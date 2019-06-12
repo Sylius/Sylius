@@ -18,6 +18,7 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     flash
     state_machine
     grid
+    tips_and_tricks
 
 .. include:: /customization/map.rst.inc
 

@@ -1,0 +1,9 @@
+* :doc:`/getting-started-with-sylius/installation`
+* :doc:`/getting-started-with-sylius/basic-configuration`
+* :doc:`/getting-started-with-sylius/shipping-and-payment`
+* :doc:`/getting-started-with-sylius/first-product`
+* :doc:`/getting-started-with-sylius/shop-customizations`
+* :doc:`/getting-started-with-sylius/custom-business-logic`
+* :doc:`/getting-started-with-sylius/plugin-installation`
+* :doc:`/getting-started-with-sylius/deployment`
+* :doc:`/getting-started-with-sylius/summary`
