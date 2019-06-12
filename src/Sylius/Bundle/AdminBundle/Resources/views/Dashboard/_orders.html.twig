@@ -7,9 +7,9 @@
     {% if orders|length > 0 %}
         <table class="ui stackable very basic table" id="orders">
             <thead>
-                <th>{{ 'sylius.ui.order'|trans }}</th>
-                <th>{{ 'sylius.ui.items'|trans }}</th>
-                <th>{{ 'sylius.ui.total'|trans }}</th>
+                <th style="color: #ababab;">{{ 'sylius.ui.order'|trans }}</th>
+                <th style="color: #ababab;">{{ 'sylius.ui.items'|trans }}</th>
+                <th style="color: #ababab;">{{ 'sylius.ui.total'|trans }}</th>
                 <th></th>
             </thead>
             <tbody>
@@ -17,7 +17,7 @@
                 <tr>
                     <td>
                         <strong>{{ order.customer.fullName }}</strong><br>
-                        {{ order.customer.email }}
+                        <div style="color: #ababab;">{{ order.customer.email }}</div>
                     </td>
                     <td>
                         {{ order.totalQuantity }}
@@ -38,4 +38,3 @@
         {{ messages.info('sylius.ui.no_results_to_display') }}
     {% endif %}
 </div>
-

@@ -7,7 +7,7 @@
     {% if customers|length > 0 %}
         <table class="ui stackable very basic table" id="customers">
             <thead>
-                <th>{{ 'sylius.ui.name'|trans }}</th>
+                <th style="color: #ababab;">{{ 'sylius.ui.name'|trans }}</th>
                 <th></th>
                 <th></th>
             </thead>
@@ -16,7 +16,7 @@
                 <tr>
                     <td>
                         <strong>{{ customer.fullName }}</strong><br>
-                        {{ customer.email }}
+                        <div style="color: #ababab;">{{ customer.email }}</div>
                     </td>
                     <td>
                         {% if customer.user is null %}
