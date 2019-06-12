@@ -23,6 +23,19 @@ Sylius Documentation
 
    For tips on using only some bundles of Sylius head to Bundles and Components docs.
 
+Getting Started with Sylius
+---------------------------
+
+The essential guide for the Sylius newcomers that want to know it's most important features, quickly see the power of customization
+and run their first Sylius shop within a few hours.
+
+.. toctree::
+   :hidden:
+
+   getting-started-with-sylius/index
+
+.. include:: /getting-started-with-sylius/map.rst.inc
+
 The Book
 --------
 
