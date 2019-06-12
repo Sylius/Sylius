@@ -349,6 +349,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->clickLink('Generate');
     }
 
+    public function hasInventoryTab(): bool
+    {
+        return (null !== $this->getDocument()->find('css', '.tab > h3:contains("Inventory")')) ;
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');

@@ -56,6 +56,12 @@ final class ProductVariantFormMenuBuilder
             ->setLabel('sylius.ui.taxes')
         ;
 
+        $menu
+            ->addChild('inventory')
+            ->setAttribute('template', '@SyliusAdmin/ProductVariant/Tab/_inventory.html.twig')
+            ->setLabel('sylius.ui.inventory')
+        ;
+
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,
             new ProductVariantMenuBuilderEvent($this->factory, $menu, $options['product_variant'])
