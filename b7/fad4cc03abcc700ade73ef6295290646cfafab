@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------
+
+by yaroslavche at 2019-05-21T14:14:45Z
+
+Hi.
+
+In [Installation > Launching application](https://github.com/Zales0123/Sylius/blob/getting-started-with-sylius-guide/docs/getting-started-with-sylius/installation.rst#launching-application):
+
+```bash
+$ bin/console server:start
+$ open http://127.0.0.1:8000/admin
+```
+
+I think `open http://127.0.0.1:8000/admin` must be not in code block. And maybe with link and small explanation why this link not always (but in most cases) http://127.0.0.1:8000.
+
+As I can know `$` indicating that you have normal command prompt and `#` - superuser prompt.
+
+```bash
+$ su
+#
+```
+I know, `#` symbol looks like a comment. And maybe this doc isn't a place for commands that requires a superuser access.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-12T14:48:14Z
+
+Thank you, Mateusz! :tada:
