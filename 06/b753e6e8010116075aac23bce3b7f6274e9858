@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by 4c0n at 2019-05-16T08:39:38Z
+
+> Hello Youri
+>
+> This tip is very valuable, although it's description is lengthy, don't you think?
+>
+> I suggest you to refactor this and:
+>
+> 1. add a new doc (`Tips & Tricks`) to the Customization Guide section `docs/customization/tips_and_tricks.rst`;
+> 2. In this doc add a section `How to get Sylius Resource configuration from the container?`
+> 3. And there give the tips you are giving here
+> 4. Here in the models doc you can then refer to that part from a `.. tip::` :)
+>
+> How do you feel about it?
+
+Hi Magdalena,
+
+Thank you very much for your feedback. I really appreciate it. :D
+It is quite lengthy indeed, I totally agree with your suggestions and will process them.
+
+I feel at some point in time we should somehow edit the original model customization guide and introduce a step 1 that allows the reader to determine what kind of model they are trying to customize and immediately point them to the right section (so having separate instructions for each case, like we have a section for regular models and a section for translated models now).
+However we currently don't have a good way to do that, so we can always revisit it when we have that figured out.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2019-05-23T07:06:59Z
+
+@CoderMaggie Can you review this again please? Thanks in advance!
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-12T14:03:36Z
+
+@4c0n thanks for your patience! Merging this PR as soon as the build passes 🎉
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-12T14:26:35Z
+
+Thanks, Youri! :tada:
