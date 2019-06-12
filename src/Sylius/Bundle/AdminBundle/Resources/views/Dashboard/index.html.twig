@@ -10,13 +10,13 @@
 
 {{ sonata_block_render_event('sylius.admin.dashboard.after_header', {'channel': channel, 'statistics': statistics}) }}
 
-{% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.dashboard.after_menu', {'channel': channel, 'statistics': statistics}) }}
-
 {% include '@SyliusAdmin/Dashboard/_statistics.html.twig' %}
 
 {{ sonata_block_render_event('sylius.admin.dashboard.after_statistics', {'channel': channel, 'statistics': statistics}) }}
+
+{% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
+
+{{ sonata_block_render_event('sylius.admin.dashboard.after_menu', {'channel': channel, 'statistics': statistics}) }}
 
 <div class="ui two column stackable grid">
     <div class="column">
