@@ -1,5 +1,5 @@
 {% if app.user.avatar is not empty and app.user.avatar.path is not empty %}
-    {% set path = app.user.avatar.path|imagine_filter('sylius_admin_admin_avatar_thumbnail') %}
+    {% set path = app.user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
 {% else %}
     {% set path = '//placehold.it/50x50' %}
 {% endif %}

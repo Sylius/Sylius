@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function attachAvatar(string $avatar): void;
+    public function attachAvatar(string $path): void;
 
     public function changeUsername(string $username): void;
 
@@ -27,7 +27,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function changeLocale(string $localeCode): void;
 
-    public function hasAvatar(string $avatarPath, string $avatar): bool;
+    public function hasAvatar(string $avatarPath): bool;
 
     public function hasAvatarInMainBar(string $avatarPath, string $avatar): bool;
 }
