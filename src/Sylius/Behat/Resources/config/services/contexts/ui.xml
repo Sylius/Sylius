@@ -35,6 +35,7 @@
             <argument type="service" id="sylius.behat.page.admin.administrator.update" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.repository.admin_user"/>
+            <argument type="service" id="sylius.behat.shared_storage" />
 
         </service>
 

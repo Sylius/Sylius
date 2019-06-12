@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -40,28 +41,35 @@ final class ManagingAdministratorsContext implements Context
     /** @var RepositoryInterface */
     private $adminUserRepository;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         NotificationCheckerInterface $notificationChecker,
-        RepositoryInterface $adminUserRepository
+        RepositoryInterface $adminUserRepository,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
         $this->adminUserRepository = $adminUserRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
-     * @Given /^(this administrator) has an avatar "([^"]*)"$/
+     * @Given /^I have the "([^"]*)" image as (my) avatar$/
      */
-    public function thisAdministratorHasAnAvatar(AdminUserInterface $administrator, string $avatar): void
+    public function iHaveTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         $this->updatePage->open(['id' => $administrator->getId()]);
 
-        $this->updatePage->attachAvatar($avatar);
+        $path = $this->updateAvatar($avatar, $administrator);
+
+        $this->sharedStorage->set($avatar, $path);
     }
 
     /**
@@ -208,11 +216,23 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I update the :avatar avatar
+     * @When /^I upload the "([^"]*)" image as (my) avatar$/
      */
-    public function iUpdateTheAvatar(string $avatar): void
+    public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
-        $this->updatePage->attachAvatar($avatar);
+        $path = $this->updateAvatar($avatar, $administrator);
+
+        $this->sharedStorage->set($avatar, $path);
+    }
+
+    /**
+     * @Given /^I update the "([^"]*)" image as (my) avatar$/
+     */
+    public function iUpdateTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
+    {
+        $path = $this->updateAvatar($avatar, $administrator);
+
+        $this->sharedStorage->set($avatar, $path);
     }
 
     /**
@@ -309,40 +329,54 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I attach the :avatar avatar
+     * @Then /^I should see the "([^"]*)" image as (my) avatar$/
      */
-    public function iAttachTheAvatar(string $avatar): void
-    {
-        $this->updatePage->attachAvatar($avatar);
-    }
-
-    /**
-     * @Then /^I should see (this administrator) account with avatar "([^"]*)"$/
-     */
-    public function iShouldSeeThisAdministratorAccountWithAvatar(AdminUserInterface $administrator, string $avatar): void
+    public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         /** @var AdminUserInterface $administrator */
         $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
 
         $this->updatePage->open(['id' => $administrator->getId()]);
 
-        $avatarPath = $administrator->getAvatar()->getPath();
+        Assert::same($this->sharedStorage->get($avatar), $administrator->getAvatar()->getPath());
 
-        $this->updatePage->hasAvatar($avatarPath, $avatar);
+        $this->updatePage->hasAvatar($administrator->getAvatar()->getPath());
     }
 
     /**
-     * @Then /^I should see "([^"]*)" avatar in main bar where (this administrator) is logged$/
+     * @Then /^I should see the "([^"]*)" avatar image in the top bar next to (my) name$/
      */
-    public function iShouldSeeAvatarInMainBarWhereThisAdministratorIsLogged(string $avatar, AdminUserInterface $administrator): void
+    public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar, AdminUserInterface $administrator): void
     {
         $this->indexPage->open();
 
         /** @var AdminUserInterface $administrator */
         $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
 
-        $avatarPath = $administrator->getAvatar()->getPath();
+        $this->updatePage->hasAvatarInMainBar($administrator->getAvatar()->getPath(), $avatar);
+    }
 
-        $this->updatePage->hasAvatarInMainBar($avatarPath, $avatar);
+    private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
+
+        return $administrator;
+    }
+
+    private function getPath(AdminUserInterface $administrator): string
+    {
+        $administrator = $this->getAdministrator($administrator);
+
+        return ((null !== $administrator->getAvatar()) && (null !== $administrator->getAvatar()->getPath())) ? $administrator->getAvatar()->getPath() : '';
+    }
+
+    private function updateAvatar(string $avatar, AdminUserInterface $administrator): string
+    {
+        $this->updatePage->attachAvatar($avatar);
+
+        $this->updatePage->saveChanges();
+
+        return $this->getPath($administrator);
     }
 }

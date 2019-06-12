@@ -1,17 +1,15 @@
 @managing_administrators
-Feature: Adding an avatar to administrator
-    In order to add new avatar to the administrator account
+Feature: Adding an avatar to an administrator
+    In order to visually identify the account
     As an Administrator
-    I want to add new avatar to the administrator account
+    I want to add an avatar to an administrator account
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And I am logged in as an administrator
+        Given I am logged in as an administrator
 
     @ui
     Scenario: Adding an avatar to administrator account
-        When I want to edit this administrator
-        And I attach the "troll.jpg" avatar
-        And I save my changes
-        Then I should see this administrator account with avatar "troll.jpg"
-        And I should see "troll.jpg" avatar in main bar where this administrator is logged
+        Given I am editing my details
+        When I upload the "troll.jpg" image as my avatar
+        Then I should see the "troll.jpg" image as my avatar
+        And I should see the "troll.jpg" avatar image in the top bar next to my name

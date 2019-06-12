@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\AvatarAwareInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-final class AvatarUploaderListener
+final class ImageUploadListener
 {
     /** @var ImageUploaderInterface */
     private $uploader;
@@ -31,11 +31,10 @@ final class AvatarUploaderListener
     public function uploadAvatar(GenericEvent $event): void
     {
         $subject = $event->getSubject();
-        Assert::isInstanceOf($subject, AvatarAwareInterface::class);
+        Assert::isInstanceOf($subject, AdminUserInterface::class);
 
-        if (null !== $subject->getAvatarImage()) {
-            $this->uploader->upload($subject->getAvatarImage());
+        if (null !== $subject->getAvatar()) {
+            $this->uploader->upload($subject->getAvatar());
         }
     }
-
 }

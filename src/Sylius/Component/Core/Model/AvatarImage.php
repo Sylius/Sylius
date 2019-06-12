@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-class AvatarImage extends Image implements AvatarImageInterface
+class AvatarImage extends Image
 {
 }
