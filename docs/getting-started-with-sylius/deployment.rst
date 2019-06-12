@@ -2,8 +2,8 @@ Deployment
 ==========
 
 Development usually takes most of the time in project implementation, but we should not forget about what's at the end of this process -
-application deployment into the server. We, in Sylius, believe, that it should be as easy and understandable as possible.
-There are many servers which you can choose for your store deployment, but in this chapter, we will use a `Platform.sh <https://platform.sh/>`_.
+application deployment into the server. We believe, that it should be as easy and understandable as possible.
+There are many servers which you can choose for your store deployment, but in this chapter, we will use `Platform.sh <https://platform.sh/>`_.
 
 .. attention::
 
@@ -130,7 +130,7 @@ As a result, you should see tons of logs and active status of the project when t
 
 |
 
-You have also a URL provided, which you can visit to see is your shop working well. Of course, it does not have your configuration
+You have also a URL provided, which you can visit to see if your shop working well. Of course, it does not have your configuration
 done locally, as well as your product... but you have an application deployed! Congratulations! You've just finished the first
 stage of the first project with Sylius.
 
