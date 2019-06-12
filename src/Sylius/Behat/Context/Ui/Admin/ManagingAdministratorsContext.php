@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
@@ -36,16 +37,31 @@ final class ManagingAdministratorsContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
+    /** @var RepositoryInterface */
+    private $adminUserRepository;
+
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        RepositoryInterface $adminUserRepository
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
+        $this->adminUserRepository = $adminUserRepository;
+    }
+
+    /**
+     * @Given /^(this administrator) has an avatar "([^"]*)"$/
+     */
+    public function thisAdministratorHasAnAvatar(AdminUserInterface $administrator, string $avatar): void
+    {
+        $this->updatePage->open(['id' => $administrator->getId()]);
+
+        $this->updatePage->attachAvatar($avatar);
     }
 
     /**
@@ -192,6 +208,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I update the :avatar avatar
+     */
+    public function iUpdateTheAvatar(string $avatar): void
+    {
+        $this->updatePage->attachAvatar($avatar);
+    }
+
+    /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with an email :email
@@ -282,5 +306,43 @@ final class ManagingAdministratorsContext implements Context
             'Cannot remove currently logged in user.',
             NotificationType::failure()
         );
+    }
+
+    /**
+     * @When I attach the :avatar avatar
+     */
+    public function iAttachTheAvatar(string $avatar): void
+    {
+        $this->updatePage->attachAvatar($avatar);
+    }
+
+    /**
+     * @Then /^I should see (this administrator) account with avatar "([^"]*)"$/
+     */
+    public function iShouldSeeThisAdministratorAccountWithAvatar(AdminUserInterface $administrator, string $avatar): void
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
+
+        $this->updatePage->open(['id' => $administrator->getId()]);
+
+        $avatarPath = $administrator->getAvatar()->getPath();
+
+        $this->updatePage->hasAvatar($avatarPath, $avatar);
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" avatar in main bar where (this administrator) is logged$/
+     */
+    public function iShouldSeeAvatarInMainBarWhereThisAdministratorIsLogged(string $avatar, AdminUserInterface $administrator): void
+    {
+        $this->indexPage->open();
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
+
+        $avatarPath = $administrator->getAvatar()->getPath();
+
+        $this->updatePage->hasAvatarInMainBar($avatarPath, $avatar);
     }
 }
