@@ -11,11 +11,11 @@
 {% if definition.enabledFilters|length > 0 %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
-        <div class="title active">
+        <div class="title">
             <i class="dropdown icon"></i>
             {{ 'sylius.ui.filters'|trans }}
         </div>
-        <div class="content active">
+        <div class="content">
             <form method="get" action="{{ path }}" class="ui loadable form">
                 <div class="two fields">
                     {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
