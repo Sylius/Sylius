@@ -96,6 +96,28 @@ That in Sylius-Standard configuration is overriden already.
                 classes:
                     model: App\Entity\Addressing\Country
 
+You can check if the configuration in ``config/_sylius.yaml`` is correct by running:
+
+.. code-block:: bash
+
+    $ php bin/console debug:container --parameter=sylius.model.country.class
+
+If all is well the output should look like:
+
+.. code-block:: bash
+
+    ---------------------------- -------------------------------------------
+     Parameter                    Value
+    ---------------------------- -------------------------------------------
+     sylius.model.country.class   App\Entity\Country
+    ---------------------------- -------------------------------------------
+
+.. tip::
+
+    In some cases you will see an error stating that the there is something wrong with the resource configuration:
+    ``Unrecognized option "classes" under...``
+    When this happens, please refer to :ref:`resource-configuration`.
+
 **3.** Update the database. There are two ways to do it.
 
 * via direct database schema update:
