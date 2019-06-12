@@ -18,7 +18,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -28,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /** @var MoneyFormatterInterface  */
+    /** @var MoneyFormatterInterface */
     private $moneyFormatter;
 
     public function __construct(
@@ -195,13 +194,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $orderPromotionTotal = 0;
 
         foreach ($rows as $row) {
-            $unitOrderPromotion =  $row->find('css', 'td:nth-child(4)')->getText();
+            $unitOrderPromotion = $row->find('css', 'td:nth-child(4)')->getText();
             $quantity = $row->find('css', 'td:nth-child(6)')->getText();
             $itemOrderPromotion = (float) trim(str_replace('-$', '', $unitOrderPromotion)) * $quantity;
             $orderPromotionTotal += (int) ($itemOrderPromotion * 100);
         }
 
-        return $this->getFormattedMoney($orderPromotionTotal > 0 ? -1 * $orderPromotionTotal: $orderPromotionTotal);
+        return $this->getFormattedMoney($orderPromotionTotal > 0 ? -1 * $orderPromotionTotal : $orderPromotionTotal);
     }
 
     public function hasPromotionDiscount(string $promotionDiscount): bool
@@ -261,7 +260,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getItemTaxIncludedInPrice(string $itemName): string
     {
         return $this->getRowWithItem($itemName)->find('css', '.tax-included')->getText();
-
     }
 
     public function getItemTotal(string $itemName): string

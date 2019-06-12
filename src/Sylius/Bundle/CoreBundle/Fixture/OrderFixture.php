@@ -270,7 +270,7 @@ class OrderFixture extends AbstractFixture
     {
         $dates = [];
 
-        for ($i = 0; $i < $amount; $i++) {
+        for ($i = 0; $i < $amount; ++$i) {
             /** @var \DateTimeInterface|array $dates */
             $dates[] = $this->faker->dateTimeBetween('-1 years', 'now');
         }
