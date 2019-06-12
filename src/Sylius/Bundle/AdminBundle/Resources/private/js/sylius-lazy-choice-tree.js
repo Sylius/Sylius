@@ -108,13 +108,13 @@ $.fn.extend({
     const bindCheckboxAction = function bindCheckboxAction(checkboxElement) {
       checkboxElement.checkbox({
         onChecked() {
-          const value = checkboxElement.data('value');
+          const { value } = checkboxElement[0].dataset;
           const checkedValues = $input.val().split(',').filter(Boolean);
           checkedValues.push(value);
           $input.val(checkedValues.join());
         },
         onUnchecked() {
-          const value = checkboxElement.data('value');
+          const { value } = checkboxElement[0].dataset;
           const checkedValues = $input.val().split(',').filter(Boolean);
           const i = checkedValues.indexOf(value);
           if (i !== -1) {
