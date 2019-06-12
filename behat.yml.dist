@@ -40,6 +40,8 @@ default:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
+                            extra_capabilities:
+                                unexpectedAlertBehaviour: accept
                 firefox:
                     selenium2:
                         browser: firefox
