@@ -1,7 +1,7 @@
 Shipping & Payment
 ==================
 
-The basic configuration is done. We can now proceed to letting potential customers to buy our merchandise.
+The basic configuration is done. We can now proceed to let potential customers buy our merchandise.
 During the checkout process, they should be able to define how do they want their order to be shipped,
 as well as how they would pay for that.
 
