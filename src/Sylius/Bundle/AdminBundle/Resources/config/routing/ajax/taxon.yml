@@ -50,6 +50,8 @@ sylius_admin_ajax_taxon_by_name_phrase:
                 method: findByNamePart
                 arguments:
                     phrase: $phrase
+                    locale: null
+                    limit: 25
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
