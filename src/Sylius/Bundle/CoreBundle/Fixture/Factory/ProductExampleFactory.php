@@ -347,20 +347,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $productAttributeValue = $this->productAttributeValueFactory->createNew();
         $productAttributeValue->setAttribute($productAttribute);
 
-        switch ($productAttribute->getType()) {
-            case DateAttributeType::TYPE:
-                $productAttributeValue->setValue(new \DateTime($value));
-                break;
-            case DatetimeAttributeType::TYPE:
-                $productAttributeValue->setValue(new \DateTime($value));
-                break;
-            case CheckboxAttributeType::TYPE:
-                $productAttributeValue->setValue($value);
-                break;
-            default:
-                $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
+        if ($value !== null && in_array($productAttribute->getStorageType(), [ProductAttributeValueInterface::STORAGE_DATE, ProductAttributeValueInterface::STORAGE_DATETIME], true)) {
+            $value = new \DateTime($value);
         }
 
+        $productAttributeValue->setValue($value ?? $this->getRandomValueForProductAttribute($productAttribute));
         $productAttributeValue->setLocaleCode($localeCode);
 
         return $productAttributeValue;
