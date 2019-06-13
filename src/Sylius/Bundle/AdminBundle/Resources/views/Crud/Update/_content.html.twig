@@ -1,3 +1,9 @@
+{% set index_url = path(
+        configuration.vars.index.route.name|default(configuration.getRouteName('index')),
+        configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
+    )
+%}
+
 <div class="ui segment">
     {{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <input type="hidden" name="_method" value="PUT" />
@@ -9,7 +15,8 @@
 
     {{ sonata_block_render_event(event_prefix ~ '.form', {'resource': resource, 'form': form}) }}
 
-    {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
+    {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': index_url}} %}
+
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 </div>
