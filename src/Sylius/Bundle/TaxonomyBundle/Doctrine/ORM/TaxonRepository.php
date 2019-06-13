@@ -87,11 +87,12 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByNamePart(string $phrase, ?string $locale = null): array
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
     {
         return $this->createTranslationBasedQueryBuilder($locale)
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%' . $phrase . '%')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
