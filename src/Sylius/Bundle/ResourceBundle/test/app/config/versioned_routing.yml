@@ -1,5 +1,0 @@
-app_comic_book:
-    resource: |
-        alias: app.comic_book
-        serialization_version: $version
-    type: sylius.resource_api

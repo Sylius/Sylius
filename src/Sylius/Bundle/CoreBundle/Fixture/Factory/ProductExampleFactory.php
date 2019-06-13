@@ -361,7 +361,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             case ProductAttributeValueInterface::STORAGE_DATETIME:
                 return $this->faker->dateTimeThisCentury;
             case ProductAttributeValueInterface::STORAGE_JSON:
-                if ($productAttribute->getType() == SelectAttributeType::TYPE) {
+                if ($productAttribute->getType() === SelectAttributeType::TYPE) {
                     if ($productAttribute->getConfiguration()['multiple']) {
                         return $this->faker->randomElements(
                             array_keys($productAttribute->getConfiguration()['choices']),

@@ -38,9 +38,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
-        $row = $tableAccessor->getRowWithFields($table, ['number' =>$orderNumber]);
+        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
 
-        return $field = $tableAccessor->getFieldFromRow($table, $row, $fieldName);
+        return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
     public function showOrderPageForNthShipment(int $shipmentNumber): void
@@ -62,6 +62,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $row = $tableAccessor->getRowsWithFields($table, [])[$shipmentNumber];
 
-        return $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
     }
 }

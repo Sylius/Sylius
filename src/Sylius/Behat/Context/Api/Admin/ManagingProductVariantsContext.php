@@ -15,9 +15,9 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Client;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context

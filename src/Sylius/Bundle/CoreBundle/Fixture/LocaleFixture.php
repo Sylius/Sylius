@@ -45,7 +45,13 @@ class LocaleFixture extends AbstractFixture
      */
     public function load(array $options): void
     {
-        foreach ($options['locales'] as $localeCode) {
+        $localesCodes = $options['locales'];
+
+        if ($options['load_default_locale'] && !in_array($this->baseLocaleCode, $localesCodes, true)) {
+            $localesCodes = array_merge([$this->baseLocaleCode], $localesCodes);
+        }
+
+        foreach ($localesCodes as $localeCode) {
             /** @var LocaleInterface $locale */
             $locale = $this->localeFactory->createNew();
 
@@ -71,24 +77,9 @@ class LocaleFixture extends AbstractFixture
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
-            ->beforeNormalization()
-                ->ifEmpty()
-                ->then(function(){
-                    @trigger_error(
-                        'Base locale deprecated since 1.3. Please, pass %locale% directly to locales fixture at fixtures option.',
-                        E_USER_DEPRECATED
-                    );
-
-                    return [
-                        'locales'=>[
-                            $this->baseLocaleCode
-                        ]
-                    ];
-                })
-            ->end()
             ->children()
-                ->arrayNode('locales')
-                    ->scalarPrototype()
+                ->scalarNode('load_default_locale')->defaultTrue()->end()
+                ->arrayNode('locales')->scalarPrototype()->end()
         ;
     }
 }

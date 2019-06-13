@@ -42,24 +42,24 @@ final class LocaleFixtureTest extends TestCase
     /**
      * @test
      */
-    public function default_locale_is_added_by_default(): void
+    public function default_locale_may_not_be_loaded(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [[]],
-            ['locales' => ['default_LOCALE']],
-            'locales'
+            [['load_default_locale' => false]],
+            ['load_default_locale' => false],
+            'load_default_locale'
         );
     }
 
     /**
      * @test
      */
-    public function default_locale_is_not_added_if_locales_passed_directly(): void
+    public function default_locale_is_added_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['locales' => ['en_US']]],
-            ['locales' => ['en_US']],
-            'locales'
+            [[]],
+            ['load_default_locale' => true],
+            'load_default_locale'
         );
     }
 

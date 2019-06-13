@@ -30,7 +30,7 @@ final class PasswordUpdater implements PasswordUpdaterInterface
      */
     public function updatePassword(CredentialsHolderInterface $user): void
     {
-        if ('' !== $password = $user->getPlainPassword()) {
+        if ('' !== $user->getPlainPassword()) {
             $user->setPassword($this->userPasswordEncoder->encode($user));
             $user->eraseCredentials();
         }

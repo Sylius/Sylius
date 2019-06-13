@@ -100,7 +100,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $totalElement = $this->getElement('subtotal');
 
-        return trim(str_replace('Subtotal:', '', $totalElement->getText()));
+        return trim(str_replace('Items total:', '', $totalElement->getText()));
     }
 
     /**

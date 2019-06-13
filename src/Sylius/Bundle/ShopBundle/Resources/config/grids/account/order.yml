@@ -51,7 +51,7 @@ sylius_grid:
             actions:
                 item:
                     show:
-                        type: show
+                        type: shop_show
                         label: sylius.ui.show
                         options:
                             link:
@@ -59,7 +59,7 @@ sylius_grid:
                                 parameters:
                                     number: resource.number
                     pay:
-                        type: pay
+                        type: shop_pay
                         label: sylius.ui.pay
                         options:
                             link:

@@ -1,0 +1,11 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.show_product'|trans }} | {{ product.name }}{% endblock %}
+
+{% block content %}
+    {% if product.variants|length == 1 %}
+        {% include "@SyliusAdmin/Product/Show/_simpleProduct.html.twig" %}
+    {% else %}
+        {% include "@SyliusAdmin/Product/Show/_configurableProduct.html.twig" %}
+    {% endif %}
+{% endblock %}

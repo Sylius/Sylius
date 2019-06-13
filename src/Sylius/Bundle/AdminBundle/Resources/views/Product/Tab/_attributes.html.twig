@@ -1,11 +1,14 @@
 {% form_theme form '@SyliusAdmin/Product/Attribute/attributesCollection.html.twig' %}
 
 <div class="ui tab" data-tab="attributes">
-    <h3 class="ui dividing header">{{ 'sylius.ui.attributes'|trans }}</h3>
-    {{ render(url('sylius_admin_get_product_attributes')) }}
-    <div id="attributesContainer" data-count="{{ form.attributes|length }}">
-        {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
-    </div>
+    <h3 class="ui top attached header">{{ 'sylius.ui.attributes'|trans }}</h3>
 
-    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_attributes', {'form': form}) }}
+    <div class="ui attached segment">
+        {{ render(url('sylius_admin_get_product_attributes')) }}
+        <div id="attributesContainer" data-count="{{ form.attributes|length }}">
+            {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
+        </div>
+
+        {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_attributes', {'form': form}) }}
+    </div>
 </div>

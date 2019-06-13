@@ -92,7 +92,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             && $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
     }
 
-
     public function isCouponManagementAvailable(): bool
     {
         $element = $this->getDocument()->find('css', 'a:contains("Manage coupons")');
@@ -103,6 +102,29 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function manageCoupons(): void
     {
         $this->getDocument()->clickLink('Manage coupons');
+    }
+
+    public function hasAnyRule(): bool
+    {
+        $items = $this->getElement('rules')->findAll('css', 'div[data-form-collection="item"]');
+
+        return 0 < count($items);
+    }
+
+    public function hasRule(string $name): bool
+    {
+        $items = $this->getElement('rules')->findAll('css', 'div[data-form-collection="item"]');
+
+        foreach ($items as $item) {
+            $selectedOption = $item->find('css', 'option[selected="selected"]');
+
+            /** @var NodeElement $selectedOption */
+            if ($selectedOption->getText() === $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected function getCodeElement(): NodeElement
@@ -121,6 +143,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'ends_at_time' => '#sylius_promotion_endsAt_time',
             'exclusive' => '#sylius_promotion_exclusive',
             'name' => '#sylius_promotion_name',
+            'rules' => '#rules',
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',

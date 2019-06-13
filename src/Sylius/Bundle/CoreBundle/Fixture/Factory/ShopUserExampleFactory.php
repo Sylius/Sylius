@@ -119,6 +119,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
                 if (is_string($value)) {
                     return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                 }
+
                 return $value;
             })
         ;

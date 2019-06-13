@@ -20,7 +20,6 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -160,7 +159,7 @@ final class PaymentContext implements Context
     public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
     {
         $config = $paymentMethod->getGatewayConfig();
-        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => 1]));
+        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
         $paymentMethod->setGatewayConfig($config);
 
         $this->paymentMethodManager->flush();

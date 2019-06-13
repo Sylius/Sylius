@@ -120,11 +120,31 @@ final class CartContext implements Context
     /**
      * @Then my cart taxes should be :taxTotal
      */
-    public function myCartTaxesShouldBe($taxTotal)
+    public function myCartTaxesShouldBe(string $taxTotal): void
     {
         $this->summaryPage->open();
 
-        Assert::same($this->summaryPage->getTaxTotal(), $taxTotal);
+        Assert::same($this->summaryPage->getExcludedTaxTotal(), $taxTotal);
+    }
+
+    /**
+     * @Then my included in price taxes should be :taxTotal
+     */
+    public function myIncludedInPriceTaxesShouldBe(string $taxTotal): void
+    {
+        $this->summaryPage->open();
+
+        Assert::same($this->summaryPage->getIncludedTaxTotal(), $taxTotal);
+    }
+
+    /**
+     * @Then there should be no taxes charged
+     */
+    public function thereShouldBeNoTaxesCharged(): void
+    {
+        $this->summaryPage->open();
+
+        Assert::false($this->summaryPage->areTaxesCharged());
     }
 
     /**

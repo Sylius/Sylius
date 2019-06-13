@@ -85,7 +85,7 @@ Finally save your Variant in the database using a repository.
      /** @var RepositoryInterface $productVariantRepository */
      $productVariantRepository = $this->get('sylius.repository.product_variant');
 
-     $productVariantRepository->add($variant);
+     $productVariantRepository->add($productVariant);
 
 Options
 =======

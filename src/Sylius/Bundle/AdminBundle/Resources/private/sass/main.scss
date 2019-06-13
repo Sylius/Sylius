@@ -1,0 +1,11 @@
+@import "taxonomy";
+@import "ui";
+
+.tax-disabled {
+    color: #a0a0a0;
+}
+
+.order-summary-table .sylius-table-column-tax,
+.order-summary-table .sylius-table-column-total {
+    width: 90px;
+}

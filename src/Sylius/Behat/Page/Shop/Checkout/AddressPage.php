@@ -18,6 +18,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -279,6 +280,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         $addressOption->click();
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     /**
@@ -393,6 +396,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement(sprintf('%s_country', $type))->selectOption($address->getCountryCode() ?: 'Select');
         $this->getElement(sprintf('%s_city', $type))->setValue($address->getCity());
         $this->getElement(sprintf('%s_postcode', $type))->setValue($address->getPostcode());
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
 
         if (null !== $address->getProvinceName()) {
             $this->waitForElement(5, sprintf('%s_province', $type));

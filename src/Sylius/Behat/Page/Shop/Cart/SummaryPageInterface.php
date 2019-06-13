@@ -28,10 +28,11 @@ interface SummaryPageInterface extends PageInterface
      */
     public function getBaseGrandTotal();
 
-    /**
-     * @return string
-     */
-    public function getTaxTotal();
+    public function getIncludedTaxTotal(): string;
+
+    public function getExcludedTaxTotal(): string;
+
+    public function areTaxesCharged(): bool;
 
     /**
      * @return string

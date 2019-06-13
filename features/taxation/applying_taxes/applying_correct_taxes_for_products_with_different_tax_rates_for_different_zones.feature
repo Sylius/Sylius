@@ -23,7 +23,7 @@ Feature: Apply correct taxes for products with different tax rates for different
     Scenario: Displaying correct tax before specifying shipping address
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
-        And my cart taxes should be "$0.00"
+        And there should be no taxes charged
 
     @ui
     Scenario: Displaying correct tax after specifying shipping address

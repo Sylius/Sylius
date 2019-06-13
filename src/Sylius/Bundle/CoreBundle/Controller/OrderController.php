@@ -21,6 +21,32 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends BaseOrderController
 {
+    public function summaryAction(Request $request): Response
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $cart = $this->getCurrentCart();
+        if (null !== $cart->getId()) {
+            $cart = $this->getOrderRepository()->findCartForSummary($cart->getId());
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($cart));
+        }
+
+        $form = $this->resourceFormFactory->create($configuration, $cart);
+
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
+            ->setData([
+                'cart' => $cart,
+                'form' => $form->createView(),
+            ])
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
     public function thankYouAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

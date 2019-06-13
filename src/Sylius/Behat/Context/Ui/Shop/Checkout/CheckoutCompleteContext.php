@@ -172,7 +172,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function shouldBeAppliedToMyOrder($promotionName)
     {
-        Assert::true($this->completePage->hasPromotion($promotionName));
+        Assert::true($this->completePage->hasOrderPromotion($promotionName));
     }
 
     /**
@@ -264,14 +264,6 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then /^(this promotion) should give "([^"]+)" discount$/
-     */
-    public function thisPromotionShouldGiveDiscount(PromotionInterface $promotion, $discount)
-    {
-        Assert::same($this->completePage->getShippingPromotionDiscount($promotion->getName()), $discount);
-    }
-
-    /**
      * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
      */
     public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod)
@@ -335,5 +327,13 @@ final class CheckoutCompleteContext implements Context
             'Your order total has been changed, check your order information and confirm it again.',
             NotificationType::failure()
         );
+    }
+
+    /**
+     * @Then /^(this promotion) should give "([^"]+)" discount on shipping$/
+     */
+    public function thisPromotionShouldGiveDiscountOnShipping(PromotionInterface $promotion, string $discount): void
+    {
+        Assert::true($this->completePage->hasShippingPromotionWithDiscount($promotion->getName(), $discount));
     }
 }

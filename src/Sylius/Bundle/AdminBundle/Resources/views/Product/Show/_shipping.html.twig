@@ -1,0 +1,29 @@
+<div id="shipping">
+    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.shipping'|trans }}</h4>
+    <div class="ui attached black segment">
+        <table class="ui definition table">
+            <tbody>
+            <tr>
+                <td class="five wide">{{ 'sylius.ui.shipping_category'|trans }}</td>
+                <td>{{ product.variants.first.shippingCategory }}</td>
+            </tr>
+            <tr>
+                <td class="five wide">{{ 'sylius.ui.width'|trans }}</td>
+                <td>{{ product.variants.first.width }}</td>
+            </tr>
+            <tr>
+                <td class="five wide">{{ 'sylius.ui.height'|trans }}</td>
+                <td>{{ product.variants.first.height }}</td>
+            </tr>
+            <tr>
+                <td class="five wide">{{ 'sylius.ui.depth'|trans }}</td>
+                <td>{{ product.variants.first.depth }}</td>
+            </tr>
+            <tr>
+                <td class="five wide">{{ 'sylius.ui.weight'|trans }}</td>
+                <td>{{ product.variants.first.weight }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

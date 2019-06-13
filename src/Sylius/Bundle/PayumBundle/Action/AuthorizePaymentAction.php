@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -17,7 +18,6 @@ use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Model\Payment as PayumPayment;
 use Payum\Core\Request\Authorize;
-use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
@@ -26,14 +26,9 @@ use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
 final class AuthorizePaymentAction extends GatewayAwareAction
 {
-    /**
-     * @var PaymentDescriptionProviderInterface
-     */
+    /** @var PaymentDescriptionProviderInterface */
     private $paymentDescriptionProvider;
 
-    /**
-     * @param PaymentDescriptionProviderInterface $paymentDescriptionProvider
-     */
     public function __construct(PaymentDescriptionProviderInterface $paymentDescriptionProvider)
     {
         $this->paymentDescriptionProvider = $paymentDescriptionProvider;
@@ -71,11 +66,12 @@ final class AuthorizePaymentAction extends GatewayAwareAction
             }
         }
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
+
         try {
             $request->setModel($details);
             $this->gateway->execute($request);
         } finally {
-            $payment->setDetails((array)$details);
+            $payment->setDetails((array) $details);
         }
     }
 

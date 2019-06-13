@@ -40,6 +40,7 @@ final class ProductTaxonContext implements Context
      * @Given /^I assigned (this product) to ("[^"]+" taxon)$/
      * @Given /^(it|this product) (belongs to "[^"]+")$/
      * @Given /^(this product) is in ("[^"]+" taxon) at (\d)(?:st|nd|rd|th) position$/
+     * @Given the product :product belongs to taxon :taxon
      */
     public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon, $position = null)
     {
@@ -47,6 +48,15 @@ final class ProductTaxonContext implements Context
         $product->addProductTaxon($productTaxon);
 
         $this->objectManager->persist($product);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the product :product has a main taxon :taxon
+     */
+    public function productHasMainTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $product->setMainTaxon($taxon);
         $this->objectManager->flush();
     }
 

@@ -15,12 +15,10 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
-use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
@@ -36,9 +34,6 @@ final class RegistrationAfterCheckoutContext implements Context
     /** @var ThankYouPageInterface */
     private $thankYouPage;
 
-    /** @var DashboardPageInterface */
-    private $dashboardPage;
-
     /** @var HomePageInterface */
     private $homePage;
 
@@ -48,27 +43,20 @@ final class RegistrationAfterCheckoutContext implements Context
     /** @var RegisterElementInterface */
     private $registerElement;
 
-    /** @var NotificationCheckerInterface */
-    private $notificationChecker;
-
     public function __construct(
         SharedStorageInterface $sharedStorage,
         LoginPageInterface $loginPage,
         ThankYouPageInterface $thankYouPage,
-        DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
         VerificationPageInterface $verificationPage,
-        RegisterElementInterface $registerElement,
-        NotificationCheckerInterface $notificationChecker
+        RegisterElementInterface $registerElement
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->loginPage = $loginPage;
         $this->thankYouPage = $thankYouPage;
-        $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
         $this->verificationPage = $verificationPage;
         $this->registerElement = $registerElement;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**

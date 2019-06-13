@@ -100,4 +100,6 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function goToVariantCreation(): void;
 
     public function goToVariantGeneration(): void;
+
+    public function hasInventoryTab(): bool;
 }

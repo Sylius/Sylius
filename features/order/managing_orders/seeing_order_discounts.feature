@@ -22,7 +22,6 @@ Feature: Seeing discounts of an order
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000666"
         Then the order's items total should be "$141.00"
-        And the order's promotion discount should be "Holiday promotion -$15.00"
         And the order's promotion total should be "-$15.00"
         And the order's total should be "$141.00"
 

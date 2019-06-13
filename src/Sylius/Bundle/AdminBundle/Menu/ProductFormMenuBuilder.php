@@ -74,6 +74,14 @@ final class ProductFormMenuBuilder
             ->setLabel('sylius.ui.media')
         ;
 
+        if ($options['product']->isSimple()) {
+            $menu
+                ->addChild('inventory')
+                ->setAttribute('template', '@SyliusAdmin/Product/Tab/_inventory.html.twig')
+                ->setLabel('sylius.ui.inventory')
+            ;
+        }
+
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,
             new ProductMenuBuilderEvent($this->factory, $menu, $options['product'])

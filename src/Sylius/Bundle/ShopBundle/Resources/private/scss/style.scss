@@ -43,3 +43,13 @@ body {
 #searchbarButtons {
     width: fit-content;
 }
+
+.old-price {
+    font-size: 80%;
+    color: #a0a0a0;
+    text-decoration: line-through;
+}
+
+.tax-disabled {
+    color: #a0a0a0;
+}

@@ -18,6 +18,7 @@
     <imports>
         <import resource="elements/admin.xml" />
         <import resource="elements/shop.xml" />
+        <import resource="elements/product.xml" />
     </imports>
     <services>
         <service id="sylius.behat.element" class="FriendsOfBehat\PageObjectExtension\Element\Element" abstract="true" public="false">

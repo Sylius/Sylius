@@ -44,8 +44,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
-        $fields = $tableAccessor->getFieldFromRow($table, $tableAccessor->getRowWithFields($table, ['code' => $promotion->getCode()]), $header);
 
-        return $fields;
+        return $tableAccessor->getFieldFromRow($table, $tableAccessor->getRowWithFields($table, ['code' => $promotion->getCode()]), $header);
     }
 }

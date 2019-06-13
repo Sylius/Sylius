@@ -1,5 +1,61 @@
 # CHANGELOG FOR `1.3.X`
 
+## v1.3.13 (2019-05-29)
+
+#### Details
+
+- [#10228](https://github.com/Sylius/Sylius/issues/10228) Improve taxon UI ([@kulczy](https://github.com/kulczy), [@Zales0123](https://github.com/Zales0123))
+- [#10290](https://github.com/Sylius/Sylius/issues/10290) [Docs] Update "Customizing Repositories" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10299](https://github.com/Sylius/Sylius/issues/10299) [Docs] Update "Customizing Models" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10314](https://github.com/Sylius/Sylius/issues/10314) [Docs] Update "Customizing Forms" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10315](https://github.com/Sylius/Sylius/issues/10315) [Docs] Update "Customizing Factories" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10330](https://github.com/Sylius/Sylius/issues/10330) [Docs] Update "Customizing Controllers" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10344](https://github.com/Sylius/Sylius/issues/10344) [Docs] Update "Customizing Templates" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10348](https://github.com/Sylius/Sylius/issues/10348) [Docs] Update "customizing menus" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10349](https://github.com/Sylius/Sylius/issues/10349) [Docs] Update "Customizing Validation" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10351](https://github.com/Sylius/Sylius/issues/10351) [Docs] Update "Customizing translations" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10353](https://github.com/Sylius/Sylius/issues/10353) [Docs] Update "Customization flashes " ([@AdamKasp](https://github.com/AdamKasp))
+- [#10359](https://github.com/Sylius/Sylius/issues/10359) [Docs] Update "Customizing Grids" ([@Tomanhez](https://github.com/Tomanhez))
+- [#10363](https://github.com/Sylius/Sylius/issues/10363) [Behat][Shop] Wait for province form loading ([@Zales0123](https://github.com/Zales0123))
+- [#10364](https://github.com/Sylius/Sylius/issues/10364) As an Administrator, I want always to have proper option values selected while editing a product variant ([@Tomanhez](https://github.com/Tomanhez), [@monro93](https://github.com/monro93))
+- [#10365](https://github.com/Sylius/Sylius/issues/10365) [Admin][Promotion] Fix removing taxon used in promotion rule ([@GSadee](https://github.com/GSadee))
+- [#10372](https://github.com/Sylius/Sylius/issues/10372) Image display in edit form ([@AdamKasp](https://github.com/AdamKasp))
+- [#10375](https://github.com/Sylius/Sylius/issues/10375) [Docs] Update "Customizing State Machine" ([@AdamKasp](https://github.com/AdamKasp))
+- [#10386](https://github.com/Sylius/Sylius/issues/10386) [Build Fix][Behat] Change scenarios to @javascript due to taxon tree changes ([@Zales0123](https://github.com/Zales0123))
+- [#10394](https://github.com/Sylius/Sylius/issues/10394) Fix error caused by the taxon tree ([@kulczy](https://github.com/kulczy))
+- [#10407](https://github.com/Sylius/Sylius/issues/10407) Bump the Sylius release versions in docs ([@teohhanhui](https://github.com/teohhanhui))
+- [#10414](https://github.com/Sylius/Sylius/issues/10414) Use HTTPS links when possible ([@javiereguiluz](https://github.com/javiereguiluz))
+
+## v1.3.12 (2019-05-07)
+
+#### TL;DR
+
+- Extracted packages from the core ([#10325](https://github.com/Sylius/Sylius/issues/10325), [#10326](https://github.com/Sylius/Sylius/issues/10326), [#10327](https://github.com/Sylius/Sylius/issues/10327))
+
+#### Details
+
+- [#10304](https://github.com/Sylius/Sylius/issues/10304) [Docs] Update contributing guide ([@Tomanhez](https://github.com/Tomanhez))
+- [#10308](https://github.com/Sylius/Sylius/issues/10308) Fix base locale ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10309](https://github.com/Sylius/Sylius/issues/10309) Do not depend on transient dependencies for "symfony/intl" package ([@pamil](https://github.com/pamil))
+- [#10320](https://github.com/Sylius/Sylius/issues/10320) fix OrderBundle depends on Core component #10319 ()
+- [#10324](https://github.com/Sylius/Sylius/issues/10324) Add a workaround for GridBundle & Symfony 4.2.7 to make tests passing ([@pamil](https://github.com/pamil))
+- [#10325](https://github.com/Sylius/Sylius/issues/10325) Extract Mailer component & bundle ([@pamil](https://github.com/pamil))
+- [#10326](https://github.com/Sylius/Sylius/issues/10326) [WIP] Extract Grid component & bundle ([@pamil](https://github.com/pamil))
+- [#10327](https://github.com/Sylius/Sylius/issues/10327) [WIP] Extract Resource component & bundle ([@pamil](https://github.com/pamil))
+- [#10328](https://github.com/Sylius/Sylius/issues/10328) Remove dead configuration related to pre-stable Sylius RBAC ([@pamil](https://github.com/pamil))
+- [#10331](https://github.com/Sylius/Sylius/issues/10331) [Shop] Update grid action and filter keys to decouple shop from admin ([@GSadee](https://github.com/GSadee))
+- [#10335](https://github.com/Sylius/Sylius/issues/10335) Bring back "pay" grid action for backwards compatibility ([@pamil](https://github.com/pamil))
+- [#10338](https://github.com/Sylius/Sylius/issues/10338) Removing unused service ([@loevgaard](https://github.com/loevgaard))
+- [#10340](https://github.com/Sylius/Sylius/issues/10340) Fix #9646 by removing lambdas in JS file ([@tchapi](https://github.com/tchapi))
+- [#10341](https://github.com/Sylius/Sylius/issues/10341) Revert "Fix base locale" ([@pamil](https://github.com/pamil))
+- [#10350](https://github.com/Sylius/Sylius/issues/10350) fix default repository for variant and association type resources ([@loic425](https://github.com/loic425))
+- [#10352](https://github.com/Sylius/Sylius/issues/10352) Update documentation products.rst ([@tom-schmitz](https://github.com/tom-schmitz))
+- [#10356](https://github.com/Sylius/Sylius/issues/10356) Quick fix product variants api invalid json ([@shql](https://github.com/shql))
+- [#10357](https://github.com/Sylius/Sylius/issues/10357) Fix wrong use statement in example ([@teohhanhui](https://github.com/teohhanhui))
+- [#10358](https://github.com/Sylius/Sylius/issues/10358) [Maintenance] Upgrade minimal jquery version ([@lchrusciel](https://github.com/lchrusciel))
+- [#10360](https://github.com/Sylius/Sylius/issues/10360) Revert "fix default repository for variant and association type resources" ([@lchrusciel](https://github.com/lchrusciel))
+- [#10362](https://github.com/Sylius/Sylius/issues/10362) Update release process with dates for 1.5 - 1.7 releases ([@pamil](https://github.com/pamil))
+
 ## v1.3.11 (2019-04-15)
 
 #### Details
