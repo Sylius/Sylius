@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle;
 
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
@@ -44,6 +45,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
         $container->addCompilerPass(new IgnoreAnnotationsPass());
+        $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
     }
 
     /**
