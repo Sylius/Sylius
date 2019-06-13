@@ -39,7 +39,7 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     /**
      * @return array|TaxonInterface[]
      */
-    public function findByNamePart(string $phrase, ?string $locale = null): array;
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array;
 
     public function createListQueryBuilder(): QueryBuilder;
 }
