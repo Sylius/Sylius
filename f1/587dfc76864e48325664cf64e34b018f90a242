@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-13T06:38:11Z
+
+Do we have any docs we could add the new configuration option to?
+
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2019-06-13T07:48:29Z
+
+@pamil It is a veeeeeery custom situation Grzegorz is covering here. I'd skip the documentation.
+
+It happens if someone wants to override existing Sylius routing in order to use it for their custom entity or define different routing for index than for other actions. Let's say someone takes our Promotions routing but uses it to some kind of blog or cms entities (the only idea that came to my mind right now ;D).
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-13T08:44:40Z
+
+Thanks, Grzegorz! :tada:
