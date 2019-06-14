@@ -8,9 +8,9 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class TopBarElement extends Element implements TopBarElementInterface
 {
-    public function hasAvatarInMainBar(string $avatarPath, string $avatar): bool
+    public function hasAvatarInMainBar(string $avatarPath): bool
     {
-        $image = $this->getDocument()->find('css', '.ui.avatar.image img');
+        $image = $this->getDocument()->find('css', 'img.ui.avatar.image');
 
         if (null === $image) {
             return false;

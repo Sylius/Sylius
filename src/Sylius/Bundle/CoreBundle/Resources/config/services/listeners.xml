@@ -41,7 +41,7 @@
         </service>
         <service id="sylius.listener.avatar_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.admin_user.pre_create" method="uploadAvatar" />
+            <tag name="kernel.event_listener" event="sylius.admin_user.pre_create" method="uploadImage" />
             <tag name="kernel.event_listener" event="sylius.admin_user.pre_update" method="uploadImage" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">

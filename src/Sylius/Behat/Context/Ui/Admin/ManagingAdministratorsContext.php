@@ -210,8 +210,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When /^I upload the "([^"]+)" image as (my) avatar$/
-     * @When /^I update the "([^"]+)" image as (my) avatar$/
+     * @When /^I (?:|upload|update) the "([^"]+)" image as (my) avatar$/
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
@@ -327,14 +326,11 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then /^I should see the "([^"]*)" avatar image in the top bar next to (my) name$/
+     * @Then /^I should see the "([^"]*)" avatar image in the top bar next to my name$/
      */
-    public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar, AdminUserInterface $administrator): void
+    public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
-        /** @var AdminUserInterface $administrator */
-        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
-
-        Assert::true($this->topBarElement->hasAvatarInMainBar($administrator->getAvatar()->getPath(), $avatar));
+        Assert::true($this->topBarElement->hasAvatarInMainBar($avatar));
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
