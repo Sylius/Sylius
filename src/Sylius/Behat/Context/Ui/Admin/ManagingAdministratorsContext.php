@@ -61,18 +61,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Given /^I have the "([^"]*)" image as (my) avatar$/
-     */
-    public function iHaveTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
-    {
-        $this->updatePage->open(['id' => $administrator->getId()]);
-
-        $path = $this->updateAvatar($avatar, $administrator);
-
-        $this->sharedStorage->set($avatar, $path);
-    }
-
-    /**
      * @Given I want to create a new administrator
      */
     public function iWantToCreateANewAdministrator()
@@ -216,19 +204,10 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When /^I upload the "([^"]*)" image as (my) avatar$/
+     * @When /^I upload the "([^"]+)" image as (my) avatar$/
+     * @When /^I update the "([^"]+)" image as (my) avatar$/
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
-    {
-        $path = $this->updateAvatar($avatar, $administrator);
-
-        $this->sharedStorage->set($avatar, $path);
-    }
-
-    /**
-     * @Given /^I update the "([^"]*)" image as (my) avatar$/
-     */
-    public function iUpdateTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         $path = $this->updateAvatar($avatar, $administrator);
 
@@ -374,7 +353,6 @@ final class ManagingAdministratorsContext implements Context
     private function updateAvatar(string $avatar, AdminUserInterface $administrator): string
     {
         $this->updatePage->attachAvatar($avatar);
-
         $this->updatePage->saveChanges();
 
         return $this->getPath($administrator);

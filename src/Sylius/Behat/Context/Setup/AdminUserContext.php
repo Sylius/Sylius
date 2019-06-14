@@ -14,10 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class AdminUserContext implements Context
 {
@@ -30,14 +34,29 @@ final class AdminUserContext implements Context
     /** @var UserRepositoryInterface */
     private $userRepository;
 
+    /** @var ImageUploaderInterface */
+    private $imageUploader;
+
+    /** @var ObjectManager */
+    private $objectManager;
+
+    /** @var \ArrayAccess */
+    private $minkParameters;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $userFactory,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        ImageUploaderInterface $imageUploader,
+        ObjectManager $objectManager,
+        \ArrayAccess $minkParameters
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userFactory = $userFactory;
         $this->userRepository = $userRepository;
+        $this->imageUploader = $imageUploader;
+        $this->objectManager = $objectManager;
+        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -76,5 +95,23 @@ final class AdminUserContext implements Context
 
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
+    }
+
+    /**
+     * @Given /^I have the "([^"]*)" image as (my) avatar$/
+     */
+    public function iHaveTheImageAsMyAvatar(string $avatarPath, AdminUserInterface $administrator): void
+    {
+        $filesPath = $this->minkParameters['files_path'];
+
+        $avatar = new AvatarImage();
+        $avatar->setFile(new UploadedFile($filesPath . $avatarPath, basename($avatarPath)));
+
+        $this->imageUploader->upload($avatar);
+
+        $administrator->setAvatar($avatar);
+        $this->objectManager->flush();
+
+        $this->sharedStorage->set($avatarPath, $avatar->getPath());
     }
 }
