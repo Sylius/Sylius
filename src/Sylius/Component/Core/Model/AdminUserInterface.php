@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
-interface AdminUserInterface extends BaseUserInterface
+interface AdminUserInterface extends BaseUserInterface, ImageAwareInterface
 {
     public const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
 

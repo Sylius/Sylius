@@ -84,14 +84,24 @@ class AdminUser extends User implements AdminUserInterface
         $this->localeCode = $code;
     }
 
-    public function getAvatar(): ?ImageInterface
+    public function getImage(): ?ImageInterface
     {
         return $this->avatar;
     }
 
+    public function setImage(?ImageInterface $image): void
+    {
+        $image->setOwner($this);
+        $this->avatar = $image;
+    }
+
+    public function getAvatar(): ?ImageInterface
+    {
+        return $this->getImage();
+    }
+
     public function setAvatar(?ImageInterface $avatar): void
     {
-        $avatar->setOwner($this);
-        $this->avatar = $avatar;
+        $this->setImage($avatar);
     }
 }

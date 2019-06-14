@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -57,9 +58,15 @@ class AdminUserSpec extends ObjectBehavior
         $this->getAvatar()->shouldReturn(null);
     }
 
-    function it_has_an_avatar(AvatarImage $image): void
+    function its_image_is_mutable(ImageInterface $image): void
+    {
+        $this->setImage($image);
+        $this->getImage()->shouldReturn($image);
+    }
+
+    function its_avatar_is_an_image(ImageInterface $image): void
     {
         $this->setAvatar($image);
-        $this->getAvatar()->shouldHaveType(AvatarImage::class);
+        $this->getAvatar()->shouldReturn($image);
     }
 }
