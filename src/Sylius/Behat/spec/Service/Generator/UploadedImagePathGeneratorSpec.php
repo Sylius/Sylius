@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Generator;
+namespace spec\Sylius\Behat\Service\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
@@ -25,12 +25,12 @@ final class UploadedImagePathGeneratorSpec extends ObjectBehavior
         $this->shouldImplement(ImagePathGeneratorInterface::class);
     }
 
-    function it_generates_random_hashed_path_for_the_image(ImageInterface $image): void
+    function it_generates_random_hashed_path_keeping_the_image_name(ImageInterface $image): void
     {
         $file = new UploadedFile(__DIR__.'/ford.jpg', 'ford.jpg', null, null, true);
 
         $image->getFile()->willReturn($file);
 
-        $this->generate($image)->shouldMatch('/[a-z0-9]{2}\/[a-z0-9]{2}\/[a-zA-Z0-9]+[_-]*[.]jpeg/i');
+        $this->generate($image)->shouldMatch('/[a-z0-9]{2}\/[a-z0-9]{2}\/[a-zA-Z0-9]+[_-]*\/ford[.]jpg/i');
     }
 }
