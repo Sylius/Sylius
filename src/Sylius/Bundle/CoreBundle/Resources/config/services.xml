@@ -55,8 +55,14 @@
                     <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
+            <argument type="service" id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" />
         </service>
         <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
+
+        <service
+            id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface"
+            class="Sylius\Component\Core\Generator\UploadedImagePathGenerator"
+        />
 
         <service id="sylius.collector.core" class="Sylius\Bundle\CoreBundle\Collector\SyliusCollector" public="false">
             <argument type="service" id="sylius.context.shopper" />

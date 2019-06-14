@@ -16,20 +16,24 @@ namespace spec\Sylius\Component\Core\Uploader;
 use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 final class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(Filesystem $filesystem, ImageInterface $image): void
-    {
+    function let(
+        Filesystem $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image
+    ): void {
         $filesystem->has(Argument::any())->willReturn(false);
 
         $file = new File(__FILE__);
         $image->getFile()->willReturn($file);
 
-        $this->beConstructedWith($filesystem);
+        $this->beConstructedWith($filesystem, $imagePathGenerator);
     }
 
     function it_is_an_image_uploader(): void
@@ -37,8 +41,11 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
-    function it_uploads_an_image(Filesystem $filesystem, ImageInterface $image): void
-    {
+    function it_uploads_an_image(
+        Filesystem $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image
+    ): void {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
@@ -46,7 +53,9 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete(Argument::any())->shouldNotBeCalled();
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $imagePathGenerator->generate($image)->willReturn('image/path/image.jpg');
+
+        $image->setPath('image/path/image.jpg')->will(function ($args) use ($image, $filesystem) {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();
@@ -55,8 +64,11 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_replaces_an_image(Filesystem $filesystem, ImageInterface $image): void
-    {
+    function it_replaces_an_image(
+        Filesystem $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image
+    ): void {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
@@ -64,7 +76,9 @@ final class ImageUploaderSpec extends ObjectBehavior
 
         $filesystem->delete('foo.jpg')->willReturn(true);
 
-        $image->setPath(Argument::type('string'))->will(function ($args) use ($image, $filesystem) {
+        $imagePathGenerator->generate($image)->willReturn('image/path/image.jpg');
+
+        $image->setPath('image/path/image.jpg')->will(function ($args) use ($image, $filesystem) {
             $image->getPath()->willReturn($args[0]);
 
             $filesystem->write($args[0], Argument::any())->shouldBeCalled();
