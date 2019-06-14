@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
+use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Webmozart\Assert\Assert;
@@ -23,9 +24,21 @@ class ImageUploader implements ImageUploaderInterface
     /** @var Filesystem */
     protected $filesystem;
 
-    public function __construct(Filesystem $filesystem)
-    {
+    /** @var ImagePathGeneratorInterface */
+    protected $imagePathGenerator;
+
+    public function __construct(
+        Filesystem $filesystem,
+        ?ImagePathGeneratorInterface $imagePathGenerator = null
+    ) {
         $this->filesystem = $filesystem;
+
+        if ($this->imagePathGenerator === null) {
+            @trigger_error(sprintf(
+                'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.5 and will be removed in Sylius 2.0.', self::class
+            ), \E_USER_DEPRECATED);
+        }
+        $this->imagePathGenerator = $imagePathGenerator;
     }
 
     /**
@@ -47,8 +60,7 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         do {
-            $hash = bin2hex(random_bytes(16));
-            $path = $this->expandPath($hash . '.' . $file->guessExtension());
+            $path = $this->getImagePath($image);
         } while ($this->isAdBlockingProne($path) || $this->filesystem->has($path));
 
         $image->setPath($path);
@@ -69,6 +81,17 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         return false;
+    }
+
+    private function getImagePath(ImageInterface $image): string
+    {
+        if (null !== $this->imagePathGenerator) {
+            return $this->imagePathGenerator->generate($image);
+        }
+
+        $hash = bin2hex(random_bytes(16));
+
+        return $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
     }
 
     private function expandPath(string $path): string
