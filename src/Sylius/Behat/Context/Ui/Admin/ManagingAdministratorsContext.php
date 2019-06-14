@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\TopBarElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
@@ -35,6 +36,9 @@ final class ManagingAdministratorsContext implements Context
     /** @var UpdatePageInterface */
     private $updatePage;
 
+    /** @var TopBarElementInterface */
+    private $topBarElement;
+
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
@@ -48,6 +52,7 @@ final class ManagingAdministratorsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
+        TopBarElementInterface $topBarElement,
         NotificationCheckerInterface $notificationChecker,
         RepositoryInterface $adminUserRepository,
         SharedStorageInterface $sharedStorage
@@ -55,6 +60,7 @@ final class ManagingAdministratorsContext implements Context
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->topBarElement = $topBarElement;
         $this->notificationChecker = $notificationChecker;
         $this->adminUserRepository = $adminUserRepository;
         $this->sharedStorage = $sharedStorage;
@@ -318,8 +324,6 @@ final class ManagingAdministratorsContext implements Context
         $this->updatePage->open(['id' => $administrator->getId()]);
 
         Assert::same($this->sharedStorage->get($avatar), $administrator->getAvatar()->getPath());
-
-        $this->updatePage->hasAvatar($administrator->getAvatar()->getPath());
     }
 
     /**
@@ -327,12 +331,10 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar, AdminUserInterface $administrator): void
     {
-        $this->indexPage->open();
-
         /** @var AdminUserInterface $administrator */
         $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
 
-        $this->updatePage->hasAvatarInMainBar($administrator->getAvatar()->getPath(), $avatar);
+        Assert::true($this->topBarElement->hasAvatarInMainBar($administrator->getAvatar()->getPath(), $avatar));
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
@@ -347,7 +349,12 @@ final class ManagingAdministratorsContext implements Context
     {
         $administrator = $this->getAdministrator($administrator);
 
-        return ((null !== $administrator->getAvatar()) && (null !== $administrator->getAvatar()->getPath())) ? $administrator->getAvatar()->getPath() : '';
+        $avatar = $administrator->getAvatar();
+        if (null === $avatar) {
+            return '';
+        }
+
+        return $avatar->getPath() ?? '';
     }
 
     private function updateAvatar(string $avatar, AdminUserInterface $administrator): string
