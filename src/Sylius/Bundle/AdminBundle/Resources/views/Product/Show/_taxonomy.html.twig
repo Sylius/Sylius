@@ -1,16 +1,16 @@
 <div id="taxonomy">
-    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.taxonomy'|trans }}</h4>
+    <h4 class="ui top attached large header">{{ 'sylius.ui.taxonomy'|trans }}</h4>
     <div class="ui attached segment">
-        <table class="ui definition table">
+        <table class="ui very basic celled table">
             <tbody>
             {% if product.mainTaxon != null %}
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.main_taxon'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.main_taxon'|trans }}</strong></td>
                     <td>{{ product.mainTaxon.getFullName }}</td>
                 </tr>
             {% endif %}
             <tr>
-                <td class="five wide">{{ 'sylius.ui.product_taxon'|trans }}</td>
+                <td class="five wide"><strong class="gray text">{{ 'sylius.ui.product_taxons'|trans }}</strong></td>
                 <td>
                     <ul class="ui bulleted list">
                         {% for productTaxon in product.productTaxons %}
