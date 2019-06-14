@@ -1,11 +1,10 @@
 <div id="media" class="ui styled fluid accordion">
-    <div class="title active">
+    <div class="title">
         <i class="dropdown icon"></i>
         {{ 'sylius.ui.media'|trans }}
     </div>
-    <div class="ui content inactive">
+    <div class="content">
         {% if product.images|length >= 1 %}
-            <div class="ui divider"></div>
             <div class="ui small images">
                 {% for image in product.images %}
                     {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : '//placehold.it/200x200' %}
