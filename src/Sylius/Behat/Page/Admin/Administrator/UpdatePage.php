@@ -48,12 +48,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function hasAvatar(string $avatarPath): bool
     {
-        return $this->isAvatar($avatarPath, 'add_avatar');
-    }
+        $srcPath = $this->getElement('add_avatar')->find('css', 'img')->getAttribute('src');
 
-    public function hasAvatarInMainBar(string $avatarPath, string $avatar): bool
-    {
-        return $this->isAvatar($avatarPath, 'main_bar_avatar');
+        return strpos($srcPath, $avatarPath) !== false;
     }
 
     protected function getDefinedElements(): array
@@ -63,17 +60,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',
-            'main_bar_avatar' => '.ui.avatar.image',
             'password' => '#sylius_admin_user_plainPassword',
             'username' => '#sylius_admin_user_username',
         ]);
-    }
-
-    private function isAvatar(string $avatarPath, string $element): bool
-    {
-
-        $srcPath = $this->getElement($element)->find('css', 'img')->getAttribute('src');
-
-        return strpos($srcPath, $avatarPath) !== false;
     }
 }
