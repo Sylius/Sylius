@@ -14,7 +14,7 @@
             {% for channelPricing in product.variants.first.channelPricings %}
                 <tr>
                     <td class="five wide gray text">
-                        <strong>{{ channelPricing.channelCode }}</strong>
+                        <strong>{{ channelPricing.channelCode|sylius_channel_name }} </strong>
                     </td>
                     <td>{{ money.format(channelPricing.price, product.channels.first.baseCurrency) }}</td>
                     {% if channelPricing.originalPrice != null %}
