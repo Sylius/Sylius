@@ -40,7 +40,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadImage($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_image_aware(GenericEvent $event): void
+    function it_throws_an_exception_if_event_subject_is_not_image_aware(GenericEvent $event): void
     {
         $event->getSubject()->willReturn('badObject');
 
