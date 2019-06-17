@@ -1,12 +1,12 @@
 <div id="associations">
     <h4 class="ui top attached large header">{{ 'sylius.ui.associations'|trans }}</h4>
     <div class="ui attached segment">
-        {% if product.getAssociations is not empty %}
+        {% if product.associations is not empty %}
             {% for association in product.associations %}
-                <strong class="gray text">{{ association.getType.getName }}:</strong>
+                <strong class="gray text">{{ association.type.name }}:</strong>
                 <ul class="ui bulleted list">
-                    {% for associatedProduct in association.getAssociatedProducts %}
-                        <li>{{ associatedProduct.getName }}</li>
+                    {% for associatedProduct in association.associatedProducts %}
+                        <li>{{ associatedProduct.name }}</li>
                     {% endfor %}
                 </ul>
             {% endfor %}

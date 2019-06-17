@@ -44,7 +44,7 @@ final class AssociationsElement extends Element implements AssociationsElementIn
     {
         return $associations->findAll(
             'css',
-            sprintf("tr:contains('%s') td:nth-child(2) li", $name)
+            sprintf("div:contains('%s') ul li", $name)
         );
     }
 }
