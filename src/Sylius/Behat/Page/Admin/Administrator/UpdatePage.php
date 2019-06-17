@@ -17,6 +17,15 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    public function attachAvatar(string $path): void
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getElement('add_avatar')->find('css', 'input[type="file"]');
+
+        $imageForm->attachFile($filesPath . $path);
+    }
+
     public function changeUsername(string $username): void
     {
         $this->getElement('username')->setValue($username);
@@ -37,9 +46,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('locale_code')->selectOption($localeCode);
     }
 
+    public function hasAvatar(string $avatarPath): bool
+    {
+        $srcPath = $this->getElement('add_avatar')->find('css', 'img')->getAttribute('src');
+
+        return strpos($srcPath, $avatarPath) !== false;
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'add_avatar' => '#add-avatar',
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',

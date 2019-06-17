@@ -43,6 +43,9 @@ sylius_grid:
 
 liip_imagine:
     filter_sets:
+        sylius_admin_admin_user_avatar_thumbnail:
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
         sylius_admin_product_tiny_thumbnail:
             filters:
                 thumbnail: { size: [64, 64], mode: outbound }

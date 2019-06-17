@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploader as BaseImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
 final class ImageUploader extends BaseImageUploader implements ImageUploaderInterface
@@ -29,7 +30,7 @@ final class ImageUploader extends BaseImageUploader implements ImageUploaderInte
 
         $file = $image->getFile();
 
-        /** @var File $file */
+        /** @var UploadedFile $file */
         Assert::isInstanceOf($file, File::class);
 
         if (null !== $image->getPath() && $this->has($image->getPath())) {
@@ -38,7 +39,7 @@ final class ImageUploader extends BaseImageUploader implements ImageUploaderInte
 
         do {
             $hash = bin2hex(random_bytes(16));
-            $path = $this->expandPath($hash . '/' . $file->getFilename() . '.' . $file->guessExtension());
+            $path = $this->expandPath($hash . '/' . $file->getClientOriginalName());
         } while ($this->isAdBlockingProne($path) || $this->filesystem->has($path));
 
         $image->setPath($path);

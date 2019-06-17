@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductImage;
@@ -73,6 +74,18 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductImageInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('avatar_image')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(AvatarImage::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

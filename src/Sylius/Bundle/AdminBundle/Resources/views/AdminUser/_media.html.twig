@@ -1,0 +1,7 @@
+{% form_theme form '@SyliusUi/Form/imagesTheme.html.twig' %}
+
+<div class="ui segment" id="add-avatar">
+    <h4 class="ui dividing header">{{ 'sylius.ui.avatar'|trans }}</h4>
+    <br>
+    {{ form_row(form.avatar, {'label': false}) }}
+</div>

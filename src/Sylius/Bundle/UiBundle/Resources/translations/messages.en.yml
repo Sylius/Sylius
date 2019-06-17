@@ -75,6 +75,7 @@ sylius:
         available_on: 'Available on'
         available_on_hand: 'Available on hand'
         available_until: 'Available until'
+        avatar: 'Avatar'
         average_order_value: 'Average order value'
         awaiting_payment: 'Awaiting payment'
         back: 'Back'

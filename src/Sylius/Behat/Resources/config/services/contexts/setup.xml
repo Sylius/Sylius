@@ -24,6 +24,9 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="behat.mink.parameters" />
         </service>
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
