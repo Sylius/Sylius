@@ -17,7 +17,7 @@
             </thead>
             <tbody class="variants-accordion">
                 {% for variant in product.variants %}
-                    <tr class="variants-accordion__title">
+                    <tr class="variants-accordion__title item-{{ loop.index	}}">
                         <td class="center aligned">
                             <button class="ui basic icon button" style="box-shadow: none">
                                 <i class="counterclockwise rotated dropdown icon"></i>
@@ -34,8 +34,8 @@
                                         {% endif %}
                                     </div>
                                     <div class="middle aligned content">
-                                        <div><strong>{{ variant.product.name }}</strong></div>
-                                        <small class="gray text">{{ variant.code }}</small>
+                                        <div><strong class="variant-name">{{ variant.product.name }}</strong></div>
+                                        <small class="gray text variant-code">{{ variant.code }}</small>
                                     </div>
                                 </div>
                             </div>
@@ -66,11 +66,11 @@
                                 <div class="gray text">-</div>
                             {% endif %}
                         </td>
-                        <td>
+                        <td class="current-stock">
                             {{ variant.onHand - variant.onHold }}
                         </td>
                     </tr>
-                    <tr class="variants-accordion__content" style="display: none; background: rgba(0,0,0,.04);">
+                    <tr class="variants-accordion__content item-{{ loop.index }}" style="display: none; background: rgba(0,0,0,.04);">
                         <td colspan="7" style="padding: 20px">
                             <div class="ui grid">
                                 <div class="doubling two column row">
@@ -125,7 +125,7 @@
                                                     </tr>
                                                     {% set currencies = sylius_channels_currencies() %}
                                                     {% for channelPricing in variant.channelPricings %}
-                                                        <tr>
+                                                        <tr class="pricing">
                                                             <td class="five wide gray text">
                                                                 <strong>{{ channelPricing.channelCode }}</strong>
                                                             </td>
