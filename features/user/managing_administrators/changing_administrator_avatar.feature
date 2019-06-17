@@ -11,5 +11,5 @@ Feature: Changing an administrator's avatar
     Scenario: Changing an avatar of an administrator
         Given I have the "ford.jpg" image as my avatar
         And I am editing my details
-        And I update the "troll.jpg" image as my avatar
+        When I update the "troll.jpg" image as my avatar
         Then I should see the "troll.jpg" image as my avatar

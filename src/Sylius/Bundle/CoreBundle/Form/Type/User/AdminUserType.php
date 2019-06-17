@@ -41,7 +41,7 @@ final class AdminUserType extends UserType
                 'placeholder' => null,
             ])
             ->add('avatar', AvatarImageType::class, [
-                'label' => 'sylius.ui.add_avatar',
+                'label' => 'sylius.ui.avatar',
                 'required' => false,
             ])
         ;
