@@ -21,15 +21,19 @@ final class VariantsElement extends Element implements VariantsElementInterface
     public function countVariantsOnPage(): int
     {
         /** @var NodeElement $variants|array */
-        $variants = $this->getDocument()->findAll('css', '#variants .variant');
+        $variants = $this->getDocument()->findAll('css', '#variants .item');
 
         return \count($variants);
     }
 
-    public function hasProductVariantWithCodePriceAndCurrentStock(string $name, string $code, string $price, string $currentStock): bool
-    {
+    public function hasProductVariantWithCodePriceAndCurrentStock(
+        string $name,
+        string $code,
+        string $price,
+        string $currentStock
+    ): bool {
         /** @var NodeElement $variantRow */
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variant');
+        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
 
         /** @var NodeElement $variant */
         foreach ($variantRows as $variant) {
@@ -43,13 +47,23 @@ final class VariantsElement extends Element implements VariantsElementInterface
         return false;
     }
 
-    private function hasProductWithGivenNameCodePriceAndCurrentStock(NodeElement $variant, string $name, string $code, string $price, string $currentStock): bool
-    {
+    private function hasProductWithGivenNameCodePriceAndCurrentStock(
+        NodeElement $variant,
+        string $name,
+        string $code,
+        string $price,
+        string $currentStock
+    ): bool {
+        $variantContent = $variant->getParent()->find('css', sprintf(
+            '.variants-accordion__content.%s',
+            explode(' ', $variant->getAttribute('class'))[1])
+        );
+
         if (
-            $variant->find('css', '.title span.variant-name')->getText() === $name &&
-            $variant->find('css', '.title span.variant-code')->getText() === $code &&
-            $variant->find('css', '.content .pricing tr:contains("WEB-US") td:nth-child(2)')->getText() === $price &&
-            $variant->find('css', '.content span.current-stock-label span.current-stock')->getText() === $currentStock
+            $variant->find('css', '.content .variant-name')->getText() === $name &&
+            $variant->find('css', '.content .variant-code')->getText() === $code &&
+            $variantContent->find('css', 'tr.pricing:contains("WEB-US") td:nth-child(2)')->getText() === $price &&
+            $variant->find('css', '.current-stock')->getText() === $currentStock
         ) {
             return true;
         }

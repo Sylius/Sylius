@@ -1,6 +1,6 @@
 <div id="details">
-    <h4 class="ui top attached inverted black header">{{ 'sylius.ui.details'|trans }}</h4>
-    <div class="ui attached black segment">
+    <h4 class="ui top attached large header">{{ 'sylius.ui.details'|trans }}</h4>
+    <div class="ui attached segment">
         <div>
             {% if product.enabled %}
                 <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.enabled'|trans }}</span>
@@ -20,14 +20,14 @@
                 <span class="ui orange label"><i class="remove icon"></i>{{ 'sylius.ui.shipping_not_required'|trans }}</span>
             {% endif %}
 
-            <table class="ui definition table">
+            <table class="ui very basic celled table">
                 <tbody>
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.code'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.code'|trans }}</strong></td>
                     <td>{{ product.code }}</td>
                 </tr>
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.options'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.options'|trans }}</strong></td>
                     <td>
                         <ul class="ui bulleted list">
                             {% for option in product.options %}
@@ -37,7 +37,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.channels'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
                     {% for channel in product.channels %}
                         <td>
                             <span class="ui large empty horizontal circular label" style="background-color: teal"></span>
@@ -46,11 +46,11 @@
                     {% endfor %}
                 </tr>
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.current_stock'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.current_stock'|trans }}</strong></td>
                     <td>{{ product.variants.first.onHand - product.variants.first.onHold }}</td>
                 </tr>
                 <tr>
-                    <td class="five wide">{{ 'sylius.ui.tax_category'|trans }}</td>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.tax_category'|trans }}</strong></td>
                     <td>{{ product.variants.first.taxCategory }}</td>
                 </tr>
                 </tbody>

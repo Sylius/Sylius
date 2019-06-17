@@ -105,6 +105,11 @@ $(document).ready(() => {
   const taxonomyTree = new SyliusTaxonomyTree();
 
   $(`${formsList}, .check-unsaved`).dirtyForms();
+
+  $('.variants-accordion__title').on('click', '.icon.button', function(e) {
+    $(e.delegateTarget).next('.variants-accordion__content').toggle();
+    $(this).find('.dropdown.icon').toggleClass('counterclockwise rotated');
+  });
 });
 
 window.$ = $;
