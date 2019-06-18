@@ -12,7 +12,7 @@
                     <th>{{ 'sylius.ui.tracked'|trans }}</th>
                     <th>{{ 'sylius.ui.shipping_required'|trans }}</th>
                     <th>{{ 'sylius.ui.tax_category'|trans }}</th>
-                    <th>{{ 'sylius.ui.current_stock'|trans }}</th>
+                    <th style="padding-right: 15px;">{{ 'sylius.ui.current_stock'|trans }}</th>
                 </tr>
             </thead>
             <tbody class="variants-accordion">
@@ -66,7 +66,7 @@
                                 <div class="gray text">-</div>
                             {% endif %}
                         </td>
-                        <td class="current-stock">
+                        <td class="current-stock" style="padding-right: 15px;">
                             {{ variant.onHand - variant.onHold }}
                         </td>
                     </tr>

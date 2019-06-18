@@ -27,23 +27,15 @@
                     <td>{{ product.code }}</td>
                 </tr>
                 <tr>
-                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.options'|trans }}</strong></td>
-                    <td>
-                        <ul class="ui bulleted list">
-                            {% for option in product.options %}
-                                <li>{{ option }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
                     <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
-                    {% for channel in product.channels %}
-                        <td>
-                            <span class="ui large empty horizontal circular label" style="background-color: teal"></span>
-                            <span class="channel-name">{{ channel }}</span>
-                        </td>
-                    {% endfor %}
+                    <td>
+                        {% for channel in product.channels %}
+                            <div>
+                                <span class="ui large empty horizontal circular label" style="background-color: {{ channel.color }}"></span>
+                                <span class="channel-name">{{ channel }}</span>
+                            </div>
+                        {% endfor %}
+                    </td>
                 </tr>
                 <tr>
                     <td class="five wide"><strong class="gray text">{{ 'sylius.ui.current_stock'|trans }}</strong></td>
