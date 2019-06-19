@@ -865,9 +865,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I set the position of :productName to :position
      */
-    public function iSetThePositionOfTo($productName, $position)
+    public function iSetThePositionOfTo(string $productName, string $position): void
     {
-        $this->indexPerTaxonPage->setPositionOfProduct($productName, (int) $position);
+        $this->indexPerTaxonPage->setPositionOfProduct($productName, $position);
     }
 
     /**
@@ -1001,6 +1001,17 @@ final class ManagingProductsContext implements Context
     public function iShouldNotSeeInventoryOfThisProduct(): void
     {
         Assert::false($this->updateConfigurableProductPage->hasInventoryTab());
+    }
+
+    /**
+     * @Then I should be notified that the position :invalidPosition is invalid
+     */
+    public function iShouldBeNotifiedThatThePositionIsInvalid(string $invalidPosition): void
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('The position "%s" is invalid.', $invalidPosition),
+            NotificationType::failure()
+        );
     }
 
     /**
