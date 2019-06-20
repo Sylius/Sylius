@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.5.X`
 
+## v1.5.2 (2019-06-20)
+
+#### Details
+
+- [#10191](https://github.com/Sylius/Sylius/issues/10191) [taxon_fixtures] Fix child taxon slug generation ([@tannyl](https://github.com/tannyl))
+- [#10371](https://github.com/Sylius/Sylius/issues/10371) [Docs] How to find out the resource config required when customizing models ([@4c0n](https://github.com/4c0n))
+- [#10384](https://github.com/Sylius/Sylius/issues/10384) "Getting Started with Sylius" guide ([@Zales0123](https://github.com/Zales0123), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#10389](https://github.com/Sylius/Sylius/issues/10389) [UI] Hide filters by default on index pages ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10404](https://github.com/Sylius/Sylius/issues/10404) Fix huge autocomplete queries issue ([@bitbager](https://github.com/bitbager), [@pamil](https://github.com/pamil))
+- [#10410](https://github.com/Sylius/Sylius/issues/10410) Fix typo ([@dnna](https://github.com/dnna))
+- [#10412](https://github.com/Sylius/Sylius/issues/10412) [Docs] Added tip for using group sequence validations ([@4c0n](https://github.com/4c0n))
+- [#10423](https://github.com/Sylius/Sylius/issues/10423) [Doc] End of bugfix support for 1.3 ([@lchrusciel](https://github.com/lchrusciel))
+- [#10426](https://github.com/Sylius/Sylius/issues/10426) Using client from browser kit component instead of http kernel component ([@loevgaard](https://github.com/loevgaard))
+- [#10432](https://github.com/Sylius/Sylius/issues/10432) Add known errors section to UPGRADE file ([@pamil](https://github.com/pamil))
+- [#10433](https://github.com/Sylius/Sylius/issues/10433) Bump fstream from 1.0.11 to 1.0.12 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#10440](https://github.com/Sylius/Sylius/issues/10440) Fix removing taxons with numeric codes from products ([@vvasiloi](https://github.com/vvasiloi))
+- [#10445](https://github.com/Sylius/Sylius/issues/10445) Fix typos and grammar in the Getting Started guide ([@pamil](https://github.com/pamil))
+- [#10446](https://github.com/Sylius/Sylius/issues/10446) Update the 1.1 version status in the release process docs ([@pamil](https://github.com/pamil))
+- [#10450](https://github.com/Sylius/Sylius/issues/10450) Fix interfaces mapping in Doctrine for admin user and shop user ([@pamil](https://github.com/pamil))
+- [#10462](https://github.com/Sylius/Sylius/issues/10462) [Docs] Update Sylius versions in installation and contribution guides ([@GSadee](https://github.com/GSadee))
+
 ## v1.5.1 (2019-05-29)
 
 #### Details
