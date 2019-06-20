@@ -85,7 +85,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if (null !== $parentTaxon) {
             $taxon->setParent($parentTaxon);
         }
-        
+
         // add translation for each defined locales
         foreach ($this->getLocales() as $localeCode) {
             $this->createTranslation($taxon, $localeCode, $options);
