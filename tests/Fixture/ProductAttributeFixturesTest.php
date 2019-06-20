@@ -32,7 +32,7 @@ final class ProductAttributeFixturesTest extends KernelTestCase
 
         $suite = new Suite('test');
         $suite->addListener($listenerRegistry->getListener('orm_purger'), ['mode' => 'delete', 'exclude' => [], 'managers' => [null]]);
-        $suite->addFixture($fixtureRegistry->getFixture('locale'), ['locales' => ['en_US'], 'load_default_locale' => false]);
+        $suite->addFixture($fixtureRegistry->getFixture('locale'), ['locales' => [], 'load_default_locale' => true]);
         $suite->addFixture($fixtureRegistry->getFixture('taxon'), ['custom' => ['books' => ['name' => 'Books', 'code' => 'BOOKS']]]);
         $suite->addFixture($fixtureRegistry->getFixture('product_attribute'), ['custom' => [
             'book_author' => ['name' => 'Author', 'code' => 'AUTHOR', 'type' => 'text'],
