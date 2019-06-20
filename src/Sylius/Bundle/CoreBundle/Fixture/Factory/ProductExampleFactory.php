@@ -14,9 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
-use Sylius\Component\Attribute\AttributeType\DateAttributeType;
-use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
