@@ -36,6 +36,14 @@ Community
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
+Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/contributing/index.html)!
+
+Security issues
+---------------
+
+If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
+Instead, all security issues must be sent to `security@sylius.com`.
+
 Official plugins
 ----------------
 
@@ -57,16 +65,18 @@ This is the list of officially supported Sylius plugins:
 You can find other plugins on [our ecosystem website](https://sylius.com/plugins/) or by looking for 
 [packages marked as *sylius-plugin*](https://packagist.org/explore/?type=sylius-plugin).
 
-Contributing
-------------
+Sylius Plus
+-----------
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/contributing/index.html)!
+Sylius Plus gives you all the power of Open Source and much more. It comes with a following set of enterprise-grade features:
 
-Security issues
----------------
+- Advanced Multi-store
+- Returns Management
+- Multi-source Inventory
+- Advanced Users Permissions
+- Enhanced security & monitoring
 
-If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
-Instead, all security issues must be sent to `security@sylius.com`.
+What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
 
 License
 -------
