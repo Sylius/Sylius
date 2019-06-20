@@ -23,47 +23,54 @@ class LocaleFixtureSpec extends ObjectBehavior
         $this->shouldImplement(FixtureInterface::class);
     }
 
-    function it_creates_and_persists_default_locale(FactoryInterface $localeFactory, ObjectManager $localeManager): void
-    {
-        $localeFactory->createNew()->willReturn(new Locale());
+    function it_creates_and_persists_default_locale(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale);
 
-        $localeManager->persist(Argument::that(function (LocaleInterface $locale): bool {
-            return $locale->getCode() === 'default_LOCALE';
-        }))->shouldBeCalledOnce();
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
 
         $localeManager->flush()->shouldBeCalled();
 
         $this->load(['locales' => []]);
     }
 
-    function it_creates_and_persists_default_locale_and_other_specified_locales(FactoryInterface $localeFactory, ObjectManager $localeManager): void
-    {
-        $localeFactory->createNew()->willReturn(new Locale(), new Locale());
+    function it_creates_and_persists_default_locale_and_other_specified_locales(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale,
+        LocaleInterface $polishLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
 
-        $localeManager->persist(Argument::that(function (LocaleInterface $locale): bool {
-            return $locale->getCode() === 'default_LOCALE';
-        }))->shouldBeCalledOnce();
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+        $polishLocale->setCode('pl_PL')->shouldBeCalled();
 
-        $localeManager->persist(Argument::that(function (LocaleInterface $locale): bool {
-            return $locale->getCode() === 'pl_PL';
-        }))->shouldBeCalledOnce();
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
+        $localeManager->persist($polishLocale)->shouldBeCalledOnce();
 
         $localeManager->flush()->shouldBeCalled();
 
         $this->load(['locales' => ['pl_PL']]);
     }
 
-    function it_deduplicates_passed_locales_and_the_default_one(FactoryInterface $localeFactory, ObjectManager $localeManager): void
-    {
-        $localeFactory->createNew()->willReturn(new Locale(), new Locale(), new Locale(), new Locale());
+    function it_deduplicates_passed_locales_and_the_default_one(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale,
+        LocaleInterface $polishLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
 
-        $localeManager->persist(Argument::that(function (LocaleInterface $locale): bool {
-            return $locale->getCode() === 'default_LOCALE';
-        }))->shouldBeCalledOnce();
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+        $polishLocale->setCode('pl_PL')->shouldBeCalled();
 
-        $localeManager->persist(Argument::that(function (LocaleInterface $locale): bool {
-            return $locale->getCode() === 'pl_PL';
-        }))->shouldBeCalledOnce();
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
+        $localeManager->persist($polishLocale)->shouldBeCalledOnce();
 
         $localeManager->flush()->shouldBeCalled();
 
