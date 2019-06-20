@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;

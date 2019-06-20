@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
