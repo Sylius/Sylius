@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Fixture;
 
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
+use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\Suite;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -26,9 +29,9 @@ final class ProductAttributeFixturesTest extends KernelTestCase
         $kernel = static::bootKernel();
         $container = $kernel->getContainer()->get('test.service_container', ContainerInterface::NULL_ON_INVALID_REFERENCE) ?? $kernel->getContainer();
 
-        $fixtureRegistry = $container->get('sylius_fixtures.fixture_registry');
-        $listenerRegistry = $container->get('sylius_fixtures.listener_registry');
-        $suiteLoader = $container->get('sylius_fixtures.suite_loader');
+        $fixtureRegistry = $container->get(FixtureRegistryInterface::class);
+        $listenerRegistry = $container->get(ListenerRegistryInterface::class);
+        $suiteLoader = $container->get(SuiteLoaderInterface::class);
 
         $suite = new Suite('test');
         $suite->addListener($listenerRegistry->getListener('orm_purger'), ['mode' => 'delete', 'exclude' => [], 'managers' => [null]]);
