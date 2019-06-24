@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
+use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Webmozart\Assert\Assert;
@@ -33,12 +34,13 @@ class ImageUploader implements ImageUploaderInterface
     ) {
         $this->filesystem = $filesystem;
 
-        if ($this->imagePathGenerator === null) {
+        if ($imagePathGenerator === null) {
             @trigger_error(sprintf(
                 'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.', self::class
             ), \E_USER_DEPRECATED);
         }
-        $this->imagePathGenerator = $imagePathGenerator;
+
+        $this->imagePathGenerator = $imagePathGenerator ?? new UploadedImagePathGenerator();
     }
 
     /**
@@ -60,7 +62,7 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         do {
-            $path = $this->getImagePath($image);
+            $path = $this->imagePathGenerator->generate($image);
         } while ($this->isAdBlockingProne($path) || $this->filesystem->has($path));
 
         $image->setPath($path);
@@ -81,27 +83,6 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         return false;
-    }
-
-    private function getImagePath(ImageInterface $image): string
-    {
-        if (null !== $this->imagePathGenerator) {
-            return $this->imagePathGenerator->generate($image);
-        }
-
-        $hash = bin2hex(random_bytes(16));
-
-        return $this->expandPath($hash . '.' . $image->getFile()->guessExtension());
-    }
-
-    private function expandPath(string $path): string
-    {
-        return sprintf(
-            '%s/%s/%s',
-            substr($path, 0, 2),
-            substr($path, 2, 2),
-            substr($path, 4)
-        );
     }
 
     private function has(string $path): bool
