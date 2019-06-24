@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-03-15T14:27:41Z
+
+But huge 👏 for resolving bug itself ;)
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-13T03:42:13Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "product-attribute-fixtures-improvements"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-20T10:23:58Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "product-attribute-fixtures-improvements"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-24T08:09:07Z
+
+Thank you, Mateusz! :tada:
