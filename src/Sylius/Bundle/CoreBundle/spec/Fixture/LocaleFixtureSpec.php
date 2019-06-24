@@ -87,4 +87,58 @@ final class LocaleFixtureSpec extends ObjectBehavior
 
         $this->load(['locales' => ['default_LOCALE'], 'load_default_locale' => true]);
     }
+
+    function it_creates_and_persists_default_locale(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale);
+
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
+
+        $localeManager->flush()->shouldBeCalled();
+
+        $this->load(['locales' => [], 'load_default_locale' => true]);
+    }
+
+    function it_creates_and_persists_default_locale_and_other_specified_locales(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale,
+        LocaleInterface $polishLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
+
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+        $polishLocale->setCode('pl_PL')->shouldBeCalled();
+
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
+        $localeManager->persist($polishLocale)->shouldBeCalledOnce();
+
+        $localeManager->flush()->shouldBeCalled();
+
+        $this->load(['locales' => ['pl_PL'], 'load_default_locale' => true]);
+    }
+
+    function it_deduplicates_passed_locales_and_the_default_one(
+        FactoryInterface $localeFactory,
+        ObjectManager $localeManager,
+        LocaleInterface $defaultLocale,
+        LocaleInterface $polishLocale
+    ): void {
+        $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
+
+        $defaultLocale->setCode('default_LOCALE')->shouldBeCalled();
+        $polishLocale->setCode('pl_PL')->shouldBeCalled();
+
+        $localeManager->persist($defaultLocale)->shouldBeCalledOnce();
+        $localeManager->persist($polishLocale)->shouldBeCalledOnce();
+
+        $localeManager->flush()->shouldBeCalled();
+
+        $this->load(['locales' => ['pl_PL', 'default_LOCALE', 'pl_PL'], 'load_default_locale' => true]);
+    }
 }

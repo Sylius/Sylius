@@ -47,9 +47,11 @@ class LocaleFixture extends AbstractFixture
     {
         $localesCodes = $options['locales'];
 
-        if ($options['load_default_locale'] && !in_array($this->baseLocaleCode, $localesCodes, true)) {
-            $localesCodes = array_merge([$this->baseLocaleCode], $localesCodes);
+        if ($options['load_default_locale']) {
+            array_unshift($localesCodes, $this->baseLocaleCode);
         }
+
+        $localesCodes = array_unique($localesCodes);
 
         foreach ($localesCodes as $localeCode) {
             /** @var LocaleInterface $locale */
