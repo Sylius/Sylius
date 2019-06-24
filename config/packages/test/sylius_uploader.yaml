@@ -4,5 +4,10 @@ services:
         arguments:
             - "%sylius.uploader.filesystem%"
         factory: ['@knp_gaufrette.filesystem_map', 'get']
+    sylius.image_uploader:
+        class: Sylius\Component\Core\Uploader\ImageUploader
+        arguments:
+            - "@sylius_test.filesystem"
+            - "@Sylius\\Component\\Core\\Generator\\ImagePathGeneratorInterface"
     Sylius\Component\Core\Generator\ImagePathGeneratorInterface:
         class: Sylius\Behat\Service\Generator\UploadedImagePathGenerator

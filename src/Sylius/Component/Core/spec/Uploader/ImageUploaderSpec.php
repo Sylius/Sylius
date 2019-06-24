@@ -41,6 +41,21 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
+    function it_triggers_a_deprecation_exception_if_not_image_path_generator_is_passed(
+        Filesystem $filesystem,
+        ImageInterface $image
+    ): void {
+        $filesystem->has(Argument::any())->willReturn(false);
+
+        $file = new File(__FILE__);
+        $image->getFile()->willReturn($file);
+
+        $this
+            ->shouldTrigger(\E_USER_DEPRECATED)
+            ->during('__construct', [$filesystem])
+        ;
+    }
+
     function it_uploads_an_image(
         Filesystem $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
