@@ -23,9 +23,9 @@
         "php": "^7.2",
 
         "sylius/resource-bundle": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1",
-        "symfony/intl": "^3.4|^4.1.1",
-        "symfony/templating": "^3.4|^4.1.1",
+        "symfony/framework-bundle": "^3.4|^4.3",
+        "symfony/intl": "^3.4|^4.3",
+        "symfony/templating": "^3.4|^4.3",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
@@ -34,9 +34,9 @@
         "phpunit/phpunit": "^7.0",
         "twig/twig": "^2.0",
         "sylius/currency-bundle": "^1.2",
-        "symfony/form": "^3.4|^4.1.1",
-        "symfony/browser-kit": "^3.4|^4.1.1",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/form": "^3.4|^4.3",
+        "symfony/browser-kit": "^3.4|^4.3",
+        "symfony/dependency-injection": "^3.4|^4.3",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "conflict": {

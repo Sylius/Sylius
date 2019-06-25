@@ -23,7 +23,7 @@
         "php": "^7.2",
 
         "sylius/resource": "^1.2",
-        "symfony/intl": "^3.4|^4.1.1",
+        "symfony/intl": "^3.4|^4.3",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
