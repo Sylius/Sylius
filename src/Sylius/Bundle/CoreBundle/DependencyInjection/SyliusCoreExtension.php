@@ -13,17 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\CoreBundle\Routing\Matcher\Dumper\PhpMatcherDumper;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\Kernel;
 
-final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface, CompilerPassInterface
+final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /** @var array */
     private static $bundles = [
@@ -92,19 +89,5 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $loader->load('services/integrations/hwi_oauth.xml');
-    }
-
-    public function process(ContainerBuilder $container): void
-    {
-        // Should be removed after PhpMatcherDumper is fixed in an another Symfony patch release
-        if (!in_array(Kernel::VERSION, ['4.1.8', '4.1.9'], true)) {
-            return;
-        }
-
-        $routerDefinition = $container->findDefinition('router.default');
-        $routerDefinition->replaceArgument(2, array_merge(
-            $routerDefinition->getArgument(2),
-            ['matcher_dumper_class' => PhpMatcherDumper::class]
-        ));
     }
 }
