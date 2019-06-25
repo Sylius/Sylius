@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
-        "symfony/dependency-injection": "^3.4|^4.1.1"
+        "symfony/dependency-injection": "^3.4|^4.3"
     },
     "config": {
         "bin-dir": "bin"

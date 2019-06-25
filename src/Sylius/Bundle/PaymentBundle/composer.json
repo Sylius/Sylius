@@ -24,15 +24,15 @@
 
         "sylius/payment": "^1.2",
         "sylius/resource-bundle": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1"
+        "symfony/framework-bundle": "^3.4|^4.3"
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
         "phpspec/phpspec": "^5.0",
         "sylius/locale-bundle": "^1.2",
         "phpunit/phpunit": "^7.0",
-        "symfony/browser-kit": "^3.4|^4.1.1",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/browser-kit": "^3.4|^4.3",
+        "symfony/dependency-injection": "^3.4|^4.3",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
