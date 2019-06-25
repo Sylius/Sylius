@@ -39,7 +39,7 @@
         "sylius/mailer-bundle": "^1.2",
         "sylius/resource-bundle": "^1.2",
         "sylius/user": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1",
+        "symfony/framework-bundle": "^3.4|^4.3",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
@@ -48,8 +48,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
-        "symfony/security-bundle": "^3.4|^4.1.1",
+        "symfony/dependency-injection": "^3.4|^4.3",
+        "symfony/security-bundle": "^3.4|^4.3",
         "symfony/swiftmailer-bundle": "^3.1"
     },
     "suggest": {

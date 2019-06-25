@@ -25,12 +25,12 @@
         "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.2",
         "sylius/ui-bundle": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1"
+        "symfony/framework-bundle": "^3.4|^4.3"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^3.4|^4.1.1"
+        "symfony/dependency-injection": "^3.4|^4.3"
     },
     "conflict": {
         "twig/twig": "^1.0"

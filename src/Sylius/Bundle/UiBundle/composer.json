@@ -26,14 +26,14 @@
         "knplabs/knp-menu-bundle": "^2.1",
         "sonata-project/block-bundle": "^3.3",
         "sylius/grid-bundle": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1",
-        "symfony/security": "^3.4|^4.1.1",
-        "symfony/templating": "^3.4|^4.1.1"
+        "symfony/framework-bundle": "^3.4|^4.3",
+        "symfony/security": "^3.4|^4.3",
+        "symfony/templating": "^3.4|^4.3"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
-        "symfony/form": "^3.4|^4.1.1",
+        "symfony/dependency-injection": "^3.4|^4.3",
+        "symfony/form": "^3.4|^4.3",
         "twig/twig": "^2.0"
     },
     "conflict": {
