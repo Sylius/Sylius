@@ -25,6 +25,7 @@
         <import resource="admin/inventory.xml" />
         <import resource="admin/locale.xml" />
         <import resource="admin/order.xml" />
+        <import resource="admin/payment.xml" />
         <import resource="admin/payment_method.xml" />
         <import resource="admin/product.xml" />
         <import resource="admin/product_association_type.xml" />

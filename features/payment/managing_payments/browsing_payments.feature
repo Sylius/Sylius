@@ -25,5 +25,5 @@ Feature: Browsing payments
     Scenario: Browsing payments and their states in one channel
         When I browse payments
         Then I should see 2 payments in the list
-        And the payments of the "#00000001" order should be "Awaiting payment" for "donald@duck.com"
-        And the payments of the "#00000002" order should be "Awaiting payment" for "iron@man.com"
+        And the payments of the "#00000001" order should be "New" for "donald@duck.com"
+        And the payments of the "#00000002" order should be "New" for "iron@man.com"
