@@ -14,6 +14,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/inventory.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_association_type.yml" }

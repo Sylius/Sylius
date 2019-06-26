@@ -1,0 +1,67 @@
+sylius_grid:
+    grids:
+        sylius_admin_payment:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.payment.class%"
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: order
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                customer:
+                    type: twig
+                    label: sylius.ui.customer
+                    path: order.customer
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/PaymentState"
+            filters:
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.new: New
+                            sylius.ui.completed: Completed
+            actions:
+                item:
+                    complete:
+                        type: apply_transition
+                        label: sylius.ui.complete
+                        icon: payment
+                        options:
+                            link:
+                                route: sylius_admin_payment_complete
+                                parameters:
+                                    id: resource.id
+                            class: teal
+                            transition: complete
+                            graph: sylius_payment
+                    details:
+                        type: default
+                        label: sylius.ui.show_order_details
+                        icon: eye
+                        options:
+                            link:
+                                route: sylius_admin_order_show
+                                parameters:
+                                    id: resource.order.id
