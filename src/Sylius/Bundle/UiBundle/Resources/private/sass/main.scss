@@ -151,3 +151,29 @@ th {
         .pagination { flex-wrap: wrap; }
     }
 }
+
+// Footer
+#wrapper.full.height {
+    position: relative;
+    padding-bottom: 80px !important;
+    min-height: 100vh;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 60px;
+        right: 30px;
+        width: calc(100% - 60px);
+        height: 1px;
+        background: #ebebeb;
+    }
+
+    .sylius-footer {
+        position: absolute;
+        bottom: 20px;
+        right: 40px;
+        font-size: 13px;
+        color: #9a9a9a;
+    }
+}
