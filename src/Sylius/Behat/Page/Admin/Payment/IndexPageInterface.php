@@ -17,5 +17,11 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
+    public function chooseStateToFilter(string $paymentState): void;
 
+    public function showOrderPageForNthPayment(int $position): void;
+
+    public function completePaymentOfOrderWithNumber(string $orderNumber): void;
+
+    public function getPaymentStateByOrderNumber(string $orderNumber): string;
 }

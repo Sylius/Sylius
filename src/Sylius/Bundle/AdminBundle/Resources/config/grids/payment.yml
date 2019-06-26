@@ -41,7 +41,11 @@ sylius_grid:
                     form_options:
                         choices:
                             sylius.ui.new: New
+                            sylius.ui.processing: Processing
                             sylius.ui.completed: Completed
+                            sylius.ui.cancelled: Cancelled
+                            sylius.ui.failed: Failed
+                            sylius.ui.refunded: Refunded
             actions:
                 item:
                     complete:
@@ -56,7 +60,7 @@ sylius_grid:
                             class: teal
                             transition: complete
                             graph: sylius_payment
-                    details:
+                    order_details:
                         type: default
                         label: sylius.ui.show_order_details
                         icon: eye

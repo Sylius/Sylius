@@ -1,8 +1,8 @@
 @managing_payments
-Feature: Browsing payments
-    In order to manage all payments regardlessly of orders
+Feature: Completing a payment from its list
+    In order to easily manage all payments statuses
     As an Administrator
-    I want to browse all payments in the system
+    I want to be able to complete a payment from payments list
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,7 +13,8 @@ Feature: Browsing payments
         And I am logged in as an administrator
 
     @ui
-    Scenario: Browsing payments and their states
+    Scenario: Completing a payment from payments index
         When I browse payments
-        Then I should see a single payment in the list
-        And the payments of the "#00000001" order should be "New" for "amba@fatima.org"
+        And I complete the payment of order "#00000001"
+        Then I should be notified that the payment has been completed
+        And I should see the payment of order "#00000001" as "Completed"

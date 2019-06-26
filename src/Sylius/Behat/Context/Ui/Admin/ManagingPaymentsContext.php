@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Payment\IndexPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
@@ -28,10 +31,17 @@ final class ManagingPaymentsContext implements Context
     /** @var ShowPageInterface */
     private $orderShowPage;
 
-    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $orderShowPage)
-    {
+    /** @var NotificationCheckerInterface */
+    private $notificationChecker;
+
+    public function __construct(
+        IndexPageInterface $indexPage,
+        ShowPageInterface $orderShowPage,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -43,9 +53,42 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @Then I should see :count payments in the list
+     * @When I choose :paymentState as a payment state
      */
-    public function iShouldSeePaymentsInTheList(int $count): void
+    public function iChooseAsAPaymentState(string $paymentState): void
+    {
+        $this->indexPage->chooseStateToFilter($paymentState);
+    }
+
+    /**
+     * @When I complete the payment of order :orderNumber
+     */
+    public function iCompleteThePaymentOfOrder(string $orderNumber): void
+    {
+        $this->indexPage->completePaymentOfOrderWithNumber($orderNumber);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @When I move to the details of first payment's order
+     */
+    public function iMoveToTheDetailsOfFirstPaymentSOrder(): void
+    {
+        $this->indexPage->showOrderPageForNthPayment(1);
+    }
+
+    /**
+     * @Then I should see :count payments in the list
+     * @Then I should see a single payment in the list
+     */
+    public function iShouldSeePaymentsInTheList(int $count = 1): void
     {
         Assert::same($count, $this->indexPage->countItems());
     }
@@ -56,8 +99,7 @@ final class ManagingPaymentsContext implements Context
     public function thePaymentsOfTheOrderShouldBeFor(
         string $orderNumber,
         string $paymentState,
-        CustomerInterface $customer,
-        Channel $channel = null
+        CustomerInterface $customer
     ): void {
         $parameters = [
             'number' => $orderNumber,
@@ -65,10 +107,46 @@ final class ManagingPaymentsContext implements Context
             'customer' => $customer->getEmail(),
         ];
 
-        if ($channel !== null) {
-            $parameters = ['channel' => $channel->getCode()];
-        }
-
         Assert::true($this->indexPage->isSingleResourceOnPage($parameters));
+    }
+
+    /**
+     * @Then I should see order page with details of order :order
+     */
+    public function iShouldSeeOrderPageWithDetailsOfOrder(OrderInterface $order): void
+    {
+        Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
+    }
+
+    /**
+     * @Then I should see the payment of the :orderNumber order
+     */
+    public function iShouldSeeThePaymentOfTheOrder(string $orderNumber): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
+    }
+
+    /**
+     * @Then I should see the payment of order :orderNumber as :paymentState
+     */
+    public function iShouldSeeThePaymentOfOrderAs(string $orderNumber, string $paymentState): void
+    {
+        Assert::same($paymentState, $this->indexPage->getPaymentStateByOrderNumber($orderNumber));
+    }
+
+    /**
+     * @Then I should be notified that the payment has been completed
+     */
+    public function iShouldBeNotifiedThatThePaymentHasBeenCompleted(): void
+    {
+        $this->notificationChecker->checkNotification('Payment has been completed.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should not see a payment of order :orderNumber
+     */
+    public function iShouldNotSeeAPaymentOfOrder(string $orderNumber): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
 }
