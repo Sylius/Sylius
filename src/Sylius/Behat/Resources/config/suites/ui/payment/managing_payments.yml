@@ -25,7 +25,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - sylius.behat.context.ui.channel
 
-                - sylius.behat.context.domain.managing_payments
+                - sylius.behat.context.ui.admin.managing_payments
 
             filters:
                 tags: "@managing_payments && @ui"
