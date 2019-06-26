@@ -1,8 +1,8 @@
 @managing_payments
-Feature: Browsing payments
-    In order to manage all payments regardlessly of orders
+Feature: Accessing payment's order from the payment index
+    In order to make payment and orders management more fluent
     As an Administrator
-    I want to browse all payments in the system
+    I want to be able to access order's page from payments index
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,7 +13,7 @@ Feature: Browsing payments
         And I am logged in as an administrator
 
     @ui
-    Scenario: Browsing payments and their states
+    Scenario: Accessing payment's order from the payments index
         When I browse payments
-        Then I should see a single payment in the list
-        And the payments of the "#00000001" order should be "New" for "amba@fatima.org"
+        And I move to the details of first payment's order
+        Then I should see order page with details of order "00000001"
