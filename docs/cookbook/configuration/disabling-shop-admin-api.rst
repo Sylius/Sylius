@@ -226,7 +226,7 @@ The part that has to be removed from this file is shown below:
 
     #    - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
 
-**5.** Remove fos_rest config from ``app/config/config.yml``.
+**5.** Remove fos_rest config from ``config/packages/fos_rest.yaml``.
 
 .. code-block:: yaml
 

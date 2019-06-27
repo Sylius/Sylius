@@ -125,7 +125,7 @@ use our guide on :doc:`extension development </plugins/creating-plugin>`.
 
 .. tip::
 
-    You'll probably need also this kind of configuration in your ``app/config/config.yml`` for the gateway's factory:
+    You'll probably need also this kind of configuration in your ``config/packages/payum.yaml`` for the gateway's factory:
 
     .. code-block:: yaml
 
@@ -144,7 +144,7 @@ PayPal Error Code 10409
 -----------------------
 
 The 10409 code, also known as the *"Checkout token was issued for a merchant account other than yours"* error.
-You have most likely changed the PayPal credentials from ``config.yml`` during the checkout process. Clear the cache and try again:
+You have most likely changed the PayPal credentials during the checkout process. Clear the cache and try again:
 
 .. code-block:: bash
 

@@ -77,19 +77,11 @@ Go to the generated class file and make it implement the ``ResourceInterface``:
 5. Register your entity as a Sylius resource
 --------------------------------------------
 
-If you don't have it yet create a file ``app/config/resources.yml``, import it in the ``app/config/config.yml``.
+If you don't have it yet, create a file ``config/packages/sylius_resource.yaml``.
 
 .. code-block:: yaml
 
-    # config/services.yaml
-    imports:
-        - { resource: "resources.yaml" }
-
-And add these few lines in the ``resources.yaml`` file:
-
-.. code-block:: yaml
-
-    # config/resources.yaml
+    # config/packages/sylius_resource.yaml
     sylius_resource:
         resources:
             app.supplier:
@@ -159,16 +151,14 @@ To have templates for your Entity administration out of the box you can use Grid
 
 Having a grid prepared we can configure routing for the entity administration:
 
-Create the ``app/config/routing/admin/supplier.yml`` file. Include it in the ``app/config/routing/admin.yml``, which
-should be also included in the ``config/routes.yaml``.
-
 .. code-block:: yaml
 
-    # app/config/routing/admin/supplier.yml
+    # config/routes.yaml
     app_admin_supplier:
         resource: |
             alias: app.supplier
             section: admin
+            path: admin
             templates: SyliusAdminBundle:Crud
             redirect: update
             grid: app_admin_supplier
@@ -178,19 +168,6 @@ should be also included in the ``config/routes.yaml``.
                 index:
                     icon: 'file image outline'
         type: sylius.resource
-
-.. code-block:: yaml
-
-    # app/config/routing/admin.yml
-    app_admin_supplier:
-        resource: 'admin/supplier.yml'
-
-.. code-block:: yaml
-
-    # config/routes.yaml
-    app_admin:
-        resource: 'routing/admin.yml'
-        prefix: /admin
 
 9. Add entity administration to the admin menu
 ----------------------------------------------

@@ -38,7 +38,7 @@ Implement the ResourceInterface in your model class.
 Configure the class as a resource.
 ----------------------------------
 
-In your ``app/config/config.yml`` add:
+In your ``config/packages/sylius_resource.yaml`` add:
 
 .. code-block:: yaml
 

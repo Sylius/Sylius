@@ -6,11 +6,11 @@ Sometimes, depending on your use case, you may want to resign from the guest che
 In order to require users to have an account and be logged in before they can make an order in your shop,
 you have to turn on the firewalls on the ``/checkout`` urls.
 
-To achieve that simple add this path to ``access_control`` in the ``security.yml`` file.
+To achieve that simple add this path to ``access_control`` in the ``security.yaml`` file.
 
 .. code-block:: yaml
 
-    # app/config/security.yml
+    # config/packages/security.yaml
     security:
         access_control:
             - { path: "%sylius.security.shop_regex%/checkout", role: ROLE_USER }

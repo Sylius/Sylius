@@ -22,7 +22,7 @@ to reflect your plugin functionality. Basing on the vendor and plugin names esta
 
     * ``acme_sylius_example_plugin`` -> ``iron_man_sylius_product_on_demand_plugin``
 
-* In ``tests/Application/app/AppKernel.php``:
+* In ``tests/Application/Kernel.php``:
 
     * ``\Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin()`` -> ``\IronMan\SyliusProductOnDemandPlugin\SyliusProductOnDemandPlugin()``
 

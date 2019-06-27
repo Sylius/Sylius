@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Advanced Platform.sh configurations
 ===================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 The basic set-up let's you easily set-up a Platform.sh project running your Sylius application. It should give you an
 environment suitable for testing Platform.sh in combination with Sylius.
