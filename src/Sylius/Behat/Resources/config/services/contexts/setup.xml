@@ -113,6 +113,7 @@
                 <argument key="paypal_express_checkout">Paypal Express Checkout</argument>
                 <argument key="stripe_checkout">Stripe Checkout</argument>
             </argument>
+
         </service>
 
         <service id="sylius.behat.context.setup.product" class="Sylius\Behat\Context\Setup\ProductContext">

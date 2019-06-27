@@ -40,12 +40,12 @@ sylius_grid:
                     label: sylius.ui.state
                     form_options:
                         choices:
-                            sylius.ui.new: New
-                            sylius.ui.processing: Processing
-                            sylius.ui.completed: Completed
-                            sylius.ui.cancelled: Cancelled
-                            sylius.ui.failed: Failed
-                            sylius.ui.refunded: Refunded
+                            sylius.ui.cancelled: cancelled
+                            sylius.ui.completed: completed
+                            sylius.ui.failed: failed
+                            sylius.ui.new: new
+                            sylius.ui.processing: processing
+                            sylius.ui.refunded: refunded
             actions:
                 item:
                     complete:

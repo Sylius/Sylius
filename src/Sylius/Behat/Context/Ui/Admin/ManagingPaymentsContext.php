@@ -18,7 +18,6 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Payment\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
@@ -46,8 +45,9 @@ final class ManagingPaymentsContext implements Context
 
     /**
      * @When I browse payments
+     * @Given I am browsing payments
      */
-    public function iBrowsePayments(): void
+    public function iAmBrowsingPayments(): void
     {
         $this->indexPage->open();
     }
@@ -77,9 +77,9 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @When I move to the details of first payment's order
+     * @When I go to the details of the first payment's order
      */
-    public function iMoveToTheDetailsOfFirstPaymentSOrder(): void
+    public function iGoToTheDetailsOfTheFirstPaymentSOrder(): void
     {
         $this->indexPage->showOrderPageForNthPayment(1);
     }
@@ -119,7 +119,7 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @Then I should see the payment of the :orderNumber order
+     * @Then I should see (also) the payment of the :orderNumber order
      */
     public function iShouldSeeThePaymentOfTheOrder(string $orderNumber): void
     {
