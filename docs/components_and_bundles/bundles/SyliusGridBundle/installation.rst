@@ -29,13 +29,10 @@ Don't worry, everything was automatically installed via Composer.
 
     <?php
 
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            new Sylius\Bundle\GridBundle\SyliusGridBundle(),
-        );
-    }
+    return [
+        \Sylius\Bundle\GridBundle\SyliusGridBundle:class => ['all' => true],
+    ];
 
 Congratulations! The bundle is now installed and ready to use. You need to define your first resource and grid!

@@ -8,11 +8,11 @@ You can do it in few simple steps:
 Configure Your E-Mail
 ---------------------
 
-In your ``app/config/config.yml``, under ``sylius_mailer`` you should configure the email:
+In your ``config/packages/sylius_mailer.yaml``, under ``sylius_mailer`` you should configure the email:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_mailer.yaml
 
     sylius_mailer:
         sender:
@@ -21,14 +21,14 @@ In your ``app/config/config.yml``, under ``sylius_mailer`` you should configure 
         emails:
             movie_added_notification:
                 subject: A new movie {{ movie.title }} has been submitted
-                template: App:Email:movieAddedNotification.html.twig
+                template: "Email/movieAddedNotification.html.twig"
 
 That's it! Your unique code is "movie_added_notification". Now, let's create the template.
 
 Creating Your Template
 ----------------------
 
-In your ``app/Resources/views/Email:movieAddedNotification.html.twig`` put the following Twig code:
+In your ``templates/Email/movieAddedNotification.html.twig`` put the following Twig code:
 
 .. code-block:: twig
 
