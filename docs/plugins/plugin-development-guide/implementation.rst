@@ -127,7 +127,7 @@ Then our new entity should be configured as a resource model:
                     model: IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariant
 
 This configuration should be placed in ``src/Resources/config/config.yml``. It also has to be imported
-(``- { resource: "@IronManSyliusProductOnDemandPlugin/Resources/config/config.yml" }``) in ``tests/Application/app/config/config.yml``
+(``- { resource: "@IronManSyliusProductOnDemandPlugin/Resources/config/config.yml" }``) in ``tests/Application/config/services.yaml``
 to make it work in Behat tests. And at the end importing this file should be one of the steps described in plugin installation.
 
 .. warning::
@@ -192,7 +192,7 @@ And in your ``services.yml`` file:
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType }
 
-Again, you must remember about importing ``src/Resources/config/services.yml`` in ``tests/Application/app/Resources/config/config.yml``.
+Again, you must remember about importing ``src/Resources/config/services.yml`` in ``tests/Application/config/services.yaml``.
 
 Template
 ********
@@ -227,9 +227,9 @@ to ``src/Resources/views/SyliusAdminBundle/ProductVariant/Tab/`` directory, and 
 .. warning::
 
     Beware! Implementing a new template on the plugin level is **not** everything! You must remember that this template should be
-    copied to ``app/Resources/views/SyliusAdminBundle/views/`` directory (with whole catalogs structure, means ``/ProductVariant/Tab``
+    copied to ``templates/SyliusAdminBundle/`` directory (with whole catalogs structure, means ``/ProductVariant/Tab``
     in the application that uses your plugin - and therefore it should be mentioned in installation instruction.
-    The same thing should be done for your test application (you should have ``tests/Application/views/SyliusAdminBundle/`` catalog
+    The same thing should be done for your test application (you should have ``tests/Application/templates/SyliusAdminBundle/`` catalog
     with this template copied).
 
     Take a look at :doc:`customizing the templates</customization/template>` section in the documentation,

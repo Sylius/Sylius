@@ -25,11 +25,11 @@ How to encrypt gateway config stored in the database?
     # .env
     DEFUSE_SECRET: "YOUR_GENERATED_KEY"
 
-**4.** Add the following code to the application configuration in the ``app/config/config.yml``.
+**4.** Add the following code to the application configuration in the ``config/packages/payum.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/payum.yaml
 
     payum:
         dynamic_gateways:

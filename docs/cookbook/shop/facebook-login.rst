@@ -13,19 +13,16 @@ Set up the HWIOAuthBundle
 
     $ composer require hwi/oauth-bundle
 
-* Enable the bundle in the ``AppKernel.php``:
+* Enable the bundle:
 
 .. code-block:: php
 
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            // ...
-            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-        );
-    }
+    return [
+        // ...
+        new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+    ];
 
 * Import the routing:
 
@@ -34,18 +31,18 @@ Set up the HWIOAuthBundle
     # config/routes.yaml
     hwi_oauth_redirect:
         resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-        prefix:   /connect
+        prefix: /connect
 
     hwi_oauth_connect:
         resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-        prefix:   /connect
+        prefix: /connect
 
     hwi_oauth_login:
         resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-        prefix:   /login
+        prefix: /login
 
     facebook:
-        path: "/login/check-facebook"
+        path: /login/check-facebook
 
 Configure the connection to Facebook
 ------------------------------------
@@ -59,7 +56,7 @@ Configure the connection to Facebook
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/hwi_oauth.yaml
     hwi_oauth:
         firewall_names: [shop]
         resource_owners:
@@ -84,11 +81,11 @@ Configure the security layer
 
 As Sylius already has a service that implements the **OAuthAwareUserProviderInterface** - ``sylius.oauth.user_provider`` - we can only
 configure the oauth firewall.
-Under the ``security: firewalls: shop:`` keys in the ``security.yml`` configure like below:
+Under the ``security: firewalls: shop:`` keys in the ``security.yaml`` configure like below:
 
 .. code-block:: yaml
 
-    # app/config/security.yml
+    # config/packages/security.yaml
     security:
         firewalls:
             shop:
@@ -106,7 +103,7 @@ Under the ``security: firewalls: shop:`` keys in the ``security.yml`` configure 
 Add facebook login button
 -------------------------
 
-You can for instance override the login template (``SyliusShopBundle/Resources/views/login.html.twig``) in the ``app/Resources/SyliusShopBundle/views/login.html.twig``
+You can for instance override the login template (``SyliusShopBundle/Resources/views/login.html.twig``) in the ``templates/SyliusShopBundle/login.html.twig``
 and add these lines to be able to login via Facebook.
 
 .. code-block:: twig

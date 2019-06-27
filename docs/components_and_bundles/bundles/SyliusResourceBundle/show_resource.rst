@@ -30,7 +30,7 @@ Okay, but what if you want to display the same Book resource, but with a differe
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
 
     app_admin_book_show:
         path: /admin/books/{id}
@@ -50,7 +50,7 @@ Displaying books by id can be boring... and let's say we do not want to allow vi
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
 
     app_book_show:
         path: /books/{title}
@@ -73,7 +73,7 @@ Creating yet another action to change the method called could be a solution but 
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
 
     app_book_show:
         path: /books/{author}
@@ -114,7 +114,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
 
     app_book_show:
         path: /books/{author}

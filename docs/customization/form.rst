@@ -89,7 +89,7 @@ As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerPr
 
 .. note::
     Of course remember that you need to define new labels for your fields
-    in the ``translations\messages.en.yml`` for english contents of your messages.
+    in the ``translations\messages.en.yaml`` for english contents of your messages.
 
 **3.** After creating your class, register this extension as a service in the ``config/services.yaml``:
 

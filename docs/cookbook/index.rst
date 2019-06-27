@@ -83,7 +83,6 @@ Images
     :hidden:
 
     images/images
-    images/images-gridfs
     images/images-on-entity
 
 .. include:: /cookbook/images/map.rst.inc
@@ -109,7 +108,6 @@ Configuration
 
     configuration/disabling-shop-admin-api
     configuration/installation-commands
-    configuration/extending-bundles-other-em
     configuration/disabling-admin-notifications
 
 .. include:: /cookbook/configuration/map.rst.inc

@@ -26,26 +26,22 @@ You need to enable the bundle inside the kernel.
 
     <?php
 
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+    return [
+        new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+        new FOS\RestBundle\FOSRestBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle($this),
+        new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+        new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
-            new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
-        );
-    }
-
+        new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
+    ];
 
 Container configuration
 -----------------------
 
-Put this configuration inside your ``app/config/config.yml``.
+Put this configuration inside your ``config/packages/sylius_mailer.yaml``.
 
 .. code-block:: yaml
 
