@@ -62,7 +62,6 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
         resource: |
             alias: app.supplier
             section: admin
-            path: admin
             templates: SyliusAdminBundle:Crud
             except: ['show']
             redirect: update
@@ -73,6 +72,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
                 index:
                     icon: 'file image outline' # choose an icon that will be displayed next to the subheader
         type: sylius.resource
+        prefix: admin
 
 This will generate the following paths:
 

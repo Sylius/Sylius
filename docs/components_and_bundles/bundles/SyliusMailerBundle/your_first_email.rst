@@ -21,7 +21,7 @@ In your ``config/packages/sylius_mailer.yaml``, under ``sylius_mailer`` you shou
         emails:
             movie_added_notification:
                 subject: A new movie {{ movie.title }} has been submitted
-                template: ":Email:movieAddedNotification.html.twig"
+                template: "Email/movieAddedNotification.html.twig"
 
 That's it! Your unique code is "movie_added_notification". Now, let's create the template.
 

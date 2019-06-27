@@ -450,7 +450,6 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            path: admin
             templates: SyliusAdminBundle:Crud
             redirect: update
             grid: app_admin_supplier
@@ -462,6 +461,7 @@ Having a grid prepared we can configure routing for the entity administration:
                 index:
                     icon: 'file image outline'
         type: sylius.resource
+        prefix: admin
 
 12. Add entity administration to the admin menu
 -----------------------------------------------

@@ -31,7 +31,7 @@ Create your adapter class and add your custom logic for sending:
 Register And Configure New Adapter In Container
 -----------------------------------------------
 
-In your ``config/services.yaml`` file, add your adapter definition and configure the mailer to use it.
+In your ``config/packages/sylius_mailer.yaml`` file, add your adapter definition and configure the mailer to use it.
 
 .. code-block:: yaml
 
