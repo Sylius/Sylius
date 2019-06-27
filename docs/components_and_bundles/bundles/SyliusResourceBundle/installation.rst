@@ -26,18 +26,15 @@ You need to enable the bundle and its dependencies in the kernel:
 
     <?php
 
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-        );
-    }
+    return [
+        new FOS\RestBundle\FOSRestBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle($this),
+        new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+        new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+        new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+        new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+    ];
 
 That's it! Now you can configure your first resource.

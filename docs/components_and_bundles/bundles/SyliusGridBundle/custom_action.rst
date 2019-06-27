@@ -15,11 +15,11 @@ In the template we will specify the button's icon to be ``mail`` and its colour 
 
     {{ buttons.default(path, action.label, null, 'mail', 'purple') }}
 
-Now configure the new action's template like below in the ``app/config/config.yml``:
+Now configure the new action's template like below in the ``config/packages/sylius_grid.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         templates:
             action:

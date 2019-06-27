@@ -41,12 +41,12 @@ Same comes with the bundle resources, eg. for ``FOSUserBundle`` the paths should
     │   ├── public
     │   │   └── asset.jpg
     │   ├── translations
-    │   │   └── messages.en.yml
+    │   │   └── messages.en.yaml
     │   └── views
     │       └── template.html.twig
     ├── composer.json
     ├── translations
-    │   └── messages.en.yml
+    │   └── messages.en.yaml
     └── views
         └── template.html.twig
 

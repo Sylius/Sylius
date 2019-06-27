@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 How to customize Sylius Checkout?
 =================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Why would you override the Checkout process?
 --------------------------------------------
@@ -92,11 +99,10 @@ Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The next step of customizing Checkout is to adjust the Checkout Resolver to match the changes you have made in the state machine.
-Make these changes in the ``config.yml``.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_shop.yaml
     sylius_shop:
         checkout_resolver:
             pattern: /checkout/.+
@@ -122,7 +128,7 @@ You will achieve that by overriding two files:
 
 .. code-block:: html
 
-    {# app/Resources/SyliusShopBundle/views/Checkout/_steps.html.twig #}
+    {# templates/SyliusShopBundle/Checkout/_steps.html.twig #}
     {% if active is not defined or active == 'address' %}
         {% set steps = {'address': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
     {% elseif active == 'select_payment' %}
@@ -166,7 +172,7 @@ You will achieve that by overriding two files:
 
 .. code-block:: html
 
-    {# app/Resources/SyliusShopBundle/views/Checkout/SelectPayment/_navigation.html.twig #}
+    {# templates/SyliusShopBundle/Checkout/SelectPayment/_navigation.html.twig #}
     {% set enabled = order.payments|length %}
 
     <div class="ui two column grid">

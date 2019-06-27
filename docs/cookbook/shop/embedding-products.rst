@@ -49,7 +49,7 @@ Your extending repository class should look like that:
             }
     }
 
-And should be registered in the ``app/config/config.yml`` just like that:
+And should be registered in the ``config/packages/sylius_product.yaml`` just like that:
 
 .. code-block:: yaml
 

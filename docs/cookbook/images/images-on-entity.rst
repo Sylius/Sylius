@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 How to add images to an entity?
 ===============================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Extending entities with an ``images`` field is quite a popular use case.
 In this cookbook we will present how to **add image to the Shipping Method entity**.
@@ -16,7 +23,7 @@ you have to create your own ShippingMethod class that will extend it:
 .. code-block:: php
 
     <?php
-    
+
     declare(strict_types=1);
 
     namespace App\Entity;
@@ -103,11 +110,11 @@ you have to create your own ShippingMethod class that will extend it:
 2. Register your extended ShippingMethod as a resource's model class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With such a configuration in the ``config.yml`` you will register your ShippingMethod class in order to override the default one:
+With such a configuration you will register your ``ShippingMethod`` class in order to override the default one:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_shipping.yaml
     sylius_shipping:
         resources:
             shipping_method:
@@ -122,7 +129,7 @@ In the ``App\Entity`` namespace place the ``ShippingMethodImage`` class which sh
 .. code-block:: php
 
     <?php
-    
+
     declare(strict_types=1);
 
     namespace App\Entity;
@@ -196,7 +203,7 @@ This is how the class for ``ShippingMethodImageType`` should look like. Place it
 .. code-block:: php
 
     <?php
-    
+
     declare(strict_types=1);
 
     namespace App\Form\Type;
@@ -257,7 +264,7 @@ It needs to have the images field as a CollectionType.
 .. code-block:: php
 
     <?php
-    
+
     declare(strict_types=1);
 
     namespace App\Form\Extension;
@@ -296,13 +303,13 @@ It needs to have the images field as a CollectionType.
 .. tip::
 
     In case you need only a single image upload, this can be done in 2 very easy steps.
-    
+
     First, in the code for the form provided above set ``allow_add`` and ``allow_delete`` to ``false``
-    
+
     Second, in the ``__construct`` method of the ``ShippingMethod`` entity you defined earlier add the following:
-    
+
     .. code-block:: php
-    
+
         public function __construct()
         {
             parent::__construct();
@@ -421,7 +428,7 @@ This could look like this e.g.:
               maxHeight: 1000
               maxSize: 10240000
               maxWidth: 1000
-              mimeTypes: 
+              mimeTypes:
                 - "image/png"
                 - "image/jpg"
                 - "image/jpeg"
@@ -429,7 +436,7 @@ This could look like this e.g.:
               mimeTypesMessage: 'This file format is not allowed. Please use PNG, JPG or GIF files.'
               minHeight: 200
               minWidth: 200
-              
+
 This defines the validation constraints for each image entity.
 Now connecting the validation of the ``ShippingMethod`` to the validation of each single ``Image Entity`` is left:
 

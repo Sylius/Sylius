@@ -41,11 +41,11 @@ To achieve that you will need to:
         {% endautoescape %}
     {% endblock %}
 
-* configure the email under ``sylius_mailer:`` in the ``config/packages/_sylius.yaml``.
+* configure the email under ``sylius_mailer:`` in the ``config/packages/sylius_mailer.yaml``.
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yaml
+    # config/packages/sylius_mailer.yaml
     sylius_mailer:
         sender:
             name: Example.com
@@ -132,18 +132,18 @@ To achieve that you will need to:
 
 .. code-block:: yaml
 
-    # config/services.yaml
+    # config/packages/_sylius.yaml
     services:
         app.email_manager.out_of_stock:
-        class: App\EmailManager\OutOfStockEmailManager
-        arguments: ['@sylius.email_sender', '@sylius.availability_checker', '@sylius.repository.admin_user']
+            class: App\EmailManager\OutOfStockEmailManager
+            arguments: ['@sylius.email_sender', '@sylius.availability_checker', '@sylius.repository.admin_user']
 
 4. Customize the state machine callback of Order's Payment:
 -----------------------------------------------------------
 
 .. code-block:: yaml
 
-    # config/packages/_sylius.yml
+    # config/packages/_sylius.yaml
     winzou_state_machine:
         sylius_order_payment:
             callbacks:
