@@ -402,9 +402,10 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given there is a new :orderNumber order with :product product
+     * @Given there is an :orderNumber order with :product product
+     * @Given there is a :state :orderName order with :product product
      */
-    public function thereIsAnNewOrderWithProduct(string $orderNumber, ProductInterface $product): void
+    public function thereIsAOrderWithProduct(string $orderNumber, ProductInterface $product, string $state = null): void
     {
         $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber);
 
@@ -413,6 +414,12 @@ final class OrderContext implements Context
         $this->theCustomerBoughtSingleProduct($product);
 
         $this->createShippingPaymentMethodsAndAddress();
+
+        if ($state !== null) {
+            foreach($this->getTargetPaymentTransitions($state) as $transition) {
+                $this->applyPaymentTransitionOnOrder($order, $transition);
+            }
+        }
 
         $this->orderRepository->add($order);
     }
@@ -953,6 +960,22 @@ final class OrderContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    private function getTargetPaymentTransitions(string $state): array
+    {
+        $state = strtolower($state);
+
+        $transitions = [
+            'new' => [],
+            'processing' => [PaymentTransitions::TRANSITION_PROCESS],
+            'completed' => [PaymentTransitions::TRANSITION_COMPLETE],
+            'cancelled' => [PaymentTransitions::TRANSITION_CANCEL],
+            'failed' => [PaymentTransitions::TRANSITION_FAIL],
+            'refunded' => [PaymentTransitions::TRANSITION_COMPLETE, PaymentTransitions::TRANSITION_REFUND]
+        ];
+
+        return $transitions[$state];
     }
 
     private function placeOrder(

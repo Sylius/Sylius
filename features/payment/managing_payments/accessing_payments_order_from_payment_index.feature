@@ -6,14 +6,14 @@ Feature: Accessing payment's order from the payment index
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "UPS" shipping method with "$10.00" fee
+        And the store ships everywhere for free
         And the store has a product "Apple"
         And the store allows paying with "Cash on Delivery"
-        And there is a new "#00000001" order with "Apple" product
+        And there is an "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
     @ui
     Scenario: Accessing payment's order from the payments index
-        When I browse payments
-        And I move to the details of first payment's order
+        Given I am browsing payments
+        When I go to the details of the first payment's order
         Then I should see order page with details of order "00000001"

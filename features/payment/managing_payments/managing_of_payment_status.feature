@@ -6,10 +6,10 @@ Feature: Completing a payment from its list
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "UPS" shipping method with "$10.00" fee
+        And the store ships everywhere for free
         And the store has a product "Apple"
         And the store allows paying with "Cash on Delivery"
-        And there is a new "#00000001" order with "Apple" product
+        And there is an "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
     @ui
