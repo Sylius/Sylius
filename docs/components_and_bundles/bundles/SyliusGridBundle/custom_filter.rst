@@ -64,7 +64,7 @@ Create a template for the filter, similar to the existing ones:
 
 .. code-block:: html
 
-    # app/Resources/views/Grid/Filter/suppliers_statistics.html.twig
+    # templates/Grid/Filter/suppliers_statistics.html.twig
     {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
     {{ form_row(form) }}

@@ -49,7 +49,7 @@ The ``imagine_filter('name')`` is a twig filter. This is how you would get an im
 
 .. note::
 
-    Sylius stores images on entities by saving a ``path`` to the file in the database. 
+    Sylius stores images on entities by saving a ``path`` to the file in the database.
     The imagine_filter root path is ``/public/media/image``.
 
 How to add custom image resizing filters?
@@ -57,12 +57,12 @@ How to add custom image resizing filters?
 
 If the filters we have in Sylius by deafult are not suitable for your needs, you can easily add your own.
 
-All you need to do is to configure new filter in the ``app/config/config.yml`` file.
+All you need to do is to configure new filter in the ``config/packages/liip_imagine.yaml`` file.
 For example you can create a filter for advertisement banners:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/liip_imagine.yaml
     liip_imagine:
         filter_sets:
             advert_banner:
