@@ -156,6 +156,17 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
                     'configuration' => $configuration,
                 ];
             })
+            ->setNormalizer('calculator', function (Options $options, $configuration): array {
+                if (isset($configuration['configuration'])) {
+                    foreach ($configuration['configuration'] as $channelCode => $channelConfiguration) {
+                        if (isset($channelConfiguration['amount'])) {
+                            $configuration['configuration'][$channelCode]['amount'] = (int) ($channelConfiguration['amount'] * 100);
+                        }
+                    }
+                }
+
+                return $configuration;
+            })
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
