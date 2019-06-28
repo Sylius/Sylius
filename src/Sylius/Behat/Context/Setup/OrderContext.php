@@ -36,65 +36,88 @@ use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
-
     /** @var FactoryInterface */
     private $orderFactory;
 
     /** @var FactoryInterface */
-    private $orderItemFactory;
-
-    /** @var OrderItemQuantityModifierInterface */
-    private $itemQuantityModifier;
+    private $addressFactory;
 
     /** @var FactoryInterface */
     private $customerFactory;
 
-    /** @var RepositoryInterface */
-    private $customerRepository;
-
-    /** @var ObjectManager */
-    private $objectManager;
+    /** @var FactoryInterface */
+    private $orderItemFactory;
 
     /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
+    /** @var RepositoryInterface */
+    private $countryRepository;
+
+    /** @var RepositoryInterface */
+    private $customerRepository;
+
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    /** @var PaymentMethodRepositoryInterface */
+    private $paymentMethodRepository;
+
+    /** @var ShippingMethodRepositoryInterface */
+    private $shippingMethodRepository;
+
     /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
+    /** @var OrderItemQuantityModifierInterface */
+    private $itemQuantityModifier;
+
+    /** @var ObjectManager */
+    private $objectManager;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
-        FactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        FactoryInterface $addressFactory,
         FactoryInterface $customerFactory,
-        RepositoryInterface $customerRepository,
-        ObjectManager $objectManager,
+        FactoryInterface $orderItemFactory,
         StateMachineFactoryInterface $stateMachineFactory,
-        ProductVariantResolverInterface $variantResolver
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $customerRepository,
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ProductVariantResolverInterface $variantResolver,
+        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->addressFactory = $addressFactory;
         $this->customerFactory = $customerFactory;
-        $this->customerRepository = $customerRepository;
-        $this->objectManager = $objectManager;
+        $this->orderItemFactory = $orderItemFactory;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->countryRepository = $countryRepository;
+        $this->customerRepository = $customerRepository;
+        $this->orderRepository = $orderRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->variantResolver = $variantResolver;
+        $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -123,11 +146,7 @@ final class OrderContext implements Context
         ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod
     ) {
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
-        $customer->setEmail($email);
-        $customer->setFirstName('John');
-        $customer->setLastName('Doe');
+        $customer = $this->createCustomer($email);
 
         $this->customerRepository->add($customer);
 
@@ -380,6 +399,29 @@ final class OrderContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given there is an :orderNumber order with :product product
+     * @Given there is a :state :orderName order with :product product
+     */
+    public function thereIsAOrderWithProduct(string $orderNumber, ProductInterface $product, string $state = null): void
+    {
+        $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber);
+
+        $this->sharedStorage->set('order', $order);
+
+        $this->theCustomerBoughtSingleProduct($product);
+
+        $this->createShippingPaymentMethodsAndAddress();
+
+        if ($state !== null) {
+            foreach($this->getTargetPaymentTransitions($state) as $transition) {
+                $this->applyPaymentTransitionOnOrder($order, $transition);
+            }
+        }
+
+        $this->orderRepository->add($order);
     }
 
     /**
@@ -719,6 +761,25 @@ final class OrderContext implements Context
         return $order;
     }
 
+    private function createCustomer(string $email): CustomerInterface
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerFactory->createNew();
+        $customer->setEmail($email);
+        $customer->setFirstName('John');
+        $customer->setLastName('Doe');
+
+        return $customer;
+    }
+
+    private function createOrProvideCustomer(string $email): CustomerInterface
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+
+        return $customer ?? $this->createCustomer($email);
+    }
+
     /**
      * @param int $count
      *
@@ -760,6 +821,28 @@ final class OrderContext implements Context
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
+    }
+
+    private function createShippingPaymentMethodsAndAddress(): void
+    {
+        /** @var AddressInterface $address */
+        $address = $this->addressFactory->createNew();
+        $address->setCity('Wawa');
+        $address->setCountryCode($this->countryRepository->findOneBy([])->getCode());
+        $address->setFirstName('Jon');
+        $address->setLastName('Doe');
+        $address->setPostcode('000');
+        $address->setStreet('Happy');
+
+        $this->theCustomerAddressedItToWithIdenticalBillingAddress($address);
+
+        $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
+        Assert::notNull($shippingMethod);
+
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        Assert::notNull($paymentMethod);
+
+        $this->theCustomerChoseShippingWithPayment($shippingMethod, $paymentMethod);
     }
 
     private function proceedSelectingShippingAndPaymentMethod(OrderInterface $order, ShippingMethodInterface $shippingMethod, PaymentMethodInterface $paymentMethod)
@@ -877,6 +960,22 @@ final class OrderContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    private function getTargetPaymentTransitions(string $state): array
+    {
+        $state = strtolower($state);
+
+        $transitions = [
+            'new' => [],
+            'processing' => [PaymentTransitions::TRANSITION_PROCESS],
+            'completed' => [PaymentTransitions::TRANSITION_COMPLETE],
+            'cancelled' => [PaymentTransitions::TRANSITION_CANCEL],
+            'failed' => [PaymentTransitions::TRANSITION_FAIL],
+            'refunded' => [PaymentTransitions::TRANSITION_COMPLETE, PaymentTransitions::TRANSITION_REFUND]
+        ];
+
+        return $transitions[$state];
     }
 
     private function placeOrder(
