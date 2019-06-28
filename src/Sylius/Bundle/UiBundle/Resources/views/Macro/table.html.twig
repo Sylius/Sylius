@@ -2,7 +2,9 @@
     {% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
 
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-        <th></th>
+        <th class="center aligned">
+            <input data-js-bulk-checkboxes=".bulk-select-checkbox" data-js-bulk-buttons=".sylius-grid-nav__bulk" type="checkbox">
+        </th>
     {% endif %}
 
     {% for field in definition.fields|sort_by('position') %}
@@ -22,7 +24,7 @@
 {% macro row(grid, definition, row) %}
     <tr class="item">
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-        <td><input class="bulk-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
+        <td class="center aligned"><input class="bulk-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
     {% endif %}
     {% for field in definition.enabledFields|sort_by('position') %}
         <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
