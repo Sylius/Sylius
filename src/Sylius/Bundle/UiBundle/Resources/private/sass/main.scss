@@ -116,11 +116,19 @@ th {
 }
 .sylius-grid-wrapper {
     .sylius-grid-nav {
+        .sylius-grid-nav__bulk,
         .sylius-grid-nav__pagination,
         .sylius-grid-nav__perpage {
             padding-bottom: 1rem;
         }
     }
+
+    .sylius-grid-nav__bulk {
+        .ui.red.labeled.icon.button:disabled {
+            background: #b9babb !important;
+        }
+    }
+
     .sylius-grid-table-wrapper {
         overflow-x: auto;
         margin-bottom: 1rem;
@@ -138,10 +146,20 @@ th {
             margin-left: -1rem;
             margin-right: -1rem;
 
+            .sylius-grid-nav__bulk,
             .sylius-grid-nav__pagination,
             .sylius-grid-nav__perpage {
                 padding-left: 1rem;
                 padding-right: 1rem;
+            }
+
+            .sylius-grid-nav__bulk {
+                display: flex;
+
+                .button {
+                    padding-top: 0.99em !important;
+                    padding-bottom: 0.99em !important;
+                }
             }
 
             .sylius-grid-nav__pagination {

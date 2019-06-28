@@ -34,37 +34,27 @@
     </div>
 {% endif %}
 
-{% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-    <div class="ui hidden divider"></div>
-    <div class="ui styled fluid accordion">
-        <div class="title active">
-            <i class="dropdown icon"></i>
-            {{ 'sylius.ui.bulk_actions'|trans }}
-        </div>
-        <div class="content active">
-            {% for action in definition.getEnabledActions('bulk') %}
-                {{ sylius_grid_render_bulk_action(grid, action, null) }}
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
-
 <div class="ui hidden divider"></div>
 <div class="sylius-grid-wrapper">
-    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
-        <div class="sylius-grid-nav">
-            <div class="sylius-grid-nav__pagination">
-                {{ pagination.simple(data) }}
+    <div class="sylius-grid-nav">
+        {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+            <div class="sylius-grid-nav__bulk">
+                {% for action in definition.getEnabledActions('bulk') %}
+                    {{ sylius_grid_render_bulk_action(grid, action, null) }}
+                {% endfor %}
             </div>
+        {% endif %}
+        <div class="sylius-grid-nav__pagination">
+            {{ pagination.simple(data) }}
+        </div>
+        {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
             <div class="sylius-grid-nav__perpage">
                 <div class="ui fluid one menu sylius-paginate">
                     {{ pagination.perPage(data, definition.limits) }}
                 </div>
             </div>
-        </div>
-    {% else %}
-        {{ pagination.simple(data) }}
-    {% endif %}
+        {% endif %}
+    </div>
 
     {% if data|length > 0 %}
         <div class="ui segment spaceless sylius-grid-table-wrapper">
