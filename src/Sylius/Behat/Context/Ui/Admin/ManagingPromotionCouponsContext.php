@@ -15,9 +15,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
+use Sylius\Behat\Page\Admin\PromotionCoupon\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -102,6 +102,22 @@ final class ManagingPromotionCouponsContext implements Context
     public function iSpecifyItsCodeLengthAs($codeLength = null)
     {
         $this->generatePage->specifyCodeLength($codeLength ?? '');
+    }
+
+    /**
+     * @When I specify its prefix as :prefix
+     */
+    public function specifyPrefixAs(string $prefix): void
+    {
+        $this->generatePage->specifyPrefix($prefix);
+    }
+
+    /**
+     * @When I specify its suffix as :prefix
+     */
+    public function specifySuffixAs(string $suffix): void
+    {
+        $this->generatePage->specifySuffix($suffix);
     }
 
     /**
@@ -246,6 +262,26 @@ final class ManagingPromotionCouponsContext implements Context
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
         Assert::same($this->indexPage->countItems(), (int) $number);
+    }
+
+    /**
+     * @Then all of the coupons codes should be prefixed with :prefix
+     */
+    public function allOfTheCouponsShouldBePrefixedWith(string $prefix): void
+    {
+        foreach ($this->indexPage->getCouponCodes() as $couponCode) {
+            Assert::startsWith($prefix, $couponCode);
+        }
+    }
+
+    /**
+     * @Then all of the coupons codes should be suffixed with :prefix
+     */
+    public function allOfTheCouponsShouldBeSuffixedWith(string $suffix): void
+    {
+        foreach ($this->indexPage->getCouponCodes() as $couponCode) {
+            Assert::endsWith($suffix, $couponCode);
+        }
     }
 
     /**
