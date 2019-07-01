@@ -19,6 +19,7 @@ use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -57,6 +58,15 @@ final class ProductContext implements Context
         $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
 
         Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @Then /^I should see (this product) in the ("([^"]*)" channel) in shop$/
+     */
+    public function iShouldSeeThisProductInTheChannelInShop(ProductInterface $product, ChannelInterface $channel): void
+    {
+        Assert::true(null !== strpos($this->showPage->getCurrentUrl(), $channel->getHostname()));
+        Assert::same($this->showPage->getName(), $product->getName());
     }
 
     /**

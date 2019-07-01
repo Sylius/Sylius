@@ -165,6 +165,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) is(?:| also) available in ("[^"]+" channel)$/
+     * @Given /^(this product) is(?:| also) available in the ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoAvailableInChannel(ProductInterface $product, ChannelInterface $channel): void
     {
