@@ -19,9 +19,17 @@ interface PromotionCouponGeneratorInstructionInterface
 
     public function setAmount(?int $amount): void;
 
+    public function getPrefix(): ?string;
+
+    public function setPrefix(?string $prefix): void;
+
     public function getCodeLength(): ?int;
 
     public function setCodeLength(?int $codeLength): void;
+
+    public function getSuffix(): ?string;
+
+    public function setSuffix(?string $suffix): void;
 
     public function getExpiresAt(): ?\DateTimeInterface;
 
