@@ -109,6 +109,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $currentVariantRow->find('css', 'td:first-child')->getText();
     }
 
+    public function getCurrentUrl(): string
+    {
+        return $this->getDriver()->getCurrentUrl();
+    }
+
     /**
      * {@inheritdoc}
      */
