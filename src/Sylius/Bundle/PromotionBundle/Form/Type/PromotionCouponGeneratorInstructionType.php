@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class PromotionCouponGeneratorInstructionType extends AbstractResourceType
@@ -29,8 +30,16 @@ final class PromotionCouponGeneratorInstructionType extends AbstractResourceType
             ->add('amount', IntegerType::class, [
                 'label' => 'sylius.form.promotion_coupon_generator_instruction.amount',
             ])
+            ->add('prefix', TextType::class, [
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.prefix',
+                'required' => false,
+            ])
             ->add('codeLength', IntegerType::class, [
                 'label' => 'sylius.form.promotion_coupon_generator_instruction.code_length',
+            ])
+            ->add('suffix', TextType::class, [
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.suffix',
+                'required' => false,
             ])
             ->add('usageLimit', IntegerType::class, [
                 'required' => false,

@@ -270,7 +270,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function allOfTheCouponsShouldBePrefixedWith(string $prefix): void
     {
         foreach ($this->indexPage->getCouponCodes() as $couponCode) {
-            Assert::startsWith($prefix, $couponCode);
+            Assert::startsWith($couponCode, $prefix);
         }
     }
 
@@ -280,7 +280,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function allOfTheCouponsShouldBeSuffixedWith(string $suffix): void
     {
         foreach ($this->indexPage->getCouponCodes() as $couponCode) {
-            Assert::endsWith($suffix, $couponCode);
+            Assert::endsWith($couponCode, $suffix);
         }
     }
 
