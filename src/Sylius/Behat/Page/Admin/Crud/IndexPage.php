@@ -135,7 +135,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function bulkDelete(): void
     {
-        $this->getElement('bulk_actions', ['%text%' => 'Bulk actions'])->pressButton('Delete');
+        $this->getElement('bulk_actions')->pressButton('Delete');
         $this->getElement('confirmation_button')->click();
     }
 
@@ -152,7 +152,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'bulk_actions' => '.accordion:contains("%text%")',
+            'bulk_actions' => '.sylius-grid-nav__bulk',
             'confirmation_button' => '#confirmation-button',
             'filter' => 'button:contains("Filter")',
             'table' => '.table',
