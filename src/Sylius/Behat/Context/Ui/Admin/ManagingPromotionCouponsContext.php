@@ -88,24 +88,24 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Given /^I want to generate a new coupons for (this promotion)$/
+     * @When /^I want to generate new coupons for (this promotion)$/
      */
-    public function iWantToGenerateANewCouponsForThisPromotion(PromotionInterface $promotion)
+    public function iWantToGenerateNewCouponsForThisPromotion(PromotionInterface $promotion)
     {
         $this->generatePage->open(['promotionId' => $promotion->getId()]);
     }
 
     /**
-     * @When /^I specify its code length as (\d+)$/
-     * @When I do not specify its code length
+     * @When /^I specify their code length as (\d+)$/
+     * @When I do not specify their code length
      */
-    public function iSpecifyItsCodeLengthAs($codeLength = null)
+    public function iSpecifyTheirCodeLengthAs($codeLength = null)
     {
         $this->generatePage->specifyCodeLength($codeLength ?? '');
     }
 
     /**
-     * @When I specify its prefix as :prefix
+     * @When I specify their prefix as :prefix
      */
     public function specifyPrefixAs(string $prefix): void
     {
@@ -113,7 +113,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I specify its suffix as :prefix
+     * @When I specify their suffix as :suffix
      */
     public function specifySuffixAs(string $suffix): void
     {
@@ -164,6 +164,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I specify its amount as :amount
      * @When I do not specify its amount
+     * @When I choose the amount of :amount coupons to be generated
      */
     public function iSpecifyItsAmountAs($amount = null)
     {
@@ -221,7 +222,9 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I generate it
+     * @When I generate these coupons
      * @When I try to generate it
+     * @When I try to generate these coupons
      */
     public function iGenerateIt()
     {
@@ -255,7 +258,8 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^there should be (\d+) coupon related to (this promotion)$/
+     * @Then /^there should be (0|1) coupon related to (this promotion)$/
+     * @Then /^there should be (\b(?![01]\b)\d{1,9}\b) coupons related to (this promotion)$/
      */
     public function thereShouldBeCouponRelatedTo($number, PromotionInterface $promotion)
     {
@@ -265,9 +269,9 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then all of the coupons codes should be prefixed with :prefix
+     * @Then all of the coupon codes should be prefixed with :prefix
      */
-    public function allOfTheCouponsShouldBePrefixedWith(string $prefix): void
+    public function allOfTheCouponCodesShouldBePrefixedWith(string $prefix): void
     {
         foreach ($this->indexPage->getCouponCodes() as $couponCode) {
             Assert::startsWith($couponCode, $prefix);
@@ -275,9 +279,9 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then all of the coupons codes should be suffixed with :prefix
+     * @Then all of the coupon codes should be suffixed with :suffix
      */
-    public function allOfTheCouponsShouldBeSuffixedWith(string $suffix): void
+    public function allOfTheCouponCodesShouldBeSuffixedWith(string $suffix): void
     {
         foreach ($this->indexPage->getCouponCodes() as $couponCode) {
             Assert::endsWith($couponCode, $suffix);
@@ -408,9 +412,9 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully generated
+     * @Then I should be notified that they have been successfully generated
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated()
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyGenerated(): void
     {
         $this->notificationChecker->checkNotification('Success Promotion coupons have been successfully generated.', NotificationType::success());
     }
