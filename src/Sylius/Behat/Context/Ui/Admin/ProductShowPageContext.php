@@ -26,7 +26,7 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
-use Sylius\Behat\Page\Shop\Product\ShowPageInterface as ShopShowPageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
@@ -38,9 +38,6 @@ final class ProductShowPageContext implements Context
 
     /** @var ShowPageInterface */
     private $productShowPage;
-
-    /** @var ShopShowPageInterface */
-    private $shopProductShowPage;
 
     /** @var AssociationsElementInterface */
     private $associationsElement;
@@ -75,7 +72,6 @@ final class ProductShowPageContext implements Context
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $productShowPage,
-        ShopShowPageInterface $shopProductShowPage,
         AssociationsElementInterface $associationsElement,
         AttributesElementInterface $attributesElement,
         DetailsElementInterface $detailsElement,
@@ -89,7 +85,6 @@ final class ProductShowPageContext implements Context
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;
-        $this->shopProductShowPage = $shopProductShowPage;
         $this->associationsElement = $associationsElement;
         $this->attributesElement = $attributesElement;
         $this->detailsElement = $detailsElement;
@@ -119,11 +114,19 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @When I specify this product to viewing in :channel channel
+     * @When I show this product in the :channel channel
      */
-    public function iSpecifyThisProductToViewingInChannel(ChannelInterface $channel): void
+    public function iShowThisProductInTheChannel(string $channel): void
     {
-        $this->productShowPage->specifyChannel($channel);
+        $this->productShowPage->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I show this product in this channel
+     */
+    public function iShowThisProductInThisChannel(): void
+    {
+       $this->productShowPage->showProductInSingleChannel();
     }
 
     /**
@@ -348,15 +351,5 @@ final class ProductShowPageContext implements Context
     public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $locale): void
     {
         Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale, $value));
-    }
-
-    /**
-     * @Then /^I should see (this product) in ("([^"]*)" channel)$/
-     */
-    public function iShouldSeeThisProductInChannel(ProductInterface $product, ChannelInterface $channel): void
-    {
-        Assert::true(null !== strpos($this->shopProductShowPage->getCurrentUrl(), $channel->getHostname()));
-
-        Assert::same($this->shopProductShowPage->getName(), $product->getName());
     }
 }

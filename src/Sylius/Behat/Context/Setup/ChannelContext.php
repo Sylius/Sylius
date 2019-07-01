@@ -105,7 +105,7 @@ final class ChannelContext implements Context
      * @Given the store operates on a channel identified by :code code
      * @Given the store (also) operates on a channel named :channelName with hostname :hostname
      */
-    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null, string $hostname = null)
+    public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
     {
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);

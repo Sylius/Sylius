@@ -1,20 +1,20 @@
 @viewing_products
-Feature: Viewing a product for a particular channel
-    In order to choosing view a product in each channel
+Feature: Viewing a product in a chosen channel
+    In order to check a product in shop in all channels it is available in
     As an Administrator
-    I want to be able to view product shop page for particular channel
+    I want to choose a channel in which I will be viewing it
 
     Background:
-        Given the store operates on a channel named "UnitedStates" with hostname "goodcars.com"
+        Given the store operates on a channel named "United States" with hostname "goodcars.com"
         And the store also operates on a channel named "Europe" with hostname "goodcars.eu"
-        And the store classifies its products as "Shield" and "Equipment"
-        And the store has a product "Iron shield" priced at "$20.00" in "UnitedStates" channel
-        And this product is available in "Europe" channel
+        And the store classifies its products as "Cars" and "Equipment"
+        And the store has a product "Bugatti" priced at "$20.00" in "United States" channel
+        And this product is available in the "Europe" channel
         And I am logged in as an administrator
-        And I am browsing products
 
     @ui
-    Scenario: Viewing product shop page for particular channel
-        When I access "Iron shield" product page
-        And I specify this product to viewing in "Europe" channel
-        Then I should see this product in "Europe" channel
+    Scenario: Viewing product shop page in a chosen channel
+        Given I am browsing products
+        When I access "Bugatti" product page
+        And I show this product in the "Europe" channel
+        Then I should see this product in the "Europe" channel in shop

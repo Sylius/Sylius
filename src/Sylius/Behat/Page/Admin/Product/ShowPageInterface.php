@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
@@ -22,5 +21,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function isSimpleProductPage(): bool;
 
-    public function specifyChannel(ChannelInterface $channel): void;
+    public function showProductInChannel(string $channel): void;
+
+    public function showProductInSingleChannel();
 }
