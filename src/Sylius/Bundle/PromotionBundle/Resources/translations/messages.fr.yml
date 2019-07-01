@@ -31,7 +31,7 @@ sylius:
             expires_at: Expire le
             usage_limit: Limite d'utilisation
         promotion_coupon_generator_instruction:
-            amount: Montant
+            amount: Quantité de coupons à générer
             code_length: Longueur du code
             expires_at: Expire le
             usage_limit: Limite d'utilisation
