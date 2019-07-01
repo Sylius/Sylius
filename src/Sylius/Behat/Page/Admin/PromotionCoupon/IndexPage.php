@@ -20,8 +20,10 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function getCouponCodes(): iterable
     {
+        $codeCells = $this->getDocument()->findAll('css', '.sylius-grid-wrapper tbody tr td:nth-child(2)');
+
         /** @var NodeElement $codeCell */
-        foreach ($this->getDocument()->findAll('css', '.sylius-grid-wrapper tbody tr td:nth-child(2)') as $codeCell) {
+        foreach ($codeCells as $codeCell) {
             yield $codeCell->getText();
         }
     }
