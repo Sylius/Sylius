@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Obrázek je příliš velký - {{ size }}{{ suffix }}. Maximální povolená velikost je {{ limit }}{{ suffix }}.
+            upload_ini_size: Obrázek je příliš velký. Maximální povolená velikost je {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Zadejt základní měnu kanálu.
