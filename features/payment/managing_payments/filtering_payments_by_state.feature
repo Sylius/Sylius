@@ -18,7 +18,7 @@ Feature: Filtering payments by state
         And I am logged in as an administrator
 
     @ui
-    Scenario: Filtering payments by a chosen state "New"
+    Scenario: Filtering payments in state "New"
         When I browse payments
         And I choose "New" as a payment state
         And I filter
@@ -29,7 +29,7 @@ Feature: Filtering payments by state
         But I should not see a payment of order "#00000002"
 
     @ui
-    Scenario: Filtering payments by a chosen state "Completed"
+    Scenario: Filtering payments in state "Completed"
         When I browse payments
         And I choose "Completed" as a payment state
         And I filter
@@ -38,7 +38,7 @@ Feature: Filtering payments by state
         But I should not see a payment of order "#00000003"
 
     @ui
-    Scenario: Filtering payments by a chosen state "Processing"
+    Scenario: Filtering payments in state "Processing"
         When I browse payments
         And I choose "Processing" as a payment state
         And I filter
@@ -47,7 +47,7 @@ Feature: Filtering payments by state
         But I should not see a payment of order "#00000004"
 
     @ui
-    Scenario: Filtering payments by a chosen state "Refunded"
+    Scenario: Filtering payments in state "Refunded"
         When I browse payments
         And I choose "Refunded" as a payment state
         And I filter
@@ -56,7 +56,7 @@ Feature: Filtering payments by state
         But I should not see a payment of order "#00000005"
 
     @ui
-    Scenario: Filtering payments by a chosen state "Cancelled"
+    Scenario: Filtering payments in state "Cancelled"
         When I browse payments
         And I choose "Cancelled" as a payment state
         And I filter
@@ -65,7 +65,7 @@ Feature: Filtering payments by state
         But I should not see a payment of order "#00000006"
 
     @ui
-    Scenario: Filtering payments by a chosen state "Failed"
+    Scenario: Filtering payments in state "Failed"
         When I browse payments
         And I choose "Failed" as a payment state
         And I filter

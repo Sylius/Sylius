@@ -2,7 +2,7 @@
 Feature: Filtering shipments by state
     In order to filter shipments by state
     As an Administrator
-    I want to browse all shipments with choosen state
+    I want to browse all shipments with a chosen state
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -21,7 +21,7 @@ Feature: Filtering shipments by state
         And I am logged in as an administrator
 
     @ui
-    Scenario: Filtering orders by a choosen state
+    Scenario: Filtering payments in state "Shipped"
         When I browse shipments
         And I choose "Shipped" as a shipment state
         And I filter
