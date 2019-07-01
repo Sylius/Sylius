@@ -3,7 +3,11 @@
         <div class="ui segment">
             {{ form_errors(form) }}
             {{ form_row(form.amount) }}
+        </div>
+        <div class="ui segment">
+            {{ form_row(form.prefix) }}
             {{ form_row(form.codeLength) }}
+            {{ form_row(form.suffix) }}
         </div>
     </div>
     <div class="column">
