@@ -176,7 +176,7 @@ class OrderFixture extends AbstractFixture
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
         $shippingMethods = $this->shippingMethodRepository->findAll();
-        $shippingMethodsAvailable = (bool) count($shippingMethods);
+        $shippingMethodsAvailable = count($shippingMethods) > 0;
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var OrderItemInterface $item */
