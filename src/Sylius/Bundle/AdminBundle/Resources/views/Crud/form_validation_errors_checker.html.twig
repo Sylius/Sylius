@@ -1,0 +1,5 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% if form.vars.valid == false %}
+    {{ messages.error('sylius.ui.this_message_contains_errors') }}
+{% endif %}
