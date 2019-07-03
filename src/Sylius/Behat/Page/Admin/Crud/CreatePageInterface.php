@@ -27,4 +27,6 @@ interface CreatePageInterface extends SymfonyPageInterface
      * @throws ElementNotFoundException
      */
     public function create(): void;
+
+    public function getMessageInvalidForm(): string;
 }

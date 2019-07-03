@@ -29,4 +29,6 @@ interface UpdatePageInterface extends SymfonyPageInterface
     public function hasResourceValues(array $parameters): bool;
 
     public function saveChanges(): void;
+
+    public function getMessageInvalidForm(): string;
 }
