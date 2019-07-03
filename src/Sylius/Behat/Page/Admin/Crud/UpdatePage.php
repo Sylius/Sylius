@@ -69,7 +69,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     public function getMessageInvalidForm(): string
     {
-        return $this->getDocument()->find('css', '#invalid-form-error')->getText();
+        return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
     }
 
     /**
