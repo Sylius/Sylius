@@ -34,6 +34,24 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(500);
     }
 
+    function its_prefix_is_mutable(): void
+    {
+        $this->setPrefix('PREFIX_');
+        $this->getPrefix()->shouldReturn('PREFIX_');
+    }
+
+    function its_code_length_is_mutable(): void
+    {
+        $this->setCodeLength(4);
+        $this->getCodeLength()->shouldReturn(4);
+    }
+
+    function its_suffix_is_mutable(): void
+    {
+        $this->setSuffix('_SUFFIX');
+        $this->getSuffix()->shouldReturn('_SUFFIX');
+    }
+
     function it_does_not_have_usage_limit_by_default(): void
     {
         $this->getUsageLimit()->shouldReturn(null);

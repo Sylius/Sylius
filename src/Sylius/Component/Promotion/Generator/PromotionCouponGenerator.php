@@ -56,7 +56,12 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
 
         $this->assertGenerationIsPossible($instruction);
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
-            $code = $this->generateUniqueCode($instruction->getCodeLength(), $generatedCoupons);
+            $code = $this->generateUniqueCode(
+                $instruction->getCodeLength(),
+                $generatedCoupons,
+                $instruction->getPrefix(),
+                $instruction->getSuffix()
+            );
 
             /** @var PromotionCouponInterface $coupon */
             $coupon = $this->couponFactory->createNew();
@@ -78,13 +83,17 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     /**
      * @throws \InvalidArgumentException
      */
-    private function generateUniqueCode(int $codeLength, array $generatedCoupons): string
-    {
+    private function generateUniqueCode(
+        int $codeLength,
+        array $generatedCoupons,
+        ?string $prefix,
+        ?string $suffix
+    ): string {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
         do {
             $hash = bin2hex(random_bytes(20));
-            $code = strtoupper(substr($hash, 0, $codeLength));
+            $code = $prefix.strtoupper(substr($hash, 0, $codeLength)).$suffix;
         } while ($this->isUsedCode($code, $generatedCoupons));
 
         return $code;

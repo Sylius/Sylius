@@ -102,6 +102,10 @@ In its **PromotionCouponGeneratorInstruction** you can define the amount of coup
    // You can easily change it with the ``setAmount()`` and ``setLength()`` methods
    $instruction->setAmount(10);
 
+   // Coupon prefix and suffix are not mandatory but can be used to make coupon code more human-friendly
+   $instruction->setPrefix('NEW_YEAR_');
+   $instruction->setSuffix('_SALE');
+
    // Now use the ``generate()`` method with your instruction on the promotion where you want to have Coupons
    $generator->generate($promotion, $instruction);
 

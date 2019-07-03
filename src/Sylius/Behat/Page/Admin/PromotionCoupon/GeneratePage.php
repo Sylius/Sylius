@@ -61,6 +61,16 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
+    public function specifyPrefix(string $prefix): void
+    {
+        $this->getDocument()->fillField('Prefix', $prefix);
+    }
+
+    public function specifySuffix(string $suffix): void
+    {
+        $this->getDocument()->fillField('Suffix', $suffix);
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_admin_promotion_coupon_generate';
