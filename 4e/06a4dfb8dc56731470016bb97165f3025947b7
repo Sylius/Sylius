@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2019-07-01T11:06:12Z
+
+Would be wonderful if we could add tooltips explaining what are these.
+Moreover, I would improve the UX, by making the code length field shorter and the prefix/suffix fields with some placeholders `I.e. 2019SALE_`
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-07-01T11:08:50Z
+
+@CoderMaggie agreed 👍 However, as it's a UI/UX job, I would leave it as it is in this PR (to not make it longer than needed) and let somebody more experienced with front-end (probably @kulczy 😄) do the job 🚀
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-07-03T07:53:18Z
+
+Thank you, Mateusz! :tada:
