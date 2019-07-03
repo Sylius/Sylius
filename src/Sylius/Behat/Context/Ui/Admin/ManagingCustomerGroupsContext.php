@@ -180,6 +180,22 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @Then I should see message that information are incomplete in create section
+     */
+    public function iShouldSeeMessageThatInformationAreIncompleteInCreateSection(): void
+    {
+        Assert::same($this->createPage->getMessageInvalidForm(), 'Error This form contains errors');
+    }
+
+    /**
+     * @Then I should see message that information are incomplete in edit section
+     */
+    public function iShouldSeeMessageThatInformationAreIncompleteInEditSection(): void
+    {
+        Assert::same($this->updatePage->getMessageInvalidForm(), 'Error This form contains errors');
+    }
+
+    /**
      * @Then the code field should be disabled
      */
     public function theCodeFieldShouldBeDisabled()
