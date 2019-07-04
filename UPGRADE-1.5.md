@@ -11,3 +11,15 @@ Copy [a new migration file](https://raw.githubusercontent.com/Sylius/Sylius-Stan
 ```bash
 bin/console doctrine:migrations:migrate
 ```
+
+### Routing
+
+- If you want to support extended locale codes, as introduced in [#10178](https://github.com/Sylius/Sylius/pull/10178), you should modify `_locale` requirement in `config/routes/sylius_shop.yml`
+
+    ```yaml
+    sylius_shop:
+        resource: "@SyliusShopBundle/Resources/config/routing.yml"
+        prefix: /{_locale}
+        requirements:
+            _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+    ```

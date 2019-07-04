@@ -12,4 +12,17 @@
 
 .text.gray {
     color: #999;
+
+.ui.buttons form .button {
+    border-radius: 0 !important;
+}
+
+.ui.buttons form:first-child .button {
+    border-top-left-radius: .28571429rem !important;
+    border-bottom-left-radius: .28571429rem !important;
+}
+
+.ui.buttons form:last-child .button {
+    border-top-right-radius: .28571429rem !important;
+    border-bottom-right-radius: .28571429rem !important;
 }
