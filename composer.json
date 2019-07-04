@@ -45,7 +45,6 @@
         "payum/payum-bundle": "^2.2",
         "php-http/guzzle6-adapter": "^1.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "psr/event-dispatcher": "^1.0",
         "ramsey/uuid": "^3.7",
         "sonata-project/block-bundle": "^3.3",
         "sonata-project/intl-bundle": "^2.2",
