@@ -67,6 +67,11 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return $this->routeName;
     }
 
+    public function getMessageInvalidForm(): string
+    {
+        return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
+    }
+
     /**
      * @throws ElementNotFoundException
      */

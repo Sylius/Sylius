@@ -67,4 +67,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
         return $element;
     }
+
+    public function getMessageInvalidForm(): string
+    {
+        return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
+    }
 }

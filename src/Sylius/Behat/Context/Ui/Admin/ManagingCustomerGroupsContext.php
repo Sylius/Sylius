@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
@@ -28,16 +29,21 @@ final class ManagingCustomerGroupsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
+    /** @var CurrentPageResolverInterface */
+    private $currentPageResolver;
+
     /** @var UpdatePageInterface */
     private $updatePage;
 
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
+        CurrentPageResolverInterface $currentPageResolver,
         UpdatePageInterface $updatePage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->updatePage = $updatePage;
     }
 
@@ -177,6 +183,17 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then I should be informed that this form contains errors
+     */
+    public function iShouldBeInformedThatThisFormContainsErrors()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getMessageInvalidForm(), 'This form contains errors');
     }
 
     /**
