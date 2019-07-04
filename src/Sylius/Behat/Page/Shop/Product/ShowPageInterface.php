@@ -115,6 +115,8 @@ interface ShowPageInterface extends PageInterface
      */
     public function getAverageRating();
 
+    public function getCurrentUrl(): string;
+
     /**
      * @param string $optionName
      * @param string $optionValue

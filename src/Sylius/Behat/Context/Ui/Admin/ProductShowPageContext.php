@@ -26,6 +26,8 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -109,6 +111,22 @@ final class ProductShowPageContext implements Context
     public function iAccessProductPage(ProductInterface $product): void
     {
         $this->indexPage->showProductPage($product->getName());
+    }
+
+    /**
+     * @When I show this product in the :channel channel
+     */
+    public function iShowThisProductInTheChannel(string $channel): void
+    {
+        $this->productShowPage->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I show this product in this channel
+     */
+    public function iShowThisProductInThisChannel(): void
+    {
+       $this->productShowPage->showProductInSingleChannel();
     }
 
     /**
