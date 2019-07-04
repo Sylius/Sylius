@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2019-05-22T14:36:46Z
+
+@pamil @lchrusciel @Zales0123
+There is an interesting error triggered by Psalm on Symfony 3 build.
+StaticPrefixCollection doesn't have **populateCollection** method on symfony/routing 3.3
+https://github.com/symfony/routing/blob/3.4/Matcher/Dumper/StaticPrefixCollection.php
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-06-25T08:22:03Z
+
+@loic425 thanks for your patience, #10468 should fix that error.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2019-06-27T19:16:47Z
+
+@pamil Something was wrong with rebase. It requires phpstan/phpstan (and not phpstan-shim) to get rid of nikic/php-parser error.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-07-04T11:13:00Z
+
+Thank you, Loïc! :tada:
