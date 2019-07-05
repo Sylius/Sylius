@@ -93,7 +93,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
 
         do {
             $hash = bin2hex(random_bytes(20));
-            $code = $prefix.strtoupper(substr($hash, 0, $codeLength)).$suffix;
+            $code = $prefix . strtoupper(substr($hash, 0, $codeLength)) . $suffix;
         } while ($this->isUsedCode($code, $generatedCoupons));
 
         return $code;

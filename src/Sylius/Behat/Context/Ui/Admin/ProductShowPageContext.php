@@ -26,8 +26,6 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -126,7 +124,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShowThisProductInThisChannel(): void
     {
-       $this->productShowPage->showProductInSingleChannel();
+        $this->productShowPage->showProductInSingleChannel();
     }
 
     /**

@@ -416,7 +416,7 @@ final class OrderContext implements Context
         $this->createShippingPaymentMethodsAndAddress();
 
         if ($state !== null) {
-            foreach($this->getTargetPaymentTransitions($state) as $transition) {
+            foreach ($this->getTargetPaymentTransitions($state) as $transition) {
                 $this->applyPaymentTransitionOnOrder($order, $transition);
             }
         }
@@ -972,7 +972,7 @@ final class OrderContext implements Context
             'completed' => [PaymentTransitions::TRANSITION_COMPLETE],
             'cancelled' => [PaymentTransitions::TRANSITION_CANCEL],
             'failed' => [PaymentTransitions::TRANSITION_FAIL],
-            'refunded' => [PaymentTransitions::TRANSITION_COMPLETE, PaymentTransitions::TRANSITION_REFUND]
+            'refunded' => [PaymentTransitions::TRANSITION_COMPLETE, PaymentTransitions::TRANSITION_REFUND],
         ];
 
         return $transitions[$state];
