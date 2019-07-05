@@ -179,6 +179,8 @@ class OrderFixture extends AbstractFixture
     {
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
+        $shippingMethods = $this->shippingMethodRepository->findAll();
+        $shippingMethodsAvailable = count($shippingMethods) > 0;
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var OrderItemInterface $item */
@@ -186,6 +188,7 @@ class OrderFixture extends AbstractFixture
 
             $product = $this->faker->randomElement($products);
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
+            $variant->setShippingRequired($shippingMethodsAvailable);
 
             $item->setVariant($variant);
             $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
@@ -217,7 +220,6 @@ class OrderFixture extends AbstractFixture
             ->faker
             ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
-        Assert::notNull($shippingMethod, 'Shipping method should not be null.');
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
