@@ -179,7 +179,7 @@ class OrderFixture extends AbstractFixture
     {
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
-        $shippingMethods = $this->shippingMethodRepository->findAll();
+        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($order->getChannel());
         $shippingMethodsAvailable = count($shippingMethods) > 0;
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
