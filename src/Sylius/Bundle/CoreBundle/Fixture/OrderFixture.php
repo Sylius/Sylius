@@ -248,7 +248,14 @@ class OrderFixture extends AbstractFixture
                 ->faker
                 ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
             ;
-            Assert::notNull($paymentMethod, 'Payment method should not be null.');
+
+            /** @var ChannelInterface $channel */
+            $channel = $order->getChannel();
+            Assert::notNull($paymentMethod, sprintf(
+                "No enabled payment method was found for channel '%s'. " .
+                "Set 'skipping_payment_step_allowed' option to true for this channel if you want to skip payment method selection.",
+                $channel->getCode()
+            ));
 
             foreach ($order->getPayments() as $payment) {
                 $payment->setMethod($paymentMethod);
