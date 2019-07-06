@@ -19,6 +19,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -221,7 +222,14 @@ class OrderFixture extends AbstractFixture
                 ->faker
                 ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
             ;
-            Assert::notNull($shippingMethod, 'Shipping method should not be null.');
+
+            /** @var ChannelInterface $channel */
+            $channel = $order->getChannel();
+            Assert::notNull($shippingMethod, sprintf(
+                "No enabled shipping method was found for channel '%s'. " .
+                "Set 'skipping_shipping_step_allowed' option to true for this channel if you want to skip shipping method selection.",
+                $channel->getCode()
+            ));
 
             foreach ($order->getShipments() as $shipment) {
                 $shipment->setMethod($shippingMethod);
