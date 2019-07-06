@@ -243,18 +243,20 @@ class OrderFixture extends AbstractFixture
 
     private function selectPayment(OrderInterface $order): void
     {
-        $paymentMethod = $this
-            ->faker
-            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
-        Assert::notNull($paymentMethod, 'Payment method should not be null.');
-
-        foreach ($order->getPayments() as $payment) {
-            $payment->setMethod($paymentMethod);
-        }
-
         if ($this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
+            $paymentMethod = $this
+                ->faker
+                ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+            ;
+            Assert::notNull($paymentMethod, 'Payment method should not be null.');
+
+            foreach ($order->getPayments() as $payment) {
+                $payment->setMethod($paymentMethod);
+            }
+
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        } else {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }
     }
 
