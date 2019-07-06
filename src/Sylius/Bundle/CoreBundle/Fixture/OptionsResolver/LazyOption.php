@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
@@ -39,7 +41,7 @@ final class LazyOption
     public static function randomOne(RepositoryInterface $repository): \Closure
     {
         return function (Options $options) use ($repository) {
-            $objects = $repository->findAll();
+            $objects = self::findLimitedAll($repository);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -58,7 +60,7 @@ final class LazyOption
                 return null;
             }
 
-            $objects = $repository->findAll();
+            $objects = self::findLimitedAll($repository);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -71,7 +73,7 @@ final class LazyOption
     public static function randomOnes(RepositoryInterface $repository, int $amount): \Closure
     {
         return function (Options $options) use ($repository, $amount) {
-            $objects = $repository->findAll();
+            $objects = self::findLimitedAll($repository);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -93,7 +95,7 @@ final class LazyOption
     public static function all(RepositoryInterface $repository): \Closure
     {
         return function (Options $options) use ($repository) {
-            return $repository->findAll();
+            return self::findLimitedAll($repository);
         };
     }
 
@@ -132,5 +134,9 @@ final class LazyOption
 
             return $repository->findOneBy([$field => $previousValue]);
         };
+    }
+
+    private static function findLimitedAll(RepositoryInterface $repository, int $limit = 2000) {
+        return $repository->findBy([], ['id'=>'asc'], $limit);
     }
 }
