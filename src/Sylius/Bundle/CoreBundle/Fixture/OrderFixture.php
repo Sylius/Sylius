@@ -19,6 +19,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -178,6 +179,9 @@ class OrderFixture extends AbstractFixture
         $products = $this->productRepository->findAll();
         $generatedItems = [];
 
+        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($order->getChannel());
+        $shippingMethodsAvailable = count($shippingMethods) > 0;
+
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
@@ -193,6 +197,7 @@ class OrderFixture extends AbstractFixture
                 /** @var OrderItemInterface $item */
                 $item = $generatedItems[$variant->getCode()];
                 $this->orderItemQuantityModifier->modify($item, $item->getQuantity() + random_int(1, 5));
+                $variant->setShippingRequired($shippingMethodsAvailable);
 
                 continue;
             }
@@ -238,24 +243,52 @@ class OrderFixture extends AbstractFixture
         }
 
         if ($this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
+            $shippingMethod = $this
+                ->faker
+                ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
+            ;
+
+            /** @var ChannelInterface $channel */
+            $channel = $order->getChannel();
+            Assert::notNull($shippingMethod, sprintf(
+                "No enabled shipping method was found for channel '%s'. " .
+                "Set 'skipping_shipping_step_allowed' option to true for this channel if you want to skip shipping method selection.",
+                $channel->getCode()
+            ));
+
+            foreach ($order->getShipments() as $shipment) {
+                $shipment->setMethod($shippingMethod);
+            }
+
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        } else {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
     }
 
     private function selectPayment(OrderInterface $order): void
     {
-        $paymentMethod = $this
-            ->faker
-            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
-        Assert::notNull($paymentMethod, 'Payment method should not be null.');
-
-        foreach ($order->getPayments() as $payment) {
-            $payment->setMethod($paymentMethod);
-        }
-
         if ($this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
+            $paymentMethod = $this
+                ->faker
+                ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+            ;
+
+            /** @var ChannelInterface $channel */
+            $channel = $order->getChannel();
+            Assert::notNull($paymentMethod, sprintf(
+                "No enabled payment method was found for channel '%s'. " .
+                "Set 'skipping_payment_step_allowed' option to true for this channel if you want to skip payment method selection.",
+                $channel->getCode()
+            ));
+
+            foreach ($order->getPayments() as $payment) {
+                $payment->setMethod($paymentMethod);
+            }
+
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        } else {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }
     }
 
