@@ -117,7 +117,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setDefault('description', $this->faker->sentence())
             ->setDefault('usage_limit', null)
             ->setDefault('coupon_based', false)
-            ->setDefault('exclusive', $this->faker->boolean(25))
+            ->setDefault('exclusive', false)
             ->setDefault('priority', 0)
             ->setDefault('starts_at', null)
             ->setAllowedTypes('starts_at', ['null', 'string'])
