@@ -216,17 +216,20 @@ class OrderFixture extends AbstractFixture
 
     private function selectShipping(OrderInterface $order): void
     {
-        $shippingMethod = $this
-            ->faker
-            ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-
         if ($this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
+            $shippingMethod = $this
+                ->faker
+                ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
+            ;
+            Assert::notNull($shippingMethod, 'Shipping method should not be null.');
+
+            foreach ($order->getShipments() as $shipment) {
+                $shipment->setMethod($shippingMethod);
+            }
+
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        } else {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
     }
 
