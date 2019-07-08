@@ -93,6 +93,7 @@ $(document).ready(() => {
 
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
+  $(document).previewUploadedImage('#add-avatar');
 
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
     if ($(event.target).find('.accordion').length > 0) {
