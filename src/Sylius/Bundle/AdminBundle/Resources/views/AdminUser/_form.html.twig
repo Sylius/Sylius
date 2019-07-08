@@ -1,3 +1,5 @@
+{% form_theme form '@SyliusUi/Form/imagesTheme.html.twig' %}
+
 <div class="ui two column stackable grid">
     {{ form_errors(form) }}
     <div class="column">
@@ -12,7 +14,6 @@
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.enabled) }}
         </div>
-        {% include '@SyliusAdmin/AdminUser/_media.html.twig' %}
     </div>
     <div class="column">
         <div class="ui segment">
@@ -20,6 +21,10 @@
             <div class="two fields">
                 {{ form_row(form.firstName) }}
                 {{ form_row(form.lastName) }}
+            </div>
+            <div class="field" id="add-avatar">
+                <label>{{ 'sylius.ui.avatar'|trans }}</label>
+                {{ form_row(form.avatar, {'label': false}) }}
             </div>
         </div>
         <div class="ui segment">
