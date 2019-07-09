@@ -354,6 +354,16 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return null !== $this->getDocument()->find('css', '.tab > h3:contains("Inventory")');
     }
 
+    public function showProductInChannel(string $channel): void
+    {
+        $this->getElement('show_product_dropdown')->clickLink($channel);
+    }
+
+    public function showProductInSingleChannel(): void
+    {
+        $this->getElement('show_product_single_button')->click();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -387,6 +397,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
+            'show_product_dropdown' => '.scrolling.menu',
+            'show_product_single_button' => 'a:contains("Show product in shop page")',
             'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',

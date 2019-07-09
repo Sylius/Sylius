@@ -27,6 +27,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
+use Sylius\Behat\Page\Shop\Product\ShowPage;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -49,6 +50,9 @@ final class ManagingProductsContext implements Context
 
     /** @var IndexPageInterface */
     private $indexPage;
+
+    /** @var ShowPage */
+    private $showPage;
 
     /** @var UpdateSimpleProductPageInterface */
     private $updateSimpleProductPage;
@@ -78,7 +82,7 @@ final class ManagingProductsContext implements Context
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
         CreateConfigurableProductPageInterface $createConfigurableProductPage,
-        IndexPageInterface $indexPage,
+        IndexPageInterface $indexPage, ShowPage $showPage,
         UpdateSimpleProductPageInterface $updateSimpleProductPage,
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         ProductReviewIndexPageInterface $productReviewIndexPage,
@@ -92,6 +96,7 @@ final class ManagingProductsContext implements Context
         $this->createSimpleProductPage = $createSimpleProductPage;
         $this->createConfigurableProductPage = $createConfigurableProductPage;
         $this->indexPage = $indexPage;
+        $this->showPage = $showPage;
         $this->updateSimpleProductPage = $updateSimpleProductPage;
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
         $this->productReviewIndexPage = $productReviewIndexPage;
@@ -116,6 +121,14 @@ final class ManagingProductsContext implements Context
     public function iWantToCreateANewConfigurableProduct()
     {
         $this->createConfigurableProductPage->open();
+    }
+
+    /**
+     * @When I access :product product edit page
+     */
+    public function iAccessProductEditPage(ProductInterface $product): void
+    {
+        $this->indexPage->showProductEditPage($product->getName());
     }
 
     /**
@@ -217,6 +230,22 @@ final class ManagingProductsContext implements Context
     public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
     {
         $this->createSimpleProductPage->specifySlugIn($slug, $language);
+    }
+
+    /**
+     * @When I show this product in the :channel channel
+     */
+    public function iShowThisProductInTheChannel(string $channel): void
+    {
+        $this->resolveCurrentPage()->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I show this product in this channel
+     */
+    public function iShowThisProductInThisChannel(): void
+    {
+        $this->resolveCurrentPage()->showProductInSingleChannel();
     }
 
     /**
@@ -993,6 +1022,15 @@ final class ManagingProductsContext implements Context
     public function iShouldSeeInventoryOfThisProduct(): void
     {
         Assert::true($this->updateSimpleProductPage->hasInventoryTab());
+    }
+
+    /**
+     * @Then /^I should see (this product) in the ("([^"]*)" channel) in shop$/
+     */
+    public function iShouldSeeThisProductInTheChannelInShop(ProductInterface $product, ChannelInterface $channel): void
+    {
+        Assert::true(null !== strpos($this->showPage->getCurrentUrl(), $channel->getHostname()));
+        Assert::same($this->showPage->getName(), $product->getName());
     }
 
     /**
