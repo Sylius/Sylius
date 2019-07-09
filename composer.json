@@ -125,6 +125,7 @@
         "phpstan/phpstan": "^0.11",
         "phpstan/phpstan-webmozart-assert": "^0.11",
         "phpunit/phpunit": "^7.0",
+        "psr/event-dispatcher": "^1.0",
         "sensiolabs/security-checker": "^5.0",
         "stripe/stripe-php": "^4.1",
         "sylius-labs/coding-standard": "^3.0",
