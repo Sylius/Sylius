@@ -69,6 +69,7 @@ sylius_admin_product_variant_update:
                 templates:
                     form: "@SyliusAdmin/ProductVariant/_form.html.twig"
                     breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
+                    toolbar: "@SyliusAdmin/ProductVariant/Update/_toolbar.html.twig"
 
 sylius_admin_product_variant_bulk_delete:
     path: /bulk-delete

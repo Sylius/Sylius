@@ -37,6 +37,11 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->imageExistenceChecker = $imageExistenceChecker;
     }
 
+    public function goToVariantList(): void
+    {
+        $this->getDocument()->clickLink('List variants');
+    }
+
     public function filterByTaxon(string $taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();

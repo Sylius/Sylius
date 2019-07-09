@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface as ProductIndexPage;
 use Webmozart\Assert\Assert;
 
 final class BrowsingProductVariantsContext implements Context
@@ -25,15 +26,37 @@ final class BrowsingProductVariantsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
+    /** @var ProductIndexPage */
+    private $productIndexPage;
+
     /** @var ProductVariantResolverInterface */
     private $defaultProductVariantResolver;
 
     public function __construct(
         IndexPageInterface $indexPage,
+        ProductIndexPage $productIndexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver
     ) {
         $this->indexPage = $indexPage;
+        $this->productIndexPage = $productIndexPage;
         $this->defaultProductVariantResolver = $defaultProductVariantResolver;
+    }
+
+    /**
+     * @Given I am browsing :product product variants
+     */
+    public function iAmBrowsingProductVariants(): void
+    {
+        $this->productIndexPage->open();
+        $this->productIndexPage->goToVariantList();
+    }
+
+    /**
+     * @When I access :productVariant variant edit page
+     */
+    public function iAccessVariantEditPage(string $productVariantName): void
+    {
+        $this->indexPage->showProductVariantEditPage($productVariantName);
     }
 
     /**
