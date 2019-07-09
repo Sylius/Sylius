@@ -50,6 +50,11 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->imageExistenceChecker->doesImageWithUrlExist($imageUrl, 'sylius_admin_product_thumbnail');
     }
 
+    public function showProductEditPage(string $productName): void
+    {
+        $this->getElement('editButton', ['%productName%' => $productName])->clickLink('Edit');
+    }
+
     public function showProductPage(string $productName): void
     {
         $tableAccessor = $this->getTableAccessor();
@@ -62,6 +67,7 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'editButton' => '.table tr:contains("%productName%") td:nth-child(7)',
             'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }

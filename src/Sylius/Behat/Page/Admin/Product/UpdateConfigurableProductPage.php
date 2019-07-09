@@ -177,6 +177,16 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return null !== $this->getDocument()->find('css', '.tab > h3:contains("Inventory")');
     }
 
+    public function showProductInChannel(string $channel): void
+    {
+        $this->getElement('show_product_dropdown')->clickLink($channel);
+    }
+
+    public function showProductInSingleChannel(): void
+    {
+        $this->getElement('show_product_single_button')->click();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -194,6 +204,8 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             'price' => '#sylius_product_variant_price',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
+            'show_product_dropdown' => '.scrolling.menu',
+            'show_product_single_button' => 'a:contains("Show product in shop page")',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
         ]);

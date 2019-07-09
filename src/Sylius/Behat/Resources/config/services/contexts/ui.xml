@@ -151,6 +151,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.create_simple" />
             <argument type="service" id="sylius.behat.page.admin.product.create_configurable" />
             <argument type="service" id="sylius.behat.page.admin.product.index" />
+            <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.page.admin.product.update_configurable" />
             <argument type="service" id="sylius.behat.page.admin.product_review.index" />
