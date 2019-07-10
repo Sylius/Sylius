@@ -33,9 +33,9 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $this->getField($orderNumber, 'state')->getText();
     }
 
-    public function showOrderPageForNthPayment(int $position): void
+    public function showOrderPage(string $orderId): void
     {
-        $this->getActionsForRow($position)->clickLink('Show order details');
+        $this->getDocument()->find('css', '.table tr td:nth-child(2)')->clickLink($orderId);
     }
 
     protected function getDefinedElements(): array
@@ -43,16 +43,6 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'filter_state' => '#criteria_state',
         ]);
-    }
-
-    private function getActionsForRow(int $paymentNumber): NodeElement
-    {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
-
-        $row = $tableAccessor->getRowsWithFields($table, [])[$paymentNumber];
-
-        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
     }
 
     private function getField(string $orderNumber, string $fieldName): NodeElement

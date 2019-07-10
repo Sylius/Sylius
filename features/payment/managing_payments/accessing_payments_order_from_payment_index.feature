@@ -16,4 +16,4 @@ Feature: Accessing payment's order from the payment index
     Scenario: Accessing payment's order from the payments index
         Given I am browsing payments
         When I go to the details of the first payment's order
-        Then I should see order page with details of order "00000001"
+        Then I should see order page with details of order "#00000001"

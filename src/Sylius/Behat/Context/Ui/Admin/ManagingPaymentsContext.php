@@ -81,7 +81,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iGoToTheDetailsOfTheFirstPaymentSOrder(): void
     {
-        $this->indexPage->showOrderPageForNthPayment(1);
+        $this->indexPage->showOrderPage('1');
     }
 
     /**
