@@ -18,7 +18,7 @@ sylius_grid:
                         template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
                 number:
                     type: twig
-                    label: sylius.ui.number
+                    label: sylius.ui.order
                     path: .
                     sortable: ~
                     options:

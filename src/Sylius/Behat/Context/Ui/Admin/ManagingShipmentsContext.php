@@ -142,7 +142,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iMoveToDetailsOfFirstShipment(): void
     {
-        $this->indexPage->showOrderPage('1');
+        $this->indexPage->showOrderPageForNthShipment(1);
     }
 
     /**
