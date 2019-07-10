@@ -56,8 +56,4 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function goToVariantGeneration(): void;
 
     public function hasInventoryTab(): bool;
-
-    public function showProductInChannel(string $channel): void;
-
-    public function showProductInSingleChannel(): void;
 }

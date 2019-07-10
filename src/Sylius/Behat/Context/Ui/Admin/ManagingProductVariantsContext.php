@@ -19,11 +19,9 @@ use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
-use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -42,9 +40,6 @@ final class ManagingProductVariantsContext implements Context
     /** @var UpdatePageInterface */
     private $updatePage;
 
-    /** @var ShowPageInterface */
-    private $showPage;
-
     /** @var GeneratePageInterface */
     private $generatePage;
 
@@ -59,7 +54,6 @@ final class ManagingProductVariantsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        ShowPageInterface $showPage,
         GeneratePageInterface $generatePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
@@ -68,7 +62,6 @@ final class ManagingProductVariantsContext implements Context
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
-        $this->showPage = $showPage;
         $this->generatePage = $generatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
@@ -394,17 +387,17 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I show this product in the :channel channel
+     * @When I choose to show this product in the :channel channel
      */
-    public function iShowThisProductInTheChannel(string $channel): void
+    public function iChooseToShowThisProductInTheChannel(string $channel): void
     {
         $this->updatePage->showProductInChannel($channel);
     }
 
     /**
-     * @When I show this product in this channel
+     * @When I choose to show this product in this channel
      */
-    public function iShowThisProductInThisChannel(): void
+    public function iChooseToShowThisProductInThisChannel(): void
     {
         $this->updatePage->showProductInSingleChannel();
     }
@@ -486,15 +479,6 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated()
     {
         $this->notificationChecker->checkNotification('Success Product variants have been successfully generated.', NotificationType::success());
-    }
-
-    /**
-     * @Then /^I should see (this product) in the ("([^"]*)" channel) in shop$/
-     */
-    public function iShouldSeeThisProductInTheChannelInShop(ProductInterface $product, ChannelInterface $channel): void
-    {
-        Assert::true(null !== strpos($this->showPage->getCurrentUrl(), $channel->getHostname()));
-        Assert::same($this->showPage->getName(), $product->getName());
     }
 
     /**
