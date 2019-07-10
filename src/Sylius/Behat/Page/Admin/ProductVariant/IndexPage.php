@@ -46,11 +46,6 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         $productVariantPosition->setValue($position);
     }
 
-    public function showProductVariantEditPage(string $productVariantName): void
-    {
-        $this->getElement('editButton', ['%variantName%' => $productVariantName])->clickLink('Edit');
-    }
-
     public function savePositions(): void
     {
         $this->getElement('save_configuration_button')->press();
@@ -63,7 +58,6 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'editButton' => '.table tr:contains("%variantName%")',
             'on_hand_quantity' => '.onHand[data-product-variant-id="%id%"]',
             'on_hold_quantity' => '.onHold[data-product-variant-id="%id%"]',
             'save_configuration_button' => '.sylius-save-position',

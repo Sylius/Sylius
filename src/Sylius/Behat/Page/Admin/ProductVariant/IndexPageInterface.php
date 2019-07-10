@@ -25,6 +25,4 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function setPosition(string $name, int $position): void;
 
     public function savePositions(): void;
-
-    public function showProductVariantEditPage(string $productVariantName): void;
 }

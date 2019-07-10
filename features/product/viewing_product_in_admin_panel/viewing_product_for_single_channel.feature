@@ -15,4 +15,4 @@ Feature: Viewing a product in a single channel
         Given I am browsing products
         When I access "Bugatti" product page
         And I show this product in this channel
-        Then I should see this product in the "United States" channel in shop
+        Then I should see this product in the "United States" channel in the shop

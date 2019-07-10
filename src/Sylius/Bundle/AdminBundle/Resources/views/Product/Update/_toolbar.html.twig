@@ -2,4 +2,4 @@
     {% set menu = knp_menu_get('sylius.admin.product.update', [], {'product': product}) %}
     {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
 </div>
-{% include '@SyliusAdmin/Product/shopProductShowPagePerChannelButton.html.twig' with {'product': product} %}
+{% include '@SyliusAdmin/Product/_showInShopButton.html.twig' %}
