@@ -11,7 +11,7 @@ sylius_grid:
                     label: sylius.ui.id
                 number:
                     type: twig
-                    label: sylius.ui.number
+                    label: sylius.ui.order
                     path: order
                     options:
                         template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
@@ -57,12 +57,3 @@ sylius_grid:
                             class: teal
                             transition: ship
                             graph: sylius_shipment
-                    details:
-                        type: default
-                        label: sylius.ui.show_order_details
-                        icon: eye
-                        options:
-                            link:
-                                route: sylius_admin_order_show
-                                parameters:
-                                    id: resource.order.id
