@@ -103,7 +103,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function hasInventoryTab(): bool;
 
-    public function isShowInShopButton(): bool;
+    public function isShowInShopButtonDisabled(): bool;
 
     public function showProductInChannel(string $channel): void;
 

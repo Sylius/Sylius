@@ -356,6 +356,6 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
-        Assert::false($this->productShowPage->isShowInShopButton());
+        Assert::true($this->productShowPage->isShowInShopButtonDisabled());
     }
 }

@@ -80,9 +80,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('option_values', ['%optionName%' => $optionName])->selectOption($optionValue);
     }
 
-    public function isShowInShopButton(): bool
+    public function isShowInShopButtonDisabled(): bool
     {
-        return $this->hasElement('show_product_single_button');
+        return $this->getElement('show_product_single_button')->hasClass('disabled');
     }
 
     public function showProductInChannel(string $channel): void

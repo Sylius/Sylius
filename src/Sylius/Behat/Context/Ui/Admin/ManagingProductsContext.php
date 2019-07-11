@@ -1035,7 +1035,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
-        Assert::false($this->updateSimpleProductPage->isShowInShopButton());
+        Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
     }
 
     /**

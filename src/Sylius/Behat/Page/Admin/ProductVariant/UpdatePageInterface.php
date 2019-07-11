@@ -41,7 +41,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function selectOption(string $optionName, string $optionValue): void;
 
-    public function isShowInShopButton(): bool;
+    public function isShowInShopButtonDisabled(): bool;
 
     public function showProductInChannel(string $channel): void;
 

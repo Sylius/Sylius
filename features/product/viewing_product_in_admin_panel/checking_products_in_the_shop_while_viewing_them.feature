@@ -7,7 +7,7 @@ Feature: Checking products in the shop while viewing them
     Background:
         Given the store operates on a channel named "United States" with hostname "goodcars.com"
         And the store also operates on a channel named "Europe" with hostname "goodcars.eu"
-        And the store has a product "Bugatti" priced at "$20.00" in "United States" channel
+        And the store has a product "Bugatti" available in "United States" channel
         And I am logged in as an administrator
         And I am browsing products
 
