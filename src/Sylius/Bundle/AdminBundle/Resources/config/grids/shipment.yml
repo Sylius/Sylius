@@ -31,9 +31,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+                        template: "@SyliusAdmin/Common/Label/shipmentState.html.twig"
             filters:
                 state:
                     type: select

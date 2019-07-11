@@ -2,7 +2,7 @@
 
 <div class="item">
     <div class="right floated content">
-        {{ label.default(('sylius.ui.'~shipment.state)|trans) }}
+        {% include '@SyliusAdmin/Common/Label/shipmentState.html.twig' with {'data': shipment.state} %}
     </div>
     <i class="large truck icon"></i>
     <div class="content">
