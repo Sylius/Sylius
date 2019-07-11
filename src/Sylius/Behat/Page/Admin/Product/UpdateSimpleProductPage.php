@@ -354,6 +354,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return null !== $this->getDocument()->find('css', '.tab > h3:contains("Inventory")');
     }
 
+    public function isShowInShopButton(): bool
+    {
+        return $this->hasElement('show_product_single_button');
+    }
+
     public function showProductInChannel(string $channel): void
     {
         $this->getElement('show_product_dropdown')->clickLink($channel);
