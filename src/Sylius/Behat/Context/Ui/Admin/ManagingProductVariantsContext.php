@@ -387,6 +387,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I choose to show this product in the :channel channel
+     */
+    public function iChooseToShowThisProductInTheChannel(string $channel): void
+    {
+        $this->updatePage->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I choose to show this product in this channel
+     */
+    public function iChooseToShowThisProductInThisChannel(): void
+    {
+        $this->updatePage->showProductInSingleChannel();
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */

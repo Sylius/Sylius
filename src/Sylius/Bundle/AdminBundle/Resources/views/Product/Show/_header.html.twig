@@ -9,40 +9,5 @@
         </h1>
         {% include "@SyliusAdmin/Product/Show/_breadcrumb.html.twig" %}
     </div>
-    {% if product.channels|length > 1 and product.channels|filter(channel => channel.enabled == true) %}
-        <div class="middle aligned column">
-            <div class="ui right floated buttons">
-                <div class="ui floating dropdown labeled icon button">
-                    <i class="share alternate icon"></i>
-                    <span class="text">
-                    {{ 'sylius.ui.show_product_in_shop_page'|trans }}
-                    </span>
-                    <div class="menu">
-                        <div class="scrolling menu">
-                            {% for channel in product.channels if channel.enabled == true %}
-                                {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
-                                <a href="{{ url|raw }}" class="item">
-                                    <i class="angle right icon"></i>
-                                    {{ 'sylius.ui.show_in'|trans }}
-                                    {{ channel.name }} ({{ channel.code }})
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% elseif product.channels|length == 1 %}
-        <div class="middle aligned column">
-            <div class="ui right floated buttons">
-                {% for channel in product.channels if channel.enabled == true %}
-                    {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
-                    <a class="ui labeled icon button" href="{{ url|raw }}">
-                        <i class="angle right icon"></i>
-                        {{ 'sylius.ui.show_product_in_shop_page'|trans }}
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
+    {% include '@SyliusAdmin/Product/_showInShopButton.html.twig' %}
 </div>

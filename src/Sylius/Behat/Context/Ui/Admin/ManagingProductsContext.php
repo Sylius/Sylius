@@ -220,6 +220,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose to show this product in the :channel channel
+     */
+    public function iChooseToShowThisProductInTheChannel(string $channel): void
+    {
+        $this->updateSimpleProductPage->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I choose to show this product in this channel
+     */
+    public function iChooseToShowThisProductInThisChannel(): void
+    {
+        $this->updateSimpleProductPage->showProductInSingleChannel();
+    }
+
+    /**
      * @When I enable slug modification
      * @When I enable slug modification in :localeCode
      */

@@ -61,15 +61,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^I should see (this product) in the ("([^"]*)" channel) in shop$/
-     */
-    public function iShouldSeeThisProductInTheChannelInShop(ProductInterface $product, ChannelInterface $channel): void
-    {
-        Assert::true(null !== strpos($this->showPage->getCurrentUrl(), $channel->getHostname()));
-        Assert::same($this->showPage->getName(), $product->getName());
-    }
-
-    /**
      * @Then I should not be able to access product :product
      */
     public function iShouldNotBeAbleToAccessProduct(ProductInterface $product)

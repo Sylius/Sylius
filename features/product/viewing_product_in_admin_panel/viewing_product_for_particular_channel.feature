@@ -17,4 +17,4 @@ Feature: Viewing a product in a chosen channel
         Given I am browsing products
         When I access "Bugatti" product page
         And I show this product in the "Europe" channel
-        Then I should see this product in the "Europe" channel in shop
+        Then I should see this product in the "Europe" channel in the shop

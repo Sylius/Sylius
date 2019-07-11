@@ -42,6 +42,7 @@ default:
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
+                - sylius.behat.context.ui.shop.browsing_product
 
             filters:
                 tags: "@viewing_products && @ui"
