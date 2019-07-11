@@ -24,3 +24,9 @@ In order to check a product in shop in all channels it is available in
         And I want to modify the "Bugatti" product variant
         And I choose to show this product in this channel
         Then I should see this product in the "United States" channel in the shop
+
+    @ui
+    Scenario: Being unable to access product show page in shop when the product is disabled
+        Given this product has been disabled
+        And I want to modify the "Bugatti" product variant
+        Then I should not be able to show this product in shop
