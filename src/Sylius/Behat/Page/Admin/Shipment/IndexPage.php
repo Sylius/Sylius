@@ -43,9 +43,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
-    public function showOrderPageForNthShipment(int $shipmentNumber): void
+    public function showOrderPageForNthShipment(int $position): void
     {
-        $this->getActionsForRow($shipmentNumber)->clickLink('Show order details');
+        $this->getOrderLinkForRow($position)->clickLink('#');
     }
 
     protected function getDefinedElements(): array
@@ -55,13 +55,13 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function getActionsForRow(int $shipmentNumber): NodeElement
+    private function getOrderLinkForRow(int $shipmentNumber): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowsWithFields($table, [])[$shipmentNumber];
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        return $row->find('css', 'td:nth-child(2)');
     }
 }

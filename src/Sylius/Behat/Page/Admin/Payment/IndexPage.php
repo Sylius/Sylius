@@ -35,7 +35,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function showOrderPageForNthPayment(int $position): void
     {
-        $this->getActionsForRow($position)->clickLink('Show order details');
+        $this->getOrderLinkForRow($position)->clickLink('#');
     }
 
     protected function getDefinedElements(): array
@@ -45,14 +45,14 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
-    private function getActionsForRow(int $paymentNumber): NodeElement
+    private function getOrderLinkForRow(int $paymentNumber): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowsWithFields($table, [])[$paymentNumber];
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        return $row->find('css', 'td:nth-child(2)');
     }
 
     private function getField(string $orderNumber, string $fieldName): NodeElement
