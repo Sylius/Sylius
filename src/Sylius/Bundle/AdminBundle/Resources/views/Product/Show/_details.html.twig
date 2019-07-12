@@ -5,7 +5,7 @@
             {% if product.enabled %}
                 <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.enabled'|trans }}</span>
             {% else %}
-                <span class="ui red label"><i class="remove icon">{{ 'sylius.ui.disabled'|trans }}</i></span>
+                <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.disabled'|trans }}</span>
             {% endif %}
 
             {% if product.variants.first.tracked %}
