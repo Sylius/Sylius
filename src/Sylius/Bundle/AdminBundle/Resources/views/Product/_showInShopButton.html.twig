@@ -1,7 +1,13 @@
 {% set enabledChannels = product.channels|filter(channel => channel.enabled == true) %}
-{% if enabledChannels|length > 1 %}
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
+
+<div class="middle aligned column">
+    <div class="ui right floated buttons">
+        {% if not product.enabled or enabledChannels|length < 1 %}
+            <a class="ui labeled icon button disabled" href="#">
+                <i class="angle right icon"></i>
+                {{ 'sylius.ui.show_product_in_shop_page'|trans }}
+            </a>
+        {% elseif enabledChannels|length > 1 %}
             <div class="ui floating dropdown labeled icon button">
                 <i class="share alternate icon"></i>
                 <span class="text">
@@ -20,11 +26,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-{% elseif enabledChannels|length == 1 %}
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
+        {% else %}
             {% for channel in enabledChannels %}
                 {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
                 <a class="ui labeled icon button" href="{{ url|raw }}">
@@ -32,6 +34,6 @@
                     {{ 'sylius.ui.show_product_in_shop_page'|trans }}
                 </a>
             {% endfor %}
-        </div>
+        {% endif %}
     </div>
-{% endif %}
+</div>

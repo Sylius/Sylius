@@ -350,4 +350,12 @@ final class ProductShowPageContext implements Context
     {
         Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale, $value));
     }
+
+    /**
+     * @Then I should not be able to show this product in shop
+     */
+    public function iShouldNotBeAbleToShowThisProductInShop(): void
+    {
+        Assert::true($this->productShowPage->isShowInShopButtonDisabled());
+    }
 }

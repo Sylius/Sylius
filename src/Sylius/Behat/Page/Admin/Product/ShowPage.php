@@ -22,6 +22,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return !$this->hasElement('variants');
     }
 
+    public function isShowInShopButtonDisabled(): bool
+    {
+        return $this->getElement('show_product_single_button')->hasClass('disabled');
+    }
+
     public function getName(): string
     {
         return $this->getElement('product_name')->getText();

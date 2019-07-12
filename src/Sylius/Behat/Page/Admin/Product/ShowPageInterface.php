@@ -21,6 +21,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function isSimpleProductPage(): bool;
 
+    public function isShowInShopButtonDisabled(): bool;
+
     public function showProductInChannel(string $channel): void;
 
     public function showProductInSingleChannel();

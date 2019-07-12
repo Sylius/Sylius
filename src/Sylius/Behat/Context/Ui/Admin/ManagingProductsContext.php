@@ -1031,6 +1031,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should not be able to show this product in shop
+     */
+    public function iShouldNotBeAbleToShowThisProductInShop(): void
+    {
+        Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
