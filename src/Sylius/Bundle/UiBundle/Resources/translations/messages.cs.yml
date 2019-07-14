@@ -501,7 +501,7 @@ sylius:
         new_coupon: 'Nový kupón'
         new_currency: 'Nová měna'
         new_customer: 'Nový zákazník'
-        new_customers: 'Nový zákazníci'
+        new_customers: 'Noví zákazníci'
         new_exchange_rate: 'Nová směnný kurz'
         new_locale: 'Nové národní prostředí'
         new_order: 'Nová objednávka'
