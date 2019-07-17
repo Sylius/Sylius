@@ -5,7 +5,7 @@ Congratulations! You've created your first, fully tested and documented, customi
 
 As a result, you should see a new field in product variant form:
 
-.. image:: ../../_images/product_variant_available_on_demand.png
+.. image:: ../_images/product_variant_available_on_demand.png
     :align: center
 
 As you can see, there are some things to do at the beginning of development, but now, when you are already familiar with
