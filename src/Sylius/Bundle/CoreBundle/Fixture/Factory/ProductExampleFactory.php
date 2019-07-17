@@ -160,9 +160,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return StringInflector::nameToCode($options['name']);
             })
 
-            ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
 
             ->setDefault('slug', function (Options $options): string {

@@ -205,5 +205,14 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.new_tshirt_product" class="Sylius\Bundle\CoreBundle\Fixture\NewTshirtProductFixture">
+            <argument type="service" id="sylius.fixture.taxon" />
+            <argument type="service" id="sylius.fixture.product_attribute" />
+            <argument type="service" id="sylius.fixture.product_option" />
+            <argument type="service" id="sylius.fixture.product" />
+            <argument>%locale%</argument>
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
