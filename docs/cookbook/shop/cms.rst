@@ -38,6 +38,6 @@ Find out more about how to install the plugin on `GitHub <https://github.com/Bit
 Learn more
 ----------
 
-* :doc:`How to create a plugin for Sylius? </plugins/creating-plugin>`
+* :doc:`How to create a plugin for Sylius? </book/plugins/creating-plugin>`
 * `BitBag plugins <https://github.com/BitBagCommerce>`_
 * `FriendsOfSylius plugins <https://github.com/FriendsOfSylius/SyliusGoose>`_

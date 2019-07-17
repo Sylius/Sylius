@@ -19,7 +19,7 @@ With respect to that rule, let's create some simple first plugin together!
 
 .. seealso::
 
-    :doc:`/plugins/index`
+    :doc:`/book/plugins/index`
         The collection of Sylius Plugins and basic introduction to the concept of plugins.
     :doc:`/customization/index`
         Sylius customization techniques available to use also in plugins.

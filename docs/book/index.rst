@@ -107,3 +107,15 @@ Here you will learn basics about the Theming concept of Sylius. How to change th
     themes/index
 
 .. include:: /book/themes/map.rst.inc
+
+Sylius Plugins
+--------------
+
+The collection of Sylius Plugins and basic introduction to the concept of plugins.
+
+.. toctree::
+    :hidden:
+
+    plugins/index
+
+.. include:: /book/plugins/map.rst.inc
