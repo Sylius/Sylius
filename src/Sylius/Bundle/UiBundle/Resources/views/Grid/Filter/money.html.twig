@@ -1,5 +1,8 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-{{ form_row(form.greaterThan, {'label': filter.label|trans ~ ' | ' ~ form.greaterThan.vars.label|trans}) }}
-{{ form_row(form.lessThan) }}
-{{ form_row(form.currency) }}
+<div class="sylius-filters__group">
+    {{ form_row(form.greaterThan, {attr: {'placeholder': form.greaterThan.vars.label|trans}, 'label': filter.label|trans}) }}
+    <input type="text" value="-" style="width: 40px !important; flex-grow: 0; background: #f9f9f9; text-align: center;" disabled>
+    {{ form_widget(form.lessThan, {attr: { 'placeholder': form.lessThan.vars.label|trans }}) }}
+    {{ form_row(form.currency) }}
+</div>
