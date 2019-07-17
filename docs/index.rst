@@ -98,8 +98,7 @@ The Customization Guide
 Sylius Plugins
 --------------
 
-The collection of Sylius Plugins together with the guide on Plugins development.
-Remember that you can use all the :doc:`customization techniques </customization/index>` in Plugins.
+The collection of Sylius Plugins and basic introduction to the concept of plugins.
 
 .. toctree::
    :hidden:
@@ -107,6 +106,20 @@ Remember that you can use all the :doc:`customization techniques </customization
    plugins/index
 
 .. include:: /plugins/map.rst.inc
+
+Plugin Development Guide
+------------------------
+
+If you're wondering how to share awesome features you have/want to have for Sylius with the Open Source community,
+here you will find a comprehensive guide to plugins development from the idea to sharing the plugin with the world.
+Remember that you can use all the :doc:`customization techniques </customization/index>` in Plugins.
+
+.. toctree::
+   :hidden:
+
+   plugin-development-guide/index
+
+.. include:: /plugin-development-guide/map.rst.inc
 
 The Cookbook
 ------------

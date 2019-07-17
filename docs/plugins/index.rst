@@ -15,13 +15,12 @@ Exemplary features may be: Social media buttons, newsletter, wishlists, payment 
 
 .. tip::
 
-    **The list of all Sylius Plugins (offcial and approved) is available on the Sylius website** `here <http://sylius.com/developers/store/plugins>`_.
+    **The list of all Sylius Plugins (official and approved) is available on the Sylius website** `here <http://sylius.com/developers/store/plugins>`_.
 
 .. toctree::
     :hidden:
 
     creating-plugin
-    plugin-development-guide/index
     official-plugins
     approved-plugins
 
