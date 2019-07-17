@@ -95,18 +95,6 @@ The Customization Guide
 
 .. include:: /customization/map.rst.inc
 
-Sylius Plugins
---------------
-
-The collection of Sylius Plugins and basic introduction to the concept of plugins.
-
-.. toctree::
-   :hidden:
-
-   plugins/index
-
-.. include:: /plugins/map.rst.inc
-
 Plugin Development Guide
 ------------------------
 

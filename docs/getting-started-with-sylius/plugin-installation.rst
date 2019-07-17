@@ -35,6 +35,6 @@ There is no need to reinvent the wheel :)
 Learn more
 ##########
 
-* :doc:`Plugins </plugins/index>`
+* :doc:`Plugins </book/plugins/index>`
 * :doc:`Plugin development guide </plugin-development-guide/index>`
-* :doc:`Official plugins </plugins/official-plugins>`
+* :doc:`Official plugins </book/plugins/official-plugins>`

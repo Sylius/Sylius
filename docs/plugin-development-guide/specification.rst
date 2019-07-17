@@ -2,7 +2,7 @@ Specification
 -------------
 
 We strongly encourage you to follow our BDD path in implementing Sylius plugins. In fact, proper tests are one of the requirements to
-:doc:`have your plugin officially accepted</plugins/index>`.
+:doc:`have your plugin officially accepted</book/plugins/index>`.
 
 .. attention::
 

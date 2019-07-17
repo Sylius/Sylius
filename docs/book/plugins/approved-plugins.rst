@@ -8,7 +8,7 @@ on our website <https://sylius.com/plugins/>`_.
 
 When a plugin is approved by Sylius, you can recognize it also by this badge below in its readme file:
 
-.. image:: ../_images/approved_plugin.png
+.. image:: ../../_images/approved_plugin.png
     :scale: 50%
 
 |
@@ -18,7 +18,7 @@ How to have a Plugin approved by Sylius?
 
 Since Sylius is an open-source platform, there is a certain flow in order for the plugin to become officially adopted by the community.
 
-**1.** Develop the plugin using :doc:`the official Plugin Development guide </plugins/creating-plugin>`.
+**1.** Develop the plugin using :doc:`the official Plugin Development guide </book/plugins/creating-plugin>`.
 
 **2.** Remember about the tests and code quality!
 

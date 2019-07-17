@@ -6,7 +6,7 @@ developed by Sylius can be found in the `github organization <http://github.com/
 
 You can recognize a Sylius official plugin by this badge in its readme:
 
-.. image:: ../_images/official_plugin.png
+.. image:: ../../_images/official_plugin.png
     :scale: 50%
 
 |

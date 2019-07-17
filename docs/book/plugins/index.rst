@@ -24,4 +24,4 @@ Exemplary features may be: Social media buttons, newsletter, wishlists, payment 
     official-plugins
     approved-plugins
 
-.. include:: /plugins/map.rst.inc
+.. include:: /book/plugins/map.rst.inc

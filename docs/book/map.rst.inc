@@ -6,3 +6,4 @@
 * :doc:`/book/products/index`
 * :doc:`/book/orders/index`
 * :doc:`/book/themes/index`
+* :doc:`/book/plugins/index`
