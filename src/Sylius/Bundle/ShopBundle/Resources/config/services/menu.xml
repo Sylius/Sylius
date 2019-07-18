@@ -20,5 +20,11 @@
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.shop.account" />
         </service>
+
+        <service id="sylius.shop.menu_builder.product_tabs" class="Sylius\Bundle\ShopBundle\Menu\ProductTabsMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.shop.product_tabs" />
+        </service>
     </services>
 </container>

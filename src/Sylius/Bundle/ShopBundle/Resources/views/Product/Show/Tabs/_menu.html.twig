@@ -1,5 +1,29 @@
-<a class="item active" data-tab="details">{{ 'sylius.ui.details'|trans }}</a>
-{% if product.attributes|length > 0 %}
-    <a class="item" data-tab="attributes">{{ 'sylius.ui.attributes'|trans }}</a>
-{% endif %}
-<a class="item" data-tab="reviews">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>
+{% extends 'knp_menu.html.twig' %}
+
+{% block list %}
+<div class="ui top attached large tabular menu">
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+</div>
+{% for item in item.children %}
+    {% include item.attribute('template') with {configuration: options.configuration, 'product': options.product} %}
+{% endfor %}
+{% endblock %}
+
+{% block item %}
+    {%- set attributes = item.attributes %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge(['active']) %}
+    {%- endif %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+    {%- if item.attribute('item_count') is not empty %}
+        {%- set label = item.label|transchoice(item.attribute('item_count')) %}
+    {%- else %}
+        {%- set label = item.label|trans %}
+    {%- endif %}
+    <a class="item{% if attributes.class is defined %} {{ attributes.class }}{% endif %}" data-tab="{{ item.name }}">{{ label }}</a>
+{% endblock %}

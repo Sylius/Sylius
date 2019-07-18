@@ -1,5 +1,2 @@
-<div class="ui top attached large tabular menu">
-    {% include '@SyliusShop/Product/Show/Tabs/_menu.html.twig' %}
-</div>
-
-{% include '@SyliusShop/Product/Show/Tabs/_content.html.twig' %}
+{% set menu = knp_menu_get('sylius.shop.product_tabs', [], {'product': product}) %}
+{{ knp_menu_render(menu, {'template': '@SyliusShop/Product/Show/Tabs/_menu.html.twig', 'configuration': configuration, 'product': product}) }}

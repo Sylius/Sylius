@@ -701,6 +701,7 @@ sylius:
         review_and_confirm_your_order: 'Review and confirm your order'
         review_details: 'Review details'
         reviews: 'Reviews'
+        reviews_with_count: 'Reviews (%count%)'
         roles: 'Roles'
         rules: 'Rules'
         sales: 'Sales'

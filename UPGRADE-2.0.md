@@ -39,3 +39,7 @@
     * The following configuration options were removed:
 
         * `sylius.mailer.templates`
+
+    * The following templates were removed:
+
+        * `@SyliusShop/Product/Show/Tabs/_content.html.twig`
