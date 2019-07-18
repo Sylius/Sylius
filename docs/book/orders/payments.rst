@@ -179,3 +179,4 @@ Learn more
 
 * :doc:`Payment - Component Documentation </components_and_bundles/components/Payment/index>`
 * `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/docs/index.md>`_
+* :doc:`Refunds </book/orders/refunds>`
