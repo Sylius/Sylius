@@ -28,6 +28,7 @@ use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -249,7 +250,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $i = 0;
         /** @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
-            $productVariant->setName($this->faker->word);
+            $productVariant->setName($this->generateProductVariantName($productVariant));
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
             $productVariant->setShippingRequired($options['shipping_required']);
@@ -388,5 +389,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             default:
                 throw new \BadMethodCallException();
         }
+    }
+
+    private function generateProductVariantName(ProductVariantInterface $variant): string
+    {
+        return trim(array_reduce(
+            $variant->getOptionValues()->toArray(),
+            static function(?string $variantName, ProductOptionValueInterface $variantOption) {
+                return $variantName . sprintf('%s ', $variantOption->getValue());
+            },
+            ''
+        ));
     }
 }
