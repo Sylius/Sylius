@@ -402,6 +402,8 @@ sylius_fixtures:
 
                 new_tshirt_product:
 
+                caps_product:
+
                 product_review:
                     options:
                         random: 40
