@@ -130,6 +130,8 @@ Read more about our REST API in the :doc:`Sylius API Guide </api/index>`.
 
 .. tip::
 
+    .. rst-class:: plugin-feature
+
     If you are looking for the Shop API, which is an API operating as a Customer then you will need the official
     `Shop API plugin <https://github.com/Sylius/ShopApiPlugin>`_.
 

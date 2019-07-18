@@ -242,6 +242,8 @@ it is possible to create Orders for a chosen Customer from the administrator per
 You will be able to choose any products, assign custom prices for items, choose payment and shipping methods. Moreover
 it is possible to reorder an order that has already been placed.
 
+.. rst-class:: plugin-feature
+
 Customer Order operations: reorder & cancellation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
