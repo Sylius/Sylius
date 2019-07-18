@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2019-07-17T12:43:43Z
+
+IMO, filters should be set in the `<th>` of each attribute if possible, and in a separate block if they deal with multiple/no specific attribute.
+
+That's what any other CMS do and it feels very intuitive.
+
+The matching can be done by name (replacing '.' by '_') or with a specific configuration line.
+
+And for the filter block itself. The global width of number inputs is way too large.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-07-17T12:50:37Z
+
+In the first screenshot the number value field has an icon, what's that? Should it be for the customer input?
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-07-17T12:53:51Z
+
+@vvasiloi my bad, it's just a chrome addon :D
+
+---------------------------------------------------------------------------
+
+by vcraescu at 2019-07-17T12:57:07Z
+
+@kulczy it's ok! 😁
+
+---------------------------------------------------------------------------
+
+by GSadee at 2019-07-18T04:58:31Z
+
+Thanks, Szymon! :tada:
