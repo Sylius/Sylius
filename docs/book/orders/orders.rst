@@ -242,6 +242,14 @@ it is possible to create Orders for a chosen Customer from the administrator per
 You will be able to choose any products, assign custom prices for items, choose payment and shipping methods. Moreover
 it is possible to reorder an order that has already been placed.
 
+Customer Order operations: reorder & cancellation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With the usage of other Sylius official plugins your Customers will be able to:
+
+* cancel unpaid Orders in the "My Account" section -> `Customer Order Cancellation Plugin <https://github.com/Sylius/CustomerOrderCancellationPlugin>`_
+* reorder one of their previously placed Orders -> `Customer Reorder Plugin <https://github.com/Sylius/CustomerReorderPlugin>`_
+
 Learn more
 ----------
 
