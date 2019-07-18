@@ -34,7 +34,7 @@ final class ImpersonateUserController
     /** @var UserProviderInterface */
     private $userProvider;
 
-    /** @var RouterInterface */
+    /** @var RouterInterface|null */
     private $router;
 
     /** @var string */
@@ -44,9 +44,13 @@ final class ImpersonateUserController
         UserImpersonatorInterface $impersonator,
         AuthorizationCheckerInterface $authorizationChecker,
         UserProviderInterface $userProvider,
-        RouterInterface $router,
+        ?RouterInterface $router,
         string $authorizationRole
     ) {
+        if (null !== $router) {
+            @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+        }
+
         $this->impersonator = $impersonator;
         $this->authorizationChecker = $authorizationChecker;
         $this->userProvider = $userProvider;
