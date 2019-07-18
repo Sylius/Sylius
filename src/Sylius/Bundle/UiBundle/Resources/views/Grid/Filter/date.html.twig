@@ -1,4 +1,7 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-{{ form_row(form.from, {'label': filter.label|trans ~ ' | ' ~ form.from.vars.label|trans }) }}
-{{ form_row(form.to) }}
+<div class="sylius-filters__group">
+    {{ form_row(form.from, { attr: {'class': 'sylius-filters__group'}, 'label': filter.label|trans ~ ' | ' ~ form.from.vars.label|trans }) }}
+    <input type="text" value="-" style="width: 40px !important; flex-grow: 0; background: #f9f9f9; text-align: center;" disabled>
+    {{ form_row(form.to, { attr: {'class': 'sylius-filters__group'} }) }}
+</div>
