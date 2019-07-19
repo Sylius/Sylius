@@ -133,6 +133,7 @@
             <argument type="service" id="sylius.repository.product_option" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.repository.tax_category" />
         </service>
 
         <service id="sylius.fixture.example_factory.address" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AddressExampleFactory">

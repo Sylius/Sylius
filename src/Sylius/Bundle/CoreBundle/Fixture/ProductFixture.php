@@ -17,17 +17,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ProductFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode
@@ -45,6 +39,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->arrayNode('product_options')->scalarPrototype()->end()->end()
                 ->arrayNode('images')->variablePrototype()->end()->end()
                 ->booleanNode('shipping_required')->end()
+                ->scalarNode('tax_category')->end()
         ;
     }
 }

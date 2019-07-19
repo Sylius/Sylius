@@ -125,9 +125,6 @@ sylius_fixtures:
                             clothing:
                                 code: "clothing"
                                 name: "Clothing"
-                            books:
-                                code: "books"
-                                name: "Books"
                             other:
                                 code: "other"
                                 name: "Other"
@@ -141,12 +138,6 @@ sylius_fixtures:
                                 zone: "US"
                                 category: "clothing"
                                 amount: 0.07
-                            books_tax:
-                                code: "books_sales_tax_2"
-                                name: "Books Sales Tax 2%"
-                                zone: "US"
-                                category: "books"
-                                amount: 0.02
                             default_sales_tax:
                                 code: "sales_tax_20"
                                 name: "Sales Tax 20%"
@@ -182,13 +173,21 @@ sylius_fixtures:
                                             US_WEB:
                                                 amount: 10.00
 
-                new_tshirt_product: ~
+                new_tshirt_product:
+                    options:
+                        tax_category: "clothing"
 
-                caps_product: ~
+                caps_product:
+                    options:
+                        tax_category: "other"
 
-                jeans_product: ~
+                jeans_product:
+                    options:
+                        tax_category: "clothing"
 
-                dress_product: ~
+                dress_product:
+                    options:
+                        tax_category: "clothing"
 
                 product_review:
                     options:

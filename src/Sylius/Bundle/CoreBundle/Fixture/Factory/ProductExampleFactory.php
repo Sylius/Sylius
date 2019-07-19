@@ -30,6 +30,7 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -79,6 +80,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var RepositoryInterface */
     private $localeRepository;
 
+    /** @var RepositoryInterface */
+    private $taxCategoryRepository;
+
     /** @var \Faker\Generator */
     private $faker;
 
@@ -99,7 +103,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         RepositoryInterface $productAttributeRepository,
         RepositoryInterface $productOptionRepository,
         RepositoryInterface $channelRepository,
-        RepositoryInterface $localeRepository
+        RepositoryInterface $localeRepository,
+        RepositoryInterface $taxCategoryRepository
     ) {
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
@@ -115,6 +120,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->productOptionRepository = $productOptionRepository;
         $this->channelRepository = $channelRepository;
         $this->localeRepository = $localeRepository;
+        $this->taxCategoryRepository = $taxCategoryRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -204,6 +210,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('images', 'array')
 
             ->setDefault('shipping_required', true)
+
+            ->setDefault('tax_category', null)
+            ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
+            ->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
         ;
     }
 
@@ -253,6 +263,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
             $productVariant->setShippingRequired($options['shipping_required']);
+            $productVariant->setTaxCategory($options['tax_category']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
                 $this->createChannelPricings($productVariant, $channel->getCode());
