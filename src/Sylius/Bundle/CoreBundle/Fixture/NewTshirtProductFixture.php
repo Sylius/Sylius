@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class NewTshirtProductFixture extends AbstractFixture
 {
@@ -36,6 +38,9 @@ final class NewTshirtProductFixture extends AbstractFixture
     /** @var \Faker\Generator */
     private $faker;
 
+    /** @var OptionsResolver */
+    private $optionsResolver;
+
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
@@ -50,6 +55,12 @@ final class NewTshirtProductFixture extends AbstractFixture
         $this->baseLocaleCode = $baseLocaleCode;
 
         $this->faker = \Faker\Factory::create();
+
+        $this->optionsResolver =
+            (new OptionsResolver())
+                ->setRequired('tax_category')
+                ->setAllowedTypes('tax_category', 'string')
+        ;
     }
 
     public function getName(): string
@@ -59,6 +70,8 @@ final class NewTshirtProductFixture extends AbstractFixture
 
     public function load(array $options): void
     {
+        $options = $this->optionsResolver->resolve($options);
+
         $this->taxonFixture->load(['custom' => [[
             'code' => 'category',
             'name' => 'Category',
@@ -143,10 +156,19 @@ final class NewTshirtProductFixture extends AbstractFixture
                         'type' => 'main',
                     ],
                 ],
+                'tax_category' => $options['tax_category'],
             ];
         }
 
         $this->productFixture->load(['custom' => $products]);
+    }
+
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
+    {
+        $optionsNode
+            ->children()
+            ->scalarNode('tax_category')->cannotBeEmpty()->end();
+        ;
     }
 
     private function getProductsData(): array
