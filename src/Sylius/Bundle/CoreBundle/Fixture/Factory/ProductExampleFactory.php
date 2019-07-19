@@ -160,9 +160,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return StringInflector::nameToCode($options['name']);
             })
 
-            ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
 
             ->setDefault('slug', function (Options $options): string {
@@ -269,7 +267,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setChannelCode($channelCode);
-        $channelPricing->setPrice($this->faker->randomNumber(3));
+        $channelPricing->setPrice($this->faker->numberBetween(100, 10000));
 
         $productVariant->addChannelPricing($channelPricing);
     }

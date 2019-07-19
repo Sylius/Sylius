@@ -13,14 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
-@trigger_error('The "TshirtProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
-
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TshirtProductFixture extends AbstractFixture
+final class NewTshirtProductFixture extends AbstractFixture
 {
     /** @var AbstractResourceFixture */
     private $taxonFixture;
@@ -34,46 +30,35 @@ class TshirtProductFixture extends AbstractFixture
     /** @var AbstractResourceFixture */
     private $productFixture;
 
+    /** @var string */
+    private $baseLocaleCode;
+
     /** @var \Faker\Generator */
     private $faker;
-
-    /** @var OptionsResolver */
-    private $optionsResolver;
 
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
         AbstractResourceFixture $productOptionFixture,
-        AbstractResourceFixture $productFixture
+        AbstractResourceFixture $productFixture,
+        string $baseLocaleCode
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;
+        $this->baseLocaleCode = $baseLocaleCode;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setRequired('amount')
-                ->setAllowedTypes('amount', 'int')
-        ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
-        return 'tshirt_product';
+        return 'new_tshirt_product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
-        $options = $this->optionsResolver->resolve($options);
-
         $this->taxonFixture->load(['custom' => [[
             'code' => 'category',
             'name' => 'Category',
@@ -104,7 +89,7 @@ class TshirtProductFixture extends AbstractFixture
                                     'slug' => 't-shirts/women',
                                 ],
                                 'fr_FR' => [
-                                    'name' => 'Hommes',
+                                    'name' => 'Femme',
                                     'slug' => 't-shirts/femmes',
                                 ],
                             ],
@@ -122,15 +107,6 @@ class TshirtProductFixture extends AbstractFixture
 
         $this->productOptionFixture->load(['custom' => [
             [
-                'name' => 'T-Shirt color',
-                'code' => 't_shirt_color',
-                'values' => [
-                    't_shirt_color_red' => 'Red',
-                    't_shirt_color_black' => 'Black',
-                    't_shirt_color_white' => 'White',
-                ],
-            ],
-            [
                 'name' => 'T-Shirt size',
                 'code' => 't_shirt_size',
                 'values' => [
@@ -144,29 +120,27 @@ class TshirtProductFixture extends AbstractFixture
         ]]);
 
         $products = [];
-        $productsNames = $this->getUniqueNames($options['amount']);
-        for ($i = 0; $i < $options['amount']; ++$i) {
-            $categoryTaxonCode = $this->faker->randomElement(['mens_t_shirts', 'womens_t_shirts']);
+
+        $productsData = $this->getProductsData();
+
+        foreach ($productsData as $productData) {
+            $categoryTaxonCode = $productData['categoryTaxonCode'];
 
             $products[] = [
-                'name' => sprintf('T-Shirt "%s"', $productsNames[$i]),
+                'name' =>  $productData['name'],
                 'code' => $this->faker->uuid,
                 'main_taxon' => $categoryTaxonCode,
                 'taxons' => ['t_shirts', $categoryTaxonCode],
                 'product_attributes' => [
-                    't_shirt_brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
-                    't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), random_int(1995, 2012)),
-                    't_shirt_material' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
+                    't_shirt_brand' => $productData['brand'],
+                    't_shirt_collection' => $productData['collection'],
+                    't_shirt_material' => $productData['material'],
                 ],
-                'product_options' => ['t_shirt_color', 't_shirt_size'],
+                'product_options' => ['t_shirt_size'],
                 'images' => [
                     [
-                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
+                        'path' => sprintf('%s/../Resources/fixtures/t-shirts/%s', __DIR__, $productData['photo']),
                         'type' => 'main',
-                    ],
-                    [
-                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
-                        'type' => 'thumbnail',
                     ],
                 ],
             ];
@@ -175,29 +149,63 @@ class TshirtProductFixture extends AbstractFixture
         $this->productFixture->load(['custom' => $products]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
+    private function getProductsData(): array
     {
-        $optionsNode
-            ->children()
-                ->integerNode('amount')->isRequired()->min(0)->end()
-        ;
-    }
-
-    private function getUniqueNames(int $amount): array
-    {
-        $productsNames = [];
-
-        for ($i = 0; $i < $amount; ++$i) {
-            $name = $this->faker->word;
-            while (in_array($name, $productsNames)) {
-                $name = $this->faker->word;
-            }
-            $productsNames[] = $name;
-        }
-
-        return $productsNames;
+        return $products = [
+            [
+                'name' => 'Basic regular woman',
+                'gender' => 'women',
+                'categoryTaxonCode' => 'womens_t_shirts',
+                'brand' => 'You are breathtaking',
+                'collection' => 'Sylius Summer 2019',
+                'material' => '100% viscose',
+                'photo' =>'woman/t-shirt_01.jpg'
+            ],
+            [
+                'name' => 'Slim fit woman',
+                'gender' => 'women',
+                'categoryTaxonCode' => 'womens_t_shirts',
+                'brand' => 'Modern Wear',
+                'collection' => 'Sylius Summer 2019',
+                'material' => '100% cotton',
+                'photo' =>'woman/t-shirt_02.jpg'
+            ],
+            [
+                'name' => 'Regular Fit V-neck woman',
+                'gender' => 'women',
+                'categoryTaxonCode' => 'womens_t_shirts',
+                'brand' => 'Celsius Small',
+                'collection' => 'Sylius Summer 2019',
+                'material' => '100% viscose',
+                'photo' =>'woman/t-shirt_03.jpg'
+            ],
+            [
+                'name' => 'Slim fit men',
+                'gender' => 'men',
+                'categoryTaxonCode' => 'mens_t_shirts',
+                'brand' => 'Date & Banana',
+                'collection' => 'Sylius Winter 2019',
+                'material' => '51% viscose, 29% polyester, 20% nylon',
+                'photo' =>'man/t-shirt_01.jpg'
+            ],
+            [
+                'name' => 'Regular fit men',
+                'gender' => 'men',
+                'categoryTaxonCode' => 'mens_t_shirts',
+                'brand' => 'You are breathtaking',
+                'collection' => 'Sylius Winter 2019',
+                'material' => '100% linen',
+                'photo' =>'man/t-shirt_02.jpg'
+            ],
+            [
+                'name' => 'Slim fit V-neck men',
+                'gender' => 'men',
+                'categoryTaxonCode' => 'mens_t_shirts',
+                'brand' => 'Modern Wear',
+                'collection' => 'Sylius Summer 2019',
+                'material' => '95% polyester, 5% elastane',
+                'photo' =>'man/t-shirt_03.jpg'
+            ],
+        ];
     }
 }

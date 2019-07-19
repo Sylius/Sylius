@@ -94,8 +94,7 @@ sylius_fixtures:
                     options:
                         random: 20
                         custom:
-                            -
-                                email: "shop@example.com"
+                            -   email: "shop@example.com"
                                 first_name: "John"
                                 last_name: "Doe"
                                 password: "sylius"
@@ -104,16 +103,14 @@ sylius_fixtures:
                     name: "admin_user"
                     options:
                         custom:
-                            -
-                                email: "sylius@example.com"
+                            -   email: "sylius@example.com"
                                 username: "sylius"
                                 password: "sylius"
                                 enabled: true
                                 locale_code: "%locale%"
                                 first_name: "John"
                                 last_name: "Doe"
-                            -
-                                email: "api@example.com"
+                            -   email: "api@example.com"
                                 username: "api"
                                 password: "sylius-api"
                                 enabled: true
@@ -175,33 +172,23 @@ sylius_fixtures:
                                 channels:
                                     - "US_WEB"
                                 rules:
-                                    -
-                                        type: "item_total"
+                                    -   type: "item_total"
                                         configuration:
                                             US_WEB:
                                                 amount: 100.00
                                 actions:
-                                    -
-                                        type: "order_fixed_discount"
+                                    -   type: "order_fixed_discount"
                                         configuration:
                                             US_WEB:
                                                 amount: 10.00
 
-                mug_product:
-                    options:
-                        amount: 15
+                new_tshirt_product: ~
 
-                sticker_product:
-                    options:
-                        amount: 15
+                caps_product: ~
 
-                book_product:
-                    options:
-                        amount: 15
+                jeans_product: ~
 
-                tshirt_product:
-                    options:
-                        amount: 15
+                dress_product: ~
 
                 product_review:
                     options:
@@ -209,7 +196,7 @@ sylius_fixtures:
 
                 similar_product_association:
                     options:
-                        amount: 10
+                        amount: 6
 
                 order:
                     options:

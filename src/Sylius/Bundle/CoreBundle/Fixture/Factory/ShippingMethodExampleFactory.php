@@ -148,7 +148,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
                 $configuration = [];
                 /** @var ChannelInterface $channel */
                 foreach ($options['channels'] as $channel) {
-                    $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
+                    $configuration[$channel->getCode()] = ['amount' => $this->faker->numberBetween(100, 1000)];
                 }
 
                 return [
