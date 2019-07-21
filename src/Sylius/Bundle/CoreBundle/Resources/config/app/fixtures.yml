@@ -419,6 +419,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -   name: "Basic regular woman"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_t_shirts"
 #                                taxons:
 #                                    -   "t_shirts"
@@ -433,6 +434,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_01.jpg', type: 'main' }
 
                             -   name: "Slim fit woman"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_t_shirts"
 #                                taxons:
 #                                    - "t_shirts"
@@ -447,6 +449,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
 
                             -   name: "Regular Fit V-neck woman"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_t_shirts"
 #                                taxons:
 #                                    - "t_shirts"
@@ -461,6 +464,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
 
                             -   name: "Slim fit men"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_t_shirts"
 #                                taxons:
 #                                    - "t_shirts"
@@ -475,6 +479,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
 
                             -   name: "Regular fit men"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_t_shirts"
 #                                taxons:
 #                                    - "t_shirts"
@@ -489,6 +494,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
 
                             -   name: "Slim fit V-neck men"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_t_shirts"
 #                                taxons:
 #                                    - "t_shirts"
@@ -507,6 +513,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -   name: "Basic winter hot cap"
+                                tax_category: "other"
 #                                main_taxon: "caps_with_pompons"
 #                                taxons:
 #                                    - "caps"
@@ -522,6 +529,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
 
                             -   name: "Beautiful cap for woman"
+                                tax_category: "other"
 #                                main_taxon: "simple_caps"
 #                                taxons:
 #                                    - "caps"
@@ -537,6 +545,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
 
                             -   name: "Regular cap with big pompon"
+                                tax_category: "other"
 #                                main_taxon: "caps_with_pompons"
 #                                taxons:
 #                                    - "caps"
@@ -573,6 +582,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -   name: "Circle-skirt Dress"
+                                tax_category: "clothing"
 #                                main_taxon: "dress"
 #                                taxons:
 #                                    - "dress"
@@ -587,6 +597,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
 
                             -   name: "Sleeveless Dress"
+                                tax_category: "clothing"
 #                                main_taxon: "dress"
 #                                taxons:
 #                                    - "dress"
@@ -601,6 +612,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
 
                             -   name: "Summer tunic"
+                                tax_category: "clothing"
 #                                main_taxon: "dress"
 #                                taxons:
 #                                    - "dress"
@@ -619,6 +631,7 @@ sylius_fixtures:
                     options:
                         custom:
                             -   name: "Basic regular"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -633,6 +646,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
 
                             -   name: "Slim fit classic"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -647,6 +661,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
 
                             -   name: "Regular Fit casual"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -661,6 +676,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_03.jpg', type: 'main' }
 
                             -   name: "Slim fit elegant"
+                                tax_category: "clothing"
 #                                main_taxon: "mens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -675,6 +691,7 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_04.jpg', type: 'main' }
 
                             -   name: "Ultra slim"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -690,6 +707,7 @@ sylius_fixtures:
 
 
                             -   name: "Slim fit"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -705,6 +723,7 @@ sylius_fixtures:
 
 
                             -   name: "New age regular"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_jeans"
 #                                taxons:
 #                                    - "jeans"
@@ -719,7 +738,8 @@ sylius_fixtures:
                                     -   { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_03.jpg', type: 'main' }
 
 
-                            -   name: "Whole holes classic'"
+                            -   name: "Whole holes classic"
+                                tax_category: "clothing"
 #                                main_taxon: "womens_jeans"
 #                                taxons:
 #                                    - "jeans"
