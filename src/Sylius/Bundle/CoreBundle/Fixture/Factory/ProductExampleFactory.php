@@ -91,9 +91,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @var FileLocatorInterface
-     */
+    /** @var FileLocatorInterface */
     private $fileLocator;
 
     public function __construct(
@@ -310,11 +308,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 $imageType = $image['type'] ?? null;
             }
 
-            if ($this->fileLocator === null) {
+            $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
             $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
-            } else {
-                $uploadedImage = new UploadedFile($this->fileLocator->locate($imagePath), basename($imagePath));
-            }
 
             /** @var ImageInterface $productImage */
             $productImage = $this->productImageFactory->createNew();
