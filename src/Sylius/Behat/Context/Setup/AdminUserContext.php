@@ -86,6 +86,14 @@ final class AdminUserContext implements Context
     }
 
     /**
+     * @Given /^(this administrator) has the "([^"]*)" image as avatar$/
+     */
+    public function thisAdministratorHasTheImageAsAvatar(AdminUserInterface $administrator, string $avatarPath): void
+    {
+        $this->iHaveTheImageAsMyAvatar($avatarPath, $administrator);
+    }
+
+    /**
      * @Given /^(this administrator) is using ("[^"]+" locale)$/
      * @Given /^(I) am using ("[^"]+" locale) for my panel$/
      */

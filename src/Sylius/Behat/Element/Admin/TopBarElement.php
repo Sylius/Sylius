@@ -27,4 +27,10 @@ final class TopBarElement extends Element implements TopBarElementInterface
 
         return strpos($image->getAttribute('src'), $avatarPath) !== false;
     }
+
+    public function hasDefaultAvatarInMainBar(): bool
+    {
+        //contains src="//placehold.it/50x50"
+        $image = $this->getDocument()->find('css', 'img.ui.avatar.image');
+    }
 }

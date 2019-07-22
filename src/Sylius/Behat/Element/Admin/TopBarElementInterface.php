@@ -16,4 +16,6 @@ namespace Sylius\Behat\Element\Admin;
 interface TopBarElementInterface
 {
     public function hasAvatarInMainBar(string $avatarPath): bool;
+
+    public function hasDefaultAvatarInMainBar(): bool;
 }
