@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -252,6 +253,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I remove the avatar image
+     */
+    public function iRemoveTheAvatarImage(): void
+    {
+        $this->updatePage->removeAvatar();
+    }
+
+    /**
      * @Then I should be notified that email must be unique
      */
     public function iShouldBeNotifiedThatEmailMustBeUnique()
@@ -331,6 +340,16 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
         Assert::true($this->topBarElement->hasAvatarInMainBar($avatar));
+    }
+
+    /**
+     * @Given /^I should not see the "([^"]*)" avatar image in the top bar next to my name$/
+     * @Given /^I should not see the avatar image in the top bar next to my name$/
+     */
+    public function iShouldNotSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
+    {
+        Assert::true(!$this->topBarElement->hasAvatarInMainBar($avatar));
+        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
