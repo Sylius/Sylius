@@ -231,6 +231,27 @@ two transitions ``request_payment`` and ``pay``.
 
 **If it was the only payment assigned to that order** now the ``paymentState`` of your order will be ``paid``.
 
+.. rst-class:: plugin-feature
+
+Creating an Order via admin panel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After installing the `Sylius/AdminOrderCreationPlugin <https://github.com/Sylius/AdminOrderCreationPlugin>`_
+it is possible to create Orders for a chosen Customer from the administrator perspective.
+
+You will be able to choose any products, assign custom prices for items, choose payment and shipping methods. Moreover
+it is possible to reorder an order that has already been placed.
+
+.. rst-class:: plugin-feature
+
+Customer Order operations: reorder & cancellation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With the usage of other Sylius official plugins your Customers will be able to:
+
+* cancel unpaid Orders in the "My Account" section -> `Customer Order Cancellation Plugin <https://github.com/Sylius/CustomerOrderCancellationPlugin>`_
+* reorder one of their previously placed Orders -> `Customer Reorder Plugin <https://github.com/Sylius/CustomerReorderPlugin>`_
+
 Learn more
 ----------
 

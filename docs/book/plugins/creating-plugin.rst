@@ -6,6 +6,12 @@ Sylius plugin is nothing more but a regular Symfony bundle adding custom behavio
 The best way to create your own plugin is to use `Sylius plugin skeleton <https://github.com/Sylius/PluginSkeleton>`_,
 which has built-in infrastructure for designing and testing using `Behat`_.
 
+.. note::
+
+    This doc is a very short introduction to plugin development. For a more detailed guide please head to :doc:`/book/plugins/index`.
+
+Quickstart to plugins development:
+
 1. Create project using Composer.
 ---------------------------------
 

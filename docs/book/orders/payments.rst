@@ -14,6 +14,17 @@ Payment
 
 Every payment in Sylius, successful or failed, is represented by the **Payment** model, which contains basic information and a reference to appropriate order.
 
+.. rst-class:: plugin-feature
+
+Invoices
+~~~~~~~~
+
+By installing the `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin>`_ you can enhance your Sylius
+application with the automatic generation of invoicing documents for each Order's payment.
+
+Sylius invoices have their own numbers, issuing dates, consist of shop and customer's data, the order items with prices and quantity
+and separated taxes section. Their templates can be changed, and of course the moment of invoice generation can be customized.
+
 Payment State Machine
 ---------------------
 
@@ -54,7 +65,7 @@ Full configuration can be seen in the `PaymentBundle/Resources/config/app/state_
 Changes to payment happen through applying appropriate transitions.
 
 How to create a Payment programmatically?
-'''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We cannot create a Payment without an Order, therefore let's assume that you have an Order to which you will assign a new payment.
 
@@ -79,7 +90,7 @@ It holds a reference to a specific ``gateway`` with custom configuration.
 Gateway is configured for each payment method separately using the payment method form.
 
 How to create a PaymentMethod programmatically?
-'''''''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As usual, use a factory to create a new PaymentMethod and give it a unique code.
 
@@ -100,7 +111,7 @@ Payment Gateway configuration
 -----------------------------
 
 Payment Gateways that already have a Sylius bridge
-''''''''''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First you need to create the configuration form type for your gateway. Have a look at the configuration form types of
 `Paypal <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
@@ -114,14 +125,14 @@ After that it will be available in the Admin panel in the gateway choice dropdow
     If you are not sure how your configuration form type should look like, head to `Payum`_ documentation.
 
 Other Payment Gateways
-''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
 
     Learn more about integrating payment gateways in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
 
 When the Payment Gateway you are trying to use does have a bridge available and you integrate them on your own,
-use our guide on :doc:`extension development </plugins/creating-plugin>`.
+use our guide on :doc:`extension development </plugin-development-guide/index>`.
 
 .. tip::
 
@@ -141,7 +152,7 @@ Sylius stores the payment output inside the **details** column of the **sylius_p
 It can provide valuable information when debugging the payment process.
 
 PayPal Error Code 10409
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The 10409 code, also known as the *"Checkout token was issued for a merchant account other than yours"* error.
 You have most likely changed the PayPal credentials during the checkout process. Clear the cache and try again:
@@ -168,3 +179,4 @@ Learn more
 
 * :doc:`Payment - Component Documentation </components_and_bundles/components/Payment/index>`
 * `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/docs/index.md>`_
+* :doc:`Refunds </book/orders/refunds>`
