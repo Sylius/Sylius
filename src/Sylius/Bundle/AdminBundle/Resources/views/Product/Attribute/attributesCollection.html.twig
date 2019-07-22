@@ -1,52 +1,63 @@
 {% extends '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block collection_widget -%}
-    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
     {% import _self as self %}
+    {% set attributes_code = [] %}
+    {% for child in form %}
+        {% if child.vars.data.attribute.code not in attributes_code %}
+            {% set attributes_code = attributes_code|merge([child.vars.data.attribute.code]) %}
+        {% endif %}
+    {% endfor %}
 
-    <div class="ui top attached tabular menu">
-        {% for localeCode, translationForm in attr.translations %}
-            <a class="item{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
-                {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
-            </a>
-        {% endfor %}
-    </div>
-
-    {% for localeCode, translationForm in attr.translations %}
-        <div class="ui bottom attached tab segment{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
-            {% spaceless %}
+    {% for code in attributes_code %}
+        <table class="attribute-group ui padded table" data-attributes_code="{{ code }}">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ code }}</th>
+                    <th class="right aligned">
+                        <button type="button" class="ui red basic labeled icon button" data-attributes_remove>
+                            <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for child in form %}
-                    {% if localeCode == child.localeCode.vars.value %}
+                    {% if code == child.vars.data.attribute.code %}
                         {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                     {% endif %}
                 {% endfor %}
-            {% endspaceless %}
-        </div>
+            </tbody>
+        </table>
     {% endfor %}
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
-    <div class="attribute" data-id="{{ form.vars.data.attribute.code }}">
+    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+    <tr class="attribute" data-id="{{ form.vars.data.attribute.code }}">
         {% set id = form.vars.id %}
+        <td style="width: 25%">
+            {{ flags.fromLocaleCode(form.localeCode.vars.value) }}
+            {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
+            <br>{{ form_errors(form.value) }}
+        </td>
         {% if 'checkbox' in form.children.value.vars.block_prefixes %}
-            <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
-                {{ form_widget(form.value) }}
-                <label>{{ form.vars.value.attribute.name }}</label>
-            </div>
-            <button class="ui red right labeled icon button" style="float: right;">
-                <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-            </button>
+            <td>
+                <div class="ui toggle checkbox">{{ form_widget(form.value) }}</div>
+            </td>
         {% else %}
-            <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
-                <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
+            <td class="attr-widget">
                 {{ form_widget(form.value) }}
-                <button class="ui red right labeled icon button">
-                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-                </button>
-            </div>
-            {{ form_errors(form.value) }}
+            </td>
         {% endif %}
+        <td style="width: 10%" class="right aligned">
+            <button type="button" class="ui button" data-attributes_apply>
+                {{ 'sylius.ui.apply'|trans }}
+            </button>
+        </td>
+
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
         <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
-    </div>
+    </tr>
 {% endmacro %}

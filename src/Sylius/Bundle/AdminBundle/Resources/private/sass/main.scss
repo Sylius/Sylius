@@ -27,3 +27,41 @@
     border-top-right-radius: .28571429rem !important;
     border-bottom-right-radius: .28571429rem !important;
 }
+
+// Attributes
+.attr-widget {
+    display: flex !important;
+
+    & > div,
+    & > div > div {
+        display: flex !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    select:not([multiple="multiple"]) {
+        width: auto !important;
+        outline: 0 !important;
+        tap-highlight-color: rgba(255,255,255,0) !important;
+        line-height: 1.21428571em !important;
+        padding: .67857143em 2em .67857143em 1em !important;
+        font-size: 1em !important;
+        border: 1px solid rgba(34,36,38,.15) !important;
+        color: rgba(0,0,0,.87) !important;
+        border-radius: .28571429rem !important;
+        box-shadow: 0 0 0 0 transparent inset !important;
+        transition: color .1s ease,border-color .1s ease !important;
+        margin: 0 3px !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: #fff !important;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23444444'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat !important;
+        background-size: 8px 12px !important;
+        background-position: calc(100% - 10px) calc(50% + 3px) !important;
+    }
+
+    .ui.labeled.input>.label {
+        flex-shrink: 1 !important;
+    }
+}

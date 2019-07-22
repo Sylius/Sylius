@@ -5,6 +5,7 @@
 
     <div class="ui attached segment">
         {{ render(url('sylius_admin_get_product_attributes')) }}
+        <div class="ui hidden divider"></div>
         <div id="attributesContainer" data-count="{{ form.attributes|length }}">
             {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
         </div>

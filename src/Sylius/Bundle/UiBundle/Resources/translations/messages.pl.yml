@@ -61,6 +61,7 @@ sylius:
         amount: 'Wartość'
         an_error_occurred: 'Wystąpił błąd'
         api: 'Interfejs API'
+        apply: 'Zastosuj'
         apply_coupon: 'Zastosuj kupon'
         archival: 'Archiwalne'
         archive: 'Archiwizuj'
