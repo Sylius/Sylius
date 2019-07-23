@@ -14,7 +14,7 @@
     .sylius-filters__group {
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-end;
+        align-items: flex-start;
 
         > .field {
             flex-grow: 1;
@@ -24,14 +24,22 @@
             flex-grow: 1;
             width: auto !important;
         }
+
+        > .disabled.field {
+            flex-grow: 0;
+
+            input {
+                width: 40px !important;
+                background: #eeeeee;
+                text-align: center;
+            }
+        }
     }
 
     .field {
-        margin-bottom: 0 !important;
+        margin-bottom: 22px !important;
         label { font-weight: 700 !important; }
     }
-
-    input, select { margin-bottom: 22px !important; }
 }
 
 .sylius-filters {
