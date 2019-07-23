@@ -95,10 +95,6 @@ $(document).ready(() => {
   $(document).previewUploadedImage('#sylius_taxon_images');
   $(document).previewUploadedImage('#add-avatar');
 
-  $(document).on('click', '#delete-button', () => {
-    $('.ui.small.bordered.image').remove('.ui.small.bordered.image');
-  });
-
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
     if ($(event.target).find('.accordion').length > 0) {
       $(event.target).find('.accordion').accordion();
