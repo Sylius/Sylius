@@ -16,7 +16,7 @@
             {{ 'sylius.ui.filters'|trans }}
         </div>
         <div class="content">
-            <form method="get" action="{{ path }}" class="ui loadable form">
+            <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
                 <div class="sylius-filters">
                     {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                         <div class="sylius-filters__field">
