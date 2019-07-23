@@ -16,3 +16,10 @@ sylius_admin_admin_user:
             index:
                 icon: lock
     type: sylius.resource
+
+sylius_admin_admin_user_remove_avatar:
+    path: /user/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        id: $id
+        _controller: SyliusAdminBundle:Avatar:removeAvatar
