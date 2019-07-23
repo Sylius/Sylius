@@ -26,6 +26,7 @@
                 <label>{{ 'sylius.ui.avatar'|trans }}</label>
                 {{ form_row(form.avatar, {'label': false}) }}
             </div>
+            <a href="{{ path('sylius_admin_admin_user_remove_avatar', {'id': app.request.attributes.get('id')}) }}" id="delete-button" class="ui icon red labeled button"><i class="icon trash"></i> {{ 'sylius.ui.delete'|trans }}</a>
         </div>
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.preferences'|trans }}</h4>

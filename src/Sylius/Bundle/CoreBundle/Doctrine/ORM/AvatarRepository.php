@@ -15,8 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Repository\AvatarRepositoryInterface;
 
-final class AvatarRepository extends EntityRepository
+final class AvatarRepository extends EntityRepository implements AvatarRepositoryInterface
 {
     public function findOneByOwner(string $id): ?AvatarImage
     {

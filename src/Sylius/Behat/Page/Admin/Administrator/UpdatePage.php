@@ -53,6 +53,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return strpos($srcPath, $avatarPath) !== false;
     }
 
+    public function removeAvatar(): void
+    {
+        $this->getDocument()->find('css', '#delete-button')->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
