@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\AvatarImageRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 use Sylius\Component\Core\Model\TaxonImageInterface;
+use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -86,6 +88,7 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(AvatarImage::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(AvatarImageRepository::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
