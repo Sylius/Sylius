@@ -14,9 +14,6 @@ addons:
     apt:
         sources:
             - mysql-5.7-trusty
-        packages:
-            - mysql-server
-            - mysql-client
 
 matrix:
     include:
@@ -27,6 +24,7 @@ matrix:
                 - SYMFONY_VERSION="3.4.*"
             services:
                 - memcached
+                - mysql
         -
             if: type IN (cron, api) OR tag IS present
             php: 7.3
@@ -35,6 +33,7 @@ matrix:
                 - SYMFONY_VERSION="4.3.*"
             services:
                 - memcached
+                - mysql
         -
             php: 7.3
             env:
@@ -45,7 +44,7 @@ matrix:
             addons:
                 apt:
                     packages:
-                    - parallel
+                        - parallel
         -
             if: type IN (cron, api) OR tag IS present
             php: 7.3
@@ -55,7 +54,7 @@ matrix:
             addons:
                 apt:
                     packages:
-                    - parallel
+                        - parallel
         -
             if: type IN (cron, api) OR tag IS present
             php: 7.2
@@ -64,6 +63,7 @@ matrix:
                 - SYMFONY_VERSION="3.4.*"
             services:
                 - memcached
+                - mysql
         -
             php: 7.2
             env:
@@ -71,6 +71,7 @@ matrix:
                 - SYMFONY_VERSION="4.3.*"
             services:
                 - memcached
+                - mysql
         -
             if: type IN (cron, api) OR tag IS present
             php: 7.2
