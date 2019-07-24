@@ -7,16 +7,17 @@
 {% set data = grid.data %}
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set criteria = app.request.query.get('criteria') %}
 
 {% if definition.enabledFilters|length > 0 %}
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
-        <div class="title">
+        <div class="title {% if criteria is not null %}active{% endif %}">
             <i class="dropdown icon"></i>
             {{ 'sylius.ui.filters'|trans }}
         </div>
-        <div class="content">
-            <form method="get" action="{{ path }}" class="ui loadable form">
+        <div class="content {% if criteria is not null %}active{% endif %}">
+            <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
                 <div class="sylius-filters">
                     {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                         <div class="sylius-filters__field">

@@ -4,7 +4,5 @@
     {% if form.type is defined %}
         {{ form_row(form.type, {'label': filter.label}) }}
     {% endif %}
-    <div class="field">
-        {{ form_widget(form.value, {attr: {placeholder: form.value.vars.label}, 'label': form.type is defined ? form.value.vars.label : filter.label}) }}
-    </div>
+    {{ form_row(form.value, {attr: {placeholder: form.value.vars.label}, 'label': form.type is defined ? form.value.vars.label : filter.label}) }}
 </div>
