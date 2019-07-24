@@ -32,6 +32,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -90,6 +91,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var OptionsResolver */
     private $optionsResolver;
 
+    /** @var FileLocatorInterface */
+    private $fileLocator;
+
     public function __construct(
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
@@ -105,7 +109,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         RepositoryInterface $productOptionRepository,
         RepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $taxCategoryRepository
+        RepositoryInterface $taxCategoryRepository,
+        ?FileLocatorInterface $fileLocator = null
     ) {
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
@@ -127,6 +132,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
+
+        $this->fileLocator = $fileLocator;
     }
 
     /**
@@ -301,6 +308,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 $imageType = $image['type'] ?? null;
             }
 
+            $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
             $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
             /** @var ImageInterface $productImage */

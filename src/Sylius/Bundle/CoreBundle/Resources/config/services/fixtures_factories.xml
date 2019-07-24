@@ -134,6 +134,7 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.tax_category" />
+            <argument type="service" id="file_locator" />
         </service>
 
         <service id="sylius.fixture.example_factory.address" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AddressExampleFactory">
