@@ -4,5 +4,39 @@
 
 {% macro fromLocaleCode(locale_code) %}
     {% import _self as flags %}
-    {{ flags.fromCountryCode(locale_code|slice(-2)) }}
+    {% set locale_country = { 
+  		'ak':'gh',
+  		'am':'et',
+  		'am':'et',
+  		'be':'by',
+  		'bs':'ba',
+  		'cs':'cz',
+  		'cy':'wls',
+  		'da':'dk',
+  		'el':'gr',
+  		'et':'ee',
+  		'ga':'ie',
+  		'gd':'sct',
+  		'hi':'in',
+  		'hy':'am',
+  		'ja':'jp',
+  		'kk':'kz',
+  		'lo':'la',
+  		'my':'mm',
+  		'nl':'an',
+  		'sq':'al',
+  		'sr':'cs',
+  		'sv':'se',
+  		'tg':'tj',
+  		'tl':'ph',
+  		'uk':'ua',
+  		'vi':'vn'  
+      } 
+    %}
+    {% set locale_code = locale_code|slice(-2) %}
+    {% if locale_code in locale_country|keys %}
+        {{ flags.fromCountryCode(locale_country[locale_code]) }}
+    {% else %}
+        {{ flags.fromCountryCode(locale_code) }}
+    {% endif %}
 {% endmacro %}
