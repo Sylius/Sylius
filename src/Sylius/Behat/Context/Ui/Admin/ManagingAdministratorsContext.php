@@ -253,7 +253,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I remove the avatar image
+     * @When I remove the avatar
      */
     public function iRemoveTheAvatarImage(): void
     {
@@ -343,13 +343,23 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Given /^I should not see the "([^"]*)" avatar image in the top bar next to my name$/
+     * @Then I should not see the :avatar avatar image in the additional information section of my account
+     */
+    public function iShouldNotSeeTheAvatarImageInTheAdditionalInformationSectionOfMyAccount(string $avatar): void
+    {
+        $avatarPath = $this->sharedStorage->get($avatar);
+
+        Assert::false($this->updatePage->hasAvatar($avatarPath));
+    }
+
+    /**
+     * @Then I should not see the :avatar avatar image in the top bar next to my name
      */
     public function iShouldNotSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
         $avatarPath = $this->sharedStorage->get($avatar);
 
-        Assert::true(!$this->topBarElement->hasAvatarInMainBar($avatarPath));
+        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
         Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
     }
 

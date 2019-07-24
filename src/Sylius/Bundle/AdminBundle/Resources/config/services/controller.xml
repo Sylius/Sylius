@@ -19,10 +19,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\AdminBundle\Controller\AvatarController" public="true">
+        <service id="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type='service' id="templating" />
             <argument type="service" id="router" />
+            <argument type="service" id="security.csrf.token_manager" />
         </service>
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">

@@ -27,7 +27,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function changeLocale(string $localeCode): void;
 
-    public function hasAvatar(string $avatarPath): bool;
-
     public function removeAvatar(): void;
+
+    public function hasAvatar(string $avatarPath): bool;
 }

@@ -15,18 +15,18 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\AvatarImage;
-use Sylius\Component\Core\Repository\AvatarRepositoryInterface;
+use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 
-final class AvatarRepository extends EntityRepository implements AvatarRepositoryInterface
+final class AvatarImageRepository extends EntityRepository implements AvatarImageRepositoryInterface
 {
-    public function findOneByOwner(string $id): ?AvatarImage
+    public function findOneByOwnerId(string $ownerId): ?ImageInterface
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.owner = :user')
-            ->andWhere('user.id = :id')
-            ->setParameter('id', $id)
+            ->andWhere('o.owner = :ownerId')
+            ->setParameter('ownerId', $ownerId)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getOneOrNullResult()
+        ;
     }
 }
