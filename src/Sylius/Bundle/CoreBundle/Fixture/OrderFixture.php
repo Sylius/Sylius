@@ -121,26 +121,7 @@ class OrderFixture extends AbstractFixture
         $countries = $this->countryRepository->findAll();
 
         for ($i = 0; $i < $options['amount']; ++$i) {
-            $channel = $this->faker->randomElement($channels);
-            $customer = $this->faker->randomElement($customers);
-            $countryCode = $this->faker->randomElement($countries)->getCode();
-
-            $currencyCode = $channel->getBaseCurrency()->getCode();
-            $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
-
-            /** @var OrderInterface $order */
-            $order = $this->orderFactory->createNew();
-            $order->setChannel($channel);
-            $order->setCustomer($customer);
-            $order->setCurrencyCode($currencyCode);
-            $order->setLocaleCode($localeCode);
-
-            $this->generateItems($order);
-
-            $this->address($order, $countryCode);
-            $this->selectShipping($order);
-            $this->selectPayment($order);
-            $this->completeCheckout($order);
+            $order = $this->createOrder($channels, $customers, $countries);
 
             $this->orderManager->persist($order);
 
@@ -161,6 +142,38 @@ class OrderFixture extends AbstractFixture
     }
 
     /**
+     * @param array $channels
+     * @param array $customers
+     * @param array $countries
+     * @return OrderInterface
+     */
+    protected function createOrder(array $channels, array $customers, array $countries): OrderInterface
+    {
+        $channel = $this->faker->randomElement($channels);
+        $customer = $this->faker->randomElement($customers);
+        $countryCode = $this->faker->randomElement($countries)->getCode();
+
+        $currencyCode = $channel->getBaseCurrency()->getCode();
+        $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
+
+        /** @var OrderInterface $order */
+        $order = $this->orderFactory->createNew();
+        $order->setChannel($channel);
+        $order->setCustomer($customer);
+        $order->setCurrencyCode($currencyCode);
+        $order->setLocaleCode($localeCode);
+
+        $this->generateItems($order);
+
+        $this->address($order, $countryCode);
+        $this->selectShipping($order);
+        $this->selectPayment($order);
+        $this->completeCheckout($order);
+
+        return $order;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
@@ -171,7 +184,7 @@ class OrderFixture extends AbstractFixture
         ;
     }
 
-    private function generateItems(OrderInterface $order): void
+    protected function generateItems(OrderInterface $order): void
     {
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
@@ -190,7 +203,7 @@ class OrderFixture extends AbstractFixture
         }
     }
 
-    private function address(OrderInterface $order, string $countryCode): void
+    protected function address(OrderInterface $order, string $countryCode): void
     {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
@@ -207,7 +220,7 @@ class OrderFixture extends AbstractFixture
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
-    private function selectShipping(OrderInterface $order): void
+    protected function selectShipping(OrderInterface $order): void
     {
         $shippingMethod = $this
             ->faker
@@ -224,7 +237,7 @@ class OrderFixture extends AbstractFixture
         }
     }
 
-    private function selectPayment(OrderInterface $order): void
+    protected function selectPayment(OrderInterface $order): void
     {
         $paymentMethod = $this
             ->faker
@@ -241,7 +254,7 @@ class OrderFixture extends AbstractFixture
         }
     }
 
-    private function completeCheckout(OrderInterface $order): void
+    protected function completeCheckout(OrderInterface $order): void
     {
         if ($this->faker->boolean(25)) {
             $order->setNotes($this->faker->sentence);
@@ -250,7 +263,7 @@ class OrderFixture extends AbstractFixture
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
     }
 
-    private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
+    protected function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
