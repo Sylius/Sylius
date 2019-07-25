@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.7 (2019-07-25)
+
+#### Details
+
+- [#10165](https://github.com/Sylius/Sylius/issues/10165) Product attribute fixtures improvements ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10401](https://github.com/Sylius/Sylius/issues/10401) Psalm ([@loic425](https://github.com/loic425), [@pamil](https://github.com/pamil))
+- [#10464](https://github.com/Sylius/Sylius/issues/10464) Do not crash when duplicated locales are passed to the fixture ([@pamil](https://github.com/pamil))
+- [#10468](https://github.com/Sylius/Sylius/issues/10468) Remove Symfony workarounds and add conflicts ([@pamil](https://github.com/pamil))
+- [#10473](https://github.com/Sylius/Sylius/issues/10473) Update docs to follow Symfony 4 standards ([@pamil](https://github.com/pamil))
+- [#10488](https://github.com/Sylius/Sylius/issues/10488) Marked router dependency as deprecated in admin ImpersonateUserController ([@SebLours](https://github.com/SebLours))
+- [#10489](https://github.com/Sylius/Sylius/issues/10489) Make it possible to have no shipping methods for Order fixtures ([@TiMESPLiNTER](https://github.com/TiMESPLiNTER))
+- [#10492](https://github.com/Sylius/Sylius/issues/10492) [Admin] Minor fixes customer group validation form ([@Tomanhez](https://github.com/Tomanhez))
+- [#10494](https://github.com/Sylius/Sylius/issues/10494) [UI] Fix button groups radius ([@kulczy](https://github.com/kulczy))
+- [#10498](https://github.com/Sylius/Sylius/issues/10498) Add search bar css rule for Firefox ([@aloupfor](https://github.com/aloupfor))
+- [#10508](https://github.com/Sylius/Sylius/issues/10508) Revert "Make it possible to have no shipping methods for Order fixtures" ([@lchrusciel](https://github.com/lchrusciel))
+- [#10509](https://github.com/Sylius/Sylius/issues/10509) [Admin] Add link to product in variant breadcrumb ([@Tomanhez](https://github.com/Tomanhez))
+- [#10517](https://github.com/Sylius/Sylius/issues/10517) [Grid] Allow not to pass "apply_transition" button class ([@Zales0123](https://github.com/Zales0123))
+- [#10525](https://github.com/Sylius/Sylius/issues/10525) Bump lodash from 4.17.11 to 4.17.14 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#10535](https://github.com/Sylius/Sylius/issues/10535) [Shop] Fix passed channel context service to be composite ([@GSadee](https://github.com/GSadee))
+- [#10548](https://github.com/Sylius/Sylius/issues/10548) [HotFix?] Move mysql service to fix the build ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.4.6 (2019-06-20)
 
 #### Details
