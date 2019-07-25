@@ -1,45 +1,54 @@
 {% import _self as self %}
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
 {% set subject = metadata.name|replace({'_attribute': ''}) %}
+{% set locale_excluded = [
+    '_value_sylius_attribute_type_select',
+    '_value_sylius_attribute_type_checkbox',
+    '_value_sylius_attribute_type_datetime',
+    '_value_sylius_attribute_type_date',
+    '_value_sylius_attribute_type_integer',
+    '_value_sylius_attribute_type_percent'
+] %}
+
 {% for code, localeCodes in forms %}
-    <table class="attribute-group ui padded table" data-attributes_code="{{ code }}">
-        <thead>
-        <tr>
-            <th colspan="2">{{ code }}</th>
-            <th class="right aligned">
-                <button type="button" class="ui red basic labeled icon button" data-attributes_remove>
-                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-                </button>
-            </th>
-        </tr>
-        </thead>
-
-        {% for localeCode, form in localeCodes %}
-            <tr class="attribute" data-id="{{ code }}">
+    <div class="attribute-group" data-attributes_code="{{ code }}">
+        <div class="attribute-group__form">
+            {% for localeCode, form in localeCodes %}
                 {% set id = form.vars.label|replace({' ': '_'})|lower %}
-                {% if 'type_checkbox' in form.vars.cache_key %}
-                    {{ self.checkboxField(form, count, id, subject, metadata.applicationName, localeCode) }}
-                {% else %}
-                    {{ self.textField(form, count, id, subject, metadata.applicationName, localeCode) }}
-                {% endif %}
-                <td style="width: 10%" class="right aligned">
-                    <button type="button" class="ui button" data-attributes_apply>
-                        {{ 'sylius.ui.apply'|trans }}
-                    </button>
-                </td>
+                <div class="attribute" data-id="{{ code }}" {% if form.vars.cache_key in locale_excluded and loop.index0 != 0  %}styleE="display:none"{% endif %}>
+                    <div class="attribute__label">
+                        {% if form.vars.cache_key not in locale_excluded %}
+                            {{ flags.fromLocaleCode(localeCode) }}
+                        {% else %}
+                            <i class="globe icon"></i>
+                        {% endif %}
+                        {{ form.vars.label }}
+                    </div>
 
-                <input type="hidden"
-                       name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
-                       id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_attribute"
-                       value="{{ code }}"/>
-                <input type="hidden"
-                       name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][localeCode]"
-                       id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_localeCode"
-                       value="{{ localeCode }}"/>
-                {% set count = count + 1 %}
-            </tr>
-        {% endfor %}
-    </table>
+                    {% if 'type_checkbox' in form.vars.cache_key %}
+                        {{ self.checkboxField(form, count, id, subject, metadata.applicationName, localeCode, locale_excluded) }}
+                    {% else %}
+                        {{ self.textField(form, count, id, subject, metadata.applicationName, localeCode, locale_excluded) }}
+                    {% endif %}
+
+                    <input type="hidden"
+                           name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
+                           id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_attribute"
+                           value="{{ code }}"/>
+                    <input type="hidden"
+                           name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][localeCode]"
+                           id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_localeCode"
+                           value="{{ localeCode }}"/>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="attribute-group__action">
+            <button type="button" class="ui red basic labeled icon button" data-attributes_remove>
+                <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+            </button>
+        </div>
+    </div>
 {% endfor %}
 
 {% macro formField(item, count, id, prefix, subject, applicationName) %}
@@ -60,31 +69,39 @@
     {% endif %}
 {% endmacro %}
 
-{% macro textField(form, count, id, subject, applicationName, localeCode) %}
+{% macro textField(form, count, id, subject, applicationName, localeCode, locale_excluded) %}
     {% from _self import formField %}
-    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
-    <td style="width: 25%">
-        {{ flags.fromLocaleCode(localeCode) }}
-        {{ form.vars.label }}
-    </td>
-    <td class="attr-widget">
-        {{ formField(form, count, id, '', subject, applicationName) }}
-    </td>
+    <div class="attribute__widget">
+        <div class="attribute__widget__input">
+            <div class="attr-widget">
+                {{ formField(form, count, id, '', subject, applicationName) }}
+            </div>
+        </div>
+
+        {% if form.vars.cache_key not in locale_excluded %}
+            <button type="button" class="ui basic tiny button" data-attributes_apply>
+                {{ 'sylius.ui.apply_for_all_locales'|trans }}
+            </button>
+        {% endif %}
+    </div>
 {% endmacro %}
 
-{% macro checkboxField(form, count, id, subject, applicationName, localeCode) %}
+{% macro checkboxField(form, count, id, subject, applicationName, localeCode, locale_excluded) %}
     {% from _self import formField %}
-    {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
-    <td style="width: 25%">
-        {{ flags.fromLocaleCode(localeCode) }}
-        {{ form.vars.label }}
-    </td>
-    <td>
-        <div class="ui toggle checkbox">
-            {{ formField(form, count, id, '', subject, applicationName) }}
-            <label></label>
+    <div class="attribute__widget">
+        <div class="attribute__widget__input">
+            <div class="ui toggle checkbox">
+                {{ formField(form, count, id, '', subject, applicationName) }}
+                <label></label>
+            </div>
         </div>
-    </td>
+
+        {% if form.vars.cache_key not in locale_excluded %}
+            <button type="button" class="ui basic tiny button" data-attributes_apply>
+                {{ 'sylius.ui.apply_for_all_locales'|trans }}
+            </button>
+        {% endif %}
+    </div>
 {% endmacro %}

@@ -2,62 +2,63 @@
 
 {% block collection_widget -%}
     {% import _self as self %}
-    {% set attributes_code = [] %}
+
+    {% set attributes, locale_excluded = {}, ['select', 'checkbox', 'datetime', 'date', 'integer', 'percent'] %}
     {% for child in form %}
-        {% if child.vars.data.attribute.code not in attributes_code %}
-            {% set attributes_code = attributes_code|merge([child.vars.data.attribute.code]) %}
+        {% set code, type = child.vars.data.attribute.code, child.vars.data.attribute.type %}
+        {% if type not in locale_excluded or type in locale_excluded and attributes[code] is not defined %}
+            {% set attr = attributes[code] is defined ? { (code): attributes[code]|merge([child]) } : { (code): [child] } %}
+            {% set attributes = attributes|merge(attr) %}
         {% endif %}
     {% endfor %}
 
-    {% for code in attributes_code %}
-        <table class="attribute-group ui padded table" data-attributes_code="{{ code }}">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ code }}</th>
-                    <th class="right aligned">
-                        <button type="button" class="ui red basic labeled icon button" data-attributes_remove>
-                            <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-                        </button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for child in form %}
-                    {% if code == child.vars.data.attribute.code %}
-                        {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
-                    {% endif %}
+    {% for key, attribute in attributes %}
+        <div class="attribute-group" data-attributes_code="{{ key }}">
+            <div class="attribute-group__form">
+                {% for child in attribute %}
+                    <div class="attribute" data-id="{{ key }}">
+                        {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0, locale_excluded) }}
+                    </div>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+            <div class="attribute-group__action">
+                <button type="button" class="ui red basic labeled icon button" data-attributes_remove>
+                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                </button>
+            </div>
+        </div>
     {% endfor %}
 {%- endblock collection_widget %}
 
-{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+{% macro collection_item(form, allow_delete, button_delete_label, index, locale_excluded) %}
     {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
-    <tr class="attribute" data-id="{{ form.vars.data.attribute.code }}">
-        {% set id = form.vars.id %}
-        <td style="width: 25%">
+    {% set id = form.vars.id %}
+    <div class="attribute__label">
+        {% if form.vars.data.attribute.type not in locale_excluded %}
             {{ flags.fromLocaleCode(form.localeCode.vars.value) }}
-            {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
-            <br>{{ form_errors(form.value) }}
-        </td>
-        {% if 'checkbox' in form.children.value.vars.block_prefixes %}
-            <td>
-                <div class="ui toggle checkbox">{{ form_widget(form.value) }}</div>
-            </td>
         {% else %}
-            <td class="attr-widget">
-                {{ form_widget(form.value) }}
-            </td>
+            <i class="globe icon"></i>
         {% endif %}
-        <td style="width: 10%" class="right aligned">
-            <button type="button" class="ui button" data-attributes_apply>
-                {{ 'sylius.ui.apply'|trans }}
-            </button>
-        </td>
+        {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
+    </div>
+    <div class="attribute__widget">
+        <div class="attribute__widget__input">
+            {% if 'checkbox' in form.children.value.vars.block_prefixes %}
+                <div class="ui toggle checkbox">{{ form_widget(form.value) }}</div>
+            {% else %}
+                <div class="attr-widget">{{ form_widget(form.value) }}</div>
+            {% endif %}
+            {{ form_errors(form.value) }}
+        </div>
 
-        <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
-        <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
-    </tr>
+        {% if form.vars.data.attribute.type not in locale_excluded %}
+            <button type="button" class="ui basic tiny button" data-attributes_apply>
+                {{ 'sylius.ui.apply_for_all_locales'|trans }}
+            </button>
+        {% endif %}
+    </div>
+
+    <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
+    <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
 {% endmacro %}

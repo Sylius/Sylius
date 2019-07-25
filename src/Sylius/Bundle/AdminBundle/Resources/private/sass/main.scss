@@ -65,3 +65,44 @@
         flex-shrink: 1 !important;
     }
 }
+
+.attribute-group {
+    margin-top: 20px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+
+    .attribute-group__form {
+        flex-grow: 1;
+    }
+
+    .attribute-group__action {
+        padding: 1px 50px;
+    }
+
+    .attribute {
+        margin-bottom: 10px;
+        align-items: center;
+
+        .attribute__label {
+            width: 200px;
+            padding: 10px 0;
+        }
+
+        .attribute__widget {
+            display: flex;
+            align-items: flex-start;
+            flex-grow: 1;
+
+            .attribute__widget__input { flex-grow: 1; }
+            .button { margin: 3px 10px; }
+        }
+    }
+
+    @media (min-width: 1280px) {
+        display: flex;
+
+        .attribute {
+            display: flex;
+        }
+    }
+}
