@@ -16,3 +16,9 @@ sylius_admin_admin_user:
             index:
                 icon: lock
     type: sylius.resource
+
+sylius_admin_admin_user_remove_avatar:
+    path: /users/{id}
+    methods: [PUT]
+    defaults:
+        _controller: Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction

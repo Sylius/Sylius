@@ -46,9 +46,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('locale_code')->selectOption($localeCode);
     }
 
+    public function removeAvatar(): void
+    {
+        $this->getElement('remove_avatar')->click();
+    }
+
     public function hasAvatar(string $avatarPath): bool
     {
-        $srcPath = $this->getElement('add_avatar')->find('css', 'img')->getAttribute('src');
+        $srcPath = $this->getAvatarImagePath();
 
         return strpos($srcPath, $avatarPath) !== false;
     }
@@ -61,7 +66,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'enabled' => '#sylius_admin_user_enabled',
             'locale_code' => '#sylius_admin_user_localeCode',
             'password' => '#sylius_admin_user_plainPassword',
+            'remove_avatar' => '.ui.icon.red.labeled.button',
             'username' => '#sylius_admin_user_username',
         ]);
+    }
+
+    private function getAvatarImagePath(): string
+    {
+        $image = $this->getElement('add_avatar')->find('css', 'img');
+
+        if (null === $image) {
+            return '';
+        }
+
+        return $image->getAttribute('src');
     }
 }

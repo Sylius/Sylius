@@ -19,12 +19,22 @@ final class TopBarElement extends Element implements TopBarElementInterface
 {
     public function hasAvatarInMainBar(string $avatarPath): bool
     {
+        return strpos($this->getAvatarImagePath(), $avatarPath) !== false;
+    }
+
+    public function hasDefaultAvatarInMainBar(): bool
+    {
+        return strpos($this->getAvatarImagePath(), '//placehold.it/50x50') !== false;
+    }
+
+    private function getAvatarImagePath(): string
+    {
         $image = $this->getDocument()->find('css', 'img.ui.avatar.image');
 
         if (null === $image) {
-            return false;
+            return '';
         }
 
-        return strpos($image->getAttribute('src'), $avatarPath) !== false;
+        return $image->getAttribute('src');
     }
 }
