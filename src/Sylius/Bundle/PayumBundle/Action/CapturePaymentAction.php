@@ -72,12 +72,8 @@ final class CapturePaymentAction extends GatewayAwareAction
 
         $details = ArrayObject::ensureArrayObject($payment->getDetails());
 
-        try {
-            $request->setModel($details);
-            $this->gateway->execute($request);
-        } finally {
-            $payment->setDetails((array) $details);
-        }
+        $request->setModel($details);
+        $this->gateway->execute($request);
     }
 
     /**

@@ -13,15 +13,18 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PayumBundle\Action;
 
+use Exception;
 use Payum\Core\Action\GatewayAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Request\Capture;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 
 final class CapturePaymentActionSpec extends ObjectBehavior
 {
@@ -52,9 +55,39 @@ final class CapturePaymentActionSpec extends ObjectBehavior
         $payment->getDetails()->willReturn([]);
         $capture->getModel()->willReturn($payment);
 
-        $payment->setDetails([])->shouldBeCalled();
         $capture->setModel(new ArrayObject())->shouldBeCalled();
 
         $this->execute($capture);
+    }
+
+    function it_should_not_overwrite_details(
+        GatewayInterface $gateway,
+        Capture $capture,
+        PaymentInterface $payment,
+        OrderInterface $order
+    ): void {
+        $e = new Exception();
+        $previousDetails = ['foo' => 'bar'];
+        $failureDetails = ['failure' => 'detail'];
+        $this->setGateway($gateway);
+
+        $capture->getModel()->willReturn($payment);
+        $payment->getOrder()->willReturn($order);
+        $gateway->execute(Argument::any())->willReturn();
+
+        $payment->getDetails()->willReturn($previousDetails);
+        $capture->setModel(new ArrayObject($previousDetails))->shouldBeCalled();
+        $gateway->execute($capture)->will(
+            function ($args) use ($e, $failureDetails): void {
+                /** @var Capture $capture */
+                [$capture] = $args;
+                /** @var SyliusPaymentInterface $payment */
+                $payment = $capture->getModel();
+                $payment->setDetails($failureDetails);
+                throw $e;
+            }
+        );
+        $payment->setDetails($failureDetails)->shouldBeCalledOnce();
+        $this->shouldThrow($e)->duringExecute($capture);
     }
 }
