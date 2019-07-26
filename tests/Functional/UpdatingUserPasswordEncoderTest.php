@@ -107,7 +107,13 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
     /** @test */
     public function oauth_user_factory_is_not_overridden(): void
     {
-        $oAuthUserProvider = $this->client->getContainer()->get('sylius.test.oauth.user_provider');
+        if (!$this->client->getContainer()->has('sylius.oauth.user_provider')) {
+            $this->markTestSkipped('HWIOAuthBundle not installed');
+
+            return;
+        }
+
+        $oAuthUserProvider = $this->client->getContainer()->get('sylius.oauth.user_provider');
         $shopUserRepository = $this->client->getContainer()->get('sylius.repository.shop_user');
         $shopUser = $shopUserRepository->findOneByEmail('Oliver@doe.com');
         $initialOAuthAccounts = $shopUser->getOAuthAccounts()->count();

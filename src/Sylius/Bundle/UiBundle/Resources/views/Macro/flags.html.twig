@@ -4,5 +4,10 @@
 
 {% macro fromLocaleCode(locale_code) %}
     {% import _self as flags %}
-    {{ flags.fromCountryCode(locale_code|slice(-2)) }}
+
+    {% set country_code = locale_code|sylius_locale_country %}
+
+    {% if country_code %}
+        {{ flags.fromCountryCode(country_code) }}
+    {% endif %}
 {% endmacro %}
