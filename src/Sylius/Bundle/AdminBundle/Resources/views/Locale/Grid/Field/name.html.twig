@@ -1,1 +1,3 @@
-<i class="{{ data.code|slice(-2)|lower }} flag"></i> {{ data.code }} {{ data.name }}
+{% import "@SyliusUi/Macro/flags.html.twig" as flags %}
+
+{{ flags.fromLocaleCode(data.code) }} {{ data.code }} {{ data.name }}

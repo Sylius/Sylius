@@ -1,3 +1,5 @@
+{% import "@SyliusUi/Macro/flags.html.twig" as flags %}
+
 <address>
     {% if address.company is not null %}
         <strong>{{ address.company }}</strong><br>
@@ -11,6 +13,6 @@
     {% if address|sylius_province_name is not empty %}
         {{ address|sylius_province_name }}<br/>
     {% endif %}
-    <i class="{{ address.countryCode|lower }} flag"></i>
+    {{ flags.fromCountryCode(address.countryCode) }}
     {{ address.countryCode|sylius_country_name|upper }}
 </address>
