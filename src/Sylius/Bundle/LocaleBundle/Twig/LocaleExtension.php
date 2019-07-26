@@ -32,6 +32,17 @@ final class LocaleExtension extends \Twig_Extension
     {
         return [
             new \Twig_Filter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
+            new \Twig_Filter('sylius_locale_country', [$this, 'getCountryCode']),
         ];
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return null|string
+     */
+    public function getCountryCode(string $locale): ?string
+    {
+        return \Locale::getRegion($locale);
     }
 }
