@@ -25,7 +25,6 @@ import './sylius-notification';
 import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
-import './sylius-delete-avatar-image-button-visible';
 
 import SyliusTaxonomyTree from './sylius-taxon-tree';
 import formsList from './sylius-forms-list';
@@ -94,8 +93,6 @@ $(document).ready(() => {
   $(document).previewUploadedImage('#sylius_product_images');
   $(document).previewUploadedImage('#sylius_taxon_images');
 
-  $(document).removeAvatarImageButtonVisibility();
-  $(document).on('change', $(this).removeAvatarImageButtonVisibility());
   $(document).previewUploadedImage('#add-avatar');
 
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
