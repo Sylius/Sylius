@@ -54,17 +54,5 @@
         </service>
 
         <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" public="true" />
-
-        <service id="sylius.test.oauth.user_provider" class="Sylius\Bundle\CoreBundle\OAuth\UserProvider" public="true">
-            <argument type="string" id="%sylius.model.shop_user.class%" />
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.factory.shop_user" />
-            <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="sylius.factory.oauth_user" />
-            <argument type="service" id="sylius.repository.oauth_user" />
-            <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="sylius.canonicalizer" />
-            <argument type="service" id="sylius.repository.customer" />
-        </service>
     </services>
 </container>
