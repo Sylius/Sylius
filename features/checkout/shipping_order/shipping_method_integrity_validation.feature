@@ -28,7 +28,7 @@ Feature: Order shipping method integrity
         Then I should not be able to confirm order because products does not fit "DHL" requirements
         And I should not see the thank you page
 
-    @ui @javascript
+    @ui
     Scenario: Validate shipping method after removing item which fits shipping method requirements
         Given I added product "T-shirt Breaking Bad" to the cart
         And I added product "Westworld host" to the cart
