@@ -9,7 +9,7 @@ Feature: Removing cart item from cart
         And the store has a product "T-shirt banana" priced at "$12.54"
         And I added product "T-shirt banana" to the cart
 
-    @ui @javascript
+    @ui
     Scenario: Removing cart item
         When I see the summary of my cart
         And I remove product "T-shirt banana" from the cart

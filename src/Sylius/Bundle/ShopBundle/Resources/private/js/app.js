@@ -18,7 +18,6 @@ import 'sylius/ui/sylius-api-toggle';
 import './sylius-add-to-cart';
 import './sylius-address-book';
 import './sylius-province-field';
-import './sylius-remove-from-cart';
 import './sylius-variant-images';
 import './sylius-variants-prices';
 
@@ -69,7 +68,6 @@ $(document).ready(() => {
     throttle: 500,
   });
 
-  $('.sylius-cart-remove-button').removeFromCart();
   $('#sylius-product-adding-to-cart').addToCart();
 
   $('#sylius-shipping-address').addressBook();
