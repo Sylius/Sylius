@@ -10,7 +10,7 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @ui @javascript
+    @ui
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
@@ -32,7 +32,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$100.00"
         And my cart shipping should be for free
 
-    @ui @javascript
+    @ui
     Scenario: Receiving discount after removing an item from the cart and then adding another one
         Given the store has a product "Symfony T-Shirt" priced at "$150.00"
         And the promotion gives "$10.00" discount to every order
