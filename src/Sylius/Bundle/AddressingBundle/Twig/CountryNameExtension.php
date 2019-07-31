@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Symfony\Component\Intl\Intl;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Symfony\Component\Intl\Countries;
 
 class CountryNameExtension extends AbstractExtension
 {
@@ -34,7 +34,7 @@ class CountryNameExtension extends AbstractExtension
     {
         $countryCode = $country instanceof CountryInterface ? $country->getCode() : $country;
 
-        if ($countryName = Intl::getRegionBundle()->getCountryName($countryCode, $locale)) {
+        if ($countryName = Countries::getName($countryCode, $locale)) {
             return $countryName;
         }
 

@@ -20,7 +20,7 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Languages;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
@@ -103,6 +103,6 @@ final class LocaleSetup implements LocaleSetupInterface
             [$language, $region] = explode('_', $code, 2);
         }
 
-        return Intl::getLanguageBundle()->getLanguageName($language, $region);
+        return Languages::getName($language, $region);
     }
 }
