@@ -67,7 +67,7 @@ final class NonChannelLocaleListener
         }
 
         $requestLocale = $request->getLocale();
-        if (!in_array($requestLocale, $this->channelBasedLocaleProvider->getAvailableLocalesCodes(), true)) {
+        if (!in_array($requestLocale->getCode(), $this->channelBasedLocaleProvider->getAvailableLocalesCodes(), true)) {
             throw new NotFoundHttpException(
                 sprintf('The "%s" locale is unavailable in this channel.', $requestLocale)
             );
