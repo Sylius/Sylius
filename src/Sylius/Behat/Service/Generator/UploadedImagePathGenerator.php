@@ -15,11 +15,13 @@ namespace Sylius\Behat\Service\Generator;
 
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class UploadedImagePathGenerator implements ImagePathGeneratorInterface
 {
     public function generate(ImageInterface $image): string
     {
+        /** @var UploadedFile $file */
         $file = $image->getFile();
 
         $hash = bin2hex(random_bytes(16));
