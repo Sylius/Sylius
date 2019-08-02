@@ -177,6 +177,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
 
+            ->setDefault('tracked', false)
+
             ->setDefault('slug', function (Options $options): string {
                 return $this->slugGenerator->generate($options['name']);
             })
@@ -272,6 +274,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setOnHand($this->faker->randomNumber(1));
             $productVariant->setShippingRequired($options['shipping_required']);
             $productVariant->setTaxCategory($options['tax_category']);
+            $productVariant->setTracked($options['tracked']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
                 $this->createChannelPricings($productVariant, $channel->getCode());

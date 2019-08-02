@@ -29,6 +29,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
+                ->booleanNode('tracked')->end()
                 ->scalarNode('slug')->end()
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
