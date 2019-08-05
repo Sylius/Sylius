@@ -54,13 +54,14 @@ Here you will find all configuration options of ``sylius_grid``.
                         form_options: { }
                         default_value: ~
                     date:
-                        type: date # Type of filter
+                        type: datetime # Type of filter
                         label: app.ui.created_at
                         enabled: true
                         template: ~
                         position: 100
                         options:
                             field: createdAt
+                            format: 'Y-m-d H:i' # optional
                         form_options: { }
                         default_value: ~
                     channel:
