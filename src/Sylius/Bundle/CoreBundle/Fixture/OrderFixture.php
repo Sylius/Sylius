@@ -21,6 +21,7 @@ use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -175,17 +176,34 @@ class OrderFixture extends AbstractFixture
     {
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
+        $generatedItems = [];
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
+            /** @var ProductInterface $product */
+            $product = $this->faker->randomElement($products);
+
+            if (!$product->hasChannel($order->getChannel())) {
+                $i--;
+                continue;
+            }
+
+            $variant = $this->faker->randomElement($product->getVariants()->toArray());
+
+            if (array_key_exists($variant->getCode(), $generatedItems)) {
+                /** @var OrderItemInterface $item */
+                $item = $generatedItems[$variant->getCode()];
+                $this->orderItemQuantityModifier->modify($item, $item->getQuantity() + random_int(1, 5));
+
+                continue;
+            }
+
             /** @var OrderItemInterface $item */
             $item = $this->orderItemFactory->createNew();
-
-            $product = $this->faker->randomElement($products);
-            $variant = $this->faker->randomElement($product->getVariants()->toArray());
 
             $item->setVariant($variant);
             $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
 
+            $generatedItems[$variant->getCode()] = $item;
             $order->addItem($item);
         }
     }
