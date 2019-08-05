@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by pjedrzejewski at 2019-07-10T11:02:37Z
+
+IIRC the reason to use codes was to avoid issues when editing. Because if you try to change name to empty, the breeadcrumb will take the data from the entity, which will have empty value bound by the forms logic... :)
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-07-10T11:54:11Z
+
+> IIRC the reason to use codes was to avoid issues when editing. Because if you try to change name to empty, the breeadcrumb will take the data from the entity, which will have empty value bound by the forms logic... :)
+
+@pjedrzejewski `resource.name|default(resource.code)`? 😄
+
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2019-07-11T07:01:12Z
+
+The editing issue is very minor compared to the logic of displaying codes (that are an internal property used for processing things), while we have names (that are designed to be displayed everywhere). :)
+
+I guess the weirdy forms' logic is not an issue that should be solved by displaying our immutable codes instead of names.
+
+Although I will use the tip from @vvasiloi for now, thanks 💪
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-07-25T06:29:47Z
+
+@CoderMaggie rebase should fix the build :)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2019-08-05T09:02:25Z
+
+Thank you, Magdalena! :tada:
