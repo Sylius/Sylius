@@ -178,6 +178,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('enabled', 'bool')
 
             ->setDefault('tracked', false)
+            ->setAllowedTypes('tracked', 'bool')
 
             ->setDefault('slug', function (Options $options): string {
                 return $this->slugGenerator->generate($options['name']);
