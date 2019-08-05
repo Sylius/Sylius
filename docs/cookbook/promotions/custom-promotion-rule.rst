@@ -26,7 +26,7 @@ The new Rule needs a RuleChecker class:
         /**
          * {@inheritdoc}
          */
-        public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+        public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
         {
             return $subject->getCustomer()->isPremium();
         }
