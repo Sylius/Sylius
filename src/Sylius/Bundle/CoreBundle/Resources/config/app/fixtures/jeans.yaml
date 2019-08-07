@@ -49,15 +49,15 @@ sylius_fixtures:
                     name: product_attribute
                     options:
                         custom:
-                            -   name: 'jeans brand'
+                            -   name: 'Jeans brand'
                                 code: 'jeans_brand'
                                 type: 'text'
 
-                            -   name: 'jeans collection'
+                            -   name: 'Jeans collection'
                                 code: 'jeans_collection'
                                 type: 'text'
 
-                            -   name: 'jeans material'
+                            -   name: 'Jeans material'
                                 code: 'jeans_material'
                                 type: 'text'
 
