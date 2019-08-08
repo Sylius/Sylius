@@ -28,3 +28,14 @@ sylius_shop_cart_clear:
         _controller: sylius.controller.order:clearAction
         _sylius:
             redirect: sylius_shop_cart_summary
+
+sylius_shop_cart_item_remove:
+    path: /{id}/remove
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.order_item:removeAction
+        _sylius:
+            flash: sylius.cart.remove_item
+            redirect:
+                route: sylius_shop_cart_summary
+                parameters: {}

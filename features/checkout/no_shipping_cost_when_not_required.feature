@@ -25,7 +25,7 @@ Feature: No shipping cost when order does not require any shipping
         When I see the summary of my cart
         Then my cart shipping total should be "$5.00"
 
-    @ui @javascript
+    @ui
     Scenario: Seeing free cost if the order items that require shipping are removed
         Given I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart
         And I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
