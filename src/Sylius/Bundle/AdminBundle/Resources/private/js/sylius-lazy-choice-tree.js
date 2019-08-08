@@ -87,6 +87,8 @@ $.fn.extend({
             content.append(leafContainerElement);
             loader.removeClass('active');
             loadedLeafs.push(parentCode);
+
+            leafContainerElement.toggle();
           },
         });
       }
