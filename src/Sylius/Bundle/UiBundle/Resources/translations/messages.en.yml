@@ -872,6 +872,7 @@ sylius:
         type: 'Type'
         unavailable: 'Unavailable'
         unexpected_error_occurred: 'Unexpected error occurred.'
+        unit_discount: 'Unit discount'
         unit_price: 'Unit price'
         unknown: 'Unknown'
         unlimited: 'Unlimited'
