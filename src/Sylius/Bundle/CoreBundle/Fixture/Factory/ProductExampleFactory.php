@@ -109,7 +109,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         RepositoryInterface $productOptionRepository,
         RepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $taxCategoryRepository,
+        ?RepositoryInterface $taxCategoryRepository = null,
         ?FileLocatorInterface $fileLocator = null
     ) {
         $this->productFactory = $productFactory;
@@ -126,7 +126,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->productOptionRepository = $productOptionRepository;
         $this->channelRepository = $channelRepository;
         $this->localeRepository = $localeRepository;
+
         $this->taxCategoryRepository = $taxCategoryRepository;
+        if ($this->taxCategoryRepository === null) {
+            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -224,8 +228,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('tax_category', null)
             ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
-            ->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
         ;
+
+        if ($this->taxCategoryRepository !== null) {
+            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
+        }
     }
 
     private function createTranslations(ProductInterface $product, array $options): void
@@ -274,7 +281,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
             $productVariant->setShippingRequired($options['shipping_required']);
-            $productVariant->setTaxCategory($options['tax_category']);
+            if (isset($options['tax_category']) && $options['tax_category'] instanceof TaxCategoryInterface) {
+                $productVariant->setTaxCategory($options['tax_category']);
+            }
             $productVariant->setTracked($options['tracked']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
