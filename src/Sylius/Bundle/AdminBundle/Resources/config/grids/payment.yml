@@ -6,9 +6,12 @@ sylius_grid:
                 options:
                     class: "%sylius.model.payment.class%"
             fields:
-                id:
-                    type: string
-                    label: sylius.ui.id
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i
                 number:
                     type: twig
                     label: sylius.ui.order
