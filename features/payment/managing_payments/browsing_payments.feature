@@ -17,3 +17,10 @@ Feature: Browsing payments
         When I browse payments
         Then I should see a single payment in the list
         And the payments of the "#00000001" order should be "New" for "amba@fatima.org"
+
+    @ui
+    Scenario: Default sorting payments by date
+        Given there is an "#00000002" order with "Apple" product
+        When I browse payments
+        Then I should see payment for "#00000001" order as 1st in the list
+        And I should see payment for "#00000002" order as 2st in the list
