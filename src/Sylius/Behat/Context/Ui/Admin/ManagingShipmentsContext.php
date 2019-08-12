@@ -152,4 +152,12 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
     }
+
+    /**
+     * @Then I should see shipment for :order order as :nth in the list
+     */
+    public function iShouldSeeShipmentForOrderAs1stInTheList(string $orderNumber, $nth): void
+    {
+        Assert::true($this->indexPage->isNthNumberOnTheListByOrderNumber($orderNumber, (int) $nth));
+    }
 }

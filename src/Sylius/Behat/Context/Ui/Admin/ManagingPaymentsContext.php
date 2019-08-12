@@ -149,4 +149,12 @@ final class ManagingPaymentsContext implements Context
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
     }
+
+    /**
+     * @Then I should see payment for :order order as :nth in the list
+     */
+    public function iShouldSeePaymentForOrderAs1stInTheList(string $orderNumber, $nth): void
+    {
+        Assert::true($this->indexPage->isNthNumberOnTheListByOrderNumber($orderNumber, (int) $nth));
+    }
 }

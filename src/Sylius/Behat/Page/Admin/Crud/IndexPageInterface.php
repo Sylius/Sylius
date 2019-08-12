@@ -24,6 +24,8 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function getColumnFields(string $columnName): array;
 
+    public function isNthNumberOnTheListByOrderNumber(string $orderNumber, int $nth): bool;
+
     public function sortBy(string $fieldName): void;
 
     public function deleteResourceOnPage(array $parameters): void;
