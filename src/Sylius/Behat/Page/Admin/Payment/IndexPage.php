@@ -33,6 +33,16 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $this->getField($orderNumber, 'state')->getText();
     }
 
+    public function isPaymentWithOrderNumberInPosition(string $orderNumber, int $position): bool
+    {
+        $result = $this->getElement('payment_in_given_position', [
+            '%position%' => $position,
+            '%orderNumber%' => $orderNumber,
+        ]);
+
+        return $result !== null;
+    }
+
     public function showOrderPageForNthPayment(int $position): void
     {
         $this->getOrderLinkForRow($position)->clickLink('#');
@@ -42,6 +52,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_state' => '#criteria_state',
+            'payment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);
     }
 

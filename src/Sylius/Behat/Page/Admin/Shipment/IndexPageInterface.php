@@ -19,6 +19,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
 {
     public function chooseStateToFilter(string $shipmentState): void;
 
+    public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool;
+
     public function shipShipmentOfOrderWithNumber(string $orderNumber): void;
 
     public function getShipmentStatusByOrderNumber(string $orderNumber): string;
