@@ -137,6 +137,15 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given there is a customer :customer that placed an order :orderNumber later
+     */
+    public function thereIsACustomerThatPlacedAnOrderLater(CustomerInterface $customer, string $orderNumber): void
+    {
+        sleep(1);
+        $this->thereIsCustomerThatPlacedOrder($customer, $orderNumber);
+    }
+
+    /**
      * @Given /^the guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based shipping address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
      */
     public function theGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
@@ -422,6 +431,15 @@ final class OrderContext implements Context
         }
 
         $this->orderRepository->add($order);
+    }
+
+    /**
+     * @Given there is an :orderNumber order with :product product ordered later
+     */
+    public function thereIsAnOrderWithProductOrderedLater(string $orderNumber, ProductInterface $product): void
+    {
+        sleep(1);
+        $this->thereIsAOrderWithProduct($orderNumber, $product);
     }
 
     /**

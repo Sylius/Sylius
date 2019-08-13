@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.shipment.class%"
+            sorting:
+                createdAt: desc
             fields:
                 createdAt:
                     type: datetime

@@ -60,17 +60,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
     }
 
-    public function isNthNumberOnTheListByOrderNumber(string $orderNumber, int $nth): bool
-    {
-        $result = $this->getDocument()->find('css', sprintf('table tbody tr:nth-child(%d) td:contains("%s")', $nth, $orderNumber));
-
-        if ($result !== null) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function sortBy(string $fieldName): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));

@@ -23,6 +23,16 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('filter_state')->selectOption($shipmentState);
     }
 
+    public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool
+    {
+        $result = $this->getElement('shipment_in_given_position', [
+                '%position%' => $position,
+                '%orderNumber%' => $orderNumber,
+            ]);
+
+        return $result !== null;
+    }
+
     public function shipShipmentOfOrderWithNumber(string $orderNumber): void
     {
         $this->getField($orderNumber, 'actions')->pressButton('Ship');
@@ -52,6 +62,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_state' => '#criteria_state',
+            'shipment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);
     }
 

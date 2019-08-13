@@ -154,10 +154,10 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see shipment for :order order as :nth in the list
+     * @Then /^I should see shipment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
      */
-    public function iShouldSeeShipmentForOrderAs1stInTheList(string $orderNumber, $nth): void
+    public function iShouldSeeShipmentForTheOrderInTheList(string $orderNumber, int $position): void
     {
-        Assert::true($this->indexPage->isNthNumberOnTheListByOrderNumber($orderNumber, (int) $nth));
+        Assert::true($this->indexPage->isShipmentWithOrderNumberInPosition($orderNumber, $position));
     }
 }

@@ -151,10 +151,10 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @Then I should see payment for :order order as :nth in the list
+     * @Then /^I should see payment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
      */
-    public function iShouldSeePaymentForOrderAs1stInTheList(string $orderNumber, $nth): void
+    public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber,int $position): void
     {
-        Assert::true($this->indexPage->isNthNumberOnTheListByOrderNumber($orderNumber, (int) $nth));
+        Assert::true($this->indexPage->isPaymentWithOrderNumberInPosition($orderNumber, $position));
     }
 }
