@@ -152,4 +152,12 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true($this->orderShowPage->isOpen(['id' => $order->getId()]));
     }
+
+    /**
+     * @Then /^I should see shipment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
+     */
+    public function iShouldSeeShipmentForTheOrderInTheList(string $orderNumber, int $position): void
+    {
+        Assert::true($this->indexPage->isShipmentWithOrderNumberInPosition($orderNumber, $position));
+    }
 }

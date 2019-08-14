@@ -79,6 +79,7 @@ final class OrderContext implements Context
      * @Transform :orderNumber
      * @Transform /^an order "([^"]+)"$/
      * @Transform /^the order "([^"]+)"$/
+     * @Transform /^the "([^"]+)" order$/
      */
     public function getOrderNumber($orderNumber)
     {

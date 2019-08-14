@@ -23,5 +23,7 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function getPaymentStateByOrderNumber(string $orderNumber): string;
 
+    public function isPaymentWithOrderNumberInPosition(string $orderNumber, int $position): bool;
+
     public function showOrderPageForNthPayment(int $position): void;
 }

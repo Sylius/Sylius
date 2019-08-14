@@ -5,10 +5,15 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.shipment.class%"
+            sorting:
+                createdAt: desc
             fields:
-                id:
-                    type: string
-                    label: sylius.ui.id
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i:s
                 number:
                     type: twig
                     label: sylius.ui.order
