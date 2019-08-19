@@ -739,7 +739,7 @@ sylius:
         show_metadata: 'Afficher les méta-données'
         show_order_details: 'Afficher les détails de votre commande'
         show_orders: 'Voir les commandes'
-        sign_in: 'Connection'
+        sign_in: 'Connexion'
         sign_in_here: 'Connectez-vous ici'
         sign_in_to_the_store_or_create_new_account: 'Connectez-vous <small>ou créez un compte</small>'
         sign_out: 'Déconnexion'
