@@ -22,7 +22,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
-                    sortable: ~
+                    sortable: name
                     options:
                         template: "@SyliusUi/Grid/Field/nameAndDescription.html.twig"
                 couponBased:
