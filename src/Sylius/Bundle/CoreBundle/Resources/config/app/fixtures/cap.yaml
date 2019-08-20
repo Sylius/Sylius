@@ -61,26 +61,6 @@ sylius_fixtures:
                                 code: 'cap_material'
                                 type: 'text'
 
-                cap_option:
-                    name: product_option
-                    options:
-                        custom:
-                            -   name: 'Cap size'
-                                code: 'cap_size'
-                                values:
-                                    cap_size_s: 'S'
-                                    cap_size_m: 'M'
-                                    cap_size_l: 'L'
-                                    cap_size_xl: 'XL'
-                                    cap_size_xxl: 'XXL'
-
-                            -   name: 'Cap color'
-                                code: 'cap_color'
-                                values:
-                                    cap_color_red: 'Red'
-                                    cap_color_black: 'Black'
-                                    cap_color_white: 'White'
-
                 cap_product:
                     name: product
                     options:
@@ -97,9 +77,6 @@ sylius_fixtures:
                                     cap_brand: 'You are breathtaking'
                                     cap_collection: 'Sylius Winter 2019'
                                     cap_material: '100% wool'
-                                product_options:
-                                    - 'cap_color'
-                                    - 'cap_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
 
@@ -115,9 +92,6 @@ sylius_fixtures:
                                     cap_brand: 'Modern Wear'
                                     cap_collection: 'Sylius Winter 2019'
                                     cap_material: '100% wool'
-                                product_options:
-                                    - 'cap_color'
-                                    - 'cap_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
 
@@ -133,9 +107,6 @@ sylius_fixtures:
                                     cap_brand: 'Celsius Small'
                                     cap_collection: 'Sylius Winter 2019'
                                     cap_material: '100% wool'
-                                product_options:
-                                    - 'cap_color'
-                                    - 'cap_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
 
@@ -148,8 +119,5 @@ sylius_fixtures:
                                     cap_brand: 'Date & Banana'
                                     cap_collection: 'Sylius Winter 2019'
                                     cap_material: '100% wool'
-                                product_options:
-                                    - 'cap_color'
-                                    - 'cap_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_04.jpg', type: 'main' }
