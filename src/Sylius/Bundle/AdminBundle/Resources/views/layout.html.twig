@@ -37,11 +37,7 @@
 {% block sidebar %}
     {{ sonata_block_render_event('sylius.admin.layout.sidebar_top') }}
 
-    <a class="item" href="{{ path('sylius_admin_dashboard') }}" style="padding: 13px 0;">
-        <div style="max-width: 90px; margin: 0 auto;">
-            <img src="{{ asset('assets/admin/img/admin-logo.svg') }}" class="ui fluid image">
-        </div>
-    </a>
+    {% include '@SyliusAdmin/_logo.html.twig' %}
     {{ knp_menu_render('sylius.admin.main', {'template': '@SyliusUi/Menu/sidebar.html.twig', 'currentClass': 'active'}) }}
 
     {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
