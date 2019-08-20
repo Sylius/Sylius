@@ -67,21 +67,13 @@ To test the documentation before a commit you need to install Sphinx.
 
     Official Sphinx installation guide : `www.sphinx-doc.org <https://www.sphinx-doc.org/en/master/usage/installation.html>`_
 
-There are two ways to install Sphinx: via `Homebrew <https://brew.sh/>`_ or via `Pip`_.
-
-• Sphinx installation via Homebrew
-
-.. code-block:: bash
-
-    $ brew install sphinx-doc
-
-• Sphinx installation via Pip
+Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 .. code-block:: bash
 
     $ pip install -U sphinx
 
-Then in the ``docs`` directory run ``sphinx-build -b html . build`` and view the generated HTML files in the ``build`` directory. You can open them in your browser and check how they look!
+Then run ``sphinx-build -b html ./docs ./docs/build`` and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
 
 Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
