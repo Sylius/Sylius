@@ -23,14 +23,18 @@ How to disable Sylius shop?
         ...
     ];
 
-**2.** Remove SyliusShopBundle's config import from ``config/packages/_sylius.yaml``.
+**2.** Remove SyliusShopBundle's configs from ``config/packages/_sylius.yaml``.
 
-Here you've got the line that should disappear from imports:
+Here you've got the lines that should disappear from this file:
 
 .. code-block:: yaml
 
     imports:
     #    - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" } # remove or leave this line commented
+    ...
+    #sylius_shop:
+    #    product_grid:
+    #        include_all_descendants: true
 
 **3.** Remove SyliusShopBundle routing configuration file ``config/routes/sylius_shop.yaml``.
 
