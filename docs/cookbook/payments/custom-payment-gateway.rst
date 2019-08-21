@@ -369,5 +369,5 @@ Learn more
 ----------
 
 * :doc:`Order payments documentation </book/orders/payments>`
-* `Payum documentation <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
-* `Mollie payment integration <https://github.com/BitBagCommerce/SyliusMolliePlugin/>`_.
+* `Payum documentation <https://github.com/Payum/Payum/blob/master/docs/index.md>`_
+* `Mollie payment integration <https://github.com/BitBagCommerce/SyliusMolliePlugin/>`_
