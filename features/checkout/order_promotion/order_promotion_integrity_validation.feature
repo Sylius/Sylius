@@ -37,3 +37,13 @@ Feature: Order promotions integrity
         And I have proceeded selecting "Offline" payment method
         When I confirm my order
         Then I should see the thank you page
+
+    @ui
+    Scenario: Removing promotion adjustment recalculate the tax on the order item unit
+        Given the store has "VAT" tax rate of 20% for "Clothes" within the "US" zone
+        And this product belongs to "Clothes" tax category
+        And this promotion gives "50%" discount to every order
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "Offline" payment method
+        And I confirm my order
+        And I should see the thank you page
