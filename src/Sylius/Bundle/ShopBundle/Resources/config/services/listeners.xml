@@ -36,17 +36,9 @@
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>
 
-        <service id="sylius.listener.order_promotion_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderPromotionIntegrityChecker">
-            <argument type="service" id="sylius.promotion_eligibility_checker" />
-            <argument type="service" id="event_dispatcher" />
+        <service id="sylius.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
-            <argument type="service" id="sylius.promotion_applicator" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
-        </service>
-
-        <service id="sylius.listener.order_total_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderTotalIntegrityChecker">
             <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="router" />
             <argument type="service" id="sylius.manager.order" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>

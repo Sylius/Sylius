@@ -93,12 +93,7 @@ interface CompletePageInterface extends SymfonyPageInterface
      */
     public function hasShippingPromotion($promotionName);
 
-    /**
-     * @param string $taxTotal
-     *
-     * @return bool
-     */
-    public function hasTaxTotal($taxTotal);
+    public function getTaxTotal(): string;
 
     /**
      * @param string $price

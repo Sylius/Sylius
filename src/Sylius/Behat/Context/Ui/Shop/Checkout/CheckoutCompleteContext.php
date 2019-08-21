@@ -186,9 +186,9 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Given my tax total should be :taxTotal
      */
-    public function myTaxTotalShouldBe($taxTotal)
+    public function myTaxTotalShouldBe(string $taxTotal): void
     {
-        Assert::true($this->completePage->hasTaxTotal($taxTotal));
+        Assert::same($this->completePage->getTaxTotal(), $taxTotal);
     }
 
     /**
