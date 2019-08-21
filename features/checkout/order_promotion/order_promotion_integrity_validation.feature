@@ -24,6 +24,16 @@ Feature: Order promotions integrity
         And I should not see the thank you page
 
     @ui
+    Scenario: Basket with several promotions is able to checkout
+        And this promotion gives "12%" discount to every order
+        And there is a promotion "New Year" with priority 2
+        And the promotion gives "$10.00" discount to every order with items total at least "$100.00"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "Offline" payment method
+        And I confirm my order
+        And I should see the thank you page
+
+    @ui
     Scenario: Receiving percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
