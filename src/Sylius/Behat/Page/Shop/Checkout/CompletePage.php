@@ -180,12 +180,9 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTaxTotal($taxTotal)
+    public function getTaxTotal(): string
     {
-        return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
+        return str_replace('Tax total: ', '', $this->getElement('tax_total')->getText());
     }
 
     /**

@@ -33,3 +33,9 @@ Feature: Browsing shipments
         When I browse shipments
         Then I should see shipment for the "#00000002" order as 1st in the list
         And I should see shipment for the "#00000001" order as 2nd in the list
+
+    @ui
+    Scenario: Not seeing shipments in cart state
+        Given the customer added "Banana" product to the cart
+        When I browse shipments
+        Then I should see only 2 shipments in the list

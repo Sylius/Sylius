@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.shipment.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 createdAt: desc
             fields:

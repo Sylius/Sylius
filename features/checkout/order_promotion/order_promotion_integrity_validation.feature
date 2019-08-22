@@ -24,6 +24,16 @@ Feature: Order promotions integrity
         And I should not see the thank you page
 
     @ui
+    Scenario: Being able to completing checkout with several promotions
+        And this promotion gives "12%" discount to every order
+        And there is a promotion "New Year" with priority 2
+        And the promotion gives "$10.00" discount to every order with items total at least "$100.00"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "Offline" payment method
+        And I confirm my order
+        And I should see the thank you page
+
+    @ui
     Scenario: Receiving percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
@@ -36,4 +46,14 @@ Feature: Order promotions integrity
         And I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "Offline" payment method
         When I confirm my order
+        Then I should see the thank you page
+
+    @ui
+    Scenario: Excluded tax is not taken into account into promotion integrity check
+        Given the store has "VAT" tax rate of 20% for "Clothes" within the "US" zone
+        And this product belongs to "Clothes" tax category
+        And this promotion gives "50%" discount to every order
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed selecting "Offline" payment method
+        And I confirm my order
         Then I should see the thank you page
