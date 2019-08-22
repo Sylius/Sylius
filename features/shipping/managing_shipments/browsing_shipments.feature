@@ -27,3 +27,9 @@ Feature: Browsing shipments
         Then I should see 2 shipments in the list
         And the shipment of the "#00000001" order should be "Shipped" for "donald@duck.com"
         And the shipment of the "#00000002" order should be "Ready" for "iron@man.com"
+
+    @ui
+    Scenario: Not seeing shipments in cart state
+        Given the customer added "Banana" product to the cart
+        When I browse shipments
+        Then I should see only 2 shipments in the list
