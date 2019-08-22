@@ -19,6 +19,12 @@ Feature: Browsing payments
         And the payments of the "#00000001" order should be "New" for "amba@fatima.org"
 
     @ui
+    Scenario: Not seeing payments in cart state
+        Given the customer added "Apple" product to the cart
+        When I browse payments
+        Then I should see a single payment in the list
+
+    @ui
     Scenario: Payments are sorted by newest as default
         Given there is an "#00000002" order with "Apple" product ordered later
         When I browse payments
