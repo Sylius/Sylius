@@ -45,7 +45,7 @@ In the following example, a new gateway will be configured, which will send paym
 
     .. code-block:: xml
 
-        # src/Resources/config/services.xml
+        <!-- src/Resources/config/services.xml -->
 
         <service id="app.sylius_payment" class="Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder">
             <argument>Acme\SyliusExamplePlugin\Payum\SyliusPaymentGatewayFactory</argument>
@@ -83,7 +83,7 @@ In the following example, a new gateway will be configured, which will send paym
 
     .. code-block:: xml
 
-        # src/Resources/config/services.xml
+        <!-- src/Resources/config/services.xml -->
 
         <service id="Acme\SyliusExamplePlugin\Form\Type\SyliusGatewayConfigurationType">
             <tag name="sylius.gateway_configuration_type" type="sylius_payment" label="Sylius Payment" />
@@ -351,7 +351,7 @@ so we can use an API Key provided in form.
 
     .. code-block:: xml
 
-        # src/Resources/config/services.xml
+        <!-- src/Resources/config/services.xml -->
 
         <service id="Acme\SyliusExamplePlugin\Payum\Action\CaptureAction" public=true>
             <argument type="service" id="sylius.http_client" />
