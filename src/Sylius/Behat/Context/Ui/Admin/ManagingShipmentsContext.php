@@ -89,7 +89,7 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see :count shipment(s) in the list
+     * @Then I should see( only) :count shipment(s) in the list
      * @Then I should see a single shipment in the list
      */
     public function iShouldSeeCountShipmentsInList(int $count = 1): void
