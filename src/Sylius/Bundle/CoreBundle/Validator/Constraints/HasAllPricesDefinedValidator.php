@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,14 +21,19 @@ use Webmozart\Assert\Assert;
 
 final class HasAllPricesDefinedValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** @var ChannelRepositoryInterface */
+    private $channelRepository;
+
+    public function __construct(ChannelRepositoryInterface $channelRepository)
+    {
+        $this->channelRepository = $channelRepository;
+    }
+
     public function validate($productVariant, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, HasAllPricesDefined::class);
 
-        $channels = $productVariant->getProduct()->getChannels();
+        $channels = $this->channelRepository->findAll();
 
         foreach ($channels as $channel) {
             /** @var ChannelPricingInterface $channelPricing */
