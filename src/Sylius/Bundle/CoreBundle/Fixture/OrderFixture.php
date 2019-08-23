@@ -19,6 +19,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -227,36 +228,57 @@ class OrderFixture extends AbstractFixture
 
     private function selectShipping(OrderInterface $order): void
     {
-        $shippingMethod = $this
-            ->faker
-            ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
-        Assert::notNull($shippingMethod, 'Shipping method should not be null.');
+        if (!$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
+
+            return;
+        }
+
+        $channel = $order->getChannel();
+        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
+
+        if (count($shippingMethods) === 0) {
+            throw new \InvalidArgumentException(sprintf(
+                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
+                $channel->getCode()
+            ));
+        }
+
+        $shippingMethod = $this->faker->randomElement($shippingMethods);
+
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
+        Assert::notNull($shippingMethod, $this->generateInvalidSkipMessage('shipping', $channel->getCode()));
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
         }
 
-        if ($this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-        }
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
     }
 
     private function selectPayment(OrderInterface $order): void
     {
+        if (!$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
+
+            return;
+        }
+
         $paymentMethod = $this
             ->faker
             ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
-        Assert::notNull($paymentMethod, 'Payment method should not be null.');
+
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
+        Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
 
         foreach ($order->getPayments() as $payment) {
             $payment->setMethod($paymentMethod);
         }
 
-        if ($this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-        }
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
     }
 
     private function completeCheckout(OrderInterface $order): void
@@ -271,5 +293,14 @@ class OrderFixture extends AbstractFixture
     private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
+    }
+
+    private function generateInvalidSkipMessage(string $type, string $channelCode): string
+    {
+        return sprintf(
+            "No enabled %s method was found for the channel '%s'. " .
+            "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
+            $type, $channelCode, $type, $type
+        );
     }
 }
