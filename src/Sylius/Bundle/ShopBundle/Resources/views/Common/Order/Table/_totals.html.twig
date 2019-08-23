@@ -16,7 +16,7 @@
     <td colspan="4" class="right aligned" id="tax-total">
         <div style="display: flex; justify-content: flex-end; align-items: center">
             <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>
-            <div>
+            <div data-test="tax-total">
             {% if not taxIncluded and not taxExcluded %}
                 <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
             {% endif %}

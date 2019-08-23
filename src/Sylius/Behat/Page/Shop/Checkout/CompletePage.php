@@ -182,7 +182,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function getTaxTotal(): string
     {
-        return str_replace('Tax total: ', '', $this->getElement('tax_total')->getText());
+        return $this->getElement('tax_total')->getText();
     }
 
     /**
@@ -352,7 +352,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'shipping_method' => '#sylius-shipping-method',
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
-            'tax_total' => '#tax-total',
+            'tax_total' => '[data-test="tax-total"]',
             'validation_errors' => '.sylius-validation-error',
         ]);
     }
