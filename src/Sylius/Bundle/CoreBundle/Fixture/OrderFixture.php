@@ -232,64 +232,50 @@ class OrderFixture extends AbstractFixture
 
     private function selectShipping(OrderInterface $order): void
     {
+        if (!$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
+            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
+
+            return;
+        }
+
         $shippingMethod = $this
             ->faker
             ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
-        Assert::notNull($shippingMethod, 'Shipping method should not be null.');
+
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
+        Assert::notNull($shippingMethod, $this->generateInvalidSkipMessage('shipping', $channel->getCode()));
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
         }
 
-        if ($this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
-            $shippingMethod = $this
-                ->faker
-                ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
-            ;
-
-            /** @var ChannelInterface $channel */
-            $channel = $order->getChannel();
-            Assert::notNull($shippingMethod, sprintf(
-                "No enabled shipping method was found for channel '%s'. " .
-                "Set 'skipping_shipping_step_allowed' option to true for this channel if you want to skip shipping method selection.",
-                $channel->getCode()
-            ));
-
-            foreach ($order->getShipments() as $shipment) {
-                $shipment->setMethod($shippingMethod);
-            }
-
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-        } else {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
-        }
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
     }
 
     private function selectPayment(OrderInterface $order): void
     {
-        if ($this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
-            $paymentMethod = $this
-                ->faker
-                ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
-            ;
-
-            /** @var ChannelInterface $channel */
-            $channel = $order->getChannel();
-            Assert::notNull($paymentMethod, sprintf(
-                "No enabled payment method was found for channel '%s'. " .
-                "Set 'skipping_payment_step_allowed' option to true for this channel if you want to skip payment method selection.",
-                $channel->getCode()
-            ));
-
-            foreach ($order->getPayments() as $payment) {
-                $payment->setMethod($paymentMethod);
-            }
-
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-        } else {
+        if (!$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
+
+            return;
         }
+
+        $paymentMethod = $this
+            ->faker
+            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+        ;
+
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
+        Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
+
+        foreach ($order->getPayments() as $payment) {
+            $payment->setMethod($paymentMethod);
+        }
+
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
     }
 
     private function completeCheckout(OrderInterface $order): void
@@ -304,5 +290,14 @@ class OrderFixture extends AbstractFixture
     private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
+    }
+
+    private function generateInvalidSkipMessage(string $type, string $channelCode): string
+    {
+        return sprintf(
+            "No enabled %s method was found for the channel '%s'. " .
+            "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
+            $type, $channelCode, $type, $type
+        );
     }
 }
