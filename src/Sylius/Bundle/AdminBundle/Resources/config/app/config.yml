@@ -44,6 +44,7 @@ sylius_grid:
 
 liip_imagine:
     filter_sets:
+        sylius_admin_product_original: ~
         sylius_admin_admin_user_avatar_thumbnail:
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
@@ -53,6 +54,12 @@ liip_imagine:
         sylius_admin_product_thumbnail:
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
+        sylius_admin_product_small_thumbnail:
+            filters:
+                thumbnail: { size: [150, 112], mode: outbound }
+        sylius_admin_product_large_thumbnail:
+            filters:
+                thumbnail: { size: [550, 412], mode: outbound }
 
 sonata_block:
     default_contexts: ~
