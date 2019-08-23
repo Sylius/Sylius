@@ -179,9 +179,6 @@ class OrderFixture extends AbstractFixture
         $products = $this->productRepository->findAll();
         $generatedItems = [];
 
-        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($order->getChannel());
-        $shippingMethodsAvailable = count($shippingMethods) > 0;
-
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
@@ -197,7 +194,6 @@ class OrderFixture extends AbstractFixture
                 /** @var OrderItemInterface $item */
                 $item = $generatedItems[$variant->getCode()];
                 $this->orderItemQuantityModifier->modify($item, $item->getQuantity() + random_int(1, 5));
-                $variant->setShippingRequired($shippingMethodsAvailable);
 
                 continue;
             }
@@ -238,10 +234,17 @@ class OrderFixture extends AbstractFixture
             return;
         }
 
-        $shippingMethod = $this
-            ->faker
-            ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
+        $channel = $order->getChannel();
+        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
+
+        if (count($shippingMethods) === 0) {
+            throw new \InvalidArgumentException(sprintf(
+                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
+                $channel->getCode()
+            ));
+        }
+
+        $shippingMethod = $this->faker->randomElement($shippingMethods);
 
         /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
