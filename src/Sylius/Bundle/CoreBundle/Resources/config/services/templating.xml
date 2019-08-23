@@ -15,8 +15,8 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.twig.extension.bundle_available_checker" class="Sylius\Bundle\CoreBundle\Twig\BundleAvailableCheckerExtension">
-            <argument type="service" id="service_container" />
+        <service id="sylius.twig.extension.sylius_bundle_loaded_checker" class="Sylius\Bundle\CoreBundle\Twig\BundleLoadedCheckerExtension">
+            <argument>%kernel.bundles%</argument>
             <tag name="twig.extension" />
         </service>
 
