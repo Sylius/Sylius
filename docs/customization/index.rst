@@ -19,6 +19,8 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     state_machine
     grid
     tips_and_tricks
+    fixtures
+    fixture_suites
 
 .. include:: /customization/map.rst.inc
 
