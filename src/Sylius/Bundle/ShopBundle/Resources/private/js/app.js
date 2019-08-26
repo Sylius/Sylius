@@ -75,4 +75,6 @@ $(document).ready(() => {
   $(document).provinceField();
   $(document).variantPrices();
   $(document).variantImages();
+
+  $('body').find('input[autocomplete="off"]').prop('autocomplete', 'disable');
 });
