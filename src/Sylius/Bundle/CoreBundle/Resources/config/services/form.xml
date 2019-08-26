@@ -120,6 +120,7 @@
         <service id="sylius.form.type.admin_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType">
             <argument>%sylius.model.admin_user.class%</argument>
             <argument>%sylius.form.type.admin_user.validation_groups%</argument>
+            <argument>%sylius_locale.locale%</argument>
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.shop_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType">
