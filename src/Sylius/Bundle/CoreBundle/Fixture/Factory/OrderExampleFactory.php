@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -183,17 +184,34 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
+        $generatedItems = [];
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
+            /** @var ProductInterface $product */
+            $product = $this->faker->randomElement($products);
+
+            if (!$product->hasChannel($order->getChannel())) {
+                $i--;
+                continue;
+            }
+
+            $variant = $this->faker->randomElement($product->getVariants()->toArray());
+
+            if (array_key_exists($variant->getCode(), $generatedItems)) {
+                /** @var OrderItemInterface $item */
+                $item = $generatedItems[$variant->getCode()];
+                $this->orderItemQuantityModifier->modify($item, $item->getQuantity() + random_int(1, 5));
+
+                continue;
+            }
+
             /** @var OrderItemInterface $item */
             $item = $this->orderItemFactory->createNew();
-
-            $product = $this->faker->randomElement($products);
-            $variant = $this->faker->randomElement($product->getVariants()->toArray());
 
             $item->setVariant($variant);
             $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
 
+            $generatedItems[$variant->getCode()] = $item;
             $order->addItem($item);
         }
     }
@@ -217,18 +235,24 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function selectShipping(OrderInterface $order): void
     {
-        if (!$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
-
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_SHIPPING_SKIPPED) {
             return;
         }
 
-        /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
         $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
 
+        if (count($shippingMethods) === 0) {
+            throw new \InvalidArgumentException(sprintf(
+                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
+                $channel->getCode()
+            ));
+        }
+
         $shippingMethod = $this->faker->randomElement($shippingMethods);
 
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
         Assert::notNull($shippingMethod, $this->generateInvalidSkipMessage('shipping', $channel->getCode()));
 
         foreach ($order->getShipments() as $shipment) {
@@ -240,23 +264,9 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     private function selectPayment(OrderInterface $order): void
     {
-        if (!$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_PAYMENT_SKIPPED) {
             return;
         }
-
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
-
-        $paymentMethod = $this->faker->randomElement($this->paymentMethodRepository->findEnabledForChannel($channel));
-
-        Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
-
-        foreach ($order->getPayments() as $payment) {
-            $payment->setMethod($paymentMethod);
-        }
-
-        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
     }
 
     protected function completeCheckout(OrderInterface $order): void

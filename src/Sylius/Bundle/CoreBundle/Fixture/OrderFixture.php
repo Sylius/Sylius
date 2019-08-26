@@ -74,6 +74,7 @@ class OrderFixture extends AbstractFixture
 
             @trigger_error('Use orderExampleFactory. OrderFixture is deprecated since 1.6 and will be prohibited since 2.0.', \E_USER_DEPRECATED);
         }
+
         $this->orderManager = $orderManager;
         $this->orderExampleFactory = $orderExampleFactory;
 
@@ -124,6 +125,7 @@ class OrderFixture extends AbstractFixture
             /** @var \DateTimeInterface|array $dates */
             $dates[] = $this->faker->dateTimeBetween('-1 years', 'now');
         }
+
         sort($dates);
 
         return $dates;
