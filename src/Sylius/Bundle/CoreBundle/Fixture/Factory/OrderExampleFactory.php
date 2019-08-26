@@ -81,7 +81,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected $orderPaymentMethodSelectionRequirementChecker;
 
     /** @var OptionsResolver */
-    private $optionsResolver;
+    protected $optionsResolver;
 
     /** @var \Faker\Generator */
     protected $faker;
@@ -262,7 +262,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
     }
 
-    private function selectPayment(OrderInterface $order): void
+    protected function selectPayment(OrderInterface $order): void
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_PAYMENT_SKIPPED) {
             return;
@@ -298,7 +298,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
-    private function generateInvalidSkipMessage(string $type, string $channelCode): string
+    protected function generateInvalidSkipMessage(string $type, string $channelCode): string
     {
         return sprintf(
             "No enabled %s method was found for the channel '%s'. " .
@@ -307,7 +307,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         );
     }
 
-    private function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
+    protected function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
             $order->setCheckoutCompletedAt($date);
