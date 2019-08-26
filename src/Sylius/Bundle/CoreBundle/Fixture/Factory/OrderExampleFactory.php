@@ -267,6 +267,21 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_PAYMENT_SKIPPED) {
             return;
         }
+
+        $paymentMethod = $this
+            ->faker
+            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+        ;
+
+        /** @var ChannelInterface $channel */
+        $channel = $order->getChannel();
+        Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
+
+        foreach ($order->getPayments() as $payment) {
+            $payment->setMethod($paymentMethod);
+        }
+
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
     }
 
     protected function completeCheckout(OrderInterface $order): void
