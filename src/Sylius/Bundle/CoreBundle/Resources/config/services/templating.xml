@@ -15,6 +15,11 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.twig.extension.sylius_bundle_loaded_checker" class="Sylius\Bundle\CoreBundle\Twig\BundleLoadedCheckerExtension">
+            <argument>%kernel.bundles%</argument>
+            <tag name="twig.extension" />
+        </service>
+
         <service id="sylius.templating.helper.product_variants_prices" class="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper">
             <argument type="service" id="sylius.provider.product_variants_prices" />
             <tag name="templating.helper" alias="sylius_product_variants_prices" />
