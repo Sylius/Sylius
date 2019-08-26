@@ -24,12 +24,14 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
@@ -115,15 +117,18 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
 
         $this->optionsResolver = new OptionsResolver();
-        $this->configureOptions($this->optionsResolver);
         $this->faker = \Faker\Factory::create();
+        $this->configureOptions($this->optionsResolver);
     }
 
     public function create(array $options = []): OrderInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        return $this->createOrder($options['channel'], $options['customer'], $options['country']);
+        $order = $this->createOrder($options['channel'], $options['customer'], $options['country']);
+        $this->setOrderCompletedDate($order, $options['complete_date']);
+
+        return $order;
     }
 
     protected function configureOptions(OptionsResolver $resolver): void
@@ -142,6 +147,11 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('country', LazyOption::randomOne($this->countryRepository))
             ->setAllowedTypes('country', ['null', 'string', CountryInterface::class])
             ->setNormalizer('country', LazyOption::findOneBy($this->countryRepository, 'code'))
+
+            ->setDefault('complete_date', function (Options $options): \DateTimeInterface {
+                return $this->faker->dateTimeBetween('-1 years', 'now');
+            })
+            ->setAllowedTypes('complete_date', ['null', \DateTime::class])
         ;
     }
 
@@ -213,19 +223,12 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             return;
         }
 
+        /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
         $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
-        if (count($shippingMethods) === 0) {
-            throw new \InvalidArgumentException(sprintf(
-                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
-                $channel->getCode()
-            ));
-        }
 
         $shippingMethod = $this->faker->randomElement($shippingMethods);
 
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
         Assert::notNull($shippingMethod, $this->generateInvalidSkipMessage('shipping', $channel->getCode()));
 
         foreach ($order->getShipments() as $shipment) {
@@ -241,13 +244,12 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
             return;
         }
-        $paymentMethod = $this
-            ->faker
-            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
 
         /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
+
+        $paymentMethod = $this->faker->randomElement($this->paymentMethodRepository->findEnabledForChannel($channel));
+
         Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
 
         foreach ($order->getPayments() as $payment) {
@@ -278,5 +280,12 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
             $type, $channelCode, $type, $type
         );
+    }
+
+    private function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
+    {
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
+            $order->setCheckoutCompletedAt($date);
+        }
     }
 }
