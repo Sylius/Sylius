@@ -16,13 +16,12 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
-use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
-use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -70,12 +69,6 @@ class OrderFixture extends AbstractFixture
     /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
-    private $orderShippingMethodSelectionRequirementChecker;
-
-    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
-    private $orderPaymentMethodSelectionRequirementChecker;
-
     /** @var \Faker\Generator */
     private $faker;
 
@@ -91,9 +84,7 @@ class OrderFixture extends AbstractFixture
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $addressFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+        StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->orderFactory = $orderFactory;
         $this->orderItemFactory = $orderItemFactory;
@@ -107,8 +98,6 @@ class OrderFixture extends AbstractFixture
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->addressFactory = $addressFactory;
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
-        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
 
         $this->faker = \Faker\Factory::create();
     }
@@ -228,9 +217,7 @@ class OrderFixture extends AbstractFixture
 
     private function selectShipping(OrderInterface $order): void
     {
-        if (!$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
-
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_SHIPPING_SKIPPED) {
             return;
         }
 
@@ -259,9 +246,7 @@ class OrderFixture extends AbstractFixture
 
     private function selectPayment(OrderInterface $order): void
     {
-        if (!$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
-
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_PAYMENT_SKIPPED) {
             return;
         }
 
