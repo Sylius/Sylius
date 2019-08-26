@@ -19,6 +19,8 @@ sylius_admin_shipment_ship:
     defaults:
         _controller: sylius.controller.shipment:applyStateMachineTransitionAction
         _sylius:
+            event: ship
+            section: admin
             permission: true
             state_machine:
                 graph: sylius_shipment
