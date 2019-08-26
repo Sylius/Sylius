@@ -299,7 +299,6 @@ class OrderFixture extends AbstractFixture
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
-<<<<<<< HEAD
     private function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
@@ -318,7 +317,8 @@ class OrderFixture extends AbstractFixture
         sort($dates);
 
         return $dates;
-=======
+    }
+
     private function generateInvalidSkipMessage(string $type, string $channelCode): string
     {
         return sprintf(
@@ -326,6 +326,5 @@ class OrderFixture extends AbstractFixture
             "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
             $type, $channelCode, $type, $type
         );
->>>>>>> 1.5
     }
 }
