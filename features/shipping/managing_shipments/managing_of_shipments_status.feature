@@ -15,9 +15,10 @@ Feature: Shipping a shipment from shipment list
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @email
     Scenario: Shipping a shipment from shipments index
         When I browse shipments
         And I ship the shipment of order "#00000001"
         Then I should be notified that the shipment has been successfully shipped
+        And an email with shipment's confirmation should be sent to "donald@duck.com"
         And I should see the shipment of order "#00000001" as "Shipped"
