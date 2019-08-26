@@ -19,6 +19,8 @@ sylius_admin_payment_complete:
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
+            event: complete
+            section: admin
             permission: true
             state_machine:
                 graph: sylius_payment
