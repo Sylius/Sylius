@@ -196,6 +196,7 @@
             <argument type="service" id="sm.factory" />
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
+            <argument type="service" id="sylius.fixture.example_factory.order" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
@@ -204,6 +205,5 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
             <tag name="sylius_fixtures.fixture" />
         </service>
-
     </services>
 </container>

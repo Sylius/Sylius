@@ -15,67 +15,24 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Webmozart\Assert\Assert;
 
 class OrderFixture extends AbstractFixture
 {
-    /** @var FactoryInterface */
-    private $orderFactory;
+    /** @var OrderExampleFactory */
+    protected $orderExampleFactory;
 
-    /** @var FactoryInterface */
-    private $orderItemFactory;
-
-    /** @var OrderItemQuantityModifierInterface */
-    private $orderItemQuantityModifier;
-
-    /** @var ObjectManager */
-    private $orderManager;
-
-    /** @var RepositoryInterface */
-    private $channelRepository;
-
-    /** @var RepositoryInterface */
-    private $customerRepository;
-
-    /** @var RepositoryInterface */
-    private $productRepository;
-
-    /** @var RepositoryInterface */
-    private $countryRepository;
-
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
-
-    /** @var ShippingMethodRepositoryInterface */
-    private $shippingMethodRepository;
-
-    /** @var FactoryInterface */
-    private $addressFactory;
-
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
-
-    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
-    private $orderShippingMethodSelectionRequirementChecker;
-
-    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
-    private $orderPaymentMethodSelectionRequirementChecker;
+    /** @var ObjectManager  */
+    protected $orderManager;
 
     /** @var \Faker\Generator */
     private $faker;
@@ -94,59 +51,43 @@ class OrderFixture extends AbstractFixture
         FactoryInterface $addressFactory,
         StateMachineFactoryInterface $stateMachineFactory,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+        OrderExampleFactory $orderExampleFactory = null
     ) {
-        $this->orderFactory = $orderFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
+        if ($orderExampleFactory === null) {
+            $orderExampleFactory = new OrderExampleFactory(
+                $orderFactory,
+                $orderItemFactory,
+                $orderItemQuantityModifier,
+                $orderManager,
+                $channelRepository,
+                $customerRepository,
+                $productRepository,
+                $paymentMethodRepository,
+                $countryRepository,
+                $shippingMethodRepository,
+                $addressFactory,
+                $stateMachineFactory,
+                $orderShippingMethodSelectionRequirementChecker,
+                $orderPaymentMethodSelectionRequirementChecker
+            );
+
+            @trigger_error('Use orderExampleFactory. OrderFixture is deprecated since 1.6 and will be prohibited since 2.0.', \E_USER_DEPRECATED);
+        }
         $this->orderManager = $orderManager;
-        $this->channelRepository = $channelRepository;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
-        $this->countryRepository = $countryRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->addressFactory = $addressFactory;
-        $this->stateMachineFactory = $stateMachineFactory;
-        $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
-        $this->orderPaymentMethodSelectionRequirementChecker = $orderPaymentMethodSelectionRequirementChecker;
+        $this->orderExampleFactory = $orderExampleFactory;
 
         $this->faker = \Faker\Factory::create();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
-        $channels = $this->channelRepository->findAll();
-        $customers = $this->customerRepository->findAll();
-        $countries = $this->countryRepository->findAll();
-
-        $randomDates = $this->generateDates($options['amount']);
+        $generateDates = $this->generateDates($options['amount']);
 
         for ($i = 0; $i < $options['amount']; ++$i) {
-            $channel = $this->faker->randomElement($channels);
-            $customer = $this->faker->randomElement($customers);
-            $countryCode = $this->faker->randomElement($countries)->getCode();
+            $options = array_merge($options, ['complete_date' => array_shift($generateDates)]);
 
-            $currencyCode = $channel->getBaseCurrency()->getCode();
-            $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
-
-            /** @var OrderInterface $order */
-            $order = $this->orderFactory->createNew();
-            $order->setChannel($channel);
-            $order->setCustomer($customer);
-            $order->setCurrencyCode($currencyCode);
-            $order->setLocaleCode($localeCode);
-
-            $this->generateItems($order);
-
-            $this->address($order, $countryCode);
-            $this->selectShipping($order);
-            $this->selectPayment($order);
-            $this->completeCheckout($order);
-            $this->setOrderCompletedDate($order, $randomDates[$i]);
+            $order = $this->orderExampleFactory->create($options);
 
             $this->orderManager->persist($order);
 
@@ -158,152 +99,21 @@ class OrderFixture extends AbstractFixture
         $this->orderManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'order';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
+                ->scalarNode('channel')->cannotBeEmpty()->end()
+                ->scalarNode('customer')->cannotBeEmpty()->end()
+                ->scalarNode('country')->cannotBeEmpty()->end()
+            ->end()
         ;
-    }
-
-    private function generateItems(OrderInterface $order): void
-    {
-        $numberOfItems = random_int(1, 5);
-        $products = $this->productRepository->findAll();
-        $generatedItems = [];
-
-        for ($i = 0; $i < $numberOfItems; ++$i) {
-            /** @var ProductInterface $product */
-            $product = $this->faker->randomElement($products);
-
-            if (!$product->hasChannel($order->getChannel())) {
-                $i--;
-                continue;
-            }
-
-            $variant = $this->faker->randomElement($product->getVariants()->toArray());
-
-            if (array_key_exists($variant->getCode(), $generatedItems)) {
-                /** @var OrderItemInterface $item */
-                $item = $generatedItems[$variant->getCode()];
-                $this->orderItemQuantityModifier->modify($item, $item->getQuantity() + random_int(1, 5));
-
-                continue;
-            }
-
-            /** @var OrderItemInterface $item */
-            $item = $this->orderItemFactory->createNew();
-
-            $item->setVariant($variant);
-            $this->orderItemQuantityModifier->modify($item, random_int(1, 5));
-
-            $generatedItems[$variant->getCode()] = $item;
-            $order->addItem($item);
-        }
-    }
-
-    private function address(OrderInterface $order, string $countryCode): void
-    {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-        $address->setFirstName($this->faker->firstName);
-        $address->setLastName($this->faker->lastName);
-        $address->setStreet($this->faker->streetAddress);
-        $address->setCountryCode($countryCode);
-        $address->setCity($this->faker->city);
-        $address->setPostcode($this->faker->postcode);
-
-        $order->setShippingAddress($address);
-        $order->setBillingAddress(clone $address);
-
-        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
-    }
-
-    private function selectShipping(OrderInterface $order): void
-    {
-        if (!$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
-
-            return;
-        }
-
-        $channel = $order->getChannel();
-        $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
-
-        if (count($shippingMethods) === 0) {
-            throw new \InvalidArgumentException(sprintf(
-                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
-                $channel->getCode()
-            ));
-        }
-
-        $shippingMethod = $this->faker->randomElement($shippingMethods);
-
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
-        Assert::notNull($shippingMethod, $this->generateInvalidSkipMessage('shipping', $channel->getCode()));
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-
-        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-    }
-
-    private function selectPayment(OrderInterface $order): void
-    {
-        if (!$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)) {
-            $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
-
-            return;
-        }
-
-        $paymentMethod = $this
-            ->faker
-            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
-        ;
-
-        /** @var ChannelInterface $channel */
-        $channel = $order->getChannel();
-        Assert::notNull($paymentMethod, $this->generateInvalidSkipMessage('payment', $channel->getCode()));
-
-        foreach ($order->getPayments() as $payment) {
-            $payment->setMethod($paymentMethod);
-        }
-
-        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-    }
-
-    private function completeCheckout(OrderInterface $order): void
-    {
-        if ($this->faker->boolean(25)) {
-            $order->setNotes($this->faker->sentence);
-        }
-
-        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-    }
-
-    private function applyCheckoutStateTransition(OrderInterface $order, string $transition): void
-    {
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
-    }
-
-    private function setOrderCompletedDate(OrderInterface $order, \DateTimeInterface $date): void
-    {
-        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
-            $order->setCheckoutCompletedAt($date);
-        }
     }
 
     private function generateDates(int $amount): array
@@ -317,14 +127,5 @@ class OrderFixture extends AbstractFixture
         sort($dates);
 
         return $dates;
-    }
-
-    private function generateInvalidSkipMessage(string $type, string $channelCode): string
-    {
-        return sprintf(
-            "No enabled %s method was found for the channel '%s'. " .
-            "Set 'skipping_%s_step_allowed' option to true for this channel if you want to skip %s method selection.",
-            $type, $channelCode, $type, $type
-        );
     }
 }
