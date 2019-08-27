@@ -1,5 +1,30 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.8 (2019-08-27)
+
+#### Details
+
+- [#10395](https://github.com/Sylius/Sylius/issues/10395) [Docs] How to add your custom fixtures? ([@Tomanhez](https://github.com/Tomanhez))
+- [#10397](https://github.com/Sylius/Sylius/issues/10397) [Docs]How to add your custom fixture suites? ([@Tomanhez](https://github.com/Tomanhez))
+- [#10512](https://github.com/Sylius/Sylius/issues/10512) [Admin] Improve breadcrumbs (especially for ProductVariants and PromotionCoupons) ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10540](https://github.com/Sylius/Sylius/issues/10540) Skip oauth_user_factory_is_not_overridden test if HWIOAuthBundle is not installed ([@vvasiloi](https://github.com/vvasiloi))
+- [#10553](https://github.com/Sylius/Sylius/issues/10553) Flags are not languages ([@vvasiloi](https://github.com/vvasiloi))
+- [#10558](https://github.com/Sylius/Sylius/issues/10558) Allow translation of custom labels ([@Prometee](https://github.com/Prometee))
+- [#10564](https://github.com/Sylius/Sylius/issues/10564) [Fixture] Improve order fixture ([@Zales0123](https://github.com/Zales0123))
+- [#10571](https://github.com/Sylius/Sylius/issues/10571) Update custom-promotion-rule.rst ([@jmwill86](https://github.com/jmwill86))
+- [#10579](https://github.com/Sylius/Sylius/issues/10579) Fix lazy choice tree will not automatically expanded ([@tom10271](https://github.com/tom10271))
+- [#10583](https://github.com/Sylius/Sylius/issues/10583) Enable sorting of customer orders in admin panel ([@pamil](https://github.com/pamil))
+- [#10598](https://github.com/Sylius/Sylius/issues/10598) Add course ad ([@kulczy](https://github.com/kulczy))
+- [#10599](https://github.com/Sylius/Sylius/issues/10599) [Documentation] Delete additional lines to remove ShopBundle ([@wpje](https://github.com/wpje))
+- [#10601](https://github.com/Sylius/Sylius/issues/10601) Change course CTA ([@kulczy](https://github.com/kulczy))
+- [#10603](https://github.com/Sylius/Sylius/issues/10603) [Shop] Promotion integrity checker fix ([@lchrusciel](https://github.com/lchrusciel))
+- [#10618](https://github.com/Sylius/Sylius/issues/10618) [Fixtures] Allow no shipping and payments in fixtures ([@igormukhingmailcom](https://github.com/igormukhingmailcom), [@Zales0123](https://github.com/Zales0123))
+- [#10624](https://github.com/Sylius/Sylius/issues/10624) Disable chrome autocomplete ([@kulczy](https://github.com/kulczy))
+- [#10626](https://github.com/Sylius/Sylius/issues/10626) [Fixture] Do not skip payments and shipments manually ([@Zales0123](https://github.com/Zales0123))
+- [#10629](https://github.com/Sylius/Sylius/issues/10629) [Docs] Add missing items to customization guide menu ([@Zales0123](https://github.com/Zales0123))
+- [#10633](https://github.com/Sylius/Sylius/issues/10633) Add Blackfire ad ([@kulczy](https://github.com/kulczy))
+- [#10634](https://github.com/Sylius/Sylius/issues/10634) Add Blackfire logo ([@kulczy](https://github.com/kulczy))
+
 ## v1.4.7 (2019-07-25)
 
 #### Details
