@@ -9,12 +9,14 @@ Feature: Completing a payment from its list
         And the store ships everywhere for free
         And the store has a product "Apple"
         And the store allows paying with "Cash on Delivery"
-        And there is an "#00000001" order with "Apple" product
+        And there is a customer "donald@duck.com" that placed an order "#00000001" in channel "United States"
+        And there is a "New" "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
-    @ui
+    @ui @email
     Scenario: Completing a payment from payments index
         When I browse payments
         And I complete the payment of order "#00000001"
         Then I should be notified that the payment has been completed
+        And an email with payment's confirmation should be sent to "donald@duck.com"
         And I should see the payment of order "#00000001" as "Completed"
