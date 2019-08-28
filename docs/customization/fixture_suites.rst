@@ -1,38 +1,43 @@
 Customizing Fixture Suites
 ==========================
 
-What are suites?
-~~~~~~~~~~~~~~~~
-Suites are pockets of fixtures that can be run together.
+What are fixture suites?
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Why would you customize a suites?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you need to create a configuration file where you define all necessarily configuration to your store.
+Suites are predefined groups of fixtures that can be run together. They can be for example full shop configurations for manual tests purposes.
+
+Why would you customize fixture suites?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * tailoring the default Sylius fixture suite to your needs (removing Orders for example)
+    * creating your own fixture suite
 
 How to use suites?
 ~~~~~~~~~~~~~~~~~~
-Complete list of suites is can be shown with the ``$ bin/console sylius:fixtures:list`` command.
-In the vanilla Sylius implementation, the ``default`` suite is loaded if ``$ bin/console sylius:fixtures:load`` command is executed without any additional argument.
-If you are creating a new suite you must use the previous command with the name of your suite: ``$ bin/console sylius:fixtures:load your_custom_suite``.
 
-How to create suites?
-~~~~~~~~~~~~~~~~~~~~~
+Complete list of suites can be shown with the ``bin/console sylius:fixtures:list`` command.
+In the vanilla Sylius implementation, the ``default`` suite is loaded if ``bin/console sylius:fixtures:load`` command
+is executed without any additional argument. If you are creating a new suite you must use this command providing the
+name of your suite as an argument: ``bin/console sylius:fixtures:load your_custom_suite``.
+
+How to create custom fixture suites?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tip::
 
     You can browse the full implementation of this example on `this GitHub Pull Request
     <https://github.com/Sylius/Customizations/pull/24>`__.
 
-.. warning::
+.. tip::
 
-    If you want create your fixtures with different locale than ``en_US`` you must change the ``locale`` parameter in ``src/config/services.yaml``.
+    If you want to create your fixtures with different locale than ``en_US`` you must change the ``locale`` parameter in ``src/config/services.yaml``.
 
     .. code-block:: yaml
 
         parameters:
             locale: pl_PL
 
-**1.** Create a ``src/config/packages/fixtures.yaml`` file and add below code it there:
+**1.** Create the ``src/config/packages/fixtures.yaml`` file and add the following code there:
 
 .. code-block:: yaml
 
@@ -40,20 +45,20 @@ How to create suites?
         suites:
             poland: # custom suite's name
                 listeners:
-                    orm_purger: ~ # clean your database after last changes
+                    orm_purger: ~ # clean your database before running this suite
                     logger: ~
 
                 fixtures:
-                    locale: ~ # add locale in your shop
+                    locale: ~
                     currency:
                         options:
-                            currencies: ['PLN'] # add your currencies in table
+                            currencies: ['PLN'] # add desired currencies as an array
 
-                    geographical: # you individual geographical settings
+                    geographical: # Countries and zones available in your store
                         options:
-                            countries: # your country
+                            countries:
                                 - "PL"
-                            zones: # add your zones
+                            zones:
                                 PL:
                                     name: "Poland"
                                     countries:
@@ -62,60 +67,35 @@ How to create suites?
                     channel:
                         options:
                             custom:
-                                pl_web_store: # define your channel in your store
+                                pl_web_store:
                                     name: "PL Web Store"
                                     code: "PL_WEB"
-                                    locales:
+                                    locales: # choose the locale for this channel
                                         - "%locale%"
-                                    currencies: # add currencies in your store
+                                    currencies: # choose currencies for this channel
                                         - "PLN"
                                     enabled: true
                                     hostname: "localhost"
 
                     payment_method:
                         options:
-                            custom: # create your custom payment_methods and add channels in it
+                            custom: # create payment methods and choose channels in which it is available
                                 cash_on_delivery:
                                     code: "cash_on_delivery"
                                     name: "Cash on delivery"
                                     channels:
                                         - "PL_WEB"
-                                bank_transfer:
-                                    code: "bank_transfer"
-                                    name: "Bank transfer"
-                                    channels:
-                                        - "PL_WEB"
-                                    enabled: true
 
-                    shipping_method: # create your custom shipping_methods and add channels in it
+                    shipping_method: # create shipping methods and choose channels in which it is available
                         options:
                             custom:
-                                ups:
-                                    code: "ups"
-                                    name: "UPS"
-                                    enabled: true
-                                    channels:
-                                        - "PL_WEB"
-                                dhl_express:
-                                    channels:
-                                        - "PL_WEB"
                                 inpost:
                                     code: "inpost"
                                     name: "InPost"
                                     channels:
                                         - "PL_WEB"
 
-                    customer_group: # add customer groups
-                        options:
-                            custom:
-                                retail:
-                                    code: "retail"
-                                    name: "Retail"
-                                wholesale:
-                                    code: "wholesale"
-                                    name: "Wholesale"
-
-                    shop_user:
+                    shop_user: # add customers
                         name: "shop_user"
                         options:
                             random: 2 # the number of users that are random created
@@ -131,7 +111,7 @@ How to create suites?
                                     last_name: "Markowski"
                                     password: "sylius"
 
-                    admin_user: # add administrators accounts
+                    admin_user: # add administrator accounts
                         name: "admin_user"
                         options:
                             custom:
@@ -153,56 +133,21 @@ How to create suites?
                                     last_name: "Nowak"
                                     api: true
 
-                    tax_category: # add category taxes
+                    promotion: # add promotions
                         options:
                             custom:
-                                clothing:
-                                    code: "clothing"
-                                    name: "Clothing"
-                                books:
-                                    code: "books"
-                                    name: "Books"
-                                other:
-                                    code: "other"
-                                    name: "Other"
-
-                    tax_rate: # add definition of tax rate and necessarily configuration
-                        options:
-                            custom:
-                                clothing_tax:
-                                    code: "clothing_sales_tax_10"
-                                    name: "Clothing Sales Tax 10%"
-                                    zone: "PL"
-                                    category: "clothing"
-                                    amount: 0.1
-                                books_tax:
-                                    code: "books_sales_tax_5"
-                                    name: "Books Sales Tax 5%"
-                                    zone: "PL"
-                                    category: "books"
-                                    amount: 0.05
-                                default_sales_tax:
-                                    code: "sales_tax_20"
-                                    name: "Sales Tax 20%"
-                                    zone: "PL"
-                                    category: "other"
-                                    amount: 0.2
-
-                    promotion: # add your promotion
-                        options:
-                            custom:
-                                black_friday: # promotion with primary settings
+                                black_friday: # promotion with basic settings
                                     code: "black_friday"
                                     name: "Black Friday"
                                     channels:
                                         - "PL_WEB"
-                                new_year: # promotion with more settings
-                                    code: "new_year"
-                                    name: "New Year"
+                                crazy_weeks: # promotion with more settings
+                                    code: "crazy_weeks"
+                                    name: "Crazy Weeks"
                                     usage_limit: 10
                                     priority: 2
-                                    starts_at: "-7 day"
-                                    ends_at: "7 day"
+                                    starts_at: "-7 day" # takes the date 7 days before the date of running the suite
+                                    ends_at: "7 day" # takes the date 7 days after the date of running the suite
                                     channels:
                                         - "PL_WEB"
                                     rules:
@@ -213,12 +158,12 @@ How to create suites?
                                                     amount: 100.00
                                     actions:
                                         -
-                                            type: "order_fixed_discount"
+                                            type: "order_percentage_discount"
                                             configuration:
                                                 PL_WEB:
                                                     amount: 10.00
 
-                    # add your products:
+                    # add products
                     mug_product:
                         options:
                             amount: 30
@@ -249,13 +194,14 @@ How to create suites?
 
                     address:
                         options:
-                            random: 10 # the number of addresses that are random created
+                            random: 10 # the number of addresses that are randomly created
                             prototype:
                                 country_code: PL
 
 **2.** Load your custom suite with ``$ bin/console sylius:fixtures:load poland`` command.
 
 Learn more
-##########
+----------
 
-* :doc:`FixtureBundle </components_and_bundles/bundles/SyliusFixturesBundle/index>`
+* :doc:`Book: Fixtures </book/architectures/fixtures>`
+* :doc:`FixturesBundle </components_and_bundles/bundles/SyliusFixturesBundle/index>`
