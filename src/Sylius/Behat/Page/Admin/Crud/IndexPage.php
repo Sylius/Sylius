@@ -139,6 +139,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->getElement('confirmation_button')->click();
     }
 
+    public function sort(string $order): void
+    {
+        $this->getDocument()->clickLink($order);
+    }
+
     public function getRouteName(): string
     {
         return $this->routeName;
