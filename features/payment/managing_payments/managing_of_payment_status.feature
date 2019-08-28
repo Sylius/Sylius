@@ -13,10 +13,9 @@ Feature: Completing a payment from its list
         And there is a "New" "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
-    @ui @email
+    @ui
     Scenario: Completing a payment from payments index
         When I browse payments
         And I complete the payment of order "#00000001"
         Then I should be notified that the payment has been completed
-        And an email with payment's confirmation should be sent to "donald@duck.com"
         And I should see the payment of order "#00000001" as "Completed"
