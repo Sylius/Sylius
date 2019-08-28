@@ -37,4 +37,6 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function filter(): void;
 
     public function bulkDelete(): void;
+
+    public function sort(string $order): void;
 }
