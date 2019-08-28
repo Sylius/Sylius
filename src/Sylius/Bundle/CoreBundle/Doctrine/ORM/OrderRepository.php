@@ -61,11 +61,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
-        return $this->createQueryBuilder('o')
+        return $this->createListQueryBuilder()
             ->andWhere('o.customer = :customerId')
-            ->andWhere('o.state != :state')
             ->setParameter('customerId', $customerId)
-            ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
 

@@ -360,16 +360,24 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I browse orders of a customer :customer
      */
-    public function iBrowseOrdersOfACustomer(CustomerInterface $customer)
+    public function iBrowseOrdersOfACustomer(CustomerInterface $customer): void
     {
         $this->ordersIndexPage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @When I sort them by :sortBy
+     */
+    public function iSortThemByChannel(string $sortBy): void
+    {
+        $this->ordersIndexPage->sort(ucfirst($sortBy));
     }
 
     /**
      * @Then the customer :customer should have an account created
      * @Then /^(this customer) should have an account created$/
      */
-    public function theyShouldHaveAnAccountCreated(CustomerInterface $customer)
+    public function theyShouldHaveAnAccountCreated(CustomerInterface $customer): void
     {
         Assert::notNull(
             $customer->getUser()->getPassword(),
