@@ -81,6 +81,14 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I choose :channelName as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(string $channelName): void
+    {
+        $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
@@ -94,7 +102,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeCountShipmentsInList(int $count = 1): void
     {
-        Assert::same($count, $this->indexPage->countItems());
+        Assert::same($this->indexPage->countItems(), $count);
     }
 
     /**
