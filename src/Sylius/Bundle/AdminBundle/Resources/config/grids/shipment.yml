@@ -48,13 +48,6 @@ sylius_grid:
                             sylius.ui.cancelled: cancelled
                             sylius.ui.ready: ready
                             sylius.ui.shipped: shipped
-                channel:
-                    type: entity
-                    label: sylius.ui.channel
-                    options:
-                        fields: [order.channel]
-                    form_options:
-                        class: "%sylius.model.channel.class%"
             actions:
                 item:
                     ship:
