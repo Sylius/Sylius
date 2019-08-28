@@ -20,4 +20,4 @@ sylius:
         stripe_checkout: Prúžok Pokladňa
     payum_action:
         payment:
-            description: Platba obsahuje %items% položku v hodnote %total% | Platba obsahuje %items% položky / položiek v hodnote %total%
+            description: Platba obsahuje %items% položku v hodnote %total%|Platba obsahuje %items% položky v hodnote %total%|Platba obsahuje %items% položiek v hodnote %total%
