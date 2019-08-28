@@ -19,6 +19,8 @@ interface ThankYouPageInterface extends SymfonyPageInterface
 {
     public function goToOrderDetails();
 
+    public function goToOrderDetailsInMyAccount(): void;
+
     /**
      * @return bool
      */

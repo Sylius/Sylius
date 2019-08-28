@@ -45,6 +45,14 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
+     * @Then I should be able to go to order details in my account
+     */
+    public function iShouldBeAbleToGoToOrderDetailsInMyAccount(): void
+    {
+        $this->thankYouPage->goToOrderDetailsInMyAccount();
+    }
+
+    /**
      * @Then I should see the thank you page
      */
     public function iShouldSeeTheThankYouPage()

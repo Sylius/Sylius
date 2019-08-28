@@ -25,6 +25,11 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         $this->getElement('order_details')->click();
     }
 
+    public function goToOrderDetailsInMyAccount(): void
+    {
+        $this->getElement('order_details_in_my_account')->click();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -74,13 +79,11 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         return 'sylius_shop_thank_you';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'order_details' => '#sylius-show-order',
+            'order_details_in_my_account' => '#sylius-show-order-in-account',
             'instructions' => '#sylius-payment-method-instructions',
             'thank_you' => '#sylius-thank-you',
         ]);
