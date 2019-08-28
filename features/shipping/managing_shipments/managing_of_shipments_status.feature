@@ -20,5 +20,5 @@ Feature: Shipping a shipment from shipment list
         When I browse shipments
         And I ship the shipment of order "#00000001"
         Then I should be notified that the shipment has been successfully shipped
-        And an email with shipment's confirmation should be sent to "donald@duck.com"
+        And an email with the "UPS" shipment's confirmation for the "#00000001" order should be sent to "donald@duck.com"
         And I should see the shipment of order "#00000001" as "Shipped"
