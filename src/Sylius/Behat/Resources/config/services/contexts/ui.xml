@@ -310,6 +310,7 @@
 
         <service id="sylius.behat.context.ui.shop.checkout.thank_you" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutThankYouContext">
             <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
+            <argument type="service" id="sylius.behat.page.shop.account.order.show"></argument>
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.order_details" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutOrderDetailsContext">

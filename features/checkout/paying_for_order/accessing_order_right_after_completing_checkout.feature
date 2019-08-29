@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Having good number of items in changing payment method page
     In order to verify that I am changing the payment method of correct order
-    As a Customer
+    As a Guest
     I want to see correct details about my order on changing the payment method page
 
     Background:
@@ -17,5 +17,5 @@ Feature: Having good number of items in changing payment method page
         And I complete addressing step with email "john@example.com" and "United States" based shipping address
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
-        When I go to order details
+        When I go to the change payment method page
         Then I should see 2 as number of items

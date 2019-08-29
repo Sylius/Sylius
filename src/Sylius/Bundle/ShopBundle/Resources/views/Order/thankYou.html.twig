@@ -22,13 +22,12 @@
                     </div>
                 {% endif %}
                 <div class="ui hidden divider"></div>
-                {% if order.customer.user is not null %}
-                    <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}" id="sylius-show-order-in-account" class="ui large blue button">{{ 'sylius.ui.view_your_order'|trans }}</a>
-                {% endif %}
             {% endif %}
 
-            {% if order.customer.user is null %}
-                <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" id="sylius-show-order" class="ui large blue button">{{ 'sylius.ui.change_payment_method'|trans }}</a>
+            {% if order.customer.user is not null %}
+                <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}" id="sylius-show-order-in-account" class="ui large blue button">{{ 'sylius.ui.view_order'|trans }}</a>
+            {% else %}
+                <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" id="payment-method-page" class="ui large blue button">{{ 'sylius.ui.change_payment_method'|trans }}</a>
                 <a href="{{ path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}) }}" class="ui large green button">
                     <i class="signup icon"></i>
                     {{ 'sylius.ui.create_an_account'|trans }}
