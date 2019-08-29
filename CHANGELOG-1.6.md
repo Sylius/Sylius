@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.0 (2019-08-29)
+
+#### Details
+
+- [#10382](https://github.com/Sylius/Sylius/issues/10382) [Admin][Shipment] Add filtering shipments by a channel ([@Tomanhez](https://github.com/Tomanhez), [@GSadee](https://github.com/GSadee))
+- [#10636](https://github.com/Sylius/Sylius/issues/10636) [Admin] Proper tests for shipment mailing ([@lchrusciel](https://github.com/lchrusciel))
+- [#10639](https://github.com/Sylius/Sylius/issues/10639) [Admin] Fix sorting on customer orders list ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.6.0-RC.1 (2019-08-27)
 
 #### Details
