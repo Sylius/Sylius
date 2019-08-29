@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -23,17 +24,21 @@ final class CheckoutThankYouContext implements Context
     /** @var ThankYouPageInterface */
     private $thankYouPage;
 
-    public function __construct(ThankYouPageInterface $thankYouPage)
+    /** @var ShowPageInterface */
+    private $orderShowPage;
+
+    public function __construct(ThankYouPageInterface $thankYouPage, ShowPageInterface $orderShowPage)
     {
         $this->thankYouPage = $thankYouPage;
+        $this->orderShowPage = $orderShowPage;
     }
 
     /**
-     * @When I go to order details
+     * @When I go to the change payment method page
      */
-    public function iGoToOrderDetails()
+    public function iGoToTheChangePaymentMethodPage(): void
     {
-        $this->thankYouPage->goToOrderDetails();
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
     }
 
     /**
@@ -45,11 +50,15 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
-     * @Then I should be able to go to order details in my account
+     * @Then /^I should be able to access this order's details$/
      */
-    public function iShouldBeAbleToGoToOrderDetailsInMyAccount(): void
+    public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
-        $this->thankYouPage->goToOrderDetailsInMyAccount();
+        $this->thankYouPage->goToOrderDetailsInAccount();
+
+        $number = $this->orderShowPage->getNumber();
+
+        Assert::true($number !== null ? true : false);
     }
 
     /**

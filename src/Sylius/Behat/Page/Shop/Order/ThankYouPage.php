@@ -20,14 +20,14 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * {@inheritdoc}
      */
-    public function goToOrderDetails()
+    public function goToTheChangePaymentMethodPage(): void
     {
-        $this->getElement('order_details')->click();
+        $this->getElement('payment_method_page')->click();
     }
 
-    public function goToOrderDetailsInMyAccount(): void
+    public function goToOrderDetailsInAccount(): void
     {
-        $this->getElement('order_details_in_my_account')->click();
+        $this->getElement('order_details_in_account')->click();
     }
 
     /**
@@ -61,7 +61,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
      */
     public function hasChangePaymentMethodButton()
     {
-        return null !== $this->getDocument()->find('css', '#sylius-show-order');
+        return null !== $this->getDocument()->find('css', '#payment-method-page');
     }
 
     public function hasRegistrationButton(): bool
@@ -82,8 +82,8 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'order_details' => '#sylius-show-order',
-            'order_details_in_my_account' => '#sylius-show-order-in-account',
+            'payment_method_page' => '#payment-method-page',
+            'order_details_in_account' => '#sylius-show-order-in-account',
             'instructions' => '#sylius-payment-method-instructions',
             'thank_you' => '#sylius-thank-you',
         ]);

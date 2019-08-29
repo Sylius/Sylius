@@ -17,7 +17,7 @@ Feature: Changing the method after order confirmation
         And I complete addressing step with email "john@example.com" and "United States" based shipping address
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
-        When I go to order details
+        When I go to the change payment method page
         And I try to pay with "Offline" payment method
         Then I should see the thank you page
 
@@ -29,6 +29,6 @@ Feature: Changing the method after order confirmation
         And I complete addressing step with email "john@example.com" and "United States" based shipping address
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
-        When I go to order details
+        When I go to the change payment method page
         And I try to pay with "Offline" payment method
         Then I should see the thank you page
