@@ -28,8 +28,8 @@ sylius_fixtures:
                 channel:
                     options:
                         custom:
-                            us_web_store:
-                                name: 'US Web Store'
+                            fashion_web_store:
+                                name: 'Fashion Web Store'
                                 code: 'FASHION_WEB'
                                 locales:
                                     - '%locale%'
