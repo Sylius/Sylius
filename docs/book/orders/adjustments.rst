@@ -62,7 +62,7 @@ To see changes on the order you need to update it in the database.
 
 .. tip::
 
-    An adjustement can be locked with ``$adjustment->setLocked(true)``.
+    An adjustment can be locked with ``$adjustment->lock()``.
     It can be useful when the total order price is recalculated and a promotion isn't applicable anymore
     but you still want it to be applied to the order.
     In case of an expired coupon that still should be included in the order for example.
