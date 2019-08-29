@@ -5,7 +5,7 @@ What are fixtures?
 ~~~~~~~~~~~~~~~~~~
 
 Fixtures are just plain old PHP objects, that change system state during their execution - they can either
-persist some entities in the database, upload some files, dispatch some events or do anything you think is needed.
+persist entities in the database, upload files, dispatch events or do anything you think is needed.
 
 .. code-block:: yaml
 
@@ -25,29 +25,34 @@ the ``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
     The former interface extends the ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
     placed under ``DependencyInjection`` directory in Symfony bundles.
 
-Why would you customize a fixtures?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Why would you customize fixtures?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to operate on the test data of objects appearing in your store
-e.g: ``Currency``, ``Country``, ``User`` etc.
+There are two main use cases for customizing fixture suites, in each of them you can adapt the data of your shop to be realistic,
+the default fixtures suite of Sylius is selling clothes, if you are selling food you'd probably need your own fixtures to show that:
 
-How to add new Fixtures?
-~~~~~~~~~~~~~~~~~~~~~~~~
+    * preparing test data for the development purposes like demo applications prepared for QA
+    * preparing the shop configuration for the production instance
 
-In Sylius part of fixtures are added in ``src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures.yml``, where is defined ``default`` suite that is partially-configured.
-If you are planning to add new fixtures in default command ``sylius:fixtures:load``, only what you have to do is add new items in ``config\packages\_sylius.yml``
+How to modify the existing Sylius fixtures?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Adding new items in shop by standard yaml configuration:
+In Sylius, fixtures are configured in ``src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures.yml``.
+It includes the ``default`` suite that is partially-configured.
+If you are planning to modify the default fixtures applied by the ``sylius:fixtures:load`` command, modify the ``config\packages\sylius_fixtures.yaml`` file.
+
+Modifying the shop configuration (channels, currencies, payment and shipping methods)
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 .. code-block:: yaml
 
     sylius_fixtures:
         suites:
-            default: # this key is always called wherever we use sylius:fixtures:load, below we are extending that about new fixtures
+            default: # this key is always called whenever the sylius:fixtures:load command is called, below we are extending it with new fixtures
                 fixtures:
                     currency:
                         options:
-                            currencies: ['PLN','HUF','EUR']
+                            currencies: ['PLN','HUF']
                     channel:
                         options:
                             custom:
@@ -72,14 +77,12 @@ Adding new items in shop by standard yaml configuration:
                     shipping_method:
                         options:
                             custom:
-                                ups_eu: # creating new shipping_method and adding channel to it
+                                ups_eu: # creating a new shipping_method and adding channel to it
                                     code: "ups_eu"
                                     name: "UPS_eu"
                                     enabled: true
                                     channels:
                                         - "PL_WEB"
-                                ups: # adding channel to existing shipping_method
-                                    channels:
                                         - "HUN_WEB"
                     payment_method:
                         options:
@@ -97,100 +100,42 @@ Adding new items in shop by standard yaml configuration:
                                         - "HUN_WEB"
                                     enabled: true
 
-Fixtures in sylius are loaded and initialized using class located at ``src/Sylius/Bundle/CoreBundle/Fixture/*``
+It is more complicated to create fixtures for products, because they have more dependencies (to Variants, Options etc.). In order to prepare a Product
+you have to create not only the product itself but other related entities via their own factories.
+Sylius delivers four ready implementations of ``Product`` fixtures, that have their relevant options (like sizes for T-shirts):
 
-Below is presented class ``Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture`` that load our currencies from yaml configuration:
+* ``BookProductFixture``
+* ``MugProductFixture``
+* ``StickerProductFixture``
+* ``TshirtProductFixture``
 
-.. code-block:: php
+You can modify their YAML fixture configs, but only within the capabilities delivered by those fixtures classes.
 
-    <?php
-
-    ...
-
-    class CurrencyFixture extends AbstractFixture
-    {
-        ...
-
-        // here we load our options array from yaml file
-        public function load(array $options): void
-        {
-            foreach ($options['currencies'] as $currencyCode) {
-                /** @var CurrencyInterface $currency */
-                $currency = $this->currencyFactory->createNew();
-
-                $currency->setCode($currencyCode);
-
-                $this->currencyManager->persist($currency);
-            }
-
-            $this->currencyManager->flush();
-        }
-
-        ...
-
-        // here we configure our restriction from our input
-        protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
-        {
-            $optionsNode
-                ->children()
-                    ->arrayNode('currencies')
-                        ->scalarPrototype()
-            ;
-        }
-    }
-
-This fixture is registered in ``src/Sylius/Bundle/CoreBundle/Resources/config/services/fixtures.xml``:
-
-.. code-block:: xml
-
-    <service id="sylius.fixture.currency" class="Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture">
-        <argument type="service" id="sylius.factory.currency" />
-        <argument type="service" id="sylius.manager.currency" />
-        <tag name="sylius_fixtures.fixture" />
-    </service>
-
-``Currency`` is simple and short example created fixtures but many models need additionally factory to create new items.
-Factories must implements ``Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface`` and ``Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory``
-
-`Products` are most complicated because have more dependencies than rest models
-Sylius delivered four ready implementation of ``Product``:
-
-* BookProductFixture
-* MugProductFixture
-* StickerProductFixture
-* TshirtProductFixture
-
-How to add new custom Fixtures?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you want to write custom fixture you must create class that implements ``Sylius/Bundle/FixturesBundle/Fixture/FixtureInterface``
-
-Best ways to write custom fixture is extend class ``Sylius/Bundle/FixturesBundle/Fixture/AbstractFixture`` or ``Sylius/Bundles/FixturesBundle/Fixture/AbstractResourceFixture``:
-
-* Extending ``AbstractFixtures`` that is basic class giving only sample configuration, next we must override methods: load() and configureOptionsNode()
-* In most cases enought extend ``AbstractResourceFixture``, this class is partially-configured, only what we have to do is override configureOptionsNode()
-
-How to add new custom Fixtures in custom Models?
+How to customize fixtures for customized models?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tip::
 
-    Below Example is based on other example showing how to extends entity with a new field.
-    You can browse the full implementation of this example on `this GitHub Pull Request
-    <https://github.com/Sylius/Customizations/pull/23>`__.
+    The following example is based on `other example of extending an entity with a new field <https://github.com/Sylius/Customizations/pull/7>`_.
+    You can browse the full implementation of this example on `this GitHub Pull Request <https://github.com/Sylius/Customizations/pull/23>`__.
 
-**1** First we extended our entity ``App\Entity\Shipping\ShippingMethod`` with a new field ``deliveryConditions``.
+Let's suppose you have extended ``App\Entity\Shipping\ShippingMethod`` extended with a new field ``deliveryConditions``,
+just like in the example mentioned above.
 
-**2** Next we need extends our factory ``Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory`` with this field
-in ``App\Entity\Factory\ShippingMethodExampleFactory``:
+**1.** To cover that in fixtures, you will need to override the ``ShippingMethodExampleFactory`` and add this field:
 
 .. code-block:: php
 
     <?php
 
-    ...
+    // src/Fixture/Factory/ShippingMethodExampleFactory.php
 
-    final class ShippingMethodExampleFactory extends BaseShippingMethodExampleFactory implements ExampleFactoryInterface
+    namespace App\Fixture\Factory;
+
+    // ...
+    use Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory as BaseShippingMethodExampleFactory;
+
+    final class ShippingMethodExampleFactory extends BaseShippingMethodExampleFactory
     {
         ...
 
@@ -199,7 +144,7 @@ in ``App\Entity\Factory\ShippingMethodExampleFactory``:
             /** @var ShippingMethod $shippingMethod */
             $shippingMethod = parent::create($options);
 
-            // here we protect object if part of our objects don't have new field
+            // Protect object if part of our objects don't have new field
             if (!isset($options['deliveryConditions'])) {
                 return $shippingMethod;
             }
@@ -226,25 +171,29 @@ in ``App\Entity\Factory\ShippingMethodExampleFactory``:
 
         private function getLocales(): iterable
         {
-            ...
+            /** @var LocaleInterface[] $locales */
+            $locales = $this->localeRepository->findAll();
+            foreach ($locales as $locale) {
+                yield $locale->getCode();
+            }
         }
     }
 
-**3** Now we extended ``Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture`` in ``App\Entity\Fixture\ShippingMethodFixture``:
+**2.** Extend the ``Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture`` in ``App\Entity\Fixture\ShippingMethodFixture``:
 
 .. code-block:: php
 
     <?php
 
-    ...
+    // src/Fixture/ShippingMethodFixture.php
 
-    final class ShippingMethodFixture extends BaseShippingMethodFixture implements FixtureInterface
+    namespace App\Fixture;
+
+    use Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture as BaseShippingMethodFixture;
+    use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+
+    final class ShippingMethodFixture extends BaseShippingMethodFixture
     {
-        public function getName(): string
-        {
-            return 'shipping_method';
-        }
-
         protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
         {
             parent::configureResourceNode($resourceNode);
@@ -256,33 +205,40 @@ in ``App\Entity\Factory\ShippingMethodExampleFactory``:
         }
     }
 
-**4** Here we create ``config/packages/fixtures.xml`` and override our services:
+**3.** Configure the services in the ``config/services.yaml`` file:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <?xml version="1.0" encoding="UTF-8"?>
+    sylius.fixture.example_factory.shipping_method:
+        class: App\Fixture\Factory\ShippingMethodExampleFactory
+        arguments:
+            - "@sylius.factory.shipping_method"
+            - "@sylius.repository.zone"
+            - "@sylius.repository.shipping_category"
+            - "@sylius.repository.locale"
+            - "@sylius.repository.channel"
+            - "@sylius.repository.tax_category"
+        public: true
 
-    <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-        <services>
-            <defaults public="true" />
+    sylius.fixture.shipping_method:
+        class: App\Fixture\ShippingMethodFixture
+        arguments:
+            - "@sylius.manager.shipping_method"
+            - "@sylius.fixture.example_factory.shipping_method"
+        tags:
+            - { name: sylius_fixtures.fixture }
 
-            <service id="sylius.fixture.shipping_method" class="App\Entity\Fixture\ShippingMethodFixture">
-                <argument type="service" id="sylius.manager.shipping_method" />
-                <argument type="service" id="sylius.fixture.example_factory.shipping_method" />
-                <tag name="sylius_fixtures.fixture" />
-            </service>
+.. tip::
 
-            <service id="sylius.fixture.example_factory.shipping_method" class="App\Entity\Factory\ShippingMethodExampleFactory">
-                <argument type="service" id="sylius.factory.shipping_method" />
-                <argument type="service" id="sylius.repository.zone" />
-                <argument type="service" id="sylius.repository.shipping_category" />
-                <argument type="service" id="sylius.repository.locale" />
-                <argument type="service" id="sylius.repository.channel" />
-            </service>
-        </services>
-    </container>
+    When creating fixtures services manually, remember to turn off autowiring for them:
 
-**5** At the end, only what you have to do is add new ``shipping_method`` in ``config\packages\_sylius.yml``
+    .. code-block:: yaml
+
+        App\:
+            resource: '../src/*'
+            exclude: '../src/{Entity,Fixture,Migrations,Tests,Kernel.php}'
+
+**4.** Add new Shipping Methods with delivery conditions in ``config/packages/fixtures.yaml``:
 
 .. code-block:: yaml
 
@@ -291,18 +247,19 @@ in ``App\Entity\Factory\ShippingMethodExampleFactory``:
             default:
                 fixtures:
                     ...
-                    shipping_method: # our new configuration with a new field
+                    shipping_method: # our new configuration with the new field
                         options:
                             custom:
                             geis:
                                 code: "geis"
-                                name: "geis"
+                                name: "Geis"
                                 enabled: true
                                 channels:
                                     - "PL_WEB"
-                                deliveryConditions: "delivered"
+                                deliveryConditions: "3-5 days"
 
 Learn more
-##########
+~~~~~~~~~~
 
-* :doc:`FixtureBundle </components_and_bundles/bundles/SyliusFixturesBundle/index>`
+* :doc:`The Book: Fixtures </book/architecture/fixtures>`
+* :doc:`FixturesBundle </components_and_bundles/bundles/SyliusFixturesBundle/index>`
