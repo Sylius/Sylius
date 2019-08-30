@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutThankYouContext implements Context
@@ -27,10 +28,17 @@ final class CheckoutThankYouContext implements Context
     /** @var ShowPageInterface */
     private $orderShowPage;
 
-    public function __construct(ThankYouPageInterface $thankYouPage, ShowPageInterface $orderShowPage)
-    {
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    public function __construct(
+        ThankYouPageInterface $thankYouPage,
+        ShowPageInterface $orderShowPage,
+        OrderRepositoryInterface $orderRepository
+    ) {
         $this->thankYouPage = $thankYouPage;
         $this->orderShowPage = $orderShowPage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -50,7 +58,7 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
-     * @Then /^I should be able to access this order's details$/
+     * @Then I should be able to access this order's details
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
@@ -58,7 +66,7 @@ final class CheckoutThankYouContext implements Context
 
         $number = $this->orderShowPage->getNumber();
 
-        Assert::true($number !== null ? true : false);
+        Assert::same($this->orderRepository->findLatest(1)[0]->getNumber(), $number);
     }
 
     /**
