@@ -18,7 +18,7 @@ sylius:
             add_province: Bundesland hinzufügen
             name: Name
             provinces: Bundesländer
-            select: Bundesland auswählen
+            select: Land auswählen
             enabled: Aktiviert
         province:
             name: Name
