@@ -36,7 +36,7 @@ sylius:
             scope: Umfang
             scopes:
                 all: Alle
-            select: Bundesland auswählen
+            select: Versandgebiet auswählen
             select_scope: Bereich wählen
         zone_member:
-            select: Bundesland auswählen
+            select: Versandgebiet Mitglied auswählen
