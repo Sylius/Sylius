@@ -39,4 +39,4 @@ sylius:
             select: Versandgebiet auswählen
             select_scope: Bereich wählen
         zone_member:
-            select: Versandgebiet Mitglied auswählen
+            select: Mitglied auswählen
