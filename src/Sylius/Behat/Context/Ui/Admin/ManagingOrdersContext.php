@@ -817,9 +817,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should not see information about payments
+     * @Then I should not see any payments
      */
-    public function iShouldNotSeeInformationAboutPayments()
+    public function iShouldNotSeeAnyPayments()
     {
         Assert::same($this->showPage->getPaymentsCount(), 0);
     }
@@ -891,5 +891,13 @@ final class ManagingOrdersContext implements Context
     {
         $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->updatePage->checkValidationMessageFor($element, $expectedMessage));
+    }
+
+    /**
+     * @Given /^I should see information about no payments$/
+     */
+    public function iShouldSeeInformationAboutNoPayments()
+    {
+        Assert::true($this->showPage->hasInformationAboutNoPayment());
     }
 }
