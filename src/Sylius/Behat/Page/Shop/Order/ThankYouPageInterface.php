@@ -17,7 +17,9 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ThankYouPageInterface extends SymfonyPageInterface
 {
-    public function goToOrderDetails();
+    public function goToTheChangePaymentMethodPage(): void;
+
+    public function goToOrderDetailsInAccount(): void;
 
     /**
      * @return bool
