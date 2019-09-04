@@ -126,7 +126,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $order = $this->createOrder($options['channel'], $options['customer'], $options['country']);
+        $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
         $this->setOrderCompletedDate($order, $options['complete_date']);
 
         return $order;
@@ -156,7 +156,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         ;
     }
 
-    protected function createOrder(ChannelInterface $channel, CustomerInterface $customer, CountryInterface $country): OrderInterface
+    protected function createOrder(ChannelInterface $channel, CustomerInterface $customer, CountryInterface $country, \DateTimeInterface $createdAt): OrderInterface
     {
         $countryCode = $country->getCode();
 
@@ -173,8 +173,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->generateItems($order);
 
         $this->address($order, $countryCode);
-        $this->selectShipping($order);
-        $this->selectPayment($order);
+        $this->selectShipping($order, $createdAt);
+        $this->selectPayment($order, $createdAt);
         $this->completeCheckout($order);
 
         return $order;
@@ -233,7 +233,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
-    protected function selectShipping(OrderInterface $order): void
+    protected function selectShipping(OrderInterface $order, \DateTimeInterface $createdAt): void
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_SHIPPING_SKIPPED) {
             return;
@@ -257,12 +257,13 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
+            $shipment->setCreatedAt($createdAt);
         }
 
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
     }
 
-    protected function selectPayment(OrderInterface $order): void
+    protected function selectPayment(OrderInterface $order, \DateTimeInterface $createdAt): void
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_PAYMENT_SKIPPED) {
             return;
@@ -279,6 +280,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         foreach ($order->getPayments() as $payment) {
             $payment->setMethod($paymentMethod);
+            $payment->setCreatedAt($createdAt);
         }
 
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
