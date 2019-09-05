@@ -22,24 +22,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class InstallAssetsCommand extends Command
 {
-    /**
-     * @var DirectoryChecker
-     */
+    /** @var DirectoryChecker */
     private $directoryChecker;
 
-    /**
-     * @var CommandsRunner
-     */
+    /** @var CommandsRunner */
     private $commandsRunner;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $publicDir;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $environment;
 
     public function __construct(

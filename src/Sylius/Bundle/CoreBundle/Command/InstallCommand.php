@@ -23,19 +23,13 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class InstallCommand extends Command
 {
-    /**
-     * @var DirectoryChecker
-     */
+    /** @var DirectoryChecker */
     private $directoryChecker;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $cacheDir;
 
-    /**
-     * @var CommandExecutor
-     */
+    /** @var CommandExecutor */
     private $commandExecutor;
 
     /** @var array */

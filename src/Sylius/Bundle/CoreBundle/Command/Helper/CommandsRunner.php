@@ -22,14 +22,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CommandsRunner
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /**
-     * @var ProgressBarCreator
-     */
+    /** @var ProgressBarCreator */
     private $progressBarCreator;
 
     public function __construct(

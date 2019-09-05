@@ -23,9 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CheckRequirementsCommand extends Command
 {
-    /**
-     * @var RequirementsCheckerInterface
-     */
+    /** @var RequirementsCheckerInterface */
     private $requirementsChecker;
 
     public function __construct(RequirementsCheckerInterface $requirementsChecker)

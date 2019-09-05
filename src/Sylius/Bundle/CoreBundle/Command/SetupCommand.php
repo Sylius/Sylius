@@ -35,39 +35,25 @@ use Webmozart\Assert\Assert;
 
 final class SetupCommand extends Command
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $adminUserManager;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $adminUserFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $adminUserRepository;
 
-    /**
-     * @var ValidatorInterface
-     */
+    /** @var ValidatorInterface */
     private $validator;
 
-    /**
-     * @var CurrencySetupInterface
-     */
+    /** @var CurrencySetupInterface */
     private $currencySetup;
 
-    /**
-     * @var LocaleSetupInterface
-     */
+    /** @var LocaleSetupInterface */
     private $localeSetup;
 
-    /**
-     * @var ChannelSetupInterface
-     */
+    /** @var ChannelSetupInterface */
     private $channelSetup;
 
     public function __construct(

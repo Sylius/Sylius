@@ -17,14 +17,13 @@
 
         <service id="Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext">
             <argument type="service" id="kernel" />
-            <argument type="service" id="__symfony__.Sylius\Bundle\CoreBundle\Command\SetupCommand" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Command\SetupCommand" />
         </service>
 
         <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
             <argument type="service" id="kernel" />
-            <argument type="service" id="__symfony__.Sylius\Bundle\CoreBundle\Command\SetupCommand" />
-            <argument type="service" id="__symfony__.Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Command\SetupCommand" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand" />
         </service>
     </services>
 </container>

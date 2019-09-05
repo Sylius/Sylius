@@ -23,19 +23,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallDatabaseCommand extends Command
 {
-    /**
-     * @var DatabaseSetupCommandsProviderInterface
-     */
+    /** @var DatabaseSetupCommandsProviderInterface */
     private $databaseSetupCommandsProvider;
 
-    /**
-     * @var CommandsRunner
-     */
+    /** @var CommandsRunner */
     private $commandsRunner;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $environment;
 
     public function __construct(

@@ -22,9 +22,6 @@ use Webmozart\Assert\Assert;
 
 final class ShowingAvailablePluginsContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
-
     /** @var Application */
     private $application;
 
@@ -36,8 +33,10 @@ final class ShowingAvailablePluginsContext implements Context
 
     public function __construct(KernelInterface $kernel, SetupCommand $setupCommand)
     {
-        $this->kernel = $kernel;
-        $this->setupCommand = $setupCommand;
+        $this->application = new Application($kernel);
+        $this->application->add($setupCommand);
+
+        $this->setupCommand = $this->application->find('sylius:show-available-plugins');
     }
 
     /**
@@ -45,12 +44,7 @@ final class ShowingAvailablePluginsContext implements Context
      */
     public function runShowAvailablePluginsCommand(): void
     {
-        $this->application = new Application($this->kernel);
-        $this->application->add($this->setupCommand);
-
-        $this->setupCommand = $this->application->find('sylius:show-available-plugins');
         $this->tester = new CommandTester($this->setupCommand);
-
         $this->tester->execute(['command' => 'sylius:show-available-plugins']);
     }
 

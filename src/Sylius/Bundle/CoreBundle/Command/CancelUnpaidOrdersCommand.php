@@ -21,19 +21,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CancelUnpaidOrdersCommand extends Command
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $orderExpirationPeriod;
 
-    /**
-     * @var UnpaidOrdersStateUpdaterInterface
-     */
+    /** @var UnpaidOrdersStateUpdaterInterface */
     private $unpaidOrdersStateUpdater;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $orderManager;
 
     public function __construct(
