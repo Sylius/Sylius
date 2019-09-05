@@ -16,7 +16,6 @@
         <defaults public="true" autowire="true" />
 
         <service id="Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand">
-            <argument key="$orderExpirationPeriod">%sylius_order.order_expiration_period%</argument>
             <tag name="console.command" />
         </service>
 
@@ -43,6 +42,11 @@
         <service id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand">
             <argument key="$publicDir">%sylius_core.public_dir%</argument>
             <argument key="$environment">%kernel.environment%</argument>
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\Order\CancelUnpaidOrdersCommand">
+            <argument key="$orderExpirationPeriod">%sylius_order.order_expiration_period%</argument>
             <tag name="console.command" />
         </service>
 

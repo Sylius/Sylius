@@ -13,35 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
-use Symfony\Component\Console\Command\Command;
+use \Sylius\Bundle\CoreBundle\Command\Order\CancelUnpaidOrdersCommand as NewCancelUnpaidOrdersCommand;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CancelUnpaidOrdersCommand extends Command
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.4, use "%s" instead.', CancelUnpaidOrdersCommand::class, NewCancelUnpaidOrdersCommand::class), E_USER_DEPRECATED);
+
+class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 {
-    /** @var string */
-    private $orderExpirationPeriod;
-
-    /** @var UnpaidOrdersStateUpdaterInterface */
-    private $unpaidOrdersStateUpdater;
-
-    /** @var ObjectManager */
-    private $orderManager;
-
-    public function __construct(
-        string $orderExpirationPeriod,
-        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
-        ObjectManager $orderManager
-    ) {
-        $this->orderExpirationPeriod = $orderExpirationPeriod;
-        $this->unpaidOrdersStateUpdater = $unpaidOrdersStateUpdater;
-        $this->orderManager = $orderManager;
-
-        parent::__construct();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -59,13 +39,8 @@ class CancelUnpaidOrdersCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $output->writeln(sprintf(
-            'Command will cancel orders that have been unpaid for <info>%s</info>.',
-            $this->orderExpirationPeriod
-        ));
-
-        $this->unpaidOrdersStateUpdater->cancel();
-
-        $this->orderManager->flush();
+        /** @var NewCancelUnpaidOrdersCommand $command */
+        $command = $this->getContainer()->get('Sylius\Bundle\CoreBundle\Command\Order\CancelUnpaidOrdersCommand');
+        $command->run($input, $output);
     }
 }
