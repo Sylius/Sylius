@@ -540,8 +540,8 @@ sylius:
         no_description: 'No description'
         no_label: 'No'
         no_new_notifications: 'No new notifications'
-        no_payments: "Order without payments"
         no_payment_methods_available: 'There are currently no payment methods available for your order'
+        no_payments: "Order without payments"
         no_pricing_configuration: 'No pricing configuration'
         no_promotion: 'No promotion applied'
         no_requirement: 'No requirement'

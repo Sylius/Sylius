@@ -1,4 +1,4 @@
-<div class="ui segment" id="payment-state" style="text-align: center">
+<div class="ui segment center aligned" id="payment-state">
     {% if order.hasPayments %}
     {% include '@SyliusAdmin/Order/Label/PaymentState/' ~ order.paymentState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.paymentState, 'attached': true } %}
         <h3 class="ui dividing header">{{ 'sylius.ui.payments'|trans }}</h3>
@@ -8,9 +8,8 @@
             {% endfor %}
         </div>
     {% else %}
-        <span class="ui grey large label" id="no-payment">
-        <i class="ban icon"></i>
-        {{ 'sylius.ui.no_payments'|trans }}
+        <span class="ui grey large label" id="no-payments">
+            <i class="ban icon"></i> {{ 'sylius.ui.no_payments'|trans }}
         </span>
     {% endif %}
 </div>
