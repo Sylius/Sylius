@@ -6,15 +6,13 @@ Feature: Filtering payments by channel
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
-        And the store allows paying with "Cash on Delivery"
-        And the store has a product "Apple"
-        And there is an "#00000001" order with "Apple" product in this channel
         And the store operates on another channel named "Canada" in "CAD" currency
-        And the store has country "Canada"
-        And the store has a product "Orange"
-        And the store allows paying with "Bank transfer"
-        And there is an "#00000002" order with "Orange" product in this channel
+        And the store ships everywhere for free for all channels
+        And the store allows paying offline for all channels
+        And the store has a product "Apple" priced at "$100.00" in "United States" channel
+        And the store has a product "Orange" priced at "$150.00" in "Canada" channel
+        And there is an "#00000001" order with "Apple" product in "United States" channel
+        And there is an "#00000002" order with "Orange" product in "Canada" channel
         And I am logged in as an administrator
 
     @ui
