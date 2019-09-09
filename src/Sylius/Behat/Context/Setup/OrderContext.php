@@ -320,9 +320,9 @@ final class OrderContext implements Context
      * @Given the customer bought a single :product
      * @Given I bought a single :product
      */
-    public function theCustomerBoughtSingleProduct(ProductInterface $product)
+    public function theCustomerBoughtSingleProduct(ProductInterface $product, ?ChannelInterface $channel = null)
     {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1);
+        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1, $channel);
 
         $this->objectManager->flush();
     }
@@ -413,15 +413,20 @@ final class OrderContext implements Context
     /**
      * @Given there is an :orderNumber order with :product product
      * @Given there is an :orderNumber order with :product product in this channel
+     * @Given there is an :orderNumber order with :product product in :channel channel
      * @Given there is a :state :orderName order with :product product
      */
-    public function thereIsAOrderWithProduct(string $orderNumber, ProductInterface $product, string $state = null): void
-    {
-        $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber);
+    public function thereIsAOrderWithProduct(
+        string $orderNumber,
+        ProductInterface $product,
+        string $state = null,
+        ?ChannelInterface $channel = null
+    ): void {
+        $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber, $channel);
 
         $this->sharedStorage->set('order', $order);
 
-        $this->theCustomerBoughtSingleProduct($product);
+        $this->theCustomerBoughtSingleProduct($product, $channel);
 
         $this->createShippingPaymentMethodsAndAddress();
 
@@ -703,13 +708,16 @@ final class OrderContext implements Context
      *
      * @return OrderInterface
      */
-    private function addProductVariantToOrder(ProductVariantInterface $productVariant, $quantity = 1)
-    {
+    private function addProductVariantToOrder(
+        ProductVariantInterface $productVariant,
+        $quantity = 1,
+        ?ChannelInterface $channel = null
+    ) {
         $order = $this->sharedStorage->get('order');
 
         $this->addProductVariantsToOrderWithChannelPrice(
             $order,
-            $this->sharedStorage->get('channel'),
+            $channel ?? $this->sharedStorage->get('channel'),
             $productVariant,
             (int) $quantity
         );
