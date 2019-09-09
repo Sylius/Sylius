@@ -412,6 +412,7 @@ final class OrderContext implements Context
 
     /**
      * @Given there is an :orderNumber order with :product product
+     * @Given there is an :orderNumber order with :product product in this channel
      * @Given there is a :state :orderName order with :product product
      */
     public function thereIsAOrderWithProduct(string $orderNumber, ProductInterface $product, string $state = null): void

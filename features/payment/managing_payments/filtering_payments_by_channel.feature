@@ -1,6 +1,6 @@
 @managing_payments
 Feature: Filtering payments by channel
-    In order to browse only relevant shipments
+    In order to browse only relevant payments
     As an Administrator
     I want to be able to filter payments from a specific channel on the list
 
@@ -9,12 +9,12 @@ Feature: Filtering payments by channel
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Apple"
-        And there is an "#00000001" order with "Apple" product
+        And there is an "#00000001" order with "Apple" product in this channel
         And the store operates on another channel named "Canada" in "CAD" currency
         And the store has country "Canada"
         And the store has a product "Orange"
         And the store allows paying with "Bank transfer"
-        And there is an "#00000002" order with "Orange" product
+        And there is an "#00000002" order with "Orange" product in this channel
         And I am logged in as an administrator
 
     @ui
