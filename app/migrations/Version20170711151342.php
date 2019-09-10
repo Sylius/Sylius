@@ -15,7 +15,6 @@ namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\Migrations\Exception\SkipMigration;
 
 class Version20170711151342 extends AbstractMigration
 {
@@ -25,9 +24,7 @@ class Version20170711151342 extends AbstractMigration
 
         // Check if foreign key with correct name exists. If so, this indicates all other foreign keys are correct as well
         foreach ($schema->getTable('sylius_admin_api_access_token')->getForeignKeys() as $key) {
-            if ($key->getName() === 'FK_2AA4915D19EB6921') {
-                throw new SkipMigration('Database has correct index name');
-            }
+            $this->skipIf($key->getName() === 'FK_2AA4915D19EB6921', 'Database has correct index name');
         }
 
         $this->addSql('ALTER TABLE sylius_admin_api_access_token DROP FOREIGN KEY FK_7D83AA7F19EB6921');
