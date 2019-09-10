@@ -374,7 +374,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasInformationAboutNoPayment(): bool
     {
-        return $this->getDocument()->has('css', '#no-payment');
+        return $this->getDocument()->has('css', '#no-payments:contains("Order without payments")');
     }
 
     protected function getDefinedElements(): array
