@@ -236,7 +236,6 @@
             "spec\\Sylius\\Bundle\\ProductBundle\\": "src/Sylius/Bundle/ProductBundle/spec/",
             "spec\\Sylius\\Bundle\\PromotionBundle\\": "src/Sylius/Bundle/PromotionBundle/spec/",
             "spec\\Sylius\\Bundle\\ReviewBundle\\": "src/Sylius/Bundle/ReviewBundle/spec/",
-            "spec\\Sylius\\Bundle\\ShippingBundle\\": "src/Sylius/Bundle/ShippingBundle",
             "spec\\Sylius\\Bundle\\ShopBundle\\": "src/Sylius/Bundle/ShopBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxationBundle\\": "src/Sylius/Bundle/TaxationBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxonomyBundle\\": "src/Sylius/Bundle/TaxonomyBundle/spec/",
