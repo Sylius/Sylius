@@ -372,6 +372,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return 'sylius_admin_order_show';
     }
 
+    public function hasInformationAboutNoPayment(): bool
+    {
+        return $this->getDocument()->has('css', '#no-payments:contains("Order without payments")');
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

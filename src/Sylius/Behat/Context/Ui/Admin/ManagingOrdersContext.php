@@ -817,17 +817,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should not see information about payments
-     */
-    public function iShouldNotSeeInformationAboutPayments()
-    {
-        Assert::same($this->showPage->getPaymentsCount(), 0);
-    }
-
-    /**
      * @Then I should not see information about shipments
      */
-    public function iShouldNotSeeInformationAboutShipments()
+    public function iShouldNotSeeInformationAboutShipments(): void
     {
         Assert::same($this->showPage->getShipmentsCount(), 0);
     }
@@ -878,6 +870,15 @@ final class ManagingOrdersContext implements Context
     public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
     {
         Assert::same($this->showPage->getItemDiscountedUnitPrice($productName), $price);
+    }
+
+    /**
+     * @Then I should be informed that there are no payments
+     */
+    public function iShouldSeeInformationAboutNoPayments(): void
+    {
+        Assert::same($this->showPage->getPaymentsCount(), 0);
+        Assert::true($this->showPage->hasInformationAboutNoPayment());
     }
 
     /**
