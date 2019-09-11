@@ -32,11 +32,16 @@ final class InformAboutGUSCommand extends Command
 
         $style->note(
             [
-                'In order to inform you about newest Sylius releases and be aware of shops based on Sylius, the Core Team uses an internal statistical service called GUS.',
-                'The only data that is collected and stored in its database are hostname, user agent, locale, environment (test, dev or prod), current Sylius version and the date of last contact.',
-                'If you do not want your shop to send requests to GUS, please visit:',
-                'https://docs.sylius.com/en/1.2/cookbook/configuration/disabling-admin-notifications.html',
-                'for further instructions',
+                'For purely statistical purposes and in order to inform you about important updates and security patches, Sylius might send non-sensitive data to our servers. We send:',
+                '* Hostname',
+                '* User-agent',
+                '* Locale',
+                '* Environment (test, dev or prod)',
+                '* Currently used Sylius version',
+                '* Date of the last contact',
+                'If you do not consent please follow this cookbook article:',
+                'https://docs.sylius.com/en/latest/cookbook/configuration/disabling-admin-notifications.html',
+                'That being said, every time we get a notification about a new site deployed with Sylius, it brings a huge smile to our face and motivates us to continue our Open Source work.',
             ]
         );
     }
