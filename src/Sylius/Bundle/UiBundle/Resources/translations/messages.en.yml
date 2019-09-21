@@ -398,6 +398,7 @@ sylius:
         inventory_tracking: 'Inventory tracking'
         invoice: 'Invoice'
         is_enabled: 'Is enabled'
+        issue_tracker: 'Issue tracker'
         it_seems_you_have_an_account_already: 'It seems you have an account already'
         item.choice: "{0} |{1}, 1 item|]1,Inf], %count% items"
         item: 'Item'
@@ -677,6 +678,7 @@ sylius:
         recent_orders: 'Recent orders'
         recent_users: 'Recent users'
         records: 'Records'
+        report_it: 'Report it'
         refund: 'Refund'
         refunded: 'Refunded'
         register: 'Register'
@@ -717,6 +719,7 @@ sylius:
         search: 'Search'
         search_products: 'Search products'
         security_settings: 'Security Settings'
+        see_issue: 'See an issue'
         select_address_from_book: 'Select address from my book'
         select_products: 'Select products'
         select_taxon: 'Select taxon'
