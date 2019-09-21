@@ -29,6 +29,7 @@
     <div class="ui right floated dividing empty item"></div>
 
     {{ sylius_render_notifications_widget() }}
+    {% include '@SyliusAdmin/_help.html.twig' %}
     {% include '@SyliusAdmin/_security.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
