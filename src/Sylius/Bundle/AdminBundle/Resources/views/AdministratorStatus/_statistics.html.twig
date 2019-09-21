@@ -1,0 +1,28 @@
+<div class="ui grid">
+    <div class="center aligned doubling two column row">
+        <div class="column">
+            <div class="ui red segment">
+                <div class="ui small statistic">
+                    <div id="total-sales" class="value" style="padding-bottom: 10px;">
+                        {{ phpVersion }}
+                    </div>
+                    <div class="label">
+                        {{ 'sylius.ui.php_version'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui yellow segment">
+                <div class="ui small statistic">
+                    <div id="new-orders" class="value" style="padding-bottom: 10px;">
+                        {{ syliusVersion }}
+                    </div>
+                    <div class="label">
+                        {{ 'sylius.ui.sylius_version'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

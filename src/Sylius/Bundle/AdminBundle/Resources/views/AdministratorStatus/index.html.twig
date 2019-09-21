@@ -1,0 +1,21 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.administrator_status'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+
+    {% include '@SyliusAdmin/AdministratorStatus/_header.html.twig' %}
+
+    {% include '@SyliusAdmin/AdministratorStatus/_statistics.html.twig' %}
+
+    <div class="ui grid">
+        <div class="ui row huge labels">
+            {% for property in modules %}
+                <div class="ui label">
+                    {{ property }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

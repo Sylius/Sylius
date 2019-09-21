@@ -45,5 +45,9 @@
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
         </service>
+
+        <service id="sylius.controller.admin.administrator_status" class="Sylius\Bundle\AdminBundle\Controller\AdministratorStatusController" public="true">
+            <argument type="service" id="templating" />
+        </service>
     </services>
 </container>

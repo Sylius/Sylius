@@ -237,5 +237,11 @@ final class MainMenuBuilder
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
             ->setLabelAttribute('icon', 'lock')
         ;
+
+        $configuration
+            ->addChild('admin_administrator_status', ['route' => 'sylius_admin_administrator_status_index'])
+            ->setLabel('sylius.ui.administrator_status')
+            ->setLabelAttribute('icon', 'server')
+        ;
     }
 }

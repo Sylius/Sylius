@@ -53,6 +53,7 @@ sylius:
         administration: 'Administration'
         administration_dashboard: 'Administration dashboard'
         administration_panel_login: 'Administration panel login'
+        administrator_status: 'Administrator Status'
         all: 'All'
         all_your_addresses: 'All your addresses'
         amount: 'Amount'
