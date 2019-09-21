@@ -4,7 +4,14 @@
 
 {% block content %}
 
-    {% include '@SyliusAdmin/AdministratorStatus/_header.html.twig' %}
+    <div class="ui stackable two column grid">
+        <div class="ten wide column">
+            {% include '@SyliusAdmin/AdministratorStatus/_header.html.twig' %}
+        </div>
+
+        {% set menu = knp_menu_get('sylius.admin.administrator_status') %}
+        {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
+    </div>
 
     {% include '@SyliusAdmin/AdministratorStatus/_statistics.html.twig' %}
 

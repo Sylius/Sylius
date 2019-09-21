@@ -58,5 +58,11 @@
             <argument type="service" id="event_dispatcher" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.product_variant_form" />
         </service>
+
+        <service id="sylius.admin.menu_builder.administrator_status" class="Sylius\Bundle\AdminBundle\Menu\AdministratorStatusMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.administrator_status" />
+        </service>
     </services>
 </container>
