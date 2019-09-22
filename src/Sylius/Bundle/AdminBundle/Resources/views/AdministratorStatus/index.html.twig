@@ -13,16 +13,20 @@
         {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
     </div>
 
-    {% include '@SyliusAdmin/AdministratorStatus/_statistics.html.twig' %}
+    {% include '@SyliusAdmin/AdministratorStatus/_main_information.html.twig' %}
 
-    <div class="ui grid">
-        <div class="ui row huge labels">
-            {% for property in modules %}
-                <div class="ui label">
-                    {{ property }}
-                </div>
-            {% endfor %}
+    <div class="ui hidden divider"></div>
+
+    <h4 class="ui top attached large header">{{ 'sylius.ui.php_modules'|trans }}</h4>
+    <div class="ui attached segment">
+        <div class="ui grid">
+            <div class="ui row large labels">
+                {% for property in modules|sort %}
+                    <div class="ui label">
+                        {{ property }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-
 {% endblock %}

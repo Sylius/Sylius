@@ -1,4 +1,4 @@
 sylius_admin_administrator_status_index:
-    path: /administrator_status
+    path: /administrator-status
     defaults:
         _controller: sylius.controller.admin.administrator_status:indexAction
