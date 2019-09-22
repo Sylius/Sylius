@@ -17,12 +17,9 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
-class AdministratorStatusMenuBuilderEvent extends MenuBuilderEvent
+final class AdministratorStatusMenuBuilderEvent extends MenuBuilderEvent
 {
-    public function __construct(
-        FactoryInterface $factory,
-        ItemInterface $menu
-    ) {
+    public function __construct(FactoryInterface $factory, ItemInterface $menu) {
         parent::__construct($factory, $menu);
     }
 }
