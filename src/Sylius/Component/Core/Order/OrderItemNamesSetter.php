@@ -26,11 +26,11 @@ final class OrderItemNamesSetter implements OrderItemNamesSetterInterface
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
 
-            if (null !== $variant) {
+            if (null === $item->getVariantName() && null !== $variant) {
                 $item->setVariantName($variant->getTranslation($localeCode)->getName());
             }
 
-            if (null !== $variant && null !== $variant->getProduct()) {
+            if (null === $item->getProductName() && null !== $variant && null !== $variant->getProduct()) {
                 $item->setProductName($variant->getProduct()->getTranslation($localeCode)->getName());
             }
         }
