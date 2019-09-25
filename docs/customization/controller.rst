@@ -136,6 +136,7 @@ getting a list of recommended products from your external api.
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
+
     app_product_show_index:
         path: /product/show
         methods: [GET]
