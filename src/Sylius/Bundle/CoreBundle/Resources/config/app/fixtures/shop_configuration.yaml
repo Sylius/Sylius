@@ -111,6 +111,7 @@ sylius_fixtures:
                                 locale_code: '%locale%'
                                 first_name: 'John'
                                 last_name: 'Doe'
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/john.jpg'
 
                             -   email: 'api@example.com'
                                 username: 'api'
@@ -120,6 +121,7 @@ sylius_fixtures:
                                 first_name: 'Luke'
                                 last_name: 'Brushwood'
                                 api: true
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
 
                 tax_category:
                     options:
