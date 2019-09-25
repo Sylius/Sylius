@@ -136,12 +136,11 @@ getting a list of recommended products from your external api.
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
-
-    app_shop_custom_product:
-        path: /page/product
+    app_product_show_index:
+        path: /product/show
         methods: [GET]
         defaults:
-            _controller: sylius.controller.product:showAction
+            _controller: app.controller.product:showAction
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
