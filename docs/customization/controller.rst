@@ -122,7 +122,7 @@ getting a list of recommended products from your external api.
             arguments: ['@sylius.repository.product']
             public: true
 
-**4.** TO BE CLARIFIED FURTHER: If you don' want to use autowire then add following snippet to ``config/services.yaml``
+**4.** Disable autowire for your controller in ``config/services.yaml``
 
 .. code-block:: yaml
 
