@@ -111,36 +111,26 @@ getting a list of recommended products from your external api.
                 classes:
                     controller: App\Controller\ProductController
 
-**3.** The next thing you have to do is to override the ``sylius.repository.product`` service definition in the ``config/services.yaml``.
+**3.** TO BE CLARIFIED FURTHER: If you don' want to use autowire then try adding following snippet to ``config/services.yaml``
 
 .. code-block:: yaml
 
-    # config/services.yaml
-    services:
-        app.provider.product:
-            class: App\Provider\ProductProvider
-            arguments: ['@sylius.repository.product']
-            public: true
+    App\Controller\ProductController:
+        autowire: false
 
 .. tip::
 
-    Run ``$ php bin/console debug:container sylius.repository.product`` to check if the class has changed to your implementation.
+    Run ``$ php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
 
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
-    app_shop_custom_index:
-        path: /custom/index
+    app_product_show_index:
+        path: /product/show
         methods: [GET]
         defaults:
-            _controller: app.controller.shop.homepage:indexAction
-
-    app_shop_custom_custom:
-        path: /custom/custom
-        methods: [GET]
-        defaults:
-            _controller: app.controller.shop.homepage:customAction
+            _controller: app.controller.product:showAction
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
