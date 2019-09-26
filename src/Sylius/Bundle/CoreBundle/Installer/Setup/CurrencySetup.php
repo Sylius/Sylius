@@ -30,10 +30,11 @@ final class CurrencySetup implements CurrencySetupInterface
     /** @var FactoryInterface */
     private $currencyFactory;
 
-    public function __construct(RepositoryInterface $currencyRepository, FactoryInterface $currencyFactory)
+    public function __construct(RepositoryInterface $currencyRepository, FactoryInterface $currencyFactory, string $currency = 'CAD')
     {
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
+        $this->currency = trim($currency);
     }
 
     /**
@@ -79,7 +80,7 @@ final class CurrencySetup implements CurrencySetupInterface
 
     private function getNewCurrencyCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
     {
-        $question = new Question('Currency (press enter to use USD): ', 'USD');
+        $question = new Question('Currency (press enter to use '.$this->currency.'): ', $this->currency);
 
         return trim($questionHelper->ask($input, $output, $question));
     }
