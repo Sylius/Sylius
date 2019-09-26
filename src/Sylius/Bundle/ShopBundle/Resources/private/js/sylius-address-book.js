@@ -29,7 +29,7 @@ $.fn.extend({
         const { provinceCode, provinceName } = choice.data();
         const provinceContainer = select.parent().find('.province-container').get(0);
 
-        element.find('input, select').each((index, input) => {
+        element.find('input:not([type="radio"]):not([type="checkbox"]), select').each((index, input) => {
           $(input).val('');
         });
 
@@ -55,6 +55,9 @@ $.fn.extend({
                 }
               }
             }, 100);
+          } else if (field.is('[type="radio"]') || field.is('[type="checkbox"]')) {
+            field.prop('checked', false);
+            field.filter(`[value="${value}"]`).prop('checked', true);
           } else {
             field.val(value);
           }
