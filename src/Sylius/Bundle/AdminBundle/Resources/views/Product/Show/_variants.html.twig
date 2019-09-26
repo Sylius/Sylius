@@ -66,9 +66,7 @@
                                 <div class="gray text">-</div>
                             {% endif %}
                         </td>
-                        <td class="current-stock" style="padding-right: 15px;">
-                            {{ variant.onHand - variant.onHold }}
-                        </td>
+                        <td class="current-stock" style="padding-right: 15px;">{{ variant.onHand }}</td>
                     </tr>
                     <tr class="variants-accordion__content item-{{ loop.index }}" style="display: none; background: rgba(0,0,0,.04);">
                         <td colspan="7" style="padding: 20px">
