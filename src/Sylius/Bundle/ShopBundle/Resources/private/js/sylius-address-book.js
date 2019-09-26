@@ -19,7 +19,7 @@ $.fn.extend({
     const element = this;
     const select = element.find('.address-book-select');
     const findByName = function findByName(name) {
-      return element.find(`[name*=${parseKey(name)}]`);
+      return element.find(`[name*="[${parseKey(name)}]"]`);
     };
 
     select.dropdown({
