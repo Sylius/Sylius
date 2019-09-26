@@ -82,14 +82,12 @@ Then build the frontend assets by running:
 Accessing the Shop
 ------------------
 
-We strongly recommend using the Symfony built-in web server by running the ``php bin/console server:start``
+We strongly recommend using the Symfony Local Web Server by running the ``symfony server:start``
 command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
 
 .. note::
-
-    The localhost's 8000 port may be already occupied by some other process.
-    If that happens, please try using a different port - ``php bin/console server:start 127.0.0.1:8081``.
-    Get to know more about using a built-in server `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
+    Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
+    If you are using a built-in server check `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
 You can log to the administrator panel located at ``/admin`` with the credentials you have provided during the installation process.
 
