@@ -19,6 +19,7 @@ commands=(
     test-behat-without-javascript
     test-behat-with-javascript
     test-behat-with-cli
+    test-doctrine-migrations
 )
 
 for command in ${commands[@]}; do
