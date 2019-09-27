@@ -45,8 +45,8 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     public function __construct(
         FactoryInterface $userFactory,
         string $localeCode,
-        FileLocatorInterface $fileLocator,
-        ImageUploaderInterface $imageUploader
+        ?FileLocatorInterface $fileLocator = null,
+        ?ImageUploaderInterface $imageUploader = null
     ) {
         $this->userFactory = $userFactory;
         $this->localeCode = $localeCode;
@@ -58,6 +58,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
         $this->fileLocator = $fileLocator;
         $this->imageUploader = $imageUploader;
+
+        if ($this->fileLocator === null || $this->imageUploader === null) {
+            @trigger_error(sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     /**
@@ -87,7 +91,9 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             $user->addRole('ROLE_API_ACCESS');
         }
 
-        $this->createAvatar($user, $options);
+        if (!($options['avatar'] === '')) {
+            $this->createAvatar($user, $options);
+        }
 
         return $user;
     }
@@ -118,9 +124,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     private function createAvatar(AdminUserInterface $adminUser, array $options): void
     {
-        if ($options['avatar'] === '') {
-            return;
+        if ($this->fileLocator === null || $this->imageUploader === null) {
+            throw new \RuntimeException('You must configure a $fileLocator or/and $imageUploader');
         }
+
         $imagePath = $options['avatar'];
 
         $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
