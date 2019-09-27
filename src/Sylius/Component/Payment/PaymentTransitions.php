@@ -22,6 +22,7 @@ final class PaymentTransitions
     public const TRANSITION_COMPLETE = 'complete';
     public const TRANSITION_FAIL = 'fail';
     public const TRANSITION_CANCEL = 'cancel';
+    public const TRANSITION_AUTHORIZE = 'authorize';
     public const TRANSITION_REFUND = 'refund';
     public const TRANSITION_VOID = 'void';
 
