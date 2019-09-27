@@ -128,6 +128,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Given /^I go to edit page$/
+     */
+    public function iGoToEditPage()
+    {
+        $this->productShowPage->showProductEditPage();
+    }
+
+    /**
      * @Then I should see this product's product page
      */
     public function iShouldSeeThisProductPage(ProductInterface $product): void
