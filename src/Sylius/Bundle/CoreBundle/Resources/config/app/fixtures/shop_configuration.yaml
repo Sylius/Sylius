@@ -36,7 +36,7 @@ sylius_fixtures:
                                 currencies:
                                     - 'USD'
                                 enabled: true
-                                hostname: 'localhost'
+                                hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
                                 shop_billing_data:
                                     company: 'Sylius'
                                     tax_id: '0001112222'
