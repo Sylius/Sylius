@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
@@ -47,6 +48,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('show_product_single_button')->click();
     }
 
+    public function showProductEditPage(): void
+    {
+        $this->getElement('edit_product')->click();
+    }
+
+    public function showVariantEditPage(ProductVariantInterface $variant): void
+    {
+        // TODO: Implement showVariantEditPage() method.
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -54,6 +65,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => '.ui.labeled.icon.button',
             'variants' => '#variants',
+            'edit_product' => '#edit-product',
         ]);
     }
 }

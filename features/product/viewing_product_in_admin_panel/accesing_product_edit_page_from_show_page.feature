@@ -1,4 +1,4 @@
-@managing_products
+@viewing_products
 Feature: Accessing to product edit page from show page
     In order to simple way to edit product
     As an Administrator
@@ -12,11 +12,13 @@ Feature: Accessing to product edit page from show page
         And I am logged in as an administrator
         And I am browsing products
 
+    @ui
     Scenario: Accessing to product edit page from product show page
         When I access "Iron shield" product page
         And I go to edit page
         Then I should be on "Iron shield" product edit page
 
+    @ui
     Scenario: Accessing to variant edit page from product show page
         When I access "Iron shield" product page
         And I go to edit page of "Iron shield" variant with code "123456789-xl"
