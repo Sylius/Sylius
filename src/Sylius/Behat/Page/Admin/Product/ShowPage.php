@@ -50,12 +50,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function showProductEditPage(): void
     {
-        $this->getElement('edit_product')->click();
+        $this->getElement('edit_product_button')->click();
     }
 
     public function showVariantEditPage(ProductVariantInterface $variant): void
     {
-        // TODO: Implement showVariantEditPage() method.
+        $this->getElement('edit_variant_button', ['%variantCode%' => $variant->getCode()])->click();
     }
 
     protected function getDefinedElements(): array
@@ -65,7 +65,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => '.ui.labeled.icon.button',
             'variants' => '#variants',
-            'edit_product' => '#edit-product',
+            'edit_product_button' => '#edit-product',
+            'edit_variant_button' => '#variants .variants-accordion__title:contains("%variantCode%") .edit-variant',
         ]);
     }
 }
