@@ -27,12 +27,12 @@ const controlAttributesList = function controlAttributesList() {
 };
 
 const modifyAttributesListOnSelectorElementDelete = function modifyAttributesListOnSelectorElementDelete(removedValue) {
-  $(`#attributesContainer .attribute[data-id="${removedValue}"]`).remove();
+  $(`#attributesContainer [data-attributes_code="${removedValue}"]`).remove();
 };
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
-  $('.attribute button').off('click').on('click', (event) => {
-    const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
+  $('[data-attributes_remove]').off('click').on('click', (event) => {
+    const attributeId = $(event.currentTarget).parents('[data-attributes_code]').attr('data-attributes_code');
 
     $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
     modifyAttributesListOnSelectorElementDelete(attributeId);
@@ -93,8 +93,7 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
         const attributeFormElements = modifyAttributeFormElements($(response));
 
         attributeFormElements.each((index, element) => {
-          const localeCode = $(element).find('input[type="hidden"]').last().val();
-          $(`#attributesContainer > div[data-tab="${localeCode}"]`).append(element);
+          $('#attributesContainer').append(element);
         });
 
         $('#sylius_product_attribute_choice').val('');
@@ -104,6 +103,26 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
 
         $('form').removeClass('loading');
       },
+    });
+  });
+};
+
+const getAttributeInputNameSuffix = function getAttributeInputNameSuffix(name) {
+  return name.substr(name.lastIndexOf('['), name.lastIndexOf(']'));
+};
+
+const applyAttributeValueToGroup = function applyAttributeValueToGroup() {
+  $('body').on('click', '[data-attributes_apply]', (e) => {
+    const current = $(e.currentTarget).parents('.attribute');
+    const group = $(e.currentTarget).parents('.attribute-group').find('.attribute');
+
+    group.each((i, item) => {
+      $(':input:not([type=hidden])', item).val(function () {
+        return $(`:input[name$="${getAttributeInputNameSuffix(this.name)}"]`, current).val();
+      });
+      $(':checkbox', item).prop('checked', function () {
+        return $(`:checkbox[name$="${getAttributeInputNameSuffix(this.name)}"]`, current).prop('checked');
+      });
     });
   });
 };
@@ -121,5 +140,6 @@ $.fn.extend({
 
     controlAttributesList();
     modifySelectorOnAttributesListElementDelete();
+    applyAttributeValueToGroup();
   },
 });
