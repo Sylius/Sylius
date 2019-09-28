@@ -111,6 +111,9 @@ sylius_fixtures:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
 
                             -   name: 'Simple cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
                                 main_taxon: 'simple_caps'
                                 taxons:
                                     - 'caps'
