@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -136,7 +135,8 @@ final class LazyOption
         };
     }
 
-    private static function findLimitedAll(RepositoryInterface $repository, int $limit = 2000) {
+    private static function findLimitedAll(RepositoryInterface $repository, int $limit = 2000): array
+    {
         return $repository->findBy([], ['id'=>'asc'], $limit);
     }
 }
