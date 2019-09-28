@@ -21,5 +21,5 @@ Feature: Accessing to product edit page from show page
     @ui
     Scenario: Accessing to variant edit page from product show page
         When I access "Iron shield" product page
-        And I go to edit page of "Iron shield" variant with code "123456789-xl"
-        Then I should see edit page of this variant
+        And I go to edit page of "Iron shield - very big" variant
+        Then I should be on "Iron shield - very big" variant edit page

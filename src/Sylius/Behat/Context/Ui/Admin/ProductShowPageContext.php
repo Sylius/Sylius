@@ -26,7 +26,10 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
@@ -67,6 +70,12 @@ final class ProductShowPageContext implements Context
     /** @var VariantsElementInterface */
     private $variantsElement;
 
+    /** @var UpdateSimpleProductPageInterface */
+    private $updateSimpleProductPage;
+
+    /** @var UpdateConfigurableProductPageInterface */
+    private $updateConfigurableProductPage;
+
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $productShowPage,
@@ -79,7 +88,9 @@ final class ProductShowPageContext implements Context
         ShippingElementInterface $shippingElement,
         TaxonomyElementIterface $taxonomyElement,
         OptionsElementInterface $optionsElement,
-        VariantsElementInterface $variantsElement
+        VariantsElementInterface $variantsElement,
+        UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        UpdateConfigurableProductPageInterface $updateConfigurableProductPage
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;
@@ -93,6 +104,8 @@ final class ProductShowPageContext implements Context
         $this->taxonomyElement = $taxonomyElement;
         $this->optionsElement = $optionsElement;
         $this->variantsElement = $variantsElement;
+        $this->updateSimpleProductPage = $updateSimpleProductPage;
+        $this->updateConfigurableProductPage = $updateConfigurableProductPage;
     }
 
     /**
@@ -128,11 +141,19 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Given /^I go to edit page$/
+     * @When I go to edit page
      */
-    public function iGoToEditPage()
+    public function iGoToEditPage(): void
     {
         $this->productShowPage->showProductEditPage();
+    }
+
+    /**
+     * @When I go to edit page of :variant variant
+     */
+    public function iGoToEditPageOfVariantWithCode(ProductVariantInterface $variant): void
+    {
+        $this->productShowPage->showVariantEditPage($variant);
     }
 
     /**
@@ -365,5 +386,21 @@ final class ProductShowPageContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->productShowPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then I should be on :product product edit page
+     */
+    public function iShouldBeOnProductEditPage(ProductInterface $product): void
+    {
+        Assert::true($this->updateSimpleProductPage->isOpen(['id' => $product->getId()]));
+    }
+
+    /**
+     * @Then I should be on :variant variant edit page
+     */
+    public function iShouldSeeEditPageOfThisVariant(ProductVariantInterface $variant): void
+    {
+        Assert::true($this->updateConfigurableProductPage->isOpen(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]));
     }
 }
