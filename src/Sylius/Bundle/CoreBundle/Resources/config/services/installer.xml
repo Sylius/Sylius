@@ -33,7 +33,7 @@
         <service id="sylius.setup.currency" class="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup">
             <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.factory.currency" />
-            <argument>%currency%</argument>
+            <argument>%sylius_installer_currency%</argument>
         </service>
         <service id="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface" alias="sylius.setup.currency" />
 
