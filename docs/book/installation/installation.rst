@@ -57,7 +57,8 @@ After everything is in place, run the following command to install Sylius:
 
     During the ``sylius:install`` command you will be asked to provide important information, but also its execution ensures
     that the default **currency** (USD) and the default **locale** (English - US) are set.
-    They can be changed later, respectively in the "Configuration > Channels" section of the admin and in the ``config/services.yaml`` file.
+    They can be changed later, respectively in the "Configuration > Channels" section of the admin and in the ``config/services.yaml`` file. If you want
+    to change these before running the installation command, set the ``locale`` and ``sylius_installer_currency`` parameters in the ``config/services.yaml`` file.
     From now on all the prices will be stored in the database in USD as integers, and all the products will have to be added with a base american english name translation.
 
 Installing assets
