@@ -83,7 +83,7 @@ final class CurrencySetup implements CurrencySetupInterface
 
     private function getNewCurrencyCode(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): string
     {
-        $question = new Question('Currency (press enter to use '.$this->currency.'): ', $this->currency);
+        $question = new Question(sprintf('Currency (press enter to use %s): ', $this->currency), $this->currency);
 
         return trim($questionHelper->ask($input, $output, $question));
     }
