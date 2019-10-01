@@ -70,12 +70,6 @@ final class ProductShowPageContext implements Context
     /** @var VariantsElementInterface */
     private $variantsElement;
 
-    /** @var UpdateSimpleProductPageInterface */
-    private $updateSimpleProductPage;
-
-    /** @var UpdateConfigurableProductPageInterface */
-    private $updateConfigurableProductPage;
-
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $productShowPage,
@@ -88,9 +82,7 @@ final class ProductShowPageContext implements Context
         ShippingElementInterface $shippingElement,
         TaxonomyElementIterface $taxonomyElement,
         OptionsElementInterface $optionsElement,
-        VariantsElementInterface $variantsElement,
-        UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        UpdateConfigurableProductPageInterface $updateConfigurableProductPage
+        VariantsElementInterface $variantsElement
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;
@@ -104,8 +96,6 @@ final class ProductShowPageContext implements Context
         $this->taxonomyElement = $taxonomyElement;
         $this->optionsElement = $optionsElement;
         $this->variantsElement = $variantsElement;
-        $this->updateSimpleProductPage = $updateSimpleProductPage;
-        $this->updateConfigurableProductPage = $updateConfigurableProductPage;
     }
 
     /**
@@ -151,7 +141,7 @@ final class ProductShowPageContext implements Context
     /**
      * @When I go to edit page of :variant variant
      */
-    public function iGoToEditPageOfVariantWithCode(ProductVariantInterface $variant): void
+    public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
     {
         $this->productShowPage->showVariantEditPage($variant);
     }
@@ -386,21 +376,5 @@ final class ProductShowPageContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->productShowPage->isShowInShopButtonDisabled());
-    }
-
-    /**
-     * @Then I should be on :product product edit page
-     */
-    public function iShouldBeOnProductEditPage(ProductInterface $product): void
-    {
-        Assert::true($this->updateSimpleProductPage->isOpen(['id' => $product->getId()]));
-    }
-
-    /**
-     * @Then I should be on :variant variant edit page
-     */
-    public function iShouldSeeEditPageOfThisVariant(ProductVariantInterface $variant): void
-    {
-        Assert::true($this->updateConfigurableProductPage->isOpen(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]));
     }
 }
