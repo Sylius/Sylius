@@ -13,18 +13,19 @@
             <tbody>
                 {% set currencies = sylius_channels_currencies() %}
                 {% for channelPricing in product.variants.first.channelPricings %}
-                {% set channel = channelPricing.channelCode|sylius_channel %}
-                <tr>
-                    <td>{{ channel.name }}</td>
-                    {% set channelCode = channel.code %}
-                    <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
-                    {% if channelPricing.originalPrice != null %}
-                        <td>{{ money.format(channelPricing.originalPrice, currencies[channelCode]) }}</td>
-                    {% else %}
-                        <td>-</td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
+                    {% set channel = channelPricing.channelCode|sylius_channel %}
+                    <tr>
+                        <td>{{ channel.name }}</td>
+                        <td>{{ money.format(channelPricing.price, currencies[channel.code]) }}</td>
+                        <td>
+                            {% if channelPricing.originalPrice != null %}
+                                {{ money.format(channelPricing.originalPrice, currencies[channel.code]) }}
+                            {% else %}
+                                <span class="gray text">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
