@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-final class ChannelNameExtension extends AbstractExtension
+final class ChannelExtension extends AbstractExtension
 {
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
@@ -30,12 +31,12 @@ final class ChannelNameExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('sylius_channel_name', [$this, 'getChannelNameByCode']),
+            new TwigFilter('sylius_channel', [$this, 'getChannelByCode']),
         ];
     }
 
-    public function getChannelNameByCode(string $code): string
+    public function getChannelByCode(string $code): ChannelInterface
     {
-        return $this->channelRepository->findOneByCode($code)->getName();
+        return $this->channelRepository->findOneByCode($code);
     }
 }
