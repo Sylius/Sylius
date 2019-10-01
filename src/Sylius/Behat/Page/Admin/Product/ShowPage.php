@@ -61,12 +61,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'edit_product_button' => '#edit-product',
+            'edit_variant_button' => '#variants .variants-accordion__title:contains("%variantCode%") .edit-variant',
             'product_name' => '#header h1 .content > span',
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => '.ui.labeled.icon.button',
             'variants' => '#variants',
-            'edit_product_button' => '#edit-product',
-            'edit_variant_button' => '#variants .variants-accordion__title:contains("%variantCode%") .edit-variant',
         ]);
     }
 }

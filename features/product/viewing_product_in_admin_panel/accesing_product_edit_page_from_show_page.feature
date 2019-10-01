@@ -1,6 +1,6 @@
-@viewing_products
+@accessing_edit_page_from_product_show_page
 Feature: Accessing to product edit page from show page
-    In order to simple way to edit product
+    In order to edit product in the simple way
     As an Administrator
     I want to be able to move to edit page directly from product show page
 
