@@ -7,7 +7,6 @@
 
 {% set variant = item.variant %}
 {% set product = variant.product %}
-{% set subtotal = item.quantity * (item.unitPrice + item.units.first.adjustmentsTotal(unitPromotionAdjustment) + item.units.first.adjustmentsTotal(orderPromotionAdjustment)) %}
 
 {% set taxIncluded = sylius_admin_order_unit_tax_included(item) %}
 {% set taxExcluded = sylius_admin_order_unit_tax_excluded(item) %}
@@ -23,16 +22,22 @@
         {{ money.format(item.units.first.adjustmentsTotal(unitPromotionAdjustment), order.currencyCode) }}
     </td>
     <td class="right aligned unit-order-discount">
-        <span style="font-style: italic;">{{ money.format(item.units.first.adjustmentsTotal(orderPromotionAdjustment), order.currencyCode) }}</span>
+        {% for key,quantity in sylius_order_summary_unit_order_discount(item) %}
+            {{ money.format(key, order.currencyCode) }}
+        {% endfor %}
     </td>
     <td class="right aligned discounted-unit-price">
-        {{ money.format(item.fullDiscountedUnitPrice, order.currencyCode) }}
+        {% for key,quantity in sylius_order_summary_discounted_unit_price_and_quantity(item) %}
+            {{ money.format(key, order.currencyCode) }}
+        {% endfor %}
     </td>
     <td class="right aligned quantity">
-        {{ item.quantity }}
+        {% for key,quantity in sylius_order_summary_discounted_unit_price_and_quantity(item) %}
+            {{ quantity }}<br>
+        {% endfor %}
     </td>
     <td class="right aligned subtotal">
-      {{ money.format(subtotal, order.currencyCode) }}
+        {{ money.format(sylius_order_summary_subtotal(item), order.currencyCode) }}
     </td>
     <td class="right aligned tax">
         <div class="tax-excluded">{{ money.format(taxExcluded, order.currencyCode) }}</div>
