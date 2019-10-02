@@ -69,6 +69,8 @@ to ensure your plugin's extraordinary quality.
 .. _`phpspec`: http://www.phpspec.net/en/stable/
 .. _`PHPUnit`: https://phpunit.de/
 
+.. _book_plugins_creating_plugin_naming_conventions:
+
 5. Naming conventions
 ---------------------
 
