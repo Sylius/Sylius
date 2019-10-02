@@ -26,7 +26,10 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
@@ -125,6 +128,22 @@ final class ProductShowPageContext implements Context
     public function iShowThisProductInThisChannel(): void
     {
         $this->productShowPage->showProductInSingleChannel();
+    }
+
+    /**
+     * @When I go to edit page
+     */
+    public function iGoToEditPage(): void
+    {
+        $this->productShowPage->showProductEditPage();
+    }
+
+    /**
+     * @When I go to edit page of :variant variant
+     */
+    public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
+    {
+        $this->productShowPage->showVariantEditPage($variant);
     }
 
     /**
