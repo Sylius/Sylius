@@ -1,1 +1,9 @@
-<span class="ui small empty circular label" style="background-color: {{ channel.color }}"></span> {{ channel.name }} ({{ channel.code }})
+{% if channel is defined %}
+    <div class="channel">
+        <span class="ui medium empty circular label channel__item" style="background-color: {{ channel.color|default('#000') }}"></span>
+
+        <span class="channel__item">
+            {{ channel.name|default(channel.code) }}
+        </span>
+    </div>
+{% endif %}

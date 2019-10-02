@@ -27,3 +27,21 @@
     border-top-right-radius: .28571429rem !important;
     border-bottom-right-radius: .28571429rem !important;
 }
+
+.channel {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+
+    .channel__item {
+        white-space: nowrap;
+    }
+
+    .channel__item.label {
+        transform: translateY(1px);
+    }
+
+    .channel__item:not(:last-child) {
+        margin-right: 8px;
+    }
+}
