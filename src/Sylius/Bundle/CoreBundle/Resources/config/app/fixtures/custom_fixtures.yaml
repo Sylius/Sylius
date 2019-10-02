@@ -16,6 +16,7 @@ sylius_fixtures:
                 order:
                     options:
                         amount: 20
+                        channel: 'FASHION_WEB'
 
                 address:
                     options:
