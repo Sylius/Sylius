@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by AdamKasp at 2019-10-01T07:45:02Z
+
+> Will it solve some of order fixtures problems like #10719?
+
+No, it fixed the only problem with missing fixture data :(
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-10-01T09:13:19Z
+
+As it is bugfix, we should add it to 1.6
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-10-01T09:13:29Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "minor-fixture-fixes"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2019-10-02T05:48:58Z
+
+Thank you, Adam! :tada:
