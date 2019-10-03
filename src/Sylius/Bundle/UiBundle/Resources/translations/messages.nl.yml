@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
     form:
         login:
@@ -72,11 +69,13 @@ sylius:
         attributes: 'Attributen'
         author: 'Auteur'
         authorized: 'Gemachtigd'
+        authorized_payment: "Gemachtigde betaling",
         availability: 'Beschikbaarheid'
         available_for_channels: 'Beschikbaar voor kanalen'
         available_on: 'Beschikbaar vanaf'
         available_on_hand: 'Uit voorraad beschikbaar'
         available_until: 'Beschikbaar tot'
+        avatar: "Avatar",
         average_order_value: 'Gemiddelde bestelwaarde'
         awaiting_payment: 'Wachtend op betaling'
         back: 'Terug'
@@ -239,6 +238,7 @@ sylius:
         delete_image: 'Verwijder afbeelding'
         deleted: 'Verwijderd'
         delivery_and_shipping: 'Verzending & Levering'
+        depth: "Diepte",
         description: 'Omschrijving'
         details: 'Details'
         disable: 'Uitschakelen'
@@ -246,7 +246,10 @@ sylius:
         discount: 'Korting'
         discounted_unit_price: 'Eenheidsprijs na korting'
         display: 'Weergeven'
+        distributed_order_discount: "Gedistribueerde Orderkorting",
+        documentation: "Documentatie",
         edit: 'Bewerken'
+        "edit_addresses": "Adressen aanpassen",
         edit_admin_user: 'Beheerder bewerken'
         edit_association_type: 'Bewerk relatietype'
         edit_channel: 'Bewerk kanaal'
@@ -355,6 +358,7 @@ sylius:
         generate_coupons: 'Coupons genereren'
         generate_variants: 'Genereer varianten'
         generating_coupons: 'Genereer coupons'
+        "get_support": "Hulp verkrijgen",
         go: 'Ga'
         go_level_up: 'Niveau omhoog'
         go_to_dashboard: 'Ga naar dashboard'
@@ -364,6 +368,7 @@ sylius:
         guest: 'Gast'
         guest_customer: 'Gast klant'
         have_an_account_already: 'Heeft U reeds een account?'
+        height: "Hoogte",
         hello: 'Hallo'
         hello_name: 'Hallo <b>%name%</b>'
         hide_deleted: 'Verberg verwijderd'
@@ -391,11 +396,15 @@ sylius:
         inventory_tracking: 'Voorraadbeheer'
         invoice: 'Factuur'
         is_enabled: 'Is ingeschakeld'
+        issue_tracker: "Issue tracker",
         it_seems_you_have_an_account_already: 'U heeft reeds een account'
         item: 'Artikel'
+        item_discount: "Artikel korting",
         items: 'Items'
         item.choice: "{0} |{1}, 1 object |] 1, Inf], %count% items"
         items_total: 'Artikelen Totaal'
+        join_forum: "Bezoek forum",
+        join_slack: "Bezoek Slack",
         jump_to_page: 'Ga naar pagina'
         label: 'Label'
         last_login: 'Laatst ingelogd'
@@ -477,6 +486,8 @@ sylius:
         menu_nodes: 'Menu items'
         menus: 'Menu ''s'
         message: 'Bericht'
+        meta_description: "Meta beschrijving",
+        meta_keywords: "Meta sleutelwoorden",
         metadata_index: 'Metagegevens'
         method: 'Methode'
         modified: 'Aangepast'
@@ -527,12 +538,14 @@ sylius:
         no_account: 'Nog geen account'
         no_addresses: 'Er zijn geen adressen om weer te geven'
         no_association_types_to_display: 'Er zijn geen relatie typen gedefinieerd'
+        no_associations_to_display: "Er zijn geen relaties om te tonen",
         no_comment: 'Geen commentaar'
         no_default_billing_address: 'Geen standaard factuuradres'
         no_default_shipping_address: 'Geen standaard verzendadres'
         no_description: 'Geen omschrijving'
         no_new_notifications: 'Geen nieuwe berichten'
         no_payment_methods_available: 'Er zijn momenteel geen betalingsmethoden beschikbaar voor uw bestelling'
+        no_payments: "Bestelling zonder betalingen",
         no_pricing_configuration: 'Geen prijsstelling geconfigureerd'
         no_promotion: 'Geen promotie toegepast'
         no_requirement: 'Geen vereiste'
@@ -540,6 +553,7 @@ sylius:
         no_results_to_display: 'Er zijn geen resultaten om weer te geven'
         no_shipping_category: 'Geen verzendcategorie'
         no_shipping_charges: 'Geen verzendkosten'
+        no_shipping_data: "Geen verzendgegevens",
         no_shipping_methods_available: 'Er zijn momenteel geen verzend methoden beschikbaar voor je verzendadres'
         no_short_description: '<i>Geen korte omschrijving</i>'
         no_sku: '<i>Geen SKU</i>'
@@ -568,6 +582,7 @@ sylius:
         order_comments: 'Order Opmerkingen'
         order_confirmation_name: 'Order bevestiging'
         order_details: 'Details van uw bestelling'
+        order_discount: "Bestellings korting",
         order_history: 'Bestelgeschiedenis'
         order_item_product: 'Artikel'
         order_state: 'Bestel status'
@@ -586,6 +601,7 @@ sylius:
         pages: 'Pagina''s'
         paid: 'Betaald'
         parent: 'Ouder'
+        partially_authorized: "Gedeeltelijk Gemachtigd",
         partially_paid: 'Gedeeltelijk betaald'
         partially_shipped: 'Gedeeltelijk verzonden'
         password: 'Wachtwoord'
@@ -629,9 +645,11 @@ sylius:
         product_attributes: 'Productattributen'
         product_details_viewing_product_product: 'Product details <small>"<strong>%product%</strong>"</small>'
         product_options: 'Productopties'
+        product_page: "Productpagina",
         product_review: 'Productbeoordeling'
         product_reviews: 'Productbeoordelingen'
         product_taxon: 'Product Taxon'
+        product_taxons: "Product Taxons",
         product_variants: 'Product varianten'
         products: 'Producten'
         products_categorized_as_name: 'Producten in "%name%"'
@@ -675,6 +693,7 @@ sylius:
         remove_attribute: 'Attribuut verwijderen'
         repeat_new_password: 'Herhaal je wachtwoord'
         report_details: 'Rapport details'
+        report_it: "Rapporteer het",
         reports: 'Rapporten'
         reserved: 'Gereserveerd'
         reset: 'Reset'
@@ -700,6 +719,7 @@ sylius:
         search: 'Zoeken'
         search_products: 'Zoek Producten'
         security_settings: 'Beveiligingsinstellingen'
+        see_issue: "Probleem bekijken",
         select_address_from_book: 'Adres uit adressenboek selecteren'
         select_products: 'Selecteer producten'
         select_taxon: 'Selecteer taxon'
@@ -725,20 +745,28 @@ sylius:
         shipping_category: 'Verzend categorie'
         shipping_address_changes_history: 'Wijzigingsgeschiedenis verzend adres'
         shipping_charges: 'Verzendkosten'
+        shipping_discount: "Verzendkost korting",
+        shipping_estimated_cost: "Geschatte verzendkost",
         shipping_method: 'Verzendmethode'
         shipping_method_details: 'Verzendmethode details'
         shipping_methods: 'Verzendmethoden'
+        shipping_not_required: "Verzending niet vereist",
+        shipping_required: "Verzending vereist",
         shipping_state: 'Verzendstatus'
         shipping_total: 'Verzendkosten totaal'
         shop_by: 'Filter op'
         shop_by_brand: 'Winkel per merk'
+        short_description: "Korte beschrijving",
         show: 'Toon'
+        show_in: "Toon in",
         show_all: 'Toon alles'
         show_deleted: 'Toon verwijderd'
         show_in_store: 'Toon in winkel'
         show_metadata: 'Toon metadata'
         show_order_details: 'Toon Orderinformatie'
         show_orders: 'Bestellingen tonen'
+        show_product: "Product tonen",
+        show_product_in_shop_page: "Toon product in winkel",
         sign_in: 'Aanmelden'
         sign_in_here: 'Hier inloggen'
         sign_in_to_the_store_or_create_new_account: 'Inloggen <small>of maak een nieuw account</small>'
@@ -748,6 +776,7 @@ sylius:
         sku: 'SKU'
         slideshow: 'Slideshow'
         slideshow_blocks: 'Slideshow blokken'
+        slug: "Slug",
         sort: 'Sortering'
         sort_by_date: 'Sorteer op datum'
         source_currency: 'Bronvaluta'
@@ -776,6 +805,7 @@ sylius:
         taxation_categories: 'BTW-groepen'
         taxation_settings: 'Belasting Instellingen'
         taxes: 'Belastingen'
+        taxes_total: "Totale belastingen",
         taxonomy: 'Taxonomie'
         taxons: 'Taxa'
         terms_and_conditions: 'Algemene Voorwaarden'
@@ -786,6 +816,7 @@ sylius:
         theme: 'Thema'
         the_instructions_below_will_be_displayed_to_the_customer: 'De onderstaande instructies worden getoond aan de klant'
         the_page_you_are_looking_for_does_not_exist: 'De pagina die u zoekt bestaat niet.'
+        the_page_you_are_looking_for_is_forbidden: "De pagina die u zoekt is verboden.",
         there_are_no_attributes_configured: 'Er zijn geen attributen geconfigureerd'
         there_are_no_blocks_to_display: 'Er zijn geen blokken weer te geven'
         there_are_no_channels_configured: 'Er zijn geen kanalen geconfigureerd'
@@ -827,10 +858,12 @@ sylius:
         there_is_no_main_taxon_for_this_product: 'Er is geen categorie voor dit product'
         this_customer_does_not_have_a_default_address: 'Deze klant heeft geen standaardadres'
         this_customer_has_not_completed_any_orders_yet: 'Deze klant heeft nog geen afgeronde orders'
+        this_message_contains_errors: "Dit formulier bevat fouten.",
         this_months_statistics: 'Statistieken van deze maand'
         this_product_has_no_attributes_defined: 'Dit product heeft geen kenmerken'
         title: 'Titel'
         to: 'Tot'
+        toggle_all: "Toggle alles",
         toggle_sidebar: 'Toggle zijbalk'
         topic: 'Onderwerp'
         total: 'Totaal'
@@ -840,12 +873,14 @@ sylius:
         total_records: 'Aantal records'
         total_registrations: 'Aantal registraties'
         total_value_of_orders: 'Totale waarde van de orders'
+        tracked: "Tracked",
         tracking_code: 'Tracking code'
         tracking_number: 'Tracking code'
         translations: 'Vertalingen'
         type: 'Type'
         unavailable: 'Onbeschikbaar'
         unexpected_error_occurred: 'Er is een onverwachte fout opgetreden.'
+        unit_discount: "Korting per stuk",
         unit_price: 'Stukprijs'
         unknown: 'Onbekend'
         unlimited: 'Onbeperkt'
@@ -874,15 +909,18 @@ sylius:
         view: 'Weergave'
         view_and_edit_cart: 'Winkelwagen bekijken en aanpassen'
         view_more: 'Bekijk details'
+        view_order: "Bekijk bestelling",
         view_product_details: 'Bekijk %product% details'
         view_your_order_or_change_payment_method: 'Bestelling bekijken of betalingsmethode wijzigen'
         view_your_store: 'Winkel bekijken'
         void: 'Leeg'
         volume_based_pricing: 'Volume gebaseerde prijzen'
         warning: 'Waarschuwing'
+        weight: "Gewicht",
         welcome: 'Welkom'
         welcome_to_our_store: 'Welkom in jouw winkel'
         welcome_to_your_space: 'Welkom in uw account'
+        width: "Gewicht",
         write_your_own_review: 'Schrijf uw beoordeling'
         yes_label: 'Ja'
         you_are_customer_since: 'U bent klant sinds'
@@ -899,6 +937,7 @@ sylius:
         your_profile: 'Je profiel'
         your_shopping_cart: 'Je winkelwagen'
         your_store: 'Je winkel'
+        youtube: "YouTube",
         zone: 'Zone'
         zone_consisting_of_countries: 'Zone bestaande uit landen'
         zone_consisting_of_other_zones: 'Zone bestaande uit andere zones'
