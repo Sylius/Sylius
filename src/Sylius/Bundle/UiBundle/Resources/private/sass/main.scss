@@ -196,3 +196,25 @@ th {
         color: #9a9a9a;
     }
 }
+
+// Color input
+input[type="color"] {
+    -webkit-appearance: none;
+    border: 1px solid rgba(34,36,38,.15);
+    width: 38px;
+    height: 38px;
+    padding: 3px;
+    border-radius: 99px;
+}
+
+input[type="color"]::-webkit-color-swatch,
+input[type="color"]::-webkit-color-swatch-wrapper {
+    border-radius: 99px;
+    border: 0;
+    padding: 3px;
+}
+
+input[type="color"]::-moz-color-swatch {
+    border-radius: 99px;
+    border: 0;
+}
