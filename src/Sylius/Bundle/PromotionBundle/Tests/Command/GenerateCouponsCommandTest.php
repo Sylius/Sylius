@@ -15,8 +15,8 @@ namespace Sylius\Bundle\PromotionBundle\Tests\Command;
 
 use InvalidArgumentException;
 use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
-use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
