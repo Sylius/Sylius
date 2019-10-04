@@ -19,7 +19,7 @@
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
-                <option name="min">2</option>
+                <option name="min">1</option>
                 <option name="minMessage">sylius.attribute.name.min_length</option>
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.attribute.name.max_length</option>
