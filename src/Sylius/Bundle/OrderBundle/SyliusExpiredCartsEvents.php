@@ -16,6 +16,7 @@ namespace Sylius\Bundle\OrderBundle;
 final class SyliusExpiredCartsEvents
 {
     public const PRE_REMOVE = 'sylius.carts.pre_remove';
+
     public const POST_REMOVE = 'sylius.carts.post_remove';
 
     private function __construct()

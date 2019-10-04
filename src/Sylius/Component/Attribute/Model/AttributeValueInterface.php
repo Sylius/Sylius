@@ -18,11 +18,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface AttributeValueInterface extends ResourceInterface
 {
     public const STORAGE_BOOLEAN = 'boolean';
+
     public const STORAGE_DATE = 'date';
+
     public const STORAGE_DATETIME = 'datetime';
+
     public const STORAGE_FLOAT = 'float';
+
     public const STORAGE_INTEGER = 'integer';
+
     public const STORAGE_JSON = 'json';
+
     public const STORAGE_TEXT = 'text';
 
     public function getSubject(): ?AttributeSubjectInterface;

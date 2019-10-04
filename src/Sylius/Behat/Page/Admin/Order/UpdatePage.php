@@ -21,6 +21,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     public const TYPE_BILLING = 'billing';
+
     public const TYPE_SHIPPING = 'shipping';
 
     public function specifyBillingAddress(AddressInterface $address): void
