@@ -191,12 +191,6 @@
             "ref": "20cacc9b2da49d96ea55c8a8dd31324c5be88bc9"
         }
     },
-    "illuminate/contracts": {
-        "version": "v5.8.3"
-    },
-    "illuminate/support": {
-        "version": "v5.8.3"
-    },
     "imagine/imagine": {
         "version": "v0.7.1"
     },
@@ -305,9 +299,6 @@
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
         }
     },
-    "nesbot/carbon": {
-        "version": "2.14.2"
-    },
     "netresearch/jsonmapper": {
         "version": "v1.4.0"
     },
@@ -316,6 +307,9 @@
     },
     "nette/robot-loader": {
         "version": "v3.0.4"
+    },
+    "nette/schema": {
+        "version": "v1.0.0"
     },
     "nette/utils": {
         "version": "v2.5.2"
@@ -793,9 +787,6 @@
     },
     "symfony/yaml": {
         "version": "v4.1.3"
-    },
-    "symplify/better-phpdoc-parser": {
-        "version": "v4.6.1"
     },
     "symplify/coding-standard": {
         "version": "v4.6.1"

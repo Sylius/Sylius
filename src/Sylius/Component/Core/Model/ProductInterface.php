@@ -36,6 +36,7 @@ interface ProductInterface extends
      *             User selects the values and we match them to variant.
      */
     public const VARIANT_SELECTION_CHOICE = 'choice';
+
     public const VARIANT_SELECTION_MATCH = 'match';
 
     public function getVariantSelectionMethod(): string;

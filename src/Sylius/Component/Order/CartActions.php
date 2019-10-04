@@ -16,6 +16,7 @@ namespace Sylius\Component\Order;
 final class CartActions
 {
     public const ADD = 'add';
+
     public const REMOVE = 'remove';
 
     private function __construct()
