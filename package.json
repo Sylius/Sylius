@@ -4,7 +4,7 @@
     "jquery": "^3.4.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0"
+    "semantic-ui-css": "npm:fomantic-ui-css@^2.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

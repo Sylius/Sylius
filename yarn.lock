@@ -2909,7 +2909,7 @@ jquery.dirtyforms@^2.0.0:
   dependencies:
     jquery ">=1.4.2"
 
-jquery@>=1.4.2, jquery@^3.4.0, jquery@x.*:
+jquery@>=1.4.2, jquery@^3.4.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
@@ -4467,12 +4467,12 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
-semantic-ui-css@^2.2.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz#f5aea39fafb787cbd905ec724272a3f9cba9004a"
-  integrity sha512-Pkp0p9oWOxlH0kODx7qFpIRYpK1T4WJOO4lNnpNPOoWKCrYsfHqYSKgk5fHfQtnWnsAKy7nLJMW02bgDWWFZFg==
+"semantic-ui-css@npm:fomantic-ui-css@^2.7.0":
+  version "2.7.8"
+  resolved "https://registry.yarnpkg.com/fomantic-ui-css/-/fomantic-ui-css-2.7.8.tgz#57186f7d2b55ba70f9fdf127501bbaa2bc3dbe8a"
+  integrity sha512-oYJczAft5XPjYOxHG2hvQs3/hkNqfbCE9Jw8iC75m2+8Rff9fqQtD0G3UTwVJtS36GsI+Hh9Fc75zXdrBemd4g==
   dependencies:
-    jquery x.*
+    jquery "^3.4.0"
 
 semver-greatest-satisfied-range@^1.1.0:
   version "1.1.0"
