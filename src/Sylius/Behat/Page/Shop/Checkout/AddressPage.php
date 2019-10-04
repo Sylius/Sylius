@@ -27,6 +27,7 @@ use Webmozart\Assert\Assert;
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
     public const TYPE_BILLING = 'billing';
+
     public const TYPE_SHIPPING = 'shipping';
 
     /** @var AddressFactoryInterface */

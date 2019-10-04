@@ -22,12 +22,15 @@ final class UserEvents
     public const REQUEST_VERIFICATION_TOKEN = 'sylius.user.email_verification.token';
 
     public const PRE_EMAIL_VERIFICATION = 'sylius.user.pre_email_verification';
+
     public const POST_EMAIL_VERIFICATION = 'sylius.user.post_email_verification';
 
     public const PRE_PASSWORD_RESET = 'sylius.user.pre_password_reset';
+
     public const POST_PASSWORD_RESET = 'sylius.user.post_password_reset';
 
     public const PRE_PASSWORD_CHANGE = 'sylius.user.pre_password_change';
+
     public const POST_PASSWORD_CHANGE = 'sylius.user.post_password_change';
 
     public const SECURITY_IMPERSONATE = 'sylius.user.security.impersonate';
