@@ -27,7 +27,6 @@ use Sylius\Component\Core\Model\ProductTaxon;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 use Sylius\Component\Core\Model\TaxonImageInterface;
-use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
