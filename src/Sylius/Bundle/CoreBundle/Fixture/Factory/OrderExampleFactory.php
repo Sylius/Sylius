@@ -191,7 +191,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $product = $this->faker->randomElement($products);
 
             if (!$product->hasChannel($order->getChannel())) {
-                $i--;
+                --$i;
+
                 continue;
             }
 

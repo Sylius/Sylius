@@ -161,7 +161,7 @@ final class ManagingPaymentsContext implements Context
     /**
      * @Then /^I should see payment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
      */
-    public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber,int $position): void
+    public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
     {
         Assert::true($this->indexPage->isPaymentWithOrderNumberInPosition($orderNumber, $position));
     }

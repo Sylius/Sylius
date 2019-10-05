@@ -31,7 +31,7 @@ class OrderFixture extends AbstractFixture
     /** @var OrderExampleFactory */
     protected $orderExampleFactory;
 
-    /** @var ObjectManager  */
+    /** @var ObjectManager */
     protected $orderManager;
 
     /** @var \Faker\Generator */
