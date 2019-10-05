@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Command;
 
-use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

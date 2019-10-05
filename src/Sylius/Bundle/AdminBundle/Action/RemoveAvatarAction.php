@@ -35,7 +35,7 @@ final class RemoveAvatarAction
     /** @var RouterInterface */
     private $router;
 
-    /** @var CsrfTokenManagerInterface  */
+    /** @var CsrfTokenManagerInterface */
     private $csrfTokenManager;
 
     public function __construct(

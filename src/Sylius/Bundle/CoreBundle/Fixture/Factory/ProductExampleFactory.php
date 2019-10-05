@@ -427,7 +427,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         return trim(array_reduce(
             $variant->getOptionValues()->toArray(),
-            static function(?string $variantName, ProductOptionValueInterface $variantOption) {
+            static function (?string $variantName, ProductOptionValueInterface $variantOption) {
                 return $variantName . sprintf('%s ', $variantOption->getValue());
             },
             ''
