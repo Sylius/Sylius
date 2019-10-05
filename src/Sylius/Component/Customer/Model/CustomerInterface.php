@@ -19,7 +19,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface CustomerInterface extends TimestampableInterface, ResourceInterface
 {
     public const UNKNOWN_GENDER = 'u';
+
     public const MALE_GENDER = 'm';
+
     public const FEMALE_GENDER = 'f';
 
     public function getEmail(): ?string;

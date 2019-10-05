@@ -18,7 +18,9 @@ final class ShipmentTransitions
     public const GRAPH = 'sylius_shipment';
 
     public const TRANSITION_CREATE = 'create';
+
     public const TRANSITION_SHIP = 'ship';
+
     public const TRANSITION_CANCEL = 'cancel';
 
     private function __construct()

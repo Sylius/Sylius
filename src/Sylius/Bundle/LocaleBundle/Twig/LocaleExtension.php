@@ -36,11 +36,6 @@ final class LocaleExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return null|string
-     */
     public function getCountryCode(string $locale): ?string
     {
         return \Locale::getRegion($locale);
