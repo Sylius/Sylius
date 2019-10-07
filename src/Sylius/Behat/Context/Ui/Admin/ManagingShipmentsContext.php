@@ -66,7 +66,7 @@ final class ManagingShipmentsContext implements Context
         ];
 
         if ($channel !== null) {
-            $parameters = ['channel' => $channel->getCode()];
+            $parameters = ['channel' => $channel->getName()];
         }
 
         Assert::true($this->indexPage->isSingleResourceOnPage($parameters));
