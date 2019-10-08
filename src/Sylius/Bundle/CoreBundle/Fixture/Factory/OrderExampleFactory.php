@@ -60,6 +60,9 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected $productRepository;
 
     /** @var RepositoryInterface */
+    protected $productVariantRepository;
+
+    /** @var RepositoryInterface */
     protected $countryRepository;
 
     /** @var PaymentMethodRepositoryInterface */
@@ -94,6 +97,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
         RepositoryInterface $productRepository,
+        RepositoryInterface $productVariantRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -109,6 +113,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $this->channelRepository = $channelRepository;
         $this->customerRepository = $customerRepository;
         $this->productRepository = $productRepository;
+        $this->productVariantRepository = $productVariantRepository;
         $this->countryRepository = $countryRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->shippingMethodRepository = $shippingMethodRepository;
@@ -126,7 +131,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
+        $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date'], $options['items']);
         $this->setOrderCompletedDate($order, $options['complete_date']);
 
         return $order;
@@ -153,11 +158,32 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return $this->faker->dateTimeBetween('-1 years', 'now');
             })
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
+
+            ->setDefault('items', [])
+            ->setAllowedTypes('items', ['array'])
+            ->setNormalizer('items', function (Options $options, $value): array {
+                $orderItems = [];
+                foreach ($value as $item) {
+                    /** @var OrderItemInterface $orderItem */
+                    $orderItem = $this->orderItemFactory->createNew();
+                    $orderItem->setVariant($this->productVariantRepository->findOneBy(['code' => $item['variant']]));
+                    $this->orderItemQuantityModifier->modify($orderItem, $item['quantity']);
+
+                    $orderItems[] = $orderItem;
+                }
+
+                return $orderItems;
+            })
         ;
     }
 
-    protected function createOrder(ChannelInterface $channel, CustomerInterface $customer, CountryInterface $country, \DateTimeInterface $createdAt): OrderInterface
-    {
+    protected function createOrder(
+        ChannelInterface $channel,
+        CustomerInterface $customer,
+        CountryInterface $country,
+        \DateTimeInterface $createdAt,
+        array $items
+    ): OrderInterface {
         $countryCode = $country->getCode();
 
         $currencyCode = $channel->getBaseCurrency()->getCode();
@@ -170,7 +196,13 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $order->setCurrencyCode($currencyCode);
         $order->setLocaleCode($localeCode);
 
-        $this->generateItems($order);
+        foreach ($items as $item) {
+            $order->addItem($item);
+        }
+
+        if (empty($items)) {
+            $this->generateItems($order);
+        }
 
         $this->address($order, $countryCode);
         $this->selectShipping($order, $createdAt);
@@ -182,6 +214,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function generateItems(OrderInterface $order): void
     {
+        $order->clearItems();
+
         $numberOfItems = random_int(1, 5);
         $products = $this->productRepository->findAll();
         $generatedItems = [];

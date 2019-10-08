@@ -45,6 +45,7 @@ class OrderFixture extends AbstractFixture
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
         RepositoryInterface $productRepository,
+        RepositoryInterface $productVariantRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -63,6 +64,7 @@ class OrderFixture extends AbstractFixture
                 $channelRepository,
                 $customerRepository,
                 $productRepository,
+                $productVariantRepository,
                 $countryRepository,
                 $paymentMethodRepository,
                 $shippingMethodRepository,
@@ -113,6 +115,12 @@ class OrderFixture extends AbstractFixture
                 ->scalarNode('channel')->cannotBeEmpty()->end()
                 ->scalarNode('customer')->cannotBeEmpty()->end()
                 ->scalarNode('country')->cannotBeEmpty()->end()
+                ->arrayNode('items')->arrayPrototype()
+                    ->children()
+                        ->scalarNode('variant')->cannotBeEmpty()->end()
+                        ->integerNode('quantity')->min(1)->defaultValue(1)->end()
+                    ->end()
+                ->end()
             ->end()
         ;
     }
