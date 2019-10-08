@@ -16,10 +16,12 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,6 +29,9 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 {
     /** @var FactoryInterface */
     private $promotionFactory;
+
+    /** @var FactoryInterface */
+    private $couponFactory;
 
     /** @var ExampleFactoryInterface */
     private $promotionRuleExampleFactory;
@@ -45,11 +50,13 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
     public function __construct(
         FactoryInterface $promotionFactory,
+        FactoryInterface $couponFactory,
         ExampleFactoryInterface $promotionRuleExampleFactory,
         ExampleFactoryInterface $promotionActionExampleFactory,
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->promotionFactory = $promotionFactory;
+        $this->couponFactory = $couponFactory;
         $this->promotionRuleExampleFactory = $promotionRuleExampleFactory;
         $this->promotionActionExampleFactory = $promotionActionExampleFactory;
         $this->channelRepository = $channelRepository;
@@ -101,6 +108,10 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             $promotion->addAction($promotionAction);
         }
 
+        foreach ($options['coupons'] as $coupon) {
+            $promotion->addCoupon($coupon);
+        }
+
         return $promotion;
     }
 
@@ -141,6 +152,32 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
                 }
 
                 return $actions;
+            })
+
+            ->setDefault('coupons', [])
+            ->setAllowedTypes('coupons', 'array')
+            ->setNormalizer('coupons', function (Options $options, array $couponDefinitions): array {
+                if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
+                    throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
+                }
+
+                $coupons = [];
+                foreach ($couponDefinitions as $couponDefinition) {
+                    /** @var PromotionCouponInterface $coupon */
+                    $coupon = $this->couponFactory->createNew();
+                    $coupon->setCode($couponDefinition['code']);
+                    $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit']);
+                    $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders']);
+                    $coupon->setUsageLimit($couponDefinition['usage_limit']);
+
+                    if (null !== $couponDefinition['expires_at']) {
+                        $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
+                    }
+
+                    $coupons[] = $coupon;
+                }
+
+                return $coupons;
             })
         ;
     }

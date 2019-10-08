@@ -60,6 +60,15 @@ class PromotionFixture extends AbstractResourceFixture
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('coupons')->arrayPrototype()
+                    ->children()
+                        ->scalarNode('code')->cannotBeEmpty()->end()
+                        ->scalarNode('expires_at')->defaultNull()->end()
+                        ->integerNode('per_customer_usage_limit')->defaultNull()->end()
+                        ->booleanNode('reusable_from_cancelled_orders')->defaultTrue()->end()
+                        ->integerNode('usage_limit')->defaultNull()->end()
+                    ->end()
+                ->end()
         ;
     }
 }

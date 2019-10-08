@@ -60,6 +60,7 @@
 
         <service id="sylius.fixture.example_factory.promotion" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory">
             <argument type="service" id="sylius.factory.promotion" />
+            <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.fixture.example_factory.promotion_rule" />
             <argument type="service" id="sylius.fixture.example_factory.promotion_action" />
             <argument type="service" id="sylius.repository.channel" />
