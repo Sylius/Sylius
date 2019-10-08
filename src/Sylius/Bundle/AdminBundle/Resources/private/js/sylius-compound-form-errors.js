@@ -13,7 +13,7 @@ $.fn.extend({
   addTabErrors() {
     const element = this;
 
-    $('.ui.segment > .ui.tab').each((idx, el) => {
+    $('.ui.tab').each((idx, el) => {
       const errors = $(el).find('.sylius-validation-error');
 
       if (errors.length !== 0) {
