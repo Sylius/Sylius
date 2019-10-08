@@ -15,9 +15,9 @@ Invoicing in Sylius
 -------------------
 
 Sylius is providing invoicing engine via a `free open-source plugin. <https://github.com/Sylius/InvoicingPlugin>`_
-Th plugin installation guide you will find in the plugin's README.
+The plugin installation guide you will find in the plugin's README.
 
-Having the plugin installed you will notice a new main menu item among "Sales" section - "Invoices". It allows you to acces the index
+Having the plugin installed, you will notice a new main menu item among "Sales" section - "Invoices". It allows you to access the index
 of all invoices issued at your shop (sortable and with filters as most of the grids).
 
 Moreover a section on admin Order show page is added: Invoices. This same section will appear also
