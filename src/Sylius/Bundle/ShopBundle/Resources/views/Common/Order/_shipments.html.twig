@@ -4,7 +4,6 @@
 {% endif %}
 {% for shipment in order.shipments %}
     {% set state = shipment.state %}
-    {% set value = 'sylius.ui.' ~ state %}
     <div class="ui small icon message">
         <i class="truck icon"></i>
         <div class="content">
