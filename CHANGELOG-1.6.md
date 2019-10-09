@@ -1,5 +1,29 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.1 (2019-10-08)
+
+#### Details
+
+- [#10641](https://github.com/Sylius/Sylius/issues/10641) [Documentation] Fixtures customization guides - fixes ([@CoderMaggie](https://github.com/CoderMaggie), [@Zales0123](https://github.com/Zales0123))
+- [#10644](https://github.com/Sylius/Sylius/issues/10644) [Documentation] Add tip about locked adjustments ([@j0r1s](https://github.com/j0r1s))
+- [#10645](https://github.com/Sylius/Sylius/issues/10645) [Docs] Fix Blackfire Ad ([@Tomanhez](https://github.com/Tomanhez))
+- [#10646](https://github.com/Sylius/Sylius/issues/10646) [Docs] Fix Ad ([@Tomanhez](https://github.com/Tomanhez))
+- [#10649](https://github.com/Sylius/Sylius/issues/10649) Update online course ad ([@kulczy](https://github.com/kulczy))
+- [#10652](https://github.com/Sylius/Sylius/issues/10652) Add Sylius 1.6 banner to the docs ([@kulczy](https://github.com/kulczy))
+- [#10667](https://github.com/Sylius/Sylius/issues/10667) Improve GUS information notification ([@Zales0123](https://github.com/Zales0123))
+- [#10680](https://github.com/Sylius/Sylius/issues/10680) Fix ChannelCollector related serialization issue in Symfony profiler ([@ostrolucky](https://github.com/ostrolucky))
+- [#10695](https://github.com/Sylius/Sylius/issues/10695) [Admin][Product] Fix displayed stocks on product show page ([@GSadee](https://github.com/GSadee))
+- [#10700](https://github.com/Sylius/Sylius/issues/10700) [Promotion] Remove coupling to core ([@lchrusciel](https://github.com/lchrusciel))
+- [#10701](https://github.com/Sylius/Sylius/issues/10701) [Maintenance] Update docs with v1.6 ([@lchrusciel](https://github.com/lchrusciel))
+- [#10710](https://github.com/Sylius/Sylius/issues/10710) [Address book] Extensibility improvements ([@cyrosy](https://github.com/cyrosy))
+- [#10713](https://github.com/Sylius/Sylius/issues/10713) [Behat] Improve dashboard page extensibility ([@loic425](https://github.com/loic425))
+- [#10716](https://github.com/Sylius/Sylius/issues/10716) Minor fixtures fixes ([@AdamKasp](https://github.com/AdamKasp))
+- [#10727](https://github.com/Sylius/Sylius/issues/10727) Fix channels label size and alignment ([@kulczy](https://github.com/kulczy))
+- [#10732](https://github.com/Sylius/Sylius/issues/10732) Update course ad ([@kulczy](https://github.com/kulczy))
+- [#10739](https://github.com/Sylius/Sylius/issues/10739) [Admin][Adressing] fixed province code validation regex ([@twojtylak](https://github.com/twojtylak))
+- [#10742](https://github.com/Sylius/Sylius/issues/10742) Fix the build for 1.5 and 1.6 branches ([@pamil](https://github.com/pamil))
+- [#10747](https://github.com/Sylius/Sylius/issues/10747) Remove flashing from the bulk button ([@kulczy](https://github.com/kulczy))
+
 ## v1.6.0 (2019-08-29)
 
 #### Details
