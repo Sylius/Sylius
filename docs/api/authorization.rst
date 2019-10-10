@@ -51,7 +51,7 @@ Definition
 
 .. code-block:: text
 
-    GET /api/oauth/v2/token
+    POST /api/oauth/v2/token
 
 +---------------+----------------+--------------------------------------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                                                      |
@@ -67,9 +67,6 @@ Definition
 | password      | query          | User password                                                                                    |
 +---------------+----------------+--------------------------------------------------------------------------------------------------+
 
-.. note::
-
-    This action can be done by POST method as well.
 
 Example
 '''''''
