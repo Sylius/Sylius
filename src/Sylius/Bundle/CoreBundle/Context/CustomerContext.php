@@ -42,7 +42,7 @@ final class CustomerContext implements CustomerContextInterface
             return null;
         }
 
-        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') && $token->getUser() instanceof ShopUserInterface) {
+        if ($token->getUser() instanceof ShopUserInterface && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $token->getUser()->getCustomer();
         }
 

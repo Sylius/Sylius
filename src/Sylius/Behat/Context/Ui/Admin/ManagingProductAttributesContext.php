@@ -134,7 +134,7 @@ final class ManagingProductAttributesContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $name],
-            sprintf('td span.ui.label:contains("%s")', $type)
+            sprintf('td span.ui.label:contains("%s")', ucfirst($type))
         ));
     }
 

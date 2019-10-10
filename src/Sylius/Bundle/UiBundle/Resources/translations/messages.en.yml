@@ -712,6 +712,7 @@ sylius:
         search: 'Search'
         search_products: 'Search products'
         security_settings: 'Security Settings'
+        select: 'Select'
         select_address_from_book: 'Select address from my book'
         select_products: 'Select products'
         select_taxon: 'Select taxon'
