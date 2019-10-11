@@ -47,7 +47,10 @@ final class UserImpersonatedListener
     {
         /** @var ShopUserInterface $user */
         $user = $event->getUser();
-        Assert::isInstanceOf($user, ShopUserInterface::class);
+
+        if (!$user instanceof ShopUserInterface) {
+            return;
+        }
 
         $customer = $user->getCustomer();
 
