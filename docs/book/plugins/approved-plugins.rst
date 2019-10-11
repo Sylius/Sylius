@@ -34,7 +34,7 @@ and general feeling. They will also ask you to provide some changes in the code 
 Technical requirements
 ----------------------
 
-Below you can find a list of requirements that your plugin needs to fulfill to be approved by Sylius core-team. Try to follow
+Below you can find a list of requirements that your plugin needs to fulfill to be approved by Sylius Core Team. Try to follow
 them, and your plugin's approval process will be faster and more efficient!
 
 Must have
@@ -74,7 +74,7 @@ Could have
 
 **Coding standards:**
 
-* Are there any apparent violations of one or more SOLID principles?
+* Does the code follow SOLID principles?
 * Are conventions in the code consistent with each other (are the same conventions used for the same concepts)?
 * Does the code apply some other `PSR's <https://www.php-fig.org/psr/>`_?
 
