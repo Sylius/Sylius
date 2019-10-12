@@ -12,7 +12,7 @@ First you need to ensure that the official ``AWS-S3 SDK`` for PHP is installed:
     composer require aws/aws-sdk-php
 
 
-1. Configure KNP-Gaufrette
+1. Configure Knp-Gaufrette
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Place this file under ``config/packages/knp_gaufrette.yaml``:
@@ -33,10 +33,10 @@ Place this file under ``config/packages/knp_gaufrette.yaml``:
         stream_wrapper: ~
 
 
-2. Configure LIIP-Imagin:
+2. Configure Liip-Imagine:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add this file under ``config/packages/liip_imagine.yaml`` in order to make LIIP-Image aware of AWS S3 storage:
+Add this file under ``config/packages/liip_imagine.yaml`` in order to make Liip-Imagine aware of AWS S3 storage:
 
 .. code-block:: yaml
 
