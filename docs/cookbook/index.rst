@@ -86,6 +86,7 @@ Images
 
     images/images
     images/images-on-entity
+    images/images-on-aws-s3
 
 .. include:: /cookbook/images/map.rst.inc
 
