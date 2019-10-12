@@ -128,7 +128,7 @@ Let's see how to do it on the example of a ProductTranslation.
    $product->addTranslation($translation);
 
    // Remember to save the product after adding the translation
-   $this->container->get('sylius.manager.product')->flush($product);
+   $this->container->get('sylius.manager.product')->flush();
 
 Learn more
 ----------
