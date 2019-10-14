@@ -20,11 +20,18 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Product\ShowPageInterface" alias="sylius.behat.page.shop.product.show" />
+
         <service id="sylius.behat.page.shop.product.index" class="%sylius.behat.page.shop.product.index.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Product\IndexPageInterface" alias="sylius.behat.page.shop.product.index" />
+
         <service id="sylius.behat.page.shop.product_reviews.create" class="%sylius.behat.page.shop.product_reviews.create.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\ProductReview\CreatePageInterface" alias="sylius.behat.page.shop.product_reviews.create" />
+
         <service id="sylius.behat.page.shop.product_reviews.index" class="%sylius.behat.page.shop.product_reviews.index.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface" alias="sylius.behat.page.shop.product_reviews.index" />
     </services>
 </container>

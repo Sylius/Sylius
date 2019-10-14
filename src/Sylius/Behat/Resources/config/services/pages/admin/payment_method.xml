@@ -19,16 +19,20 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.payment_method.create" class="%sylius.behat.page.admin.payment_method.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_payment_method_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface" alias="sylius.behat.page.admin.payment_method.create" />
+
         <service id="sylius.behat.page.admin.payment_method.index" class="%sylius.behat.page.admin.payment_method.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_payment_method_index</argument>
         </service>
+
         <service id="sylius.behat.page.admin.payment_method.update" class="%sylius.behat.page.admin.payment_method.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_payment_method_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface" alias="sylius.behat.page.admin.payment_method.update" />
     </services>
 </container>

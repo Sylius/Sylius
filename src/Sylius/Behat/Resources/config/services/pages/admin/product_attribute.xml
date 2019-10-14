@@ -19,16 +19,20 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.product_attribute.create" class="%sylius.behat.page.admin.product_attribute.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_attribute_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface" alias="sylius.behat.page.admin.product_attribute.create" />
+
         <service id="sylius.behat.page.admin.product_attribute.index" class="%sylius.behat.page.admin.product_attribute.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_attribute_index</argument>
         </service>
+
         <service id="sylius.behat.page.admin.product_attribute.update" class="%sylius.behat.page.admin.product_attribute.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_attribute_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface" alias="sylius.behat.page.admin.product_attribute.update" />
     </services>
 </container>

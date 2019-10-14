@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_promotion_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Promotion\CreatePageInterface" alias="sylius.behat.page.admin.promotion.create" />
+
         <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_promotion_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface" alias="sylius.behat.page.admin.promotion.update" />
+
         <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_promotion_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Promotion\IndexPageInterface" alias="sylius.behat.page.admin.promotion.index" />
     </services>
 </container>

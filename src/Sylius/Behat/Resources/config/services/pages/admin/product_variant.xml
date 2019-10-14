@@ -20,19 +20,26 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.product_variant.create" class="%sylius.behat.page.admin.product_variant.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_variant_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface" alias="sylius.behat.page.admin.product_variant.create" />
+
         <service id="sylius.behat.page.admin.product_variant.generate" class="%sylius.behat.page.admin.product_variant.generate.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="string">product_variant</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface" alias="sylius.behat.page.admin.product_variant.generate" />
+
         <service id="sylius.behat.page.admin.product_variant.index" class="%sylius.behat.page.admin.product_variant.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_variant_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface" alias="sylius.behat.page.admin.product_variant.index" />
+
         <service id="sylius.behat.page.admin.product_variant.update" class="%sylius.behat.page.admin.product_variant.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_variant_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface" alias="sylius.behat.page.admin.product_variant.update" />
     </services>
 </container>

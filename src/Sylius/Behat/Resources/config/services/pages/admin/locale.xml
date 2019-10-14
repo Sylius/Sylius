@@ -18,11 +18,13 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.locale.create" class="%sylius.behat.page.admin.locale.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_locale_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Locale\CreatePageInterface" alias="sylius.behat.page.admin.locale.create" />
+
         <service id="sylius.behat.page.admin.locale.index" class="%sylius.behat.page.admin.locale.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_locale_index</argument>
         </service>

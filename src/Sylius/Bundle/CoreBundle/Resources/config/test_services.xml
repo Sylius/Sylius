@@ -24,6 +24,7 @@
         <service id="sylius.behat.email_checker" class="Sylius\Component\Core\Test\Services\EmailChecker">
             <argument>%kernel.cache_dir%/spool</argument>
         </service>
+        <service id="Sylius\Component\Core\Test\Services\EmailCheckerInterface" alias="sylius.behat.email_checker" />
 
         <!--Default Store Data-->
         <service id="sylius.behat.factory.default_united_states_channel" class="Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory">
