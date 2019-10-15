@@ -1,8 +1,6 @@
 .. warning::
 
-    On September 14, 2019 the `Strong Customer Authentication (SCA)
-    <https://eur-lex.europa.eu/legal-content/EN/TXT/uri=uriserv:OJ.L_.2018.069.01.0023.01.ENG&toc=OJ:L:2018:069:TOC>`_
-    requirement has been introduced.
+    On September 14, 2019 the Strong Customer Authentication (SCA) requirement has been introduced.
     The implementation provided by Sylius Core was not *SCA Ready* and has been deprecated.
     Please have a look at the `official documentation of Stripe regarding this topic <https://stripe.com/guides/strong-customer-authentication>`_.
 
