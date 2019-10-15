@@ -126,6 +126,6 @@ final class PaypalContext implements Context
             }
         }
 
-        throw new \RuntimeException(sprintf('There is no notificaiton with "%s". Got "%s"', $expectedNotification, $hasNotifications));
+        throw new \RuntimeException(sprintf('There is no notification with "%s". Got "%s"', $expectedNotification, $hasNotifications));
     }
 }
