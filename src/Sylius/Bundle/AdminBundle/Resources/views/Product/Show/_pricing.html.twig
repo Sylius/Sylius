@@ -1,8 +1,9 @@
 {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
-<div id="pricing">
+
+<div class="pricing">
     <h4 class="ui top attached large header">{{ 'sylius.ui.pricing'|trans }}</h4>
     <div class="ui attached segment">
-        <table id="pricing" class="ui very basic celled table">
+        <table id="pricing__table" class="ui very basic celled table">
             <thead>
                 <tr>
                     <th><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></th>
@@ -12,7 +13,7 @@
             </thead>
             <tbody>
                 {% set currencies = sylius_channels_currencies() %}
-                {% for channelPricing in product.variants.first.channelPricings %}
+                {% for channelPricing in channelPricings %}
                     {% set channel = channelPricing.channelCode|sylius_channel %}
                     <tr>
                         <td>{{ channel.name }}</td>

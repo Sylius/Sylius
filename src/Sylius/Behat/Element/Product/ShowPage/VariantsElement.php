@@ -64,7 +64,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         if (
             $variant->find('css', '.content .variant-name')->getText() === $name &&
             $variant->find('css', '.content .variant-code')->getText() === $code &&
-            $variantContent->find('css', sprintf('tr.pricing:contains("%s") td:nth-child(2)', $channelName))->getText() === $price &&
+            $variantContent->find('css', sprintf(' .pricing tr:contains("%s") td:nth-child(2)', $channelName))->getText() === $price &&
             $variant->find('css', '.current-stock')->getText() === $currentStock
         ) {
             return true;

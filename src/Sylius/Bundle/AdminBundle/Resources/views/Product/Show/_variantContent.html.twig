@@ -6,7 +6,7 @@
                     {% include '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig' %}
                 </div>
                 <div class="column">
-                    {% include '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig' %}
+                    {% include '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig' with {'channelPricings': variant.channelPricings } %}
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ final class PricingElement extends Element implements PricingElementInterface
     public function getPriceForChannel(string $channelName): string
     {
         /** @var NodeElement $priceForChannel */
-        $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+        $channelPriceRow = $this->getDocument()->find('css', sprintf('.pricing tr:contains("%s")', $channelName));
 
         $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(2)');
 
@@ -30,7 +30,7 @@ final class PricingElement extends Element implements PricingElementInterface
     public function getOriginalPriceForChannel(string $channelName): string
     {
         /** @var NodeElement $priceForChannel */
-        $channelPriceRow = $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+        $channelPriceRow = $this->getDocument()->find('css', sprintf('.pricing tr:contains("%s")', $channelName));
 
         $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(3)');
 
