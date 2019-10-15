@@ -17,6 +17,5 @@ The current list is as follows:
 * `Invoicing Plugin <https://github.com/Sylius/InvoicingPlugin>`_
 * `Refund Plugin <https://github.com/Sylius/RefundPlugin>`_
 * `Admin Order Creation Plugin <https://github.com/Sylius/AdminOrderCreationPlugin>`_
-* `RBAC Plugin <https://github.com/Sylius/RbacPlugin>`_
 * `Customer Reorder Plugin <https://github.com/Sylius/CustomerReorderPlugin>`_
 * `Customer Order Cancellation Plugin <https://github.com/Sylius/CustomerOrderCancellationPlugin>`_
