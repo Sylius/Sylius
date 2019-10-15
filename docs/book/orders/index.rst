@@ -19,6 +19,7 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     coupons
     shipments
     payments
+    invoices
     checkout
     refunds
 

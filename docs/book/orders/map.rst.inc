@@ -5,6 +5,7 @@
 * :doc:`/book/orders/promotions`
 * :doc:`/book/orders/coupons`
 * :doc:`/book/orders/payments`
+* :doc:`/book/orders/invoices`
 * :doc:`/book/orders/shipments`
 * :doc:`/book/orders/checkout`
 * :doc:`/book/orders/refunds`
