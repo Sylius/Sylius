@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-final class IndexPage extends BaseIndexPage implements IndexPageInterface
+class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function getOnHandQuantityFor(ProductVariantInterface $productVariant): int
     {
