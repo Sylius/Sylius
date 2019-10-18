@@ -51,6 +51,11 @@ sylius_fixtures:
                             cash_on_delivery:
                                 code: 'cash_on_delivery'
                                 name: 'Cash on delivery'
+                                translations:
+                                    uk_UA:
+                                        name: 'Готівкою при отриманні'
+                                        description: 'Сплатити готівкою при доставці замовлення'
+                                        instructions: 'Важливо! Може стягуватися додаткова комісія'
                                 channels:
                                     - 'FASHION_WEB'
                             bank_transfer:
