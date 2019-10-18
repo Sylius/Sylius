@@ -19,12 +19,15 @@ use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
+    use TranslatableExampleFactoryTrait;
+
     public const DEFAULT_LOCALE = 'en_US';
 
     /** @var PaymentMethodFactoryInterface */
@@ -73,13 +76,10 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         $paymentMethod->setEnabled($options['enabled']);
 
         foreach ($this->getLocales() as $localeCode) {
-            $paymentMethod->setCurrentLocale($localeCode);
-            $paymentMethod->setFallbackLocale($localeCode);
-
-            $paymentMethod->setName($options['name']);
-            $paymentMethod->setDescription($options['description']);
-            $paymentMethod->setInstructions($options['instructions']);
+            $this->createTranslation($paymentMethod, $localeCode, $options);
         }
+
+        $this->createTranslations($paymentMethod, $options);
 
         foreach ($options['channels'] as $channel) {
             $paymentMethod->addChannel($channel);
@@ -93,6 +93,8 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
      */
     protected function configureOptions(OptionsResolver $resolver): void
     {
+        $this->configureTranslationsOptions($resolver);
+
         $resolver
             ->setDefault('name', function (Options $options): string {
                 return $this->faker->words(3, true);
@@ -116,6 +118,21 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setAllowedTypes('enabled', 'bool')
         ;
+    }
+
+    /**
+     * @param TranslatableInterface|PaymentMethodInterface $translatable
+     */
+    protected function createTranslation(TranslatableInterface $translatable, string $localeCode, array $options = []): void
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        $translatable->setCurrentLocale($localeCode);
+        $translatable->setFallbackLocale($localeCode);
+
+        $translatable->setName($options['name']);
+        $translatable->setDescription($options['description']);
+        $translatable->setInstructions($options['instructions']);
     }
 
     private function getLocales(): iterable

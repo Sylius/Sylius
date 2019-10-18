@@ -17,6 +17,8 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class PaymentMethodFixture extends AbstractResourceFixture
 {
+    use TranslatableFixtureTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +32,8 @@ class PaymentMethodFixture extends AbstractResourceFixture
      */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
+        $this->configureTranslationsResourceNode($resourceNode);
+
         $resourceNode
             ->children()
                 ->scalarNode('code')->cannotBeEmpty()->end()
