@@ -1,0 +1,72 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-12-03T20:47:30Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "issue_9928"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-02-21T08:36:09Z
+
+It appeared in my notifications that the issue is stale now, so I've reminded about this PR :) of course the PHPSpec is not a point (stupid me from the December 😠), but I still wonder how can we test it to be 100% sure we're fixing a bug? The change does not seem to harm anything, but it should not be a sufficient reason to say it's definitely ok 😄 cc @tautelis @pamil @lchrusciel
+
+---------------------------------------------------------------------------
+
+by j0r1s at 2019-09-12T09:10:54Z
+
+Hopefully I stumbled on this, I had a Doctrine exception inside a StateMachine callback (inserting a null value into a non nullable column).
+And my computer kept crashing in Payum infinite loop. Thanks to the changes from this PR I could identify what was wrong.
+
+Thanks @tautelis !
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-09-13T07:16:59Z
+
+Ok, it's a long time since it was opened... I agree that we should merge it, probably to `1.5` now, even without any tests, but I would like to see one more opinion from @pamil about that. And thank you @tautelis for your patience 🖖
+
+---------------------------------------------------------------------------
+
+by tautelis at 2019-09-13T11:03:17Z
+
+@Zales0123 speaking about tests, there is no structure to perform such test since its an edge case of system working incorrectly and throwing exceptions. It's not possible to test these exceptions with Behat or Spec. The only way would be PHPUnit Functional test which we have none.
+
+Update: sorry I was looking at 1.3 version on my project. Apparently there is one `UpdatingUserPasswordEncoderTest` functional test in the latest master. Anyways, we can still merge this :)
+
+---------------------------------------------------------------------------
+
+by alexrowesoap at 2019-10-18T08:44:11Z
+
+This really needs merging in, coverage or not. This was absolutely crippling to locate when the loop it causes means you don't even get a log in Sentry when in production mode.
+
+---------------------------------------------------------------------------
+
+by alexrowesoap at 2019-10-18T08:53:49Z
+
+Just to add, adding the above patch indeed fixed a loop in our UAT environment and successfully the underlying cause: A doctrine error in regards to a key error in a custom table
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-10-18T09:58:10Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "issue_9928"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-10-18T10:39:59Z
+
+Thanks, Vytautas! :tada:
