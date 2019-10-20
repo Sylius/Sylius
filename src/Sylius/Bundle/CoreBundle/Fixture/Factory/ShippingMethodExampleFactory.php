@@ -107,12 +107,10 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         }
 
         foreach ($this->getLocales() as $localeCode) {
-            $shippingMethod->setCurrentLocale($localeCode);
-            $shippingMethod->setFallbackLocale($localeCode);
-
-            $shippingMethod->setName($options['name']);
-            $shippingMethod->setDescription($options['description']);
+            $this->createTranslation($shippingMethod, $localeCode, $options);
         }
+
+        $this->createTranslations($shippingMethod, $options);
 
         foreach ($options['channels'] as $channel) {
             $shippingMethod->addChannel($channel);
