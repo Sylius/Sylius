@@ -71,6 +71,10 @@ sylius_fixtures:
                             ups:
                                 code: 'ups'
                                 name: 'UPS'
+                                translations:
+                                    uk_UA:
+                                        name: 'Експрес-доставка UPS'
+                                        description: 'Експрес-доставка через United Parcel Service'
                                 enabled: true
                                 channels:
                                     - 'FASHION_WEB'
