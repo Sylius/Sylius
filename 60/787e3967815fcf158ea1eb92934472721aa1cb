@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------
+
+by ostrolucky at 2019-10-02T14:10:58Z
+
+looks like all changes except custom_fixtures can be backported to < 1.6
+
+---------------------------------------------------------------------------
+
+by ostrolucky at 2019-10-16T08:37:14Z
+
+> 1.6 (as it present only at 1.6 and not present at 1.5 or 1.4)
+
+This is false though, it's on 1.4 too
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2019-10-16T13:41:05Z
+
+@ostrolucky
+> This is false though, it's on 1.4 too
+
+At 1.4 there is another file to fix - `OrderFixture` rather than `OrderExampleFactory`. I guess you can make PR for it if you want.
+
+---------------------------------------------------------------------------
+
+by ostrolucky at 2019-10-16T14:28:39Z
+
+true
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-10-20T08:45:24Z
+
+Thanks, Igor! :1st_place_medal:
