@@ -136,7 +136,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('skipping_payment_step_allowed', 'bool')
             ->setDefault('account_verification_required', true)
             ->setAllowedTypes('account_verification_required', 'bool')
-            ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
+            ->setDefault('default_tax_zone', LazyOption::randomOneOrNull($this->zoneRepository))
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
             ->setDefault('tax_calculation_strategy', 'order_items_based')
