@@ -183,19 +183,20 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function generateItems(OrderInterface $order): void
     {
         $numberOfItems = random_int(1, 5);
-        $products = $this->productRepository->findAll();
+        $channel = $order->getChannel();
+        $products = $this->productRepository->findLatestByChannel($channel, $order->getLocaleCode(), 100);
+        if (0 === count($products)) {
+            throw new \InvalidArgumentException(sprintf(
+                'You have no enabled products at the channel "%s", but they are required to create an orders for that channel',
+                $channel->getCode()
+            ));
+        }
+
         $generatedItems = [];
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
-
-            if (!$product->hasChannel($order->getChannel())) {
-                --$i;
-
-                continue;
-            }
-
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
 
             if (array_key_exists($variant->getCode(), $generatedItems)) {
