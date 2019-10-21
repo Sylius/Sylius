@@ -2,7 +2,7 @@ Installation
 ============
 
 So you want to try creating an online shop with Sylius? Great! The first step is the most important one, so let's start
-with the Sylius project installation via Composer. We will be using the latest stable version of Sylius - ``1.5``.
+with the Sylius project installation via Composer. We will be using the latest stable version of Sylius - ``1.6``.
 
 Before installation
 -------------------
@@ -64,12 +64,12 @@ That's it! You're ready to launch your empty Sylius-based web store.
 Launching application
 ---------------------
 
-For the testing reasons, the fastest way to start the application is using Symfony built-in server. Let's also start
+For the testing reasons, the fastest way to start the application is using Symfony binary. It can be downloaded from `here <https://symfony.com/download>`_. Let's also start
 browsing the application from the Admin panel.
 
 .. code-block:: bash
 
-    $ bin/console server:start
+    $ symfony serve
     $ open http://127.0.0.1:8000/admin
 
 Great! You are closer to the final goal. Let's configure your application a little bit, to make it usable by some future customers.
@@ -78,3 +78,4 @@ Learn more
 ##########
 
 * :doc:`Installation chapter in The Book </book/installation/index>`
+
