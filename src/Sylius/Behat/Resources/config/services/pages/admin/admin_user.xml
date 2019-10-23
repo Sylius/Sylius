@@ -12,9 +12,10 @@
         </service>
         <service id="Sylius\Behat\Page\Admin\Administrator\CreatePageInterface" alias="sylius.behat.page.admin.administrator.create" />
 
-        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Administrator\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_admin_user_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Administrator\IndexPageInterface" alias="sylius.behat.page.admin.administrator.index" />
 
         <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_admin_user_update</argument>

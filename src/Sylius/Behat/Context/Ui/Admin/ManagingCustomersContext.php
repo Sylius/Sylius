@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Customer as Customer;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInterface;
+use Sylius\Behat\Page\Admin\Customer\OrderIndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -38,18 +37,18 @@ final class ManagingCustomersContext implements Context
     /** @var ShowPageInterface */
     private $showPage;
 
-    /** @var IndexPageInterface */
+    /** @var OrderIndexPageInterface */
     private $ordersIndexPage;
 
     /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
-    
+
     public function __construct(
         CreatePageInterface $createPage,
-        Customer\IndexPageInterface $indexPage,
+        CustomerIndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         ShowPageInterface $showPage,
-        IndexPageInterface $ordersIndexPage,
+        OrderIndexPageInterface $ordersIndexPage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
