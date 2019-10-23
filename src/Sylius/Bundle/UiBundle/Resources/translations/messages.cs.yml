@@ -706,6 +706,7 @@ sylius:
         search: 'Hledat'
         search_products: 'Hledat produkty'
         security_settings: 'Nastavení zabezpečení'
+        select: 'Vybrat'
         select_address_from_book: 'Vybrat adresu z mých adres'
         select_products: 'Vyberte produkty'
         select_taxon: 'Vyberte taxon'
