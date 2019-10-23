@@ -491,6 +491,20 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that shipping charge for :channel channel cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            'Shipping charge cannot be lower than 0.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
