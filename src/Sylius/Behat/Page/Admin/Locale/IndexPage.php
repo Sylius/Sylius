@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Behat\Page\Admin\CustomerGroup\IndexPageInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
