@@ -14,8 +14,8 @@ sylius:
 
     shipping_method:
         calculator:
-            not_blank: 'Please select shipping method calculator.'
             min: 'Shipping charge cannot be lower than 0.'
+            not_blank: 'Please select shipping method calculator.'
         name:
             max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
             min_length: 'Shipping method name must be at least {{ limit }} characters long.'

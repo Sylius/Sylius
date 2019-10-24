@@ -17,7 +17,7 @@ Feature: Shipping method flat rate per shipment calculator validation
         And I name it "FedEx Carrier" in "English (United States)"
         And I define it for the "United States" zone
         But I do not specify amount for "Flat rate per shipment" calculator
-        When I try to add it
+        And I try to add it
         Then I should be notified that amount for "Web" channel should not be blank
         And shipping method with name "FedEx Carrier" should not be added
 
@@ -29,6 +29,6 @@ Feature: Shipping method flat rate per shipment calculator validation
         And I define it for the "United States" zone
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as "-50.00" for "Web" channel
-        When I try to add it
+        And I try to add it
         Then I should be notified that shipping charge for "Web" channel cannot be lower than 0
         And shipping method with name "FedEx Carrier" should not be added
