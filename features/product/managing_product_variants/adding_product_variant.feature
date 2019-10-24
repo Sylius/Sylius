@@ -82,8 +82,8 @@ Feature: Adding a new product variant
 
     @ui
     Scenario: Adding a new free product variant
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$0.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created

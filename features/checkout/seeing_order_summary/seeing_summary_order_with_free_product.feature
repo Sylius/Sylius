@@ -35,5 +35,5 @@ Feature: Seeing a summary of the order with free product
         And I proceed with "DHL" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order total should be "$104.50"
-        And my discount should be "-$5.00"
-        And my cart taxes should be "$9.50"
+        And my order promotion total should be "-$5.00"
+        And my tax total should be "$9.50"

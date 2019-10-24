@@ -34,8 +34,8 @@ Feature: Adding a new product
 
     @ui
     Scenario: Adding a new simple free product
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$0.00" for "United States" channel
