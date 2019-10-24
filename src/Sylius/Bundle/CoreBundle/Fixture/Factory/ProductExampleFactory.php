@@ -228,6 +228,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('tax_category', null)
             ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
+
+            ->setDefault('prices', null)
+            ->setAllowedTypes('prices', ['null', 'int', 'array'])
         ;
 
         if ($this->taxCategoryRepository !== null) {
@@ -287,19 +290,31 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             $productVariant->setTracked($options['tracked']);
 
             foreach ($this->channelRepository->findAll() as $channel) {
-                $this->createChannelPricings($productVariant, $channel->getCode());
+                $this->createChannelPricings($productVariant, $channel->getCode(), $options);
             }
 
             ++$i;
         }
     }
 
-    private function createChannelPricings(ProductVariantInterface $productVariant, string $channelCode): void
+    private function createChannelPricings(ProductVariantInterface $productVariant, string $channelCode, array $options): void
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setChannelCode($channelCode);
         $channelPricing->setPrice($this->faker->numberBetween(100, 10000));
+
+        if (isset($options['prices']) && is_int($options['prices'])) {
+            $channelPricing->setPrice($options['price']);
+        }
+
+        if (isset($options['prices']) && is_array($options['prices'])) {
+            foreach($options['prices'] as $code => $priceForChannel) {
+                if($code === $channelCode) {
+                    $channelPricing->setPrice($priceForChannel);
+                }
+            }
+        }
 
         $productVariant->addChannelPricing($channelPricing);
     }

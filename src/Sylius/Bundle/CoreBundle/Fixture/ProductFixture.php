@@ -41,6 +41,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->arrayNode('images')->variablePrototype()->end()->end()
                 ->booleanNode('shipping_required')->end()
                 ->scalarNode('tax_category')->end()
+                ->scalarNode('prices')->end()
         ;
     }
 }
