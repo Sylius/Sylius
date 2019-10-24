@@ -234,10 +234,11 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Given I want to modify a channel :channel
-     * @Given /^I want to modify (this channel)$/
+     * @Given I am modifying a channel :channel
+     * @When I want to modify a channel :channel
+     * @When /^I want to modify (this channel)$/
      */
-    public function iWantToModifyChannel(ChannelInterface $channel)
+    public function iWantToModifyChannel(ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
     }
@@ -371,14 +372,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I make it available in :locale
+     * @When I make it available (only) in :locale
      */
-    public function iMakeItAvailableIn($locale)
+    public function iMakeItAvailableIn(string $localeName): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->chooseLocale($locale);
+        $currentPage->chooseLocale($localeName);
     }
 
     /**
@@ -478,6 +479,17 @@ final class ManagingChannelsContext implements Context
     public function theBaseCurrencyFieldShouldBeDisabled()
     {
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
+    }
+
+    /**
+     * @Then I should be notified that the default locale has to be enabled
+     */
+    public function iShouldBeNotifiedThatTheDefaultLocaleHasToBeEnabled(): void
+    {
+        Assert::same(
+            $this->updatePage->getValidationMessage('default_locale'),
+            'Default locale has to be enabled.'
+        );
     }
 
     /**
