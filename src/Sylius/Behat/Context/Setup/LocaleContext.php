@@ -86,6 +86,8 @@ final class LocaleContext implements Context
      * @Given /^(that channel) allows to shop using the "([^"]+)" locale$/
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/
+     * @Given /^(this channel) allows to shop using the "([^"]+)" locale$/
+     * @Given /^(this channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      */
     public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
     {
@@ -102,8 +104,9 @@ final class LocaleContext implements Context
 
     /**
      * @Given /^(it) uses the "([^"]+)" locale by default$/
+     * @Given /^(this channel) uses the "([^"]+)" locale as default$/
      */
-    public function itUsesTheLocaleByDefault(ChannelInterface $channel, $localeName)
+    public function itUsesTheLocaleByDefault(ChannelInterface $channel, string $localeName): void
     {
         $locale = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));
 
