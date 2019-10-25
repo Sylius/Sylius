@@ -7,6 +7,7 @@ sylius:
         base_currency:
             not_blank: Please enter channel base currency.
         default_locale:
+            enabled: Default locale has to be enabled.
             not_blank: Please enter channel default locale.
         contact_email:
             invalid: This email is invalid.
