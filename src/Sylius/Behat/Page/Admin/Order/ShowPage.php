@@ -203,11 +203,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getFormattedMoney($orderPromotionTotal > 0 ? -1 * $orderPromotionTotal : $orderPromotionTotal);
     }
 
-    public function hasPromotionDiscount(string $promotionDiscount): bool
+    public function hasPromotionDiscount(string $promotionName, string $promotionAmount): bool
     {
         $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
 
-        return stripos($promotionDiscountsText, $promotionDiscount) !== false;
+        return stripos($promotionDiscountsText, sprintf('%s %s', $promotionAmount, $promotionName)) !== false;
     }
 
     public function hasTax(string $tax): bool
