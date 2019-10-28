@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -551,10 +553,59 @@ final class OrderSpec extends ObjectBehavior
         $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
         $orderItem2->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-600);
 
+        $orderItem1->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection());
+        $orderItem2->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection());
+
         $orderItem1->setOrder($this)->shouldBeCalled();
         $orderItem2->setOrder($this)->shouldBeCalled();
         $this->addItem($orderItem1);
         $this->addItem($orderItem2);
+
+        $this->getOrderPromotionTotal()->shouldReturn(-1000);
+    }
+
+    function it_returns_a_sum_of_all_order_promotion_adjustments_applied_to_orders_as_order_promotion_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3
+    ) {
+        $adjustment1->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $adjustment1->getAmount()->willReturn(-400);
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->setAdjustable(Argument::cetera());
+        $adjustment2->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $adjustment2->getAmount()->willReturn(-600);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->setAdjustable(Argument::cetera());
+        $adjustment3->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $adjustment3->getAmount()->willReturn(-500);
+        $adjustment3->isNeutral()->willReturn(true);
+        $adjustment3->setAdjustable(Argument::cetera());
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $this->getOrderPromotionTotal()->shouldReturn(-1000);
+    }
+
+    function it_returns_a_sum_of_all_order_promotion_adjustments_as_order_promotion_total(
+        AdjustmentInterface $adjustment,
+        OrderItemInterface $orderItem
+    ) {
+        $orderItem->getTotal()->willReturn(800);
+        $orderItem->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-600);
+        $orderItem->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-600);
+        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$adjustment]));
+        $orderItem->setOrder(Argument::type(OrderInterface::class));
+        $this->addItem($orderItem);
+
+        $adjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $adjustment->getAmount()->willReturn(-400);
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->setAdjustable(Argument::cetera());
+        $this->addAdjustment($adjustment);
 
         $this->getOrderPromotionTotal()->shouldReturn(-1000);
     }
@@ -565,8 +616,10 @@ final class OrderSpec extends ObjectBehavior
     ): void {
         $orderItem1->getTotal()->willReturn(500);
         $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
+        $orderItem1->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection());
 
-        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
         $shippingPromotionAdjustment->isNeutral()->willReturn(false);
         $shippingPromotionAdjustment->getAmount()->willReturn(-100);
 

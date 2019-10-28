@@ -514,6 +514,8 @@ class Order extends BaseOrder implements OrderInterface
             $orderPromotionTotal += $item->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
         }
 
+        $orderPromotionTotal += $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+
         return $orderPromotionTotal;
     }
 
