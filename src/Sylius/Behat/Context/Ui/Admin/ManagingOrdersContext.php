@@ -346,11 +346,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's promotion discount should be :promotionDiscount
+     * @Then the order's promotion discount should be :promotionAmount from :promotionName promotion
      */
-    public function theOrdersPromotionDiscountShouldBe($promotionDiscount)
+    public function theOrdersPromotionDiscountShouldBeFromPromotion(string $promotionAmount, string $promotionName): void
     {
-        Assert::true($this->showPage->hasPromotionDiscount($promotionDiscount));
+        Assert::true($this->showPage->hasPromotionDiscount($promotionName, $promotionAmount));
     }
 
     /**

@@ -58,7 +58,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getOrderPromotionTotal(): string;
 
-    public function hasPromotionDiscount(string $promotionDiscount): bool;
+    public function hasPromotionDiscount(string $promotionName, string $promotionAmount): bool;
 
     public function hasTax(string $tax): bool;
 
