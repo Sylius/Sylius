@@ -3,7 +3,7 @@
 {% block title %} | Sylius{% endblock %}
 
 {% block stylesheets %}
-    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+    {% include '@SyliusAdmin/_styles.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
@@ -49,7 +49,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+    {% include '@SyliusAdmin/_scripts.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
 {% endblock %}
