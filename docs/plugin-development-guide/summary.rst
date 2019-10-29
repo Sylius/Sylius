@@ -26,7 +26,7 @@ and even more. The limit is only your imagination (and business value, of course
 our :doc:`customizing guide</customization/index>`.
 
 At the end, do not hesitate to contact us at contact@sylius.com when you manage to implement a new plugin.
-We would be happy to check it out and add it to our `official plugins list`_!
+We would be happy to check it out and add it to our `approved plugins list`_!
 
 .. note::
 
@@ -40,5 +40,5 @@ We are working hard to make creating Sylius plugins even more developer- and use
 `PluginSkeleton`_ notifications and other announcements from Sylius community.
 Our plugins base is growing fast - why not be a part of it?
 
-.. _`official plugins list`: https://sylius.com/plugins/
+.. _`approved plugins list`: https://sylius.com/plugins/
 .. _`PluginSkeleton`: https://github.com/Sylius/PluginSkeleton
