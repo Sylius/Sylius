@@ -62,7 +62,7 @@ Must have
 
 * Are there any unit tests for the plugin's classes? They can be written in PHPSpec, PHPUnit or any other working and reliable unit testing library
 * Does the unit tests cover at least the most crucial classes in the plugin (those which contain important business logic)?
-* Does the plugin contain some functional/acceptation tests (written in Behat/PHPUnit or similar tool)?
+* Does the plugin contain some functional/acceptance tests (written in Behat/PHPUnit or similar tool)?
 * Are the core features of the plugin described and tests by them?
 
 **Coding standards:**
