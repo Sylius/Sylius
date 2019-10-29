@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AddressingBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 final class CountryNameExtensionSpec extends ObjectBehavior
@@ -38,5 +39,17 @@ final class CountryNameExtensionSpec extends ObjectBehavior
     function it_translates_country_code_to_name_according_to_locale(): void
     {
         $this->translateCountryIsoCode('IE', 'es')->shouldReturn('Irlanda');
+    }
+
+    function it_fallbacks_to_country_code_when_there_is_no_translation(): void
+    {
+        $country = 'country_code_without_translation';
+        $this->translateCountryIsoCode($country)->shouldReturn($country);
+    }
+
+    function it_fallbacks_to_an_empty_string_when_there_is_no_code(): void
+    {
+        $this->translateCountryIsoCode(new Country())->shouldReturn('');
+        $this->translateCountryIsoCode(null)->shouldReturn('');
     }
 }
