@@ -30,9 +30,6 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var FactoryInterface */
     private $promotionFactory;
 
-    /** @var FactoryInterface */
-    private $couponFactory;
-
     /** @var ExampleFactoryInterface */
     private $promotionRuleExampleFactory;
 
@@ -42,6 +39,9 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
+    /** @var FactoryInterface|null */
+    private $couponFactory;
+
     /** @var \Faker\Generator */
     private $faker;
 
@@ -50,16 +50,16 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
     public function __construct(
         FactoryInterface $promotionFactory,
-        FactoryInterface $couponFactory,
         ExampleFactoryInterface $promotionRuleExampleFactory,
         ExampleFactoryInterface $promotionActionExampleFactory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ?FactoryInterface $couponFactory = null
     ) {
         $this->promotionFactory = $promotionFactory;
-        $this->couponFactory = $couponFactory;
         $this->promotionRuleExampleFactory = $promotionRuleExampleFactory;
         $this->promotionActionExampleFactory = $promotionActionExampleFactory;
         $this->channelRepository = $channelRepository;
+        $this->couponFactory = $couponFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -156,29 +156,38 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
             ->setDefault('coupons', [])
             ->setAllowedTypes('coupons', 'array')
-            ->setNormalizer('coupons', function (Options $options, array $couponDefinitions): array {
-                if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
-                    throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
-                }
-
-                $coupons = [];
-                foreach ($couponDefinitions as $couponDefinition) {
-                    /** @var PromotionCouponInterface $coupon */
-                    $coupon = $this->couponFactory->createNew();
-                    $coupon->setCode($couponDefinition['code']);
-                    $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit']);
-                    $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders']);
-                    $coupon->setUsageLimit($couponDefinition['usage_limit']);
-
-                    if (null !== $couponDefinition['expires_at']) {
-                        $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
-                    }
-
-                    $coupons[] = $coupon;
-                }
-
-                return $coupons;
-            })
+            ->setNormalizer('coupons', self::getCouponNormalizer($this->couponFactory))
         ;
+    }
+
+    /**
+     * @param FactoryInterface $couponFactory
+     *
+     * @return \Closure
+     */
+    private static function getCouponNormalizer (FactoryInterface $couponFactory): \Closure {
+        return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
+            if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
+                throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
+            }
+
+            $coupons = [];
+            foreach ($couponDefinitions as $couponDefinition) {
+                /** @var PromotionCouponInterface $coupon */
+                $coupon = $couponFactory->createNew();
+                $coupon->setCode($couponDefinition['code']);
+                $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit']);
+                $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders']);
+                $coupon->setUsageLimit($couponDefinition['usage_limit']);
+
+                if (null !== $couponDefinition['expires_at']) {
+                    $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
+                }
+
+                $coupons[] = $coupon;
+            }
+
+            return $coupons;
+        };
     }
 }
