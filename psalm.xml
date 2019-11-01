@@ -129,8 +129,6 @@
 
         <RawObjectIteration errorLevel="info" />
 
-        <InvalidStringClass errorLevel="info" />
-
         <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
 
         <MoreSpecificReturnType errorLevel="info" />
