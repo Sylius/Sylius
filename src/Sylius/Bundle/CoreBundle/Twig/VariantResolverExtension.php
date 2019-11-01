@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\Templating\Helper\Helper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class VariantResolverExtension extends \Twig_Extension
+final class VariantResolverExtension extends AbstractExtension
 {
     /** @var Helper */
     private $helper;
@@ -31,7 +33,7 @@ final class VariantResolverExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
+            new TwigFilter('sylius_resolve_variant', [$this->helper, 'resolveVariant']),
         ];
     }
 }

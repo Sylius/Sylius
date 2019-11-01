@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\LocaleBundle\Twig;
 
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class LocaleExtension extends \Twig_Extension
+final class LocaleExtension extends AbstractExtension
 {
     /** @var LocaleHelperInterface */
     private $localeHelper;
@@ -31,8 +33,8 @@ final class LocaleExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
-            new \Twig_Filter('sylius_locale_country', [$this, 'getCountryCode']),
+            new TwigFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
+            new TwigFilter('sylius_locale_country', [$this, 'getCountryCode']),
         ];
     }
 

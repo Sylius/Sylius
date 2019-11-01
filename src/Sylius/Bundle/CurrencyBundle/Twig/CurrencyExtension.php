@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CurrencyBundle\Twig;
 
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class CurrencyExtension extends \Twig_Extension
+final class CurrencyExtension extends AbstractExtension
 {
     /** @var CurrencyHelperInterface */
     private $helper;
@@ -31,7 +33,7 @@ final class CurrencyExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new TwigFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
 }

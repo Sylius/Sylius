@@ -16,14 +16,16 @@ namespace Sylius\Bundle\ShopBundle\Twig;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class OrderTaxesTotalExtension extends \Twig_Extension
+class OrderTaxesTotalExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('sylius_order_tax_included', [$this, 'getIncludedTax']),
-            new \Twig_Function('sylius_order_tax_excluded', [$this, 'getExcludedTax']),
+            new TwigFunction('sylius_order_tax_included', [$this, 'getIncludedTax']),
+            new TwigFunction('sylius_order_tax_excluded', [$this, 'getExcludedTax']),
         ];
     }
 

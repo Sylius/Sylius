@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Symfony\Component\Templating\Helper\Helper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class PriceExtension extends \Twig_Extension
+final class PriceExtension extends AbstractExtension
 {
     /** @var Helper */
     private $helper;
@@ -31,7 +33,7 @@ final class PriceExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_calculate_price', [$this->helper, 'getPrice']),
+            new TwigFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
         ];
     }
 }
