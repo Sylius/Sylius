@@ -1,5 +1,5 @@
-@checkout
-Feature: No shipping cost when order does not require any shipping
+@shopping_cart
+Feature: Seeing shipping costs only when order requires shipping
     In order to pay the correct amount for my order
     As a Customer
     I want to be only be charged for shipping when it is necessary
@@ -13,10 +13,10 @@ Feature: No shipping cost when order does not require any shipping
         And I am a logged in customer
 
     @ui
-    Scenario: Seeing free shipping cost if none of the order items require shipping
+    Scenario: Not seeing shipping cost if none of the order items require shipping
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         When I see the summary of my cart
-        Then my cart shipping should be for free
+        Then I should not see shipping total for my cart
 
     @ui
     Scenario: Seeing shipping cost if some of the order items require shipping
@@ -26,9 +26,9 @@ Feature: No shipping cost when order does not require any shipping
         Then my cart shipping total should be "$5.00"
 
     @ui
-    Scenario: Seeing free cost if the order items that require shipping are removed
+    Scenario: Not seeing free cost if the order items that require shipping are removed
         Given I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart
         And I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         When I remove product "Guards! Guards!" from the cart
         And I see the summary of my cart
-        Then my cart shipping should be for free
+        Then I should not see shipping total for my cart
