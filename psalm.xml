@@ -110,8 +110,6 @@
 
         <MissingClosureReturnType errorLevel="info" />
         <MissingReturnType errorLevel="info" />
-        <InvalidDocblock errorLevel="info" />
-        <MisplacedRequiredParam errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
         <MissingConstructor>
