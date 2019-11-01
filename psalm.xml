@@ -208,10 +208,7 @@
 
         <!-- level 8 issues - some fatal errors in PHP -->
 
-        <ReservedWord errorLevel="info" />
         <MethodSignatureMismatch errorLevel="info" />
-        <OverriddenMethodAccess errorLevel="info" />
-        <InaccessibleProperty errorLevel="info" />
 
         <!-- Custom -->
 
