@@ -41,11 +41,11 @@ final class ProductVariantChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choices' => function (Options $options): iterable {
                     return $options['product']->getVariants();
                 },
                 'choice_value' => 'code',
-                'choice_label' => function (ProductVariantInterface $variant) {
+                'choice_label' => function (ProductVariantInterface $variant): string {
                     /** @psalm-suppress InvalidCast */
                     return (string) $variant;
                 },

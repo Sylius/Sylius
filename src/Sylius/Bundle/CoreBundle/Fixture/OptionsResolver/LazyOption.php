@@ -38,7 +38,7 @@ final class LazyOption
 {
     public static function randomOne(RepositoryInterface $repository): \Closure
     {
-        return function (Options $options) use ($repository) {
+        return function (Options $options) use ($repository): object {
             $objects = $repository->findAll();
 
             if ($objects instanceof Collection) {
@@ -53,7 +53,7 @@ final class LazyOption
 
     public static function randomOneOrNull(RepositoryInterface $repository, int $chanceOfRandomOne = 100): \Closure
     {
-        return function (Options $options) use ($repository, $chanceOfRandomOne) {
+        return function (Options $options) use ($repository, $chanceOfRandomOne): ?object {
             if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
@@ -70,7 +70,7 @@ final class LazyOption
 
     public static function randomOnes(RepositoryInterface $repository, int $amount): \Closure
     {
-        return function (Options $options) use ($repository, $amount) {
+        return function (Options $options) use ($repository, $amount): iterable {
             $objects = $repository->findAll();
 
             if ($objects instanceof Collection) {
@@ -92,14 +92,14 @@ final class LazyOption
 
     public static function all(RepositoryInterface $repository): \Closure
     {
-        return function (Options $options) use ($repository) {
+        return function (Options $options) use ($repository): iterable {
             return $repository->findAll();
         };
     }
 
     public static function findBy(RepositoryInterface $repository, string $field): \Closure
     {
-        return function (Options $options, ?array $previousValues) use ($repository, $field) {
+        return function (Options $options, ?array $previousValues) use ($repository, $field): ?iterable {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
@@ -121,7 +121,7 @@ final class LazyOption
     {
         return
             /** @param mixed $previousValue */
-            function (Options $options, $previousValue) use ($repository, $field) {
+            function (Options $options, $previousValue) use ($repository, $field): ?object {
                 if (null === $previousValue || [] === $previousValue) {
                     return $previousValue;
                 }

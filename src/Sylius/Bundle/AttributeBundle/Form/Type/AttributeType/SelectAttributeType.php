@@ -48,7 +48,11 @@ final class SelectAttributeType extends AbstractType
             && isset($options['configuration']['multiple'])
             && !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
-                /** @param mixed $array */
+                /**
+                 * @param mixed $array
+                 *
+                 * @return mixed
+                 */
                 function ($array) {
                     if (is_array($array) && count($array) > 0) {
                         return $array[0];
@@ -57,7 +61,7 @@ final class SelectAttributeType extends AbstractType
                     return null;
                 },
                 /** @param mixed $string */
-                function ($string) {
+                function ($string): array {
                     if (null !== $string) {
                         return [$string];
                     }
@@ -102,7 +106,7 @@ final class SelectAttributeType extends AbstractType
 
                 return [];
             })
-            ->setNormalizer('multiple', function (Options $options) {
+            ->setNormalizer('multiple', function (Options $options): bool {
                 if (is_array($options['configuration']) && isset($options['configuration']['multiple'])) {
                     return $options['configuration']['multiple'];
                 }

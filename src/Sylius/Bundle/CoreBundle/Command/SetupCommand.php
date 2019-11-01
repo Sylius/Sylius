@@ -107,8 +107,10 @@ EOT
     {
         return (new Question('E-mail: '))
             ->setValidator(
-                /** @param mixed $value */
-                function ($value) {
+                /**
+                 * @param mixed $value
+                 */
+                function ($value): string {
                     /** @var ConstraintViolationListInterface $errors */
                     $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                     foreach ($errors as $error) {
@@ -187,7 +189,7 @@ EOT
     {
         return
             /** @param mixed $value */
-            function ($value) {
+            function ($value): string {
                 /** @var ConstraintViolationListInterface $errors */
                 $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
                 foreach ($errors as $error) {

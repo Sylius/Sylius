@@ -108,7 +108,6 @@
             </errorLevel>
         </DeprecatedMethod>
 
-        <MissingClosureReturnType errorLevel="info" />
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
