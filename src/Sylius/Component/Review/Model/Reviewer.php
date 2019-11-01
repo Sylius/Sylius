@@ -15,7 +15,7 @@ namespace Sylius\Component\Review\Model;
 
 class Reviewer implements ReviewerInterface
 {
-    /** @var int */
+    /** @var int|null */
     protected $id;
 
     /** @var string|null */
@@ -28,7 +28,7 @@ class Reviewer implements ReviewerInterface
     protected $lastName;
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getId()
     {

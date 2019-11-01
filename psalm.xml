@@ -114,7 +114,11 @@
         <MisplacedRequiredParam errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
-        <MissingConstructor errorLevel="info" />
+        <MissingConstructor>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/CoreBundle/Application/SyliusPluginTrait.php" />
+            </errorLevel>
+        </MissingConstructor>
         <MissingClosureParamType errorLevel="info" />
         <MissingParamType errorLevel="info" />
 

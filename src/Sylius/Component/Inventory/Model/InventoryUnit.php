@@ -18,7 +18,7 @@ class InventoryUnit implements InventoryUnitInterface
     /** @var mixed */
     protected $id;
 
-    /** @var StockableInterface */
+    /** @var StockableInterface|null */
     protected $stockable;
 
     /**

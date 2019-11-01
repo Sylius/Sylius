@@ -20,19 +20,19 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
-    /** @var string */
+    /** @var string|null */
     protected $slug;
 
-    /** @var string */
+    /** @var string|null */
     protected $description;
 
-    /** @var string */
+    /** @var string|null */
     protected $metaKeywords;
 
-    /** @var string */
+    /** @var string|null */
     protected $metaDescription;
 
     /**

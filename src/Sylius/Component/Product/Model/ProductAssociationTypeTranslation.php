@@ -20,7 +20,7 @@ class ProductAssociationTypeTranslation extends AbstractTranslation implements P
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /**
