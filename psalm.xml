@@ -12,6 +12,7 @@
 
             <directory name="src/Sylius/Bundle/AddressingBundle/spec" />
             <directory name="src/Sylius/Bundle/AddressingBundle/test" />
+            <directory name="src/Sylius/Bundle/AddressingBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
             <directory name="src/Sylius/Bundle/AdminBundle/spec" />
             <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
@@ -109,7 +110,6 @@
 
         <MissingClosureReturnType errorLevel="info" />
         <MissingReturnType errorLevel="info" />
-        <MissingPropertyType errorLevel="info" />
         <InvalidDocblock errorLevel="info" />
         <MisplacedRequiredParam errorLevel="info" />
 

@@ -128,7 +128,7 @@ final class ShippingMethodType extends AbstractResourceType
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MissingPropertyType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
