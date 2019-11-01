@@ -68,8 +68,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <LessSpecificReturnType errorLevel="info" />
-
         <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
 
         <DeprecatedClass>
