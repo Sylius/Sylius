@@ -130,7 +130,7 @@ class GeographicalFixture extends AbstractFixture
 
         $zoneNode
             ->validate()
-                ->ifTrue(function ($zone) {
+                ->ifTrue(function (array $zone): bool {
                     $filledTypes = 0;
                     $filledTypes += empty($zone['countries']) ? 0 : 1;
                     $filledTypes += empty($zone['zones']) ? 0 : 1;
@@ -248,7 +248,7 @@ class GeographicalFixture extends AbstractFixture
     private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [
-            ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options) {
+            ZoneInterface::TYPE_COUNTRY => function (string $countryCode) use ($options) {
                 if (in_array($countryCode, $options['countries'], true)) {
                     return;
                 }
@@ -259,7 +259,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_PROVINCE => function ($provinceCode) use ($options) {
+            ZoneInterface::TYPE_PROVINCE => function (string $provinceCode) use ($options) {
                 $foundProvinces = [];
                 foreach ($options['provinces'] as $provinces) {
                     if (isset($provinces[$provinceCode])) {
@@ -275,7 +275,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['provinces'])
                 ));
             },
-            ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options) {
+            ZoneInterface::TYPE_ZONE => function (string $zoneCode) use ($options) {
                 if (isset($options['zones'][$zoneCode])) {
                     return;
                 }

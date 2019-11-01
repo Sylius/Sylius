@@ -119,7 +119,6 @@
                 <file name="src/Sylius/Bundle/CoreBundle/Application/SyliusPluginTrait.php" />
             </errorLevel>
         </MissingConstructor>
-        <MissingClosureParamType errorLevel="info" />
         <MissingParamType errorLevel="info" />
 
         <DocblockTypeContradiction errorLevel="info" />

@@ -99,12 +99,10 @@ final class LazyOption
 
     public static function findBy(RepositoryInterface $repository, string $field): \Closure
     {
-        return function (Options $options, $previousValues) use ($repository, $field) {
+        return function (Options $options, ?array $previousValues) use ($repository, $field) {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
-
-            Assert::isArray($previousValues);
 
             $resources = [];
             foreach ($previousValues as $previousValue) {
@@ -121,16 +119,19 @@ final class LazyOption
 
     public static function findOneBy(RepositoryInterface $repository, string $field): \Closure
     {
-        return function (Options $options, $previousValue) use ($repository, $field) {
-            if (null === $previousValue || [] === $previousValue) {
-                return $previousValue;
-            }
+        return
+            /** @param mixed $previousValue */
+            function (Options $options, $previousValue) use ($repository, $field) {
+                if (null === $previousValue || [] === $previousValue) {
+                    return $previousValue;
+                }
 
-            if (is_object($previousValue)) {
-                return $previousValue;
-            }
+                if (is_object($previousValue)) {
+                    return $previousValue;
+                }
 
-            return $repository->findOneBy([$field => $previousValue]);
-        };
+                return $repository->findOneBy([$field => $previousValue]);
+            }
+        ;
     }
 }

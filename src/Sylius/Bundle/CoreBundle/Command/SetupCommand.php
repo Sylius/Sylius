@@ -106,15 +106,18 @@ EOT
     private function createEmailQuestion(): Question
     {
         return (new Question('E-mail: '))
-            ->setValidator(function ($value) {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
-                foreach ($errors as $error) {
-                    throw new \DomainException($error->getMessage());
-                }
+            ->setValidator(
+                /** @param mixed $value */
+                function ($value) {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    foreach ($errors as $error) {
+                        throw new \DomainException($error->getMessage());
+                    }
 
-                return $value;
-            })
+                    return $value;
+                }
+            )
             ->setMaxAttempts(3)
         ;
     }
@@ -182,15 +185,18 @@ EOT
 
     private function getPasswordQuestionValidator(): \Closure
     {
-        return function ($value) {
-            /** @var ConstraintViolationListInterface $errors */
-            $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
-            foreach ($errors as $error) {
-                throw new \DomainException($error->getMessage());
-            }
+        return
+            /** @param mixed $value */
+            function ($value) {
+                /** @var ConstraintViolationListInterface $errors */
+                $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+                foreach ($errors as $error) {
+                    throw new \DomainException($error->getMessage());
+                }
 
-            return $value;
-        };
+                return $value;
+            }
+        ;
     }
 
     private function createPasswordQuestion(string $message, \Closure $validator): Question

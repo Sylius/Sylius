@@ -85,7 +85,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
         $resolver
             ->setDefault('user', LazyOption::randomOne($this->userRepository))
             ->setAllowedTypes('user', ['string', UserInterface::class, 'null'])
-            ->setNormalizer('user', function (Options $options, $userEmail) {
+            ->setNormalizer('user', function (Options $options, string $userEmail) {
                 return $this->userRepository->findOneByEmail($userEmail);
             })
             ->setDefault('token', function (Options $options) {

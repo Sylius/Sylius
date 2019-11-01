@@ -49,7 +49,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('email')) {
             $question = new Question('Please enter an email:');
-            $question->setValidator(function ($email) {
+            $question->setValidator(function (?string $email) {
                 if (!filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                     throw new \RuntimeException('The email you entered is invalid.');
                 }
@@ -62,7 +62,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('roles')) {
             $question = new Question('Please enter user\'s roles (separated by space):');
-            $question->setValidator(function ($roles) {
+            $question->setValidator(function (?string $roles) {
                 if (strlen($roles) < 1) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
