@@ -60,10 +60,6 @@ class SortByExtension extends AbstractExtension
             return $iterable;
         }
 
-        if ($iterable instanceof \Traversable) {
-            return iterator_to_array($iterable);
-        }
-
-        throw new \RuntimeException('Cannot transform an iterable to an array.');
+        return iterator_to_array($iterable);
     }
 }

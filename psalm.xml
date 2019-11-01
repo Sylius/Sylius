@@ -120,8 +120,6 @@
         <MissingClosureParamType errorLevel="info" />
         <MissingParamType errorLevel="info" />
 
-        <RedundantCondition errorLevel="info" />
-
         <DocblockTypeContradiction errorLevel="info" />
         <RedundantConditionGivenDocblockType errorLevel="info" />
 
