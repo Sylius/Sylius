@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Symfony\Component\Templating\Helper\Helper;
+use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 final class PriceExtension extends AbstractExtension
 {
-    /** @var Helper */
+    /** @var PriceHelper */
     private $helper;
 
-    public function __construct(Helper $helper)
+    public function __construct(PriceHelper $helper)
     {
         $this->helper = $helper;
     }

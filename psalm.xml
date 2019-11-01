@@ -14,12 +14,15 @@
             <directory name="src/Sylius/Bundle/AddressingBundle/test" />
             <directory name="src/Sylius/Bundle/AddressingBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
+            <directory name="src/Sylius/Bundle/AdminApiBundle/Tests" />
             <directory name="src/Sylius/Bundle/AdminBundle/spec" />
+            <directory name="src/Sylius/Bundle/AdminBundle/Tests" />
             <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
             <directory name="src/Sylius/Bundle/AttributeBundle/test" />
             <directory name="src/Sylius/Bundle/ChannelBundle/spec" />
             <directory name="src/Sylius/Bundle/ChannelBundle/test" />
             <directory name="src/Sylius/Bundle/CoreBundle/spec" />
+            <directory name="src/Sylius/Bundle/CoreBundle/Tests" />
             <directory name="src/Sylius/Bundle/CurrencyBundle/spec" />
             <directory name="src/Sylius/Bundle/CurrencyBundle/test" />
             <directory name="src/Sylius/Bundle/CustomerBundle/test" />
@@ -37,6 +40,7 @@
             <directory name="src/Sylius/Bundle/ProductBundle/test" />
             <directory name="src/Sylius/Bundle/PromotionBundle/spec" />
             <directory name="src/Sylius/Bundle/PromotionBundle/test" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/Tests" />
             <directory name="src/Sylius/Bundle/ReviewBundle/spec" />
             <directory name="src/Sylius/Bundle/ShippingBundle/test" />
             <directory name="src/Sylius/Bundle/ShopBundle/spec" />
@@ -197,14 +201,11 @@
         <UndefinedThisPropertyFetch errorLevel="info" />
         <UndefinedPropertyFetch errorLevel="info" />
 
-        <InvalidReturnStatement errorLevel="info" />
-        <InvalidReturnType errorLevel="info" />
-        <InvalidArgument errorLevel="info" />
-        <InvalidPropertyAssignmentValue errorLevel="info" />
-        <InvalidArrayOffset errorLevel="info" />
-        <InvalidArrayAssignment errorLevel="info" />
-        <InvalidArrayAccess errorLevel="info" />
-        <InvalidClone errorLevel="info" />
+        <InvalidArgument>
+            <errorLevel type="info">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+            </errorLevel>
+        </InvalidArgument>
 
         <!-- level 8 issues - some fatal errors in PHP -->
 
