@@ -20,7 +20,7 @@ interface AdjustableInterface
     /**
      * @return Collection|AdjustmentInterface[]
      *
-     * @psalm-return Collection<AdjustmentInterface>
+     * @psalm-return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustments(?string $type = null): Collection;
 

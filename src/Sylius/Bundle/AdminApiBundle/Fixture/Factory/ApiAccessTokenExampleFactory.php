@@ -23,6 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 class ApiAccessTokenExampleFactory extends AbstractExampleFactory
 {
@@ -86,7 +87,15 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
             ->setDefault('user', LazyOption::randomOne($this->userRepository))
             ->setAllowedTypes('user', ['string', UserInterface::class, 'null'])
             ->setNormalizer('user', function (Options $options, string $userEmail): ?UserInterface {
-                return $this->userRepository->findOneByEmail($userEmail);
+                if (null === $userEmail) {
+                    return null;
+                }
+
+                $user = $this->userRepository->findOneByEmail($userEmail);
+
+                Assert::isInstanceOf($user, UserInterface::class);
+
+                return $user;
             })
             ->setDefault('token', function (Options $options): string {
                 return $this->faker->md5;

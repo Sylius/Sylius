@@ -32,7 +32,7 @@ final class CustomerStatistics
 
     public function getAllOrdersCount(): int
     {
-        return array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {
+        return (int) array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {
             return $statistics->getOrdersCount();
         }, $this->perChannelsStatistics));
     }

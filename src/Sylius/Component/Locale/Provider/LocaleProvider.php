@@ -39,7 +39,7 @@ final class LocaleProvider implements LocaleProviderInterface
 
         return array_map(
             function (LocaleInterface $locale) {
-                return $locale->getCode();
+                return (string) $locale->getCode();
             },
             $locales
         );

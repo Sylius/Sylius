@@ -478,9 +478,15 @@ class Order extends BaseOrder implements OrderInterface
         $taxTotal = 0;
 
         foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            /** @var AdjustmentInterface $taxAdjustment */
+            Assert::isInstanceOf($taxAdjustment, AdjustmentInterface::class);
+
             $taxTotal += $taxAdjustment->getAmount();
         }
         foreach ($this->items as $item) {
+            /** @var OrderItemInterface $item */
+            Assert::isInstanceOf($item, OrderItemInterface::class);
+
             $taxTotal += $item->getTaxTotal();
         }
 
