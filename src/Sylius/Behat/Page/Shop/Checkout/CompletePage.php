@@ -185,12 +185,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->getElement('tax_total')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingTotal($price)
+    public function getShippingTotal(): string
     {
-        return false !== strpos($this->getElement('shipping_total')->getText(), $price);
+        return $this->getElement('shipping_total')->getText();
+    }
+
+    public function hasShippingTotal(): bool
+    {
+        return $this->hasElement('shipping_total');
     }
 
     /**

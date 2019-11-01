@@ -82,6 +82,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $shippingTotalElement->getText();
     }
 
+    public function hasShippingTotal(): bool
+    {
+        return $this->hasElement('shipping_total');
+    }
+
     /**
      * {@inheritdoc}
      */

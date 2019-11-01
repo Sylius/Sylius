@@ -39,6 +39,8 @@ interface SummaryPageInterface extends PageInterface
      */
     public function getShippingTotal();
 
+    public function hasShippingTotal(): bool;
+
     /**
      * @return string
      */

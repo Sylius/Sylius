@@ -60,17 +60,19 @@
                     {{ money.convertAndFormat(order.orderPromotionTotal) }}
                 </td>
             </tr>
-            <tr>
-                <td colspan="1">
-                    <strong>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</strong>
-                </td>
-                <td colspan="2" class="right aligned">
-                    {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}
-                        <div class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal('shipping')) }}</div>
-                    {% endif %}
-                    <span id="sylius-summary-shipping-total">{{ money.convertAndFormat(order.shippingTotal) }}</span>
-                </td>
-            </tr>
+            {% if order.shipments is not empty %}
+                <tr>
+                    <td colspan="1">
+                        <strong>{{ 'sylius.ui.shipping_estimated_cost'|trans }}:</strong>
+                    </td>
+                    <td colspan="2" class="right aligned">
+                        {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}
+                            <div class="old-price">{{ money.convertAndFormat(order.getAdjustmentsTotal('shipping')) }}</div>
+                        {% endif %}
+                        <span id="sylius-summary-shipping-total">{{ money.convertAndFormat(order.shippingTotal) }}</span>
+                    </td>
+                </tr>
+            {% endif %}
             <tr class="ui large header">
                 <td colspan="1">
                     <strong>{{ 'sylius.ui.order_total'|trans }}:</strong>
