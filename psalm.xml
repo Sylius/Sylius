@@ -112,6 +112,12 @@
             </errorLevel>
         </DeprecatedMethod>
 
+        <InternalMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
+            </errorLevel>
+        </InternalMethod>
+
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />

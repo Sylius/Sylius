@@ -99,13 +99,8 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         $taxTotal = 0;
 
         foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
-            /** @var AdjustmentInterface $taxAdjustment */
-            Assert::isInstanceOf($taxAdjustment, AdjustmentInterface::class);
-
             $taxTotal += $taxAdjustment->getAmount();
         }
-
-
 
         foreach ($this->units as $unit) {
             /** @var OrderItemUnitInterface $unit */

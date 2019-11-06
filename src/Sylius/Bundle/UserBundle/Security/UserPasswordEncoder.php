@@ -16,8 +16,6 @@ namespace Sylius\Bundle\UserBundle\Security;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Webmozart\Assert\Assert;
 
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {
@@ -34,8 +32,7 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
      */
     public function encode(CredentialsHolderInterface $user): string
     {
-        Assert::isInstanceOf($user, UserInterface::class);
-
+        /** @psalm-suppress InvalidArgument */
         $encoder = $this->encoderFactory->getEncoder($user);
 
         return $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
