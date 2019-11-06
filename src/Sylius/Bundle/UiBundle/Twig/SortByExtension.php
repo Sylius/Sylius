@@ -15,8 +15,10 @@ namespace Sylius\Bundle\UiBundle\Twig;
 
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class SortByExtension extends \Twig_Extension
+class SortByExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -24,7 +26,7 @@ class SortByExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sort_by', [$this, 'sortBy']),
+            new TwigFilter('sort_by', [$this, 'sortBy']),
         ];
     }
 
