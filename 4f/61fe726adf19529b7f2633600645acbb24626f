@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by gabiudrescu at 2019-10-29T15:22:14Z
+
+1. Reproducible builds with Webpack are nightmare; further reads here:
+ - https://github.com/webpack/webpack/issues/7179
+ - https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
+
+2.
+
+> Once you decide to use the webpack you can delete the gulpfile.babel.js and .babelrc from the root directory - then the errors will stop appearing.
+
+Could be automated with symfony-flex, I think. but I don't know if it should
+
+3. can we challenge now the usage of yarn instead of npm? why not use npm instead of yarn?
+
+---------------------------------------------------------------------------
+
+by kulczy at 2019-10-29T15:35:24Z
+
+This is just the first step to implement the Webpack into Sylius, Sylius-standard and plugins. When everything works and the gulp is no longer needed then we will think about improvements
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-11-06T19:10:46Z
+
+Thank you, Szymon! :tada:
