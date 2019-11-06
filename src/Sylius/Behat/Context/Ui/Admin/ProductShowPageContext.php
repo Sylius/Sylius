@@ -22,7 +22,7 @@ use Sylius\Behat\Element\Product\ShowPage\MoreDetailsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\OptionsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\PricingElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\ShippingElementInterface;
-use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementIterface;
+use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
@@ -59,7 +59,7 @@ final class ProductShowPageContext implements Context
     /** @var ShippingElementInterface */
     private $shippingElement;
 
-    /** @var TaxonomyElementIterface */
+    /** @var TaxonomyElementInterface */
     private $taxonomyElement;
 
     /** @var OptionsElementInterface */
@@ -78,7 +78,7 @@ final class ProductShowPageContext implements Context
         MoreDetailsElementInterface $moreDetailsElement,
         PricingElementInterface $pricingElement,
         ShippingElementInterface $shippingElement,
-        TaxonomyElementIterface $taxonomyElement,
+        TaxonomyElementInterface $taxonomyElement,
         OptionsElementInterface $optionsElement,
         VariantsElementInterface $variantsElement
     ) {
