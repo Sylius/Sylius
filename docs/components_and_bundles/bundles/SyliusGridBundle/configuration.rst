@@ -11,7 +11,7 @@ Here you will find all configuration options of ``sylius_grid``.
                 driver:
                     name: doctrine/orm
                     options:
-                        class: "%app.model.user%"
+                        class: "%app.model.user.class%"
                         repository:
                             method: myCustomMethod
                             arguments:
@@ -72,7 +72,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         options:
                             fields: [channel]
                         form_options:
-                            class: "%app.model.channel%"
+                            class: "%app.model.channel.class%"
                         default_value: ~
                 actions:
                     main:
