@@ -7,6 +7,7 @@
     "semantic-ui-css": "^2.2.0"
   },
   "devDependencies": {
+    "@symfony/webpack-encore": "^0.28.0",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -36,6 +37,7 @@
     "rollup-plugin-inject": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0",
+    "sass-loader": "^7.0.1",
     "upath": "^1.1.0",
     "yargs": "^6.4.0"
   },
