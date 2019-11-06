@@ -28,12 +28,6 @@ class CountryNameExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param CountryInterface|string $country
-     * @param string|null $locale
-     *
-     * @return string
-     */
     public function translateCountryIsoCode($country, ?string $locale = null): string
     {
         $countryCode = $country instanceof CountryInterface ? $country->getCode() : $country;
