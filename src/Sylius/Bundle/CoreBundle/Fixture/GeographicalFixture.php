@@ -272,7 +272,7 @@ class GeographicalFixture extends AbstractFixture
                 throw new \InvalidArgumentException(sprintf(
                     'Could not find province "%s", defined ones are: %s!',
                     $provinceCode,
-                    implode(', ', $options['countries'])
+                    implode(', ', $options['provinces'])
                 ));
             },
             ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options) {
