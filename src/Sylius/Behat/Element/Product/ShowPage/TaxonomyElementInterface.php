@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-interface TaxonomyElementIterface
+interface TaxonomyElementInterface
 {
     public function getProductMainTaxon(): string;
 
