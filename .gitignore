@@ -41,8 +41,3 @@
 ###> phpunit/phpunit ###
 /phpunit.xml
 ###< phpunit/phpunit ###
-
-###> symfony/webpack-encore-bundle ###
-/npm-debug.log
-/yarn-error.log
-###< symfony/webpack-encore-bundle ###
