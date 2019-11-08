@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabled;
 use Sylius\Component\Core\Model\ChannelInterface;
