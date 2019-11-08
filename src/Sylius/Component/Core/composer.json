@@ -43,13 +43,13 @@
         "sylius/taxation": "^1.2",
         "sylius/taxonomy": "^1.2",
         "sylius/user": "^1.2",
-        "symfony/http-foundation": "^3.4|^4.3",
+        "symfony/http-foundation": "^4.3",
         "webmozart/assert": "^1.0",
         "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
-        "symfony/property-access": "^3.4|^4.3"
+        "symfony/property-access": "^4.3"
     },
     "config": {
         "bin-dir": "bin"
