@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+
+by pamil at 2019-10-04T08:22:22Z
+
+Could you add a line to `UPGRADE-1.7.md` about this change? It's very unlikely, but it can be a BC break for some.
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2019-10-10T09:25:18Z
+
+> Could you add a line to `UPGRADE-1.7.md` about this change? It's very unlikely, but it can be a BC break for some.
+
+I'm on 1.3, and there are no `UPGRADE-1.7.md`... How that usually handled?
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-10-10T12:24:48Z
+
+@igormukhingmailcom it should appear after you rebase your PR with the `master` branch - we can't merge it into any previous version (BC reasons), and even if we could, currently only 1.5+ versions are supported.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-10-19T20:44:18Z
+
+Hey Kamil.
+
+Do we really need to add a notice to the UPGRADE file? According to our [bc promise](https://docs.sylius.com/en/1.6/contributing/code/bc.html#models-model-interfaces) we are fine without it :)
+
+I would vote for merge ;)
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2019-10-20T12:00:15Z
+
+> Models & model interfaces
+> In order to fulfill the constant Sylius’ need to evolve, model interfaces are excluded from this BC promise.
+
+Rebased to 1.5
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-11-08T10:02:08Z
+
+Thank you, Igor! :tada:
