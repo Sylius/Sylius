@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Mockery;
-use Mockery\Mock;
 use Mockery\MockInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
