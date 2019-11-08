@@ -102,7 +102,6 @@
         <DeprecatedMethod>
             <errorLevel type="info">
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
-                <referencedMethod name="Symfony\Component\Config\Definition\Builder\TreeBuilder::root" />
                 <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Kernel::getRootDir" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getCurrencyBundle" />
