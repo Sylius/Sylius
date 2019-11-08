@@ -61,4 +61,22 @@ final class PromotionActionSpec extends ObjectBehavior
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);
     }
+
+    function it_clears_configuration_when_type_is_changed(): void
+    {
+        $this->setType('type_one');
+        $this->setConfiguration(['foo' => 'bar']);
+
+        $this->setType('type_two');
+        $this->getConfiguration()->shouldReturn([]);
+    }
+
+    function it_does_not_clear_configuration_when_type_is_set_twice_to_the_same_value(): void
+    {
+        $this->setType('type_one');
+        $this->setConfiguration(['foo' => 'bar']);
+
+        $this->setType('type_one');
+        $this->getConfiguration()->shouldReturn(['foo' => 'bar']);
+    }
 }

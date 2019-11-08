@@ -48,6 +48,10 @@ class PromotionAction implements PromotionActionInterface
      */
     public function setType(?string $type): void
     {
+        if ($this->type !== $type) {
+            $this->configuration = [];
+        }
+
         $this->type = $type;
     }
 
