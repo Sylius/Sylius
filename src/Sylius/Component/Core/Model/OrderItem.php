@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Webmozart\Assert\Assert;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
@@ -102,6 +103,9 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         }
 
         foreach ($this->units as $unit) {
+            /** @var OrderItemUnitInterface $unit */
+            Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
             $taxTotal += $unit->getTaxTotal();
         }
 

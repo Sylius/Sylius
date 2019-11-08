@@ -20,6 +20,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
@@ -481,6 +482,9 @@ class Order extends BaseOrder implements OrderInterface
             $taxTotal += $taxAdjustment->getAmount();
         }
         foreach ($this->items as $item) {
+            /** @var OrderItemInterface $item */
+            Assert::isInstanceOf($item, OrderItemInterface::class);
+
             $taxTotal += $item->getTaxTotal();
         }
 

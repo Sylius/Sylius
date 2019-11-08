@@ -57,7 +57,7 @@ class ShippingMethod implements ShippingMethodInterface
 
     public function __toString(): string
     {
-        return $this->getTranslation()->__toString();
+        return (string) $this->getName();
     }
 
     /**

@@ -20,34 +20,34 @@ class AttributeValue implements AttributeValueInterface
     /** @var mixed */
     protected $id;
 
-    /** @var AttributeSubjectInterface */
+    /** @var AttributeSubjectInterface|null */
     protected $subject;
 
-    /** @var AttributeInterface */
+    /** @var AttributeInterface|null */
     protected $attribute;
 
-    /** @var string */
+    /** @var string|null */
     protected $localeCode;
 
-    /** @var string */
+    /** @var string|null */
     private $text;
 
-    /** @var bool */
+    /** @var bool|null */
     private $boolean;
 
-    /** @var int */
+    /** @var int|null */
     private $integer;
 
-    /** @var float */
+    /** @var float|null */
     private $float;
 
-    /** @var \DateTimeInterface */
+    /** @var \DateTimeInterface|null */
     private $datetime;
 
-    /** @var \DateTimeInterface */
+    /** @var \DateTimeInterface|null */
     private $date;
 
-    /** @var array */
+    /** @var array|null */
     private $json;
 
     /**

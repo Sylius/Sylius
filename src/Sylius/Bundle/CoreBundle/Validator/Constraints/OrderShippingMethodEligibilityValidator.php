@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -49,6 +50,8 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 
         foreach ($shipments as $shipment) {
             if (!$this->methodEligibilityChecker->isEligible($shipment, $shipment->getMethod())) {
+                Assert::isInstanceOf($shipment, ShipmentInterface::class);
+
                 $this->context->addViolation(
                     $constraint->message,
                     ['%shippingMethodName%' => $shipment->getMethod()->getName()]

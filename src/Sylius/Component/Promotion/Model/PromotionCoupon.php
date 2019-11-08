@@ -22,7 +22,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $code;
 
     /** @var int|null */
@@ -31,10 +31,10 @@ class PromotionCoupon implements PromotionCouponInterface
     /** @var int */
     protected $used = 0;
 
-    /** @var PromotionInterface */
+    /** @var PromotionInterface|null */
     protected $promotion;
 
-    /** @var \DateTimeInterface */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
     /**

@@ -66,7 +66,7 @@ class PromotionActionExampleFactory extends AbstractExampleFactory implements Ex
             ->setDefault('configuration', [
                 'percentage' => $this->faker->randomNumber(2),
             ])
-            ->setNormalizer('configuration', function (Options $options, $configuration): array {
+            ->setNormalizer('configuration', function (Options $options, array $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
                         $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);

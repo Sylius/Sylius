@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -56,7 +57,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /** @var RepositoryInterface */
     protected $customerRepository;
 
-    /** @var RepositoryInterface */
+    /** @var ProductRepositoryInterface */
     protected $productRepository;
 
     /** @var RepositoryInterface */
@@ -93,7 +94,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         ObjectManager $orderManager,
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
-        RepositoryInterface $productRepository,
+        ProductRepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,

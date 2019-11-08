@@ -18,7 +18,9 @@ use Doctrine\Common\Collections\Collection;
 interface AdjustableInterface
 {
     /**
-     * @return Collection|AdjustmentInterface[]
+     * @return AdjustmentInterface[]
+     *
+     * @psalm-return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustments(?string $type = null): Collection;
 

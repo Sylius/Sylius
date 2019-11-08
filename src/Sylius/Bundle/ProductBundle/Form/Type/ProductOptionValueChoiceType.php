@@ -28,7 +28,7 @@ final class ProductOptionValueChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choices' => function (Options $options): iterable {
                     return $options['option']->getValues();
                 },
                 'choice_value' => 'code',

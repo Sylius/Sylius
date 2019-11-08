@@ -27,10 +27,10 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     /** @var string|null */
     private $suffix;
 
-    /** @var \DateTimeInterface */
+    /** @var \DateTimeInterface|null */
     private $expiresAt;
 
-    /** @var int */
+    /** @var int|null */
     private $usageLimit;
 
     /**

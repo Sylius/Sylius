@@ -34,7 +34,7 @@ final class TaxonAutocompleteChoiceType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MissingPropertyType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {

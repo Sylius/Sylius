@@ -101,7 +101,6 @@ final class EmailChecker implements EmailCheckerInterface
     private function assertRecipientIsValid(string $recipient): void
     {
         Assert::notEmpty($recipient, 'The recipient cannot be empty.');
-        Assert::string($recipient, sprintf('The recipient must be a string, %s given.', gettype($recipient)));
         Assert::notEq(
             false,
             filter_var($recipient, \FILTER_VALIDATE_EMAIL),

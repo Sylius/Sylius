@@ -66,7 +66,7 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('configuration', [
                 'count' => $this->faker->randomNumber(1),
             ])
-            ->setNormalizer('configuration', function (Options $options, $configuration): array {
+            ->setNormalizer('configuration', function (Options $options, array $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
                         $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);

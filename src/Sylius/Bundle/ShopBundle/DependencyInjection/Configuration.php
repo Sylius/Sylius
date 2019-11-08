@@ -45,9 +45,12 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('pattern')
                             ->defaultValue('/checkout/.+')
                             ->validate()
-                            ->ifTrue(function ($pattern) {
-                                return !is_string($pattern);
-                            })
+                            ->ifTrue(
+                                /** @param mixed $pattern */
+                                function ($pattern) {
+                                    return !is_string($pattern);
+                                }
+                            )
                                 ->thenInvalid('Invalid pattern "%s"')
                             ->end()
                         ->end()
