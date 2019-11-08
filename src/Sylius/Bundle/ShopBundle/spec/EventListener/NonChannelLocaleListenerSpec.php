@@ -20,7 +20,7 @@ use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class NonChannelLocaleListenerSpec extends ObjectBehavior
@@ -57,7 +57,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_does_nothing_if_its_not_a_master_request(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(false);
 
@@ -75,7 +75,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
@@ -93,7 +93,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
@@ -113,7 +113,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
@@ -135,7 +135,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
@@ -164,7 +164,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        GetResponseEvent $event
+        RequestEvent $event
     ): void {
         $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);

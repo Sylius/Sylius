@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 final class RequestLocaleSetterSpec extends ObjectBehavior
 {
@@ -29,7 +29,7 @@ final class RequestLocaleSetterSpec extends ObjectBehavior
     function it_sets_locale_and_default_locale_on_request(
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
-        GetResponseEvent $event,
+        RequestEvent $event,
         Request $request
     ): void {
         $event->getRequest()->willReturn($request);
