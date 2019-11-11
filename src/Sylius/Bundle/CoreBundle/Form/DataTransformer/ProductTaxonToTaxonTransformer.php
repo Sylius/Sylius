@@ -67,7 +67,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 
         $this->assertTransformationValueType($taxon, TaxonInterface::class);
 
-        /** @var ProductTaxonInterface $productTaxon */
+        /** @var ProductTaxonInterface|null $productTaxon */
         $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
 
         if (null === $productTaxon) {

@@ -58,14 +58,15 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         }
 
         try {
-            /** @var OrderInterface $cart */
             $cart = $this->cartContext->getCart();
+
+            /** @var OrderInterface $cart */
             Assert::isInstanceOf($cart, OrderInterface::class);
         } catch (CartNotFoundException $exception) {
             return;
         }
 
-        if (null !== $cart && null !== $cart->getId() && null !== $cart->getChannel()) {
+        if (null !== $cart->getId() && null !== $cart->getChannel()) {
             $this->cartStorage->setForChannel($cart->getChannel(), $cart);
         }
     }

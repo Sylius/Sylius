@@ -33,8 +33,9 @@ final class UserWithEncoderFactory implements FactoryInterface
 
     public function createNew(): UserInterface
     {
-        /** @var UserInterface $user */
         $user = $this->decoratedUserFactory->createNew();
+
+        /** @var UserInterface $user */
         Assert::isInstanceOf($user, UserInterface::class);
 
         $user->setEncoderName($this->encoderName);

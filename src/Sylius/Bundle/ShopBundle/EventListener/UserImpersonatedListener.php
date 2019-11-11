@@ -45,7 +45,6 @@ final class UserImpersonatedListener
 
     public function onUserImpersonated(UserEvent $event): void
     {
-        /** @var ShopUserInterface $user */
         $user = $event->getUser();
 
         if (!$user instanceof ShopUserInterface) {
@@ -54,10 +53,8 @@ final class UserImpersonatedListener
 
         $customer = $user->getCustomer();
 
-        /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
 
-        /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findLatestCartByChannelAndCustomer($channel, $customer);
 
         if ($cart === null) {

@@ -148,7 +148,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     {
         $currencyCode = $currencyCode ?? self::DEFAULT_CURRENCY_CODE;
 
-        /** @var CurrencyInterface $currency */
+        /** @var CurrencyInterface|null $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
@@ -164,7 +164,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
     private function provideLocale(): LocaleInterface
     {
-        /** @var LocaleInterface $locale */
+        /** @var LocaleInterface|null $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);
 
         if (null === $locale) {

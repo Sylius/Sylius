@@ -44,7 +44,7 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
         foreach ($product->getVariants() as $productVariant) {
             /** @var ChannelInterface $channel */
             foreach ($channels as $channel) {
-                /** @var ChannelPricingInterface $channelPricing */
+                /** @var ChannelPricingInterface|null $channelPricing */
                 $channelPricing = $productVariant->getChannelPricingForChannel($channel);
                 if (null === $channelPricing || null === $channelPricing->getPrice()) {
                     $this->context->buildViolation($constraint->message)

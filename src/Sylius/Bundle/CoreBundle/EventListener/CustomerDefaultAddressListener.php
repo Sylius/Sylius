@@ -22,9 +22,9 @@ final class CustomerDefaultAddressListener
 {
     public function preCreate(ResourceControllerEvent $event): void
     {
-        /** @var AddressInterface $address */
         $address = $event->getSubject();
 
+        /** @var AddressInterface $address */
         Assert::isInstanceOf($address, AddressInterface::class);
 
         $this->setAddressAsDefault($address);

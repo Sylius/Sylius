@@ -47,7 +47,7 @@ final class CurrencySetup implements CurrencySetupInterface
     {
         $code = $this->getCurrencyCodeFromUser($input, $output, $questionHelper);
 
-        /** @var CurrencyInterface $existingCurrency */
+        /** @var CurrencyInterface|null $existingCurrency */
         $existingCurrency = $this->currencyRepository->findOneBy(['code' => $code]);
         if (null !== $existingCurrency) {
             return $existingCurrency;

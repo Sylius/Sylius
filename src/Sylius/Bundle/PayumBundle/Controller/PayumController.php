@@ -87,7 +87,7 @@ final class PayumController
     {
         $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
-        /** @var OrderInterface $order */
+        /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneByTokenValue($tokenValue);
 
         if (null === $order) {

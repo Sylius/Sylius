@@ -30,16 +30,16 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /** @var CustomerInterface */
+    /** @var CustomerInterface|null */
     protected $customer;
 
-    /** @var ChannelInterface */
+    /** @var ChannelInterface|null */
     protected $channel;
 
-    /** @var AddressInterface */
+    /** @var AddressInterface|null */
     protected $shippingAddress;
 
-    /** @var AddressInterface */
+    /** @var AddressInterface|null */
     protected $billingAddress;
 
     /** @var Collection|BasePaymentInterface[] */
@@ -48,13 +48,13 @@ class Order extends BaseOrder implements OrderInterface
     /** @var Collection|ShipmentInterface[] */
     protected $shipments;
 
-    /** @var string */
+    /** @var string|null */
     protected $currencyCode;
 
-    /** @var string */
+    /** @var string|null */
     protected $localeCode;
 
-    /** @var BaseCouponInterface */
+    /** @var BaseCouponInterface|null */
     protected $promotionCoupon;
 
     /** @var string */
@@ -69,10 +69,10 @@ class Order extends BaseOrder implements OrderInterface
     /** @var Collection|BasePromotionInterface[] */
     protected $promotions;
 
-    /** @var string */
+    /** @var string|null */
     protected $tokenValue;
 
-    /** @var string */
+    /** @var string|null */
     protected $customerIp;
 
     public function __construct()

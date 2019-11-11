@@ -54,7 +54,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event): void
     {
-        /** @var AddressInterface $address */
+        /** @var AddressInterface|null $address */
         $address = $event->getData();
         if (null === $address) {
             return;
@@ -65,7 +65,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var CountryInterface $country */
+        /** @var CountryInterface|null $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
         if (null === $country) {
             return;
@@ -93,7 +93,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var CountryInterface $country */
+        /** @var CountryInterface|null $country */
         $country = $this->countryRepository->findOneBy(['code' => $data['countryCode']]);
         if (null === $country) {
             return;

@@ -52,7 +52,7 @@ final class RemoveAvatarAction
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
-        /** @var AvatarImage $avatar */
+        /** @var AvatarImage|null $avatar */
         $avatar = $this->avatarRepository->findOneByOwnerId($userId);
 
         if (null !== $avatar) {

@@ -52,7 +52,8 @@ final class AddressType extends AbstractResourceType
                 $customer = $options['customer'];
 
                 Assert::isInstanceOf($resource, CustomerAwareInterface::class);
-                /** @var CustomerInterface $resourceCustomer */
+
+                /** @var CustomerInterface|null $resourceCustomer */
                 $resourceCustomer = $resource->getCustomer();
 
                 if (

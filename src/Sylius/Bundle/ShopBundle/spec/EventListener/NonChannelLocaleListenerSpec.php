@@ -173,6 +173,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         );
 
         $request->getLocale()->willReturn('en');
+        $request->attributes = new ParameterBag();
 
         $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
 

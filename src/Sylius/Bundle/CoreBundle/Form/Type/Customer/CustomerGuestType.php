@@ -58,7 +58,7 @@ final class CustomerGuestType extends AbstractResourceType
                     return;
                 }
 
-                /** @var CustomerInterface $customer */
+                /** @var CustomerInterface|null $customer */
                 $customer = $this->customerRepository->findOneBy(['email' => $data['email']]);
 
                 // assign existing customer or create a new one

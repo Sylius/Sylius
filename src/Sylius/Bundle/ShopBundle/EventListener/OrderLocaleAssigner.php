@@ -30,9 +30,9 @@ final class OrderLocaleAssigner
 
     public function assignLocale(ResourceControllerEvent $event): void
     {
-        /** @var OrderInterface $order */
         $order = $event->getSubject();
 
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
         $order->setLocaleCode($this->localeContext->getLocaleCode());

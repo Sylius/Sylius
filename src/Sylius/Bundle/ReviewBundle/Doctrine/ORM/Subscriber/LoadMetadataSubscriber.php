@@ -42,9 +42,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
     {
         $metadata = $eventArguments->getClassMetadata();
 
-        /** @var ClassMetadata $metadata */
-        Assert::isInstanceOf($metadata, ClassMetadata::class);
-
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {

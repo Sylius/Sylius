@@ -52,7 +52,7 @@ final class DashboardController
     {
         $channelCode = $request->query->get('channel');
 
-        /** @var ChannelInterface $channel */
+        /** @var ChannelInterface|null $channel */
         $channel = $this->findChannelByCodeOrFindFirst($channelCode);
 
         if (null === $channel) {

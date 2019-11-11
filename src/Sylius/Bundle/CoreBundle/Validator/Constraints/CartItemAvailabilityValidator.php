@@ -31,14 +31,12 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
         $this->availabilityChecker = $availabilityChecker;
     }
 
-    /**
-     * @param AddToCartCommandInterface $addCartItemCommand
-     *
-     * {@inheritdoc}
-     */
     public function validate($addCartItemCommand, Constraint $constraint): void
     {
+        /** @var AddToCartCommandInterface $addCartItemCommand */
         Assert::isInstanceOf($addCartItemCommand, AddToCartCommandInterface::class);
+
+        /** @var CartItemAvailability $constraint */
         Assert::isInstanceOf($constraint, CartItemAvailability::class);
 
         /** @var OrderItemInterface $cartItem */

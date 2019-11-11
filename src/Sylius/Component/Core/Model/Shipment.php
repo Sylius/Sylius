@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
 class Shipment extends BaseShipment implements ShipmentInterface
 {
-    /** @var BaseOrderInterface */
+    /** @var BaseOrderInterface|null */
     protected $order;
 
     /**

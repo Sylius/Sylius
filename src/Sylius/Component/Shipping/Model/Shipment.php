@@ -27,13 +27,13 @@ class Shipment implements ShipmentInterface
     /** @var string */
     protected $state = ShipmentInterface::STATE_CART;
 
-    /** @var ShippingMethodInterface */
+    /** @var ShippingMethodInterface|null */
     protected $method;
 
     /** @var Collection|ShipmentUnitInterface[] */
     protected $units;
 
-    /** @var string */
+    /** @var string|null */
     protected $tracking;
 
     public function __construct()

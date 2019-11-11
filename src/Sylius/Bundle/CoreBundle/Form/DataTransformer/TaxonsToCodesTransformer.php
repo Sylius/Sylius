@@ -55,10 +55,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     {
         Assert::isInstanceOf($taxons, Collection::class);
 
-        if (null === $taxons) {
-            return [];
-        }
-
         return array_map(function (TaxonInterface $taxon) {
             return $taxon->getCode();
         }, $taxons->toArray());

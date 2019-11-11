@@ -48,9 +48,9 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 
     public function preSetData(FormEvent $event): void
     {
-        /** @var ProductInterface $product */
         $product = $event->getData();
 
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
 
         try {
