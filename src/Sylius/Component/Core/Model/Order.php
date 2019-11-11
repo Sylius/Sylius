@@ -292,6 +292,9 @@ class Order extends BaseOrder implements OrderInterface
     public function isShippingRequired(): bool
     {
         foreach ($this->getItems() as $orderItem) {
+            /** @var OrderItemInterface $orderItem */
+            Assert::isInstanceOf($orderItem, OrderItemInterface::class);
+
             if ($orderItem->getVariant()->isShippingRequired()) {
                 return true;
             }
