@@ -1,5 +1,35 @@
 # CHANGELOG FOR `1.5.X`
 
+## v1.5.6 (2019-11-11)
+
+### Details
+
+- [#9931](https://github.com/Sylius/Sylius/issues/9931) [Payum] infinite loop on state machine exception fixed ([@tautelis](https://github.com/tautelis))
+- [#10734](https://github.com/Sylius/Sylius/issues/10734) Added: TimestampableInterface to core TaxonInterface (fixes #10728) ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10748](https://github.com/Sylius/Sylius/issues/10748) Switch statement conditions ([@mikemix](https://github.com/mikemix))
+- [#10750](https://github.com/Sylius/Sylius/issues/10750) Fix compound form errors ([@loic425](https://github.com/loic425))
+- [#10752](https://github.com/Sylius/Sylius/issues/10752) Translate attribute type on attributes grid ([@loic425](https://github.com/loic425))
+- [#10755](https://github.com/Sylius/Sylius/issues/10755) [Docs] Add tag that stripe is outdated and add SCA note ([@Tomanhez](https://github.com/Tomanhez), [@GSadee](https://github.com/GSadee))
+- [#10761](https://github.com/Sylius/Sylius/issues/10761) Replace EntityManager#flush($entity) by EntityManager#flush() ([@twojtylak](https://github.com/twojtylak))
+- [#10764](https://github.com/Sylius/Sylius/issues/10764) [Behat] Fix a typo on Paypal context ([@loic425](https://github.com/loic425))
+- [#10769](https://github.com/Sylius/Sylius/issues/10769) Remove unsupported RBAC plugin from command and docs ([@GSadee](https://github.com/GSadee))
+- [#10773](https://github.com/Sylius/Sylius/issues/10773) Update ad url ([@kulczy](https://github.com/kulczy))
+- [#10776](https://github.com/Sylius/Sylius/issues/10776) [Behat] Remove final on product index and product variant index pages ([@loic425](https://github.com/loic425))
+- [#10781](https://github.com/Sylius/Sylius/issues/10781) Allow no default tax zone in channel fixtures ([@pamil](https://github.com/pamil))
+- [#10790](https://github.com/Sylius/Sylius/issues/10790) [ShippingMethod] Do not allow to specify shipping charge below 0 ([@Zales0123](https://github.com/Zales0123))
+- [#10792](https://github.com/Sylius/Sylius/issues/10792) [Behat][Admin] Add scenarios for validating default locale for a channel ([@GSadee](https://github.com/GSadee))
+- [#10793](https://github.com/Sylius/Sylius/issues/10793) [Admin][Channel] Validating default locale for a channel ([@GSadee](https://github.com/GSadee))
+- [#10805](https://github.com/Sylius/Sylius/issues/10805) [Addressing] Make sure the CountryNameExtension::translateCountryIsoCode() always returns a string ([@vvasiloi](https://github.com/vvasiloi))
+- [#10806](https://github.com/Sylius/Sylius/issues/10806) [Order] include order promotion adjustments in order promotion total ([@vvasiloi](https://github.com/vvasiloi))
+- [#10819](https://github.com/Sylius/Sylius/issues/10819) Fixed: Typo/artifact ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10820](https://github.com/Sylius/Sylius/issues/10820) Rename shop user factory to help autowiring ([@loic425](https://github.com/loic425))
+- [#10821](https://github.com/Sylius/Sylius/issues/10821) Specify PHP version for SymfonyInsights ([@pamil](https://github.com/pamil))
+- [#10823](https://github.com/Sylius/Sylius/issues/10823) Remove unnecessary +x chmod on some files ([@pamil](https://github.com/pamil))
+- [#10824](https://github.com/Sylius/Sylius/issues/10824) Use SessionInterface instead of Session in UserImpersonator ([@pamil](https://github.com/pamil))
+- [#10825](https://github.com/Sylius/Sylius/issues/10825) Fixed: Typo at grid configuration example ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10826](https://github.com/Sylius/Sylius/issues/10826) Execute PHPUnit tests inside AdminApiBundle ([@pamil](https://github.com/pamil))
+- [#10832](https://github.com/Sylius/Sylius/issues/10832) Do not merge promotion action configuration ([@pamil](https://github.com/pamil))
+
 ## v1.5.5 (2019-10-08)
 
 #### Details
