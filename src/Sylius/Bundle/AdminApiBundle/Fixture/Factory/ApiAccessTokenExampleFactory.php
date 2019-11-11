@@ -86,11 +86,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
         $resolver
             ->setDefault('user', LazyOption::randomOne($this->adminApiUserRepository))
             ->setAllowedTypes('user', ['string', UserInterface::class, 'null'])
-            ->setNormalizer('user', function (Options $options, string $userEmail): ?UserInterface {
-                if (null === $userEmail) {
-                    return null;
-                }
-
+            ->setNormalizer('user', function (Options $options, string $userEmail): UserInterface {
                 $user = $this->adminApiUserRepository->findOneByEmail($userEmail);
 
                 Assert::isInstanceOf($user, UserInterface::class);
