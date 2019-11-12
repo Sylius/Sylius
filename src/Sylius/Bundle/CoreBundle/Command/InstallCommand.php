@@ -21,7 +21,11 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class InstallCommand extends AbstractInstallCommand
 {
-    /** @var array */
+    /**
+     * @var array
+     *
+     * @psalm-var non-empty-list
+     */
     private $commands = [
         [
             'command' => 'check-requirements',

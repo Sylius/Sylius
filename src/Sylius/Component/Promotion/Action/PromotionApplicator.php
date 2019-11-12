@@ -35,7 +35,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         $applyPromotion = false;
         foreach ($promotion->getActions() as $action) {
             $result = $this->getActionCommandByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
-            $applyPromotion |= $result;
+            $applyPromotion = $applyPromotion || $result;
         }
 
         if ($applyPromotion) {

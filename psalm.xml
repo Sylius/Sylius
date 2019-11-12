@@ -172,18 +172,15 @@
 
         <!-- level 5 issues - should be avoided at mosts costs... -->
 
-        <ForbiddenCode errorLevel="info" />
-        <ImplicitToStringCast errorLevel="info" />
-        <InvalidScalarArgument errorLevel="info" />
-        <InvalidToString errorLevel="info" />
-        <InvalidOperand errorLevel="info" />
-        <NoInterfaceProperties errorLevel="info" />
-        <TooManyArguments errorLevel="info" />
-        <TypeDoesNotContainType errorLevel="info" />
-        <TypeDoesNotContainNull errorLevel="info" />
-        <MissingDocblockType errorLevel="info" />
-        <ImplementedReturnTypeMismatch errorLevel="info" />
-        <ImplementedParamTypeMismatch errorLevel="info" />
+        <TooManyArguments>
+            <errorLevel type="info">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+            </errorLevel>
+            <errorLevel type="suppress">
+                <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
+                <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
+            </errorLevel>
+        </TooManyArguments>
 
         <!-- level 6 issues - really bad things -->
 
