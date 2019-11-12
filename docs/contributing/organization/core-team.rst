@@ -58,7 +58,7 @@ Active Core Team Members
   * **Łukasz Chruściel** (`lchrusciel`_)
   * **Mateusz Zalewski** (`Zales0123`_)
   * **Grzegorz Sadowski** (`GSadee`_)
-  * **Bartosz Pietrzak** (`bartoszpietrzak1994`_)
+  * **Szymon Kulczyński** (`kulczy`_)
 
 Core Membership Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,4 +90,4 @@ The rules described in this document may be amended at anytime by the **Project 
 .. _`lchrusciel`: https://github.com/lchrusciel/
 .. _`Zales0123`: https://github.com/Zales0123/
 .. _`GSadee`: https://github.com/GSadee/
-.. _`bartoszpietrzak1994`: https://github.com/bartoszpietrzak1994/
+.. _`kulczy`: https://github.com/kulczy/
