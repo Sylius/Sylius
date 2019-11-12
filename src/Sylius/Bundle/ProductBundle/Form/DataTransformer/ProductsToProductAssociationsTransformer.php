@@ -34,7 +34,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /** @var Collection */
+    /** @var Collection<array-key, ProductAssociationInterface> */
     private $productAssociations;
 
     public function __construct(
@@ -79,6 +79,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             return null;
         }
 
+        /** @var Collection<array-key, ProductAssociationInterface> $productAssociations */
         $productAssociations = new ArrayCollection();
         foreach ($values as $productAssociationTypeCode => $productCodes) {
             if (null === $productCodes) {
