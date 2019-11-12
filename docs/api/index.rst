@@ -36,3 +36,7 @@ The REST API Reference
     sorting_and_filtration
 
 .. include:: /api/map.rst.inc
+
+.. tip::
+
+    If you're interested in the documentation of Shop API (provided by a `plugin <https://github.com/Sylius/ShopApiPlugin>`_), check out `ShopApi swagger documentation. <https://app.swaggerhub.com/apis/Sylius/sylius-shop-api/1.0.0>`_
