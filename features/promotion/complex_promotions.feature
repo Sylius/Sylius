@@ -53,7 +53,7 @@ Feature: Receiving a discount based on a configured promotion
         When I add 7 products "Black Sabbath jacket" to the cart
         Then theirs price should be decreased by "$140.00"
         And my cart total should be "$510.00"
-        And my discount should be "-$50.00"
+        And my discount should be "-$190.00"
 
     @ui
     Scenario: Receiving a discount on products from multiple taxons based on products from different taxons
@@ -71,5 +71,5 @@ Feature: Receiving a discount based on a configured promotion
         When I add product "Iron Maiden trousers" to the cart
         And I add product "Black Sabbath jacket" to the cart
         Then product "Black Sabbath jacket" price should be decreased by "$10.00"
-        And my discount should be "-$20.00"
+        And my discount should be "-$30.00"
         And my cart total should be "$150.00"
