@@ -123,9 +123,14 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             return $this->unitPrice;
         }
 
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
         return
             $this->unitPrice +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
         ;
     }
 
@@ -135,10 +140,15 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             return $this->unitPrice;
         }
 
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
         return
             $this->unitPrice +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
         ;
     }
 

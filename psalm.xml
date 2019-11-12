@@ -136,11 +136,6 @@
         <LessSpecificReturnStatement errorLevel="info" />
         <TypeCoercion errorLevel="info" />
 
-        <PossiblyFalseArgument errorLevel="info" />
-        <PossiblyFalseIterator errorLevel="info" />
-        <PossiblyFalseOperand errorLevel="info" />
-        <PossiblyFalsePropertyAssignmentValue errorLevel="info" />
-        <PossiblyFalseReference errorLevel="info" />
         <PossiblyInvalidArgument errorLevel="info" />
         <PossiblyInvalidArrayAccess errorLevel="info" />
         <PossiblyInvalidArrayAssignment errorLevel="info" />
@@ -164,10 +159,13 @@
         <PossiblyNullPropertyAssignmentValue errorLevel="info" />
         <PossiblyNullPropertyFetch errorLevel="info" />
         <PossiblyNullReference errorLevel="info" />
-        <PossiblyUndefinedGlobalVariable errorLevel="info" />
-        <PossiblyUndefinedVariable errorLevel="info" />
-        <PossiblyUndefinedArrayOffset errorLevel="info" />
-        <PossiblyUndefinedMethod errorLevel="info" />
+        <PossiblyUndefinedMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+            </errorLevel>
+        </PossiblyUndefinedMethod>
 
         <!-- level 5 issues - should be avoided at mosts costs... -->
 
