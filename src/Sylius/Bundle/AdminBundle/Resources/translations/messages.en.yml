@@ -35,3 +35,6 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
+    ui:
+        gateway:
+            no_sca_support_notice: The chosen payment gateway does not support SCA.
