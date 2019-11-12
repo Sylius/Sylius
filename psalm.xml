@@ -162,7 +162,10 @@
         <PossiblyUndefinedMethod>
             <errorLevel type="info">
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::integerNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::variableNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
             </errorLevel>
         </PossiblyUndefinedMethod>

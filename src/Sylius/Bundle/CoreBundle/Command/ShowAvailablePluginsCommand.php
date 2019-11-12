@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Command\Model\PluginInfo;
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
 use Symfony\Component\Console\Command\Command;
@@ -23,7 +22,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ShowAvailablePluginsCommand extends Command
 {
-    /** @var Collection|PluginInfo[] */
+    /**
+     * @var iterable<PluginInfo>
+     *
+     * @psalm-var ArrayCollection<array-key, PluginInfo>
+     */
     private $plugins;
 
     protected function configure(): void
@@ -49,6 +52,7 @@ final class ShowAvailablePluginsCommand extends Command
 
     private function configurePlugins(): void
     {
+        /** @var ArrayCollection<array-key, PluginInfo> $this->plugins */
         $this->plugins = new ArrayCollection();
 
         $this->plugins->add(new PluginInfo('<info>Admin Order Creation</info>', 'Creating (and copying) orders in the administration panel.', 'https://github.com/Sylius/AdminOrderCreationPlugin'));
