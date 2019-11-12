@@ -27,6 +27,7 @@ This BC promise applies to all of Sylius' PHP code except for:
     - PHPUnit tests (located at ``tests/``, ``src/**/Tests/``)
     - PHPSpec tests (located at ``src/**/spec/``)
     - Behat tests (located at ``src/Sylius/Behat/``)
+    - final controllers (their service name is still covered with BC promise)
 
 Additional rules
 ----------------
@@ -49,6 +50,12 @@ Event listeners
 
 They are excluded from this BC promise, but they should be as simple as possible and always call another service.
 Behaviour they're providing (the end result) is still included in BC promise.
+
+Final controllers
+~~~~~~~~~~~~~~~~~
+
+It is allowed to change their dependencies, but the behaviour they're providing is still included in BC promise.
+The service name and class name will not change.
 
 Routing
 ~~~~~~~
