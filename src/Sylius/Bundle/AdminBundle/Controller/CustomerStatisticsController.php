@@ -49,7 +49,7 @@ final class CustomerStatisticsController
     {
         $customerId = $request->query->get('customerId');
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->find($customerId);
         if (null === $customer) {
             throw new HttpException(

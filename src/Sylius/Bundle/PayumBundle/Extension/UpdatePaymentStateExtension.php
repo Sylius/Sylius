@@ -68,19 +68,20 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
             }
         }
 
-        /** @var Generic $request */
         $request = $context->getRequest();
-        if (false === $request instanceof Generic) {
+
+        if (!$request instanceof Generic) {
             return;
         }
 
-        if (false === $request instanceof GetStatusInterface && false === $request instanceof Notify) {
+        if (!$request instanceof GetStatusInterface && !$request instanceof Notify) {
             return;
         }
+
+        $payment = $request->getFirstModel();
 
         /** @var PaymentInterface $payment */
-        $payment = $request->getFirstModel();
-        if (false === $payment instanceof PaymentInterface) {
+        if (!$payment instanceof PaymentInterface) {
             return;
         }
 
@@ -97,9 +98,9 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
-        /** @var StateMachineInterface $stateMachine */
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
 
+        /** @var StateMachineInterface $stateMachine */
         Assert::isInstanceOf($stateMachine, StateMachineInterface::class);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {

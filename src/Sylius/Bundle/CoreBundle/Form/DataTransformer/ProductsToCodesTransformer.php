@@ -55,10 +55,6 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     {
         Assert::isInstanceOf($products, Collection::class);
 
-        if (null === $products) {
-            return [];
-        }
-
         $productCodes = [];
 
         /** @var ProductInterface $product */

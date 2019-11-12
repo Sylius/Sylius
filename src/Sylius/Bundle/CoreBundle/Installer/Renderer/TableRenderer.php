@@ -30,7 +30,7 @@ final class TableRenderer
     /** @var array */
     private $rows = [];
 
-    /** @var string */
+    /** @var string|null */
     private $label;
 
     public function __construct(OutputInterface $output)

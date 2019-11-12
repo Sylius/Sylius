@@ -72,7 +72,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var TaxonInterface $taxon */
+        /** @var TaxonInterface|null $taxon */
         $taxon = $this->taxonRepository->findOneBy(['code' => $options['code']]);
 
         if (null === $taxon) {

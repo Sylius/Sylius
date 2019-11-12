@@ -65,9 +65,6 @@ final class ImpersonateUserController
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-        if (null === $user) {
-            throw new HttpException(Response::HTTP_NOT_FOUND);
-        }
 
         $this->impersonator->impersonate($user);
 

@@ -71,8 +71,9 @@ final class ContactController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $data = $form->getData();
 
-            /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
+
+            /** @var ChannelInterface $channel */
             Assert::isInstanceOf($channel, ChannelInterface::class);
 
             $contactEmail = $channel->getContactEmail();

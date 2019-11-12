@@ -36,10 +36,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var string */
     private $localeCode;
 
-    /** @var FileLocatorInterface */
+    /** @var FileLocatorInterface|null */
     private $fileLocator;
 
-    /** @var ImageUploaderInterface */
+    /** @var ImageUploaderInterface|null */
     private $imageUploader;
 
     public function __construct(
@@ -50,14 +50,13 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     ) {
         $this->userFactory = $userFactory;
         $this->localeCode = $localeCode;
+        $this->fileLocator = $fileLocator;
+        $this->imageUploader = $imageUploader;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        $this->fileLocator = $fileLocator;
-        $this->imageUploader = $imageUploader;
 
         if ($this->fileLocator === null || $this->imageUploader === null) {
             @trigger_error(sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
@@ -91,7 +90,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             $user->addRole('ROLE_API_ACCESS');
         }
 
-        if (!($options['avatar'] === '')) {
+        if ($options['avatar'] !== '') {
             $this->createAvatar($user, $options);
         }
 
@@ -128,9 +127,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             throw new \RuntimeException('You must configure a $fileLocator or/and $imageUploader');
         }
 
-        $imagePath = $options['avatar'];
-
-        $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
+        $imagePath = $this->fileLocator->locate($options['avatar']);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
         $avatarImage = new AvatarImage();

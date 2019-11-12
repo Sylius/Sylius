@@ -51,8 +51,9 @@ final class ShopBasedCartContext implements CartContextInterface
             return $this->cart;
         }
 
-        /** @var OrderInterface $cart */
         $cart = $this->cartContext->getCart();
+
+        /** @var OrderInterface $cart */
         Assert::isInstanceOf($cart, OrderInterface::class);
 
         try {
@@ -66,7 +67,7 @@ final class ShopBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         }
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->shopperContext->getCustomer();
         if (null !== $customer) {
             $this->setCustomerAndAddressOnCart($cart, $customer);

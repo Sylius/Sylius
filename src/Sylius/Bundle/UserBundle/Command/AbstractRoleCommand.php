@@ -102,7 +102,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function findUserByEmail(string $email, string $userType): UserInterface
     {
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->getUserRepository($userType)->findOneByEmail($email);
 
         if (null === $user) {

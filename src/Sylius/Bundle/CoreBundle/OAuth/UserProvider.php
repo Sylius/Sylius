@@ -118,7 +118,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->findOneBy(['emailCanonical' => $canonicalEmail]);
 
         if (null === $customer) {

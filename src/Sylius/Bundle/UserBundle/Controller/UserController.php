@@ -84,7 +84,7 @@ class UserController extends ResourceController
     public function resetPasswordAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['passwordResetToken' => $token]);
         if (null === $user) {
             throw new NotFoundHttpException('Token not found.');
@@ -124,7 +124,7 @@ class UserController extends ResourceController
 
         $response = $this->redirectToRoute($redirectRoute);
 
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['emailVerificationToken' => $token]);
         if (null === $user) {
             if (!$configuration->isHtmlRequest()) {
@@ -214,8 +214,9 @@ class UserController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
-            /** @var UserRepositoryInterface $userRepository */
             $userRepository = $this->repository;
+
+            /** @var UserRepositoryInterface $userRepository */
             Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
 
             $user = $userRepository->findOneByEmail($passwordReset->getEmail());

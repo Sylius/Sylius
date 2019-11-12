@@ -67,7 +67,7 @@ final class OrderType extends AbstractResourceType
                 /** @var OrderInterface $order */
                 $order = $event->getData();
 
-                /** @var ChannelInterface $channel */
+                /** @var ChannelInterface|null $channel */
                 $channel = $order->getChannel();
 
                 if (null !== $channel) {

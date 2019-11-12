@@ -24,13 +24,13 @@ class Customer extends BaseCustomer implements CustomerInterface
     /** @var Collection|OrderInterface[] */
     protected $orders;
 
-    /** @var AddressInterface */
+    /** @var AddressInterface|null */
     protected $defaultAddress;
 
     /** @var Collection|AddressInterface[] */
     protected $addresses;
 
-    /** @var ShopUserInterface */
+    /** @var ShopUserInterface|null */
     protected $user;
 
     public function __construct()
@@ -128,6 +128,7 @@ class Customer extends BaseCustomer implements CustomerInterface
         $previousUser = $this->user;
         $this->user = $user;
 
+        /** @psalm-suppress RedundantConditionGivenDocblockType */
         if ($previousUser instanceof ShopUserInterface) {
             $previousUser->setCustomer(null);
         }

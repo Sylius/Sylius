@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 final class CreateClientCommand extends ContainerAwareCommand
 {
-    /** @var ClientManagerInterface */
+    /** @var ClientManagerInterface|null */
     private $clientManager;
 
     public function __construct(?string $name = null, ClientManagerInterface $clientManager = null)

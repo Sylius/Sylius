@@ -82,17 +82,17 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var RepositoryInterface */
     private $localeRepository;
 
-    /** @var RepositoryInterface */
+    /** @var RepositoryInterface|null */
     private $taxCategoryRepository;
+
+    /** @var FileLocatorInterface|null */
+    private $fileLocator;
 
     /** @var \Faker\Generator */
     private $faker;
 
     /** @var OptionsResolver */
     private $optionsResolver;
-
-    /** @var FileLocatorInterface */
-    private $fileLocator;
 
     public function __construct(
         FactoryInterface $productFactory,
@@ -132,12 +132,12 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
 
+        $this->fileLocator = $fileLocator;
+
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        $this->fileLocator = $fileLocator;
     }
 
     /**
@@ -370,7 +370,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private function configureProductAttributeValue(string $code, string $localeCode, $value): ProductAttributeValueInterface
     {
-        /** @var ProductAttributeInterface $productAttribute */
+        /** @var ProductAttributeInterface|null $productAttribute */
         $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
 
         Assert::notNull($productAttribute);
