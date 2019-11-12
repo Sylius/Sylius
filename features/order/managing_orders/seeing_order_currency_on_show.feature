@@ -40,5 +40,5 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And the order's items total should be "$5.50"
         And the order's shipping total should be "$20.00"
         And the order's tax total should be "$0.50"
-        And the order's promotion total should be "-$5.00"
+        And the order's promotion total should be "-$15.00"
         And the order's total should be "$25.50"
