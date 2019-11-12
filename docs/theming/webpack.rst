@@ -31,27 +31,26 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
             shop: '%kernel.project_dir%/public/build/shop'
             admin: '%kernel.project_dir%/public/build/admin'
 
-**4.** Change the assets paths for admin and shop:
+**4.** Overwrite template files and add new assets paths for admin and shop:
 
 .. code-block:: php
 
-    // src/Sylius/Bundle/AdminBundle/Resources/views/_scripts.html.twig
-
+    // templates/bundles/SyliusAdminBundle/_scripts.html.twig
     {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
-    // src/Sylius/Bundle/AdminBundle/Resources/views/_styles.html.twig
 
+    // templates/bundles/SyliusAdminBundle/_styles.html.twig
     {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
-    // src/Sylius/Bundle/AdminBundle/Resources/views/_logo.html.twig
 
+    // templates/bundles/SyliusAdminBundle/_logo.html.twig
     {{ asset('build/admin/images/admin-logo.svg', 'admin') }}
-    // src/Sylius/Bundle/ShopBundle/Resources/views/_scripts.html.twig
 
+    // templates/bundles/SyliusShopBundle/_scripts.html.twig
     {{ encore_entry_script_tags('shop-entry', null, 'shop') }}
-    // src/Sylius/Bundle/ShopBundle/Resources/views/_styles.html.twig
 
+    // templates/bundles/SyliusShopBundle/_styles.html.twig
     {{ encore_entry_link_tags('shop-entry', null, 'shop') }}
-    // src/Sylius/Bundle/ShopBundle/Resources/views/_header.html.twig
 
+    // templates/bundles/SyliusShopBundle/_header.html.twig
     {{ asset('build/shop/images/logo.png', 'shop') }}
 
 .. warning::
