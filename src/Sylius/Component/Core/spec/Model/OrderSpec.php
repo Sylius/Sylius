@@ -542,84 +542,176 @@ final class OrderSpec extends ObjectBehavior
         $this->getOrderPromotionTotal()->shouldReturn(0);
     }
 
-    function it_returns_a_sum_of_all_order_promotion_adjustments_applied_to_items_as_order_promotion_total(
+    function it_returns_a_sum_of_all_order_promotion_adjustments_order_item_promotion_adjustments_and_order_unit_promotion_adjustments_applied_to_items_as_order_promotion_total(
         OrderItemInterface $orderItem1,
         OrderItemInterface $orderItem2,
+        AdjustmentInterface $orderAdjustment1,
+        AdjustmentInterface $orderAdjustment2,
         AdjustmentInterface $orderItemAdjustment1,
-        AdjustmentInterface $orderItemAdjustment2
+        AdjustmentInterface $orderItemAdjustment2,
+        AdjustmentInterface $orderUnitAdjustment1,
+        AdjustmentInterface $orderUnitAdjustment2
+
     ): void {
-        $orderItemAdjustment1->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $orderItemAdjustment1->getAmount()->willReturn(-400);
+        $orderAdjustment1->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderAdjustment1->getAmount()->willReturn(-400);
+        $orderAdjustment1->isNeutral()->willReturn(false);
+
+        $orderAdjustment2->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderAdjustment2->getAmount()->willReturn(-600);
+        $orderAdjustment2->isNeutral()->willReturn(false);
+
+        $orderItemAdjustment1->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItemAdjustment1->getAmount()->willReturn(-100);
         $orderItemAdjustment1->isNeutral()->willReturn(false);
 
-        $orderItemAdjustment2->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $orderItemAdjustment2->getAmount()->willReturn(-600);
+        $orderItemAdjustment2->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItemAdjustment2->getAmount()->willReturn(-200);
         $orderItemAdjustment2->isNeutral()->willReturn(false);
+
+        $orderUnitAdjustment1->getType()->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $orderUnitAdjustment1->getAmount()->willReturn(-50);
+        $orderUnitAdjustment1->isNeutral()->willReturn(false);
+
+        $orderUnitAdjustment2->getType()->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $orderUnitAdjustment2->getAmount()->willReturn(-20);
+        $orderUnitAdjustment2->isNeutral()->willReturn(false);
 
         $orderItem1->getTotal()->willReturn(500);
         $orderItem2->getTotal()->willReturn(300);
 
-        $orderItem1->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new ArrayCollection([$orderItemAdjustment1->getWrappedObject()]));
+        $orderItem1
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderAdjustment1->getWrappedObject()]))
+        ;
         $orderItem2->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new ArrayCollection([$orderItemAdjustment2->getWrappedObject()]));
+            ->willReturn(new ArrayCollection([$orderAdjustment2->getWrappedObject()]))
+        ;
+        $orderItem1
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderItemAdjustment1->getWrappedObject()]))
+        ;
+        $orderItem2->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderItemAdjustment2->getWrappedObject()]))
+        ;
+        $orderItem1
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderUnitAdjustment1->getWrappedObject()]))
+        ;
+        $orderItem2->getAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderUnitAdjustment2->getWrappedObject()]))
+        ;
 
         $orderItem1->setOrder($this)->shouldBeCalled();
         $orderItem2->setOrder($this)->shouldBeCalled();
         $this->addItem($orderItem1);
         $this->addItem($orderItem2);
 
-        $this->getOrderPromotionTotal()->shouldReturn(-1000);
+        $this->getOrderPromotionTotal()->shouldReturn(-1370);
     }
 
     function it_does_not_include_a_shipping_promotion_adjustment_in_order_promotion_total(
         AdjustmentInterface $shippingPromotionAdjustment,
-        AdjustmentInterface $itemAdjustment,
-        OrderItemInterface $orderItem1
+        AdjustmentInterface $orderAdjustment,
+        AdjustmentInterface $orderItemAdjustment,
+        AdjustmentInterface $orderUnitAdjustment,
+        OrderItemInterface $orderItem
     ): void {
-        $itemAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $itemAdjustment->getAmount()->willReturn(-400);
-        $itemAdjustment->isNeutral()->willReturn(false);
+        $orderAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderAdjustment->getAmount()->willReturn(-400);
+        $orderAdjustment->isNeutral()->willReturn(false);
 
-        $orderItem1->getTotal()->willReturn(500);
-        $orderItem1->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new ArrayCollection([$itemAdjustment->getWrappedObject()]));
+        $orderItemAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItemAdjustment->getAmount()->willReturn(-100);
+        $orderItemAdjustment->isNeutral()->willReturn(false);
+
+        $orderUnitAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $orderUnitAdjustment->getAmount()->willReturn(-50);
+        $orderUnitAdjustment->isNeutral()->willReturn(false);
+
+        $orderItem->getTotal()->willReturn(500);
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderAdjustment->getWrappedObject()]))
+        ;
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderItemAdjustment->getWrappedObject()]))
+        ;
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderUnitAdjustment->getWrappedObject()]))
+        ;
 
         $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
         $shippingPromotionAdjustment->isNeutral()->willReturn(false);
         $shippingPromotionAdjustment->getAmount()->willReturn(-100);
 
-        $orderItem1->setOrder($this)->shouldBeCalled();
-        $this->addItem($orderItem1);
+        $orderItem->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem);
 
         $shippingPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
         $this->addAdjustment($shippingPromotionAdjustment);
 
-        $this->getOrderPromotionTotal()->shouldReturn(-400);
+        $this->getOrderPromotionTotal()->shouldReturn(-550);
     }
 
-    function it_includes_order_promotion_adjustments_in_order_promotion_total(
-        AdjustmentInterface $orderAdjustment,
-        AdjustmentInterface $itemAdjustment,
-        OrderItemInterface $orderItem
+    function it_includes_order_promotion_adjustments_order_item_promotion_adjustments_and_order_unit_promotion_adjustments_in_order_promotion_total(
+        OrderItemInterface $orderItem,
+        AdjustmentInterface $orderAdjustmentForOrder,
+        AdjustmentInterface $orderAdjustmentForItem,
+        AdjustmentInterface $orderItemAdjustmentForOrder,
+        AdjustmentInterface $orderItemAdjustmentForItem,
+        AdjustmentInterface $orderUnitAdjustmentForOrder,
+        AdjustmentInterface $orderUnitAdjustmentForItem
     ): void {
-        $orderAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $orderAdjustment->getAmount()->willReturn(-100);
-        $orderAdjustment->isNeutral()->willReturn(false);
-        $orderAdjustment->setAdjustable($this)->shouldBeCalled();
-        $this->addAdjustment($orderAdjustment);
+        $orderAdjustmentForOrder->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderAdjustmentForOrder->getAmount()->willReturn(-120);
+        $orderAdjustmentForOrder->isNeutral()->willReturn(false);
+        $orderAdjustmentForOrder->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($orderAdjustmentForOrder);
 
-        $itemAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $itemAdjustment->getAmount()->willReturn(-100);
-        $itemAdjustment->isNeutral()->willReturn(false);
+        $orderAdjustmentForItem->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $orderAdjustmentForItem->getAmount()->willReturn(-150);
+        $orderAdjustmentForItem->isNeutral()->willReturn(false);
+
+        $orderItemAdjustmentForOrder->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItemAdjustmentForOrder->getAmount()->willReturn(-230);
+        $orderItemAdjustmentForOrder->isNeutral()->willReturn(false);
+        $orderItemAdjustmentForOrder->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($orderItemAdjustmentForOrder);
+
+        $orderItemAdjustmentForItem->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItemAdjustmentForItem->getAmount()->willReturn(-250);
+        $orderItemAdjustmentForItem->isNeutral()->willReturn(false);
+
+        $orderUnitAdjustmentForOrder->getType()->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $orderUnitAdjustmentForOrder->getAmount()->willReturn(-53);
+        $orderUnitAdjustmentForOrder->isNeutral()->willReturn(false);
+        $orderUnitAdjustmentForOrder->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($orderUnitAdjustmentForOrder);
+
+        $orderUnitAdjustmentForItem->getType()->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $orderUnitAdjustmentForItem->getAmount()->willReturn(-20);
+        $orderUnitAdjustmentForItem->isNeutral()->willReturn(false);
 
         $orderItem->getTotal()->willReturn(200);
-        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new ArrayCollection([$itemAdjustment->getWrappedObject()]));
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderAdjustmentForItem->getWrappedObject()]))
+        ;
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderItemAdjustmentForItem->getWrappedObject()]))
+        ;
+        $orderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$orderUnitAdjustmentForItem->getWrappedObject()]))
+        ;
         $orderItem->setOrder($this)->shouldBeCalled();
         $this->addItem($orderItem);
 
-        $this->getOrderPromotionTotal()->shouldReturn(-200);
+        $this->getOrderPromotionTotal()->shouldReturn(-823);
     }
 
     function it_has_a_token_value(): void

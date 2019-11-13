@@ -509,13 +509,17 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * Returns amount of order discount. Does not include order item and shipping discounts.
+     * Returns amount of order discount. Does not include shipping discounts.
      *
      * {@inheritdoc}
      */
     public function getOrderPromotionTotal(): int
     {
-        return $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        return
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) +
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) +
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+        ;
     }
 
     /**
