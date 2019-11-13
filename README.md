@@ -1,6 +1,6 @@
 <h1 align="center">
-    <a href="https://sylius.com/blog/sylius-store-now-open-the-marketplace-of-extensions/" target="_blank">
-        <img src="https://sylius.com/assets/sylius-store-the-plugin-marketplace.png" />
+    <a href="https://sylius.com/github-readme/link/" target="_blank">
+        <img src="https://sylius.com/assets/github-readme.png" />
     </a>
 </h1>
 
