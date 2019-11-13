@@ -188,19 +188,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOrderPromotionTotal(): string
     {
-        /** @var NodeElement[] $rows */
-        $rows = $this->getElement('table')->findAll('css', 'tbody tr');
+        $promotionTotalElement = $this->getElement('promotion_total');
 
-        $orderPromotionTotal = 0;
-
-        foreach ($rows as $row) {
-            $unitOrderPromotion = $row->find('css', 'td:nth-child(4)')->getText();
-            $quantity = $row->find('css', 'td:nth-child(6)')->getText();
-            $itemOrderPromotion = (float) trim(str_replace('-$', '', $unitOrderPromotion)) * $quantity;
-            $orderPromotionTotal += (int) ($itemOrderPromotion * 100);
-        }
-
-        return $this->getFormattedMoney($orderPromotionTotal > 0 ? -1 * $orderPromotionTotal : $orderPromotionTotal);
+        return trim(str_replace('Promotion total:', '', $promotionTotalElement->getText()));
     }
 
     public function hasPromotionDiscount(string $promotionName, string $promotionAmount): bool
