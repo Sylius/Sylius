@@ -180,9 +180,9 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductVariantTranslationInterface
      */
-    protected function createTranslation(): ProductVariantTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new ProductVariantTranslation();
     }

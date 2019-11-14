@@ -436,9 +436,9 @@ class Product implements ProductInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductTranslationInterface
      */
-    protected function createTranslation(): ProductTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new ProductTranslation();
     }

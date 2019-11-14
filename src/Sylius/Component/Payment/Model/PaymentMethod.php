@@ -166,9 +166,9 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return PaymentMethodTranslationInterface
      */
-    protected function createTranslation(): PaymentMethodTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new PaymentMethodTranslation();
     }

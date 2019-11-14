@@ -193,10 +193,6 @@
             </errorLevel>
         </InvalidArgument>
 
-        <!-- level 8 issues - some fatal errors in PHP -->
-
-        <MethodSignatureMismatch errorLevel="info" />
-
         <!-- Custom -->
 
         <MismatchingDocblockReturnType errorLevel="info" />
