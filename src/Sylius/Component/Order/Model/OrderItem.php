@@ -36,13 +36,21 @@ class OrderItem implements OrderItemInterface
     /** @var bool */
     protected $immutable = false;
 
-    /** @var Collection<array-key, OrderItemUnitInterface> */
+    /**
+     * @var Collection|OrderItemUnitInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderItemUnitInterface>
+     */
     protected $units;
 
     /** @var int */
     protected $unitsTotal = 0;
 
-    /** @var Collection<array-key, AdjustmentInterface> */
+    /**
+     * @var Collection|AdjustmentInterface[]
+     *
+     * @psalm-var Collection<array-key, AdjustmentInterface>
+     */
     protected $adjustments;
 
     /** @var int */
@@ -50,7 +58,10 @@ class OrderItem implements OrderItemInterface
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, OrderItemUnitInterface> $this->units */
         $this->units = new ArrayCollection();
     }
 

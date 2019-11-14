@@ -29,13 +29,18 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /** @var TaxCategoryInterface */
     protected $taxCategory;
 
-    /** @var Collection */
+    /**
+     * @var Collection|ChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
+     */
     protected $channels;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 
@@ -73,6 +78,9 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getChannels(): Collection
     {

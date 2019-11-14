@@ -18,7 +18,11 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {
-    /** @var PriorityQueue|OrderProcessorInterface[] */
+    /**
+     * @var PriorityQueue|OrderProcessorInterface[]
+     *
+     * @psalm-var PriorityQueue<OrderProcessorInterface>
+     */
     private $orderProcessors;
 
     public function __construct()

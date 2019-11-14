@@ -49,7 +49,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
      */
     protected function getModelNamespace(): string
     {

@@ -34,10 +34,18 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var string */
     protected $taxCalculationStrategy;
 
-    /** @var CurrencyInterface[]|Collection */
+    /**
+     * @var Collection|CurrencyInterface[]
+     *
+     * @psalm-var Collection<array-key, CurrencyInterface>
+     */
     protected $currencies;
 
-    /** @var LocaleInterface[]|Collection */
+    /**
+     * @var Collection|LocaleInterface[]
+     *
+     * @psalm-var Collection<array-key, LocaleInterface>
+     */
     protected $locales;
 
     /** @var string */
@@ -62,7 +70,9 @@ class Channel extends BaseChannel implements ChannelInterface
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, CurrencyInterface> $this->currencies */
         $this->currencies = new ArrayCollection();
+        /** @var ArrayCollection<array-key, LocaleInterface> $this->locales */
         $this->locales = new ArrayCollection();
     }
 

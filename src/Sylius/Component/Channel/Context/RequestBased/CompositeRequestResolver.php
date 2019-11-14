@@ -19,7 +19,11 @@ use Zend\Stdlib\PriorityQueue;
 
 final class CompositeRequestResolver implements RequestResolverInterface
 {
-    /** @var PriorityQueue|RequestResolverInterface[] */
+    /**
+     * @var PriorityQueue|RequestResolverInterface[]
+     *
+     * @psalm-var PriorityQueue<RequestResolverInterface>
+     */
     private $requestResolvers;
 
     public function __construct()

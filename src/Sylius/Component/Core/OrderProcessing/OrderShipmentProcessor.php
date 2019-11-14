@@ -110,9 +110,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         Assert::isInstanceOf($order, OrderInterface::class);
 
         foreach ($order->getItemUnits() as $itemUnit) {
-            /** @var OrderItemUnitInterface $itemUnit */
-            Assert::isInstanceOf($itemUnit, OrderItemUnitInterface::class);
-
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);
             }

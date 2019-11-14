@@ -19,6 +19,8 @@ interface CurrenciesAwareInterface
 {
     /**
      * @return Collection|CurrencyInterface[]
+     *
+     * @psalm-return Collection<array-key, CurrencyInterface>
      */
     public function getCurrencies(): Collection;
 

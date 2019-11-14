@@ -24,6 +24,8 @@ interface ReviewableInterface
 
     /**
      * @return Collection|ReviewInterface[]
+     *
+     * @psalm-return Collection<array-key, ReviewInterface>
      */
     public function getReviews(): Collection;
 

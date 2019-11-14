@@ -50,8 +50,6 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 
         foreach ($shipments as $shipment) {
             if (!$this->methodEligibilityChecker->isEligible($shipment, $shipment->getMethod())) {
-                Assert::isInstanceOf($shipment, ShipmentInterface::class);
-
                 $this->context->addViolation(
                     $constraint->message,
                     ['%shippingMethodName%' => $shipment->getMethod()->getName()]

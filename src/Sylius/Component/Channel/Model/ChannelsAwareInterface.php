@@ -19,6 +19,8 @@ interface ChannelsAwareInterface
 {
     /**
      * @return Collection|ChannelInterface[]
+     *
+     * @psalm-return Collection<array-key, ChannelInterface>
      */
     public function getChannels(): Collection;
 

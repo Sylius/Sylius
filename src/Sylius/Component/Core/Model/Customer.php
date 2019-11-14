@@ -21,13 +21,21 @@ use Webmozart\Assert\Assert;
 
 class Customer extends BaseCustomer implements CustomerInterface
 {
-    /** @var Collection|OrderInterface[] */
+    /**
+     * @var Collection|OrderInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderInterface>
+     */
     protected $orders;
 
     /** @var AddressInterface|null */
     protected $defaultAddress;
 
-    /** @var Collection|AddressInterface[] */
+    /**
+     * @var Collection|AddressInterface[]
+     *
+     * @psalm-var Collection<array-key, AddressInterface>
+     */
     protected $addresses;
 
     /** @var ShopUserInterface|null */
@@ -37,7 +45,10 @@ class Customer extends BaseCustomer implements CustomerInterface
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, OrderInterface> $this->orders */
         $this->orders = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, AddressInterface> $this->addresses */
         $this->addresses = new ArrayCollection();
     }
 

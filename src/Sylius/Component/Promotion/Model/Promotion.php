@@ -62,21 +62,38 @@ class Promotion implements PromotionInterface
     /** @var bool */
     protected $couponBased = false;
 
-    /** @var Collection|PromotionCouponInterface[] */
+    /**
+     * @var Collection|PromotionCouponInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionCouponInterface>
+     */
     protected $coupons;
 
-    /** @var Collection|PromotionRuleInterface[] */
+    /**
+     * @var Collection|PromotionRuleInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionRuleInterface>
+     */
     protected $rules;
 
-    /** @var Collection|PromotionActionInterface[] */
+    /**
+     * @var Collection|PromotionActionInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionActionInterface>
+     */
     protected $actions;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
 
+        /** @var ArrayCollection<array-key, PromotionCouponInterface> $this->coupons */
         $this->coupons = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, PromotionRuleInterface> $this->rules */
         $this->rules = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, PromotionActionInterface> $this->actions */
         $this->actions = new ArrayCollection();
     }
 

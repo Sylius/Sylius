@@ -48,6 +48,8 @@ interface ProductOptionInterface extends
 
     /**
      * @return Collection|ProductOptionValueInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductOptionValueInterface>
      */
     public function getValues(): Collection;
 

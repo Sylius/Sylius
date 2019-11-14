@@ -51,6 +51,7 @@ final class OrderIntegrityChecker
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
+        /** @var ArrayCollection<array-key, PromotionInterface> $previousPromotions */
         $previousPromotions = new ArrayCollection($order->getPromotions()->toArray());
         $oldTotal = $order->getTotal();
 

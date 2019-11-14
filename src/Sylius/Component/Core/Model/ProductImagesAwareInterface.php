@@ -19,11 +19,15 @@ interface ProductImagesAwareInterface
 {
     /**
      * @return Collection|ImageInterface[]
+     *
+     * @psalm-return Collection<array-key, ImageInterface>
      */
     public function getImages(): Collection;
 
     /**
      * @return Collection|ImageInterface[]
+     *
+     * @psalm-return Collection<array-key, ImageInterface>
      */
     public function getImagesByType(string $type): Collection;
 
