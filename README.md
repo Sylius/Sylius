@@ -1,6 +1,6 @@
 <h1 align="center">
-    <a href="https://sylius.com/blog/sylius-1-6-with-refreshed-admin-and-headless-ecommerce" target="_blank">
-        <img src="https://sylius.com/assets/sylius-1-6-with-refreshed-admin-and-headless-ecommerce.png" />
+    <a href="https://sylius.com/github-readme/link/" target="_blank">
+        <img src="https://sylius.com/assets/github-readme.png" />
     </a>
 </h1>
 
