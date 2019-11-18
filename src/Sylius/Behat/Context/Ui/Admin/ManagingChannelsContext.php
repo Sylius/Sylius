@@ -267,6 +267,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I define its type as "Mobile"
+     */
+    public function iDefineItsTypeAs(): void
+    {
+        //todo
+        $this->createPage->setType();
+    }
+
+    /**
      * @Then I should be notified that channel with this code already exists
      */
     public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists()
@@ -454,6 +463,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I change its type to "Website"
+     */
+    public function iChangeItsTypeTo(): void
+    {
+        //todo
+        $this->updatePage->changeTypeTo();
+    }
+
+    /**
      * @Given channel :channel should not have default tax zone
      */
     public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel)
@@ -493,6 +511,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @Then this channel type should be "Website"
+     */
+    public function thisChannelTypeShouldBe(): void
+    {
+        $this->updatePage->getType();
+        //todo
+    }
+
+    /**
      * @param bool $state
      */
     private function assertChannelState(ChannelInterface $channel, $state)
@@ -504,4 +531,5 @@ final class ManagingChannelsContext implements Context
             'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
+
 }

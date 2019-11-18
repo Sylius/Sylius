@@ -217,6 +217,15 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the channel :channel is a "Mobile" type
+     */
+    public function theChannelIsAType(ChannelInterface $channel): void
+    {
+        throw new PendingException();
+        //set channel type
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

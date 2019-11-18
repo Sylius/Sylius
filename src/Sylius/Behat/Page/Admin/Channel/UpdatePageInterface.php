@@ -50,4 +50,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isTaxCalculationStrategyChosen(string $taxCalculationStrategy): bool;
 
     public function isBaseCurrencyDisabled(): bool;
+
+    public function changeTypeTo(string $string): void;
+
+    public function getType(): string;
 }
