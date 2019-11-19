@@ -15,9 +15,9 @@ namespace Sylius\Component\Channel\Model;
 
 interface ChannelTypeInterface
 {
-    public const TYPE_WEBSITE = 'Website';
+    public const TYPE_WEBSITE = 'website';
 
-    public const TYPE_MOBILE = 'Mobile';
+    public const TYPE_MOBILE = 'mobile';
 
-    public const TYPE_POS = 'POS';
+    public const TYPE_POS = 'pos';
 }

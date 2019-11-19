@@ -1,7 +1,19 @@
-{% if channel is defined %}
-    <div class="channel">
-        <span class="ui medium empty circular label channel__item" style="background-color: {{ channel.color|default('#000') }}"></span>
+{%
+    set typeIcons = {
+        mobile: 'mobile alternate',
+        website: 'desktop',
+        pos: 'map pin',
+    }
+%}
 
+{% if channel is defined %}
+    {%  set type = channel.type %}
+
+    <div class="channel">
+        {% if type is not empty %}
+            <i class="{{ typeIcons[type] }} icon"></i>
+        {% endif %}
+        <span class="ui medium empty circular label channel__item" style="background-color: {{ channel.color|default('#000') }}"></span>
         <span class="channel__item">
             {{ channel.name|default(channel.code) }}
         </span>

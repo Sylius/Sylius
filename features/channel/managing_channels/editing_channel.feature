@@ -34,7 +34,7 @@ Feature: Editing channel
         When I want to modify a channel "Web Channel"
         Then the base currency field should be disabled
 
-    @ui @todo
+    @ui
     Scenario: Changing type of channel
         Given the channel "Web Channel" is a "Mobile" type
         When I want to modify a channel "Web Channel"

@@ -6,3 +6,8 @@ sylius:
             enabled: Enabled
             name: Name
             url: URL
+            type: Type
+            types:
+                webiste: Website
+                mobile: Mobile
+                pos: POS

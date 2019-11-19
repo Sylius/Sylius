@@ -20,7 +20,7 @@ Feature: Adding a new channel
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry
 
-    @ui @todo
+    @ui
     Scenario: Adding a new channel with additional fields
         Given I want to create a new channel
         When I specify its code as "MOBILE"

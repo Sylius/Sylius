@@ -1,0 +1,18 @@
+{%
+    set typeIcons = {
+        mobile: 'mobile alternate',
+        website: 'desktop',
+        pos: 'map pin',
+    }
+%}
+
+{% if data is defined %}
+    {% set type = data %}
+{% endif %}
+
+{% if type is not empty %}
+    {% set type = 'sylius.form.channel.types.' ~ type %}
+    <span>
+        <i class="{{ typeIcons[data] }} icon"></i> {{ type|trans }}
+    </span>
+{% endif %}

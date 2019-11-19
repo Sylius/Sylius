@@ -89,7 +89,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function setType(string $type): void
     {
-        $this->getElement('types')->selectOption($type);
+        $this->getElement('type')->selectOption($type);
     }
 
     protected function getToggleableElement(): NodeElement
@@ -107,7 +107,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
-            'types' => '#sylius_channel_name',
+            'type' => '#sylius_channel_type',
         ]);
     }
 }
