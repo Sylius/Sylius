@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Channel\Model\ChannelTypeInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -271,8 +272,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iDefineItsTypeAs(): void
     {
-        //todo
-        $this->createPage->setType();
+        $this->createPage->setType(ChannelTypeInterface::TYPE_MOBILE);
     }
 
     /**
@@ -467,8 +467,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iChangeItsTypeTo(): void
     {
-        //todo
-        $this->updatePage->changeTypeTo();
+        $this->updatePage->changeTypeTo(ChannelTypeInterface::TYPE_WEBSITE);
     }
 
     /**
@@ -515,8 +514,7 @@ final class ManagingChannelsContext implements Context
      */
     public function thisChannelTypeShouldBe(): void
     {
-        $this->updatePage->getType();
-        //todo
+        Assert::same($this->updatePage->getType(), ChannelTypeInterface::TYPE_WEBSITE);
     }
 
     /**
@@ -531,5 +529,4 @@ final class ManagingChannelsContext implements Context
             'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
     }
-
 }
