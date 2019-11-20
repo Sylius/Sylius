@@ -27,6 +27,8 @@ use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -51,6 +53,9 @@ final class PromotionContext implements Context
     /** @var PromotionRepositoryInterface */
     private $promotionRepository;
 
+    /** @var PromotionCouponGeneratorInterface */
+    private $couponGenerator;
+
     /** @var ObjectManager */
     private $objectManager;
 
@@ -61,6 +66,7 @@ final class PromotionContext implements Context
         PromotionRuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
+        PromotionCouponGeneratorInterface $couponGenerator,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -69,6 +75,7 @@ final class PromotionContext implements Context
         $this->ruleFactory = $ruleFactory;
         $this->testPromotionFactory = $testPromotionFactory;
         $this->promotionRepository = $promotionRepository;
+        $this->couponGenerator = $couponGenerator;
         $this->objectManager = $objectManager;
     }
 
@@ -740,6 +747,32 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+) and prefix "([^"]+)"$/
+     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+), prefix "([^"]+)" and suffix "([^"]+)"$/
+     */
+    public function iHaveGeneratedCouponsForThisPromotionWithCodeLengthPrefixAndSuffix(
+        int $amount,
+        PromotionInterface $promotion,
+        int $codeLength,
+        string $prefix,
+        ?string $suffix = null
+    ): void {
+        $this->generateCoupons($amount, $promotion, $codeLength, $prefix, $suffix);
+    }
+
+    /**
+     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+) and suffix "([^"]+)"$/
+     */
+    public function iHaveGeneratedCouponsForThisPromotionWithCodeLengthAndSuffix(
+        int $amount,
+        PromotionInterface $promotion,
+        int $codeLength,
+        string $suffix
+    ): void {
+        $this->generateCoupons($amount, $promotion, $codeLength, null, $suffix);
+    }
+
+    /**
      * @return array
      */
     private function getTaxonFilterConfiguration(array $taxonCodes)
@@ -864,5 +897,21 @@ final class PromotionContext implements Context
         $coupon->setUsageLimit($usageLimit);
 
         return $coupon;
+    }
+
+    private function generateCoupons(
+        int $amount,
+        PromotionInterface $promotion,
+        int $codeLength,
+        ?string $prefix = null,
+        ?string $suffix = null
+    ): void {
+        $instruction = new PromotionCouponGeneratorInstruction();
+        $instruction->setAmount($amount);
+        $instruction->setCodeLength($codeLength);
+        $instruction->setPrefix($prefix);
+        $instruction->setSuffix($suffix);
+
+        $this->couponGenerator->generate($promotion, $instruction);
     }
 }
