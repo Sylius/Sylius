@@ -18,7 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Channel\Model\ChannelTypeInterface;
+use Sylius\Component\Channel\Model\ChannelTypes;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -218,11 +218,11 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given the channel :channel is a "Mobile" type
+     * @Given /^the (channel "[^"]+") with a (mobile|website|pos) type$/
      */
-    public function theChannelIsAType(ChannelInterface $channel): void
+    public function theChannelIsAType(ChannelInterface $channel, string $type): void
     {
-        $channel->setType(ChannelTypeInterface::TYPE_MOBILE);
+        $channel->setType($type);
     }
 
     /**

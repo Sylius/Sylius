@@ -13,11 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Model;
 
-interface ChannelTypeInterface
+final class ChannelTypes
 {
     public const TYPE_WEBSITE = 'website';
 
     public const TYPE_MOBILE = 'mobile';
 
     public const TYPE_POS = 'pos';
+
+    private function __construct()
+    {
+    }
 }

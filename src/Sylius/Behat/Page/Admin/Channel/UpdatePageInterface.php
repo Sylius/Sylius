@@ -51,7 +51,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isBaseCurrencyDisabled(): bool;
 
-    public function changeTypeTo(string $type): void;
+    public function changeType(string $type): void;
 
     public function getType(): string;
+
+    public function getUsedTheme(): string;
 }

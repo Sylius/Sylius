@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Channel\Model\ChannelTypeInterface;
+use Sylius\Component\Channel\Model\ChannelTypes;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -55,9 +55,9 @@ final class ChannelType extends AbstractResourceType
                 'label' => 'sylius.form.channel.type',
                 'required' => false,
                 'choices' => [
-                    'sylius.form.channel.types.webiste' => ChannelTypeInterface::TYPE_WEBSITE,
-                    'sylius.form.channel.types.mobile' => ChannelTypeInterface::TYPE_MOBILE,
-                    'sylius.form.channel.types.pos' => ChannelTypeInterface::TYPE_POS,
+                    'sylius.ui.channel.types.website' => ChannelTypes::TYPE_WEBSITE,
+                    'sylius.ui.channel.types.mobile' => ChannelTypes::TYPE_MOBILE,
+                    'sylius.ui.channel.types.pos' => ChannelTypes::TYPE_POS,
                 ]
             ])
         ;

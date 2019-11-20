@@ -7,7 +7,9 @@ sylius:
             name: Name
             url: URL
             type: Type
+    ui:
+        channel:
             types:
-                webiste: Website
+                website: Website
                 mobile: Mobile
                 pos: POS

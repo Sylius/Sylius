@@ -16,11 +16,11 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Channel\Model\ChannelTypeInterface;
+use Sylius\Component\Channel\Model\ChannelTypes;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -268,11 +268,11 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I define its type as "Mobile"
+     * @When /^I define its type as (mobile|website|pos)$/
      */
-    public function iDefineItsTypeAs(): void
+    public function iDefineItsTypeAs(string $type): void
     {
-        $this->createPage->setType(ChannelTypeInterface::TYPE_MOBILE);
+        $this->createPage->setType($type);
     }
 
     /**
@@ -463,11 +463,11 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I change its type to "Website"
+     * @When /^I change its type to (mobile|website|pos)$/
      */
-    public function iChangeItsTypeTo(): void
+    public function iChangeItsTypeTo(string $type): void
     {
-        $this->updatePage->changeTypeTo(ChannelTypeInterface::TYPE_WEBSITE);
+        $this->updatePage->changeType($type);
     }
 
     /**
@@ -510,11 +510,11 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then this channel type should be "Website"
+     * @Then /^this channel type should be (mobile|website|pos)$/
      */
-    public function thisChannelTypeShouldBe(): void
+    public function thisChannelTypeShouldBe(string $type): void
     {
-        Assert::same($this->updatePage->getType(), ChannelTypeInterface::TYPE_WEBSITE);
+        Assert::same($this->updatePage->getType(), $type);
     }
 
     /**

@@ -1,18 +1,7 @@
-{%
-    set typeIcons = {
-        mobile: 'mobile alternate',
-        website: 'desktop',
-        pos: 'map pin',
-    }
-%}
+{% import '@SyliusAdmin/Common/Macro/icons.html.twig' as icons  %}
 
-{% if data is defined %}
-    {% set type = data %}
-{% endif %}
-
-{% if type is not empty %}
-    {% set type = 'sylius.form.channel.types.' ~ type %}
+{% if data is not empty %}
     <span>
-        <i class="{{ typeIcons[data] }} icon"></i> {{ type|trans }}
+        {{ icons.channelType(data)}} {{ ('sylius.ui.channel.types.' ~ data)|trans }}
     </span>
 {% endif %}

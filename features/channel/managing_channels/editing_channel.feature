@@ -36,9 +36,9 @@ Feature: Editing channel
 
     @ui
     Scenario: Changing type of channel
-        Given the channel "Web Channel" is a "Mobile" type
+        Given the channel "Web Channel" with a mobile type
         When I want to modify a channel "Web Channel"
-        And I change its type to "Website"
+        And I change its type to website
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this channel type should be "Website"
+        And this channel type should be website
