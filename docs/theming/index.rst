@@ -8,6 +8,7 @@ and thus completely customizing Sylius assets.
     :hidden:
 
     webpack
+    bootstrap-theme
 
 .. include:: /theming/map.rst.inc
 
