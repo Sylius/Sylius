@@ -23,6 +23,12 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
 
     public function countByCodeLength(int $codeLength): int;
 
+    public function countByCodeLengthWithPrefixAndSuffix(
+        int $codeLength,
+        ?string $prefix = null,
+        ?string $suffix = null
+    ): int;
+
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
 
     public function createPaginatorForPromotion(string $promotionCode): iterable;

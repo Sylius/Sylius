@@ -19,7 +19,7 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         And I specify their code length as 1
         And I try to generate these coupons
         Then I should be notified that generating 2 coupons with code length equal to 1 is not possible
-        And there should still be 10 coupons related to this promotion
+        And there should still be 8 coupons related to this promotion
 
     @ui
     Scenario: Being unable to generate too many coupons with suffix
@@ -30,7 +30,7 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         And I specify their code length as 1
         And I try to generate these coupons
         Then I should be notified that generating 2 coupons with code length equal to 1 is not possible
-        And there should still be 13 coupons related to this promotion
+        And there should still be 8 coupons related to this promotion
 
     @ui
     Scenario: Being unable to generate too many coupons with prefix and suffix
@@ -42,4 +42,4 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         And I specify their code length as 1
         And I try to generate these coupons
         Then I should be notified that generating 2 coupons with code length equal to 1 is not possible
-        And there should still be 16 coupons related to this promotion
+        And there should still be 8 coupons related to this promotion

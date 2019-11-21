@@ -101,7 +101,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyTheirCodeLengthAs(int $codeLength = null): void
     {
-        $this->generatePage->specifyCodeLength($codeLength ?? '');
+        $this->generatePage->specifyCodeLength($codeLength);
     }
 
     /**
@@ -168,7 +168,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsAmountAs(int $amount = null): void
     {
-        $this->generatePage->specifyAmount($amount ?? '');
+        $this->generatePage->specifyAmount($amount);
     }
 
     /**
@@ -445,7 +445,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
     {
         Assert::true($this->generatePage->checkGenerationValidation(sprintf(
-            'Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.',
+            'Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d.',
             $amount,
             $codeLength
         )));
