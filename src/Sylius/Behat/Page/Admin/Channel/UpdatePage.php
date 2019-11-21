@@ -87,6 +87,21 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('base_currency')->hasAttribute('disabled');
     }
 
+    public function changeType(string $type): void
+    {
+        $this->getElement('type')->selectOption($type);
+    }
+
+    public function getType(): string
+    {
+        return $this->getElement('type')->getValue();
+    }
+
+    public function getUsedTheme(): string
+    {
+        return $this->getElement('theme')->getValue();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -109,6 +124,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
             'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
+            'theme' => '#sylius_channel_themeName',
+            'type' => '#sylius_channel_type',
         ]);
     }
 }

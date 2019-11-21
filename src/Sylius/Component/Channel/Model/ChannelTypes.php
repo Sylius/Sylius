@@ -11,11 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Channel;
+namespace Sylius\Component\Channel\Model;
 
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
-
-interface IndexPageInterface extends BaseIndexPageInterface
+final class ChannelTypes
 {
-    public function getUsedThemeName(string $channelCode): ?string;
+    public const TYPE_WEBSITE = 'website';
+
+    public const TYPE_MOBILE = 'mobile';
+
+    public const TYPE_POS = 'pos';
+
+    private function __construct()
+    {
+    }
 }
