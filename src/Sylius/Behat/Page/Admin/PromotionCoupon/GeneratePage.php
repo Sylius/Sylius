@@ -39,12 +39,12 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         $this->getDocument()->pressButton('Generate');
     }
 
-    public function specifyAmount(string $amount): void
+    public function specifyAmount(?int $amount): void
     {
         $this->getDocument()->fillField('Amount', $amount);
     }
 
-    public function specifyCodeLength(string $codeLength): void
+    public function specifyCodeLength(?int $codeLength): void
     {
         $this->getDocument()->fillField('Code length', $codeLength);
     }

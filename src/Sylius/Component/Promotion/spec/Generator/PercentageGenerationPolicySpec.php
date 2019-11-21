@@ -30,15 +30,33 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $this->shouldImplement(GenerationPolicyInterface::class);
     }
 
-    function it_examine_possibility_of_coupon_generation(
+    function it_examines_possibility_of_coupon_generation(
         PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository
     ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
-        $couponRepository->countByCodeLength(1)->shouldBeCalled();
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
+        $couponRepository->countByCodeLength(1, null, null)->willReturn(0);
 
         $this->isGenerationPossible($instruction)->shouldReturn(false);
+    }
+
+    function it_examines_possibility_of_coupon_generation_with_prefix_and_suffix(
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        PromotionCouponRepositoryInterface $couponRepository
+    ): void {
+        $instruction->getAmount()->willReturn(7);
+        $instruction->getCodeLength()->willReturn(1);
+        $instruction->getPrefix()->willReturn('CHRISTMAS_');
+        $instruction->getSuffix()->willReturn('_SALE');
+        $couponRepository
+            ->countByCodeLength(1, 'CHRISTMAS_', '_SALE')
+            ->willReturn(0)
+        ;
+
+        $this->isGenerationPossible($instruction)->shouldReturn(true);
     }
 
     function it_returns_possible_generation_amount(
@@ -47,10 +65,27 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
-        $couponRepository->countByCodeLength(1)->willReturn(1);
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
+        $couponRepository->countByCodeLength(1, null, null)->willReturn(1);
 
-        $this->isGenerationPossible($instruction)->shouldReturn(false);
         $this->getPossibleGenerationAmount($instruction)->shouldReturn(7);
+    }
+
+    function it_returns_possible_generation_amount_with_prefix_and_suffix(
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        PromotionCouponRepositoryInterface $couponRepository
+    ): void {
+        $instruction->getAmount()->willReturn(3);
+        $instruction->getCodeLength()->willReturn(1);
+        $instruction->getPrefix()->willReturn('CHRISTMAS_');
+        $instruction->getSuffix()->willReturn('_SALE');
+        $couponRepository
+            ->countByCodeLength(1, 'CHRISTMAS_', '_SALE')
+            ->willReturn(5)
+        ;
+
+        $this->getPossibleGenerationAmount($instruction)->shouldReturn(3);
     }
 
     function it_throws_an_invalid_argument_exception_when_expected_amount_is_null(
