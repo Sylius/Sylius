@@ -23,7 +23,11 @@ class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
 
-    /** @var Collection|ImageInterface[] */
+    /**
+     * @var Collection|ImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ImageInterface>
+     */
     protected $images;
 
     public function __construct()
@@ -31,6 +35,8 @@ class Taxon extends BaseTaxon implements TaxonInterface
         parent::__construct();
 
         $this->createdAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 

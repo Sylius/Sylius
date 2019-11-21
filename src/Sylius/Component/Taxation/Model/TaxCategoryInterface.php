@@ -30,6 +30,8 @@ interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterfac
 
     /**
      * @return Collection|TaxRateInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxRateInterface>
      */
     public function getRates(): Collection;
 

@@ -111,6 +111,8 @@ final class OrderPaymentStateResolver implements StateResolverInterface
 
     /**
      * @return Collection|PaymentInterface[]
+     *
+     * @psalm-return Collection<array-key, PaymentInterface>
      */
     private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {

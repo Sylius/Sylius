@@ -21,6 +21,8 @@ interface PromotionSubjectInterface
 
     /**
      * @return Collection|PromotionInterface[]
+     *
+     * @psalm-return Collection<array-key, PromotionInterface>
      */
     public function getPromotions(): Collection;
 

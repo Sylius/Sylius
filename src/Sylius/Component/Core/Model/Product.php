@@ -28,31 +28,54 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /** @var string */
     protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
-    /** @var Collection|ProductTaxonInterface[] */
+    /**
+     * @var Collection|ProductTaxonInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductTaxonInterface>
+     */
     protected $productTaxons;
 
-    /** @var Collection|ChannelInterface[] */
+    /**
+     * @var Collection|ChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
+     */
     protected $channels;
 
     /** @var BaseTaxonInterface */
     protected $mainTaxon;
 
-    /** @var Collection|ReviewInterface[] */
+    /**
+     * @var Collection|ReviewInterface[]
+     *
+     * @psalm-var Collection<array-key, ReviewInterface>
+     */
     protected $reviews;
 
     /** @var float */
     protected $averageRating = 0;
 
-    /** @var Collection|ImageInterface[] */
+    /**
+     * @var Collection|ImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ImageInterface>
+     */
     protected $images;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ProductTaxonInterface> $this->productTaxons */
         $this->productTaxons = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ReviewInterface> $this->reviews */
         $this->reviews = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 
@@ -153,6 +176,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getChannels(): Collection
     {

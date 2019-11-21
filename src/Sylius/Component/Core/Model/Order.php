@@ -20,7 +20,6 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
-use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
@@ -42,10 +41,18 @@ class Order extends BaseOrder implements OrderInterface
     /** @var AddressInterface|null */
     protected $billingAddress;
 
-    /** @var Collection|BasePaymentInterface[] */
+    /**
+     * @var Collection|PaymentInterface[]
+     *
+     * @psalm-var Collection<array-key, PaymentInterface>
+     */
     protected $payments;
 
-    /** @var Collection|ShipmentInterface[] */
+    /**
+     * @var Collection|ShipmentInterface[]
+     *
+     * @psalm-var Collection<array-key, ShipmentInterface>
+     */
     protected $shipments;
 
     /** @var string|null */
@@ -66,7 +73,11 @@ class Order extends BaseOrder implements OrderInterface
     /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
-    /** @var Collection|BasePromotionInterface[] */
+    /**
+     * @var Collection|BasePromotionInterface[]
+     *
+     * @psalm-var Collection<array-key, BasePromotionInterface>
+     */
     protected $promotions;
 
     /** @var string|null */
@@ -79,8 +90,13 @@ class Order extends BaseOrder implements OrderInterface
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, PaymentInterface> $this->payments */
         $this->payments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ShipmentInterface> $this->shipments */
         $this->shipments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, BasePromotionInterface> $this->promotions */
         $this->promotions = new ArrayCollection();
     }
 
@@ -199,6 +215,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getItemUnits(): Collection
     {
+        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */
@@ -223,6 +240,9 @@ class Order extends BaseOrder implements OrderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getPayments(): Collection
     {
@@ -291,7 +311,7 @@ class Order extends BaseOrder implements OrderInterface
 
     public function isShippingRequired(): bool
     {
-        foreach ($this->getItems() as $orderItem) {
+        foreach ($this->items as $orderItem) {
             /** @var OrderItemInterface $orderItem */
             Assert::isInstanceOf($orderItem, OrderItemInterface::class);
 

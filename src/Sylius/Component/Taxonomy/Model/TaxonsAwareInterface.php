@@ -19,6 +19,8 @@ interface TaxonsAwareInterface
 {
     /**
      * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
      */
     public function getTaxons(): Collection;
 

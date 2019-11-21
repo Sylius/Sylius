@@ -41,11 +41,15 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
 
     /**
      * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
      */
     public function getAncestors(): Collection;
 
     /**
      * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
      */
     public function getChildren(): Collection;
 

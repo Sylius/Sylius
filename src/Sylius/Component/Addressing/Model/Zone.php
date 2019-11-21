@@ -33,11 +33,16 @@ class Zone implements ZoneInterface
     /** @var string|null */
     protected $scope = Scope::ALL;
 
-    /** @var Collection|ZoneMemberInterface[] */
+    /**
+     * @var Collection|ZoneMemberInterface[]
+     *
+     * @psalm-var Collection<array-key, ZoneMemberInterface>
+     */
     protected $members;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
         $this->members = new ArrayCollection();
     }
 

@@ -47,7 +47,6 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
 
         return array_combine(
             array_map(
-                /** @psalm-return array-key */
                 function (ProductOptionValueInterface $productOptionValue): string {
                     return (string) $productOptionValue->getOptionCode();
                 },
@@ -78,7 +77,7 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
      *
      * @throws TransformationFailedException
      */
-    private function matches(array $optionValues): ?ProductVariantInterface
+    private function matches(array $optionValues): ProductVariantInterface
     {
         foreach ($this->product->getVariants() as $variant) {
             foreach ($optionValues as $optionValue) {

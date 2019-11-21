@@ -36,16 +36,32 @@ class Product implements ProductInterface
     /** @var string */
     protected $code;
 
-    /** @var Collection|AttributeValueInterface[] */
+    /**
+     * @var Collection|AttributeValueInterface[]
+     *
+     * @psalm-var Collection<array-key, AttributeValueInterface>
+     */
     protected $attributes;
 
-    /** @var Collection|ProductVariantInterface[] */
+    /**
+     * @var Collection|ProductVariantInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductVariantInterface>
+     */
     protected $variants;
 
-    /** @var Collection|ProductOptionInterface[] */
+    /**
+     * @var Collection|ProductOptionInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductOptionInterface>
+     */
     protected $options;
 
-    /** @var Collection|ProductAssociationInterface[] */
+    /**
+     * @var Collection|ProductAssociationInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductAssociationInterface>
+     */
     protected $associations;
 
     public function __construct()
@@ -53,9 +69,17 @@ class Product implements ProductInterface
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, AttributeValueInterface> $this->attributes */
         $this->attributes = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductAssociationInterface> $this->associations */
         $this->associations = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->variants */
         $this->variants = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductOptionInterface> $this->options */
         $this->options = new ArrayCollection();
     }
 

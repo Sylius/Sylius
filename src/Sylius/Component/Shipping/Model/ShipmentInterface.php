@@ -37,6 +37,8 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
 
     /**
      * @return Collection|ShipmentUnitInterface[]
+     *
+     * @psalm-return Collection<array-key, ShipmentUnitInterface>
      */
     public function getUnits(): Collection;
 

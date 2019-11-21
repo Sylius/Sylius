@@ -19,6 +19,8 @@ interface ProductTaxonsAwareInterface
 {
     /**
      * @return Collection|ProductTaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductTaxonInterface>
      */
     public function getProductTaxons(): Collection;
 
@@ -30,6 +32,8 @@ interface ProductTaxonsAwareInterface
 
     /**
      * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
      */
     public function getTaxons(): Collection;
 

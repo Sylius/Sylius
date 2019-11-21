@@ -199,10 +199,13 @@
 
         <!-- Custom -->
 
-        <MismatchingDocblockReturnType errorLevel="info" />
         <!-- remove after guzzlehttp-release -->
         <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
         <InvalidCatch errorLevel="info" />
 
     </issueHandlers>
+
+    <stubs>
+        <file name="etc/psalm/ZendPriorityQueueStub.php" />
+    </stubs>
 </psalm>
