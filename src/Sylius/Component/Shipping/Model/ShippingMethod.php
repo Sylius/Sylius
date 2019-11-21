@@ -208,9 +208,9 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ShippingMethodTranslationInterface
      */
-    protected function createTranslation(): ShippingMethodTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new ShippingMethodTranslation();
     }

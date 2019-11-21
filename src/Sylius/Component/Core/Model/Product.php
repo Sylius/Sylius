@@ -369,9 +369,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductTranslationInterface
      */
-    protected function createTranslation(): BaseProductTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new ProductTranslation();
     }

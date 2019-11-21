@@ -99,9 +99,9 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductAssociationTypeTranslationInterface
      */
-    protected function createTranslation(): ProductAssociationTypeTranslationInterface
+    protected function createTranslation(): TranslationInterface
     {
         return new ProductAssociationTypeTranslation();
     }
