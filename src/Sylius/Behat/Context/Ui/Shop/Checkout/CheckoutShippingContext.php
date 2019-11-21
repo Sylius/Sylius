@@ -203,4 +203,20 @@ final class CheckoutShippingContext implements Context
     {
         Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as ' . $email . '.');
     }
+
+    /**
+     * @Then I should see shipping total :shippingTotal
+     */
+    public function iShouldSeeShippingTotal($shippingTotal)
+    {
+        Assert::same($this->selectShippingPage->getShippingTotal(), $shippingTotal);
+    }
+
+    /**
+     * @Then I should see total price :totalPrice
+     */
+    public function iShouldSeeTotalPrice($totalPrice)
+    {
+        Assert::same($this->selectShippingPage->getTotalPrice(), $totalPrice);
+    }
 }

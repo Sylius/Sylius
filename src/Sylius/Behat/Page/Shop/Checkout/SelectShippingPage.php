@@ -186,6 +186,22 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
+    public function getShippingTotal()
+    {
+        return $this->getElement('shipping_total')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalPrice()
+    {
+        return $this->getElement('total_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -199,6 +215,8 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
             'shipping_method_select' => '.item:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
+            'shipping_total' => '#sylius-summary-shipping-total',
+            'total_price' => '#sylius-summary-grand-total',
             'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped',
         ]);
     }

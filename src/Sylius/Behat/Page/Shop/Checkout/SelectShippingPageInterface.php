@@ -81,4 +81,14 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasShippingMethod($shippingMethodName);
+
+    /**
+     * @return string
+     */
+    public function getShippingTotal();
+
+    /**
+     * @return string
+     */
+    public function getTotalPrice();
 }
