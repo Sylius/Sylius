@@ -31,21 +31,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countByCodeLength(int $codeLength): int
-    {
-        return (int) $this->createQueryBuilder('o')
-            ->select('COUNT(o.id)')
-            ->andWhere('LENGTH(o.code) = :codeLength')
-            ->setParameter('codeLength', $codeLength)
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
-
-    public function countByCodeLengthWithPrefixAndSuffix(
+    public function countByCodeLength(
         int $codeLength,
         ?string $prefix = null,
         ?string $suffix = null
@@ -61,9 +47,9 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('LENGTH(o.code) = :codeLength')
-            ->andWhere('o.code LIKE :prefixAndSuffix')
+            ->andWhere('o.code LIKE :codeTemplate')
             ->setParameter('codeLength', $codeLength)
-            ->setParameter('prefixAndSuffix', $codeTemplate)
+            ->setParameter('codeTemplate', $codeTemplate)
             ->getQuery()
             ->getSingleScalarResult()
         ;

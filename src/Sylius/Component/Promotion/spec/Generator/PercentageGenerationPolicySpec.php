@@ -38,7 +38,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $instruction->getCodeLength()->willReturn(1);
         $instruction->getPrefix()->willReturn(null);
         $instruction->getSuffix()->willReturn(null);
-        $couponRepository->countByCodeLengthWithPrefixAndSuffix(1, null, null)->willReturn(0);
+        $couponRepository->countByCodeLength(1, null, null)->willReturn(0);
 
         $this->isGenerationPossible($instruction)->shouldReturn(false);
     }
@@ -52,7 +52,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $instruction->getPrefix()->willReturn('CHRISTMAS_');
         $instruction->getSuffix()->willReturn('_SALE');
         $couponRepository
-            ->countByCodeLengthWithPrefixAndSuffix(1, 'CHRISTMAS_', '_SALE')
+            ->countByCodeLength(1, 'CHRISTMAS_', '_SALE')
             ->willReturn(0)
         ;
 
@@ -67,7 +67,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $instruction->getCodeLength()->willReturn(1);
         $instruction->getPrefix()->willReturn(null);
         $instruction->getSuffix()->willReturn(null);
-        $couponRepository->countByCodeLengthWithPrefixAndSuffix(1, null, null)->willReturn(1);
+        $couponRepository->countByCodeLength(1, null, null)->willReturn(1);
 
         $this->getPossibleGenerationAmount($instruction)->shouldReturn(7);
     }
@@ -81,7 +81,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $instruction->getPrefix()->willReturn('CHRISTMAS_');
         $instruction->getSuffix()->willReturn('_SALE');
         $couponRepository
-            ->countByCodeLengthWithPrefixAndSuffix(1, 'CHRISTMAS_', '_SALE')
+            ->countByCodeLength(1, 'CHRISTMAS_', '_SALE')
             ->willReturn(5)
         ;
 

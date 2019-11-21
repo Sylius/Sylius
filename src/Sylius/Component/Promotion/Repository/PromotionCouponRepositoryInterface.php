@@ -21,9 +21,7 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
 
-    public function countByCodeLength(int $codeLength): int;
-
-    public function countByCodeLengthWithPrefixAndSuffix(
+    public function countByCodeLength(
         int $codeLength,
         ?string $prefix = null,
         ?string $suffix = null

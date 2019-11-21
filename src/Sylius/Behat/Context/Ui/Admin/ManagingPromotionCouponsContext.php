@@ -99,7 +99,7 @@ final class ManagingPromotionCouponsContext implements Context
      * @When /^I specify their code length as (\d+)$/
      * @When I do not specify their code length
      */
-    public function iSpecifyTheirCodeLengthAs(int $codeLength = null): void
+    public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
         $this->generatePage->specifyCodeLength($codeLength);
     }
@@ -166,7 +166,7 @@ final class ManagingPromotionCouponsContext implements Context
      * @When I do not specify its amount
      * @When I choose the amount of :amount coupons to be generated
      */
-    public function iSpecifyItsAmountAs(int $amount = null): void
+    public function iSpecifyItsAmountAs(?int $amount = null): void
     {
         $this->generatePage->specifyAmount($amount);
     }

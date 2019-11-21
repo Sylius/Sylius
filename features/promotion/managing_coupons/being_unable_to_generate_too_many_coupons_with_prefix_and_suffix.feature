@@ -4,6 +4,10 @@ Feature: Being unable to generate too many coupons with prefix and suffix
     As an Administrator
     I want to be prevented from generating too many coupons with the same prefix or suffix
 
+    Rules:
+        - Generated coupon code uses 16 characters (numbers from 0 to 9, letters from A to F)
+        - To prevent guessing coupons codes, it is not allowed to generate more than 50% of possible coupons
+
     Background:
         Given the store operates on a single channel in "United States"
         And there is a promotion "Christmas sale"
