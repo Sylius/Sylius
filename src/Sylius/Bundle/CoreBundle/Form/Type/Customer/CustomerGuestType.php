@@ -62,17 +62,13 @@ final class CustomerGuestType extends AbstractResourceType
                 $customer = $this->customerRepository->findOneBy(['email' => $data['email']]);
 
                 // assign existing customer or create a new one
-                $form = $event->getForm();
-                if (null !== $customer && null === $customer->getUser()) {
-                    $form->setData($customer);
-
-                    return;
+                if (null === $customer) {
+                    /** @var CustomerInterface $customer */
+                    $customer = $this->customerFactory->createNew();
+                    $customer->setEmail($data['email']);
                 }
 
-                /** @var CustomerInterface $customer */
-                $customer = $this->customerFactory->createNew();
-                $customer->setEmail($data['email']);
-
+                $form = $event->getForm();
                 $form->setData($customer);
             })
             ->setDataLocked(false)
