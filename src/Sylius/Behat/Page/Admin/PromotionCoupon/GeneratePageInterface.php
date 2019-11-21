@@ -25,9 +25,9 @@ interface GeneratePageInterface extends SymfonyPageInterface
 
     public function generate(): void;
 
-    public function specifyAmount(string $amount): void;
+    public function specifyAmount(?int $amount): void;
 
-    public function specifyCodeLength(string $codeLength): void;
+    public function specifyCodeLength(?int $codeLength): void;
 
     public function setExpiresAt(\DateTimeInterface $date): void;
 
