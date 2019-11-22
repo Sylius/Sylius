@@ -46,7 +46,6 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
      */
     public function getLocaleCode(): string
     {
-        $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
 
         try {
             $localeCode = $this->localeStorage->get($this->channelContext->getChannel());
@@ -54,7 +53,8 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
             throw new LocaleNotFoundException(null, $exception);
         }
 
-        if (!in_array($localeCode, $availableLocalesCodes, true)) {
+        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+            $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

@@ -57,6 +57,46 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
     }
 
+    function it_checks_if_locale_is_available_in_channel(
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
+        LocaleInterface $enabledLocale
+    ): void {
+        $channelContext->getChannel()->willReturn($channel);
+
+        $channel->getLocales()->willReturn(new ArrayCollection([
+            $enabledLocale->getWrappedObject(),
+        ]));
+
+        $enabledLocale->getCode()->willReturn('en_US');
+
+        $this->isLocaleCodeAvailable('en_US')->shouldReturn(true);
+    }
+
+    function it_denies_if_locale_is_not_available_in_channel(
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
+        LocaleInterface $enabledLocale
+    ): void {
+        $channelContext->getChannel()->willReturn($channel);
+
+        $channel->getLocales()->willReturn(new ArrayCollection([
+            $enabledLocale->getWrappedObject(),
+        ]));
+
+        $enabledLocale->getCode()->willReturn('en_US');
+
+        $this->isLocaleCodeAvailable('fr_FR')->shouldReturn(false);
+    }
+
+    function it_checks_against_the_default_locale_if_channel_cannot_be_determined(
+        ChannelContextInterface $channelContext
+    ): void {
+        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
+
+        $this->isLocaleCodeAvailable('en_US')->shouldReturn(false);
+    }
+
     function it_returns_channels_default_locale(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,

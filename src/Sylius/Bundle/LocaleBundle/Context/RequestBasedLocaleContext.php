@@ -47,8 +47,8 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
             throw new LocaleNotFoundException('No locale attribute is set on the master request.');
         }
 
-        $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
-        if (!in_array($localeCode, $availableLocalesCodes, true)) {
+        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+            $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

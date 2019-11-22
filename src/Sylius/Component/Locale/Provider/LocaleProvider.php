@@ -45,6 +45,11 @@ final class LocaleProvider implements LocaleProviderInterface
         );
     }
 
+    public function isLocaleCodeAvailable(string $locale): bool
+    {
+        return $this->localeRepository->findOneBy(['code' => $locale]) !== null;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -30,10 +30,10 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
      */
     public function getLocaleCode(): string
     {
-        $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
         $localeCode = $this->localeProvider->getDefaultLocaleCode();
 
-        if (!in_array($localeCode, $availableLocalesCodes, true)) {
+        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+            $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

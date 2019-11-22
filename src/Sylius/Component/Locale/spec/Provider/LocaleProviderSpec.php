@@ -38,6 +38,22 @@ final class LocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
+    function it_checks_if_given_locale_is_available(
+        RepositoryInterface $localeRepository,
+        LocaleInterface $locale
+    ): void {
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn($locale);
+
+        $this->isLocaleCodeAvailable('en_US')->shouldReturn(true);
+    }
+
+    function it_returns_false_if_given_locale_is_not_available(RepositoryInterface $localeRepository): void
+    {
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
+
+        $this->isLocaleCodeAvailable('en_US')->shouldReturn(false);
+    }
+
     function it_returns_the_default_locale(): void
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');

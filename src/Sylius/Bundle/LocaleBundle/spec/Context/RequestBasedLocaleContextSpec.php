@@ -60,6 +60,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
 
         $request->attributes = new ParameterBag(['_locale' => 'en_US']);
 
+        $localeProvider->isLocaleCodeAvailable('en_US')->willReturn(false);
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
@@ -74,7 +75,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
 
         $request->attributes = new ParameterBag(['_locale' => 'pl_PL']);
 
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
+        $localeProvider->isLocaleCodeAvailable('pl_PL')->willReturn(true);
 
         $this->getLocaleCode()->shouldReturn('pl_PL');
     }

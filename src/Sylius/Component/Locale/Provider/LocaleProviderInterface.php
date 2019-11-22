@@ -20,5 +20,7 @@ interface LocaleProviderInterface
      */
     public function getAvailableLocalesCodes(): array;
 
+    public function isLocaleCodeAvailable(string $locale): bool;
+
     public function getDefaultLocaleCode(): string;
 }

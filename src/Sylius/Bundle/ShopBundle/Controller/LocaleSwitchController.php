@@ -61,7 +61,7 @@ final class LocaleSwitchController
             $code = $this->localeProvider->getDefaultLocaleCode();
         }
 
-        if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true)) {
+        if (!$this->localeProvider->isLocaleCodeAvailable($code)) {
             throw new HttpException(
                 Response::HTTP_NOT_ACCEPTABLE,
                 sprintf('The locale code "%s" is invalid.', $code)

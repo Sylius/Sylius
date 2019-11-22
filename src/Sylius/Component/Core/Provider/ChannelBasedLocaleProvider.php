@@ -54,6 +54,24 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
         }
     }
 
+    public function isLocaleCodeAvailable(string $locale): bool
+    {
+        try {
+            /** @var ChannelInterface $channel */
+            $channel = $this->channelContext->getChannel();
+
+            return $channel
+                ->getLocales()
+                ->map(function (LocaleInterface $locale) {
+                    return (string) $locale->getCode();
+                })
+               ->contains($locale);
+
+        } catch (ChannelNotFoundException $exception) {
+            return $locale === $this->defaultLocaleCode;
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

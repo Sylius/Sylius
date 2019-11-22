@@ -123,7 +123,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
 
         $request->getLocale()->willReturn('en');
 
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['en', 'ga_IE']);
+        $localeProvider->isLocaleCodeAvailable('en')->willReturn(true);
 
         $this
             ->shouldNotThrow(NotFoundHttpException::class)
@@ -146,7 +146,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         $request->attributes = new ParameterBag(['_route' => '_wdt']);
         $request->getLocale()->willReturn('en');
 
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
+        $localeProvider->isLocaleCodeAvailable('en')->willReturn(false);
 
         $this
             ->shouldNotThrow(NotFoundHttpException::class)
@@ -175,7 +175,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         $request->getLocale()->willReturn('en');
         $request->attributes = new ParameterBag();
 
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
+        $localeProvider->isLocaleCodeAvailable('en')->willReturn(false);
 
         $this
             ->shouldThrow(NotFoundHttpException::class)
