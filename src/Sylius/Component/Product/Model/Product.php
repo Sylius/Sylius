@@ -462,7 +462,7 @@ class Product implements ProductInterface
     /**
      * @return ProductTranslationInterface
      */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
     }
