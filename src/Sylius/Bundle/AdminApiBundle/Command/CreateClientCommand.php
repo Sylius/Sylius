@@ -65,7 +65,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (null === $this->clientManager) {
             @trigger_error('Fetching services directly from the container is deprecated since Sylius 1.2 and will be removed in 2.0.', \E_USER_DEPRECATED);
@@ -85,5 +85,7 @@ EOT
                 $client->getSecret()
             )
         );
+
+        return 0;
     }
 }

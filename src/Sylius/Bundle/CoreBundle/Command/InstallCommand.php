@@ -64,7 +64,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $suite = $input->getOption('fixture-suite');
 
@@ -99,6 +99,8 @@ EOT
         $outputStyle->newLine(2);
         $outputStyle->success($this->getProperFinalMessage($errored));
         $outputStyle->writeln('You can now open your store at the following path under the website root: /');
+
+        return $errored ? 1 : 0;
     }
 
     private function getProperFinalMessage(bool $errored): string
@@ -112,23 +114,23 @@ EOT
 
     private function getSyliusLogo(): string
     {
-        return '                                                                  
-           <info>,</info>                                                       
-         <info>,;:,</info>                                                      
-       <info>`;;;.:`</info>                                                     
-      <info>`::;`  :`</info>                                                    
-       <info>:::`   `</info>          .\'++:           \'\'.   \'.                  
-       <info>`:::</info>             :+\',;+\'          :+;  `+.                  
-        <info>::::</info>            +\'   :\'          `+;                       
+        return '
+           <info>,</info>
+         <info>,;:,</info>
+       <info>`;;;.:`</info>
+      <info>`::;`  :`</info>
+       <info>:::`   `</info>          .\'++:           \'\'.   \'.
+       <info>`:::</info>             :+\',;+\'          :+;  `+.
+        <info>::::</info>            +\'   :\'          `+;
         <info>`:::,</info>           \'+`     ++    :+.`+; `++. ;+\'    \'\'  ,++++.
          <info>,:::`</info>          `++\'.   .+:  `+\' `+;  .+,  ;+    +\'  +;  \'\'
-          <info>::::`</info>           ,+++.  \'+` :+. `+;  `+,  ;+    +\'  \'+.   
-   <info>,.     .::::</info>             .++` `+: +\'  `+;  `+,  ;+    +\'  `;++; 
+          <info>::::`</info>           ,+++.  \'+` :+. `+;  `+,  ;+    +\'  \'+.
+   <info>,.     .::::</info>             .++` `+: +\'  `+;  `+,  ;+    +\'  `;++;
 <info>`;;.:::`   :::::</info>             :+.  \'+,+.  `+;  `+,  ;+   `+\'     .++
  <info>.;;;;;;::`.::::,</info>       +\'` `++   `++\'   `+;  `+:  :+. `++\'  \'.  ;+
   <info>,;;;;;;;;;:::::</info>       .+++++`    ;+,    ++;  ++, `\'+++,\'+\' :++++,
-   <info>,;;;;;;;;;:::</info>`                  ;\'                              
-    <info>:;;;;;;;;;:,</info>                :.:+,                              
+   <info>,;;;;;;;;;:::</info>`                  ;\'
+    <info>:;;;;;;;;;:,</info>                :.:+,
      <info>;;;;;;;;;:</info>                 ;++,'
         ;
     }

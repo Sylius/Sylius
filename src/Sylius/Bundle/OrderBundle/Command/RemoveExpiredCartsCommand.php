@@ -17,6 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @final
+ */
 class RemoveExpiredCartsCommand extends ContainerAwareCommand
 {
     /**
@@ -33,7 +36,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
         $output->writeln(
@@ -42,5 +45,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
 
         $expiredCartsRemover = $this->getContainer()->get('sylius.expired_carts_remover');
         $expiredCartsRemover->remove();
+
+        return 0;
     }
 }
