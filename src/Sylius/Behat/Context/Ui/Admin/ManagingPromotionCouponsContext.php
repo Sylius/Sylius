@@ -399,13 +399,15 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that generating (\d+) coupons with code length equal to (\d+) is not possible$/
+     * @Then I should be notified that generating :amount coupons with code length equal to :codeLength is not possible
      */
-    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible($amount, $codeLength)
+    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
     {
-        $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
-
-        Assert::true($this->generatePage->checkGenerationValidation($message));
+        Assert::true($this->generatePage->checkGenerationValidation(sprintf(
+            'Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d. The possible amount to generate is 8.',
+            $amount,
+            $codeLength
+        )));
     }
 
     /**
