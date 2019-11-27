@@ -58,19 +58,12 @@ Must have
 * Is it possible to install the plugin on a fresh Sylius-Standard application with no problems?
 * Is every step needed for installation and configuration explained in the documentation? Are there any assumptions that could be confusing for less experienced developers?
 
-**Tests:**
-
-* Are there any unit tests for the plugin's classes? They can be written in PHPSpec, PHPUnit or any other working and reliable unit testing library
-* Does the unit tests cover at least the most crucial classes in the plugin (those which contain important business logic)?
-* Does the plugin contain some functional/acceptance tests (written in Behat/PHPUnit or similar tool)?
-* Are the core features of the plugin described and tests by them?
-
 **Coding standards:**
 
 * Does the code apply at least `PSR-1 <https://www.php-fig.org/psr/psr-1/>`_?
 
-Could have
-##########
+Should have
+###########
 
 **Coding standards:**
 
@@ -80,7 +73,10 @@ Could have
 
 **Tests:**
 
-* Do unit tests cover most of the application classes?
+* Are there any unit tests for the plugin's classes? They can be written in PHPSpec, PHPUnit or any other working and reliable unit testing library
+* Does the unit tests cover at least the most crucial classes in the plugin (those which contain important business logic)?
+* Does the plugin contain some functional/acceptance tests (written in Behat/PHPUnit or similar tool)?
+* Are the core features of the plugin described and tests by them?
 * Do the functional/acceptance tests describe most of the application business-related features?
 
 **Continuous integration:**
