@@ -164,9 +164,9 @@ class ProductOption implements ProductOptionInterface
     }
 
     /**
-     * @return ProductOptionTranslationInterface
+     * {@inheritdoc}
      */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): ProductOptionTranslationInterface
     {
         return new ProductOptionTranslation();
     }

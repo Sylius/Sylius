@@ -196,6 +196,10 @@
             </errorLevel>
         </InvalidArgument>
 
+        <!-- level 8 issues - some fatal errors in PHP -->
+
+        <MethodSignatureMismatch errorLevel="info" />
+
         <!-- Custom -->
 
         <!-- remove after guzzlehttp-release -->

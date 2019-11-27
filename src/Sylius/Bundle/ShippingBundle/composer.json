@@ -38,6 +38,9 @@
         "symfony/dependency-injection": "^4.3",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
+    "conflict": {
+        "twig/twig": "^3.0"
+    },
     "config": {
         "bin-dir": "bin"
     },

@@ -34,7 +34,8 @@
         "symfony/dependency-injection": "^4.3"
     },
     "conflict": {
-        "symfony/dependency-injection": "3.4.22"
+        "symfony/dependency-injection": "3.4.22",
+        "twig/twig": "^3.0"
     },
     "config": {
         "bin-dir": "bin"
