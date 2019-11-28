@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
-use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
+use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
@@ -60,7 +60,7 @@ final class AddressType extends AbstractResourceType
                     (null === $customer && null === $resourceCustomer) ||
                     (null !== $resourceCustomer && null === $resourceCustomer->getUser())
                 ) {
-                    $form->add('customer', CustomerGuestType::class, ['constraints' => [new Valid()]]);
+                    $form->add('customer', CustomerCheckoutGuestType::class, ['constraints' => [new Valid()]]);
                 }
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
