@@ -31,7 +31,6 @@
             <parameter>sylius_customer_guest</parameter>
         </parameter>
         <parameter key="sylius.form.type.customer_checkout_guest.validation_groups" type="collection">
-            <parameter>sylius_customer_guest</parameter>
             <parameter>sylius_customer_checkout_guest</parameter>
         </parameter>
         <parameter key="sylius.form.type.customer_simple_registration.validation_groups" type="collection">
