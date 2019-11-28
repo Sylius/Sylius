@@ -74,7 +74,7 @@ Install missing BootstrapTheme dependencies
 
 .. code-block:: bash
 
-    yarn add node-sass lodash.throttle -D
+    yarn add sass-loader@^7.0.0 node-sass lodash.throttle -D
     yarn add bootstrap bootstrap.native glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
 
 in ``theme/BootstrapChildTheme/assets`` create 2 files: ``entry.js`` and ``scss/index.scss``
