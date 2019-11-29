@@ -43,10 +43,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         $this->getElement('logout_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasLogoutButton()
+    public function hasLogoutButton(): bool
     {
         return $this->hasElement('logout_button');
     }
@@ -135,15 +132,12 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'currency_selector' => '#sylius-currency-selector',
             'locale_selector' => '#sylius-locale-selector',
-            'logout_button' => '.sylius-logout-button',
+            'logout_button' => '[data-test-logout-button]',
             'full_name' => '.right.menu .item',
         ]);
     }
