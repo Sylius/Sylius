@@ -4,6 +4,6 @@
     {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
 {% endif %}
 
-{{ form_row(form._username) }}
-{{ form_row(form._password) }}
-{{ form_row(form._remember_me) }}
+{{ form_row(form._username, sylius_test_form_attribute('login-username')) }}
+{{ form_row(form._password, sylius_test_form_attribute('login-password')) }}
+{{ form_row(form._remember_me, sylius_test_form_attribute('remember-me')) }}
