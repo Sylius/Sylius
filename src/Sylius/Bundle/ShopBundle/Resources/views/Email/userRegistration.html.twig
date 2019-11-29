@@ -3,11 +3,18 @@
 {% endblock %}
 
 {% block body %}
-    {% autoescape %}
-        Welcome to our store!
-        <br/><br/>
-        You have just been registered.
-        <br/>
-        Thank you {{ user.username }}.
-    {% endautoescape %}
+    {% include '@SyliusShop/Email/_layout.html.twig' with {'content': block('content')} %}
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; margin-bottom: 30px;">
+        <div style="font-size: 24px;">Welcome to our store!<br></div>
+        You have just been registered. Thank you {{ user.username }}.
+    </div>
+
+    <div style="text-align: center;">
+        <a href="{{ absolute_url(path('sylius_shop_homepage')) }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+            Start shopping
+        </a>
+    </div>
 {% endblock %}
