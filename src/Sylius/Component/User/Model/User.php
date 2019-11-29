@@ -302,9 +302,6 @@ class User implements UserInterface
         $this->emailVerificationToken = $verificationToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPasswordResetToken(): ?string
     {
         return $this->passwordResetToken;

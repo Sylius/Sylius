@@ -22,10 +22,7 @@ interface HomePageInterface extends SymfonyPageInterface
      */
     public function getContents();
 
-    /**
-     * @return bool
-     */
-    public function hasLogoutButton();
+    public function hasLogoutButton(): bool;
 
     public function logOut();
 
