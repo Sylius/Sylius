@@ -16,7 +16,7 @@ sylius_fixtures:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'dresses'
                                         translations:

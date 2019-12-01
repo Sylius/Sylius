@@ -16,7 +16,7 @@ sylius_fixtures:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 't_shirts'
                                         name: 'T-shirts'
@@ -42,7 +42,7 @@ sylius_fixtures:
                                                         name: 'Women'
                                                         slug: 't-shirts/women'
                                                     fr_FR:
-                                                        name: 'Femme'
+                                                        name: 'Femmes'
                                                         slug: 't-shirts/femmes'
 
                 tshirt_attribute:

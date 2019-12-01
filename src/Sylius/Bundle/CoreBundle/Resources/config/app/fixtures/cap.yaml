@@ -16,7 +16,7 @@ sylius_fixtures:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'caps'
                                         name: 'Caps'
@@ -25,7 +25,7 @@ sylius_fixtures:
                                             en_US:
                                                 name: 'Caps'
                                             fr_FR:
-                                                name: 'Casquestte'
+                                                name: 'Casquettes'
                                         children:
                                             -   code: 'simple_caps'
                                                 translations:
@@ -33,7 +33,7 @@ sylius_fixtures:
                                                         name: 'Simple'
                                                         slug: 'caps/simple'
                                                     fr_FR:
-                                                        name: 'simple'
+                                                        name: 'Simple'
                                                         slug: 'casquette/simple'
 
                                             -   code: 'caps_with_pompons'
@@ -42,7 +42,7 @@ sylius_fixtures:
                                                         name: 'With pompons'
                                                         slug: 'caps/with-pompons'
                                                     fr_FR:
-                                                        name: 'A pompon'
+                                                        name: 'À pompon'
                                                         slug: 'casquette/a-pompon'
 
                 cap_attribute:
