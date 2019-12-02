@@ -219,4 +219,12 @@ final class CheckoutShippingContext implements Context
     {
         Assert::same($this->selectShippingPage->getTotalPrice(), $totalPrice);
     }
+
+    /**
+     * @When I change my shipping method to :shippingMethod
+     */
+    public function iChangeMyShippingMethodTo($shippingMethod)
+    {
+        $this->selectShippingPage->selectShippingMethod($shippingMethod);
+    }
 }

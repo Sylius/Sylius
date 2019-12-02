@@ -17,6 +17,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
@@ -35,6 +36,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
 
             return;
         }

@@ -90,7 +90,7 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     public function getTaxTotal(): string;
 
-    public function getShippingTotal(): string ;
+    public function getShippingTotal(): string;
 
     public function hasShippingTotal(): bool;
 

@@ -15,6 +15,7 @@
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_shipping'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     {{ form_errors(form) }}
                     <input type="hidden" name="_method" value="PUT" />
+                    <div class="ui red label bottom pointing hidden sylius-validation-error" id="sylius-select-shipping-validation-error">{{ 'sylius.ui.unexpected_error_occurred'|trans }}</div>
 
                     {% include '@SyliusShop/Checkout/SelectShipping/_form.html.twig' %}
                     <div class="ui hidden divider"></div>

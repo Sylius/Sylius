@@ -15,6 +15,14 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.controller.checkout" class="Sylius\Bundle\CoreBundle\Controller\CheckoutController" public="true">
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="templating" />
+        </service>
+
         <service id="sylius.controller.shop.contact" class="Sylius\Bundle\ShopBundle\Controller\ContactController">
             <argument type="service" id="router" />
             <argument type="service" id="form.factory" />

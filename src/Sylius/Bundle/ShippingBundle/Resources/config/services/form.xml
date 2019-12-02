@@ -54,6 +54,7 @@
             <argument type="service" id="sylius.shipping_methods_resolver" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="router" />
             <tag name="form.type" />
         </service>
 

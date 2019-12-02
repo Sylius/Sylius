@@ -25,6 +25,6 @@ Feature: Selecting order shipping method
         Given I have product "Targaryen T-Shirt" in the cart
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I select "Raven Post" shipping method
-        And I select "Dragon Post" shipping method
+        And I change my shipping method to "Dragon Post"
         Then I should see shipping total "$30.00"
         And I should see total price "$49.99"

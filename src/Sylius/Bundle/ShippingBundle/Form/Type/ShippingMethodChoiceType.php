@@ -28,6 +28,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\RouterInterface;
 
 final class ShippingMethodChoiceType extends AbstractType
 {
@@ -40,14 +41,19 @@ final class ShippingMethodChoiceType extends AbstractType
     /** @var RepositoryInterface */
     private $repository;
 
+    /** @var RouterInterface */
+    private $router;
+
     public function __construct(
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         ServiceRegistryInterface $calculators,
-        RepositoryInterface $repository
+        RepositoryInterface $repository,
+        RouterInterface $router
     ) {
         $this->shippingMethodsResolver = $shippingMethodsResolver;
         $this->calculators = $calculators;
         $this->repository = $repository;
+        $this->router = $router;
     }
 
     /**
@@ -58,6 +64,11 @@ final class ShippingMethodChoiceType extends AbstractType
         if ($options['multiple']) {
             $builder->addModelTransformer(new CollectionToArrayTransformer());
         }
+    }
+
+    private function generateUrl($route, $parameters)
+    {
+        return $this->router->generate($route, $parameters);
     }
 
     /**
@@ -77,6 +88,14 @@ final class ShippingMethodChoiceType extends AbstractType
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
+                'choice_attr' => function ($choice, $key, $value) {
+                    /** @var $choice ShippingMethodInterface */
+                    return [
+                        'data-url' => $this->generateUrl('sylius_shop_ajax_shipping_fee', [
+                            'shippingMethodId' => $choice->getId(),
+                        ]),
+                    ];
+                },
             ])
             ->setDefined([
                 'subject',

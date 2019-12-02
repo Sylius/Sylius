@@ -9,6 +9,12 @@ sylius_shop_ajax_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/cart.yml"
     prefix: /cart
 
+sylius_shop_ajax_shipping_fee:
+    path: /shipping-fee/{shippingMethodId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.checkout:shippingFeeAction
+
 sylius_shop_ajax_render_province_form:
     path: /render-province-form
     methods: [GET]
