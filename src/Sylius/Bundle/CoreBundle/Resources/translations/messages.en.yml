@@ -197,6 +197,7 @@ sylius:
             header: PHP version and settings
             any: any
             detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: non deprecated
             off: off
@@ -204,13 +205,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
             short_open_tag: short_open_tag
             timezone: timezone
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Deprecated timezone
                 help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP version
             version_recommended: Recommended PHP version
+            version_help: Sylius reccomends %recommended% PHP version, your current version is %current%. Please upgrade.
 
     payum_gateway:
         cash_on_delivery: Cash on delivery
