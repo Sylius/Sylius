@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ContactEmailManager implements ContactEmailManagerInterface
@@ -29,8 +30,15 @@ final class ContactEmailManager implements ContactEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendContactRequest(array $data, array $recipients): void
+    public function sendContactRequest(array $data, array $recipients, ?ChannelInterface $channel = null): void
     {
-        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data], [], [$data['email']]);
+        if ($channel === null) {
+            @trigger_error(
+                sprintf('Not passing channel into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data, 'channel' => $channel], [], [$data['email']]);
     }
 }

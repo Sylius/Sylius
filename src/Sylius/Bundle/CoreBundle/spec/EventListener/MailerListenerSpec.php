@@ -1,39 +1,28 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ShopBundle\EventListener;
+namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\MailerListener;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Bundle\UserBundle\EventListener\MailerListener;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-final class UserMailerListenerSpec extends ObjectBehavior
+final class MailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext): void
+    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext, ChannelInterface $channel): void
     {
         $this->beConstructedWith($emailSender, $channelContext);
-    }
 
-    function it_is_a_mailer_listener(): void
-    {
-        $this->shouldHaveType(MailerListener::class);
+        $channelContext->getChannel()->willReturn($channel);
     }
 
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
@@ -75,11 +64,10 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
     function it_sends_an_email_registration_successfully(
         SenderInterface $emailSender,
-        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
         GenericEvent $event,
         CustomerInterface $customer,
-        ShopUserInterface $user,
-        ChannelInterface $channel
+        ShopUserInterface $user
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -87,13 +75,47 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('fulanito@sylius.com');
 
-        $channelContext->getChannel()->willReturn($channel);
-
         $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
             'user' => $user,
             'channel' => $channel,
         ])->shouldBeCalled();
 
         $this->sendUserRegistrationEmail($event);
+    }
+
+    function it_send_password_reset_token_mail(
+        SenderInterface $emailSender,
+        ChannelInterface $channel,
+        GenericEvent $event,
+        UserInterface $user
+    ): void {
+        $event->getSubject()->willReturn($user);
+
+        $user->getEmail()->willReturn('test@example.com');
+
+        $emailSender->send('reset_password_token', ['test@example.com'], [
+            'user' => $user,
+            'channel' => $channel,
+        ])->shouldBeCalled();
+
+        $this->sendResetPasswordTokenEmail($event);
+    }
+
+    function it_send_password_reset_pin_mail(
+        SenderInterface $emailSender,
+        ChannelInterface $channel,
+        GenericEvent $event,
+        UserInterface $user
+    ): void {
+        $event->getSubject()->willReturn($user);
+
+        $user->getEmail()->willReturn('test@example.com');
+
+        $emailSender->send('reset_password_pin', ['test@example.com'], [
+            'user' => $user,
+            'channel' => $channel,
+        ])->shouldBeCalled();
+
+        $this->sendResetPasswordPinEmail($event);
     }
 }

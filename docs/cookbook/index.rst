@@ -62,6 +62,7 @@ Emails
     :hidden:
 
     emails/custom-email
+    emails/custom-email-template-per-channel
     emails/disabling-order-confirmation-email
     emails/mailer
 
