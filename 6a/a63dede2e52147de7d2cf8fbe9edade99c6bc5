@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------
+
+by akondas at 2019-11-27T13:33:01Z
+
+```
+001 Scenario: Being unable to generate too many coupons with prefix                                   # features/promotion/managing_coupons/being_unable_to_generate_too_many_coupons_with_prefix_and_suffix.feature:18
+      Then I should be notified that generating 2 coupons with code length equal to 1 is not possible # features/promotion/managing_coupons/being_unable_to_generate_too_many_coupons_with_prefix_and_suffix.feature:25
+        InvalidArgumentException: Expected a value to be true. Got: false in vendor/webmozart/assert/src/Assert.php:1915
+```
+ :thinking: random error or my fault?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-11-27T13:36:07Z
+
+Failing on `master` as well, as far as I know, somebody is already working on that ;) 🖖
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-02T14:44:10Z
+
+Thanks, Arkadiusz! :tada:
