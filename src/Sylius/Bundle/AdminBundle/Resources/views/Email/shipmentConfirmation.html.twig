@@ -1,9 +1,7 @@
+{% extends '@SyliusAdmin/Email/layout.html.twig' %}
+
 {% block subject %}
     Shipment confirmation
-{% endblock %}
-
-{% block body %}
-    {% include '@SyliusAdmin/Email/_layout.html.twig' with {'content': block('content')} %}
 {% endblock %}
 
 {% block content %}

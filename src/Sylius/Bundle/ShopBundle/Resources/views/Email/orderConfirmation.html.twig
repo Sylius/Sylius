@@ -1,9 +1,7 @@
+{% extends '@SyliusShop/Email/layout.html.twig' %}
+
 {% block subject %}
     Order confirmation
-{% endblock %}
-
-{% block body %}
-    {% include '@SyliusShop/Email/_layout.html.twig' with {'content': block('content')} %}
 {% endblock %}
 
 {% block content %}
