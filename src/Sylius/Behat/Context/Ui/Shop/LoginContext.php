@@ -99,7 +99,7 @@ final class LoginContext implements Context
     /**
      * @When I specify the username as :username
      */
-    public function iSpecifyTheUsername(string $username = null): void
+    public function iSpecifyTheUsername(?string $username = null): void
     {
         $this->loginPage->specifyUsername($username);
     }
@@ -117,7 +117,7 @@ final class LoginContext implements Context
      * @When I specify the password as :password
      * @When I do not specify the password
      */
-    public function iSpecifyThePasswordAs(string $password = null): void
+    public function iSpecifyThePasswordAs(?string $password = null): void
     {
         $this->loginPage->specifyPassword($password);
     }
@@ -126,7 +126,7 @@ final class LoginContext implements Context
      * @When I specify my new password as :password
      * @When I do not specify my new password
      */
-    public function iSpecifyMyNewPassword(string $password = null): void
+    public function iSpecifyMyNewPassword(?string $password = null): void
     {
         $this->resetPasswordPage->specifyNewPassword($password);
     }
@@ -135,7 +135,7 @@ final class LoginContext implements Context
      * @When I confirm my new password as :password
      * @When I do not confirm my new password
      */
-    public function iConfirmMyNewPassword(string $password = null): void
+    public function iConfirmMyNewPassword(?string $password = null): void
     {
         $this->resetPasswordPage->specifyConfirmPassword($password);
     }
