@@ -92,7 +92,7 @@ final class ContactController
                 return new RedirectResponse($request->headers->get('referer'));
             }
 
-            $this->contactEmailManager->sendContactRequest($data, [$contactEmail]);
+            $this->contactEmailManager->sendContactRequest($data, [$contactEmail], $channel);
 
             $successMessage = $this->getSyliusAttribute(
                 $request,
