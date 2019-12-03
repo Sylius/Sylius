@@ -32,7 +32,7 @@ Don't worry, everything was automatically installed via Composer.
     // config/bundles.php
 
     return [
-        \Sylius\Bundle\GridBundle\SyliusGridBundle:class => ['all' => true],
+        Sylius\Bundle\GridBundle\SyliusGridBundle::class => ['all' => true],
     ];
 
 Congratulations! The bundle is now installed and ready to use. You need to define your first resource and grid!
