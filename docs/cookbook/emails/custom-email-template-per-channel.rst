@@ -28,7 +28,7 @@ The simplest customization might be done with an ``if`` statement in the templat
     {% block subject %}Topic{% endblock %}
 
     {% block body %}{% autoescape %}
-        {% if channel.code === 'TOY_STORE' %}
+        {% if channel.code is same as ('TOY_STORE') %}
             Thanks for buying one of our toys!
         {% else %}
             Thanks for buying!
