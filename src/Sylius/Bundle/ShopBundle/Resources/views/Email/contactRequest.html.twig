@@ -1,13 +1,14 @@
+{% extends '@SyliusShop/Email/layout.html.twig' %}
+
 {% block subject %}
     Contact request
 {% endblock %}
 
-{% block body %}
-    {% autoescape %}
-        Message from: {{ data.email }}
-        <br/>
-        Content:
-        <br/>
-        "{{ data.message|nl2br }}"
-    {% endautoescape %}
+{% block content %}
+    <div style="text-align: left;">
+        <div style="color: #1abb9c;"><strong>Message from:</strong></div>
+        <div style="margin-bottom: 20px;">{{ data.email }}</div>
+        <div style="color: #1abb9c;"><strong>Content:</strong></div>
+        <div>{{ data.message|nl2br }}</div>
+    </div>
 {% endblock %}

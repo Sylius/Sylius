@@ -1,13 +1,24 @@
+{% extends '@SyliusAdmin/Email/layout.html.twig' %}
+
 {% block subject %}
     Shipment confirmation
 {% endblock %}
 
-{% block body %}
-    {% autoescape %}
-        Your order with number {{ order.number }} has been sent using {{ shipment.method }}.
-        <br/>
-        You can check it's location with the "{{ shipment.tracking }}" tracking code.
-        <br/><br/>
-        Thank you for a successful transaction.
-    {% endautoescape %}
+{% block content %}
+    <div style="text-align: center;">
+        <div>
+            Your order with number
+            <span style="color: #1abb9c;">{{ order.number }}</span>
+            has been sent using
+            <span style="color: #1abb9c;">{{ shipment.method }}</span>.
+        </div>
+        <div style="margin-bottom: 20px;">
+            You can check it's location with the
+            <span style="color: #1abb9c;">{{ shipment.tracking }}</span>
+            tracking code.
+        </div>
+        <div>
+            Thank you for a successful transaction.
+        </div>
+    </div>
 {% endblock %}
