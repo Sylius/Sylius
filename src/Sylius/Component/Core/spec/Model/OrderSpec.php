@@ -551,7 +551,6 @@ final class OrderSpec extends ObjectBehavior
         AdjustmentInterface $orderItemAdjustment2,
         AdjustmentInterface $orderUnitAdjustment1,
         AdjustmentInterface $orderUnitAdjustment2
-
     ): void {
         $orderAdjustment1->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
         $orderAdjustment1->getAmount()->willReturn(-400);
