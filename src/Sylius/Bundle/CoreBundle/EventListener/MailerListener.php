@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 final class MailerListener
 {
     /** @var SenderInterface */
-    protected $emailSender;
+    private $emailSender;
 
     /** @var ChannelContextInterface */
     private $channelContext;

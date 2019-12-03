@@ -36,7 +36,7 @@ final class TestFormAttributeExtension extends AbstractExtension
                 'sylius_test_form_attribute',
                 function (string $name, ?string $value = null): array {
                     if (strpos($this->environment, 'test') === 0) {
-                        return ['attr' => ['data-test-'.$name => (string) $value]];
+                        return ['attr' => ['data-test-' . $name => (string) $value]];
                     }
 
                     return [];

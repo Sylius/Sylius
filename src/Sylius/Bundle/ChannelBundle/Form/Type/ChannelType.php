@@ -51,14 +51,14 @@ final class ChannelType extends AbstractResourceType
                 'label' => 'sylius.form.channel.color',
                 'required' => false,
             ])
-            ->add('type', ChoiceType::class,[
+            ->add('type', ChoiceType::class, [
                 'label' => 'sylius.form.channel.type',
                 'required' => false,
                 'choices' => [
                     'sylius.ui.channel.types.website' => ChannelTypes::TYPE_WEBSITE,
                     'sylius.ui.channel.types.mobile' => ChannelTypes::TYPE_MOBILE,
                     'sylius.ui.channel.types.pos' => ChannelTypes::TYPE_POS,
-                ]
+                ],
             ])
         ;
     }

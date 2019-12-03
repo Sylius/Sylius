@@ -459,9 +459,6 @@ class Product implements ProductInterface
         return $translation;
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();

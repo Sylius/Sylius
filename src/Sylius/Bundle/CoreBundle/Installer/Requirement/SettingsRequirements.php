@@ -36,7 +36,7 @@ final class SettingsRequirements extends RequirementCollection
                 false,
                 $translator->trans('sylius.installer.settings.version_help', [
                     '%current%' => \PHP_VERSION,
-                    '%recommended%' => self::RECOMMENDED_PHP_VERSION
+                    '%recommended%' => self::RECOMMENDED_PHP_VERSION,
                 ])
             ))
             ->add(new Requirement(
