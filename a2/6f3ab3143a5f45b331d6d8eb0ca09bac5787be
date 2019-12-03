@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by pjedrzejewski at 2019-12-02T15:16:38Z
+
+I do not know about Gulp, but with BootstrapTheme and Webpack/Encore, I had an issue with displaying assets (logo, to be specific) in Gmail - it has something to do with image caching done by Gmail and the custom extension (app.XXX.js) added by Webpack.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-03T09:51:04Z
+
+Thanks, Szymon! :tada:
