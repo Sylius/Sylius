@@ -1,8 +1,37 @@
 # CHANGELOG FOR `1.5.X`
 
+## v1.5.7 (2019-12-03)
+
+#### CVE-2019-16768: Internal exception message exposure in login action.
+
+**Details:**
+
+Exception messages from internal exceptions (like database exception) are wrapped by 
+`\Symfony\Component\Security\Core\Exception\AuthenticationServiceException` and propagated through the system to UI. 
+Therefore, some internal system information may leak and be visible to the customer.
+
+A validation message with the exception details will be presented to the user when one will try to log into the shop.
+
+**Solution:**
+
+This release patches the reported vulnerability. The `src/Sylius/Bundle/UiBundle/Resources/views/Security/_login.html.twig` 
+file from Sylius should be overridden and `{{ messages.error(last_error.message) }}` changed to `{{ messages.error(last_error.messageKey) }}`.
+
+#### Details
+
+- [#10835](https://github.com/Sylius/Sylius/issues/10835) Improve deprecation message for "Sylius\Bundle\CoreBundle\Application\Kernel" ([@pamil](https://github.com/pamil))
+- [#10841](https://github.com/Sylius/Sylius/issues/10841) [Docs] Include link to ShopApi docs to REST API Reference ([@Zales0123](https://github.com/Zales0123))
+- [#10846](https://github.com/Sylius/Sylius/issues/10846) [Order] Include order unit promotion adjustments and order item promotion adjustments in order promotion total ([@Tomanhez](https://github.com/Tomanhez))
+- [#10849](https://github.com/Sylius/Sylius/issues/10849) Move ShopApi reference to main menu ([@Zales0123](https://github.com/Zales0123))
+- [#10855](https://github.com/Sylius/Sylius/issues/10855) [Docs] Open external links in a new tab ([@Zales0123](https://github.com/Zales0123))
+- [#10857](https://github.com/Sylius/Sylius/issues/10857) Change readme banner ([@kulczy](https://github.com/kulczy))
+- [#10880](https://github.com/Sylius/Sylius/issues/10880) [Promotion] Improve coupon generation validation message ([@GSadee](https://github.com/GSadee))
+- [#10881](https://github.com/Sylius/Sylius/issues/10881) Add docs banner ([@kulczy](https://github.com/kulczy))
+- [#10891](https://github.com/Sylius/Sylius/issues/10891) Update release process docs for 1.2 ([@pamil](https://github.com/pamil))
+
 ## v1.5.6 (2019-11-11)
 
-### Details
+#### Details
 
 - [#9931](https://github.com/Sylius/Sylius/issues/9931) [Payum] infinite loop on state machine exception fixed ([@tautelis](https://github.com/tautelis))
 - [#10734](https://github.com/Sylius/Sylius/issues/10734) Added: TimestampableInterface to core TaxonInterface (fixes #10728) ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
