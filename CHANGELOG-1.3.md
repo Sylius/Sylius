@@ -2,9 +2,9 @@
 
 ## v1.3.14 (2019-12-03)
 
-### CVE-2019-16768: Internal exception message exposure in login action.
+#### CVE-2019-16768: Internal exception message exposure in login action.
 
-#### Details
+**Details:**
 
 Exception messages from internal exceptions (like database exception) are wrapped by 
 `\Symfony\Component\Security\Core\Exception\AuthenticationServiceException` and propagated through the system to UI. 
@@ -12,7 +12,7 @@ Therefore, some internal system information may leak and be visible to the custo
 
 A validation message with the exception details will be presented to the user when one will try to log into the shop.
 
-#### Workaround
+**Solution:**
 
 This release patches the reported vulnerability. The `src/Sylius/Bundle/UiBundle/Resources/views/Security/_login.html.twig` 
 file from Sylius should be overridden and `{{ messages.error(last_error.message) }}` changed to `{{ messages.error(last_error.messageKey) }}`.
