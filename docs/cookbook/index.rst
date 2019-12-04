@@ -122,5 +122,6 @@ Frontend
     :hidden:
 
     frontend/admin-js-and-css
+    frontend/google-analytics.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
