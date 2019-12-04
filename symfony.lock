@@ -866,6 +866,12 @@
     "symplify/package-builder": {
         "version": "v4.6.1"
     },
+    "symplify/set-config-resolver": {
+        "version": "v7.0.2"
+    },
+    "symplify/smart-file-system": {
+        "version": "v7.0.2"
+    },
     "theofidry/alice-data-fixtures": {
         "version": "1.0",
         "recipe": {
