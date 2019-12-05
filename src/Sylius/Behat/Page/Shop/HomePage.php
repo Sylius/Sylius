@@ -19,26 +19,17 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage implements HomePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_homepage';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getContents()
+    public function getContents(): string
     {
         return $this->getDocument()->getContent();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout_button')->click();
     }
@@ -48,26 +39,17 @@ class HomePage extends SymfonyPage implements HomePageInterface
         return $this->hasElement('logout_button');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getElement('full_name')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveCurrency()
+    public function getActiveCurrency(): string
     {
         return $this->getElement('currency_selector')->find('css', '.sylius-active-currency')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrencies(): array
     {
         return array_map(
             function (NodeElement $element) {
@@ -77,10 +59,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function switchCurrency($currencyCode)
+    public function switchCurrency($currencyCode): void
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
@@ -90,18 +69,12 @@ class HomePage extends SymfonyPage implements HomePageInterface
         $this->getElement('currency_selector')->clickLink($currencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveLocale()
+    public function getActiveLocale(): string
     {
         return $this->getElement('locale_selector')->find('css', '.sylius-active-locale')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableLocales()
+    public function getAvailableLocales(): array
     {
         return array_map(
             function (NodeElement $element) {
@@ -111,24 +84,18 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function switchLocale($localeCode)
+    public function switchLocale($localeCode): void
     {
         $this->getElement('locale_selector')->clickLink($localeCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLatestProductsNames()
+    public function getLatestProductsNames(): array
     {
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $this->getDocument()->findAll('css', '.sylius-product-name')
+            $this->getElement('latest_products')->findAll('css', '.sylius-product-name')
         );
     }
 
@@ -136,9 +103,10 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'currency_selector' => '#sylius-currency-selector',
+            'full_name' => '.right.menu .item',
+            'latest_products' => '[data-test-latest-products]',
             'locale_selector' => '#sylius-locale-selector',
             'logout_button' => '[data-test-logout-button]',
-            'full_name' => '.right.menu .item',
         ]);
     }
 }
