@@ -3,7 +3,12 @@
         <div class="ui inverted divided equal height stackable grid">
             {{ sonata_block_render_event('sylius.shop.layout.before_footer') }}
 
-            <div class="three wide column">
+            <div class="four wide column">
+                <a href="//sylius.com/plus" target="_blank">
+                    <img class="ui fluid image" style="max-width: 170px;" src="{{ asset('assets/shop/img/sylius-plus-banner.png') }}" alt="Sylius Plus">
+                </a>
+            </div>
+            <div class="four wide column">
                 <h4 class="ui inverted header">{{ 'sylius.ui.your_store'|trans }}</h4>
                 <div class="ui inverted link list">
                     <a href="#" class="item">{{ 'sylius.ui.about'|trans }}</a>
@@ -12,7 +17,7 @@
                     <a href="{{ path('sylius_shop_contact_request') }}" class="item">{{ 'sylius.ui.contact_us'|trans }}</a>
                 </div>
             </div>
-            <div class="three wide column">
+            <div class="four wide column">
                 <h4 class="ui inverted header">{{ 'sylius.ui.customer_care'|trans  }}</h4>
                 <div class="ui inverted link list">
                     <a href="{{ path('sylius_shop_contact_request') }}" class="item">{{ 'sylius.ui.contact_us'|trans  }}</a>
@@ -21,12 +26,25 @@
                     <a href="#" class="item">{{ 'sylius.ui.returns_policy'|trans  }}</a>
                 </div>
             </div>
-            <div class="eight wide column">
-                <h4 class="ui inverted header">&copy; {{ 'sylius.ui.your_store'|trans }}</h4>
-                <p>{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank" style="color: #1abb9c;">Sylius</a>.</p>
+            <div class="four wide column">
+                <h4 class="ui inverted header">{{ 'sylius.ui.payment_methods'|trans  }}</h4>
+                <div>
+                    <i class="huge inverted cc mastercard icon"></i>
+                    <i class="huge inverted cc visa icon"></i>
+                    <i class="huge inverted cc paypal card icon"></i>
+                </div>
             </div>
-
-            {{ sonata_block_render_event('sylius.shop.layout.after_footer') }}
         </div>
+
+        <div class="ui hidden divider"></div>
+
+        <div class="ui center aligned inverted basic segment">
+            <p>&copy; {{ 'sylius.ui.your_store'|trans }}, {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank" style="color: #1abb9c;">Sylius</a>.</p>
+            <a target="_blank" href="//facebook.com/SyliusEcommerce/"><i class="big grey facebook icon"></i></a>
+            <a target="_blank" href="//instagram.com/sylius.team/"><i class="big grey instagram icon"></i></a>
+            <a target="_blank" href="//twitter.com/sylius"><i class="big grey twitter card icon"></i></a>
+        </div>
+
+        {{ sonata_block_render_event('sylius.shop.layout.after_footer') }}
     </div>
 </footer>
