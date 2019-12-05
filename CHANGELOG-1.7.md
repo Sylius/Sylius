@@ -1,6 +1,6 @@
 # CHANGELOG FOR `1.7.X`
 
-## v1.7.0-ALPHA.1
+## v1.7.0-ALPHA.1, v1.7.0-ALPHA.2 (2019-12-03, 2019-12-05)
 
 #### Details
 
