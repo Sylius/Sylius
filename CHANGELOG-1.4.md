@@ -1,6 +1,6 @@
 # CHANGELOG FOR `1.4.X`
 
-## v1.4.10 (2019-12-03)
+## v1.4.10, v1.4.11 (2019-12-03, 2019-12-05)
 
 #### CVE-2019-16768: Internal exception message exposure in login action.
 
