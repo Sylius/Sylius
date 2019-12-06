@@ -112,7 +112,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
             $this->zoneTaxScope->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['All', 'Tax'], [ 'zone_scope' => 'tax' ]);
+        $this->assertChoicesLabels(['All', 'Tax'], ['zone_scope' => 'tax']);
     }
 
     /**
