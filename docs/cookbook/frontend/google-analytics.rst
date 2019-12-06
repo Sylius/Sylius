@@ -2,13 +2,17 @@ How to add Google Analytics script to shop?
 ===========================================
 
 All shops tend to observe traffic on their websites, the most popular tool for that is Google Analytics.
-In Sylius we have a few ways to enable it!
+In Sylius we have two ways to enable it:
 
-.. note::
-    Which way is better?
-    It depends on how you customize your project, if you have the Sylius layout overwritten by your custom layout,
-    then you should add script directly in `head` section of the layout template,
-    otherwise, use the Sonata events.
+*If you have the Sylius layout overriden completely then:*
+
+* paste the script directly into :ref:`head section of the layout <google_analytics_to_head_section>`
+
+or *if you are just customizing the Sylius layout, and you will be updating to future versions then:*
+
+* add the script :ref:`via Sonata events <google_analytics_via_sonata_events>`
+
+.. _google_analytics_to_head_section:
 
 Adding Google Analytics by pasting the script directly into the layout template.
 --------------------------------------------------------------------------------
@@ -43,6 +47,8 @@ If you want to add Google Analytics by this way, you need to override the ``layo
 
     {# rest of layout.html.twig code #}
 
+.. _google_analytics_via_sonata_events:
+
 Adding Google Analytics script with Sonata events.
 --------------------------------------------------
 
@@ -75,3 +81,8 @@ Now, we need to configure a new service.
                 - 'googleScript.html.twig'
             tags:
                 - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
+
+Learn more
+----------
+
+* `Google Analytics Documentation <https://developers.google.com/analytics/devguides/collection/analyticsjs>`_
