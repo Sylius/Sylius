@@ -24,7 +24,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         return 'sylius_shop_homepage';
     }
 
-    public function getContents(): string
+    public function getContent(): string
     {
         return $this->getDocument()->getContent();
     }
