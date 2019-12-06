@@ -99,7 +99,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
             $this->zoneShippingScope->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['All', 'Tax', 'Shipping'], [ 'zone_scope' => AddressingScope::ALL ]);
+        $this->assertChoicesLabels(['All', 'Tax', 'Shipping'], ['zone_scope' => AddressingScope::ALL]);
     }
 
     /**
