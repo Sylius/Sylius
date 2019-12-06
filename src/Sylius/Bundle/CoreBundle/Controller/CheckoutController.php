@@ -41,10 +41,10 @@ final class CheckoutController
         $this->templatingEngine = $templatingEngine;
     }
 
-    public function shippingFeeAction(Request $request, int $shippingMethodId): Response
+    public function shippingFeeAction(Request $request, string $shippingMethodCode): Response
     {
         /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $this->shippingMethodRepository->find($shippingMethodId);
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $shippingMethodCode]);
         if (!$shippingMethod) {
             throw new HttpException(
                 Response::HTTP_BAD_REQUEST,

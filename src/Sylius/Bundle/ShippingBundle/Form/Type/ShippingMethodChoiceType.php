@@ -92,7 +92,7 @@ final class ShippingMethodChoiceType extends AbstractType
                     /** @var $choice ShippingMethodInterface */
                     return [
                         'data-url' => $this->generateUrl('sylius_shop_ajax_shipping_fee', [
-                            'shippingMethodId' => $choice->getId(),
+                            'shippingMethodCode' => $choice->getCode(),
                         ]),
                     ];
                 },

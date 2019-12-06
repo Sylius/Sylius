@@ -10,7 +10,7 @@ sylius_shop_ajax_cart:
     prefix: /cart
 
 sylius_shop_ajax_shipping_fee:
-    path: /shipping-fee/{shippingMethodId}
+    path: /shipping-fee/{shippingMethodCode}
     methods: [GET]
     defaults:
         _controller: sylius.controller.checkout:shippingFeeAction
