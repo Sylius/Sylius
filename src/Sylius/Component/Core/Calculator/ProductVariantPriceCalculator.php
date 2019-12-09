@@ -30,9 +30,10 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
 
         if (null === $channelPricing) {
             throw new MissingChannelConfigurationException(sprintf(
-                'Channel %s has no price defined for product variant %s',
+                'Channel %s has no price defined for product variant %s (%s)',
                 $context['channel']->getName(),
-                $productVariant->getName()
+                $productVariant->getName(),
+                $productVariant->getCode()
             ));
         }
 
