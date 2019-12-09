@@ -59,16 +59,19 @@ body {
     position: relative;
 }
 
-.homepage .carousel-nav {
+.homepage .carousel-nav .carousel-left,
+.homepage .carousel-nav .carousel-right {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    width: 96%;
-    height: 100%;
-    align-items: center;
-    justify-content: space-between;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.homepage .carousel-nav .carousel-left {
+    left: 30px;
+}
+
+.homepage .carousel-nav .carousel-right {
+    right: 30px;
 }
 
 .homepage .carousel {
