@@ -154,7 +154,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
      */
-    public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount)
+    public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, int $amount): void
     {
         Assert::true($this->completePage->hasProductDiscountedUnitPriceBy($product, $amount));
     }
@@ -162,7 +162,7 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then /^my order total should be ("(?:\£|\$)\d+(?:\.\d+)?")$/
      */
-    public function myOrderTotalShouldBe($total)
+    public function myOrderTotalShouldBe(int $total): void
     {
         Assert::true($this->completePage->hasOrderTotal($total));
     }
