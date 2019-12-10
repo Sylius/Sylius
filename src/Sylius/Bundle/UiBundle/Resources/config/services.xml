@@ -17,4 +17,10 @@
         <import resource="services/form.xml" />
         <import resource="services/twig.xml" />
     </imports>
+
+    <services>
+        <service id="sylius.ui.sonata_multiple_block_event_listener" class="Sylius\Bundle\UiBundle\Block\MultipleBlockEventListener">
+            <argument type="collection" />
+        </service>
+    </services>
 </container>
