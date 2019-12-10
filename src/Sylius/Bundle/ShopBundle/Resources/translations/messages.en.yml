@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'has been successfully placed.'
+            subject: 'Order confirmation'
+            view_order_or_change_payment_method: 'View order or change payment method'
+            thank_you: 'Thank you for shopping at our store!'
+            your_order_number: 'Your order no.'
     homepage:
         about_us: 'About Us'
         about_us_content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad adipisci aperiam consectetur cum dicta dolores ducimus, eveniet ex exercitationem harum in iure labore libero magnam minima neque, numquam officiis possimus quasi reiciendis rem repellat repellendus rerum ut vel veniam vitae? Beatae consectetur culpa debitis ex laudantium porro unde? Modi.'

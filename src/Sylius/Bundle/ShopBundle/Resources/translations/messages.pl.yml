@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'zostało pomyślnie złożone.'
+            subject: 'Potwierdzenie zamówienia'
+            view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
+            thank_you: 'Dziękujemy za zakupy w naszym sklepie!'
+            your_order_number: 'Twoje zamówienie o numerze'
     lightbox:
         image_album_label: 'Obraz %1 z %2'
     menu:
