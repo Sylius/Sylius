@@ -20,18 +20,12 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_checkout_select_shipping';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectShippingMethod($shippingMethod)
+    public function selectShippingMethod(string $shippingMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
@@ -43,10 +37,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         $shippingMethodOptionElement->selectOption($shippingMethodOptionElement->getAttribute('value'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingMethods()
+    public function getShippingMethods(): array
     {
         $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
 
@@ -58,9 +49,6 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $shippingMethods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSelectedShippingMethodName(): ?string
     {
         $shippingMethods = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item');
@@ -75,10 +63,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoShippingMethodsMessage()
+    public function hasNoShippingMethodsMessage(): bool
     {
         try {
             $this->getElement('order_cannot_be_shipped_message');
@@ -89,20 +74,14 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethodFee($shippingMethodName, $fee)
+    public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool
     {
         $feeElement = $this->getElement('shipping_method_fee', ['%shipping_method%' => $shippingMethodName])->getText();
 
         return false !== strpos($feeElement, $fee);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
 
@@ -111,33 +90,27 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getDocument()->clickLink('Change address');
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
         $this->getElement('address')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPurchaserEmail()
+    public function getPurchaserEmail(): string
     {
         return $this->getElement('purchaser-email')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForShipment()
+    public function getValidationMessageForShipment(): string
     {
         $foundElement = $this->getElement('shipment');
         if (null === $foundElement) {
@@ -152,26 +125,17 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoAvailableShippingMethodsWarning()
+    public function hasNoAvailableShippingMethodsWarning(): bool
     {
         return $this->hasElement('warning_no_shipping_methods');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isNextStepButtonUnavailable()
+    public function isNextStepButtonUnavailable(): bool
     {
         return $this->getElement('next_step')->hasClass('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod($shippingMethodName)
+    public function hasShippingMethod(string $shippingMethodName): bool
     {
         $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
 
@@ -183,9 +147,6 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return in_array($shippingMethodName, $shippingMethods);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
