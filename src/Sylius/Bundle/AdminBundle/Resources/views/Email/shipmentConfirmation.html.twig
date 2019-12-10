@@ -1,24 +1,24 @@
 {% extends '@SyliusAdmin/Email/layout.html.twig' %}
 
 {% block subject %}
-    Shipment confirmation
+    {{ 'sylius.email.shipment_confirmation.subject'|trans({}, null, localeCode) }}
 {% endblock %}
 
 {% block content %}
     <div style="text-align: center;">
         <div>
-            Your order with number
+            {{ 'sylius.email.shipment_confirmation.your_order_with_number'|trans({}, null, localeCode) }}
             <span style="color: #1abb9c;">{{ order.number }}</span>
-            has been sent using
+            {{ 'sylius.email.shipment_confirmation.has_been_sent_using'|trans({}, null, localeCode) }}
             <span style="color: #1abb9c;">{{ shipment.method }}</span>.
         </div>
         <div style="margin-bottom: 20px;">
-            You can check it's location with the
+            {{ 'sylius.email.shipment_confirmation.you_can_check_its_location'|trans({}, null, localeCode) }}
             <span style="color: #1abb9c;">{{ shipment.tracking }}</span>
-            tracking code.
+            {{ 'sylius.email.shipment_confirmation.tracking_code'|trans({}, null, localeCode) }}
         </div>
         <div>
-            Thank you for a successful transaction.
+            {{ 'sylius.email.shipment_confirmation.thank_you_for_transaction'|trans({}, null, localeCode) }}
         </div>
     </div>
 {% endblock %}

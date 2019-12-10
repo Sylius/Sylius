@@ -102,14 +102,34 @@ final class EmailContext implements Context
 
     /**
      * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
+     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
      */
-    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, string $recipient): void
-    {
-        $this->assertEmailContainsMessageTo($order->getNumber(), $recipient);
-        $this->assertEmailContainsMessageTo($this->getShippingMethodName($order), $recipient);
+    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s %s.',
+                $this->translator->trans('sylius.email.shipment_confirmation.your_order_with_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.shipment_confirmation.has_been_sent_using', [], null, $localeCode),
+                $this->getShippingMethodName($order)
 
-        $tracking = $this->sharedStorage->get('tracking_code');
-        $this->assertEmailContainsMessageTo($tracking, $recipient);
+            ),
+            $recipient
+        );
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                $this->sharedStorage->get('tracking_code'),
+                $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
+                $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
+
+            ),
+            $recipient
+        );
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void

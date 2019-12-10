@@ -671,6 +671,16 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the order :order has been placed in :localeCode locale
+     */
+    public function theOrderHasBeenPlacedInLocale(OrderInterface $order, string $localeCode): void
+    {
+        $order->setLocaleCode($localeCode);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
