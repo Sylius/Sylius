@@ -91,7 +91,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->hasElement('payment_method');
     }
 
-    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, float $amount): bool
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool
     {
         $columns = $this->getProductRowElement($product)->findAll('css', 'td');
         $priceWithoutDiscount = $this->getPriceFromString($columns[1]->getText());
@@ -101,7 +101,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $discount === $amount;
     }
 
-    public function hasOrderTotal(float $total): bool
+    public function hasOrderTotal(int $total): bool
     {
         if (!$this->hasElement('order_total')) {
             return false;
@@ -304,7 +304,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    private function hasAddressPart(string $address, string $addressPart, bool $optional = false): bool
+    private function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
