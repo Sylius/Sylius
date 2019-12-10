@@ -46,6 +46,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
         $productVariant->getName()->willReturn('Red variant');
+        $productVariant->getCode()->willReturn('RED_VARIANT');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)
