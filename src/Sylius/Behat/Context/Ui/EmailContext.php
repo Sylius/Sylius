@@ -18,6 +18,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
@@ -28,10 +29,17 @@ final class EmailContext implements Context
     /** @var EmailCheckerInterface */
     private $emailChecker;
 
-    public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
-    {
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        EmailCheckerInterface $emailChecker,
+        TranslatorInterface $translator
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
+        $this->translator = $translator;
     }
 
     /**
@@ -77,13 +85,16 @@ final class EmailContext implements Context
 
     /**
      * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
+     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him in ("([^"]+)" locale)$/
      */
-    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order): void
+    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
             sprintf(
-                'Your order no. %s has been successfully placed.',
-                $order->getNumber()
+                '%s %s %s',
+                $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode)
             ),
             $order->getCustomer()->getEmailCanonical()
         );
