@@ -3,12 +3,31 @@
 
 sylius:
     email:
+        contact_request:
+            content: 'Zawartość'
+            message_from: 'Wiadomość od'
+            subject: 'Prośba o kontakt'
         order_confirmation:
             has_been_successfully_placed: 'zostało pomyślnie złożone.'
             subject: 'Potwierdzenie zamówienia'
             view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
             thank_you: 'Dziękujemy za zakupy w naszym sklepie!'
             your_order_number: 'Twoje zamówienie o numerze'
+        password_reset:
+            hello: 'Cześć'
+            reset_your_password: 'Zresetuj swoje hasło'
+            subject: 'Resetowanie hasła'
+            to_reset_your_password: 'Aby zresetować hasło - kliknij w link poniżej'
+        user_registration:
+            start_shopping: 'Rozpocznij zakupy'
+            subject: 'Rejestracja klienta'
+            welcome_to_our_store: 'Witamy w naszym sklepie!'
+            you_have_just_been_registered: 'Właśnie zostałeś zarejestrowany. Dziękujemy'
+        verification_token:
+            hello: 'Cześć'
+            subject: 'Weryfikacja adresu mailowego'
+            to_verify_your_email_address: 'Aby zweryfikować swój adres mailowy - kliknij w link poniżej'
+            verify_your_email_address: 'Zweryfikuj swój adres mailowy'
     lightbox:
         image_album_label: 'Obraz %1 z %2'
     menu:
