@@ -99,11 +99,14 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
-     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
+     * @Then an email with the confirmation of the order :order should be sent to :email
+     * @Then an email with the confirmation of the order :order should be sent to :email in :localeCode locale
      */
-    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
-    {
+    public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
@@ -111,8 +114,17 @@ final class EmailContext implements Context
                 $order->getNumber(),
                 $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode)
             ),
-            $order->getCustomer()->getEmailCanonical()
+            $recipient
         );
+    }
+
+    /**
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
+     */
+    public function anEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
+    {
+        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
     }
 
     /**

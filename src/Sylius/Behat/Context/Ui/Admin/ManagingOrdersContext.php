@@ -193,6 +193,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        $this->showPage->resendOrderConfirmationEmail();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
