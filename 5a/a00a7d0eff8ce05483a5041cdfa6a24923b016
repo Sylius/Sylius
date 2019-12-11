@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-12-10T10:31:55Z
+
+I find passing the locale code to every translation call very annoying, so I did this:
+https://gist.github.com/vvasiloi/40ed49e336fd4be22544e3e9e1c81e9a
+
+---------------------------------------------------------------------------
+
+by GSadee at 2019-12-10T10:44:49Z
+
+@vvasiloi Thanks for the suggestion, I was thinking about it and your solution looks quite convincing 👍
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-11T11:12:07Z
+
+Thanks, Grzegorz! :tada:
