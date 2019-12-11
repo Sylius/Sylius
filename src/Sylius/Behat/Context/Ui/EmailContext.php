@@ -44,12 +44,23 @@ final class EmailContext implements Context
 
     /**
      * @Then it should be sent to :recipient
-     * @Then the email with reset token should be sent to :recipient
      * @Then the email with contact request should be sent to :recipient
      */
     public function anEmailShouldBeSentTo(string $recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
+    }
+
+    /**
+     * @Then an email with reset token should be sent to :recipient
+     * @Then an email with reset token should be sent to :recipient in :localeCode locale
+     */
+    public function anEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
+            $recipient
+        );
     }
 
     /**
@@ -77,15 +88,19 @@ final class EmailContext implements Context
 
     /**
      * @Then a welcoming email should have been sent to :recipient
+     * @Then a welcoming email should have been sent to :recipient in :localeCode locale
      */
-    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient): void
+    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
-        $this->assertEmailContainsMessageTo('Welcome to our store', $recipient);
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.user_registration.welcome_to_our_store', [], null, $localeCode),
+            $recipient
+        );
     }
 
     /**
-     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
-     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him in ("([^"]+)" locale)$/
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
      */
     public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {

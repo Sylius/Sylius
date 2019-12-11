@@ -234,14 +234,18 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When /^I proceed selecting ("[^"]+" as shipping country)$/
      */
-    public function iProceedSelectingShippingCountry(CountryInterface $shippingCountry = null, $localeCode = 'en_US')
-    {
+    public function iProceedSelectingShippingCountry(
+        CountryInterface $shippingCountry = null,
+        string $localeCode = 'en_US',
+        ?string $email = null
+    ) {
         $this->addressPage->open(['_locale' => $localeCode]);
         $shippingAddress = $this->createDefaultAddress();
         if (null !== $shippingCountry) {
             $shippingAddress->setCountryCode($shippingCountry->getCode());
         }
 
+        $this->addressPage->specifyEmail($email);
         $this->addressPage->specifyShippingAddress($shippingAddress);
         $this->addressPage->nextStep();
     }
