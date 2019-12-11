@@ -32,29 +32,17 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            0,
+            'sylius.twig.extension.template_event',
+            1,
             [
                 'first_event' => [
-                    ['template' => 'first.html.twig', 'name' => 'first_block'],
-                    ['template' => 'second.html.twig', 'name' => 'second_block'],
+                    'first.html.twig',
+                    'second.html.twig',
                 ],
                 'second_event' => [
-                    ['template' => 'another.html.twig', 'name' => 'another_block'],
+                    'another.html.twig',
                 ],
             ]
-        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            'kernel.event_listener',
-            ['event' => 'sonata.block.event.first_event', 'method' => '__invoke']
-        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            'kernel.event_listener',
-            ['event' => 'sonata.block.event.second_event', 'method' => '__invoke']
         );
     }
 
@@ -69,40 +57,10 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            0,
+            'sylius.twig.extension.template_event',
+            1,
             ['event_name' => [
-                ['template' => 'second.html.twig', 'name' => 'second_block'],
-            ]]
-        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            'kernel.event_listener',
-            ['event' => 'sonata.block.event.event_name', 'method' => '__invoke']
-        );
-    }
-
-    /** @test */
-    public function it_sorts_blocks_by_their_priority(): void
-    {
-        $this->load(['events' => [
-            'event_name' => ['blocks' => [
-                'third_block' => ['template' => 'third.html.twig', 'enabled' => true, 'priority' => -5],
-                'fourth_block' => ['template' => 'fourth.html.twig', 'enabled' => true, 'priority' => -10],
-                'second_block' => ['template' => 'second.html.twig', 'enabled' => true, 'priority' => 0],
-                'first_block' => ['template' => 'first.html.twig', 'enabled' => true, 'priority' => 5],
-            ]],
-        ]]);
-
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            0,
-            ['event_name' => [
-                ['template' => 'first.html.twig', 'name' => 'first_block'],
-                ['template' => 'second.html.twig', 'name' => 'second_block'],
-                ['template' => 'third.html.twig', 'name' => 'third_block'],
-                ['template' => 'fourth.html.twig', 'name' => 'fourth_block'],
+                'second.html.twig',
             ]]
         );
     }
@@ -120,31 +78,15 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.ui.sonata_multiple_block_event_listener',
-            0,
+            'sylius.twig.extension.template_event',
+            1,
             ['event_name' => [
-                ['template' => 'first.html.twig', 'name' => 'first_block'],
-                ['template' => 'second.html.twig', 'name' => 'second_block'],
-                ['template' => 'third.html.twig', 'name' => 'third_block'],
-                ['template' => 'fourth.html.twig', 'name' => 'fourth_block'],
+                'first.html.twig',
+                'second.html.twig',
+                'third.html.twig',
+                'fourth.html.twig',
             ]]
         );
-    }
-
-    /** @test */
-    public function it_does_not_register_listener_for_event_that_has_all_blocks_disabled(): void
-    {
-        $this->load(['events' => [
-            'event_name' => ['blocks' => [
-                'first_block' => ['template' => 'first.html.twig', 'enabled' => false, 'priority' => 0],
-                'second_block' => ['template' => 'second.html.twig', 'enabled' => false, 'priority' => 0],
-            ]],
-        ]]);
-
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.ui.sonata_multiple_block_event_listener', 0, []);
-
-        $listenerDefinition = $this->container->findDefinition('sylius.ui.sonata_multiple_block_event_listener');
-        $this->assertEmpty($listenerDefinition->getTags());
     }
 
     protected function getContainerExtensions(): array

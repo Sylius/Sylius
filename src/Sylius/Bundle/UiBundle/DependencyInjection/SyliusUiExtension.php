@@ -36,24 +36,18 @@ final class SyliusUiExtension extends Extension
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
-        $multipleBlockEventListenerDefinition = $container->getDefinition('sylius.ui.sonata_multiple_block_event_listener');
+        $templateEventExtensionDefinition = $container->getDefinition('sylius.twig.extension.template_event');
 
         $blocksForEvents = [];
         foreach ($eventsConfig as $eventName => $eventConfiguration) {
             $blocksPriorityQueue = new SplPriorityQueue();
 
             foreach ($eventConfiguration['blocks'] as $blockName => $details) {
-                if ($details['enabled'] === false) {
+                if (!$details['enabled']) {
                     continue;
                 }
 
-                $blocksPriorityQueue->insert(
-                    [
-                        'template' => $details['template'],
-                        'name' => $blockName,
-                    ],
-                    $details['priority']
-                );
+                $blocksPriorityQueue->insert($details['template'], $details['priority']);
             }
 
             if ($blocksPriorityQueue->count() === 0) {
@@ -61,16 +55,8 @@ final class SyliusUiExtension extends Extension
             }
 
             $blocksForEvents[$eventName] = $blocksPriorityQueue->toArray();
-
-            $multipleBlockEventListenerDefinition->addTag(
-                'kernel.event_listener',
-                [
-                    'event' => sprintf('sonata.block.event.%s', $eventName),
-                    'method' => '__invoke',
-                ]
-            );
         }
 
-        $multipleBlockEventListenerDefinition->setArgument(0, $blocksForEvents);
+        $templateEventExtensionDefinition->setArgument(1, $blocksForEvents);
     }
 }

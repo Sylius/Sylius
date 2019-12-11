@@ -13,21 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Twig;
 
-use Sonata\BlockBundle\Templating\Helper\BlockHelper;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/**
- * Proxy extension for rendering blocks for an event - currently uses Sonata, might change in the future.
- */
 final class TemplateEventExtension extends AbstractExtension
 {
-    /** @var BlockHelper */
-    private $blockHelper;
+    /** @var Environment */
+    private $twig;
 
-    public function __construct(BlockHelper $blockHelper)
+    /**
+     * @var array
+     *
+     * @psalm-var array<string, list<string>>
+     */
+    private $eventsToTemplates;
+
+    public function __construct(Environment $twig, array $eventsToTemplates)
     {
-        $this->blockHelper = $blockHelper;
+        $this->twig = $twig;
+        $this->eventsToTemplates = $eventsToTemplates;
     }
 
     public function getFunctions(): array
@@ -39,6 +44,14 @@ final class TemplateEventExtension extends AbstractExtension
 
     public function renderBlocksForEvent(string $event, array $options = []): string
     {
-        return $this->blockHelper->renderEvent($event, $options);
+        $templates = $this->eventsToTemplates[$event] ?? [];
+
+        $renderedTemplates = [];
+
+        foreach ($templates as $template) {
+            $renderedTemplates[] = $this->twig->render($template, $options);
+        }
+
+        return implode("\n", $renderedTemplates);
     }
 }

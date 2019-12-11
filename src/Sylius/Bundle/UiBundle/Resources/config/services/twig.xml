@@ -34,7 +34,8 @@
         </service>
 
         <service id="sylius.twig.extension.template_event" class="Sylius\Bundle\UiBundle\Twig\TemplateEventExtension" public="false">
-            <argument type="service" id="sonata.block.templating.helper" />
+            <argument type="service" id="twig" />
+            <argument type="collection" />
             <tag name="twig.extension" />
         </service>
     </services>
