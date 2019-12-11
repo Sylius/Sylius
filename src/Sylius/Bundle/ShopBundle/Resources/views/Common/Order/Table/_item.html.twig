@@ -2,7 +2,7 @@
 
 {% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
 {% set unitPromotions = item.units.first.adjustments(unitPromotionAdjustment) %}
-<tr>
+<tr {{ sylius_test_html_attribute('product-row', item.productName) }}>
     <td>
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
     </td>
