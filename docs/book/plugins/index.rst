@@ -22,6 +22,6 @@ Exemplary features may be: Social media buttons, newsletter, wishlists, payment 
 
     creating-plugin
     official-plugins
-    approved-plugins
+    sylius-store
 
 .. include:: /book/plugins/map.rst.inc
