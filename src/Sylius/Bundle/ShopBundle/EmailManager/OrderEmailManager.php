@@ -35,7 +35,7 @@ final class OrderEmailManager implements OrderEmailManagerInterface
             [
                 'order' => $order,
                 'channel' => $order->getChannel(),
-                'localeCode' => $order->getLocaleCode()
+                'localeCode' => $order->getLocaleCode(),
             ])
         ;
     }

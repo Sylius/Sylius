@@ -244,8 +244,9 @@ final class CheckoutAddressingContext implements Context
         if (null !== $shippingCountry) {
             $shippingAddress->setCountryCode($shippingCountry->getCode());
         }
-
-        $this->addressPage->specifyEmail($email);
+        if (null !== $email) {
+            $this->addressPage->specifyEmail($email);
+        }
         $this->addressPage->specifyShippingAddress($shippingAddress);
         $this->addressPage->nextStep();
     }
