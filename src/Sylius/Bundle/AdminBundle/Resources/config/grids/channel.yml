@@ -22,12 +22,12 @@ sylius_grid:
                     sortable: code
                     options:
                         template: "@SyliusAdmin/Channel/Grid/Field/code.html.twig"
-                themeName:
+                type:
                     type: twig
-                    label: sylius.ui.theme
+                    label: sylius.form.channel.type
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Channel/Grid/Field/themeName.html.twig"
+                        template: "@SyliusAdmin/Channel/Grid/Field/type.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

@@ -49,7 +49,7 @@ How to customize templates by overriding?
 
 * **Shop** templates: customizing Login Page template:
 
-The default login template is: ``SyliusShopBundle:login.html.twig``.
+The default login template is: ``@SyliusShopBundle/login.html.twig``.
 In order to override it you need to create your own: ``templates/bundles/SyliusShopBundle/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.

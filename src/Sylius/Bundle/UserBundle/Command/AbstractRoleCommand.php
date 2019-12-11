@@ -80,7 +80,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -95,6 +95,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         $user = $this->findUserByEmail($email, $userType);
 
         $this->executeRoleCommand($input, $output, $user, $securityRoles);
+
+        return 0;
     }
 
     /**

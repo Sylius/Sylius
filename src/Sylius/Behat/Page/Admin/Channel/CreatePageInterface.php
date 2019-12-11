@@ -48,4 +48,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function allowToSkipShippingStep(): void;
 
     public function allowToSkipPaymentStep(): void;
+
+    public function setType(string $type): void;
 }

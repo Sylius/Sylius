@@ -31,7 +31,11 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
     /** @var int */
     private $id;
 
-    /** @var Collection|PromotionInterface[] */
+    /**
+     * @var Collection|PromotionInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionInterface>
+     */
     protected $promotions;
 
     /**

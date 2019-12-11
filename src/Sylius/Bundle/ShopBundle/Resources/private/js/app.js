@@ -10,6 +10,7 @@
 import 'semantic-ui-css/components/popup';
 import 'semantic-ui-css/components/rating';
 import $ from 'jquery';
+import 'slick-carousel';
 
 import 'sylius/ui/app';
 import 'sylius/ui/sylius-api-login';
@@ -78,4 +79,13 @@ $(document).ready(() => {
   $(document).selectShipping();
 
   $('body').find('input[autocomplete="off"]').prop('autocomplete', 'disable');
+
+  $('.carousel').slick({
+    infinite: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    prevArrow: $('.carousel-left'),
+    nextArrow: $('.carousel-right'),
+    appendArrows: false
+  });
 });

@@ -5,13 +5,14 @@
         <div class="ui attached segment">
             {{ form_errors(form) }}
             <div class="fields">
-                <div class="six wide field">
+                <div class="five wide field">
                     {{ form_row(form.code) }}
                 </div>
-                <div class="seven wide field">
+                <div class="six wide field">
                     {{ form_row(form.name) }}
                 </div>
-                <div class="three wide field">
+                <div class="three wide filed">{{ form_row(form.type) }}</div>
+                <div class="one wide field">
                     {{ form_row(form.color) }}
                 </div>
             </div>

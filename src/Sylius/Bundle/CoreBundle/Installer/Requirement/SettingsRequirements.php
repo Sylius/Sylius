@@ -25,24 +25,31 @@ final class SettingsRequirements extends RequirementCollection
 
         $this
             ->add(new Requirement(
-                $translator->trans('sylius.installer.settings.timezone', []),
+                $translator->trans('sylius.installer.settings.timezone'),
                 $this->isOn('date.timezone'),
-                true
+                true,
+                $translator->trans('sylius.installer.settings.timezone_help')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.installer.settings.version_recommended', []),
+                $translator->trans('sylius.installer.settings.version_recommended'),
                 version_compare(\PHP_VERSION, self::RECOMMENDED_PHP_VERSION, '>='),
-                false
+                false,
+                $translator->trans('sylius.installer.settings.version_help', [
+                    '%current%' => \PHP_VERSION,
+                    '%recommended%' => self::RECOMMENDED_PHP_VERSION,
+                ])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.installer.settings.detect_unicode', []),
+                $translator->trans('sylius.installer.settings.detect_unicode'),
                 !$this->isOn('detect_unicode'),
-                false
+                false,
+                $translator->trans('sylius.installer.settings.detect_unicode_help')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.installer.settings.session.auto_start', []),
+                $translator->trans('sylius.installer.settings.session.auto_start'),
                 !$this->isOn('session.auto_start'),
-                false
+                false,
+                $translator->trans('sylius.installer.settings.session.auto_start_help')
             ))
         ;
     }
@@ -51,6 +58,6 @@ final class SettingsRequirements extends RequirementCollection
     {
         $value = ini_get($key);
 
-        return !empty($value) && $value !== 'off';
+        return !empty($value) && strtolower($value) !== 'off';
     }
 }

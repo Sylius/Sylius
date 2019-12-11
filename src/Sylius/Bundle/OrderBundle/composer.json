@@ -36,12 +36,12 @@
         "phpunit/phpunit": "^7.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^4.3",
-        "symfony/dependency-injection": "^4.3",
         "symfony/form": "^4.3",
         "symfony/validator": "^4.3"
     },
     "conflict": {
-        "twig/twig": "^1.0"
+        "twig/twig": "^1.0|^3.0",
+        "symfony/dependency-injection": "^4.4"
     },
     "config": {
         "bin-dir": "bin"

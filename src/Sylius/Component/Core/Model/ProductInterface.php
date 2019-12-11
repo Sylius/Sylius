@@ -60,6 +60,8 @@ interface ProductInterface extends
 
     /**
      * @return Collection|ReviewInterface[]
+     *
+     * @psalm-return Collection<array-key, ReviewInterface>
      */
     public function getAcceptedReviews(): Collection;
 

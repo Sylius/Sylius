@@ -87,6 +87,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
     }
 
+    public function setType(string $type): void
+    {
+        $this->getElement('type')->selectOption($type);
+    }
+
     protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
@@ -95,13 +100,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
-            'base_currency' => '#sylius_channel_baseCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
+            'type' => '#sylius_channel_type',
         ]);
     }
 }

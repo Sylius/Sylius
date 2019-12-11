@@ -33,11 +33,9 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \LogicException
      */
-    public function getCurrentPageWithForm(array $pages)
+    public function getCurrentPageWithForm(array $pages): SymfonyPageInterface
     {
         $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), \PHP_URL_PATH));
 

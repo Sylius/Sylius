@@ -22,6 +22,8 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
 {
     /**
      * @return Collection|OrderInterface[]
+     *
+     * @psalm-return Collection<array-key, OrderInterface>
      */
     public function getOrders(): Collection;
 
@@ -37,6 +39,8 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
 
     /**
      * @return Collection|AddressInterface[]
+     *
+     * @psalm-return Collection<array-key, AddressInterface>
      */
     public function getAddresses(): Collection;
 

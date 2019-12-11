@@ -36,7 +36,11 @@ class ProductVariant implements ProductVariantInterface
     /** @var ProductInterface */
     protected $product;
 
-    /** @var Collection|ProductOptionValueInterface[] */
+    /**
+     * @var Collection|ProductOptionValueInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductOptionValueInterface>
+     */
     protected $optionValues;
 
     /** @var int */
@@ -45,6 +49,8 @@ class ProductVariant implements ProductVariantInterface
     public function __construct()
     {
         $this->initializeTranslationsCollection();
+
+        /** @var ArrayCollection<array-key, ProductOptionValueInterface> $this->optionValues */
         $this->optionValues = new ArrayCollection();
 
         $this->createdAt = new \DateTime();

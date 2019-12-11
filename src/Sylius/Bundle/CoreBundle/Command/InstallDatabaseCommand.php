@@ -39,7 +39,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $suite = $input->getOption('fixture-suite');
 
@@ -63,5 +63,7 @@ EOT
             $parameters['--fixture-suite'] = $suite;
         }
         $this->commandExecutor->runCommand('sylius:install:sample-data', $parameters, $output);
+
+        return 0;
     }
 }

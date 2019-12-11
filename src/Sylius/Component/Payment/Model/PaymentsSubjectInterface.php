@@ -19,6 +19,8 @@ interface PaymentsSubjectInterface
 {
     /**
      * @return Collection|PaymentInterface[]
+     *
+     * @psalm-return Collection<array-key, PaymentInterface>
      */
     public function getPayments(): Collection;
 

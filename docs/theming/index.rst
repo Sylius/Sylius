@@ -1,3 +1,9 @@
+.. raw:: html
+
+    <div style="padding: 20px; background: #ffedcc; border-radius: 4px; margin-bottom: 20px;">
+    <strong>EXPERIMENTAL.</strong> This guide is based on "Sylius" and "Sylius-Standard" master branches.
+    </div>
+
 🎨 Theming Guide
 ================
 
@@ -8,6 +14,7 @@ and thus completely customizing Sylius assets.
     :hidden:
 
     webpack
+    bootstrap-theme
 
 .. include:: /theming/map.rst.inc
 

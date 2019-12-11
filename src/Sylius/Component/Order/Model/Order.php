@@ -33,13 +33,21 @@ class Order implements OrderInterface
     /** @var string|null */
     protected $notes;
 
-    /** @var Collection<array-key, OrderItemInterface> */
+    /**
+     * @var Collection|OrderItemInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderItemInterface>
+     */
     protected $items;
 
     /** @var int */
     protected $itemsTotal = 0;
 
-    /** @var Collection<array-key, AdjustmentInterface> */
+    /**
+     * @var Collection|AdjustmentInterface[]
+     *
+     * @psalm-var Collection<array-key, AdjustmentInterface>
+     */
     protected $adjustments;
 
     /** @var int */
@@ -57,8 +65,12 @@ class Order implements OrderInterface
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, OrderItemInterface> $this->items */
         $this->items = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
     }
 

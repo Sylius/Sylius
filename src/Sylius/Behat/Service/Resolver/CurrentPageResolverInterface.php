@@ -19,8 +19,6 @@ interface CurrentPageResolverInterface
 {
     /**
      * @param SymfonyPageInterface[] $pages
-     *
-     * @return SymfonyPageInterface
      */
-    public function getCurrentPageWithForm(array $pages);
+    public function getCurrentPageWithForm(array $pages): SymfonyPageInterface;
 }

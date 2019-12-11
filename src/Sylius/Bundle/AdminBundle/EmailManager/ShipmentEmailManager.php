@@ -39,6 +39,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
         $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, [$order->getCustomer()->getEmail()], [
             'shipment' => $shipment,
             'order' => $order,
+            'channel' => $order->getChannel(),
         ]);
     }
 }

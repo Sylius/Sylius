@@ -52,6 +52,8 @@ interface ProductInterface extends
 
     /**
      * @return Collection|ProductVariantInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductVariantInterface>
      */
     public function getVariants(): Collection;
 
@@ -65,6 +67,8 @@ interface ProductInterface extends
 
     /**
      * @return Collection|ProductOptionInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductOptionInterface>
      */
     public function getOptions(): Collection;
 
@@ -76,6 +80,8 @@ interface ProductInterface extends
 
     /**
      * @return Collection|ProductAssociationInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductAssociationInterface>
      */
     public function getAssociations(): Collection;
 

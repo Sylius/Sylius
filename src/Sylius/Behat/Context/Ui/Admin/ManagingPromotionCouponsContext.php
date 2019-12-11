@@ -99,9 +99,9 @@ final class ManagingPromotionCouponsContext implements Context
      * @When /^I specify their code length as (\d+)$/
      * @When I do not specify their code length
      */
-    public function iSpecifyTheirCodeLengthAs($codeLength = null)
+    public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->generatePage->specifyCodeLength($codeLength ?? '');
+        $this->generatePage->specifyCodeLength($codeLength);
     }
 
     /**
@@ -166,9 +166,9 @@ final class ManagingPromotionCouponsContext implements Context
      * @When I do not specify its amount
      * @When I choose the amount of :amount coupons to be generated
      */
-    public function iSpecifyItsAmountAs($amount = null)
+    public function iSpecifyItsAmountAs(?int $amount = null): void
     {
-        $this->generatePage->specifyAmount($amount ?? '');
+        $this->generatePage->specifyAmount($amount);
     }
 
     /**
@@ -260,12 +260,13 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^there should be (0|1) coupon related to (this promotion)$/
      * @Then /^there should be (\b(?![01]\b)\d{1,9}\b) coupons related to (this promotion)$/
+     * @Then /^there should still be (\d+) coupons related to (this promotion)$/
      */
-    public function thereShouldBeCouponRelatedTo($number, PromotionInterface $promotion)
+    public function thereShouldBeCouponRelatedTo(int $number, PromotionInterface $promotion): void
     {
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
-        Assert::same($this->indexPage->countItems(), (int) $number);
+        Assert::same($this->indexPage->countItems(), $number);
     }
 
     /**
@@ -439,13 +440,15 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that generating (\d+) coupons with code length equal to (\d+) is not possible$/
+     * @Then I should be notified that generating :amount coupons with code length equal to :codeLength is not possible
      */
-    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible($amount, $codeLength)
+    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
     {
-        $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
-
-        Assert::true($this->generatePage->checkGenerationValidation($message));
+        Assert::true($this->generatePage->checkGenerationValidation(sprintf(
+            'Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d.',
+            $amount,
+            $codeLength
+        )));
     }
 
     /**

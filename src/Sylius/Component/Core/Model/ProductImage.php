@@ -18,11 +18,16 @@ use Doctrine\Common\Collections\Collection;
 
 class ProductImage extends Image implements ProductImageInterface
 {
-    /** @var Collection|ProductVariantInterface[] */
+    /**
+     * @var Collection|ProductVariantInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductVariantInterface>
+     */
     protected $productVariants;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->productVaraints */
         $this->productVariants = new ArrayCollection();
     }
 

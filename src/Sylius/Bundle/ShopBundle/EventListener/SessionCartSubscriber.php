@@ -52,8 +52,9 @@ final class SessionCartSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $session = $event->getRequest()->getSession();
-        if ($session && !$session->isStarted()) {
+        $request = $event->getRequest();
+
+        if (!$request->hasSession() || !$request->getSession()->isStarted()) {
             return;
         }
 

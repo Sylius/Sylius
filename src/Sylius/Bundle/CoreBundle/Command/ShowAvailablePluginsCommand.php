@@ -36,7 +36,7 @@ final class ShowAvailablePluginsCommand extends Command
         $this->configurePlugins();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<comment>Available official Sylius Plugins:</comment>');
 
@@ -48,6 +48,8 @@ final class ShowAvailablePluginsCommand extends Command
         }
 
         $pluginTable->render();
+
+        return 0;
     }
 
     private function configurePlugins(): void

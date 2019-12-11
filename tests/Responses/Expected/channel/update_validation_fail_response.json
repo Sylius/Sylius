@@ -8,6 +8,7 @@
                     "Please enter channel name."
                 ]
             },
+            "type": {},
             "description": {},
             "enabled": {},
             "hostname": {},

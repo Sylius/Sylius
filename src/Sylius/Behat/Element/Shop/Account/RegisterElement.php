@@ -36,12 +36,12 @@ final class RegisterElement extends Element implements RegisterElementInterface
 
     public function register(): void
     {
-        $this->getDocument()->pressButton('Create an account');
+        $this->getElement('register_button')->click();
     }
 
     public function specifyEmail(?string $email): void
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getElement('email')->setValue($email);
     }
 
     public function getEmail(): string
@@ -51,43 +51,45 @@ final class RegisterElement extends Element implements RegisterElementInterface
 
     public function specifyFirstName(?string $firstName): void
     {
-        $this->getDocument()->fillField('First name', $firstName);
+        $this->getElement('first_name')->setValue($firstName);
     }
 
     public function specifyLastName(?string $lastName): void
     {
-        $this->getDocument()->fillField('Last name', $lastName);
+        $this->getElement('last_name')->setValue($lastName);
     }
 
     public function specifyPassword(?string $password): void
     {
-        $this->getDocument()->fillField('Password', $password);
+        $this->getElement('password')->setValue($password);
     }
 
     public function specifyPhoneNumber(string $phoneNumber): void
     {
-        $this->getDocument()->fillField('Phone number', $phoneNumber);
+        $this->getElement('phone_number')->setValue($phoneNumber);
     }
 
     public function verifyPassword(?string $password): void
     {
-        $this->getDocument()->fillField('Verification', $password);
+        $this->getElement('password_verification')->setValue($password);
     }
 
     public function subscribeToTheNewsletter(): void
     {
-        $this->getDocument()->checkField('Subscribe to the newsletter');
+        $this->getElement('newsletter')->check();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_customer_registration_email',
-            'first_name' => '#sylius_customer_registration_firstName',
-            'last_name' => '#sylius_customer_registration_lastName',
-            'password' => '#sylius_customer_registration_user_plainPassword_first',
-            'password_verification' => '#sylius_customer_registration_user_plainPassword_second',
-            'phone_number' => '#sylius_customer_registration_phoneNumber',
+            'email' => '[data-test-email]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'newsletter' => '[data-test-subscribed-to-newsletter]',
+            'password' => '[data-test-password-first]',
+            'password_verification' => '[data-test-password-second]',
+            'phone_number' => '[data-test-phone-number]',
+            'register_button' => '[data-test-register-button]',
         ]);
     }
 }

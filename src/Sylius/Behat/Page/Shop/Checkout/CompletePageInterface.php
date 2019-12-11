@@ -20,71 +20,29 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface CompletePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $productName
-     * @param string $quantity
-     *
-     * @return bool
-     */
-    public function hasItemWithProductAndQuantity($productName, $quantity);
+    public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasShippingAddress(AddressInterface $address);
+    public function hasShippingAddress(AddressInterface $address): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasBillingAddress(AddressInterface $address);
+    public function hasBillingAddress(AddressInterface $address): bool;
 
-    /**
-     * @return bool
-     */
-    public function getPaymentMethodName();
+    public function getPaymentMethodName(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasPaymentMethod();
+    public function hasPaymentMethod(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasShippingMethod(ShippingMethodInterface $shippingMethod);
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool;
 
-    /**
-     * @param float $amount
-     *
-     * @return bool
-     */
-    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount);
+    public function hasOrderTotal(int $total): bool;
 
-    /**
-     * @param float $total
-     *
-     * @return bool
-     */
-    public function hasOrderTotal($total);
+    public function getBaseCurrencyOrderTotal(): string;
 
-    /**
-     * @param string $notes
-     */
-    public function addNotes($notes);
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool;
 
-    /**
-     * @param string $promotionTotal
-     *
-     * @return bool
-     */
-    public function hasPromotionTotal($promotionTotal);
+    public function addNotes(string $notes): void;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return bool
-     */
-    public function hasPromotion($promotionName);
+    public function hasPromotionTotal(string $promotionTotal): bool;
+
+    public function hasPromotion(string $promotionName): bool;
 
     public function hasShippingPromotion(string $promotionName): bool;
 
@@ -94,70 +52,29 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     public function hasShippingTotal(): bool;
 
-    /**
-     * @param string $price
-     *
-     * @return bool
-     */
-    public function hasProductUnitPrice(ProductInterface $product, $price);
+    public function hasProductUnitPrice(ProductInterface $product, string $price): bool;
 
-    /**
-     * @param string $localeName
-     *
-     * @return bool
-     */
-    public function hasLocale($localeName);
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return bool
-     */
-    public function hasCurrency($currencyCode);
+    public function getValidationErrors(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+    public function hasLocale(string $localeName): bool;
 
-    public function changeAddress();
+    public function hasCurrency(string $currencyCode): bool;
 
-    public function changeShippingMethod();
+    public function confirmOrder(): void;
 
-    public function changePaymentMethod();
+    public function changeAddress(): void;
 
-    public function confirmOrder();
+    public function changeShippingMethod(): void;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasShippingProvinceName($provinceName);
+    public function changePaymentMethod(): void;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasBillingProvinceName($provinceName);
+    public function hasShippingProvinceName(string $provinceName):bool;
 
-    /**
-     * @return string
-     */
-    public function getBaseCurrencyOrderTotal();
+    public function hasBillingProvinceName(string $provinceName): bool;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return string
-     */
-    public function getShippingPromotionDiscount($promotionName);
-
-    /**
-     * @return string
-     */
-    public function getValidationErrors();
+    public function getShippingPromotionDiscount(string $promotionName): string;
 
     public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool;
 

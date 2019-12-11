@@ -62,6 +62,8 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
 
     /**
      * @return Collection|PromotionCouponInterface[]
+     *
+     * @psalm-return Collection<array-key, PromotionCouponInterface>
      */
     public function getCoupons(): Collection;
 
@@ -75,6 +77,8 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
 
     /**
      * @return Collection|PromotionRuleInterface[]
+     *
+     * @psalm-return Collection<array-key, PromotionRuleInterface>
      */
     public function getRules(): Collection;
 
@@ -88,6 +92,8 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
 
     /**
      * @return Collection|PromotionActionInterface[]
+     *
+     * @psalm-return Collection<array-key, PromotionActionInterface>
      */
     public function getActions(): Collection;
 

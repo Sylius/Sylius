@@ -62,6 +62,7 @@ Emails
     :hidden:
 
     emails/custom-email
+    emails/custom-email-template-per-channel
     emails/disabling-order-confirmation-email
     emails/mailer
 
@@ -121,5 +122,6 @@ Frontend
     :hidden:
 
     frontend/admin-js-and-css
+    frontend/google-analytics.rst
 
 .. include:: /cookbook/frontend/map.rst.inc

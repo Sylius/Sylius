@@ -54,7 +54,11 @@ final class EmailChecker implements EmailCheckerInterface
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $sentMessage) {
             if ($this->isMessageTo($sentMessage, $recipient)) {
-                if (false !== strpos($sentMessage->getBody(), $message)) {
+                $body = strip_tags($sentMessage->getBody());
+                $body = str_replace("\n", ' ', $body);
+                $body = preg_replace('/ {2,}/', ' ', $body);
+
+                if (false !== strpos($body, $message)) {
                     return true;
                 }
             }

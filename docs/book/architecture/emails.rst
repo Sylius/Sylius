@@ -15,11 +15,12 @@ Every time a customer registers via the registration form, a user registration e
 
 **Code**: ``user_registration``
 
-**The default template**: ``SyliusShopBundle:Email:userRegistration.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/userRegistration.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
 
 Email Verification
 ------------------
@@ -28,11 +29,12 @@ When a customer registers via the registration form, besides the User Confirmati
 
 **Code**: ``verification_token``
 
-**The default template**: ``SyliusShopBundle:Email:verification.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/verification.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
 
 Password Reset
 --------------
@@ -41,11 +43,12 @@ This e-mail is used when the user requests to reset their password in the login 
 
 **Code**: ``reset_password_token``
 
-**The default template**: ``SyliusShopBundle:Email:passwordReset.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/passwordReset.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
 
 Order Confirmation
 ------------------
@@ -54,11 +57,12 @@ This e-mail is sent when order is placed.
 
 **Code**: ``order_confirmation``
 
-**The default template**: ``SyliusShopBundle:Email:orderConfirmation.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/orderConfirmation.html.twig``
 
 You also have the following parameters available:
 
 * ``order``: Instance of the order, with all its data
+* ``channel``: Channel in which an order was placed
 
 Shipment Confirmation
 ---------------------
@@ -67,12 +71,13 @@ This e-mail is sent when the order's shipping process has started.
 
 **Code**: ``shipment_confirmation``
 
-**The default template**: ``SyliusAdminBundle:Email:shipmentConfirmation.html.twig``
+**The default template**: ``@SyliusAdminBundle/Email/shipmentConfirmation.html.twig``
 
 You have the following parameters available:
 
 * ``shipment``: Shipment instance
 * ``order``: Instance of the order, with all its data
+* ``channel``: Channel in which an order was placed
 
 How to send an Email programmatically?
 --------------------------------------
@@ -95,7 +100,7 @@ Example using **Sender**:
     /** @var SenderInterface $sender */
     $sender = $this->container->get('sylius.email_sender');
 
-    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['bannanowa@gmail.com'], ['user' => $user]);
+    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['sylius@example.com'], ['user' => $user, 'channel' => $channel]);
 
 Example using **EmailManager**:
 

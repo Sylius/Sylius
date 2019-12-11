@@ -30,7 +30,11 @@ class Shipment implements ShipmentInterface
     /** @var ShippingMethodInterface|null */
     protected $method;
 
-    /** @var Collection|ShipmentUnitInterface[] */
+    /**
+     * @var Collection|ShipmentUnitInterface[]
+     *
+     * @psalm-var Collection<array-key, ShipmentUnitInterface>
+     */
     protected $units;
 
     /** @var string|null */
@@ -38,6 +42,7 @@ class Shipment implements ShipmentInterface
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ShipmentUnitInterface> $this->units */
         $this->units = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -154,6 +159,7 @@ class Shipment implements ShipmentInterface
      */
     public function getShippables(): Collection
     {
+        /** @var ArrayCollection<array-key, ShippableInterface> $shippables */
         $shippables = new ArrayCollection();
 
         foreach ($this->units as $unit) {

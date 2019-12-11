@@ -217,6 +217,14 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^the (channel "[^"]+") with a (mobile|website|pos) type$/
+     */
+    public function theChannelIsAType(ChannelInterface $channel, string $type): void
+    {
+        $channel->setType($type);
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

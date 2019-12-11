@@ -52,11 +52,15 @@ interface OrderInterface extends
 
     /**
      * @return Collection|OrderItemUnitInterface[]
+     *
+     * @psalm-return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnits(): Collection;
 
     /**
      * @return Collection|OrderItemUnitInterface[]
+     *
+     * @psalm-return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;
 
@@ -64,6 +68,8 @@ interface OrderInterface extends
 
     /**
      * @return Collection|ShipmentInterface[]
+     *
+     * @psalm-return Collection<array-key, ShipmentInterface>
      */
     public function getShipments(): Collection;
 
@@ -109,6 +115,10 @@ interface OrderInterface extends
 
     /**
      * @return Collection|OrderItemInterface[]
+     *
+     * @psalm-return Collection<array-key, OrderItemInterface>
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     public function getItems(): Collection;
 
