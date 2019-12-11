@@ -252,10 +252,11 @@ class RegistrationContext implements Context
 
     /**
      * @When I register with email :email and password :password
+     * @When I register with email :email and password :password in the :localeCode locale
      */
-    public function iRegisterWithEmailAndPassword(string $email, string $password): void
+    public function iRegisterWithEmailAndPassword(string $email, string $password, string $localeCode = 'en_US'): void
     {
-        $this->registerPage->open();
+        $this->registerPage->open(['_locale' => $localeCode]);
         $this->registerElement->specifyEmail($email);
         $this->registerElement->specifyPassword($password);
         $this->registerElement->verifyPassword($password);

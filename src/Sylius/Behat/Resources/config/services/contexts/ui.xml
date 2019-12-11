@@ -463,6 +463,7 @@
         <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
+            <argument type="service" id="translator" />
         </service>
 
         <service

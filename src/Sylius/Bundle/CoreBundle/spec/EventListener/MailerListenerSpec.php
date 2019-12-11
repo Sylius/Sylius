@@ -20,17 +20,23 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class MailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext, ChannelInterface $channel): void
-    {
-        $this->beConstructedWith($emailSender, $channelContext);
+    function let(
+        SenderInterface $emailSender,
+        ChannelContextInterface $channelContext,
+        LocaleContextInterface $localeContext,
+        ChannelInterface $channel
+    ): void {
+        $this->beConstructedWith($emailSender, $channelContext, $localeContext);
 
         $channelContext->getChannel()->willReturn($channel);
+        $localeContext->getLocaleCode()->willReturn('en_US');
     }
 
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
@@ -86,6 +92,7 @@ final class MailerListenerSpec extends ObjectBehavior
         $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
             'user' => $user,
             'channel' => $channel,
+            'localeCode' => 'en_US',
         ])->shouldBeCalled();
 
         $this->sendUserRegistrationEmail($event);
@@ -104,6 +111,7 @@ final class MailerListenerSpec extends ObjectBehavior
         $emailSender->send('reset_password_token', ['test@example.com'], [
             'user' => $user,
             'channel' => $channel,
+            'localeCode' => 'en_US',
         ])->shouldBeCalled();
 
         $this->sendResetPasswordTokenEmail($event);
@@ -122,6 +130,7 @@ final class MailerListenerSpec extends ObjectBehavior
         $emailSender->send('reset_password_pin', ['test@example.com'], [
             'user' => $user,
             'channel' => $channel,
+            'localeCode' => 'en_US',
         ])->shouldBeCalled();
 
         $this->sendResetPasswordPinEmail($event);

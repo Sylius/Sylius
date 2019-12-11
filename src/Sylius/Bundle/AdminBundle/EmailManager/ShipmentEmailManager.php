@@ -28,9 +28,6 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
         $this->emailSender = $emailSender;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationEmail(ShipmentInterface $shipment): void
     {
         /** @var OrderInterface $order */
@@ -40,6 +37,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
             'shipment' => $shipment,
             'order' => $order,
             'channel' => $order->getChannel(),
+            'localeCode' => $order->getLocaleCode()
         ]);
     }
 }

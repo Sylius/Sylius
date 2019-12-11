@@ -44,6 +44,7 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                         'message' => 'Hello!',
                     ],
                     'channel' => $channel,
+                    'localeCode' => 'en_US',
                 ],
                 [],
                 ['customer@example.com']
@@ -58,7 +59,8 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                     'message' => 'Hello!',
                 ],
                 ['contact@example.com'],
-                $channel
+                $channel,
+                'en_US'
             )
         ;
     }

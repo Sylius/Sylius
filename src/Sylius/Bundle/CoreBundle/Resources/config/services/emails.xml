@@ -18,6 +18,7 @@
     <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
         <argument type="service" id="sylius.email_sender" />
         <argument type="service" id="sylius.context.channel" />
+        <argument type="service" id="sylius.context.locale" />
         <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
         <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
         <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />

@@ -187,6 +187,16 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I reset password for email :email in :localeCode locale
+     */
+    public function iResetPasswordForEmailInLocale(string $email, string $localeCode): void
+    {
+        $this->requestPasswordResetPage->open(['_locale' => $localeCode]);
+        $this->iSpecifyTheEmail($email);
+        $this->iResetIt();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn(): void

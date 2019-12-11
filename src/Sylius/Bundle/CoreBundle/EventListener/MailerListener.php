@@ -18,6 +18,7 @@ use Sylius\Bundle\UserBundle\Mailer\Emails as UserBundleEmails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -31,10 +32,17 @@ final class MailerListener
     /** @var ChannelContextInterface */
     private $channelContext;
 
-    public function __construct(SenderInterface $emailSender, ChannelContextInterface $channelContext)
-    {
+    /** @var LocaleContextInterface */
+    private $localeContext;
+
+    public function __construct(
+        SenderInterface $emailSender,
+        ChannelContextInterface $channelContext,
+        LocaleContextInterface $localeContext
+    ) {
         $this->emailSender = $emailSender;
         $this->channelContext = $channelContext;
+        $this->localeContext = $localeContext;
     }
 
     public function sendResetPasswordTokenEmail(GenericEvent $event): void
@@ -81,6 +89,7 @@ final class MailerListener
             [
                 'user' => $user,
                 'channel' => $this->channelContext->getChannel(),
+                'localeCode' => $this->localeContext->getLocaleCode(),
             ]
         );
     }

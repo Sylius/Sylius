@@ -27,18 +27,35 @@ final class ContactEmailManager implements ContactEmailManagerInterface
         $this->emailSender = $emailSender;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sendContactRequest(array $data, array $recipients, ?ChannelInterface $channel = null): void
-    {
+    public function sendContactRequest(
+        array $data,
+        array $recipients,
+        ?ChannelInterface $channel = null,
+        ?string $localeCode = null
+    ): void {
         if ($channel === null) {
             @trigger_error(
                 sprintf('Not passing channel into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
                 \E_USER_DEPRECATED
             );
         }
+        if ($localeCode === null) {
+            @trigger_error(
+                sprintf('Not passing locale code into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
+                \E_USER_DEPRECATED
+            );
+        }
 
-        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data, 'channel' => $channel], [], [$data['email']]);
+        $this->emailSender->send(
+            Emails::CONTACT_REQUEST,
+            $recipients,
+            [
+                'data' => $data,
+                'channel' => $channel,
+                'localeCode' => $localeCode,
+            ],
+            [],
+            [$data['email']]
+        );
     }
 }
