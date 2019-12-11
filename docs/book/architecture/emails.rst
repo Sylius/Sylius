@@ -21,6 +21,7 @@ You also have the following parameters available:
 
 * ``user``: Instance of the user model
 * ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Email Verification
 ------------------
@@ -35,6 +36,7 @@ You also have the following parameters available:
 
 * ``user``: Instance of the user model
 * ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Password Reset
 --------------
@@ -49,6 +51,7 @@ You also have the following parameters available:
 
 * ``user``: Instance of the user model
 * ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Order Confirmation
 ------------------
@@ -63,6 +66,7 @@ You also have the following parameters available:
 
 * ``order``: Instance of the order, with all its data
 * ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
 
 Shipment Confirmation
 ---------------------
@@ -78,6 +82,7 @@ You have the following parameters available:
 * ``shipment``: Shipment instance
 * ``order``: Instance of the order, with all its data
 * ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
 
 How to send an Email programmatically?
 --------------------------------------
@@ -100,7 +105,7 @@ Example using **Sender**:
     /** @var SenderInterface $sender */
     $sender = $this->container->get('sylius.email_sender');
 
-    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['sylius@example.com'], ['user' => $user, 'channel' => $channel]);
+    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['sylius@example.com'], ['user' => $user, 'channel' => $channel, 'localeCode' => $localeCode]);
 
 Example using **EmailManager**:
 
