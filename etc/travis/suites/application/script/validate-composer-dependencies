@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
+
+print_header "Validating (Composer require checker)" "Sylius"
+run_command "curl -L https://github.com/maglnet/ComposerRequireChecker/releases/download/2.0.0/composer-require-checker.phar > $SYLIUS_CACHE_DIR/composer-require-checker.phar"
+run_command "php $SYLIUS_CACHE_DIR/composer-require-checker.phar --config-file=$(pwd)/composer-require-checker.json"

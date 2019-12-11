@@ -6,6 +6,7 @@ code=0
 commands=(
     validate-composer
     validate-composer-security
+    validate-composer-dependencies
     validate-doctrine-schema
     validate-twig
     validate-yaml-files
