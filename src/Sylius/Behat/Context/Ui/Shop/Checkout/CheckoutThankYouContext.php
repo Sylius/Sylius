@@ -82,7 +82,7 @@ final class CheckoutThankYouContext implements Context
      */
     public function iShouldSeeTheThankYouPageInLocale($localeCode)
     {
-        Assert::false($this->thankYouPage->isOpen(['_locale' => $localeCode]));
+        Assert::true($this->thankYouPage->isOpen(['_locale' => $localeCode]));
     }
 
     /**

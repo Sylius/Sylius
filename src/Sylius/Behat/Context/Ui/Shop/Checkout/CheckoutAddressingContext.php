@@ -237,7 +237,7 @@ final class CheckoutAddressingContext implements Context
     public function iProceedSelectingShippingCountry(
         CountryInterface $shippingCountry = null,
         string $localeCode = 'en_US',
-        ?string $email = null
+        ?string $email = 'adam@adam.com'
     ) {
         $this->addressPage->open(['_locale' => $localeCode]);
         $shippingAddress = $this->createDefaultAddress();
