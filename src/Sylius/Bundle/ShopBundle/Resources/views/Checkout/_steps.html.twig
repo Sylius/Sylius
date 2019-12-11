@@ -19,7 +19,7 @@
 {% endif %}
 
 <div class="ui {{ steps_count }} steps">
-    <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
+    <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}" {{ sylius_test_html_attribute('step-address') }}>
         <i class="map icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.address'|trans }}</div>

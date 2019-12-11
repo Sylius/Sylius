@@ -28,10 +28,10 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
      */
     public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-sylius-validation-error]');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-sylius-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();

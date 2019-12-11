@@ -70,7 +70,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function checkInvalidCredentialsValidation(): bool
     {
         $this->getElement('login_password')->waitFor(5, function () {
-            $validationElement = $this->getElement('login_password')->getParent()->find('css', '.red.label');
+            $validationElement = $this->getElement('login_password')->getParent()->find('css', '[data-test-login-errors]');
             if (null === $validationElement) {
                 return false;
             }
@@ -85,12 +85,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         $validationMessage = $foundElement->find('css', '.sylius-validation-error');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $validationMessage->getText();
@@ -118,7 +118,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('billing_country_province')->selectOption($province);
     }
 
-    public function specifyEmail(string $email): void
+    public function specifyEmail(?string $email): void
     {
         $this->getElement('customer_email')->setValue($email);
     }
@@ -164,7 +164,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('[data-test-item-subtotal="%s"]', $itemSlug))->getText();
     }
 
     public function getShippingAddressCountry(): string
@@ -253,31 +253,31 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address_book' => '#sylius-billing-address .ui.dropdown',
-            'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
-            'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
-            'billing_street' => '#sylius_checkout_address_billingAddress_street',
-            'billing_city' => '#sylius_checkout_address_billingAddress_city',
-            'billing_country' => '#sylius_checkout_address_billingAddress_countryCode',
+            'billing_address_book' => '[data-test-billing-address] .ui.dropdown',
+            'billing_city' => '[data-test-billing-city]',
+            'billing_country' => '[data-test-billing-country]',
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
-            'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
+            'billing_first_name' => '[data-test-billing-first-name]',
+            'billing_last_name' => '[data-test-billing-last-name]',
+            'billing_postcode' => '[data-test-billing-postcode]',
             'billing_province' => '[name="sylius_checkout_address[billingAddress][provinceName]"]',
-            'checkout_subtotal' => '#sylius-checkout-subtotal',
-            'customer_email' => '#sylius_checkout_address_customer_email',
-            'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
-            'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',
+            'billing_street' => '[data-test-billing-street]',
+            'checkout_subtotal' => '[data-test-checkout-subtotal]',
+            'customer_email' => '[data-test-login-email]',
+            'different_billing_address' => '[data-test-different-billing-address]',
+            'different_billing_address_label' => '[data-test-different-billing-address-label]',
             'login_button' => '#sylius-api-login-submit',
             'login_password' => 'input[type=\'password\']',
-            'next_step' => '#next-step',
-            'shipping_address_book' => '#sylius-shipping-address .ui.dropdown',
-            'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
-            'shipping_country' => '#sylius_checkout_address_shippingAddress_countryCode',
+            'next_step' => '[data-test-next-step]',
+            'shipping_address_book' => '[data-test-address-book]',
+            'shipping_city' => '[data-test-shipping-city]',
+            'shipping_country' => '[data-test-shipping-country]',
             'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',
-            'shipping_first_name' => '#sylius_checkout_address_shippingAddress_firstName',
-            'shipping_last_name' => '#sylius_checkout_address_shippingAddress_lastName',
-            'shipping_postcode' => '#sylius_checkout_address_shippingAddress_postcode',
+            'shipping_first_name' => '[data-test-shipping-first-name]',
+            'shipping_last_name' => '[data-test-shipping-last-name]',
+            'shipping_postcode' => '[data-test-shipping-postcode]',
             'shipping_province' => '[name="sylius_checkout_address[shippingAddress][provinceName]"]',
-            'shipping_street' => '#sylius_checkout_address_shippingAddress_street',
+            'shipping_street' => '[data-test-shipping-street]',
         ]);
     }
 

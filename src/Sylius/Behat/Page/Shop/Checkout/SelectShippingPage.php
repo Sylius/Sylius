@@ -39,7 +39,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function getShippingMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
 
         $shippingMethods = [];
         foreach ($inputs as $input) {
@@ -51,12 +51,12 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function getSelectedShippingMethodName(): ?string
     {
-        $shippingMethods = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item');
+        $shippingMethods = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-item]');
 
         /** @var NodeElement $shippingMethod */
         foreach ($shippingMethods as $shippingMethod) {
             if (null !== $shippingMethod->find('css', 'input:checked')) {
-                return $shippingMethod->find('css', '.content label')->getText();
+                return $shippingMethod->find('css', '[data-test-shipping-method-label]')->getText();
             }
         }
 
@@ -87,7 +87,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('[data-test-item-subtotal="%s"]', $itemSlug))->getText();
     }
 
     public function nextStep(): void
@@ -107,7 +107,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function getPurchaserEmail(): string
     {
-        return $this->getElement('purchaser-email')->getText();
+        return $this->getElement('purchaser_email')->getText();
     }
 
     public function getValidationMessageForShipment(): string
@@ -117,9 +117,9 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             throw new ElementNotFoundException($this->getSession(), 'Items element');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $validationMessage->getText();
@@ -137,7 +137,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function hasShippingMethod(string $shippingMethodName): bool
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
 
         $shippingMethods = [];
         foreach ($inputs as $input) {
@@ -150,17 +150,17 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'address' => '.steps a:contains("Address")',
-            'checkout_subtotal' => '#sylius-checkout-subtotal',
-            'next_step' => '#next-step',
-            'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
-            'purchaser-email' => '#purchaser-email',
-            'shipment' => '.items',
+            'address' => '[data-test-step-address]',
+            'checkout_subtotal' => '[data-test-checkout-subtotal]',
+            'next_step' => '[data-test-next-step]',
+            'order_cannot_be_shipped_message' => '[data-test-order-cannot-be-shipped]',
+            'purchaser_email' => '[data-test-purchaser-name-or-email]',
+            'shipment' => '[data-test-shipments]',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
-            'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
-            'shipping_method_select' => '.item:contains("%shipping_method%") > .field > .ui.radio.checkbox',
+            'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
+            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
-            'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped',
+            'warning_no_shipping_methods' => '[data-test-order-cannot-be-shipped]',
         ]);
     }
 }
