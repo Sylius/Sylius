@@ -20,11 +20,13 @@ Feature: Resending an order confirmation email for a chosen order
     Scenario: Resending a confirmation email for a given order
         When I view the summary of the order "#00000666"
         And I resend the order confirmation email
-        Then an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com"
+        Then I should be notified that the order confirmation email has been successfully resent to the customer
+        And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com"
 
     @ui @email
     Scenario: Sending a confirmation email after shipping an order in different locale than the default one
         Given the order "#00000666" has been placed in "Polish (Poland)" locale
         When I view the summary of the order "#00000666"
         And I resend the order confirmation email
-        Then an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com" in "Polish (Poland)" locale
+        Then I should be notified that the order confirmation email has been successfully resent to the customer
+        And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com" in "Polish (Poland)" locale

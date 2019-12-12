@@ -698,6 +698,7 @@ sylius:
         repeat_new_password: 'Repeat new password'
         report_details: 'Report details'
         reports: 'Reports'
+        resend_the_order_confirmation_email: 'Resend the order confirmation email'
         reserved: 'Reserved'
         reset: 'Reset'
         reset_button: 'Reset'

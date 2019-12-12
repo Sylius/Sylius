@@ -890,6 +890,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Order confirmation has been successfully resent to the customer.',
+            NotificationType::success()
+        );
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

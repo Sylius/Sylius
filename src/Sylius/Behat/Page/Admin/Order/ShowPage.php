@@ -369,7 +369,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function resendOrderConfirmationEmail(): void
     {
-        return $this->getElement('resend_order_confirmation_email')->click();
+        $this->getElement('resend_order_confirmation_email')->click();
     }
 
     protected function getDefinedElements(): array
