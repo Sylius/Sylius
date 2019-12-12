@@ -358,6 +358,42 @@ so we can use an API Key provided in form.
             <tag name="payum.action" factory="sylius_payment" alias="payum.action.capture" />
         </service>
 
+    Finally, in ``src/Payum/SyliusPaymentGatewayFactory.php`` we need to add
+    ``'payum.action.capture' => new CaptureAction(),`` to config defaults. The ``SyliusPaymentGatewayFactory`` class
+    should look like this:
+
+    .. code-block:: php
+
+        // src/Payum/SyliusPaymentGatewayFactory.php
+
+        <?php
+
+        declare(strict_types=1);
+
+        namespace Acme\SyliusExamplePlugin\Payum;
+
+        use Acme\SyliusExamplePlugin\Payum\Action\CaptureAction;
+        use Acme\SyliusExamplePlugin\Payum\Action\StatusAction;
+        use Payum\Core\Bridge\Spl\ArrayObject;
+        use Payum\Core\GatewayFactory;
+
+        final class SyliusPaymentGatewayFactory extends GatewayFactory
+        {
+            protected function populateConfig(ArrayObject $config): void
+            {
+                $config->defaults([
+                    'payum.factory_name' => 'sylius_payment',
+                    'payum.factory_title' => 'Sylius Payment',
+                    'payum.action.status' => new StatusAction(),
+                    'payum.action.capture' => new CaptureAction(),
+                ]);
+
+                $config['payum.api'] = function (ArrayObject $config) {
+                    return new SyliusApi($config['api_key']);
+                };
+            }
+        }
+
     Your shop is ready to handle the first checkout with your newly created gateway!
 
     .. tip::
