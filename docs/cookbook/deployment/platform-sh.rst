@@ -1,12 +1,6 @@
-.. rst-class:: outdated
 
 How to deploy Sylius to Platform.sh?
 ====================================
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. tip::
 
@@ -19,55 +13,108 @@ In this guide you will find sufficient instructions to have your application up 
 1. Prepare a Platform.sh project
 --------------------------------
 
-If you do not have it yet, go to the `Platform.sh store <https://accounts.platform.sh/platform/buy-now>`_, choose development plan
-and go through checkout. Then, when you will have a project ready, give it a name and proceed to ``Import an existing site``.
+* Create an account on `Platform.sh <https://platform.sh/>`_
 
-.. tip::
+* Create a new project, naming it **MyFirstShop** and selecting **Blank project** template
 
-    To investigate if Platform.sh suits your needs, you can use their **free trial**, which you can choose as a development plan.
+.. hint::
+
+    **Platform.sh** offers a trial month, which you can use for testing your store deployment. If you would be asked to provide
+    your credit card data nevertheless, use `this link <https://accounts.platform.sh/platform/trial/general/setup>`_ for a new
+    project creation.
+
+.. image:: /_images/getting-started-with-sylius/platform-sh-project.png
+    :scale: 55%
+    :align: center
+
+|
+
+* Install a Symfony-Platform.sh bridge in your application with ``composer require platformsh/symfonyflex-bridge``
 
 2. Make the application ready to deploy
 ---------------------------------------
 
-* Add the ``.platform.app.yaml`` file at the root of your project repository
-
-This is how this file should look like for Sylius (tuned version of the default Platform.sh example):
+* Create a file ``.platform/routes.yaml``, which describes how an incoming URL is going to be processed by the server
 
 .. code-block:: yaml
 
-    # .platform.app.yaml
+    "https://{default}/":
+        type: upstream
+        upstream: "app:http"
+
+    "https://www.{default}/":
+        type: redirect
+        to: "https://{default}/"
+
+* Create a file ``.platform/services.yaml``
+
+.. code-block:: yaml
+
+    db:
+        type: mysql:10.2
+        disk: 2048
+
+* Create a file ``.platform.app.yaml``, which is the main server application configuration file (and the longest one :))
+
+.. code-block:: yaml
+
     name: app
-
-    type: "php:7.2"
-
+    type: php:7.3
     build:
         flavor: composer
 
-    relationships:
-        database: "mysql:mysql"
-        redis: "redis:redis"
-
     variables:
         env:
+            # Tell Symfony to always install in production-mode.
             APP_ENV: 'prod'
             APP_DEBUG: 0
 
-    runtime:
-        extensions:
-            - msgpack
-            - igbinary
-            - memcached
-            - redis
+    # The hooks that will be performed when the package is deployed.
+    hooks:
+        build: |
+            set -e
+            yarn install
+            GULP_ENV=prod yarn build
+        deploy: |
+            set -e
+            rm -rf var/cache/*
+            mkdir -p public/media/image
+            bin/console sylius:install -n
+            bin/console sylius:fixtures:load -n
+            bin/console assets:install --symlink --relative public
+            bin/console cache:clear
+
+    # The relationships of the application with services or other applications.
+    # The left-hand side is the name of the relationship as it will be exposed
+    # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
+    # side is in the form `<service name>:<endpoint name>`.
+    relationships:
+        # behind the scene this will be installed mariadb because platform.sh use it instead mysql
+        database: "db:mysql"
 
     dependencies:
         nodejs:
             yarn: "*"
             gulp-cli: "*"
 
+    # The size of the persistent disk of the application (in MB).
+    disk: 2048
+
+    # The mounts that will be performed when the package is deployed.
+    mounts:
+        "/var/cache": "shared:files/cache"
+        "/var/log": "shared:files/log"
+        "/var/sessions": "shared:files/sessions"
+        "/public/uploads": "shared:files/uploads"
+        "/public/media": "shared:files/media"
+
+    # The configuration of app when it is exposed to the web.
     web:
         locations:
-            '/':
+            "/":
+                # The public directory of the app, relative to its root.
                 root: "public"
+                # The front-controller script to send non-static requests to.
                 passthru: "/index.php"
                 allow: true
                 expires: -1
@@ -102,107 +149,6 @@ This is how this file should look like for Sylius (tuned version of the default 
                     '\.(jpe?g|png|gif|svgz?)$':
                         allow: true
 
-    disk: 4096
-
-    mounts:
-        "/var/cache": "shared:files/cache"
-        "/var/log": "shared:files/logs"
-        "/public/uploads": "shared:files/uploads"
-        "/public/media": "shared:files/media"
-
-    hooks:
-        build: |
-            rm public/index.php
-            rm -rf var/cache/*
-            php bin/console --env=prod --no-debug --ansi cache:clear --no-warmup
-            php bin/console --env=prod --no-debug --ansi cache:warmup
-            php bin/console --env=prod --no-debug --ansi assets:install
-            # Next command is only needed if you are using themes
-            php bin/console --env=prod --no-debug --ansi sylius:theme:assets:install
-            yarn install
-            GULP_ENV=prod yarn build
-        deploy: |
-            rm -rf var/cache/*
-            php bin/console --env=prod doctrine:migrations:migrate --no-interaction
-
-The above configuration includes tuned cache expiration headers for static files. The cache lifetimes can be adjusted for your site if desired.
-
-* Add ``.platform/routes.yaml`` file:
-
-.. code-block:: yaml
-
-    # .platform/routes.yaml
-    "http://{default}/":
-        type: upstream
-        upstream: "app:http"
-
-    "http://www.{default}/":
-        type: redirect
-        to: "http://{default}/"
-
-* Add ``.platform/services.yaml`` file:
-
-This file will load ``mysql`` and ``redis`` on your Platform.sh server.
-
-.. code-block:: yaml
-
-    # .platform/services.yaml
-    mysql:
-        type: mysql
-        disk: 1024
-
-    redis:
-        type: redis:3.0
-
-* Configure the access to the database:
-
-In the ``app/config/parameters_platform.php`` file, put the following code:
-
-.. code-block:: php
-
-    // app/config/parameters_platform.php
-    <?php
-
-    $relationships = getenv("PLATFORM_RELATIONSHIPS");
-
-    if (!$relationships) {
-        return;
-    }
-
-    $relationships = json_decode(base64_decode($relationships), true);
-
-    foreach ($relationships['database'] as $endpoint) {
-        if (empty($endpoint['query']['is_master'])) {
-            continue;
-        }
-
-        $container->setParameter('database_driver', 'pdo_' . $endpoint['scheme']);
-        $container->setParameter('database_host', $endpoint['host']);
-        $container->setParameter('database_port', $endpoint['port']);
-        $container->setParameter('database_name', $endpoint['path']);
-        $container->setParameter('database_user', $endpoint['username']);
-        $container->setParameter('database_password', $endpoint['password']);
-        $container->setParameter('database_path', '');
-    }
-    foreach ($relationships['redis'] as $endpoint) {
-        $container->setParameter('redis_dsn', 'redis://'.$endpoint['host'].':'.$endpoint['port']);
-    }
-
-    ini_set('session.save_path', '/tmp/sessions');
-
-    if (getenv('PLATFORM_PROJECT_ENTROPY')) {
-        $container->setParameter('secret', getenv('PLATFORM_PROJECT_ENTROPY'));
-    }
-
-Remember to have it imported in the config:
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        # - { resource: parameters.yml } <- Has to be placed before our new file
-        - { resource: parameters_platform.php }
-
 .. warning::
 
     It is important to place newly created file after importing regular parameters.yml file. Otherwise your database connection will not work.
@@ -210,8 +156,8 @@ Remember to have it imported in the config:
 
 The application secret is used in several places in Sylius and Symfony. Platform.sh allows you to deploy an environment for each branch you have, and therefore it makes sense to have a secret automatically generated by the Platform.sh system. The last 3 lines in the sample above will use the Platform.sh-provided random value as the application secret.
 
-3. Add Platform.sh as a remote to your repository:
---------------------------------------------------
+3. Add Platform.sh as a remote to your repository
+-------------------------------------------------
 
 Use the below command to add your Platform.sh project as the ``platform`` remote:
 
@@ -222,19 +168,13 @@ Use the below command to add your Platform.sh project as the ``platform`` remote
 The ``PROJECT-ID`` is the unique identifier of your project,
 and ``CLUSTER`` can be ``eu`` or ``us`` - depending on where are you deploying your project.
 
-4. Commit the Platform.sh specific files:
------------------------------------------
+4. Commit the configuration
+---------------------------
 
-.. code-block:: bash
+    Use ``git add . && git commit -m "Platform.sh configuration"``
 
-    $ git add .platform.app.yaml
-    $ git add .platform/*
-    $ git add app/config/parameters_platform.php
-    $ git add app/config/config.yml
-    $ git commit -m "Platform.sh deploy configuration files."
-
-5. Push your project to the platform remote:
---------------------------------------------
+5. Push your project to the platform remote
+-------------------------------------------
 
 .. code-block:: bash
 
@@ -261,10 +201,33 @@ When you get connected please run:
 7. Dive deeper
 --------------
 
-Learn some more specific topics related to Sylius & Symfony on our :doc:`Advanced Platform.sh Cookbook </cookbook/deployment/platform-sh-advanced>`
+Add default Sylius cronjobs:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add the example below to your ``.platform.app.yaml`` file. This runs these cronjobs every 6 hours.
+
+.. code-block:: yaml
+
+    crons:
+        cleanup_cart:
+            spec: '0 */6 * * *'
+            cmd: '/usr/bin/flock -n /tmp/lock.app.cleanup_cart bin/console sylius:remove-expired-carts --env=prod --verbose'
+        cleanup_order:
+            spec: '0 */6 * * *'
+            cmd: '/usr/bin/flock -n /tmp/lock.app.cleanup_order bin/console sylius:cancel-unpaid-orders --env=prod --verbose'
+
+Additional tips:
+~~~~~~~~~~~~~~~~
+
+* Platform.sh can serve gzipped versions of your static assets. Make sure to save your assets in the same folder, but with
+    a .gz suffix. The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
+
+* Platform.sh comes with a `New Relic integration <https://docs.platform.sh/administration/integrations/new-relic.html>`_.
+
+* Platform.sh comes with a `Blackfire.io integration <https://docs.platform.sh/administration/integrations/blackfire.html>`_
 
 Learn more
-----------
+~~~~~~~~~~~
 
 * Platform.sh documentation: `Configuring Symfony projects for Platform.sh <https://docs.platform.sh/frameworks/symfony.html>`_
 * Symfony documentation: `Deploying Symfony to Platform.sh <http://symfony.com/doc/current/deployment/platformsh.html>`_

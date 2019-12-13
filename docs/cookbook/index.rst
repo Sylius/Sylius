@@ -97,7 +97,6 @@ Deployment
     :hidden:
 
     deployment/platform-sh
-    deployment/platform-sh-advanced
     deployment/cloudways
     deployment/cron-jobs
 
