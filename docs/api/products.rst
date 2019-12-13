@@ -659,7 +659,7 @@ Exemplary Response
 Getting a Single Product
 ------------------------
 
-To retrieve the details of a product you will need to call the ``/api/v1/product/code`` endpoint with the ``GET`` method.
+To retrieve the details of a product you will need to call the ``/api/v1/products/code`` endpoint with the ``GET`` method.
 
 Definition
 ^^^^^^^^^^
