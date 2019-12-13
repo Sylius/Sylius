@@ -24,18 +24,12 @@ use Webmozart\Assert\Assert;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_product_show';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addToCart()
+    public function addToCart(): void
     {
         $this->getDocument()->pressButton('Add to cart');
 
@@ -44,10 +38,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addToCartWithQuantity($quantity)
+    public function addToCartWithQuantity(string $quantity): void
     {
         $this->getDocument()->fillField('Quantity', $quantity);
         $this->getDocument()->pressButton('Add to cart');
@@ -57,10 +48,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addToCartWithVariant($variant)
+    public function addToCartWithVariant(string $variant): void
     {
         $this->selectVariant($variant);
 
@@ -71,10 +59,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addToCartWithOption(ProductOptionInterface $option, $optionValue)
+    public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
     {
         $select = $this->getDocument()->find('css', sprintf('select#sylius_add_to_cart_cartItem_variant_%s', $option->getCode()));
 
@@ -82,41 +67,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getDocument()->pressButton('Add to cart');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function visit($url)
-    {
-        $absoluteUrl = $this->makePathAbsolute($url);
-        $this->getDriver()->visit($absoluteUrl);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getElement('name')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrentVariantName()
-    {
-        $currentVariantRow = $this->getElement('current_variant_input')->getParent()->getParent();
-
-        return $currentVariantRow->find('css', 'td:first-child')->getText();
-    }
-
-    public function getCurrentUrl(): string
-    {
-        return $this->getDriver()->getCurrentUrl();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAttributeByName(string $name): ?string
     {
         $attributesTable = $this->getElement('attributes');
@@ -145,20 +95,61 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         $attributesTable = $this->getElement('attributes');
 
         return $attributesTable->findAll('css', 'tr > td.sylius-product-attribute-name');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    public function getAverageRating(): float
+    {
+        return (float) $this->getElement('average_rating')->getAttribute('data-average-rating');
+    }
+
+    public function getCurrentUrl(): string
+    {
+        return $this->getDriver()->getCurrentUrl();
+    }
+
+    public function getCurrentVariantName(): string
+    {
+        $currentVariantRow = $this->getElement('current_variant_input')->getParent()->getParent();
+
+        return $currentVariantRow->find('css', 'td:first-child')->getText();
+    }
+
+    public function getName(): string
+    {
+        return $this->getElement('name')->getText();
+    }
+
+    public function getPrice(): string
+    {
+        return $this->getElement('product_price')->getText();
+    }
+
+    public function hasAddToCartButton(): bool
+    {
+        return $this->getDocument()->hasButton('Add to cart')
+            && false === $this->getDocument()->findButton('Add to cart')->hasAttribute('disabled');
+    }
+
+    public function hasAssociation(string $productAssociationName): bool
+    {
+        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
+    }
+
+    public function hasProductInAssociation(string $productName, string $productAssociationName): bool
+    {
+        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+
+        Assert::notNull($products);
+
+        return null !== $products->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+    }
+
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
@@ -169,10 +160,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('validation_errors')->getText() === $message;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function waitForValidationErrors($timeout)
+    public function hasReviewTitled(string $title): bool
+    {
+        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+    }
+
+    public function waitForValidationErrors(int $timeout): bool
     {
         $errorsContainer = $this->getElement('selecting_variants');
 
@@ -181,85 +174,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        return $this->getElement('product_price')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function countReviews()
-    {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasReviewTitled($title)
-    {
-        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAverageRating()
-    {
-        return (float) $this->getElement('average_rating')->getAttribute('data-average-rating');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function selectOption($optionName, $optionValue)
-    {
-        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
-        $optionElement->selectOption($optionValue);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function selectVariant($variantName)
-    {
-        $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
-
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
-            $variantRadio->click();
-
-            return;
-        }
-
-        $this->getDocument()->fillField($variantRadio->getAttribute('name'), $variantRadio->getAttribute('value'));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isOutOfStock()
+    public function isOutOfStock(): bool
     {
         return $this->hasElement('out_of_stock');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAddToCartButton()
-    {
-        return $this->getDocument()->hasButton('Add to cart')
-            && false === $this->getDocument()->findButton('Add to cart')->hasAttribute('disabled');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isMainImageDisplayed()
+    public function isMainImageDisplayed(): bool
     {
         $imageElement = $this->getElement('main_image');
 
@@ -275,29 +195,37 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return false === stripos($pageText, '404 Not Found');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAssociation($productAssociationName)
+    public function countReviews(): int
     {
-        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
+        return count($this->getElement('reviews')->findAll('css', '.comment'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductInAssociation($productName, $productAssociationName)
+    public function selectOption(string $optionName, string $optionValue): void
     {
-        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
-
-        Assert::notNull($products);
-
-        return null !== $products->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
+        $optionElement->selectOption($optionValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function selectVariant(string $variantName): void
+    {
+        $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
+
+        $driver = $this->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            $variantRadio->click();
+
+            return;
+        }
+
+        $this->getDocument()->fillField($variantRadio->getAttribute('name'), $variantRadio->getAttribute('value'));
+    }
+
+    public function visit($url): void
+    {
+        $absoluteUrl = $this->makePathAbsolute($url);
+        $this->getDriver()->visit($absoluteUrl);
+    }
+
     public function open(array $urlParameters = []): void
     {
         $start = microtime(true);
@@ -317,9 +245,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
