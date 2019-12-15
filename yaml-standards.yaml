@@ -1,0 +1,9 @@
+-   pathsToCheck:
+        - ./
+    excludedPaths:
+        - ./var
+        - ./vendor
+    checkers:
+        -   pathToChecker: YamlStandards\Model\YamlIndent\YamlIndentChecker
+            parameters:
+                { indents: 4 }
