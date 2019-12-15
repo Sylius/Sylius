@@ -11,4 +11,3 @@ sylius_admin_api_country:
         criteria:
             code: $code
     type: sylius.resource_api
-
