@@ -36,10 +36,10 @@ use Webmozart\Assert\Assert;
  */
 final class LazyOption
 {
-    public static function randomOne(RepositoryInterface $repository): \Closure
+    public static function randomOne(RepositoryInterface $repository, array $criteria = []): \Closure
     {
-        return function (Options $options) use ($repository) {
-            $objects = $repository->findAll();
+        return function (Options $options) use ($repository, $criteria) {
+            $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -51,14 +51,17 @@ final class LazyOption
         };
     }
 
-    public static function randomOneOrNull(RepositoryInterface $repository, int $chanceOfRandomOne = 100): \Closure
-    {
-        return function (Options $options) use ($repository, $chanceOfRandomOne) {
+    public static function randomOneOrNull(
+        RepositoryInterface $repository,
+        int $chanceOfRandomOne = 100,
+        array $criteria = []
+    ): \Closure {
+        return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria) {
             if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
 
-            $objects = $repository->findAll();
+            $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -68,10 +71,10 @@ final class LazyOption
         };
     }
 
-    public static function randomOnes(RepositoryInterface $repository, int $amount): \Closure
+    public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
-        return function (Options $options) use ($repository, $amount) {
-            $objects = $repository->findAll();
+        return function (Options $options) use ($repository, $amount, $criteria) {
+            $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
                 $objects = $objects->toArray();
@@ -97,9 +100,9 @@ final class LazyOption
         };
     }
 
-    public static function findBy(RepositoryInterface $repository, string $field): \Closure
+    public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValues) use ($repository, $field) {
+        return function (Options $options, $previousValues) use ($repository, $field, $criteria) {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
@@ -111,7 +114,7 @@ final class LazyOption
                 if (is_object($previousValue)) {
                     $resources[] = $previousValue;
                 } else {
-                    $resources[] = $repository->findOneBy([$field => $previousValue]);
+                    $resources[] = $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
                 }
             }
 
@@ -119,9 +122,9 @@ final class LazyOption
         };
     }
 
-    public static function findOneBy(RepositoryInterface $repository, string $field): \Closure
+    public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue) use ($repository, $field) {
+        return function (Options $options, $previousValue) use ($repository, $field, $criteria) {
             if (null === $previousValue || [] === $previousValue) {
                 return $previousValue;
             }
@@ -130,7 +133,7 @@ final class LazyOption
                 return $previousValue;
             }
 
-            return $repository->findOneBy([$field => $previousValue]);
+            return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
         };
     }
 }
