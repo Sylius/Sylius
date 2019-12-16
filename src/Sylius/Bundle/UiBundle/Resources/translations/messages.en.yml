@@ -699,6 +699,7 @@ sylius:
         report_details: 'Report details'
         reports: 'Reports'
         resend_the_order_confirmation_email: 'Resend the order confirmation email'
+        resend_the_shipment_confirmation_email: 'Resend the shipment confirmation email'
         reserved: 'Reserved'
         reset: 'Reset'
         reset_button: 'Reset'

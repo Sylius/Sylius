@@ -4,5 +4,6 @@
 sylius:
     email:
         order_confirmation_resent: 'Order confirmation has been successfully resent to the customer.'
+        shipment_confirmation_resent: 'Shipment confirmation has been successfully resent to the customer.'
     product_variant:
         cannot_generate_variants: 'Cannot generate variants for a product without options values.'

@@ -201,6 +201,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I resend the shipment confirmation email
+     */
+    public function iResendTheShipmentConfirmationEmail(): void
+    {
+        $this->showPage->resendShipmentConfirmationEmail();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -890,12 +898,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
      */
-    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(string $type): void
     {
         $this->notificationChecker->checkNotification(
-            'Order confirmation has been successfully resent to the customer.',
+            sprintf('%s confirmation has been successfully resent to the customer.', ucfirst($type)),
             NotificationType::success()
         );
     }
