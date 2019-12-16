@@ -17,18 +17,12 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_product_index';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countProductsItems()
+    public function countProductsItems(): int
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
@@ -37,86 +31,59 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return count($products);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstProductNameFromList()
+    public function getFirstProductNameFromList(): string
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
         return $productsList->find('css', '.card:first-child .content > a')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastProductNameFromList()
+    public function getLastProductNameFromList(): string
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
         return $productsList->find('css', '.card:last-child .content > a')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function search($name)
+    public function search(string $name): void
     {
         $this->getDocument()->fillField('criteria_search_value', $name);
         $this->getDocument()->pressButton('Search');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sort($order)
+    public function sort(string $orderNumber): void
     {
-        $this->getDocument()->clickLink($order);
+        $this->getDocument()->clickLink($orderNumber);
     }
 
-    public function clearFilter()
+    public function clearFilter(): void
     {
         $this->getDocument()->clickLink('Clear');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isProductOnList($productName)
+    public function isProductOnList(string $productName): bool
     {
         return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no results to display');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductPrice($productName)
+    public function getProductPrice(string $productName): string
     {
         $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
 
         return $container->find('css', '.sylius-product-price')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isProductOnPageWithName($name)
+    public function isProductOnPageWithName(string $name): bool
     {
         return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductsInOrder(array $productNames)
+    public function hasProductsInOrder(array $productNames): bool
     {
         $productsList = $this->getDocument()->find('css', '#products');
         $products = $productsList->findAll('css', '.card  .content > .sylius-product-name');

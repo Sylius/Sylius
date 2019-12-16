@@ -23,123 +23,60 @@ interface ShowPageInterface extends PageInterface
     /**
      * @throws ElementNotFoundException
      */
-    public function addToCart();
+    public function addToCart(): void;
 
     /**
-     * @param string $quantity
-     *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithQuantity($quantity);
+    public function addToCartWithQuantity(string $quantity): void;
 
     /**
      * @param string $variant
      *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithVariant($variant);
+    public function addToCartWithVariant(string $variant): void;
 
     /**
-     * @param string $optionValue
-     *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithOption(ProductOptionInterface $option, $optionValue);
-
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @return string
-     */
-    public function getCurrentVariantName();
-
-    /**
-     * @param string $url
-     */
-    public function visit($url);
+    public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void;
 
     public function getAttributeByName(string $name): ?string;
 
-    /**
-     * @return array
-     */
-    public function getAttributes();
+    public function getAttributes(): array;
 
-    /**
-     * @return bool
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
-
-    /**
-     * @param int $timeout
-     */
-    public function waitForValidationErrors($timeout);
-
-    /**
-     * @return bool
-     */
-    public function isOutOfStock();
-
-    /**
-     * @return bool
-     */
-    public function hasAddToCartButton();
-
-    /**
-     * @return string
-     */
-    public function getPrice();
-
-    /**
-     * @return int
-     */
-    public function countReviews();
-
-    /**
-     * @return bool
-     */
-    public function isMainImageDisplayed();
-
-    /**
-     * @param string $title
-     *
-     * @return bool
-     */
-    public function hasReviewTitled($title);
-
-    /**
-     * @return float
-     */
-    public function getAverageRating();
+    public function getAverageRating(): float;
 
     public function getCurrentUrl(): string;
 
-    /**
-     * @param string $optionName
-     * @param string $optionValue
-     */
-    public function selectOption($optionName, $optionValue);
+    public function getCurrentVariantName(): string;
 
-    /**
-     * @param string $variantName
-     */
-    public function selectVariant($variantName);
+    public function getName(): string;
 
-    /**
-     * @param string $productAssociationName
-     *
-     * @return bool
-     */
-    public function hasAssociation($productAssociationName);
+    public function getPrice(): string;
 
-    /**
-     * @param string $productName
-     * @param string $productAssociationName
-     *
-     * @return bool
-     */
-    public function hasProductInAssociation($productName, $productAssociationName);
+    public function hasAddToCartButton(): bool;
+
+    public function hasAssociation(string $productAssociationName): bool;
+
+    public function hasProductInAssociation(string $productName, string $productAssociationName): bool;
+
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
+
+    public function hasReviewTitled(string $title): bool;
+
+    public function waitForValidationErrors(int $timeout): bool;
+
+    public function isOutOfStock(): bool;
+
+    public function isMainImageDisplayed(): bool;
+
+    public function countReviews(): int;
+
+    public function selectOption(string $optionName, string $optionValue): void;
+
+    public function selectVariant(string $variantName): void;
+
+    public function visit(string $url): void;
 }
