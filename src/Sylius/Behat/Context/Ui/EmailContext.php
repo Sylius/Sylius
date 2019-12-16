@@ -130,6 +130,8 @@ final class EmailContext implements Context
     /**
      * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
      * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
+     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient
+     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient in :localeCode locale
      */
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
@@ -147,16 +149,19 @@ final class EmailContext implements Context
             ),
             $recipient
         );
-        $this->assertEmailContainsMessageTo(
-            sprintf(
-                '%s %s %s',
-                $this->sharedStorage->get('tracking_code'),
-                $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
-                $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
 
-            ),
-            $recipient
-        );
+        if ($this->sharedStorage->has('tracking_code')) {
+            $this->assertEmailContainsMessageTo(
+                sprintf(
+                    '%s %s %s',
+                    $this->sharedStorage->get('tracking_code'),
+                    $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
+                    $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
+
+                ),
+                $recipient
+            );
+        }
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void

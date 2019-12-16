@@ -117,4 +117,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasInformationAboutNoPayment(): bool;
 
     public function resendOrderConfirmationEmail(): void;
+
+    public function resendShipmentConfirmationEmail(): void;
 }

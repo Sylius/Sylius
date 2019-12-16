@@ -372,6 +372,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('resend_order_confirmation_email')->click();
     }
 
+    public function resendShipmentConfirmationEmail(): void
+    {
+        $this->getElement('resend_shipment_confirmation_email')->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -389,6 +394,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'promotion_shipping_discounts' => '#shipping-discount-value',
             'promotion_total' => '#promotion-total',
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
+            'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
