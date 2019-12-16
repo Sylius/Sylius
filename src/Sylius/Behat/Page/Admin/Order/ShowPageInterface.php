@@ -115,4 +115,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getItemOrderDiscount(string $itemName): string;
 
     public function hasInformationAboutNoPayment(): bool;
+
+    public function resendOrderConfirmationEmail(): void;
 }

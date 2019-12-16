@@ -193,6 +193,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        $this->showPage->resendOrderConfirmationEmail();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -879,6 +887,17 @@ final class ManagingOrdersContext implements Context
     {
         Assert::same($this->showPage->getPaymentsCount(), 0);
         Assert::true($this->showPage->hasInformationAboutNoPayment());
+    }
+
+    /**
+     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Order confirmation has been successfully resent to the customer.',
+            NotificationType::success()
+        );
     }
 
     /**

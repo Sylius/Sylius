@@ -367,6 +367,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getDocument()->has('css', '#no-payments:contains("Order without payments")');
     }
 
+    public function resendOrderConfirmationEmail(): void
+    {
+        $this->getElement('resend_order_confirmation_email')->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -383,6 +388,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'promotion_discounts' => '#promotion-discounts',
             'promotion_shipping_discounts' => '#shipping-discount-value',
             'promotion_total' => '#promotion-total',
+            'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
