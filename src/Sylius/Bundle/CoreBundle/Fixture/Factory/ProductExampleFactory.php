@@ -214,6 +214,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')
             ->setNormalizer('product_attributes', function (Options $options, array $productAttributes): array {
+                $productAttributes = $this->filterTranslationsFromAttributes($productAttributes);
                 return $this->setAttributeValues($productAttributes);
             })
 
@@ -448,5 +449,12 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             },
             ''
         ));
+    }
+
+    private function filterTranslationsFromAttributes(array $productAttributes): array
+    {
+        return array_filter($productAttributes, function ($code) {
+            return is_string($code);
+        }, ARRAY_FILTER_USE_KEY);
     }
 }
