@@ -54,6 +54,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
+        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $this->create([
@@ -77,6 +78,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
+        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $taxon->setCurrentLocale('fr_FR');
@@ -112,6 +114,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
+        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $taxon->setCurrentLocale('en_US');
