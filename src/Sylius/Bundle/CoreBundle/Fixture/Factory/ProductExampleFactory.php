@@ -228,6 +228,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             ->setDefault('tax_category', null)
             ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
+
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
         ;
 
         if ($this->taxCategoryRepository !== null) {
@@ -237,15 +240,28 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private function createTranslations(ProductInterface $product, array $options): void
     {
+        // add translation for each defined locales
         foreach ($this->getLocales() as $localeCode) {
-            $product->setCurrentLocale($localeCode);
-            $product->setFallbackLocale($localeCode);
-
-            $product->setName($options['name']);
-            $product->setSlug($options['slug']);
-            $product->setShortDescription($options['short_description']);
-            $product->setDescription($options['description']);
+            $this->createTranslation($product, $localeCode, $options);
         }
+
+        // create or replace with custom translations
+        foreach ($options['translations'] as $localeCode => $translationOptions) {
+            $this->createTranslation($product, $localeCode, $translationOptions);
+        }
+    }
+
+    private function createTranslation(ProductInterface $product, string $localeCode, array $options = []): void
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        $product->setCurrentLocale($localeCode);
+        $product->setFallbackLocale($localeCode);
+
+        $product->setName($options['name']);
+        $product->setSlug($options['slug'] ?: $this->slugGenerator->generate($product, $localeCode));
+        $product->setShortDescription($options['short_description']);
+        $product->setDescription($options['description']);
     }
 
     private function createRelations(ProductInterface $product, array $options): void
