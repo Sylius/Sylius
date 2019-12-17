@@ -2,6 +2,16 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Obsah'
+        order_confirmation:
+            subject: 'Potvrdenie objednávky'
+            view_order_or_change_payment_method: 'Zobraziť objednávku alebo zmeniť spôsob platby'
+        password_reset:
+            hello: 'Ahoj'
+        verification_token:
+            hello: 'Ahoj'
     lightbox:
         image_album_label: 'Obrázok %1 z %2'
     menu:
