@@ -102,7 +102,7 @@ final class LazyOption
 
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValues) use ($repository, $field, $criteria): ?iterable {
+        return function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): ?iterable {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
@@ -122,17 +122,19 @@ final class LazyOption
 
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        /** @param mixed $previousValue */
-        return function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
-            if (null === $previousValue || [] === $previousValue) {
-                return $previousValue;
-            }
+        return
+            /** @param mixed $previousValue */
+            function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+                if (null === $previousValue || [] === $previousValue) {
+                    return $previousValue;
+                }
 
-            if (is_object($previousValue)) {
-                return $previousValue;
-            }
+                if (is_object($previousValue)) {
+                    return $previousValue;
+                }
 
-            return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
-        };
+                return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+            }
+        ;
     }
 }

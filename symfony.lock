@@ -321,13 +321,13 @@
         "version": "v3.0.0"
     },
     "nette/php-generator": {
-        "version": "v3.2.3"
+        "version": "v3.3.1"
     },
     "nette/robot-loader": {
         "version": "v3.0.4"
     },
     "nette/schema": {
-        "version": "v1.0.0"
+        "version": "v1.0.1"
     },
     "nette/utils": {
         "version": "v2.5.2"
@@ -370,6 +370,9 @@
     },
     "phar-io/version": {
         "version": "1.0.1"
+    },
+    "php": {
+        "version": "7.3"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"

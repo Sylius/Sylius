@@ -121,9 +121,9 @@
         "pamil/phpspec-skip-example-extension": "^4.0",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^5.0",
-        "phpstan/phpstan-doctrine": "^0.11",
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-webmozart-assert": "^0.11",
+        "phpstan/phpstan-doctrine": "0.11.6",
+        "phpstan/phpstan": "0.11.19",
+        "phpstan/phpstan-webmozart-assert": "0.11.3",
         "phpunit/phpunit": "^7.0",
         "psr/event-dispatcher": "^1.0",
         "sensiolabs/security-checker": "^5.0",
@@ -135,7 +135,7 @@
         "symfony/flex": "^1.2",
         "symfony/web-profiler-bundle": "^4.3",
         "symfony/web-server-bundle": "^4.3",
-        "vimeo/psalm": "^3.4"
+        "vimeo/psalm": "3.7.2"
     },
     "replace": {
         "sylius/addressing": "self.version",
