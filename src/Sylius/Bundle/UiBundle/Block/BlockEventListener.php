@@ -24,7 +24,7 @@ final class BlockEventListener
     public function __construct(string $template)
     {
         @trigger_error(
-            sprintf('Using "%s" to add blocks to the templates is deprecated since Sylius 1.7. Use "sylius_ui" configuration instead.', self::class),
+            sprintf('Using "%s" to add blocks to the templates is deprecated since Sylius 1.7 and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.', self::class),
             \E_USER_DEPRECATED
         );
 
