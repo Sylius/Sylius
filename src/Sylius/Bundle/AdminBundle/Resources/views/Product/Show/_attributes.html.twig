@@ -14,7 +14,7 @@
             <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}">
                 <table class="ui very basic celled table">
                     <tbody>
-                    {% for attributeValue in product.attributes if attributeValue.localeCode == locale %}
+                    {% for attributeValue in product.attributes|filter(attributeValue => attributeValue.localeCode == locale) %}
                         <tr>
                             <td class="five wide">
                                 <strong class="gray text">{{ attributeValue.name }}</strong>
