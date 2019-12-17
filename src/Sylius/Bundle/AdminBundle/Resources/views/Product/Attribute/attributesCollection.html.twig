@@ -14,13 +14,13 @@
 
     {% for localeCode, translationForm in attr.translations %}
         <div class="ui bottom attached tab segment{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
-            {% spaceless %}
+            {% apply spaceless %}
                 {% for child in form %}
                     {% if localeCode == child.localeCode.vars.value %}
                         {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                     {% endif %}
                 {% endfor %}
-            {% endspaceless %}
+            {% endapply %}
         </div>
     {% endfor %}
 {%- endblock collection_widget %}

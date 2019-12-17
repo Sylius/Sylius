@@ -6,7 +6,7 @@
     {% import _self as tree %}
 
     <ul>
-        {% for taxon in taxons if taxon.id != null %}
+        {% for taxon in taxons|filter(taxon => taxon.id is not null) %}
             <li data-id="{{ taxon.id }}" {% if taxon.children is not empty %}data-sylius-js-tree-parent="{{ taxon.id }}"{% endif %}>
                 <div class="sylius-tree__item">
                     <div class="sylius-tree__icon" {% if taxon.children is not empty %}data-sylius-js-tree-trigger="{{ taxon.id }}"{% endif %}>
