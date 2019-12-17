@@ -156,7 +156,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'order_cannot_be_shipped_message' => '[data-test-order-cannot-be-shipped]',
             'purchaser_email' => '[data-test-purchaser-name-or-email]',
             'shipment' => '[data-test-shipments]',
-            'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
+            'shipping_method' => '[data-test-shipping-method-select]',
             'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
             'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',

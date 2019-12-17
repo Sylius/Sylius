@@ -1,7 +1,7 @@
 <div class="one field" id="sylius-api-login">
     {{ form_errors(form.email, sylius_test_form_attribute('login-errors')) }}
     {% set path = path('sylius_shop_ajax_user_check_action')  %}
-    {{ form_row(form.email, sylius_test_form_attribute('login-email')|merge({'attr': {'data-url': path}})) }}
+    {{ form_row(form.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': path}})) }}
 
     <div class="ui action input" id="sylius-api-login-form">
         <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">

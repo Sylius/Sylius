@@ -5,7 +5,7 @@
         {% include '@SyliusShop/Common/Form/_login.html.twig' with {'form': form.customer} %}
     {% endif %}
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
-    {{ form_row(form.differentBillingAddress,sylius_test_form_attribute('different-billing-address')|merge({'attr': {'data-toggles': 'sylius-billing-address'}, 'label_attr': {'data-test-different-billing-address-label': ''}})) }}
+    {{ form_row(form.differentBillingAddress,sylius_test_form_attribute('different-billing-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-billing-address'}, 'label_attr': {'data-test-different-billing-address-label': ''}} )) }}
 
     {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
 </div>
