@@ -38,6 +38,7 @@ class TaxonFixture extends AbstractResourceFixture
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->variableNode('translations')->cannotBeEmpty()->defaultValue([])->end()
                 ->variableNode('children')->cannotBeEmpty()->defaultValue([])->end()
+                ->variableNode('parent')->defaultNull()->end()
         ;
     }
 }

@@ -100,6 +100,11 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $this->createTaxon($childOptions, $taxon);
         }
 
+        if ($options['parent']) {
+            $parent = $this->taxonRepository->findOneBy(['code' => $options['parent']]);
+            $taxon->setParent($parent);
+        }
+
         return $taxon;
     }
 
@@ -135,6 +140,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])
             ->setAllowedTypes('children', ['array'])
+            ->setDefault('parent', function (Options $options): string {
+                return StringInflector::nameToCode($options['name']);
+            })
         ;
     }
 
