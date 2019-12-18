@@ -40,6 +40,9 @@ default:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
+                            extra_capabilities:
+                                goog:chromeOptions:
+                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
                 firefox:
                     selenium2:
                         browser: firefox
