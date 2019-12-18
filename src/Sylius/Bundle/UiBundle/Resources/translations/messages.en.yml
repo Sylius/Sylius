@@ -401,7 +401,6 @@ sylius:
         is_enabled: 'Is enabled'
         issue_tracker: 'Issue tracker'
         it_seems_you_have_an_account_already: 'It seems you have an account already'
-        item.choice: "{0} |{1}, 1 item|]1,Inf], %count% items"
         item: 'Item'
         item_discount: 'Item discount'
         items: 'Items'
@@ -598,7 +597,6 @@ sylius:
         orders_statistics: 'Orders statistics'
         original_price: 'Original price'
         out_of_stock: 'Out of stock'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{0}|{1}This customer has placed one order|]1,Inf]Overall, this customer has placed %count% orders across all channels'
         overview_of_your_store: 'Overview of your store'
         page: 'Page'
         pages: 'Pages'

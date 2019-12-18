@@ -5,9 +5,9 @@
 
     <i class="cart icon"></i>
     <span id="sylius-cart-total">
-        {{ money.convertAndFormat(cart.itemsTotal) }}
+        {{- money.convertAndFormat(cart.itemsTotal) -}}
     </span>
-    {% transchoice cart.items|length %}sylius.ui.item.choice{% endtranschoice %}
+    {{- 'sylius.ui.item.choice'|trans({'%count%': cart.items|length}) }}
 
     {{ sonata_block_render_event('sylius.shop.partial.cart.summary.after_widget_content', {'cart': cart}) }}
 </div>
