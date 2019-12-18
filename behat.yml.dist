@@ -42,6 +42,8 @@ default:
                                     - "no-sandbox"
                             extra_capabilities:
                                 unexpectedAlertBehaviour: accept
+                                goog:chromeOptions:
+                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
                 firefox:
                     selenium2:
                         browser: firefox
