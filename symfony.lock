@@ -1,7 +1,4 @@
 {
-    "akeneo/phpspec-skip-example-extension": {
-        "version": "v4.0.0"
-    },
     "amphp/amp": {
         "version": "v2.1.2"
     },
@@ -40,9 +37,6 @@
     },
     "coduo/php-to-string": {
         "version": "2.0.1"
-    },
-    "composer/ca-bundle": {
-        "version": "1.1.2"
     },
     "composer/semver": {
         "version": "1.4.2"
@@ -308,26 +302,11 @@
     "netresearch/jsonmapper": {
         "version": "v1.4.0"
     },
-    "nette/bootstrap": {
-        "version": "v3.0.1"
-    },
-    "nette/di": {
-        "version": "v3.0.1"
-    },
     "nette/finder": {
         "version": "v2.4.2"
     },
-    "nette/neon": {
-        "version": "v3.0.0"
-    },
-    "nette/php-generator": {
-        "version": "v3.3.1"
-    },
     "nette/robot-loader": {
         "version": "v3.0.4"
-    },
-    "nette/schema": {
-        "version": "v1.0.1"
     },
     "nette/utils": {
         "version": "v2.5.2"
@@ -346,9 +325,6 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.0.1"
-    },
-    "pamil/phpspec-skip-example-extension": {
-        "version": "v4.0.0"
     },
     "pamil/prophecy-common": {
         "version": "v0.1.0"
@@ -520,15 +496,6 @@
     },
     "sebastian/version": {
         "version": "2.0.1"
-    },
-    "sensiolabs/security-checker": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.0",
-            "ref": "421933bf8f0e75546ac8e00cb3eb12904fa2ac1a"
-        }
     },
     "slevomat/coding-standard": {
         "version": "4.6.3"
