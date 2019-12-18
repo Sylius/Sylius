@@ -48,8 +48,8 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         $order->getShippingAddress()->willReturn($shippingAddress);
         $order->getBillingAddress()->willReturn($billingAddress);
 
-        $addressAdder->add($customer, clone $shippingAddress)->shouldBeCalled();
-        $addressAdder->add($customer, clone $billingAddress)->shouldBeCalled();
+        $addressAdder->add($customer, Argument::type(AddressInterface::class))->shouldBeCalled();
+        $addressAdder->add($customer, Argument::type(AddressInterface::class))->shouldBeCalled();
 
         $this->saveAddresses($order);
     }
