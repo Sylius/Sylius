@@ -522,24 +522,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that a percentage discount value must be at least 0%
      * @Then I should be notified that the maximum value of a percentage discount is 100%
      */
-    public function iShouldBeNotifiedThatTheMaximumValueOfAPercentageDiscountIs100()
+    public function iShouldBeNotifiedThatPercentageDiscountShouldBeBetween(): void
     {
         Assert::same(
             $this->createPage->getValidationMessageForAction(),
-            'The maximum value of a percentage discount is 100%.'
-        );
-    }
-
-    /**
-     * @Then I should be notified that a percentage discount value must be at least 0%
-     */
-    public function iShouldBeNotifiedThatAPercentageDiscountValueMustBeAtLeast0()
-    {
-        Assert::same(
-            $this->createPage->getValidationMessageForAction(),
-            'The value of a percentage discount must be at least 0%.'
+            'The percentage discount must be between 0% and 100%.'
         );
     }
 

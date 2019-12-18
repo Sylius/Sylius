@@ -18,8 +18,7 @@ sylius:
             not_blank: Please enter promotion name.
     promotion_action:
         percentage_discount_configuration:
-            min: The value of a percentage discount must be at least 0%.
-            max: The maximum value of a percentage discount is 100%.
+            not_in_range: The percentage discount must be between 0% and 100%. 
     promotion_coupon:
         code:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
