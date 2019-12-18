@@ -21,7 +21,7 @@ default:
 
         Behat\MinkExtension:
             files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
-            base_url: "http://localhost:8080/"
+            base_url: "https://localhost:8080/"
             default_session: symfony
             javascript_session: chrome
             sessions:
