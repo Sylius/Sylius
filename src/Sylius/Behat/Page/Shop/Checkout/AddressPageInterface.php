@@ -42,15 +42,15 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function specifyPassword(string $password): void;
 
-    public function getItemSubtotal(string $itemName):string ;
+    public function getItemSubtotal(string $itemName): string;
 
-    public function getShippingAddressCountry(): string ;
+    public function getShippingAddressCountry(): string;
 
     public function nextStep(): void;
 
     public function backToStore(): void;
 
-    public function specifyBillingAddressProvince(string $provinceName):void;
+    public function specifyBillingAddressProvince(string $provinceName): void;
 
     public function specifyShippingAddressProvince(string $provinceName): void;
 

@@ -37,7 +37,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
             'shipment' => $shipment,
             'order' => $order,
             'channel' => $order->getChannel(),
-            'localeCode' => $order->getLocaleCode()
+            'localeCode' => $order->getLocaleCode(),
         ]);
     }
 }

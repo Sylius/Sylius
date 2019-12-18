@@ -33,7 +33,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function changeAddress(): void;
 
-    public function changeAddressByStepLabel():void;
+    public function changeAddressByStepLabel(): void;
 
     public function getPurchaserEmail(): string;
 

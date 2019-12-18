@@ -145,7 +145,6 @@ final class EmailContext implements Context
                 $order->getNumber(),
                 $this->translator->trans('sylius.email.shipment_confirmation.has_been_sent_using', [], null, $localeCode),
                 $this->getShippingMethodName($order)
-
             ),
             $recipient
         );
@@ -157,7 +156,6 @@ final class EmailContext implements Context
                     $this->sharedStorage->get('tracking_code'),
                     $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
                     $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
-
                 ),
                 $recipient
             );

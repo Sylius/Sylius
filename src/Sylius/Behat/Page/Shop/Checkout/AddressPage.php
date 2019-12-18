@@ -107,7 +107,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('shipping_country_province')->selectOption($province);
     }
 
-    public function specifyBillingAddress(AddressInterface $billingAddress):void
+    public function specifyBillingAddress(AddressInterface $billingAddress): void
     {
         $this->specifyAddress($billingAddress, self::TYPE_BILLING);
     }

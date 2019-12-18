@@ -31,8 +31,6 @@ interface ShowPageInterface extends PageInterface
     public function addToCartWithQuantity(string $quantity): void;
 
     /**
-     * @param string $variant
-     *
      * @throws ElementNotFoundException
      */
     public function addToCartWithVariant(string $variant): void;

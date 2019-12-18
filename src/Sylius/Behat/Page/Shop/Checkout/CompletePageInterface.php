@@ -70,7 +70,7 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     public function changePaymentMethod(): void;
 
-    public function hasShippingProvinceName(string $provinceName):bool;
+    public function hasShippingProvinceName(string $provinceName): bool;
 
     public function hasBillingProvinceName(string $provinceName): bool;
 

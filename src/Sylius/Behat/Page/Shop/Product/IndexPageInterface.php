@@ -33,7 +33,7 @@ interface IndexPageInterface extends PageInterface
 
     public function isEmpty(): bool;
 
-    public function getProductPrice(string $productName): string ;
+    public function getProductPrice(string $productName): string;
 
     public function isProductOnPageWithName(string $name): bool;
 

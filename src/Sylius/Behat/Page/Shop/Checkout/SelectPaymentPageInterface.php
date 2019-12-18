@@ -21,7 +21,7 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
 
     public function hasPaymentMethod(string $paymentMethodName): bool;
 
-    public function getItemSubtotal(string $itemName):string;
+    public function getItemSubtotal(string $itemName): string;
 
     public function nextStep(): void;
 
