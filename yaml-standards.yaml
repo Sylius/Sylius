@@ -1,6 +1,8 @@
 -   pathsToCheck:
         - ./
     excludedPaths:
+        - ./node_modules
+        - ./public
         - ./var
         - ./vendor
     checkers:
