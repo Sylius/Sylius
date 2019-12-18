@@ -66,8 +66,6 @@ interface ShowPageInterface extends PageInterface
 
     public function hasReviewTitled(string $title): bool;
 
-    public function waitForValidationErrors(int $timeout): bool;
-
     public function isOutOfStock(): bool;
 
     public function isMainImageDisplayed(): bool;

@@ -165,15 +165,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
     }
 
-    public function waitForValidationErrors(int $timeout): bool
-    {
-        $errorsContainer = $this->getElement('selecting_variants');
-
-        $this->getDocument()->waitFor($timeout, function () use ($errorsContainer) {
-            return false !== $errorsContainer->has('css', '[class ~="sylius-validation-error"]');
-        });
-    }
-
     public function isOutOfStock(): bool
     {
         return $this->hasElement('out_of_stock');
