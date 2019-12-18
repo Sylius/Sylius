@@ -350,6 +350,9 @@
     "phar-io/version": {
         "version": "1.0.1"
     },
+    "php": {
+        "version": "7.3"
+    },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
@@ -523,6 +526,9 @@
     },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
+    },
+    "sspooky13/yaml-standards": {
+        "version": "5.0.0"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",

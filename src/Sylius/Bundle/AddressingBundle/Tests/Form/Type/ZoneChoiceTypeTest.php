@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
@@ -7,8 +16,8 @@ namespace Sylius\Bundle\AddressingBundle\Tests\Form\Type;
 use PHPUnit\Framework\Assert;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\PreloadedExtension;
@@ -64,7 +73,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $scopeTypes = [
             AddressingScope::ALL => 'All',
             'tax' => 'Tax',
-            'shipping' => 'Shipping'
+            'shipping' => 'Shipping',
         ];
 
         $type = new ZoneChoiceType($this->zoneRepository->reveal(), $scopeTypes);
@@ -107,7 +116,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
      */
     public function it_returns_tax_scopes_when_zone_scope_set_to_tax()
     {
-        $this->zoneRepository->findBy([ 'scope' => ['tax', AddressingScope::ALL]])->willReturn([
+        $this->zoneRepository->findBy(['scope' => ['tax', AddressingScope::ALL]])->willReturn([
             $this->zoneAllScopes->reveal(),
             $this->zoneTaxScope->reveal(),
         ]);
@@ -120,7 +129,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
      */
     public function it_returns_shipping_scopes_when_zone_scope_set_to_shipping()
     {
-        $this->zoneRepository->findBy([ 'scope' => ['shipping', AddressingScope::ALL]])->willReturn([
+        $this->zoneRepository->findBy(['scope' => ['shipping', AddressingScope::ALL]])->willReturn([
             $this->zoneAllScopes->reveal(),
             $this->zoneShippingScope->reveal(),
         ]);
@@ -128,10 +137,6 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['All', 'Shipping'], ['zone_scope' => 'shipping']);
     }
 
-    /**
-     * @param array $expectedLabels
-     * @param array $formConfiguration
-     */
     private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
     {
         $form = $this->factory->create(ZoneChoiceType::class, null, $formConfiguration);
