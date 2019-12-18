@@ -28,9 +28,9 @@ Sylius\Component\Shipping\Model\ShippingCategory:
             type: DateTime
             groups: [Detailed]
     relations:
-        - rel: self
-          href:
-            route: sylius_admin_api_shipping_category_show
-            parameters:
-                code: expr(object.getCode())
-                version: 1
+        -   rel: self
+            href:
+                route: sylius_admin_api_shipping_category_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1

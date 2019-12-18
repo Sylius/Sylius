@@ -26,7 +26,7 @@ sylius_admin_product_variant_create:
             factory:
                 method: createForProduct
                 arguments:
-                  - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+                    - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
             template: "@SyliusAdmin/Crud/create.html.twig"
             grid: sylius_admin_product_variant
             section: admin

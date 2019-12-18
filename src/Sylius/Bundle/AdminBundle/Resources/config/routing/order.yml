@@ -7,10 +7,10 @@ sylius_admin_order:
         grid: sylius_admin_order
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.process_your_orders
-          index:
-              icon: cart
+            all:
+                subheader: sylius.ui.process_your_orders
+            index:
+                icon: cart
     type: sylius.resource
 
 sylius_admin_order_show:

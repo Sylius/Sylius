@@ -8,10 +8,10 @@ sylius_admin_shipping_category:
         grid: sylius_admin_shipping_category
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.manage_shipping_categories_for_your_store
-              templates:
-                  form: "@SyliusAdmin/ShippingCategory/_form.html.twig"
-          index:
-              icon: list layout
+            all:
+                subheader: sylius.ui.manage_shipping_categories_for_your_store
+                templates:
+                    form: "@SyliusAdmin/ShippingCategory/_form.html.twig"
+            index:
+                icon: list layout
     type: sylius.resource

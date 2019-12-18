@@ -126,6 +126,7 @@
         "phpstan/phpstan-webmozart-assert": "^0.11",
         "phpunit/phpunit": "^7.0",
         "sensiolabs/security-checker": "^5.0",
+        "sspooky13/yaml-standards": "^5.0",
         "stripe/stripe-php": "^4.1",
         "sylius-labs/coding-standard": "^3.0",
         "symfony/browser-kit": "^3.4|^4.1",
