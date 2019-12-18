@@ -18,6 +18,9 @@ parameters:
         - '**MongoDB**'
         - '**ODM**'
 
+        # Deprecated classes
+        - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
+
     ignoreErrors:
         # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
