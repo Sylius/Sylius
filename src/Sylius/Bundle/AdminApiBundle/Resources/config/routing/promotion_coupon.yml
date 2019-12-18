@@ -25,7 +25,7 @@ sylius_admin_api_promotion_coupon_create:
             factory:
                 method: createForPromotion
                 arguments:
-                  - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
+                    - expr:service('sylius.repository.promotion').findOneByCode($promotionCode)
             criteria:
                 promotion: $promotionCode
 
