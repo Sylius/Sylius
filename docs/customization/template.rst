@@ -164,12 +164,12 @@ How to use template events for customizations?
 When you have found an event in the place where you want to add some content, here's what you have to do.
 
 Let's assume that you would like to add some content after the header in the Sylius shop views.
-You will need to look at the ``/SyliusShopBundle/Resources/views/layout.html.twig`` template,
+You will need to look at the ``SyliusShopBundle/Resources/views/layout.html.twig`` template,
 which is the basic layout of Sylius shop, and then in it find the appropriate event.
 
 For the space below the header it will be ``sylius.shop.layout.after_header``.
 
-* Create an ``.html.twig`` file that will contain what you want to add.
+* Create a Twig template file that will contain what you want to add.
 
 .. code-block:: twig
 
@@ -177,21 +177,17 @@ For the space below the header it will be ``sylius.shop.layout.after_header``.
 
     <h1> Test Block Title </h1>
 
-* And register a listener for the chosen event:
-
-.. warning::
-
-    The name of the event should be preceded by the ``sonata.block.event.`` string.
+* And configure Sylius UI to display it for the chosen event:
 
 .. code-block:: yaml
 
-    services:
-        app.block_event_listener.homepage.layout.after_header:
-            class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-            arguments:
-                - 'block.html.twig'
-            tags:
-                - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_header, method: onBlockEvent }
+    # config/packages/sylius_ui.yaml
+
+    sylius_ui:
+        events:
+            sylius.shop.layout.after_header:
+                blocks:
+                    my_block_name: 'block.html.twig'
 
 That's it. Your new block should appear in the view.
 

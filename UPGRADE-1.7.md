@@ -22,7 +22,11 @@ Update your `package.json` in order to add `slick-carousel` :
 }
 ```
 
-# Breaking changes
+## Template events
+
+- `Sylius\Bundle\UiBundle\Block\BlockEventListener` has been deprecated, use `sylius_ui` configuration instead.
+
+## Breaking changes
 
 Those are excluded from our BC promise:
 

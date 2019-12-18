@@ -28,10 +28,15 @@
         "sylius/grid-bundle": "^1.2",
         "symfony/framework-bundle": "^4.3",
         "symfony/security": "^4.3",
-        "symfony/templating": "^4.3"
+        "symfony/security-bundle": "^4.3",
+        "symfony/templating": "^4.3",
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
+        "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^4.3",
         "symfony/form": "^4.3",
         "twig/twig": "^2.0"
@@ -56,6 +61,7 @@
     "scripts": {
         "test": [
             "@composer validate --strict",
+            "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"
         ]
     },

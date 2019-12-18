@@ -48,6 +48,7 @@
             <directory name="src/Sylius/Bundle/TaxationBundle/test" />
             <directory name="src/Sylius/Bundle/TaxonomyBundle/Tests" />
             <directory name="src/Sylius/Bundle/UiBundle/spec" />
+            <directory name="src/Sylius/Bundle/UiBundle/Tests" />
             <directory name="src/Sylius/Bundle/UserBundle/spec" />
             <directory name="src/Sylius/Bundle/UserBundle/Tests" />
 
@@ -164,6 +165,7 @@
             <errorLevel type="info">
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::arrayNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::children" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::integerNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::variableNode" />

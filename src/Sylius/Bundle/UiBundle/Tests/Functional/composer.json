@@ -1,0 +1,4 @@
+{
+    "name": "example/test-application",
+    "description": "This file is here to maintain the proper behaviour of project dir in Symfony apps."
+}
