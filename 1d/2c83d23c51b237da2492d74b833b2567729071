@@ -1,0 +1,109 @@
+---------------------------------------------------------------------------
+
+by Chrysweel at 2018-02-05T10:52:12Z
+
+@pamil @jdeveloper this pull request will accepted in some time ?
+
+We have the same problem...
+
+---------------------------------------------------------------------------
+
+by ping86 at 2018-07-05T07:23:59Z
+
+Is planned solve this issue, or is fixed in v1.2?
+
+Thanks.
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-07-06T09:51:24Z
+
+I'm on it, sorry for the delay!
+
+---------------------------------------------------------------------------
+
+by jdeveloper at 2018-10-05T11:39:45Z
+
+Hello, I am asking once again for the state of this PR since I think it's a clear improve when there are a lot of users in the database.
+
+I have no problem to change implementation if you think it 's not a valid one.
+
+Thanks in advance.
+
+---------------------------------------------------------------------------
+
+by jdeveloper at 2019-02-19T09:48:13Z
+
+@pamil Sorry for asking this one more time
+
+Is this PR to be considered? I once again need to creat by REST a cart and it just creates a timeout with a large customer table.
+
+I have no regards to take some time to adapt, improve the code
+
+---------------------------------------------------------------------------
+
+by jdeveloper at 2019-09-16T10:18:55Z
+
+Hi @pamil
+
+Sorry for asking once again but we have a database with more then 200 k customers and we want to use the sylius API without deppending on SyliusShopApiPlugin. It is imposible to create a cart without this PR.
+
+It would be nice to review this PR, I think it is also a benefit for other developers. If we have to make changes on this PR just comment them and we will work on them.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-09-26T20:55:59Z
+
+Hey @jdeveloper,
+
+It took too long to provide you some feedback here. We all are humans, and sometimes we tend to forget or miss something. When you asked for a review, we (as a core team) had too much on our heads.
+
+I will ping @CoderMaggie to add this issue to our sprints. Therefore someone should take a look over it in the nearest sprint (if it only will fit into backlog). Please, ping me one more time if it won't be resolved during the next month.
+
+Thank you for your patience.
+
+---------------------------------------------------------------------------
+
+by jdeveloper at 2019-09-27T06:54:14Z
+
+Hey @lchrusciel,
+
+Thanks for replying. Don't worry, we understand that we are all humans and with such a huge project like Sylius, things can quickly go out of control. We appreciate your reply to an old issue.
+
+As always, if we have to work in some issue around this PR, just ping me.
+
+Thank you for your attention.
+
+---------------------------------------------------------------------------
+
+by jdeveloper at 2019-11-06T07:13:29Z
+
+Hi @lchrusciel
+
+I just wonder about the state of this PR. As you said to ping you if I got sign on this PR in a month here I am just pinging you to look if we can solve this together. I think it can benefit a lot of people and shops that have a lot of customers and want to integrate through REST API.
+
+Have a nice time.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2019-12-18T09:19:50Z
+
+As a part of the work over this PR, I've decided to make some profiling. @jdeveloper proposition reduced the time of execution by 62%, but this change may be much greater for a bigger set of data.
+![image](https://user-images.githubusercontent.com/6213903/71071057-33fb7400-217c-11ea-9602-c7864e7e3e46.png)
+
+You can check the complete profile [here](https://blackfire.io/profiles/compare/3ba8ea6b-f181-4e2c-ba5d-3082ebec954d/graph).
+Data was collected on my local machine, with a set of 10k customers in DB.
+
+The current solution assumes that customers are not loaded to choice type, which makes sense because it is used only in the Admin API Context. To make this choice type usable for the twig based templates, we should introduce Autocomplete Form Type. On the other hand, this form type wouldn't be used anywhere in current Sylius implementation. It is tested already with cart creation endpoint in Admin API.
+
+Therefore, it could be improved in the future, but I think that the current solution is good to go.
+
+I'm also considering writing an ADR for this feature, not to lose track of it. (/cc @Sylius/core-team)
+
+Also, thank you @jdeveloper for the contribution and sorry for a long time for merging it. I've decided to append your work, I hope you don't mind.
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-18T12:09:02Z
+
+Thanks, @jdeveloper! :1st_place_medal:
