@@ -14,16 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AdminApiBundle\Form\ChoiceList\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
-use Sylius\Component\User\Model\UserAwareInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormEvent;
 
 final class LazyCustomerLoaderSpec extends ObjectBehavior
 {
@@ -53,11 +47,13 @@ final class LazyCustomerLoaderSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_load_any_choices_available(): void {
+    function it_does_not_load_any_choices_available(): void
+    {
         $this->loadValuesForChoices([])->shouldReturn([]);
     }
 
-    function it_provides_empty_array_choice_list(): void {
+    function it_provides_empty_array_choice_list(): void
+    {
         $this->loadChoiceList()->shouldBeAnInstanceOf(ArrayChoiceList::class);
     }
 }
