@@ -24,14 +24,14 @@
 
         "sylius/core-bundle": "^1.2",
         "sylius/ui-bundle": "^1.2",
-        "symfony/framework-bundle": "^4.3",
+        "symfony/framework-bundle": "^4.4",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.3"
+        "symfony/dependency-injection": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
