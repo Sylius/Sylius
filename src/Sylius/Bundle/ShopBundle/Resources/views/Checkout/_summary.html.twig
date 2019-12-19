@@ -5,7 +5,7 @@
 {% set taxExcluded = sylius_order_tax_excluded(order) %}
 
 <div class="ui segment">
-    <table class="ui very basic table" id="sylius-checkout-subtotal">
+    <table class="ui very basic table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
         <thead>
         <tr>
             <th class="sylius-table-column-item">{{ 'sylius.ui.item'|trans }}</th>
@@ -20,7 +20,9 @@
                 <td class="center aligned">
                     {{ item.quantity }}
                 </td>
-                <td class="right aligned" id="sylius-item-{{ item.variant.product.slug }}-subtotal">{{ money.convertAndFormat(item.subtotal) }}</td>
+                <td class="right aligned" id="sylius-item-{{ item.variant.product.slug }}-subtotal" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>
+                    {{ money.convertAndFormat(item.subtotal) }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

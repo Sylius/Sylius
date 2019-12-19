@@ -32,7 +32,7 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function selectBillingAddressProvince(string $province): void;
 
-    public function specifyEmail(string $email): void;
+    public function specifyEmail(?string $email): void;
 
     public function specifyShippingAddressFullName(string $fullName): void;
 
