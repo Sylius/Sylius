@@ -23,7 +23,7 @@ Feature: Editing shipping method
         When I want to modify a shipping method "UPS Carrier"
         Then the code field should be disabled
 
-    @ui @javascript
+    @ui
     Scenario: Renaming the shipping method
         Given I want to modify a shipping method "UPS Carrier"
         When I rename it to "UPS Transport" in "English (United States)"
