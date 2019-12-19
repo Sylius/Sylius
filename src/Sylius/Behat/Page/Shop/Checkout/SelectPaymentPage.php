@@ -53,7 +53,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('[data-test-item-subtotal="%s"]', $itemSlug))->getText();
     }
 
     public function nextStep(): void
@@ -73,7 +73,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function changeAddressByStepLabel(): void
     {
-        $this->getElement('address_step_label')->click();
+        $this->getElement('address')->click();
     }
 
     public function hasNoAvailablePaymentMethodsWarning(): bool
@@ -88,7 +88,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function getPaymentMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-payment-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-payment-method-label]');
 
         $paymentMethods = [];
         foreach ($inputs as $input) {
@@ -101,14 +101,14 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'address_step_label' => '.steps a:contains("Address")',
-            'checkout_subtotal' => '#sylius-checkout-subtotal',
-            'next_step' => '#next-step',
-            'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
-            'payment_method_option' => '.item:contains("%payment_method%") input',
+            'address' => '[data-test-step-address]',
+            'checkout_subtotal' => '[data-test-checkout-subtotal]',
+            'next_step' => '[data-test-next-step]',
+            'order_cannot_be_paid_message' => '[data-test-order-cannot-be-paid]',
+            'payment_method_option' => '[data-test-payment-item]:contains("%payment_method%") input',
             'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
-            'shipping_step_label' => '.steps a:contains("Shipping")',
-            'warning_no_payment_methods' => '#sylius-order-cannot-be-paid',
+            'shipping_step_label' => '[data-test-step-shipping]',
+            'warning_no_payment_methods' => '[data-test-order-cannot-be-paid]',
         ]);
     }
 }

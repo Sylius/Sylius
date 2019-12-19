@@ -27,7 +27,7 @@
         </div>
     </a>
     {% if order_requires_shipping %}
-    <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}">
+    <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>
         <i class="truck icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
