@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
@@ -35,7 +36,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] > a')->getText();
+        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 
     public function getLastProductNameFromList(): string
@@ -48,7 +49,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function search(string $name): void
     {
         $this->getDocument()->fillField('criteria_search_value', $name);
-        $this->getDocument()->find('css', '[data-test-search]')->submit();
+        $this->getElement('search_button')->submit();
     }
 
     public function sort(string $orderNumber): void
@@ -63,26 +64,30 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isProductOnList(string $productName): bool
     {
-        $element = $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $productName));
+        try{
+            $this->getElement('product_name', ['%productName%' => $productName]);
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
 
-        return ($element !== null) ? true : false;
+        return true;
     }
 
     public function isEmpty(): bool
     {
-        return false !== strpos($this->getDocument()->find('css', '[data-test-flash-message]')->getText(), 'There are no results to display');
+        return false !== strpos($this->getElement('validation_message')->getText(), 'There are no results to display');
     }
 
     public function getProductPrice(string $productName): string
     {
-        $element = $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $productName));
+        $element = $this->getElement('product_name', ['%productName%' => $productName]);
 
         return $element->getParent()->find('css', '[data-test-product-price]')->getText();
     }
 
-    public function isProductOnPageWithName(string $name): bool
+    public function isProductOnPageWithName(string $productName): bool
     {
-        return null !== $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $name));
+        return $this->hasElement('product_name', ['%productName%' => $productName]);
     }
 
     public function hasProductsInOrder(array $productNames): bool
@@ -103,7 +108,10 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'clear' => '[data-test-clear]',
+            'product_name' => '[data-test-product-name="%productName%"]',
             'products' => '[data-test-products]',
+            'search_button' => '[data-test-search]',
+            'validation_message' => '[data-test-flash-message]',
         ]);
     }
 }

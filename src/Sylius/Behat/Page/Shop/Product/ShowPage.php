@@ -61,7 +61,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
     {
-        $select = $this->getDocument()->find('css', sprintf('[data-test-item-variant="%s"]', $option->getCode()));
+        $select = $this->getElement('option_select', ['%optionCode%' => $option->getCode()]);
 
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getElement('add_to_cart_button')->click();
@@ -120,7 +120,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getName(): string
     {
-        return $this->getDocument()->find('css', '[data-test-product-name]')->getText();
+        return $this->getElement('product_name')->getText();
     }
 
     public function getPrice(): string
@@ -139,12 +139,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasAssociation(string $productAssociationName): bool
     {
-        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
+        try{
+            $this->getElement('association', ['%associationName%' => $productAssociationName]);
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
+
+        return true;
     }
 
     public function hasProductInAssociation(string $productName, string $productAssociationName): bool
     {
-        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+        $products = $this->getElement('association', ['%associationName%' => $productAssociationName]);
 
         Assert::notNull($products);
 
@@ -197,15 +203,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return count($this->getElement('reviews')->findAll('css', '[data-test-comment]'));
     }
 
-    public function selectOption(string $optionName, string $optionValue): void
+    public function selectOption(string $optionCode, string $optionValue): void
     {
-        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
+        $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
         $optionElement->selectOption($optionValue);
     }
 
     public function selectVariant(string $variantName): void
     {
-        $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
+        $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
 
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
@@ -246,22 +252,23 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'add_to_cart_button' => '[data-test-add-to-cart-button]',
-            'association' => '[data-test-product-association="%association-name%"]',
+            'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'main_image' => '[data-test-main-image]',
             'name' => '[data-test-product-name]',
-            'option_select' => '[data-test-item-variant="%option-name%"]',
+            'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
             'out_of_stock' => '[data-test-product-out-of-stock]',
             'product_price' => '[data-test-product-price]',
+            'product_name' => '[data-test-product-name]',
             'reviews' => '[data-test-product-reviews]',
             'reviews_comment' => '[data-test-comment="%title%"]',
             'selecting_variants' => '[data-test-product-selecting-variant]',
             'tab' => '[data-test-tab="%name%"]',
             'quantity' => '[data-test-quantity]',
             'validation_errors' => '[data-test-cart-validation-error]',
-            'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variant-name%") input',
+            'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
         ]);
     }
 }

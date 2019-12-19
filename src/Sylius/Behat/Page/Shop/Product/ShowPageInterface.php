@@ -70,7 +70,7 @@ interface ShowPageInterface extends PageInterface
 
     public function countReviews(): int;
 
-    public function selectOption(string $optionName, string $optionValue): void;
+    public function selectOption(string $optionCode, string $optionValue): void;
 
     public function selectVariant(string $variantName): void;
 
