@@ -8,8 +8,8 @@
             </div>
             <div class="right aligned column" id="searchbarButtons">
                 <div class="ui buttons">
-                    <button type="submit" class="ui primary icon labeled button"><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
-                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui negative icon labeled button">
+                    <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('search') }}><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
+                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui negative icon labeled button" {{ sylius_test_html_attribute('clear') }}>
                         <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
                     </a>
                 </div>

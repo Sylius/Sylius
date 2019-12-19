@@ -24,31 +24,31 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function countProductsItems(): int
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        $products = $productsList->findAll('css', '.card');
+        $products = $productsList->findAll('css', '[data-test-product]');
 
         return count($products);
     }
 
     public function getFirstProductNameFromList(): string
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '.card:first-child .content > a')->getText();
+        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] > a')->getText();
     }
 
     public function getLastProductNameFromList(): string
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '.card:last-child .content > a')->getText();
+        return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] > a')->getText();
     }
 
     public function search(string $name): void
     {
         $this->getDocument()->fillField('criteria_search_value', $name);
-        $this->getDocument()->pressButton('Search');
+        $this->getDocument()->find('css', '[data-test-search]')->submit();
     }
 
     public function sort(string $orderNumber): void
@@ -58,35 +58,37 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function clearFilter(): void
     {
-        $this->getDocument()->clickLink('Clear');
+        $this->getElement('clear')->click();
     }
 
     public function isProductOnList(string $productName): bool
     {
-        return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+        $element = $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $productName));
+
+        return ($element !== null) ? true : false;
     }
 
     public function isEmpty(): bool
     {
-        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no results to display');
+        return false !== strpos($this->getDocument()->find('css', '[data-test-flash-message]')->getText(), 'There are no results to display');
     }
 
     public function getProductPrice(string $productName): string
     {
-        $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
+        $element = $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $productName));
 
-        return $container->find('css', '.sylius-product-price')->getText();
+        return $element->getParent()->find('css', '[data-test-product-price]')->getText();
     }
 
     public function isProductOnPageWithName(string $name): bool
     {
-        return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
+        return null !== $this->getDocument()->find('css', sprintf('[data-test-product-name="%s"]', $name));
     }
 
     public function hasProductsInOrder(array $productNames): bool
     {
-        $productsList = $this->getDocument()->find('css', '#products');
-        $products = $productsList->findAll('css', '.card  .content > .sylius-product-name');
+        $productsList = $this->getElement('products');
+        $products = $productsList->findAll('css', '[data-test-product-content] > [data-test-product-name]');
 
         foreach ($productNames as $key => $value) {
             if ($products[$key]->getText() !== $value) {
@@ -95,5 +97,13 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
 
         return true;
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'clear' => '[data-test-clear]',
+            'products' => '[data-test-products]',
+        ]);
     }
 }
