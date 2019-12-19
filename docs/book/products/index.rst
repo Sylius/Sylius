@@ -13,6 +13,7 @@ This is a guide to understanding products handling in Sylius together with surro
     pricing
     taxons
     inventory
+    multi_source_inventory
     search
 
 .. include:: /book/products/map.rst.inc

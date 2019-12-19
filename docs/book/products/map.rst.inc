@@ -1,8 +1,13 @@
-* :doc:`/book/products/products`
-* :doc:`/book/products/product_reviews`
-* :doc:`/book/products/product_associations`
-* :doc:`/book/products/attributes`
-* :doc:`/book/products/pricing`
-* :doc:`/book/products/taxons`
-* :doc:`/book/products/inventory`
-* :doc:`/book/products/search`
+.. raw:: html
+
+    <ul class="simple">
+    <li><p><a class="reference internal" href="products.html"><span class="doc">Products</span></a></p></li>
+    <li><p><a class="reference internal" href="product_reviews.html"><span class="doc">Product Reviews</span></a></p></li>
+    <li><p><a class="reference internal" href="product_associations.html"><span class="doc">Product Associations</span></a></p></li>
+    <li><p><a class="reference internal" href="attributes.html"><span class="doc">Attributes</span></a></p></li>
+    <li><p><a class="reference internal" href="pricing.html"><span class="doc">Pricing</span></a></p></li>
+    <li><p><a class="reference internal" href="taxons.html"><span class="doc">Taxons</span></a></p></li>
+    <li><p><a class="reference internal" href="inventory.html"><span class="doc">Inventory</span></a></p></li>
+    <li><p><a class="reference internal plus-feature" href="multi_source_inventory.html"><span class="doc">Multi-Source Inventory</span></a></p></li>
+    <li><p><a class="reference internal" href="search.html"><span class="doc">Search</span></a></p></li>
+    </ul>
