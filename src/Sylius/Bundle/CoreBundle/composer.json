@@ -27,7 +27,6 @@
         "jms/serializer-bundle": "^2.0",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
-        "sonata-project/intl-bundle": "^2.2",
         "swiftmailer/swiftmailer": "^6.0",
         "sylius/addressing-bundle": "^1.2",
         "sylius/attribute-bundle": "^1.2",
@@ -63,9 +62,6 @@
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^4.3"
-    },
-    "conflict": {
-        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"

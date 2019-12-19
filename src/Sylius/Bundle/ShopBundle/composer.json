@@ -28,12 +28,12 @@
     "require": {
         "php": "^7.2",
 
-        "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.2",
         "sylius/ui-bundle": "^1.2",
         "symfony/framework-bundle": "^4.3",
         "symfony/security-bundle": "^4.3",
-        "twig/twig": "^2.6"
+        "twig/intl-extra": "^2.12",
+        "twig/twig": "^2.12"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
