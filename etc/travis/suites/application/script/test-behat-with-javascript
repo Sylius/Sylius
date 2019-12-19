@@ -7,12 +7,6 @@ prepare_for_behat_with_js() {
     run_command "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 2880x1800x16"
     run_command "export DISPLAY=:99"
 
-    # Download and configure Symfony webserver
-    if [ ! -f $SYLIUS_CACHE_DIR/symfony ]; then
-        run_command "wget https://get.symfony.com/cli/installer -O - | bash"
-        run_command "mv ~/.symfony/bin/symfony $SYLIUS_CACHE_DIR"
-    fi
-
     # Download and configure ChromeDriver
     if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 2.34)" = "0" ]; then
         run_command "curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip"
