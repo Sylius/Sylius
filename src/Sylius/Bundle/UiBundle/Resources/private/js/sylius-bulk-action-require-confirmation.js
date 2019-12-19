@@ -27,10 +27,6 @@ $.fn.extend({
             event.preventDefault();
 
             const form = actionButton.closest('form');
-            $('input.bulk-select-checkbox:checked').each((index, element) => {
-              $(`<input type="hidden" name="ids[]" value="${element.value}">`).appendTo(form);
-            });
-
             form.submit();
           });
         }
