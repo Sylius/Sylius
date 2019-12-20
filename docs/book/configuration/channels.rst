@@ -60,6 +60,37 @@ You can get the current channel from the channel context.
    Moreover if the channel depends mainly on the request you can implement the ``Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface``
    with its ``findChannel(Request $request)`` method and register it under the ``sylius.context.channel.request_based.resolver`` tag.
 
+Shop Billing Data
+-----------------
+
+For :doc:`Invoicing </book/orders/invoices>` and :doc:`Credit Memo </book/orders/refunds>` purposes Channels are
+supplied with a section named Shop Billing Data, which is editable on the Channel create/update form.
+
+.. image:: ../../_images/shop_billing_data.png
+    :align: center
+
+.. rst-class:: plus-doc
+
+Business Units
+~~~~~~~~~~~~~~
+
+Sylius Plus is supplied with an enhanced version of Shop Billing Data from open source edition. It is also used for Invoicing and Refunds purposes,
+but it is a separate entity, that you can create outside of the Channel and then just pick a previously created Business Unit
+on the Channel form.
+
+.. image:: ../../_images/sylius_plus/business_units.png
+    :align: center
+
+.. image:: ../../_images/sylius_plus/business_unit_form.png
+    :align: center
+
+.. image:: ../../_images/sylius_plus/channel_business_unit.png
+    :align: center
+
+.. image:: ../../_images/sylius_plus/banner.png
+    :align: center
+    :target: http://sylius.com/plus/?utm_source=docs
+
 Learn more
 ----------
 
