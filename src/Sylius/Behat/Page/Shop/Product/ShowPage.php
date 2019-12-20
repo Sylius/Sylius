@@ -31,7 +31,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function addToCart(): void
     {
-        $this->getDocument()->pressButton('Add to cart');
+        $this->getElement('add_to_cart_button')->click();
 
         if ($this->getDriver() instanceof Selenium2Driver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
@@ -40,8 +40,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function addToCartWithQuantity(string $quantity): void
     {
-        $this->getDocument()->fillField('Quantity', $quantity);
-        $this->getDocument()->pressButton('Add to cart');
+        $this->getElement('quantity')->setValue($quantity);
+        $this->getElement('add_to_cart_button')->click();
 
         if ($this->getDriver() instanceof Selenium2Driver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
@@ -52,7 +52,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->selectVariant($variant);
 
-        $this->getDocument()->pressButton('Add to cart');
+        $this->getElement('add_to_cart_button')->click();
 
         if ($this->getDriver() instanceof Selenium2Driver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
@@ -61,10 +61,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
     {
-        $select = $this->getDocument()->find('css', sprintf('select#sylius_add_to_cart_cartItem_variant_%s', $option->getCode()));
+        $select = $this->getElement('option_select', ['%optionCode%' => $option->getCode()]);
 
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
-        $this->getDocument()->pressButton('Add to cart');
+        $this->getElement('add_to_cart_button')->click();
     }
 
     public function getAttributeByName(string $name): ?string
@@ -75,7 +75,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         if ($driver instanceof Selenium2Driver) {
             try {
                 $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
-                if (!$attributesTab->hasClass('active')) {
+                if (!$attributesTab->hasAttribute('[data-test-active]')) {
                     $attributesTab->click();
                 }
             } catch (ElementNotFoundException $exception) {
@@ -83,8 +83,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             }
         }
 
-        $nameTdSelector = sprintf('tr > td.sylius-product-attribute-name:contains("%s")', $name);
-        $nameTd = $attributesTable->find('css', $nameTdSelector);
+        $nameTd = $attributesTable->find('css', sprintf('[data-test-product-attribute-name="%s"]', $name));
 
         if (null === $nameTd) {
             return null;
@@ -99,12 +98,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $attributesTable = $this->getElement('attributes');
 
-        return $attributesTable->findAll('css', 'tr > td.sylius-product-attribute-name');
+        return $attributesTable->findAll('css', 'tr > td[data-test-product-attribute-name]');
     }
 
     public function getAverageRating(): float
     {
-        return (float) $this->getElement('average_rating')->getAttribute('data-average-rating');
+        return (float) $this->getElement('average_rating')->getAttribute('data-test-average-rating');
     }
 
     public function getCurrentUrl(): string
@@ -121,7 +120,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getName(): string
     {
-        return $this->getElement('name')->getText();
+        return $this->getElement('product_name')->getText();
     }
 
     public function getPrice(): string
@@ -131,22 +130,31 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasAddToCartButton(): bool
     {
-        return $this->getDocument()->hasButton('Add to cart')
-            && false === $this->getDocument()->findButton('Add to cart')->hasAttribute('disabled');
+        if (!$this->hasElement('add_to_cart_button')) {
+            return false;
+        }
+
+        return $this->getElement('add_to_cart_button') !== null && false === $this->getElement('add_to_cart_button')->hasAttribute('disabled');
     }
 
     public function hasAssociation(string $productAssociationName): bool
     {
-        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
+        try{
+            $this->getElement('association', ['%associationName%' => $productAssociationName]);
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
+
+        return true;
     }
 
     public function hasProductInAssociation(string $productName, string $productAssociationName): bool
     {
-        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+        $products = $this->getElement('association', ['%associationName%' => $productAssociationName]);
 
         Assert::notNull($products);
 
-        return null !== $products->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+        return $productName === $products->find('css', sprintf('[data-test-product-name="%s"]', $productName))->getText();
     }
 
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
@@ -162,7 +170,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasReviewTitled(string $title): bool
     {
-        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+        try{
+            $element = $this->getElement('reviews_comment', ['%title%' => $title]);
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
+
+        return $title === $element->getAttribute('data-test-comment');
     }
 
     public function isOutOfStock(): bool
@@ -172,13 +186,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isMainImageDisplayed(): bool
     {
-        $imageElement = $this->getElement('main_image');
-
-        if (null === $imageElement) {
+        if ( !$this->hasElement('main_image')) {
             return false;
         }
 
-        $imageUrl = $imageElement->getAttribute('src');
+        $imageUrl = $this->getElement('main_image')->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
         $this->getDriver()->back();
@@ -188,18 +200,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
+        return count($this->getElement('reviews')->findAll('css', '[data-test-comment]'));
     }
 
-    public function selectOption(string $optionName, string $optionValue): void
+    public function selectOption(string $optionCode, string $optionValue): void
     {
-        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
+        $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
         $optionElement->selectOption($optionValue);
     }
 
     public function selectVariant(string $variantName): void
     {
-        $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
+        $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
 
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
@@ -239,20 +251,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'association' => '#sylius-product-association-%association-name%',
-            'attributes' => '#sylius-product-attributes',
-            'average_rating' => '#average-rating',
-            'current_variant_input' => '#sylius-product-variants td input:checked',
-            'main_image' => '#main-image',
-            'name' => '#sylius-product-name',
-            'option_select' => '#sylius_add_to_cart_cartItem_variant_%option-name%',
-            'out_of_stock' => '#sylius-product-out-of-stock',
-            'product_price' => '#product-price',
-            'reviews' => '[data-tab="reviews"] .comments',
-            'selecting_variants' => '#sylius-product-selecting-variant',
-            'tab' => '.menu [data-tab="%name%"]',
-            'validation_errors' => '.sylius-validation-error',
-            'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',
+            'add_to_cart_button' => '[data-test-add-to-cart-button]',
+            'association' => '[data-test-product-association="%associationName%"]',
+            'attributes' => '[data-test-product-attributes]',
+            'average_rating' => '[data-test-average-rating]',
+            'current_variant_input' => '[data-test-product-variants] td input:checked',
+            'main_image' => '[data-test-main-image]',
+            'name' => '[data-test-product-name]',
+            'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
+            'out_of_stock' => '[data-test-product-out-of-stock]',
+            'product_price' => '[data-test-product-price]',
+            'product_name' => '[data-test-product-name]',
+            'reviews' => '[data-test-product-reviews]',
+            'reviews_comment' => '[data-test-comment="%title%"]',
+            'selecting_variants' => '[data-test-product-selecting-variant]',
+            'tab' => '[data-test-tab="%name%"]',
+            'quantity' => '[data-test-quantity]',
+            'validation_errors' => '[data-test-cart-validation-error]',
+            'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
         ]);
     }
 }

@@ -15,7 +15,7 @@
 {{ sonata_block_render_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
-    <div class="ui three cards" id="products">
+    <div class="ui three cards" id="products" {{ sylius_test_html_attribute('products') }}>
         {% for product in resources.data %}
             {% include '@SyliusShop/Product/_box.html.twig' %}
         {% endfor %}
