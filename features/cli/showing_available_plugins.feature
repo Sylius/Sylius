@@ -6,4 +6,4 @@ Feature: Showing available Sylius plugins
 
     Scenario: Showing available Sylius plugins
         When I run show available plugins command
-        Then I should see output "Available official Sylius Plugins" with listed plugins
+        Then I should see output "Available official plugins and selected community plugins" with listed plugins
