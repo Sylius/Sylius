@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Kota tidak boleh lebih dari 255 karakter|Kota tidak boleh lebih dari 255 karakter.
-            min_length: Kota harus memiliki minimal 2 karakter|Kota harus memiliki minimal 2 karakter.
             not_blank: Silahkan masukkan nama kota.
         country:
             not_blank: Silahkan pilih negara.
             disabled: Negara yang dipilih telah dinonaktifkan. Silakan pilih satu yang lain.
         first_name:
-            max_length: Nama Depan tidak boleh lebih dari 255 karakter|Nama Depan tidak boleh lebih dari 255 karakter.
-            min_length: Nama pertama harus memiliki minimal 2 karakter|Nama pertama harus memiliki minimal 2 karakter.
             not_blank: Masukkan nama depan.
         last_name:
-            max_length: Nama belakang tidak boleh lebih dari 255 karakter|Nama belakang tidak boleh lebih dari 255 karakter.
-            min_length: Nama belakang harus memiliki minimal 2 karakter| Nama belakang harus memiliki minimal 2 karakter.
             not_blank: Silahkan masukkan nama belakang.
         postcode:
-            max_length: Kode pos tidak boleh lebih dari 255 karakter|Kode pos tidak boleh lebih dari 255 karakter.
-            min_length: Kode pos harus memiliki minimal 2 karakter| Kode pos harus memiliki minimal 2 karakter.
             not_blank: Harap masukkan kode pos.
         province:
             valid: Silahkan pilih provinsi yang tepat.
         street:
-            max_length: Jalan tidak boleh lebih dari 255 karakter|Jalan tidak boleh lebih dari 255 karakter.
-            min_length: Jalan harus memiliki minimal 2 karakter|Jalan harus memiliki minimal 2 karakter.
             not_blank: Silahkan masukkan jalan.
         not_shippable: Alamat ini bukanlah tujuan pengiriman yang sah.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Kode provinsi harus memiliki format XX-XX (mis. ID-JT).
             unique: Kode provinsi harus unik.
         name:
-            max_length: Nama Provinsi tidak boleh lebih dari 255 karakter|Nama Provinsi tidak boleh lebih dari 255 karakter.
-            min_length: Nama provinsi harus memiliki minimal 2 karakter|Nama provinsi harus memiliki minimal 2 karakter.
             not_blank: Masukkan nama provinsi.
             unique: Nama provinsi harus unik.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Harap tambahkan setidaknya {{ limit }} anggota zona.
         name:
-            max_length: Nama zona tidak boleh lebih dari 255 karakter|Nama zona tidak boleh lebih dari 255 karakter.
-            min_length: Nama zona harus memiliki panjang minimal 2 karakter | Nama zona harus memiliki panjang minimal 2 karakter.
             not_blank: Masukkan nama zona.
     zone_member:
         code:

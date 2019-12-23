@@ -38,6 +38,5 @@ sylius:
             min: Kode kupon harus paling sedikit {{ limit }} karakternya panjang.
             max: Kode kupon tidak boleh lebih dari karakter {{ limit }}.
             not_blank: Harap masukkan panjang kode kupon.
-        possible_generation_amount: Kupon tidak valid kode panjang atau jumlah kupon. Tidak mungkin menghasilkan %expectedAmount% kupon unik dengan panjang kode sama dengan %codeLength%. Kemungkinan menghasilkan jumlah adalah %possibleAmount%.
         usage_limit:
             min: Batas penggunaan kupon yang dihasilkan minimal harus {{ limit }}.
