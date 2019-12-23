@@ -121,8 +121,3 @@ sonata_block:
                 resources: ~
                 statistics: ~
                 taxon: ~
-
-sonata_core:
-    form:
-        mapping:
-            enabled: false # https://github.com/sonata-project/SonataCoreBundle/pull/462
