@@ -44,7 +44,6 @@ return [
     winzou\Bundle\StateMachineBundle\winzouStateMachineBundle::class => ['all' => true],
     Sonata\CoreBundle\SonataCoreBundle::class => ['all' => true],
     Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
-    Sonata\IntlBundle\SonataIntlBundle::class => ['all' => true],
     Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
     FOS\RestBundle\FOSRestBundle::class => ['all' => true],

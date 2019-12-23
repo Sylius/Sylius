@@ -518,9 +518,6 @@
     "sonata-project/doctrine-extensions": {
         "version": "1.3.1"
     },
-    "sonata-project/intl-bundle": {
-        "version": "2.5.0"
-    },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
     },
@@ -853,6 +850,9 @@
             "version": "1.0",
             "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
         }
+    },
+    "twig/intl-extra": {
+        "version": "v2.12.2"
     },
     "twig/twig": {
         "version": "v2.5.0"

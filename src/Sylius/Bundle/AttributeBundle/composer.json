@@ -23,7 +23,6 @@
         "php": "^7.2",
 
         "ramsey/uuid": "^3.7",
-        "sonata-project/intl-bundle": "^2.2",
         "stof/doctrine-extensions-bundle": "^1.2",
         "sylius/attribute": "^1.2",
         "sylius/resource-bundle": "^1.2",
