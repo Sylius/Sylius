@@ -57,7 +57,7 @@ abstract class SlugGenerationHelper
 
     private static function waitForElementToBeClickable(Session $session, NodeElement $element)
     {
-        $session->wait(5000, sprintf(
+        $session->wait(1000, sprintf(
             'false === $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).hasClass("loading")',
             $element->getParent()->getParent()->getXpath()
         ));
@@ -68,7 +68,7 @@ abstract class SlugGenerationHelper
      */
     private static function isElementReadonly(Session $session, NodeElement $element)
     {
-        return $session->wait(5000, sprintf(
+        return $session->wait(1000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
             $element->getXpath()
         ));
