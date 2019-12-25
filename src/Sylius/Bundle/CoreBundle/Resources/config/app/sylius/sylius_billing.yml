@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shipping:
+    resources:
+        shop_billing_data:
+            classes:
+                model: Sylius\Component\Core\Model\ShopBillingData
+        

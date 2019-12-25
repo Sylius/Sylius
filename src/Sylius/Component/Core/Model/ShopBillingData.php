@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-/** @final */
 class ShopBillingData implements ShopBillingDataInterface
 {
     /** @var int|null */
