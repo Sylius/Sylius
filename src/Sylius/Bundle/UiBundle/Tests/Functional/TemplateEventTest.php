@@ -19,14 +19,19 @@ use Twig\Environment;
 
 final class TemplateEventTest extends KernelTestCase
 {
-    /** @test */
-    public function it_renders_template_events_blocks(): void
+    /** @var Environment */
+    private $twig;
+
+    protected function setUp(): void
     {
         self::bootKernel();
 
-        /** @var Environment $twig */
-        $twig = self::$container->get('twig');
+        $this->twig = self::$container->get('twig');
+    }
 
+    /** @test */
+    public function it_renders_template_events_blocks(): void
+    {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
             'First block',
@@ -34,7 +39,22 @@ final class TemplateEventTest extends KernelTestCase
             'Third block',
             'The king is dead, long live the king!',
         ];
-        $renderedLines = array_values(array_filter(explode("\n", $twig->render('templateEvents.txt.twig'))));
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('templateEvents.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
+
+    /** @test */
+    public function it_renders_debug_info_in_html_comments_while_rendering_in_test_environment(): void
+    {
+        // See Kernel.php for the configuration resulting in those lines
+        $expectedLines = [
+            '<!-- event name: "event", block name: "first", template: "blocks/html/first.html.twig", priority: 5 -->',
+            '<p id="first">First block</p>',
+            '<!-- event name: "event", block name: "context", template: "blocks/html/context.html.twig", priority: -5 -->',
+            '<p class="context">The king is dead, long live the king!</p>',
+        ];
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('templateEvents.html.twig'))));
 
         Assert::assertSame($expectedLines, $renderedLines);
     }
