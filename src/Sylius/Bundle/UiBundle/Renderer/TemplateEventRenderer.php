@@ -14,24 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
-use Twig\Environment;
 
 final class TemplateEventRenderer implements TemplateEventRendererInterface
 {
     /** @var TemplateBlockRegistryInterface */
     private $templateBlockRegistry;
 
-    /** @var Environment */
-    private $twig;
+    /** @var TemplateBlockRendererInterface */
+    private $templateBlockRenderer;
 
-    /** @var bool */
-    private $debug;
-
-    public function __construct(TemplateBlockRegistryInterface $templateBlockRegistry, Environment $twig, bool $debug)
+    public function __construct(TemplateBlockRegistryInterface $templateBlockRegistry, TemplateBlockRendererInterface $templateBlockRenderer)
     {
         $this->templateBlockRegistry = $templateBlockRegistry;
-        $this->twig = $twig;
-        $this->debug = $debug;
+        $this->templateBlockRenderer = $templateBlockRenderer;
     }
 
     public function render(string $eventName, array $context = []): string
@@ -40,16 +35,7 @@ final class TemplateEventRenderer implements TemplateEventRendererInterface
         $renderedTemplates = [];
 
         foreach ($templateBlocks as $templateBlock) {
-            if ($this->debug && strrpos($templateBlock->template(), '.html.twig') !== false) {
-                $renderedTemplates[] = sprintf(
-                    '<!-- event name: "%s", block name: "%s", template: "%s", priority: %d -->',
-                    $eventName,
-                    $templateBlock->name(),
-                    $templateBlock->template(),
-                    $templateBlock->priority()
-                );
-            }
-            $renderedTemplates[] = $this->twig->render($templateBlock->template(), $context);
+            $renderedTemplates[] = $this->templateBlockRenderer->render($eventName, $templateBlock, $context);
         }
 
         return implode("\n", $renderedTemplates);
