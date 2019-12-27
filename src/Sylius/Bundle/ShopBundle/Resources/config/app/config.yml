@@ -54,3 +54,20 @@ liip_imagine:
 
 sonata_block:
     default_contexts: ~
+
+sylius_ui:
+    events:
+        sylius.shop.layout.topbar:
+            blocks:
+                before_switchers_legacy:
+                    template: "@SyliusShop/Block/Layout/_beforeSwitchersLegacy.html.twig"
+                currency_switcher:
+                    template: "@SyliusShop/Block/Layout/_currencySwitcher.html.twig"
+                locale_switcher:
+                    template: "@SyliusShop/Block/Layout/_localeSwitcher.html.twig"
+                before_security_widget_legacy:
+                    template: "@SyliusShop/Block/Layout/_beforeSecurityWidgetLegacy.html.twig"
+                security_widget:
+                    template: "@SyliusShop/Block/Layout/_securityWidget.html.twig"
+                after_security_widget_legacy:
+                    template: "@SyliusShop/Block/Layout/_afterSecurityWidgetLegacy.html.twig"
