@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\DependencyInjection;
 
+use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Zend\Stdlib\SplPriorityQueue;
@@ -36,27 +39,22 @@ final class SyliusUiExtension extends Extension
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
-        $templateEventExtensionDefinition = $container->getDefinition('sylius.twig.extension.template_event');
+        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
 
         $blocksForEvents = [];
         foreach ($eventsConfig as $eventName => $eventConfiguration) {
             $blocksPriorityQueue = new SplPriorityQueue();
 
             foreach ($eventConfiguration['blocks'] as $blockName => $details) {
-                if (!$details['enabled']) {
-                    continue;
-                }
-
-                $blocksPriorityQueue->insert($details['template'], $details['priority']);
-            }
-
-            if ($blocksPriorityQueue->count() === 0) {
-                continue;
+                $blocksPriorityQueue->insert(
+                    new Definition(TemplateBlock::class, [$blockName, $details['template'], $details['priority'], $details['enabled']]),
+                    $details['priority']
+                );
             }
 
             $blocksForEvents[$eventName] = $blocksPriorityQueue->toArray();
         }
 
-        $templateEventExtensionDefinition->setArgument(1, $blocksForEvents);
+        $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
     }
 }
