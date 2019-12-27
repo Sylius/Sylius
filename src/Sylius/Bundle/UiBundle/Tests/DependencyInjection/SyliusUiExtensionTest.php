@@ -24,6 +24,8 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
     /** @test */
     public function it_configures_the_multiple_event_block_listener_service_with_events_and_blocks_data(): void
     {
+        $this->container->setParameter('kernel.debug', true);
+
         $this->load(['events' => [
             'first_event' => ['blocks' => [
                 'first_block' => ['template' => 'first.html.twig', 'enabled' => true, 'priority' => 0],
@@ -52,6 +54,8 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
     /** @test */
     public function it_sorts_blocks_by_their_priority_and_uses_fifo_ordering(): void
     {
+        $this->container->setParameter('kernel.debug', true);
+
         $this->load(['events' => [
             'event_name' => ['blocks' => [
                 'fourth_block' => ['template' => 'fourth.html.twig', 'enabled' => true, 'priority' => -5],
