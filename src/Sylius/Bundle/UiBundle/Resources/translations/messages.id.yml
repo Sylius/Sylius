@@ -395,7 +395,6 @@ sylius:
         invoice: 'Faktur'
         is_enabled: 'Diaktifkan'
         it_seems_you_have_an_account_already: 'Sepertinya Anda sudah memiliki akun'
-        item.choice: "{0} |{1}, 1 barang|]1, inf],%count% item"
         item: 'Item'
         items: 'Item'
         items_total: 'Total item'
@@ -583,7 +582,6 @@ sylius:
         orders_statistics: 'statistik pesanan'
         original_price: 'Harga asli'
         out_of_stock: 'Kehabisan persediaan'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{0} | {1} Pelanggan ini telah menempatkan satu order |] 1, Inf] Secara keseluruhan, pelanggan ini telah menempatkan %count% pesanan di semua saluran'
         overview_of_your_store: 'Sekilas toko Anda'
         page: 'Halaman'
         pages: 'Halaman'
