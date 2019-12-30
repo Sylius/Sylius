@@ -46,6 +46,15 @@ Feature: Receiving percentage discount on shipping
         And my cart shipping total should be "$10.00"
 
     @ui
+    Scenario: Not receiving negative discount on shipping
+        Given the promotion gives free shipping to every order over "$70.00"
+        And there is a promotion "Shipping promotion"
+        And this promotion gives free shipping to every order over "$50.00"
+        When I add 4 products "PHP Mug" to the cart
+        Then my cart total should be "$80.00"
+        And my cart shipping total should be "$0.00"
+
+    @ui
     Scenario: Still receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
