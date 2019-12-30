@@ -48,11 +48,20 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             return false;
         }
 
+        $maxShippingDiscount = $subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) + $subject->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+        if ($maxShippingDiscount < 0) {
+            return false;
+        }
+
         $adjustment = $this->createAdjustment($promotion);
 
         $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
         if (0 === $adjustmentAmount) {
             return false;
+        }
+
+        if ($maxShippingDiscount < $adjustmentAmount) {
+            $adjustmentAmount = $maxShippingDiscount;
         }
 
         $adjustment->setAmount(-$adjustmentAmount);
