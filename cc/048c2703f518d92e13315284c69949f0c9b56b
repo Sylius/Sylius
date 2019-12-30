@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2018-10-24T06:07:25Z
+
+Hi there! Great to see new Sylius contributors 💪
+
+Regarding the PR, I assume this is a long existent bug, therefore you should open this PR to the lowest possible branch -> 1.2 :)
+
+And please, next time, edit the PR template, as you have left it untouched.
+
+Thanks!
+
+---------------------------------------------------------------------------
+
+by pamil at 2018-10-26T10:34:27Z
+
+I saw you have some troubles rebasing the PR (like I did for a first hundred of them), so I made it for you :) We've got a basic section explaining it in our docs (https://docs.sylius.com/en/1.2/contributing/code/patches.html#rework-your-patch), but I think we need to make it a bit more straightforward and more accessible.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2018-11-30T14:55:13Z
+
+Hello @cosyz2010, do you think you will be able to adjust tests, as @lchrusciel was asking for? It would be great to have it merged :)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-12-27T14:15:45Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-30T07:59:01Z
+
+Thanks, @cosyz2010! :tada:
