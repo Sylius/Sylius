@@ -1,7 +1,5 @@
 language: php
 
-dist: trusty
-
 sudo: false
 
 env:
@@ -17,7 +15,24 @@ addons:
 
 matrix:
     include:
+        -
+            php: 7.4
+            env:
+                - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="4.4.*"
+            services:
+                - memcached
+                - mysql
         -   
+            php: 7.4
+            env:
+                - SYLIUS_SUITE="packages"
+                - SYMFONY_VERSION="4.4.*"
+            addons:
+                apt:
+                    packages:
+                        - parallel
+        -
             php: 7.3
             env:
                 - SYLIUS_SUITE="application"
@@ -25,6 +40,7 @@ matrix:
             services:
                 - memcached
                 - mysql
+            dist: trusty
         -   
             php: 7.3
             env:
@@ -36,6 +52,7 @@ matrix:
                 apt:
                     packages:
                         - parallel
+            dist: trusty
 
 cache:
     yarn: true
