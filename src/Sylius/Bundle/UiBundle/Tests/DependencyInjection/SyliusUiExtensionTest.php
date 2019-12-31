@@ -26,11 +26,11 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
     {
         $this->load(['events' => [
             'first_event' => ['blocks' => [
-                'first_block' => ['template' => 'first.html.twig', 'enabled' => true, 'priority' => 0],
-                'second_block' => ['template' => 'second.html.twig', 'enabled' => true, 'priority' => 0],
+                'first_block' => ['template' => 'first.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
+                'second_block' => ['template' => 'second.html.twig', 'context' => ['foo' => 'bar'], 'enabled' => true, 'priority' => 0],
             ]],
             'second_event' => ['blocks' => [
-                'another_block' => ['template' => 'another.html.twig', 'enabled' => true, 'priority' => 0],
+                'another_block' => ['template' => 'another.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
             ]],
         ]]);
 
@@ -39,11 +39,11 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             0,
             [
                 'first_event' => [
-                    new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', 0, true]),
-                    new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', 0, true]),
+                    new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', [], 0, true]),
+                    new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', ['foo' => 'bar'], 0, true]),
                 ],
                 'second_event' => [
-                    new Definition(TemplateBlock::class, ['another_block', 'another.html.twig', 0, true]),
+                    new Definition(TemplateBlock::class, ['another_block', 'another.html.twig', [], 0, true]),
                 ],
             ]
         );
@@ -54,10 +54,10 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
     {
         $this->load(['events' => [
             'event_name' => ['blocks' => [
-                'fourth_block' => ['template' => 'fourth.html.twig', 'enabled' => true, 'priority' => -5],
-                'second_block' => ['template' => 'second.html.twig', 'enabled' => true, 'priority' => 0],
-                'third_block' => ['template' => 'third.html.twig', 'enabled' => true, 'priority' => 0],
-                'first_block' => ['template' => 'first.html.twig', 'enabled' => true, 'priority' => 5],
+                'fourth_block' => ['template' => 'fourth.html.twig', 'context' => [], 'enabled' => true, 'priority' => -5],
+                'second_block' => ['template' => 'second.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
+                'third_block' => ['template' => 'third.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
+                'first_block' => ['template' => 'first.html.twig', 'context' => [], 'enabled' => true, 'priority' => 5],
             ]],
         ]]);
 
@@ -65,10 +65,10 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             TemplateBlockRegistryInterface::class,
             0,
             ['event_name' => [
-                new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', 5, true]),
-                new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', 0, true]),
-                new Definition(TemplateBlock::class, ['third_block', 'third.html.twig', 0, true]),
-                new Definition(TemplateBlock::class, ['fourth_block', 'fourth.html.twig', -5, true]),
+                new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', [], 5, true]),
+                new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', [], 0, true]),
+                new Definition(TemplateBlock::class, ['third_block', 'third.html.twig', [], 0, true]),
+                new Definition(TemplateBlock::class, ['fourth_block', 'fourth.html.twig', [], -5, true]),
             ]]
         );
     }

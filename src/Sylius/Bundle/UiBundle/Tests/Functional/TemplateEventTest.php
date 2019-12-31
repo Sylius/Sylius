@@ -58,4 +58,16 @@ final class TemplateEventTest extends KernelTestCase
 
         Assert::assertSame($expectedLines, $renderedLines);
     }
+
+    /** @test */
+    public function it_passes_context_defined_in_template_block_configuration_during_rendering(): void
+    {
+        // See Kernel.php for the configuration resulting in those lines
+        $expectedLines = [
+            'Block: option1=foo, option2=baz',
+        ];
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('contextTemplateBlock.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
 }

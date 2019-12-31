@@ -31,7 +31,7 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
 
     function it_returns_all_template_blocks(): void
     {
-        $templateBlock = new TemplateBlock('block_name', 'block.html.twig', 10, true);
+        $templateBlock = new TemplateBlock('block_name', 'block.html.twig', [], 10, true);
 
         $this->beConstructedWith(['event' => [$templateBlock]]);
 
@@ -40,9 +40,9 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
 
     function it_returns_enabled_template_blocks_for_a_given_event(): void
     {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'first.html.twig', 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'second.html.twig', 10, false);
-        $thirdTemplateBlock = new TemplateBlock('third_block', 'third.html.twig', 50, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'first.html.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'second.html.twig', [], 10, false);
+        $thirdTemplateBlock = new TemplateBlock('third_block', 'third.html.twig', [], 50, true);
 
         $this->beConstructedWith(['event' => [$firstTemplateBlock, $secondTemplateBlock], 'another_event' => [$thirdTemplateBlock]]);
 

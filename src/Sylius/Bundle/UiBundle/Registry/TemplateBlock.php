@@ -21,6 +21,9 @@ final class TemplateBlock
     /** @var string */
     private $template;
 
+    /** @var array */
+    private $context;
+
     /** @var int */
     private $priority;
 
@@ -30,11 +33,13 @@ final class TemplateBlock
     public function __construct(
         string $name,
         string $template,
+        array $context,
         int $priority,
         bool $enabled
     ) {
         $this->name = $name;
         $this->template = $template;
+        $this->context = $context;
         $this->priority = $priority;
         $this->enabled = $enabled;
     }
@@ -47,6 +52,11 @@ final class TemplateBlock
     public function getTemplate(): string
     {
         return $this->template;
+    }
+
+    public function getContext(): array
+    {
+        return $this->context;
     }
 
     public function getPriority(): int

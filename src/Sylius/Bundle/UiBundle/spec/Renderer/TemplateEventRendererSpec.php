@@ -36,8 +36,8 @@ final class TemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry,
         TemplateBlockRendererInterface $templateBlockRenderer
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'firstBlock.txt.twig', 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'secondBlock.txt.twig', 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'secondBlock.txt.twig', [], 0, true);
 
         $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
