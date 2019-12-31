@@ -60,14 +60,26 @@ sylius_ui:
         sylius.shop.layout.topbar:
             blocks:
                 before_switchers_legacy:
-                    template: "@SyliusShop/Block/Layout/_beforeSwitchersLegacy.html.twig"
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 35
+                    context:
+                        event: sylius.shop.layout.before_currency_switcher
                 currency_switcher:
                     template: "@SyliusShop/Block/Layout/_currencySwitcher.html.twig"
+                    priority: 30
                 locale_switcher:
                     template: "@SyliusShop/Block/Layout/_localeSwitcher.html.twig"
+                    priority: 20
                 before_security_widget_legacy:
-                    template: "@SyliusShop/Block/Layout/_beforeSecurityWidgetLegacy.html.twig"
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: sylius.shop.layout.before_security_widget
                 security_widget:
                     template: "@SyliusShop/Block/Layout/_securityWidget.html.twig"
+                    priority: 10
                 after_security_widget_legacy:
-                    template: "@SyliusShop/Block/Layout/_afterSecurityWidgetLegacy.html.twig"
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.after_security_widget
