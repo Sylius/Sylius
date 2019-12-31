@@ -34,18 +34,18 @@ final class TemplateBlockRenderer implements TemplateBlockRendererInterface
     {
         $renderedBlock = '';
 
-        if ($this->debug && strrpos($templateBlock->template(), '.html.twig') !== false) {
+        if ($this->debug && strrpos($templateBlock->getTemplate(), '.html.twig') !== false) {
             $renderedBlock .= sprintf(
                 '<!-- event name: "%s", block name: "%s", template: "%s", priority: %d -->',
                 $eventName,
-                $templateBlock->name(),
-                $templateBlock->template(),
-                $templateBlock->priority()
+                $templateBlock->getName(),
+                $templateBlock->getTemplate(),
+                $templateBlock->getPriority()
             );
             $renderedBlock .= "\n";
         }
 
-        $renderedBlock .= $this->twig->render($templateBlock->template(), $context);
+        $renderedBlock .= $this->twig->render($templateBlock->getTemplate(), $context);
 
         return $renderedBlock;
     }

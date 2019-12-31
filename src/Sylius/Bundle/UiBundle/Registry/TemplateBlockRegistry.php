@@ -33,7 +33,7 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
         return array_values(array_filter(
             $this->eventsToTemplateBlocks[$eventName] ?? [],
             static function (TemplateBlock $templateBlock): bool {
-                return $templateBlock->enabled();
+                return $templateBlock->isEnabled();
             }
         ));
     }

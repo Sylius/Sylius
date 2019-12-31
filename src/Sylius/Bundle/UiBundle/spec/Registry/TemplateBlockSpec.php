@@ -21,9 +21,9 @@ final class TemplateBlockSpec extends ObjectBehavior
     {
         $this->beConstructedWith('block_name', 'block.html.twig', 10, false);
 
-        $this->name()->shouldReturn('block_name');
-        $this->template()->shouldReturn('block.html.twig');
-        $this->priority()->shouldReturn(10);
-        $this->enabled()->shouldReturn(false);
+        $this->getName()->shouldReturn('block_name');
+        $this->getTemplate()->shouldReturn('block.html.twig');
+        $this->getPriority()->shouldReturn(10);
+        $this->isEnabled()->shouldReturn(false);
     }
 }

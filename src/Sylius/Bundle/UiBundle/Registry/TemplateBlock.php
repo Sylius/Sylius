@@ -39,22 +39,22 @@ final class TemplateBlock
         $this->enabled = $enabled;
     }
 
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function template(): string
+    public function getTemplate(): string
     {
         return $this->template;
     }
 
-    public function priority(): int
+    public function getPriority(): int
     {
         return $this->priority;
     }
 
-    public function enabled(): bool
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
