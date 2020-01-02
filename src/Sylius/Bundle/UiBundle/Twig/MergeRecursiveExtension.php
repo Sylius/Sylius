@@ -18,7 +18,7 @@ use Twig\TwigFilter;
 
 final class MergeRecursiveExtension extends AbstractExtension
 {
-    public function  getFilters(): array
+    public function getFilters(): array
     {
         return [
             new TwigFilter(

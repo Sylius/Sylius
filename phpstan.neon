@@ -10,9 +10,15 @@ parameters:
         - '**/DependencyInjection/Configuration.php'
 
         # Test dependencies
+        - '**/Bundle/*/spec/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'
+        - '**/Bundle/*/Tests/Functional/var/**.php'
+
+        # Vendor files in subpackages
+        - '**/Bundle/*/vendor/**.php'
+        - '**/Component/*/vendor/**.php'
 
         # These packages aren't in require-dev of the global package
         - '**MongoDB**'

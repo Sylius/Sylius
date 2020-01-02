@@ -53,14 +53,20 @@ final class Kernel extends HttpKernel
         $containerBuilder->loadFromExtension('sylius_ui', ['events' => [
             'first_event' => [
                 'blocks' => [
-                    'third' => ['template' => 'blocks/third.txt.twig', 'priority' => -5],
-                    'first' => ['template' => 'blocks/first.txt.twig', 'priority' => 5],
-                    'second' => 'blocks/second.txt.twig',
+                    'third' => ['template' => 'blocks/txt/third.txt.twig', 'priority' => -5],
+                    'first' => ['template' => 'blocks/txt/first.txt.twig', 'priority' => 5],
+                    'second' => 'blocks/txt/second.txt.twig',
                 ],
             ],
             'second_event' => [
                 'blocks' => [
-                    'context' => 'blocks/context.txt.twig',
+                    'context' => 'blocks/txt/context.txt.twig',
+                ],
+            ],
+            'event' => [
+                'blocks' => [
+                    'first' => ['template' => 'blocks/html/first.html.twig', 'priority' => 5],
+                    'context' => ['template' => 'blocks/html/context.html.twig', 'priority' => -5],
                 ],
             ],
         ]]);

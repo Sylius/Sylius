@@ -15,6 +15,9 @@ namespace Sylius\Bundle\UiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\UiBundle\DependencyInjection\SyliusUiExtension;
+use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
+use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusUiExtensionTest extends AbstractExtensionTestCase
 {
@@ -32,36 +35,17 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.twig.extension.template_event',
-            1,
+            TemplateBlockRegistryInterface::class,
+            0,
             [
                 'first_event' => [
-                    'first.html.twig',
-                    'second.html.twig',
+                    new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', 0, true]),
+                    new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', 0, true]),
                 ],
                 'second_event' => [
-                    'another.html.twig',
+                    new Definition(TemplateBlock::class, ['another_block', 'another.html.twig', 0, true]),
                 ],
             ]
-        );
-    }
-
-    /** @test */
-    public function it_does_not_register_disabled_blocks(): void
-    {
-        $this->load(['events' => [
-            'event_name' => ['blocks' => [
-                'first_block' => ['template' => 'first.html.twig', 'enabled' => false, 'priority' => 0],
-                'second_block' => ['template' => 'second.html.twig', 'enabled' => true, 'priority' => 0],
-            ]],
-        ]]);
-
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.twig.extension.template_event',
-            1,
-            ['event_name' => [
-                'second.html.twig',
-            ]]
         );
     }
 
@@ -78,13 +62,13 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sylius.twig.extension.template_event',
-            1,
+            TemplateBlockRegistryInterface::class,
+            0,
             ['event_name' => [
-                'first.html.twig',
-                'second.html.twig',
-                'third.html.twig',
-                'fourth.html.twig',
+                new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', 5, true]),
+                new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', 0, true]),
+                new Definition(TemplateBlock::class, ['third_block', 'third.html.twig', 0, true]),
+                new Definition(TemplateBlock::class, ['fourth_block', 'fourth.html.twig', -5, true]),
             ]]
         );
     }
