@@ -42,9 +42,6 @@ final class CustomerCheckoutGuestType extends AbstractResourceType
         $this->customerFactory = $customerFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
@@ -75,9 +72,6 @@ final class CustomerCheckoutGuestType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_customer_checkout_guest';
