@@ -1,7 +1,7 @@
 @checkout
 Feature: Checking out as guest with a registered email
     In order to make the checkout process less cumbersome
-    As a Guest
+    As a Visitor
     I want to be able to checkout with my email although I have a registered account
 
     Background:
