@@ -6,6 +6,14 @@ Sylius\Component\Core\Model\Order:
             expose: true
             type: string
             groups: [Default, Detailed, DetailedCart]
+        paymentState:
+            expose: true
+            type: string
+            groups: [Default, Detailed, DetailedCart]
+        shippingState:
+            expose: true
+            type: string
+            groups: [Default, Detailed, DetailedCart]
         currencyCode:
             expose: true
             type: string
