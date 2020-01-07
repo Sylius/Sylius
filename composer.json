@@ -177,6 +177,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
+        "sylius/grid-bundle": "1.7.4",
         "symfony/symfony": "3.4.7",
         "twig/twig": "2.6.1"
     },
