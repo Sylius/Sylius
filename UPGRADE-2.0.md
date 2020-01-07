@@ -24,6 +24,7 @@
         * `Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber`
         * `Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber`
         * `Sylius\Bundle\ResourceBundle\EventListener\ODMTranslatableListener`
+        * `Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension`
 
     * The following services were removed:
     

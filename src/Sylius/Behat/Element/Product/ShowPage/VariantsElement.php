@@ -30,6 +30,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $name,
         string $code,
         string $price,
+        string $channelName,
         string $currentStock
     ): bool {
         /** @var NodeElement $variantRow */
@@ -38,7 +39,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         /** @var NodeElement $variant */
         foreach ($variantRows as $variant) {
             if (
-                $this->hasProductWithGivenNameCodePriceAndCurrentStock($variant, $name, $code, $price, $currentStock)
+                $this->hasProductWithGivenNameCodePriceAndCurrentStock($variant, $name, $code, $price, $channelName, $currentStock)
             ) {
                 return true;
             }
@@ -52,6 +53,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $name,
         string $code,
         string $price,
+        string $channelName,
         string $currentStock
     ): bool {
         $variantContent = $variant->getParent()->find('css', sprintf(
@@ -62,7 +64,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         if (
             $variant->find('css', '.content .variant-name')->getText() === $name &&
             $variant->find('css', '.content .variant-code')->getText() === $code &&
-            $variantContent->find('css', 'tr.pricing:contains("WEB-US") td:nth-child(2)')->getText() === $price &&
+            $variantContent->find('css', sprintf('tr.pricing:contains("%s") td:nth-child(2)', $channelName))->getText() === $price &&
             $variant->find('css', '.current-stock')->getText() === $currentStock
         ) {
             return true;

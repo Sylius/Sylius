@@ -123,17 +123,17 @@
                                                     </tr>
                                                     {% set currencies = sylius_channels_currencies() %}
                                                     {% for channelPricing in variant.channelPricings %}
+                                                        {% set channel = channelPricing.channelCode|sylius_channel %}
                                                         <tr class="pricing">
-                                                            <td class="five wide gray text">
-                                                                <strong>{{ channelPricing.channelCode }}</strong>
+                                                            <td>{{ channel.name }}</td>
+                                                            <td>{{ money.format(channelPricing.price, currencies[channel.code]) }}</td>
+                                                            <td>
+                                                                {% if channelPricing.originalPrice != null %}
+                                                                    {{ money.format(channelPricing.originalPrice, currencies[channel.code]) }}
+                                                                {% else %}
+                                                                    <span class="gray text">-</span>
+                                                                {% endif %}
                                                             </td>
-                                                            {% set channelCode = channelPricing.channelCode %}
-                                                            <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
-                                                            {% if channelPricing.originalPrice != null %}
-                                                                <td>{{ money.format(channelPricing.originalPrice, currencies[channelCode]) }}</td>
-                                                            {% else %}
-                                                                <td><span class="gray text">-</span></td>
-                                                            {% endif %}
                                                         </tr>
                                                     {% endfor %}
                                                 </tbody>
