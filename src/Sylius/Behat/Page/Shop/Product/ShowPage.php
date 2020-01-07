@@ -134,7 +134,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             return false;
         }
 
-        return $this->getElement('add_to_cart_button') !== null && false === $this->getElement('add_to_cart_button')->hasAttribute('disabled');
+        return false === $this->getElement('add_to_cart_button')->hasAttribute('disabled');
     }
 
     public function hasAssociation(string $productAssociationName): bool
@@ -154,7 +154,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         Assert::notNull($products);
 
-        return $productName === $products->find('css', sprintf('[data-test-product-name="%s"]', $productName))->getText();
+        return null !== $products->find('css', sprintf('[data-test-product-name="%s"]', $productName));
     }
 
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
@@ -176,7 +176,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             return false;
         }
 
-        return $title === $element->getAttribute('data-test-comment');
+        return null !== $element->getAttribute('data-test-comment');
     }
 
     public function isOutOfStock(): bool
