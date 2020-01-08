@@ -185,6 +185,7 @@
         "symfony/dom-crawler": "4.1.8",
         "symfony/routing": "4.1.8 || 4.1.9",
         "symfony/symfony": "3.4.7 || 4.0.7 || 4.1.8 || 4.1.9 || 4.2.2",
+        "sylius/grid-bundle": "1.7.4",
         "twig/twig": "2.6.1"
     },
     "suggest": {
