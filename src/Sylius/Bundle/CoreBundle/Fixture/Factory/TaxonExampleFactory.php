@@ -140,7 +140,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])
             ->setAllowedTypes('children', ['array'])
-            ->setDefault('parent', function (Options $options): string {
+            ->setDefault('parent', null)
+            ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))
                 return StringInflector::nameToCode($options['name']);
             })
         ;
