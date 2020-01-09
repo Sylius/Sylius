@@ -17,33 +17,34 @@ sylius_fixtures:
                                         name: 'Category'
                                     fr_FR:
                                         name: 'Categorie'
-                                children:
-                                    -   code: 't_shirts'
+                            t-shirt:
+                                code: 't_shirts'
+                                name: 'T-shirts'
+                                slug: 't-shirts'
+                                parent: 'category'
+                                translations:
+                                    en_US:
                                         name: 'T-shirts'
-                                        slug: 't-shirts'
+                                    fr_FR:
+                                        name: 'T-shirts'
+                                children:
+                                    -   code: 'mens_t_shirts'
                                         translations:
                                             en_US:
-                                                name: 'T-shirts'
+                                                name: 'Men'
+                                                slug: 't-shirts/men'
                                             fr_FR:
-                                                name: 'T-shirts'
-                                        children:
-                                            -   code: 'mens_t_shirts'
-                                                translations:
-                                                    en_US:
-                                                        name: 'Men'
-                                                        slug: 't-shirts/men'
-                                                    fr_FR:
-                                                        name: 'Hommes'
-                                                        slug: 't-shirts/hommes'
+                                                name: 'Hommes'
+                                                slug: 't-shirts/hommes'
 
-                                            -   code: 'womens_t_shirts'
-                                                translations:
-                                                    en_US:
-                                                        name: 'Women'
-                                                        slug: 't-shirts/women'
-                                                    fr_FR:
-                                                        name: 'Femme'
-                                                        slug: 't-shirts/femmes'
+                                    -   code: 'womens_t_shirts'
+                                        translations:
+                                            en_US:
+                                                name: 'Women'
+                                                slug: 't-shirts/women'
+                                            fr_FR:
+                                                name: 'Femme'
+                                                slug: 't-shirts/femmes'
 
                 tshirt_attribute:
                     name: product_attribute
