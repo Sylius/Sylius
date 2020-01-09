@@ -22,7 +22,7 @@ final class TemplateBlockRendererSpec extends ObjectBehavior
 {
     function let(Environment $twig): void
     {
-        $this->beConstructedWith($twig, true);
+        $this->beConstructedWith($twig, false);
     }
 
     function it_is_a_template_block_renderer(): void
@@ -36,8 +36,19 @@ final class TemplateBlockRendererSpec extends ObjectBehavior
 
         $this->render(
             'event_name',
-            new TemplateBlock('block_name', 'block.txt.twig', 0, true),
+            new TemplateBlock('block_name', 'block.txt.twig', [], 0, true),
             ['foo' => 'bar']
+        )->shouldReturn('Block content');
+    }
+
+    function it_merges_template_block_context_with_passed_context(Environment $twig): void
+    {
+        $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true])->willReturn('Block content');
+
+        $this->render(
+            'event_name',
+            new TemplateBlock('block_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true),
+            ['sample' => 'Hello']
         )->shouldReturn('Block content');
     }
 
@@ -49,7 +60,7 @@ final class TemplateBlockRendererSpec extends ObjectBehavior
 
         $this->render(
             'event_name',
-            new TemplateBlock('block_name', 'block.html.twig', 0, true),
+            new TemplateBlock('block_name', 'block.html.twig', [], 0, true),
             ['foo' => 'bar']
         )->shouldReturn(
             '<!-- event name: "event_name", block name: "block_name", template: "block.html.twig", priority: 0 -->' . "\n" .
@@ -65,7 +76,7 @@ final class TemplateBlockRendererSpec extends ObjectBehavior
 
         $this->render(
             'event_name',
-            new TemplateBlock('block_name', 'block.html.twig', 0, true),
+            new TemplateBlock('block_name', 'block.html.twig', [], 0, true),
             ['foo' => 'bar']
         )->shouldReturn('Block content');
     }

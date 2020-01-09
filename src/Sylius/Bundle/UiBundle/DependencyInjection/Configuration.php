@@ -45,6 +45,7 @@ final class Configuration implements ConfigurationInterface
                                         })
                                     ->end()
                                     ->children()
+                                        ->arrayNode('context')->addDefaultsIfNotSet()->ignoreExtraKeys(false)->end()
                                         ->scalarNode('template')->isRequired()->cannotBeEmpty()->end()
                                         ->integerNode('priority')->defaultValue(0)->end()
         ;

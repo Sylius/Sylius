@@ -190,6 +190,38 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function context_can_be_passed_to_the_block(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar']]]]]]],
+            ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar']]]]]],
+            'events.*.blocks.*.context'
+        );
+    }
+
+    /** @test */
+    public function consecutive_block_context_configuration_is_shallowly_merged(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar']]]]]],
+                ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['bar' => 'baz']]]]]],
+            ],
+            ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar', 'bar' => 'baz']]]]]],
+            'events.*.blocks.*.context'
+        );
+
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => ['bar']]]]]]],
+                ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => ['baz']]]]]]],
+            ],
+            ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => ['baz']]]]]]],
+            'events.*.blocks.*.context'
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

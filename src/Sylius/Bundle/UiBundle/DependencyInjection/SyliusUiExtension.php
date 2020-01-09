@@ -35,7 +35,7 @@ final class SyliusUiExtension extends Extension
     }
 
     /**
-     * @psalm-param array<string, array{blocks: array<string, array{template: string, priority: int, enabled: bool}>}> $eventsConfig
+     * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
@@ -47,7 +47,7 @@ final class SyliusUiExtension extends Extension
 
             foreach ($eventConfiguration['blocks'] as $blockName => $details) {
                 $blocksPriorityQueue->insert(
-                    new Definition(TemplateBlock::class, [$blockName, $details['template'], $details['priority'], $details['enabled']]),
+                    new Definition(TemplateBlock::class, [$blockName, $details['template'], $details['context'], $details['priority'], $details['enabled']]),
                     $details['priority']
                 );
             }

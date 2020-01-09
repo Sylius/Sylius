@@ -69,6 +69,17 @@ final class Kernel extends HttpKernel
                     'context' => ['template' => 'blocks/html/context.html.twig', 'priority' => -5],
                 ],
             ],
+            'context_template_block' => [
+                'blocks' => [
+                    'block' => [
+                        'template' => 'blocks/contextTemplateBlock/block.txt.twig',
+                        'context' => [
+                            'option1' => 'foo',
+                            'option2' => 'bar',
+                        ],
+                    ],
+                ],
+            ],
         ]]);
     }
 

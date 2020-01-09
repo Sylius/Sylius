@@ -45,7 +45,7 @@ final class TemplateBlockRenderer implements TemplateBlockRendererInterface
             $renderedBlock .= "\n";
         }
 
-        $renderedBlock .= $this->twig->render($templateBlock->getTemplate(), $context);
+        $renderedBlock .= $this->twig->render($templateBlock->getTemplate(), array_replace($templateBlock->getContext(), $context));
 
         return $renderedBlock;
     }
