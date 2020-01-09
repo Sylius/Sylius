@@ -25,7 +25,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 class TaxonExampleFactorySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
         RepositoryInterface $localeRepository,
@@ -34,12 +34,12 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $this->beConstructedWith($taxonFactory, $taxonRepository, $localeRepository, $taxonSlugGenerator);
     }
 
-    function it_is_an_example_factory(): void
+    public function it_is_an_example_factory(): void
     {
         $this->shouldHaveType(ExampleFactoryInterface::class);
     }
 
-    function it_creates_translations_for_each_defined_locales(
+    public function it_creates_translations_for_each_defined_locales(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
@@ -54,7 +54,6 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
-        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $this->create([
@@ -63,7 +62,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         ]);
     }
 
-    function it_creates_translations_for_each_custom_translations(
+    public function it_creates_translations_for_each_custom_translations(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
@@ -78,7 +77,6 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
-        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $taxon->setCurrentLocale('fr_FR');
@@ -99,7 +97,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         ]);
     }
 
-    function it_replaces_existing_translations_for_each_custom_translations(
+    public function it_replaces_existing_translations_for_each_custom_translations(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
@@ -114,7 +112,6 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $taxon->setCode('Category')->shouldBeCalled();
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setSlug('category')->shouldBeCalled();
-        $taxon->setParent(null)->shouldBeCalled();
         $taxon->setDescription(Argument::type('string'))->shouldBeCalled();
 
         $taxon->setCurrentLocale('en_US');
