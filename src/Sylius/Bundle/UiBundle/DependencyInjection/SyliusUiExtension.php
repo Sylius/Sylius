@@ -31,6 +31,10 @@ final class SyliusUiExtension extends Extension
 
         $loader->load('services.xml');
 
+        if ($container->getParameter('kernel.debug')) {
+            $loader->load('services/debug/template_event.xml');
+        }
+
         $this->loadEvents($config['events'], $container);
     }
 
