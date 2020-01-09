@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -143,8 +144,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('parent', null)
             ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
             ->setNormalizer('parent', LazyOption::findOneBy($this->taxonRepository, 'code'))
-                return StringInflector::nameToCode($options['name']);
-            })
         ;
     }
 
