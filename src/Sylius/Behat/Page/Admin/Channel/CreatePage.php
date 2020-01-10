@@ -92,6 +92,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('type')->selectOption($type);
     }
 
+    public function specifyMenuTaxon(string $menuTaxon): void
+    {
+        $this->getElement('menu_taxon')->selectOption($menuTaxon);
+    }
+
     protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
@@ -106,6 +111,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
+            'menu_taxon' => '#sylius_channel_menuTaxon',
             'name' => '#sylius_channel_name',
             'type' => '#sylius_channel_type',
         ]);
