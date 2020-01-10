@@ -20,12 +20,7 @@
                 </div>
 
                 <div style="text-align: center; padding: 20px 0;">
-                    {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
-                        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
-                        <a href="{{ url|raw }}" style="color: #1abb9c; text-decoration: none;">sylius.com</a>
-                    {% else %}
-                        <div style="color: #1abb9c; text-decoration: none;">sylius.com</div>
-                    {% endif %}
+                    <a href="https://sylius.com" target="_blank" style="color: #1abb9c; text-decoration: none;">sylius.com</a>
                 </div>
             </div>
         </div>
