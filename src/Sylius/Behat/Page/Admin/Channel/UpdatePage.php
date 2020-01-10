@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -99,12 +100,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function changeMenuTaxon(string $menuTaxon): void
     {
-        $this->getElement('menu_taxon')->selectOption($menuTaxon);
+        $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $menuTaxonElement, $menuTaxon);
     }
 
     public function getMenuTaxon(): string
     {
-        return $this->getElement('menu_taxon')->find('css', 'option:selected')->getText();
+        return $this->getElement('menu_taxon')->getParent()->find('css', '.search > .text')->getText();
     }
 
     public function getUsedTheme(): string

@@ -19,6 +19,7 @@ use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -94,7 +95,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyMenuTaxon(string $menuTaxon): void
     {
-        $this->getElement('menu_taxon')->selectOption($menuTaxon);
+        $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $menuTaxonElement, $menuTaxon);
     }
 
     protected function getToggleableElement(): NodeElement

@@ -37,6 +37,7 @@ sylius:
             hostname: Hostname
             locale_default: Default locale
             locales: Locales
+            menu_taxon: Menu taxon
             payment_methods: Payment Methods
             shipping_methods: Shipping Methods
             shop_billing_data: Shop billing data
