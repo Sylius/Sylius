@@ -128,6 +128,7 @@ final class TaxonomyContext implements Context
 
     /**
      * @Given /^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/
+     * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/
      */
     public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, $firstTaxonName, $secondTaxonName)
     {
