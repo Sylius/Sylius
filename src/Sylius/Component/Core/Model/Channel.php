@@ -66,6 +66,9 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var ShopBillingDataInterface|null */
     protected $shopBillingData;
 
+    /** @var TaxonInterface|null */
+    protected $menuTaxon;
+
     public function __construct()
     {
         parent::__construct();
@@ -300,5 +303,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void
     {
         $this->shopBillingData = $shopBillingData;
+    }
+
+    public function getMenuTaxon(): ?TaxonInterface
+    {
+        return $this->menuTaxon;
+    }
+
+    public function setMenuTaxon(?TaxonInterface $menuTaxon): void
+    {
+        $this->menuTaxon = $menuTaxon;
     }
 }

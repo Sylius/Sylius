@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ChannelSpec extends ObjectBehavior
 {
@@ -92,5 +93,11 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
+    }
+
+    function its_type_is_mutable(): void
+    {
+        $this->setType('mobile');
+        $this->getType()->shouldReturn('mobile');
     }
 }
