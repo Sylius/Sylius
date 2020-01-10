@@ -24,6 +24,8 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      */
     public function findChildren(string $parentCode, ?string $locale = null): array;
 
+    public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array;
+
     /**
      * @return array|TaxonInterface[]
      */

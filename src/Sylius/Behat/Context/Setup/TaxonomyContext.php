@@ -149,7 +149,7 @@ final class TaxonomyContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
-        $taxon->setCode(StringInflector::nameToCode($name));
+        $taxon->setCode(StringInflector::nameToLowercaseCode($name));
         $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
 
         return $taxon;
