@@ -98,8 +98,10 @@
 
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="session" />
+            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
             <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
         </service>
     </services>

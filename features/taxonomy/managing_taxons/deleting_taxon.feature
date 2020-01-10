@@ -24,7 +24,7 @@ Feature: Deleting a taxon
         And the taxon named "Women" should no longer exist in the registry
         But the "Shovels" taxon should appear in the registry
 
-    @ui
+    @ui @javascript
     Scenario: Deleted taxon should disappear from the registry
         Given the store classifies its products as "T-Shirts" and "Caps"
         And the store operates on a channel named "Web Store"

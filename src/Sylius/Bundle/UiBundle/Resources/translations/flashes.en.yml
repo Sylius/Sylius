@@ -26,3 +26,5 @@ sylius:
         update_error: 'There was an unexpected problem with updating a product variant. Please, try to update product variant again.'
     promotion:
         update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

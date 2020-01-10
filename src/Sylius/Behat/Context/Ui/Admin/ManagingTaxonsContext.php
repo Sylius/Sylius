@@ -393,7 +393,7 @@ final class ManagingTaxonsContext implements Context
     public function iShouldBeNotifiedThatICannotDeleteAMenuTaxonOfAnyChannel(): void
     {
         $this->notificationChecker->checkNotification(
-            'You cannot delete a menu taxon of any channel',
+            'You cannot delete a menu taxon of any channel.',
             NotificationType::failure()
         );
     }
