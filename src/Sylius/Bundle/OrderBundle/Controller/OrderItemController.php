@@ -227,7 +227,7 @@ class OrderItemController extends ResourceController
     private function getAddToCartFormWithErrors(ConstraintViolationListInterface $errors, FormInterface $form): FormInterface
     {
         foreach ($errors as $error) {
-            $formSelected = (is_null($error->getPropertyPath()) || empty($error->getPropertyPath()))
+            $formSelected = empty($error->getPropertyPath())
                 ? $form->get('cartItem')
                 : $form->get('cartItem')->get($error->getPropertyPath());
 
