@@ -17,15 +17,9 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductsInOrder(array $productNames)
+    public function hasProductsInOrder(array $productNames): bool
     {
         $productsOnPage = $this->getColumnFields('name');
 
@@ -38,10 +32,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPositionOfProduct($productName, $position)
+    public function setPositionOfProduct(string $productName, string $position): void
     {
         /** @var NodeElement $productsRow */
         $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
@@ -50,19 +41,17 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $productsRow->find('css', '.sylius-product-taxon-position')->setValue($position);
     }
 
-    public function savePositions()
+    public function savePositions(): void
     {
-        $this->getElement('save_configuration_button')->press();
+        $saveConfigurationButton = $this->getElement('save_configuration_button');
+        $saveConfigurationButton->press();
 
-        $this->getDocument()->waitFor(5, function () {
-            return null === $this->getElement('save_configuration_button')->find('css', '.loading');
+        $this->getDocument()->waitFor(5, function () use ($saveConfigurationButton) {
+            return null === $saveConfigurationButton->find('css', '.loading');
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'save_configuration_button' => '.sylius-save-position',

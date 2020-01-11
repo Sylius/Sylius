@@ -4,7 +4,7 @@
 default:
     suites:
         ui_applying_taxes:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address
@@ -33,5 +33,6 @@ default:
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.user
+
             filters:
                 tags: "@applying_taxes && @ui"

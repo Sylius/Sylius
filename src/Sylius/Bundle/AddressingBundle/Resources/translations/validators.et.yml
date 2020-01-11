@@ -9,3 +9,18 @@ sylius:
             not_blank: Palun sisestage linn.
         country:
             not_blank: Palun valige riik.
+            disabled: Valitud riik on keelatud. Palun vali teine nimi.
+        first_name:
+            max_length: Eesnimi ei tohi olla pikem kui 255 märki | Eesnimi ei tohi olla pikem kui 255 märki.
+            min_length: Eesnimi peab olema vähemalt 2 tähemärki | Eesnimi peab olema vähemalt 2 tähemärki.
+            not_blank: Palun sisesta eesnimi.
+        last_name:
+            max_length: Perekonnanimi ei tohi olla pikem kui 255 märki | Perekonnanimi ei tohi olla pikem kui 255 märki.
+            min_length: Perekonnanimi peab olema vähemalt 2 tähemärki | Perekonnanimi peab olema vähemalt 2 tähemärki.
+            not_blank: Palun sisesta perekonnanimi.
+        postcode:
+            max_length: Postiindeks ei tohi olla pikem kui 255 märki | Postiindeks ei tohi olla pikem kui 255 märki.
+            min_length: Postiindeks peab olema vähemalt 2 tähemärki | Postiindex peab olema vähemalt 2 tähemärki.
+            not_blank: Palun sisesta postiindeks.
+        province:
+            valid: Palun sisesta õige maakond.

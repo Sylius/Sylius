@@ -13,17 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Currency\Converter;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CurrencyConverterInterface
 {
-    /**
-     * @param int $value
-     * @param string $sourceCurrencyCode
-     * @param string $targetCurrencyCode
-     *
-     * @return int
-     */
     public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int;
 }

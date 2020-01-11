@@ -25,7 +25,7 @@ Administration Security
 -----------------------
 
 In **Sylius** by default you have got the administration panel routes (``/admin/*``) secured by a firewall - its configuration
-can be found in the `security.yml <https://github.com/Sylius/Sylius/blob/master/app/config/security.yml>`_ file.
+can be found in the `security.yaml <https://github.com/Sylius/Sylius/blob/master/config/packages/security.yaml>`_ file.
 
 Only the logged in **AdminUsers** are eligible to enter these routes.
 

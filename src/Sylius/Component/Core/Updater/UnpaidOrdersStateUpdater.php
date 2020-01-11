@@ -18,29 +18,18 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var Factory
-     */
+    /** @var Factory */
     private $stateMachineFactory;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $expirationPeriod;
 
     /**
-     * @param OrderRepositoryInterface $orderRepository
-     * @param Factory $stateMachineFactory
      * @param string $expirationPeriod
      */
     public function __construct(
@@ -61,9 +50,6 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         }
     }
 
-    /**
-     * @param OrderInterface $expiredUnpaidOrder
-     */
     private function cancelOrder(OrderInterface $expiredUnpaidOrder): void
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, OrderTransitions::GRAPH);

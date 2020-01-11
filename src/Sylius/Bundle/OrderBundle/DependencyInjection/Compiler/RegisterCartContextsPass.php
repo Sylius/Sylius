@@ -14,19 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class RegisterCartContextsPass extends PrioritizedCompositeServicePass
 {
+    public const CART_CONTEXT_SERVICE_TAG = 'sylius.context.cart';
+
     public function __construct()
     {
         parent::__construct(
             'sylius.context.cart',
             'sylius.context.cart.composite',
-            'sylius.context.cart',
+            self::CART_CONTEXT_SERVICE_TAG,
             'addContext'
         );
+    }
+
+    public function process(ContainerBuilder $container): void
+    {
+        parent::process($container);
+
+        $container->setAlias(CartContextInterface::class, 'sylius.context.cart');
     }
 }

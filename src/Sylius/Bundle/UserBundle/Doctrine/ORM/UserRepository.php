@@ -17,10 +17,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     /**

@@ -22,41 +22,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductOptionExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionValueFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param RepositoryInterface $localeRepository
-     */
     public function __construct(
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
@@ -121,7 +103,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                 return StringInflector::nameToCode($options['name']);
             })
             ->setDefault('values', null)
-            ->setDefault('values', function (Options $options, $values): array {
+            ->setDefault('values', function (Options $options, ?array $values): array {
                 if (is_array($values)) {
                     return $values;
                 }
@@ -137,9 +119,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

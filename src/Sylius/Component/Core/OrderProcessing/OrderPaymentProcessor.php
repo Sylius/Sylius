@@ -22,27 +22,14 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var OrderPaymentProviderInterface
-     */
+    /** @var OrderPaymentProviderInterface */
     private $orderPaymentProvider;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $targetState;
 
-    /**
-     * @param OrderPaymentProviderInterface $orderPaymentProvider
-     * @param string $targetState
-     */
     public function __construct(
         OrderPaymentProviderInterface $orderPaymentProvider,
         string $targetState = PaymentInterface::STATE_CART
@@ -64,7 +51,11 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         if (0 === $order->getTotal()) {
-            foreach ($order->getPayments(OrderPaymentStates::STATE_CART) as $payment) {
+            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
+                return $payment->getState() === OrderPaymentStates::STATE_CART;
+            });
+
+            foreach ($removablePayments as $payment) {
                 $order->removePayment($payment);
             }
 

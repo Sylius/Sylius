@@ -9,8 +9,9 @@ sylius:
             country: Land
             first_name: Vorname
             last_name: Nachname
-            phone_number: Telefonnummber
+            phone_number: Telefonnummer
             postcode: Postleitzahl
+            street: Straße und Hausnummer
             province: Kanton
             zone: Zone
         country:
@@ -33,6 +34,8 @@ sylius:
                 province: Kanton
                 zone: Zone
             scope: Umfang
+            scopes:
+                all: Alle
             select: Auswählen
             select_scope: Bereich auswählen
         zone_member:

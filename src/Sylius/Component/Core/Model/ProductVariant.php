@@ -19,73 +19,48 @@ use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $version = 1;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHold = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $onHand = 0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $tracked = false;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $weight;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $width;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $height;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $depth;
 
-    /**
-     * @var TaxCategoryInterface
-     */
+    /** @var TaxCategoryInterface */
     protected $taxCategory;
 
-    /**
-     * @var ShippingCategoryInterface
-     */
+    /** @var ShippingCategoryInterface */
     protected $shippingCategory;
 
-    /**
-     * @var Collection
-     */
+    /** @var Collection */
     protected $channelPricings;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $shippingRequired = true;
 
     /**
      * @var Collection|ProductImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductImageInterface>
      */
     protected $images;
 
@@ -93,13 +68,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ChannelPricingInterface> $this->channelPricings */
         $this->channelPricings = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         $string = (string) $this->getProduct()->getName();
@@ -409,6 +384,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getImages(): Collection
     {
@@ -417,6 +395,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getImagesByType(string $type): Collection
     {

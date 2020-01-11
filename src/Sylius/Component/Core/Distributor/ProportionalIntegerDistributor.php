@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Distributor;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProportionalIntegerDistributor implements ProportionalIntegerDistributorInterface
 {
     /**
@@ -31,7 +28,7 @@ final class ProportionalIntegerDistributor implements ProportionalIntegerDistrib
         $distributedAmounts = [];
 
         foreach ($integers as $element) {
-            $distributedAmounts[] = (int) round(($element * $amount) / $total, 0, PHP_ROUND_HALF_DOWN);
+            $distributedAmounts[] = (int) round(($element * $amount) / $total, 0, \PHP_ROUND_HALF_DOWN);
         }
 
         $missingAmount = $amount - array_sum($distributedAmounts);

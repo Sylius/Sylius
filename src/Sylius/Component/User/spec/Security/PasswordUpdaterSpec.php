@@ -19,9 +19,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class PasswordUpdaterSpec extends ObjectBehavior
 {
     function let(UserPasswordEncoderInterface $userPasswordEncoder): void

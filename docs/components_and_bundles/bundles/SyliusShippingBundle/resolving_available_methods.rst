@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Resolving available shipping methods
 ====================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In many use cases, you want to decide which shipping methods are available for user.
 Sylius has a dedicated service which serves this purpose.

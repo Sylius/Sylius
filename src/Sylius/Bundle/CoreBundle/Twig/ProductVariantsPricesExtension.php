@@ -14,20 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
-final class ProductVariantsPricesExtension extends \Twig_Extension
+final class ProductVariantsPricesExtension extends AbstractExtension
 {
-    /**
-     * @var ProductVariantsPricesHelper
-     */
+    /** @var ProductVariantsPricesHelper */
     private $productVariantsPricesHelper;
 
-    /**
-     * @param ProductVariantsPricesHelper $productVariantsPricesHelper
-     */
     public function __construct(ProductVariantsPricesHelper $productVariantsPricesHelper)
     {
         $this->productVariantsPricesHelper = $productVariantsPricesHelper;
@@ -39,7 +33,7 @@ final class ProductVariantsPricesExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
+            new TwigFunction('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
         ];
     }
 }

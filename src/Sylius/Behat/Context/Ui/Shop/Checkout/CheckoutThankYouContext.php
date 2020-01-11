@@ -14,34 +14,59 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutThankYouContext implements Context
 {
-    /**
-     * @var ThankYouPageInterface
-     */
+    /** @var ThankYouPageInterface */
     private $thankYouPage;
 
-    /**
-     * @param ThankYouPageInterface $thankYouPage
-     */
-    public function __construct(ThankYouPageInterface $thankYouPage)
-    {
+    /** @var ShowPageInterface */
+    private $orderShowPage;
+
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    public function __construct(
+        ThankYouPageInterface $thankYouPage,
+        ShowPageInterface $orderShowPage,
+        OrderRepositoryInterface $orderRepository
+    ) {
         $this->thankYouPage = $thankYouPage;
+        $this->orderShowPage = $orderShowPage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @When I go to order details
+     * @When I go to the change payment method page
      */
-    public function iGoToOrderDetails()
+    public function iGoToTheChangePaymentMethodPage(): void
     {
-        $this->thankYouPage->goToOrderDetails();
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
+    }
+
+    /**
+     * @When I proceed to the registration
+     */
+    public function iProceedToTheRegistration(): void
+    {
+        $this->thankYouPage->createAccount();
+    }
+
+    /**
+     * @Then I should be able to access this order's details
+     */
+    public function iShouldBeAbleToAccessThisOrderDetails(): void
+    {
+        $this->thankYouPage->goToOrderDetailsInAccount();
+
+        $number = $this->orderShowPage->getNumber();
+
+        Assert::same($this->orderRepository->findLatest(1)[0]->getNumber(), $number);
     }
 
     /**
@@ -90,5 +115,21 @@ final class CheckoutThankYouContext implements Context
     public function iShouldNotBeAbleToChangeMyPaymentMethod()
     {
         Assert::false($this->thankYouPage->hasChangePaymentMethodButton());
+    }
+
+    /**
+     * @Then I should be able to proceed to the registration
+     */
+    public function iShouldBeAbleToProceedToTheRegistration(): void
+    {
+        Assert::true($this->thankYouPage->hasRegistrationButton());
+    }
+
+    /**
+     * @Then I should not be able to proceed to the registration
+     */
+    public function iShouldNotBeAbleToProceedToTheRegistration(): void
+    {
+        Assert::false($this->thankYouPage->hasRegistrationButton());
     }
 }

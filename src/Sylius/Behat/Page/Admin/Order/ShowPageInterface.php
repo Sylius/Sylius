@@ -13,288 +13,110 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShowPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $customerName
-     */
-    public function hasCustomer($customerName);
+    public function hasCustomer(string $customerName): bool;
 
-    /**
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName);
+    public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
-    /**
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName);
+    public function hasShippingAddressVisible(): bool;
 
-    /**
-     * @param string $shippingMethodName
-     *
-     * @return bool
-     */
-    public function hasShipment($shippingMethodName);
+    public function hasBillingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
-    /**
-     * @param string $code
-     */
-    public function specifyTrackingCode($code);
+    public function hasShipment(string $shippingMethodName): bool;
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    public function canShipOrder(OrderInterface $order);
+    public function specifyTrackingCode(string $code): void;
 
-    /**
-     * @param OrderInterface $order
-     */
-    public function shipOrder(OrderInterface $order);
+    public function canShipOrder(OrderInterface $order): bool;
 
-    /**
-     * @param string $paymentMethodName
-     *
-     * @return bool
-     */
-    public function hasPayment($paymentMethodName);
+    public function shipOrder(OrderInterface $order): void;
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
-    public function canCompleteOrderLastPayment(OrderInterface $order);
+    public function hasPayment(string $paymentMethodName): bool;
 
-    /**
-     * @param OrderInterface $order
-     */
-    public function completeOrderLastPayment(OrderInterface $order);
+    public function canCompleteOrderLastPayment(OrderInterface $order): bool;
 
-    /**
-     * @param OrderInterface $order
-     */
-    public function refundOrderLastPayment(OrderInterface $order);
+    public function completeOrderLastPayment(OrderInterface $order): void;
 
-    /**
-     * @return int
-     */
-    public function countItems();
+    public function refundOrderLastPayment(OrderInterface $order): void;
 
-    /**
-     * @param string $productName
-     *
-     * @return bool
-     */
-    public function isProductInTheList($productName);
+    public function countItems(): int;
 
-    /**
-     * @return string
-     */
-    public function getItemsTotal();
+    public function isProductInTheList(string $productName): bool;
 
-    /**
-     * @return string
-     */
-    public function getTotal();
+    public function getItemsTotal(): string;
 
-    /**
-     * @return string
-     */
-    public function getShippingTotal();
+    public function getTotal(): string;
 
-    /**
-     * @param string $shippingCharge
-     *
-     * @return bool
-     */
-    public function hasShippingCharge($shippingCharge);
+    public function getShippingTotal(): string;
 
-    /**
-     * @return string
-     */
-    public function getTaxTotal();
+    public function hasShippingCharge(string $shippingCharge): bool;
 
-    /**
-     * @return string
-     */
-    public function getPromotionTotal();
+    public function getTaxTotal(): string;
 
-    /**
-     * @param string $promotionDiscount
-     *
-     * @return bool
-     */
-    public function hasPromotionDiscount($promotionDiscount);
+    public function getOrderPromotionTotal(): string;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return bool
-     */
-    public function hasShippingPromotion($promotionName);
+    public function hasPromotionDiscount(string $promotionName, string $promotionAmount): bool;
 
-    /**
-     * @param string $tax
-     *
-     * @return bool
-     */
-    public function hasTax($tax);
+    public function hasTax(string $tax): bool;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemCode($itemName);
+    public function getItemCode(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemUnitPrice($itemName);
+    public function getItemUnitPrice(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemDiscountedUnitPrice($itemName);
+    public function getItemDiscountedUnitPrice(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemQuantity($itemName);
+    public function getItemQuantity(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemDiscount($itemName);
+    public function getItemDiscount(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemTax($itemName);
+    public function getItemTax(string $itemName): string;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemTotal($itemName);
+    public function getItemTaxIncludedInPrice(string $itemName): string;
 
-    /**
-     * @return string
-     */
-    public function getPaymentAmount();
+    public function getItemTotal(string $itemName): string;
 
-    /**
-     * @return int
-     */
-    public function getPaymentsCount();
+    public function getPaymentAmount(): string;
 
-    /**
-     * @return int
-     */
-    public function getShipmentsCount();
+    public function getPaymentsCount(): int;
 
-    /**
-     * @return bool
-     */
-    public function hasCancelButton();
+    public function getShipmentsCount(): int;
 
-    /**
-     * @return string
-     */
-    public function getOrderState();
+    public function hasCancelButton(): bool;
 
-    /**
-     * @return string
-     */
-    public function getPaymentState();
+    public function getOrderState(): string;
 
-    /**
-     * @return string
-     */
-    public function getShippingState();
+    public function getPaymentState(): string;
 
-    public function cancelOrder();
+    public function getShippingState(): string;
 
-    public function deleteOrder();
+    public function cancelOrder(): void;
 
-    /**
-     * @param string $note
-     *
-     * @return bool
-     */
-    public function hasNote($note);
+    public function deleteOrder(): void;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasShippingProvinceName($provinceName);
+    public function hasNote(string $note): bool;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasBillingProvinceName($provinceName);
+    public function hasShippingProvinceName(string $provinceName): bool;
 
-    /**
-     * @return string
-     */
-    public function getIpAddressAssigned();
+    public function hasBillingProvinceName(string $provinceName): bool;
 
-    /**
-     * @return string
-     */
-    public function getOrderCurrency();
+    public function getIpAddressAssigned(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasRefundButton();
+    public function getOrderCurrency(): string;
 
-    /**
-     * @return string
-     */
-    public function getShippingPromotionData();
+    public function hasRefundButton(): bool;
+
+    public function getShippingPromotionData(): string;
+
+    public function getItemOrderDiscount(string $itemName): string;
+
+    public function hasInformationAboutNoPayment(): bool;
+
+    public function resendOrderConfirmationEmail(): void;
+
+    public function resendShipmentConfirmationEmail(): void;
 }

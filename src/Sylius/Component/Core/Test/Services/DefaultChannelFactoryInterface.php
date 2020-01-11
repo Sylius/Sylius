@@ -13,17 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Test\Services;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface DefaultChannelFactoryInterface
 {
-    /**
-     * @param string|null $code
-     * @param string|null $name
-     * @param string|null $currencyCode
-     *
-     * @return array
-     */
     public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array;
 }

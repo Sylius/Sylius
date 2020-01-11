@@ -37,9 +37,9 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $fulfilled = $this->get('sylius.installer.checker.sylius_requirements')->check($input, $output);
+        $fulfilled = $this->getContainer()->get('sylius.installer.checker.sylius_requirements')->check($input, $output);
 
         if (!$fulfilled) {
             throw new RuntimeException(
@@ -48,5 +48,7 @@ EOT
         }
 
         $output->writeln('<info>Success! Your system can run Sylius properly.</info>');
+
+        return 0;
     }
 }

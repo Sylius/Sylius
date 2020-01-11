@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la commande. Veuillez réessayer.'
         promotion_integrity: 'Vous n’êtes plus admissible à la promotion %promotionName%.'
         total_integrity: 'Le total de votre commande a été changé, vérifiez les informations de votre commande et confirmez.'
-        update_error: 'Il y a eu une erreur inconnue lors de la mise à jour du produit. Veuillez réessayer.'
+        update_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la commande. Veuillez réessayer.'
     payment:
         apply_state_machine_transition_error: 'Il y a eu une erreur inconnue lors de la mise à jour du paiement. Veuillez réessayer.'
     product:

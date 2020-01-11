@@ -11,6 +11,7 @@ sylius:
                     header: Katalogu
                     inventory: Gjendja e magazinës
                     options: Opsionet
+                    products: Produktet
                     taxons: Tipologjite
                 configuration:
                     channels: Kanalet
@@ -19,6 +20,7 @@ sylius:
                     header: Konfigurimi
                     locales: Rajonet
                     payment_methods: Mënyrat e pagesës
+                    shipping_categories: Kategoritë e dërgesave
                     shipping_methods: Mënyrat e dërgesave
                     tax_categories: Kategoritë e taksimit
                     tax_rates: Normat e taksimit

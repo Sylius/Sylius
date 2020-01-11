@@ -5,4 +5,9 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Lista de adrese'
+                change_password: 'Schimbă parola'
                 dashboard: 'Panou de administrare'
+                header: 'Contul tău'
+                order_history: 'Istoric comenzi'
+                personal_information: 'Informaţii personale'

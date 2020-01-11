@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Remover;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ExpiredCartsRemoverInterface
 {
     public function remove(): void;

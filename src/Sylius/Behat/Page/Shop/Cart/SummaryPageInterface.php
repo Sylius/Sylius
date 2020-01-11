@@ -13,13 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface SummaryPageInterface extends PageInterface
 {
     /**
@@ -32,15 +28,18 @@ interface SummaryPageInterface extends PageInterface
      */
     public function getBaseGrandTotal();
 
-    /**
-     * @return string
-     */
-    public function getTaxTotal();
+    public function getIncludedTaxTotal(): string;
+
+    public function getExcludedTaxTotal(): string;
+
+    public function areTaxesCharged(): bool;
 
     /**
      * @return string
      */
     public function getShippingTotal();
+
+    public function hasShippingTotal(): bool;
 
     /**
      * @return string
@@ -67,6 +66,8 @@ interface SummaryPageInterface extends PageInterface
      * @return string
      */
     public function getItemUnitPrice($productName);
+
+    public function getItemImage(int $itemNumber): string;
 
     /**
      * @param string $productName
@@ -127,8 +128,6 @@ interface SummaryPageInterface extends PageInterface
     public function hasItemWithOptionValue($productName, $optionName, $optionValue);
 
     /**
-     * @param ProductInterface $product
-     *
      * @return bool
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product);
@@ -139,7 +138,7 @@ interface SummaryPageInterface extends PageInterface
     public function isEmpty();
 
     /**
-     * @param $productName
+     * @param string $productName
      *
      * @return int
      */

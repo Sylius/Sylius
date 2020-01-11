@@ -1,0 +1,52 @@
+<div id="details">
+    <h4 class="ui top attached large header">{{ 'sylius.ui.details'|trans }}</h4>
+    <div class="ui attached segment">
+        <div>
+            {% if product.enabled %}
+                <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.enabled'|trans }}</span>
+            {% else %}
+                <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.disabled'|trans }}</span>
+            {% endif %}
+
+            {% if product.variants.first.tracked %}
+                <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.tracked'|trans }}</span>
+            {% else %}
+                <span class="ui red label"><i class="remove icon"></i>{{ 'sylius.ui.not_tracked'|trans }}</span>
+            {% endif %}
+
+            {% if product.variants.first.shippingRequired %}
+                <span class="ui teal label"><i class="checkmark icon"></i>{{ 'sylius.ui.shipping_required'|trans }}</span>
+            {% else %}
+                <span class="ui orange label"><i class="remove icon"></i>{{ 'sylius.ui.shipping_not_required'|trans }}</span>
+            {% endif %}
+
+            <table class="ui very basic celled table">
+                <tbody>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.code'|trans }}</strong></td>
+                    <td>{{ product.code }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></td>
+                    <td>
+                        {% for channel in product.channels %}
+                            <div>
+                                <span class="ui large empty horizontal circular label" style="background-color: {{ channel.color }}"></span>
+                                <span class="channel-name">{{ channel }}</span>
+                            </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.current_stock'|trans }}</strong></td>
+                    <td>{{ product.variants.first.onHand }}</td>
+                </tr>
+                <tr>
+                    <td class="five wide"><strong class="gray text">{{ 'sylius.ui.tax_category'|trans }}</strong></td>
+                    <td>{{ product.variants.first.taxCategory }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

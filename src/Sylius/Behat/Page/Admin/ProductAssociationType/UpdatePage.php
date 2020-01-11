@@ -13,46 +13,32 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductAssociationType;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_association_type_translations_%s_name', $language), $name
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameIt($name)
+    public function nameIt($name): void
     {
         $this->getElement('name')->setValue($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_association_type_code',

@@ -19,31 +19,17 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class SessionBasedCartContext implements CartContextInterface
 {
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionKeyName;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param SessionInterface $session
-     * @param string $sessionKeyName
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(SessionInterface $session, string $sessionKeyName, OrderRepositoryInterface $orderRepository)
     {
         $this->session = $session;

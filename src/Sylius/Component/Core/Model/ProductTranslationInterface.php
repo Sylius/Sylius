@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Product\Model\ProductTranslationInterface as BaseProductTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ProductTranslationInterface extends BaseProductTranslationInterface
 {
     /**
@@ -25,8 +22,5 @@ interface ProductTranslationInterface extends BaseProductTranslationInterface
      */
     public function getShortDescription(): ?string;
 
-    /**
-     * @param string|null $shortDescription
-     */
     public function setShortDescription(?string $shortDescription): void;
 }

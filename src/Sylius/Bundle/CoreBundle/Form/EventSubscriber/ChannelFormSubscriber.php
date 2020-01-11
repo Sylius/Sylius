@@ -17,9 +17,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ChannelFormSubscriber implements EventSubscriberInterface
 {
     /**
@@ -32,9 +29,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
@@ -58,7 +52,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param array|string[] $locales
-     * @param string $defaultLocale
      *
      * @return array|string[]
      */
@@ -77,7 +70,6 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
 
     /**
      * @param array|string[] $currencies
-     * @param string $baseCurrency
      *
      * @return array|string[]
      */

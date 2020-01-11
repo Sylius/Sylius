@@ -19,9 +19,6 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class PerUnitRateCalculator implements CalculatorInterface
 {
     /**
@@ -31,6 +28,7 @@ final class PerUnitRateCalculator implements CalculatorInterface
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration): int
     {
+        /** @var ShipmentInterface $subject */
         Assert::isInstanceOf($subject, ShipmentInterface::class);
 
         $channelCode = $subject->getOrder()->getChannel()->getCode();

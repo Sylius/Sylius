@@ -20,15 +20,20 @@ Methods of templates customizing
 
     There are three ways of customizing templates of Sylius:
 
-    The first one is simple **templates overriding** inside of the ``app/Resources`` directory of your project. Using
+    The first one is simple **templates overriding** inside of the ``templates/bundles`` directory of your project. Using
     this method you can completely change the content of templates.
 
     The second method is **templates customization via events**. You are able to listen on these template events,
     and by that add your own blocks without copying and pasting the whole templates. This feature is really useful
-    when :doc:`creating Sylius Extensions </plugins/creating-plugin>`.
+    when :doc:`creating Sylius Plugins </book/plugins/creating-plugin>`.
 
     The third method is **using Sylius themes**. Creating a Sylius theme requires a few more steps than basic template overriding,
     but allows you to have a different design on multiple channels of the same Sylius instance. :doc:`Learn more about themes here </book/themes/themes>`.
+
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/16>`_
 
 
 How to customize templates by overriding?
@@ -44,8 +49,8 @@ How to customize templates by overriding?
 
 * **Shop** templates: customizing Login Page template:
 
-The default login template is: ``SyliusShopBundle:login.html.twig``.
-In order to override it you need to create your own: ``app/Resources/SyliusShopBundle/views/login.html.twig``.
+The default login template is: ``@SyliusShopBundle/login.html.twig``.
+In order to override it you need to create your own: ``templates/bundles/SyliusShopBundle/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
@@ -90,7 +95,7 @@ Done! If you do not see any changes on the ``/shop/login`` url, clear your cache
 * **Admin** templates: Customization of the Country form view.
 
 The default template for the Country form is: ``SyliusAdminBundle:Country:_form.html.twig``.
-In order to override it you need to create your own: ``app/Resources/SyliusAdminBundle/views/Country/_form.html.twig``.
+In order to override it you need to create your own: ``templates/bundles/SyliusAdminBundle/Country/_form.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
@@ -159,47 +164,36 @@ How to use template events for customizations?
 When you have found an event in the place where you want to add some content, here's what you have to do.
 
 Let's assume that you would like to add some content after the header in the Sylius shop views.
-You will need to look at the ``/SyliusShopBundle/Resources/views/layout.html.twig`` template,
+You will need to look at the ``SyliusShopBundle/Resources/views/layout.html.twig`` template,
 which is the basic layout of Sylius shop, and then in it find the appropriate event.
 
 For the space below the header it will be ``sylius.shop.layout.after_header``.
 
-* Create an ``.html.twig`` file that will contain what you want to add.
+* Create a Twig template file that will contain what you want to add.
 
 .. code-block:: twig
 
-    {# AppBundle/Resources/views/block.html.twig #}
+    {# templates/block.html.twig #}
 
     <h1> Test Block Title </h1>
 
-* And register a listener for the chosen event:
-
-.. warning::
-
-    The name of the event should be preceded by the ``sonata.block.event.`` string.
+* And configure Sylius UI to display it for the chosen event:
 
 .. code-block:: yaml
 
-    services:
-        app.block_event_listener.homepage.layout.after_header:
-            class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-            arguments:
-                - '@@App/block.html.twig'
-            tags:
-                - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_header, method: onBlockEvent }
+    # config/packages/sylius_ui.yaml
 
-.. tip::
-
-    While configuring it in ``yaml`` remember about having two ``@`` for the argument reference to your template,
-    just like above ``'@@App/block.html.twig'``, what escapes the second ``@`` and lets it not to be interpreted as a service.
-
-    In ``xml`` the double ``@`` is not required: it would be just ``<argument>@App/block.html.twig</argument>``
+    sylius_ui:
+        events:
+            sylius.shop.layout.after_header:
+                blocks:
+                    my_block_name: 'block.html.twig'
 
 That's it. Your new block should appear in the view.
 
 .. tip::
 
-    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/admin-js-and-css>`.
+    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
 
 How to use themes for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

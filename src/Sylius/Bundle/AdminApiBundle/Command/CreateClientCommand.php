@@ -21,10 +21,20 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @author Arnaud Langlade <arn0d.dev@gmali.com>
+ * @deprecated Fetching dependencies directly from container is not recommended from Symfony 3.4. Extending `ContainerAwareCommand` will be removed in 2.0
  */
 final class CreateClientCommand extends ContainerAwareCommand
 {
+    /** @var ClientManagerInterface|null */
+    private $clientManager;
+
+    public function __construct(?string $name = null, ClientManagerInterface $clientManager = null)
+    {
+        parent::__construct($name);
+
+        $this->clientManager = $clientManager;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -55,15 +65,18 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $clientManager = $this->getClientManager();
+        if (null === $this->clientManager) {
+            @trigger_error('Fetching services directly from the container is deprecated since Sylius 1.2 and will be removed in 2.0.', \E_USER_DEPRECATED);
+            $this->clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
+        }
 
         /** @var Client $client */
-        $client = $clientManager->createClient();
+        $client = $this->clientManager->createClient();
         $client->setRedirectUris($input->getOption('redirect-uri'));
         $client->setAllowedGrantTypes($input->getOption('grant-type'));
-        $clientManager->updateClient($client);
+        $this->clientManager->updateClient($client);
 
         $output->writeln(
             sprintf(
@@ -72,13 +85,7 @@ EOT
                 $client->getSecret()
             )
         );
-    }
 
-    /**
-     * @return ClientManagerInterface
-     */
-    private function getClientManager(): ClientManagerInterface
-    {
-        return $this->getContainer()->get('fos_oauth_server.client_manager.default');
+        return 0;
     }
 }

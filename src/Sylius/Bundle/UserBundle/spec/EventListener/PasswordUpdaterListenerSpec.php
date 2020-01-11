@@ -20,9 +20,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class PasswordUpdaterListenerSpec extends ObjectBehavior
 {
     function let(PasswordUpdaterInterface $passwordUpdater): void

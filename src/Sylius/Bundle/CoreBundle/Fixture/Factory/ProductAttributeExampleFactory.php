@@ -21,41 +21,23 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductAttributeExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var AttributeFactoryInterface
-     */
+    /** @var AttributeFactoryInterface */
     private $productAttributeFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $attributeTypes;
 
-    /**
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param RepositoryInterface $localeRepository
-     * @param array $attributeTypes
-     */
     public function __construct(
         AttributeFactoryInterface $productAttributeFactory,
         RepositoryInterface $localeRepository,
@@ -116,9 +98,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

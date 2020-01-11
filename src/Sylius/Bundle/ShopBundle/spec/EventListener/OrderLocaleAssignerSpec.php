@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class OrderLocaleAssignerSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext): void

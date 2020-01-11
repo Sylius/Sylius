@@ -1,15 +1,6 @@
 Summary
 =======
 
-Tests
------
-
-.. code-block:: bash
-
-    $ composer install
-    $ bin/phpspec run
-    $ bin/phpunit
-
 Bug tracking
 ------------
 

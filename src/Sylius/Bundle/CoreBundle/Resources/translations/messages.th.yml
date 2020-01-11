@@ -22,9 +22,15 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
-            name: ชื่อ
+            name: ชื่อภาษา
             roles: Roles
         channel:
+            billing_data:
+                city: เขต/อำเภอ
+                company: บริษัท
+                country: ประเทศ
+                postcode: รหัสไปรษณีย์
+                street: ที่อยู่
             contact_email: ติดต่ออีเมล์
             currencies: สกุลเงิน
             currency_base: ฐานสกุลเงิน
@@ -45,7 +51,7 @@ sylius:
             file: รูปภาพ
         locale:
             code: รหัส
-            enabled: เปิดใช้งานแล้ว
+            enabled: เปิดใช้งาน
         order_filter:
             created_at_from: สร้างหลังจาก
             created_at_to: สร้างก่อน
@@ -65,9 +71,9 @@ sylius:
             variant_selection_method: วิธีการเลือกตัวแปร
             main_taxon: หมวดหมู่หลัก
             channels: ช่องทางจำหน่าย
-            enabled: เปิดใช้งานแล้ว
+            enabled: เปิดใช้งาน
         product_filter:
-            name: ชื่อ
+            name: ชื่อภาษา
             code: รหัส
         product_variant:
             tax_category: ประเภทภาษี
@@ -95,12 +101,12 @@ sylius:
         user:
             billing_address: ที่อยู่สำหรับออกใบเสร็จ
             different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
-            enabled: เปิดใช้งานแล้ว
+            enabled: เปิดใช้งาน
             first_name: ชื่อ
             groups: กลุ่ม
             roles: Roles
             last_name: นามสกุล
-            password: รหัสผ่าน
+            password: Password
             shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
         user_filter:
             query: ค้นหา
@@ -123,7 +129,7 @@ sylius:
             product: สินค้าที่เกี่ยวข้อง
             type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
-            name: ชื่อ
+            name: ชื่อภาษา
         promotion_filter:
             products: ตัวกรองสินค้า
             taxons: ตัวกรอง taxons
@@ -136,7 +142,7 @@ sylius:
                 products: สินค้า
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
-                amount: ยอดเงิน
+                amount: ยอดรวม
         payment_method:
             channels: ช่องทางจำหน่าย
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: ระบบแฟ้ม
             cache:
                 header: แคช
-                help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: exists
             logs:
                 header: บันทึก
-                help: 'ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "ตั้งค่า permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: not exists
             not_writable: not writable
             parameters:
                 header: parameters.yml
-                help: 'ตั้งค่า permissions run: sudo chmod a+w %path%'
+                help: "ตั้งค่า permissions run: sudo chmod a+w %path%"
             vendors: vendors
             writable: writable
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: non deprecated
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: timezone
             timezone_deprecated:
                 header: เขตเวลาที่เลิกใช้งาน
-                help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
+                help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP เวอร์ชัน
             version_recommended: PHP เวอร์ชันที่แนะนำ
     payum_gateway:

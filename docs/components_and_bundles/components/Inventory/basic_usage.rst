@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Basic Usage
 ===========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Stockable Object
 ----------------
@@ -158,14 +165,14 @@ Decrease
 .. caution::
     All methods in **InventoryOperator** throw `InvalidArgumentException`_ or `InsufficientStockException`_ if an error occurs.
 
-.. _InsufficientStockException: http://api.sylius.org/Sylius/Component/Inventory/Operator/InsufficientStockException.html
+.. _InsufficientStockException: http://api.sylius.com/Sylius/Component/Inventory/Operator/InsufficientStockException.html
 
 .. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
 
 .. note::
     For more detailed information go to `Sylius API InventoryOperator`_.
 
-.. _Sylius API InventoryOperator: http://api.sylius.org/Sylius/Component/Inventory/Operator/InventoryOperator.html
+.. _Sylius API InventoryOperator: http://api.sylius.com/Sylius/Component/Inventory/Operator/InventoryOperator.html
 
 .. hint::
     To understand how events work check `Symfony EventDispatcher`_.
@@ -187,7 +194,7 @@ In some cases, you may want to have unlimited inventory, this operator will allo
 .. note::
     For more detailed information go to `Sylius API NoopInventoryOperator`_.
 
-.. _Sylius API NoopInventoryOperator: http://api.sylius.org/Sylius/Component/Inventory/Operator/NoopInventoryOperator.html
+.. _Sylius API NoopInventoryOperator: http://api.sylius.com/Sylius/Component/Inventory/Operator/NoopInventoryOperator.html
 
 .. _component_inventory_checker_availability-checker:
 
@@ -241,4 +248,4 @@ The **InventoryUnitFactory** creates a collection of new inventory units.
 .. note::
     For more detailed information go to `Sylius API InventoryUnitFactory`_.
 
-.. _Sylius API InventoryUnitFactory: http://api.sylius.org/Sylius/Component/Inventory/Factory/InventoryUnitFactory.html
+.. _Sylius API InventoryUnitFactory: http://api.sylius.com/Sylius/Component/Inventory/Factory/InventoryUnitFactory.html

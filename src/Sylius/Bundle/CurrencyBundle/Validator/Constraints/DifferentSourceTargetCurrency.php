@@ -15,14 +15,9 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class DifferentSourceTargetCurrency extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.exchange_rate.different_source_target_currency';
 
     /**

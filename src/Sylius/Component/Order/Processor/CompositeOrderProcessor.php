@@ -16,13 +16,12 @@ namespace Sylius\Component\Order\Processor;
 use Sylius\Component\Order\Model\OrderInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {
     /**
      * @var PriorityQueue|OrderProcessorInterface[]
+     *
+     * @psalm-var PriorityQueue<OrderProcessorInterface>
      */
     private $orderProcessors;
 
@@ -31,10 +30,6 @@ final class CompositeOrderProcessor implements OrderProcessorInterface
         $this->orderProcessors = new PriorityQueue();
     }
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     * @param int $priority
-     */
     public function addProcessor(OrderProcessorInterface $orderProcessor, int $priority = 0): void
     {
         $this->orderProcessors->insert($orderProcessor, $priority);

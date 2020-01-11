@@ -15,9 +15,6 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Client extends BaseClient implements ClientInterface
 {
     /**

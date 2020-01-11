@@ -23,14 +23,10 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
  *
  * Provides a common logic for Sylius Plugins.
  * Each of a plugins should be created with Plugin instead of Bundle suffix for the root class.
- *
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 trait SyliusPluginTrait
 {
-    /**
-     * @var ExtensionInterface|bool
-     */
+    /** @var ExtensionInterface|bool */
     private $containerExtension;
 
     /**
@@ -54,7 +50,7 @@ trait SyliusPluginTrait
                 $basename = preg_replace('/Plugin$/', '', $this->getName());
                 $expectedAlias = Container::underscore($basename);
 
-                if ($expectedAlias != $extension->getAlias()) {
+                if ($expectedAlias !== $extension->getAlias()) {
                     throw new \LogicException(sprintf(
                         'Users will expect the alias of the default extension of a plugin to be the underscored version of the plugin name ("%s"). You can override "Bundle::getContainerExtension()" if you want to use "%s" or another alias.',
                         $expectedAlias, $extension->getAlias()
@@ -67,9 +63,7 @@ trait SyliusPluginTrait
             }
         }
 
-        if ($this->containerExtension) {
-            return $this->containerExtension;
-        }
+        return $this->containerExtension ?: null;
     }
 
     /**
@@ -95,8 +89,6 @@ trait SyliusPluginTrait
 
     /**
      * Returns the plugin's container extension class.
-     *
-     * @return string
      */
     protected function getContainerExtensionClass(): string
     {

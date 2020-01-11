@@ -13,33 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductOption;
 
-use Behat\Mink\Element\Element;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_option_translations_%s_name', $language), $name
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addOptionValue($code, $value)
+    public function addOptionValue(string $code, string $value): void
     {
         $this->getDocument()->clickLink('Add value');
 
@@ -49,10 +40,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $optionValueForm->fillField('English (United States)', $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkValidationMessageForOptionValues($message)
+    public function checkValidationMessageForOptionValues(string $message): bool
     {
         $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.sylius-validation-error');
         if (null === $optionValuesValidationElement) {
@@ -62,10 +50,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $optionValuesValidationElement->getText() === $message;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_option_code',
@@ -75,10 +60,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    /**
-     * @return Element
-     */
-    private function getLastOptionValueElement()
+    private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');
         $items = $optionValues->findAll('css', 'div[data-form-collection="item"]');

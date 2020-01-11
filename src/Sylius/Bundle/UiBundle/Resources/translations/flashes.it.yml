@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'C''è stato un problema imprevisto con l''aggiornamento di un ordine. Per favore, provare ad aggiornare l''ordine nuovamente.'
         promotion_integrity: 'Non sei più autorizzato a partecipare a questa promozione %promotionName%.'
         total_integrity: 'L''importo totale dell''ordine è stato modificato, verifica le informazioni sull''ordine e conferma nuovamente.'
-        update_error: 'C''è stato un problema imprevisto con l''aggiornamento di un prodotto. Per favore, prova ad aggiornare il prodotto nuovamente.'
+        update_error: 'C''è stato un problema imprevisto con l''aggiornamento di un ordine. Per favore, provare ad aggiornare l''ordine nuovamente.'
     payment:
         apply_state_machine_transition_error: 'C''è stato un problema imprevisto con l''aggiornamento di un pagamento. Per favore, prova ad aggiornare il pagamento nuovamente.'
     product:

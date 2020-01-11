@@ -19,6 +19,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -28,6 +29,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 final class UserProviderSpec extends ObjectBehavior
 {
@@ -163,7 +165,7 @@ final class UserProviderSpec extends ObjectBehavior
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
-        $response->getEmail()->willReturn(null);
+        $response->getEmail()->willReturn('username@emaildoesntexist');
         $response->getUsername()->willReturn('username');
         $response->getNickname()->willReturn('user');
         $response->getRealName()->willReturn('Name');
@@ -179,6 +181,7 @@ final class UserProviderSpec extends ObjectBehavior
         $userFactory->createNew()->willReturn($user);
         $customerFactory->createNew()->willReturn($customer);
         $customer->setFirstName('Name')->shouldBeCalled();
+        $customer->setEmail('username@emaildoesntexist')->shouldBeCalled();
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -187,7 +190,7 @@ final class UserProviderSpec extends ObjectBehavior
 
         $user->setCustomer($customer)->shouldBeCalled();
         $user->getUsername()->willReturn(null);
-        $user->setUsername('user')->shouldBeCalled();
+        $user->setUsername('username@emaildoesntexist')->shouldBeCalled();
         $user->setPlainPassword('2ff2dfe363')->shouldBeCalled();
         $user->setEnabled(true)->shouldBeCalled();
         $user->addOAuthAccount($oauth)->shouldBeCalled();
@@ -196,5 +199,28 @@ final class UserProviderSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+    }
+
+    function it_should_throw_exception_when_no_email_was_provided(
+        $userManager,
+        UserRepositoryInterface $userRepository,
+        FactoryInterface $oauthFactory,
+        RepositoryInterface $oauthRepository,
+        ShopUserInterface $user,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner,
+        UserOAuthInterface $oauth
+    ): void {
+        $response->getResourceOwner()->willReturn($resourceOwner);
+        $resourceOwner->getName()->willReturn('google');
+
+        $response->getUsername()->willReturn('username');
+
+        $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
+
+        $response->getEmail()->willReturn(null);
+        $userRepository->findOneByEmail(Argument::any())->shouldNotBeCalled();
+
+        $this->shouldThrow(UsernameNotFoundException::class)->during('loadUserByOAuthUserResponse', [$response]);
     }
 }

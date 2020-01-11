@@ -18,27 +18,16 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderCompleteListener
 {
-    /**
-     * @var OrderEmailManagerInterface
-     */
+    /** @var OrderEmailManagerInterface */
     private $orderEmailManager;
 
-    /**
-     * @param OrderEmailManagerInterface $orderEmailManager
-     */
     public function __construct(OrderEmailManagerInterface $orderEmailManager)
     {
         $this->orderEmailManager = $orderEmailManager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function sendConfirmationEmail(GenericEvent $event): void
     {
         $order = $event->getSubject();

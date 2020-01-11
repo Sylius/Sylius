@@ -13,15 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Checker;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UniquenessCheckerInterface
 {
-    /**
-     * @param string $token
-     *
-     * @return bool
-     */
     public function isUnique(string $token): bool;
 }

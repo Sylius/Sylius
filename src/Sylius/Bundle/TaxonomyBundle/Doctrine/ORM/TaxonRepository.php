@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-/**
- * @author Aram Alipoor <aram.alipoor@gmail.com>
- */
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
     /**
@@ -90,11 +87,12 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByNamePart(string $phrase, ?string $locale = null): array
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
     {
         return $this->createTranslationBasedQueryBuilder($locale)
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%' . $phrase . '%')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
@@ -108,12 +106,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
     }
 
-    /**
-     * @param string|null $locale
-     *
-     * @return QueryBuilder
-     */
-    private function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
+    protected function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

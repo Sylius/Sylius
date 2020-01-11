@@ -17,25 +17,14 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-/**
- * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
- */
 final class OrderModifier implements OrderModifierInterface
 {
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessor;
 
-    /**
-     * @var OrderItemQuantityModifierInterface
-     */
+    /** @var OrderItemQuantityModifierInterface */
     private $orderItemQuantityModifier;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
-     */
     public function __construct(
         OrderProcessorInterface $orderProcessor,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
@@ -63,10 +52,6 @@ final class OrderModifier implements OrderModifierInterface
         $this->orderProcessor->process($order);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param OrderItemInterface $item
-     */
     private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item): void
     {
         foreach ($order->getItems() as $existingItem) {

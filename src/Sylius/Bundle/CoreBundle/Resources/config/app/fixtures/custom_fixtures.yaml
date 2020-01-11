@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                product_review:
+                    options:
+                        random: 40
+
+                similar_product_association:
+                    options:
+                        amount: 3
+
+                order:
+                    options:
+                        amount: 20
+                        channel: 'FASHION_WEB'
+
+                address:
+                    options:
+                        random: 10
+                        prototype:
+                            country_code: US

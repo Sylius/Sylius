@@ -20,19 +20,11 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
-    /**
-     * @var TaxonRepositoryInterface
-     */
+    /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     */
     public function __construct(TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonRepository = $taxonRepository;
@@ -62,10 +54,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     public function reverseTransform($taxons): array
     {
         Assert::isInstanceOf($taxons, Collection::class);
-
-        if (null === $taxons) {
-            return [];
-        }
 
         return array_map(function (TaxonInterface $taxon) {
             return $taxon->getCode();

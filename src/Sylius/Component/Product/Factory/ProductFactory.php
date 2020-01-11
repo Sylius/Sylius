@@ -16,26 +16,14 @@ namespace Sylius\Component\Product\Factory;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 class ProductFactory implements ProductFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $variantFactory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param FactoryInterface $variantFactory
-     */
     public function __construct(
         FactoryInterface $factory,
         FactoryInterface $variantFactory

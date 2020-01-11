@@ -16,27 +16,21 @@ namespace Sylius\Bundle\UiBundle\Block;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class BlockEventListener
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
-    /**
-     * @param string $template
-     */
     public function __construct(string $template)
     {
+        @trigger_error(
+            sprintf('Using "%s" to add blocks to the templates is deprecated since Sylius 1.7 and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.', self::class),
+            \E_USER_DEPRECATED
+        );
+
         $this->template = $template;
     }
 
-    /**
-     * @param BlockEvent $event
-     */
     public function onBlockEvent(BlockEvent $event): void
     {
         $block = new Block();

@@ -19,49 +19,36 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.order.show';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param StateMachineFactoryInterface $stateMachineFactory,
-     */
+    /** @var CsrfTokenManagerInterface */
+    private $csrfTokenManager;
+
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
+        CsrfTokenManagerInterface $csrfTokenManager
     ) {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -87,9 +74,13 @@ final class OrderShowMenuBuilder
             $menu
                 ->addChild('cancel', [
                     'route' => 'sylius_admin_order_cancel',
-                    'routeParameters' => ['id' => $order->getId()],
+                    'routeParameters' => [
+                        'id' => $order->getId(),
+                        '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
+                    ],
                 ])
                 ->setAttribute('type', 'transition')
+                ->setAttribute('confirmation', true)
                 ->setLabel('sylius.ui.cancel')
                 ->setLabelAttribute('icon', 'ban')
                 ->setLabelAttribute('color', 'yellow')

@@ -16,22 +16,12 @@ namespace Sylius\Behat\Page\Admin\Locale;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
-     * @param string $name
-     *
      * @throws ElementNotFoundException
      */
-    public function chooseName($name);
+    public function chooseName(string $name): void;
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isOptionAvailable($name);
+    public function isOptionAvailable(string $name): bool;
 }

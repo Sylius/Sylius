@@ -17,33 +17,18 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class UniquePinGenerator implements GeneratorInterface
 {
-    /**
-     * @var RandomnessGeneratorInterface
-     */
+    /** @var RandomnessGeneratorInterface */
     private $generator;
 
-    /**
-     * @var UniquenessCheckerInterface
-     */
+    /** @var UniquenessCheckerInterface */
     private $uniquenessChecker;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $pinLength;
 
     /**
-     * @param RandomnessGeneratorInterface $generator
-     * @param UniquenessCheckerInterface $uniquenessChecker
-     * @param int $pinLength
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(

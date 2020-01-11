@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel_pricing:
+        price:
+            not_blank: 価格を入力してください。
+    checkout:
+        shipping_method:
+            not_blank: 発送方法を選択してください。
+    product_variant:
+        onHand:
+            min: 在庫は{{ limit }}以上で入力してください。
+            not_blank: 在庫を入力してください。

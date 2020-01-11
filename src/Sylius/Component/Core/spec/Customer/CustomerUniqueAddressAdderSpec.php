@@ -21,9 +21,6 @@ use Sylius\Component\Core\Customer\CustomerAddressAdderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 {
     function let(AddressComparatorInterface $addressComparator): void

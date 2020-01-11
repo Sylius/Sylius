@@ -16,27 +16,16 @@ namespace Sylius\Component\Addressing\Matcher;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ZoneMatcherInterface
 {
     /**
      * Returns the best matching zone for given address.
-     *
-     * @param AddressInterface $address
-     * @param string|null      $scope
-     *
-     * @return ZoneInterface|null
      */
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface;
 
     /**
      * Returns all matching zones for given address.
      *
-     * @param AddressInterface $address
-     * @param string|null      $scope
      *
      * @return array|ZoneInterface[]
      */

@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class Configuration implements ConfigurationInterface
 {
     /**
@@ -26,8 +24,9 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_shop');
+        $treeBuilder = new TreeBuilder('sylius_shop');
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
@@ -42,15 +41,18 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('pattern')
                             ->defaultValue('/checkout/.+')
                             ->validate()
-                            ->ifTrue(function ($pattern) {
-                                return !is_string($pattern);
-                            })
+                            ->ifTrue(
+                                /** @param mixed $pattern */
+                                function ($pattern) {
+                                    return !is_string($pattern);
+                                }
+                            )
                                 ->thenInvalid('Invalid pattern "%s"')
                             ->end()
                         ->end()
                         ->arrayNode('route_map')
                             ->useAttributeAsKey('name')
-                            ->prototype('array')
+                            ->arrayPrototype()
                                 ->children()
                                     ->scalarNode('route')
                                         ->cannotBeEmpty()
@@ -58,6 +60,14 @@ final class Configuration implements ConfigurationInterface
                                     ->end()
                                 ->end()
                             ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('product_grid')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('include_all_descendants')
+                            ->defaultFalse()
                         ->end()
                     ->end()
                 ->end()

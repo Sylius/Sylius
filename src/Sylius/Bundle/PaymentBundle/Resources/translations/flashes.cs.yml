@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Platba byla autorizována.'
         cancelled: 'Platba byla zrušena.'
         completed: 'Platba byla dokončena.'
         failed: 'Platba se nezdařila.'

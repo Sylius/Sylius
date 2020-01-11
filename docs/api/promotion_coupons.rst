@@ -77,7 +77,7 @@ To create a new promotion coupon for the promotion with ``code = HOLIDAY-SALE`` 
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -121,7 +121,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -171,7 +171,7 @@ Here is an example of creating a promotion coupon with additional data for the p
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -241,7 +241,7 @@ To see the details of the promotion coupon with ``code = A3BCB`` which belongs t
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
+     $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -305,7 +305,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -397,7 +397,7 @@ To fully update the promotion coupon with ``code = A3BCB`` for the promotion wit
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -444,7 +444,7 @@ To partially update the promotion coupon with ``code = A3BCB`` for the promotion
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -490,7 +490,7 @@ To delete the promotion coupon with ``code = A3BCB`` from the promotion with ``c
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
+    $ curl http://demo.sylius.com/api/v1/promotions/HOLIDAY-SALE/coupons/A3BCB \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

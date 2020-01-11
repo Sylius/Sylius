@@ -14,23 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Provider;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $provinceRepository;
 
-    /**
-     * @param RepositoryInterface $provinceRepository
-     */
     public function __construct(RepositoryInterface $provinceRepository)
     {
         $this->provinceRepository = $provinceRepository;
@@ -49,6 +41,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
             return '';
         }
 
+        /** @var ProvinceInterface|null $province */
         $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
         Assert::notNull($province, sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
 
@@ -68,6 +61,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
             return '';
         }
 
+        /** @var ProvinceInterface|null $province */
         $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
         Assert::notNull($province, sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
 

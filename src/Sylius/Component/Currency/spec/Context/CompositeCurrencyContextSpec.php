@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeCurrencyContextSpec extends ObjectBehavior
 {
     function it_implements_currency_context_interface(): void

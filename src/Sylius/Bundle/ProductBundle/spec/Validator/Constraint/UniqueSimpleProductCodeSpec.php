@@ -16,9 +16,6 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator\Constraint;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.org>
- */
 final class UniqueSimpleProductCodeSpec extends ObjectBehavior
 {
     function it_is_a_validation_constraint(): void

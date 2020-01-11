@@ -5,5 +5,10 @@ sylius:
     form:
         tax_category:
             name: الاسم
+            description: الوصف
         tax_rate:
+            category: القسم
             name: الاسم
+            amount: القيمة
+            included_in_price: مشمول السعر؟
+            calculator: الحاسبة

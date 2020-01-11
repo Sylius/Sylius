@@ -15,9 +15,6 @@ namespace Sylius\Component\Promotion\Exception;
 
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class FailedGenerationException extends \InvalidArgumentException
 {
     /**

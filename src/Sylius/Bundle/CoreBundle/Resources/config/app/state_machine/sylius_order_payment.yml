@@ -7,6 +7,8 @@ winzou_state_machine:
         states:
             cart: ~
             awaiting_payment: ~
+            partially_authorized: ~
+            authorized: ~
             partially_paid: ~
             cancelled: ~
             paid: ~
@@ -16,14 +18,20 @@ winzou_state_machine:
             request_payment:
                 from: [cart]
                 to: awaiting_payment
+            partially_authorize:
+                from: [awaiting_payment, partially_authorized]
+                to: partially_authorized
+            authorize:
+                from: [awaiting_payment, partially_authorized]
+                to: authorized
             partially_pay:
-                from: [awaiting_payment, partially_paid]
+                from: [awaiting_payment, partially_paid, partially_authorized]
                 to: partially_paid
             cancel:
-                from: [awaiting_payment]
+                from: [awaiting_payment, authorized, partially_authorized]
                 to: cancelled
             pay:
-                from: [awaiting_payment, partially_paid]
+                from: [awaiting_payment, partially_paid, authorized]
                 to: paid
             partially_refund:
                 from: [paid, partially_paid, partially_refunded]

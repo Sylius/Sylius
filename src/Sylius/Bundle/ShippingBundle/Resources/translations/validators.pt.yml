@@ -11,9 +11,6 @@ sylius:
             not_blank: 'Por favor, insira o código da categoria de expedição.'
             unique: 'Já existe uma categoria de transporte com o código introduzido.'
     shipping_method:
-        calculator:
-            max_length: Tamanho máximo
-            min_length: Tamanho mínimo
         name:
             max_length: 'O nome do método de envio não deve ter mais que {{ limit }} caracteres.'
             min_length: 'O nome do método de envio deve ter pelo menos {{ limit }} caracteres.'

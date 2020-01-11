@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductsToCodesTransformerSpec extends ObjectBehavior
 {
     function let(ProductRepositoryInterface $productRepository): void

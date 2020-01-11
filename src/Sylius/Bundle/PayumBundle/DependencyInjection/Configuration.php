@@ -15,7 +15,9 @@ namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
 use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfig;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken;
+use Sylius\Bundle\PayumBundle\Model\PaymentSecurityTokenInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -30,8 +32,9 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius_payum');
+        $treeBuilder = new TreeBuilder('sylius_payum');
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -40,8 +43,8 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('template')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('layout')->defaultValue('SyliusPayumBundle::layout.html.twig')->end()
-                        ->scalarNode('obtain_credit_card')->defaultValue('SyliusPayumBundle:Action:obtainCreditCard.html.twig')->end()
+                        ->scalarNode('layout')->defaultValue('@SyliusPayum/layout.html.twig')->end()
+                        ->scalarNode('obtain_credit_card')->defaultValue('@SyliusPayum/Action/obtainCreditCard.html.twig')->end()
                     ->end()
                 ->end()
             ->end()
@@ -52,9 +55,6 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $node
-     */
     private function addResourcesSection(ArrayNodeDefinition $node): void
     {
         $node
@@ -70,6 +70,7 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(PaymentSecurityToken::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PaymentSecurityTokenInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
@@ -84,6 +85,7 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(GatewayConfig::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(GatewayConfigInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(GatewayConfigType::class)->cannotBeEmpty()->end()

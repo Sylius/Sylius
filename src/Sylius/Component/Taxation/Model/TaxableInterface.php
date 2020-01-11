@@ -13,13 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface TaxableInterface
 {
-    /**
-     * @return TaxCategoryInterface|null
-     */
     public function getTaxCategory(): ?TaxCategoryInterface;
 }

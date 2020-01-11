@@ -28,8 +28,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * when we're adding product to cart, but not when we edit quantity in cart.
  * We'll use simple option for that, passing the product instance required by
  * variant choice type.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartItemTypeExtension extends AbstractTypeExtension
 {

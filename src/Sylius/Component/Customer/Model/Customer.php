@@ -15,61 +15,38 @@ namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class Customer implements CustomerInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $emailCanonical;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $firstName;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $lastName;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $birthday;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
-    /**
-     * @var CustomerGroupInterface|null
-     */
+    /** @var CustomerGroupInterface|null */
     protected $group;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $phoneNumber;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $subscribedToNewsletter = false;
 
     public function __construct()
@@ -77,9 +54,6 @@ class Customer implements CustomerInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getEmail();

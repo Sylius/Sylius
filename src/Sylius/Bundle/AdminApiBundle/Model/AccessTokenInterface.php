@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 use FOS\OAuthServerBundle\Model\AccessTokenInterface as BaseAccessTokenInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AccessTokenInterface extends BaseAccessTokenInterface, ResourceInterface
 {
 }

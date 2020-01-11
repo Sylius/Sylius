@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PriceHelperSpec extends ObjectBehavior
 {
     function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void

@@ -14,19 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_cart_summary';
     }
@@ -51,14 +47,29 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $totalElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxTotal()
+    public function getIncludedTaxTotal(): string
     {
-        $taxTotalElement = $this->getElement('tax_total');
+        $includedTaxTotalElement = $this->getElement('tax_included');
 
-        return $taxTotalElement->getText();
+        return $includedTaxTotalElement->getText();
+    }
+
+    public function getExcludedTaxTotal(): string
+    {
+        $excludedTaxTotalElement = $this->getElement('tax_excluded');
+
+        return $excludedTaxTotalElement->getText();
+    }
+
+    public function areTaxesCharged(): bool
+    {
+        try {
+            $this->getElement('no_taxes');
+        } catch (ElementNotFoundException $exception) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -69,6 +80,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $shippingTotalElement = $this->getElement('shipping_total');
 
         return $shippingTotalElement->getText();
+    }
+
+    public function hasShippingTotal(): bool
+    {
+        return $this->hasElement('shipping_total');
     }
 
     /**
@@ -88,7 +104,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
-        return  $itemTotalElement->getText();
+        return $itemTotalElement->getText();
     }
 
     /**
@@ -109,6 +125,13 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
 
         return $this->getPriceFromString(trim($unitPrice->getText()));
+    }
+
+    public function getItemImage(int $itemNumber): string
+    {
+        $itemImage = $this->getElement('item_image', ['%number%' => $itemNumber]);
+
+        return $itemImage->getAttribute('src');
     }
 
     /**
@@ -276,16 +299,18 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'apply_coupon_button' => 'button:contains("Apply coupon")',
+            'base_grand_total' => '#sylius-cart-base-grand-total',
             'cart_items' => '#sylius-cart-items',
             'cart_total' => '#sylius-cart-total',
             'clear_button' => '#sylius-cart-clear',
             'coupon_field' => '#sylius_cart_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
-            'base_grand_total' => '#sylius-cart-base-grand-total',
+            'item_image' => '#sylius-cart-items tbody tr:nth-child(%number%) img',
+            'no_taxes' => '#sylius-cart-tax-none',
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
@@ -295,15 +320,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',
-            'tax_total' => '#sylius-cart-tax-total',
+            'tax_excluded' => '#sylius-cart-tax-excluded',
+            'tax_included' => '#sylius-cart-tax-included',
             'update_button' => '#sylius-cart-update',
             'validation_errors' => '.sylius-validation-error',
         ]);
     }
 
     /**
-     * @param $attributeName
-     * @param $selector
+     * @param string $attributeName
+     * @param string|array $selector
      *
      * @return bool
      *
@@ -322,13 +348,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return false;
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
-        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }

@@ -19,25 +19,14 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class CurrencyFixture extends AbstractFixture
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $currencyFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $currencyManager;
 
-    /**
-     * @param FactoryInterface $currencyFactory
-     * @param ObjectManager $currencyManager
-     */
     public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager)
     {
         $this->currencyFactory = $currencyFactory;
@@ -77,7 +66,7 @@ class CurrencyFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('currencies')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
         ;
     }
 }

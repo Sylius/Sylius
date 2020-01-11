@@ -16,15 +16,9 @@ namespace Sylius\Component\Shipping\Repository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $name
-     * @param string $locale
-     *
      * @return ShippingMethodInterface[]
      */
     public function findByName(string $name, string $locale): array;

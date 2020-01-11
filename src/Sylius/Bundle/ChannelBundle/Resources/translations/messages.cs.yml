@@ -9,3 +9,4 @@ sylius:
             enabled: Povoleno
             name: Jméno
             url: URL
+            type: Typ

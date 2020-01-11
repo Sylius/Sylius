@@ -18,25 +18,14 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutPaymentContext implements Context
 {
-    /**
-     * @var SelectPaymentPageInterface
-     */
+    /** @var SelectPaymentPageInterface */
     private $selectPaymentPage;
 
-    /**
-     * @var CompletePageInterface
-     */
+    /** @var CompletePageInterface */
     private $completePage;
 
-    /**
-     * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param CompletePageInterface $completePage
-     */
     public function __construct(SelectPaymentPageInterface $selectPaymentPage, CompletePageInterface $completePage)
     {
         $this->selectPaymentPage = $selectPaymentPage;

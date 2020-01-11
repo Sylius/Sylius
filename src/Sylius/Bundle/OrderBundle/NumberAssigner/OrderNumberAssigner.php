@@ -16,19 +16,11 @@ namespace Sylius\Bundle\OrderBundle\NumberAssigner;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderNumberAssigner implements OrderNumberAssignerInterface
 {
-    /**
-     * @var OrderNumberGeneratorInterface
-     */
+    /** @var OrderNumberGeneratorInterface */
     private $numberGenerator;
 
-    /**
-     * @param OrderNumberGeneratorInterface $numberGenerator
-     */
     public function __construct(OrderNumberGeneratorInterface $numberGenerator)
     {
         $this->numberGenerator = $numberGenerator;

@@ -16,25 +16,14 @@ namespace Sylius\Component\Promotion\Generator;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
-    /**
-     * @var PromotionCouponRepositoryInterface
-     */
+    /** @var PromotionCouponRepositoryInterface */
     private $couponRepository;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     private $ratio;
 
-    /**
-     * @param PromotionCouponRepositoryInterface $couponRepository
-     * @param float $ratio
-     */
     public function __construct(PromotionCouponRepositoryInterface $couponRepository, float $ratio = 0.5)
     {
         $this->couponRepository = $couponRepository;
@@ -61,10 +50,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     }
 
     /**
-     * @param PromotionCouponGeneratorInstructionInterface $instruction
-     *
-     * @return int
-     *
      * @throws \InvalidArgumentException
      */
     private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int
@@ -77,7 +62,11 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
             'Code length or amount cannot be null.'
         );
 
-        $generatedAmount = $this->couponRepository->countByCodeLength($expectedCodeLength);
+        $generatedAmount = $this->couponRepository->countByCodeLength(
+            $expectedCodeLength,
+            $instruction->getPrefix(),
+            $instruction->getSuffix()
+        );
 
         return (int) floor((16 ** $expectedCodeLength) * $this->ratio - $generatedAmount);
     }

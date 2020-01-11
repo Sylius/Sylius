@@ -16,14 +16,9 @@ namespace Sylius\Component\Core\Checker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymentMethodSelectionRequirementCheckerInterface
 {
-    /**
-     * @var PaymentMethodsResolverInterface
-     */
+    /** @var PaymentMethodsResolverInterface */
     private $paymentMethodsResolver;
 
     public function __construct(PaymentMethodsResolverInterface $paymentMethodsResolver)

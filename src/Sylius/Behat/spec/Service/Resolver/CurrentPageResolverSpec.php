@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolver;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CurrentPageResolverSpec extends ObjectBehavior
 {
     function let(Session $session, UrlMatcherInterface $urlMatcher)

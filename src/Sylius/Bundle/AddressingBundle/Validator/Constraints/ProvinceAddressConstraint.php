@@ -17,14 +17,10 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * Constraint to require a province to be valid.
- *
- * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceAddressConstraint extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.address.province.valid';
 
     /**

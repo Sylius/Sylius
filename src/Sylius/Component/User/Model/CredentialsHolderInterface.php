@@ -13,19 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface CredentialsHolderInterface
 {
-    /**
-     * @return string|null
-     */
     public function getPlainPassword(): ?string;
 
-    /**
-     * @param string|null $plainPassword
-     */
     public function setPlainPassword(?string $plainPassword): void;
 
     /**
@@ -38,9 +29,6 @@ interface CredentialsHolderInterface
      */
     public function getPassword();
 
-    /**
-     * @param string|null $encodedPassword
-     */
     public function setPassword(?string $encodedPassword): void;
 
     /**

@@ -4,7 +4,7 @@
 default:
     suites:
         ui_modifying_address:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel
@@ -45,5 +45,6 @@ default:
                 - sylius.behat.context.ui.admin.managing_orders
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.shop.currency
+
             filters:
                 tags: "@modifying_address && @ui"

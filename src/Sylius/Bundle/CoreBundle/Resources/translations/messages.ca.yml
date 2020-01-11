@@ -25,6 +25,12 @@ sylius:
             name: Nom
             roles: Rols
         channel:
+            billing_data:
+                city: Ciutat
+                company: Empresa
+                country: País
+                postcode: Codi postal
+                street: Carrer
             contact_email: Correu de contacte
             currencies: Monedes
             currency_base: Moneda base
@@ -151,8 +157,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -160,6 +166,7 @@ sylius:
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
+            header: file system
             cache:
                 header: cache
             exists: existeix
@@ -172,17 +179,20 @@ sylius:
             vendors: vendors
             writable: que es pugui escriure
         settings:
+            header: Versió de PHP i configuració
             any: qualsevol
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: non deprecated
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
             timezone: fus horari
             timezone_deprecated:
-                help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
+                header: Fus horari no aprovat
+                help: El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).
             version: Versió PHP
+            version_recommended: Versió de PHP recomanada

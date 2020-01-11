@@ -15,25 +15,14 @@ namespace Sylius\Component\User\Security\Checker;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $repository;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tokenFieldName;
 
-    /**
-     * @param RepositoryInterface $repository
-     * @param string $tokenFieldName
-     */
     public function __construct(RepositoryInterface $repository, string $tokenFieldName)
     {
         $this->repository = $repository;

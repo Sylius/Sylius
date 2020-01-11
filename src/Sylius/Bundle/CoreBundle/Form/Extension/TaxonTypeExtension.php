@@ -19,9 +19,6 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TaxonTypeExtension extends AbstractTypeExtension
 {
     /**

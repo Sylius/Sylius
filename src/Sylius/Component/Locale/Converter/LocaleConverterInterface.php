@@ -13,27 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Converter;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface LocaleConverterInterface
 {
     /**
-     * @param string $name
-     * @param string|null $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertNameToCode(string $name, ?string $locale = null): string;
 
     /**
-     * @param string $code
-     * @param string|null $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertCodeToName(string $code, ?string $locale = null): string;

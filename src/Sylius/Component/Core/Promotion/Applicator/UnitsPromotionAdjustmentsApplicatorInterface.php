@@ -16,14 +16,9 @@ namespace Sylius\Component\Core\Promotion\Applicator;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface UnitsPromotionAdjustmentsApplicatorInterface
 {
     /**
-     * @param OrderInterface $order
-     * @param PromotionInterface $promotion
      * @param array|int[] $adjustmentsAmounts
      */
     public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void;

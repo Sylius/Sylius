@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
@@ -24,52 +25,33 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ManagingPromotionsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var IndexPageCouponInterface */
+    private $indexCouponPage;
+
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
+        IndexPageCouponInterface $indexCouponPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
@@ -77,6 +59,7 @@ final class ManagingPromotionsContext implements Context
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
+        $this->indexCouponPage = $indexCouponPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
@@ -84,9 +67,10 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I create a new promotion
      * @When I want to create a new promotion
      */
-    public function iWantToCreateANewPromotion()
+    public function iWantToCreateANewPromotion(): void
     {
         $this->createPage->open();
     }
@@ -106,7 +90,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -116,7 +100,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
@@ -128,12 +112,13 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should see the promotion :promotionName in the list
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
      * @Then promotion :promotionName should still exist in the registry
      */
-    public function thePromotionShouldAppearInTheRegistry($promotionName)
+    public function thePromotionShouldAppearInTheRegistry(string $promotionName): void
     {
         $this->indexPage->open();
 
@@ -235,10 +220,13 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+") channel$/
      */
-    public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
-    {
+    public function iAddTheActionConfiguredWithAPercentageValueForChannel(
+        string $actionType,
+        string $percentage = null,
+        string $channelName
+    ): void {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
     }
@@ -250,7 +238,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
     {
         $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Percentage', $percentage);
+        $this->createPage->fillActionOption('Percentage', $percentage ?? '');
     }
 
     /**
@@ -263,15 +251,28 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then /^there should be (\d+) promotion(?:|s)$/
+     * @When I check (also) the :promotionName promotion
      */
-    public function thereShouldBePromotion($number)
+    public function iCheckThePromotion(string $promotionName): void
     {
-        Assert::same(
-            (int) $number,
-            $this->indexPage->countItems(),
-            'I should see %s promotions but i see only %2$s'
-        );
+        $this->indexPage->checkResourceOnPage(['name' => $promotionName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see a single promotion in the list
+     * @Then there should be :amount promotions
+     */
+    public function thereShouldBePromotion(int $amount = 1): void
+    {
+        Assert::same($amount, $this->indexPage->countItems());
     }
 
     /**
@@ -339,6 +340,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItsUsageLimitTo($usageLimit)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->fillUsageLimit($usageLimit);
@@ -359,6 +361,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItExclusive()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->makeExclusive();
@@ -377,6 +380,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItCouponBased()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->checkCouponBased();
@@ -395,6 +399,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItApplicableForTheChannel($channelName)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->checkChannel($channelName);
@@ -413,9 +418,9 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Given I want to modify a :promotion promotion
      * @Given /^I want to modify (this promotion)$/
-     * @Then I should be able to modify a :promotion promotion
+     * @When I modify a :promotion promotion
      */
-    public function iWantToModifyAPromotion(PromotionInterface $promotion)
+    public function iWantToModifyAPromotion(PromotionInterface $promotion): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
     }
@@ -475,6 +480,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->setStartsAt($startsDate);
@@ -614,11 +620,65 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Given the :promotion promotion should have priority :priority
      */
-    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, $priority)
+    public function thePromotionsShouldHavePriority(PromotionInterface $promotion, int $priority)
     {
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::same($this->updatePage->getPriority(), $priority);
+    }
+
+    /**
+     * @When I want to manage this promotion coupons
+     */
+    public function iWantToManageThisPromotionSCoupons(): void
+    {
+        $this->updatePage->manageCoupons();
+    }
+
+    /**
+     * @Then I should not be able to access coupons management page
+     */
+    public function iShouldNotBeAbleToAccessCouponsManagementPage(): void
+    {
+        Assert::false($this->updatePage->isCouponManagementAvailable());
+    }
+
+    /**
+     * @Then /^I should be on (this promotion)'s coupons management page$/
+     */
+    public function iShouldBeOnThisPromotionSCouponsManagementPage(PromotionInterface $promotion): void
+    {
+        Assert::true($this->indexCouponPage->isOpen(['promotionId' => $promotion->getId()]));
+    }
+
+    /**
+     * @Then I should be able to modify a :promotion promotion
+     */
+    public function iShouldBeAbleToModifyAPromotion(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then the :promotion promotion should have :ruleName rule configured
+     */
+    public function thePromotionShouldHaveRuleConfigured(PromotionInterface $promotion, string $ruleName): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+        $this->updatePage->saveChanges();
+
+        Assert::true($this->updatePage->hasRule($ruleName));
+    }
+
+    /**
+     * @Then the :promotion promotion should not have any rule configured
+     */
+    public function thePromotionShouldNotHaveAnyRuleConfigured(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasAnyRule());
     }
 
     /**
@@ -634,7 +694,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @param PromotionInterface $promotion
      * @param string $field
      */
     private function assertIfFieldIsTrue(PromotionInterface $promotion, $field)

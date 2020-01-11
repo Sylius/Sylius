@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_addressing_model_address:
 
@@ -43,7 +50,7 @@ concerning customer's address and as default has the following properties:
 
    For more detailed information go to `Sylius API Address`_.
 
-.. _Sylius API Address: http://api.sylius.org/Sylius/Component/Addressing/Model/Address.html
+.. _Sylius API Address: http://api.sylius.com/Sylius/Component/Addressing/Model/Address.html
 
 .. _component_addressing_model_country:
 
@@ -71,7 +78,7 @@ It should contain all data concerning a country and as default has the following
 
    For more detailed information go to `Sylius API Country`_.
 
-.. _Sylius API Country: http://api.sylius.org/Sylius/Component/Addressing/Model/Country.html
+.. _Sylius API Country: http://api.sylius.com/Sylius/Component/Addressing/Model/Country.html
 
 .. _component_addressing_model_province:
 
@@ -100,7 +107,7 @@ It should contain all data concerning a province and as default has the followin
 
    For more detailed information go to `Sylius API Province`_.
 
-.. _Sylius API Province: http://api.sylius.org/Sylius/Component/Addressing/Model/Province.html
+.. _Sylius API Province: http://api.sylius.com/Sylius/Component/Addressing/Model/Province.html
 
 .. _component_addressing_model_zone:
 
@@ -132,7 +139,7 @@ It should contain all data concerning a zone and as default has the following pr
 
    For more detailed information go to `Sylius API Zone`_.
 
-.. _Sylius API Zone: http://api.sylius.org/Sylius/Component/Addressing/Model/Zone.html
+.. _Sylius API Zone: http://api.sylius.com/Sylius/Component/Addressing/Model/Zone.html
 
 .. _component_addressing_model_zone-member:
 
@@ -159,4 +166,4 @@ On default this model has the following properties:
 
    For more detailed information go to `Sylius API ZoneMember`_.
 
-.. _Sylius API ZoneMember: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMember.html
+.. _Sylius API ZoneMember: http://api.sylius.com/Sylius/Component/Addressing/Model/ZoneMember.html

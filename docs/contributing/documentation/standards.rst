@@ -43,7 +43,7 @@ Example
 
         echo 'You cannot use the :: shortcut here';
 
-    .. _`Sylius Documentation`: http://docs.sylius.org/en/latest/contributing/documentation/standards.html
+    .. _`Sylius Documentation`: http://docs.sylius.com/en/latest/contributing/documentation/standards.html
 
 Code Examples
 -------------
@@ -131,7 +131,10 @@ Language Standards
 
     The Vitamins are in my Fresh California Raisins
 
-* Do not use `Serial (Oxford) Commas`_;
+* Please use appropriate, informative, rather formal language;
+* Do not place any kind of advertisements in the documentation;
+* The documentation should be neutral, without judgements, opinions. Make sure you do not favor anyone,
+  our community is great as a whole, there is no need to point who is better than the rest of us;
 * You should use a form of *you* instead of *we* (i.e. avoid the first person
   point of view: use the second instead);
 * When referencing a hypothetical person, such as "a user with a session cookie", gender-neutral

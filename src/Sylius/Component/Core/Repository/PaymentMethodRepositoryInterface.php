@@ -17,22 +17,9 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface as BasePaymentMethodRepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return array
-     */
     public function findEnabledForChannel(ChannelInterface $channel): array;
 }

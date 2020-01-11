@@ -10,6 +10,7 @@ sylius:
             options: Opções
             meta_keywords: Palavras-chave meta
             meta_description: Descrição meta
+            taxons: Táxons
         product_variant:
             name: Nome
         association_type:

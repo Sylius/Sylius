@@ -7,7 +7,7 @@ sylius:
             first_name: Nome próprio
             group: Grupo
             last_name: Apelido
-            email: Endereço de e-mail
+            email: Endereço de email
             phone_number: Número de telefone
             gender: Género
             birthday: Data de nascimento

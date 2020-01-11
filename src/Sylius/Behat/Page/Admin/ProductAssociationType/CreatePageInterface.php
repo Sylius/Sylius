@@ -15,19 +15,9 @@ namespace Sylius\Behat\Page\Admin\ProductAssociationType;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function nameItIn($name, $language);
+    public function nameItIn(string $name, string $language): void;
 }

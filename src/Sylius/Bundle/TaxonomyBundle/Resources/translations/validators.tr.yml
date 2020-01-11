@@ -10,6 +10,9 @@ sylius:
         name:
             max_length: Sınıf adı 255 karakterden uzun olamaz.
             not_blank: Lütfen sınıf adını giriniz.
+        slug:
+            not_blank: Lütfen kategori harf dizisi girin.
+            unique: Sınıf kütle birimi benzersiz olmalıdır.
     taxonomy:
         name:
             max_length: Sınıflandırma adı 255 karakterden uzun olamaz.

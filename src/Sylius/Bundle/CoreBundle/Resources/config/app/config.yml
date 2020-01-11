@@ -23,6 +23,9 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
 
+parameters:
+    sylius_core.public_dir: "%kernel.project_dir%/web"
+
 doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -30,15 +33,11 @@ doctrine:
             default:
                 auto_mapping: true
 
-doctrine_cache:
-    providers:
-        sylius_rbac: "%sylius.cache%"
-
 knp_gaufrette:
     adapters:
         sylius_image:
             local:
-                directory: "%kernel.root_dir%/../web/media/image"
+                directory: "%sylius_core.public_dir%/media/image"
                 create: true
     filesystems:
         sylius_image:
@@ -48,7 +47,12 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: "%kernel.root_dir%/../web/media/image"
+                data_root: "%sylius_core.public_dir%/media/image"
+    resolvers:
+        default:
+            web_path:
+                web_root: "%sylius_core.public_dir%"
+                cache_prefix: "media/cache"
     filter_sets:
         sylius_small:
             filters:
@@ -90,9 +94,11 @@ stof_doctrine_extensions:
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
+        sylius_base_locale: "%locale%"
+        sylius_meta:
+            version: !php/const Sylius\Bundle\CoreBundle\Application\Kernel::VERSION
 
 sonata_block:
     blocks:
@@ -101,6 +107,7 @@ sonata_block:
                 address: ~
                 addresses: ~
                 cart: ~
+                channel: ~
                 customer: ~
                 form: ~
                 order: ~
@@ -114,3 +121,8 @@ sonata_block:
                 resources: ~
                 statistics: ~
                 taxon: ~
+
+sonata_core:
+    form:
+        mapping:
+            enabled: false # https://github.com/sonata-project/SonataCoreBundle/pull/462

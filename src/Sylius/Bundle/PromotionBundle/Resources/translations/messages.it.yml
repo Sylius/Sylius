@@ -7,11 +7,11 @@ sylius:
             actions: Azioni
             add_action: Aggiungi azione
             add_rule: Aggiungi regola
-            coupon_based: Basata su coupon
+            coupon_based: Basata su codice sconto
             description: Descrizione
-            ends_at: Termina il
+            ends_at: Termina
             exclusive: Esclusivo
-            name: Nome
+            name: "Nome\n"
             priority: Priorità
             rules: Regole
             starts_at: Inizia il
@@ -58,7 +58,7 @@ sylius:
             nth_order_configuration:
                 nth: Ennesimo
             shipping_country_configuration:
-                country: Nazione
+                country: Paese
             taxonomy_configuration:
                 exclude: Escludi
                 taxons: Taxons

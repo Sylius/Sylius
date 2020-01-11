@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Saluran tidak dapat dihapus Paling sedikit satu saluran yang diaktifkan diperlukan.'
+    checkout:
+        complete_error: 'Ada masalah tak terduga dengan menyelesaikan pesanan. Tolong, coba taruh pesanan anda lagi.'
+    contact:
+        request_success: 'Permintaan kontak Anda telah berhasil dikirim.'
+        request_error: 'Terjadi masalah saat mengirim permintaan kontak. Silakan coba lagi nanti.'
+    customer:
+        add_address: 'Alamat telah berhasil ditambahkan.'
+        impersonate: 'Berhasil menyamarkan %name% pelanggan.'
+        set_address_as_default: 'Alamat telah ditetapkan sebagai default.'
+    order:
+        apply_state_machine_transition_error: 'Ada masalah tak terduga dengan memperbarui pesanan. Tolong, coba perbarui pesanan lagi.'
+        promotion_integrity: 'Anda tidak lagi memenuhi syarat untuk promosi ini %promotionName%.'
+        total_integrity: 'Total pesanan Anda telah berubah, periksa informasi pesanan Anda dan konfirmasikan lagi.'
+        update_error: 'Ada masalah tak terduga dengan memperbarui pesanan. Tolong, coba perbarui pesanan lagi.'
+    payment:
+        apply_state_machine_transition_error: 'Ada masalah tak terduga dengan memperbarui pembayaran. Tolong, coba perbarui pembayaran lagi.'
+    product:
+        out_of_stock: 'Hanya ada %quantity% dari produk ini di saham.'
+    product_variant:
+        update_error: 'Ada masalah tak terduga dengan mengupdate varian produk. Tolong, coba perbarui varian produk lagi.'

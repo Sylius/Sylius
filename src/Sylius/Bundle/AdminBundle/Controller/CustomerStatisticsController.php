@@ -21,31 +21,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class CustomerStatisticsController
 {
-    /**
-     * @var CustomerStatisticsProviderInterface
-     */
+    /** @var CustomerStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @param CustomerStatisticsProviderInterface $statisticsProvider
-     * @param RepositoryInterface $customerRepository
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(
         CustomerStatisticsProviderInterface $statisticsProvider,
         RepositoryInterface $customerRepository,
@@ -57,17 +43,13 @@ final class CustomerStatisticsController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws HttpException
      */
     public function renderAction(Request $request): Response
     {
         $customerId = $request->query->get('customerId');
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->find($customerId);
         if (null === $customer) {
             throw new HttpException(

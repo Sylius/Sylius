@@ -1,4 +1,4 @@
-@checkout @javascript
+@checkout
 Feature: Skipping payment step when only one payment method is available
     In order to not select payment method if its unnecessary
     As a Customer

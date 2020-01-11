@@ -17,19 +17,11 @@ use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterfa
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionSubjectCouponEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
-    /**
-     * @var PromotionCouponEligibilityCheckerInterface
-     */
+    /** @var PromotionCouponEligibilityCheckerInterface */
     private $promotionCouponEligibilityChecker;
 
-    /**
-     * @param PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker
-     */
     public function __construct(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker)
     {
         $this->promotionCouponEligibilityChecker = $promotionCouponEligibilityChecker;

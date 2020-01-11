@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -22,45 +21,23 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
-    private $channelIndexPage;
-
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $channelUpdatePage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $channelIndexPage
-     * @param UpdatePageInterface $channelUpdatePage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        IndexPageInterface $channelIndexPage,
         UpdatePageInterface $channelUpdatePage,
         HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->channelIndexPage = $channelIndexPage;
         $this->channelUpdatePage = $channelUpdatePage;
         $this->homePage = $homePage;
     }
@@ -71,7 +48,7 @@ final class ThemeContext implements Context
     public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme)
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
-        $this->channelUpdatePage->setTheme($theme);
+        $this->channelUpdatePage->setTheme($theme->getName());
         $this->channelUpdatePage->saveChanges();
 
         $this->sharedStorage->set('channel', $channel);
@@ -93,9 +70,9 @@ final class ThemeContext implements Context
      */
     public function channelShouldNotUseAnyTheme(ChannelInterface $channel)
     {
-        $this->channelIndexPage->open();
+        $this->channelUpdatePage->open(['id' => $channel->getId()]);
 
-        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), 'Default');
+        Assert::isEmpty($this->channelUpdatePage->getUsedTheme($channel->getCode()));
     }
 
     /**
@@ -103,9 +80,9 @@ final class ThemeContext implements Context
      */
     public function channelShouldUseTheme(ChannelInterface $channel, ThemeInterface $theme)
     {
-        $this->channelIndexPage->open();
+        $this->channelUpdatePage->open(['id' => $channel->getId()]);
 
-        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), $theme->getName());
+        Assert::same($this->channelUpdatePage->getUsedTheme($channel->getCode()), $theme->getName());
     }
 
     /**
@@ -115,7 +92,7 @@ final class ThemeContext implements Context
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        Assert::same($this->homePage->getContents(), $content);
+        Assert::same($this->homePage->getContent(), $content);
     }
 
     /**
@@ -125,6 +102,6 @@ final class ThemeContext implements Context
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        Assert::notSame($this->homePage->getContents(), $content);
+        Assert::notSame($this->homePage->getContent(), $content);
     }
 }

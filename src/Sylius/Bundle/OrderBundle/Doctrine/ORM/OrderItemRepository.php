@@ -18,9 +18,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 
-/**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
- */
 class OrderItemRepository extends EntityRepository implements OrderItemRepositoryInterface
 {
     /**

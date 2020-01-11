@@ -15,9 +15,6 @@ namespace spec\Sylius\Component\Payment\Exception;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class UnresolvedDefaultPaymentMethodExceptionSpec extends ObjectBehavior
 {
     function it_is_an_exception(): void

@@ -25,6 +25,12 @@ sylius:
             name: Назва
             roles: Ролі
         channel:
+            billing_data:
+                city: Місто
+                company: Компанія
+                country: Країна
+                postcode: Поштовий індекс
+                street: Вулиця
             contact_email: Контактна електронна пошта
             currencies: Валюти
             currency_base: Основна валюта
@@ -45,7 +51,7 @@ sylius:
             file: Зображення
         locale:
             code: Код
-            enabled: Увімкнено
+            enabled: Ввімкнено
         order_filter:
             created_at_from: Створені після
             created_at_to: Створений перед
@@ -57,7 +63,7 @@ sylius:
         page:
             body: Тіло
             id: ID
-            title: Назва
+            title: Заголовок
         product:
             images: Зображення
             restricted_zone: Заборонена зона
@@ -65,9 +71,9 @@ sylius:
             variant_selection_method: Метод вибору варіанту
             main_taxon: Основний таксон
             channels: Канали
-            enabled: Увімкнено
+            enabled: Ввімкнено
         product_filter:
-            name: Ім’я
+            name: Назва
             code: Код
         product_variant:
             tax_category: Категорія податку
@@ -94,8 +100,8 @@ sylius:
             file: Вибрати зображення
         user:
             billing_address: Адреса для рахунків
-            different_billing_address: Використати іншу адресу для рахунків?
-            enabled: Увімкнено
+            different_billing_address: Використати іншу адресу для виставлення рахунків?
+            enabled: Ввімкнено
             first_name: Iм'я
             groups: Групи
             roles: Ролі
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Багатобайтові рядки (Multibyte String)
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: файлова система
             cache:
                 header: кеш
-                help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: існує
             logs:
                 header: журнали
-                help: 'Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Щоб встановити дозволи, запустіть: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не існує
             not_writable: відсутня можливість запису
             parameters:
                 header: parameters.yml
-                help: 'Щоб встановити дозволи, запустіть: sudo chmod a+w %path%'
+                help: "Щоб встановити дозволи, запустіть: sudo chmod a+w %path%"
             vendors: постачальники
             writable: наявна можливість запису
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: не є застарілим
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: часовий пояс
             timezone_deprecated:
                 header: Застарілий часовий пояс
-                help: 'Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).'
+                help: Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).
             version: Версія PHP
             version_recommended: Рекомендована версія PHP
     payum_gateway:

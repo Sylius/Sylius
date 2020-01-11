@@ -22,7 +22,7 @@ sylius:
                     header: Configuratie
                     locales: Talen/Regio's
                     payment_methods: Betaalmethoden
-                    shipping_categories: Verzendcategorieën
+                    shipping_categories: Verzend categorieën
                     shipping_methods: Verzendmethoden
                     tax_categories: Belastingcategorieën
                     tax_rates: BTW-tarieven

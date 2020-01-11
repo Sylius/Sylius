@@ -15,14 +15,12 @@ namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
 {
     /**
@@ -41,7 +39,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -82,7 +80,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -103,7 +101,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver.composite',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one')]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
         );
     }
 
@@ -115,11 +113,6 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new CompositeRequestResolverPass());
     }
 
-    /**
-     * @param string $serviceId
-     * @param string $method
-     * @param array $arguments
-     */
     private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
         string $serviceId,
         string $method,
@@ -129,7 +122,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
 
         self::assertThat(
             $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method, $arguments))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method, $arguments))
         );
     }
 }

@@ -20,37 +20,20 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class AdminSecurityContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var SecurityServiceInterface
-     */
+    /** @var SecurityServiceInterface */
     private $securityService;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $userFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
+    /** @var UserRepositoryInterface */
     private $userRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SecurityServiceInterface $securityService
-     * @param ExampleFactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
@@ -87,5 +70,15 @@ final class AdminSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('administrator', $user);
+    }
+
+    /**
+     * @Given I have been logged out from administration
+     */
+    public function iHaveBeenLoggedOutFromAdministration()
+    {
+        $this->securityService->logOut();
+
+        $this->sharedStorage->set('administrator', null);
     }
 }

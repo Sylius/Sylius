@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class TaxRateContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $taxRateRepository;
 
-    /**
-     * @param RepositoryInterface $taxRateRepository
-     */
     public function __construct(RepositoryInterface $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;

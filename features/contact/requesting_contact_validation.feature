@@ -41,4 +41,4 @@ Feature: Requesting contact validation
         And I specify the email as "lucifer@morningstar.com"
         And I specify the message as "Hi! I did not receive an item!"
         And I try to send it
-        Then I should be notified that a problem occured while sending the contact request
+        Then I should be notified that a problem occurred while sending the contact request

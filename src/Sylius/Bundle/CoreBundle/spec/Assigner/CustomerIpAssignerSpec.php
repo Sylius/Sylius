@@ -18,9 +18,6 @@ use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CustomerIpAssignerSpec extends ObjectBehavior
 {
     function it_implements_ip_assigner_interface(): void

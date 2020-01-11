@@ -21,31 +21,17 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ManagingExchangeRatesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -74,7 +60,8 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I am browsing exchange rates of the store
+     * @Given I am browsing exchange rates of the store
+     * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */
     public function iWantToBrowseExchangeRatesOfTheStore()
@@ -88,7 +75,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs($ratio = null)
     {
-        $this->createPage->specifyRatio($ratio);
+        $this->createPage->specifyRatio($ratio ?? '');
     }
 
     /**
@@ -120,7 +107,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo($ratio)
     {
-        $this->updatePage->changeRatio((float) $ratio);
+        $this->updatePage->changeRatio($ratio);
     }
 
     /**
@@ -161,6 +148,25 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @When I check (also) the exchange rate between :sourceCurrencyName and :targetCurrencyName
+     */
+    public function iCheckTheExchangeRateBetweenAnd(string $sourceCurrencyName, string $targetCurrencyName): void
+    {
+        $this->indexPage->checkResourceOnPage([
+            'sourceCurrency' => $sourceCurrencyName,
+            'targetCurrency' => $targetCurrencyName,
+        ]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then I should see :count exchange rates on the list
      */
     public function iShouldSeeExchangeRatesOnTheList($count = 0)
@@ -169,6 +175,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then I should see a single exchange rate in the list
      * @Then I should( still) see one exchange rate on the list
      */
     public function iShouldSeeOneExchangeRateOnTheList()
@@ -189,10 +196,13 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then I should see the exchange rate between :sourceCurrencyName and :targetCurrencyName in the list
      * @Then I should (also) see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
      */
-    public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
-    {
+    public function iShouldSeeAnExchangeRateBetweenAndOnTheList(
+        string $sourceCurrencyName,
+        string $targetCurrencyName
+    ): void {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'sourceCurrency' => $sourceCurrencyName,
             'targetCurrency' => $targetCurrencyName,

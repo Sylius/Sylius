@@ -25,6 +25,12 @@ sylius:
             name: Jméno
             roles: Role
         channel:
+            billing_data:
+                city: Město
+                company: Firma
+                country: Země
+                postcode: PSČ
+                street: Ulice
             contact_email: Kontaktní e-mail
             currencies: Měny
             currency_base: Základní měna
@@ -67,7 +73,7 @@ sylius:
             channels: Kanály
             enabled: Povoleno
         product_filter:
-            name: Název
+            name: Jméno
             code: Kód
         product_variant:
             tax_category: Typ daně
@@ -110,6 +116,7 @@ sylius:
             on_hand: Aktuálně skladem
             price: Cena
             sku: SKU
+            shipping_required: Je povinná doprava?
             weight: Hmotnost
             width: Šířka
         attribute:
@@ -161,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -173,16 +180,16 @@ sylius:
             header: souborový systém
             cache:
                 header: mezipaměť
-                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existuje
             logs:
                 header: logy
-                help: 'To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neexistuje
             not_writable: nelze zapisovat
             parameters:
                 header: parameters.yml
-                help: 'Chcete-li nastavit oprávnění spustit: sudo chmod a + w %path%'
+                help: "Chcete-li nastavit oprávnění spustit: sudo chmod a + w %path%"
             vendors: vendors
             writable: zapisovatelný
         settings:
@@ -191,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nejsou zastaralé
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -200,7 +207,7 @@ sylius:
             timezone: Časové pásmo
             timezone_deprecated:
                 header: Zastaralé časové pásmo
-                help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
+                help: Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).
             version: Verze PHP
             version_recommended: Doporučená verze PHP
     payum_gateway:

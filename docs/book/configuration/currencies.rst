@@ -41,7 +41,7 @@ Currency Converter
 
 The ``Sylius\Component\Currency\Converter\CurrencyConverter`` is a service available under the ``sylius.currency_converter`` id.
 
-It lets you to convert money values from one currency to another.
+It allows you to convert money values from one currency to another.
 
 This solution is used for displaying an *approximate* value of price when the desired currency is different from the base currency of the current channel.
 

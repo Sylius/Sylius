@@ -9,7 +9,7 @@ sylius:
             paypal:
                 password: Пароль
                 signature: Подпись
-                username: Логин
+                username: Имя пользователя
                 sandbox: Песочница
             stripe:
                 publishable_key: Публикуемый ключ
@@ -20,4 +20,4 @@ sylius:
         stripe_checkout: Stripe checkout
     payum_action:
         payment:
-            description: Оплата содержит %items% элемент в общей сложности %total% | Оплата содержит %items% элементы в общей сложности %total%
+            description: Оплата содержит %items% элемент в общей сложности %total% | Оплата содержит %items% элемента в общей сложности %total% | Оплата содержит %items% элементов в общей сложности %total%

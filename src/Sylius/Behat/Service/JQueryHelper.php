@@ -13,18 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
+use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Session;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 abstract class JQueryHelper
 {
-    /**
-     * @param Session $session
-     */
-    public static function waitForAsynchronousActionsToFinish(Session $session)
+    public static function waitForAsynchronousActionsToFinish(Session $session): void
     {
-        $session->wait(5000, '0 === jQuery.active');
+        $session->wait(1000, '0 === jQuery.active');
+    }
+
+    public static function waitForFormToStopLoading(DocumentElement $document, int $timeout = 10): void
+    {
+        $form = $document->find('css', 'form');
+        $document->waitFor($timeout, function () use ($form) {
+            return !$form->hasClass('loading');
+        });
     }
 }

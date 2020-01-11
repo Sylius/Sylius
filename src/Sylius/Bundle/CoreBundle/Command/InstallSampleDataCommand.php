@@ -15,14 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class InstallSampleDataCommand extends AbstractInstallCommand
 {
     /**
@@ -37,6 +34,7 @@ final class InstallSampleDataCommand extends AbstractInstallCommand
 The <info>%command.name%</info> command loads the sample data for Sylius.
 EOT
             )
+            ->addOption('fixture-suite', 's', InputOption::VALUE_OPTIONAL, 'Load specified fixture suite during install', null)
         ;
     }
 
@@ -47,33 +45,41 @@ EOT
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
+        $suite = $input->getOption('fixture-suite');
 
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->newLine();
         $outputStyle->writeln(sprintf(
-            'Loading sample data for environment <info>%s</info>.',
-            $this->getEnvironment()
+            'Loading sample data for environment <info>%s</info> from suite <info>%s</info>.',
+            $this->getEnvironment(),
+            $suite ?? 'default'
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 
-        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', false))) {
+        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', null !== $suite))) {
             $outputStyle->writeln('Cancelled loading sample data.');
 
             return 0;
         }
 
         try {
-            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 
             return 1;
         }
 
+        $parameters = [
+            'suite' => $suite,
+            '--no-interaction' => true,
+        ];
+
         $commands = [
-            'sylius:fixtures:load' => ['--no-interaction' => true],
+            'sylius:fixtures:load' => $parameters,
         ];
 
         $this->runCommands($commands, $output);

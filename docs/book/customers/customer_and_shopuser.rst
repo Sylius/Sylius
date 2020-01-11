@@ -17,7 +17,7 @@ or that have somehow provided us their e-mail.
 How to create a Customer programmatically?
 ''''''''''''''''''''''''''''''''''''''''''
 
-As usually, use a factory. The only required field for the Customer entity is ``email``, provide it before adding it to the repository.
+As usual, use a factory. The only required field for the Customer entity is ``email``, provide it before adding it to the repository.
 
 .. code-block:: php
 
@@ -28,8 +28,7 @@ As usually, use a factory. The only required field for the Customer entity is ``
 
    $this->container->get('sylius.repository.customer')->add($customer);
 
-The Customer entity can of course hold other information besides an email, it can be for instance
-``billingAddress`` and ``shippingAddress``, ``firstName``, ``lastName`` or ``birthday``.
+The Customer entity can of course hold other information besides an email, it can be for instance ``firstName``, ``lastName`` or ``birthday``.
 
 .. note::
 

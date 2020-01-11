@@ -14,25 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class OrderStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -41,7 +34,7 @@ final class OrderStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order): void
+    public function resolve(BaseOrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
 
@@ -50,11 +43,6 @@ final class OrderStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     private function canOrderBeFulfilled(OrderInterface $order): bool
     {
         return

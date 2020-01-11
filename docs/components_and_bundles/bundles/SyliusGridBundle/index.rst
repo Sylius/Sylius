@@ -23,4 +23,5 @@ Some of the features worth mentioning:
     custom_field_type
     custom_filter
     custom_action
+    custom_bulk_action
     configuration

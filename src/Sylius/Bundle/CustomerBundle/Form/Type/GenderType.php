@@ -18,9 +18,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class GenderType extends AbstractType
 {
     /**
@@ -34,6 +31,7 @@ final class GenderType extends AbstractType
                 'sylius.gender.male' => CustomerInterface::MALE_GENDER,
                 'sylius.gender.female' => CustomerInterface::FEMALE_GENDER,
             ],
+            'empty_data' => CustomerInterface::UNKNOWN_GENDER,
         ]);
     }
 

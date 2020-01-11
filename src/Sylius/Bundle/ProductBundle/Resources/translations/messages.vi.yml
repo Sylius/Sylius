@@ -5,7 +5,10 @@ sylius:
     form:
         product:
             name: Tên
+            description: Mô tả
+            attributes: Thuộc tính
             options: Tùy chọn
+            taxons: Phân loại
         product_variant:
             name: Tên
         association_type:

@@ -17,9 +17,6 @@ use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
     /**
@@ -32,11 +29,15 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
 
         if (null === $channelPricing) {
-            throw new MissingChannelConfigurationException(sprintf(
-                'Channel %s has no price defined for product variant %s',
-                $context['channel']->getName(),
-                $productVariant->getName()
-            ));
+            $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
+
+            if ($productVariant->getName() !== null) {
+                $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
+            } else {
+                $message .= sprintf(' with code %s', $productVariant->getCode());
+            }
+
+            throw new MissingChannelConfigurationException($message);
         }
 
         return $channelPricing->getPrice();

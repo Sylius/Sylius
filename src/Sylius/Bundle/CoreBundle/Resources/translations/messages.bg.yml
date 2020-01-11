@@ -25,6 +25,12 @@ sylius:
             name: Име
             roles: Роли
         channel:
+            billing_data:
+                city: Град
+                company: Фирма
+                country: Държава
+                postcode: Пощенски код
+                street: Улица
             contact_email: Имейл за контакт
             currencies: Валути
             currency_base: Основна валута
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Многобайтов низ
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: файлова система
             cache:
                 header: кеш
-                help: 'За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: съществува
             logs:
                 header: логове
-                help: 'За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "За да зададете разрешения стартирайте: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не съществува
             not_writable: не е записваемо
             parameters:
                 header: parameters.yml
-                help: 'За да зададете разрешения стартирайте: sudo chmod a+w %path%'
+                help: "За да зададете разрешения стартирайте: sudo chmod a+w %path%"
             vendors: vendors
             writable: записваемо
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: не е отхвърлен
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: часова зона
             timezone_deprecated:
                 header: Непрепоръчителена часова зона
-                help: 'Часовата зона %timezone% е непрепоръчителена. Коригирате вашия php.ini файл (списък на остарелите часови зони http://php.net/manual/en/timezones.others.php).'
+                help: Часовата зона %timezone% е непрепоръчителена. Коригирате вашия php.ini файл (списък на остарелите часови зони http://php.net/manual/en/timezones.others.php).
             version: Версия на PHP
             version_recommended: Препоръчителни PHP версия
     payum_gateway:

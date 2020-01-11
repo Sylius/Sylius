@@ -15,9 +15,6 @@ namespace Sylius\Bundle\MoneyBundle\Formatter;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class MoneyFormatter implements MoneyFormatterInterface
 {
     /**

@@ -16,7 +16,7 @@ sylius:
             only_customer_registration: สร้างบัญชี?
             subscribed_to_newsletter: สมัครรับจดหมายข่าว
         customer_group:
-            name: ชื่อ
+            name: ชื่อภาษา
             roles: Roles
     gender:
         unknown: ไม่ทราบสถานะ

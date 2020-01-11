@@ -18,21 +18,11 @@ use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderItemType extends AbstractResourceType
 {
-    /**
-     * @var DataMapperInterface
-     */
+    /** @var DataMapperInterface */
     private $dataMapper;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param DataMapperInterface $dataMapper
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups = [],

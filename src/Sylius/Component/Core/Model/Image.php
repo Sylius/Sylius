@@ -13,40 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 abstract class Image implements ImageInterface
 {
-    /**
-     * @var int
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var \SplFileInfo
-     */
+    /** @var \SplFileInfo|null */
     protected $file;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $path;
 
-    /**
-     * @var object
-     */
+    /** @var object|null */
     protected $owner;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
 
     /**
      * @return int

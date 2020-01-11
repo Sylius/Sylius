@@ -21,7 +21,7 @@ On the Customer entity we are holding a collection of addresses:
      */
     protected $addresses;
 
-We can operate on it as usually - by adding and removing objects.
+We can operate on it as usual - by adding and removing objects.
 
 Besides the Customer entity has a **default address** field that is the default address used both for shipping and billing,
 the one that will be filling the form fields by default.

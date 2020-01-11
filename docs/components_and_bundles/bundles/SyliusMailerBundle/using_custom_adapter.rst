@@ -22,16 +22,16 @@ Create your adapter class and add your custom logic for sending:
 
     class CustomAdapter extends AbstractAdapter
     {
-        public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data) 
+        public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data)
         {
             // Your custom logic.
         }
     }
 
-Register New Adapter In Container
----------------------------------
+Register And Configure New Adapter In Container
+-----------------------------------------------
 
-In your ``services.yml`` file, simply add your adapter definition.
+In your ``config/packages/sylius_mailer.yaml`` file, add your adapter definition and configure the mailer to use it.
 
 .. code-block:: yaml
 
@@ -39,13 +39,6 @@ In your ``services.yml`` file, simply add your adapter definition.
         app.email_sender.adapter.custom:
             parent: sylius.email_sender.adapter.abstract
             class: App\Mailer\Adapter\CustomAdapter
-
-Configure The New Adapter
--------------------------
-
-Now you just need to put service name under ``sylius_mailer`` configuration in ``app/config/config.yml``.
-
-.. code-block:: yaml
 
     sylius_mailer:
         sender_adapter: app.email_sender.adapter.custom

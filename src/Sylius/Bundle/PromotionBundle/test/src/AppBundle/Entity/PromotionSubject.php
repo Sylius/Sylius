@@ -26,18 +26,15 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
     /**
      * @var Collection|PromotionInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionInterface>
      */
     protected $promotions;
 

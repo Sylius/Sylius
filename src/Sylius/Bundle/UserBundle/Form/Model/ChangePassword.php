@@ -13,32 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Form\Model;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ChangePassword
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $currentPassword;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $newPassword;
 
-    /**
-     * @return string|null
-     */
     public function getCurrentPassword(): ?string
     {
         return $this->currentPassword;
     }
 
-    /**
-     * @param string|null $password
-     */
     public function setCurrentPassword(?string $password): void
     {
         $this->currentPassword = $password;

@@ -17,14 +17,9 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class TaxRateApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -35,9 +30,11 @@ final class TaxRateApiTest extends JsonApiTestCase
      */
     public function it_does_not_allow_to_show_tax_rates_list_when_access_is_denied()
     {
-        $this->loadFixturesFromFile('resources/tax_categories.yml');
-        $this->loadFixturesFromFile('resources/zones.yml');
-        $this->loadFixturesFromFile('resources/tax_rates.yml');
+        $this->loadFixturesFromFiles([
+            'resources/tax_categories.yml',
+            'resources/zones.yml',
+            'resources/tax_rates.yml',
+        ]);
 
         $this->client->request('GET', '/api/v1/tax-rates/');
 
@@ -51,9 +48,11 @@ final class TaxRateApiTest extends JsonApiTestCase
     public function it_allows_indexing_tax_rates()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/tax_categories.yml');
-        $this->loadFixturesFromFile('resources/zones.yml');
-        $this->loadFixturesFromFile('resources/tax_rates.yml');
+        $this->loadFixturesFromFiles([
+            'resources/tax_categories.yml',
+            'resources/zones.yml',
+            'resources/tax_rates.yml',
+        ]);
 
         $this->client->request('GET', '/api/v1/tax-rates/', [], [], static::$authorizedHeaderWithAccept);
 
@@ -80,9 +79,11 @@ final class TaxRateApiTest extends JsonApiTestCase
     public function it_allows_showing_tax_rate()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/tax_categories.yml');
-        $this->loadFixturesFromFile('resources/zones.yml');
-        $taxRates = $this->loadFixturesFromFile('resources/tax_rates.yml');
+        $taxRates = $this->loadFixturesFromFiles([
+            'resources/zones.yml',
+            'resources/tax_categories.yml',
+            'resources/tax_rates.yml',
+        ]);
         $taxRate = $taxRates['sales_tax'];
 
         $this->client->request('GET', $this->getTaxRateUrl($taxRate), [], [], static::$authorizedHeaderWithAccept);
@@ -92,8 +93,6 @@ final class TaxRateApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param TaxRateInterface $taxRate
-     *
      * @return string
      */
     private function getTaxRateUrl(TaxRateInterface $taxRate)

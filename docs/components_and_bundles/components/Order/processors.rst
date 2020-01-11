@@ -1,7 +1,14 @@
+.. rst-class:: outdated
+
 Processors
 ==========
 
-Order processors are responsible of manipulating the orders to apply different predefined adjustments or other modifications based on order state.
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
+
+Order processors are responsible for manipulating the orders to apply different predefined adjustments or other modifications based on order state.
 
 .. _component_order_processors_order-processor-interface:
 

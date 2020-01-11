@@ -15,23 +15,11 @@ namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ConfigurablePromotionElementInterface extends ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getType(): ?string;
 
-    /**
-     * @return array
-     */
     public function getConfiguration(): array;
 
-    /**
-     * @return PromotionInterface|null
-     */
     public function getPromotion(): ?PromotionInterface;
 }

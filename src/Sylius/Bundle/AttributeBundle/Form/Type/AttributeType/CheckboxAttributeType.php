@@ -17,9 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckboxAttributeType extends AbstractType
 {
     /**
@@ -40,6 +37,7 @@ final class CheckboxAttributeType extends AbstractType
                 'label' => false,
             ])
             ->setRequired('configuration')
+            ->setDefined('locale_code')
         ;
     }
 

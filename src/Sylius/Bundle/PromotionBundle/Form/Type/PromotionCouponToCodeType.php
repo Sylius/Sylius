@@ -22,20 +22,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionCouponToCodeType extends AbstractType implements DataTransformerInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $promotionCouponRepository;
 
-    /**
-     * @param RepositoryInterface $promotionCouponRepository
-     */
     public function __construct(RepositoryInterface $promotionCouponRepository)
     {
         $this->promotionCouponRepository = $promotionCouponRepository;

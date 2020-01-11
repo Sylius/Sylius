@@ -4,9 +4,12 @@
 </div>
 <div class="ui segment">
     <h4 class="ui dividing header">{{ 'sylius.ui.expiration_and_usage_limits'|trans }}</h4>
-    <div class="three fields">
-        {{ form_row(form.expiresAt) }}
+    <div class="two fields">
         {{ form_row(form.usageLimit) }}
         {{ form_row(form.perCustomerUsageLimit) }}
+    </div>
+    <div class="two fields">
+        {{ form_row(form.reusableFromCancelledOrders) }}
+        {{ form_row(form.expiresAt) }}
     </div>
 </div>

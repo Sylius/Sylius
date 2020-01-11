@@ -14,17 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\User as BaseUser;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ShopUser extends BaseUser implements ShopUserInterface
 {
-    /**
-     * @var CustomerInterface
-     */
+    /** @var BaseCustomerInterface|null */
     protected $customer;
 
     /**
@@ -61,6 +56,10 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function getEmail(): ?string
     {
+        if (null === $this->customer) {
+            return null;
+        }
+
         return $this->customer->getEmail();
     }
 
@@ -69,6 +68,10 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function setEmail(?string $email): void
     {
+        if (null === $this->customer) {
+            throw new UnexpectedTypeException($this->customer, BaseCustomerInterface::class);
+        }
+
         $this->customer->setEmail($email);
     }
 
@@ -77,6 +80,10 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function getEmailCanonical(): ?string
     {
+        if (null === $this->customer) {
+            return null;
+        }
+
         return $this->customer->getEmailCanonical();
     }
 
@@ -85,6 +92,10 @@ class ShopUser extends BaseUser implements ShopUserInterface
      */
     public function setEmailCanonical(?string $emailCanonical): void
     {
+        if (null === $this->customer) {
+            throw new UnexpectedTypeException($this->customer, BaseCustomerInterface::class);
+        }
+
         $this->customer->setEmailCanonical($emailCanonical);
     }
 }

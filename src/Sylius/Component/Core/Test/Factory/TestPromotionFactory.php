@@ -18,19 +18,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $promotionFactory;
 
-    /**
-     * @param FactoryInterface $promotionFactory
-     */
     public function __construct(FactoryInterface $promotionFactory)
     {
         $this->promotionFactory = $promotionFactory;

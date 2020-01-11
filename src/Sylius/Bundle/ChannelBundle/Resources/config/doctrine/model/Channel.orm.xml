@@ -28,6 +28,7 @@
         <field name="description" type="text" nullable="true" />
         <field name="enabled" type="boolean" />
         <field name="hostname" type="string" nullable="true" />
+        <field name="type" type="string" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -35,6 +36,10 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <indexes>
+            <index columns="hostname"/>
+        </indexes>
     </mapped-superclass>
 
 </doctrine-mapping>

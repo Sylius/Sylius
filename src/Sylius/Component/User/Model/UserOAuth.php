@@ -13,40 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-/**
- * @author Sergio Marchesini
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 class UserOAuth implements UserOAuthInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $provider;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $identifier;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $accessToken;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $refreshToken;
 
-    /**
-     * @var UserInterface|null
-     */
+    /** @var UserInterface|null */
     protected $user;
 
     /**

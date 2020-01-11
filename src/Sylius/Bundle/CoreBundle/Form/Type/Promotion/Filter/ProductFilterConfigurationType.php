@@ -18,19 +18,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductFilterConfigurationType extends AbstractType
 {
-    /**
-     * @var DataTransformerInterface
-     */
+    /** @var DataTransformerInterface */
     private $productsToCodesTransformer;
 
-    /**
-     * @param DataTransformerInterface $productsToCodesTransformer
-     */
     public function __construct(DataTransformerInterface $productsToCodesTransformer)
     {
         $this->productsToCodesTransformer = $productsToCodesTransformer;

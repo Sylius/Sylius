@@ -16,9 +16,6 @@ namespace Sylius\Component\Locale\Converter;
 use Symfony\Component\Intl\Intl;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class LocaleConverter implements LocaleConverterInterface
 {
     /**

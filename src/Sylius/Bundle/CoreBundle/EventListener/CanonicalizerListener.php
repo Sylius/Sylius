@@ -18,27 +18,16 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CanonicalizerListener
 {
-    /**
-     * @var CanonicalizerInterface
-     */
+    /** @var CanonicalizerInterface */
     private $canonicalizer;
 
-    /**
-     * @param CanonicalizerInterface $canonicalizer
-     */
     public function __construct(CanonicalizerInterface $canonicalizer)
     {
         $this->canonicalizer = $canonicalizer;
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function canonicalize(LifecycleEventArgs $event): void
     {
         $item = $event->getEntity();
@@ -51,17 +40,11 @@ final class CanonicalizerListener
         }
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function prePersist(LifecycleEventArgs $event): void
     {
         $this->canonicalize($event);
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function preUpdate(LifecycleEventArgs $event): void
     {
         $this->canonicalize($event);

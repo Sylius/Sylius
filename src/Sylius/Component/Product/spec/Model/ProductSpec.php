@@ -17,16 +17,13 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class ProductSpec extends ObjectBehavior
 {
     function let()
@@ -118,6 +115,174 @@ final class ProductSpec extends ObjectBehavior
     function it_refuses_to_remove_non_product_attribute(AttributeValueInterface $attribute): void
     {
         $this->shouldThrow('\InvalidArgumentException')->duringRemoveAttribute($attribute);
+    }
+
+    function it_returns_attributes_by_a_locale_without_a_base_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueEN,
+        ProductAttributeValueInterface $attributeValuePL
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setProduct($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('Blue');
+
+        $attributeValuePL->setProduct($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn('Niebieski');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US')
+            ->shouldIterateAs([$attributeValuePL->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_locale_with_a_base_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueEN,
+        ProductAttributeValueInterface $attributeValuePL,
+        ProductAttributeValueInterface $attributeValueFR
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setProduct($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('Blue');
+
+        $attributeValuePL->setProduct($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn('Niebieski');
+
+        $attributeValueFR->setProduct($this)->shouldBeCalled();
+        $attributeValueFR->getLocaleCode()->willReturn('fr_FR');
+        $attributeValueFR->getAttribute()->willReturn($attribute);
+        $attributeValueFR->getCode()->willReturn('colour');
+        $attributeValueFR->getValue()->willReturn('Bleu');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+        $this->addAttribute($attributeValueFR);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US', 'fr_FR')
+            ->shouldIterateAs([$attributeValuePL->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueEN
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setProduct($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('Blue');
+
+        $this->addAttribute($attributeValueEN);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US')
+            ->shouldIterateAs([$attributeValueEN->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueEN,
+        ProductAttributeValueInterface $attributeValuePL
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setProduct($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('Blue');
+
+        $attributeValuePL->setProduct($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn('');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US')
+            ->shouldIterateAs([$attributeValueEN->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueFR
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueFR->setProduct($this)->shouldBeCalled();
+        $attributeValueFR->getLocaleCode()->willReturn('fr_FR');
+        $attributeValueFR->getAttribute()->willReturn($attribute);
+        $attributeValueFR->getCode()->willReturn('colour');
+        $attributeValueFR->getValue()->willReturn('Bleu');
+
+        $this->addAttribute($attributeValueFR);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US', 'fr_FR')
+            ->shouldIterateAs([$attributeValueFR->getWrappedObject()])
+        ;
+    }
+
+    function it_returns_attributes_by_a_base_locale_when_there_is_an_empty_value_for_a_given_locale_or_a_fallback_locale(
+        ProductAttributeInterface $attribute,
+        ProductAttributeValueInterface $attributeValueEN,
+        ProductAttributeValueInterface $attributeValuePL,
+        ProductAttributeValueInterface $attributeValueFR
+    ): void {
+        $attribute->getCode()->willReturn('colour');
+
+        $attributeValueEN->setProduct($this)->shouldBeCalled();
+        $attributeValueEN->getLocaleCode()->willReturn('en_US');
+        $attributeValueEN->getAttribute()->willReturn($attribute);
+        $attributeValueEN->getCode()->willReturn('colour');
+        $attributeValueEN->getValue()->willReturn('');
+
+        $attributeValuePL->setProduct($this)->shouldBeCalled();
+        $attributeValuePL->getLocaleCode()->willReturn('pl_PL');
+        $attributeValuePL->getAttribute()->willReturn($attribute);
+        $attributeValuePL->getCode()->willReturn('colour');
+        $attributeValuePL->getValue()->willReturn(null);
+
+        $attributeValueFR->setProduct($this)->shouldBeCalled();
+        $attributeValueFR->getLocaleCode()->willReturn('fr_FR');
+        $attributeValueFR->getAttribute()->willReturn($attribute);
+        $attributeValueFR->getCode()->willReturn('colour');
+        $attributeValueFR->getValue()->willReturn('Bleu');
+
+        $this->addAttribute($attributeValueEN);
+        $this->addAttribute($attributeValuePL);
+        $this->addAttribute($attributeValueFR);
+
+        $this
+            ->getAttributesByLocale('pl_PL', 'en_US', 'fr_FR')
+            ->shouldIterateAs([$attributeValueFR->getWrappedObject()])
+        ;
     }
 
     function it_has_no_variants_by_default(): void

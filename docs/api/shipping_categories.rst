@@ -64,7 +64,7 @@ To create a new shipping category use the below method.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -104,7 +104,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -165,7 +165,7 @@ To see the details of the shipping category with ``code = SC3`` use the below me
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -224,7 +224,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/ \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -310,7 +310,7 @@ To fully update the shipping category with ``code = SC3`` use the below method.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -335,7 +335,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -392,7 +392,7 @@ To partially update the shipping category with ``code = SC3`` use the below meth
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -437,7 +437,7 @@ To delete the shipping category with ``code = SC3`` use the below method.
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/shipping-categories/SC3 \
+    $ curl http://demo.sylius.com/api/v1/shipping-categories/SC3 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

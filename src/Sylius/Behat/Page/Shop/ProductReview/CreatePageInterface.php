@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface CreatePageInterface extends PageInterface
 {
     /**

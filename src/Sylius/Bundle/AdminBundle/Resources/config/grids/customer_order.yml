@@ -8,6 +8,12 @@ sylius_grid:
                         method: createByCustomerIdQueryBuilder
                         arguments:
                             customerId: $id
+            fields:
+                customer:
+                    type: string
+                    enabled: false
+            sorting:
+                number: desc
             filters:
                 customer:
                     type: string

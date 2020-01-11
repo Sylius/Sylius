@@ -6,6 +6,18 @@ sylius:
         code:
             exact_length: Para birimi kodu tam olarak 3 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen para birimi kodunu seçiniz.
+            regex: Para birimi kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
             unique: Param birimi kodu tekil olmalıdır.
         exchange_rate:
             not_blank: Lütfen döviz kurunu giriniz.
+    exchange_rate:
+        ratio:
+            greater_than: Oran 0'dan büyük olmalı.
+            invalid: Oran numara olmalıdır.
+            not_blank: Lütfen döviz kuru oranını giriniz.
+        source_currency:
+            not_blank: Lütfen para birimi hangi döviz kurundan türetilmiş olmasını seçiniz.
+        target_currency:
+            not_blank: Lütfen para birimi hangi döviz kuruna ayarlanmış olmasını seçiniz.
+        unique_currency_pair: Param birimi tekil olmalıdır.
+        different_source_target_currency: Kaynak ve hedef para birimleri farklı olmalıdır.

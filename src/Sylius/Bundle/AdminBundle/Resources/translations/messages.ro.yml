@@ -17,8 +17,8 @@ sylius:
                     admin_users: Administratori
                     channels: Canale
                     countries: Țări
-                    currencies: Valute
-                    exchange_rates: Rate de schimb
+                    currencies: Monede
+                    exchange_rates: Cursul de schimb
                     header: Configurare
                     locales: Setări regionale
                     payment_methods: Metode de plată
@@ -29,7 +29,7 @@ sylius:
                     zones: Zone
                 marketing:
                     header: Marketing
-                    product_reviews: Recenzii despre produse
+                    product_reviews: Recenziile produsului
                     promotions: Promoţii
                 customers:
                     customers: Clienți

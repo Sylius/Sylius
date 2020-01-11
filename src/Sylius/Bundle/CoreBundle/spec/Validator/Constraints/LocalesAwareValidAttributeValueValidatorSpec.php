@@ -25,9 +25,6 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $attributeTypesRegistry, ExecutionContextInterface $context, TranslationLocaleProviderInterface $localeProvider): void
@@ -57,7 +54,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         $localeProvider->getDefaultLocaleCode()->willReturn('en_US');
         $attributeValue->getLocaleCode()->willReturn('pl');
 
-        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::type(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }
@@ -78,7 +75,7 @@ class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         $localeProvider->getDefaultLocaleCode()->willReturn('en_US');
         $attributeValue->getLocaleCode()->willReturn('en_US');
 
-        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), ['min' => 2, 'max' => 255, 'required' => true])->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::type(ExecutionContextInterface::class), ['min' => 2, 'max' => 255, 'required' => true])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }

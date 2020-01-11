@@ -13,19 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class SharedStorage implements SharedStorageInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $clipboard = [];
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $latestKey;
 
     /**

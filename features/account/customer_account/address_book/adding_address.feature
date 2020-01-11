@@ -14,4 +14,4 @@ Feature: Adding a new address to the book
         And I specify the address as "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas"
         And I add it
         Then I should be notified that the address has been successfully added
-        And the address assigned to "Lucifer Morningstar" should appear in my book
+        And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be marked as my default address

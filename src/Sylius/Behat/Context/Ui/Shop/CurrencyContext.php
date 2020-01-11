@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CurrencyContext implements Context
 {
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homePage
-     */
     public function __construct(HomePageInterface $homePage)
     {
         $this->homePage = $homePage;

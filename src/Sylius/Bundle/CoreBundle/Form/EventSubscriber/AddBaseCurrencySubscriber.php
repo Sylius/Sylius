@@ -20,9 +20,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddBaseCurrencySubscriber implements EventSubscriberInterface
 {
     /**
@@ -35,9 +32,6 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         $resource = $event->getData();
@@ -52,10 +46,6 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param mixed $resource
-     *
-     * @return bool
-     *
      * @throws UnexpectedTypeException
      */
     private function getDisabledOption($resource): bool

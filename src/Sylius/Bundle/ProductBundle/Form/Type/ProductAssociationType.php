@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductAssociationType extends AbstractResourceType
 {
     /**

@@ -7,5 +7,6 @@ sylius:
             description: Açıklama
             name: Ad
             parent: Üst
+            slug: Kısa isim
         taxonomy:
             name: Ad

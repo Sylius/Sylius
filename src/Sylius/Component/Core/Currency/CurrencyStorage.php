@@ -17,19 +17,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Storage\StorageInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CurrencyStorage implements CurrencyStorageInterface
 {
-    /**
-     * @var StorageInterface
-     */
+    /** @var StorageInterface */
     private $storage;
 
-    /**
-     * @param StorageInterface $storage
-     */
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
@@ -65,23 +57,11 @@ final class CurrencyStorage implements CurrencyStorageInterface
         return '_currency_' . $channel->getCode();
     }
 
-    /**
-     * @param string $currencyCode
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     private function isBaseCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         return $currencyCode === $channel->getBaseCurrency()->getCode();
     }
 
-    /**
-     * @param string $currencyCode
-     * @param ChannelInterface $channel
-     *
-     * @return bool
-     */
     private function isAvailableCurrency(string $currencyCode, ChannelInterface $channel): bool
     {
         $availableCurrencies = array_map(

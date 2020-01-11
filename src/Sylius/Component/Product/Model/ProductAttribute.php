@@ -16,10 +16,6 @@ namespace Sylius\Component\Product\Model;
 use Sylius\Component\Attribute\Model\Attribute as BaseAttribute;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductAttribute extends BaseAttribute implements ProductAttributeInterface
 {
     /**

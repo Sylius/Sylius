@@ -11,7 +11,7 @@ Now you need to configure your first resource. Let's assume you have a *Book* en
 .. tip::
 
     You can see a full exemplary configuration of a typical resource
-    :doc:`here, in the "How to add a custom model?" cookbook </cookbook/custom-model>`.
+    :doc:`here, in the "How to add a custom model?" cookbook </cookbook/entities/custom-model>`.
 
 Implement the ResourceInterface in your model class.
 ----------------------------------------------------
@@ -20,7 +20,7 @@ Implement the ResourceInterface in your model class.
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -38,7 +38,7 @@ Implement the ResourceInterface in your model class.
 Configure the class as a resource.
 ----------------------------------
 
-In your ``app/config/config.yml`` add:
+In your ``config/packages/sylius_resource.yaml`` add:
 
 .. code-block:: yaml
 
@@ -46,7 +46,7 @@ In your ``app/config/config.yml`` add:
         resources:
             app.book:
                 classes:
-                    model: AppBundle\Entity\Book
+                    model: App\Entity\Book
 
 That's it! Your Book entity is now registered as Sylius Resource.
 
@@ -66,11 +66,11 @@ You can also configure several doctrine drivers.
         resources:
             app.book:
                 classes:
-                    model: AppBundle\Entity\Book
+                    model: App\Entity\Book
             app.article:
                 driver: doctrine/phpcr-odm
                 classes:
-                    model: AppBundle\Document\ArticleDocument
+                    model: App\Document\ArticleDocument
 
 Generate API routing.
 ---------------------
@@ -78,9 +78,9 @@ Generate API routing.
 .. tip::
 
     Learn more about using Sylius REST API in these articles:
-    :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api>`.
+    :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api/api>`.
 
-Add the following lines to ``app/config/routing.yml``:
+Add the following lines to ``config/routes.yaml``:
 
 .. code-block:: yaml
 

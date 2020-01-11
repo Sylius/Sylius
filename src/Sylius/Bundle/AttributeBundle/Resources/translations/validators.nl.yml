@@ -11,6 +11,11 @@ sylius:
             not_blank: Vul de attribuutcode in.
             regex: Zone code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Deze code is al in gebruik.
+        configuration:
+            max_entries: Configuratie max aantal dient groter dan of gelijk aan het min aantal te zijn.
+            max_length: Configuratie maximale lengte moet groter dan of gelijk aan de minimale lengte zijn.
+            min_entries: Configuratie min aantal dient kleiner dan of gelijk aan het aantal toegevoegde opties te zijn.
+            multiple: Configuratie meerdere is vereist om min aantal of max aantal op te kunnen geven.
         presentation:
             not_blank: Vul de attribuutweergave in.
             min_length: Attribuutweergave moet minimaal 1 teken bevatten. |Attribuutweergave moet minstens {{ limit }} teken bevatten.

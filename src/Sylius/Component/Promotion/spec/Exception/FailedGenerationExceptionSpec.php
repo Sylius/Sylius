@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Promotion\Exception;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
     function let(

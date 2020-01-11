@@ -16,16 +16,7 @@ namespace Sylius\Component\Payment\Factory;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface PaymentFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param int $amount
-     * @param string $currency
-     *
-     * @return PaymentInterface
-     */
     public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface;
 }

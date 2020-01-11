@@ -20,9 +20,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, FactoryInterface $zoneMemberFactory): void

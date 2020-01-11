@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        taxon:
+            description: 説明
+            name: ゾーン名
+        taxonomy:
+            name: ゾーン名

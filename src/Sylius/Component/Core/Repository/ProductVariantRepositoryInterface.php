@@ -16,15 +16,7 @@ namespace Sylius\Component\Core\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface as BaseProductVariantRepositoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ProductVariantRepositoryInterface extends BaseProductVariantRepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 }

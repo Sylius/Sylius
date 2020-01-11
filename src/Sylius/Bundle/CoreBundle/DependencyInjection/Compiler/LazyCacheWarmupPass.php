@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LazyCacheWarmupPass implements CompilerPassInterface
 {
     /**
@@ -35,10 +32,6 @@ final class LazyCacheWarmupPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param string $id
-     */
     private function markServiceAsLazy(ContainerBuilder $container, string $id): void
     {
         try {

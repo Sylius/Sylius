@@ -61,7 +61,7 @@ To see the details of the shipping method with ``code = ups`` use the below meth
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/shipping-methods/ups \
+     $ curl http://demo.sylius.com/api/v1/shipping-methods/ups \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

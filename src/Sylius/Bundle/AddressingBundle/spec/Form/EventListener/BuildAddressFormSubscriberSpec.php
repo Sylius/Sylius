@@ -27,10 +27,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $countryRepository, FormFactoryInterface $formFactory): void

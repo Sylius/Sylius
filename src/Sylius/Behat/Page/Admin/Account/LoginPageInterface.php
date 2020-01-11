@@ -13,29 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Account;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface LoginPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function hasValidationErrorWith($message);
+    public function hasValidationErrorWith(string $message): bool;
 
-    public function logIn();
+    public function logIn(): void;
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
-    /**
-     * @param string $username
-     */
-    public function specifyUsername($username);
+    public function specifyUsername(string $username): void;
 }

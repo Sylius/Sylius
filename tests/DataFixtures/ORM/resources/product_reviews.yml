@@ -1,0 +1,44 @@
+Sylius\Component\Core\Model\Customer:
+    customer_example1:
+        firstName: Example
+        lastName: Queen
+        email: example.queen@example.com
+        emailCanonical: example.queen@example.com
+    customer_example2:
+        firstName: Example
+        lastName: King
+        email: example.king@example.com
+        emailCanonical: example.king@example.com
+
+Sylius\Component\Core\Model\Product:
+    product1:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_REVIEW_BEST
+    product2:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG_REVIEW_GOOD
+
+Sylius\Component\Core\Model\ProductReview:
+    productReview1:
+        title: mug_review_best
+        rating: 4
+        comment: "mug_review_best_comment"
+        author: "@customer_example1"
+        status: "new"
+        reviewSubject: "@product1"
+    productReview2:
+        title: mug_review_good
+        rating: 3
+        comment: "mug_review_good_comment"
+        author: "@customer_example1"
+        status: "new"
+        reviewSubject: "@product1"
+    productReview3:
+        title: mug_review_bad
+        rating: 1
+        comment: "mug_review_bad_comment"
+        author: "@customer_example1"
+        status: "rejected"
+        reviewSubject: "@product1"

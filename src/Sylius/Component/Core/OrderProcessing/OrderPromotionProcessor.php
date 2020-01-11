@@ -19,19 +19,11 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class OrderPromotionProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var PromotionProcessorInterface
-     */
+    /** @var PromotionProcessorInterface */
     private $promotionProcessor;
 
-    /**
-     * @param PromotionProcessorInterface $promotionProcessor
-     */
     public function __construct(PromotionProcessorInterface $promotionProcessor)
     {
         $this->promotionProcessor = $promotionProcessor;

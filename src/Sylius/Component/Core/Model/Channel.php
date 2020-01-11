@@ -20,71 +20,59 @@ use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Channel extends BaseChannel implements ChannelInterface
 {
-    /**
-     * @var CurrencyInterface
-     */
+    /** @var CurrencyInterface */
     protected $baseCurrency;
 
-    /**
-     * @var LocaleInterface
-     */
+    /** @var LocaleInterface */
     protected $defaultLocale;
 
-    /**
-     * @var ZoneInterface
-     */
+    /** @var ZoneInterface */
     protected $defaultTaxZone;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $taxCalculationStrategy;
 
     /**
-     * @var CurrencyInterface[]|Collection
+     * @var Collection|CurrencyInterface[]
+     *
+     * @psalm-var Collection<array-key, CurrencyInterface>
      */
     protected $currencies;
 
     /**
-     * @var LocaleInterface[]|Collection
+     * @var Collection|LocaleInterface[]
+     *
+     * @psalm-var Collection<array-key, LocaleInterface>
      */
     protected $locales;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $themeName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $contactEmail;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $skippingShippingStepAllowed = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $skippingPaymentStepAllowed = false;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $accountVerificationRequired = true;
+
+    /** @var ShopBillingDataInterface|null */
+    protected $shopBillingData;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, CurrencyInterface> $this->currencies */
         $this->currencies = new ArrayCollection();
+        /** @var ArrayCollection<array-key, LocaleInterface> $this->locales */
         $this->locales = new ArrayCollection();
     }
 
@@ -302,5 +290,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
+    }
+
+    public function getShopBillingData(): ?ShopBillingDataInterface
+    {
+        return $this->shopBillingData;
+    }
+
+    public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void
+    {
+        $this->shopBillingData = $shopBillingData;
     }
 }

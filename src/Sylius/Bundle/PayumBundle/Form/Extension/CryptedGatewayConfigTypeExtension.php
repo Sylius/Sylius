@@ -21,19 +21,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var CypherInterface|null
-     */
+    /** @var CypherInterface|null */
     private $cypher;
 
-    /**
-     * @param CypherInterface|null $cypher
-     */
     public function __construct(?CypherInterface $cypher = null)
     {
         $this->cypher = $cypher;

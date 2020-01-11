@@ -21,19 +21,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 abstract class AttributeChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     protected $attributeRepository;
 
-    /**
-     * @param RepositoryInterface $attributeRepository
-     */
     public function __construct(RepositoryInterface $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;

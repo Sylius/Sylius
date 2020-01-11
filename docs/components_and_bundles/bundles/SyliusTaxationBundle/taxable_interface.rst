@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 The TaxableInterface
 ====================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In order to calculate the taxes for a model in your application, it needs to implement the ``TaxableInterface`` 
 It is a very simple interface, with only one method - the ``getTaxCategory()``, as every taxable has to belong to a specific tax category.

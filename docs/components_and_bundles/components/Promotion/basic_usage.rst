@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Basic Usage
 ===========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In order to benefit from the component's features at first you need to create a basic class that will implement
 the :ref:`component_promotion_model_promotion-subject-interface`. Let's assume that you would like to
@@ -11,7 +18,7 @@ for promotion application purposes.
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Doctrine\Common\Collections\Collection;
     use Doctrine\Common\Collections\ArrayCollection;
@@ -148,7 +155,7 @@ and applies configured actions if rules are eligible.
     <?php
 
     use Sylius\Component\Promotion\Processor\PromotionProcessor;
-    use AppBundle\Entity\Ticket;
+    use App\Entity\Ticket;
 
     /**
      * @param PromotionRepositoryInterface         $repository
@@ -184,7 +191,7 @@ Below you can see how it works:
     use Sylius\Component\Promotion\Model\PromotionAction;
     use Sylius\Component\Promotion\Model\PromotionRule;
     use Sylius\Component\Promotion\Checker\CompositePromotionEligibilityChecker;
-    use AppBundle\Entity\Ticket;
+    use App\Entity\Ticket;
 
     $checkerRegistry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     $actionRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionActionInterface');
@@ -253,7 +260,7 @@ which is able to apply and revert single promotions on a subject implementing th
     use Sylius\Component\Promotion\PromotionAction\PromotionApplicator;
     use Sylius\Component\Promotion\Model\Promotion;
     use Sylius\Component\Registry\ServiceRegistry;
-    use AppBundle\Entity\Ticket;
+    use App\Entity\Ticket;
 
     // In order for the applicator to work properly you need to have your actions created and registered before.
     $registry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionActionInterface');

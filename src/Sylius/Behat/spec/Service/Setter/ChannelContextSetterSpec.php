@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Behat;
+namespace spec\Sylius\Behat\Service\Setter;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Service\Setter\ChannelContextSetter;
@@ -19,9 +19,6 @@ use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelContextSetterSpec extends ObjectBehavior
 {
     function let(CookieSetterInterface $cookieSetter)

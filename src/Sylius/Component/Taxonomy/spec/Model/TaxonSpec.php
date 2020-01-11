@@ -17,10 +17,6 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 final class TaxonSpec extends ObjectBehavior
 {
     public function let()
@@ -119,6 +115,29 @@ final class TaxonSpec extends ObjectBehavior
     {
         $this->setName('T-Shirt material');
         $this->__toString()->shouldReturn('T-Shirt material');
+    }
+
+    function its_fullname_is_null_if_unnamed(): void
+    {
+        $this->getFullname()->shouldReturn(null);
+    }
+
+    function its_fullname_equal_name_if_no_parent(): void
+    {
+        $this->setName('Category');
+        $this->getFullname()->shouldReturn('Category');
+    }
+
+    function its_fullname_prepends_with_parents_fullname(TaxonInterface $root): void
+    {
+        $root->getFullname()->willReturn('Category');
+        $this->setName('T-shirts');
+
+        $root->addChild($this)->shouldBeCalled();
+        $this->setParent($root);
+
+        $this->getFullname()->shouldReturn('Category / T-shirts');
+        $this->getFullname(' -- ')->shouldReturn('Category -- T-shirts');
     }
 
     function it_has_no_description_by_default(): void

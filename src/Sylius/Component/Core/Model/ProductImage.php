@@ -16,20 +16,18 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ProductImage extends Image implements ProductImageInterface
 {
     /**
      * @var Collection|ProductVariantInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductVariantInterface>
      */
     protected $productVariants;
 
     public function __construct()
     {
-        parent::__construct();
-
+        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->productVaraints */
         $this->productVariants = new ArrayCollection();
     }
 

@@ -34,6 +34,38 @@ final class CreateClientCommandSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius:oauth-server:create-client');
     }
 
+    public function it_creates_a_client_without_client_manager(
+        ContainerInterface $container,
+        InputInterface $input,
+        OutputInterface $output,
+        ClientManager $clientManager,
+        Client $client
+    ) {
+        $input->bind(Argument::any())->shouldBeCalled();
+        $input->isInteractive()->shouldBeCalled();
+        $input->validate()->shouldBeCalled();
+        $input->hasArgument('command')->willReturn(false);
+
+        $container->get('fos_oauth_server.client_manager.default')->willReturn($clientManager);
+        $clientManager->createClient()->willReturn($client);
+
+        $input->getOption('redirect-uri')->willReturn(['redirect-uri']);
+        $input->getOption('grant-type')->willReturn(['grant-type']);
+
+        $client->setRedirectUris(['redirect-uri'])->shouldBeCalled();
+        $client->setAllowedGrantTypes(['grant-type'])->shouldBeCalled();
+
+        $clientManager->updateClient($client)->shouldBeCalled();
+
+        $client->getPublicId()->shouldBeCalled();
+        $client->getSecret()->shouldBeCalled();
+
+        $output->writeln(Argument::type('string'))->shouldBeCalled();
+
+        $this->setContainer($container);
+        $this->run($input, $output);
+    }
+
     public function it_creates_a_client(
         ContainerInterface $container,
         InputInterface $input,
@@ -41,6 +73,8 @@ final class CreateClientCommandSpec extends ObjectBehavior
         ClientManager $clientManager,
         Client $client
     ) {
+        $this->beConstructedWith(null, $clientManager);
+
         $input->bind(Argument::any())->shouldBeCalled();
         $input->isInteractive()->shouldBeCalled();
         $input->validate()->shouldBeCalled();

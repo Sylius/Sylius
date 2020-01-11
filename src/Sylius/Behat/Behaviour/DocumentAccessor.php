@@ -15,13 +15,7 @@ namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\DocumentElement;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 trait DocumentAccessor
 {
-    /**
-     * @return DocumentElement
-     */
-    abstract protected function getDocument();
+    abstract protected function getDocument(): DocumentElement;
 }

@@ -15,14 +15,7 @@ namespace Sylius\Component\Order\Modifier;
 
 use Sylius\Component\Order\Model\OrderItemInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderItemQuantityModifierInterface
 {
-    /**
-     * @param OrderItemInterface $orderItem
-     * @param int $targetQuantity
-     */
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void;
 }

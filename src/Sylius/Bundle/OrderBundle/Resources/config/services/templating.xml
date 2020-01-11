@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.templating.helper.adjustment" class="Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper">
             <argument type="service" id="sylius.adjustments_aggregator" />
             <tag name="templating.helper" alias="sylius_adjustments" />

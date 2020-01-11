@@ -16,21 +16,14 @@ namespace Sylius\Component\Locale\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Locale implements LocaleInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
     public function __construct()
@@ -38,9 +31,6 @@ class Locale implements LocaleInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

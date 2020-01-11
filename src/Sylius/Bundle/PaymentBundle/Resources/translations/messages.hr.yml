@@ -17,6 +17,7 @@ sylius:
                 header: Stanje plaćanja
                 checkout: Blagajna
                 completed: Završeno
+                authorized: Autorizirano
                 failed: Neuspješno
                 new: Novo
                 pending: Na čekanju
@@ -28,4 +29,6 @@ sylius:
         payment_method:
             description: Opis
             enabled: Omogući?
-            name: Naziv
+            instructions: Upute
+            name: Naziv regije
+            position: Pozicija

@@ -4,7 +4,7 @@
 Shipments
 =========
 
-A **Shipment** is a representation of a shipping request for an Order. Sylius supports multiple shipments per one Order.
+A **Shipment** is a representation of a shipping request for an Order. Sylius can attach multiple shipments to each single Order.
 
 How is a Shipment created for an Order?
 '''''''''''''''''''''''''''''''''''''''
@@ -16,7 +16,7 @@ How is a Shipment created for an Order?
 The Shipment State Machine
 --------------------------
 
-A Shipment that is attached to an Order will have its own state machine with such states available:
+A Shipment that is attached to an Order will have its own state machine with the following states available:
 ``cart``, ``ready``, ``cancelled``, ``shipped``.
 
 The allowed transitions between these states are:
@@ -46,8 +46,8 @@ Shipping Methods
 How to create a ShippingMethod programmatically?
 ''''''''''''''''''''''''''''''''''''''''''''''''
 
-As usually use a factory to create a new ShippingMethod. Give it a ``code``, set a desired shipping calculator and set a ``zone``.
-It need also a configuration, for instance of the amount (cost).
+As usual use a factory to create a new ShippingMethod. Give it a ``code``, set a desired shipping calculator and set a ``zone``.
+It also need a configuration, for instance of the amount (cost).
 At the end add it to the system using a repository.
 
 .. code-block:: php
@@ -56,7 +56,7 @@ At the end add it to the system using a repository.
 
     $shippingMethod->setCode('DHL');
     $shippingMethod->setCalculator(DefaultCalculators::FLAT_RATE);
-    $shippingMethod->setConfiguration(['amount' => 50]);
+    $shippingMethod->setConfiguration(['channel_code' => ['amount' => 50]]);
 
     $zone = $this->container->get('sylius.repository.zone')->findOneByCode('US');
     $shippingMethod->setZone($zone);
@@ -67,6 +67,7 @@ In order to have your shipping method available in checkout add it to a desired 
 
 .. code-block:: php
 
+    $channel = $this->container->get('sylius.repository.channel')->findOneByCode('channel_code');
     $channel->addShippingMethod($shippingMethod);
 
 Shipping Zones
@@ -102,16 +103,7 @@ The already defined calculators in Sylius are described as constants in the
 `Sylius\Component\Shipping\Calculator\DefaultCalculators <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Shipping/Calculator/DefaultCalculators.php>`_
 
 * **FlatRateCalculator** - just returns the ``amount`` from the ShippingMethod's configuration.
-* **FlexibleRateCalculator** - on the ShippingMethod's configuration it should have the ``first_unit_cost``, ``additional_unit_cost`` and ``additional_unit_limit`` configured - it is useful if you want to have different cost for the first item than for the rest.
 * **PerUnitRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count.
-* **VolumeRateCalculator** - returns the ``amount`` from the ShippingMethod's configuration multiplied by the ``units`` count divided by the configured ``division``.
-* **WeightRateCalculator** - returns the ``fixed`` from the ShippingMethod's configuration multiplied plus the ``variable`` multiplied by the ``weight`` of the shipment and divided by the ``division`` from the configuration.
-
-ProductVariant Configuration
-----------------------------
-
-In order to be able to calculate shipping costs basing on the volume and weight of products in an order
-the ProductVariant has the ``depth``, ``width``, ``height`` and ``weight`` fields.
 
 Shipment complete events
 ------------------------

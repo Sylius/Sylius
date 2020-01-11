@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductAssociationTypeContext implements Context
 {
-    /**
-     * @var ProductAssociationTypeRepositoryInterface
-     */
+    /** @var ProductAssociationTypeRepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
-     */
     public function __construct(ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository)
     {
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;

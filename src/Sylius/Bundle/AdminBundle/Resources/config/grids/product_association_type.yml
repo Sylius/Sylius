@@ -36,3 +36,6 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                bulk:
+                    delete:
+                        type: delete

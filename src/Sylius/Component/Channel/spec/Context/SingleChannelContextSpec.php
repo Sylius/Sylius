@@ -19,9 +19,6 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SingleChannelContextSpec extends ObjectBehavior
 {
     function let(ChannelRepositoryInterface $channelRepository): void

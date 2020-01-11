@@ -17,37 +17,17 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param mixed $promotionId
-     *
-     * @return QueryBuilder
-     */
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
 
-    /**
-     * @param int $codeLength
-     *
-     * @return int
-     */
-    public function countByCodeLength(int $codeLength): int;
+    public function countByCodeLength(
+        int $codeLength,
+        ?string $prefix = null,
+        ?string $suffix = null
+    ): int;
 
-    /**
-     * @param string $code
-     * @param string $promotionCode
-     *
-     * @return PromotionCouponInterface|null
-     */
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
 
-    /**
-     * @param string $promotionCode
-     *
-     * @return iterable
-     */
     public function createPaginatorForPromotion(string $promotionCode): iterable;
 }

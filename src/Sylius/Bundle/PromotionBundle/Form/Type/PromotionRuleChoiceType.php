@@ -17,14 +17,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionRuleChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $rules;
 
     public function __construct(array $rules)

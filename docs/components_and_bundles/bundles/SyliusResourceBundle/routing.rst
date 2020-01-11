@@ -6,7 +6,7 @@ SyliusResourceBundle ships with a custom route loader that can save you some tim
 Generating Generic CRUD Routing
 -------------------------------
 
-To generate a full CRUD routing, simply configure it in your ``app/config/routing.yml``:
+To generate a full CRUD routing, simply configure it in your ``config/routes.yaml``:
 
 .. code-block:: yaml
 
@@ -61,7 +61,7 @@ Results in the following routes:
 Generating API CRUD Routing
 ---------------------------
 
-To generate a full API-friendly CRUD routing, add these YAML lines to your ``app/config/routing.yml``:
+To generate a full API-friendly CRUD routing, add these YAML lines to your ``config/routes.yaml``:
 
 .. code-block:: yaml
 
@@ -193,10 +193,10 @@ You can easily change that per route, but it is also easy when you generate the 
 
 Following templates will be used for actions:
 
-* ``:app/Resources/views/Admin/Book:show.html.twig``
-* ``:app/Resources/views/Admin/Book:index.html.twig``
-* ``:app/Resources/views/Admin/Book:create.html.twig``
-* ``:app/Resources/views/Admin/Book:update.html.twig``
+* ``:templates/Admin/Book:show.html.twig``
+* ``:templates/Admin/Book:index.html.twig``
+* ``:templates/Admin/Book:create.html.twig``
+* ``:templates/Admin/Book:update.html.twig``
 
 Using a Custom Form
 -------------------
@@ -208,16 +208,16 @@ If you want to use a custom form:
     app_book:
         resource: |
             alias: app.book
-            form: AppBundle/Form/Type/AdminBookType
+            form: App/Form/Type/AdminBookType
         type: sylius.resource
 
-``create`` and ``update`` actions will use AppBundle/Form/Type/AdminBookType form type.
+``create`` and ``update`` actions will use ``App/Form/Type/AdminBookType`` form type.
 
 .. note::
 
     Remember, that if your form type has some dependencies you have to declare it as a service and tag with **name: form.type**. You can read more about it `here`__
 
-__ http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusResourceBundle/forms.html#custom-resource-form
+__ http://docs.sylius.com/en/latest/components_and_bundles/bundles/SyliusResourceBundle/forms.html#custom-resource-form
 
 Using a Custom Redirect
 -----------------------

@@ -1,0 +1,16 @@
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                result_cache_driver:
+                    type: memcached
+                    host: localhost
+                    port: 11211
+                query_cache_driver:
+                    type: memcached
+                    host: localhost
+                    port: 11211
+                metadata_cache_driver:
+                    type: memcached
+                    host: localhost
+                    port: 11211

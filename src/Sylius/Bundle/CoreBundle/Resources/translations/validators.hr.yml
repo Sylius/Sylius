@@ -44,6 +44,9 @@ sylius:
             unique: Ovaj lokalni kod već postoji.
         enabled:
             cannot_disable_base: Osnovni jezik nije moguće onemogućiti.
+    product:
+        variants:
+            all_prices_defined: Potrebno je prvo definirati cijene varijanti proizvoda za novo dodjeljene kanale.
     product_attribute:
         invalid: Pozicija mora biti cijeli broj.
     product_image:

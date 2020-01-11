@@ -5,4 +5,4 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: 'Командна Табла'
+                dashboard: 'Контролна табла'

@@ -17,22 +17,15 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PromotionApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -195,7 +188,7 @@ final class PromotionApiTest extends JsonApiTestCase
         $promotions = $this->loadFixturesFromFile('resources/promotions.yml');
         $promotion = $promotions['promotion1'];
 
-        $this->client->request('DELETE', $this->getPromotionUrl($promotion), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getPromotionUrl($promotion), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -213,7 +206,7 @@ final class PromotionApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/promotions/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/promotions/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'promotion/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -338,9 +331,11 @@ EOT;
     public function it_allows_to_create_promotion_with_actions()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/channels.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $this->loadFixturesFromFiles([
+            'resources/channels.yml',
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         $data =
 <<<EOT
@@ -493,8 +488,6 @@ EOT;
     }
 
     /**
-     * @param PromotionInterface $promotion
-     *
      * @return string
      */
     private function getPromotionUrl(PromotionInterface $promotion)

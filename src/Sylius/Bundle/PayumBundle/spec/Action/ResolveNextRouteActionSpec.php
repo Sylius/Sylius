@@ -19,9 +19,6 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ResolveNextRouteActionSpec extends ObjectBehavior
 {
     function it_is_a_payum_action(): void

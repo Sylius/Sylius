@@ -29,35 +29,17 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ShippingMethodType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $shippingMethodTranslationType;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $calculatorRegistry;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $shippingMethodTranslationType
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormTypeRegistryInterface $formTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -146,7 +128,7 @@ final class ShippingMethodType extends AbstractResourceType
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MissingPropertyType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
@@ -166,10 +148,6 @@ final class ShippingMethodType extends AbstractResourceType
         return 'sylius_shipping_method';
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $calculatorName
-     */
     private function addConfigurationField(FormInterface $form, string $calculatorName): void
     {
         /** @var CalculatorInterface $calculator */

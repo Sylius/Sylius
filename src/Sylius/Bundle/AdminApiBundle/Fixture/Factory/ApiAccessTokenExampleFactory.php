@@ -15,57 +15,40 @@ namespace Sylius\Bundle\AdminApiBundle\Fixture\Factory;
 
 use Sylius\Bundle\AdminApiBundle\Model\AccessTokenInterface;
 use Sylius\Bundle\AdminApiBundle\Model\ClientInterface;
-use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ApiAccessTokenExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $accessTokenFactory;
 
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
+    /** @var UserRepositoryInterface */
+    private $adminApiUserRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $clientRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $accessTokenFactory
-     * @param UserRepositoryInterface $userRepository
-     * @param RepositoryInterface $clientRepository
-     */
     public function __construct(
         FactoryInterface $accessTokenFactory,
-        UserRepositoryInterface $userRepository,
+        UserRepositoryInterface $adminApiUserRepository,
         RepositoryInterface $clientRepository
     ) {
         $this->accessTokenFactory = $accessTokenFactory;
-        $this->userRepository = $userRepository;
+        $this->adminApiUserRepository = $adminApiUserRepository;
         $this->clientRepository = $clientRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -101,12 +84,16 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('user', LazyOption::randomOne($this->userRepository))
+            ->setDefault('user', LazyOption::randomOne($this->adminApiUserRepository))
             ->setAllowedTypes('user', ['string', UserInterface::class, 'null'])
-            ->setNormalizer('user', function (Options $options, $userEmail) {
-                return $this->userRepository->findOneByEmail($userEmail);
+            ->setNormalizer('user', function (Options $options, string $userEmail): UserInterface {
+                $user = $this->adminApiUserRepository->findOneByEmail($userEmail);
+
+                Assert::isInstanceOf($user, UserInterface::class);
+
+                return $user;
             })
-            ->setDefault('token', function (Options $options) {
+            ->setDefault('token', function (Options $options): string {
                 return $this->faker->md5;
             })
             ->setDefault('client', LazyOption::randomOne($this->clientRepository))

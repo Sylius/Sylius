@@ -21,9 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker): void

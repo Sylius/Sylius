@@ -28,56 +28,29 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingOrdersContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $showPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var HistoryPageInterface
-     */
+    /** @var HistoryPageInterface */
     private $historyPage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @var SharedSecurityServiceInterface
-     */
+    /** @var SharedSecurityServiceInterface */
     private $sharedSecurityService;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPageInterface $indexPage
-     * @param ShowPageInterface $showPage
-     * @param UpdatePageInterface $updatePage
-     * @param HistoryPageInterface $historyPage
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedSecurityServiceInterface $sharedSecurityService
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
@@ -168,7 +141,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateFromAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateFrom(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateFrom($dateTime);
     }
 
     /**
@@ -176,7 +149,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterDateToAs($dateTime)
     {
-        $this->indexPage->specifyFilterDateTo(new \DateTime($dateTime));
+        $this->indexPage->specifyFilterDateTo($dateTime);
     }
 
     /**
@@ -217,6 +190,22 @@ final class ManagingOrdersContext implements Context
     public function iFilter()
     {
         $this->indexPage->filter();
+    }
+
+    /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        $this->showPage->resendOrderConfirmationEmail();
+    }
+
+    /**
+     * @When I resend the shipment confirmation email
+     */
+    public function iResendTheShipmentConfirmationEmail(): void
+    {
+        $this->showPage->resendShipmentConfirmationEmail();
     }
 
     /**
@@ -272,6 +261,14 @@ final class ManagingOrdersContext implements Context
         }
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
+    }
+
+    /**
+     * @Then it should have no shipping address set
+     */
+    public function itShouldHaveNoShippingAddressSet(): void
+    {
+        Assert::false($this->showPage->hasShippingAddressVisible());
     }
 
     /**
@@ -365,11 +362,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's promotion discount should be :promotionDiscount
+     * @Then the order's promotion discount should be :promotionAmount from :promotionName promotion
      */
-    public function theOrdersPromotionDiscountShouldBe($promotionDiscount)
+    public function theOrdersPromotionDiscountShouldBeFromPromotion(string $promotionAmount, string $promotionName): void
     {
-        Assert::true($this->showPage->hasPromotionDiscount($promotionDiscount));
+        Assert::true($this->showPage->hasPromotionDiscount($promotionName, $promotionAmount));
     }
 
     /**
@@ -385,7 +382,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
-        Assert::eq($this->showPage->getPromotionTotal(), $promotionTotal);
+        Assert::same($this->showPage->getOrderPromotionTotal(), $promotionTotal);
     }
 
     /**
@@ -450,6 +447,14 @@ final class ManagingOrdersContext implements Context
     public function itemTaxShouldBe($itemName, $tax)
     {
         Assert::eq($this->showPage->getItemTax($itemName), $tax);
+    }
+
+    /**
+     * @Then /^(its) tax included in price should be ([^"]+)$/
+     */
+    public function itsTaxIncludedInPriceShouldBe(string $itemName, string $tax): void
+    {
+        Assert::same($this->showPage->getItemTaxIncludedInPrice($itemName), $tax);
     }
 
     /**
@@ -828,19 +833,79 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should not see information about payments
+     * @Then I should not see information about shipments
      */
-    public function iShouldNotSeeInformationAboutPayments()
+    public function iShouldNotSeeInformationAboutShipments(): void
     {
-        Assert::same($this->showPage->getPaymentsCount(), 0);
+        Assert::same($this->showPage->getShipmentsCount(), 0);
     }
 
     /**
-     * @Then I should not see information about shipments
+     * @Then the :productName product's unit price should be :price
      */
-    public function iShouldNotSeeInformationAboutShipments()
+    public function productUnitPriceShouldBe(string $productName, string $price): void
     {
-        Assert::same($this->showPage->getShipmentsCount(), 0);
+        Assert::same($this->showPage->getItemUnitPrice($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's item discount should be :price
+     */
+    public function productItemDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's order discount should be :price
+     */
+    public function productOrderDiscountShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemOrderDiscount($productName), $price);
+    }
+
+    /**
+     * @Then the :productName product's quantity should be :quantity
+     */
+    public function productQuantityShouldBe(string $productName, string $quantity): void
+    {
+        Assert::same($this->showPage->getItemQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then the :productName product's subtotal should be :subTotal
+     */
+    public function productSubtotalShouldBe(string $productName, string $subTotal): void
+    {
+        Assert::same($this->showPage->getItemSubtotal($productName), $subTotal);
+    }
+
+    /**
+     * @Then the :productName product's discounted unit price should be :price
+     */
+    public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
+    {
+        Assert::same($this->showPage->getItemDiscountedUnitPrice($productName), $price);
+    }
+
+    /**
+     * @Then I should be informed that there are no payments
+     */
+    public function iShouldSeeInformationAboutNoPayments(): void
+    {
+        Assert::same($this->showPage->getPaymentsCount(), 0);
+        Assert::true($this->showPage->hasInformationAboutNoPayment());
+    }
+
+    /**
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(string $type): void
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('%s confirmation has been successfully resent to the customer.', ucfirst($type)),
+            NotificationType::success()
+        );
     }
 
     /**
@@ -852,7 +917,7 @@ final class ManagingOrdersContext implements Context
      */
     private function assertElementValidationMessage($type, $element, $expectedMessage)
     {
-        $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
+        $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->updatePage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

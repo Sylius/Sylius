@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class RegisterPromotionActionsPass implements CompilerPassInterface
 {
     /**

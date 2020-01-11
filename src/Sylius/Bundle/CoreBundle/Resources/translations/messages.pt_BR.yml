@@ -25,6 +25,12 @@ sylius:
             name: Nome
             roles: Papéis
         channel:
+            billing_data:
+                city: Cidade
+                company: Empresa
+                country: País
+                postcode: CEP
+                street: Rua
             contact_email: Email de contato
             currencies: Moedas
             currency_base: Moeda base
@@ -45,7 +51,7 @@ sylius:
             file: Imagem
         locale:
             code: Código
-            enabled: Ativado
+            enabled: Habilitado
         order_filter:
             created_at_from: Criado após
             created_at_to: Criado antes
@@ -65,7 +71,7 @@ sylius:
             variant_selection_method: Método de seleção da variação
             main_taxon: Táxon principal
             channels: Canais
-            enabled: Ativado
+            enabled: Habilitado
         product_filter:
             name: Nome
             code: Código
@@ -95,7 +101,7 @@ sylius:
         user:
             billing_address: Endereço de cobrança
             different_billing_address: Utilizar um endereço diferente para cobrança?
-            enabled: Ativado
+            enabled: Habilitado
             first_name: Nome
             groups: Grupos
             roles: Papéis
@@ -131,7 +137,7 @@ sylius:
             customer_group:
                 group: Grupo de Cliente
             has_taxon:
-                taxons: Taxas
+                taxons: Táxons
             product:
                 products: Produtos
             total_of_items_from_taxon:
@@ -143,8 +149,8 @@ sylius:
             position: Posição
         zone:
             scopes:
-                shipping: Entrega
-                tax: Taxa
+                shipping: Expedição
+                tax: Imposto
     installer:
         extensions:
             header: extensões
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: sistema de arquivos
             cache:
                 header: cache
-                help: 'Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: existe
             logs:
                 header: logs
-                help: 'Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Para configurar as permissões execute: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: Não existe
             not_writable: não gravável
             parameters:
                 header: parameters.yml
-                help: 'Para configurar as permissões execute: sudo chmod + w %path%'
+                help: "Para configurar as permissões execute: sudo chmod + w %path%"
             vendors: fornecedores
             writable: gravável
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: não substituído
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: fuso horário
             timezone_deprecated:
                 header: Fuso Horário obsoleto
-                help: 'Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).'
+                help: Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).
             version: Versão do PHP
             version_recommended: Versão recomendada do PHP
     payum_gateway:

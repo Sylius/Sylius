@@ -19,9 +19,6 @@ use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ProvinceSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

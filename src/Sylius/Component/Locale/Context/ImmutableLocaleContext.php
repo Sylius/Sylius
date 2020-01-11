@@ -13,19 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Context;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ImmutableLocaleContext implements LocaleContextInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $localeCode;
 
-    /**
-     * @param string $localeCode
-     */
     public function __construct(string $localeCode)
     {
         $this->localeCode = $localeCode;

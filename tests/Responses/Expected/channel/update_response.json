@@ -1,0 +1,17 @@
+{
+    "id": @integer@,
+    "code": "WEB",
+    "name": "Web Channel",
+    "description": "Lorem ipsum",
+    "hostname": "localhost",
+    "color": "black",
+    "createdAt": "@string@.isDateTime()",
+    "updatedAt": "@string@.isDateTime()",
+    "enabled": false,
+    "taxCalculationStrategy": "order_items_based",
+    "_links": {
+        "self": {
+            "href": "\/api\/v1\/channels\/WEB"
+        }
+    }
+}

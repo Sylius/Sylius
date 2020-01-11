@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Channel
 =======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Sale channels management implementation in PHP.
 
@@ -7,7 +14,6 @@ Sale channels management implementation in PHP.
    :maxdepth: 2
 
    installation
-   basic_usage
    models
    interfaces
 

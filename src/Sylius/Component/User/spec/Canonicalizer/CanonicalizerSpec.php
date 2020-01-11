@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\User\Canonicalizer;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CanonicalizerSpec extends ObjectBehavior
 {
     function it_implements_canonicalizer_interface(): void

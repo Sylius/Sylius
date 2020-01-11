@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: البريد الإلكتروني يجب أن يكون على الأقل {{ limit }} حرفاً.
+            not_blank: الرجاء إدخال اسم المشهد
+        expiry_month:
+            max_range: يجب أن تكون انقضاء شهر بطاقة الائتمان لبين {{ min }} و {{ max }}.
+            min_range: يجب أن تكون انقضاء شهر بطاقة الائتمان لبين {{ min }} و {{ max }}.
+            not_blank: يُرجى تحديد وقت انتهاء الصلاحية
+        number:
+            not_blank: الرجاء إدخال رقم بطاقة صالحة.
+            luhn: رقم المنفذ الذى ادخلته غير صالح.
+        security_code:
+            not_blank: الرجاء إدخال رمز دعوة.
+            max_length: يجب أن يكون رمز CVV بطاقة الائتمان على الأقل {{ limit }} أرقام طويلة.
+            min_length: يجب أن يكون رمز CVV بطاقة الائتمان على الأقل {{ limit }} أرقام طويلة.
+        expiry_year:
+            not_blank: يُرجى تحديد وقت انتهاء الصلاحية
+    payment:
+        currency_code:
+            not_valid: رمز العملة الذي أدخلته غير صالح.
+        method:
+            not_blank: 'الرجاء إختيار طريقة للدفع'
+    payment_method:
+        gateway:
+            not_blank: الرجاء إختيار طريقة للدفع
+        name:
+            max_length: يجب أن يكون اسم طريقة الدفع الأحرف {{ limit }} طويلة أو أقل.
+            min_length: البريد الإلكتروني يجب أن يكون على الأقل {{ limit }} حرفاً.
+            not_blank: الرجاء إختيار طريقة للدفع.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: لا يمكن أن تكون الرسوم أقل من {{ compared_value }}.
+                not_blank: الرجاء إدخال كمية صحيحة.
+            percent:
+                max_range: لا يمكن أن تكون الرسوم نسبة أكبر من {{ limit }}.
+                min_range: لا يمكن أن تكون الرسوم نسبة أكبر من {{ limit }}.
+                not_blank: الرجاء إدخال كمية صحيحة.
+        code:
+            not_blank: 'الرجاء إختيار طريقة للدفع.'
+            regex: 'رمز عضو المنطقة يجب أن يتكون من الأحرف اللاتينية والأرقام والشرطات ''-'' والشرطات السفلية ''_'' فقط.'
+            unique: 'طريقة الدفع بالنظر إلى التعليمات البرمجية موجود بالفعل.'

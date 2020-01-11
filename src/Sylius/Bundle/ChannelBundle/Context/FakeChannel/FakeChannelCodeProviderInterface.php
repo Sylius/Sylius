@@ -15,15 +15,7 @@ namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface FakeChannelCodeProviderInterface
 {
-    /**
-     * @param Request $request
-     *
-     * @return string|null
-     */
     public function getCode(Request $request): ?string;
 }

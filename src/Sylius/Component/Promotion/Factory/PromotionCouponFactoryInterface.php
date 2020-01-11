@@ -17,16 +17,9 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface PromotionCouponFactoryInterface extends FactoryInterface
 {
     /**
-     * @param PromotionInterface $promotionId
-     *
-     * @return PromotionCouponInterface
-     *
      * @throws \InvalidArgumentException
      */
     public function createForPromotion(PromotionInterface $promotionId): PromotionCouponInterface;

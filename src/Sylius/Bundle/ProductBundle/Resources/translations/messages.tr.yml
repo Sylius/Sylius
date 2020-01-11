@@ -10,15 +10,21 @@ sylius:
             options: Ayarlar
             meta_keywords: Meta anahtar kelimeleri
             meta_description: Meta açıklama
+            slug: Kısa isim
+            taxons: Kategoriler
         product_variant:
             name: Ad
         association_type:
             name: Ad
             translations: Çeviriler
+        association:
+            type: İşbirliği Türü
+            product: İlişkili ürün
         variant:
             name: Ad
         option:
             name: Ad
+            position: Konum
             values: Olası değerler
         option_value:
             add_value: Değer ekle

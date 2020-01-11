@@ -1,0 +1,29 @@
+<div id="shipping">
+    <h4 class="ui top attached large header">{{ 'sylius.ui.shipping'|trans }}</h4>
+    <div class="ui attached segment">
+        <table class="ui very basic celled table">
+            <tbody>
+            <tr>
+                <td class="seven wide"><strong class="gray text">{{ 'sylius.ui.shipping_category'|trans }}</strong></td>
+                <td>{{ product.variants.first.shippingCategory is not empty ? product.variants.first.shippingCategory : '-' }}</td>
+            </tr>
+            <tr>
+                <td class="seven wide"><strong class="gray text">{{ 'sylius.ui.width'|trans }}</strong></td>
+                <td>{{ product.variants.first.width is not empty ? product.variants.first.width : '-' }}</td>
+            </tr>
+            <tr>
+                <td class="seven wide"><strong class="gray text">{{ 'sylius.ui.height'|trans }}</strong></td>
+                <td>{{ product.variants.first.height is not empty ? product.variants.first.height : '-' }}</td>
+            </tr>
+            <tr>
+                <td class="seven wide"><strong class="gray text">{{ 'sylius.ui.depth'|trans }}</strong></td>
+                <td>{{ product.variants.first.depth is not empty ? product.variants.first.depth : '-' }}</td>
+            </tr>
+            <tr>
+                <td class="seven wide"><strong class="gray text">{{ 'sylius.ui.weight'|trans }}</strong></td>
+                <td>{{ product.variants.first.weight is not empty ? product.variants.first.weight : '-' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

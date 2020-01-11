@@ -15,15 +15,7 @@ namespace Sylius\Component\Core\Customer\Statistics;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface CustomerStatisticsProviderInterface
 {
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return CustomerStatistics
-     */
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics;
 }

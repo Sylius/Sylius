@@ -16,10 +16,6 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
     /**
@@ -40,13 +36,14 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findByNamePart(string $phrase, string $locale): array
+    public function findByNamePart(string $phrase, string $locale, ?int $limit = null): array
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%' . $phrase . '%')
             ->setParameter('locale', $locale)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;

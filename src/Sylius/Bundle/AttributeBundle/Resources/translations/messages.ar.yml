@@ -5,8 +5,35 @@ sylius:
     form:
         attribute:
             add: اضافة
+            add_attributes: إضافة سمات
             choices: الخيارات
+            code: رمز
             name: الاسم
+            translations: التّرجمة
             type: نوع
         attribute_type:
+            checkbox: خانة الاختيار
+            configuration: الضبط
+            date: التاريخ
+            datetime: التاريخ والوقت
+            integer: عدد صحيح
+            percent: النسبة المؤية
             select: اختر
+            text: النصوص
+            textarea: حقل النص
+            title: نوع السمة
+            validation: المصادقة
+        attribute_type_configuration:
+            datetime:
+                format: الصيغة
+            date:
+                format: الصيغة
+            select:
+                multiple: متعددة
+                values: قيم
+                choose: حدد خيار
+                min: إدخالات دقيقة
+                max: إدخالات دقيقة
+            text:
+                min: الطول الأصغري
+                max: الطول الأقصى

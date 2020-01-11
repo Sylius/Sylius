@@ -23,9 +23,6 @@ use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/**
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 final class CapturePaymentActionSpec extends ObjectBehavior
 {
     function let(PaymentDescriptionProviderInterface $paymentDescriptionProvider): void

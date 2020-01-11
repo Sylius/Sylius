@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Checker\Eligibility;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionUsageLimitEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
@@ -30,10 +27,6 @@ final class PromotionUsageLimitEligibilityChecker implements PromotionEligibilit
             return true;
         }
 
-        if ($promotion->getUsed() < $usageLimit) {
-            return true;
-        }
-
-        return false;
+        return $promotion->getUsed() < $usageLimit;
     }
 }

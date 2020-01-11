@@ -21,28 +21,16 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddUserFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $entryType;
 
-    /**
-     * @param string $entryType
-     */
     public function __construct(string $entryType)
     {
         $this->entryType = $entryType;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -51,9 +39,6 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
@@ -65,9 +50,6 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         ]);
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function submit(FormEvent $event): void
     {
         $data = $event->getData();

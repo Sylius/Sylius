@@ -19,9 +19,6 @@ use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AverageRatingCalculatorSpec extends ObjectBehavior
 {
     function it_implements_average_price_calculator_interface(): void

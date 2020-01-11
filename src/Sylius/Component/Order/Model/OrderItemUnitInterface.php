@@ -15,18 +15,9 @@ namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
 {
-    /**
-     * @return int
-     */
     public function getTotal(): int;
 
-    /**
-     * @return OrderItemInterface
-     */
     public function getOrderItem(): OrderItemInterface;
 }

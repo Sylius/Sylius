@@ -15,13 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\ShopUserFixture;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-final class ShopUserFixtureTest extends \PHPUnit_Framework_TestCase
+final class ShopUserFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -72,6 +70,30 @@ final class ShopUserFixtureTest extends \PHPUnit_Framework_TestCase
     public function user_password_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['password' => 'I.<3.Krzysztof.Krawczyk']]]], 'custom.*.password');
+    }
+
+    /**
+     * @test
+     */
+    public function gender_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['gender' => 'u']]]], 'custom.*.gender');
+    }
+
+    /**
+     * @test
+     */
+    public function phone_number_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['phone_number' => '+1234567']]]], 'custom.*.phone_number');
+    }
+
+    /**
+     * @test
+     */
+    public function birthday_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['birthday' => '01-01-2001']]]], 'custom.*.birthday');
     }
 
     /**

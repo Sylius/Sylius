@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        change_password: 'Jūsų slaptažodis buvo pakeistas sėkmingai!'
+        reset_password: 'Jūsų slaptažodis atstatytas sėkmingai!'
+        reset_password_request: 'Jei nurodytas el. pašto adresas yra užregistruotas, tada mes išsiųsime instrukciją apie tai, kaip iš naujo nustatyti naują slaptažodį.'
+        verify_email: 'Elektroninio pašto adresas sėkmingai patikrintas.'
+        verify_email_by_invalid_token: 'Patvirtinimo raktas yra neteisingas.'
+        verify_email_request: 'Jūsų el. pašto adresu buvo išsiųstas el. laiškas su patvirtinimo nuoroda.'
+        verify_verified_email: 'Jūsų elektroninio pašto adresas jau yra patikrintas.'

@@ -11,6 +11,11 @@ sylius:
             not_blank: Por favor, digite o código do atributo.
             regex: Código do atributo somente pode ser composto por letras, números, hifens e traços.
             unique: Esse código já está em uso.
+        configuration:
+            max_entries: A configuração para o número máximo de entradas deve ser maior ou igual ao número mínimo de entradas.
+            max_length: A configuração para o comprimento máximo deve ser maior ou igual ao comprimento mínimo.
+            min_entries: A configuração para o mínimo de entradas deve ser menor ou igual ao número de opções adicionadas.
+            multiple: A configuração para o múltiplo deve ser verdadeira se o número mínimo ou máximo de entradas é especificado.
         presentation:
             not_blank: Por favor insira a apresentação de atributo.
             min_length: Apresentação de atributo deve ser pelo menos 1 caractere de comprimento. |Apresentação de atributo deve ser pelo menos {{ limit }} caractere de comprimento.

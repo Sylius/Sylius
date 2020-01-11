@@ -18,38 +18,22 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -65,9 +49,6 @@ final class MainMenuBuilder
         return $menu;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addCatalogSubMenu(ItemInterface $menu): void
     {
         $catalog = $menu
@@ -112,9 +93,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addCustomersSubMenu(ItemInterface $menu): void
     {
         $customers = $menu
@@ -135,9 +113,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addMarketingSubMenu(ItemInterface $menu): void
     {
         $marketing = $menu
@@ -158,9 +133,6 @@ final class MainMenuBuilder
         ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addSalesSubMenu(ItemInterface $menu): void
     {
         $sales = $menu
@@ -173,11 +145,20 @@ final class MainMenuBuilder
             ->setLabel('sylius.menu.admin.main.sales.orders')
             ->setLabelAttribute('icon', 'cart')
         ;
+
+        $sales
+            ->addChild('payments', ['route' => 'sylius_admin_payment_index'])
+            ->setLabel('sylius.ui.payments')
+            ->setLabelAttribute('icon', 'payment')
+        ;
+
+        $sales
+            ->addChild('shipments', ['route' => 'sylius_admin_shipment_index'])
+            ->setLabel('sylius.ui.shipments')
+            ->setLabelAttribute('icon', 'truck')
+        ;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addConfigurationSubMenu(ItemInterface $menu): void
     {
         $configuration = $menu

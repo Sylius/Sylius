@@ -21,6 +21,7 @@ sylius:
         code:
             regex: Customer group code can only be comprised of letters, numbers, dashes and underscores.
             unique: Customer group code has to be unique.
+            not_blank: Please enter a customer group code.
         name:
             max: Customer group name must not be longer than {{ limit }} characters.
             min: Customer group name must be at least {{ limit }} characters long.

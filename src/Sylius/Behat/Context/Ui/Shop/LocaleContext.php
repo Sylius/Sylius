@@ -18,19 +18,11 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleContext implements Context
 {
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param HomePageInterface $homePage
-     */
     public function __construct(HomePageInterface $homePage)
     {
         $this->homePage = $homePage;
@@ -38,10 +30,11 @@ final class LocaleContext implements Context
 
     /**
      * @Given I switched the shop's locale to :locale
+     * @Given I have switched to the :locale locale
      * @When I switch to the :locale locale
      * @When I change my locale to :locale
      */
-    public function iSwitchTheLocaleToTheLocale($locale)
+    public function iSwitchTheLocaleToTheLocale(string $locale): void
     {
         $this->homePage->open();
         $this->homePage->switchLocale($locale);
@@ -74,7 +67,7 @@ final class LocaleContext implements Context
         if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
-                $localeName,
+                $locale,
                 implode('", "', $this->homePage->getAvailableLocales())
             ));
         }

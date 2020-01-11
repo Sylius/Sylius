@@ -15,7 +15,7 @@ sylius:
             method: Način plačila
             state:
                 header: Stanje plačila
-                checkout: Plačilo
+                checkout: Nakup
                 completed: Zaključeno
                 authorized: Pooblaščeno
                 failed: Ni uspelo

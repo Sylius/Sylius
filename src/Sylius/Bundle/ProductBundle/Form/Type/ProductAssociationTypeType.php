@@ -18,10 +18,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductAssociationTypeType extends AbstractResourceType
 {
     /**

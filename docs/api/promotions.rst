@@ -90,7 +90,7 @@ To create a new promotion use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -140,7 +140,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
        -X POST
@@ -229,7 +229,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -368,7 +368,7 @@ To see the details of the promotion with ``code = sd-promo`` use the below metho
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/promotions/sd-promo \
+     $ curl http://demo.sylius.com/api/v1/promotions/sd-promo \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -440,7 +440,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/ \
+    $ curl http://demo.sylius.com/api/v1/promotions/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -527,7 +527,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
+    $ curl http://demo.sylius.com/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -551,7 +551,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
+    $ curl http://demo.sylius.com/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -629,7 +629,7 @@ To partially update the promotion with ``code = christmas-promotion`` use the be
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
+    $ curl http://demo.sylius.com/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -674,7 +674,7 @@ To delete the promotion with ``code = christmas-promotion`` use the below method
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/promotions/christmas-promotion \
+    $ curl http://demo.sylius.com/api/v1/promotions/christmas-promotion \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

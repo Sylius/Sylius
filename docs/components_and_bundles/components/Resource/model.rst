@@ -98,7 +98,7 @@ This interface should be implemented by a model used in more than one language.
 .. note::
    For more detailed information go to `Sylius API TranslatableInterface`_.
 
-.. _Sylius API TranslatableInterface: http://api.sylius.org/Sylius/Component/Resource/Model/TranslatableInterface.html
+.. _Sylius API TranslatableInterface: http://api.sylius.com/Sylius/Component/Resource/Model/TranslatableInterface.html
 
 .. _component_resource_model_translation-interface:
 
@@ -114,4 +114,4 @@ This interface should be implemented by a model responsible for keeping a single
 .. note::
    For more detailed information go to `Sylius API TranslationInterface`_.
 
-.. _Sylius API TranslationInterface: http://api.sylius.org/Sylius/Component/Resource/Model/TranslationInterface.html
+.. _Sylius API TranslationInterface: http://api.sylius.com/Sylius/Component/Resource/Model/TranslationInterface.html

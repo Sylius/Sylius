@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ProductAssociationFixture extends AbstractResourceFixture
 {
     /**
@@ -37,7 +34,7 @@ class ProductAssociationFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode('type')->cannotBeEmpty()->end()
                 ->scalarNode('owner')->cannotBeEmpty()->end()
-                ->arrayNode('associated_products')->prototype('scalar')->end()->end()
+                ->arrayNode('associated_products')->scalarPrototype()->end()->end()
         ;
     }
 }

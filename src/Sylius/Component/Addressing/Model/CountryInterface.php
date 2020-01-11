@@ -18,44 +18,22 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @param string|null $locale
-     *
-     * @return string|null
-     */
     public function getName(?string $locale = null): ?string;
 
     /**
      * @return Collection|ProvinceInterface[]
+     *
+     * @psalm-return Collection<array-key, ProvinceInterface>
      */
     public function getProvinces(): Collection;
 
-    /**
-     * @return bool
-     */
     public function hasProvinces(): bool;
 
-    /**
-     * @param ProvinceInterface $province
-     */
     public function addProvince(ProvinceInterface $province): void;
 
-    /**
-     * @param ProvinceInterface $province
-     */
     public function removeProvince(ProvinceInterface $province): void;
 
-    /**
-     * @param ProvinceInterface $province
-     *
-     * @return bool
-     */
     public function hasProvince(ProvinceInterface $province): bool;
 }

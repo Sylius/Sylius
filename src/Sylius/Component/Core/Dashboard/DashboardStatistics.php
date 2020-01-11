@@ -13,31 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class DashboardStatistics
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $totalSales;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $numberOfNewOrders;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $numberOfNewCustomers;
 
     /**
-     * @param int $totalSales
-     * @param int $numberOfNewOrders
-     * @param int $numberOfNewCustomers
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers)
@@ -47,33 +34,21 @@ class DashboardStatistics
         $this->numberOfNewCustomers = $numberOfNewCustomers;
     }
 
-    /**
-     * @return int
-     */
     public function getTotalSales(): int
     {
         return $this->totalSales;
     }
 
-    /**
-     * @return int
-     */
     public function getNumberOfNewOrders(): int
     {
         return $this->numberOfNewOrders;
     }
 
-    /**
-     * @return int
-     */
     public function getNumberOfNewCustomers(): int
     {
         return $this->numberOfNewCustomers;
     }
 
-    /**
-     * @return int
-     */
     public function getAverageOrderValue(): int
     {
         if (0 === $this->numberOfNewOrders) {

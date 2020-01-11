@@ -27,9 +27,6 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPaymentProviderSpec extends ObjectBehavior
 {
     function let(

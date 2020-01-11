@@ -20,9 +20,6 @@ use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType as BaseCustomerPr
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CustomerProfileType extends AbstractResourceType
 {
     /**

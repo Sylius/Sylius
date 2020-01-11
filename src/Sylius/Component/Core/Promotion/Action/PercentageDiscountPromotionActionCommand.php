@@ -19,30 +19,18 @@ use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicat
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     public const TYPE = 'order_percentage_discount';
 
-    /**
-     * @var ProportionalIntegerDistributorInterface
-     */
+    /** @var ProportionalIntegerDistributorInterface */
     private $distributor;
 
-    /**
-     * @var UnitsPromotionAdjustmentsApplicatorInterface
-     */
+    /** @var UnitsPromotionAdjustmentsApplicatorInterface */
     private $unitsPromotionAdjustmentsApplicator;
 
-    /**
-     * @param ProportionalIntegerDistributorInterface $distributor
-     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-     */
     public function __construct(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
@@ -57,6 +45,8 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
         if (!$this->isSubjectValid($subject)) {
             return false;
         }
@@ -88,17 +78,11 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
      */
     protected function isConfigurationValid(array $configuration): void
     {
-        if (!isset($configuration['percentage']) || !is_float($configuration['percentage'])) {
-            throw new \InvalidArgumentException('"percentage" must be set and must be a float.');
-        }
+        Assert::keyExists($configuration, 'percentage');
+        Assert::greaterThan($configuration['percentage'], 0);
+        Assert::lessThanEq($configuration['percentage'], 1);
     }
 
-    /**
-     * @param int $promotionSubjectTotal
-     * @param float $percentage
-     *
-     * @return int
-     */
     private function calculateAdjustmentAmount(int $promotionSubjectTotal, float $percentage): int
     {
         return -1 * (int) round($promotionSubjectTotal * $percentage);

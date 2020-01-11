@@ -17,18 +17,9 @@ use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface PaymentMethodInterface extends BasePaymentMethodInterface, ChannelsAwareInterface
 {
-    /**
-     * @param GatewayConfigInterface|null $gateway
-     */
     public function setGatewayConfig(?GatewayConfigInterface $gateway): void;
 
-    /**
-     * @return GatewayConfigInterface|null
-     */
     public function getGatewayConfig(): ?GatewayConfigInterface;
 }

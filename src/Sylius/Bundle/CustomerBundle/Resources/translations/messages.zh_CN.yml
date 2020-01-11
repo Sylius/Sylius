@@ -8,7 +8,7 @@ sylius:
             group: 分组
             last_name: 姓氏
             email: 电子邮件
-            phone_number: 电话
+            phone_number: 电话号码
             gender: 性别
             birthday: 出生日期
             billing_address: 账单地址

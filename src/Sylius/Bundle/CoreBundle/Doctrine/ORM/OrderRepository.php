@@ -28,9 +28,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     protected $associationHydrator;
 
     /**
@@ -63,11 +61,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
-        return $this->createQueryBuilder('o')
+        return $this->createListQueryBuilder()
             ->andWhere('o.customer = :customerId')
-            ->andWhere('o.state != :state')
             ->setParameter('customerId', $customerId)
-            ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
 
@@ -129,11 +125,16 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon): int
-    {
+    public function countByCustomerAndCoupon(
+        CustomerInterface $customer,
+        PromotionCouponInterface $coupon,
+        bool $includeCancelled = false
+    ): int {
+        $states = [OrderInterface::STATE_CART];
+        if ($coupon->isReusableFromCancelledOrders()) {
+            $states[] = OrderInterface::STATE_CANCELLED;
+        }
+
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->andWhere('o.customer = :customer')
@@ -141,7 +142,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->andWhere('o.state NOT IN (:states)')
             ->setParameter('customer', $customer)
             ->setParameter('coupon', $coupon)
-            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
+            ->setParameter('states', $states)
             ->getQuery()
             ->getSingleScalarResult()
         ;

@@ -28,10 +28,6 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class OrderTaxesProcessorSpec extends ObjectBehavior
 {
     function let(

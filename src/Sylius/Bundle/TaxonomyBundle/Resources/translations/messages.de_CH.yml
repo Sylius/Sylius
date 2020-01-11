@@ -4,6 +4,9 @@
 sylius:
     form:
         taxon:
+            description: Beschreibung
             name: Name
+            parent: Parent
+            slug: Kategorie SEO-URL
         taxonomy:
             name: Name

@@ -20,9 +20,6 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 {
     /**
@@ -192,8 +189,6 @@ EOT;
     }
 
     /**
-     * @param mixed $cartId
-     *
      * @return string
      */
     private function getCheckoutCompleteUrl($cartId)

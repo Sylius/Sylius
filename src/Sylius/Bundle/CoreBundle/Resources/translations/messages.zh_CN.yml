@@ -25,6 +25,12 @@ sylius:
             name: 名称
             roles: 角色
         channel:
+            billing_data:
+                city: 城市
+                company: 公司
+                country: test
+                postcode: 邮编
+                street: 街道
             contact_email: 联系邮件
             currencies: 货币
             currency_base: 基础货币
@@ -64,7 +70,7 @@ sylius:
             short_description: 简短说明：
             variant_selection_method: 变量选择方法
             main_taxon: 主分类
-            channels: 频道
+            channels: 门店
             enabled: 已启用
         product_filter:
             name: 名称
@@ -138,7 +144,7 @@ sylius:
                 taxon: 分类
                 amount: 金额
         payment_method:
-            channels: 频道
+            channels: 门店
         product_attribute:
             position: 优先级
         zone:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: 多字节字符串
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP XML
@@ -174,16 +180,16 @@ sylius:
             header: 文件系统
             cache:
                 header: 缓存
-                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: 存在
             logs:
                 header: 日志
-                help: '设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "设置权限运行： sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: 不存在
             not_writable: 不可写
             parameters:
                 header: parameters.yml
-                help: 设置权限运行： sudo chmod a+w %path%
+                help: "设置权限运行： sudo chmod a+w %path%"
             vendors: 供应商
             writable: 可写
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: 非弃用
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: 注册的全局变量
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: 时区
             timezone_deprecated:
                 header: 过时的时区
-                help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
+                help: 时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。
             version: PHP 版本
             version_recommended: 推荐的 PHP 版本
     payum_gateway:

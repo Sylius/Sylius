@@ -15,13 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 abstract class AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @param OptionsResolver $resolver
-     */
     abstract protected function configureOptions(OptionsResolver $resolver): void;
 }

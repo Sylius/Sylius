@@ -22,9 +22,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository): void

@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Distributor;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class IntegerDistributor implements IntegerDistributorInterface
 {
     /**

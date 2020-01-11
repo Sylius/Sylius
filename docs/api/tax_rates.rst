@@ -62,7 +62,7 @@ To see the details of the tax rate with ``code = clothing_sales_tax_7`` use the 
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/tax-rates/clothing_sales_tax_7 \
+     $ curl http://demo.sylius.com/api/v1/tax-rates/clothing_sales_tax_7 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -130,7 +130,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-rates/ \
+    $ curl http://demo.sylius.com/api/v1/tax-rates/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

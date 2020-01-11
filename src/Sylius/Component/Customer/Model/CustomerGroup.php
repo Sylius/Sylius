@@ -13,30 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class CustomerGroup implements CustomerGroupInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

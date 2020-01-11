@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_locale_model_locale:
 
@@ -29,6 +36,6 @@ Locale has the following properties:
     This model implements the :ref:`component_locale_model_locale-interface`
     For more detailed information go to `Sylius API Locale`_.
 
-.. _Sylius API Locale: http://api.sylius.org/Sylius/Component/Locale/Model/Locale.html
+.. _Sylius API Locale: http://api.sylius.com/Sylius/Component/Locale/Model/Locale.html
 
 .. _Symfony Intl component: http://symfony.com/doc/current/components/intl.html

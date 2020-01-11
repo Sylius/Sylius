@@ -22,9 +22,6 @@ use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
 {
     function let(CartStorageInterface $cartStorage, ChannelContextInterface $channelContext): void

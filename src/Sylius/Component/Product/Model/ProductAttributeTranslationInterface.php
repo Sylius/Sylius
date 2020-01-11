@@ -15,9 +15,6 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface as BaseAttributeTranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ProductAttributeTranslationInterface extends BaseAttributeTranslationInterface
 {
 }

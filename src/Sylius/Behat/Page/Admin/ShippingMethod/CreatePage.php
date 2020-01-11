@@ -19,67 +19,43 @@ use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Formatter\StringInflector;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPosition($position)
+    public function specifyPosition(?int $position): void
     {
         $this->getDocument()->fillField('Position', $position);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameIt($name, $language)
+    public function nameIt(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_shipping_method_translations_%s_name', $language), $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function describeIt($description, $languageCode)
+    public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_shipping_method_translations_%s_description', $languageCode), $description
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyAmountForChannel($channelCode, $amount)
+    public function specifyAmountForChannel(string $channelCode, string $amount): void
     {
         $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseZone($name)
+    public function chooseZone(string $name): void
     {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCalculator($name)
+    public function chooseCalculator(string $name): void
     {
-        $this->getDocument()->selectFieldOption(\Calculator::class, $name);
+        $this->getDocument()->selectFieldOption('Calculator', $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkChannel($channelName)
+    public function checkChannel($channelName): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
@@ -90,10 +66,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField($channelName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForAmount($channelCode)
+    public function getValidationMessageForAmount(string $channelCode): string
     {
         $foundElement = $this->getFieldElement('amount', ['%channelCode%' => $channelCode]);
         if (null === $foundElement) {
@@ -113,10 +86,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
@@ -129,14 +99,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param string $element
-     * @param array $parameters
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement($element, array $parameters = [])
+    private function getFieldElement(string $element, array $parameters = []): ?\Behat\Mink\Element\NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
         while (null !== $element && !$element->hasClass('field')) {

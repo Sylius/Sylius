@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_mailer_model_email:
 
@@ -37,4 +44,4 @@ Email has the following properties:
     This model implements the :ref:`component_mailer_model_email-interface`
     For more detailed information go to `Sylius API Email`_.
 
-.. _Sylius API Email: http://api.sylius.org/Sylius/Component/Mailer/Model/Email.html
+.. _Sylius API Email: http://api.sylius.com/Sylius/Component/Mailer/Model/Email.html

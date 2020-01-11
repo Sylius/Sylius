@@ -6,7 +6,7 @@ In the default scenario, it will return an instance of paginator, with a list of
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index:
         path: /books
@@ -27,7 +27,7 @@ Just like for the **showAction**, you can override the default template and crit
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_inactive:
         path: /books/disabled
@@ -35,6 +35,7 @@ Just like for the **showAction**, you can override the default template and crit
         defaults:
             _controller: app.controller.book:indexAction
             _sylius:
+                filterable: true
                 criteria:
                     enabled: false
                 template: Book/disabled.html.twig
@@ -48,7 +49,7 @@ Except filtering, you can also sort Books.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top:
         path: /books/top
@@ -67,7 +68,7 @@ Using a Custom Repository Method
 --------------------------------
 
 You can define your own repository method too, you can use the same way explained
-in `show_resource  <http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusResourceBundle/show_resource.html#using-custom-repository-methods>`_.
+in `show_resource  <http://docs.sylius.com/en/latest/components_and_bundles/bundles/SyliusResourceBundle/show_resource.html#using-custom-repository-methods>`_.
 
 .. note::
 
@@ -81,7 +82,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top:
         path: /books/top
@@ -104,7 +105,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index_top3:
         path: /books/top
@@ -126,7 +127,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_index:
         path: /{author}/books

@@ -5,23 +5,17 @@ In order to use grids, we need to register your entity as a Sylius resource. Let
 which represents a supplier of goods in your shop and has several fields, including name, description and enabled field.
 
 In order to make it a Sylius resource, you need to configure it under ``sylius_resource`` node.
-If you don’t have it yet create a file ``app/config/resources.yml``, import it in the ``app/config/config.yml``.
+If you don’t have it yet, create a file ``config/packages/sylius_resource.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/resources.yml
+    # config/packages/sylius_resource.yaml
     sylius_resource:
         resources:
             app.supplier:
                 driver: doctrine/orm
                 classes:
-                    model: AppBundle\Entity\Supplier
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "resources.yml" }
+                    model: App\Entity\Supplier
 
 That's it! Your class is now a resource. In order to learn what does it mean, please refer to the :doc:`SyliusResourceBundle </components_and_bundles/bundles/SyliusResourceBundle/index>` documentation.
 
@@ -38,14 +32,14 @@ Now we can configure our first grid:
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         grids:
             app_admin_supplier:
                 driver:
                     name: doctrine/orm
                     options:
-                        class: AppBundle\Entity\Supplier
+                        class: App\Entity\Supplier
                 fields:
                     name:
                         type: string
@@ -56,20 +50,6 @@ Now we can configure our first grid:
                         options:
                             template: SyliusUiBundle:Grid/Field:enabled.html.twig # This will be a checkbox field
 
-Remember to import your grid in the ``app/config/grids/grids.yml`` file which has to be imported in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/grids/grids.yml
-    imports:
-        - { resource: 'admin/supplier.yml' }
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "grids/grids.yml" }
-
 Generating The CRUD Routing
 ---------------------------
 
@@ -77,7 +57,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 
 .. code-block:: yaml
 
-    # app/config/routing/admin/supplier.yml
+    # config/routes.yaml
     app_admin_supplier:
         resource: |
             alias: app.supplier
@@ -92,19 +72,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
                 index:
                     icon: 'file image outline' # choose an icon that will be displayed next to the subheader
         type: sylius.resource
-
-.. code-block:: yaml
-
-    # app/config/routing/admin.yml
-    app_admin_supplier:
-        resource: 'supplier.yml'
-
-.. code-block:: yaml
-
-    # app/config/routing.yml
-    app_admin:
-        resource: 'routing/admin.yml'
-        prefix: /admin
+        prefix: admin
 
 This will generate the following paths:
 
@@ -128,7 +96,7 @@ This will generate the following paths:
 
     .. code-block:: yaml
 
-        # app/Resources/translations/messages.en.yml
+        # translations/messages.en.yaml
         app:
             ui:
                 supplier: Supplier
@@ -172,6 +140,46 @@ How will it look like in the admin panel?
 .. image:: ../../../_images/grid_filters.png
     :align: center
 
+What about filtering by fields of related entities? For instance if you would like to filter your suppliers by their country of origin, which is a property of the associated address entity.
+
+This first requires a :doc:`custom repository method </customization/repository>` for your grid query:
+
+.. code-block:: yaml
+
+    # config/packages/sylius_grid.yaml
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        class: App\Entity\Supplier
+                        repository:
+                            method: mySupplierGridQuery
+
+.. note::
+
+    The repository method has to return a queryBuilder object, since the query has to adjustable depending on the filters and sorting the user later applies.
+    Furthermore, all sub entities you wish to use later for filtering have to be joined explicitely in the query.
+
+Then you can set up your filter to accordingly:
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                    ...
+                filters:
+                    ...
+                    country:
+                        type: string
+                        label: origin
+                        options:
+                            fields: [address.country]
+                        form_options:
+                            type: contains
+
 Default Sorting
 ---------------
 
@@ -179,7 +187,7 @@ You can define by which field you want the grid to be sorted and how.
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         grids:
             app_admin_supplier:
@@ -192,7 +200,7 @@ Then at the fields level, define that the field can be used for sorting:
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         grids:
             app_admin_supplier:
@@ -204,6 +212,26 @@ Then at the fields level, define that the field can be used for sorting:
                         sortable: ~
                     ...
 
+If your field is not of a "simple" type, f.i. a twig template with a specific path, you get sorting working with the following definition:
+
+.. code-block:: yaml
+
+    # config/packages/sylius_grid.yaml
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                ...
+                fields:
+                    ....
+                    origin:
+                        type: twig
+                        options:
+                            template: "@App/Grid/Fields/myCountryFlags.html.twig"
+                        path: address.country
+                        label: app.ui.country
+                        sortable: address.country
+                    ...
+
 Pagination
 ----------
 
@@ -212,7 +240,7 @@ The first element of the array will be treated as the default, so by configuring
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         grids:
             app_admin_supplier:
@@ -239,7 +267,7 @@ Next step is adding some actions to the grid: create, update and delete.
 
 .. code-block:: yaml
 
-    # app/config/grids/admin/supplier.yml
+    # config/packages/sylius_grid.yaml
     sylius_grid:
         grids:
             app_admin_supplier:

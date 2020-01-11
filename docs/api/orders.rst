@@ -82,7 +82,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/orders/21 \
+    $ curl http://demo.sylius.com/api/v1/orders/21 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -367,7 +367,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/orders/21/cancel \
+    $ curl http://demo.sylius.com/api/v1/orders/21/cancel \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -408,7 +408,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/orders/21/shipments/21/ship \
+    $ curl http://demo.sylius.com/api/v1/orders/21/shipments/21/ship \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT
@@ -451,7 +451,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/orders/21/payments/21/complete \
+    $ curl http://demo.sylius.com/api/v1/orders/21/payments/21/complete \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X PUT

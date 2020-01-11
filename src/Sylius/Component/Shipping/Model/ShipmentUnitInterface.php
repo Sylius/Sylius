@@ -16,24 +16,11 @@ namespace Sylius\Component\Shipping\Model;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterface
 {
-    /**
-     * @return ShipmentInterface|null
-     */
     public function getShipment(): ?ShipmentInterface;
 
-    /**
-     * @param ShipmentInterface|null $shipment
-     */
     public function setShipment(?ShipmentInterface $shipment): void;
 
-    /**
-     * @return ShippableInterface|null
-     */
     public function getShippable(): ?ShippableInterface;
 }

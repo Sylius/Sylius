@@ -15,25 +15,18 @@ namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
-    /**
-     * @var Registry
-     */
+    /** @var Registry */
     private $doctrineRegistry;
 
-    /**
-     * @param Registry $doctrineRegistry
-     */
     public function __construct(Registry $doctrineRegistry)
     {
         $this->doctrineRegistry = $doctrineRegistry;
@@ -48,12 +41,10 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
             return [
                 'doctrine:database:create',
                 'doctrine:migrations:migrate' => ['--no-interaction' => true],
-                'cache:clear',
             ];
         }
 
-        return array_merge($this->getRequiredCommands($input, $output, $questionHelper), [
-            'cache:clear',
+        return array_merge($this->setupDatabase($input, $output, $questionHelper), [
             'doctrine:migrations:version' => [
                 '--add' => true,
                 '--all' => true,
@@ -63,8 +54,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @return bool
-     *
      * @throws \Exception
      */
     private function isDatabasePresent(): bool
@@ -89,29 +78,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
-     *
-     * @return array
-     */
-    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
-    {
-        if ($input->getOption('no-interaction')) {
-            $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
-        }
-
-        return $this->setupDatabase($input, $output, $questionHelper);
-    }
-
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
-     *
-     * @return array
-     */
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -144,27 +110,23 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         return [];
     }
 
-    /**
-     * @return bool
-     */
     private function isSchemaPresent(): bool
     {
         return 0 !== count($this->getSchemaManager()->listTableNames());
     }
 
-    /**
-     * @return string
-     */
     private function getDatabaseName(): string
     {
-        return $this->doctrineRegistry->getManager()->getConnection()->getDatabase();
+        return (string) $this->getEntityManager()->getConnection()->getDatabase();
     }
 
-    /**
-     * @return AbstractSchemaManager
-     */
     private function getSchemaManager(): AbstractSchemaManager
     {
-        return $this->doctrineRegistry->getManager()->getConnection()->getSchemaManager();
+        return $this->getEntityManager()->getConnection()->getSchemaManager();
+    }
+
+    private function getEntityManager(): EntityManagerInterface
+    {
+        return $this->doctrineRegistry->getManager();
     }
 }

@@ -11,15 +11,18 @@ sylius:
             last_name: Perekonnanimi
             phone_number: Telefoni number
             postcode: Pistiindeks
+            street: Tänav
             province: Provints
+            zone: Piirkond
         country:
             add_province: Lisa provints
             name: Nimi
             provinces: Provintsid
             select: Vali
-            enabled: Luba
+            enabled: Lubatud
         province:
             name: Nimi
+            abbreviation: Lühend
             select: Vali
         zone:
             add_member: Lisa liige
@@ -29,7 +32,11 @@ sylius:
             types:
                 country: Riik
                 province: Provints
-                zone: Tsoon
+                zone: Piirkond
+            scope: Ulatus
+            scopes:
+                all: Kõik
             select: Vali
+            select_scope: Valige
         zone_member:
             select: Vali

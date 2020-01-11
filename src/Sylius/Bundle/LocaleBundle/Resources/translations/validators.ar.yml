@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: الرجاء إدخال رمز المنطقة.
+            regex: يجب أن يتكون رمز المنطقة من الأحرف اللاتينية والأرقام والشرطات '-' والشرطات السفلية '_' فقط.
+            unique: رمز المنطقة المدخل مستخدم مسبقًا، الرجاء إدخال رمز منطقة مميز.

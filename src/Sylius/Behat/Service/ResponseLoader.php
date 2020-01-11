@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class ResponseLoader implements ResponseLoaderInterface
 {
     /**
@@ -68,9 +65,8 @@ class ResponseLoader implements ResponseLoaderInterface
     private function getCalledClassFolder()
     {
         $calledClass = get_called_class();
-        $calledClassFolder = dirname((new \ReflectionClass($calledClass))->getFileName());
 
-        return $calledClassFolder;
+        return \dirname((new \ReflectionClass($calledClass))->getFileName());
     }
 
     /**
@@ -87,7 +83,6 @@ class ResponseLoader implements ResponseLoaderInterface
 
     /**
      * @param string $source
-     * @param mixed $content
      *
      * @throws \RuntimeException
      */
@@ -100,7 +95,6 @@ class ResponseLoader implements ResponseLoaderInterface
 
     /**
      * @param string $source
-     * @param mixed $content
      *
      * @throws \RuntimeException
      */

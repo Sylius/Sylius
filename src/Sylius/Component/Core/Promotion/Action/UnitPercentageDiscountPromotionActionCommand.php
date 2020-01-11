@@ -21,34 +21,19 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     public const TYPE = 'unit_percentage_discount';
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $priceRangeFilter;
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $taxonFilter;
 
-    /**
-     * @var FilterInterface
-     */
+    /** @var FilterInterface */
     private $productFilter;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param FilterInterface $priceRangeFilter
-     * @param FilterInterface $taxonFilter
-     * @param FilterInterface $productFilter
-     */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -95,11 +80,6 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         return true;
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @param int $promotionAmount
-     * @param PromotionInterface $promotion
-     */
     private function setUnitsAdjustments(
         OrderItemInterface $item,
         int $promotionAmount,

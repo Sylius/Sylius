@@ -20,14 +20,11 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @author Stefan Doorn <stefan@efectos.nl>
- */
 final class PaymentDescriptionProviderSpec extends ObjectBehavior
 {
     function let(TranslatorInterface $translator): void
     {
-        $translator->transChoice('sylius.payum_action.payment.description', 2, [
+        $translator->trans('sylius.payum_action.payment.description', [
             '%items%' => 2,
             '%total%' => 100.00,
         ])->willReturn('Payment contains 2 items for a total of 100');
@@ -38,8 +35,9 @@ final class PaymentDescriptionProviderSpec extends ObjectBehavior
     function it_should_generate_a_description_string(PaymentInterface $payment, OrderInterface $order): void
     {
         $order->getItems()->willReturn(new ArrayCollection([new OrderItem(), new OrderItem()]));
-        $order->getTotal()->willReturn(10000);
+
         $payment->getOrder()->willReturn($order);
+        $payment->getAmount()->willReturn(10000);
 
         $this->getPaymentDescription($payment)->shouldReturn('Payment contains 2 items for a total of 100');
     }

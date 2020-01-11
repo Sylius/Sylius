@@ -22,19 +22,11 @@ use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
@@ -99,12 +91,6 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
     }
 
-    /**
-     * @param string $type
-     * @param array $configuration
-     *
-     * @return PromotionRuleInterface
-     */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
         /** @var PromotionRuleInterface $rule */

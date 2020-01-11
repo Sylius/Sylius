@@ -19,37 +19,20 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class PaypalContext implements Context
 {
-    /**
-     * @var PaypalExpressCheckoutPageInterface
-     */
+    /** @var PaypalExpressCheckoutPageInterface */
     private $paypalExpressCheckoutPage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $orderDetails;
 
-    /**
-     * @var CompletePageInterface
-     */
+    /** @var CompletePageInterface */
     private $summaryPage;
 
-    /**
-     * @var PaypalApiMocker
-     */
+    /** @var PaypalApiMocker */
     private $paypalApiMocker;
 
-    /**
-     * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ShowPageInterface $orderDetails
-     * @param CompletePageInterface $summaryPage
-     * @param PaypalApiMocker $paypalApiMocker
-     */
     public function __construct(
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,
@@ -70,6 +53,16 @@ final class PaypalContext implements Context
     {
         $this->paypalApiMocker->performActionInApiInitializeScope(function () {
             $this->summaryPage->confirmOrder();
+        });
+    }
+
+    /**
+     * @When I sign in to PayPal and authorize successfully
+     */
+    public function iSignInToPaypalAndAuthorizeSuccessfully()
+    {
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+            $this->paypalExpressCheckoutPage->authorize();
         });
     }
 
@@ -133,6 +126,6 @@ final class PaypalContext implements Context
             }
         }
 
-        throw new \RuntimeException(sprintf('There is no notificaiton with "%s". Got "%s"', $expectedNotification, $hasNotifications));
+        throw new \RuntimeException(sprintf('There is no notification with "%s". Got "%s"', $expectedNotification, $hasNotifications));
     }
 }

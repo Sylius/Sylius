@@ -38,6 +38,5 @@ sylius:
             min: Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
             max: Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
             not_blank: Prosím, zadajte dĺžku kódu kupónu.
-        possible_generation_amount: Neplatná dĺžka kódu kupónov, alebo suma kupónov. Nie je možné vygenerovať %expectedAmount% unikátnych kupónov a dĺžkou kódu rovnou %codeLength%. Je možné vygenerovať sumu %possibleAmount%.
         usage_limit:
             min: Limit využitia vygenerovaných kupónov musí byť najmenej {{ limit }}.

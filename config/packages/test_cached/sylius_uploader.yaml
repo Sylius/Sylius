@@ -1,0 +1,2 @@
+imports:
+    - { resource: "../test/sylius_uploader.yaml" }

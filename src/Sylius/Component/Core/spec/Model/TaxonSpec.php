@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class TaxonSpec extends ObjectBehavior
 {
     function it_is_a_taxon(): void

@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class TaxCategoryContext implements Context
 {
-    /**
-     * @var TaxCategoryRepositoryInterface
-     */
+    /** @var TaxCategoryRepositoryInterface */
     private $taxCategoryRepository;
 
-    /**
-     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     */
     public function __construct(TaxCategoryRepositoryInterface $taxCategoryRepository)
     {
         $this->taxCategoryRepository = $taxCategoryRepository;

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'Rezension wurde erfolgreich angenommen.'
+        reject: 'Rezension wurde erfolgreich abgewiesen.'
+        wait_for_the_acceptation: 'Ihre Rezension wartet auf die Annahme.'

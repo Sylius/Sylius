@@ -6,13 +6,13 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/application.
 print_header "Activating memcached extension" "Sylius"
 run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini" || exit $?
 
-print_header "Installing Yarn" "Sylius"
+print_header "Updating Composer" "Sylius"
+run_command "composer self-update --preview"
 
-# Install Node Version Manager to install newer node version
-run_command "rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout \`git describe --abbrev=0 --tags\`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION" || exit $?
-
-# Install Yarn globally
-run_command "sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg"
-run_command "echo \"deb http://dl.yarnpkg.com/debian/ stable main\" | sudo tee /etc/apt/sources.list.d/yarn.list"
-run_command "sudo apt-get update -qq"
-run_command "sudo apt-get install -y -qq yarn=0.21.3-1"
+# Download and configure Symfony webserver
+print_header "Downloading Symfony CLI" "Sylius"
+if [ ! -f $SYLIUS_CACHE_DIR/symfony ]; then
+    run_command "wget https://get.symfony.com/cli/installer -O - | bash"
+    run_command "mv ~/.symfony/bin/symfony $SYLIUS_CACHE_DIR"
+fi
+run_command "$SYLIUS_CACHE_DIR/symfony version"

@@ -17,14 +17,9 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface SecurityServiceInterface
 {
     /**
-     * @param UserInterface $user
-     *
      * @throws \InvalidArgumentException
      */
     public function logIn(UserInterface $user);
@@ -38,8 +33,5 @@ interface SecurityServiceInterface
      */
     public function getCurrentToken();
 
-    /**
-     * @param TokenInterface $token
-     */
     public function restoreToken(TokenInterface $token);
 }

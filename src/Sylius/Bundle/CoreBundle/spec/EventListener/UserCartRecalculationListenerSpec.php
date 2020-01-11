@@ -21,9 +21,6 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
     function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor): void

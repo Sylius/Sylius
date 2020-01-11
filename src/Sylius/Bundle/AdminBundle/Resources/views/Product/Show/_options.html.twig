@@ -1,0 +1,12 @@
+<div id="options">
+    <h4 class="ui top attached large header">{{ 'sylius.ui.options'|trans }}</h4>
+    <div class="ui attached segment">
+        <div>
+            <ul class="ui bulleted list">
+                {% for option in product.options %}
+                    <li>{{ option }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

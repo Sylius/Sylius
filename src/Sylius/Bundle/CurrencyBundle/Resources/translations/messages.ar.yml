@@ -4,5 +4,11 @@
 sylius:
     form:
         currency:
+            base: العملة الأساسية
             code: الاسم
+            enabled: تفعيل
             exchange_rate: سعر الصرف
+        exchange_rate:
+            source_currency: عملة الموقع
+            target_currency: العملة الأساسية
+            ratio: النسبة

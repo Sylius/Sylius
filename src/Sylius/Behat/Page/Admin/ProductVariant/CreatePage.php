@@ -16,45 +16,27 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPrice($price, $channelName)
+    public function specifyPrice(string $price, string $channelName): void
     {
         $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyOriginalPrice($originalPrice, $channelName)
+    public function specifyOriginalPrice(string $originalPrice, string $channelName): void
     {
         $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyCurrentStock($currentStock)
+    public function specifyCurrentStock(string $currentStock): void
     {
         $this->getDocument()->fillField('Current stock', $currentStock);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight)
+    public function specifyHeightWidthDepthAndWeight(string $height, string $width, string $depth, string $weight): void
     {
         $this->getDocument()->fillField('Height', $height);
         $this->getDocument()->fillField('Width', $width);
@@ -62,52 +44,25 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Weight', $weight);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_variant_translations_%s_name', $language), $name
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectOption($optionName, $optionValue)
+    public function selectOption(string $optionName, string $optionValue): void
     {
         $optionName = strtoupper($optionName);
         $this->getElement('option_select', ['%option-name%' => $optionName])->selectOption($optionValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function choosePricingCalculator($name)
+    public function choosePricingCalculator(string $name): void
     {
         $this->getElement('price_calculator')->selectOption($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency)
-    {
-        $calculatorElement = $this->getElement('calculator');
-        $calculatorElement
-            ->waitFor(5, function () use ($channel, $currency) {
-                return $this->getElement('calculator')->hasField(sprintf('%s %s', $channel->getName(), $currency->getCode()));
-            })
-        ;
-
-        $calculatorElement->fillField(sprintf('%s %s', $channel->getName(), $currency->getCode()), $price);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForForm()
+    public function getValidationMessageForForm(): string
     {
         $formElement = $this->getDocument()->find('css', 'form[name="sylius_product_variant"]');
         if (null === $formElement) {
@@ -122,26 +77,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectShippingCategory($shippingCategoryName)
+    public function selectShippingCategory(string $shippingCategoryName): void
     {
         $this->getElement('shipping_category')->selectOption($shippingCategoryName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricesValidationMessage()
+    public function getPricesValidationMessage(): string
     {
         return $this->getElement('prices_validation_message')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingRequired($isShippingRequired)
+    public function setShippingRequired(bool $isShippingRequired): void
     {
         if ($isShippingRequired) {
             $this->getElement('shipping_required')->check();
@@ -152,13 +98,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getElement('shipping_required')->uncheck();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'calculator' => '#sylius_calculator_container',
             'code' => '#sylius_product_variant_code',
             'depth' => '#sylius_product_variant_depth',
             'form' => 'form[name="sylius_product_variant"]',

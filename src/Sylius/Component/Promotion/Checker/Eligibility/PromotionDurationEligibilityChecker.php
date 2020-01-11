@@ -16,9 +16,6 @@ namespace Sylius\Component\Promotion\Checker\Eligibility;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionDurationEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**

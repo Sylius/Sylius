@@ -16,22 +16,9 @@ namespace Sylius\Component\Addressing\Factory;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface ZoneFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param string $type
-     *
-     * @return ZoneInterface
-     */
     public function createTyped(string $type): ZoneInterface;
 
-    /**
-     * @param array $membersCodes
-     *
-     * @return ZoneInterface
-     */
     public function createWithMembers(array $membersCodes): ZoneInterface;
 }

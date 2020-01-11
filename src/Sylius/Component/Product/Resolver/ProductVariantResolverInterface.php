@@ -16,15 +16,7 @@ namespace Sylius\Component\Product\Resolver;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface ProductVariantResolverInterface
 {
-    /**
-     * @param ProductInterface $subject
-     *
-     * @return ProductVariantInterface|null
-     */
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface;
 }

@@ -19,27 +19,16 @@ use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.customer.show';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $eventDispatcher
@@ -48,11 +37,6 @@ final class CustomerShowMenuBuilder
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -72,9 +56,6 @@ final class CustomerShowMenuBuilder
         return $menu;
     }
 
-    /**
-     * @param ItemInterface $menu
-     */
     private function addChildren(ItemInterface $menu, CustomerInterface $customer): void
     {
         if (null !== $customer->getUser()) {
@@ -104,7 +85,7 @@ final class CustomerShowMenuBuilder
                     'routeParameters' => ['id' => $customer->getUser()->getId()],
                 ])
                 ->setAttribute('type', 'delete')
-                ->setAttribute('resource_id', $customer->getId())
+                ->setAttribute('resource_id', $customer->getUser()->getId())
                 ->setLabel('sylius.ui.delete')
             ;
 

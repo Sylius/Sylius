@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sylius\Component\Core\Model\ShopBillingData" table="sylius_shop_billing_data">
+        <id name="id" column="id" type="integer">
+            <generator/>
+        </id>
+
+        <field name="company" nullable="true" />
+        <field name="taxId" column="tax_id" nullable="true" />
+        <field name="countryCode" column="country_code" nullable="true" />
+        <field name="street" nullable="true" />
+        <field name="city" nullable="true" />
+        <field name="postcode" nullable="true" />
+    </entity>
+</doctrine-mapping>

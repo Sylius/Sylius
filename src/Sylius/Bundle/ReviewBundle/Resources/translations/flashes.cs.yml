@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        accept: 'Recenze byla schválena.'
+        reject: 'Recenze byla zamítnuta.'
+        wait_for_the_acceptation: 'Recenze byla odeslána ke schválení.'

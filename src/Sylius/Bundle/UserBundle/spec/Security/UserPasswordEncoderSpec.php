@@ -19,9 +19,6 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserPasswordEncoderSpec extends ObjectBehavior
 {
     function let(EncoderFactoryInterface $encoderFactory): void
@@ -41,7 +38,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');
-        $encoderFactory->getEncoder(get_class($user->getWrappedObject()))->willReturn($passwordEncoder);
+        $encoderFactory->getEncoder($user->getWrappedObject())->willReturn($passwordEncoder);
         $passwordEncoder->encodePassword('topSecretPlainPassword', 'typicalSalt')->willReturn('topSecretEncodedPassword');
 
         $this->encode($user)->shouldReturn('topSecretEncodedPassword');

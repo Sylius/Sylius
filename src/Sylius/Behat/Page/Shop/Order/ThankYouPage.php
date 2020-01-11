@@ -13,20 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function goToOrderDetails()
+    public function goToTheChangePaymentMethodPage(): void
     {
-        $this->getElement('order_details')->click();
+        $this->getElement('payment_method_page')->click();
+    }
+
+    public function goToOrderDetailsInAccount(): void
+    {
+        $this->getElement('order_details_in_account')->click();
     }
 
     /**
@@ -60,25 +61,30 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
      */
     public function hasChangePaymentMethodButton()
     {
-        return null !== $this->getDocument()->find('css', '#sylius-show-order');
+        return null !== $this->getDocument()->find('css', '#payment-method-page');
     }
 
-    /**
-     * @return string
-     */
-    public function getRouteName()
+    public function hasRegistrationButton(): bool
+    {
+        return $this->getDocument()->hasLink('Create an account');
+    }
+
+    public function createAccount(): void
+    {
+        $this->getDocument()->clickLink('Create an account');
+    }
+
+    public function getRouteName(): string
     {
         return 'sylius_shop_thank_you';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'order_details' => '#sylius-show-order',
             'instructions' => '#sylius-payment-method-instructions',
+            'order_details_in_account' => '#sylius-show-order-in-account',
+            'payment_method_page' => '#payment-method-page',
             'thank_you' => '#sylius-thank-you',
         ]);
     }

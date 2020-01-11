@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ImagesUploadListenerSpec extends ObjectBehavior
 {
     function let(ImageUploaderInterface $uploader): void

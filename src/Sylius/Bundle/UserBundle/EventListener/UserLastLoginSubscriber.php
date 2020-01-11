@@ -16,26 +16,19 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $userClass;
 
-    /**
-     * @param ObjectManager $userManager
-     * @param string $userClass
-     */
     public function __construct(ObjectManager $userManager, string $userClass)
     {
         $this->userManager = $userManager;
@@ -53,29 +46,24 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param InteractiveLoginEvent $event
-     */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $this->updateUserLastLogin($event->getAuthenticationToken()->getUser());
     }
 
-    /**
-     * @param UserEvent $event
-     */
     public function onImplicitLogin(UserEvent $event)
     {
         $this->updateUserLastLogin($event->getUser());
     }
 
-    /**
-     * @param object $user
-     */
     private function updateUserLastLogin($user): void
     {
         if (!$user instanceof $this->userClass) {
             return;
+        }
+
+        if (!$user instanceof UserInterface) {
+            throw new \UnexpectedValueException('In order to use this subscriber, your class has to implement UserInterface');
         }
 
         $user->setLastLogin(new \DateTime());

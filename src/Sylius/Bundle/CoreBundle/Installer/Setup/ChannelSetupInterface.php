@@ -16,14 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ChannelSetupInterface
 {
-    /**
-     * @param LocaleInterface $locale
-     * @param CurrencyInterface $currency
-     */
     public function setup(LocaleInterface $locale, CurrencyInterface $currency): void;
 }

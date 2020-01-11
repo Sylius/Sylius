@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
+
     - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
@@ -9,10 +11,11 @@ imports:
 sylius_grid:
     templates:
         action:
-            show: "@SyliusUi/Grid/Action/show.html.twig"
-            pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+            pay: "@SyliusShop/Account/Order/Grid/Action/_pay_deprecated.html.twig"
+            shop_show: "@SyliusShop/Grid/Action/show.html.twig"
+            shop_pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
         filter:
-            string: "@SyliusUi/Grid/Filter/string.html.twig"
+            shop_string: "@SyliusShop/Grid/Filter/string.html.twig"
 
 sylius_shop:
     checkout_resolver:
@@ -51,3 +54,32 @@ liip_imagine:
 
 sonata_block:
     default_contexts: ~
+
+sylius_ui:
+    events:
+        sylius.shop.layout.topbar:
+            blocks:
+                before_switchers_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 35
+                    context:
+                        event: sylius.shop.layout.before_currency_switcher
+                currency_switcher:
+                    template: "@SyliusShop/Block/Layout/_currencySwitcher.html.twig"
+                    priority: 30
+                locale_switcher:
+                    template: "@SyliusShop/Block/Layout/_localeSwitcher.html.twig"
+                    priority: 20
+                before_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: sylius.shop.layout.before_security_widget
+                security_widget:
+                    template: "@SyliusShop/Block/Layout/_securityWidget.html.twig"
+                    priority: 10
+                after_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.after_security_widget

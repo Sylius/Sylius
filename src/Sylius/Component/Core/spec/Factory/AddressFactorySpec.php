@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class AddressFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $decoratedFactory): void

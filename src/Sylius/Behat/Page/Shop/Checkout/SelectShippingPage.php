@@ -14,26 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_checkout_select_shipping';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectShippingMethod($shippingMethod)
+    public function selectShippingMethod(string $shippingMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
@@ -45,12 +37,9 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         $shippingMethodOptionElement->selectOption($shippingMethodOptionElement->getAttribute('value'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingMethods()
+    public function getShippingMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
 
         $shippingMethods = [];
         foreach ($inputs as $input) {
@@ -60,10 +49,21 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return $shippingMethods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoShippingMethodsMessage()
+    public function getSelectedShippingMethodName(): ?string
+    {
+        $shippingMethods = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-item]');
+
+        /** @var NodeElement $shippingMethod */
+        foreach ($shippingMethods as $shippingMethod) {
+            if (null !== $shippingMethod->find('css', 'input:checked')) {
+                return $shippingMethod->find('css', '[data-test-shipping-method-label]')->getText();
+            }
+        }
+
+        return null;
+    }
+
+    public function hasNoShippingMethodsMessage(): bool
     {
         try {
             $this->getElement('order_cannot_be_shipped_message');
@@ -74,91 +74,70 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethodFee($shippingMethodName, $fee)
+    public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool
     {
         $feeElement = $this->getElement('shipping_method_fee', ['%shipping_method%' => $shippingMethodName])->getText();
 
         return false !== strpos($feeElement, $fee);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('[data-test-item-subtotal="%s"]', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getDocument()->clickLink('Change address');
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
         $this->getElement('address')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPurchaserEmail()
+    public function getPurchaserEmail(): string
     {
-        return $this->getElement('purchaser-email')->getText();
+        return $this->getElement('purchaser_email')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForShipment()
+    public function getValidationMessageForShipment(): string
     {
         $foundElement = $this->getElement('shipment');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Items element');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $validationMessage->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoAvailableShippingMethodsWarning()
+    public function hasNoAvailableShippingMethodsWarning(): bool
     {
         return $this->hasElement('warning_no_shipping_methods');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isNextStepButtonUnavailable()
+    public function isNextStepButtonUnavailable(): bool
     {
         return $this->getElement('next_step')->hasClass('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod($shippingMethodName)
+    public function hasShippingMethod(string $shippingMethodName): bool
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-shipping-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-shipping-method-label]');
 
         $shippingMethods = [];
         foreach ($inputs as $input) {
@@ -168,23 +147,20 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return in_array($shippingMethodName, $shippingMethods);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'address' => '.steps a:contains("Address")',
-            'checkout_subtotal' => '#sylius-checkout-subtotal',
-            'next_step' => '#next-step',
-            'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
-            'purchaser-email' => '#purchaser-email',
-            'shipment' => '.items',
-            'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
-            'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
-            'shipping_method_select' => '.item:contains("%shipping_method%") > .field > .ui.radio.checkbox',
+            'address' => '[data-test-step-address]',
+            'checkout_subtotal' => '[data-test-checkout-subtotal]',
+            'next_step' => '[data-test-next-step]',
+            'order_cannot_be_shipped_message' => '[data-test-order-cannot-be-shipped]',
+            'purchaser_email' => '[data-test-purchaser-name-or-email]',
+            'shipment' => '[data-test-shipments]',
+            'shipping_method' => '[data-test-shipping-method-select]',
+            'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
+            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
-            'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped',
+            'warning_no_shipping_methods' => '[data-test-order-cannot-be-shipped]',
         ]);
     }
 }

@@ -22,17 +22,14 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
+use Webmozart\Assert\Assert;
 
 final class UpdatePaymentStateExtension implements ExtensionInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
@@ -71,19 +68,24 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
             }
         }
 
-        /** @var Generic $request */
         $request = $context->getRequest();
-        if (false === $request instanceof Generic) {
+
+        if (!$request instanceof Generic) {
             return;
         }
 
-        if (false === $request instanceof GetStatusInterface && false === $request instanceof Notify) {
+        if (!$request instanceof GetStatusInterface && !$request instanceof Notify) {
             return;
         }
+
+        $payment = $request->getFirstModel();
 
         /** @var PaymentInterface $payment */
-        $payment = $request->getFirstModel();
-        if (false === $payment instanceof PaymentInterface) {
+        if (!$payment instanceof PaymentInterface) {
+            return;
+        }
+
+        if (null !== $context->getException()) {
             return;
         }
 
@@ -94,13 +96,12 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
         }
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param string $nextState
-     */
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
+
+        /** @var StateMachineInterface $stateMachine */
+        Assert::isInstanceOf($stateMachine, StateMachineInterface::class);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);

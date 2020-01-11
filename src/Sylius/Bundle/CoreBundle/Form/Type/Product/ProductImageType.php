@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductImageType extends ImageType
 {
     /**
@@ -47,6 +44,9 @@ final class ProductImageType extends ImageType
         }
     }
 
+    /**
+     * @psalm-suppress MissingPropertyType
+     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);

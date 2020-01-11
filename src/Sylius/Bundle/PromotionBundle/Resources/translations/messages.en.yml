@@ -20,7 +20,7 @@ sylius:
             item_percentage_discount: Item percentage discount
             order_fixed_discount: Order fixed discount
             order_percentage_discount: Order percentage discount
-            shipping_percentage_discount: Shipping percentage discount        
+            shipping_percentage_discount: Shipping percentage discount
             fixed_discount_configuration:
                 amount: Amount
             percentage_discount_configuration:
@@ -33,6 +33,8 @@ sylius:
             amount: Amount
             code_length: Code length
             expires_at: Expires at
+            prefix: Prefix
+            suffix: Suffix
             usage_limit: Usage limit
         promotion_filter:
             price_range: Price range filter
@@ -44,8 +46,8 @@ sylius:
             item_total: Item total
             nth_order: Nth order
             shipping_country: Shipping country
-            taxonomy: Taxonomy         
-            total_price_of_items_from_taxon: Total price of items from taxon        
+            taxonomy: Taxonomy
+            total_price_of_items_from_taxon: Total price of items from taxon
             cart_quantity_configuration:
                 count: Count
                 equal: Equal

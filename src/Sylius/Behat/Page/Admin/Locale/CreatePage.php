@@ -17,17 +17,11 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isOptionAvailable($name)
+    public function isOptionAvailable(string $name): bool
     {
         try {
             $this->chooseName($name);

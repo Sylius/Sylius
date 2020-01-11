@@ -19,9 +19,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class PromoteUserCommand extends AbstractRoleCommand
 {
     /**
@@ -52,21 +49,25 @@ EOT
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void
     {
         $error = false;
+        $successMessages = [];
 
         foreach ($securityRoles as $securityRole) {
             if ($user->hasRole($securityRole)) {
-                $output->writeln(sprintf('<error>User "%s" did already have "%s" security role.</error>', (string) $user, $securityRole));
+                $output->writeln(sprintf('<error>User "%s" already has "%s" security role.</error>', $user->getEmail(), $securityRole));
                 $error = true;
 
                 continue;
             }
 
             $user->addRole($securityRole);
-            $output->writeln(sprintf('Security role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string) $user));
+            $successMessages[] = sprintf('Security role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, $user->getEmail());
         }
 
         if (!$error) {
+            $output->writeln($successMessages);
             $this->getEntityManager($input->getOption('user-type'))->flush();
+        } else {
+            $output->writeln(sprintf('<error>No roles added to User "%s".</error>', $user->getEmail()));
         }
     }
 }

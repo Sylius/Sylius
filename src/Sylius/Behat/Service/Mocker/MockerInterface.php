@@ -15,9 +15,6 @@ namespace Sylius\Behat\Service\Mocker;
 
 use Mockery\MockInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface MockerInterface
 {
     /**

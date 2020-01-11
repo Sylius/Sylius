@@ -9,5 +9,6 @@ sylius:
         tax_rate:
             category: Kategória
             name: Név
+            amount: Összeg
             included_in_price: Az ár tartalmazza?
             calculator: Számológép

@@ -13,18 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Model;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface CustomerAwareInterface
 {
-    /**
-     * @return CustomerInterface|null
-     */
     public function getCustomer(): ?CustomerInterface;
 
-    /**
-     * @param CustomerInterface|null $customer
-     */
     public function setCustomer(?CustomerInterface $customer): void;
 }

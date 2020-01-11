@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<psalm
+    totallyTyped="false"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <file name="src/Sylius/Bundle/CoreBundle/Application/Kernel.php" />
+
+            <directory name="src/Sylius/Behat" />
+
+            <directory name="src/Sylius/Bundle/AddressingBundle/spec" />
+            <directory name="src/Sylius/Bundle/AddressingBundle/test" />
+            <directory name="src/Sylius/Bundle/AddressingBundle/Tests" />
+            <directory name="src/Sylius/Bundle/AdminApiBundle/spec" />
+            <directory name="src/Sylius/Bundle/AdminApiBundle/Tests" />
+            <directory name="src/Sylius/Bundle/AdminBundle/spec" />
+            <directory name="src/Sylius/Bundle/AdminBundle/Tests" />
+            <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
+            <directory name="src/Sylius/Bundle/AttributeBundle/test" />
+            <directory name="src/Sylius/Bundle/ChannelBundle/spec" />
+            <directory name="src/Sylius/Bundle/ChannelBundle/test" />
+            <directory name="src/Sylius/Bundle/CoreBundle/spec" />
+            <directory name="src/Sylius/Bundle/CoreBundle/Tests" />
+            <directory name="src/Sylius/Bundle/CurrencyBundle/spec" />
+            <directory name="src/Sylius/Bundle/CurrencyBundle/test" />
+            <directory name="src/Sylius/Bundle/CustomerBundle/test" />
+            <directory name="src/Sylius/Bundle/InventoryBundle/spec" />
+            <directory name="src/Sylius/Bundle/InventoryBundle/test" />
+            <directory name="src/Sylius/Bundle/LocaleBundle/spec" />
+            <directory name="src/Sylius/Bundle/LocaleBundle/test" />
+            <directory name="src/Sylius/Bundle/MoneyBundle/spec" />
+            <directory name="src/Sylius/Bundle/MoneyBundle/test" />
+            <directory name="src/Sylius/Bundle/OrderBundle/spec" />
+            <directory name="src/Sylius/Bundle/OrderBundle/test" />
+            <directory name="src/Sylius/Bundle/PaymentBundle/test" />
+            <directory name="src/Sylius/Bundle/PayumBundle/spec" />
+            <directory name="src/Sylius/Bundle/ProductBundle/spec" />
+            <directory name="src/Sylius/Bundle/ProductBundle/test" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/spec" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/test" />
+            <directory name="src/Sylius/Bundle/PromotionBundle/Tests" />
+            <directory name="src/Sylius/Bundle/ReviewBundle/spec" />
+            <directory name="src/Sylius/Bundle/ShippingBundle/test" />
+            <directory name="src/Sylius/Bundle/ShopBundle/spec" />
+            <directory name="src/Sylius/Bundle/TaxationBundle/spec" />
+            <directory name="src/Sylius/Bundle/TaxationBundle/test" />
+            <directory name="src/Sylius/Bundle/TaxonomyBundle/Tests" />
+            <directory name="src/Sylius/Bundle/UiBundle/spec" />
+            <directory name="src/Sylius/Bundle/UiBundle/Tests" />
+            <directory name="src/Sylius/Bundle/UserBundle/spec" />
+            <directory name="src/Sylius/Bundle/UserBundle/Tests" />
+
+            <directory name="src/Sylius/Component/Addressing/spec" />
+            <directory name="src/Sylius/Component/Attribute/spec" />
+            <directory name="src/Sylius/Component/Channel/spec" />
+            <directory name="src/Sylius/Component/Core/spec" />
+            <directory name="src/Sylius/Component/Currency/spec" />
+            <directory name="src/Sylius/Component/Inventory/spec" />
+            <directory name="src/Sylius/Component/Locale/spec" />
+            <directory name="src/Sylius/Component/Order/spec" />
+            <directory name="src/Sylius/Component/Payment/spec" />
+            <directory name="src/Sylius/Component/Product/spec" />
+            <directory name="src/Sylius/Component/Promotion/spec" />
+            <directory name="src/Sylius/Component/Review/spec" />
+            <directory name="src/Sylius/Component/Shipping/spec" />
+            <directory name="src/Sylius/Component/Taxation/spec" />
+            <directory name="src/Sylius/Component/Taxonomy/spec" />
+            <directory name="src/Sylius/Component/User/spec" />
+
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+
+        <DeprecatedClass>
+            <errorLevel type="info">
+                <referencedClass name="Doctrine\Common\Persistence\ManagerRegistry" />
+                <referencedClass name="Doctrine\Common\Persistence\Mapping\ClassMetadata" />
+                <referencedClass name="Doctrine\Common\Persistence\ObjectManager" />
+                <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
+                <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
+                <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
+                <referencedClass name="Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand" />
+                <referencedClass name="Symfony\Bundle\FrameworkBundle\Controller\Controller" />
+                <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" />
+                <referencedClass name="Symfony\Component\Intl\ResourceBundle\CurrencyBundleInterface" />
+                <referencedClass name="Symfony\Component\Intl\ResourceBundle\LanguageBundleInterface" />
+                <referencedClass name="Symfony\Component\Intl\ResourceBundle\LocaleBundleInterface" />
+                <referencedClass name="Symfony\Component\Intl\ResourceBundle\RegionBundleInterface" />
+                <referencedClass name="Symfony\Component\Security\Core\Role\Role" />
+                <referencedClass name="Symfony\Component\Translation\TranslatorInterface" />
+                <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
+            </errorLevel>
+        </DeprecatedClass>
+        <DeprecatedInterface>
+            <errorLevel type="info">
+                <referencedClass name="Doctrine\Common\Persistence\ObjectManager" />
+                <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
+                <referencedClass name="Symfony\Component\Security\Core\User\AdvancedUserInterface" />
+            </errorLevel>
+        </DeprecatedInterface>
+        <DeprecatedMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
+                <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Kernel::getRootDir" />
+                <referencedMethod name="Symfony\Component\Intl\Intl::getCurrencyBundle" />
+                <referencedMethod name="Symfony\Component\Intl\Intl::getLanguageBundle" />
+                <referencedMethod name="Symfony\Component\Intl\Intl::getLocaleBundle" />
+                <referencedMethod name="Symfony\Component\Intl\Intl::getRegionBundle" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent::getException" />
+            </errorLevel>
+        </DeprecatedMethod>
+
+        <InternalMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
+            </errorLevel>
+        </InternalMethod>
+
+        <MissingReturnType errorLevel="info" />
+
+        <PropertyNotSetInConstructor errorLevel="info" />
+        <MissingConstructor>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/CoreBundle/Application/SyliusPluginTrait.php" />
+            </errorLevel>
+        </MissingConstructor>
+        <MissingParamType errorLevel="info" />
+
+        <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
+
+        <MoreSpecificReturnType errorLevel="info" />
+        <LessSpecificReturnStatement errorLevel="info" />
+        <TypeCoercion errorLevel="info" />
+
+        <PossiblyInvalidArgument errorLevel="info" />
+        <PossiblyInvalidArrayAccess errorLevel="info" />
+        <PossiblyInvalidArrayAssignment errorLevel="info" />
+        <PossiblyInvalidArrayOffset errorLevel="info" />
+        <PossiblyInvalidCast errorLevel="info" />
+        <PossiblyInvalidFunctionCall errorLevel="info" />
+        <PossiblyInvalidIterator errorLevel="info" />
+        <PossiblyInvalidMethodCall errorLevel="info" />
+        <PossiblyInvalidOperand errorLevel="info" />
+        <PossiblyInvalidPropertyAssignment errorLevel="info" />
+        <PossiblyInvalidPropertyAssignmentValue errorLevel="info" />
+        <PossiblyInvalidPropertyFetch errorLevel="info" />
+        <PossiblyNullArgument errorLevel="info" />
+        <PossiblyNullArrayAccess errorLevel="info" />
+        <PossiblyNullArrayAssignment errorLevel="info" />
+        <PossiblyNullArrayOffset errorLevel="info" />
+        <PossiblyNullFunctionCall errorLevel="info" />
+        <PossiblyNullIterator errorLevel="info" />
+        <PossiblyNullOperand errorLevel="info" />
+        <PossiblyNullPropertyAssignment errorLevel="info" />
+        <PossiblyNullPropertyAssignmentValue errorLevel="info" />
+        <PossiblyNullPropertyFetch errorLevel="info" />
+        <PossiblyNullReference errorLevel="info" />
+        <PossiblyUndefinedMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::children" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::integerNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::variableNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+            </errorLevel>
+        </PossiblyUndefinedMethod>
+
+        <!-- level 5 issues - should be avoided at mosts costs... -->
+
+        <TooManyArguments>
+            <errorLevel type="info">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+                <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
+            </errorLevel>
+            <errorLevel type="suppress">
+                <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
+                <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
+            </errorLevel>
+        </TooManyArguments>
+
+        <!-- level 6 issues - really bad things -->
+
+        <InvalidNullableReturnType errorLevel="info" />
+        <NullableReturnStatement errorLevel="info" />
+        <InvalidFalsableReturnType errorLevel="info" />
+        <FalsableReturnStatement errorLevel="info" />
+
+        <MoreSpecificImplementedParamType errorLevel="info" />
+        <LessSpecificImplementedReturnType errorLevel="info" />
+
+        <!-- level 7 issues - even worse -->
+
+        <InvalidArgument>
+            <errorLevel type="info">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+            </errorLevel>
+        </InvalidArgument>
+
+        <!-- level 8 issues - some fatal errors in PHP -->
+
+        <MethodSignatureMismatch errorLevel="info" />
+
+        <!-- Custom -->
+
+        <!-- remove after guzzlehttp-release -->
+        <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
+        <InvalidCatch errorLevel="info" />
+
+    </issueHandlers>
+
+    <stubs>
+        <file name="etc/psalm/ZendPriorityQueueStub.php" />
+    </stubs>
+</psalm>

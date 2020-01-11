@@ -19,38 +19,22 @@ use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ProductFormMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.product.form';
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ItemInterface
-     */
     public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');
@@ -89,6 +73,14 @@ final class ProductFormMenuBuilder
             ->setAttribute('template', '@SyliusAdmin/Product/Tab/_media.html.twig')
             ->setLabel('sylius.ui.media')
         ;
+
+        if ($options['product']->isSimple()) {
+            $menu
+                ->addChild('inventory')
+                ->setAttribute('template', '@SyliusAdmin/Product/Tab/_inventory.html.twig')
+                ->setLabel('sylius.ui.inventory')
+            ;
+        }
 
         $this->eventDispatcher->dispatch(
             self::EVENT_NAME,

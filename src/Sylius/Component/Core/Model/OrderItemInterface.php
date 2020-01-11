@@ -15,38 +15,27 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface OrderItemInterface extends BaseOrderItemInterface
 {
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface;
 
-    /**
-     * @return ProductVariantInterface|null
-     */
     public function getVariant(): ?ProductVariantInterface;
 
-    /**
-     * @param ProductVariantInterface|null $variant
-     */
     public function setVariant(?ProductVariantInterface $variant): void;
 
-    /**
-     * @return int
-     */
+    public function getProductName(): ?string;
+
+    public function setProductName(?string $productName): void;
+
+    public function getVariantName(): ?string;
+
+    public function setVariantName(?string $variantName): void;
+
     public function getTaxTotal(): int;
 
-    /**
-     * @return int
-     */
     public function getDiscountedUnitPrice(): int;
 
-    /**
-     * @return int
-     */
     public function getSubtotal(): int;
+
+    public function getFullDiscountedUnitPrice(): int;
 }

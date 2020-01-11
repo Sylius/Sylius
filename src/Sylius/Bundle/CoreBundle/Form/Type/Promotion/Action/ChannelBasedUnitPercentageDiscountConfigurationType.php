@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelBasedUnitPercentageDiscountConfigurationType extends AbstractType
 {
     /**

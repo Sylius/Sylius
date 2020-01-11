@@ -23,37 +23,20 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class ProductReviewContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productReviewFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productReviewRepository;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $productReviewFactory
-     * @param RepositoryInterface $productReviewRepository
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productReviewFactory,
@@ -157,11 +140,9 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @param ProductInterface $product
      * @param string $title
      * @param int $rating
      * @param string $comment
-     * @param CustomerInterface|null $customer
      * @param string $transition
      *
      * @return ReviewInterface

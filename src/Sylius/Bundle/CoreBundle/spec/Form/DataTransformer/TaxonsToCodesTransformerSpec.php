@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository): void

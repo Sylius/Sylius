@@ -19,25 +19,14 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ChannelContext implements ChannelContextInterface
 {
-    /**
-     * @var RequestResolverInterface
-     */
+    /** @var RequestResolverInterface */
     private $requestResolver;
 
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * @param RequestResolverInterface $requestResolver
-     * @param RequestStack $requestStack
-     */
     public function __construct(RequestResolverInterface $requestResolver, RequestStack $requestStack)
     {
         $this->requestResolver = $requestResolver;
@@ -56,11 +45,6 @@ final class ChannelContext implements ChannelContextInterface
         }
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return ChannelInterface
-     */
     private function getChannelForRequest(Request $request): ChannelInterface
     {
         $channel = $this->requestResolver->findChannel($request);
@@ -70,9 +54,6 @@ final class ChannelContext implements ChannelContextInterface
         return $channel;
     }
 
-    /**
-     * @return Request
-     */
     private function getMasterRequest(): Request
     {
         $masterRequest = $this->requestStack->getMasterRequest();
@@ -83,9 +64,6 @@ final class ChannelContext implements ChannelContextInterface
         return $masterRequest;
     }
 
-    /**
-     * @param ChannelInterface|null $channel
-     */
     private function assertChannelWasFound(?ChannelInterface $channel): void
     {
         if (null === $channel) {

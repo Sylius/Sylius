@@ -20,31 +20,17 @@ use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutRedirectListener
 {
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * @var CheckoutStateUrlGeneratorInterface
-     */
+    /** @var CheckoutStateUrlGeneratorInterface */
     private $checkoutStateUrlGenerator;
 
-    /**
-     * @var RequestMatcherInterface
-     */
+    /** @var RequestMatcherInterface */
     private $requestMatcher;
 
-    /**
-     * @param RequestStack $requestStack
-     * @param CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator
-     * @param RequestMatcherInterface $requestMatcher
-     */
     public function __construct(
         RequestStack $requestStack,
         CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
@@ -55,9 +41,6 @@ final class CheckoutRedirectListener
         $this->requestMatcher = $requestMatcher;
     }
 
-    /**
-     * @param ResourceControllerEvent $resourceControllerEvent
-     */
     public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
     {
         $request = $this->requestStack->getCurrentRequest();

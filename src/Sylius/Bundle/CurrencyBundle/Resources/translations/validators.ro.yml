@@ -4,7 +4,20 @@
 sylius:
     currency:
         code:
+            exact_length: Codul valutei trebuie să aibă fix 3 caractere.
             not_blank: Vă rugăm să selectaţi codul monedei.
+            regex: Codul valutei poate conține doar litere, numere, - și _.
             unique: Codul monedei trebuie să fie unic.
         exchange_rate:
             not_blank: Vă rugăm să completați cursul de schimb.
+    exchange_rate:
+        ratio:
+            greater_than: Cursul de schimb trebuie să fie mai mare decât 0.
+            invalid: Cursul de schimb trebuie exprimat în numere.
+            not_blank: Introdu un curs de schimb.
+        source_currency:
+            not_blank: Introdu din ce monedă derivă cursul de schimb.
+        target_currency:
+            not_blank: Introdu către ce monedă se face cursul de schimb.
+        unique_currency_pair: Combinația de monezi trebuie să fie unică.
+        different_source_target_currency: Moneda sursă și moneda de schimb trebuie să fie diferite.

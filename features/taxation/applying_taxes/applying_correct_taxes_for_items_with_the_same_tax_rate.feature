@@ -32,7 +32,7 @@ Feature: Apply correct taxes for items with the same tax rate
         Then my cart total should be "$442.80"
         And my cart taxes should be "$82.80"
 
-    @ui @javascript
+    @ui
     Scenario: Proper taxes after removing one of the item
         Given I have 3 products "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Hat" in the cart

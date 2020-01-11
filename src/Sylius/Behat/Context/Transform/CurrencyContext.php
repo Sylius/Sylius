@@ -18,25 +18,14 @@ use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CurrencyContext implements Context
 {
-    /**
-     * @var CurrencyNameConverterInterface
-     */
+    /** @var CurrencyNameConverterInterface */
     private $currencyNameConverter;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $currencyRepository;
 
-    /**
-     * @param CurrencyNameConverterInterface $currencyNameConverter
-     * @param RepositoryInterface $currencyRepository
-     */
     public function __construct(
         CurrencyNameConverterInterface $currencyNameConverter,
         RepositoryInterface $currencyRepository

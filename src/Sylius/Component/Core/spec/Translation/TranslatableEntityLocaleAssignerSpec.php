@@ -20,9 +20,6 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider): void

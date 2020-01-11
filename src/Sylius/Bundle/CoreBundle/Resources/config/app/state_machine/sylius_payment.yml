@@ -8,6 +8,7 @@ winzou_state_machine:
             cart: ~
             new: ~
             processing: ~
+            authorized: ~
             completed: ~
             failed: ~
             cancelled: ~
@@ -19,14 +20,17 @@ winzou_state_machine:
             process:
                 from: [new]
                 to: processing
-            complete:
+            authorize:
                 from: [new, processing]
+                to: authorized
+            complete:
+                from: [new, processing, authorized]
                 to: completed
             fail:
                 from: [new, processing]
                 to: failed
             cancel:
-                from: [new, processing]
+                from: [new, processing, authorized]
                 to: cancelled
             refund:
                 from: [completed]
@@ -38,6 +42,6 @@ winzou_state_machine:
                     do: ["@sylius.order_processing.order_payment_processor.after_checkout", "process"]
                     args: ["object.getOrder()"]
                 sylius_resolve_state:
-                    on: ["complete", "refund"]
+                    on: ["complete", "refund", "authorize"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]

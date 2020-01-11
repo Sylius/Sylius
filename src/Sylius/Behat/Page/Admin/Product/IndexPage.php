@@ -13,28 +13,56 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Checker\ImageExistenceCheckerInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-final class IndexPage extends CrudIndexPage implements IndexPageInterface
+class IndexPage extends CrudIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function filterByTaxon($taxonName)
+    /** @var ImageExistenceCheckerInterface */
+    private $imageExistenceChecker;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        ImageExistenceCheckerInterface $imageExistenceChecker
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+
+        $this->imageExistenceChecker = $imageExistenceChecker;
+    }
+
+    public function filterByTaxon(string $taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    public function hasProductAccessibleImage(string $productCode): bool
+    {
+        $productRow = $this->getTableAccessor()->getRowWithFields($this->getElement('table'), ['code' => $productCode]);
+        $imageUrl = $productRow->find('css', 'img')->getAttribute('src');
+
+        return $this->imageExistenceChecker->doesImageWithUrlExist($imageUrl, 'sylius_admin_product_thumbnail');
+    }
+
+    public function showProductPage(string $productName): void
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+        $row = $tableAccessor->getRowWithFields($table, ['name' => $productName]);
+        $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        $field->clickLink('Details');
+    }
+
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'taxon_filter' => '.item a:contains("%taxon%")',
+            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }
 }

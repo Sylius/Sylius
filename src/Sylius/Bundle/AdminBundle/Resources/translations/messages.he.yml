@@ -7,4 +7,28 @@ sylius:
             main:
                 catalog:
                     attributes: מאפיינים
+                    header: קטלוג
+                    inventory: מלאי
                     options: אפשרויות
+                    products: מוצרים
+                    taxons: קבוצות טקסונומיות
+                configuration:
+                    admin_users: מנהלי מערכת
+                    channels: ערוצים
+                    countries: ארצות
+                    currencies: מטבעות
+                    exchange_rates: שערי החליפין
+                    shipping_methods: שיטות משלוח
+                    tax_categories: קטגוריות מס
+                    tax_rates: שיעורי מס
+                marketing:
+                    header: שיווק
+                    product_reviews: ביקורות מוצרים
+                    promotions: מבצעים
+                customers:
+                    customers: לקוחות
+                    groups: קבוצות
+                    header: לקוח
+                sales:
+                    header: מכירות
+                    orders: הזמנות

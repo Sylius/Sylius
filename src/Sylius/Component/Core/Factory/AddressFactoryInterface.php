@@ -17,15 +17,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface AddressFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return AddressInterface
-     */
     public function createForCustomer(CustomerInterface $customer): AddressInterface;
 }

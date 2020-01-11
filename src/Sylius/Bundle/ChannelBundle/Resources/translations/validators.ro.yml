@@ -5,7 +5,7 @@ sylius:
     channel:
         code:
             not_blank: Introdu un cod de canal.
-            regex: Codul canalului numai poate fi compus din litere, numere, cratime şi linii de subliniere.
+            regex: Codul canalului numai poate fi compus din litere, numere, - și _.
             unique: Codul de canal trebuie să fie unic.
         name:
             not_blank: Introdu numele canalului.

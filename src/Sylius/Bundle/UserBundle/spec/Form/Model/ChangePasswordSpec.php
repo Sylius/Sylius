@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Model;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ChangePasswordSpec extends ObjectBehavior
 {
     function it_has_current_password(): void

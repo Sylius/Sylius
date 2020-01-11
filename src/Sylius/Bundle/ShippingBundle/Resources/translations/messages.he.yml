@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipment:
+            states:
+                ready: מוכן
+                cancelled: בוטל
+            tracking_code: מספר מעקב
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: כמות
+            per_unit_rate_configuration:
+                amount: כמות
+        shipping_category:
+            description: תיאור
+            name: שם
+        shipping_method:
+            calculator: מחשבון
+            category: קטגוריה
+            channels: ערוצים
+            description: תיאור
+            enabled: הופעל
+            name: שם
+            position: מיקום
+            translations: תרגומים

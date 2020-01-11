@@ -6,7 +6,7 @@ sylius:
         taxon:
             description: Popis
             name: Názov
-            parent: Nadradená kategória
+            parent: Nadradený prototyp
             slug: Slug
         taxonomy:
             name: Názov

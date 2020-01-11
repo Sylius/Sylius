@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 {
     function it_implements_product_variant_price_calculator_interface(): void
@@ -49,6 +46,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
         $productVariant->getName()->willReturn('Red variant');
+        $productVariant->getCode()->willReturn('RED_VARIANT');
 
         $this
             ->shouldThrow(MissingChannelConfigurationException::class)

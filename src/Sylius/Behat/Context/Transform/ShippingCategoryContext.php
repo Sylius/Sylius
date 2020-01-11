@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ShippingCategoryContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $shippingCategoryRepository;
 
-    /**
-     * @param RepositoryInterface $shippingCategoryRepository
-     */
     public function __construct(RepositoryInterface $shippingCategoryRepository)
     {
         $this->shippingCategoryRepository = $shippingCategoryRepository;

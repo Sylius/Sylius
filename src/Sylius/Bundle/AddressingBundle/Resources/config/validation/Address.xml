@@ -114,7 +114,7 @@
                 </option>
             </constraint>
             <constraint name="Length">
-                <option name="min">2</option>
+                <option name="min">1</option>
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.postcode.min_length</option>
                 <option name="maxMessage">sylius.address.postcode.max_length</option>

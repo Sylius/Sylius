@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        promotion:
+            name: Nama
         promotion_action:
             type: Jenis
         promotion_rule:

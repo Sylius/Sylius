@@ -22,37 +22,21 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * Should not be extended, final removed to make this class lazy.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 /* final */ class ShopperContext implements ShopperContextInterface
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var CurrencyContextInterface
-     */
+    /** @var CurrencyContextInterface */
     private $currencyContext;
 
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var CustomerContextInterface
-     */
+    /** @var CustomerContextInterface */
     private $customerContext;
 
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyContextInterface $currencyContext
-     * @param LocaleContextInterface $localeContext
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,

@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Taxation\Exception;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class UnsupportedTaxCalculationStrategyException extends \RuntimeException
 {
     /**

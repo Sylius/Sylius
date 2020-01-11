@@ -1,26 +1,10 @@
 <h1 align="center">
-    <a href="http://sylius.org" target="_blank">
-        <img src="http://demo.sylius.org/assets/shop/img/logo.png" />
-    </a>
-    <br />
-    <a href="https://packagist.org/packages/sylius/sylius" title="License" target="_blank">
-        <img src="https://img.shields.io/packagist/l/Sylius/Sylius.svg" />
-    </a>
-    <a href="https://packagist.org/packages/sylius/sylius" title="Version" target="_blank">
-        <img src="https://img.shields.io/packagist/v/Sylius/Sylius.svg" />
-    </a>
-    <a href="http://travis-ci.org/Sylius/Sylius" title="Build status" target="_blank">
-        <img src="https://img.shields.io/travis/Sylius/Sylius/master.svg" />
-    </a>
-    <a href="https://scrutinizer-ci.com/g/Sylius/Sylius/" title="Scrutinizer" target="_blank">
-        <img src="https://img.shields.io/scrutinizer/g/Sylius/Sylius.svg" />
-    </a>
-    <a href="https://packagist.org/packages/sylius/sylius" title="Total Downloads" target="_blank">
-        <img src="https://poser.pugx.org/sylius/sylius/downloads" />
+    <a href="https://sylius.com/github-readme/link/" target="_blank">
+        <img src="https://sylius.com/assets/github-readme.png" />
     </a>
 </h1>
 
-Sylius is the first eCommerce framework for tailored solution based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
+Sylius is an Open Source eCommerce platform on top of [**Symfony**](https://symfony.com). 
 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
 Powerful REST API allows for easy integrations and creating unique customer experience on any device.
@@ -29,79 +13,78 @@ We're using full-stack Behavior-Driven-Development, with [phpspec](http://phpspe
 
 Enjoy being an eCommerce Developer again!
 
-Documentation
--------------
-
-Documentation is available at [docs.sylius.org](http://docs.sylius.org).
-
 Installation
 ------------
 
-You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages and [yarn](https://yarnpkg.com/lang/en/docs/install/) to install JS packages.
+[Install Sylius](https://docs.sylius.com/en/latest/book/installation/installation.html) with Composer (see [requirements details](https://docs.sylius.com/en/latest/book/installation/requirements.html)).
 
-```bash
-$ composer create-project sylius/sylius-standard my-sylius-shop && cd my-sylius-shop
-$ php bin/console sylius:install
-$ yarn install && yarn run gulp
-$ php bin/console server:start
-```
+Documentation
+-------------
+ 
+Documentation is available at [docs.sylius.com](https://docs.sylius.com).
 
-Then open `http://localhost:8000/` in your web browser to enjoy your Sylius shop in a development environment.
+Roadmap
+-------
 
-Alternatively, you can use [Vagrant](http://docs.sylius.org/en/latest/book/installation/vagrant_installation.html) for your initial setup.
+Our roadmap is available to browse, vote and comment as a [Github project](https://github.com/orgs/Sylius/projects/2). 
+You can also see all roadmap related issues by filtering [those labeled with "Roadmap"](https://github.com/Sylius/Sylius/labels/Roadmap).
 
-**Production**
+Community
+---------
 
-When you're ready to go live, setup your production database:
+[Get Sylius support](https://docs.sylius.com/en/latest/support/index.html) on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
-```bash
-php bin/console sylius:install --env prod
-```
+Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
-And choose _N_ when it comes to the _Loading sample data_ step.
+Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/contributing/index.html)!
 
-Then please refer to [Symfony's documentation](https://symfony.com/doc/current/setup/web_server_configuration.html) to properly setup your Apache/Nginx web server.
-
-
-Troubleshooting
+Security issues
 ---------------
 
-If something goes wrong, errors & exceptions are logged at the application level:
+If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
+Instead, all security issues must be sent to `security@sylius.com`.
 
-```bash
-$ tail -f var/logs/prod.log
-$ tail -f var/logs/dev.log
-```
+Official plugins
+----------------
 
-If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](http://github.com/Sylius/Vagrant/README.md#Troubleshooting) for more information.
+This is the list of officially supported Sylius plugins:
 
-Contributing
-------------
+ - [Admin Order Creation Plugin](https://github.com/Sylius/AdminOrderCreationPlugin) - 
+   allows creating orders directly from the administrator panel
+ - [Customer Order Cancellation Plugin](https://github.com/Sylius/CustomerOrderCancellationPlugin) -
+   allows customer to cancel a placed order which has not been processed yet
+ - [Customer Reorder Plugin](https://github.com/Sylius/CustomerReorderPlugin) - 
+   allows customer to copy items from the already placed order to the current cart
+ - [Invoicing Plugin](https://github.com/Sylius/InvoicingPlugin) -
+   generates an invoice for every placed order
+ - [Refund Plugin](https://github.com/Sylius/RefundPlugin) -
+   allows administrator to refund items from paid order
+ - [Shop API Plugin](https://github.com/Sylius/SyliusShopApiPlugin) - 
+   provides customer-level API for the shop functionalities
+   
+You can find other plugins on [our ecosystem website](https://sylius.com/plugins/) or by looking for 
+[packages marked as *sylius-plugin*](https://packagist.org/explore/?type=sylius-plugin).
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html)!
-
-Stay Updated
-------------
-
-If you want to keep up with the updates, [follow the official Sylius account on Twitter](http://twitter.com/Sylius) and [like us on Facebook](https://www.facebook.com/SyliusEcommerce/).
-
-Bug Tracking
-------------
-
-If you want to report a bug or suggest an idea, please use [GitHub issues](https://github.com/Sylius/Sylius/issues).
-
-Community Support
------------------
-
-Have a question? Join our [Slack](http://sylius.org/slack) or post it on [StackOverflow](http://stackoverflow.com) tagged with ["sylius"](https://stackoverflow.com/questions/tagged/sylius). You can also join our [group on Facebook](https://www.facebook.com/groups/sylius/)!
-
-MIT License
+Sylius Plus
 -----------
+
+Sylius Plus gives you all the power of Open Source and much more. It comes with a following set of enterprise-grade features:
+
+- Advanced Multi-store
+- Returns Management
+- Multi-source Inventory
+- Advanced Users Permissions
+- Enhanced security & monitoring
+
+What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
+
+License
+-------
 
 Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------
 
-Sylius was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
+Sylius was originally created by [Paweł Jędrzejewski](https://pjedrzejewski.com).
 See the list of [contributors from our awesome community](https://github.com/Sylius/Sylius/contributors).

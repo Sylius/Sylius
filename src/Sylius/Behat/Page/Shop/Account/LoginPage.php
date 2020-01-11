@@ -13,57 +13,42 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class LoginPage extends SymfonyPage implements LoginPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function hasValidationErrorWith($message)
-    {
-        return $this->getElement('validation_error')->getText() === $message;
-    }
-
-    public function logIn()
-    {
-        $this->getDocument()->pressButton('Login');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPassword($password)
-    {
-        $this->getDocument()->fillField('Password', $password);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyUsername($username)
-    {
-        $this->getDocument()->fillField('Username', $username);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_login';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    public function hasValidationErrorWith(string $message): bool
+    {
+        return $this->getElement('validation_error')->getText() === $message;
+    }
+
+    public function logIn(): void
+    {
+        $this->getElement('login_button')->click();
+    }
+
+    public function specifyPassword(string $password): void
+    {
+        $this->getElement('password')->setValue($password);
+    }
+
+    public function specifyUsername(string $username): void
+    {
+        $this->getElement('username')->setValue($username);
+    }
+
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'validation_error' => '.message.negative',
+            'login_button' => '[data-test-login-button]',
+            'password' => '[data-test-login-password]',
+            'username' => '[data-test-login-username]',
+            'validation_error' => '[data-test-flash-message="negative"]',
         ]);
     }
 }

@@ -25,6 +25,12 @@ sylius:
             name: Pavadinimas
             roles: Rolės
         channel:
+            billing_data:
+                city: Miestas
+                company: įmonė
+                country: Šalis
+                postcode: Pašto kodas
+                street: Gatvė
             contact_email: Kontaktinis el. pašto adresas
             currencies: Valiutos
             currency_base: Bazinė valiuta
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Įvairaus baitų ilgio eilutę
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: failų sistema
             cache:
                 header: podėlis
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: egzistuoja
             logs:
                 header: audito įrašai
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neegzistuoja
             not_writable: be galimybės įrašyti
             parameters:
                 header: parameters.yml
-                help: 'Jei norite nustatyti teises, įvykdykite komandą: sudo chmod a+w %path%'
+                help: "Jei norite nustatyti teises, įvykdykite komandą: sudo chmod a+w %path%"
             vendors: vendors
             writable: galimas įrašyti
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: galiojantis
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: laiko juosta
             timezone_deprecated:
                 header: Pasenusi laiko juosta
-                help: 'Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).'
+                help: Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).
             version: PHP versija
             version_recommended: Rekomenduojama PHP versija
     payum_gateway:

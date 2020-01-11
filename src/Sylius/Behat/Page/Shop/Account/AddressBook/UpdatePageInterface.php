@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UpdatePageInterface extends SymfonyPageInterface
 {
     /**

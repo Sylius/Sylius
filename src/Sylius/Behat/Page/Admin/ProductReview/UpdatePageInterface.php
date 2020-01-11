@@ -15,38 +15,17 @@ namespace Sylius\Behat\Page\Admin\ProductReview;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $title
-     */
-    public function specifyTitle($title);
+    public function specifyTitle(string $title): void;
 
-    /**
-     * @param string $comment
-     */
-    public function specifyComment($comment);
+    public function specifyComment(string $comment): void;
 
-    /**
-     * @param string $rating
-     */
-    public function chooseRating($rating);
+    public function chooseRating(string $rating): void;
 
-    /**
-     * @return string
-     */
-    public function getRating();
+    public function getRating(): string;
 
-    /**
-     * @return string
-     */
-    public function getProductName();
+    public function getProductName(): string;
 
-    /**
-     * @return string
-     */
-    public function getCustomerName();
+    public function getCustomerName(): string;
 }

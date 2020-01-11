@@ -18,27 +18,16 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz CHruściel <lukasz.chrusciel@lakion.com>
- */
 final class UserReloaderListener
 {
-    /**
-     * @var UserReloaderInterface
-     */
+    /** @var UserReloaderInterface */
     private $userReloader;
 
-    /**
-     * @param UserReloaderInterface $userReloader
-     */
     public function __construct(UserReloaderInterface $userReloader)
     {
         $this->userReloader = $userReloader;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function reloadUser(GenericEvent $event): void
     {
         $user = $event->getSubject();

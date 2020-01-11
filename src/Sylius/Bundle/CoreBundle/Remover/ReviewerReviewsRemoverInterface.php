@@ -15,13 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Remover;
 
 use Sylius\Component\Review\Model\ReviewerInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface ReviewerReviewsRemoverInterface
 {
-    /**
-     * @param ReviewerInterface $author
-     */
     public function removeReviewerReviews(ReviewerInterface $author): void;
 }

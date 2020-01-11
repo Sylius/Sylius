@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Flexible payments system for PHP e-commerce applications.",
     "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -20,13 +20,13 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
 
-        "sylius/registry": "^1.0",
+        "sylius/registry": "^1.2",
         "sylius/resource": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0"
+        "phpspec/phpspec": "^5.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -47,7 +47,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.6-dev"
         }
     }
 }

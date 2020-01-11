@@ -4,7 +4,7 @@
 default:
     suites:
         ui_customer_statistics:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -21,5 +21,6 @@ default:
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.admin.managing_customers
+
             filters:
                 tags: "@customer_statistics && @ui"

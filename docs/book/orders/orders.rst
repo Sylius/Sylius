@@ -10,8 +10,8 @@ It represents an order that can be either placed or in progress (cart).
 **Order** holds a collection of **OrderItem** instances, which represent products from the shop,
 as its physical copies, with chosen variants and quantities.
 
-Each Order is **assigned to the channel** in which it has been created. Moreover the **language** the customer was using
-and the **currency with its exchange rate** at the moment of creation are saved.
+Each Order is **assigned to the channel** in which it has been created as well as the **language** the customer was using
+while placing the order. The order currency code will be the base currency of the current channel by default.
 
 How to create an Order programmatically?
 ----------------------------------------
@@ -124,7 +124,7 @@ Shipments of an Order
 ---------------------
 
 An **Order** in Sylius holds a collection of Shipments on it. Each shipment in that collection has its own shipping method and has its own state machine.
-This lets you to divide an order into several different shipments that have own shipping states (like sending physical objects via DHL and sending a link to downloadable files via e-mail).
+This lets you divide an order into several different shipments that have own shipping states (like sending physical objects via DHL and sending a link to downloadable files via e-mail).
 
 .. tip::
 
@@ -230,6 +230,27 @@ two transitions ``request_payment`` and ``pay``.
     $this->container->get('sylius.manager.order')->flush();
 
 **If it was the only payment assigned to that order** now the ``paymentState`` of your order will be ``paid``.
+
+.. rst-class:: plugin-feature
+
+Creating an Order via admin panel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After installing the `Sylius/AdminOrderCreationPlugin <https://github.com/Sylius/AdminOrderCreationPlugin>`_
+it is possible to create Orders for a chosen Customer from the administrator perspective.
+
+You will be able to choose any products, assign custom prices for items, choose payment and shipping methods. Moreover
+it is possible to reorder an order that has already been placed.
+
+.. rst-class:: plugin-feature
+
+Customer Order operations: reorder & cancellation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With the usage of other Sylius official plugins your Customers will be able to:
+
+* cancel unpaid Orders in the "My Account" section -> `Customer Order Cancellation Plugin <https://github.com/Sylius/CustomerOrderCancellationPlugin>`_
+* reorder one of their previously placed Orders -> `Customer Reorder Plugin <https://github.com/Sylius/CustomerReorderPlugin>`_
 
 Learn more
 ----------

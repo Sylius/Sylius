@@ -16,50 +16,36 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class Zone implements ZoneInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $scope = Scope::ALL;
 
     /**
      * @var Collection|ZoneMemberInterface[]
+     *
+     * @psalm-var Collection<array-key, ZoneMemberInterface>
      */
     protected $members;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
         $this->members = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

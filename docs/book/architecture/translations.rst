@@ -21,7 +21,7 @@ Assuming that we would like to have a translatable model of a ``Supplier``, we n
 
    <?php
 
-   namespace AppBundle\Entity;
+   namespace App\Entity;
 
    use Sylius\Component\Resource\Model\AbstractTranslation;
 
@@ -60,7 +60,7 @@ The actual entity has access to its translation by using the ``TranslatableTrait
 
    <?php
 
-   namespace AppBundle\Entity;
+   namespace App\Entity;
 
    use Sylius\Component\Resource\Model\TranslatableInterface;
    use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -100,7 +100,7 @@ The ``getTranslation()`` method gets a translation for the current locale, while
 impose the locale - ``getTranslation('pl_PL')`` will return a polish translation **if there is a translation in this locale**.
 
 But when the translation for the chosen locale is unavailable, instead the translation for the **fallback locale**
-(the one that was either set in ``config.yml`` or using the ``setFallbackLocale()`` method from the TranslatableTrait on the entity) is used.
+(the one that was either set in ``config/services.yaml`` or using the ``setFallbackLocale()`` method from the TranslatableTrait on the entity) is used.
 
 How to add a new translation programmatically?
 ----------------------------------------------
@@ -128,7 +128,7 @@ Let's see how to do it on the example of a ProductTranslation.
    $product->addTranslation($translation);
 
    // Remember to save the product after adding the translation
-   $this->container->get('sylius.manager.product')->flush($product);
+   $this->container->get('sylius.manager.product')->flush();
 
 Learn more
 ----------

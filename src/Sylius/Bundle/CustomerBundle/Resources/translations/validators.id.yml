@@ -19,7 +19,7 @@ sylius:
             not_blank: Masukkan email Anda.
             invalid: Email ini tidak valid.
             unique: Email ini telah digunakan.
-            registered: Email ini telah terdaftar, silahkan login atau gunakan lupa kata sandi.
+            registered: Email ini sudah terdaftar, silahkan login atau gunakan password yang terlupakan.
     customer_group:
         code:
             regex: Kode kelompok pelanggan hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.

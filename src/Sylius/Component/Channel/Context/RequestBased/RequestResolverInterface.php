@@ -16,15 +16,7 @@ namespace Sylius\Component\Channel\Context\RequestBased;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface RequestResolverInterface
 {
-    /**
-     * @param Request $request
-     *
-     * @return ChannelInterface|null
-     */
     public function findChannel(Request $request): ?ChannelInterface;
 }

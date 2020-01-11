@@ -18,9 +18,6 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AdjustmentFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $adjustmentFactory): void

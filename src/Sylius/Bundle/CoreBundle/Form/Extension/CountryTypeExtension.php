@@ -25,16 +25,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class CountryTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
     /**
@@ -90,11 +83,6 @@ final class CountryTypeExtension extends AbstractTypeExtension
         return CountryType::class;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string|null
-     */
     private function getCountryName(string $code): ?string
     {
         return Intl::getRegionBundle()->getCountryName($code);

@@ -13,18 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Model;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface UserAwareInterface
 {
-    /**
-     * @return UserInterface|null
-     */
     public function getUser(): ?UserInterface;
 
-    /**
-     * @param UserInterface|null $user
-     */
     public function setUser(?UserInterface $user);
 }

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanalas negali būti panaikintas. Reikalingas bent vienas įjungtas kanalas.'
+    customer:
+        add_address: 'Adresas buvo sėkmingai pridėtas.'

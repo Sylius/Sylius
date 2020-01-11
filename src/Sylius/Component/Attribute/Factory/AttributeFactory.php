@@ -18,25 +18,14 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AttributeFactory implements AttributeFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $attributeTypesRegistry;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ServiceRegistryInterface $attributeTypesRegistry
-     */
     public function __construct(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
         $this->factory = $factory;

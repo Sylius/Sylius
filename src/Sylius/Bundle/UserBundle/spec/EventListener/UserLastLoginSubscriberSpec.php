@@ -21,6 +21,7 @@ use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
@@ -76,7 +77,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $this->onImplicitLogin($event);
     }
 
-    function it_updates_only_user_specified_in_constructor(
+    function it_updates_only_sylius_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
         UserInterface $user
@@ -90,5 +91,43 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $userManager->flush()->shouldNotBeCalled();
 
         $this->onImplicitLogin($event);
+    }
+
+    function it_updates_only_user_specified_in_constructor(
+        ObjectManager $userManager,
+        UserEvent $event,
+        InteractiveLoginEvent $interactiveLoginEvent,
+        TokenInterface $token,
+        SymfonyUserInterface $user
+    ): void {
+        $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
+
+        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
+        $token->getUser()->willReturn($user);
+
+        $event->getUser()->willReturn($user);
+
+        $userManager->persist(Argument::any())->shouldNotBeCalled();
+        $userManager->flush()->shouldNotBeCalled();
+
+        $this->onSecurityInteractiveLogin($interactiveLoginEvent);
+    }
+
+    function it_throws_excepcion_if_subscriber_is_used_for_class_other_than_sylius_user_interface(
+        ObjectManager $userManager,
+        UserEvent $event,
+        InteractiveLoginEvent $interactiveLoginEvent,
+        TokenInterface $token,
+        SymfonyUserInterface $user
+    ): void {
+        $this->beConstructedWith($userManager, SymfonyUserInterface::class);
+
+        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
+        $token->getUser()->willReturn($user);
+
+        $userManager->persist(Argument::any())->shouldNotBeCalled();
+        $userManager->flush()->shouldNotBeCalled();
+
+        $this->shouldThrow(\UnexpectedValueException::class)->during('onSecurityInteractiveLogin', [$interactiveLoginEvent]);
     }
 }

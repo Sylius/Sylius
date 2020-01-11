@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                address_book: 'Βιβλίο διευθύνσεων'
+                change_password: 'Αλλαγή κωδικού πρόσβασης'
+                dashboard: 'Dashboard'

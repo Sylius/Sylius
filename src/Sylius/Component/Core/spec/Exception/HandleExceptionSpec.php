@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Core\Exception;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Exception\HandleException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class HandleExceptionSpec extends ObjectBehavior
 {
     function let(): void

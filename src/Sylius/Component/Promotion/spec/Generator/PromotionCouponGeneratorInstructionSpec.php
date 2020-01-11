@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Promotion\Generator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
     function it_implements_an_promotion_coupon_genarator_instruction_interface(): void
@@ -35,6 +32,24 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
     {
         $this->setAmount(500);
         $this->getAmount()->shouldReturn(500);
+    }
+
+    function its_prefix_is_mutable(): void
+    {
+        $this->setPrefix('PREFIX_');
+        $this->getPrefix()->shouldReturn('PREFIX_');
+    }
+
+    function its_code_length_is_mutable(): void
+    {
+        $this->setCodeLength(4);
+        $this->getCodeLength()->shouldReturn(4);
+    }
+
+    function its_suffix_is_mutable(): void
+    {
+        $this->setSuffix('_SUFFIX');
+        $this->getSuffix()->shouldReturn('_SUFFIX');
     }
 
     function it_does_not_have_usage_limit_by_default(): void

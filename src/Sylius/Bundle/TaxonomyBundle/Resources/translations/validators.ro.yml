@@ -3,9 +3,16 @@
 
 sylius:
     taxon:
+        code:
+            not_blank: Vă rugăm să completați numele taxonului.
+            regex: Codul taxonului poate conține doar litere, numere, cratime și linii de subliniere.
+            unique: Codul taxonului trebuie să fie unic.
         name:
             max_length: Numele categoriei nu poate depăși 255 de caractere.
             not_blank: Vă rugăm să completați numele categoriei.
+        slug:
+            not_blank: Vă rugăm să completați slugul taxonului.
+            unique: Valoarea din câmpul "slug" trebuie să fie unică.
     taxonomy:
         name:
             max_length: Numele categorizării nu poate depăși 255 de caractere.

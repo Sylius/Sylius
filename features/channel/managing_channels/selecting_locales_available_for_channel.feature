@@ -29,3 +29,24 @@ Feature: Selecting available locales for a channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the channel "Web channel" should be available in "English (United States)"
+
+    @ui
+    Scenario: Being unable to disable locale used as the default one for a channel
+        Given the store operates on a channel named "Web"
+        And this channel allows to shop using "English (United States)" and "Polish (Poland)" locales
+        And this channel uses the "English (United States)" locale as default
+        And I am modifying a channel "Web"
+        When I make it available only in "Polish (Poland)"
+        And I try to save my changes
+        Then I should be notified that the default locale has to be enabled
+
+    @ui
+    Scenario: Being unable to set disabled locale as a default one for a channel
+        Given the store has locale "Polish (Poland)"
+        And the store operates on a channel named "Web"
+        And this channel allows to shop using the "English (United States)" locale
+        And this channel uses the "English (United States)" locale as default
+        And I am modifying a channel "Web"
+        When I choose "Polish (Poland)" as a default locale
+        And I try to save my changes
+        Then I should be notified that the default locale has to be enabled

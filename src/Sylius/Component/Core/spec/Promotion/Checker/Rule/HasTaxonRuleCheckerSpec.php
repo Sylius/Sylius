@@ -24,10 +24,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_a_rule_checker(): void

@@ -21,19 +21,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProductOptionChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productOptionRepository;
 
-    /**
-     * @param RepositoryInterface $productOptionRepository
-     */
     public function __construct(RepositoryInterface $productOptionRepository)
     {
         $this->productOptionRepository = $productOptionRepository;

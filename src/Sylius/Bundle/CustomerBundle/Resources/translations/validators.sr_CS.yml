@@ -9,4 +9,5 @@ sylius:
             already_used: E-Mail je već registrovan, ulogujete se ili izaberite opciju `zaboravljena lozinka`.
             not_blank: Unеsite vaš e-mail.
             invalid: E-mail nije validan.
+            unique: Ova e-mail adresa je već iskorišćena.
             registered: E-Mail je već registrovan, ulogujete se ili izaberite opciju `zaboravljena lozinka`.

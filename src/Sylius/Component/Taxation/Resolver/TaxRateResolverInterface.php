@@ -16,16 +16,7 @@ namespace Sylius\Component\Taxation\Resolver;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface TaxRateResolverInterface
 {
-    /**
-     * @param TaxableInterface $taxable
-     * @param array $criteria
-     *
-     * @return TaxRateInterface|null
-     */
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface;
 }

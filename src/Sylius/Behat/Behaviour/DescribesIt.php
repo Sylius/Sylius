@@ -13,17 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Behaviour;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 trait DescribesIt
 {
     use DocumentAccessor;
 
-    /**
-     * @param string $description
-     */
-    public function describeItAs($description)
+    public function describeItAs(string $description): void
     {
         $this->getDocument()->fillField('Description', $description);
     }

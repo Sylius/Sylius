@@ -23,43 +23,23 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CheckoutAddressingContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var AddressPageInterface
-     */
+    /** @var AddressPageInterface */
     private $addressPage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @var AddressComparatorInterface
-     */
+    /** @var AddressComparatorInterface */
     private $addressComparator;
 
-    /**
-     * @var SelectShippingPageInterface
-     */
+    /** @var SelectShippingPageInterface */
     private $selectShippingPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param AddressPageInterface $addressPage
-     * @param FactoryInterface $addressFactory
-     * @param AddressComparatorInterface $addressComparator
-     * @param SelectShippingPageInterface $selectShippingPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         AddressPageInterface $addressPage,
@@ -91,6 +71,16 @@ final class CheckoutAddressingContext implements Context
     {
         $this->addressPage->open();
         $this->iSpecifyTheEmail($email);
+        $this->iSpecifyTheShippingAddressAs($address);
+        $this->iCompleteTheAddressingStep();
+    }
+
+    /**
+     * @When /^I complete addressing step with ("[^"]+" based shipping address)$/
+     */
+    public function iCompleteAddressingStepWithBasedShippingAddress(AddressInterface $address): void
+    {
+        $this->addressPage->open();
         $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
@@ -244,14 +234,19 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When /^I proceed selecting ("[^"]+" as shipping country)$/
      */
-    public function iProceedSelectingShippingCountry(CountryInterface $shippingCountry = null, $localeCode = 'en_US')
-    {
+    public function iProceedSelectingShippingCountry(
+        CountryInterface $shippingCountry = null,
+        string $localeCode = 'en_US',
+        ?string $email = null
+    ) {
         $this->addressPage->open(['_locale' => $localeCode]);
         $shippingAddress = $this->createDefaultAddress();
         if (null !== $shippingCountry) {
             $shippingAddress->setCountryCode($shippingCountry->getCode());
         }
-
+        if (null !== $email) {
+            $this->addressPage->specifyEmail($email);
+        }
         $this->addressPage->specifyShippingAddress($shippingAddress);
         $this->addressPage->nextStep();
     }
@@ -415,7 +410,7 @@ final class CheckoutAddressingContext implements Context
      */
     private function assertElementValidationMessage($type, $element, $expectedMessage)
     {
-        $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
+        $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->addressPage->checkValidationMessageFor($element, $expectedMessage));
     }
 }

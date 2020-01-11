@@ -15,18 +15,9 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $isArchival
-     */
-    public function chooseArchival($isArchival);
+    public function chooseArchival(string $isArchival): void;
 
-    /**
-     * @return bool
-     */
-    public function isArchivalFilterEnabled();
+    public function isArchivalFilterEnabled(): bool;
 }

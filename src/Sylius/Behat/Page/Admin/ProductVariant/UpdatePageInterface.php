@@ -17,66 +17,37 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function disableTracking(): void;
 
-    /**
-     * @param int $price
-     */
-    public function specifyPrice($price);
+    public function enableTracking(): void;
 
-    public function disableTracking();
+    public function isCodeDisabled(): bool;
 
-    public function enableTracking();
+    public function isSelectedOptionValueOnPage(string $optionName, string $valueName): bool;
 
-    /**
-     * @return bool
-     */
-    public function isTracked();
+    public function isShippingRequired(): bool;
 
-    /**
-     * @param ChannelInterface $channel
-     * @param CurrencyInterface $currency
-     *
-     * @return string
-     */
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);
+    public function isTracked(): bool;
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getPriceForChannel($channelName);
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 
-    /**
-     * @param string $channelName
-     *
-     * @return string
-     */
-    public function getOriginalPriceForChannel($channelName);
+    public function getPriceForChannel(string $channelName): string;
 
-    /**
-     * @param string $language
-     *
-     * @return string
-     */
-    public function getNameInLanguage($language);
+    public function getOriginalPriceForChannel(string $channelName): string;
 
-    /**
-     * @param int $amount
-     */
-    public function specifyCurrentStock($amount);
+    public function getNameInLanguage(string $language): string;
 
-    /**
-     * @return bool
-     */
-    public function isShippingRequired();
+    public function selectOption(string $optionName, string $optionValue): void;
+
+    public function isShowInShopButtonDisabled(): bool;
+
+    public function showProductInChannel(string $channel): void;
+
+    public function showProductInSingleChannel(): void;
+
+    public function specifyCurrentStock(int $amount): void;
+
+    public function specifyPrice(int $price): void;
 }

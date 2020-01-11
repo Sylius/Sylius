@@ -22,9 +22,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
-/**
- * @author Adam Elsodaney <adam.elso@gmail.com>
- */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let(): void

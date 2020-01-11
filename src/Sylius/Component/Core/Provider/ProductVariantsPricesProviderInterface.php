@@ -16,16 +16,7 @@ namespace Sylius\Component\Core\Provider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface ProductVariantsPricesProviderInterface
 {
-    /**
-     * @param ProductInterface $product
-     * @param ChannelInterface $channel
-     *
-     * @return array
-     */
     public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array;
 }

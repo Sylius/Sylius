@@ -18,9 +18,6 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class DelegatingCalculatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculators, CalculatorInterface $calculator): void

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Form\Type\Taxon;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -26,24 +27,15 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ObjectProphecy|ServiceRegistryInterface */
     private $resourceRepositoryRegistry;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var ObjectProphecy|FactoryInterface */
     private $productTaxonFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var ObjectProphecy|RepositoryInterface */
     private $productTaxonRepository;
 
     protected function setUp(): void
@@ -76,6 +68,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
 
+        /** @var ObjectProphecy|TaxonRepositoryInterface $taxonRepository */
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
@@ -105,6 +98,8 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
+
+        /** @var ObjectProphecy|TaxonRepositoryInterface $taxonRepository */
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
@@ -129,6 +124,8 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     {
         $taxon = $this->prophesize(TaxonInterface::class);
         $product = $this->prophesize(ProductInterface::class);
+
+        /** @var ObjectProphecy|TaxonRepositoryInterface $taxonRepository */
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);
@@ -158,6 +155,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
         $product = $this->prophesize(ProductInterface::class);
         $productTaxon = $this->prophesize(ProductTaxonInterface::class);
 
+        /** @var ObjectProphecy|TaxonRepositoryInterface $taxonRepository */
         $taxonRepository = $this->prophesize(TaxonRepositoryInterface::class);
 
         $this->resourceRepositoryRegistry->get('sylius.taxon')->willReturn($taxonRepository);

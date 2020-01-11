@@ -4,8 +4,36 @@
 sylius:
     form:
         attribute:
+            add: Hinzufügen
+            add_attributes: Attribute hinzufügen
+            choices: Auswahlmöglichkeiten
             code: Code
             name: Name
+            translations: Übersetzungen
             type: Typ
         attribute_type:
+            checkbox: Kontrollkästchen
+            configuration: Einstellung
+            date: Datum
+            datetime: Datum / Zeit
+            integer: Integer
+            percent: Prozent
             select: Auswählen
+            text: Text
+            textarea: Textfeld
+            title: Attributtyp
+            validation: Überprüfung
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            select:
+                multiple: Mehrere
+                values: Werte
+                choose: Wählen Sie eine Option
+                min: Min-Einträge
+                max: Max-Einträge
+            text:
+                min: Mindestlänge
+                max: Maximale Länge

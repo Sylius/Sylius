@@ -53,7 +53,7 @@ If you request for a more detailed data, you will receive an object with followi
 +-------------------------+-------------------------------------------+
 | birthday                | Customers birthday                        |
 +-------------------------+-------------------------------------------+
-| groups                  | Array of groups customer belongs to       |
+| group                   | Customer group code                       |
 +-------------------------+-------------------------------------------+
 
 .. note::
@@ -81,7 +81,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 | lastName                 | request        | Customer's last name                                                                                 |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to                                                     |
+| group                   | request        | *(optional)* Customer group code                                                                      |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
 | gender                   | request        | Customer's gender                                                                                    |
 +--------------------------+----------------+------------------------------------------------------------------------------------------------------+
@@ -99,7 +99,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/ \
+    $ curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -139,9 +139,7 @@ Exemplary Response
         "firstName":"John",
         "lastName":"Diggle",
         "gender":"m",
-        "group":[
-
-        ]
+        "group":{}
     }
 
 If you try to create a customer without email or gender, you will receive a ``400 Bad Request`` error.
@@ -151,7 +149,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/ \
+    $ curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -215,7 +213,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
+    $ curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -244,9 +242,7 @@ Exemplary Response
         "firstName":"Levi",
         "lastName":"Friesen",
         "gender":"u",
-        "group":[
-
-        ]
+        "group":{}
     }
 
 Collection of Customers
@@ -276,7 +272,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/ \
+    $ curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -428,7 +424,7 @@ Definition
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | lastName                 | request        | Customers last name                                                          |
 +--------------------------+----------------+------------------------------------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to                             |
+| group                    | request        | *(optional)* Customer group code                                             |
 +--------------------------+----------------+------------------------------------------------------------------------------+
 | gender                   | request        | Customers gender                                                             |
 +--------------------------+----------------+------------------------------------------------------------------------------+
@@ -446,7 +442,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
+    $ curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -473,7 +469,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
+    $ curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -534,7 +530,7 @@ Definition
 +--------------------------+----------------+--------------------------------------------------+
 | lastName                 | request        | *(optional)* Customers last name                 |
 +--------------------------+----------------+--------------------------------------------------+
-| groups                   | request        | *(optional)* Array of groups customer belongs to |
+| group                    | request        | *(optional)* Customer group code                 |
 +--------------------------+----------------+--------------------------------------------------+
 | gender                   | request        | *(optional)* Customers gender                    |
 +--------------------------+----------------+--------------------------------------------------+
@@ -552,7 +548,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
+    $ curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -588,7 +584,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/399 \
+    $ curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -627,7 +623,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/customers/7/orders/ \
+    $ curl http://demo.sylius.com/api/v1/customers/7/orders/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

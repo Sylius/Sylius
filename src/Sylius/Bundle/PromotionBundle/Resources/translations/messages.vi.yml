@@ -4,10 +4,21 @@
 sylius:
     form:
         promotion:
+            description: Mô tả
             name: Tên
         promotion_action:
+            fixed_discount_configuration:
+                amount: Số tiền
             type: Phân loại
+        promotion_coupon_generator_instruction:
+            amount: Số tiền
         promotion_rule:
+            contains_product_configuration:
+                variants: Sản phẩm
+            item_total_configuration:
+                amount: Số tiền
             shipping_country_configuration:
                 country: Quốc gia
+            taxonomy_configuration:
+                taxons: Phân loại
             type: Phân loại

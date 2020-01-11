@@ -1,26 +1,54 @@
 language: php
 
-dist: precise
+dist: trusty
+
+sudo: false
 
 env:
     global:
+        - APP_ENV=test_cached
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
+
+addons:
+    apt:
+        sources:
+            - mysql-5.7-trusty
 
 matrix:
     include:
         -
-            sudo: required
-            php: 7.1
+            php: 7.3
             env:
                 - SYLIUS_SUITE="application"
-                - TRAVIS_NODE_VERSION="7.5"
+                - SYMFONY_VERSION="4.3.*"
             services:
                 - memcached
+                - mysql
         -
-            sudo: false
-            php: 7.1
-            env: SYLIUS_SUITE="docs packages"
+            php: 7.3
+            env:
+                - SYLIUS_SUITE="docs packages"
+                - SYMFONY_VERSION="4.3.*"
+            services:
+                - docker
+            addons:
+                apt:
+                    packages:
+                        - parallel
+        -
+            php: 7.2
+            env:
+                - SYLIUS_SUITE="application"
+                - SYMFONY_VERSION="4.3.*"
+            services:
+                - memcached
+                - mysql
+        -
+            php: 7.2
+            env:
+                - SYLIUS_SUITE="packages"
+                - SYMFONY_VERSION="4.3.*"
             addons:
                 apt:
                     packages:
@@ -31,7 +59,6 @@ cache:
     directories:
         - ~/.composer/cache/files
         - ~/.cache/pip
-        - vendor
         - node_modules
         - $SYLIUS_CACHE_DIR
 

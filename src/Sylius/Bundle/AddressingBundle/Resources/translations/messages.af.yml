@@ -11,6 +11,7 @@ sylius:
             last_name: Van
             postcode: Poskode
             province: Provinsie
+            zone: Area
         country:
             name: Naam
             provinces: Provinsies

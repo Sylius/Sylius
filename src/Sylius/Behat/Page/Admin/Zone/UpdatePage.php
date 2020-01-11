@@ -20,36 +20,24 @@ use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use NamesIt;
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countMembers()
+    public function countMembers(): int
     {
         $selectedZoneMembers = $this->getSelectedZoneMembers();
 
         return count($selectedZoneMembers);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getScope()
+    public function getScope(): string
     {
         return $this->getElement('scope')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasMember(ZoneMemberInterface $zoneMember)
+    public function hasMember(ZoneMemberInterface $zoneMember): bool
     {
         $selectedZoneMembers = $this->getSelectedZoneMembers();
 
@@ -62,10 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeMember(ZoneMemberInterface $zoneMember)
+    public function removeMember(ZoneMemberInterface $zoneMember): void
     {
         $zoneMembers = $this->getElement('zone_members');
         $items = $zoneMembers->findAll('css', 'div[data-form-collection="item"]');
@@ -87,19 +72,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_zone_code',
@@ -112,13 +92,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @param NodeElement $item
-     *
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
-    private function getDeleteButtonForCollectionItem(NodeElement $item)
+    private function getDeleteButtonForCollectionItem(NodeElement $item): NodeElement
     {
         $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
         if (null === $deleteButton) {
@@ -133,11 +109,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getSelectedZoneMembers()
+    private function getSelectedZoneMembers(): array
     {
         $zoneMembers = $this->getElement('zone_members');
-        $selectedZoneMembers = $zoneMembers->findAll('css', 'option[selected="selected"]');
 
-        return $selectedZoneMembers;
+        return $zoneMembers->findAll('css', 'option[selected="selected"]');
     }
 }

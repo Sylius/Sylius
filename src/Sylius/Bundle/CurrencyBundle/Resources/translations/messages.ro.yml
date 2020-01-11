@@ -4,6 +4,11 @@
 sylius:
     form:
         currency:
-            code: Nume
+            base: Monedă de bază
+            code: Nume produs
             enabled: Activat
             exchange_rate: Cursul de schimb
+        exchange_rate:
+            source_currency: Valută sursă
+            target_currency: Monedă de schimb
+            ratio: Curs de schimb

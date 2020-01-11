@@ -40,6 +40,8 @@ sylius:
                 variants: Produkter
             item_total_configuration:
                 amount: Antall
+            nth_order_configuration:
+                nth: Nth
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:

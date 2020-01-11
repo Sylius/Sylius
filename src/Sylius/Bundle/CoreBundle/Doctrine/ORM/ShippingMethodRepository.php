@@ -18,9 +18,6 @@ use Sylius\Bundle\ShippingBundle\Doctrine\ORM\ShippingMethodRepository as BaseSh
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ShippingMethodRepository extends BaseShippingMethodRepository implements ShippingMethodRepositoryInterface
 {
     /**
@@ -59,11 +56,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         ;
     }
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return QueryBuilder
-     */
     protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel): QueryBuilder
     {
         return $this->createQueryBuilder('o')

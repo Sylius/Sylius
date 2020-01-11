@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-cached:
-    extensions:
-        FriendsOfBehat\SymfonyExtension:
-            kernel:
-                env: test_cached
-                debug: false

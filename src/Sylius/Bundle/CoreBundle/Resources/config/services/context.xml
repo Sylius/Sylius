@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.context.channel.cached" class="Sylius\Component\Channel\Context\CachedPerRequestChannelContext" decorates="sylius.context.channel" decoration-priority="256" public="false">
             <argument type="service" id="sylius.context.channel.cached.inner" />
             <argument type="service" id="request_stack" />
@@ -29,10 +31,12 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.customer" />
         </service>
+        <service id="Sylius\Component\Core\Context\ShopperContextInterface" alias="sylius.context.shopper" />
 
         <service id="sylius.context.cart.new_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext" decorates="sylius.context.cart.new" decoration-priority="256" public="false">
             <argument type="service" id="sylius.context.cart.new_shop_based.inner" />
             <argument type="service" id="sylius.context.shopper" />
+            <tag name="kernel.reset" method="reset" />
         </service>
         <service id="sylius.context.cart.customer_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\CustomerAndChannelBasedCartContext">
             <argument type="service" id="sylius.context.customer" />
@@ -44,6 +48,7 @@
         <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\CurrencyStorage">
             <argument type="service" id="sylius.storage.cookie" />
         </service>
+        <service id="Sylius\Component\Core\Currency\CurrencyStorageInterface" alias="sylius.storage.currency" />
 
         <service id="sylius.context.currency.storage_based" class="Sylius\Component\Core\Currency\Context\StorageBasedCurrencyContext">
             <argument type="service" id="sylius.context.channel" />

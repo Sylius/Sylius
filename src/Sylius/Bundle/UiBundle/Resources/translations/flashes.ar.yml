@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'لا يمكن حذف القناة. قناة ممكن واحد على الأقل مطلوب.'
+    checkout:
+        complete_error: 'وكان هناك مشكلة غير متوقعة مع إكمال أمر. من فضلك، حاول طلبك مرة أخرى.'
+    contact:
+        request_success: 'تم حفظ طلب الاتصال بنجاح.'
+        request_error: 'حدثت مشكلة أثناء إرسال طلب الاتصال. الرجاء المحاولة مرة أخرى لاحقاً.'
+    customer:
+        add_address: 'تم استلام الدفع الخاص بك بنجاح.'
+        impersonate: '%name% العميل بنجاح تم انتحاله.'
+        set_address_as_default: 'وقد تم تعيين عنوان كافتراضي.'
+    order:
+        apply_state_machine_transition_error: 'وكان هناك مشكلة غير متوقعة مع إكمال أمر. من فضلك، حاول طلبك مرة أخرى.'
+        promotion_integrity: 'أنك لم تعد مؤهلة للحصول على هذه الترقية %promotionName%.'
+        total_integrity: 'تم تغيير إجمالي الطلبية الخاصة بك، تحقق من معلومات النظام الخاص بك وتأكيدها مرة أخرى.'
+        update_error: 'وكان هناك مشكلة غير متوقعة مع إكمال أمر. من فضلك، حاول طلبك مرة أخرى.'
+    payment:
+        apply_state_machine_transition_error: 'وكان هناك مشكلة غير متوقعة مع إكمال أمر. من فضلك، حاول طلبك مرة أخرى.'
+    product:
+        out_of_stock: 'وهناك %quantity% فقط لهذا المنتج في المخزون.'
+    product_variant:
+        update_error: 'وكان هناك مشكلة غير متوقعة مع إكمال أمر. من فضلك، حاول طلبك مرة أخرى.'

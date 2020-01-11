@@ -23,9 +23,6 @@ use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionAction
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionActionFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $decoratedFactory): void

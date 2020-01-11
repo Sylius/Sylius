@@ -45,3 +45,12 @@ sylius:
             unique: Hodnota možnosti se zadaným kódem již existuje.
         value:
             not_blank: Vložte prosím hodnotu možnosti.
+    association_type:
+        name:
+            not_blank: Prosím vložte název typu asociace.
+            min_length: Název typu asociace musí být dlouhý nejméně 1 znak. | Název typu asociace musí být dlouhý alespoň {{ limit }} znaků.
+            max_length: Název typu asociace nesmí být delší než 1 znak. | Název typu asociace nesmí být delší než {{ limit }} znaků.
+        code:
+            not_blank: Zadejte kód typu asociace.
+            regex: Kód typu asociace může být tvořen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
+            unique: Typ asociace s tímto kódem již existuje.

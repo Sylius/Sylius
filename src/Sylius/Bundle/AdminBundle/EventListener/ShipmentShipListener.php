@@ -18,27 +18,16 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ShipmentShipListener
 {
-    /**
-     * @var ShipmentEmailManagerInterface
-     */
+    /** @var ShipmentEmailManagerInterface */
     private $shipmentEmailManager;
 
-    /**
-     * @param ShipmentEmailManagerInterface $shipmentEmailManager
-     */
     public function __construct(ShipmentEmailManagerInterface $shipmentEmailManager)
     {
         $this->shipmentEmailManager = $shipmentEmailManager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function sendConfirmationEmail(GenericEvent $event): void
     {
         $shipment = $event->getSubject();

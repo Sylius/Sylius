@@ -21,30 +21,17 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 abstract class AbstractResourceFixture implements FixtureInterface
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $exampleFactory;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ObjectManager $objectManager
-     * @param ExampleFactoryInterface $exampleFactory
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory)
     {
         $this->objectManager = $objectManager;
@@ -68,9 +55,6 @@ abstract class AbstractResourceFixture implements FixtureInterface
         ;
     }
 
-    /**
-     * @param array $options
-     */
     final public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -98,24 +82,26 @@ abstract class AbstractResourceFixture implements FixtureInterface
      */
     final public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $optionsNode = $treeBuilder->root($this->getName());
+        $treeBuilder = new TreeBuilder($this->getName());
 
-        $optionsNode->children()->integerNode('random')->min(0)->defaultValue(0);
+        /** @var ArrayNodeDefinition $optionsNode */
+        $optionsNode = $treeBuilder->getRootNode();
+
+        $optionsNode->children()
+            ->integerNode('random')->min(0)->defaultValue(0)->end()
+            ->variableNode('prototype')->end()
+        ;
 
         /** @var ArrayNodeDefinition $resourcesNode */
         $resourcesNode = $optionsNode->children()->arrayNode('custom');
 
         /** @var ArrayNodeDefinition $resourceNode */
-        $resourceNode = $resourcesNode->requiresAtLeastOneElement()->prototype('array');
+        $resourceNode = $resourcesNode->requiresAtLeastOneElement()->arrayPrototype();
         $this->configureResourceNode($resourceNode);
 
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $resourceNode
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         // empty

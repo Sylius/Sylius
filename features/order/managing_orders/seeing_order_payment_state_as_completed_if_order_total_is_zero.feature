@@ -24,6 +24,5 @@ Feature: Seeing payment state as paid after checkout steps if order total is zer
     @ui
     Scenario: Seeing payment state as paid on order's summary
         When I view the summary of the order "#00000666"
-        Then it should have order's payment state "Paid"
-        And I should not see information about payments
+        Then I should be informed that there are no payments
         And I should not be able to refund this payment

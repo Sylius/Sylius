@@ -20,25 +20,14 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ManagingTaxonsContext implements Context
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param Client $client
-     * @param SessionInterface $session
-     */
     public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;
@@ -100,9 +89,7 @@ final class ManagingTaxonsContext implements Context
     public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames)
     {
         $response = json_decode($this->client->getResponse()->getContent(), true);
-        $taxonNames = array_map(function ($item) {
-            return $item['name'];
-        }, $response);
+        $taxonNames = array_column($response, 'name');
 
         Assert::allOneOf($taxonNames, $expectedTaxonNames);
     }

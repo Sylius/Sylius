@@ -15,16 +15,7 @@ namespace Sylius\Component\Taxation\Calculator;
 
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CalculatorInterface
 {
-    /**
-     * @param float $base
-     * @param TaxRateInterface $rate
-     *
-     * @return float
-     */
     public function calculate(float $base, TaxRateInterface $rate): float;
 }

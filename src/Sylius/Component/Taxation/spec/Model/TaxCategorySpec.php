@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Taxation\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxCategorySpec extends ObjectBehavior
 {
     function it_implements_tax_category_interface(): void

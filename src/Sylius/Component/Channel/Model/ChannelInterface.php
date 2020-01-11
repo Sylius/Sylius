@@ -18,52 +18,29 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ChannelInterface extends
     CodeAwareInterface,
     TimestampableInterface,
     ToggleableInterface,
     ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 
-    /**
-     * @return string|null
-     */
     public function getHostname(): ?string;
 
-    /**
-     * @param string|null $hostname
-     */
     public function setHostname(?string $hostname): void;
 
-    /**
-     * @return string|null
-     */
     public function getColor(): ?string;
 
-    /**
-     * @param string|null $color
-     */
     public function setColor(?string $color): void;
+
+    public function getType(): ?string;
+
+    public function setType(?string $type): void;
 }

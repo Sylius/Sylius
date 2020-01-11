@@ -21,31 +21,17 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productTaxonFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productTaxonRepository;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     private $product;
 
-    /**
-     * @param FactoryInterface $productTaxonFactory
-     * @param RepositoryInterface $productTaxonRepository
-     * @param ProductInterface $product
-     */
     public function __construct(
         FactoryInterface $productTaxonFactory,
         RepositoryInterface $productTaxonRepository,
@@ -81,10 +67,11 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 
         $this->assertTransformationValueType($taxon, TaxonInterface::class);
 
-        /** @var ProductTaxonInterface $productTaxon */
+        /** @var ProductTaxonInterface|null $productTaxon */
         $productTaxon = $this->productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $this->product]);
 
         if (null === $productTaxon) {
+            /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->productTaxonFactory->createNew();
             $productTaxon->setProduct($this->product);
             $productTaxon->setTaxon($taxon);
@@ -94,9 +81,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $value
-     * @param string $expectedType
-     *
      * @throws TransformationFailedException
      */
     private function assertTransformationValueType($value, string $expectedType): void

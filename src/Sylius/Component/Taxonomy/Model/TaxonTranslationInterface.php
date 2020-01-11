@@ -17,28 +17,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface TaxonTranslationInterface extends SlugAwareInterface, ResourceInterface, TranslationInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 }

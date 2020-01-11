@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductImageSpec extends ObjectBehavior
 {
     function it_implements_product_image_interface(): void

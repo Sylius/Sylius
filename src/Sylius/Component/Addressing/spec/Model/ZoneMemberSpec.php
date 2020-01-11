@@ -18,10 +18,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneMemberSpec extends ObjectBehavior
 {
     function it_is_initializable(): void

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Summary
 =======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Configuration Reference
 -----------------------
@@ -13,7 +20,7 @@ Configuration Reference
             shipment:
                 classes:
                     model:      Sylius\Component\Shipping\Model\Shipment
-                    interface:      Sylius\Component\Shipping\Model\ShipmentInterface
+                    interface:  Sylius\Component\Shipping\Model\ShipmentInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
@@ -21,7 +28,7 @@ Configuration Reference
             shipment_item:
                 classes:
                     model:      Sylius\Component\Shipping\Model\ShipmentItem
-                    interface:      Sylius\Component\Shipping\Model\ShipmentItemInterface
+                    interface:  Sylius\Component\Shipping\Model\ShipmentItemInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
@@ -29,7 +36,7 @@ Configuration Reference
             shipping_method:
                 classes:
                     model:      Sylius\Component\Shipping\Model\ShippingMethod
-                    interface:      Sylius\Component\Shipping\Model\ShippingMethodInterface
+                    interface:  Sylius\Component\Shipping\Model\ShippingMethodInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
@@ -50,14 +57,6 @@ Configuration Reference
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
-
-Tests
------
-
-.. code-block:: bash
-
-    $ composer install
-    $ bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------

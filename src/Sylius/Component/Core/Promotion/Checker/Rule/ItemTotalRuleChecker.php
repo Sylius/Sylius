@@ -18,19 +18,11 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
-    /**
-     * @var RuleCheckerInterface
-     */
+    /** @var RuleCheckerInterface */
     private $itemTotalRuleChecker;
 
-    /**
-     * @param RuleCheckerInterface $itemTotalRuleChecker
-     */
     public function __construct(RuleCheckerInterface $itemTotalRuleChecker)
     {
         $this->itemTotalRuleChecker = $itemTotalRuleChecker;

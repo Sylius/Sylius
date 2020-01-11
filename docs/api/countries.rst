@@ -59,7 +59,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/countries/ \
+    $ curl http://demo.sylius.com/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -97,7 +97,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/countries/ \
+    $ curl http://demo.sylius.com/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -142,7 +142,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/countries/ \
+    $ curl http://demo.sylius.com/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -221,7 +221,7 @@ To see the details of the country with ``code = US`` use the below method:
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/countries/US \
+     $ curl http://demo.sylius.com/api/v1/countries/US \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -279,7 +279,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/countries/ \
+    $ curl http://demo.sylius.com/api/v1/countries/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -357,7 +357,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/countries/PL \
+    $ curl http://demo.sylius.com/api/v1/countries/PL \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

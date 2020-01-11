@@ -11,6 +11,7 @@ sylius:
             last_name: Nazwisko
             phone_number: Numer telefonu
             postcode: Kod pocztowy
+            street: Ulica
             province: Województwo
             zone: Strefa
         country:
@@ -18,7 +19,7 @@ sylius:
             name: Nazwa
             provinces: Województwa
             select: Wybierz
-            enabled: Aktywne
+            enabled: Dostępny
         province:
             name: Nazwa
             abbreviation: Skrót

@@ -7,71 +7,109 @@
  * file that was distributed with this source code.
  */
 
-(function($) {
-    $(document).ready(function () {
-        $('#sylius_product_variant_pricingCalculator').handlePrototypes({
-            'prototypePrefix': 'sylius_product_variant_pricingCalculator',
-            'containerSelector': '#sylius_calculator_container'
-        });
+import 'semantic-ui-css/components/accordion';
+import $ from 'jquery';
+import 'jquery.dirtyforms/jquery.dirtyforms';
 
-        $('#sylius_customer_createUser').change(function () {
-            $('#user-form').toggle();
-        });
+import 'sylius/ui/app';
+import 'sylius/ui/sylius-auto-complete';
+import 'sylius/ui/sylius-product-attributes';
+import 'sylius/ui/sylius-product-auto-complete';
+import 'sylius/ui/sylius-prototype-handler';
 
-        $('.sylius-autocomplete').autoComplete();
+import './sylius-compound-form-errors';
+import './sylius-lazy-choice-tree';
+import './sylius-move-product-variant';
+import './sylius-move-taxon';
+import './sylius-notification';
+import './sylius-product-images-preview';
+import './sylius-product-slug';
+import './sylius-taxon-slug';
 
-        $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
-        $('div#attributeChoice > .ui.dropdown.search').productAttributes();
+import SyliusTaxonomyTree from './sylius-taxon-tree';
+import formsList from './sylius-forms-list';
 
-        $('table thead th.sortable').on('click', function () {
-            window.location = $(this).find('a').attr('href');
-        });
+$(document).ready(() => {
+  $('#sylius_product_variant_pricingCalculator').handlePrototypes({
+    prototypePrefix: 'sylius_product_variant_pricingCalculator',
+    containerSelector: '#sylius_calculator_container',
+  });
 
-        $('.sylius-update-product-taxons').moveProduct($('.sylius-product-taxon-position'));
-        $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
-        $('.sylius-taxon-move-up').taxonMoveUp();
-        $('.sylius-taxon-move-down').taxonMoveDown();
+  $('#sylius_customer_createUser').change(() => {
+    $('#user-form').toggle();
+  });
 
-        $('#sylius_shipping_method_calculator').handlePrototypes({
-            'prototypePrefix': 'sylius_shipping_method_calculator_calculators',
-            'containerSelector': '.configuration'
-        });
+  $('.sylius-autocomplete').autoComplete();
 
-        $('#actions a[data-form-collection="add"]').on('click', function () {
-            setTimeout(function(){
-                $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
-            }, 50);
-        });
-        $('#rules a[data-form-collection="add"]').on('click', function () {
-            setTimeout(function(){
-                $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
-            }, 50);
-        });
+  $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
+  $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 
-        $(document).on('collection-form-add', function () {
-            $.each($('.sylius-autocomplete'), function (index, element) {
-                if ($._data($(element).get(0), 'events') == undefined) {
-                    $(element).autoComplete();
-                }
-            });
-        });
-        $(document).on('collection-form-update', function () {
-            $.each($('.sylius-autocomplete'), function (index, element) {
-                if ($._data($(element).get(0), 'events') == undefined) {
-                    $(element).autoComplete();
-                }
-            });
-        });
+  $('table thead th.sortable').on('click', (event) => {
+    window.location = $(event.currentTarget).find('a').attr('href');
+  });
 
-        $('.sylius-tabular-form').addTabErrors();
-        $('.ui.accordion').addAccordionErrors();
-        $('#sylius-product-taxonomy-tree').choiceTree('productTaxon', true, 1);
+  $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
+  $('.sylius-taxon-move-up').taxonMoveUp();
+  $('.sylius-taxon-move-down').taxonMoveDown();
 
-        $(document).notification();
-        $(document).productSlugGenerator();
-        $(document).taxonSlugGenerator();
+  $('#sylius_shipping_method_calculator').handlePrototypes({
+    prototypePrefix: 'sylius_shipping_method_calculator_calculators',
+    containerSelector: '.configuration',
+  });
 
-        $(document).previewUploadedImage('#sylius_product_images');
-        $(document).previewUploadedImage('#sylius_taxon_images');
+  $('#actions a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
+    }, 50);
+  });
+  $('#rules a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+    }, 50);
+  });
+
+  $(document).on('collection-form-add', () => {
+    $('.sylius-autocomplete').each((index, element) => {
+      if ($._data($(element).get(0), 'events') == undefined) {
+        $(element).autoComplete();
+      }
     });
-})(jQuery);
+  });
+  $(document).on('collection-form-update', () => {
+    $('.sylius-autocomplete').each((index, element) => {
+      if ($._data($(element).get(0), 'events') == undefined) {
+        $(element).autoComplete();
+      }
+    });
+  });
+
+  $('.sylius-tabular-form').addTabErrors();
+  $('.ui.accordion').addAccordionErrors();
+  $('#sylius-product-taxonomy-tree').choiceTree('productTaxon', true, 1);
+
+  $(document).notification();
+  $(document).productSlugGenerator();
+  $(document).taxonSlugGenerator();
+  $(document).previewUploadedImage('#sylius_product_images');
+  $(document).previewUploadedImage('#sylius_taxon_images');
+
+  $(document).previewUploadedImage('#add-avatar');
+
+  $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
+    if ($(event.target).find('.accordion').length > 0) {
+      $(event.target).find('.accordion').accordion();
+    }
+  });
+
+  const taxonomyTree = new SyliusTaxonomyTree();
+
+  $(`${formsList}, .check-unsaved`).dirtyForms();
+
+  $('.variants-accordion__title').on('click', '.icon.button', function(e) {
+    $(e.delegateTarget).next('.variants-accordion__content').toggle();
+    $(this).find('.dropdown.icon').toggleClass('counterclockwise rotated');
+  });
+});
+
+window.$ = $;
+window.jQuery = $;

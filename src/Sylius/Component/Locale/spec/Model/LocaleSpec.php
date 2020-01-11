@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleSpec extends ObjectBehavior
 {
     function let(): void

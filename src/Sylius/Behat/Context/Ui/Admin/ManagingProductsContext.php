@@ -25,85 +25,55 @@ use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
- */
 final class ManagingProductsContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**x
-     * @var CreateSimpleProductPageInterface
-     */
+    /** @var CreateSimpleProductPageInterface */
     private $createSimpleProductPage;
 
-    /**
-     * @var CreateConfigurableProductPageInterface
-     */
+    /** @var CreateConfigurableProductPageInterface */
     private $createConfigurableProductPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdateSimpleProductPageInterface
-     */
+    /** @var UpdateSimpleProductPageInterface */
     private $updateSimpleProductPage;
 
-    /**
-     * @var UpdateConfigurableProductPageInterface
-     */
+    /** @var UpdateConfigurableProductPageInterface */
     private $updateConfigurableProductPage;
 
-    /**
-     * @var ProductReviewIndexPageInterface
-     */
+    /** @var ProductReviewIndexPageInterface */
     private $productReviewIndexPage;
 
-    /**
-     * @var IndexPerTaxonPageInterface
-     */
+    /** @var IndexPerTaxonPageInterface */
     private $indexPerTaxonPage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var VariantCreatePageInterface */
+    private $variantCreatePage;
+
+    /** @var GeneratePageInterface */
+    private $variantGeneratePage;
+
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CreateSimpleProductPageInterface $createSimpleProductPage
-     * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
-     * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
-     * @param ProductReviewIndexPageInterface $productReviewIndexPage
-     * @param IndexPerTaxonPageInterface $indexPerTaxonPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -113,6 +83,8 @@ final class ManagingProductsContext implements Context
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         ProductReviewIndexPageInterface $productReviewIndexPage,
         IndexPerTaxonPageInterface $indexPerTaxonPage,
+        VariantCreatePageInterface $variantCreatePage,
+        GeneratePageInterface $variantGeneratePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -124,6 +96,8 @@ final class ManagingProductsContext implements Context
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
         $this->productReviewIndexPage = $productReviewIndexPage;
         $this->indexPerTaxonPage = $indexPerTaxonPage;
+        $this->variantCreatePage = $variantCreatePage;
+        $this->variantGeneratePage = $variantGeneratePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -152,7 +126,7 @@ final class ManagingProductsContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->specifyCode($code);
+        $currentPage->specifyCode($code ?? '');
     }
 
     /**
@@ -197,7 +171,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsPriceTo($price, $channelName)
+    public function iSetItsPriceTo(string $price, string $channelName)
     {
         $this->createSimpleProductPage->specifyPrice($channelName, $price);
     }
@@ -205,7 +179,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo(int $originalPrice, $channelName)
     {
         $this->createSimpleProductPage->specifyOriginalPrice($channelName, $originalPrice);
     }
@@ -213,18 +187,18 @@ final class ManagingProductsContext implements Context
     /**
      * @When I make it available in channel :channel
      */
-    public function iMakeItAvailableInChannel($channel)
+    public function iMakeItAvailableInChannel(ChannelInterface $channel)
     {
-        $this->createSimpleProductPage->checkChannel($channel);
+        $this->createSimpleProductPage->checkChannel($channel->getName());
     }
 
     /**
      * @When I assign it to channel :channel
      */
-    public function iAssignItToChannel($channel)
+    public function iAssignItToChannel(ChannelInterface $channel)
     {
         // Temporary solution until we will make current page resolver work with product pages
-        $this->updateConfigurableProductPage->checkChannel($channel);
+        $this->updateConfigurableProductPage->checkChannel($channel->getName());
     }
 
     /**
@@ -240,9 +214,25 @@ final class ManagingProductsContext implements Context
      * @When I set its slug to :slug in :language
      * @When I remove its slug
      */
-    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
     {
         $this->createSimpleProductPage->specifySlugIn($slug, $language);
+    }
+
+    /**
+     * @When I choose to show this product in the :channel channel
+     */
+    public function iChooseToShowThisProductInTheChannel(string $channel): void
+    {
+        $this->updateSimpleProductPage->showProductInChannel($channel);
+    }
+
+    /**
+     * @When I choose to show this product in this channel
+     */
+    public function iChooseToShowThisProductInThisChannel(): void
+    {
+        $this->updateSimpleProductPage->showProductInSingleChannel();
     }
 
     /**
@@ -256,11 +246,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
      */
-    public function theProductShouldAppearInTheShop($productName)
+    public function theProductShouldAppearInTheShop(string $productName): void
     {
         $this->iWantToBrowseProducts();
 
@@ -269,6 +260,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Given I am browsing products
+     * @When I browse products
      * @When I want to browse products
      */
     public function iWantToBrowseProducts()
@@ -290,6 +282,22 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon($taxonName)
     {
         $this->indexPage->filterByTaxon($taxonName);
+    }
+
+    /**
+     * @When I check (also) the :productName product
+     */
+    public function iCheckTheProduct(string $productName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -339,9 +347,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see a single product in the list
      * @Then I should see :numberOfProducts products in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProducts)
+    public function iShouldSeeProductsInTheList(int $numberOfProducts = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProducts);
     }
@@ -390,8 +399,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
+     * @When I modify the :product product
      */
-    public function iWantToModifyAProduct(ProductInterface $product)
+    public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
 
@@ -453,7 +463,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I change its price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iChangeItsPriceTo($price, $channelName)
+    public function iChangeItsPriceTo(string $price, $channelName)
     {
         $this->updateSimpleProductPage->specifyPrice($channelName, $price);
     }
@@ -461,7 +471,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iChangeItsOriginalPriceTo($price, $channelName)
+    public function iChangeItsOriginalPriceTo(string $price, $channelName)
     {
         $this->updateSimpleProductPage->specifyOriginalPrice($channelName, $price);
     }
@@ -481,7 +491,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsAttributeTo($attribute, $value = null, $language = 'en_US')
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value, $language);
+        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', $language);
     }
 
     /**
@@ -598,6 +608,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then /^(this product) main taxon should be "([^"]+)"$/
+     * @Then /^main taxon of (product "[^"]+") should be "([^"]+)"$/
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, $taxonName)
     {
@@ -664,6 +675,30 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I go to the variants list
+     */
+    public function iGoToTheVariantsList(): void
+    {
+        $this->resolveCurrentPage()->goToVariantsList();
+    }
+
+    /**
+     * @When I go to the variant creation page
+     */
+    public function iGoToTheVariantCreationPage(): void
+    {
+        $this->resolveCurrentPage()->goToVariantCreation();
+    }
+
+    /**
+     * @When I go to the variant generation page
+     */
+    public function iGoToTheVariantGenerationPage(): void
+    {
+        $this->resolveCurrentPage()->goToVariantGeneration();
+    }
+
+    /**
      * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an image with "([^"]*)" type$/
      */
     public function thisProductShouldHaveAnImageWithType($type)
@@ -671,6 +706,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->hasProductAccessibleImage($product->getCode()));
     }
 
     /**
@@ -838,9 +881,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I set the position of :productName to :position
      */
-    public function iSetThePositionOfTo($productName, $position)
+    public function iSetThePositionOfTo(string $productName, string $position): void
     {
-        $this->indexPerTaxonPage->setPositionOfProduct($productName, (int) $position);
+        $this->indexPerTaxonPage->setPositionOfProduct($productName, $position);
     }
 
     /**
@@ -863,7 +906,7 @@ final class ManagingProductsContext implements Context
      * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
-    public function itShouldBePricedAtForChannel(ProductInterface $product, $price, $channelName)
+    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, $channelName)
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
@@ -945,6 +988,57 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^I should be on the variant creation page for (this product)$/
+     */
+    public function iShouldBeOnTheVariantCreationPageForThisProduct(ProductInterface $product): void
+    {
+        Assert::true($this->variantCreatePage->isOpen(['productId' => $product->getId()]));
+    }
+
+    /**
+     * @Then /^I should be on the variant generation page for (this product)$/
+     */
+    public function iShouldBeOnTheVariantGenerationPageForThisProduct(ProductInterface $product): void
+    {
+        Assert::true($this->variantGeneratePage->isOpen(['productId' => $product->getId()]));
+    }
+
+    /**
+     * @Then I should see inventory of this product
+     */
+    public function iShouldSeeInventoryOfThisProduct(): void
+    {
+        Assert::true($this->updateSimpleProductPage->hasInventoryTab());
+    }
+
+    /**
+     * @Then I should not see inventory of this product
+     */
+    public function iShouldNotSeeInventoryOfThisProduct(): void
+    {
+        Assert::false($this->updateConfigurableProductPage->hasInventoryTab());
+    }
+
+    /**
+     * @Then I should be notified that the position :invalidPosition is invalid
+     */
+    public function iShouldBeNotifiedThatThePositionIsInvalid(string $invalidPosition): void
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('The position "%s" is invalid.', $invalidPosition),
+            NotificationType::failure()
+        );
+    }
+
+    /**
+     * @Then I should not be able to show this product in shop
+     */
+    public function iShouldNotBeAbleToShowThisProductInShop(): void
+    {
+        Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
@@ -974,7 +1068,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @return SymfonyPageInterface|IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
+     * @return IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
      */
     private function resolveCurrentPage()
     {

@@ -17,16 +17,10 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface CurrencyInterface extends
     CodeAwareInterface,
     TimestampableInterface,
     ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 }

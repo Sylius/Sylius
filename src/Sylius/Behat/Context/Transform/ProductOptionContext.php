@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionContext implements Context
 {
-    /**
-     * @var ProductOptionRepositoryInterface
-     */
+    /** @var ProductOptionRepositoryInterface */
     private $productOptionRepository;
 
-    /**
-     * @param ProductOptionRepositoryInterface $productOptionRepository
-     */
     public function __construct(ProductOptionRepositoryInterface $productOptionRepository)
     {
         $this->productOptionRepository = $productOptionRepository;

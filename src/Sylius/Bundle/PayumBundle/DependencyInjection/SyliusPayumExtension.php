@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-/**
- * @author Maksim Kotlyar
- */
 final class SyliusPayumExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**

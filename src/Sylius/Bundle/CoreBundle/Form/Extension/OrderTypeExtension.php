@@ -18,9 +18,6 @@ use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class OrderTypeExtension extends AbstractTypeExtension
 {
     /**

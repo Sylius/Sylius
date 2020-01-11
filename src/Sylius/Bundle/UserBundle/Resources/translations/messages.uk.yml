@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: Адреса електронної пошти
-            enabled: Увімкнено
+            enabled: Ввімкнено
             password:
                 label: Пароль
                 confirmation: Перевірка

@@ -19,25 +19,14 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CartContext implements Context
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $orderManager;
 
-    /**
-     * @var ExpiredCartsRemoverInterface
-     */
+    /** @var ExpiredCartsRemoverInterface */
     private $expiredCartsRemover;
 
-    /**
-     * @param ObjectManager $orderManager
-     * @param ExpiredCartsRemoverInterface $expiredCartsRemover
-     */
     public function __construct(
         ObjectManager $orderManager,
         ExpiredCartsRemoverInterface $expiredCartsRemover

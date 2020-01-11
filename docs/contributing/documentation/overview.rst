@@ -33,7 +33,17 @@ Add also the main repository as the ``upstream`` remote.
     $ git remote add upstream git@github.com:Sylius/Sylius.git
 
 
-The ``master`` branch holds the documentation for the development branch of the code.
+Choose the right Base Branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before starting to work on a patch, you must determine on which branch you need to work. It will be:
+
+* ``1.4`` or ``1.5``, if you are fixing or adding docs for features that exist in one of those versions,
+* ``master``, if you are documenting a new feature, that was not in ``1.4`` nor in ``1.5``
+
+.. note::
+
+    All bug fixes merged into the ``1.4`` and ``1.5`` maintenance branches are also merged into ``master`` on a regular basis.
 
 Create a dedicated branch for your changes (for organization):
 
@@ -48,28 +58,22 @@ When you're done, push this branch to *your* GitHub fork and initiate a pull req
 
 Your pull request will be reviewed, you will be asked to apply fixes if necessary and then it will be merged into the main repository.
 
-
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~
 
-To test the documentation before a commit:
+To test the documentation before a commit you need to install Sphinx.
 
-* Install `pip`_, the Python package manager,
+.. tip::
 
-* Download the documentation requirements,
+    Official Sphinx installation guide : `www.sphinx-doc.org <https://www.sphinx-doc.org/en/master/usage/installation.html>`_
 
-.. code-block:: bash
-
-    $ pip install -r docs/requirements.txt
-    # This makes sure that the version of Sphinx you'll get is >=1.4.2!
-
-* Install `Sphinx`_,
+Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 .. code-block:: bash
 
-    $ pip install Sphinx
+    $ pip install -U sphinx
 
-* In the ``docs`` directory run ``sphinx-build -b html . build`` and view the generated HTML files in the ``build`` directory.
+Then run ``sphinx-build -b html ./docs ./docs/build`` and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
 
 Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,8 +120,8 @@ tag and a short description:
 
 .. code-block:: text
 
-    .. versionadded:: 1.1
-        The ``getProductDiscount`` method was introduced in Sylius 1.1.
+    .. versionadded:: 1.3
+        The ``getProductDiscount`` method was introduced in Sylius 1.3.
 
 Standards
 ---------

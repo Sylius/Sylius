@@ -16,16 +16,7 @@ namespace Sylius\Component\Product\Checker;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface ProductVariantsParityCheckerInterface
 {
-    /**
-     * @param ProductVariantInterface $variant
-     * @param ProductInterface $product
-     *
-     * @return bool
-     */
     public function checkParity(ProductVariantInterface $variant, ProductInterface $product): bool;
 }

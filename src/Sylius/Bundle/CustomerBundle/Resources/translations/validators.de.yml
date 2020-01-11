@@ -27,4 +27,4 @@ sylius:
         name:
             max: Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
             min: Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie einen Namen der Kundengruppe an.
+            not_blank: Bitte geben Sie einen Namen für die Kundengruppe an.

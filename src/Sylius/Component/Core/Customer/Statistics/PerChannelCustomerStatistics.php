@@ -15,31 +15,18 @@ namespace Sylius\Component\Core\Customer\Statistics;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class PerChannelCustomerStatistics
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $ordersCount;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $ordersValue;
 
-    /**
-     * @var ChannelInterface
-     */
+    /** @var ChannelInterface */
     private $channel;
 
     /**
-     * @param int $ordersCount
-     * @param int $ordersValue
-     * @param ChannelInterface $channel
-     *
      * @throws \InvalidArgumentException
      */
     public function __construct(int $ordersCount, int $ordersValue, ChannelInterface $channel)
@@ -49,33 +36,21 @@ final class PerChannelCustomerStatistics
         $this->channel = $channel;
     }
 
-    /**
-     * @return int
-     */
     public function getOrdersCount(): int
     {
         return $this->ordersCount;
     }
 
-    /**
-     * @return int
-     */
     public function getOrdersValue(): int
     {
         return $this->ordersValue;
     }
 
-    /**
-     * @return ChannelInterface
-     */
     public function getChannel(): ChannelInterface
     {
         return $this->channel;
     }
 
-    /**
-     * @return int
-     */
     public function getAverageOrderValue(): int
     {
         return (int) round($this->ordersValue / $this->ordersCount);

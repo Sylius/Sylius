@@ -1,9 +1,19 @@
+<div class="ui column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            <div class="three fields">
+                {{ form_row(form.prefix) }}
+                {{ form_row(form.codeLength) }}
+                {{ form_row(form.suffix) }}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="ui two column stackable grid">
     <div class="column">
         <div class="ui segment">
             {{ form_errors(form) }}
             {{ form_row(form.amount) }}
-            {{ form_row(form.codeLength) }}
         </div>
     </div>
     <div class="column">

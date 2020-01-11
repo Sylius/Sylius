@@ -13,19 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Model;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class OrderSequence implements OrderSequenceInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $index = 0;
 
     /**

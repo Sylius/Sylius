@@ -17,48 +17,21 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 interface ProductTranslationInterface extends SlugAwareInterface, ResourceInterface, TranslationInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 
-    /**
-     * @return string|null
-     */
     public function getMetaKeywords(): ?string;
 
-    /**
-     * @param string|null $metaKeywords
-     */
     public function setMetaKeywords(?string $metaKeywords): void;
 
-    /**
-     * @return string|null
-     */
     public function getMetaDescription(): ?string;
 
-    /**
-     * @param string|null $metaDescription
-     */
     public function setMetaDescription(?string $metaDescription): void;
 }

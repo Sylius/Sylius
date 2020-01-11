@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        promotion:
+            name: 이름
         promotion_action:
             type: 타입
         promotion_rule:

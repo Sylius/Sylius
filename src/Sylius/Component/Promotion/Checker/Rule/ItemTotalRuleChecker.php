@@ -15,9 +15,6 @@ namespace Sylius\Component\Promotion\Checker\Rule;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'item_total';

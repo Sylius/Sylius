@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Došlo k neočekávaným potížím s aktualizací objednávky. Prosím zkuste objednávku znovu aktualizovat.'
         promotion_integrity: 'Bohužel už nemůžete využít akci %promotionName%.'
         total_integrity: 'Vaše objednávka byla změněna, prosím zkontrolujte ji ještě jednou.'
-        update_error: 'Došlo k neočekávaným potížím s aktualizací produktu. Prosím zkuste produkt znovu aktualizovat.'
+        update_error: 'Došlo k neočekávaným potížím s aktualizací objednávky. Prosím zkuste objednávku znovu aktualizovat.'
     payment:
         apply_state_machine_transition_error: 'Došlo k neočekávaným potížím s aktualizací platby. Prosím zkuste platbu znovu aktualizovat.'
     product:

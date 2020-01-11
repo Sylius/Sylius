@@ -15,41 +15,26 @@ namespace Sylius\Component\Promotion\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 class PromotionCoupon implements PromotionCouponInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $usageLimit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $used = 0;
 
-    /**
-     * @var PromotionInterface
-     */
+    /** @var PromotionInterface|null */
     protected $promotion;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
     /**

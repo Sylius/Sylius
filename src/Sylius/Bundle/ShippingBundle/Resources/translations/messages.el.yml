@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Πλήθος
+                equal: Ισούται με
+            type: Τύπος κανόνα
         shipment:
             state: Νομός
             states:
@@ -14,16 +16,30 @@ sylius:
                 ready: Έτοιμα
                 shipped: Αποστάλθηκαν
                 returned: Επεστράφησαν
+                cancelled: Ακυρωμένο
             tracking_code: Κωδικός παρακολούθησης
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Σταθερή χρέωση ανά αποστολή
+                amount: Ποσό
+            per_unit_rate_configuration:
+                label: Σταθερή χρέωση ανά μονάδα
+                amount: Ποσό
         shipping_category:
             description: Περιγραφή
             name: Ονομασία
         shipping_method:
+            calculator: Τρόπος υπολογισμού
             category: Κατηγορία
+            category_requirement: Απαίτηση κατηγορίας
             channels: Κανάλια
             configuration: Παραμετροποίηση
             description: Περιγραφή
             enabled: Ενεργοποιημένο
+            match_all_category_requirement: Όλες οι μονάδες πρέπει να ταιριάζουν με τις μεθόδους της κατηγορίας
+            match_any_category_requirement: Τουλάχιστον 1 μονάδα θα πρέπει να ταιριάζει με στην κατηγορία της μεθόδου
+            match_none_category_requirement: Καμία από τις μονάδες δεν πρέπει να ταιριάζει με τις μεθόδους της κατηγορίας
             name: Ονομασία
+            position: Θέση
             tax_category: Φορολογική κατηγορία
             translations: Μεταφράσεις

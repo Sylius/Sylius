@@ -11,16 +11,17 @@ sylius:
             last_name: Prezime
             phone_number: Kontakt telefon
             postcode: Poštanski broj
-            province: Pokrajina
+            street: Adresa
+            province: Županija
             zone: Regija
         country:
             add_province: Dodaj pokrajinu
-            name: Naziv Države
-            provinces: Pokrajine
+            name: Naziv regije
+            provinces: Županije
             select: Odaberite
             enabled: Omogućeno
         province:
-            name: Naziv pokrajine
+            name: Naziv regije
             abbreviation: Skraćeno
             select: Odaberite
         zone:
@@ -30,7 +31,7 @@ sylius:
             type: Vrsta
             types:
                 country: Država
-                province: Pokrajina
+                province: Županija
                 zone: Regija
             scope: Djelokrug
             scopes:

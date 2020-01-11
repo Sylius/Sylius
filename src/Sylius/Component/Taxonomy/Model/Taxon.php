@@ -16,72 +16,54 @@ namespace Sylius\Component\Taxonomy\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class Taxon implements TaxonInterface
 {
     use TranslatableTrait {
         __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $root;
 
-    /**
-     * @var TaxonInterface|null
-     */
+    /** @var TaxonInterface|null */
     protected $parent;
 
     /**
      * @var Collection|TaxonInterface[]
+     *
+     * @psalm-var Collection<array-key, TaxonInterface>
      */
     protected $children;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $left;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $right;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $level;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     protected $position;
 
     public function __construct()
     {
         $this->initializeTranslationsCollection();
 
+        /** @var ArrayCollection<array-key, TaxonInterface> $this->children */
         $this->children = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -229,6 +211,23 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function getFullname(string $pathDelimiter = ' / '): ?string
+    {
+        if ($this->isRoot()) {
+            return $this->getName();
+        }
+
+        return sprintf(
+            '%s%s%s',
+            $this->getParent()->getFullname(),
+            $pathDelimiter,
+            $this->getName()
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSlug(): ?string
     {
         return $this->getTranslation()->getSlug();
@@ -323,9 +322,20 @@ class Taxon implements TaxonInterface
     }
 
     /**
+     * @return TaxonTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var TaxonTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    protected function createTranslation(): TaxonTranslation
+    protected function createTranslation(): TaxonTranslationInterface
     {
         return new TaxonTranslation();
     }

@@ -16,9 +16,6 @@ namespace Sylius\Tests\Controller;
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class OauthTokenApiTest extends JsonApiTestCase
 {
     /**

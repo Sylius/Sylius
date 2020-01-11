@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: Naziv grupe
+            name: Naziv regije

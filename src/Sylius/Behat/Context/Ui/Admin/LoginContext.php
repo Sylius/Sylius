@@ -19,25 +19,14 @@ use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class LoginContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @var LoginPageInterface
-     */
+    /** @var LoginPageInterface */
     private $loginPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param LoginPageInterface $loginPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage, LoginPageInterface $loginPage)
     {
         $this->dashboardPage = $dashboardPage;
@@ -94,11 +83,19 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Given I should be on login page
+     */
+    public function iShouldBeOnLoginPage()
+    {
+        Assert::true($this->loginPage->isOpen());
+    }
+
+    /**
      * @Then I should be notified about bad credentials
      */
     public function iShouldBeNotifiedAboutBadCredentials()
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Bad credentials.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
     /**
@@ -126,7 +123,7 @@ final class LoginContext implements Context
     {
         $this->logInAgain($username, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Bad credentials.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
         Assert::false($this->dashboardPage->isOpen());
     }
 

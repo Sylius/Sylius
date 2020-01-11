@@ -24,39 +24,20 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CartContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var SummaryPageInterface
-     */
+    /** @var SummaryPageInterface */
     private $summaryPage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $productShowPage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param SummaryPageInterface $summaryPage
-     * @param ShowPageInterface $productShowPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
@@ -139,11 +120,31 @@ final class CartContext implements Context
     /**
      * @Then my cart taxes should be :taxTotal
      */
-    public function myCartTaxesShouldBe($taxTotal)
+    public function myCartTaxesShouldBe(string $taxTotal): void
     {
         $this->summaryPage->open();
 
-        Assert::same($this->summaryPage->getTaxTotal(), $taxTotal);
+        Assert::same($this->summaryPage->getExcludedTaxTotal(), $taxTotal);
+    }
+
+    /**
+     * @Then my included in price taxes should be :taxTotal
+     */
+    public function myIncludedInPriceTaxesShouldBe(string $taxTotal): void
+    {
+        $this->summaryPage->open();
+
+        Assert::same($this->summaryPage->getIncludedTaxTotal(), $taxTotal);
+    }
+
+    /**
+     * @Then there should be no taxes charged
+     */
+    public function thereShouldBeNoTaxesCharged(): void
+    {
+        $this->summaryPage->open();
+
+        Assert::false($this->summaryPage->areTaxesCharged());
     }
 
     /**
@@ -155,6 +156,16 @@ final class CartContext implements Context
         $this->summaryPage->open();
 
         Assert::same($this->summaryPage->getShippingTotal(), $shippingTotal);
+    }
+
+    /**
+     * @Then I should not see shipping total for my cart
+     */
+    public function iShouldNotSeeShippingTotalForMyCart(): void
+    {
+        $this->summaryPage->open();
+
+        Assert::false($this->summaryPage->hasShippingTotal());
     }
 
     /**
@@ -228,9 +239,10 @@ final class CartContext implements Context
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
+     * @Given the customer added :product product to the cart
      * @When I add product :product to the cart
      */
-    public function iAddProductToTheCart(ProductInterface $product)
+    public function iAddProductToTheCart(ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCart();
@@ -429,12 +441,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @param string $price
-     *
-     * @return int
+     * @Then /^(\d)(st|nd|rd|th) item in my cart should have "([^"]+)" image displayed$/
      */
-    private function getPriceFromString($price)
+    public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
     {
-        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
+    }
+
+    private function getPriceFromString(string $price): int
+    {
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }

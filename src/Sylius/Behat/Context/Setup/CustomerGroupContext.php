@@ -20,31 +20,17 @@ use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerGroupContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerGroupRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerGroupFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $customerGroupRepository
-     * @param FactoryInterface $customerGroupFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $customerGroupRepository,
@@ -62,6 +48,17 @@ final class CustomerGroupContext implements Context
     public function theStoreHasACustomerGroup($name, $code = null)
     {
         $this->createCustomerGroup($name, $code);
+    }
+
+    /**
+     * @Given the store has customer groups :firstName and :secondName
+     * @Given the store has customer groups :firstName, :secondName and :thirdName
+     */
+    public function theStoreHasCustomerGroups(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasACustomerGroup($name);
+        }
     }
 
     /**

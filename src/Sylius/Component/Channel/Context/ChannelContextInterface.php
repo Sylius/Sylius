@@ -15,14 +15,9 @@ namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ChannelContextInterface
 {
     /**
-     * @return ChannelInterface
-     *
      * @throws ChannelNotFoundException
      */
     public function getChannel(): ChannelInterface;

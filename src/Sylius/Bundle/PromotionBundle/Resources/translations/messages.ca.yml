@@ -7,10 +7,16 @@ sylius:
             description: Descripció
             name: Nom
         promotion_action:
+            fixed_discount_configuration:
+                amount: Total
             type: Tipus
+        promotion_coupon_generator_instruction:
+            amount: Total
         promotion_rule:
             contains_product_configuration:
                 variants: Productes
+            item_total_configuration:
+                amount: Total
             shipping_country_configuration:
                 country: País
             type: Tipus

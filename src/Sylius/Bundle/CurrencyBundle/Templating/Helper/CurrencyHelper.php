@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
     /**

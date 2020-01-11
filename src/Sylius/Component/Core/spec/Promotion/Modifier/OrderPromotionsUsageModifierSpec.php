@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
     function it_implements_an_order_promotions_usage_modifier_interface(): void
@@ -87,15 +84,38 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $secondPromotion,
         PromotionCouponInterface $promotionCoupon
     ): void {
+        $order->getState()->willReturn('cancelled');
         $order->getPromotions()->willReturn(
             new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
         );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
+        $promotionCoupon->isReusableFromCancelledOrders()->willReturn(true);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();
         $secondPromotion->decrementUsed()->shouldBeCalled();
 
         $promotionCoupon->decrementUsed()->shouldBeCalled();
+
+        $this->decrement($order);
+    }
+
+    function it_decrements_a_usage_of_promotions_and_does_not_decrement_a_usage_of_promotion_coupon_applied_on_order(
+        OrderInterface $order,
+        PromotionInterface $firstPromotion,
+        PromotionInterface $secondPromotion,
+        PromotionCouponInterface $promotionCoupon
+    ): void {
+        $order->getState()->willReturn('cancelled');
+        $order->getPromotions()->willReturn(
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+        );
+        $order->getPromotionCoupon()->willReturn($promotionCoupon);
+        $promotionCoupon->isReusableFromCancelledOrders()->willReturn(false);
+
+        $firstPromotion->decrementUsed()->shouldBeCalled();
+        $secondPromotion->decrementUsed()->shouldBeCalled();
+
+        $promotionCoupon->decrementUsed()->shouldNotBeCalled();
 
         $this->decrement($order);
     }

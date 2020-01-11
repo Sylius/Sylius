@@ -41,7 +41,7 @@ Purges the relational database. Uses ``delete`` purge mode and the default entit
 
 Configuration options:
 
-    - ``purge_mode`` - sets how database is purged, available values: ``delete`` (default), ``truncate``
+    - ``mode`` - sets how database is purged, available values: ``delete`` (default), ``truncate``
     - ``managers`` - an array of entity managers' names used to purge the database, ``[null]`` by default
     - ``exclude`` - an array of table/view names to be excluded from purge, ``[]`` by default
 
@@ -55,7 +55,7 @@ Example configuration:
                 listeners:
                     orm_purger:
                         options:
-                            purge_mode: truncate
+                            mode: truncate
                             managers:
                                 - custom_manager
                             exclude:

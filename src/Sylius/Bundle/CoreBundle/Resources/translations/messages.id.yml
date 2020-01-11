@@ -25,6 +25,12 @@ sylius:
             name: Nama
             roles: Peran
         channel:
+            billing_data:
+                city: Kota
+                company: Perusahaan
+                country: Negara
+                postcode: Kode pos
+                street: Alamat
             contact_email: Kontak email
             currencies: Mata Uang
             currency_base: Mata uang utama
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: sistem file
             cache:
                 header: cache
-                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: ada
             logs:
                 header: log
-                help: 'Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Untuk menyeting permissions jalankan: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: tidak ada
             not_writable: tidak writable
             parameters:
                 header: parameters.yml
-                help: 'Untuk menyeting permissions jalankan: sudo chmod a+w %path%'
+                help: "Untuk menyeting permissions jalankan: sudo chmod a+w %path%"
             vendors: vendors
             writable: writable
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: tidak ketergantungan
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: zona waktu
             timezone_deprecated:
                 header: Zona waktu kadaluarsa
-                help: 'Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).'
+                help: Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).
             version: Versi PHP
             version_recommended: Versi PHP yang direkomendasikan
     payum_gateway:

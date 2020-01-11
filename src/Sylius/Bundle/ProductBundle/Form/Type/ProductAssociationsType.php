@@ -22,25 +22,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductAssociationsType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
-    /**
-     * @var DataTransformerInterface
-     */
+    /** @var DataTransformerInterface */
     private $productsToProductAssociationsTransformer;
 
-    /**
-     * @param RepositoryInterface $productAssociationTypeRepository
-     * @param DataTransformerInterface $productsToProductAssociationsTransformer
-     */
     public function __construct(
         RepositoryInterface $productAssociationTypeRepository,
         DataTransformerInterface $productsToProductAssociationsTransformer

@@ -18,9 +18,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositeChannelContextSpec extends ObjectBehavior
 {
     function it_implements_channel_context_interface(): void

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -25,41 +25,23 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class AddressExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $addressFactory
-     * @param RepositoryInterface $countryRepository
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $addressFactory,
         RepositoryInterface $countryRepository,
@@ -88,10 +70,10 @@ class AddressExampleFactory extends AbstractExampleFactory
                 return $this->faker->lastName;
             })
             ->setDefault('phone_number', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->phoneNumber : null;
+                return random_int(1, 100) > 50 ? $this->faker->phoneNumber : null;
             })
             ->setDefault('company', function (Options $options): ?string {
-                return mt_rand(1, 100) > 50 ? $this->faker->company : null;
+                return random_int(1, 100) > 50 ? $this->faker->company : null;
             })
             ->setDefault('street', function (Options $options): string {
                 return $this->faker->streetAddress;
@@ -149,8 +131,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $code
-     *
      * @throws \InvalidArgumentException
      */
     private function assertCountryCodeIsValid(string $code): void
@@ -160,16 +140,13 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param string $provinceCode
-     * @param string $countryCode
-     *
      * @throws \InvalidArgumentException
      */
     private function assertProvinceCodeIsValid(string $provinceCode, string $countryCode): void
     {
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
 
-        /** @var ProvinceInterface $province */
         foreach ($country->getProvinces() as $province) {
             if ($province->getCode() === $provinceCode) {
                 return;
@@ -179,13 +156,9 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Provided province code is not valid for "%s"', $country->getName()));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function provideProvince(array $options, AddressInterface $address): void
     {
-        /** @var Country $country */
+        /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $options['country_code']]);
 
         if ($country->hasProvinces()) {
@@ -198,11 +171,6 @@ class AddressExampleFactory extends AbstractExampleFactory
     }
 
     /**
-     * @param Collection $provinces
-     * @param string $provinceName
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     private function getProvinceCode(Collection $provinces, string $provinceName): string
@@ -217,10 +185,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         throw new \InvalidArgumentException(sprintf('Country has defined provinces, but %s is not one of them', $provinceName));
     }
 
-    /**
-     * @param array $options
-     * @param AddressInterface $address
-     */
     private function resolveCountryProvince(array $options, AddressInterface $address): void
     {
         if (null !== $options['province_code']) {

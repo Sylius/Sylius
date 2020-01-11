@@ -20,19 +20,11 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentType extends AbstractType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $dataClass;
 
-    /**
-     * @param string $dataClass
-     */
     public function __construct(string $dataClass)
     {
         $this->dataClass = $dataClass;

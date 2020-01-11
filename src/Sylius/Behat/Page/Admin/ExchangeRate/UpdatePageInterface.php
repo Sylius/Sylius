@@ -15,28 +15,13 @@ namespace Sylius\Behat\Page\Admin\ExchangeRate;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return string
-     */
-    public function getRatio();
+    public function getRatio(): string;
 
-    /**
-     * @param string $ratio
-     */
-    public function changeRatio($ratio);
+    public function changeRatio(string $ratio): void;
 
-    /**
-     * @return bool
-     */
-    public function isSourceCurrencyDisabled();
+    public function isSourceCurrencyDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isTargetCurrencyDisabled();
+    public function isTargetCurrencyDisabled(): bool;
 }

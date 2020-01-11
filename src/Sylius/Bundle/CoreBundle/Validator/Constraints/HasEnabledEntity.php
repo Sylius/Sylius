@@ -15,34 +15,21 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class HasEnabledEntity extends Constraint
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $objectManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'Must have at least one enabled entity';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $repositoryMethod = 'findBy';
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     public $errorPath;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $enabledPath = 'enabled';
 
     /**

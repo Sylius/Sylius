@@ -15,19 +15,12 @@ namespace Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\Generic;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class ResolveNextRoute extends Generic implements ResolveNextRouteInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $routeName;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $routeParameters = [];
 
     public function getRouteName(): ?string

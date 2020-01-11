@@ -16,33 +16,19 @@ namespace Sylius\Behat\Page\Admin\ProductReview;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function accept(array $parameters)
+    public function accept(array $parameters): void
     {
         $this->getActionButtonsField($parameters)->pressButton('Accept');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function reject(array $parameters)
+    public function reject(array $parameters): void
     {
         $this->getActionButtonsField($parameters)->pressButton('Reject');
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return NodeElement
-     */
-    private function getActionButtonsField(array $parameters)
+    private function getActionButtonsField(array $parameters): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterface
 {
     /**
@@ -41,7 +38,7 @@ final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterfac
                 throw new \InvalidArgumentException('Tagged tax calculation strategies need to have `type` and `label` attributes.');
             }
 
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
+            $priority = (int) ($attributes[0]['priority'] ?? 0);
 
             $strategies[$attributes[0]['type']] = $attributes[0]['label'];
 

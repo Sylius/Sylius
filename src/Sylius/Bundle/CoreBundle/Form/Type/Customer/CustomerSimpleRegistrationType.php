@@ -22,21 +22,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class CustomerSimpleRegistrationType extends AbstractResourceType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(string $dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);

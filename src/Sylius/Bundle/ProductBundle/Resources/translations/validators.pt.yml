@@ -14,6 +14,7 @@ sylius:
             min_length: O nome do produto deve ter pelo menos 1 caracter.|O nome do produto deve ter pelo menos {{ limit }} caracteres.
             max_length: O nome do produto não deve ter mais que 1 caracter.|O nome do produto não deve ter mais que {{ limit }} caracteres.
     product_variant:
+        combination: Variante com esta opção definida já existe.
         code:
             not_blank: Por favor, insira o código.
     option:

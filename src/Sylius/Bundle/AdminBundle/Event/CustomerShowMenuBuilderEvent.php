@@ -18,21 +18,11 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
 {
-    /**
-     * @var CustomerInterface
-     */
+    /** @var CustomerInterface */
     private $customer;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param CustomerInterface $customer
-     */
     public function __construct(FactoryInterface $factory, ItemInterface $menu, CustomerInterface $customer)
     {
         parent::__construct($factory, $menu);
@@ -40,9 +30,6 @@ class CustomerShowMenuBuilderEvent extends MenuBuilderEvent
         $this->customer = $customer;
     }
 
-    /**
-     * @return CustomerInterface
-     */
     public function getCustomer(): CustomerInterface
     {
         return $this->customer;

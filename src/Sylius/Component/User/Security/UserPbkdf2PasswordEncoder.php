@@ -24,40 +24,24 @@ use Webmozart\Assert\Assert;
  *
  * But also warrants a warning, using PBKDF2 (with a high number of iterations) slows down the process.
  * PBKDF2 should be used with caution and care.
- *
- * @author Sebastiaan Stok <s.stok@rollerscapes.net>
- * @author Andrew Johnson
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 {
     private const MAX_PASSWORD_LENGTH = 4096;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $algorithm;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $encodeHashAsBase64;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $iterations;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $length;
 
     /**
-     * @param string|null $algorithm
-     * @param bool|null $encodeHashAsBase64
-     * @param int|null $iterations
      * @param int|null $length of the result of encoding
      */
     public function __construct(
@@ -83,11 +67,6 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
     }
 
     /**
-     * @param string $plainPassword
-     * @param string $salt
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      * @throws \LogicException when the algorithm is not supported
      */

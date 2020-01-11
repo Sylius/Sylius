@@ -17,18 +17,17 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
+use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -57,6 +56,7 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('defaultTaxZone', ZoneChoiceType::class, [
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
+                'zone_scope' => Scope::TAX,
             ])
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
@@ -82,6 +82,9 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('accountVerificationRequired', CheckboxType::class, [
                 'label' => 'sylius.form.channel.account_verification_required',
                 'required' => false,
+            ])
+            ->add('shopBillingData', ShopBillingDataType::class, [
+                'label' => 'sylius.form.channel.shop_billing_data',
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
             ->addEventSubscriber(new ChannelFormSubscriber())

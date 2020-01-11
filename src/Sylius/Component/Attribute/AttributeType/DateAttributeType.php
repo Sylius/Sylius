@@ -16,9 +16,6 @@ namespace Sylius\Component\Attribute\AttributeType;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DateAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'date';
@@ -36,7 +33,7 @@ final class DateAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**

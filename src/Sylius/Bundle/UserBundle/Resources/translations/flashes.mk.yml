@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        change_password: 'Вашата лозинка е успешно променета!'
+        reset_password: 'Вашата лозинка е успешно ресетирана!'
+        verify_no_user: 'Нема најавен корисник.'

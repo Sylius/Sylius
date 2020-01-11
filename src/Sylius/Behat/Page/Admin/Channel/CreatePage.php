@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\DescribesIt;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use NamesIt;
@@ -29,69 +27,44 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use DescribesIt;
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setHostname($hostname)
+    public function setHostname(string $hostname): void
     {
         $this->getDocument()->fillField('Hostname', $hostname);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setContactEmail($contactEmail)
+    public function setContactEmail(string $contactEmail): void
     {
         $this->getDocument()->fillField('Contact email', $contactEmail);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function defineColor($color)
+    public function defineColor(string $color): void
     {
         $this->getDocument()->fillField('Color', $color);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCurrency($currencyCode)
+    public function chooseCurrency(string $currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseLocale($language)
+    public function chooseLocale(string $language): void
     {
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseDefaultTaxZone($taxZone)
+    public function chooseDefaultTaxZone(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseDefaultLocale($locale)
+    public function chooseDefaultLocale(?string $locale): void
     {
         if (null !== $locale) {
-            $this->getElement('locales')->selectOption($locale);
             $this->getElement('default_locale')->selectOption($locale);
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseBaseCurrency($currency)
+    public function chooseBaseCurrency(?string $currency): void
     {
         if (null !== $currency) {
             $this->getElement('currencies')->selectOption($currency);
@@ -99,45 +72,42 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
 
-    public function allowToSkipShippingStep()
+    public function allowToSkipShippingStep(): void
     {
         $this->getDocument()->checkField('Skip shipping step if only one shipping method is available?');
     }
 
-    public function allowToSkipPaymentStep()
+    public function allowToSkipPaymentStep(): void
     {
         $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    public function setType(string $type): void
+    {
+        $this->getElement('type')->selectOption($type);
+    }
+
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
-            'base_currency' => '#sylius_channel_baseCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
+            'type' => '#sylius_channel_type',
         ]);
     }
 }

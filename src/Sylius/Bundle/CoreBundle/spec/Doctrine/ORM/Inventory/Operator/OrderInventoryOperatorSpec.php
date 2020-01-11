@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
     function let(OrderInventoryOperatorInterface $decoratedOperator, EntityManagerInterface $productVariantManager): void

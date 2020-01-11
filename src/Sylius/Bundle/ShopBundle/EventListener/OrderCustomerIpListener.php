@@ -19,34 +19,20 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderCustomerIpListener
 {
-    /**
-     * @var IpAssignerInterface
-     */
+    /** @var IpAssignerInterface */
     private $ipAssigner;
 
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * @param IpAssignerInterface $ipAssigner
-     * @param RequestStack $requestStack
-     */
     public function __construct(IpAssignerInterface $ipAssigner, RequestStack $requestStack)
     {
         $this->ipAssigner = $ipAssigner;
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function assignCustomerIpToOrder(GenericEvent $event): void
     {
         $subject = $event->getSubject();

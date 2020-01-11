@@ -18,19 +18,11 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ManagingShipmentsContext implements Context
 {
-    /**
-     * @var ShipmentRepositoryInterface
-     */
+    /** @var ShipmentRepositoryInterface */
     private $shipmentRepository;
 
-    /**
-     * @param ShipmentRepositoryInterface $shipmentRepository
-     */
     public function __construct(ShipmentRepositoryInterface $shipmentRepository)
     {
         $this->shipmentRepository = $shipmentRepository;

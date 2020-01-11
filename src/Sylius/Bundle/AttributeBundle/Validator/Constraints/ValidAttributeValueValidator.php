@@ -20,19 +20,11 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ValidAttributeValueValidator extends ConstraintValidator
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $attributeTypeRegistry;
 
-    /**
-     * @param ServiceRegistryInterface $attributeTypeRegistry
-     */
     public function __construct(ServiceRegistryInterface $attributeTypeRegistry)
     {
         $this->attributeTypeRegistry = $attributeTypeRegistry;

@@ -16,27 +16,16 @@ namespace Sylius\Bundle\LocaleBundle\Listener;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class RequestLocaleSetter
 {
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     * @param LocaleProviderInterface $localeProvider
-     */
     public function __construct(
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider
@@ -46,11 +35,9 @@ final class RequestLocaleSetter
     }
 
     /**
-     * @param GetResponseEvent $event
-     *
      * @throws LocaleNotFoundException
      */
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
 

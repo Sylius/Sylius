@@ -15,14 +15,9 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 class UniqueCurrencyPair extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.exchange_rate.unique_currency_pair';
 
     /**

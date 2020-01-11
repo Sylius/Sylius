@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Shipping\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ShippingCategorySpec extends ObjectBehavior
 {
     function it_implements_shipping_category_interface(): void

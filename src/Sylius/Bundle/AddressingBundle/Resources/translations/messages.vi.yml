@@ -12,6 +12,7 @@ sylius:
             phone_number: Số điện thoại
             postcode: Mã bưu chính
             province: Tỉnh
+            zone: Khu vực
         country:
             add_province: Thêm tỉnh
             name: Tên

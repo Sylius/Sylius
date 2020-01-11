@@ -68,7 +68,7 @@ To create a new product option use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/ \
+    $ curl http://demo.sylius.com/api/v1/product-options/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -145,7 +145,7 @@ Exemplary Response
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/ \
+    $ curl http://demo.sylius.com/api/v1/product-options/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -207,7 +207,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/ \
+    $ curl http://demo.sylius.com/api/v1/product-options/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -340,7 +340,7 @@ To see the details of the product option with ``code = MUG_TYPE`` use the below 
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/product-options/MUG_TYPE \
+     $ curl http://demo.sylius.com/api/v1/product-options/MUG_TYPE \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -436,7 +436,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/ \
+    $ curl http://demo.sylius.com/api/v1/product-options/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -714,7 +714,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/MUG_SIZE \
+    $ curl http://demo.sylius.com/api/v1/product-options/MUG_SIZE \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -759,7 +759,7 @@ To partially update the product option with ``code = MUG_SIZE`` use the below me
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/MUG_SIZE \
+    $ curl http://demo.sylius.com/api/v1/product-options/MUG_SIZE \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -807,7 +807,7 @@ To delete the product option with ``code = MUG_SIZE`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/product-options/MUG_SIZE \
+    $ curl http://demo.sylius.com/api/v1/product-options/MUG_SIZE \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
+
+print_header "Testing (PHPStan)" "Sylius"
+run_command "vendor/bin/phpstan analyse -c phpstan.neon -l 1 src"

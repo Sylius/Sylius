@@ -8,6 +8,11 @@ sylius:
             not_blank: Please enter attribute code.
             regex: Attribute code can only be comprised of letters, numbers, dashes and underscores.
             unique: This code is already in use.
+        configuration:
+            max_entries: Configuration max entries value must be greater or equal to the min entries value.
+            max_length: Configuration max length must be greater or equal to the min length.
+            min_entries: Configuration min entries value must be lower or equal to the number of added choices.
+            multiple: Configuration multiple must be true if min or max entries values are specified.
         presentation:
             not_blank: Please enter attribute presentation.
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.

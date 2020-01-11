@@ -19,9 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 class SelectAttributeConfigurationType extends AbstractType
 {
     /**
@@ -31,19 +28,25 @@ class SelectAttributeConfigurationType extends AbstractType
     {
         $builder
             ->add('choices', SelectAttributeChoicesCollectionType::class, [
-                'entry_type' => TextType::class,
+                'entry_type' => SelectAttributeValueTranslationsType::class,
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,
                 'allow_delete' => true,
+                'required' => false,
+                'entry_options' => [
+                    'entry_type' => TextType::class,
+                ],
             ])
             ->add('multiple', CheckboxType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.multiple',
             ])
             ->add('min', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.min',
+                'required' => false,
             ])
             ->add('max', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.max',
+                'required' => false,
             ])
         ;
     }

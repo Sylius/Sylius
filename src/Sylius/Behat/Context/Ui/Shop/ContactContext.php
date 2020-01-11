@@ -15,30 +15,18 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ContactContext implements Context
 {
-    /**
-     * @var ContactPageInterface
-     */
+    /** @var ContactPageInterface */
     private $contactPage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param ContactPageInterface $contactPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         ContactPageInterface $contactPage,
         NotificationCheckerInterface $notificationChecker
@@ -98,11 +86,7 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage(
-            $this->contactPage,
-            $element,
-            sprintf('Please enter your %s.', $element)
-        );
+        Assert::same($this->contactPage->getValidationMessageFor($element), sprintf('Please enter your %s.', $element));
     }
 
     /**
@@ -110,31 +94,17 @@ final class ContactContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsInvalid()
     {
-        $this->assertFieldValidationMessage(
-            $this->contactPage,
-            'email',
-            'This email is invalid.'
-        );
+        Assert::same($this->contactPage->getValidationMessageFor('email'), 'This email is invalid.');
     }
 
     /**
-     * @Then I should be notified that a problem occured while sending the contact request
+     * @Then I should be notified that a problem occurred while sending the contact request
      */
-    public function iShouldBeNotifiedThatAProblemOccuredWhileSendingTheContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest()
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',
             NotificationType::failure()
         );
-    }
-
-    /**
-     * @param PageInterface $page
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
-    {
-        Assert::same($page->getValidationMessageFor($element), $expectedMessage);
     }
 }

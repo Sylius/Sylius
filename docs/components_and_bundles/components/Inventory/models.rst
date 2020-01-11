@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_inventory_model_inventory-unit:
 
@@ -27,4 +34,4 @@ InventoryUnits have the following properties:
     This model implements the :ref:`component_inventory_model_inventory-unit-interface`
     For more detailed information go to `Sylius API InventoryUnit`_.
 
-.. _Sylius API InventoryUnit: http://api.sylius.org/Sylius/Component/Inventory/Model/InventoryUnitInterface.html
+.. _Sylius API InventoryUnit: http://api.sylius.com/Sylius/Component/Inventory/Model/InventoryUnitInterface.html

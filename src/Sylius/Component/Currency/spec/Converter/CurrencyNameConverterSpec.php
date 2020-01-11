@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Currency\Converter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CurrencyNameConverterSpec extends ObjectBehavior
 {
     function it_implements_a_currency_name_converter_interface(): void

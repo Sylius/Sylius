@@ -16,15 +16,11 @@ namespace spec\Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let(): void
@@ -58,8 +54,8 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_maps_proper_relations_for_review_model(
         ClassMetadataFactory $metadataFactory,
-        ClassMetadataInfo $classMetadataInfo,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $classMetadataInfo,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ): void {
@@ -101,7 +97,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_maps_proper_relations_for_reviewable_model(
         ClassMetadataFactory $metadataFactory,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ): void {
@@ -122,7 +118,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_skips_mapping_configuration_if_metadata_name_is_not_different(
         ClassMetadataFactory $metadataFactory,
-        ClassMetadataInfo $metadata,
+        ClassMetadata $metadata,
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ): void {

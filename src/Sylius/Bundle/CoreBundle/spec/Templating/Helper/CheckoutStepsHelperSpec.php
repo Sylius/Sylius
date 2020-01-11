@@ -19,9 +19,6 @@ use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutStepsHelperSpec extends ObjectBehavior
 {
     function let(

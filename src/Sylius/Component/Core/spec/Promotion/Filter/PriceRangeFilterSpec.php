@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PriceRangeFilterSpec extends ObjectBehavior
 {
     function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void

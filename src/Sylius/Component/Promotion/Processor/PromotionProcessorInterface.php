@@ -15,13 +15,7 @@ namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionProcessorInterface
 {
-    /**
-     * @param PromotionSubjectInterface $subject
-     */
     public function process(PromotionSubjectInterface $subject): void;
 }

@@ -20,25 +20,23 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {
     /**
-     * @var Collection
+     * @var Collection|BaseChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, BaseChannelInterface>
      */
     protected $channels;
 
-    /**
-     * @var GatewayConfigInterface
-     */
+    /** @var GatewayConfigInterface */
     protected $gatewayConfig;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, BaseChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 

@@ -15,14 +15,9 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 
-/**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductTranslation extends BaseProductTranslation implements ProductTranslationInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $shortDescription;
 
     /**

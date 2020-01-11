@@ -17,18 +17,17 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
     /**
      * @var string
+     *
+     * @psalm-var class-string
      */
     private $className;
 
     /**
-     * @param string $className
+     * @psalm-param class-string $className
      */
     public function __construct(string $className)
     {
@@ -45,11 +44,6 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
         throw new UnsupportedMethodException('createNew');
     }
 
-    /**
-     * @param OrderItemInterface $orderItem
-     *
-     * @return OrderItemUnitInterface
-     */
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface
     {
         return new $this->className($orderItem);

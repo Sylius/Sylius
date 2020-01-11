@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Din e-postadress har verifierats.'
         verify_email_by_invalid_token: 'Verifieringsnyckeln är ogiltig.'
         verify_email_request: 'Ett e-postmeddelande med verifieringslänken har skickats till din e-postadress.'
+        verify_no_user: 'Det finns ingen inloggad användare.'
         verify_verified_email: 'Din e-postadress är redan verifierad.'

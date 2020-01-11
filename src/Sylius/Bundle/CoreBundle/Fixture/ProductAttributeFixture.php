@@ -17,21 +17,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductAttributeFixture extends AbstractResourceFixture
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $attributeTypes;
 
-    /**
-     * @param ObjectManager $objectManager
-     * @param ExampleFactoryInterface $exampleFactory
-     * @param array $attributeTypes
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory, array $attributeTypes)
     {
         parent::__construct($objectManager, $exampleFactory);

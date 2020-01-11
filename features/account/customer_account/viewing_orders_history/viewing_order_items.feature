@@ -16,7 +16,7 @@ Feature: Viewing details of an order
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @javascript
+    @ui
     Scenario: Viewing basic information about an order
         When I view the summary of the order "#00000666"
         And it should has number "#00000666"

@@ -16,51 +16,36 @@ namespace Sylius\Component\Channel\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Channel implements ChannelInterface
 {
     use TimestampableTrait, ToggleableTrait;
 
-    /**
-     * @var mixed|null
-     */
+    /** @var mixed|null */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $description;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $hostname;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $color;
+
+    /** @var string|null */
+    protected $type;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->name;
@@ -152,5 +137,15 @@ class Channel implements ChannelInterface
     public function setColor(?string $color): void
     {
         $this->color = $color;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 }

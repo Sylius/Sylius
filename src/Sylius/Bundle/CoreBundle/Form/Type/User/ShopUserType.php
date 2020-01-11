@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ShopUserType extends UserType
 {
     /**

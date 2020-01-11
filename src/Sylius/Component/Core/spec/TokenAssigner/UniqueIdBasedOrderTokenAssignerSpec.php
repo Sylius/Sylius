@@ -19,9 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
 {
     public function let(RandomnessGeneratorInterface $generator)

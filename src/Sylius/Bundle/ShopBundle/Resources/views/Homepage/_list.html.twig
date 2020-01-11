@@ -1,0 +1,12 @@
+{% if products|length == 4 %}
+    {% set columns = "two" %}
+{% endif %}
+{% if products|length == 3 %}
+    {% set columns = "three odd doubling" %}
+{% endif %}
+
+<div class="ui {{ columns|default('') }} cards">
+    {% for product in products %}
+        {% include '@SyliusShop/Product/_box.html.twig' %}
+    {% endfor %}
+</div>

@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class PaymentMethodFixture extends AbstractResourceFixture
 {
     /**
@@ -38,10 +35,11 @@ class PaymentMethodFixture extends AbstractResourceFixture
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
+                ->scalarNode('instructions')->end()
                 ->scalarNode('gatewayName')->cannotBeEmpty()->end()
                 ->scalarNode('gatewayFactory')->cannotBeEmpty()->end()
-                ->arrayNode('gatewayConfig')->prototype('variable')->end()->end()
-                ->arrayNode('channels')->prototype('scalar')->end()->end()
+                ->arrayNode('gatewayConfig')->variablePrototype()->end()->end()
+                ->arrayNode('channels')->scalarPrototype()->end()->end()
                 ->booleanNode('enabled')->end()
         ;
     }

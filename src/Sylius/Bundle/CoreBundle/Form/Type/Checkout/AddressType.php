@@ -26,9 +26,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class AddressType extends AbstractResourceType
 {
     /**
@@ -55,7 +52,8 @@ final class AddressType extends AbstractResourceType
                 $customer = $options['customer'];
 
                 Assert::isInstanceOf($resource, CustomerAwareInterface::class);
-                /** @var CustomerInterface $resourceCustomer */
+
+                /** @var CustomerInterface|null $resourceCustomer */
                 $resourceCustomer = $resource->getCustomer();
 
                 if (

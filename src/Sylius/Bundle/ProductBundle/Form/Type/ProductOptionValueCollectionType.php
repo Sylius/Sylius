@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,8 +27,6 @@ use Webmozart\Assert\Assert;
  * implementation, designed to handle option values assigned to object variant.
  * Array of OptionInterface objects should be passed as 'options' option to build proper
  * set of choice types with option values list.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductOptionValueCollectionType extends AbstractType
 {
@@ -50,6 +50,7 @@ final class ProductOptionValueCollectionType extends AbstractType
             $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
+                'data' => $this->getDefaultDataOption($option, $options['data']),
                 'property_path' => '[' . $i . ']',
                 'block_name' => 'entry',
             ]);
@@ -77,17 +78,24 @@ final class ProductOptionValueCollectionType extends AbstractType
     }
 
     /**
-     * @param mixed $options
-     *
      * @throws \InvalidArgumentException
      */
-    private function assertOptionsAreValid($options)
+    private function assertOptionsAreValid($options): void
     {
-        Assert::false((
-            !isset($options['options']) ||
-            !is_array($options['options']) &&
-            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)),
-            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
+        Assert::true(
+            isset($options['options']) && is_iterable($options['options']),
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\ProductOptionInterface" must be passed to collection'
         );
+    }
+
+    private function getDefaultDataOption(ProductOptionInterface $option, Collection $data): ?ProductOptionValueInterface
+    {
+        foreach ($data as $defaultOption) {
+            if ($defaultOption->getOption()->getCode() === $option->getCode()) {
+                return $defaultOption;
+            }
+        }
+
+        return null;
     }
 }

@@ -9,6 +9,9 @@ sylius:
         email:
             invalid: 這不是正確的電郵地址。
             not_blank: 請輸入您的電郵地址。
+    customer:
+        currency_code:
+            not_valid: 您輸入的貨幣代碼不正確。
     order:
         currency_code:
             not_valid: 您輸入的貨幣代碼不正確。

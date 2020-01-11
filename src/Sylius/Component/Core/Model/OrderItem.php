@@ -15,24 +15,18 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
-    /**
-     * @var ProductVariantInterface
-     */
+    /** @var ProductVariantInterface */
     protected $variant;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProduct(): ?ProductInterface
-    {
-        return $this->variant->getProduct();
-    }
+    /** @var string */
+    protected $productName;
+
+    /** @var string */
+    protected $variantName;
 
     /**
      * {@inheritdoc}
@@ -48,6 +42,43 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
+    }
+
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->variant->getProduct();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductName(): ?string
+    {
+        return $this->productName ?: $this->variant->getProduct()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductName(?string $productName): void
+    {
+        $this->productName = $productName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariantName(): ?string
+    {
+        return $this->variantName ?: $this->variant->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVariantName(?string $variantName): void
+    {
+        $this->variantName = $variantName;
     }
 
     /**
@@ -72,6 +103,9 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         }
 
         foreach ($this->units as $unit) {
+            /** @var OrderItemUnitInterface $unit */
+            Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
             $taxTotal += $unit->getTaxTotal();
         }
 
@@ -89,9 +123,32 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             return $this->unitPrice;
         }
 
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
         return
             $this->unitPrice +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+        ;
+    }
+
+    public function getFullDiscountedUnitPrice(): int
+    {
+        if ($this->units->isEmpty()) {
+            return $this->unitPrice;
+        }
+
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
+        return
+            $this->unitPrice +
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
         ;
     }
 

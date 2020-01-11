@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        review:
+            author: מחבר
+            comment: תגובה
+            header: הוסף סקירה
+            rating: דירוג
+            status:
+                approved: אושר
+                label: מצב
+                new: חדש
+                rejected: נדחה
+            submit: שלח
+            title: כותרת

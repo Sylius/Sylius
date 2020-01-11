@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 class AdminUserFixture extends AbstractResourceFixture
 {
     /**
@@ -43,6 +40,7 @@ class AdminUserFixture extends AbstractResourceFixture
                 ->scalarNode('locale_code')->cannotBeEmpty()->end()
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
+                ->scalarNode('avatar')->cannotBeEmpty()->end()
         ;
     }
 }

@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Hubo un problema inesperado al actualizar una orden. Por favor, intente actualizar nuevamente.'
         promotion_integrity: 'Lo sentimos, la promoción %promotionName% ya no está disponible para usted.'
         total_integrity: 'El total de su pedido ha cambiado, compruebe la información del pedido y confirme nuevamente.'
-        update_error: 'Hubo un problema inesperado al actualizar un producto. Por favor, intente actualizar nuevamente.'
+        update_error: 'Hubo un problema inesperado al actualizar una orden. Por favor, intente actualizar nuevamente.'
     payment:
         apply_state_machine_transition_error: 'Hubo un problema inesperado al actualizar un pago. Por favor, intente actualizar nuevamente.'
     product:

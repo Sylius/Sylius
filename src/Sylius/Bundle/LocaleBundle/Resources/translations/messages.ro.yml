@@ -4,4 +4,4 @@
 sylius:
     form:
         locale:
-            name: Nume
+            name: Nume produs

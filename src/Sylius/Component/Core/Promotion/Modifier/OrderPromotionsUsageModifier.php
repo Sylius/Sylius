@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Modifier;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifierInterface
 {
     /**
@@ -44,9 +42,16 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
             $promotion->decrementUsed();
         }
 
+        /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $order->getPromotionCoupon();
-        if (null !== $promotionCoupon) {
-            $promotionCoupon->decrementUsed();
+        if (null === $promotionCoupon) {
+            return;
         }
+
+        if (OrderInterface::STATE_CANCELLED === $order->getState() && !$promotionCoupon->isReusableFromCancelledOrders()) {
+            return;
+        }
+
+        $promotionCoupon->decrementUsed();
     }
 }

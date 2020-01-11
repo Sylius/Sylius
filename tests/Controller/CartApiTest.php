@@ -18,22 +18,15 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class CartApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -44,7 +37,7 @@ final class CartApiTest extends JsonApiTestCase
      */
     public function it_denies_getting_an_cart_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/carts/-1');
+        $this->client->request('GET', $this->getCartApiUrl('-1'));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -57,7 +50,7 @@ final class CartApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/carts/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl('-1'), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -70,10 +63,11 @@ final class CartApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $cartData = $this->loadFixturesFromFile('resources/cart.yml');
+
         /** @var OrderInterface $cart */
         $cart = $cartData['order_001'];
 
-        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/show_response', Response::HTTP_OK);
@@ -86,10 +80,11 @@ final class CartApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $orderData = $this->loadFixturesFromFile('resources/order.yml');
-        /** @var OrderInterface $cart */
-        $order = $orderData['order_001'];
 
-        $this->client->request('GET', $this->getCartUrl($order), [], [], static::$authorizedHeaderWithAccept);
+        /** @var OrderInterface $cart */
+        $cart = $orderData['order_001'];
+
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -100,7 +95,7 @@ final class CartApiTest extends JsonApiTestCase
      */
     public function it_denies_creating_cart_for_non_authenticated_user()
     {
-        $this->client->request('POST', '/api/v1/carts/');
+        $this->client->request('POST', $this->getCartApiUrl());
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -113,7 +108,7 @@ final class CartApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/carts/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', $this->getCartApiUrl(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -136,7 +131,7 @@ final class CartApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/v1/carts/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', $this->getCartApiUrl(), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
 
@@ -148,7 +143,7 @@ EOT;
      */
     public function it_denies_getting_carts_for_non_authenticated_user()
     {
-        $this->client->request('GET', '/api/v1/carts/');
+        $this->client->request('GET', $this->getCartApiUrl());
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -162,7 +157,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/cart.yml');
 
-        $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/index_response', Response::HTTP_OK);
@@ -176,7 +171,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/order.yml');
 
-        $this->client->request('GET', '/api/v1/carts/', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/empty_index_response', Response::HTTP_OK);
@@ -192,7 +187,7 @@ EOT;
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
 
-        $this->client->request('DELETE', $this->getCartUrl($cart));
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $cart->getId()));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -205,7 +200,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/v1/carts/-1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl('-1'), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -222,12 +217,12 @@ EOT;
         /** @var OrderInterface $cart */
         $cart = $carts['order_001'];
 
-        $this->client->request('DELETE', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -244,7 +239,7 @@ EOT;
         /** @var OrderItemInterface $order */
         $order = $orders['order_001'];
 
-        $this->client->request('DELETE', $this->getCartUrl($order), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', $this->getCartApiUrl((string) $order->getId()), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -255,7 +250,7 @@ EOT;
      */
     public function it_denies_adding_a_product_to_cart_for_non_authenticated_user()
     {
-        $this->client->request('POST', '/api/v1/carts/1/items/');
+        $this->client->request('POST', $this->getCartApiUrl('1/items/'));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -403,7 +398,7 @@ EOT;
      */
     public function it_denies_updating_a_cart_item_quantity_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/v1/carts/1/items/1');
+        $this->client->request('PUT', $this->getCartApiUrl('1/items/1'));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -459,7 +454,7 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/increase_quantity_response', Response::HTTP_OK);
@@ -495,7 +490,7 @@ EOT;
      */
     public function it_denies_carts_item_deletion_for_non_authenticated_user()
     {
-        $this->client->request('DELETE', '/api/v1/carts/-1/items/-1');
+        $this->client->request('DELETE', $this->getCartApiUrl('-1/items/-1'));
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -511,7 +506,7 @@ EOT;
 
         /** @var OrderInterface $cart */
         $cart = $cartWithItems['cart_with_items'];
-        $url = sprintf('/api/v1/carts/%s/items/-1', $cart->getId());
+        $url = sprintf($this->getCartApiUrl('%s/items/-1'), $cart->getId());
 
         $this->client->request('DELETE', $url, [], [], static::$authorizedHeaderWithContentType);
 
@@ -556,40 +551,30 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', $this->getCartUrl($cart), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', $this->getCartApiUrl((string) $cart->getId()), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'cart/recalculated_items_total_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param OrderInterface $cart
-     *
-     * @return string
-     */
-    private function getCartUrl(OrderInterface $cart)
+    private function getCartApiUrl(string $urlFragment = ''): string
     {
-        return '/api/v1/carts/' . $cart->getId();
+        return '/api/v1/carts/' . $urlFragment;
     }
 
     /**
-     * @param OrderInterface $cart
-     *
      * @return string
      */
     private function getCartItemListUrl(OrderInterface $cart)
     {
-        return sprintf('/api/v1/carts/%s/items/', $cart->getId());
+        return sprintf($this->getCartApiUrl('%s/items/'), (string) $cart->getId());
     }
 
     /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     *
      * @return string
      */
     private function getCartItemUrl(OrderInterface $cart, OrderItemInterface $cartItem)
     {
-        return sprintf('/api/v1/carts/%s/items/%s', $cart->getId(), $cartItem->getId());
+        return sprintf($this->getCartApiUrl('%s/items/%s'), $cart->getId(), $cartItem->getId());
     }
 }

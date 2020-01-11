@@ -17,8 +17,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * This bundle provides generic UI for Sylius bundles and platform.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusUiBundle extends Bundle
 {

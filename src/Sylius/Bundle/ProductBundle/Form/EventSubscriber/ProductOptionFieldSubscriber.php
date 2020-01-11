@@ -21,19 +21,11 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(ProductVariantResolverInterface $variantResolver)
     {
         $this->variantResolver = $variantResolver;
@@ -49,14 +41,11 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
-        /** @var ProductInterface $product */
         $product = $event->getData();
 
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
 
         $form = $event->getForm();

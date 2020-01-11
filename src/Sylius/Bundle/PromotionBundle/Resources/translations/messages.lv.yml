@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        promotion:
+            description: Apraksts
+            name: Nosaukums
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Summa
+        promotion_coupon_generator_instruction:
+            amount: Summa
+        promotion_rule:
+            item_total_configuration:
+                amount: Summa

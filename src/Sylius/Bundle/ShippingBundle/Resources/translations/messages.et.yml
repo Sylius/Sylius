@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_category:
+            name: Nimi
+        shipping_method:
+            channels: Kanalid
+            enabled: Lubatud
+            name: Nimi
+            tax_category: Maksu kategooria

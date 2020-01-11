@@ -5,7 +5,7 @@ To display an edit form of a particular resource, change it or update it via API
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -38,7 +38,7 @@ Just like for other actions, you can customize the template.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -55,7 +55,7 @@ Same way like for **createAction** you can override the default form.
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -63,7 +63,7 @@ Same way like for **createAction** you can override the default form.
         defaults:
             _controller: app.controller.book:updateAction
             _sylius:
-                form: AppBundle\Form\BookType
+                form: App\Form\BookType
 
 Passing Custom Options to Form
 ------------------------------
@@ -74,7 +74,7 @@ Below you can see how to specify custom options, in this case, ``validation_grou
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -94,7 +94,7 @@ By default, the **updateAction** will look for the resource by id. You can easil
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{title}/edit
@@ -111,7 +111,7 @@ By default the controller will try to get the id of resource and redirect to the
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{id}/edit
@@ -125,7 +125,7 @@ You can also perform more complex redirects, with parameters. For example:
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /genre/{genreId}/books/{id}/edit
@@ -137,6 +137,30 @@ You can also perform more complex redirects, with parameters. For example:
                     route: app_genre_show
                     parameters: { id: $genreId }
 
+
+Custom Event Name
+-----------------
+
+By default, there are two events dispatched during resource update, one before setting new data, the other after successful update.
+The pattern is always the same - ``{applicationName}.{resourceName}.pre/post_update``. However, you can customize the last part of the event, to provide your
+own action name.
+
+.. code-block:: yaml
+
+    # config/routes.yaml
+
+    app_book_customer_update:
+        path: /customer/book-update/{id}
+        methods: [GET, PUT]
+        defaults:
+            _controller: app.controller.book:updateAction
+            _sylius:
+                event: customer_update
+
+This way, you can listen to ``app.book.pre_customer_update`` and ``app.book.post_customer_update`` events. It's especially useful, when you use
+``ResourceController:updateAction`` in more than one route.
+
+
 [API] Returning resource or no content
 --------------------------------------
 
@@ -145,7 +169,7 @@ Sylius, by default is returning the ``204 HTTP Code``, which indicates an empty 
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /books/{title}/edit
@@ -166,7 +190,7 @@ Configuration Reference
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
+    # config/routes.yaml
 
     app_book_update:
         path: /genre/{genreId}/books/{title}/edit
@@ -176,6 +200,7 @@ Configuration Reference
             _sylius:
                 template: Book/editInGenre.html.twig
                 form: app_book_custom
+                event: book_update
                 repository:
                     method: findBookByTitle
                     arguments: [$title, expr:service('app.context.book')]

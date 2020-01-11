@@ -13,17 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Behaviour;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 trait SpecifiesItsCode
 {
     use DocumentAccessor;
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code)
+    public function specifyCode(string $code): void
     {
         $this->getDocument()->fillField('Code', $code);
     }

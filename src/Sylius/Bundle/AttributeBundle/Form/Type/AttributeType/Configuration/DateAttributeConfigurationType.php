@@ -17,9 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DateAttributeConfigurationType extends AbstractType
 {
     /**
@@ -30,6 +27,7 @@ final class DateAttributeConfigurationType extends AbstractType
         $builder
             ->add('format', TextType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.date.format',
+                'required' => false,
             ])
         ;
     }

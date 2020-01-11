@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class TaxonImageSpec extends ObjectBehavior
 {
     function it_extends_an_image(): void

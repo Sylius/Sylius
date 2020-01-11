@@ -16,22 +16,11 @@ namespace Sylius\Component\Core\Locale;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 interface LocaleStorageInterface
 {
-    /**
-     * @param ChannelInterface $channel
-     * @param string $localeCode
-     */
     public function set(ChannelInterface $channel, string $localeCode): void;
 
     /**
-     * @param ChannelInterface $channel
-     *
-     * @return string
-     *
      * @throws ChannelNotFoundException
      */
     public function get(ChannelInterface $channel): string;

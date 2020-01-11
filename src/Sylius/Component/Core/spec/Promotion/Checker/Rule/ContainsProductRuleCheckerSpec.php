@@ -22,10 +22,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-/**
- * @author Piotr Walków <walkow.piotr@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
     function it_implements_a_rule_checker_interface(): void

@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
     /**
@@ -95,8 +92,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @throws \InvalidArgumentException
      */
     private function release(OrderInterface $order): void
@@ -122,9 +117,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function giveBack(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */

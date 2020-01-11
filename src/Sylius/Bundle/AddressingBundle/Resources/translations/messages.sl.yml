@@ -30,8 +30,8 @@ sylius:
             type: Vrsta
             types:
                 country: Država
-                province: Provinca
-                zone: Območje
+                province: Regija
+                zone: Cona
             scope: Področje
             select: Izberite
             select_scope: Izberite področje

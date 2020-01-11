@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -35,101 +36,88 @@ use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\User\Model\UserInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class OrderContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
-    private $orderRepository;
-
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $orderFactory;
 
-    /**
-     * @var FactoryInterface
-     */
-    private $orderItemFactory;
+    /** @var FactoryInterface */
+    private $addressFactory;
 
-    /**
-     * @var OrderItemQuantityModifierInterface
-     */
-    private $itemQuantityModifier;
-
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
+    /** @var FactoryInterface */
+    private $orderItemFactory;
 
-    /**
-     * @var ObjectManager
-     */
-    private $objectManager;
-
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var RepositoryInterface */
+    private $countryRepository;
+
+    /** @var RepositoryInterface */
+    private $customerRepository;
+
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    /** @var PaymentMethodRepositoryInterface */
+    private $paymentMethodRepository;
+
+    /** @var ShippingMethodRepositoryInterface */
+    private $shippingMethodRepository;
+
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param OrderRepositoryInterface $orderRepository
-     * @param FactoryInterface $orderFactory
-     * @param FactoryInterface $orderItemFactory
-     * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param FactoryInterface $customerFactory
-     * @param RepositoryInterface $customerRepository
-     * @param ObjectManager $objectManager
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     * @param ProductVariantResolverInterface $variantResolver
-     */
+    /** @var OrderItemQuantityModifierInterface */
+    private $itemQuantityModifier;
+
+    /** @var ObjectManager */
+    private $objectManager;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
-        FactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        FactoryInterface $addressFactory,
         FactoryInterface $customerFactory,
-        RepositoryInterface $customerRepository,
-        ObjectManager $objectManager,
+        FactoryInterface $orderItemFactory,
         StateMachineFactoryInterface $stateMachineFactory,
-        ProductVariantResolverInterface $variantResolver
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $customerRepository,
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ProductVariantResolverInterface $variantResolver,
+        OrderItemQuantityModifierInterface $itemQuantityModifier,
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
-        $this->orderItemFactory = $orderItemFactory;
-        $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->addressFactory = $addressFactory;
         $this->customerFactory = $customerFactory;
-        $this->customerRepository = $customerRepository;
-        $this->objectManager = $objectManager;
+        $this->orderItemFactory = $orderItemFactory;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->countryRepository = $countryRepository;
+        $this->customerRepository = $customerRepository;
+        $this->orderRepository = $orderRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->variantResolver = $variantResolver;
+        $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -137,14 +125,24 @@ final class OrderContext implements Context
      * @Given /^there is (?:a|another) (customer "[^"]+") that placed (an order "[^"]+")$/
      * @Given a customer :customer placed an order :orderNumber
      * @Given the customer :customer has already placed an order :orderNumber
+     * @Given there is a customer :customer that placed an order :orderNumber in channel :channel
      */
-    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber = null)
+    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber = null, $channel = null)
     {
-        $order = $this->createOrder($customer, $orderNumber);
+        $order = $this->createOrder($customer, $orderNumber, $channel);
 
         $this->sharedStorage->set('order', $order);
 
         $this->orderRepository->add($order);
+    }
+
+    /**
+     * @Given there is a customer :customer that placed an order :orderNumber later
+     */
+    public function thereIsACustomerThatPlacedAnOrderLater(CustomerInterface $customer, string $orderNumber): void
+    {
+        sleep(1);
+        $this->thereIsCustomerThatPlacedOrder($customer, $orderNumber);
     }
 
     /**
@@ -157,11 +155,7 @@ final class OrderContext implements Context
         ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod
     ) {
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
-        $customer->setEmail($email);
-        $customer->setFirstname('John');
-        $customer->setLastname('Doe');
+        $customer = $this->createCustomer($email);
 
         $this->customerRepository->add($customer);
 
@@ -184,7 +178,7 @@ final class OrderContext implements Context
     /**
      * @Given /^(I) placed (an order "[^"]+")$/
      */
-    public function iPlacedAnOrder(UserInterface $user, $orderNumber)
+    public function iPlacedAnOrder(ShopUserInterface $user, $orderNumber)
     {
         $customer = $user->getCustomer();
         $order = $this->createOrder($customer, $orderNumber);
@@ -326,9 +320,9 @@ final class OrderContext implements Context
      * @Given the customer bought a single :product
      * @Given I bought a single :product
      */
-    public function theCustomerBoughtSingleProduct(ProductInterface $product)
+    public function theCustomerBoughtSingleProduct(ProductInterface $product, ?ChannelInterface $channel = null)
     {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1);
+        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1, $channel);
 
         $this->objectManager->flush();
     }
@@ -401,7 +395,7 @@ final class OrderContext implements Context
      * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function iHaveAlreadyPlacedOrderNthTimes(
-        UserInterface $user,
+        ShopUserInterface $user,
         $numberOfOrders,
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
@@ -414,6 +408,44 @@ final class OrderContext implements Context
         }
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given there is an :orderNumber order with :product product
+     * @Given there is an :orderNumber order with :product product in this channel
+     * @Given there is an :orderNumber order with :product product in :channel channel
+     * @Given there is a :state :orderName order with :product product
+     */
+    public function thereIsAOrderWithProduct(
+        string $orderNumber,
+        ProductInterface $product,
+        string $state = null,
+        ?ChannelInterface $channel = null
+    ): void {
+        $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber, $channel);
+
+        $this->sharedStorage->set('order', $order);
+
+        $this->theCustomerBoughtSingleProduct($product, $channel);
+
+        $this->createShippingPaymentMethodsAndAddress();
+
+        if ($state !== null) {
+            foreach ($this->getTargetPaymentTransitions($state) as $transition) {
+                $this->applyPaymentTransitionOnOrder($order, $transition);
+            }
+        }
+
+        $this->orderRepository->add($order);
+    }
+
+    /**
+     * @Given there is an :orderNumber order with :product product ordered later
+     */
+    public function thereIsAnOrderWithProductOrderedLater(string $orderNumber, ProductInterface $product): void
+    {
+        sleep(1);
+        $this->thereIsAOrderWithProduct($orderNumber, $product);
     }
 
     /**
@@ -488,9 +520,9 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfCustomers; ++$i) {
-            $order = $this->createCart($customers[rand(0, $numberOfCustomers - 1)]);
+            $order = $this->createCart($customers[random_int(0, $numberOfCustomers - 1)]);
 
-            $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfCustomers - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
@@ -639,7 +671,16 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
+     * @Given the order :order has been placed in :localeCode locale
+     */
+    public function theOrderHasBeenPlacedInLocale(OrderInterface $order, string $localeCode): void
+    {
+        $order->setLocaleCode($localeCode);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
@@ -650,7 +691,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $transition
      */
     private function applyPaymentTransitionOnOrder(OrderInterface $order, $transition)
@@ -661,7 +701,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
      * @param string $transition
      */
     private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
@@ -669,28 +708,26 @@ final class OrderContext implements Context
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $transition
-     */
     private function applyTransitionOnOrder(OrderInterface $order, string $transition): void
     {
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply($transition);
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
      * @param int $quantity
      *
      * @return OrderInterface
      */
-    private function addProductVariantToOrder(ProductVariantInterface $productVariant, $quantity = 1)
-    {
+    private function addProductVariantToOrder(
+        ProductVariantInterface $productVariant,
+        $quantity = 1,
+        ?ChannelInterface $channel = null
+    ) {
         $order = $this->sharedStorage->get('order');
 
         $this->addProductVariantsToOrderWithChannelPrice(
             $order,
-            $this->sharedStorage->get('channel'),
+            $channel ?? $this->sharedStorage->get('channel'),
             $productVariant,
             (int) $quantity
         );
@@ -698,12 +735,6 @@ final class OrderContext implements Context
         return $order;
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ChannelInterface $channel
-     * @param ProductVariantInterface $productVariant
-     * @param int $quantity
-     */
     private function addProductVariantsToOrderWithChannelPrice(
         OrderInterface $order,
         ChannelInterface $channel,
@@ -724,9 +755,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param CustomerInterface $customer
      * @param string $number
-     * @param ChannelInterface|null $channel
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -749,8 +778,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param CustomerInterface $customer
-     * @param ChannelInterface|null $channel
      * @param string|null $localeCode
      *
      * @return OrderInterface
@@ -764,11 +791,30 @@ final class OrderContext implements Context
         $order = $this->orderFactory->createNew();
 
         $order->setCustomer($customer);
-        $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
-        $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
+        $order->setChannel($channel ?? $this->sharedStorage->get('channel'));
+        $order->setLocaleCode($localeCode ?? $this->sharedStorage->get('locale')->getCode());
         $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());
 
         return $order;
+    }
+
+    private function createCustomer(string $email): CustomerInterface
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerFactory->createNew();
+        $customer->setEmail($email);
+        $customer->setFirstName('John');
+        $customer->setLastName('Doe');
+
+        return $customer;
+    }
+
+    private function createOrProvideCustomer(string $email): CustomerInterface
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+
+        return $customer ?? $this->createCustomer($email);
     }
 
     /**
@@ -781,6 +827,7 @@ final class OrderContext implements Context
         $customers = [];
 
         for ($i = 0; $i < $count; ++$i) {
+            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
             $customer->setFirstname('John');
@@ -794,22 +841,11 @@ final class OrderContext implements Context
         return $customers;
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
-        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ShippingMethodInterface $shippingMethod
-     * @param AddressInterface $address
-     * @param PaymentMethodInterface $paymentMethod
-     */
     private function checkoutUsing(
         OrderInterface $order,
         ShippingMethodInterface $shippingMethod,
@@ -824,11 +860,28 @@ final class OrderContext implements Context
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param ShippingMethodInterface $shippingMethod
-     * @param PaymentMethodInterface $paymentMethod
-     */
+    private function createShippingPaymentMethodsAndAddress(): void
+    {
+        /** @var AddressInterface $address */
+        $address = $this->addressFactory->createNew();
+        $address->setCity('Wawa');
+        $address->setCountryCode($this->countryRepository->findOneBy([])->getCode());
+        $address->setFirstName('Jon');
+        $address->setLastName('Doe');
+        $address->setPostcode('000');
+        $address->setStreet('Happy');
+
+        $this->theCustomerAddressedItToWithIdenticalBillingAddress($address);
+
+        $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
+        Assert::notNull($shippingMethod);
+
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        Assert::notNull($paymentMethod);
+
+        $this->theCustomerChoseShippingWithPayment($shippingMethod, $paymentMethod);
+    }
+
     private function proceedSelectingShippingAndPaymentMethod(OrderInterface $order, ShippingMethodInterface $shippingMethod, PaymentMethodInterface $paymentMethod)
     {
         foreach ($order->getShipments() as $shipment) {
@@ -844,12 +897,11 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param OrderInterface $order
-     * @param ProductVariantInterface $variant
      * @param int $price
      */
     private function addVariantWithPriceToOrder(OrderInterface $order, ProductVariantInterface $variant, $price)
     {
+        /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($variant);
         $item->setUnitPrice($price);
@@ -859,12 +911,6 @@ final class OrderContext implements Context
         $order->addItem($item);
     }
 
-    /**
-     * @param int $numberOfCustomers
-     * @param int $numberOfOrders
-     * @param string $total
-     * @param bool $isFulfilled
-     */
     private function createOrders(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -876,11 +922,11 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid());
+            $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid());
             $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
@@ -896,13 +942,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param int $numberOfCustomers
-     * @param int $numberOfOrders
-     * @param string $total
-     * @param ProductInterface $product
-     * @param bool $isFulfilled
-     */
     private function createOrdersWithProduct(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -915,11 +954,11 @@ final class OrderContext implements Context
         $total = $this->getPriceFromString($total);
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
-            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
+            $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
             $order->setState(OrderInterface::STATE_NEW);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
-            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
             $total -= $price;
 
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
@@ -934,14 +973,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param int $orderCount
-     * @param ChannelInterface $channel
-     * @param int $productCount
-     * @param ProductInterface $product
-     * @param bool $isFulfilled
-     */
     private function createOrdersForCustomer(
         CustomerInterface $customer,
         int $orderCount,
@@ -968,14 +999,22 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ShippingMethodInterface $shippingMethod
-     * @param AddressInterface $address
-     * @param PaymentMethodInterface $paymentMethod
-     * @param CustomerInterface $customer
-     * @param int $number
-     */
+    private function getTargetPaymentTransitions(string $state): array
+    {
+        $state = strtolower($state);
+
+        $transitions = [
+            'new' => [],
+            'processing' => [PaymentTransitions::TRANSITION_PROCESS],
+            'completed' => [PaymentTransitions::TRANSITION_COMPLETE],
+            'cancelled' => [PaymentTransitions::TRANSITION_CANCEL],
+            'failed' => [PaymentTransitions::TRANSITION_FAIL],
+            'refunded' => [PaymentTransitions::TRANSITION_COMPLETE, PaymentTransitions::TRANSITION_REFUND],
+        ];
+
+        return $transitions[$state];
+    }
+
     private function placeOrder(
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
@@ -990,7 +1029,7 @@ final class OrderContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
 
-        /** @var \Sylius\Component\Order\Model\OrderItemInterface $item */
+        /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($variant);
         $item->setUnitPrice($channelPricing->getPrice());

@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product:
+        sku:
+            not_blank: SIlahkan masukkan SKU produk.
+            unique: SKU produk harus unik.
+        slug:
+            not_blank: Silahkan masukkan slug produk.
+            unique: Slug produk harus unik.
+        code:
+            not_blank: Silahkan masukkan kode produk.
+            regex: Kode produk hanya bisa berupa huruf, angka, tanda pisah dan  garis bawah.
+            unique: Kode produk harus unik.
+        name:
+            not_blank: Silahkan masukkan nama produk.
+            min_length: Nama produk setidaknya harus memiliki minimal 1 karakter. | Nama produk harus meiliki {{ limit }} panjang karakter.
+            max_length: Nama produk tidak boleh lebih dari 1 karakter.|Nama produk tidak boleh lebih dari {{ limit }} karakter.
+    product_variant:
+        combination: Variasi dari opsi ini sudah tersedia.
+        code:
+            not_blank: Silahkan masukkan kode.
+            regex: Kode variasi hanya bisa  berupa huruf, angka, tanda pisah dan garis bawah.
+            unique: Variasi kode produk harus unik.
+            within_product_unique: Kode ini harus unik dengan produk ini.
+    simple_product:
+        code:
+            unique: Kode produk sederhana harus unik di antara semua produk dan varian produknya.
+    option:
+        code:
+            not_blank: Silahkan masukkan kode opsi.
+            regex: Kode pilihan hanya boleh terdiri dari huruf, angka, garis dan garis bawah.
+            unique: Kode pilihan yang di isi sudah ada.
+        name:
+            not_blank: Silahkan masukkan nama pilihan.
+            min_length: Nama pilihan setidaknya harus berisi 1 karakter.|Nama pilihan setidaknya harus berisi {{ limit }} panjang karakter.
+            max_length: Nama pilihan tidak boleh lebih dari 1 karakter.|Nama pilihan tidak boleh lebih dari {{ limit }} karakter.
+        values:
+            min_count: Harap tambahkan setidaknya {{ limit }} jumlah pilihan. | Harap tambahkan setidaknya {{ limit }} jumlah pilihan.
+    option_value:
+        code:
+            not_blank: Silahkan masukkan kode jumlah pilihan.
+            regex: Kode pilihan hanya boleh terdiri dari huruf, angka, garis dan garis bawah.
+            unique: Kode pilihan yang di isi sudah ada.
+        value:
+            not_blank: Silahkan masukkan nama pilihan.
+    association_type:
+        name:
+            not_blank: Silahkan masukkan gabungan jenis nama.
+            min_length: Gabungan jenis nama setidaknya harus berisi 1 karakter.|Gabungan jenis nama setidaknya harus berisi {{ limit }} panjang karakter.
+            max_length: Gabungan jenis nama boleh lebih dari 1 karakter.|Gabungan jenis nama boleh lebih dari {{ limit }} panjang karakter.
+        code:
+            not_blank: Silahkan masukkan jenis gabungan nama.
+            regex: Jenis gabungan hanya boleh terdiri dari huruf, angka, garis dan garis bawah.
+            unique: Jenis gabungan yang di isi sudah ada.

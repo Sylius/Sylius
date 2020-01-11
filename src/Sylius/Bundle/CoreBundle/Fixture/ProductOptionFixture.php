@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductOptionFixture extends AbstractResourceFixture
 {
     /**
@@ -40,7 +37,7 @@ class ProductOptionFixture extends AbstractResourceFixture
                 ->arrayNode('values')
                     ->requiresAtLeastOneElement()
                     ->useAttributeAsKey('code')
-                    ->prototype('scalar')
+                    ->scalarPrototype()
                 ->end()
         ;
     }

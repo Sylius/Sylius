@@ -17,19 +17,11 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionApplicator implements PromotionApplicatorInterface
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
+    /** @var ServiceRegistryInterface */
     private $registry;
 
-    /**
-     * @param ServiceRegistryInterface $registry
-     */
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
@@ -43,7 +35,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         $applyPromotion = false;
         foreach ($promotion->getActions() as $action) {
             $result = $this->getActionCommandByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
-            $applyPromotion |= $result;
+            $applyPromotion = $applyPromotion || $result;
         }
 
         if ($applyPromotion) {
@@ -63,11 +55,6 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         $subject->removePromotion($promotion);
     }
 
-    /**
-     * @param string $type
-     *
-     * @return PromotionActionCommandInterface
-     */
     private function getActionCommandByType(string $type): PromotionActionCommandInterface
     {
         return $this->registry->get($type);

@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ShopUserFixture extends AbstractResourceFixture
 {
     /**
@@ -38,6 +35,9 @@ class ShopUserFixture extends AbstractResourceFixture
                 ->scalarNode('email')->cannotBeEmpty()->end()
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
+                ->scalarNode('gender')->end()
+                ->scalarNode('phone_number')->end()
+                ->scalarNode('birthday')->end()
                 ->booleanNode('enabled')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
                 ->scalarNode('customer_group')->end()

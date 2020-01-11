@@ -18,22 +18,15 @@ use PHPUnit\Framework\Assert;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductAttributeApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -163,7 +156,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes/text', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -176,10 +169,10 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/product-attributes', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_METHOD_NOT_ALLOWED);
+        $this->assertResponseCodeOneOf($response, [Response::HTTP_NOT_FOUND, Response::HTTP_METHOD_NOT_ALLOWED]);
     }
 
     /**
@@ -295,9 +288,9 @@ EOT;
             "code": "mug_color",
             "configuration": {
                 "choices": [
-                    "yellow",
-                    "green",
-                    "black"
+                    {"en_US": "yellow", "fr_FR": "jaune"},
+                    {"en_US": "green"},
+                    {"en_US": "black"}
                 ],
                 "multiple": true,
                 "min": 1,
@@ -318,12 +311,16 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
-        $this->assertSelectChoicesInResponse($response, ['yellow', 'green', 'black']);
+
+        $expectedChoiceValues = [
+            ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
+            ['en_US' => 'green'],
+            ['en_US' => 'black'],
+        ];
+        $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }
 
     /**
-     * @param ProductAttributeInterface $productAttribute
-     *
      * @return string
      */
     private function getProductAttributeUrl(ProductAttributeInterface $productAttribute)
@@ -332,7 +329,6 @@ EOT;
     }
 
     /**
-     * @param Response $response
      * @param array|string[] $expectedChoiceValues
      */
     private function assertSelectChoicesInResponse(Response $response, array $expectedChoiceValues): void
@@ -353,5 +349,10 @@ EOT;
         foreach ($choices as $choiceKey => $choiceValue) {
             Assert::assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i', $choiceKey);
         }
+    }
+
+    private function assertResponseCodeOneOf(Response $response, array $statusCodes): void
+    {
+        self::assertContains($response->getStatusCode(), $statusCodes, $response->getContent());
     }
 }

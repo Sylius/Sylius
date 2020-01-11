@@ -17,29 +17,20 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Axel Vankrunkelsven <axel@digilabs.be>
- */
 final class CurrencyApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeader = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -176,7 +167,7 @@ EOT;
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
         $currency = $currencies['currency_1'];
 
-        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getCurrencyUrl($currency), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -188,8 +179,6 @@ EOT;
     }
 
     /**
-     * @param CurrencyInterface $currency
-     *
      * @return string
      */
     private function getCurrencyUrl(CurrencyInterface $currency)

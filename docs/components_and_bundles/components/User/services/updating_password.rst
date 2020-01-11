@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Updating password
 =================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 In order to store user's password safely you need to encode it and get rid of
 the plain password.

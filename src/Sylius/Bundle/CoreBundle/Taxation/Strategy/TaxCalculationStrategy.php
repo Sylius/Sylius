@@ -20,23 +20,15 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var array|OrderTaxesApplicatorInterface[]
-     */
+    /** @var array|OrderTaxesApplicatorInterface[] */
     private $applicators;
 
     /**
-     * @param string $type
      * @param array|OrderTaxesApplicatorInterface[] $applicators
      */
     public function __construct(string $type, array $applicators)

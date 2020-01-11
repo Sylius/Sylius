@@ -15,40 +15,19 @@ namespace Sylius\Behat\Page\Admin\TaxRate;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $name
-     */
-    public function nameIt($name);
+    public function nameIt(string $name): void;
 
-    /**
-     * @param string $amount
-     */
-    public function specifyAmount($amount);
+    public function specifyAmount(string $amount): void;
 
-    /**
-     * @param string $name
-     */
-    public function chooseZone($name);
+    public function chooseZone(string $name): void;
 
-    /**
-     * @param string $name
-     */
-    public function chooseCategory($name);
+    public function chooseCategory(string $name): void;
 
-    /**
-     * @param string $name
-     */
-    public function chooseCalculator($name);
+    public function chooseCalculator(string $name): void;
 
-    public function chooseIncludedInPrice();
+    public function chooseIncludedInPrice(): void;
 }

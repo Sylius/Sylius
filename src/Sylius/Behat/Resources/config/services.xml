@@ -14,17 +14,16 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/contexts.xml" />
+        <import resource="services/elements.xml" />
         <import resource="services/pages.xml" />
     </imports>
 
     <services>
-        <service id="mink.default_session" class="Behat\Mink\Session" lazy="true" public="false">
-            <factory service="__behat__.mink" method="getSession" />
-        </service>
+        <defaults public="true" />
 
         <service id="sylius.behat.cookie_setter" class="Sylius\Behat\Service\Setter\CookieSetter" public="false">
-            <argument type="service" id="mink.default_session" />
-            <argument>%__behat__.mink.parameters%</argument>
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="service" id="behat.mink.parameters" />
         </service>
 
         <service id="sylius.behat.channel_context_setter" class="Sylius\Behat\Service\Setter\ChannelContextSetter" public="false">
@@ -32,13 +31,13 @@
         </service>
 
         <service id="sylius.behat.admin_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="__symfony__.session" />
+            <argument type="service" id="session" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">admin</argument>
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="__symfony__.session" />
+            <argument type="service" id="session" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">shop</argument>
         </service>
@@ -49,24 +48,29 @@
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
+        <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
+            <argument type="service" id="sylius.liip.filter_service" />
+            <argument type="string">%sylius_core.public_dir%</argument>
+        </service>
+
         <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
         </service>
         <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
-            <argument type="service" id="__symfony__.service_container" />
+            <argument type="service" id="service_container" />
         </service>
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
         <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
-            <argument type="service" id="mink.default_session" />
+            <argument type="service" id="behat.mink.default_session" />
         </service>
         <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
-            <argument type="service" id="mink.default_session" />
-            <argument type="service" id="__symfony__.router" />
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>

@@ -16,31 +16,19 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class UserDeleteListener
 {
-    /**
-     * @var TokenStorageInterface
-     */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $session
-     */
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
         $this->tokenStorage = $tokenStorage;
@@ -48,8 +36,6 @@ final class UserDeleteListener
     }
 
     /**
-     * @param ResourceControllerEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function deleteUser(ResourceControllerEvent $event): void
@@ -58,14 +44,29 @@ final class UserDeleteListener
 
         Assert::isInstanceOf($user, UserInterface::class);
 
-        $token = $this->tokenStorage->getToken();
-
-        if ((null !== $token) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        if ($this->isTryingToDeleteLoggedInUser($user)) {
             $event->stopPropagation();
             $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             $event->setMessage('Cannot remove currently logged in user.');
 
-            $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged in user.');
+            /** @var FlashBagInterface $flashBag */
+            $flashBag = $this->session->getBag('flashes');
+            $flashBag->add('error', 'Cannot remove currently logged in user.');
         }
+    }
+
+    private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
+    {
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return false;
+        }
+
+        $loggedUser = $token->getUser();
+        if (!$loggedUser) {
+            return false;
+        }
+
+        return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
     }
 }

@@ -18,32 +18,21 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class OrderLocaleAssigner
 {
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     */
     public function __construct(LocaleContextInterface $localeContext)
     {
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * @param ResourceControllerEvent $event
-     */
     public function assignLocale(ResourceControllerEvent $event): void
     {
-        /** @var OrderInterface $order */
         $order = $event->getSubject();
 
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
         $order->setLocaleCode($this->localeContext->getLocaleCode());

@@ -15,10 +15,16 @@ sylius:
             zone: 対象の地域
         country:
             add_province: 都道府県を設定する
+            name: ゾーン名
             provinces: 都道府県
+            enabled: 有効
+        province:
+            name: ゾーン名
         zone:
             add_member: 追加
             members: 地域
+            name: ゾーン名
+            type: タイプ
             types:
                 country: 国
                 province: 都道府県

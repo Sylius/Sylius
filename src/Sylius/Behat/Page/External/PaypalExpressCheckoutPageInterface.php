@@ -15,13 +15,16 @@ namespace Sylius\Behat\Page\External;
 
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface PaypalExpressCheckoutPageInterface extends PageInterface
 {
+    /**
+     * @throws UnsupportedDriverActionException
+     * @throws DriverException
+     */
+    public function authorize();
+
     /**
      * @throws UnsupportedDriverActionException
      * @throws DriverException

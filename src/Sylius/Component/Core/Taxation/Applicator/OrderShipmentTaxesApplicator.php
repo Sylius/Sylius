@@ -21,33 +21,19 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 {
-    /**
-     * @var CalculatorInterface
-     */
+    /** @var CalculatorInterface */
     private $calculator;
 
-    /**
-     * @var AdjustmentFactoryInterface
-     */
+    /** @var AdjustmentFactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var TaxRateResolverInterface
-     */
+    /** @var TaxRateResolverInterface */
     private $taxRateResolver;
 
-    /**
-     * @param CalculatorInterface $calculator
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param TaxRateResolverInterface $taxRateResolver
-     */
     public function __construct(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentFactory,
@@ -81,13 +67,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
         $this->addAdjustment($order, (int) $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param int $taxAmount
-     * @param string $label
-     * @param bool $included
-     */
-    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included)
+    private function addAdjustment(OrderInterface $order, int $taxAmount, string $label, bool $included): void
     {
         /** @var AdjustmentInterface $shippingTaxAdjustment */
         $shippingTaxAdjustment = $this->adjustmentFactory
@@ -97,20 +77,21 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
-     * @return ShippingMethodInterface
-     *
      * @throws \LogicException
      */
     private function getShippingMethod(OrderInterface $order): ShippingMethodInterface
     {
-        /** @var ShipmentInterface $shipment */
+        /** @var ShipmentInterface|bool $shipment */
         $shipment = $order->getShipments()->first();
         if (false === $shipment) {
             throw new \LogicException('Order should have at least one shipment.');
         }
 
-        return $shipment->getMethod();
+        $method = $shipment->getMethod();
+
+        /** @var ShippingMethodInterface $method */
+        Assert::isInstanceOf($method, ShippingMethodInterface::class);
+
+        return $method;
     }
 }

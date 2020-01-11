@@ -22,9 +22,6 @@ use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
 {
     function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void

@@ -21,20 +21,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class GatewayConfigType extends AbstractResourceType
 {
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $gatewayConfigurationTypeRegistry;
 
     /**
      * {@inheritdoc}
-     *
-     * @param FormTypeRegistryInterface $gatewayConfigurationTypeRegistry
      */
     public function __construct(
         string $dataClass,

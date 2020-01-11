@@ -24,25 +24,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $attributeValueFactory;
 
-    /**
-     * @var TranslationLocaleProviderInterface
-     */
+    /** @var TranslationLocaleProviderInterface */
     private $localeProvider;
 
-    /**
-     * @param FactoryInterface $attributeValueFactory
-     * @param TranslationLocaleProviderInterface $localeProvider
-     */
     public function __construct(
         FactoryInterface $attributeValueFactory,
         TranslationLocaleProviderInterface $localeProvider
@@ -63,15 +52,13 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param FormEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function preSetData(FormEvent $event): void
     {
-        /** @var ProductInterface $product */
         $product = $event->getData();
 
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
 
         $defaultLocaleCode = $this->localeProvider->getDefaultLocaleCode();
@@ -88,15 +75,13 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param FormEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function postSubmit(FormEvent $event): void
     {
-        /** @var ProductInterface $product */
         $product = $event->getData();
 
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
 
         /** @var AttributeValueInterface $attribute */
@@ -107,10 +92,6 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param ProductAttributeValueInterface $attribute
-     */
     private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $attribute): void
     {
         $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
@@ -123,12 +104,6 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param ProductAttributeInterface $attribute
-     * @param string $localeCode
-     *
-     * @return ProductAttributeValueInterface
-     */
     private function createProductAttributeValue(
         ProductAttributeInterface $attribute,
         string $localeCode

@@ -23,20 +23,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneType extends AbstractResourceType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $scopeChoices;
 
     /**
-     * @param string   $dataClass
      * @param string[] $validationGroups
      * @param string[] $scopeChoices
      */
@@ -108,11 +100,6 @@ final class ZoneType extends AbstractResourceType
         return 'sylius_zone';
     }
 
-    /**
-     * @param string $zoneMemberType
-     *
-     * @return string
-     */
     private function getZoneMemberEntryType(string $zoneMemberType): string
     {
         $zoneMemberEntryTypes = [
@@ -124,11 +111,6 @@ final class ZoneType extends AbstractResourceType
         return $zoneMemberEntryTypes[$zoneMemberType];
     }
 
-    /**
-     * @param string $zoneMemberType
-     *
-     * @return array
-     */
     private function getZoneMemberEntryOptions(string $zoneMemberType): array
     {
         $zoneMemberEntryOptions = [

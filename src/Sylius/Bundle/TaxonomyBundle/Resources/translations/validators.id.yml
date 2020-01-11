@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    taxon:
+        code:
+            not_blank: Harap masukkan kode tanpa pajak.
+            regex: Kode pajak hanya bisa terdiri dari huruf, angka, tanda hubung dan garis bawah.
+            unique: Taxon dengan kode yang diberikan sudah ada.
+        name:
+            max_length: Nama taxon tidak boleh lebih dari 255 karakter.
+            not_blank: Masukkan nama takson.
+        slug:
+            not_blank: Silahkan masukkan siput tanpa pamrih.
+            unique: Siput taksi harus unik.
+    taxonomy:
+        name:
+            max_length: Nama taksonomi tidak boleh lebih dari 255 karakter.
+            not_blank: Masukkan nama taksonomi.

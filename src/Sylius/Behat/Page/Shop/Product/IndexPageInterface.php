@@ -13,69 +13,29 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
-interface IndexPageInterface
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+
+interface IndexPageInterface extends PageInterface
 {
-    /**
-     * @return int
-     */
-    public function countProductsItems();
+    public function countProductsItems(): int;
 
-    /**
-     * @return string
-     */
-    public function getFirstProductNameFromList();
+    public function getFirstProductNameFromList(): string;
 
-    /**
-     * @return string
-     */
-    public function getLastProductNameFromList();
+    public function getLastProductNameFromList(): string;
 
-    /**
-     * @param string $name
-     */
-    public function search($name);
+    public function search(string $name): void;
 
-    /**
-     * @param string $order
-     */
-    public function sort($order);
+    public function sort(string $orderNumber): void;
 
-    public function clearFilter();
+    public function clearFilter(): void;
 
-    /**
-     * @param string $productName
-     *
-     * @return bool
-     */
-    public function isProductOnList($productName);
+    public function isProductOnList(string $productName): bool;
 
-    /**
-     * @return bool
-     */
-    public function isEmpty();
+    public function isEmpty(): bool;
 
-    /**
-     * @param string $productName
-     *
-     * @return string
-     */
-    public function getProductPrice($productName);
+    public function getProductPrice(string $productName): string;
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function isProductOnPageWithName($name);
+    public function isProductOnPageWithName(string $name): bool;
 
-    /**
-     * @param array $productNames
-     *
-     * @return bool
-     */
-    public function hasProductsInOrder(array $productNames);
+    public function hasProductsInOrder(array $productNames): bool;
 }

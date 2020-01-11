@@ -21,9 +21,6 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_implements_Sylius_shipping_method_eligibility_checker_interface(): void

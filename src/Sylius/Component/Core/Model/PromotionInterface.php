@@ -16,9 +16,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 
-/**
- * @author Kristian Loevstroem <kristian@loevstroem.dk>
- */
 interface PromotionInterface extends BasePromotionInterface, ChannelsAwareInterface
 {
 }

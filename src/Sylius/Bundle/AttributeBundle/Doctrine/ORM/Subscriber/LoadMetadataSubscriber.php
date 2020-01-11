@@ -14,32 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $subjects;
 
-    /**
-     * @param array $subjects
-     */
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;
     }
 
-    /**
-     * @return array
-     */
     public function getSubscribedEvents(): array
     {
         return [
@@ -47,9 +35,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         $metadata = $eventArgs->getClassMetadata();
@@ -63,18 +48,13 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param string $subject
-     * @param string $subjectClass
-     * @param ClassMetadataInfo $metadata
-     * @param ClassMetadataFactory $metadataFactory
-     */
     private function mapSubjectOnAttributeValue(
         string $subject,
         string $subjectClass,
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
     ): void {
+        /** @var ClassMetadataInfo $targetEntityMetadata */
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
         $subjectMapping = [
             'fieldName' => 'subject',
@@ -91,16 +71,12 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata, $subjectMapping);
     }
 
-    /**
-     * @param string $attributeClass
-     * @param ClassMetadataInfo $metadata
-     * @param ClassMetadataFactory $metadataFactory
-     */
     private function mapAttributeOnAttributeValue(
         string $attributeClass,
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory
     ): void {
+        /** @var ClassMetadataInfo $attributeMetadata */
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
         $attributeMapping = [
             'fieldName' => 'attribute',
@@ -116,10 +92,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata, $attributeMapping);
     }
 
-    /**
-     * @param ClassMetadataInfo|ClassMetadata $metadata
-     * @param array $subjectMapping
-     */
     private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping): void
     {
         $metadata->mapManyToOne($subjectMapping);

@@ -19,19 +19,11 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    /**
-     * @var ShippingMethodEligibilityCheckerInterface
-     */
+    /** @var ShippingMethodEligibilityCheckerInterface */
     private $methodEligibilityChecker;
 
-    /**
-     * @param ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker
-     */
     public function __construct(ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker)
     {
         $this->methodEligibilityChecker = $methodEligibilityChecker;
@@ -44,7 +36,11 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint): void
     {
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        /** @var OrderShippingMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderShippingMethodEligibility::class);
 
         $shipments = $order->getShipments();
         if ($shipments->isEmpty()) {

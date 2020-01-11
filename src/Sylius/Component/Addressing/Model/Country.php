@@ -18,18 +18,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 class Country implements CountryInterface
 {
     use ToggleableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
     /**
@@ -41,17 +34,17 @@ class Country implements CountryInterface
 
     /**
      * @var Collection|ProvinceInterface[]
+     *
+     * @psalm-var Collection<array-key, ProvinceInterface>
      */
     protected $provinces;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ProvinceInterface> $this->provinces */
         $this->provinces = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) ($this->getName() ?? $this->getCode());

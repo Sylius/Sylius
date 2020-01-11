@@ -14,23 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class LoadMetadataSubscriber implements EventSubscriber
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $subjects;
 
-    /**
-     * @param array $subjects
-     */
     public function __construct(array $subjects)
     {
         $this->subjects = $subjects;
@@ -46,12 +37,10 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArguments
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArguments): void
     {
         $metadata = $eventArguments->getClassMetadata();
+
         $metadataFactory = $eventArguments->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
@@ -73,13 +62,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param string $reviewableEntity
-     * @param string $subject
-     * @param ClassMetadata $reviewableEntityMetadata
-     *
-     * @return array
-     */
     private function createSubjectMapping(
         string $reviewableEntity,
         string $subject,
@@ -98,12 +80,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param string $reviewerEntity
-     * @param ClassMetadata $reviewerEntityMetadata
-     *
-     * @return array
-     */
     private function createReviewerMapping(string $reviewerEntity, ClassMetadata $reviewerEntityMetadata): array
     {
         return [
@@ -119,11 +95,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param string $reviewEntity
-     *
-     * @return array
-     */
     private function createReviewsMapping(string $reviewEntity): array
     {
         return [

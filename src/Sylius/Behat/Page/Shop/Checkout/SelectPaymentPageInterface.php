@@ -13,52 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface SelectPaymentPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $paymentMethod
-     */
-    public function selectPaymentMethod($paymentMethod);
+    public function selectPaymentMethod(string $paymentMethod): void;
 
-    /**
-     * @param string $paymentMethodName
-     *
-     * @return bool
-     */
-    public function hasPaymentMethod($paymentMethodName);
+    public function hasPaymentMethod(string $paymentMethodName): bool;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
-    public function nextStep();
+    public function nextStep(): void;
 
-    public function changeShippingMethod();
+    public function changeShippingMethod(): void;
 
-    public function changeShippingMethodByStepLabel();
+    public function changeShippingMethodByStepLabel(): void;
 
-    public function changeAddressByStepLabel();
+    public function changeAddressByStepLabel(): void;
 
-    /**
-     * @return bool
-     */
-    public function hasNoAvailablePaymentMethodsWarning();
+    public function hasNoAvailablePaymentMethodsWarning(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isNextStepButtonUnavailable();
+    public function isNextStepButtonUnavailable(): bool;
 
-    /**
-     * @return string[]
-     */
-    public function getPaymentMethods();
+    public function getPaymentMethods(): array;
 }

@@ -21,16 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class PromotionCouponController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws NotFoundHttpException
      */
     public function generateAction(Request $request): Response
@@ -46,8 +39,9 @@ class PromotionCouponController extends ResourceController
         }
 
         $form = $this->container->get('form.factory')->create(PromotionCouponGeneratorInstructionType::class);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
             $this->flashHelper->addSuccessFlash($configuration, 'generate');
 
@@ -71,9 +65,6 @@ class PromotionCouponController extends ResourceController
         return $this->viewHandler->handle($configuration, $view);
     }
 
-    /**
-     * @return PromotionCouponGeneratorInterface
-     */
     protected function getGenerator(): PromotionCouponGeneratorInterface
     {
         return $this->container->get('sylius.promotion_coupon_generator');

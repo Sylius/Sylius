@@ -21,67 +21,37 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxonomyContext implements Context
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $taxonRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxonFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxonTranslationFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxonImageFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ImageUploaderInterface
-     */
+    /** @var ImageUploaderInterface */
     private $imageUploader;
 
-    /**
-     * @var TaxonSlugGeneratorInterface
-     */
+    /** @var TaxonSlugGeneratorInterface */
     private $taxonSlugGenerator;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $minkParameters;
 
-    /**
-     * @param RepositoryInterface $taxonRepository
-     * @param FactoryInterface $taxonFactory
-     * @param FactoryInterface $taxonTranslationFactory
-     * @param FactoryInterface $taxonImageFactory
-     * @param ObjectManager $objectManager
-     * @param ImageUploaderInterface $imageUploader
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     * @param array $minkParameters
-     */
     public function __construct(
         RepositoryInterface $taxonRepository,
         FactoryInterface $taxonFactory,
@@ -90,8 +60,16 @@ final class TaxonomyContext implements Context
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        array $minkParameters
+        $minkParameters
     ) {
+        if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
+            throw new \InvalidArgumentException(sprintf(
+                '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
+                self::class,
+                \ArrayAccess::class
+            ));
+        }
+
         $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;
         $this->taxonTranslationFactory = $taxonTranslationFactory;
@@ -144,7 +122,8 @@ final class TaxonomyContext implements Context
 
         $taxon->addImage($taxonImage);
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -155,7 +134,8 @@ final class TaxonomyContext implements Context
         $taxon->addChild($this->createTaxon($firstTaxonName));
         $taxon->addChild($this->createTaxon($secondTaxonName));
 
-        $this->objectManager->flush($taxon);
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
     }
 
     /**
@@ -175,8 +155,6 @@ final class TaxonomyContext implements Context
     }
 
     /**
-     * @param array $names
-     *
      * @return TaxonInterface
      */
     private function createTaxonInManyLanguages(array $names)
@@ -185,7 +163,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setCode(StringInflector::nameToCode($names['en_US']));
         foreach ($names as $locale => $name) {
-            /** @var TranslationInterface|TaxonTranslationInterface $taxonTranslation */
+            /** @var TaxonTranslationInterface $taxonTranslation */
             $taxonTranslation = $this->taxonTranslationFactory->createNew();
             $taxonTranslation->setLocale($locale);
             $taxonTranslation->setName($name);
@@ -205,6 +183,6 @@ final class TaxonomyContext implements Context
      */
     private function getParameter($name)
     {
-        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+        return $this->minkParameters[$name] ?? null;
     }
 }

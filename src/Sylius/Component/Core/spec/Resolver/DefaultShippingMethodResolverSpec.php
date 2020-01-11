@@ -23,9 +23,6 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 {
     function let(ShippingMethodRepositoryInterface $shippingMethodRepository): void
@@ -38,7 +35,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
 
-    function it_returns_first_enabled_shipping_method_from_shipment_order_channel_as_default(
+    function it_returns_first_enabled_shipping_method_from_shipment_order_channel(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -57,17 +54,16 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
-    function it_throws_an_exception_if_there_is_no_enabled_shipping_methods(
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment,
+    function it_throws_an_exception_if_there_is_no_enabled_shipping_methods_for_order_channel_and_zones(
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ShippingMethodRepositoryInterface $shippingMethodRepository
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
-        $shippingMethodRepository
-            ->findEnabledForChannel($channel)->willReturn([]);
+        $shippingMethodRepository->findEnabledForChannel($channel)->willReturn([]);
 
         $this
             ->shouldThrow(UnresolvedDefaultShippingMethodException::class)

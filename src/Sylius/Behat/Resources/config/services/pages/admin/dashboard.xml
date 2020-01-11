@@ -17,6 +17,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.dashboard" class="%sylius.behat.page.admin.dashboard.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>

@@ -22,43 +22,23 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ProductOptionContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ProductOptionRepositoryInterface
-     */
+    /** @var ProductOptionRepositoryInterface */
     private $productOptionRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productOptionValueFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductOptionRepositoryInterface $productOptionRepository
-     * @param FactoryInterface $productOptionFactory
-     * @param FactoryInterface $productOptionValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductOptionRepositoryInterface $productOptionRepository,
@@ -74,7 +54,7 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @Given the store has a product option :name
+     * @Given the store has (also) a product option :name
      * @Given the store has a product option :name with a code :code
      */
     public function theStoreHasAProductOptionWithACode($name, $code = null)

@@ -16,16 +16,7 @@ namespace Sylius\Component\Shipping\Checker;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ShippingMethodEligibilityCheckerInterface
 {
-    /**
-     * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface $method
-     *
-     * @return bool
-     */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool;
 }

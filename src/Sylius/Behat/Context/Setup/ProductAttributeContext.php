@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,48 +25,26 @@ use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductAttributeContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAttributeRepository;
 
-    /**
-     * @var AttributeFactoryInterface
-     */
+    /** @var AttributeFactoryInterface */
     private $productAttributeFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAttributeValueFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param RepositoryInterface $productAttributeRepository
-     * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $productAttributeValueFactory
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productAttributeRepository,
@@ -104,7 +83,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given the store has( also) a/an :type product attribute :name
+     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent) product attribute "([^"]+)"$/
      */
     public function theStoreHasAProductAttribute(string $type, string $name): void
     {
@@ -114,14 +93,73 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given the store has a select product attribute :name with value :value
+     * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function theStoreHasASelectProductAttributeWithValue(string $name, string $value): void
+    public function thisProductAttributeHasAValueInLocale(
+        ProductAttributeInterface $productAttribute,
+        string $value,
+        string $localeCode
+    ): void {
+        $choices = [
+            $this->faker->uuid => [
+                $localeCode => $value,
+            ],
+        ];
+
+        $configuration = $productAttribute->getConfiguration();
+        $configuration['choices'] = array_merge($configuration['choices'], $choices);
+        $productAttribute->setConfiguration($configuration);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function thisProductAttributeHasAValueInLocaleAndInLocale(
+        ProductAttributeInterface $productAttribute,
+        string $firstValue,
+        string $firstLocaleCode,
+        string $secondValue,
+        string $secondLocaleCode
+    ): void {
+        $choices = [
+            $this->faker->uuid => [
+                $firstLocaleCode => $firstValue,
+                $secondLocaleCode => $secondValue,
+            ],
+        ];
+
+        $configuration = $productAttribute->getConfiguration();
+        $configuration['choices'] = array_merge($configuration['choices'], $choices);
+        $productAttribute->setConfiguration($configuration);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given the store has a select product attribute :name
+     */
+    public function theStoreHasASelectProductAttribute(string $name): void
     {
-        $productAttribute = $this->createProductAttribute('select', $name);
+        $this->theStoreHasASelectProductAttributeWithValue($name);
+    }
+
+    /**
+     * @Given the store has a select product attribute :name with value :value
+     * @Given the store has a select product attribute :name with values :firstValue and :secondValue
+     */
+    public function theStoreHasASelectProductAttributeWithValue(string $name, string ...$values): void
+    {
+        $choices = [];
+        foreach ($values as $value) {
+            $choices[$this->faker->uuid] = ['en_US' => $value];
+        }
+
+        $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
         $productAttribute->setConfiguration([
             'multiple' => true,
-            'choices' => [$this->faker->uuid => $value],
+            'choices' => $choices,
             'min' => null,
             'max' => null,
         ]);
@@ -140,37 +178,40 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with values "([^"]+)", "([^"]+)"$/
+     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      */
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
-        $firstAttributeValue,
-        $secondAttributeValue,
-        $language = 'en_US'
-    ) {
-        $values = [$this->faker->uuid => $firstAttributeValue, $this->faker->uuid => $secondAttributeValue];
-
-        $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attribute->setConfiguration(['multiple' => true, 'choices' => $values, 'min' => null, 'max' => null]);
-        $attributeValue = $this->createProductAttributeValue(array_keys($values), $attribute, $language);
-        $product->addAttribute($attributeValue);
-
-        $this->objectManager->flush();
+        string $productAttributeName,
+        string ...$productAttributeValues
+    ): void {
+        $this->createSelectProductAttributeValue($product, $productAttributeName, $productAttributeValues);
     }
 
     /**
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has (.+?) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function thisProductHasSelectAttributeWithValueInLocale(
+        ProductInterface $product,
+        string $productAttributeName,
+        string $productAttributeValue,
+        string $localeCode
+    ): void {
+        $this->createSelectProductAttributeValue($product, $productAttributeName, [$productAttributeValue], $localeCode);
+    }
+
+    /**
+     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
+     * @Given /^(this product) has (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductHasAttributeWithValue(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
-        $value,
-        $language = 'en_US'
-    ) {
+        string $productAttributeType,
+        string $productAttributeName,
+        string $value,
+        string $language = 'en_US'
+    ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
         $product->addAttribute($attributeValue);
@@ -217,7 +258,7 @@ final class ProductAttributeContext implements Context
     ) {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition((int) $position);
-        $attributeValue = $this->createProductAttributeValue(rand(1, 100) / 100, $attribute);
+        $attributeValue = $this->createProductAttributeValue(random_int(1, 100) / 100, $attribute);
 
         $product->addAttribute($attributeValue);
 
@@ -283,15 +324,11 @@ final class ProductAttributeContext implements Context
         return $productAttribute;
     }
 
-    /**
-     * @param string $value
-     * @param ProductAttributeInterface $attribute
-     * @param string $localeCode
-     *
-     * @return ProductAttributeValueInterface
-     */
-    private function createProductAttributeValue($value, ProductAttributeInterface $attribute, $localeCode = 'en_US')
-    {
+    private function createProductAttributeValue(
+        $value,
+        ProductAttributeInterface $attribute,
+        string $localeCode = 'en_US'
+    ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
@@ -303,12 +340,34 @@ final class ProductAttributeContext implements Context
         return $attributeValue;
     }
 
-    /**
-     * @param ProductAttributeInterface $productAttribute
-     */
     private function saveProductAttribute(ProductAttributeInterface $productAttribute)
     {
         $this->productAttributeRepository->add($productAttribute);
         $this->sharedStorage->set('product_attribute', $productAttribute);
+    }
+
+    private function createSelectProductAttributeValue(
+        ProductInterface $product,
+        string $productAttributeName,
+        array $values,
+        string $localeCode = 'en_US'
+    ): void {
+        $attribute = $this->provideProductAttribute(SelectAttributeType::TYPE, $productAttributeName);
+
+        $choices = $attribute->getConfiguration()['choices'];
+        $choiceKeys = [];
+        foreach ($values as $value) {
+            foreach ($choices as $choiceKey => $choiceValues) {
+                $key = array_search($value, $choiceValues);
+                if ($localeCode === $key) {
+                    $choiceKeys[] = $choiceKey;
+                }
+            }
+        }
+
+        $attributeValue = $this->createProductAttributeValue($choiceKeys, $attribute, $localeCode);
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
     }
 }

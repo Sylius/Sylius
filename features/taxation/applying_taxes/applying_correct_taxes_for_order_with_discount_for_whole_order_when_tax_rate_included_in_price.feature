@@ -24,27 +24,27 @@ Feature: Apply correct taxes for an order with a discount applied for all items 
     Scenario: Properly rounded up tax for single product
         When I add product "Symfony Mug" to the cart
         Then my cart total should be "$46.95"
-        And my cart taxes should be "$4.27"
+        And my included in price taxes should be "$4.27"
 
     @ui
     Scenario: Properly rounded down tax for single product
         When I add product "PHP Mug" to the cart
         Then my cart total should be "$46.90"
-        And my cart taxes should be "$4.26"
+        And my included in price taxes should be "$4.26"
 
     @ui
     Scenario: Properly rounded taxes for multiple products with different tax rate
         When I add 2 products "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
         Then my cart total should be "$66.90"
-        And my cart taxes should be "$7.75"
+        And my included in price taxes should be "$7.75"
 
     @ui
     Scenario: Properly rounded taxes for multiple products with the same tax rate
         When I add 2 products "PHP Mug" to the cart
         And I add product "Symfony Mug" to the cart
         Then my cart total should be "$150.75"
-        And my cart taxes should be "$13.70"
+        And my included in price taxes should be "$13.70"
 
     @ui
     Scenario: Properly rounded taxes for order with multiple promotions and multiple products with different tax rate
@@ -53,4 +53,4 @@ Feature: Apply correct taxes for an order with a discount applied for all items 
         When I add product "Symfony Mug" to the cart
         And I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$51.95"
-        And my cart taxes should be "$5.47"
+        And my included in price taxes should be "$5.47"

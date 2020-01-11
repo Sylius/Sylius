@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 SyliusTaxationBundle
 ====================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Calculating and applying taxes is a common task for most of ecommerce applications. **SyliusTaxationBundle** is a reusable taxation component for Symfony.
 You can integrate it into your existing application and enable the tax calculation logic for any model implementing the ``TaxableInterface``.

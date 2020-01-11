@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.validator.has_enabled_entity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
@@ -56,6 +58,10 @@
         </service>
         <service id="sylius.validator.product_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_product_eligibility_validator" />
+        </service>
+
+        <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
+            <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>
     </services>
 </container>

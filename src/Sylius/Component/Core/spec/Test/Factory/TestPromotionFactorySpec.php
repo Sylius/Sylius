@@ -20,9 +20,6 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TestPromotionFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $promotionFactory): void

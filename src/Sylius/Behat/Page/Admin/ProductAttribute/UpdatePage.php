@@ -18,66 +18,55 @@ use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeName($name, $language)
+    public function changeName(string $name, string $language): void
     {
         $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isTypeDisabled()
+    public function isTypeDisabled(): bool
     {
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function changeAttributeValue(string $oldValue, string $newValue): void
     {
         $this->getElement('attribute_choice_list_element', ['%value%' => $oldValue])->setValue($newValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasAttributeValue(string $value): bool
     {
-        return null !== $this->getElement('attribute_choice_list_element', ['%value%' => $value]);
+        return $this->hasElement('attribute_choice_list_element', ['%value%' => $value]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addAttributeValue(string $value): void
+    public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
-        $this->getLastAttributeChoiceElement()->find('css', 'input')->setValue($value);
+        $this
+            ->getLastAttributeChoiceElement()
+            ->find('css', 'div[data-locale="' . $localeCode . '"] input')
+            ->setValue($value)
+        ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    public function deleteAttributeValue(string $value): void
+    {
+        $attributeChoiceElement = $this
+            ->getElement('attribute_choice_list_element', ['%value%' => $value])
+            ->getParent()->getParent()->getParent()->getParent()
+        ;
+        $attributeChoiceElement->clickLink('Delete');
+    }
+
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list_element' => 'input[value="%value%"]',
@@ -98,9 +87,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $attributeChoices->findAll('css', 'div[data-form-collection="item"]');
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastAttributeChoiceElement(): NodeElement
     {
         $elements = $this->getAttributeChoiceElements();

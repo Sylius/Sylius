@@ -23,9 +23,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 {
     function let(PaymentMethodRepositoryInterface $paymentMethodRepository): void

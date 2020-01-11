@@ -20,26 +20,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var CartStorageInterface
-     */
+    /** @var CartStorageInterface */
     private $cartStorage;
 
     /**
      * {@inheritdoc}
-     *
-     * @param ChannelContextInterface $channelContext
-     * @param CartStorageInterface $cartStorage
      */
     public function __construct(
         HttpUtils $httpUtils,

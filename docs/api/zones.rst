@@ -88,7 +88,7 @@ To create a new country zone use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/country \
+    $ curl http://demo.sylius.com/api/v1/zones/country \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -136,7 +136,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/country \
+    $ curl http://demo.sylius.com/api/v1/zones/country \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -206,7 +206,7 @@ To see the details of the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/EU \
+    $ curl http://demo.sylius.com/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -268,7 +268,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/ \
+    $ curl http://demo.sylius.com/api/v1/zones/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -358,7 +358,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/EU \
+    $ curl http://demo.sylius.com/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -388,7 +388,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/EU \
+    $ curl http://demo.sylius.com/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -453,7 +453,7 @@ To partially update the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/EU \
+    $ curl http://demo.sylius.com/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -497,7 +497,7 @@ To delete the zone with ``code = EU`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/zones/EU \
+    $ curl http://demo.sylius.com/api/v1/zones/EU \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

@@ -15,13 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\ProductFixture;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
+final class ProductFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -56,6 +54,15 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     public function product_may_be_toggled(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
+    }
+
+    /**
+     * @test
+     */
+    public function product_slug_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['slug' => 'the-slug']]]], 'custom.*.slug');
+        $this->assertConfigurationIsValid([['custom' => [['slug' => '']]]], 'custom.*.slug');
     }
 
     /**
@@ -119,7 +126,7 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
      */
     public function product_images_are_optional(): void
     {
-        $this->assertConfigurationIsValid([['custom' => [['images' => ['../image/path1.jpg', '../image/path2.jpg']]]]], 'custom.*.images');
+        $this->assertConfigurationIsValid([['custom' => [['images' => [['path' => '../image/path1.jpg', 'type' => 'main'], ['path' => '../image/path2.jpg', 'type' => 'thumbnail']]]]]], 'custom.*.images');
     }
 
     /**

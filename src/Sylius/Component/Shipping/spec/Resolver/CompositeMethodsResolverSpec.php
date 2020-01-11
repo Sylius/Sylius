@@ -19,9 +19,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
     function let(PrioritizedServiceRegistryInterface $resolversRegistry): void

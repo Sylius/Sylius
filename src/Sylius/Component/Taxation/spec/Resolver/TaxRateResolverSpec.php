@@ -20,9 +20,6 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class TaxRateResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $taxRateRepository): void

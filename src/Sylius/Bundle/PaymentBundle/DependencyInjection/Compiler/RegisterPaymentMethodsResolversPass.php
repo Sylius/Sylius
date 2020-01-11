@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
 {
     /**
@@ -39,7 +36,7 @@ final class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
                 throw new \InvalidArgumentException('Tagged payment methods resolvers need to have `type` and `label` attributes.');
             }
 
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
+            $priority = (int) ($attributes[0]['priority'] ?? 0);
 
             $resolvers[$attributes[0]['type']] = $attributes[0]['label'];
 

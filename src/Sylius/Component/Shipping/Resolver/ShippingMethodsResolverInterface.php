@@ -16,22 +16,12 @@ namespace Sylius\Component\Shipping\Resolver;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface ShippingMethodsResolverInterface
 {
     /**
-     * @param ShippingSubjectInterface $subject
-     *
      * @return ShippingMethodInterface[]
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array;
 
-    /**
-     * @param ShippingSubjectInterface $subject
-     *
-     * @return bool
-     */
     public function supports(ShippingSubjectInterface $subject): bool;
 }

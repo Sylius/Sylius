@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    gateway_config:
+        paypal:
+            password:
+                not_blank: Introdu o parolă pentru PayPal.
+            signature:
+                not_blank: Introdu semnătura pentru PayPal.
+            username:
+                not_blank: Introdu numele de utilizator pentru PayPal.
+        stripe:
+            secret_key:
+                not_blank: Introdu cheia secretă pentru Stripe.
+            publishable_key:
+                not_blank: Introdu cheia publică pentru Stripe.

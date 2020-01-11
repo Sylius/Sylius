@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'A termék a kosárba került'
+        cannot_modify: 'A módosítandó kosárhoz már tartozik megrendelés.'
+        remove_item: 'A terméket eltávolítottuk a kosárból'
+        save: 'Kosár tartalma sikeresen frissítve'

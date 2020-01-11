@@ -11,6 +11,7 @@ sylius:
             last_name: Επώνυμο
             phone_number: Αριθμός τηλεφώνου
             postcode: Ταχ. Κώδικας
+            street: Οδός
             province: Επαρχία
             zone: Ζώνη
         country:

@@ -19,9 +19,6 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Storage\StorageInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class LocaleStorageSpec extends ObjectBehavior
 {
     function let(StorageInterface $storage): void

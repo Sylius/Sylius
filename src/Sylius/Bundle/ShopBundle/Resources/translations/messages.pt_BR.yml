@@ -6,7 +6,7 @@ sylius:
         shop:
             account:
                 address_book: 'Catálogo de endereços'
-                change_password: 'Alterar senha'
+                change_password: 'Alterar palavra-passe'
                 dashboard: 'Painel'
                 header: 'Sua conta'
                 order_history: 'Histórico de pedidos'

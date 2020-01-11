@@ -12,7 +12,7 @@ Feature: Browsing promotions
     @ui
     Scenario: Browsing promotions
         Given I want to browse promotions
-        Then there should be 1 promotion
+        Then I should see a single promotion in the list
         And the "Basic promotion" promotion should exist in the registry
 
     @ui

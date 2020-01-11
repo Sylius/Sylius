@@ -16,7 +16,9 @@ namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Http\Message\MessageFactory;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -24,29 +26,18 @@ use Sylius\Bundle\AdminBundle\Controller\NotificationController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
-final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
+final class NotificationControllerTest extends TestCase
 {
-    /**
-     * @var ClientInterface
-     */
+    /** @var ProphecyInterface|ClientInterface */
     private $client;
 
-    /**
-     * @var MessageFactory
-     */
+    /** @var ProphecyInterface|MessageFactory */
     private $messageFactory;
 
-    /**
-     * @var NotificationController
-     */
+    /** @var NotificationController */
     private $controller;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private static $hubUri = 'www.doesnotexist.test.com';
 
     /**
@@ -54,7 +45,7 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function it_returns_an_empty_json_response_upon_client_exception(): void
     {
-        $this->messageFactory->createRequest(Argument::cetera())
+        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
             ->willReturn($this->prophesize(RequestInterface::class)->reveal())
         ;
 
@@ -73,13 +64,15 @@ final class NotificationControllerTest extends \PHPUnit_Framework_TestCase
     {
         $content = json_encode(['version' => '9001']);
 
-        $this->messageFactory->createRequest(Argument::cetera())
+        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
             ->willReturn($this->prophesize(RequestInterface::class)->reveal())
         ;
 
+        /** @var ProphecyInterface|StreamInterface $stream */
         $stream = $this->prophesize(StreamInterface::class);
         $stream->getContents()->willReturn($content);
 
+        /** @var ProphecyInterface|ResponseInterface $externalResponse */
         $externalResponse = $this->prophesize(ResponseInterface::class);
         $externalResponse->getBody()->willReturn($stream->reveal());
 

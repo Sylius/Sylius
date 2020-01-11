@@ -22,9 +22,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class OrderInventoryOperatorSpec extends ObjectBehavior
 {
     function it_implements_an_order_inventory_operator_interface(): void

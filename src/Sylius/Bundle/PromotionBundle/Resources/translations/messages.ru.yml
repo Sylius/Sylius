@@ -11,31 +11,41 @@ sylius:
             description: Описание
             ends_at: Конец
             exclusive: Эксклюзив
-            name: Название
             priority: Приоритет
             rules: Правила
-            starts_at: Старт
-            usage_limit: Предел использования
+            starts_at: Начало
+            usage_limit: Предел
         promotion_action:
             item_fixed_discount: Фиксированная скидка
+            item_percentage_discount: Процентная скидка
+            order_fixed_discount: Фиксированная скидка
+            order_percentage_discount: Процент скидки на заказ
+            shipping_percentage_discount: Процент скидки на доставку
             fixed_discount_configuration:
-                amount: Сумма
+                amount: Количество
             percentage_discount_configuration:
                 percentage: Процент
             type: Тип
         promotion_coupon:
             expires_at: Истекает
-            usage_limit: Предел использования
+            usage_limit: Предел
         promotion_coupon_generator_instruction:
-            amount: Сумма
+            amount: Количество
             code_length: Длина кода
             expires_at: Истекает
-            usage_limit: Предел использования
+            usage_limit: Предел
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
+            cart_quantity: Кол-во в корзине
+            contains_product: Содержит продукт
             customer_group: Группа клиента
+            has_at_least_one_from_taxons: Имеет по крайней мере один из таксонов
+            item_total: Товаров всего
+            nth_order: N-й заказ
+            shipping_country: Страна получателя
             taxonomy: Тип товара
+            total_price_of_items_from_taxon: Общая стоимость предметов из категории
             cart_quantity_configuration:
                 count: Кол-во
                 equal: Равно
@@ -43,12 +53,12 @@ sylius:
                 exclude: Исключить
                 variants: Товары
             item_total_configuration:
-                amount: Сумма
+                amount: Количество
             nth_order_configuration:
                 nth: Количество
             shipping_country_configuration:
                 country: Страна
             taxonomy_configuration:
                 exclude: Исключить
-                taxons: Таксоны
+                taxons: Категории
             type: Тип

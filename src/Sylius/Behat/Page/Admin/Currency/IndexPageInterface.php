@@ -16,22 +16,9 @@ namespace Sylius\Behat\Page\Admin\Currency;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param CurrencyInterface $currency
-     *
-     * @return bool
-     */
-    public function isCurrencyDisabled(CurrencyInterface $currency);
+    public function isCurrencyDisabled(CurrencyInterface $currency): bool;
 
-    /**
-     * @param CurrencyInterface $currency
-     *
-     * @return bool
-     */
-    public function isCurrencyEnabled(CurrencyInterface $currency);
+    public function isCurrencyEnabled(CurrencyInterface $currency): bool;
 }

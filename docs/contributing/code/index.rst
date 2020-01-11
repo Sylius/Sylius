@@ -4,13 +4,10 @@ Contributing Code
 .. toctree::
     :hidden:
 
-    bugs
+    bc
     patches
     security
-    bdd
     standards
-    conventions
-    git
     license
 
 .. include:: /contributing/code/map.rst.inc

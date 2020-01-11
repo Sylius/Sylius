@@ -8,12 +8,19 @@ sylius:
                 checkout: Realitza la compra
                 pending: Pendent
                 cancelled: Cancel·lat
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Total
+            per_unit_rate_configuration:
+                amount: Total
         shipping_category:
             description: Descripció
             name: Nom
         shipping_method:
             channels: Canals
+            configuration: Configuració
             description: Descripció
             enabled: Activat
             name: Nom
+            position: Posició
             tax_category: Categoria d'impost

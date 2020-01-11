@@ -5,8 +5,20 @@ sylius:
     form:
         customer:
             first_name: الاسم الأول
+            group: مجموعة
             last_name: اسم العائلة
             email: البريد الإلكتروني
             phone_number: رقم الهاتف
+            gender: الجنس
+            birthday: عيد ميلاد
+            billing_address: عنوان الفاتورة
+            different_billing_address: استخدام عنوان مختلف للفوترة؟
+            only_customer_registration: إنشاء حساب؟
+            subscribed_to_newsletter: الاشتراك في نشرتنا الإخبارية
         customer_group:
             name: الاسم
+            roles: الأدوار
+    gender:
+        unknown: غير معروف
+        male: ذكر
+        female: أنثى

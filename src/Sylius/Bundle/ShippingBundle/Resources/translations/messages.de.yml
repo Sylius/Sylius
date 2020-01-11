@@ -21,10 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Pauschale pro Sendung
-                amount: Anzahl
+                amount: Steuersatz
             per_unit_rate_configuration:
                 label: Pauschale pro Artikel
-                amount: Anzahl
+                amount: Steuersatz
         shipping_category:
             description: Beschreibung
             name: Name

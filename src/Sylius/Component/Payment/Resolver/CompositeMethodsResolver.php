@@ -16,19 +16,11 @@ namespace Sylius\Component\Payment\Resolver;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /**
-     * @var PrioritizedServiceRegistryInterface
-     */
+    /** @var PrioritizedServiceRegistryInterface */
     private $resolversRegistry;
 
-    /**
-     * @param PrioritizedServiceRegistryInterface $resolversRegistry
-     */
     public function __construct(PrioritizedServiceRegistryInterface $resolversRegistry)
     {
         $this->resolversRegistry = $resolversRegistry;

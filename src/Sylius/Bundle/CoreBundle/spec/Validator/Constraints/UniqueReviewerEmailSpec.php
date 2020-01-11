@@ -16,10 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class UniqueReviewerEmailSpec extends ObjectBehavior
 {
     function it_extends_constraint_class(): void

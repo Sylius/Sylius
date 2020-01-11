@@ -20,31 +20,17 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FakeChannelContext implements ChannelContextInterface
 {
-    /**
-     * @var FakeChannelCodeProviderInterface
-     */
+    /** @var FakeChannelCodeProviderInterface */
     private $fakeChannelCodeProvider;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var RequestStack
-     */
+    /** @var RequestStack */
     private $requestStack;
 
-    /**
-     * @param FakeChannelCodeProviderInterface $fakeChannelCodeProvider
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param RequestStack $requestStack
-     */
     public function __construct(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
@@ -76,8 +62,6 @@ final class FakeChannelContext implements ChannelContextInterface
     }
 
     /**
-     * @return Request
-     *
      * @throws ChannelNotFoundException
      */
     private function getMasterRequest(): Request

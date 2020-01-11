@@ -15,15 +15,9 @@ namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getCustomerAccountStatus($customer)
+    public function getCustomerAccountStatus(\Sylius\Component\Customer\Model\CustomerInterface $customer): string
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');

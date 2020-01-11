@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Basic Usage
 ===========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Getting a Currency name
 -----------------------
@@ -38,7 +45,7 @@ This behaviour is used just for displaying the *approximate* value in another cu
 
    For more detailed information go to `Sylius API CurrencyConverter`_.
 
-.. _Sylius API CurrencyConverter: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverter.html
+.. _Sylius API CurrencyConverter: http://api.sylius.com/Sylius/Component/Currency/Converter/CurrencyConverter.html
 
 .. caution::
 
@@ -71,4 +78,4 @@ property is set to true and have been inserted in the given repository.
 
    For more detailed information go to `Sylius API CurrencyProvider`_.
 
-.. _Sylius API CurrencyProvider: http://api.sylius.org/Sylius/Component/Currency/Provider/CurrencyProvider.html
+.. _Sylius API CurrencyProvider: http://api.sylius.com/Sylius/Component/Currency/Provider/CurrencyProvider.html

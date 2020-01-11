@@ -17,19 +17,11 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Inventory\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingInventoryContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     */
     public function __construct(IndexPageInterface $indexPage)
     {
         $this->indexPage = $indexPage;

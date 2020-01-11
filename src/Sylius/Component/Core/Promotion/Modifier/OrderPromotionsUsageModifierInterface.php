@@ -15,18 +15,9 @@ namespace Sylius\Component\Core\Promotion\Modifier;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface OrderPromotionsUsageModifierInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function increment(OrderInterface $order): void;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function decrement(OrderInterface $order): void;
 }

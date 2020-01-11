@@ -23,11 +23,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ZoneMatcherSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository): void

@@ -21,9 +21,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class SimpleProductLockingListenerSpec extends ObjectBehavior
 {
     function let(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver): void

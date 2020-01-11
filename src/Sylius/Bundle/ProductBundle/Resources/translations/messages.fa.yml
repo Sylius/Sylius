@@ -24,7 +24,7 @@ sylius:
             name: نام
         option:
             name: نام
-            position: موقعیت
+            position: جایگاه
             values: مقادیر قابل قبول
         option_value:
             add_value: افزودن مقدار

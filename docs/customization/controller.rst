@@ -2,7 +2,7 @@ Customizing Controllers
 =======================
 
 All **Sylius** resources use the
-`Sylius/Bundle/ResourceBundle/Controller/ResourceController <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ResourceBundle/Controller/ResourceController.php>`_
+`Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ResourceBundle/Controller/ResourceController.php>`_
 by default, but some of them have already been extended in Bundles.
 If you want to override a controller action, check which controller you should be extending.
 
@@ -14,6 +14,11 @@ If you want to override a controller action, check which controller you should b
 
     **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages.
     We are defining these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
+
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/13>`_
 
 Why would you customize a Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -32,7 +37,7 @@ Having this method you may be rendering its result in a new action of the ``Prod
 
 See example below:
 
-**1.** Create a new Controller class under the ``AppBundle/Controller`` namespace.
+**1.** Create a new Controller class under the ``App\Controller`` namespace.
 
 Remember that it has to extend a proper base class. How can you check that?
 
@@ -51,31 +56,28 @@ getting a list of recommended products from your external api.
 
     <?php
 
-    namespace AppBundle\Controller;
+    declare(strict_types=1);
+
+    namespace App\Controller;
 
     use FOS\RestBundle\View\View;
     use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+    use Sylius\Component\Resource\ResourceActions;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Sylius\Component\Resource\ResourceActions;
 
     class ProductController extends ResourceController
     {
-        /**
-         * @param Request $request
-         *
-         * @return Response
-         */
-        public function showAction(Request $request)
+        public function showAction(Request $request): Response
         {
             $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
             $this->isGrantedOr403($configuration, ResourceActions::SHOW);
             $product = $this->findOr404($configuration);
 
-            $recommendationServiceApi = $this->get('app.recommendation_service_api');
+            $recommendationService = $this->get('app.provider.product');
 
-            $recommendedProducts = $recommendationServiceApi->getRecommendedProducts($product);
+            $recommendedProducts = $recommendationService->getRecommendedProducts($product);
 
             $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $product);
 
@@ -99,7 +101,7 @@ getting a list of recommended products from your external api.
         }
     }
 
-**2.** In order to use your controller and its actions you need to configure it in the ``app/config/config.yml``.
+**2.** In order to use your controller and its actions you need to configure it in the ``config/packages/_sylius.yaml``.
 
 .. code-block:: yaml
 
@@ -107,84 +109,104 @@ getting a list of recommended products from your external api.
         resources:
             product:
                 classes:
-                    controller: AppBundle\Controller\ProductController
+                    controller: App\Controller\ProductController
 
-How to customize a Standard Controller:
+**3.** The next thing you have to do is to override the ``sylius.repository.product`` service definition in the ``config/services.yaml``.
+
+.. code-block:: yaml
+
+    # config/services.yaml
+    services:
+        app.provider.product:
+            class: App\Provider\ProductProvider
+            arguments: ['@sylius.repository.product']
+            public: true
+
+.. tip::
+
+    Run ``$ php bin/console debug:container sylius.repository.product`` to check if the class has changed to your implementation.
+
+**4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
+
+.. code-block:: yaml
+
+    app_shop_custom_index:
+        path: /custom/index
+        methods: [GET]
+        defaults:
+            _controller: app.controller.shop.homepage:indexAction
+
+    app_shop_custom_custom:
+        path: /custom/custom
+        methods: [GET]
+        defaults:
+            _controller: app.controller.shop.homepage:customAction
+
+How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's assume that you would like to add some logic to the Homepage.
 
-**1.** Create a new Controller class under the ``AppBundle/Controller/Shop`` namespace.
+**1.** Create a new Controller class under the ``App\Controller\Shop`` namespace.
 
-If you still need the methods of the original HomepageController, then copy its body to the new class.
+If you still need the methods of the original ``HomepageController``, then copy its body to the new class.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Controller\Shop;
+    declare(strict_types=1);
+
+    namespace App\Controller\Shop;
 
     use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-    use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
 
     final class HomepageController
     {
-        /**
-         * @var EngineInterface
-         */
+        /** @var EngineInterface */
         private $templatingEngine;
 
-        /**
-         * @param EngineInterface $templatingEngine
-         */
         public function __construct(EngineInterface $templatingEngine)
         {
             $this->templatingEngine = $templatingEngine;
         }
 
-        /**
-         * @param Request $request
-         *
-         * @return Response
-         */
-        public function indexAction(Request $request)
+        public function indexAction(): Response
         {
             return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
         }
 
-        /**
-         * @param Request $request
-         *
-         * @return Response
-         */
-        public function customAction(Request $request)
+        public function customAction(): Response
         {
-            // Put your custom logic here
+            return $this->templatingEngine->renderResponse('custom.html.twig');
         }
     }
 
-**2.** The next thing you have to do is to override the ``sylius.controller.shop.homepage`` service definition in the ``app/config/services.yml``.
+**2.** The next thing you have to do is to override the ``sylius.controller.shop.homepage`` service definition in the ``config/services.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     services:
-        sylius.controller.shop.homepage:
-            class: AppBundle\Controller\Shop\HomepageController
+        app.controller.shop.homepage:
+            class: App\Controller\Shop\HomepageController
             arguments: ['@templating']
-
-Remember to import the ``app/config/services.yml`` into the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "services.yml" }
+            tags: ['controller.service_arguments']
 
 .. tip::
 
     Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
+
+**3.** Finally you’ll need to add routes in the ``config/routes.yaml``.
+
+.. code-block:: yaml
+
+    app_shop_custom_procuct:
+        path: /custom/product
+        methods: [GET]
+        defaults:
+            _controller: sylius.controller.product:showAction
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
 

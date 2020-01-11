@@ -23,15 +23,9 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- */
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     private $associationHydrator;
 
     /**
@@ -73,27 +67,61 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ChannelInterface $channel,
         TaxonInterface $taxon,
         string $locale,
-        array $sorting = []
+        array $sorting = [],
+        bool $includeAllDescendants = false
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
+            ->distinct()
             ->addSelect('translation')
+            ->addSelect('productTaxon')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->innerJoin('o.productTaxons', 'productTaxon')
-            ->andWhere('productTaxon.taxon = :taxon')
+            ->innerJoin('o.productTaxons', 'productTaxon');
+
+        if ($includeAllDescendants) {
+            $queryBuilder
+                ->innerJoin('productTaxon.taxon', 'taxon')
+                ->andWhere('taxon.left >= :taxonLeft')
+                ->andWhere('taxon.right <= :taxonRight')
+                ->andWhere('taxon.root = :taxonRoot')
+                ->setParameter('taxonLeft', $taxon->getLeft())
+                ->setParameter('taxonRight', $taxon->getRight())
+                ->setParameter('taxonRoot', $taxon->getRoot())
+            ;
+        } else {
+            $queryBuilder
+                ->andWhere('productTaxon.taxon = :taxon')
+                ->setParameter('taxon', $taxon)
+            ;
+        }
+
+        $queryBuilder
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
-            ->addGroupBy('o.id')
             ->setParameter('locale', $locale)
-            ->setParameter('taxon', $taxon)
             ->setParameter('channel', $channel)
         ;
 
         // Grid hack, we do not need to join these if we don't sort by price
         if (isset($sorting['price'])) {
+            // Another hack, the subquery to get the first position variant
+            $subQuery = $this->createQueryBuilder('m')
+                 ->select('min(v.position)')
+                 ->innerJoin('m.variants', 'v')
+                 ->andWhere('m.id = :product_id')
+             ;
+
             $queryBuilder
+                ->addSelect('variant')
+                ->addSelect('channelPricing')
                 ->innerJoin('o.variants', 'variant')
                 ->innerJoin('variant.channelPricings', 'channelPricing')
                 ->andWhere('channelPricing.channelCode = :channelCode')
+                ->andWhere(
+                    $queryBuilder->expr()->in(
+                        'variant.position',
+                        str_replace(':product_id', 'o.id', $subQuery->getDQL())
+                    )
+                )
                 ->setParameter('channelCode', $channel->getCode())
             ;
         }

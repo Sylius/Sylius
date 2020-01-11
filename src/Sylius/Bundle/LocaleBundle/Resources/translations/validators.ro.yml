@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Vă rugăm să alegeţi codul de localizare.
+            regex: Codul de regionalizare poate conține doar litere, numere - și _.
             unique: Codul de localizare trebuie să fie unic.

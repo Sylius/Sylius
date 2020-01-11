@@ -16,40 +16,30 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class OrderItemUnit implements OrderItemUnitInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var OrderItemInterface
-     */
+    /** @var OrderItemInterface */
     protected $orderItem;
 
     /**
      * @var Collection|AdjustmentInterface[]
+     *
+     * @psalm-var Collection<array-key, AdjustmentInterface>
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
-    /**
-     * @param OrderItemInterface $orderItem
-     */
     public function __construct(OrderItemInterface $orderItem)
     {
         $this->orderItem = $orderItem;
         $this->orderItem->addUnit($this);
 
+        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
     }
 
@@ -178,9 +168,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
@@ -188,9 +175,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {

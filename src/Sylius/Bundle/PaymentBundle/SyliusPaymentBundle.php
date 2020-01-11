@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Payments component for Symfony2 applications.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusPaymentBundle extends AbstractResourceBundle
 {
@@ -46,7 +44,7 @@ final class SyliusPaymentBundle extends AbstractResourceBundle
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
      */
     protected function getModelNamespace(): string
     {

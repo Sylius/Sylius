@@ -18,9 +18,6 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(PromotionEligibilityCheckerInterface $promotionEligibilityChecker): void

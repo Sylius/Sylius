@@ -7,7 +7,7 @@ sylius_admin_partial_order_latest:
             repository:
                 method: findLatest
                 arguments:
-                    - !!int $count
+                    - '!!int $count'
             template: $template
             permission: true
 
@@ -20,7 +20,7 @@ sylius_admin_partial_order_latest_in_channel:
             repository:
                 method: findLatestInChannel
                 arguments:
-                    count: !!int $count
+                    count: '!!int $count'
                     channel: expr:notFoundOnNull(service('sylius.repository.channel').findOneByCode($channelCode))
             template: $template
             permission: true

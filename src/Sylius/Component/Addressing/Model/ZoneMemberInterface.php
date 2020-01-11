@@ -16,18 +16,9 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @return ZoneInterface|null
-     */
     public function getBelongsTo(): ?ZoneInterface;
 
-    /**
-     * @param ZoneInterface|null $belongsTo
-     */
     public function setBelongsTo(?ZoneInterface $belongsTo): void;
 }

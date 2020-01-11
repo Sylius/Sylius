@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Interfaces
 ==========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Model Interfaces
 ----------------
@@ -16,7 +23,7 @@ This interface should be implemented by model representing a single type of Emai
 
     For more detailed information go to `Sylius API EmailInterface`_.
 
-.. _Sylius API EmailInterface: http://api.sylius.org/Sylius/Component/Mailer/Model/EmailInterface.html
+.. _Sylius API EmailInterface: http://api.sylius.com/Sylius/Component/Mailer/Model/EmailInterface.html
 
 Service Interfaces
 ------------------
@@ -31,7 +38,7 @@ This interface provides methods for retrieving default sender name nad address.
 .. note::
     For more detailed information go to `Sylius API DefaultSettingsProviderInterface`_.
 
-.. _Sylius API DefaultSettingsProviderInterface: http://api.sylius.org/Sylius/Component/Mailer/Provider/DefaultSettingsProviderInterface.html
+.. _Sylius API DefaultSettingsProviderInterface: http://api.sylius.com/Sylius/Component/Mailer/Provider/DefaultSettingsProviderInterface.html
 
 .. _component_mailer_provider_email-provider-interface:
 
@@ -43,7 +50,7 @@ This interface provides methods for retrieving an email from storage.
 .. note::
     For more detailed information go to `Sylius API EmailProviderInterface`_.
 
-.. _Sylius API EmailProviderInterface: http://api.sylius.org/Sylius/Component/Mailer/Provider/EmailProviderInterface.html
+.. _Sylius API EmailProviderInterface: http://api.sylius.com/Sylius/Component/Mailer/Provider/EmailProviderInterface.html
 
 Sender
 ~~~~~~

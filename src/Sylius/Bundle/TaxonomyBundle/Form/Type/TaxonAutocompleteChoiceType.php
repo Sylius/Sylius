@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TaxonAutocompleteChoiceType extends AbstractType
 {
     /**
@@ -31,13 +28,13 @@ final class TaxonAutocompleteChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'resource' => 'sylius.taxon',
-            'choice_name' => 'name',
+            'choice_name' => 'fullname',
             'choice_value' => 'code',
         ]);
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress MissingPropertyType
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {

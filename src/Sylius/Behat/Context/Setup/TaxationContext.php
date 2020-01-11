@@ -25,49 +25,26 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TaxationContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxRateFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxCategoryFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $taxRateRepository;
 
-    /**
-     * @var TaxCategoryRepositoryInterface
-     */
+    /** @var TaxCategoryRepositoryInterface */
     private $taxCategoryRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $taxRateFactory
-     * @param FactoryInterface $taxCategoryFactory
-     * @param RepositoryInterface $taxRateRepository
-     * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     * @param ObjectManager $objectManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $taxRateFactory,
@@ -87,7 +64,7 @@ final class TaxationContext implements Context
     /**
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
-     * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
+     * @Given /^the store has(?:| also) "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
      */
     public function storeHasTaxRateWithinZone(
         $taxRateName,
@@ -136,6 +113,16 @@ final class TaxationContext implements Context
         $taxCategory = $this->createTaxCategory($name, $code);
 
         $this->sharedStorage->set('tax_category', $taxCategory);
+    }
+
+    /**
+     * @Given the store has tax categories :firstName, :secondName and :thirdName
+     */
+    public function theStoreHasTaxCategories(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->theStoreHasTaxCategoryWithCode($name);
+        }
     }
 
     /**

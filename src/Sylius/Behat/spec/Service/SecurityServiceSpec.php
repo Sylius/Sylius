@@ -22,10 +22,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SecurityServiceSpec extends ObjectBehavior
 {
     function let(

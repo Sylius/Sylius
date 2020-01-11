@@ -14,14 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Customer\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerSpec extends ObjectBehavior
 {
     function it_implements_customer_interface(): void

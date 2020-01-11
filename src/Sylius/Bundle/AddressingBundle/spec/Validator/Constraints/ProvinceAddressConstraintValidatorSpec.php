@@ -25,9 +25,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
- */
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $countryRepository, RepositoryInterface $provinceRepository): void

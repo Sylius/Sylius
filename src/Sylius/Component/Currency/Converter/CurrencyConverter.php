@@ -16,24 +16,14 @@ namespace Sylius\Component\Currency\Converter;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class CurrencyConverter implements CurrencyConverterInterface
 {
-    /**
-     * @var ExchangeRateRepositoryInterface
-     */
+    /** @var ExchangeRateRepositoryInterface */
     private $exchangeRateRepository;
 
-    /**
-     * @var array|ExchangeRateInterface[]
-     */
+    /** @var array|ExchangeRateInterface[] */
     private $cache;
 
-    /**
-     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
-     */
     public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->exchangeRateRepository = $exchangeRateRepository;
@@ -61,12 +51,6 @@ final class CurrencyConverter implements CurrencyConverterInterface
         return (int) round($amount / $exchangeRate->getRatio());
     }
 
-    /**
-     * @param string $sourceCode
-     * @param string $targetCode
-     *
-     * @return ExchangeRateInterface|null
-     */
     private function findExchangeRate(string $sourceCode, string $targetCode): ?ExchangeRateInterface
     {
         $sourceTargetIndex = $this->createIndex($sourceCode, $targetCode);
@@ -84,12 +68,6 @@ final class CurrencyConverter implements CurrencyConverterInterface
         return $this->cache[$sourceTargetIndex] = $this->exchangeRateRepository->findOneWithCurrencyPair($sourceCode, $targetCode);
     }
 
-    /**
-     * @param string $prefix
-     * @param string $suffix
-     *
-     * @return string
-     */
     private function createIndex(string $prefix, string $suffix): string
     {
         return sprintf('%s-%s', $prefix, $suffix);

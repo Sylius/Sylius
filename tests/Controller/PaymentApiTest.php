@@ -15,9 +15,6 @@ namespace Sylius\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class PaymentApiTest extends CheckoutApiTestCase
 {
     /**
@@ -93,8 +90,6 @@ final class PaymentApiTest extends CheckoutApiTestCase
     }
 
     /**
-     * @param mixed $orderId
-     *
      * @return string
      */
     private function getOrderUrl($orderId)
@@ -103,8 +98,6 @@ final class PaymentApiTest extends CheckoutApiTestCase
     }
 
     /**
-     * @param mixed $paymentId
-     *
      * @return string
      */
     private function getPaymentUrl($paymentId)

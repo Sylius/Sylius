@@ -15,14 +15,9 @@ namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class UniqueSimpleProductCode extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.simple_product.code.unique';
 
     /**

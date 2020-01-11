@@ -15,13 +15,7 @@ namespace Sylius\Bundle\OrderBundle\NumberAssigner;
 
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 interface OrderNumberAssignerInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function assignNumber(OrderInterface $order): void;
 }

@@ -6,11 +6,12 @@ sylius:
         address:
             city: Mesto
             company: Spoločnosť
-            country: Štát
+            country: Krajina
             first_name: Meno
             last_name: Priezvisko
             phone_number: Telefónne číslo
             postcode: PSČ
+            street: Ulica
             province: Provincia
             zone: Zóna
         country:
@@ -25,7 +26,7 @@ sylius:
             select: Vyberte
         zone:
             add_member: Pridať člena
-            members: Členovia
+            members: Používatelia
             name: Názov
             type: Typ
             types:

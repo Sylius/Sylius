@@ -16,11 +16,11 @@
                     {{ order.currencyCode }}
                 </div>
                 <div class="item">
-                    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|locale }}
+                    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|locale_name }}
                 </div>
                 <div class="item">
                     {{ 'sylius.ui.purchased_from'|trans }}
-                    <span class="ui large empty horizontal circular label" style="background-color: {{ order.channel.color }}"></span> <strong>{{ order.channel }}</strong>
+                    {% include '@SyliusAdmin/Common/_channel.html.twig' with {'channel': order.channel} %}
                 </div>
             </div>
         </div>

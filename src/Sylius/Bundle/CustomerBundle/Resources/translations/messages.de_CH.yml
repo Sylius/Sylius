@@ -5,10 +5,20 @@ sylius:
     form:
         customer:
             first_name: Vorname
+            group: Gruppe
+            last_name: Nachname
             email: E-Mail
-            phone_number: Telefonnummber
+            phone_number: Telefonnummer
+            gender: Geschlecht
+            birthday: Geburtstag
             billing_address: Rechnungsadresse
             different_billing_address: Eine andere Rechnungsadresse benutzen?
+            only_customer_registration: Account erstellen?
+            subscribed_to_newsletter: Newsletter abonnieren
         customer_group:
             name: Name
             roles: Rollen
+    gender:
+        unknown: Unbekannt
+        male: Männlich
+        female: Weiblich

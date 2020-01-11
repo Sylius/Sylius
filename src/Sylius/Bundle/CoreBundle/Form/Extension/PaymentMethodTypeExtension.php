@@ -23,9 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -53,6 +50,7 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
                 }
 
                 $gatewayConfig = $paymentMethod->getGatewayConfig();
+                /** @psalm-suppress DocblockTypeContradiction */
                 if (null === $gatewayConfig->getGatewayName() && null !== $paymentMethod->getCode()) {
                     $gatewayConfig->setGatewayName(StringInflector::nameToLowercaseCode($paymentMethod->getCode()));
                 }

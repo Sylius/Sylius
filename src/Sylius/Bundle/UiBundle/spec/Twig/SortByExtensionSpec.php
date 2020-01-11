@@ -18,9 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\spec\Fixtures\SampleInterface;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class SortByExtensionSpec extends ObjectBehavior
 {
     function it_extends_twig_extensions(): void

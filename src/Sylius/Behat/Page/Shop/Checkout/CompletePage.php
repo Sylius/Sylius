@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,45 +24,28 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class CompletePage extends SymfonyPage implements CompletePageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
+    /** @var TableAccessorInterface */
     private $tableAccessor;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
     public function __construct(
         Session $session,
-        array $parameters,
+        $minkParameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor
     ) {
-        parent::__construct($session, $parameters, $router);
+        parent::__construct($session, $minkParameters, $router);
 
         $this->tableAccessor = $tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_checkout_complete';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItemWithProductAndQuantity($productName, $quantity)
+    public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool
     {
         $table = $this->getElement('items_table');
 
@@ -75,30 +58,21 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingAddress(AddressInterface $address)
+    public function hasShippingAddress(AddressInterface $address): bool
     {
         $shippingAddress = $this->getElement('shipping_address')->getText();
 
         return $this->isAddressValid($shippingAddress, $address);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingAddress(AddressInterface $address)
+    public function hasBillingAddress(AddressInterface $address): bool
     {
         $billingAddress = $this->getElement('billing_address')->getText();
 
         return $this->isAddressValid($billingAddress, $address);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         if (!$this->hasElement('shipping_method')) {
             return false;
@@ -107,26 +81,17 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($this->getElement('shipping_method')->getText(), $shippingMethod->getName());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethodName()
+    public function getPaymentMethodName(): string
     {
         return $this->getElement('payment_method')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPaymentMethod()
+    public function hasPaymentMethod(): bool
     {
         return $this->hasElement('payment_method');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount)
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool
     {
         $columns = $this->getProductRowElement($product)->findAll('css', 'td');
         $priceWithoutDiscount = $this->getPriceFromString($columns[1]->getText());
@@ -136,10 +101,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $discount === $amount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasOrderTotal($total)
+    public function hasOrderTotal(int $total): bool
     {
         if (!$this->hasElement('order_total')) {
             return false;
@@ -148,161 +110,136 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->getTotalFromString($this->getElement('order_total')->getText()) === $total;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBaseCurrencyOrderTotal()
+    public function getBaseCurrencyOrderTotal(): string
     {
-        return $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
+        return (string) $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addNotes($notes)
+    public function addNotes(string $notes): void
     {
         $this->getElement('extra_notes')->setValue($notes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotionTotal($promotionTotal)
+    public function hasPromotionTotal(string $promotionTotal): bool
     {
         return false !== strpos($this->getElement('promotion_total')->getText(), $promotionTotal);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPromotion($promotionName)
+    public function hasPromotion(string $promotionName): bool
     {
         return false !== stripos($this->getElement('promotion_discounts')->getText(), $promotionName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingPromotion($promotionName)
+    public function hasShippingPromotion(string $promotionName): bool
     {
-        return false !== stripos($this->getElement('promotion_shipping_discounts')->getText(), $promotionName);
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('promotions_shipping_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTaxTotal($taxTotal)
+    public function getTaxTotal(): string
     {
-        return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
+        return $this->getElement('tax_total')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingTotal($price)
+    public function getShippingTotal(): string
     {
-        return false !== strpos($this->getElement('shipping_total')->getText(), $price);
+        return $this->getElement('shipping_total')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductUnitPrice(ProductInterface $product, $price)
+    public function hasShippingTotal(): bool
+    {
+        return $this->hasElement('shipping_total');
+    }
+
+    public function hasProductUnitPrice(ProductInterface $product, string $price): bool
     {
         $productRowElement = $this->getProductRowElement($product);
 
         return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
         return $this->getElement('validation_errors')->getText() === $message;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationErrors()
+    public function getValidationErrors(): string
     {
         return $this->getElement('validation_errors')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasLocale($localeName)
+    public function hasLocale(string $localeName): bool
     {
         return false !== strpos($this->getElement('locale')->getText(), $localeName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasCurrency($currencyCode)
+    public function hasCurrency(string $currencyCode): bool
     {
         return false !== strpos($this->getElement('currency')->getText(), $currencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function confirmOrder()
+    public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
     }
 
-    public function changeAddress()
+    public function changeAddress(): void
     {
         $this->getElement('addressing_step_label')->click();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changePaymentMethod()
+    public function changePaymentMethod(): void
     {
         $this->getElement('payment_step_label')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
         return false !== stripos($shippingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
         return false !== stripos($billingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingPromotionDiscount($promotionName)
+    public function getShippingPromotionDiscount(string $promotionName): string
     {
         return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function tryToOpen(array $urlParameters = [])
+    public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool
+    {
+        $promotionWithDiscount = sprintf('%s: %s', $promotionName, $discount);
+
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('promotions_shipping_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionWithDiscount);
+    }
+
+    public function hasOrderPromotion(string $promotionName): bool
+    {
+        /** @var NodeElement $shippingPromotions */
+        $shippingPromotions = $this->getElement('order_promotions_details');
+
+        return false !== strpos($shippingPromotions->getAttribute('data-html'), $promotionName);
+    }
+
+    public function tryToOpen(array $urlParameters = []): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $start = microtime(true);
@@ -318,10 +255,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         parent::tryToOpen($urlParameters);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
@@ -332,39 +266,30 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'extra_notes' => '#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
             'locale' => '#sylius-order-locale-name',
+            'order_promotions_details' => '#order-promotions-details',
             'order_total' => 'td:contains("Total")',
             'payment_method' => '#sylius-payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
+            'promotions_shipping_details' => '#shipping-promotion-details',
             'promotion_shipping_discounts' => '#promotion-shipping-discounts',
             'promotion_total' => '#promotion-total',
             'shipping_address' => '#sylius-shipping-address',
             'shipping_method' => '#sylius-shipping-method',
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
-            'tax_total' => '#tax-total',
+            'tax_total' => '[data-test="tax-total"]',
             'validation_errors' => '.sylius-validation-error',
         ]);
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return NodeElement
-     */
-    private function getProductRowElement(ProductInterface $product)
+    private function getProductRowElement(ProductInterface $product): NodeElement
     {
         return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
-    /**
-     * @param string $displayedAddress
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    private function isAddressValid($displayedAddress, AddressInterface $address)
+    private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
             $this->hasAddressPart($displayedAddress, $address->getCompany(), true) &&
@@ -379,13 +304,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    /**
-     * @param string $address
-     * @param string $addressPart
-     *
-     * @return bool
-     */
-    private function hasAddressPart($address, $addressPart, $optional = false)
+    private function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
@@ -394,44 +313,24 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== strpos($address, $addressPart);
     }
 
-    /**
-     * @param string $countryCode
-     *
-     * @return string
-     */
-    private function getCountryName($countryCode)
+    private function getCountryName(string $countryCode): string
     {
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
 
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
+    private function getPriceFromString(string $price): int
     {
-        return (int) round(str_replace(['€', '£', '$'], '', $price) * 100, 2);
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
-    private function getTotalFromString($total)
+    private function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
 
         return $this->getPriceFromString($total);
     }
 
-    /**
-     * @param string $total
-     *
-     * @return int
-     */
-    private function getBaseTotalFromString($total)
+    private function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);
 

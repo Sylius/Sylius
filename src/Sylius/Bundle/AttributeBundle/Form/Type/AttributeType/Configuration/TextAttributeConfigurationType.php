@@ -17,9 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class TextAttributeConfigurationType extends AbstractType
 {
     /**
@@ -30,9 +27,11 @@ final class TextAttributeConfigurationType extends AbstractType
         $builder
             ->add('min', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.text.min',
+                'required' => false,
             ])
             ->add('max', NumberType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.text.max',
+                'required' => false,
             ])
         ;
     }

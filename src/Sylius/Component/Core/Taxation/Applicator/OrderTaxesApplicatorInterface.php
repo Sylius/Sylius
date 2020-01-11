@@ -16,15 +16,7 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 interface OrderTaxesApplicatorInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     */
     public function apply(OrderInterface $order, ZoneInterface $zone): void;
 }

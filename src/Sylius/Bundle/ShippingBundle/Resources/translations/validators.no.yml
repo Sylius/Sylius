@@ -8,10 +8,6 @@ sylius:
             min_length: 'Kategorinavnet må være minst {{ limit }} tegn.'
             not_blank: 'Angi fraktkategorinavn.'
     shipping_method:
-        calculator:
-            max_length: Maksimal lengde
-            min_length: Minimum lengde
-            not_blank: Kan ikke være tomt
         name:
             max_length: 'Fraktmetodenavn kan ikke være lengre enn {{ limit }} tegn.'
             min_length: 'Fraktmetodenavn må være minst {{ limit }} tegn.'

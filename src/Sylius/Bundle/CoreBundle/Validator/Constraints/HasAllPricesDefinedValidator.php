@@ -18,9 +18,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class HasAllPricesDefinedValidator extends ConstraintValidator
 {
     /**
@@ -33,7 +30,7 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
         $channels = $productVariant->getProduct()->getChannels();
 
         foreach ($channels as $channel) {
-            /** @var ChannelPricingInterface $channelPricing */
+            /** @var ChannelPricingInterface|null $channelPricing */
             $channelPricing = $productVariant->getChannelPricingForChannel($channel);
             if (null === $channelPricing || null === $channelPricing->getPrice()) {
                 $this->context->buildViolation($constraint->message)

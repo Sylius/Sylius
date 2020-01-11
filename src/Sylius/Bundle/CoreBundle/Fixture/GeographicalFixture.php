@@ -24,49 +24,26 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Intl\Intl;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class GeographicalFixture extends AbstractFixture
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $countryFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $countryManager;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $provinceFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $provinceManager;
 
-    /**
-     * @var ZoneFactoryInterface
-     */
+    /** @var ZoneFactoryInterface */
     private $zoneFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $zoneManager;
 
-    /**
-     * @param FactoryInterface $countryFactory
-     * @param ObjectManager $countryManager
-     * @param FactoryInterface $provinceFactory
-     * @param ObjectManager $provinceManager
-     * @param ZoneFactoryInterface $zoneFactory
-     * @param ObjectManager $zoneManager
-     */
     public function __construct(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
@@ -115,7 +92,7 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('countries')
                 ->performNoDeepMerging()
                 ->defaultValue(array_keys(Intl::getRegionBundle()->getCountryNames()))
-                ->prototype('scalar')
+                ->scalarPrototype()
         ;
 
         /** @var ArrayNodeDefinition $provinceNode */
@@ -123,14 +100,14 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('provinces')
                 ->normalizeKeys(false)
                 ->useAttributeAsKey('code')
-                ->prototype('array')
+                ->arrayPrototype()
         ;
 
         $provinceNode
             ->performNoDeepMerging()
             ->normalizeKeys(false)
             ->useAttributeAsKey('code')
-            ->prototype('scalar')
+            ->scalarPrototype()
         ;
 
         /** @var ArrayNodeDefinition $zoneNode */
@@ -138,22 +115,22 @@ class GeographicalFixture extends AbstractFixture
             ->arrayNode('zones')
                 ->normalizeKeys(false)
                 ->useAttributeAsKey('code')
-                ->prototype('array')
+                ->arrayPrototype()
         ;
 
         $zoneNode
             ->performNoDeepMerging()
             ->children()
                 ->scalarNode('name')->cannotBeEmpty()->end()
-                ->arrayNode('countries')->prototype('scalar')->end()->end()
-                ->arrayNode('zones')->prototype('scalar')->end()->end()
-                ->arrayNode('provinces')->prototype('scalar')->end()->end()
+                ->arrayNode('countries')->scalarPrototype()->end()->end()
+                ->arrayNode('zones')->scalarPrototype()->end()->end()
+                ->arrayNode('provinces')->scalarPrototype()->end()->end()
                 ->scalarNode('scope')->end()
         ;
 
         $zoneNode
             ->validate()
-                ->ifTrue(function ($zone) {
+                ->ifTrue(function (array $zone): bool {
                     $filledTypes = 0;
                     $filledTypes += empty($zone['countries']) ? 0 : 1;
                     $filledTypes += empty($zone['zones']) ? 0 : 1;
@@ -165,10 +142,6 @@ class GeographicalFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param array $countriesCodes
-     * @param array $countriesProvinces
-     */
     private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
@@ -190,11 +163,7 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zones
-     * @param \Closure $zoneValidator
-     */
-    private function loadZones(array $zones, \Closure $zoneValidator)
+    private function loadZones(array $zones, \Closure $zoneValidator): void
     {
         foreach ($zones as $zoneCode => $zoneOptions) {
             $zoneName = $zoneOptions['name'];
@@ -211,6 +180,10 @@ class GeographicalFixture extends AbstractFixture
                 $zone->setName($zoneName);
                 $zone->setType($zoneType);
 
+                if (isset($zoneOptions['scope'])) {
+                    $zone->setScope($zoneOptions['scope']);
+                }
+
                 $this->zoneManager->persist($zone);
             } catch (\InvalidArgumentException $exception) {
                 throw new \InvalidArgumentException(sprintf(
@@ -222,11 +195,7 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $provinces
-     * @param CountryInterface $country
-     */
-    private function loadProvincesForCountry(array $provinces, CountryInterface $country)
+    private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
             /** @var ProvinceInterface $province */
@@ -244,13 +213,9 @@ class GeographicalFixture extends AbstractFixture
     /**
      * @see ZoneInterface
      *
-     * @param array $zoneOptions
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
-    private function getZoneType(array $zoneOptions)
+    private function getZoneType(array $zoneOptions): string
     {
         switch (true) {
             case count($zoneOptions['countries']) > 0:
@@ -264,12 +229,7 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $zoneOptions
-     *
-     * @return array
-     */
-    private function getZoneMembers(array $zoneOptions)
+    private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
 
@@ -285,15 +245,10 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
-    /**
-     * @param array $options
-     *
-     * @return \Closure
-     */
-    private function provideZoneValidator(array $options)
+    private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [
-            ZoneInterface::TYPE_COUNTRY => function ($countryCode) use ($options) {
+            ZoneInterface::TYPE_COUNTRY => function (string $countryCode) use ($options): void {
                 if (in_array($countryCode, $options['countries'], true)) {
                     return;
                 }
@@ -304,7 +259,7 @@ class GeographicalFixture extends AbstractFixture
                     implode(', ', $options['countries'])
                 ));
             },
-            ZoneInterface::TYPE_PROVINCE => function ($provinceCode) use ($options) {
+            ZoneInterface::TYPE_PROVINCE => function (string $provinceCode) use ($options): void {
                 $foundProvinces = [];
                 foreach ($options['provinces'] as $provinces) {
                     if (isset($provinces[$provinceCode])) {
@@ -317,10 +272,10 @@ class GeographicalFixture extends AbstractFixture
                 throw new \InvalidArgumentException(sprintf(
                     'Could not find province "%s", defined ones are: %s!',
                     $provinceCode,
-                    implode(', ', $options['countries'])
+                    implode(', ', $options['provinces'])
                 ));
             },
-            ZoneInterface::TYPE_ZONE => function ($zoneCode) use ($options) {
+            ZoneInterface::TYPE_ZONE => function (string $zoneCode) use ($options): void {
                 if (isset($options['zones'][$zoneCode])) {
                     return;
                 }
@@ -333,7 +288,7 @@ class GeographicalFixture extends AbstractFixture
             },
         ];
 
-        return function (array $zoneOptions) use ($memberValidators) {
+        return function (array $zoneOptions) use ($memberValidators): void {
             $zoneType = $this->getZoneType($zoneOptions);
             $zoneMembers = $this->getZoneMembers($zoneOptions);
 

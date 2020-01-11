@@ -19,29 +19,17 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class PromotionRuleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var PromotionRuleFactoryInterface
-     */
+    /** @var PromotionRuleFactoryInterface */
     private $promotionRuleFactory;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param PromotionRuleFactoryInterface $promotionRuleFactory
-     */
     public function __construct(PromotionRuleFactoryInterface $promotionRuleFactory)
     {
         $this->promotionRuleFactory = $promotionRuleFactory;
@@ -78,10 +66,10 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
             ->setDefault('configuration', [
                 'count' => $this->faker->randomNumber(1),
             ])
-            ->setNormalizer('configuration', function (Options $options, $configuration): array {
+            ->setNormalizer('configuration', function (Options $options, array $configuration): array {
                 foreach ($configuration as $channelCode => $channelConfiguration) {
                     if (isset($channelConfiguration['amount'])) {
-                        $configuration[$channelCode]['amount'] *= 100;
+                        $configuration[$channelCode]['amount'] = (int) ($configuration[$channelCode]['amount'] * 100);
                     }
                 }
 

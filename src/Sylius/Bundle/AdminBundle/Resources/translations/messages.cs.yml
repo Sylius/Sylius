@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Potvrzení odeslání'
     menu:
         admin:
             main:
@@ -29,7 +32,7 @@ sylius:
                     zones: Oblasti
                 marketing:
                     header: Marketing
-                    product_reviews: Hodnocení produktu
+                    product_reviews: Hodnocení produktů
                     promotions: Akce
                 customers:
                     customers: Zákazníci

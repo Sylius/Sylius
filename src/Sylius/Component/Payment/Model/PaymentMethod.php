@@ -16,35 +16,26 @@ namespace Sylius\Component\Payment\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class PaymentMethod implements PaymentMethodInterface
 {
     use TimestampableTrait, ToggleableTrait;
     use TranslatableTrait {
         __construct as initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $environment;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()
@@ -54,9 +45,6 @@ class PaymentMethod implements PaymentMethodInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -164,6 +152,17 @@ class PaymentMethod implements PaymentMethodInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    /**
+     * @return PaymentMethodTranslationInterface
+     */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var PaymentMethodTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
     }
 
     /**

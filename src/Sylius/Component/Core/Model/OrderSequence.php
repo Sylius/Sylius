@@ -15,14 +15,9 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $version = 1;
 
     /**

@@ -18,19 +18,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class HasTaxonConfigurationType extends AbstractType
 {
-    /**
-     * @var DataTransformerInterface
-     */
+    /** @var DataTransformerInterface */
     private $taxonsToCodesTransformer;
 
-    /**
-     * @param DataTransformerInterface $taxonsToCodesTransformer
-     */
     public function __construct(DataTransformerInterface $taxonsToCodesTransformer)
     {
         $this->taxonsToCodesTransformer = $taxonsToCodesTransformer;

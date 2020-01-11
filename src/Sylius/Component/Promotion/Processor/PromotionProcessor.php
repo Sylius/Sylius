@@ -18,31 +18,17 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionProcessor implements PromotionProcessorInterface
 {
-    /**
-     * @var PreQualifiedPromotionsProviderInterface
-     */
+    /** @var PreQualifiedPromotionsProviderInterface */
     private $preQualifiedPromotionsProvider;
 
-    /**
-     * @var PromotionEligibilityCheckerInterface
-     */
+    /** @var PromotionEligibilityCheckerInterface */
     private $promotionEligibilityChecker;
 
-    /**
-     * @var PromotionApplicatorInterface
-     */
+    /** @var PromotionApplicatorInterface */
     private $promotionApplicator;
 
-    /**
-     * @param PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider
-     * @param PromotionEligibilityCheckerInterface $promotionEligibilityChecker
-     * @param PromotionApplicatorInterface $promotionApplicator
-     */
     public function __construct(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,

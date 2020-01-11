@@ -11,15 +11,33 @@ sylius:
             max_length: Promosyon açıklaması 1 karakterden uzun olmamalıdır. |Promosyon açıklamasının {{ limit }} karakterden uzun olmaması gerekir.
             min_length: Promosyon açıklaması en az 1 karakter uzunluğunda olmalıdır.|Promosyon açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen promosyon açıklamasını girin.
+        end_date_cannot_be_set_prior_start_date: Bitiş tarihi başlangıç tarihinin öncesine ayarlanamaz.
         name:
             max_length: Promosyon ismi 1 karakterden uzun olmamalıdır.|Promosyon ismi {{ limit }} karakterden uzun olmamalıdır.
             min_length: Promosyon ismi en az 1 karakter uzunluğunda olmalıdır.|Promosyon ismi en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen promosyon ismini girin.
+    promotion_action:
+        percentage_discount_configuration:
+            min: Indirim değeri en az %0 olmalıdır.
+            max: En yüksek indirim yüzdesi %100'dür.
     promotion_coupon:
         code:
             max_length: Kupon kodu 1 karakterden uzun olmamalıdır. |Kupon kodunun {{ limit }} karakterden uzun olmaması gerekir.
             min_length: Kupon kodu en az 1 karakter uzunluğunda olmalıdır. |Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Kupon kodunu giriniz.
+            regex: Kupon kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
             unique: Bu kupon zaten var.
+        is_invalid: Kupon kodu geçersiz.
         usage_limit:
             min: Kupon kullanım limitinin en az {{ limit }} olması gerekir.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Oluşturulacak kuponların miktarı en az {{ limit }} olmalıdır.
+            not_blank: Lütfen oluşturulacak kuponların miktarını giriniz.
+        code_length:
+            min: Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.
+            max: Kupon kodu {{ limit }} karakterden uzun olamaz.
+            not_blank: Kupon kod uzunluğunu giriniz.
+        possible_generation_amount: Geçersiz kupon kodu uzunluğu veya kupon tutarı. %expectedAmount% eşsiz kuponları, kod uzunluğu %codeLength% emsali ile oluşturmak mümkün değildir. mümkün olan oluşturma miktarı %possibleAmount%'dır.
+        usage_limit:
+            min: Oluşturulan Kuponlar kullanım sınırı en az olması gerekir {{ limit }}.

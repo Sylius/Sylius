@@ -7,6 +7,19 @@ sylius:
             not_blank: Bitte Attributnamen eingeben.
             min_length: Attributname muss mindestens 1 Zeichen lang sein.|Attributname muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Attributname darf nicht länger als 1 Zeichen sein.|Attributname darf nicht länger als {{ limit }} Zeichen sein.
+        code:
+            not_blank: Bitte Attribut-Code eingeben.
+            regex: Kürzel der Eigenschaft darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            unique: Dieser Code wird bereits verwendet.
+        configuration:
+            max_entries: Der Maximalwert muss größer oder gleich dem Mindestwert sein.
+            max_length: Die maximale Länge muss größer oder gleich der minimalen Länge sein.
+            min_entries: Der Mindestwert muss kleiner oder gleich dem Maximalwert sein.
+            multiple: Die Option Mehrere muss ausgewählt werden, wenn Mindest- oder Maximalwerte definiert sind.
+        presentation:
+            not_blank: Bitte Attributsanzeige auswählen.
+            min_length: Attributsanzeige muss mindestens 1 Zeichen lang sein.|Attributsanzeige muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Attributsanzeige darf nicht länger als 1 Zeichen sein.|Attributsanzeige darf nicht länger als {{ limit }} Zeichen sein.
     attribute_value:
         attribute:
             not_blank: Bitte Attribut auswählen.

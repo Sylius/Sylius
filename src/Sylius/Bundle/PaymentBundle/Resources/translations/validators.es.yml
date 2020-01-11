@@ -21,7 +21,7 @@ sylius:
             not_blank: Por favor, seleccione el año de caducidad.
     payment:
         currency_code:
-            not_valid: El código de moneda introducido no es válido.
+            not_valid: El código de la moneda que introdujo no es válido.
         method:
             not_blank: 'Por favor, seleccione un método de pago.'
     payment_method:

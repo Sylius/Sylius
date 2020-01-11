@@ -3,7 +3,7 @@ Customizing Translations
 
 .. note::
 
-    We've adopted a convention of overriding translations in the ``app\Resources\translations`` directory.
+    We've adopted a convention of overriding translations in the ``translations`` directory.
 
 Why would you customize a translation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,13 +20,18 @@ There are many other places where you can customize the text content of pages.
 How to customize a translation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. tip::
+
+    You can browse the full implementation of these examples on `this GitHub Pull Request.
+    <https://github.com/Sylius/Customizations/pull/17>`_
+
 In order to customize a translation in your project:
 
-**1.** If you don't have it yet, create ``app\Resources\translations\messages.en.yml`` for English translations.
+**1.** If you don't have it yet, create ``translations/messages.en.yaml`` for English translations.
 
 .. note::
 
-    You can create different files for different locales (languages). For example ``messages.pl.yml`` should hold only Polish translations,
+    You can create different files for different locales (languages). For example ``messages.pl.yaml`` should hold only Polish translations,
     as they will be visible when the current locale is ``PL``. Check the :doc:`Locales </book/configuration/locales>` docs for more information.
 
 **2.** In this file, configure the desired key and give it a translation.
@@ -40,6 +45,16 @@ override its translation key which is ``sylius.form.customer.email``.
         form:
             customer:
                 email: Username
+
+Before
+
+.. image:: ../_images/before_customizing_translation.png
+    :align: center
+
+After
+
+.. image:: ../_images/after_customizing_translation.png
+    :align: center
 
 .. tip::
 

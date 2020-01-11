@@ -24,19 +24,11 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.org>
- */
 final class OrderItemType extends AbstractType
 {
-    /**
-     * @var ProductVariantRepositoryInterface
-     */
+    /** @var ProductVariantRepositoryInterface */
     private $variantRepository;
 
-    /**
-     * @param ProductVariantRepositoryInterface $variantRepository
-     */
     public function __construct(ProductVariantRepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;

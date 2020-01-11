@@ -9,21 +9,86 @@ sylius:
             not_blank: Lütfen kanal için varsayılan dili girin.
         contact_email:
             invalid: Bu e-posta geçerli değil.
+            max: E-posta {{ limit }} karakterden uzun olmaması gerekir.
+            min: E-posta {{ limit }} karakter uzunluğunda olmalıdır.
+    channel_pricing:
+        price:
+            min: Fiyatı en az olması gerekir {{ limit }}.
+            not_blank: Lütfen fiyatı giriniz.
+    checkout:
+        shipping_method:
+            not_blank: Lütfen kargoyu seçiniz.
     contact:
         email:
             invalid: Bu e-posta geçerli değil.
             not_blank: Lütfen e-posta adresinizi girin.
+        message:
+            not_blank: Lütfen mesajınızı girin.
+    currency:
+        enabled:
+            cannot_disable_base: Ana para birimi devre dışı bırakılmaz.
+    customer:
+        currency_code:
+            not_valid: Girmiş olduğunuz döviz numarası geçersiz.
+    cart_item:
+        not_available: '%itemName% yeterli stoğa sahip değil.'
+    order:
+        currency_code:
+            not_valid: Girmiş olduğunuz döviz numarası geçersiz.
+        payment_method_eligibility: 'Bu ödeme şekli %paymentMethodName% devre dışı bırakılmıştır. Lütfen ödeme şeklinizi tekrar seçiniz.'
+        product_eligibility: 'Bu ürün%productName% devre dışı bırakılmıştır.'
+        shipping_method_eligibility: 'Ürün gereksinimleri %shippingMethodName% sevkiyat yöntemi için uygun değil. Lütfen, sevkiyat yöntemi yeniden seçin.'
     locale:
         code:
             not_blank: Lütfen bölge kodunu giriniz.
             unique: Bu bölge kodu zaten var.
+        enabled:
+            cannot_disable_base: Ana mahal devre dışı bırakılamaz.
+    product:
+        variants:
+            all_prices_defined: Ürün çeşitlerinin fiyatlarını yeni atanan kanallar için ilk tanımlamak zorundasın.
+    product_attribute:
+        invalid: Pozisyon tam sayı olmalıdır.
+    product_image:
+        file:
+            max_size: Görüntü çok büyük - {{ size }}{{ suffix }}. En fazla izin verilen boyut {{ limit }}{{ suffix }}.
+            upload_ini_size: Görüntü çok büyük . En fazla izin verilen boyut {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Stok miktarı {{ limit }} değerinden daha büyük olmalıdır.
             not_blank: Lütfen stok miktarını giriniz.
+            reserved: Elde bulunan, tutulan birimlerin sayısından büyük olmalıdır
+        original_price:
+            min: Asıl fiyat negatif olamaz.
+        weight:
+            min: Ağırlık negatif olamaz.
+            invalid: Ağırlık bir sayı olmalıdır.
+        width:
+            min: Genişlik negatif olamaz.
+            invalid: Genişlik bir sayı olmalıdır.
+        height:
+            min: Yükseklik negatif olamaz.
+            invalid: Yükseklik bir sayı olmalıdır.
+        depth:
+            min: Derinlik negatif olamaz.
+            invalid: Derinlik sayı olmalıdır.
+        channel_pricing:
+            all_defined: 'Fiyatı bütün kanallar için tanımlamalısın.'
     product_translation:
         short_description:
             max: Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.
+    taxon_image:
+        file:
+            max_size: Görüntü çok büyük - {{ size }}{{ suffix }}. En fazla izin verilen boyut {{ limit }}{{ suffix }}.
+            upload_ini_size: Görüntü çok büyük . En fazla izin verilen boyut {{ limit }}{{ suffix }}.
     user:
         email:
+            unique: Bu e-posta adresi zaten kullanılmakta.
+            min: E-posta en az {{ min }} karakterden oluşmalıdır.
+            max: E-posta en fazla {{ max }} karakterden oluşmalıdır.
             invalid: Bu e-posta geçerli değil.
+        username:
+            unique: Bu kullanıcı adı zaten kullanılıyor.
+            not_blank: Lütfen adınızı girin.
+        locale_code:
+            not_blank: Lütfen bir yer seçin.

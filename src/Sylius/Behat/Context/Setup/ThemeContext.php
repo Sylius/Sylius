@@ -21,37 +21,20 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ThemeContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ThemeRepositoryInterface
-     */
+    /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $channelManager;
 
-    /**
-     * @var TestThemeConfigurationManagerInterface
-     */
+    /** @var TestThemeConfigurationManagerInterface */
     private $testThemeConfigurationManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ThemeRepositoryInterface $themeRepository
-     * @param ObjectManager $channelManager
-     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,
@@ -107,7 +90,20 @@ final class ThemeContext implements Context
      */
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
     {
-        $file = rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig';
+        $this->changeTemplateContents('/SyliusShopBundle/views/Homepage/index.html.twig', $theme, $contents);
+    }
+
+    /**
+     * @Given /^(this theme) changes plugin main template's content to "([^"]+)"$/
+     */
+    public function themeChangesPluginMainTemplateContent(ThemeInterface $theme, string $content): void
+    {
+        $this->changeTemplateContents('/SyliusTestPlugin/views/main.html.twig', $theme, $content);
+    }
+
+    private function changeTemplateContents(string $templatePath, ThemeInterface $theme, string $contents): void
+    {
+        $file = rtrim($theme->getPath(), '/') . $templatePath;
         $dir = dirname($file);
 
         if (!file_exists($dir)) {

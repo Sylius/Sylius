@@ -19,9 +19,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     /**
@@ -31,7 +28,11 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
      */
     public function validate($order, Constraint $constraint): void
     {
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
+
+        /** @var OrderProductEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderProductEligibility::class);
 
         /** @var OrderItemInterface[] $orderItems */
         $orderItems = $order->getItems();

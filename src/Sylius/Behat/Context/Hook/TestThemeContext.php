@@ -16,19 +16,11 @@ namespace Sylius\Behat\Context\Hook;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class TestThemeContext implements Context
 {
-    /**
-     * @var TestThemeConfigurationManagerInterface
-     */
+    /** @var TestThemeConfigurationManagerInterface */
     private $testThemeConfigurationManager;
 
-    /**
-     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
-     */
     public function __construct(TestThemeConfigurationManagerInterface $testThemeConfigurationManager)
     {
         $this->testThemeConfigurationManager = $testThemeConfigurationManager;

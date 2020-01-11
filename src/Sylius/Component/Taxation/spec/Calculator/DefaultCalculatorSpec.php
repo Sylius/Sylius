@@ -17,10 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 final class DefaultCalculatorSpec extends ObjectBehavior
 {
     function it_implements_Sylius_tax_calculator_interface(): void

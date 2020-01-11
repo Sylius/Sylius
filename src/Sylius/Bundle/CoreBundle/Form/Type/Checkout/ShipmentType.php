@@ -20,19 +20,11 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class ShipmentType extends AbstractType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $dataClass;
 
-    /**
-     * @param string $dataClass
-     */
     public function __construct(string $dataClass)
     {
         $this->dataClass = $dataClass;

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        change_password: 'Fjalëkalimi yt u ndryshua me sukses!'
+        reset_password: 'Fjalëkalimi yt u rivendos me sukses!'
+        reset_password_request: 'Në rast se emaili që keni specifikuar egziston në sistemin tonë, ju kemi dërguar në atë adresë një udhëzim mbi mënyrën e rivendosjes së fjalëkalimit tuaj.'

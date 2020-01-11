@@ -15,9 +15,6 @@ namespace spec\Sylius\Bundle\UiBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PercentageExtensionSpec extends ObjectBehavior
 {
     function it_is_twig_extension(): void

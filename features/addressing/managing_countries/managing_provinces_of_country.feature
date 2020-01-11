@@ -35,3 +35,11 @@ Feature: Managing provinces of a country
         Then I should be notified that it has been successfully edited
         And this country should not have the "Northern Ireland" province
         And this country should have the "Scotland" province
+
+    @ui @javascript
+    Scenario: Adding a province with an austrian province code
+        When I want to edit this country
+        And I add the "Wien" province with "AT-9" code
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this country should have the "Wien" province

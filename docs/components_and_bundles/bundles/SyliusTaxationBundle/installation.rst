@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Installation
 ============
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 Use the following command to add the bundle to your `composer.json` and download package.
@@ -47,9 +54,6 @@ Don't worry, everything was automatically installed via Composer.
         );
     }
 
-.. note::
-
-    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
 Container configuration
 -----------------------
@@ -69,16 +73,6 @@ And configure doctrine extensions which are used by this bundle:
         orm:
             default:
                 timestampable: true
-
-Routing configuration
----------------------
-
-Add the following to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_taxation:
-        resource: "@SyliusTaxationBundle/Resources/config/routing.yml"
 
 Updating database schema
 ------------------------

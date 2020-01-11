@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        user:
+            email: דואר אלקטרוני
+            enabled: הופעל
+            password:
+                label: סיסמה
+                confirmation: אימות
+            remember_me: זכור אותי
+            shipping_address: כתובת למשלוח
+            username: שם משתמש
+        user_filter:
+            query: חפש
+        user_change_password:
+            confirmation: אישור
+            current: סיסמה נוכחית
+            new: סיסמה חדשה
+        user_reset_password:
+            confirmation: אישור
+            new: סיסמה חדשה

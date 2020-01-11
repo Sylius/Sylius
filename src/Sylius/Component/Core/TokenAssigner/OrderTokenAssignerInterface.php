@@ -15,18 +15,9 @@ namespace Sylius\Component\Core\TokenAssigner;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 interface OrderTokenAssignerInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function assignTokenValue(OrderInterface $order): void;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function assignTokenValueIfNotSet(OrderInterface $order): void;
 }

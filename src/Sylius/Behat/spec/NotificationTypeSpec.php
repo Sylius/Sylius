@@ -15,9 +15,6 @@ namespace spec\Sylius\Behat;
 
 use PhpSpec\ObjectBehavior;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationTypeSpec extends ObjectBehavior
 {
     function it_initialize_with_success_value()

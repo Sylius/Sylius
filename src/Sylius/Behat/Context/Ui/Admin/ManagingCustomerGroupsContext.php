@@ -17,41 +17,33 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class ManagingCustomerGroupsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var CurrentPageResolverInterface */
+    private $currentPageResolver;
+
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
+        CurrentPageResolverInterface $currentPageResolver,
         UpdatePageInterface $updatePage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->updatePage = $updatePage;
     }
 
@@ -69,7 +61,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -78,7 +70,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsNameAs($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
@@ -118,6 +110,22 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I check (also) the :customerGroupName customer group
+     */
+    public function iCheckTheCustomerGroup(string $customerGroupName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $customerGroupName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then this customer group with name :name should appear in the store
      * @Then I should see the customer group :name in the list
      */
@@ -129,6 +137,7 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I browse customer groups
      * @When I want to browse customer groups
      */
     public function iWantToBrowseCustomerGroups()
@@ -137,9 +146,10 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) customer groups in the list$/
+     * @Then I should see a single customer group in the list
+     * @Then I should see :amountOfCustomerGroups customer groups in the list
      */
-    public function iShouldSeeCustomerGroupsInTheList($amountOfCustomerGroups)
+    public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
         $this->indexPage->open();
 
@@ -173,6 +183,17 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then I should be informed that this form contains errors
+     */
+    public function iShouldBeInformedThatThisFormContainsErrors()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getMessageInvalidForm(), 'This form contains errors');
     }
 
     /**

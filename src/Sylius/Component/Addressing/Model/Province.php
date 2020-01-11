@@ -13,39 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 class Province implements ProvinceInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $abbreviation;
 
-    /**
-     * @var CountryInterface|null
-     */
+    /** @var CountryInterface|null */
     protected $country;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

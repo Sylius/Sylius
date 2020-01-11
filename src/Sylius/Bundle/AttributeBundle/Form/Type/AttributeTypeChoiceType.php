@@ -17,19 +17,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AttributeTypeChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $attributeTypes;
 
-    /**
-     * @param array $attributeTypes
-     */
     public function __construct(array $attributeTypes)
     {
         $this->attributeTypes = $attributeTypes;

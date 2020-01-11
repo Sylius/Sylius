@@ -18,15 +18,8 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 abstract class SlugGenerationHelper
 {
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     public static function waitForSlugGeneration(Session $session, NodeElement $element)
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
@@ -36,10 +29,6 @@ abstract class SlugGenerationHelper
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     public static function enableSlugModification(Session $session, NodeElement $element)
     {
         Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
@@ -53,9 +42,6 @@ abstract class SlugGenerationHelper
     }
 
     /**
-     * @param Session $session
-     * @param NodeElement $element
-     *
      * @return bool
      */
     public static function isSlugReadonly(Session $session, NodeElement $element)
@@ -69,27 +55,20 @@ abstract class SlugGenerationHelper
         return static::isElementReadonly($session, $element);
     }
 
-    /**
-     * @param Session $session
-     * @param NodeElement $element
-     */
     private static function waitForElementToBeClickable(Session $session, NodeElement $element)
     {
-        $session->wait(5000, sprintf(
+        $session->wait(1000, sprintf(
             'false === $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).hasClass("loading")',
             $element->getParent()->getParent()->getXpath()
         ));
     }
 
     /**
-     * @param Session $session
-     * @param NodeElement $element
-     *
      * @return bool
      */
     private static function isElementReadonly(Session $session, NodeElement $element)
     {
-        return $session->wait(5000, sprintf(
+        return $session->wait(1000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
             $element->getXpath()
         ));

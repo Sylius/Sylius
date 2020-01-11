@@ -15,15 +15,10 @@ namespace Sylius\Component\Order\Aggregator;
 
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 interface AdjustmentsAggregatorInterface
 {
     /**
      * @param iterable|AdjustmentInterface[] $adjustments
-     *
-     * @return array
      *
      * @throws \InvalidArgumentException
      */

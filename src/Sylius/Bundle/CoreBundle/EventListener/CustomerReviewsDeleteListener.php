@@ -18,28 +18,17 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class CustomerReviewsDeleteListener
 {
-    /**
-     * @var ReviewerReviewsRemoverInterface
-     */
+    /** @var ReviewerReviewsRemoverInterface */
     private $reviewerReviewsRemover;
 
-    /**
-     * @param ReviewerReviewsRemoverInterface $reviewerReviewsRemover
-     */
     public function __construct(ReviewerReviewsRemoverInterface $reviewerReviewsRemover)
     {
         $this->reviewerReviewsRemover = $reviewerReviewsRemover;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function removeCustomerReviews(GenericEvent $event): void

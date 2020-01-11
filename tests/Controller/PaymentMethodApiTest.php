@@ -17,14 +17,9 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentMethodApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
@@ -59,9 +54,12 @@ final class PaymentMethodApiTest extends JsonApiTestCase
      */
     public function it_allows_showing_payment_method()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/channels.yml');
-        $paymentMethods = $this->loadFixturesFromFile('resources/payment_methods.yml');
+        $paymentMethods = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/channels.yml',
+            'resources/payment_methods.yml',
+        ]);
+
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentMethods['cash_on_delivery'];
 
@@ -72,8 +70,6 @@ final class PaymentMethodApiTest extends JsonApiTestCase
     }
 
     /**
-     * @param PaymentMethodInterface $paymentMethod
-     *
      * @return string
      */
     private function getPaymentMethodUrl(PaymentMethodInterface $paymentMethod)

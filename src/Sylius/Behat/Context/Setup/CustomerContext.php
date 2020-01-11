@@ -17,54 +17,33 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class CustomerContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $customerManager;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $userFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $addressFactory;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param ObjectManager $customerManager
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $userFactory
-     * @param FactoryInterface $addressFactory
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CustomerRepositoryInterface $customerRepository,
@@ -193,6 +172,8 @@ final class CustomerContext implements Context
     public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
     {
         $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
+
+        /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
         $address->setCountryCode($country->getCode());
         $address->setCity('Berlin');
@@ -209,7 +190,6 @@ final class CustomerContext implements Context
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
-     * @param \DateTimeInterface|null $createdAt
      * @param string|null $phoneNumber
      *
      * @return CustomerInterface
@@ -255,7 +235,9 @@ final class CustomerContext implements Context
         $lastName = null,
         $role = null
     ) {
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();
+
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
 

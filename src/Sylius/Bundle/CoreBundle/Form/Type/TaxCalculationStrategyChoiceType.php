@@ -17,19 +17,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Mark McKelvie <mark.mckelvie@reiss.com>
- */
 final class TaxCalculationStrategyChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $strategies;
 
-    /**
-     * @param array $strategies
-     */
     public function __construct(array $strategies)
     {
         $this->strategies = $strategies;

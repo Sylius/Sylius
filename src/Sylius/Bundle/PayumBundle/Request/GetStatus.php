@@ -18,6 +18,9 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 class GetStatus extends BaseGetStatus
 {
+    /** @var string */
+    protected $status;
+
     /**
      * {@inheritdoc}
      */

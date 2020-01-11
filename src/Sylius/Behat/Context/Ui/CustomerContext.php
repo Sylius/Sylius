@@ -19,25 +19,14 @@ use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
- */
 final class CustomerContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $customerShowPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShowPageInterface $customerShowPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShowPageInterface $customerShowPage

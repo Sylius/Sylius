@@ -20,7 +20,7 @@ sylius:
                     currencies: Devises
                     exchange_rates: Taux de change
                     header: Configuration
-                    locales: Paramètres régionaux
+                    locales: Locales
                     payment_methods: Moyens de paiement
                     shipping_categories: Catégories d'expédition
                     shipping_methods: Modes de livraison

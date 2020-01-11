@@ -18,14 +18,9 @@ use Doctrine\ORM\Mapping;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ProductOptionRepository extends BaseProductOptionRepository
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     protected $associationHydrator;
 
     /**

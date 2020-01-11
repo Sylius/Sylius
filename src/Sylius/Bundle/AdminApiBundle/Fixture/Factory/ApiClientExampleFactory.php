@@ -19,29 +19,17 @@ use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 class ApiClientExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var ClientManagerInterface
-     */
+    /** @var ClientManagerInterface */
     private $clientManager;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ClientManagerInterface $clientManager
-     */
     public function __construct(ClientManagerInterface $clientManager)
     {
         $this->clientManager = $clientManager;
@@ -76,10 +64,10 @@ class ApiClientExampleFactory extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('random_id', function (Options $options) {
+            ->setDefault('random_id', function (Options $options): int {
                 return $this->faker->unique()->randomNumber(8);
             })
-            ->setDefault('secret', function (Options $options) {
+            ->setDefault('secret', function (Options $options): string {
                 return $this->faker->uuid;
             })
             ->setDefault('allowed_grant_types', [])

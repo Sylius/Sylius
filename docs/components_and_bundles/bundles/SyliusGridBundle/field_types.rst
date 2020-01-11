@@ -70,18 +70,3 @@ If you wish to render more complex grid fields just redefine the path of the fie
 
     <strong>{{ data.name }}</strong>
     <p>{{ data.description|markdown }}</p>
-
-Boolean (*boolean*)
--------------------
-
-Boolean column type expects the value to be boolean and renders a default or custom Twig template.
-
-.. code-block:: yaml
-
-    sylius_grid:
-        grids:
-            app_user:
-                fields:
-                    status:
-                        type: boolean
-                        label: app.ui.status

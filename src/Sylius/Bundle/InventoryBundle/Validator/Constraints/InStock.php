@@ -15,24 +15,15 @@ namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class InStock extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.cart_item.not_available';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $stockablePath = 'stockable';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $quantityPath = 'quantity';
 
     /**

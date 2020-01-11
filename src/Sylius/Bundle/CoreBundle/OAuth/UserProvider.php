@@ -26,58 +26,33 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
- *
- * @author Fabian Kiss <fabian.kiss@ymc.ch>
- * @author Joseph Bielawski <stloyd@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $oauthFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $oauthRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $userFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $userManager;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @param string $supportedUserClass
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $userFactory
-     * @param UserRepositoryInterface $userRepository
-     * @param FactoryInterface $oauthFactory
-     * @param RepositoryInterface $oauthRepository
-     * @param ObjectManager $userManager
-     * @param CanonicalizerInterface $canonicalizer
-     * @param CustomerRepositoryInterface $customerRepository
-     */
     public function __construct(
         string $supportedUserClass,
         FactoryInterface $customerFactory,
@@ -118,9 +93,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             if (null !== $user) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }
+
+            return $this->createUserByOAuthUserResponse($response);
         }
 
-        return $this->createUserByOAuthUserResponse($response);
+        throw new UsernameNotFoundException('Email is null or not provided');
     }
 
     /**
@@ -133,10 +110,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
     /**
      * Ad-hoc creation of user.
-     *
-     * @param UserResponseInterface $response
-     *
-     * @return SyliusUserInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
@@ -145,10 +118,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerRepository->findOneBy(['emailCanonical' => $canonicalEmail]);
 
         if (null === $customer) {
+            /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
         }
 
@@ -183,21 +157,19 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
     /**
      * Attach OAuth sign-in provider account to existing user.
-     *
-     * @param UserInterface $user
-     * @param UserResponseInterface $response
-     *
-     * @return UserInterface
      */
-    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): UserInterface
+    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): SyliusUserInterface
     {
+        /** @var SyliusUserInterface $user */
+        Assert::isInstanceOf($user, SyliusUserInterface::class);
+
+        /** @var UserOAuthInterface $oauth */
         $oauth = $this->oauthFactory->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
         $oauth->setRefreshToken($response->getRefreshToken());
 
-        /** @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
 
         $this->userManager->persist($user);

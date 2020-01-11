@@ -20,32 +20,17 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class CheckoutStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var OrderPaymentMethodSelectionRequirementCheckerInterface
-     */
+    /** @var OrderPaymentMethodSelectionRequirementCheckerInterface */
     private $orderPaymentMethodSelectionRequirementChecker;
 
-    /**
-     * @var OrderShippingMethodSelectionRequirementCheckerInterface
-     */
+    /** @var OrderShippingMethodSelectionRequirementCheckerInterface */
     private $orderShippingMethodSelectionRequirementChecker;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     * @param OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
-     * @param OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
-     */
     public function __construct(
         FactoryInterface $stateMachineFactory,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,

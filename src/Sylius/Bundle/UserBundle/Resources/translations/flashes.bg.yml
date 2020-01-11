@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Вашият имейл бе успешно потвърден.'
         verify_email_by_invalid_token: 'Кода за потвърждение на имейл е невалиден.'
         verify_email_request: 'Имейл с линк за потвърждение е изпратен до вашия имейл адрес.'
+        verify_no_user: 'Няма влязъл потребител.'
         verify_verified_email: 'Вашият имейл е вече потвърден.'

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 SyliusAddressingBundle
 ======================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 This bundle integrates the :doc:`/components_and_bundles/components/Addressing/index` into Symfony and Doctrine.
 

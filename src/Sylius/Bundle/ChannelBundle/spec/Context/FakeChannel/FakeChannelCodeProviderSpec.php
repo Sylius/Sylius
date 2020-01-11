@@ -18,9 +18,6 @@ use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInter
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class FakeChannelCodeProviderSpec extends ObjectBehavior
 {
     function it_implements_a_channel_code_provider_interface(): void

@@ -23,6 +23,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.registry.tax_calculation_strategy" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.tax_calculation_strategy.interface%</argument>
             <argument>Tax calculation strategy</argument>
@@ -36,6 +38,7 @@
         <service id="sylius.tax_calculator" class="Sylius\Component\Taxation\Calculator\DelegatingCalculator">
             <argument type="service" id="sylius.registry.tax_calculator" />
         </service>
+        <service id="Sylius\Component\Taxation\Calculator\CalculatorInterface" alias="sylius.tax_calculator" />
 
         <service id="sylius.tax_calculator.default" class="Sylius\Component\Taxation\Calculator\DefaultCalculator">
             <tag name="sylius.tax_calculator" calculator="default" />
@@ -44,5 +47,6 @@
         <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
         </service>
+        <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
     </services>
 </container>

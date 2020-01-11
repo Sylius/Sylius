@@ -21,37 +21,20 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ManagingTaxRateContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -78,7 +61,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -88,7 +71,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSpecifyItsAmountAs($amount = null)
     {
-        $this->createPage->specifyAmount($amount);
+        $this->createPage->specifyAmount($amount ?? '');
     }
 
     /**
@@ -125,7 +108,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iNameIt($name = null)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameIt($name ?? '');
     }
 
     /**
@@ -138,9 +121,10 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @Then I should see the tax rate :taxRateName in the list
      * @Then the tax rate :taxRateName should appear in the registry
      */
-    public function theTaxRateShouldAppearInTheRegistry($taxRateName)
+    public function theTaxRateShouldAppearInTheRegistry(string $taxRateName): void
     {
         $this->indexPage->open();
 
@@ -293,7 +277,38 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @param TaxRateInterface $taxRate
+     * @When I check (also) the :taxRateName tax rate
+     */
+    public function iCheckTheTaxRate(string $taxRateName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $taxRateName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @When I browse tax rates
+     */
+    public function iWantToBrowseTaxRates(): void
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then I should see a single tax rate in the list
+     */
+    public function iShouldSeeASingleTaxRateInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
+    }
+
+    /**
      * @param string $element
      * @param string $taxRateElement
      */

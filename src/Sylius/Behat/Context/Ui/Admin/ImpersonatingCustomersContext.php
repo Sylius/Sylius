@@ -20,31 +20,17 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ImpersonatingCustomersContext implements Context
 {
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $customerShowPage;
 
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param ShowPageInterface $customerShowPage
-     * @param DashboardPageInterface $dashboardPage
-     * @param HomePageInterface $homePage
-     */
     public function __construct(
         ShowPageInterface $customerShowPage,
         DashboardPageInterface $dashboardPage,

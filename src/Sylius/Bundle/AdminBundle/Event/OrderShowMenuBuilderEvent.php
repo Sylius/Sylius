@@ -19,27 +19,14 @@ use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class OrderShowMenuBuilderEvent extends MenuBuilderEvent
 {
-    /**
-     * @var OrderInterface
-     */
+    /** @var OrderInterface */
     private $order;
 
-    /**
-     * @var StateMachineInterface
-     */
+    /** @var StateMachineInterface */
     private $stateMachine;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param OrderInterface $order
-     * @param StateMachineInterface $stateMachine
-     */
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,
@@ -52,17 +39,11 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
         $this->stateMachine = $stateMachine;
     }
 
-    /**
-     * @return OrderInterface
-     */
     public function getOrder(): OrderInterface
     {
         return $this->order;
     }
 
-    /**
-     * @return StateMachineInterface
-     */
     public function getStateMachine(): StateMachineInterface
     {
         return $this->stateMachine;

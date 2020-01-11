@@ -18,10 +18,6 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductInterface;
 
-/**
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductAssociationSpec extends ObjectBehavior
 {
     function it_implements_ProductAssociation_interface(): void

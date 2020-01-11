@@ -4,9 +4,31 @@
 sylius:
     form:
         credit_card:
+            cardholder_name: اسم حامل البطاقة
+            expiry_month: تاريخ الإنتهاء
+            expiry_year: تاريخ الإنتهاء
             number: رقم البطاقة
+            security_code: رمز الأمان (CVV)
+            type: نوع البطاقة
         payment:
+            amount: مبلغ الدفعة
+            method: طريقة الدفع
             state:
+                header: حالة الدفع
+                checkout: إتمام الشراء
+                completed: مكتمل
+                authorized: تم الإذن
+                failed: فاشل
                 new: جديد
+                pending: مُعلقّة
+                processing: جاري التجهيز
+                unknown: غير معروف
+                void: فراغ
+                cancelled: ملغي
+                refunded: تم الإسترجاع
         payment_method:
+            description: الوصف
+            enabled: تفعيل؟
+            instructions: تعليمات
             name: الاسم
+            position: المهنة

@@ -1,0 +1,7 @@
+{% import '@SyliusAdmin/Common/Macro/icons.html.twig' as icons  %}
+
+{% if data is not empty %}
+    <span>
+        {{ icons.channelType(data)}} {{ ('sylius.ui.channel.types.' ~ data)|trans }}
+    </span>
+{% endif %}

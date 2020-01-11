@@ -105,7 +105,7 @@ This type filters by a chosen entity.
                             class: "%app.model.customer%"
 
 Money
-_____
+-----
 
 This filter checks if an amount is in range and in a specified currency
 
@@ -142,6 +142,24 @@ This filter checks if the specified field contains any value
                         type: exists
                         options:
                             field: completedAt
+
+Select
+------
+
+This type filters by a value chosen from the defined list
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    state:
+                        type: select
+                        form_options:
+                            choices:
+                                sylius.ui.ready: Ready
+                                sylius.ui.shipped: Shipped
 
 Custom Filters
 --------------

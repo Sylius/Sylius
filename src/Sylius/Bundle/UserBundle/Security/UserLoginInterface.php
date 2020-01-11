@@ -15,14 +15,7 @@ namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UserLoginInterface
 {
-    /**
-     * @param UserInterface $user
-     * @param string|null $firewallName
-     */
     public function login(UserInterface $user, ?string $firewallName = null);
 }

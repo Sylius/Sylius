@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_channel_model_channel:
 
@@ -36,4 +43,4 @@ concerning channel's data and as default has the following properties:
 
    For more detailed information go to `Sylius API Channel`_.
 
-.. _Sylius API Channel: http://api.sylius.org/Sylius/Component/Channel/Model/Channel.html
+.. _Sylius API Channel: http://api.sylius.com/Sylius/Component/Channel/Model/Channel.html

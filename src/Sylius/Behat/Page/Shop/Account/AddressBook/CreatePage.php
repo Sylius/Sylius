@@ -13,18 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_create';
     }
@@ -40,6 +38,8 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         $this->getElement('country')->selectOption($address->getCountryCode());
         $this->getElement('city')->setValue($address->getCity());
         $this->getElement('postcode')->setValue($address->getPostcode());
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     /**
@@ -49,9 +49,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         $this->getElement('country')->selectOption($name);
 
-        $this->getDocument()->waitFor(5, function () {
-            return false;
-        });
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     /**
@@ -81,7 +79,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'add_button' => 'button:contains("Add")',

@@ -14,57 +14,39 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var ChannelFactoryInterface
-     */
+    /** @var ChannelFactoryInterface */
     private $channelFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $currencyRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $zoneRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ChannelFactoryInterface $channelFactory
-     * @param RepositoryInterface $localeRepository
-     * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $zoneRepository
-     */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
@@ -101,6 +83,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setContactEmail($options['contact_email']);
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
+        $channel->setAccountVerificationRequired($options['account_verification_required']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -110,6 +93,18 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setBaseCurrency($options['base_currency']);
         foreach ($options['currencies'] as $currency) {
             $channel->addCurrency($currency);
+        }
+
+        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data']) {
+            $shopBillingData = new ShopBillingData();
+            $shopBillingData->setCompany($options['shop_billing_data']['company'] ?? null);
+            $shopBillingData->setTaxId($options['shop_billing_data']['tax_id'] ?? null);
+            $shopBillingData->setCountryCode($options['shop_billing_data']['country_code'] ?? null);
+            $shopBillingData->setStreet($options['shop_billing_data']['street'] ?? null);
+            $shopBillingData->setCity($options['shop_billing_data']['city'] ?? null);
+            $shopBillingData->setPostcode($options['shop_billing_data']['postcode'] ?? null);
+
+            $channel->setShopBillingData($shopBillingData);
         }
 
         return $channel;
@@ -141,9 +136,17 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('skipping_shipping_step_allowed', 'bool')
             ->setDefault('skipping_payment_step_allowed', false)
             ->setAllowedTypes('skipping_payment_step_allowed', 'bool')
-            ->setDefault('default_tax_zone', LazyOption::randomOne($this->zoneRepository))
+            ->setDefault('account_verification_required', true)
+            ->setAllowedTypes('account_verification_required', 'bool')
+            ->setDefault(
+                'default_tax_zone',
+                LazyOption::randomOneOrNull($this->zoneRepository, 100, ['scope' => [Scope::TAX, AddressingScope::ALL]])
+            )
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
-            ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setNormalizer(
+                'default_tax_zone',
+                LazyOption::findOneBy($this->zoneRepository, 'code', ['scope' => [Scope::TAX, AddressingScope::ALL]])
+            )
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
             ->setDefault('default_locale', function (Options $options): LocaleInterface {
@@ -164,6 +167,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
             ->setDefault('theme_name', null)
             ->setDefault('contact_email', null)
+            ->setDefault('shop_billing_data', null)
         ;
     }
 }

@@ -13,17 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Converter;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface CountryNameConverterInterface
 {
     /**
-     * @param string $name
-     * @param string $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertToCode(string $name, string $locale = 'en'): string;

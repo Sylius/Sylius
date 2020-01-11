@@ -21,9 +21,6 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Laurent Paganin-Gioanni <l.paganin@algo-factory.com>
- */
 final class SelectAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'select';
@@ -41,7 +38,7 @@ final class SelectAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
@@ -67,13 +64,6 @@ final class SelectAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param array|null $value
-     * @param array $validationConfiguration
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?array $value,

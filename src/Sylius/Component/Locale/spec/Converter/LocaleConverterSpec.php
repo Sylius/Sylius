@@ -16,9 +16,6 @@ namespace spec\Sylius\Component\Locale\Converter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class LocaleConverterSpec extends ObjectBehavior
 {
     function it_is_a_locale_converter(): void

@@ -17,9 +17,6 @@ use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class ProductAssociationTypeApiTest extends JsonApiTestCase
 {
     /**
@@ -303,7 +300,7 @@ EOT;
         $this->client->request('DELETE', $this->getAssociationTypeUrl($productAssociationType), [], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
             'CONTENT_TYPE' => 'application/json',
-        ], []);
+        ]);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -318,8 +315,6 @@ EOT;
     }
 
     /**
-     * @param ProductAssociationTypeInterface $productAssociationType
-     *
      * @return string
      */
     private function getAssociationTypeUrl(ProductAssociationTypeInterface $productAssociationType)

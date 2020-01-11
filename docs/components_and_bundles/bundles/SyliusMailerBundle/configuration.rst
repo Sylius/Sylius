@@ -16,14 +16,14 @@ Configuration reference
           emails:
               your_email:
                   subject: Subject of your email
-                  template: AppBundle:Email:yourEmail.html.twig
+                  template: App:Email:yourEmail.html.twig
                   enabled: true/false
                   sender:
                      name: Custom name
                      address: Custom sender address for this e-mail
               your_another_email:
                   subject: Subject of your another email
-                  template: AppBundle:Email:yourAnotherEmail.html.twig
+                  template: App:Email:yourAnotherEmail.html.twig
                   enabled: true/false
                   sender:
                      name: Custom name

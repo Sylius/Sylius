@@ -85,7 +85,7 @@ Finally save your Variant in the database using a repository.
      /** @var RepositoryInterface $productVariantRepository */
      $productVariantRepository = $this->get('sylius.repository.product_variant');
 
-     $productVariantRepository->add($variant);
+     $productVariantRepository->add($productVariant);
 
 Options
 =======
@@ -120,7 +120,7 @@ Firstly let's learn how to prepare an exemplary Option and its values.
 
 .. code-block:: php
 
-     /* @var $option OptionInterface */
+     /** @var ProductOptionInterface $option */
      $option = $this->get('sylius.factory.product_option')->createNew();
      $option->setCode('t_shirt_color');
      $option->setName('T-Shirt Color');
@@ -133,7 +133,7 @@ Firstly let's learn how to prepare an exemplary Option and its values.
      ];
 
      foreach ($valuesData as $code => $values) {
-         /* @var OptionValueInterface $optionValue */
+         /** @var ProductOptionValueInterface $optionValue */
          $optionValue = $this->get('sylius.factory.product_option_value')->createNew();
 
          $optionValue->setCode($code);
@@ -152,7 +152,7 @@ After you have an Option created and you keep it as ``$option`` variable let's a
      $product->addOption($option);
 
      // Having option of a product you can generate variants. Sylius has a service for that operation.
-     /** @var VariantGeneratorInterface $variantGenerator */
+     /** @var ProductVariantGeneratorInterface $variantGenerator */
      $variantGenerator = $this->get('sylius.generator.product_variant');
 
      $variantGenerator->generate($product);

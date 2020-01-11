@@ -16,19 +16,11 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class LocaleContext implements Context
 {
-    /**
-     * @var LocaleConverterInterface
-     */
+    /** @var LocaleConverterInterface */
     private $localeNameConverter;
 
-    /**
-     * @param LocaleConverterInterface $localeNameConverter
-     */
     public function __construct(LocaleConverterInterface $localeNameConverter)
     {
         $this->localeNameConverter = $localeNameConverter;

@@ -12,10 +12,6 @@ sylius:
             regex: 'Kürzel der Versandkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
             unique: 'Eine Kategorie mit diesem Kürzel existiert bereits.'
     shipping_method:
-        calculator:
-            max_length: Eingabe darf nicht länger als {{ limit }} Zeichen sein.
-            min_length: Die Eingabe muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Die Eingabe darf nicht leer sein.
         name:
             max_length: 'Der Name der Versandmethode darf nicht länger als {{ limit }} Zeichen sein.'
             min_length: 'Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein.'

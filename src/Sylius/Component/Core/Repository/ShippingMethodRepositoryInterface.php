@@ -18,29 +18,16 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as BaseShippingMethodRepositoryInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @param ChannelInterface $channel
-     *
      * @return array|ShippingMethodInterface[]
      */
     public function findEnabledForChannel(ChannelInterface $channel): array;
 
     /**
-     * @param array $zones
-     * @param ChannelInterface $channel
-     *
      * @return array|ShippingMethodInterface[]
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array;

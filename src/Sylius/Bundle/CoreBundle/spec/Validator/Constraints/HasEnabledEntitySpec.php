@@ -16,9 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @author Gustavo Perdomo <gperdomor@gmail.com>
- */
 final class HasEnabledEntitySpec extends ObjectBehavior
 {
     public function it_is_a_constraint()

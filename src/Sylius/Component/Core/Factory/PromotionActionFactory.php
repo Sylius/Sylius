@@ -21,19 +21,11 @@ use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionAction
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PromotionActionFactory implements PromotionActionFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
@@ -102,12 +94,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * @param string $type
-     * @param array $configuration
-     *
-     * @return PromotionActionInterface
-     */
     private function createAction(string $type, array $configuration): PromotionActionInterface
     {
         /** @var PromotionActionInterface $action */

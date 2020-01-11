@@ -73,7 +73,7 @@ To create a new tax category use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/ \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -115,7 +115,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/ \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -162,7 +162,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/ \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -222,7 +222,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -285,7 +285,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/ \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -391,7 +391,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -416,7 +416,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -471,7 +471,7 @@ To partially update the tax category with ``code = food`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -513,7 +513,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/tax-categories/food \
+    $ curl http://demo.sylius.com/api/v1/tax-categories/food \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

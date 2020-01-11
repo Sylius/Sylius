@@ -20,9 +20,6 @@ use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AverageRatingUpdaterSpec extends ObjectBehavior
 {
     function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager): void
@@ -36,21 +33,22 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
     }
 
     function it_updates_review_subject_average_rating(
-        $averageRatingCalculator,
-        $reviewSubjectManager,
+        ReviewableRatingCalculatorInterface $averageRatingCalculator,
+        ObjectManager $reviewSubjectManager,
         ReviewableInterface $reviewSubject
     ): void {
         $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
-        $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
+
+        $reviewSubjectManager->flush()->shouldBeCalled();
 
         $this->update($reviewSubject);
     }
 
     function it_updates_review_subject_average_rating_from_review(
-        $averageRatingCalculator,
-        $reviewSubjectManager,
+        ReviewableRatingCalculatorInterface $averageRatingCalculator,
+        ObjectManager $reviewSubjectManager,
         ReviewableInterface $reviewSubject,
         ReviewInterface $review
     ): void {
@@ -58,7 +56,8 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
         $averageRatingCalculator->calculate($reviewSubject)->willReturn(4.5);
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
-        $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
+
+        $reviewSubjectManager->flush()->shouldBeCalled();
 
         $this->updateFromReview($review);
     }

@@ -13,29 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 class ProductTaxon implements ProductTaxonInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface|null */
     protected $product;
 
-    /**
-     * @var TaxonInterface
-     */
+    /** @var TaxonInterface|null */
     protected $taxon;
 
-    /**
-     * @var int
-     */
+    /** @var int|null */
     protected $position;
 
     /**

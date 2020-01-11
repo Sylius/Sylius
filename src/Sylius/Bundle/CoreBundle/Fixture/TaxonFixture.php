@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 class TaxonFixture extends AbstractResourceFixture
 {
     /**
@@ -39,6 +36,7 @@ class TaxonFixture extends AbstractResourceFixture
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->scalarNode('slug')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
+                ->variableNode('translations')->cannotBeEmpty()->defaultValue([])->end()
                 ->variableNode('children')->cannotBeEmpty()->defaultValue([])->end()
         ;
     }

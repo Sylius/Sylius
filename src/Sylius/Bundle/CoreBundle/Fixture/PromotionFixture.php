@@ -15,9 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class PromotionFixture extends AbstractResourceFixture
 {
     /**
@@ -42,12 +39,12 @@ class PromotionFixture extends AbstractResourceFixture
                 ->booleanNode('coupon_based')->end()
                 ->booleanNode('exclusive')->end()
                 ->integerNode('priority')->min(0)->end()
-                ->arrayNode('channels')->prototype('scalar')->end()->end()
+                ->arrayNode('channels')->scalarPrototype()->end()->end()
                 ->scalarNode('starts_at')->cannotBeEmpty()->end()
                 ->scalarNode('ends_at')->cannotBeEmpty()->end()
                 ->arrayNode('rules')
                     ->requiresAtLeastOneElement()
-                    ->prototype('array')
+                    ->arrayPrototype()
                         ->children()
                             ->scalarNode('type')->cannotBeEmpty()->end()
                             ->variableNode('configuration')->end()
@@ -56,7 +53,7 @@ class PromotionFixture extends AbstractResourceFixture
                 ->end()
                 ->arrayNode('actions')
                     ->requiresAtLeastOneElement()
-                    ->prototype('array')
+                    ->arrayPrototype()
                         ->children()
                             ->scalarNode('type')->cannotBeEmpty()->end()
                             ->variableNode('configuration')->end()

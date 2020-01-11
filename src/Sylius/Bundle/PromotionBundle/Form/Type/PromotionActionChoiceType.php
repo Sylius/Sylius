@@ -17,19 +17,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class PromotionActionChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $actions;
 
-    /**
-     * @param array $actions
-     */
     public function __construct(array $actions)
     {
         $this->actions = $actions;

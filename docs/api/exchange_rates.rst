@@ -59,7 +59,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/ \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -120,7 +120,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/ \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -190,7 +190,7 @@ To see the details of the exchange rate between ``Euro (code = EUR)`` and ``Brit
 
 .. code-block:: bash
 
-     $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
+     $ curl http://demo.sylius.com/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -270,7 +270,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/ \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -362,7 +362,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -386,7 +386,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -447,7 +447,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/exchange-rates/EUR-GBP \
+    $ curl http://demo.sylius.com/api/v1/exchange-rates/EUR-GBP \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE

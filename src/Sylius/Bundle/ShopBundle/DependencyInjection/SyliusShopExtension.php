@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\DependencyInjection;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutResolver;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGenerator;
+use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -24,9 +25,6 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\RequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusShopExtension extends Extension
 {
     /**
@@ -39,15 +37,16 @@ final class SyliusShopExtension extends Extension
 
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
+        $container->setAlias(LocaleSwitcherInterface::class, 'sylius.shop.locale_switcher');
 
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
+        $container->setParameter(
+            'sylius_shop.product_grid.include_all_descendants',
+            $config['product_grid']['include_all_descendants']
+        );
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container): void
     {
         if (!$config['enabled']) {
@@ -77,11 +76,6 @@ final class SyliusShopExtension extends Extension
         $container->setDefinition('sylius.router.checkout_state', $checkoutStateUrlGeneratorDefinition);
     }
 
-    /**
-     * @param array $config
-     *
-     * @return Definition
-     */
     private function registerCheckoutRedirectListener(array $config): Definition
     {
         $checkoutRedirectListener = new Definition(CheckoutRedirectListener::class, [

@@ -23,9 +23,6 @@ use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-/**
- * @author Magdalena Banasiak <magdalena.banasiak@gmail.com>
- */
 class AppKernel extends Kernel
 {
     /**
@@ -40,9 +37,9 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }
@@ -60,7 +57,7 @@ class AppKernel extends Kernel
      */
     protected function getContainerBaseClass()
     {
-        if ('test' === $this->environment) {
+        if (0 === strpos($this->environment, 'test')) {
             return MockerContainer::class;
         }
 

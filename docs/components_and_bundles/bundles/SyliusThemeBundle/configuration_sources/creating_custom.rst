@@ -90,9 +90,6 @@ The last step is to tell ThemeBundle to use the source factory defined before. I
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-    /**
-     * @author Kamil Kokot <kamil@kokot.me>
-     */
     final class AcmeBundle extends Bundle
     {
         /**

@@ -1,26 +1,31 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 class Version20161223091334 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_variant ADD position INT NOT NULL');
         $this->addSql('SET @row_number = -1');
         $this->addSql('CREATE TEMPORARY TABLE IF NOT EXISTS variants_count
-                        SELECT sylius_product.id AS product_id, COUNT(sylius_product_variant.id) AS row_number FROM sylius_product
+                        SELECT sylius_product.id AS product_id, COUNT(sylius_product_variant.id) AS `row_number` FROM sylius_product
                         INNER JOIN sylius_product_variant ON sylius_product.id = sylius_product_variant.product_id
                         GROUP BY sylius_product.id'
         );
@@ -34,10 +39,7 @@ class Version20161223091334 extends AbstractMigration
         );
     }
 
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 

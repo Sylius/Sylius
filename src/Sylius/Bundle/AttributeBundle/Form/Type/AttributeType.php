@@ -22,28 +22,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Leszek Prabucki <leszek.prabucki@gmail.com>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 abstract class AttributeType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $attributeTranslationType;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     protected $formTypeRegistry;
 
     /**
      * {@inheritdoc}
-     *
-     * @param string $attributeTranslationType
-     * @param FormTypeRegistryInterface $formTypeRegistry
      */
     public function __construct(
         string $dataClass,

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Taxonomy is a list constructed from individual Taxons. Taxonomy is a special case of Taxon itself (it has no parent).
 All taxons can have many child taxons, you can define as many of them as you need.
@@ -38,8 +45,6 @@ Taxon
 +-----------------+--------------------------------------------------------------------+
 | slug            | Urlized name taken from the ``TaxonTranslation``                   |
 +-----------------+--------------------------------------------------------------------+
-| permalink       | Full permalink for given taxon taken form the ``TaxonTranslation`` |
-+-----------------+--------------------------------------------------------------------+
 | description     | Description of taxon taken from the ``TaxonTranslation``           |
 +-----------------+--------------------------------------------------------------------+
 | parent          | Parent taxon                                                       |
@@ -52,9 +57,7 @@ Taxon
 +-----------------+--------------------------------------------------------------------+
 | level           | How deep it is in the tree                                         |
 +-----------------+--------------------------------------------------------------------+
-| createdAt       | Date when taxon was created                                        |
-+-----------------+--------------------------------------------------------------------+
-| updatedAt       | Date of last update                                                |
+| position        | Position of the taxon on its taxonomy                              |
 +-----------------+--------------------------------------------------------------------+
 
 .. note::
@@ -62,7 +65,7 @@ Taxon
     This model implements the :ref:`component_taxonomy_model_taxon-interface`.
     You will find more information about this model in `Sylius API Taxon`_.
 
-.. _Sylius API Taxon: http://api.sylius.org/Sylius/Component/Taxonomy/Model/Taxon.html
+.. _Sylius API Taxon: http://api.sylius.com/Sylius/Component/Taxonomy/Model/Taxon.html
 
 .. _component_taxonomy_model_taxon-translation:
 
@@ -80,8 +83,6 @@ This model stores translations for the **Taxon** instances.
 +-----------------+------------------------------------+
 | slug            | Urlized name                       |
 +-----------------+------------------------------------+
-| permalink       | Full permalink for given taxon     |
-+-----------------+------------------------------------+
 | description     | Description of taxon               |
 +-----------------+------------------------------------+
 
@@ -90,4 +91,4 @@ This model stores translations for the **Taxon** instances.
     This model implements the :ref:`component_taxonomy_model_taxon-translation-interface`.
     You will find more information about this model in `Sylius API TaxonTranslation`_.
 
-.. _Sylius API TaxonTranslation: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonTranslation.html
+.. _Sylius API TaxonTranslation: http://api.sylius.com/Sylius/Component/Taxonomy/Model/TaxonTranslation.html

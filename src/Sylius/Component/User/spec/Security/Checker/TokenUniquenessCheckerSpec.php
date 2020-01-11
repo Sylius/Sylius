@@ -18,9 +18,6 @@ use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class TokenUniquenessCheckerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository): void

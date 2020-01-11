@@ -15,15 +15,7 @@ namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface DelegatingCalculatorInterface
 {
-    /**
-     * @param ShipmentInterface $subject
-     *
-     * @return int
-     */
     public function calculate(ShipmentInterface $subject): int;
 }

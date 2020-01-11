@@ -22,50 +22,26 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class GeographicalContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $countryFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $provinceFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @var CountryNameConverterInterface
-     */
+    /** @var CountryNameConverterInterface */
     private $countryNameConverter;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $countryManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface $countryFactory
-     * @param FactoryInterface $provinceFactory
-     * @param RepositoryInterface $countryRepository
-     * @param CountryNameConverterInterface $countryNameConverter
-     * @param ObjectManager $countryManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $countryFactory,

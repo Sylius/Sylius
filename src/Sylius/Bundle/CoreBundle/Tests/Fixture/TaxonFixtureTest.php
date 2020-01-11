@@ -15,13 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\TaxonFixture;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
-final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
+final class TaxonFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -75,6 +73,26 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
             [['custom' => [['children' => [['nested' => ['key' => 'value']]]]]]],
             ['custom' => [['children' => [['nested' => ['key' => 'value']]]]]],
             'custom.*.children'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function taxon_translations_are_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['translations' => [['en_US' => ['name' => ['foo']]]]]]]], 'custom.*.translations');
+    }
+
+    /**
+     * @test
+     */
+    public function taxon_translations_may_contain_nested_array(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]]],
+            ['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]],
+            'custom.*.translations'
         );
     }
 

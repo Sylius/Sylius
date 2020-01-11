@@ -16,35 +16,20 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
+
+    public function isAvailableInChannel(string $channelName): bool;
+
+    public function enable(): void;
+
+    public function disable(): void;
+
+    public function removeZone(): void;
 
     /**
-     * @param string $channelName
-     *
-     * @return bool
-     */
-    public function isAvailableInChannel($channelName);
-
-    public function enable();
-
-    public function disable();
-
-    public function removeZone();
-
-    /**
-     * @param string $channelCode
-     *
-     * @return string
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForAmount($channelCode);
+    public function getValidationMessageForAmount(string $channelCode): string;
 }

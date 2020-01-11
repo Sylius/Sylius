@@ -25,6 +25,12 @@ sylius:
             name: Navn
             roles: Roller
         channel:
+            billing_data:
+                city: By
+                company: Firma
+                country: Land
+                postcode: Postnummer
+                street: Gade
             contact_email: Kontakt e-mail
             currencies: Valutaer
             currency_base: Standardvaluta
@@ -55,7 +61,7 @@ sylius:
             payment_state: Betalingsstatus
             channel: Alle kanaler
         page:
-            body: Krop
+            body: Indhold
             id: ID
             title: Titel
         product:
@@ -133,7 +139,7 @@ sylius:
             has_taxon:
                 taxons: Kategorier
             product:
-                products: Produkter
+                products: Varer
             total_of_items_from_taxon:
                 taxon: Taksonomi
                 amount: Beløb
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte streng
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: BOB
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: filsystem
             cache:
                 header: cache
-                help: 'For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: ''whoami'': rwx %path%'
+                help: "For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: 'whoami': rwx %path%"
             exists: eksisterer
             logs:
                 header: logger
-                help: 'For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: ''whoami'': rwx %path%'
+                help: "For at indstille tilladelser, afvikl: sudo setfacl -R -m u:www-data: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-data: rwx -m u: 'whoami': rwx %path%"
             not_exists: Findes ikke
             not_writable: ikke skrivebar
             parameters:
                 header: parameters.yml
-                help: 'For at indstille tilladelser, afvikl: sudo chmod a + w %path%'
+                help: "For at indstille tilladelser, afvikl: sudo chmod a + w %path%"
             vendors: forhandler
             writable: skrivbar
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: ikke forældet
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -201,7 +207,7 @@ sylius:
             timezone: tidszone
             timezone_deprecated:
                 header: Uddateret tidszone
-                help: 'Timezone %timezone% er forældet. Fix din php.ini fil (listen over forældede tidszoner http://php.net/manual/en/timezones.others.php).'
+                help: Timezone %timezone% er forældet. Fix din php.ini fil (listen over forældede tidszoner http://php.net/manual/en/timezones.others.php).
             version: PHP version
             version_recommended: Anbefalet PHP version
     payum_gateway:

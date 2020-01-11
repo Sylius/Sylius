@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Tilauksen päivityksessä tapahtui odottamaton virhe. Yritä päivittää tilaus uudelleen.'
         promotion_integrity: 'Sinulla ei ole enää oikeutta saada promootiota %promotionName%.'
         total_integrity: 'Tilauksen kokonaissumma on muuttunut. Tarkista tilauksen tiedot ja vahvista uudelleen.'
-        update_error: 'Tuotteen päivityksessä tapahtui odottamaton virhe. Yritä päivittää tuote uudelleen.'
+        update_error: 'Tilauksen päivityksessä tapahtui odottamaton virhe. Yritä päivittää tilaus uudelleen.'
     payment:
         apply_state_machine_transition_error: 'Maksun päivityksessä tapahtui odottamaton virhe. Yritä päivittää maksu uudelleen.'
     product:

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Models
 ======
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Shipment
 --------
@@ -30,7 +37,7 @@ Shipment has the following properties:
 
     For more detailed information go to `Sylius API Shipment`_.
 
-.. _Sylius API Shipment: http://api.sylius.org/Sylius/Component/Shipping/Model/Shipment.html
+.. _Sylius API Shipment: http://api.sylius.com/Sylius/Component/Shipping/Model/Shipment.html
 
 ShipmentItem
 ------------
@@ -59,7 +66,7 @@ ShipmentItems have the following properties:
 
     For more detailed information go to `Sylius API ShipmentItem`_.
 
-.. _Sylius API ShipmentItem: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItem.html
+.. _Sylius API ShipmentItem: http://api.sylius.com/Sylius/Component/Shipping/Model/ShipmentItem.html
 
 
 ShippingCategory
@@ -94,7 +101,7 @@ ShippingCategory has the following properties:
 
     For more detailed information go to `Sylius API ShippingCategory`_.
 
-.. _Sylius API ShippingCategory: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategory.html
+.. _Sylius API ShippingCategory: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingCategory.html
 
 
 ShippingMethod
@@ -141,7 +148,7 @@ It has the following properties:
 
     For more detailed information go to `Sylius API ShippingMethod`_.
 
-.. _Sylius API ShippingMethod: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethod.html
+.. _Sylius API ShippingMethod: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethod.html
 
 ShippingMethodTranslation
 -------------------------
@@ -167,30 +174,6 @@ It has the following properties:
 
     Form more information go to `Sylius API ShippingMethodTranslation`_.
 
-.. _Sylius API ShippingMethodTranslation: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
+.. _Sylius API ShippingMethodTranslation: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
 
-Rule
-----
 
-A **Rule** object represents additional restrictions which have to be fulfilled by a shippable object in order to be
-supported by a given **ShippingMethod**.
-Rule has the following properties:
-
-+---------------+------------------------------------------------+
-| Property      | Description                                    |
-+===============+================================================+
-| id            | Unique id of the rule                          |
-+---------------+------------------------------------------------+
-| type          | Reference to constant from RuleInterface       |
-+---------------+------------------------------------------------+
-| configuration | Additional restriction which have to be fulfil |
-+---------------+------------------------------------------------+
-| method        | Reference to ShippingMethod                    |
-+---------------+------------------------------------------------+
-
-.. note::
-    This model implements the :ref:`component_shipping_model_rule-interface`.
-
-    For more detailed information go to `Sylius API Rule`_.
-
-.. _Sylius API Rule: http://api.sylius.org/Sylius/Component/Shipping/Model/Rule.html

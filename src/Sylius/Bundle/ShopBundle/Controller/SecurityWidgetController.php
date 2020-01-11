@@ -16,27 +16,16 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Kamil Kokot <kamil@kokot.me>
- */
 final class SecurityWidgetController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     */
     public function __construct(EngineInterface $templatingEngine)
     {
         $this->templatingEngine = $templatingEngine;
     }
 
-    /**
-     * @return Response
-     */
     public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_security.html.twig');

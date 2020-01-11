@@ -15,9 +15,6 @@ namespace Sylius\Bundle\ShopBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 final class SyliusShopBundle extends Bundle
 {
 }

@@ -16,19 +16,11 @@ namespace Sylius\Component\Payment\Resolver;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class PaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @param RepositoryInterface $paymentMethodRepository
-     */
     public function __construct(RepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;

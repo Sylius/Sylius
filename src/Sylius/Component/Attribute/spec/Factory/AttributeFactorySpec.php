@@ -21,9 +21,6 @@ use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class AttributeFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry): void

@@ -15,23 +15,9 @@ namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
 interface AvailabilityCheckerInterface
 {
-    /**
-     * @param StockableInterface $stockable
-     *
-     * @return bool
-     */
     public function isStockAvailable(StockableInterface $stockable): bool;
 
-    /**
-     * @param StockableInterface $stockable
-     * @param int $quantity
-     *
-     * @return bool
-     */
     public function isStockSufficient(StockableInterface $stockable, int $quantity): bool;
 }

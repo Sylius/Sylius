@@ -16,16 +16,7 @@ namespace Sylius\Component\Promotion\Checker\Eligibility;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 interface PromotionCouponEligibilityCheckerInterface
 {
-    /**
-     * @param PromotionSubjectInterface $promotionSubject
-     * @param PromotionCouponInterface $promotionCoupon
-     *
-     * @return bool
-     */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool;
 }

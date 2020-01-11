@@ -26,40 +26,20 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ReversedTransformer;
 
-/**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 abstract class AttributeValueType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $attributeChoiceType;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     protected $attributeRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     protected $localeRepository;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     protected $formTypeRegistry;
 
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $attributeChoiceType
-     * @param RepositoryInterface $attributeRepository
-     * @param RepositoryInterface $localeRepository
-     * @param FormTypeRegistryInterface $formTypeTypeRegistry
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -96,7 +76,9 @@ abstract class AttributeValueType extends AbstractResourceType
                     return;
                 }
 
-                $this->addValueField($event->getForm(), $attribute);
+                $localeCode = $attributeValue->getLocaleCode();
+
+                $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $attributeValue = $event->getData();
@@ -119,16 +101,16 @@ abstract class AttributeValueType extends AbstractResourceType
         );
     }
 
-    /**
-     * @param FormInterface $form
-     * @param AttributeInterface $attribute
-     */
-    protected function addValueField(FormInterface $form, AttributeInterface $attribute): void
-    {
+    protected function addValueField(
+        FormInterface $form,
+        AttributeInterface $attribute,
+        ?string $localeCode = null
+    ): void {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,
             'configuration' => $attribute->getConfiguration(),
             'label' => $attribute->getName(),
+            'locale_code' => $localeCode,
         ]);
     }
 }

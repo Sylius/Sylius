@@ -18,25 +18,14 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class OrderContext implements Context
 {
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         OrderRepositoryInterface $orderRepository
@@ -59,6 +48,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Transform /^latest order$/
+     */
+    public function getLatestOrder()
+    {
+        $orders = $this->orderRepository->findLatest(1);
+
+        Assert::notEmpty($orders, 'No order have been made');
+
+        return $orders[0];
+    }
+
+    /**
      * @Transform /^this order made by "([^"]+)"$/
      * @Transform /^order placed by "([^"]+)"$/
      * @Transform /^the order of "([^"]+)"$/
@@ -78,6 +79,7 @@ final class OrderContext implements Context
      * @Transform :orderNumber
      * @Transform /^an order "([^"]+)"$/
      * @Transform /^the order "([^"]+)"$/
+     * @Transform /^the "([^"]+)" order$/
      */
     public function getOrderNumber($orderNumber)
     {

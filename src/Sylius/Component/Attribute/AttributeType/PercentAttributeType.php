@@ -18,9 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class PercentAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'percent';
@@ -38,7 +35,7 @@ final class PercentAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
@@ -64,12 +61,6 @@ final class PercentAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param float|null $value
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(ExecutionContextInterface $context, ?float $value): ConstraintViolationListInterface
     {
         return $context->getValidator()->validate($value, [new NotBlank([])]);

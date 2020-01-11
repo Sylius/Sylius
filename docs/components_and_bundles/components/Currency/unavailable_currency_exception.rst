@@ -1,3 +1,4 @@
+.. rst-class:: outdated
 .. _component_currency_converter_unavailable-currency-exception:
 
 UnavailableCurrencyException

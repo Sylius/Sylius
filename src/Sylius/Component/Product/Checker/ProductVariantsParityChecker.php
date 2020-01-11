@@ -16,9 +16,6 @@ namespace Sylius\Component\Product\Checker;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- */
 final class ProductVariantsParityChecker implements ProductVariantsParityCheckerInterface
 {
     /**
@@ -40,12 +37,6 @@ final class ProductVariantsParityChecker implements ProductVariantsParityChecker
         return false;
     }
 
-    /**
-     * @param ProductVariantInterface $variant
-     * @param ProductVariantInterface $existingVariant
-     *
-     * @return bool
-     */
     private function matchOptions(ProductVariantInterface $variant, ProductVariantInterface $existingVariant): bool
     {
         foreach ($variant->getOptionValues() as $option) {

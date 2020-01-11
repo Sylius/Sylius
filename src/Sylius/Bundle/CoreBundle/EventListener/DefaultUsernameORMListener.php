@@ -21,14 +21,9 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
  * Keeps user's username synchronized with email.
- *
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class DefaultUsernameORMListener
 {
-    /**
-     * @param OnFlushEventArgs $onFlushEventArgs
-     */
     public function onFlush(OnFlushEventArgs $onFlushEventArgs)
     {
         $entityManager = $onFlushEventArgs->getEntityManager();
@@ -38,11 +33,6 @@ final class DefaultUsernameORMListener
         $this->processEntities($unitOfWork->getScheduledEntityUpdates(), $entityManager, $unitOfWork);
     }
 
-    /**
-     * @param array $entities
-     * @param EntityManagerInterface $entityManager
-     * @param UnitOfWork $unitOfWork
-     */
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $customer) {

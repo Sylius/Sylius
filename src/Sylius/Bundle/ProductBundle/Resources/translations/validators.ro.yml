@@ -6,11 +6,32 @@ sylius:
         sku:
             not_blank: Vă rugăm să completați codul SKU al produsului.
             unique: Codul SKU trebuie să fie unic.
+        slug:
+            not_blank: Introdu o valoare în câmpul "slug".
+            unique: Valoarea din câmpul "slug" trebuie să fie unică.
+        code:
+            not_blank: Introdu un cod de produs.
+            regex: Codul de produs poate să conțină litere, numere, - și _.
+            unique: Codul produsul trebuie să fie unic.
         name:
             not_blank: Vă rugăm să completați numele produsului.
             min_length: Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.
             max_length: Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.
+    product_variant:
+        combination: O variantă cu acest set de opţiuni există deja.
+        code:
+            not_blank: Introdu codul variantei.
+            regex: Codul de variantă poate să conțină litere, numere, - și _.
+            unique: Codul variantei trebuie să fie unic.
+            within_product_unique: Codul variantei trebuie să fie unic în cadrul acestui produs.
+    simple_product:
+        code:
+            unique: Codul produsului simplu trebuie să fie unic între produse și variante.
     option:
+        code:
+            not_blank: Introdu codul opțiunii.
+            regex: Codul opțiunii poate să conțină litere, numere, - și _.
+            unique: Codul opțiunii trebuie să fie unic.
         name:
             not_blank: Vă rugăm să completați numele opţiunii.
             min_length: Numele opţiunii trebuie să conţină cel puţin un caracter.|Numele opţiunii trebuie să conţină cel puţin {{ limit }} caractere.
@@ -18,5 +39,18 @@ sylius:
         values:
             min_count: Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.|Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.
     option_value:
+        code:
+            not_blank: Introdu codul valorii opțiunii.
+            regex: Codul valorii opțiunii poate să conțină litere, numere, - și _.
+            unique: Codul valorii opțiunii trebuie să fie unic.
         value:
             not_blank: Vă rugăm să completați valoarea opţiunii.
+    association_type:
+        name:
+            not_blank: Introdu numele unei asocieri.
+            min_length: Numele asocierii trebuie să conţină cel puţin un caracter. |Numele asocierii trebuie să conţină cel puţin {{ limit }} caractere.
+            max_length: Numele tipului de asociere nu poate fi mai lung de 1 caracter|Numele tipului de asociere nu poate fi mai lung de {{ limit }} caractere.
+        code:
+            not_blank: Introdu codul unei asocieri.
+            regex: Codul asocierii poate să conțină litere, numere, - și _.
+            unique: Codul asocierii trebuie să fie unic.

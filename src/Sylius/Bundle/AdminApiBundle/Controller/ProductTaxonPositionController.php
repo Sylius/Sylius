@@ -22,25 +22,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class ProductTaxonPositionController
 {
-    /**
-     * @var ProductTaxonRepositoryInterface
-     */
+    /** @var ProductTaxonRepositoryInterface */
     private $productTaxonRepository;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $manager;
 
-    /**
-     * @param RepositoryInterface $productTaxonRepository
-     * @param EntityManagerInterface $manager
-     */
     public function __construct(
         RepositoryInterface $productTaxonRepository,
         EntityManagerInterface $manager
@@ -49,11 +38,6 @@ final class ProductTaxonPositionController
         $this->manager = $manager;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
     public function updatePositionsAction(Request $request): JsonResponse
     {
         $productsPositions = $request->request->get('productsPositions');

@@ -16,15 +16,12 @@ namespace Sylius\Bundle\AdminApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\ClientManager as BaseClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 
-/**
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- */
 class ClientManager extends BaseClientManager
 {
     /**
      * {@inheritdoc}
      */
-    public function findClientByPublicId($publicId): ClientInterface
+    public function findClientByPublicId($publicId): ?ClientInterface
     {
         return $this->findClientBy(['randomId' => $publicId]);
     }

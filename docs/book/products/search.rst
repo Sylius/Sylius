@@ -4,13 +4,13 @@
 Search
 ======
 
-Having a products search functionality in an eCommerce system is a very popular usecase.
+Having a products search functionality in an eCommerce system is a very popular use case.
 Sylius provides a products search functionality that is a grid filter.
 
 Grid filters
 ------------
 
-For simple usecases of products search use the **filters of grids**.
+For simple use cases of products search use the **filters of grids**.
 For example, the shop's categories each have a ``search`` filter in the products grid:
 
 .. code-block:: yaml
@@ -25,7 +25,7 @@ For example, the shop's categories each have a ``search`` filter in the products
             form_options:
                 type: contains
 
-It searches by product names that contain a string that the user typed in the search bar.
+It searches by product names that contains a string that the user typed in the search bar.
 
 The search bar looks like below:
 
@@ -47,15 +47,15 @@ ElasticSearch
 When the grids filtering is not enough for you, and your needs are more complex you should go for the
 `ElasticSearch <https://www.elastic.co/products/elasticsearch>`_ integration.
 
-There is the `Lakion/SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_ integration extension,
+There is the `Sylius/SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_ integration extension,
 which you can use to extend Sylius functionalities with ElasticSearch.
 
-All you have to do is require the bundle in your project via composer, install the ElasticSearch server, and configure ElasticSearch
-in your application. Everything is well described in the Lakion/SyliusElasticSearchBundle's readme.
+All you have to do is require the plugin in your project via composer, install the ElasticSearch server, and configure ElasticSearch
+in your application. Everything is well described in the Sylius/SyliusElasticSearchPlugin's readme.
 
 Learn more
 ----------
 
-* `SyliusElasticSearchBundle <https://github.com/Lakion/SyliusElasticSearchBundle>`_
+* `SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_
 * :doc:`Grid Bundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
 * :doc:`Grid Component documentation </components_and_bundles/components/Grid/index>`

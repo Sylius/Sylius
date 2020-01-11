@@ -19,19 +19,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class AddressChoiceType extends AbstractType
 {
-    /**
-     * @var AddressRepositoryInterface
-     */
+    /** @var AddressRepositoryInterface */
     private $addressRepository;
 
-    /**
-     * @param AddressRepositoryInterface $addressRepository
-     */
     public function __construct(AddressRepositoryInterface $addressRepository)
     {
         $this->addressRepository = $addressRepository;

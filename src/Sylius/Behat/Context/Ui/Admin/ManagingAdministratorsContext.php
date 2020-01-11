@@ -14,55 +14,56 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\TopBarElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class ManagingAdministratorsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var TopBarElementInterface */
+    private $topBarElement;
+
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
+    /** @var RepositoryInterface */
+    private $adminUserRepository;
+
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        NotificationCheckerInterface $notificationChecker
+        TopBarElementInterface $topBarElement,
+        NotificationCheckerInterface $notificationChecker,
+        RepositoryInterface $adminUserRepository,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->topBarElement = $topBarElement;
         $this->notificationChecker = $notificationChecker;
+        $this->adminUserRepository = $adminUserRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -83,6 +84,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I browse administrators
      * @When I want to browse administrators
      */
     public function iWantToBrowseAdministrators()
@@ -96,7 +98,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsNameAs($username = null)
     {
-        $this->createPage->specifyUsername($username);
+        $this->createPage->specifyUsername($username ?? '');
     }
 
     /**
@@ -113,7 +115,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email);
+        $this->createPage->specifyEmail($email ?? '');
     }
 
     /**
@@ -147,7 +149,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsPasswordAs($password = null)
     {
-        $this->createPage->specifyPassword($password);
+        $this->createPage->specifyPassword($password ?? '');
     }
 
     /**
@@ -192,6 +194,32 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I check (also) the :email administrator
+     */
+    public function iCheckTheAdministrator(string $email): void
+    {
+        $this->indexPage->checkResourceOnPage(['email' => $email]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @When /^I (?:|upload|update) the "([^"]+)" image as (my) avatar$/
+     */
+    public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
+    {
+        $path = $this->updateAvatar($avatar, $administrator);
+
+        $this->sharedStorage->set($avatar, $path);
+    }
+
+    /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with an email :email
@@ -215,11 +243,20 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @Then I should see a single administrator in the list
      * @Then /^there should be (\d+) administrators in the list$/
      */
-    public function iShouldSeeAdministratorsInTheList($number)
+    public function iShouldSeeAdministratorsInTheList(int $number = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $number);
+    }
+
+    /**
+     * @When I remove the avatar
+     */
+    public function iRemoveTheAvatarImage(): void
+    {
+        $this->updatePage->removeAvatar();
     }
 
     /**
@@ -281,5 +318,75 @@ final class ManagingAdministratorsContext implements Context
             'Cannot remove currently logged in user.',
             NotificationType::failure()
         );
+    }
+
+    /**
+     * @Then /^I should see the "([^"]*)" image as (my) avatar$/
+     */
+    public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
+
+        $this->updatePage->open(['id' => $administrator->getId()]);
+
+        Assert::same($this->sharedStorage->get($avatar), $administrator->getAvatar()->getPath());
+    }
+
+    /**
+     * @Then /^I should see the "([^"]*)" avatar image in the top bar next to my name$/
+     */
+    public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
+    {
+        Assert::true($this->topBarElement->hasAvatarInMainBar($avatar));
+    }
+
+    /**
+     * @Then I should not see the :avatar avatar image in the additional information section of my account
+     */
+    public function iShouldNotSeeTheAvatarImageInTheAdditionalInformationSectionOfMyAccount(string $avatar): void
+    {
+        $avatarPath = $this->sharedStorage->get($avatar);
+
+        Assert::false($this->updatePage->hasAvatar($avatarPath));
+    }
+
+    /**
+     * @Then I should not see the :avatar avatar image in the top bar next to my name
+     */
+    public function iShouldNotSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
+    {
+        $avatarPath = $this->sharedStorage->get($avatar);
+
+        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
+        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
+    }
+
+    private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->adminUserRepository->findOneBy(['id' => $administrator->getId()]);
+
+        return $administrator;
+    }
+
+    private function getPath(AdminUserInterface $administrator): string
+    {
+        $administrator = $this->getAdministrator($administrator);
+
+        $avatar = $administrator->getAvatar();
+        if (null === $avatar) {
+            return '';
+        }
+
+        return $avatar->getPath() ?? '';
+    }
+
+    private function updateAvatar(string $avatar, AdminUserInterface $administrator): string
+    {
+        $this->updatePage->attachAvatar($avatar);
+        $this->updatePage->saveChanges();
+
+        return $this->getPath($administrator);
     }
 }

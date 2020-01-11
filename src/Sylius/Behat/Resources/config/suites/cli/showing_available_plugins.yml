@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        cli_showing_available_plugins:
+            contexts:
+                - Sylius\Behat\Context\Cli\ShowingAvailablePluginsContext
+
+
+            filters:
+                tags: "@showing_available_plugins && @cli"

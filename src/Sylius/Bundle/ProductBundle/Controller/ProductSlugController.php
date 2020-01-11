@@ -18,16 +18,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 class ProductSlugController extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');

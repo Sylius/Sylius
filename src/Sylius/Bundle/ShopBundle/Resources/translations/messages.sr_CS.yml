@@ -7,7 +7,7 @@ sylius:
             account:
                 address_book: 'Adresar'
                 change_password: 'Promenite lozinku'
-                dashboard: 'Komandna Tabla'
+                dashboard: 'Kontrolna tabla'
                 header: 'Vaš nalog'
                 order_history: 'Istorija narudžbina'
                 personal_information: 'Lični podaci'

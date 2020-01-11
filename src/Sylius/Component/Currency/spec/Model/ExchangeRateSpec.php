@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ExchangeRateSpec extends ObjectBehavior
 {
     function it_implements_exchange_rate_interface(): void

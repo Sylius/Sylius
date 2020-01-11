@@ -18,9 +18,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-/**
- * @author Anna Walasek <anna.walasek@lakion.com>
- */
 final class SyliusCustomerExtension extends AbstractResourceExtension
 {
     /**

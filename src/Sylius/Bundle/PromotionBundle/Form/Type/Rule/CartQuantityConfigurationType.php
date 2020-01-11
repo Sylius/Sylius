@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-/**
- * @author Saša Stamenković <umpirsky@gmail.com>
- */
 final class CartQuantityConfigurationType extends AbstractType
 {
     /**

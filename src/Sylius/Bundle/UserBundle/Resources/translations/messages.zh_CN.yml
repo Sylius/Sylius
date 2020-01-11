@@ -8,7 +8,7 @@ sylius:
             enabled: 已启用
             password:
                 label: 密码
-                confirmation: 验证
+                confirmation: 确认密码
             remember_me: 记住我
             shipping_address: 送货地址
             username: 用户名

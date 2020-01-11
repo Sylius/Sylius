@@ -13,18 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Model;
 
-/**
- * @author Joseph Bielawski <stloyd@gmail.com>
- */
 interface OrderAwareInterface
 {
-    /**
-     * @return OrderInterface|null
-     */
     public function getOrder(): ?OrderInterface;
 
-    /**
-     * @param OrderInterface|null $order
-     */
     public function setOrder(?OrderInterface $order): void;
 }

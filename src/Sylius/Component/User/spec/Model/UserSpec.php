@@ -14,13 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
- */
 final class UserSpec extends ObjectBehavior
 {
     function it_implements_user_interface(): void
@@ -85,5 +80,13 @@ final class UserSpec extends ObjectBehavior
 
         $this->getEmail()->shouldReturn('admin@example.com');
         $this->getEmailCanonical()->shouldReturn('user@example.com');
+    }
+
+    function it_has_encoder_name()
+    {
+        $this->getEncoderName()->shouldReturn(null);
+
+        $this->setEncoderName('argon2i');
+        $this->getEncoderName()->shouldReturn('argon2i');
     }
 }

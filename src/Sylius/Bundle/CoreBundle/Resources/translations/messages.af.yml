@@ -3,12 +3,30 @@
 
 sylius:
     form:
+        group:
+            name: Naam
+        channel:
+            billing_data:
+                city: Stad
+                company: Maatskappy
+                country: Land
+                postcode: Poskode
+                street: Straat
         image:
             type: Tipe
+        product_filter:
+            name: Naam
+        shipping_method:
+            zone: Area
+        user:
+            first_name: Naam
+            last_name: Van
+        product_association_type:
+            name: Naam
     installer:
         extensions:
-            "off": false
-            "on": true
+            off: false
+            on: true
         settings:
-            "off": false
-            "on": true
+            off: false
+            on: true

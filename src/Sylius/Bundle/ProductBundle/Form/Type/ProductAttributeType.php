@@ -17,9 +17,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Jan Góralski <jan.goralski@lakion.com>
- */
 final class ProductAttributeType extends AttributeType
 {
     /**

@@ -7,4 +7,5 @@ sylius:
             type: Tyyppi
         gateway_configuration:
             paypal:
+                password: Salasana
                 username: Käyttäjänimi

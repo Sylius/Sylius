@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Παρακαλώ επιλέξτε τον κωδικό περιοχής.
+            regex: Ο κωδικός περιοχής μπορεί να αποτελείται μόνο από γράμματα, αριθμούς, παύλες και κάτω παύλες.
+            unique: Υπάρχει ήδη αυτός ο κωδικός περιοχής.
