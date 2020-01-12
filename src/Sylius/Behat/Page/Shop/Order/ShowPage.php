@@ -18,26 +18,20 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPayAction()
+    public function hasPayAction(): bool
     {
         return $this->hasElement('pay_link');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function pay()
+    public function pay(): void
     {
         $this->getElement('pay_link')->click();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
-    public function getNotifications()
+    public function getNotifications(): array
     {
         /** @var NodeElement[] $notificationElements */
         $notificationElements = $this->getDocument()->findAll('css', '.message > .content > p');
@@ -50,26 +44,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $notifications;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function choosePaymentMethod($paymentMethodName)
+    public function choosePaymentMethod($paymentMethodName): void
     {
         $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_order_show';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNumberOfItems(): int
     {
         $itemsText = trim($this->getElement('items_text')->getText());
@@ -77,10 +62,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         return (int) $itemsTextWords[0];
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

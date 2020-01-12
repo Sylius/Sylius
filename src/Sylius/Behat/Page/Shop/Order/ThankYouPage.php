@@ -17,9 +17,6 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function goToTheChangePaymentMethodPage(): void
     {
         $this->getElement('payment_method_page')->click();
@@ -30,36 +27,24 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         $this->getElement('order_details_in_account')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasThankYouMessage()
+    public function hasThankYouMessage(): bool
     {
         $thankYouMessage = $this->getElement('thank_you')->getText();
 
         return false !== strpos($thankYouMessage, 'Thank you!');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInstructions()
+    public function getInstructions(): string
     {
         return $this->getElement('instructions')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasInstructions()
+    public function hasInstructions(): bool
     {
         return null !== $this->getDocument()->find('css', '#sylius-payment-method-instructions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasChangePaymentMethodButton()
+    public function hasChangePaymentMethodButton(): bool
     {
         return null !== $this->getDocument()->find('css', '#payment-method-page');
     }
