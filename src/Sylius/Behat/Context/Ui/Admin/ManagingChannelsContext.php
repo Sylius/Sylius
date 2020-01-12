@@ -113,7 +113,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I change its menu taxon to :menuTaxon
      */
-    public function iChangeMenuTaxonTo(string $menuTaxon): void
+    public function iChangeItsMenuTaxonTo(string $menuTaxon): void
     {
         $this->updatePage->changeMenuTaxon($menuTaxon);
     }
