@@ -21,7 +21,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function pay(): void;
 
-    public function choosePaymentMethod($paymentMethodName): void;
+    public function choosePaymentMethod(string $paymentMethodName): void;
 
     public function getNotifications(): array;
 

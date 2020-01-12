@@ -41,22 +41,22 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 
     public function hasInstructions(): bool
     {
-        return null !== $this->getDocument()->find('css', '#sylius-payment-method-instructions');
+        return $this->hasElement('instructions');
     }
 
     public function hasChangePaymentMethodButton(): bool
     {
-        return null !== $this->getDocument()->find('css', '#payment-method-page');
+        return $this->hasElement('payment_method_page');
     }
 
     public function hasRegistrationButton(): bool
     {
-        return $this->getDocument()->hasLink('Create an account');
+        return $this->hasElement('create_account_button');
     }
 
     public function createAccount(): void
     {
-        $this->getDocument()->clickLink('Create an account');
+        $this->getElement('create_account_button')->click();
     }
 
     public function getRouteName(): string
@@ -67,10 +67,11 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'instructions' => '#sylius-payment-method-instructions',
-            'order_details_in_account' => '#sylius-show-order-in-account',
-            'payment_method_page' => '#payment-method-page',
-            'thank_you' => '#sylius-thank-you',
+            'instructions' => '[data-test-payment-method-instructions]',
+            'order_details_in_account' => '[data-test-show-order-in-account]',
+            'payment_method_page' => '[data-test-payment-method-page]',
+            'thank_you' => '[data-test-thank-you]',
+            'create_account_button' => '[data-test-create-an-account]',
         ]);
     }
 }
