@@ -56,7 +56,7 @@ final class ConvertPaymentAction implements ActionInterface
         $m = 0;
         foreach ($order->getItems() as $item) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = $item->getVariant()->getProduct()->getName();
-            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($item->getDiscountedUnitPrice());
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($item->getUnitPrice());
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = $item->getQuantity();
 
             ++$m;
