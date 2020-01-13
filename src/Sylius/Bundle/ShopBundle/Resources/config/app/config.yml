@@ -83,3 +83,24 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.layout.after_security_widget
+        
+        sylius.shop.homepage:
+            blocks:
+                banner:
+                    template: "@SyliusShop/Homepage/Block/_banner.html.twig"
+                    priority: 60
+                latest_products:
+                    template: "@SyliusShop/Homepage/Block/_latestProducts.html.twig"
+                    priority: 50
+                latest_products_carousel:
+                    template: "@SyliusShop/Homepage/Block/_latestProductsCarousel.html.twig"
+                    priority: 40
+                newsletter:
+                    template: "@SyliusShop/Homepage/Block/_newsletter.html.twig"
+                    priority: 30
+                products_grid:
+                    template: "@SyliusShop/Homepage/Block/_productsGrid.html.twig"
+                    priority: 20
+                about_us:
+                    template: "@SyliusShop/Homepage/Block/_aboutUs.html.twig"
+                    priority: 10
