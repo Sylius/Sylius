@@ -1,0 +1,7 @@
+{% set menu = knp_menu_get('sylius.admin.promotion.update', [], {'promotion': promotion}) %}
+
+{% if promotion.couponBased == true  %}
+    <div class="ui right floated buttons">
+        {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
+    </div>
+{% endif %}

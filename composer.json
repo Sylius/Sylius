@@ -51,15 +51,15 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^6.0",
         "sylius-labs/association-hydrator": "^1.1",
-        "sylius/fixtures-bundle": "~1.4.1",
-        "sylius/grid": "~1.4.4",
-        "sylius/grid-bundle": "~1.4.4",
-        "sylius/mailer": "~1.4.4",
-        "sylius/mailer-bundle": "~1.4.4",
-        "sylius/registry": "~1.4.1",
-        "sylius/resource": "~1.4.4",
-        "sylius/resource-bundle": "~1.4.4",
-        "sylius/theme-bundle": "~1.4.5",
+        "sylius/fixtures-bundle": "^1.4.1",
+        "sylius/grid": "^1.5",
+        "sylius/grid-bundle": "^1.5",
+        "sylius/mailer": "^1.4.4",
+        "sylius/mailer-bundle": "^1.4.4",
+        "sylius/registry": "^1.4.1",
+        "sylius/resource": "^1.4.4",
+        "sylius/resource-bundle": "^1.4.4",
+        "sylius/theme-bundle": "^1.4.5",
         "symfony/asset": "^3.4|^4.1",
         "symfony/config": "^3.4|^4.1",
         "symfony/console": "^3.4|^4.1",
@@ -126,6 +126,7 @@
         "phpstan/phpstan-webmozart-assert": "^0.11",
         "phpunit/phpunit": "^7.0",
         "sensiolabs/security-checker": "^5.0",
+        "sspooky13/yaml-standards": "^5.0",
         "stripe/stripe-php": "^4.1",
         "sylius-labs/coding-standard": "^3.0",
         "symfony/browser-kit": "^3.4|^4.1",
@@ -184,6 +185,7 @@
         "symfony/dom-crawler": "4.1.8",
         "symfony/routing": "4.1.8 || 4.1.9",
         "symfony/symfony": "3.4.7 || 4.0.7 || 4.1.8 || 4.1.9 || 4.2.2",
+        "sylius/grid-bundle": "1.7.4",
         "twig/twig": "2.6.1"
     },
     "suggest": {
@@ -239,7 +241,6 @@
             "spec\\Sylius\\Bundle\\ProductBundle\\": "src/Sylius/Bundle/ProductBundle/spec/",
             "spec\\Sylius\\Bundle\\PromotionBundle\\": "src/Sylius/Bundle/PromotionBundle/spec/",
             "spec\\Sylius\\Bundle\\ReviewBundle\\": "src/Sylius/Bundle/ReviewBundle/spec/",
-            "spec\\Sylius\\Bundle\\ShippingBundle\\": "src/Sylius/Bundle/ShippingBundle",
             "spec\\Sylius\\Bundle\\ShopBundle\\": "src/Sylius/Bundle/ShopBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxationBundle\\": "src/Sylius/Bundle/TaxationBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxonomyBundle\\": "src/Sylius/Bundle/TaxonomyBundle/spec/",
@@ -272,7 +273,7 @@
             "allow-contrib": false
         },
         "branch-alias": {
-            "dev-master": "1.4-dev"
+            "dev-master": "1.5-dev"
         }
     }
 }

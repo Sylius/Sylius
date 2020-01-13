@@ -18,6 +18,11 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\PromotionCoupon" table="sylius_promotion_coupon">
         <field type="integer" name="perCustomerUsageLimit" column="per_customer_usage_limit" nullable="true" />
+        <field name="reusableFromCancelledOrders" column="reusable_from_cancelled_orders" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -249,6 +249,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this coupon) is set as non reusable after cancelling the order in which it has been used$/
+     */
+    public function thisIsSetAsNonReusableAfterCancellingTheOrderInWhichItHasBeenUsed(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setReusableFromCancelledOrders(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this coupon) has already reached its usage limit$/
      */
     public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon)
@@ -261,10 +271,21 @@ final class PromotionContext implements Context
 
     /**
      * @Given /^(this coupon) can be used (\d+) times?$/
+     * @Given /^(this coupon) can be used once$/
      */
-    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
+    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, int $usageLimit = 1): void
     {
-        $coupon->setUsageLimit((int) $usageLimit);
+        $coupon->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used once per customer$/
+     */
+    public function thisCouponCanBeUsedOncePerCustomer(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setPerCustomerUsageLimit(1);
 
         $this->objectManager->flush();
     }
@@ -272,7 +293,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^(this coupon) can be used twice per customer$/
      */
-    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon)
+    public function thisCouponCanBeUsedTwicePerCustomer(PromotionCouponInterface $coupon): void
     {
         $coupon->setPerCustomerUsageLimit(2);
 
@@ -624,8 +645,9 @@ final class PromotionContext implements Context
 
     /**
      * @Given /^(it) is coupon based promotion$/
+     * @Given /^(it) is a coupon based promotion$/
      */
-    public function itIsCouponBasedPromotion(PromotionInterface $promotion)
+    public function itIsCouponBasedPromotion(PromotionInterface $promotion): void
     {
         $promotion->setCouponBased(true);
 

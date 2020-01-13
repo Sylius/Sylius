@@ -41,7 +41,7 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
 
-        $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
+        $reviewSubjectManager->flush()->shouldBeCalled();
 
         $this->update($reviewSubject);
     }
@@ -57,7 +57,7 @@ final class AverageRatingUpdaterSpec extends ObjectBehavior
 
         $reviewSubject->setAverageRating(4.5)->shouldBeCalled();
 
-        $reviewSubjectManager->flush($reviewSubject)->shouldBeCalled();
+        $reviewSubjectManager->flush()->shouldBeCalled();
 
         $this->updateFromReview($review);
     }

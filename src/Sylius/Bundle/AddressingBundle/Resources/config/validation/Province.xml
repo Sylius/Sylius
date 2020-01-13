@@ -34,7 +34,7 @@
             </constraint>
             <constraint name="Regex">
                 <option name="message">sylius.province.code.regex</option>
-                <option name="pattern">/^[A-Z]{2}-[A-Z0-9]{2,}$/</option>
+                <option name="pattern">/^[A-Z]{2}-[A-Z0-9]{1,}$/</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

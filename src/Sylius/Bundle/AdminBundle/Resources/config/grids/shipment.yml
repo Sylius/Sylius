@@ -1,0 +1,69 @@
+sylius_grid:
+    grids:
+        sylius_admin_shipment:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.shipment.class%"
+                    repository:
+                        method: createListQueryBuilder
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: order
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                customer:
+                    type: twig
+                    label: sylius.ui.customer
+                    path: order.customer
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+            filters:
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.ready: Ready
+                            sylius.ui.shipped: Shipped
+            actions:
+                item:
+                    ship:
+                        type: apply_transition
+                        label: sylius.ui.ship
+                        icon: plane
+                        options:
+                            link:
+                                route: sylius_admin_shipment_ship
+                                parameters:
+                                    id: resource.id
+                            class: teal
+                            transition: ship
+                            graph: sylius_shipment
+                    details:
+                        type: default
+                        label: sylius.ui.show_order_details
+                        icon: eye
+                        options:
+                            link:
+                                route: sylius_admin_order_show
+                                parameters:
+                                    id: resource.order.id

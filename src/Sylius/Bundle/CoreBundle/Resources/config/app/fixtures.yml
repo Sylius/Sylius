@@ -36,6 +36,13 @@ sylius_fixtures:
                                     - "USD"
                                 enabled: true
                                 hostname: "localhost"
+                                shop_billing_data:
+                                    company: "Sylius"
+                                    tax_id: "0001112222"
+                                    country_code: "US"
+                                    street: "Test St. 15"
+                                    city: "eCommerce Town"
+                                    postcode: "00 33 22"
 
                 payment_method:
                     options:

@@ -20,12 +20,12 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
 class ShipmentRepository extends EntityRepository implements ShipmentRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('o');
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state != :state')
+            ->setParameter('state', ShipmentInterface::STATE_CART)
+        ;
     }
 
     /**

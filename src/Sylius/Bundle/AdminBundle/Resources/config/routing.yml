@@ -80,6 +80,9 @@ sylius_admin_promotion_coupon:
 sylius_admin_security:
     resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
 
+sylius_admin_shipment:
+    resource: "@SyliusAdminBundle/Resources/config/routing/shipment.yml"
+
 sylius_admin_shipping_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_category.yml"
 

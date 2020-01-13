@@ -33,8 +33,8 @@
     
 * Incorporate changes from the following files into your application:
 
-    * [`package.json`](https://github.com/Sylius/Sylius-Standard/blob/1.3/package.json) ([see diff](https://github.com/Sylius/Sylius-Standard/compare/1.2...1.3#diff-e56633f72ecc521128b3db6586074d2c)) 
-    * [`.babelrc`](https://github.com/Sylius/Sylius-Standard/blob/1.3/.babelrc) ([see diff](https://github.com/Sylius/Sylius-Standard/compare/1.2...1.3#diff-b9cfc7f2cdf78a7f4b91a753d10865a2))
+    * [`package.json`](https://github.com/Sylius/Sylius-Standard/blob/1.3/package.json) ([see diff](https://github.com/Sylius/Sylius-Standard/compare/1.2...1.3#diff-b9cfc7f2cdf78a7f4b91a753d10865a2)) 
+    * [`.babelrc`](https://github.com/Sylius/Sylius-Standard/blob/1.3/.babelrc) ([see diff](https://github.com/Sylius/Sylius-Standard/compare/1.2...1.3#diff-e56633f72ecc521128b3db6586074d2c))
     * [`.eslintrc.js`](https://github.com/Sylius/Sylius-Standard/blob/1.3/.eslintrc.js) ([see diff](https://github.com/Sylius/Sylius-Standard/compare/1.2...1.3#diff-e4403a877d80de653400d88d85e4801a))
      
 * Update PHP and JS dependencies by running `composer update` and `yarn upgrade`

@@ -118,21 +118,10 @@ Other Payment Gateways
 
 .. note::
 
-    Learn more about integrating payment gateways in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
+    Learn more about integrating payment gateways in the :doc:`dedicated guide </cookbook/payments/custom-payment-gateway>` and in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
 
 When the Payment Gateway you are trying to use does have a bridge available and you integrate them on your own,
 use our guide on :doc:`extension development </plugins/creating-plugin>`.
-
-.. tip::
-
-    You'll probably need also this kind of configuration in your ``config/packages/payum.yaml`` for the gateway's factory:
-
-    .. code-block:: yaml
-
-        payum:
-            gateways:
-                yourgateway:
-                    factory: yourgateway
 
 Troubleshooting
 ---------------

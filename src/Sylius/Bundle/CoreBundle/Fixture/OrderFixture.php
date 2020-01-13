@@ -173,7 +173,8 @@ class OrderFixture extends AbstractFixture
             $product = $this->faker->randomElement($products);
 
             if (!$product->hasChannel($order->getChannel())) {
-                $i--;
+                --$i;
+
                 continue;
             }
 

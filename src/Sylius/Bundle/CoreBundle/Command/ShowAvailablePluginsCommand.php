@@ -35,7 +35,7 @@ final class ShowAvailablePluginsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $output->writeln('<comment>Available official Sylius Plugins:</comment>');
+        $output->writeln('<comment>Available official plugins and selected community plugins:</comment>');
 
         $pluginTable = new TableRenderer($output);
         $pluginTable->setHeaders(['Plugin', 'Description', 'URL']);
@@ -55,7 +55,7 @@ final class ShowAvailablePluginsCommand extends Command
         $this->plugins->add(new PluginInfo('<info>Customer Order Cancellation</info>', 'Allows customers to quickly cancel their unpaid and unshipped orders.', 'https://github.com/Sylius/CustomerOrderCancellationPlugin'));
         $this->plugins->add(new PluginInfo('<info>Customer Reorder</info>', 'Convenient reordering for the customers from the `My account` section.', 'https://github.com/Sylius/CustomerReorderPlugin'));
         $this->plugins->add(new PluginInfo('<info>Invoicing</info>', 'Automatised, basic invoicing system for orders.', 'https://github.com/Sylius/InvoicingPlugin'));
-        $this->plugins->add(new PluginInfo('<info>RBAC</info>', 'Permissions management for the administration panel.', 'https://github.com/Sylius/RbacPlugin'));
         $this->plugins->add(new PluginInfo('<info>Refund</info>', 'Full and partial refunds of items and/or shipping costs including Credit Memos.', 'https://github.com/Sylius/RefundPlugin'));
+        $this->plugins->add(new PluginInfo('<info>CMS</info>', 'This plugin allows you to add dynamic blocks with images, text or HTML to your storefront as well as pages and FAQs section.','https://github.com/BitBagCommerce/SyliusCmsPlugin' ));
     }
 }

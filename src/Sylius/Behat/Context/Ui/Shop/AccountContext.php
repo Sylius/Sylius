@@ -423,4 +423,36 @@ final class AccountContext implements Context
     {
         $this->loginPage->tryToOpen();
     }
+
+    /**
+     * @Then I should see its payment status as :paymentStatus
+     */
+    public function shouldSeePaymentStatus(string $paymentStatus): void
+    {
+        Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
+    }
+
+    /**
+     * @Then I should see its order's payment status as :orderPaymentState
+     */
+    public function iShouldSeeItsOrderSPaymentStatusAs(string $orderPaymentState): void
+    {
+        Assert::same($this->orderShowPage->getOrderPaymentStatus(), $orderPaymentState);
+    }
+
+    /**
+     * @Then the order's shipment status should be :orderShipmentStatus
+     */
+    public function theOrderShipmentStatusShouldBe(string $orderShipmentStatus): void
+    {
+        Assert::same($this->orderShowPage->getOrderShipmentStatus(), $orderShipmentStatus);
+    }
+
+    /**
+     * @Then the shipment status should be :shipmentStatus
+     */
+    public function theShipmentStatusShouldBe(string $shipmentStatus): void
+    {
+        Assert::same($this->orderShowPage->getShipmentStatus(), $shipmentStatus);
+    }
 }

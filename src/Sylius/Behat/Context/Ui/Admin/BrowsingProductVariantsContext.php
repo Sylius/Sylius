@@ -264,6 +264,14 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^I should be on the list of (this product)'s variants$/
+     */
+    public function iShouldBeOnTheListOfThisProductVariants(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->isOpen(['productId' => $product->getId()]));
+    }
+
+    /**
      * @param int $expectedAmount
      * @param ProductVariantInterface $variant
      *

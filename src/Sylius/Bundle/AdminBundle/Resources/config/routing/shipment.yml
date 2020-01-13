@@ -1,0 +1,27 @@
+sylius_admin_shipment:
+    resource: |
+        alias: sylius.shipment
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        only: ['index']
+        grid: sylius_admin_shipment
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_shipments
+            index:
+                icon: truck
+    type: sylius.resource
+
+sylius_admin_shipment_ship:
+    path: /shipments/{id}/ship
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.shipment:applyStateMachineTransitionAction
+        _sylius:
+            permission: true
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            flash: sylius.shipment.shipped

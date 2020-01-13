@@ -19,7 +19,7 @@ use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\Checker\ImageExistenceCheckerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class IndexPage extends CrudIndexPage implements IndexPageInterface
+class IndexPage extends CrudIndexPage implements IndexPageInterface
 {
     /** @var ImageExistenceCheckerInterface */
     private $imageExistenceChecker;

@@ -209,9 +209,10 @@ final class CartContext implements Context
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
+     * @Given the customer added :product product to the cart
      * @When I add product :product to the cart
      */
-    public function iAddProductToTheCart(ProductInterface $product)
+    public function iAddProductToTheCart(ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCart();
@@ -407,6 +408,14 @@ final class CartContext implements Context
         $this->summaryPage->open();
 
         Assert::same($this->summaryPage->getCartTotal(), $total);
+    }
+
+    /**
+     * @Then /^(\d)(st|nd|rd|th) item in my cart should have "([^"]+)" image displayed$/
+     */
+    public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
+    {
+        Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
     }
 
     private function getPriceFromString(string $price): int

@@ -30,7 +30,9 @@ interface ShippingMethodInterface extends
     TranslatableInterface
 {
     public const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
+
     public const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
+
     public const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     public function getName(): ?string;

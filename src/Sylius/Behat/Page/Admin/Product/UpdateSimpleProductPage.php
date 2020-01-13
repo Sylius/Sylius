@@ -334,6 +334,21 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('shipping_required')->isChecked();
     }
 
+    public function goToVariantsList(): void
+    {
+        $this->getDocument()->clickLink('List variants');
+    }
+
+    public function goToVariantCreation(): void
+    {
+        $this->getDocument()->clickLink('Create');
+    }
+
+    public function goToVariantGeneration(): void
+    {
+        $this->getDocument()->clickLink('Generate');
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');

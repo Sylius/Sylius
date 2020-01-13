@@ -63,7 +63,7 @@ final class ShowingAvailablePluginsContext implements Context
         Assert::contains($this->tester->getDisplay(), 'Customer Order Cancellation');
         Assert::contains($this->tester->getDisplay(), 'Customer Reorder');
         Assert::contains($this->tester->getDisplay(), 'Invoicing');
-        Assert::contains($this->tester->getDisplay(), 'RBAC');
         Assert::contains($this->tester->getDisplay(), 'Refund');
+        Assert::contains($this->tester->getDisplay(), 'CMS');
     }
 }

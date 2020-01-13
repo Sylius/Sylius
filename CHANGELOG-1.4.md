@@ -1,5 +1,41 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.10, v1.4.11 (2019-12-03, 2019-12-05)
+
+#### CVE-2019-16768: Internal exception message exposure in login action.
+
+**Details:**
+
+Exception messages from internal exceptions (like database exception) are wrapped by 
+`\Symfony\Component\Security\Core\Exception\AuthenticationServiceException` and propagated through the system to UI. 
+Therefore, some internal system information may leak and be visible to the customer.
+
+A validation message with the exception details will be presented to the user when one will try to log into the shop.
+
+**Solution:**
+
+This release patches the reported vulnerability. The `src/Sylius/Bundle/UiBundle/Resources/views/Security/_login.html.twig` 
+file from Sylius should be overridden and `{{ messages.error(last_error.message) }}` changed to `{{ messages.error(last_error.messageKey) }}`.
+
+## v1.4.9 (2019-10-09)
+
+The last bugfix release for v1.4.x.
+
+#### Details
+
+- [#10641](https://github.com/Sylius/Sylius/issues/10641) [Documentation] Fixtures customization guides - fixes ([@CoderMaggie](https://github.com/CoderMaggie), [@Zales0123](https://github.com/Zales0123))
+- [#10645](https://github.com/Sylius/Sylius/issues/10645) [Docs] Fix Blackfire Ad ([@Tomanhez](https://github.com/Tomanhez))
+- [#10646](https://github.com/Sylius/Sylius/issues/10646) [Docs] Fix Ad ([@Tomanhez](https://github.com/Tomanhez))
+- [#10649](https://github.com/Sylius/Sylius/issues/10649) Update online course ad ([@kulczy](https://github.com/kulczy))
+- [#10652](https://github.com/Sylius/Sylius/issues/10652) Add Sylius 1.6 banner to the docs ([@kulczy](https://github.com/kulczy))
+- [#10680](https://github.com/Sylius/Sylius/issues/10680) Fix ChannelCollector related serialization issue in Symfony profiler ([@ostrolucky](https://github.com/ostrolucky))
+- [#10701](https://github.com/Sylius/Sylius/issues/10701) [Maintenance] Update docs with v1.6 ([@lchrusciel](https://github.com/lchrusciel))
+- [#10710](https://github.com/Sylius/Sylius/issues/10710) [Address book] Extensibility improvements ([@cyrosy](https://github.com/cyrosy))
+- [#10713](https://github.com/Sylius/Sylius/issues/10713) [Behat] Improve dashboard page extensibility ([@loic425](https://github.com/loic425))
+- [#10727](https://github.com/Sylius/Sylius/issues/10727) Fix channels label size and alignment ([@kulczy](https://github.com/kulczy))
+- [#10732](https://github.com/Sylius/Sylius/issues/10732) Update course ad ([@kulczy](https://github.com/kulczy))
+- [#10739](https://github.com/Sylius/Sylius/issues/10739) [Admin][Adressing] fixed province code validation regex ([@twojtylak](https://github.com/twojtylak))
+
 ## v1.4.8 (2019-08-27)
 
 #### Details

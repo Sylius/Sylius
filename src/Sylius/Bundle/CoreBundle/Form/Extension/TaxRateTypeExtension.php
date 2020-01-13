@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
+use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,7 +26,7 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('zone', ZoneChoiceType::class);
+        $builder->add('zone', ZoneChoiceType::class, ['zone_scope' => Scope::TAX]);
     }
 
     /**

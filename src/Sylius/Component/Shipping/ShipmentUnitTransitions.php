@@ -18,6 +18,8 @@ class ShipmentUnitTransitions
     public const GRAPH = 'sylius_shipment_unit';
 
     public const SYLIUS_CREATE = 'create';
+
     public const SYLIUS_SHIP = 'ship';
+
     public const SYLIUS_CANCEL = 'cancel';
 }

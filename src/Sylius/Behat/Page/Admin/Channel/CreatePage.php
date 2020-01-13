@@ -60,7 +60,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function chooseDefaultLocale(?string $locale): void
     {
         if (null !== $locale) {
-            $this->getElement('locales')->selectOption($locale);
             $this->getElement('default_locale')->selectOption($locale);
         }
     }

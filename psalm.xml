@@ -70,6 +70,13 @@
     <issueHandlers>
         <LessSpecificReturnType errorLevel="info" />
 
+        <!-- Psalm v3.7.2 <=> v3.8.2 BC break-->
+        <UndefinedMagicMethod>
+            <errorLevel type="info">
+                <referencedMethod name="Faker\Generator::boolean"/>
+            </errorLevel>
+        </UndefinedMagicMethod>
+
         <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
 
         <DeprecatedMethod errorLevel="info" />

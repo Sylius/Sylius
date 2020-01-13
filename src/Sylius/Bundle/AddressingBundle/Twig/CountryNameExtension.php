@@ -30,10 +30,12 @@ class CountryNameExtension extends \Twig_Extension
 
     public function translateCountryIsoCode($country, ?string $locale = null): string
     {
-        if ($country instanceof CountryInterface) {
-            return Intl::getRegionBundle()->getCountryName($country->getCode(), $locale);
+        $countryCode = $country instanceof CountryInterface ? $country->getCode() : $country;
+
+        if ($countryName = Intl::getRegionBundle()->getCountryName($countryCode, $locale)) {
+            return $countryName;
         }
 
-        return Intl::getRegionBundle()->getCountryName($country, $locale);
+        return $countryCode ?? '';
     }
 }

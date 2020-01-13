@@ -25,6 +25,8 @@ use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -60,6 +62,12 @@ final class ManagingProductsContext implements Context
     /** @var IndexPerTaxonPageInterface */
     private $indexPerTaxonPage;
 
+    /** @var VariantCreatePageInterface */
+    private $variantCreatePage;
+
+    /** @var GeneratePageInterface */
+    private $variantGeneratePage;
+
     /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
@@ -75,6 +83,8 @@ final class ManagingProductsContext implements Context
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         ProductReviewIndexPageInterface $productReviewIndexPage,
         IndexPerTaxonPageInterface $indexPerTaxonPage,
+        VariantCreatePageInterface $variantCreatePage,
+        GeneratePageInterface $variantGeneratePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -86,6 +96,8 @@ final class ManagingProductsContext implements Context
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
         $this->productReviewIndexPage = $productReviewIndexPage;
         $this->indexPerTaxonPage = $indexPerTaxonPage;
+        $this->variantCreatePage = $variantCreatePage;
+        $this->variantGeneratePage = $variantGeneratePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -371,8 +383,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
+     * @When I modify the :product product
      */
-    public function iWantToModifyAProduct(ProductInterface $product)
+    public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
 
@@ -643,6 +656,30 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeAssociatedProduct($productName, $productAssociationType);
+    }
+
+    /**
+     * @When I go to the variants list
+     */
+    public function iGoToTheVariantsList(): void
+    {
+        $this->resolveCurrentPage()->goToVariantsList();
+    }
+
+    /**
+     * @When I go to the variant creation page
+     */
+    public function iGoToTheVariantCreationPage(): void
+    {
+        $this->resolveCurrentPage()->goToVariantCreation();
+    }
+
+    /**
+     * @When I go to the variant generation page
+     */
+    public function iGoToTheVariantGenerationPage(): void
+    {
+        $this->resolveCurrentPage()->goToVariantGeneration();
     }
 
     /**
@@ -932,6 +969,22 @@ final class ManagingProductsContext implements Context
             $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
             sprintf('This value is too short. It should have %s characters or more.', $number)
         );
+    }
+
+    /**
+     * @Then /^I should be on the variant creation page for (this product)$/
+     */
+    public function iShouldBeOnTheVariantCreationPageForThisProduct(ProductInterface $product): void
+    {
+        Assert::true($this->variantCreatePage->isOpen(['productId' => $product->getId()]));
+    }
+
+    /**
+     * @Then /^I should be on the variant generation page for (this product)$/
+     */
+    public function iShouldBeOnTheVariantGenerationPageForThisProduct(ProductInterface $product): void
+    {
+        Assert::true($this->variantGeneratePage->isOpen(['productId' => $product->getId()]));
     }
 
     /**

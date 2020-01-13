@@ -86,6 +86,7 @@
 
         <service id="sylius.form.type.zone_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType">
             <argument type="service" id="sylius.repository.zone" />
+            <argument>%sylius.scope.zone%</argument>
             <tag name="form.type" />
         </service>
 

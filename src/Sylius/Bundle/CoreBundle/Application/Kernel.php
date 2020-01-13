@@ -31,17 +31,21 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.4.9-DEV';
-    public const VERSION_ID = '10409';
+    public const VERSION = '1.5.9-DEV';
+
+    public const VERSION_ID = '10509';
+
     public const MAJOR_VERSION = '1';
-    public const MINOR_VERSION = '4';
+
+    public const MINOR_VERSION = '5';
+
     public const RELEASE_VERSION = '9';
+
     public const EXTRA_VERSION = 'DEV';
 
     public function __construct(string $environment, bool $debug)
     {
-        // TODO: Better deprecation message!
-        @trigger_error(sprintf('Using "%s" as Symfony kernel is deprecated since Sylius 1.3. Please migrate to Symfony 4 directory structure.', self::class), \E_USER_DEPRECATED);
+        @trigger_error(sprintf('Using "%s" as Symfony kernel is deprecated since Sylius 1.3. Please migrate to Symfony 4 directory structure. Upgrade guide: https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md#directory-structure-change', self::class), \E_USER_DEPRECATED);
 
         parent::__construct($environment, $debug);
     }

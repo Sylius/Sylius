@@ -48,4 +48,10 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function modifyFirstImageType(string $type): void;
 
     public function countImages(): int;
+
+    public function goToVariantsList(): void;
+
+    public function goToVariantCreation(): void;
+
+    public function goToVariantGeneration(): void;
 }

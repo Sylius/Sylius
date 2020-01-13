@@ -124,4 +124,3 @@ Sylius\Component\Product\Model\ProductOptionValueTranslation:
         locale: "en_US"
         value: "Size L"
         translatable: "@mug-size-l"
-
