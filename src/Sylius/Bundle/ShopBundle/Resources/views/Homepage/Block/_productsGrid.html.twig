@@ -1,0 +1,9 @@
+<div class="ui grid">
+    <div class="sixteen wide tablet eight wide computer featured column">
+        {{ render(url('sylius_shop_partial_product_index_latest', {'count': 1, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
+    </div>
+    <div class="sixteen wide tablet eight wide computer column">
+        {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
+    </div>
+</div>
+<div class="ui hidden divider"></div>

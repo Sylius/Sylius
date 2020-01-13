@@ -3,70 +3,7 @@
 {% block content %}
     <div class="homepage">
         <div class="ui hidden divider"></div>
-        <img class="ui fluid image" src="{{ asset('assets/shop/img/homepage-banner.jpg') }}" alt="Sylius">
-        <div class="ui hidden divider"></div>
 
-        <h2 class="ui center aligned huge header">{{ 'sylius.ui.latest_products'|trans }}</h2>
-        <div class="ui hidden divider"></div>
-
-        <div {{ sylius_test_html_attribute('latest-products') }}>
-            {{ render(url('sylius_shop_partial_product_index_latest', {'count': 3, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
-        </div>
-        <div class="ui hidden divider"></div>
-
-        <h2 class="ui center aligned huge header">{{ 'sylius.homepage.brace_yoursel_winter_is_coming'|trans }}</h2>
-        <div class="ui hidden divider"></div>
-
-        {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Homepage/_carousel.html.twig'})) }}
-
-        <div class="ui very padded secondary segment newsletter">
-            <div class="ui bottom aligned grid">
-                <div class="doubling two column row">
-                    <div class="column">
-                        <h2 class="ui huge header">
-                            {{ 'sylius.homepage.newsletter'|trans }}
-                        </h2>
-                        <p>
-                            {{ 'sylius.homepage.newsletter_description'|trans }}
-                        </p>
-                    </div>
-                    <div class="column">
-                        <form class="ui form">
-                            <div class="newsletter-input">
-                                <input type="text" placeholder="{{ 'sylius.ui.email'|trans }}">
-                            </div>
-                            <div class="newsletter-button">
-                                <button class="ui button">{{ 'sylius.homepage.subscribe'|trans }}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui hidden divider"></div>
-
-        <div class="ui grid">
-            <div class="sixteen wide tablet eight wide computer featured column">
-                {{ render(url('sylius_shop_partial_product_index_latest', {'count': 1, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
-            </div>
-            <div class="sixteen wide tablet eight wide computer column">
-                {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
-            </div>
-        </div>
-        <div class="ui hidden divider"></div>
-
-        <div class="ui very padded center aligned secondary segment">
-            <div class="ui centered grid">
-                <div class="sixteen wide tablet twelve wide computer center aligned column">
-                    <h2 class="ui huge header">
-                        {{ 'sylius.homepage.about_us'|trans }}
-                    </h2>
-                    <p>
-                        {{ 'sylius.homepage.about_us_content'|trans }}
-                    </p>
-                </div>
-            </div>
-        </div>
+        {{ sylius_template_event('sylius.shop.homepage') }}
     </div>
 {% endblock %}
