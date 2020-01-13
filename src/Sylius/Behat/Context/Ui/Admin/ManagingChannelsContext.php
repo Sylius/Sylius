@@ -534,7 +534,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Given /^(this channel) menu taxon should be "([^"]+)"$/
-     * @Given /^the (channel "[^"]+") should have "([^"]+)" as a menu taxon$/
+     * @Given the channel :channel should have :menuTaxon as a menu taxon
      */
     public function thisChannelMenuTaxonShouldBe(ChannelInterface $channel, string $menuTaxon): void
     {

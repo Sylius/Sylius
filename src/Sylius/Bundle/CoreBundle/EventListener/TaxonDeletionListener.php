@@ -26,7 +26,7 @@ final class TaxonDeletionListener
     /** @var SessionInterface */
     private $session;
 
-    /** @var ChannelRepositoryInterface $channelRepository */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
     /** @var TaxonAwareRuleUpdaterInterface[] */

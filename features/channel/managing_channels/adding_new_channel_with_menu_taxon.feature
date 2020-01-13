@@ -13,8 +13,8 @@ Feature: Adding a new channel with menu taxon
 
     @ui @javascript
     Scenario: Adding a new channel with menu taxon
-        Given I want to create a new channel
-        When I specify its code as "MOBILE"
+        When I want to create a new channel
+        And I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I specify menu taxon as "Clothes"
         And I add it

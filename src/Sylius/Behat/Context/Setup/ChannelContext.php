@@ -228,7 +228,7 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given /^(channel "[^"]+") has menu (taxon "[^"]+")$/
+     * @Given channel :channel has menu taxon :taxon
      * @Given /^(this channel) has menu (taxon "[^"]+")$/
      */
     public function channelHasMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
