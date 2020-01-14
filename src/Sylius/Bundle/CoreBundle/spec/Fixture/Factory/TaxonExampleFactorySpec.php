@@ -25,7 +25,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 class TaxonExampleFactorySpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
         RepositoryInterface $localeRepository,
@@ -34,12 +34,12 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         $this->beConstructedWith($taxonFactory, $taxonRepository, $localeRepository, $taxonSlugGenerator);
     }
 
-    public function it_is_an_example_factory(): void
+    function it_is_an_example_factory(): void
     {
         $this->shouldHaveType(ExampleFactoryInterface::class);
     }
 
-    public function it_creates_translations_for_each_defined_locales(
+    function it_creates_translations_for_each_defined_locales(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
@@ -62,7 +62,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         ]);
     }
 
-    public function it_creates_translations_for_each_custom_translations(
+    function it_creates_translations_for_each_custom_translations(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
@@ -97,7 +97,7 @@ class TaxonExampleFactorySpec extends ObjectBehavior
         ]);
     }
 
-    public function it_replaces_existing_translations_for_each_custom_translations(
+    function it_replaces_existing_translations_for_each_custom_translations(
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
