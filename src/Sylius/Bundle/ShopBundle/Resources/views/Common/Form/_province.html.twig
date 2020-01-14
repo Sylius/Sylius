@@ -1,7 +1,7 @@
 {{ form_label(form) }}
 
 {% if form.vars.choices is defined %}
-    {{ form_widget(form, {'attr': {'class': 'ui dropdown'}}) }}
+    {{ form_widget(form, sylius_test_form_attribute('province-code')|sylius_merge_recursive( {'attr': {'class': 'ui dropdown'}})) }}
 {% else %}
-    {{ form_widget(form) }}
+    {{ form_widget(form, sylius_test_form_attribute('province-name')) }}
 {% endif %}

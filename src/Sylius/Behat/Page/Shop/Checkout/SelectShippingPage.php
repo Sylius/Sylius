@@ -158,8 +158,8 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'shipment' => '[data-test-shipments]',
             'shipping_method' => '[data-test-shipping-method-select]',
             'shipping_method_fee' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-fee]',
-            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") > .field > .ui.radio.checkbox',
-            'shipping_method_option' => '.item:contains("%shipping_method%") input',
+            'shipping_method_select' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-checkbox]',
+            'shipping_method_option' => '[data-test-shipping-item]:contains("%shipping_method%") [data-test-shipping-method-select]',
             'warning_no_shipping_methods' => '[data-test-order-cannot-be-shipped]',
         ]);
     }
