@@ -6,6 +6,9 @@ Sylius\Component\Core\Model\Channel:
             expose: true
             type: string
             groups: [Detailed]
+        menuTaxon:
+            expose: true
+            groups: [Detailed]
     relations:
         -   rel: self
             href:

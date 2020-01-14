@@ -55,5 +55,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function getType(): string;
 
+    public function changeMenuTaxon(string $menuTaxon): void;
+
+    public function getMenuTaxon(): string;
+
     public function getUsedTheme(): string;
 }

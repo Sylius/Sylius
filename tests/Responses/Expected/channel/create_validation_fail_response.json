@@ -45,6 +45,7 @@
           "postcode": {}
         }
       },
+      "menuTaxon": {},
       "code": {
         "errors": [
           "Please enter channel code."

@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -97,6 +98,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('type')->getValue();
     }
 
+    public function changeMenuTaxon(string $menuTaxon): void
+    {
+        $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $menuTaxonElement, $menuTaxon);
+    }
+
+    public function getMenuTaxon(): string
+    {
+        return $this->getElement('menu_taxon')->getParent()->find('css', '.search > .text')->getText();
+    }
+
     public function getUsedTheme(): string
     {
         return $this->getElement('theme')->getValue();
@@ -122,6 +135,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
+            'menu_taxon' => '#sylius_channel_menuTaxon',
             'name' => '#sylius_channel_name',
             'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
             'theme' => '#sylius_channel_themeName',

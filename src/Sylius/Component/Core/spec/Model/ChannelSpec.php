@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
@@ -158,5 +159,11 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setAccountVerificationRequired(false);
         $this->isAccountVerificationRequired()->shouldReturn(false);
+    }
+
+    function its_menu_taxon_is_mutable(TaxonInterface $taxon): void
+    {
+        $this->setMenuTaxon($taxon);
+        $this->getMenuTaxon()->shouldReturn($taxon);
     }
 }

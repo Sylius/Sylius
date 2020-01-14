@@ -37,6 +37,7 @@
                     "postcode": {}
                 }
             },
+            "menuTaxon": {},
             "code": {},
             "baseCurrency": {}
         }

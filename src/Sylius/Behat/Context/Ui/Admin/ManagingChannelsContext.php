@@ -103,6 +103,22 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I specify menu taxon as :menuTaxon
+     */
+    public function iSpecifyMenuTaxonAs(string $menuTaxon): void
+    {
+        $this->createPage->specifyMenuTaxon($menuTaxon);
+    }
+
+    /**
+     * @When I change its menu taxon to :menuTaxon
+     */
+    public function iChangeItsMenuTaxonTo(string $menuTaxon): void
+    {
+        $this->updatePage->changeMenuTaxon($menuTaxon);
+    }
+
+    /**
      * @When I allow to skip shipping step if only one shipping method is available
      */
     public function iAllowToSkipShippingStepIfOnlyOneShippingMethodIsAvailable()
@@ -514,6 +530,19 @@ final class ManagingChannelsContext implements Context
     public function thisChannelTypeShouldBe(string $type): void
     {
         Assert::same($this->updatePage->getType(), $type);
+    }
+
+    /**
+     * @Given /^(this channel) menu taxon should be "([^"]+)"$/
+     * @Given the channel :channel should have :menuTaxon as a menu taxon
+     */
+    public function thisChannelMenuTaxonShouldBe(ChannelInterface $channel, string $menuTaxon): void
+    {
+        if (!$this->updatePage->isOpen(['id' => $channel->getId()])) {
+            $this->updatePage->open(['id' => $channel->getId()]);
+        }
+
+        Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
     }
 
     /**

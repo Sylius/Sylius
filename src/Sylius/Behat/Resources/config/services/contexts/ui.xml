@@ -252,6 +252,7 @@
             <argument type="service" id="sylius.behat.page.admin.taxon.create_for_parent" />
             <argument type="service" id="sylius.behat.page.admin.taxon.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_tax_rate" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext">
@@ -414,6 +415,7 @@
 
         <service id="sylius.behat.context.ui.shop.homepage" class="Sylius\Behat\Context\Ui\Shop\HomepageContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.element.shop.menu" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext">
