@@ -39,7 +39,7 @@
         "knplabs/knp-gaufrette-bundle": "^0.7",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
-        "liip/imagine-bundle": "^2.0",
+        "liip/imagine-bundle": "^2.3",
         "ocramius/proxy-manager": "^2.1",
         "payum/payum": "^1.4",
         "payum/payum-bundle": "^2.2",

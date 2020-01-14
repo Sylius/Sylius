@@ -53,7 +53,7 @@
         "symfony/framework-bundle": "^4.3",
         "symfony/intl": "^4.3",
         "winzou/state-machine-bundle": "^0.3",
-        "liip/imagine-bundle": "^2.0"
+        "liip/imagine-bundle": "^2.3"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^0.6",
