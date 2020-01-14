@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "knplabs/gaufrette": "^0.8",
         "payum/payum": "^1.3",

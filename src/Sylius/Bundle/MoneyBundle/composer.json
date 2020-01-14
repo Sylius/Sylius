@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "sylius/resource-bundle": "^1.2",
         "symfony/framework-bundle": "^4.3",
