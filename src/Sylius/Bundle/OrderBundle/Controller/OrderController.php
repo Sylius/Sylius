@@ -102,12 +102,12 @@ class OrderController extends ResourceController
 
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
+            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
+            $this->manager->flush();
+
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
-
-            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
-            $this->manager->flush();
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
