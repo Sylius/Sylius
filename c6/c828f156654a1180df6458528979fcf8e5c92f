@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-12-27T07:58:26Z
+
+As far as I see, `Sonata Block Bundle ^4.0` requires PHP7.3, so our tests on 7.2 fail:/ Is it even possible for us to support both these versions and still make progress with Symfony 5?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-01-15T13:04:32Z
+
+Thank you, Kamil! :tada:
