@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "behat/transliterator": "^1.1",
         "sylius/resource": "^1.2",

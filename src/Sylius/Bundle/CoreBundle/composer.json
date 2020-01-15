@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
 		"egulias/email-validator": "~2.0",
         "fzaninotto/faker": "^1.6",
