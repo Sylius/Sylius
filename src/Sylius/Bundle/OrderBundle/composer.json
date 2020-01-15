@@ -34,7 +34,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^4.4",
         "symfony/form": "^4.4",
         "symfony/validator": "^4.4"

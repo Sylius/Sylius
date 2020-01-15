@@ -32,7 +32,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
         ];
     }
 
@@ -42,17 +41,5 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/config/config.yml');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerBaseClass(): string
-    {
-        if (0 === strpos($this->environment, 'test')) {
-            return MockerContainer::class;
-        }
-
-        return parent::getContainerBaseClass();
     }
 }
