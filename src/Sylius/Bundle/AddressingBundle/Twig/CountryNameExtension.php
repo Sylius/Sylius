@@ -15,8 +15,10 @@ namespace Sylius\Bundle\AddressingBundle\Twig;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class CountryNameExtension extends \Twig_Extension
+class CountryNameExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -24,7 +26,7 @@ class CountryNameExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_country_name', [$this, 'translateCountryIsoCode']),
+            new TwigFilter('sylius_country_name', [$this, 'translateCountryIsoCode']),
         ];
     }
 

@@ -18,6 +18,7 @@ use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,6 +45,9 @@ final class ContactController
     /** @var CustomerContextInterface */
     private $customerContext;
 
+    /** @var LocaleContextInterface */
+    private $localeContext;
+
     /** @var ContactEmailManagerInterface */
     private $contactEmailManager;
 
@@ -53,6 +57,7 @@ final class ContactController
         EngineInterface $templatingEngine,
         ChannelContextInterface $channelContext,
         CustomerContextInterface $customerContext,
+        LocaleContextInterface $localeContext,
         ContactEmailManagerInterface $contactEmailManager
     ) {
         $this->router = $router;
@@ -60,6 +65,7 @@ final class ContactController
         $this->templatingEngine = $templatingEngine;
         $this->channelContext = $channelContext;
         $this->customerContext = $customerContext;
+        $this->localeContext = $localeContext;
         $this->contactEmailManager = $contactEmailManager;
     }
 
@@ -71,8 +77,9 @@ final class ContactController
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $data = $form->getData();
 
-            /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
+
+            /** @var ChannelInterface $channel */
             Assert::isInstanceOf($channel, ChannelInterface::class);
 
             $contactEmail = $channel->getContactEmail();
@@ -91,7 +98,8 @@ final class ContactController
                 return new RedirectResponse($request->headers->get('referer'));
             }
 
-            $this->contactEmailManager->sendContactRequest($data, [$contactEmail]);
+            $localeCode = $this->localeContext->getLocaleCode();
+            $this->contactEmailManager->sendContactRequest($data, [$contactEmail], $channel, $localeCode);
 
             $successMessage = $this->getSyliusAttribute(
                 $request,

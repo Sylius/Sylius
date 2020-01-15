@@ -103,7 +103,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                 return StringInflector::nameToCode($options['name']);
             })
             ->setDefault('values', null)
-            ->setDefault('values', function (Options $options, $values): array {
+            ->setDefault('values', function (Options $options, ?array $values): array {
                 if (is_array($values)) {
                     return $values;
                 }

@@ -17,26 +17,17 @@ use FriendsOfBehat\PageObjectExtension\Page\Page;
 
 class ErrorPage extends Page implements ErrorPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function getUrl(array $urlParameters = []): string
     {
         // This page does not have any url
         return '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle(): string
     {
         return $this->getElement('title')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

@@ -188,32 +188,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOrderPromotionTotal(): string
     {
-        /** @var NodeElement[] $rows */
-        $rows = $this->getElement('table')->findAll('css', 'tbody tr');
+        $promotionTotalElement = $this->getElement('promotion_total');
 
-        $promotionTotal = 0;
-
-        foreach ($rows as $row) {
-            $orderPromotion = $row->find('css', 'td:nth-child(3)')->getText();
-            $unitOrderPromotion = $row->find('css', 'td:nth-child(4)')->getText();
-
-            $quantity = $row->find('css', 'td:nth-child(6)')->getText();
-
-            $orderPromotionTotal = (float) trim(str_replace('-$', '', $unitOrderPromotion)) * $quantity;
-            $unitOrderPromotionTotal = (float) trim(str_replace('-$', '', $orderPromotion)) * $quantity;
-
-            $promotionTotal += (int) ($orderPromotionTotal * 100);
-            $promotionTotal += (int) ($unitOrderPromotionTotal * 100);
-        }
-
-        return $this->getFormattedMoney($promotionTotal > 0 ? -1 * $promotionTotal : $promotionTotal);
+        return trim(str_replace('Promotion total:', '', $promotionTotalElement->getText()));
     }
 
-    public function hasPromotionDiscount(string $promotionDiscount): bool
+    public function hasPromotionDiscount(string $promotionName, string $promotionAmount): bool
     {
         $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
 
-        return stripos($promotionDiscountsText, $promotionDiscount) !== false;
+        return stripos($promotionDiscountsText, sprintf('%s %s', $promotionAmount, $promotionName)) !== false;
     }
 
     public function hasTax(string $tax): bool
@@ -378,6 +362,21 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return 'sylius_admin_order_show';
     }
 
+    public function hasInformationAboutNoPayment(): bool
+    {
+        return $this->getDocument()->has('css', '#no-payments:contains("Order without payments")');
+    }
+
+    public function resendOrderConfirmationEmail(): void
+    {
+        $this->getElement('resend_order_confirmation_email')->click();
+    }
+
+    public function resendShipmentConfirmationEmail(): void
+    {
+        $this->getElement('resend_shipment_confirmation_email')->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -394,6 +393,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'promotion_discounts' => '#promotion-discounts',
             'promotion_shipping_discounts' => '#shipping-discount-value',
             'promotion_total' => '#promotion-total',
+            'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
+            'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',

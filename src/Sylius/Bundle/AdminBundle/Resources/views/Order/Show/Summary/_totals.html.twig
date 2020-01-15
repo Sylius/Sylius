@@ -1,9 +1,6 @@
 {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
 
-
-{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 {% set orderShippingPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
-{% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
@@ -59,6 +56,9 @@
         {{ money.format(order.shippingTotal, order.currencyCode) }}
     </td>
 </tr>
+
+{% include '@SyliusAdmin/Order/Show/Summary/_totalsPromotions.html.twig' %}
+
 <tr>
     <td colspan="9" id="total" class="ui large header right aligned">
         <strong>{{ 'sylius.ui.order_total'|trans }}</strong>:

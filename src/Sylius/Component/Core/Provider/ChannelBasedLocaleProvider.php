@@ -45,7 +45,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
             return $channel
                 ->getLocales()
                 ->map(function (LocaleInterface $locale) {
-                    return $locale->getCode();
+                    return (string) $locale->getCode();
                 })
                 ->toArray()
             ;

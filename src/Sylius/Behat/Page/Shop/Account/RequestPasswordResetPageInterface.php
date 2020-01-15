@@ -19,10 +19,7 @@ interface RequestPasswordResetPageInterface extends SymfonyPageInterface
 {
     public function checkValidationMessageFor(string $element, string $message): bool;
 
-    public function reset();
+    public function reset(): void;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(?string $email): void;
 }

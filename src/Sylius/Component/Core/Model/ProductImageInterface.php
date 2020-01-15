@@ -21,6 +21,8 @@ interface ProductImageInterface extends ImageInterface
 
     /**
      * @return Collection|ProductVariantInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductVariantInterface>
      */
     public function getProductVariants(): Collection;
 

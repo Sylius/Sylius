@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Gambar terlalu besar - {{ size }}{{ suffix }}. Ukuran maksimal yang diperbolehkan berukuran {{ limit }}{{ suffix }}.
+            upload_ini_size: Gambar terlalu besar. Ukuran maksimal yang diperbolehkan {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Mohon masukan mata uang utama channel.
@@ -13,7 +17,6 @@ sylius:
             min: Email setidaknya harus sepanjang {{ limit }} karakter.
     channel_pricing:
         price:
-            min: Harga sedikitnya {{ limit }}.
             not_blank: Mohon masukan harga.
     checkout:
         shipping_method:

@@ -82,16 +82,10 @@ abstract class AbstractResourceFixture implements FixtureInterface
      */
     final public function getConfigTreeBuilder(): TreeBuilder
     {
-        if (method_exists(TreeBuilder::class, 'getRootNode')) {
-            $treeBuilder = new TreeBuilder($this->getName());
-            /** @var ArrayNodeDefinition $optionsNode */
-            $optionsNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $treeBuilder = new TreeBuilder();
-            /** @var ArrayNodeDefinition $optionsNode */
-            $optionsNode = $treeBuilder->root($this->getName());
-        }
+        $treeBuilder = new TreeBuilder($this->getName());
+
+        /** @var ArrayNodeDefinition $optionsNode */
+        $optionsNode = $treeBuilder->getRootNode();
 
         $optionsNode->children()
             ->integerNode('random')->min(0)->defaultValue(0)->end()

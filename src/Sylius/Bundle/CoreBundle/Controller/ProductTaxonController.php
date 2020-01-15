@@ -40,7 +40,7 @@ class ProductTaxonController extends ResourceController
         $this->validateCsrfProtection($request, $configuration);
 
         if ($this->shouldProductsPositionsBeUpdated($request, $productTaxons)) {
-            /** @var ProductTaxonInterface $productTaxon */
+            /** @psalm-var array{position: string|int, id: int} $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 try {
                     $this->updatePositions($productTaxon['position'], $productTaxon['id']);

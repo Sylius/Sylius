@@ -7,10 +7,10 @@ sylius_admin_order:
         grid: sylius_admin_order
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.process_your_orders
-          index:
-              icon: cart
+            all:
+                subheader: sylius.ui.process_your_orders
+            index:
+                icon: cart
     type: sylius.resource
 
 sylius_admin_order_show:
@@ -119,3 +119,9 @@ sylius_admin_order_shipment_ship:
                     parameters:
                         orderId: $orderId
                         id: $id
+
+sylius_admin_order_resend_confirmation_email:
+    path: /{id}/resend-confirmation-email
+    methods: [GET]
+    defaults:
+        _controller: Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction

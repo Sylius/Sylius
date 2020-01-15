@@ -65,6 +65,7 @@ const paths = {
     css: [
       upath.joinSafe(nodeModulesPath, 'semantic-ui-css/semantic.min.css'),
       upath.joinSafe(nodeModulesPath, 'lightbox2/dist/css/lightbox.min.css'),
+      upath.joinSafe(nodeModulesPath, 'slick-carousel/slick/slick.css'),
       upath.joinSafe(vendorUiPath, 'Resources/private/css/**'),
       upath.joinSafe(vendorShopPath, 'Resources/private/css/**'),
       upath.joinSafe(vendorShopPath, 'Resources/private/scss/**'),

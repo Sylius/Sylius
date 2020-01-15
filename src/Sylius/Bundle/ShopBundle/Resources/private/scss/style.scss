@@ -54,3 +54,65 @@ body {
 .tax-disabled {
     color: #a0a0a0;
 }
+
+.homepage .carousel-wrapper {
+    position: relative;
+}
+
+.homepage .carousel-nav .carousel-left,
+.homepage .carousel-nav .carousel-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.homepage .carousel-nav .carousel-left {
+    left: 30px;
+}
+
+.homepage .carousel-nav .carousel-right {
+    right: 30px;
+}
+
+.homepage .carousel {
+    margin: 0 -1em;
+}
+
+.homepage .carousel-item {
+    padding: 5px 1em;
+}
+
+@media (min-width: 992px) {
+    .homepage .featured.column .card .content {
+        text-align: center;
+        padding-top: 41px;
+    }
+
+    .homepage .featured.column .card .content .header {
+        font-size: 26px;
+    }
+
+    .homepage .featured.column .cards,
+    .homepage .featured.column .cards .ui.fluid.card {
+        height: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .homepage .odd.doubling > .card:first-child {
+        width: calc(100% - 2em) !important;
+    }
+}
+
+.newsletter .ui.form {
+    display: flex !important;
+}
+
+.newsletter .ui.form .newsletter-input,
+.newsletter .ui.form .newsletter-button {
+    margin: 5px;
+}
+
+.newsletter .ui.form .newsletter-input {
+    flex-grow: 1;
+}

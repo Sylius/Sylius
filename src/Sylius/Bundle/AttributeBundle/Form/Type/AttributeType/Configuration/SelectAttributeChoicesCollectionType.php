@@ -32,7 +32,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @psalm-suppress InvalidScalarArgument Some weird magic going on here, not sure about refactor
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

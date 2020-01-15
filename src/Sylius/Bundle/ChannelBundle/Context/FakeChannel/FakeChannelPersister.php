@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class FakeChannelPersister
@@ -27,7 +27,7 @@ final class FakeChannelPersister
         $this->fakeChannelCodeProvider = $fakeChannelCodeProvider;
     }
 
-    public function onKernelResponse(FilterResponseEvent $filterResponseEvent): void
+    public function onKernelResponse(ResponseEvent $filterResponseEvent): void
     {
         if (HttpKernelInterface::SUB_REQUEST === $filterResponseEvent->getRequestType()) {
             return;

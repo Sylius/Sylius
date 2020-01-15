@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,15 +36,31 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var string */
     private $localeCode;
 
-    public function __construct(FactoryInterface $userFactory, string $localeCode)
-    {
+    /** @var FileLocatorInterface|null */
+    private $fileLocator;
+
+    /** @var ImageUploaderInterface|null */
+    private $imageUploader;
+
+    public function __construct(
+        FactoryInterface $userFactory,
+        string $localeCode,
+        ?FileLocatorInterface $fileLocator = null,
+        ?ImageUploaderInterface $imageUploader = null
+    ) {
         $this->userFactory = $userFactory;
         $this->localeCode = $localeCode;
+        $this->fileLocator = $fileLocator;
+        $this->imageUploader = $imageUploader;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
+
+        if ($this->fileLocator === null || $this->imageUploader === null) {
+            @trigger_error(sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     /**
@@ -70,6 +90,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             $user->addRole('ROLE_API_ACCESS');
         }
 
+        if ($options['avatar'] !== '') {
+            $this->createAvatar($user, $options);
+        }
+
         return $user;
     }
 
@@ -92,6 +116,25 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setDefault('api', false)
             ->setDefined('first_name')
             ->setDefined('last_name')
+            ->setDefault('avatar', '')
+            ->setAllowedTypes('avatar', 'string')
         ;
+    }
+
+    private function createAvatar(AdminUserInterface $adminUser, array $options): void
+    {
+        if ($this->fileLocator === null || $this->imageUploader === null) {
+            throw new \RuntimeException('You must configure a $fileLocator or/and $imageUploader');
+        }
+
+        $imagePath = $this->fileLocator->locate($options['avatar']);
+        $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
+
+        $avatarImage = new AvatarImage();
+        $avatarImage->setFile($uploadedImage);
+
+        $this->imageUploader->upload($avatarImage);
+
+        $adminUser->setAvatar($avatarImage);
     }
 }

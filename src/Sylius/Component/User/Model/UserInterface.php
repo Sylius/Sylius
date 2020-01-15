@@ -101,6 +101,8 @@ interface UserInterface extends
 
     /**
      * @return Collection|UserOAuthInterface[]
+     *
+     * @psalm-return Collection<array-key, UserOAuthInterface>
      */
     public function getOAuthAccounts(): Collection;
 

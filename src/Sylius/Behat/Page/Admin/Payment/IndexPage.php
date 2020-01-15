@@ -48,9 +48,15 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getOrderLinkForRow($position)->clickLink('#');
     }
 
+    public function chooseChannelFilter(string $channelName): void
+    {
+        $this->getElement('filter_channel')->selectOption($channelName);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'filter_channel' => '#criteria_channel',
             'filter_state' => '#criteria_state',
             'payment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);

@@ -28,15 +28,15 @@ sylius_fixtures:
                 channel:
                     options:
                         custom:
-                            us_web_store:
-                                name: 'US Web Store'
+                            fashion_web_store:
+                                name: 'Fashion Web Store'
                                 code: 'FASHION_WEB'
                                 locales:
                                     - '%locale%'
                                 currencies:
                                     - 'USD'
                                 enabled: true
-                                hostname: 'localhost'
+                                hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
                                 shop_billing_data:
                                     company: 'Sylius'
                                     tax_id: '0001112222'
@@ -111,6 +111,7 @@ sylius_fixtures:
                                 locale_code: '%locale%'
                                 first_name: 'John'
                                 last_name: 'Doe'
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/john.jpg'
 
                             -   email: 'api@example.com'
                                 username: 'api'
@@ -120,6 +121,7 @@ sylius_fixtures:
                                 first_name: 'Luke'
                                 last_name: 'Brushwood'
                                 api: true
+                                avatar: '@SyliusCoreBundle/Resources/fixtures/adminAvatars/luke.jpg'
 
                 tax_category:
                     options:

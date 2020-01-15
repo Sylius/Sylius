@@ -36,7 +36,6 @@ sylius_fixtures:
                                             fr_FR:
                                                 name: 'Hommes'
                                                 slug: 't-shirts/hommes'
-
                                     -   code: 'womens_t_shirts'
                                         translations:
                                             en_US:

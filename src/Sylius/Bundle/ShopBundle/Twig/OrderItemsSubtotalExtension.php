@@ -15,13 +15,15 @@ namespace Sylius\Bundle\ShopBundle\Twig;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class OrderItemsSubtotalExtension extends \Twig_Extension
+class OrderItemsSubtotalExtension extends AbstractExtension
 {
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('sylius_order_items_subtotal', [$this, 'getSubtotal']),
+            new TwigFunction('sylius_order_items_subtotal', [$this, 'getSubtotal']),
         ];
     }
 

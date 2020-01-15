@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ShopBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ContactEmailManagerSpec extends ObjectBehavior
@@ -29,8 +30,10 @@ final class ContactEmailManagerSpec extends ObjectBehavior
         $this->shouldImplement(ContactEmailManagerInterface::class);
     }
 
-    function it_sends_a_contact_request_email(SenderInterface $sender): void
-    {
+    function it_sends_a_contact_request_email(
+        SenderInterface $sender,
+        ChannelInterface $channel
+    ): void {
         $sender
             ->send(
                 'contact_request',
@@ -40,6 +43,8 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                         'email' => 'customer@example.com',
                         'message' => 'Hello!',
                     ],
+                    'channel' => $channel,
+                    'localeCode' => 'en_US',
                 ],
                 [],
                 ['customer@example.com']
@@ -53,7 +58,9 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                     'email' => 'customer@example.com',
                     'message' => 'Hello!',
                 ],
-                ['contact@example.com']
+                ['contact@example.com'],
+                $channel,
+                'en_US'
             )
         ;
     }

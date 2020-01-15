@@ -18,7 +18,7 @@ use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Webmozart\Assert\Assert;
 
@@ -46,26 +46,28 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelResponse(FilterResponseEvent $event): void
+    public function onKernelResponse(ResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
         }
 
-        $session = $event->getRequest()->getSession();
-        if ($session && !$session->isStarted()) {
+        $request = $event->getRequest();
+
+        if (!$request->hasSession() || !$request->getSession()->isStarted()) {
             return;
         }
 
         try {
-            /** @var OrderInterface $cart */
             $cart = $this->cartContext->getCart();
+
+            /** @var OrderInterface $cart */
             Assert::isInstanceOf($cart, OrderInterface::class);
         } catch (CartNotFoundException $exception) {
             return;
         }
 
-        if (null !== $cart && null !== $cart->getId() && null !== $cart->getChannel()) {
+        if (null !== $cart->getId() && null !== $cart->getChannel()) {
             $this->cartStorage->setForChannel($cart->getChannel(), $cart);
         }
     }

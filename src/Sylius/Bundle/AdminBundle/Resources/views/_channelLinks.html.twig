@@ -5,7 +5,7 @@
         </span>
         <i class="dropdown icon"></i>
         <div class="menu">
-            {% for channel in channels if channel.hostname is not empty %}
+            {% for channel in channels|filter(channel => channel.hostname is not empty) %}
             <a href="http://{{ channel.hostname }}" target="_blank" class="item">
                 {% include '@SyliusAdmin/Common/_channel.html.twig' %}
             </a>

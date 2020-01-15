@@ -21,6 +21,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -32,14 +33,27 @@ final class OrderType extends AbstractResourceType
     /** @var RepositoryInterface */
     private $localeRepository;
 
+    /** @var ?ChoiceLoaderInterface */
+    private $customerChoiceLoader;
+
     /**
      * {@inheritdoc}
      */
-    public function __construct(string $dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
-    {
+    public function __construct(
+        string $dataClass,
+        array $validationGroups = [],
+        RepositoryInterface $localeRepository,
+        ?ChoiceLoaderInterface $customerChoiceLoader = null
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->localeRepository = $localeRepository;
+
+        if ($customerChoiceLoader === null) {
+            @trigger_error(sprintf('Not passing a $customerChoiceLoader to %s constructor is deprecated since Sylius 1.5 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
+
+        $this->customerChoiceLoader = $customerChoiceLoader;
     }
 
     /**
@@ -52,6 +66,8 @@ final class OrderType extends AbstractResourceType
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                 ],
+                'choices' => [], /** Intentionally left blank, as in the only usage of this loader is in the context of api, where we don't need to load choices */
+                'choice_loader' => $this->customerChoiceLoader,
             ])
             ->add('localeCode', LocaleChoiceType::class, [
                 'constraints' => [
@@ -67,7 +83,7 @@ final class OrderType extends AbstractResourceType
                 /** @var OrderInterface $order */
                 $order = $event->getData();
 
-                /** @var ChannelInterface $channel */
+                /** @var ChannelInterface|null $channel */
                 $channel = $order->getChannel();
 
                 if (null !== $channel) {

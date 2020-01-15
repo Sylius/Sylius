@@ -24,6 +24,8 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
 
     /**
      * @return Collection|ProvinceInterface[]
+     *
+     * @psalm-return Collection<array-key, ProvinceInterface>
      */
     public function getProvinces(): Collection;
 

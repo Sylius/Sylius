@@ -17,7 +17,6 @@ sylius:
             min: E-mail musí být alespoň {{ limit }} znaků.
     channel_pricing:
         price:
-            min: Cena musí být alespoň {{ limit }}.
             not_blank: Prosím vložte cenu.
     checkout:
         shipping_method:

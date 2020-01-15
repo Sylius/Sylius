@@ -13,7 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EmailManager;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+
 interface ContactEmailManagerInterface
 {
-    public function sendContactRequest(array $data, array $recipients): void;
+    public function sendContactRequest(
+        array $data,
+        array $recipients,
+        ?ChannelInterface $channel = null,
+        ?string $localeCode = null
+    ): void;
 }

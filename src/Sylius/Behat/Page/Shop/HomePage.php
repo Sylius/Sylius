@@ -19,71 +19,51 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class HomePage extends SymfonyPage implements HomePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_homepage';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getContents()
+    public function getContent(): string
     {
         return $this->getDocument()->getContent();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function logOut()
+    public function logOut(): void
     {
         $this->getElement('logout_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasLogoutButton()
+    public function hasLogoutButton(): bool
     {
         return $this->hasElement('logout_button');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullName()
+    public function getFullName(): string
     {
-        return $this->getElement('full_name')->getText();
+        if ($this->hasElement('full_name')) {
+            return $this->getElement('full_name')->getText();
+        }
+
+        return '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveCurrency()
+    public function getActiveCurrency(): string
     {
-        return $this->getElement('currency_selector')->find('css', '.sylius-active-currency')->getText();
+        return $this->getElement('currency_selector')->find('css', '[data-test-active-currency]')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrencies(): array
     {
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $this->getElement('currency_selector')->findAll('css', '.sylius-available-currency')
+            $this->getElement('currency_selector')->findAll('css', '[data-test-available-currency]')
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function switchCurrency($currencyCode)
+    public function switchCurrency($currencyCode): void
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
@@ -93,58 +73,44 @@ class HomePage extends SymfonyPage implements HomePageInterface
         $this->getElement('currency_selector')->clickLink($currencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getActiveLocale()
+    public function getActiveLocale(): string
     {
-        return $this->getElement('locale_selector')->find('css', '.sylius-active-locale')->getText();
+        return $this->getElement('locale_selector')->find('css', '[data-test-active-locale]')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableLocales()
+    public function getAvailableLocales(): array
     {
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $this->getElement('locale_selector')->findAll('css', '.sylius-available-locale')
+            $this->getElement('locale_selector')->findAll('css', '[data-test-available-locale]')
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function switchLocale($localeCode)
+    public function switchLocale($localeCode): void
     {
         $this->getElement('locale_selector')->clickLink($localeCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLatestProductsNames()
+    public function getLatestProductsNames(): array
     {
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $this->getDocument()->findAll('css', '.sylius-product-name')
+            $this->getElement('latest_products')->findAll('css', '[data-test-product-name]')
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'currency_selector' => '#sylius-currency-selector',
-            'locale_selector' => '#sylius-locale-selector',
-            'logout_button' => '.sylius-logout-button',
-            'full_name' => '.right.menu .item',
+            'currency_selector' => '[data-test-currency-selector]',
+            'full_name' => '[data-test-full-name]',
+            'latest_products' => '[data-test-latest-products]',
+            'locale_selector' => '[data-test-locale-selector]',
+            'logout_button' => '[data-test-logout-button]',
         ]);
     }
 }

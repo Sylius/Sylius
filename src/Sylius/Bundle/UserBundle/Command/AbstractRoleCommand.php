@@ -49,7 +49,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('email')) {
             $question = new Question('Please enter an email:');
-            $question->setValidator(function ($email) {
+            $question->setValidator(function (?string $email) {
                 if (!filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                     throw new \RuntimeException('The email you entered is invalid.');
                 }
@@ -62,7 +62,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
         if (!$input->getArgument('roles')) {
             $question = new Question('Please enter user\'s roles (separated by space):');
-            $question->setValidator(function ($roles) {
+            $question->setValidator(function (?string $roles) {
                 if (strlen($roles) < 1) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
@@ -80,7 +80,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
         $securityRoles = $input->getArgument('roles');
@@ -95,6 +95,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         $user = $this->findUserByEmail($email, $userType);
 
         $this->executeRoleCommand($input, $output, $user, $securityRoles);
+
+        return 0;
     }
 
     /**
@@ -102,7 +104,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function findUserByEmail(string $email, string $userType): UserInterface
     {
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->getUserRepository($userType)->findOneByEmail($email);
 
         if (null === $user) {

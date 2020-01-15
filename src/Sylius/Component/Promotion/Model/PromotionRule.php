@@ -18,13 +18,13 @@ class PromotionRule implements PromotionRuleInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $type;
 
     /** @var array */
     protected $configuration = [];
 
-    /** @var PromotionInterface */
+    /** @var PromotionInterface|null */
     protected $promotion;
 
     /**

@@ -14,9 +14,11 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.zone
+                - sylius.behat.context.transform.lexical
 
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment

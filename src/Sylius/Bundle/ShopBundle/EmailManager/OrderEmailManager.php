@@ -27,11 +27,16 @@ final class OrderEmailManager implements OrderEmailManagerInterface
         $this->emailSender = $emailSender;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationEmail(OrderInterface $order): void
     {
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
+        $this->emailSender->send(
+            Emails::ORDER_CONFIRMATION,
+            [$order->getCustomer()->getEmail()],
+            [
+                'order' => $order,
+                'channel' => $order->getChannel(),
+                'localeCode' => $order->getLocaleCode(),
+            ])
+        ;
     }
 }

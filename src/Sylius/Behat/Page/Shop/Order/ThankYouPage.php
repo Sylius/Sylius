@@ -17,56 +17,46 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function goToOrderDetails()
+    public function goToTheChangePaymentMethodPage(): void
     {
-        $this->getElement('order_details')->click();
+        $this->getElement('payment_method_page')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasThankYouMessage()
+    public function goToOrderDetailsInAccount(): void
+    {
+        $this->getElement('order_details_in_account')->click();
+    }
+
+    public function hasThankYouMessage(): bool
     {
         $thankYouMessage = $this->getElement('thank_you')->getText();
 
         return false !== strpos($thankYouMessage, 'Thank you!');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInstructions()
+    public function getInstructions(): string
     {
         return $this->getElement('instructions')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasInstructions()
+    public function hasInstructions(): bool
     {
-        return null !== $this->getDocument()->find('css', '#sylius-payment-method-instructions');
+        return $this->hasElement('instructions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasChangePaymentMethodButton()
+    public function hasChangePaymentMethodButton(): bool
     {
-        return null !== $this->getDocument()->find('css', '#sylius-show-order');
+        return $this->hasElement('payment_method_page');
     }
 
     public function hasRegistrationButton(): bool
     {
-        return $this->getDocument()->hasLink('Create an account');
+        return $this->hasElement('create_account_button');
     }
 
     public function createAccount(): void
     {
-        $this->getDocument()->clickLink('Create an account');
+        $this->getElement('create_account_button')->click();
     }
 
     public function getRouteName(): string
@@ -74,15 +64,14 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         return 'sylius_shop_thank_you';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'order_details' => '#sylius-show-order',
-            'instructions' => '#sylius-payment-method-instructions',
-            'thank_you' => '#sylius-thank-you',
+            'create_account_button' => '[data-test-create-an-account]',
+            'instructions' => '[data-test-payment-method-instructions]',
+            'order_details_in_account' => '[data-test-show-order-in-account]',
+            'payment_method_page' => '[data-test-payment-method-page]',
+            'thank_you' => '[data-test-thank-you]',
         ]);
     }
 }

@@ -27,6 +27,8 @@ interface ShippingSubjectInterface
 
     /**
      * @return Collection|ShippableInterface[]
+     *
+     * @psalm-return Collection<array-key, ShippableInterface>
      */
     public function getShippables(): Collection;
 }

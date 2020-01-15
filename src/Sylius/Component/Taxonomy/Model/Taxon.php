@@ -37,7 +37,11 @@ class Taxon implements TaxonInterface
     /** @var TaxonInterface|null */
     protected $parent;
 
-    /** @var Collection|TaxonInterface[] */
+    /**
+     * @var Collection|TaxonInterface[]
+     *
+     * @psalm-var Collection<array-key, TaxonInterface>
+     */
     protected $children;
 
     /** @var int|null */
@@ -56,6 +60,7 @@ class Taxon implements TaxonInterface
     {
         $this->initializeTranslationsCollection();
 
+        /** @var ArrayCollection<array-key, TaxonInterface> $this->children */
         $this->children = new ArrayCollection();
     }
 

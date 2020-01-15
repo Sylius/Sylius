@@ -99,10 +99,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
             return $data->getType();
         }
 
-        if (null !== $form->getConfig()->hasOption('configuration_type')) {
-            return $form->getConfig()->getOption('configuration_type');
-        }
-
-        return null;
+        return $form->getConfig()->getOption('configuration_type');
     }
 }

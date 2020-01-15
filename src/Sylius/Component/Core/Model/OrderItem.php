@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Webmozart\Assert\Assert;
 
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
@@ -102,6 +103,9 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         }
 
         foreach ($this->units as $unit) {
+            /** @var OrderItemUnitInterface $unit */
+            Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
             $taxTotal += $unit->getTaxTotal();
         }
 
@@ -119,9 +123,14 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             return $this->unitPrice;
         }
 
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
         return
             $this->unitPrice +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
         ;
     }
 
@@ -131,10 +140,15 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             return $this->unitPrice;
         }
 
+        $firstUnit = $this->units->first();
+
+        /** @var OrderItemUnitInterface $firstUnit */
+        Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
+
         return
             $this->unitPrice +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
-            $this->units->first()->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
         ;
     }
 

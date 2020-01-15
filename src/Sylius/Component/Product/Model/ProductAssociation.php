@@ -30,13 +30,19 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var ProductInterface */
     protected $owner;
 
-    /** @var Collection|ProductInterface[] */
+    /**
+     * @var Collection|ProductInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductInterface>
+     */
     protected $associatedProducts;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, ProductInterface> $this->associatedProducts */
         $this->associatedProducts = new ArrayCollection();
     }
 

@@ -16,7 +16,7 @@ sylius_fixtures:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'jeans'
                                         name: 'Jeans'
@@ -42,8 +42,8 @@ sylius_fixtures:
                                                         name: 'Women'
                                                         slug: 'jeans/women'
                                                     fr_FR:
-                                                        name: 'Femme'
-                                                        slug: 'jeans/femme'
+                                                        name: 'Femmes'
+                                                        slug: 'jeans/femmes'
 
                 jeans_attribute:
                     name: product_attribute

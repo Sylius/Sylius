@@ -15,7 +15,7 @@
             ></i>
         </span>
     </td>
-{% else %}
+{% elseif order.shipments is not empty %}
     <td colspan="4" class="right aligned" id="shipping-total">
         {{ 'sylius.ui.shipping_total'|trans }}:
         {{ money.convertAndFormat(order.shippingTotal) }}

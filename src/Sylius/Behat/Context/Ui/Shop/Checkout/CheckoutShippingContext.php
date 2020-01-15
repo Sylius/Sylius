@@ -51,12 +51,12 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
+     * @Given I have selected :shippingMethodName shipping method
+     * @When I select :shippingMethodName shipping method
      */
-    public function iSelectShippingMethod($shippingMethod)
+    public function iSelectShippingMethod(string $shippingMethodName): void
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**

@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
 use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class FormatMoneyExtension extends \Twig_Extension
+final class FormatMoneyExtension extends AbstractExtension
 {
     /** @var FormatMoneyHelperInterface */
     private $helper;
@@ -31,7 +33,7 @@ final class FormatMoneyExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_format_money', [$this->helper, 'formatAmount']),
+            new TwigFilter('sylius_format_money', [$this->helper, 'formatAmount']),
         ];
     }
 }

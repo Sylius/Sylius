@@ -52,9 +52,9 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
-        /** @var File $file */
         $file = $image->getFile();
 
+        /** @var File $file */
         Assert::isInstanceOf($file, File::class);
 
         if (null !== $image->getPath() && $this->has($image->getPath())) {

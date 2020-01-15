@@ -3,7 +3,7 @@
 {% block title %} | Sylius{% endblock %}
 
 {% block stylesheets %}
-    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+    {% include '@SyliusAdmin/_styles.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
@@ -29,6 +29,7 @@
     <div class="ui right floated dividing empty item"></div>
 
     {{ sylius_render_notifications_widget() }}
+    {% include '@SyliusAdmin/_support.html.twig' %}
     {% include '@SyliusAdmin/_security.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
@@ -44,11 +45,11 @@
 {% endblock %}
 
 {% block footer %}
-    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank">Sylius v{{ sylius_meta.version }}</a>
+{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank">Sylius v{{ sylius_meta.version }}</a>. {{ 'sylius.ui.see_issue'|trans }}? <a href="https://github.com/Sylius/Sylius/issues" target="_blank">{{ 'sylius.ui.report_it'|trans }}!</a>
 {% endblock %}
 
 {% block javascripts %}
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+    {% include '@SyliusAdmin/_scripts.html.twig' %}
 
     {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
 {% endblock %}

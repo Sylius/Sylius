@@ -105,6 +105,9 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             $shipment->removeUnit($unit);
         }
 
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);

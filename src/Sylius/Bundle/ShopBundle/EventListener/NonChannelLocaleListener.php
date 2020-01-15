@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
@@ -50,14 +50,14 @@ final class NonChannelLocaleListener
     /**
      * @throws NotFoundHttpException
      */
-    public function restrictRequestLocale(GetResponseEvent $event): void
+    public function restrictRequestLocale(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
         }
 
         $request = $event->getRequest();
-        if ($request->attributes && in_array($request->attributes->get('_route'), ['_wdt', '_profiler'])) {
+        if (in_array($request->attributes->get('_route'), ['_wdt', '_profiler'])) {
             return;
         }
 

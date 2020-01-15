@@ -46,11 +46,12 @@ final class OrderIntegrityChecker
 
     public function check(ResourceControllerEvent $event): void
     {
-        /** @var OrderInterface $order */
         $order = $event->getSubject();
 
+        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
+        /** @var ArrayCollection<array-key, PromotionInterface> $previousPromotions */
         $previousPromotions = new ArrayCollection($order->getPromotions()->toArray());
         $oldTotal = $order->getTotal();
 

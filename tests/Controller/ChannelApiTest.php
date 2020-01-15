@@ -142,9 +142,10 @@ EOT;
         $this->loadFixturesFromFile('resources/locales.yml');
         $this->loadFixturesFromFile('resources/currencies.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
+        $this->loadFixturesFromFile('resources/taxons.yml');
 
         $data =
-            <<<EOT
+<<<EOT
         {
             "code": "android",
             "name": "Channel for Android client",
@@ -158,6 +159,7 @@ EOT;
             "currencies": [
                 "GBP"
             ],
+            "menuTaxon": "mugs",
             "color": "ClassicBlue",
             "contactEmail": "admin@quickmart.eu",
             "skippingShippingStepAllowed": true,

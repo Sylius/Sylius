@@ -11,7 +11,7 @@ Feature: Shipping method code validation
         And I am logged in as an administrator
 
     @ui
-    Scenario: Trying to add a new shipping method with
+    Scenario: Trying to add a new shipping method with special symbols in the code
         Given I want to create a new shipping method
         When I name it "FedEx Carrier" in "English (United States)"
         And I specify its code as "#π/"
@@ -20,7 +20,7 @@ Feature: Shipping method code validation
         And shipping method with name "FedEx Carrier" should not be added
 
     @ui
-    Scenario: Trying to add a new shipping method with
+    Scenario: Trying to add a new shipping method with spaces in the code
         Given I want to create a new shipping method
         When I name it "FedEx Carrier" in "English (United States)"
         And I specify its code as "PEC  -PEC"

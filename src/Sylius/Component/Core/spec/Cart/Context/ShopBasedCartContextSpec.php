@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Cart\Context;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -86,7 +87,9 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cart->setShippingAddress($defaultAddress)->shouldBeCalled();
+        $cart->setShippingAddress(Argument::that(static function (AddressInterface $address): bool {
+            return $address->getCustomer() === null;
+        }))->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }

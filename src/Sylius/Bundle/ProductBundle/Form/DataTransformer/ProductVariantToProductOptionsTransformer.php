@@ -46,9 +46,12 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
         }
 
         return array_combine(
-            array_map(function (ProductOptionValueInterface $productOptionValue) {
-                return $productOptionValue->getOptionCode();
-            }, $value->getOptionValues()->toArray()),
+            array_map(
+                function (ProductOptionValueInterface $productOptionValue): string {
+                    return (string) $productOptionValue->getOptionCode();
+                },
+                $value->getOptionValues()->toArray()
+            ),
             $value->getOptionValues()->toArray()
         );
     }
@@ -66,15 +69,15 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
             throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
         }
 
-        return $this->matches($value);
+        return $this->matches(is_array($value) ? $value : iterator_to_array($value));
     }
 
     /**
-     * @param ProductOptionValueInterface[] $optionValues
+     * @param (ProductOptionValueInterface|null)[] $optionValues
      *
      * @throws TransformationFailedException
      */
-    private function matches(array $optionValues): ?ProductVariantInterface
+    private function matches(array $optionValues): ProductVariantInterface
     {
         foreach ($this->product->getVariants() as $variant) {
             foreach ($optionValues as $optionValue) {

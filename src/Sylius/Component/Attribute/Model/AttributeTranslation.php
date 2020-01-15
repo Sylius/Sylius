@@ -20,7 +20,7 @@ class AttributeTranslation extends AbstractTranslation implements AttributeTrans
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /**

@@ -34,10 +34,18 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var string */
     protected $taxCalculationStrategy;
 
-    /** @var CurrencyInterface[]|Collection */
+    /**
+     * @var Collection|CurrencyInterface[]
+     *
+     * @psalm-var Collection<array-key, CurrencyInterface>
+     */
     protected $currencies;
 
-    /** @var LocaleInterface[]|Collection */
+    /**
+     * @var Collection|LocaleInterface[]
+     *
+     * @psalm-var Collection<array-key, LocaleInterface>
+     */
     protected $locales;
 
     /** @var string */
@@ -58,11 +66,16 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var ShopBillingDataInterface|null */
     protected $shopBillingData;
 
+    /** @var TaxonInterface|null */
+    protected $menuTaxon;
+
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, CurrencyInterface> $this->currencies */
         $this->currencies = new ArrayCollection();
+        /** @var ArrayCollection<array-key, LocaleInterface> $this->locales */
         $this->locales = new ArrayCollection();
     }
 
@@ -290,5 +303,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void
     {
         $this->shopBillingData = $shopBillingData;
+    }
+
+    public function getMenuTaxon(): ?TaxonInterface
+    {
+        return $this->menuTaxon;
+    }
+
+    public function setMenuTaxon(?TaxonInterface $menuTaxon): void
+    {
+        $this->menuTaxon = $menuTaxon;
     }
 }

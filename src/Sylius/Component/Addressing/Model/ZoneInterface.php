@@ -44,6 +44,8 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
 
     /**
      * @return Collection|ZoneMemberInterface[]
+     *
+     * @psalm-return Collection<array-key, ZoneMemberInterface>
      */
     public function getMembers(): Collection;
 

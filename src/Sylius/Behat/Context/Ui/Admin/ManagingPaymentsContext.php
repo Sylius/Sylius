@@ -85,6 +85,14 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When I choose :channelName as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(string $channelName): void
+    {
+        $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
      * @Then I should see :count payments in the list
      * @Then I should see a single payment in the list
      */

@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class TaxonomyElement extends Element implements TaxonomyElementIterface
+final class TaxonomyElement extends Element implements TaxonomyElementInterface
 {
     public function getProductMainTaxon(): string
     {

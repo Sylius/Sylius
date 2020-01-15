@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
@@ -136,7 +137,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function bulkDelete(): void
     {
         $this->getElement('bulk_actions')->pressButton('Delete');
-        $this->getElement('confirmation_button')->click();
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getElement('confirmation_button')->click();
+        }
     }
 
     public function sort(string $order): void

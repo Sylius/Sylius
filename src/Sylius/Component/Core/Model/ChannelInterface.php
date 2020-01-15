@@ -64,4 +64,8 @@ interface ChannelInterface extends
     public function getShopBillingData(): ?ShopBillingDataInterface;
 
     public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void;
+
+    public function getMenuTaxon(): ?TaxonInterface;
+
+    public function setMenuTaxon(?TaxonInterface $menuTaxon): void;
 }

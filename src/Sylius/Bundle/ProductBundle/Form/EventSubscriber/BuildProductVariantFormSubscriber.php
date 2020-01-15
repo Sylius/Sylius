@@ -46,7 +46,7 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
 
     public function preSetData(FormEvent $event): void
     {
-        /** @var ProductVariantInterface $productVariant */
+        /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $event->getData();
         $form = $event->getForm();
 

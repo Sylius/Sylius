@@ -45,12 +45,14 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
         $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
         $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
+
+        return 0;
     }
 
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
@@ -106,15 +108,20 @@ EOT
     private function createEmailQuestion(): Question
     {
         return (new Question('E-mail: '))
-            ->setValidator(function ($value) {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
-                foreach ($errors as $error) {
-                    throw new \DomainException($error->getMessage());
-                }
+            ->setValidator(
+                /**
+                 * @param mixed $value
+                 */
+                function ($value): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    foreach ($errors as $error) {
+                        throw new \DomainException($error->getMessage());
+                    }
 
-                return $value;
-            })
+                    return $value;
+                }
+            )
             ->setMaxAttempts(3)
         ;
     }
@@ -182,15 +189,18 @@ EOT
 
     private function getPasswordQuestionValidator(): \Closure
     {
-        return function ($value) {
-            /** @var ConstraintViolationListInterface $errors */
-            $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
-            foreach ($errors as $error) {
-                throw new \DomainException($error->getMessage());
-            }
+        return
+            /** @param mixed $value */
+            function ($value): string {
+                /** @var ConstraintViolationListInterface $errors */
+                $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+                foreach ($errors as $error) {
+                    throw new \DomainException($error->getMessage());
+                }
 
-            return $value;
-        };
+                return $value;
+            }
+        ;
     }
 
     private function createPasswordQuestion(string $message, \Closure $validator): Question

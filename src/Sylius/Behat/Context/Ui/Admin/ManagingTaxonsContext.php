@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -39,18 +41,23 @@ final class ManagingTaxonsContext implements Context
     /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
+    /** @var NotificationCheckerInterface */
+    private $notificationChecker;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         CreateForParentPageInterface $createForParentPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
         $this->createForParentPage = $createForParentPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -378,6 +385,17 @@ final class ManagingTaxonsContext implements Context
         $this->iWantToModifyATaxon($taxon);
 
         Assert::same($this->updatePage->countImages(), (int) $count);
+    }
+
+    /**
+     * @Then I should be notified that I cannot delete a menu taxon of any channel
+     */
+    public function iShouldBeNotifiedThatICannotDeleteAMenuTaxonOfAnyChannel(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'You cannot delete a menu taxon of any channel.',
+            NotificationType::failure()
+        );
     }
 
     /**

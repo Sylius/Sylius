@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Webmozart\Assert\Assert;
 
 class Payment implements PaymentInterface
 {
@@ -80,8 +79,6 @@ class Payment implements PaymentInterface
      */
     public function setCurrencyCode(string $currencyCode): void
     {
-        Assert::string($currencyCode);
-
         $this->currencyCode = $currencyCode;
     }
 

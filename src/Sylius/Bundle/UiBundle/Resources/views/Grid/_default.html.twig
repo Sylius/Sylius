@@ -19,7 +19,7 @@
         <div class="content {% if criteria is not null %}active{% endif %}">
             <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
                 <div class="sylius-filters">
-                    {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
+                    {% for filter in definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
                         <div class="sylius-filters__field">
                             {{ sylius_grid_render_filter(grid, filter) }}
                         </div>

@@ -29,6 +29,8 @@ interface ProductAssociationInterface extends TimestampableInterface, ResourceIn
 
     /**
      * @return Collection|ProductInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductInterface>
      */
     public function getAssociatedProducts(): Collection;
 

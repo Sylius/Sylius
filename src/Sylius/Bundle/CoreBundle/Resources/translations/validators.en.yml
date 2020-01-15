@@ -15,7 +15,7 @@ sylius:
             min: Email must be at least {{ limit }} characters long.
     channel_pricing:
         price:
-            min: Price must be at least {{ limit }}.
+            min: Price cannot be lower than 0.
             not_blank: Please enter the price.
     checkout:
         shipping_method:

@@ -51,10 +51,12 @@ final class ConvertPaymentAction implements ActionInterface
         $details['PAYMENTREQUEST_0_AMT'] = $this->formatPrice($order->getTotal());
         $details['PAYMENTREQUEST_0_ITEMAMT'] = $this->formatPrice($order->getTotal());
 
+        $details = $this->prepareAddressData($order, $details);
+
         $m = 0;
         foreach ($order->getItems() as $item) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = $item->getVariant()->getProduct()->getName();
-            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($item->getDiscountedUnitPrice());
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($item->getUnitPrice());
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = $item->getQuantity();
 
             ++$m;
@@ -100,5 +102,28 @@ final class ConvertPaymentAction implements ActionInterface
     private function formatPrice(int $price): float
     {
         return round($price / 100, 2);
+    }
+
+    private function prepareAddressData(OrderInterface $order, array $details): array
+    {
+        $details['EMAIL'] = $order->getCustomer()->getEmail();
+        $billingAddress = $order->getBillingAddress();
+        $details['LOCALECODE'] = $billingAddress->getCountryCode();
+        $details['PAYMENTREQUEST_0_SHIPTONAME'] = $billingAddress->getFullName();
+        $details['PAYMENTREQUEST_0_SHIPTOSTREET'] = $billingAddress->getStreet();
+        $details['PAYMENTREQUEST_0_SHIPTOCITY'] = $billingAddress->getCity();
+        $details['PAYMENTREQUEST_0_SHIPTOZIP'] = $billingAddress->getPostcode();
+        $details['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $billingAddress->getCountryCode();
+
+        if ($billingAddress->getPhoneNumber() !== null) {
+            $details['PAYMENTREQUEST_0_SHIPTOPHONENUM'] = $billingAddress->getPhoneNumber();
+        }
+
+        $province = $billingAddress->getProvinceCode() ?? $billingAddress->getProvinceName();
+        if ($province !== null) {
+            $details['PAYMENTREQUEST_0_SHIPTOSTATE'] = $province;
+        }
+
+        return $details;
     }
 }

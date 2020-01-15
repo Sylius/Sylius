@@ -18,62 +18,49 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ContactPage extends SymfonyPage implements ContactPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_contact_request';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyEmail($email)
+    public function specifyEmail(?string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyMessage($message)
+    public function specifyMessage(?string $message): void
     {
         $this->getDocument()->fillField('Message', $message);
     }
 
-    public function send()
+    public function send(): void
     {
-        $this->getDocument()->pressButton('Send');
+        $this->getElement('send_button')->click();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageFor($element)
+    public function getValidationMessageFor(string $element): string
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
 
         if (null === $errorLabel) {
             throw new ElementNotFoundException(
                 $this->getSession(),
-                'Validation message', 'css', '.sylius-validation-error')
+                'Validation message', 'css', '[data-test-validation-error]')
             ;
         }
 
         return $errorLabel->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_contact_email',
-            'message' => '#sylius_contact_message',
+            'email' => '[data-test-contact-email]',
+            'message' => '[data-test-contact-message]',
+            'send_button' => '[data-test-send-button]',
         ]);
     }
 }

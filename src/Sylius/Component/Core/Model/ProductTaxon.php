@@ -18,13 +18,13 @@ class ProductTaxon implements ProductTaxonInterface
     /** @var mixed */
     protected $id;
 
-    /** @var ProductInterface */
+    /** @var ProductInterface|null */
     protected $product;
 
-    /** @var TaxonInterface */
+    /** @var TaxonInterface|null */
     protected $taxon;
 
-    /** @var int */
+    /** @var int|null */
     protected $position;
 
     /**

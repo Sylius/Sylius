@@ -37,6 +37,20 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
+    public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array
+    {
+        return $this->createTranslationBasedQueryBuilder($locale)
+            ->addSelect('child')
+            ->innerJoin('o.parent', 'parent')
+            ->leftJoin('o.children', 'child')
+            ->andWhere('parent.code = :parentCode')
+            ->addOrderBy('o.position')
+            ->setParameter('parentCode', ($menuTaxon !== null) ? $menuTaxon->getCode() : 'category')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -106,7 +120,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
     }
 
-    private function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
+    protected function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

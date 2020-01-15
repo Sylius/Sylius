@@ -67,7 +67,7 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
      */
     private function getOrdersSummedTotal(array $orders): int
     {
-        return array_sum(
+        return (int) array_sum(
             array_map(function (OrderInterface $order) {
                 return $order->getTotal();
             }, $orders)

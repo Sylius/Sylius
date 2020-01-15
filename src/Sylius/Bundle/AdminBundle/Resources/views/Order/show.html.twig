@@ -47,6 +47,7 @@
 
         {% include '@SyliusAdmin/Order/Show/_payments.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
+        {% include '@SyliusAdmin/Order/Show/_resendEmail.html.twig' %}
 
         {{ sonata_block_render_event('sylius.admin.order.show.after_shipments', {'resource': resource}) }}
     </div>

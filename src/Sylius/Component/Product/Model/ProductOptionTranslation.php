@@ -20,7 +20,7 @@ class ProductOptionTranslation extends AbstractTranslation implements ProductOpt
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     /**

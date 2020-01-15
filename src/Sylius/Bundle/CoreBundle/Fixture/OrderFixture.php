@@ -119,10 +119,10 @@ class OrderFixture extends AbstractFixture
 
     private function generateDates(int $amount): array
     {
+        /** @var \DateTimeInterface[] $dates */
         $dates = [];
 
         for ($i = 0; $i < $amount; ++$i) {
-            /** @var \DateTimeInterface|array $dates */
             $dates[] = $this->faker->dateTimeBetween('-1 years', 'now');
         }
 

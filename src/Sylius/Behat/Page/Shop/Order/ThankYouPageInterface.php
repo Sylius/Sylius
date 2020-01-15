@@ -17,27 +17,17 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ThankYouPageInterface extends SymfonyPageInterface
 {
-    public function goToOrderDetails();
+    public function goToTheChangePaymentMethodPage(): void;
 
-    /**
-     * @return bool
-     */
-    public function hasThankYouMessage();
+    public function goToOrderDetailsInAccount(): void;
 
-    /**
-     * @return string
-     */
-    public function getInstructions();
+    public function hasThankYouMessage(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasInstructions();
+    public function getInstructions(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasChangePaymentMethodButton();
+    public function hasInstructions(): bool;
+
+    public function hasChangePaymentMethodButton(): bool;
 
     public function hasRegistrationButton(): bool;
 

@@ -2,6 +2,7 @@
 /public/css
 /public/js
 /public/media
+/public/build
 !/public/media/image/.gitkeep
 
 /app/config/parameters.yml
@@ -27,10 +28,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs

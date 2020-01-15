@@ -52,6 +52,8 @@ interface ProductVariantInterface extends
 
     /**
      * @return Collection|ChannelPricingInterface[]
+     *
+     * @psalm-return Collection<array-key, ChannelPricingInterface>
      */
     public function getChannelPricings(): Collection;
 

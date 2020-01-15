@@ -14,20 +14,19 @@
 
     {% for localeCode, translationForm in attr.translations %}
         <div class="ui bottom attached tab segment{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
-            {% spaceless %}
+            {% apply spaceless %}
                 {% for child in form %}
                     {% if localeCode == child.localeCode.vars.value %}
                         {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                     {% endif %}
                 {% endfor %}
-            {% endspaceless %}
+            {% endapply %}
         </div>
     {% endfor %}
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
     <div class="attribute" data-id="{{ form.vars.data.attribute.code }}">
-        {% set id = form.vars.id %}
         {% if 'checkbox' in form.children.value.vars.block_prefixes %}
             <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
                 {{ form_widget(form.value) }}

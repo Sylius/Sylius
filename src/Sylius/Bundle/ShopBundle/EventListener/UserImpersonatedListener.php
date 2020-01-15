@@ -15,12 +15,9 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Webmozart\Assert\Assert;
 
 final class UserImpersonatedListener
 {
@@ -45,16 +42,16 @@ final class UserImpersonatedListener
 
     public function onUserImpersonated(UserEvent $event): void
     {
-        /** @var ShopUserInterface $user */
         $user = $event->getUser();
-        Assert::isInstanceOf($user, ShopUserInterface::class);
+
+        if (!$user instanceof ShopUserInterface) {
+            return;
+        }
 
         $customer = $user->getCustomer();
 
-        /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
 
-        /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findLatestCartByChannelAndCustomer($channel, $customer);
 
         if ($cart === null) {

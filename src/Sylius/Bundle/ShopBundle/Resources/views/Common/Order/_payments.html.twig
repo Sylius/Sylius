@@ -8,7 +8,6 @@
 
 {% for payment in order.payments %}
     {% set state = payment.state %}
-    {% set value = 'sylius.ui.' ~ state %}
 
     <div class="ui small icon message">
         <i class="payment icon"></i>

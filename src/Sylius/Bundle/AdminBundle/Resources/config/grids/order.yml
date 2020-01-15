@@ -10,19 +10,6 @@ sylius_grid:
             sorting:
                 number: desc
             fields:
-                channel:
-                    type: twig
-                    label: sylius.ui.channel
-                    sortable: channel.code
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
-                number:
-                    type: twig
-                    label: sylius.ui.order
-                    path: .
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
                 date:
                     type: datetime
                     label: sylius.ui.date
@@ -30,6 +17,19 @@ sylius_grid:
                     sortable: checkoutCompletedAt
                     options:
                         format: d-m-Y H:i:s
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: .
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    sortable: channel.code
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
                 customer:
                     type: twig
                     label: sylius.ui.customer

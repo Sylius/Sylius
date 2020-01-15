@@ -397,7 +397,6 @@ sylius:
         invoice: 'Faktúra'
         is_enabled: 'Zapnuté'
         it_seems_you_have_an_account_already: 'Zdá sa, že už máte účet'
-        item.choice: "{0} |{1}, 1 položka|] 1, Inf], %count% položiek"
         item: 'Položka'
         items: 'Položky'
         items_total: 'Položiek celkom'
@@ -585,7 +584,6 @@ sylius:
         orders_statistics: 'Štatistika objednávok'
         original_price: 'Pôvodná cena'
         out_of_stock: 'Nie je na sklade'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{0} |{1}Zákazník objednal jednu objednávku |] 1, Inf]Tento zákazník objednal %count% objednávok vo všetkých kanáloch'
         overview_of_your_store: 'Prehľad Vášho obchodu'
         page: 'Stránka'
         pages: 'Stránky'
@@ -706,6 +704,7 @@ sylius:
         search: 'Vyhľadať'
         search_products: 'Vyhľadávanie produktov'
         security_settings: 'Bezpečnostné nastavenia'
+        select: 'Vyberte'
         select_address_from_book: 'Vyberte adresu z môjho adresára'
         select_products: 'Vybrať produkty'
         select_taxon: 'Vyberte kategóriu'

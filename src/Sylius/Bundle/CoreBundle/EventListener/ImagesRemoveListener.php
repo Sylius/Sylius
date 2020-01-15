@@ -51,8 +51,14 @@ final class ImagesRemoveListener
                 continue;
             }
 
-            if (!in_array($entityDeletion->getPath(), $this->imagesToDelete)) {
-                $this->imagesToDelete[] = $entityDeletion->getPath();
+            $path = $entityDeletion->getPath();
+
+            if (null === $path) {
+                continue;
+            }
+
+            if (!in_array($path, $this->imagesToDelete, true)) {
+                $this->imagesToDelete[] = $path;
             }
         }
     }

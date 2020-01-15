@@ -127,7 +127,7 @@ final class UserContext implements Context
     /**
      * @Given /^(?:(I) have|(this user) has) already received a resetting password email$/
      */
-    public function iHaveReceivedResettingPasswordEmail(UserInterface $user)
+    public function iHaveReceivedResettingPasswordEmail(UserInterface $user): void
     {
         $this->prepareUserPasswordResetToken($user);
     }
@@ -142,7 +142,7 @@ final class UserContext implements Context
         $this->userManager->flush();
     }
 
-    private function prepareUserPasswordResetToken(UserInterface $user)
+    private function prepareUserPasswordResetToken(UserInterface $user): void
     {
         $token = 'itotallyforgotmypassword';
 

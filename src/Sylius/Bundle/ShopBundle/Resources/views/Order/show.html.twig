@@ -12,7 +12,7 @@
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <div class="ui hidden divider"></div>
-            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link">
+            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
                 <i class="check icon"></i> {{ 'sylius.ui.pay'|trans }}
             </button>
 

@@ -21,23 +21,34 @@ use Webmozart\Assert\Assert;
 
 class Customer extends BaseCustomer implements CustomerInterface
 {
-    /** @var Collection|OrderInterface[] */
+    /**
+     * @var Collection|OrderInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderInterface>
+     */
     protected $orders;
 
-    /** @var AddressInterface */
+    /** @var AddressInterface|null */
     protected $defaultAddress;
 
-    /** @var Collection|AddressInterface[] */
+    /**
+     * @var Collection|AddressInterface[]
+     *
+     * @psalm-var Collection<array-key, AddressInterface>
+     */
     protected $addresses;
 
-    /** @var ShopUserInterface */
+    /** @var ShopUserInterface|null */
     protected $user;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, OrderInterface> $this->orders */
         $this->orders = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, AddressInterface> $this->addresses */
         $this->addresses = new ArrayCollection();
     }
 
@@ -128,6 +139,7 @@ class Customer extends BaseCustomer implements CustomerInterface
         $previousUser = $this->user;
         $this->user = $user;
 
+        /** @psalm-suppress RedundantConditionGivenDocblockType */
         if ($previousUser instanceof ShopUserInterface) {
             $previousUser->setCustomer(null);
         }

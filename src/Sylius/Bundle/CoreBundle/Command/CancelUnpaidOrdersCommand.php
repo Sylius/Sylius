@@ -17,6 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @final
+ */
 class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 {
     /**
@@ -34,7 +37,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
 
@@ -47,5 +50,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
         $unpaidCartsStateUpdater->cancel();
 
         $this->getContainer()->get('sylius.manager.order')->flush();
+
+        return 0;
     }
 }

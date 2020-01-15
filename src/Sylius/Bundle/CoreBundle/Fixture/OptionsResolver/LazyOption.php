@@ -38,7 +38,7 @@ final class LazyOption
 {
     public static function randomOne(RepositoryInterface $repository, array $criteria = []): \Closure
     {
-        return function (Options $options) use ($repository, $criteria) {
+        return function (Options $options) use ($repository, $criteria): object {
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
@@ -56,7 +56,7 @@ final class LazyOption
         int $chanceOfRandomOne = 100,
         array $criteria = []
     ): \Closure {
-        return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria) {
+        return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria): ?object {
             if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
@@ -73,7 +73,7 @@ final class LazyOption
 
     public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
-        return function (Options $options) use ($repository, $amount, $criteria) {
+        return function (Options $options) use ($repository, $amount, $criteria): iterable {
             $objects = $repository->findBy($criteria);
 
             if ($objects instanceof Collection) {
@@ -95,19 +95,17 @@ final class LazyOption
 
     public static function all(RepositoryInterface $repository): \Closure
     {
-        return function (Options $options) use ($repository) {
+        return function (Options $options) use ($repository): iterable {
             return $repository->findAll();
         };
     }
 
     public static function findBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValues) use ($repository, $field, $criteria) {
+        return function (Options $options, ?array $previousValues) use ($repository, $field, $criteria): ?iterable {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }
-
-            Assert::isArray($previousValues);
 
             $resources = [];
             foreach ($previousValues as $previousValue) {
@@ -124,16 +122,19 @@ final class LazyOption
 
     public static function findOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
     {
-        return function (Options $options, $previousValue) use ($repository, $field, $criteria) {
-            if (null === $previousValue || [] === $previousValue) {
-                return $previousValue;
-            }
+        return
+            /** @param mixed $previousValue */
+            function (Options $options, $previousValue) use ($repository, $field, $criteria): ?object {
+                if (null === $previousValue || [] === $previousValue) {
+                    return $previousValue;
+                }
 
-            if (is_object($previousValue)) {
-                return $previousValue;
-            }
+                if (is_object($previousValue)) {
+                    return $previousValue;
+                }
 
-            return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
-        };
+                return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
+            }
+        ;
     }
 }

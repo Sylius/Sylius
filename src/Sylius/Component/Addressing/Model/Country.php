@@ -32,11 +32,16 @@ class Country implements CountryInterface
      */
     protected $code;
 
-    /** @var Collection|ProvinceInterface[] */
+    /**
+     * @var Collection|ProvinceInterface[]
+     *
+     * @psalm-var Collection<array-key, ProvinceInterface>
+     */
     protected $provinces;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ProvinceInterface> $this->provinces */
         $this->provinces = new ArrayCollection();
     }
 

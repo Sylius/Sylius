@@ -1,0 +1,14 @@
+<tr class="variants-accordion__content item-{{ loop.index }}" style="display: none; background: rgba(0,0,0,.04);">
+    <td colspan="8" style="padding: 20px">
+        <div class="ui grid">
+            <div class="doubling two column row">
+                <div class="column">
+                    {% include '@SyliusAdmin/Product/Show/_variantContentShipping.html.twig' %}
+                </div>
+                <div class="column">
+                    {% include '@SyliusAdmin/Product/Show/_variantContentPricing.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>

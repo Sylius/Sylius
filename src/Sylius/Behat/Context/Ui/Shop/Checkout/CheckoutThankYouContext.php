@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutThankYouContext implements Context
@@ -23,17 +25,28 @@ final class CheckoutThankYouContext implements Context
     /** @var ThankYouPageInterface */
     private $thankYouPage;
 
-    public function __construct(ThankYouPageInterface $thankYouPage)
-    {
+    /** @var ShowPageInterface */
+    private $orderShowPage;
+
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    public function __construct(
+        ThankYouPageInterface $thankYouPage,
+        ShowPageInterface $orderShowPage,
+        OrderRepositoryInterface $orderRepository
+    ) {
         $this->thankYouPage = $thankYouPage;
+        $this->orderShowPage = $orderShowPage;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @When I go to order details
+     * @When I go to the change payment method page
      */
-    public function iGoToOrderDetails()
+    public function iGoToTheChangePaymentMethodPage(): void
     {
-        $this->thankYouPage->goToOrderDetails();
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
     }
 
     /**
@@ -42,6 +55,18 @@ final class CheckoutThankYouContext implements Context
     public function iProceedToTheRegistration(): void
     {
         $this->thankYouPage->createAccount();
+    }
+
+    /**
+     * @Then I should be able to access this order's details
+     */
+    public function iShouldBeAbleToAccessThisOrderDetails(): void
+    {
+        $this->thankYouPage->goToOrderDetailsInAccount();
+
+        $number = $this->orderShowPage->getNumber();
+
+        Assert::same($this->orderRepository->findLatest(1)[0]->getNumber(), $number);
     }
 
     /**

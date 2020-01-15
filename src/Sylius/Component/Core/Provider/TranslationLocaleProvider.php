@@ -40,7 +40,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
 
         return array_map(
             function (LocaleInterface $locale) {
-                return $locale->getCode();
+                return (string) $locale->getCode();
             },
             $locales
         );

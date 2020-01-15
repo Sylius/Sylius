@@ -10,6 +10,8 @@ Sylius manages its releases through a *time-based model* and follows the
 * A new Sylius minor version (e.g. 1.1, 1.2, etc.) comes out *at least every four months*.
 * A new Sylius patch version (e.g. 1.0.1, 1.0.2, etc.) comes out *at least every three weeks*.
 
+New Sylius minor releases will drop unsupported PHP versions.
+
 Development
 -----------
 
@@ -53,7 +55,7 @@ Past Releases
 +---------+--------------------+--------------------+--------------------+-----------------------+
 | 1.4     | Feb 4, 2019        | Oct 4, 2019        | Jun 4, 2020        | Security support only |
 +---------+--------------------+--------------------+--------------------+-----------------------+
-| 1.5     | May 10, 2019       | Jan 10, 2020       | Sep 10, 2020       | Fully supported       |
+| 1.5     | May 10, 2019       | Jan 10, 2020       | Sep 10, 2020       | Security support only |
 +---------+--------------------+--------------------+--------------------+-----------------------+
 | 1.6     | Aug 29, 2019       | Apr 29, 2020       | Dec 29, 2020       | Fully supported       |
 +---------+--------------------+--------------------+--------------------+-----------------------+

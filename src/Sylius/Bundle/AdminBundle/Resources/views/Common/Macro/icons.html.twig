@@ -1,0 +1,11 @@
+{% macro channelType(type)  %}
+    {%
+        set icons = {
+            mobile: 'mobile alternate',
+            website: 'desktop',
+            pos: 'map pin',
+        }
+    %}
+
+    <i class="{{ icons[type] }} icon"></i>
+{% endmacro %}

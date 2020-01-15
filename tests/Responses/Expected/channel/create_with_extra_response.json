@@ -9,6 +9,164 @@
     "updatedAt": "@string@.isDateTime()",
     "enabled": true,
     "taxCalculationStrategy": "order_items_based",
+    "menuTaxon": {
+        "id": @integer@,
+        "code": "mugs",
+        "root": {
+            "id": @integer@,
+            "code": "category",
+            "children": {
+                "1": {
+                    "id": @integer@,
+                    "code": "stickers",
+                    "children": [],
+                    "left": 4,
+                    "right": 5,
+                    "level": 1,
+                    "position": 1,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "2": {
+                    "id": @integer@,
+                    "code": "books",
+                    "children": [],
+                    "left": 6,
+                    "right": 7,
+                    "level": 1,
+                    "position": 2,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "3": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "children": [],
+                    "left": 8,
+                    "right": 13,
+                    "level": 1,
+                    "position": 3,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            },
+            "left": 1,
+            "right": 14,
+            "level": 0,
+            "position": 0,
+            "translations": {
+                "en": {
+                    "locale": "en"
+                }
+            },
+            "images": [],
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "parent": {
+            "id": @integer@,
+            "code": "category",
+            "children": {
+                "1": {
+                    "id": @integer@,
+                    "code": "stickers",
+                    "children": [],
+                    "left": 4,
+                    "right": 5,
+                    "level": 1,
+                    "position": 1,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "2": {
+                    "id": @integer@,
+                    "code": "books",
+                    "children": [],
+                    "left": 6,
+                    "right": 7,
+                    "level": 1,
+                    "position": 2,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                },
+                "3": {
+                    "id": @integer@,
+                    "code": "t-shirts",
+                    "children": [],
+                    "left": 8,
+                    "right": 13,
+                    "level": 1,
+                    "position": 3,
+                    "translations": [],
+                    "images": [],
+                    "_links": {
+                        "self": {
+                            "href": "@string@"
+                        }
+                    }
+                }
+            },
+            "left": 1,
+            "right": 14,
+            "level": 0,
+            "position": 0,
+            "translations": {
+                "en": {
+                    "locale": "en"
+                }
+            },
+            "images": [],
+            "_links": {
+                "self": {
+                    "href": "@string@"
+                }
+            }
+        },
+        "children": [],
+        "left": 2,
+        "right": 3,
+        "level": 1,
+        "position": 0,
+        "translations": {
+            "en": {
+                "locale": "en"
+            }
+        },
+        "images": [],
+        "_links": {
+            "self": {
+                "href": "@string@"
+            }
+        }
+    },
     "_links": {
         "self": {
             "href": @string@

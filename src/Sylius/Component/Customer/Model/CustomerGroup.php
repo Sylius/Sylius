@@ -18,10 +18,10 @@ class CustomerGroup implements CustomerGroupInterface
     /** @var mixed */
     protected $id;
 
-    /** @var string */
+    /** @var string|null */
     protected $code;
 
-    /** @var string */
+    /** @var string|null */
     protected $name;
 
     public function __toString(): string

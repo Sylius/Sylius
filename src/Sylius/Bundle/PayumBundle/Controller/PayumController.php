@@ -87,7 +87,7 @@ final class PayumController
     {
         $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
-        /** @var OrderInterface $order */
+        /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneByTokenValue($tokenValue);
 
         if (null === $order) {
@@ -116,7 +116,7 @@ final class PayumController
 
         $token = $this->getHttpRequestVerifier()->verify($request);
 
-        /** @var Generic|GetStatusInterface $status */
+        /** @var Generic&GetStatusInterface $status */
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
 

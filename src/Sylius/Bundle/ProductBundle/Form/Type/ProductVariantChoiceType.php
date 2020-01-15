@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,12 +41,13 @@ final class ProductVariantChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'choices' => function (Options $options): iterable {
                     return $options['product']->getVariants();
                 },
                 'choice_value' => 'code',
-                'choice_label' => function ($variant) {
-                    return $variant;
+                'choice_label' => function (ProductVariantInterface $variant): string {
+                    /** @psalm-suppress InvalidCast */
+                    return (string) $variant;
                 },
                 'choice_translation_domain' => false,
                 'multiple' => false,

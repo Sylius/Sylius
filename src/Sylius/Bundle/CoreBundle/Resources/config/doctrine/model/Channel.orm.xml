@@ -33,6 +33,9 @@
         <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
+        <many-to-one field="menuTaxon" target-entity="Sylius\Component\Core\Model\TaxonInterface">
+            <join-column name="menu_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
         <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
             <join-table name="sylius_channel_currencies">
                 <join-columns>

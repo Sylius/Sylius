@@ -57,14 +57,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /** @var bool */
     protected $shippingRequired = true;
 
-    /** @var Collection|ProductImageInterface[] */
+    /**
+     * @var Collection|ProductImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductImageInterface>
+     */
     protected $images;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ChannelPricingInterface> $this->channelPricings */
         $this->channelPricings = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 
@@ -377,6 +384,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getImages(): Collection
     {
@@ -385,6 +395,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getImagesByType(string $type): Collection
     {
