@@ -29,9 +29,6 @@
     "clue/stream-filter": {
         "version": "v1.4.0"
     },
-    "cocur/slugify": {
-        "version": "v3.1"
-    },
     "coduo/php-matcher": {
         "version": "3.1.0"
     },
@@ -503,20 +500,14 @@
     "sonata-project/cache": {
         "version": "2.0.1"
     },
-    "sonata-project/core-bundle": {
-        "version": "3.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.9",
-            "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
-        }
-    },
-    "sonata-project/datagrid-bundle": {
-        "version": "2.3.1"
-    },
     "sonata-project/doctrine-extensions": {
         "version": "1.3.1"
+    },
+    "sonata-project/form-extensions": {
+        "version": "1.0.0"
+    },
+    "sonata-project/twig-extensions": {
+        "version": "1.1.0"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
@@ -841,15 +832,6 @@
     },
     "theseer/tokenizer": {
         "version": "1.1.0"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
-        }
     },
     "twig/intl-extra": {
         "version": "v2.12.2"
