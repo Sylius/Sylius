@@ -67,11 +67,11 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'create_account_button' => '[data-test-create-an-account]',
             'instructions' => '[data-test-payment-method-instructions]',
             'order_details_in_account' => '[data-test-show-order-in-account]',
             'payment_method_page' => '[data-test-payment-method-page]',
             'thank_you' => '[data-test-thank-you]',
-            'create_account_button' => '[data-test-create-an-account]',
         ]);
     }
 }

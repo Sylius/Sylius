@@ -52,7 +52,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return 'sylius_shop_order_show';
     }
 
-    public function getNumberOfItems(): int
+    public function getAmountOfItems(): int
     {
         $paymentItems = $this->getDocument()->findAll('css', '[data-test-payment-item]');
 
