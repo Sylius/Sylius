@@ -22,6 +22,16 @@ Update your `package.json` in order to add `slick-carousel` :
 }
 ```
 
+You may need to remove `SonataCoreBundle` from your list of used bundles in `config/bundles.php`(if you are not using it explicitly):
+
+```diff
+    winzou\Bundle\StateMachineBundle\winzouStateMachineBundle::class => ['all' => true],
+-   Sonata\CoreBundle\SonataCoreBundle::class => ['all' => true],
+    Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],
+```
+
+And you should remove `config/packages/sonata_core.yaml` as well.
+
 ## Template events
 
 - `Sylius\Bundle\UiBundle\Block\BlockEventListener` has been deprecated, use `sylius_ui` configuration instead.
