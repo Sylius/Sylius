@@ -49,16 +49,16 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return 'sylius_shop_checkout_address';
     }
 
-    public function chooseDifferentBillingAddress(): void
+    public function chooseDifferentShippingAddress(): void
     {
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
-            $this->getElement('different_billing_address_label')->click();
+            $this->getElement('different_shipping_address_label')->click();
 
             return;
         }
 
-        $billingAddressSwitch = $this->getElement('different_billing_address');
+        $billingAddressSwitch = $this->getElement('different_shipping_address');
         Assert::false(
             $billingAddressSwitch->isChecked(),
             'Previous state of different billing address switch was true expected to be false'
@@ -266,6 +266,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'customer_email' => '[data-test-login-email]',
             'different_billing_address' => '[data-test-different-billing-address]',
             'different_billing_address_label' => '[data-test-different-billing-address-label]',
+            'different_shipping_address' => '[data-test-different-shipping-address]',
+            'different_shipping_address_label' => '[data-test-different-shipping-address-label]',
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
             'next_step' => '[data-test-next-step]',

@@ -52,7 +52,7 @@
                     }
                 }
             },
-            "differentBillingAddress": {}
+            "differentShippingAddress": {}
         }
     }
 }

@@ -55,7 +55,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $data =
 <<<EOT
         {
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -88,7 +88,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -122,7 +122,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": true
+            "differentShippingAddress": true
         }
 EOT;
 
@@ -163,7 +163,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "differentShippingAddress": true
         }
 EOT;
 
@@ -201,7 +201,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -218,7 +218,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -251,7 +251,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -270,7 +270,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -303,7 +303,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -323,7 +323,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
