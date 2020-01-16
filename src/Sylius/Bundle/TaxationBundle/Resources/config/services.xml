@@ -17,18 +17,11 @@
     </imports>
 
     <parameters>
-        <parameter key="sylius.tax_calculation_strategy.interface">Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface</parameter>
-
         <parameter key="sylius.tax_calculator.interface">Sylius\Component\Taxation\Calculator\CalculatorInterface</parameter>
     </parameters>
 
     <services>
         <defaults public="true" />
-
-        <service id="sylius.registry.tax_calculation_strategy" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
-            <argument>%sylius.tax_calculation_strategy.interface%</argument>
-            <argument>Tax calculation strategy</argument>
-        </service>
 
         <service id="sylius.registry.tax_calculator" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>%sylius.tax_calculator.interface%</argument>
