@@ -126,6 +126,7 @@ final class CheckoutContext implements Context
      * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      * @When I proceed through checkout process
      * @When I proceed through checkout process in the :localeCode locale
+     * @When I proceed through checkout process in the :localeCode locale with email :email
      */
     public function iProceedThroughCheckoutProcess(string $localeCode = 'en_US', ?string $email = null): void
     {

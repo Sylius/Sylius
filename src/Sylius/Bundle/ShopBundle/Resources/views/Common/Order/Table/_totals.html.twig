@@ -16,7 +16,7 @@
     <td colspan="4" class="right aligned" id="tax-total">
         <div style="display: flex; justify-content: flex-end; align-items: center">
             <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>
-            <div data-test="tax-total">
+            <div data-test="tax-total" {{ sylius_test_html_attribute('tax-total') }}>
             {% if not taxIncluded and not taxExcluded %}
                 <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
             {% endif %}
@@ -34,11 +34,13 @@
     </td>
 </tr>
 <tr>
-    <td colspan="4" id="promotion-total" class="right aligned">
+    <td colspan="4" id="promotion-total" class="right aligned" {{ sylius_test_html_attribute('promotion-total') }}>
         {{ 'sylius.ui.discount'|trans }}: {{ money.convertAndFormat(order.orderPromotionTotal)  }}
         {% if order.orderPromotionTotal != 0 %}
-            <i id="order-promotions-details" class="question circle icon popup-js"
-                data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}">
+            <i
+                id="order-promotions-details" class="question circle icon popup-js"
+                data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}"
+            >
             </i>
         {% endif %}
     </td>
@@ -47,13 +49,13 @@
     {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {'order': order} %}
 </tr>
 <tr>
-    <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
+    <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total" {{ sylius_test_html_attribute('order-total') }}>
         {{ 'sylius.ui.total'|trans }}: {{ money.convertAndFormat(order.total) }}
     </td>
 </tr>
 {% if order.currencyCode is not same as(sylius.currencyCode) %}
     <tr>
-        <td colspan="4" class="right aligned" id="base-total">
+        <td colspan="4" class="right aligned" id="base-total" {{ sylius_test_html_attribute('summary-order-total') }}>
             {{ 'sylius.ui.total_in_base_currency'|trans }}: {{ money.format(order.total, order.currencyCode) }}
         </td>
     </tr>

@@ -7,7 +7,7 @@
     <div class="ui small icon message">
         <i class="truck icon"></i>
         <div class="content">
-            <div class="header" id="sylius-shipping-method">
+            <div class="header" id="sylius-shipping-method" {{ sylius_test_html_attribute('shipping-method') }}>
                 {{ shipment.method }}
             </div>
             {% if state != 'cart' %}

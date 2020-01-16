@@ -12,7 +12,7 @@
     <div class="ui small icon message">
         <i class="payment icon"></i>
         <div class="content">
-            <div class="header" id="sylius-payment-method">
+            <div class="header" id="sylius-payment-method" {{ sylius_test_html_attribute('payment-method') }}>
                 {{ payment.method }}
             </div>
             <p>{{ money.format(payment.amount, payment.currencyCode) }}</p>

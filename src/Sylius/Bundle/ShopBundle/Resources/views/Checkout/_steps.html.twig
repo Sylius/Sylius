@@ -36,7 +36,7 @@
     </a>
     {% endif %}
     {% if order_requires_payment %}
-    <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}">
+    <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}" {{ sylius_test_html_attribute('step-payment') }}>
         <i class="payment icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.payment'|trans }}</div>

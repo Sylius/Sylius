@@ -4,7 +4,7 @@
 {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
 
 {% if not orderPromotions is empty %}
-    <td colspan="2" id="promotion-discounts">
+    <td colspan="2" id="promotion-discounts" {{ sylius_test_html_attribute('promotion-discounts') }}>
         <div class="ui relaxed divided list">
             {% for label, amount in orderPromotions %}
                 <div class="item">
@@ -19,7 +19,7 @@
         </div>
     </td>
 {% endif %}
-<td colspan="{% if not orderPromotions is empty %}2{% else %}4{% endif %}" id="promotion-total" class="right aligned">
+<td colspan="{% if not orderPromotions is empty %}2{% else %}4{% endif %}" id="promotion-total" class="right aligned" {{ sylius_test_html_attribute('promotion-total') }}>
     {{ 'sylius.ui.promotion_total'|trans }}:
     {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
 </td>
