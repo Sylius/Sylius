@@ -9,7 +9,7 @@
                 <div class="item" id="sylius-order-currency-code" {{ sylius_test_html_attribute('order-currency-code') }}>
                     {{ order.currencyCode }}
                 </div>
-                <div class="item" id="sylius-order-locale-name">
+                <div class="item" id="sylius-order-locale-name" {{ sylius_test_html_attribute('order-locale-name') }}>
                     {{ flags.fromLocaleCode(sylius.localeCode) }}{{ sylius.localeCode|locale_name }}
                 </div>
             </div>

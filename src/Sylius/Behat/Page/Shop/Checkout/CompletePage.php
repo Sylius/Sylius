@@ -265,7 +265,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'currency' => '[data-test-order-currency-code]',
             'extra_notes' => '[data-test-extra-notes]',
             'items_table' => '[data-test-order-table]',
-            'locale' => '[data-test-order-locale]',
+            'locale' => '[data-test-order-locale-name]',
             'order_promotions_details' => '#order-promotions-details',
             'order_total' => '[data-test-order-total]',
             'payment_method' => '[data-test-payment-method]',

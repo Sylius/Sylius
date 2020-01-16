@@ -68,4 +68,5 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I proceed with "Pigeon Mail" shipping method and "Offline" payment
         When the exchange rate of "US Dollar" to "British Pound" is 3.0
         And I decide to change the payment method
+        And I complete the payment step
         Then the "The Pug Mug" product should have unit price "£30.00"
