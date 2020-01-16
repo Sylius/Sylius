@@ -105,8 +105,8 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
             'checkout_subtotal' => '[data-test-checkout-subtotal]',
             'next_step' => '[data-test-next-step]',
             'order_cannot_be_paid_message' => '[data-test-order-cannot-be-paid]',
-            'payment_method_option' => '[data-test-payment-item]:contains("%payment_method%") input',
-            'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
+            'payment_method_option' => '[data-test-payment-item]:contains("%payment_method%") [data-test-payment-method-select]',
+            'payment_method_select' => '[data-test-payment-item]:contains("%payment_method%") [data-test-payment-method-checkbox]',
             'shipping_step_label' => '[data-test-step-shipping]',
             'warning_no_payment_methods' => '[data-test-order-cannot-be-paid]',
         ]);

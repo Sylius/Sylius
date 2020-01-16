@@ -2,7 +2,7 @@
 
 <div class="item" {{ sylius_test_html_attribute('shipping-item') }}>
     <div class="field">
-        <div class="ui radio checkbox">
+        <div class="ui radio checkbox" {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
             {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')) }}
         </div>
     </div>

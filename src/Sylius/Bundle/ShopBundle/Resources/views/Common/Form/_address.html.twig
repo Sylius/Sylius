@@ -13,9 +13,9 @@
 
 <div class="province-container field" data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
     {% if form.provinceCode is defined %}
-        {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
+        {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')|sylius_merge_recursive( {'attr': {'class': 'ui dropdown'}})) }}
     {% elseif form.provinceName is defined %}
-        {{ form_row(form.provinceName) }}
+        {{ form_row(form.provinceName, sylius_test_form_attribute('province-name')) }}
     {% endif %}
 </div>
 
