@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------
+
+by pamil at 2019-12-27T12:56:30Z
+
+No idea why PHP 7.2 application build fails :/
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-01-11T18:31:00Z
+
+> No output has been received in the last 10m0s, this potentially indicates a stalled build or something wrong with the build itself.
+Check the details on how to adjust your build configuration on: https://docs.travis-ci.com/user/common-build-problems/#build-times-out-because-no-output-was-received
+
+I feel like it's just a lag time that has lasted too long (more than 10 minutes).
+
+I think relaunching the build can validate (or not) this idea ;)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-01-16T09:41:05Z
+
+Thanks, Kamil! :1st_place_medal:
