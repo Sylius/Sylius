@@ -9,18 +9,12 @@ framework:
         resource: "%kernel.project_dir%/app/config/routing.yml"
     form: ~
     csrf_protection: true
-    templating:
-        engines: ['twig']
     default_locale: "%locale%"
     session:
         handler_id: ~
         storage_id: session.storage.mock_file
     http_method_override: true
     test: ~
-
-twig:
-    debug: "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
 
 doctrine:
     dbal:

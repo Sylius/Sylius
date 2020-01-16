@@ -17,19 +17,19 @@ addons:
 
 matrix:
     include:
-        -
+        -   
             php: 7.3
             env:
                 - SYLIUS_SUITE="application"
-                - SYMFONY_VERSION="4.3.*"
+                - SYMFONY_VERSION="4.4.*"
             services:
                 - memcached
                 - mysql
-        -
+        -   
             php: 7.3
             env:
                 - SYLIUS_SUITE="docs packages"
-                - SYMFONY_VERSION="4.3.*"
+                - SYMFONY_VERSION="4.4.*"
             services:
                 - docker
             addons:
