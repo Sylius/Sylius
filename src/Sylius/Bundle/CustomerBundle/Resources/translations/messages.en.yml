@@ -9,7 +9,7 @@ sylius:
             gender: Gender
             birthday: Birthday
             billing_address: Billing address
-            different_billing_address: Use different address for billing?
+            different_shipping_address: Use different address for shipping?
             only_customer_registration: Create account?
             subscribed_to_newsletter: Subscribe to the newsletter
         customer_group:
