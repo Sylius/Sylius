@@ -14,7 +14,7 @@ Feature: Receiving confirmation email after finalizing checkout
     @ui @email
     Scenario: Receiving confirmation email after finalizing checkout
         Given I have product "Sig Sauer P226" in the cart
-        And I have completed addressing step with email "john@example.com" and "United States" based shipping address
+        And I have completed addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I confirm my order
         Then an email with the summary of order placed by "john@example.com" should be sent to him

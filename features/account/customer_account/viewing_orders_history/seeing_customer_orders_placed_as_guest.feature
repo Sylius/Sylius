@@ -10,12 +10,12 @@ Feature: Seeing customer's orders placed as guest
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying offline
-        And the guest customer placed order with "PHP T-Shirt" product for "john@snow.com" and "United States" based shipping address with "Free" shipping method and "Offline" payment
+        And the guest customer placed order with "PHP T-Shirt" product for "john@snow.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
 
     @ui
     Scenario: Not being able to hijack another customer's orders
         Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@snow.com" and "United States" based shipping address
+        When I complete addressing step with email "john@snow.com" and "United States" based billing address
         And I decide to change my address
         And I specify the email as "ned@stark.com"
         And I complete the addressing step

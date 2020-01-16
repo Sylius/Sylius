@@ -46,7 +46,7 @@ Feature: Inform customer about any order total changes during checkout process
     Scenario: Inform customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
         And I added product "PHP T-Shirt" to the cart
-        And I have completed addressing step with email "guest@example.com" and "United States" based shipping address
+        And I have completed addressing step with email "guest@example.com" and "United States" based billing address
         And I have proceeded order with "UPS" shipping method and "Offline" payment
         And the shipping fee for "UPS" shipping method has been changed to "$30.00"
         When I confirm my order
