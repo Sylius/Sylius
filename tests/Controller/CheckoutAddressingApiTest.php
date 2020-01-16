@@ -80,7 +80,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -114,7 +114,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -147,7 +147,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -155,7 +155,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "billingAddress": {
+            "shippingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -193,7 +193,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -210,7 +210,7 @@ EOT;
         $newData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -243,7 +243,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -262,7 +262,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -295,7 +295,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -315,7 +315,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",

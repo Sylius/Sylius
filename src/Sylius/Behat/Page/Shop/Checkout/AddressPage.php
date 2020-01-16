@@ -123,12 +123,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('customer_email')->setValue($email);
     }
 
-    public function specifyShippingAddressFullName(string $fullName): void
+    public function specifyBillingAddressFullName(string $fullName): void
     {
         $names = explode(' ', $fullName);
 
-        $this->getElement('shipping_first_name')->setValue($names[0]);
-        $this->getElement('shipping_last_name')->setValue($names[1]);
+        $this->getElement('billing_first_name')->setValue($names[0]);
+        $this->getElement('billing_last_name')->setValue($names[1]);
     }
 
     public function canSignIn(): bool
@@ -219,8 +219,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         $addressOption->click();
-
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void
@@ -238,6 +236,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         $addressOption->click();
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     public function getPreFilledShippingAddress(): AddressInterface
@@ -271,7 +271,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
             'next_step' => '[data-test-next-step]',
-            'shipping_address_book' => '[data-test-address-book]',
+            'shipping_address_book' => '[data-test-shipping-address] .ui.dropdown',
             'shipping_city' => '[data-test-shipping-city]',
             'shipping_country' => '[data-test-shipping-country]',
             'shipping_country_province' => '[data-test-shipping-address] [data-test-province-code]',

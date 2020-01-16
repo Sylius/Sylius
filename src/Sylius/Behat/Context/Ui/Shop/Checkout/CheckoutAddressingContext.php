@@ -207,11 +207,11 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @When I specify the first and last name as :fullName for shipping address
+     * @When I specify the first and last name as :fullName for billing address
      */
-    public function iSpecifyTheStreetAsForShippingAddress(string $fullName)
+    public function iSpecifyTheStreetAsForBillingAddress(string $fullName): void
     {
-        $this->addressPage->specifyShippingAddressFullName($fullName);
+        $this->addressPage->specifyBillingAddressFullName($fullName);
     }
 
     /**
@@ -252,10 +252,12 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @When /^I proceed as guest "([^"]*)" with ("[^"]+" as shipping country)$/
+     * @When /^I proceed as guest "([^"]*)" with ("[^"]+" as billing country)$/
      */
-    public function iProceedLoggingAsGuestWithAsShippingCountry($email, CountryInterface $shippingCountry = null)
-    {
+    public function iProceedLoggingAsGuestWithAsBillingCountry(
+        string $email,
+        CountryInterface $shippingCountry = null
+    ): void {
         $this->addressPage->open();
         $this->addressPage->specifyEmail($email);
         $shippingAddress = $this->createDefaultAddress();
@@ -263,7 +265,7 @@ final class CheckoutAddressingContext implements Context
             $shippingAddress->setCountryCode($shippingCountry->getCode());
         }
 
-        $this->addressPage->specifyShippingAddress($shippingAddress);
+        $this->addressPage->specifyBillingAddress($shippingAddress);
         $this->addressPage->nextStep();
     }
 
