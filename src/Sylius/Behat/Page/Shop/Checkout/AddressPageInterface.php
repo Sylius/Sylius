@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 interface AddressPageInterface extends SymfonyPageInterface
 {
-    public function chooseDifferentBillingAddress(): void;
+    public function chooseDifferentShippingAddress(): void;
 
     public function checkInvalidCredentialsValidation(): bool;
 
@@ -34,7 +34,7 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function specifyEmail(?string $email): void;
 
-    public function specifyShippingAddressFullName(string $fullName): void;
+    public function specifyBillingAddressFullName(string $fullName): void;
 
     public function canSignIn(): bool;
 

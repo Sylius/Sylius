@@ -16,8 +16,8 @@ Feature: Choosing province for country
     Scenario: Address an order with country and its province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
-        And I specify shipping country province as "New York"
+        When I specify the billing address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
+        And I specify billing country province as "New York"
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
@@ -25,8 +25,8 @@ Feature: Choosing province for country
     Scenario: Address an order with country and its province and different billing address for country without province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
-        And I specify shipping country province as "New York"
+        When I specify the billing address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
+        And I specify billing country province as "New York"
         And I specify the billing address as "Nanda Parbat", "League of Assassins House", "11-333", "Nepal" for "Ra's al Ghul"
         And I complete the addressing step
         Then I should be on the checkout shipping step
@@ -35,9 +35,9 @@ Feature: Choosing province for country
     Scenario: Address an order with country with province and different billing address for country with province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
-        And I specify shipping country province as "New York"
-        And I specify the billing address as "Metropolis", "Clinton Str.", "344", "United States" for "Clark Kent"
+        When I specify the billing address as "Gotham", "Mountain Drive", "1007", "United States" for "Bruce Wayne"
         And I specify billing country province as "New York"
+        And I specify the shipping address as "Metropolis", "Clinton Str.", "344", "United States" for "Clark Kent"
+        And I specify shipping country province as "New York"
         And I complete the addressing step
         Then I should be on the checkout shipping step

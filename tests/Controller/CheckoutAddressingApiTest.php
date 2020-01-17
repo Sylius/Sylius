@@ -55,7 +55,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         $data =
 <<<EOT
         {
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -80,7 +80,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -88,7 +88,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -114,7 +114,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -122,7 +122,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": true
+            "differentShippingAddress": true
         }
 EOT;
 
@@ -147,7 +147,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -155,7 +155,55 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "countryCode": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "differentShippingAddress": true
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getAddressingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', $this->getCheckoutSummaryUrl($cartId), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/addressed_order_response');
+    }
+
+    /**
+     * @test
+     *
+     * It is deprecated since Sylius 1.7 and will be removed in Sylius 2.0
+     */
+    public function it_allows_to_address_order_with_different_shipping_and_billing_address_using_different_billing_address_flag(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+
+        $data =
+<<<EOT
+        {
             "billingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
+                "street": "Surrealism St.",
+                "countryCode": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "shippingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -193,7 +241,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -201,7 +249,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -210,7 +258,7 @@ EOT;
         $newData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -218,7 +266,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -243,7 +291,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -251,7 +299,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -262,7 +310,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -270,7 +318,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -295,7 +343,7 @@ EOT;
         $addressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Vincent",
                 "lastName": "van Gogh",
                 "street": "Post-Impressionism St.",
@@ -303,7 +351,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 
@@ -315,7 +363,7 @@ EOT;
         $newAddressData =
 <<<EOT
         {
-            "shippingAddress": {
+            "billingAddress": {
                 "firstName": "Hieronim",
                 "lastName": "Bosch",
                 "street": "Surrealism St.",
@@ -323,7 +371,7 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentShippingAddress": false
         }
 EOT;
 

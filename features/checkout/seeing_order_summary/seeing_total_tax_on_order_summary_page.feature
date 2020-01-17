@@ -16,7 +16,7 @@ Feature: Seeing tax total on order summary page
     @ui
     Scenario: Seeing the total discount on order summary page
         Given I have product "The Sorting Hat" in the cart
-        When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my tax total should be "$23.00"

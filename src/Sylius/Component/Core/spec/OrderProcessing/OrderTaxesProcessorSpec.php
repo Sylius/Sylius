@@ -55,7 +55,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
-        $order->getShippingAddress()->willReturn($address);
+        $order->getBillingAddress()->willReturn($address);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
@@ -83,7 +83,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $order->isEmpty()->willReturn(false);
-        $order->getShippingAddress()->willReturn($address);
+        $order->getBillingAddress()->willReturn($address);
 
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
@@ -104,7 +104,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([]));
         $order->isEmpty()->willReturn(true);
 
-        $order->getShippingAddress()->shouldNotBeCalled();
+        $order->getBillingAddress()->shouldNotBeCalled();
 
         $this->process($order);
     }
@@ -123,7 +123,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
-        $order->getShippingAddress()->willReturn($address);
+        $order->getBillingAddress()->willReturn($address);
 
         $zoneMatcher->match($address, Scope::TAX)->willReturn(null);
 

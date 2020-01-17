@@ -89,7 +89,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "differentShippingAddress": true
         }
 EOT;
 

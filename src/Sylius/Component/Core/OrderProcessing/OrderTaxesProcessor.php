@@ -80,11 +80,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $shippingAddress = $order->getShippingAddress();
+        $billingAddress = $order->getBillingAddress();
         $zone = null;
 
-        if (null !== $shippingAddress) {
-            $zone = $this->zoneMatcher->match($shippingAddress, Scope::TAX);
+        if (null !== $billingAddress) {
+            $zone = $this->zoneMatcher->match($billingAddress, Scope::TAX);
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);

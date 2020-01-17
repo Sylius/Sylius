@@ -9,6 +9,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Use different address for billing?
+                different_shipping_address: Use different address for shipping?
             payment_method: Payment Method
             shipping_method: Shipping Method
         promotion:
@@ -101,7 +102,7 @@ sylius:
             file: Select image
         user:
             billing_address: Billing address
-            different_billing_address: Use different address for billing?
+            different_shipping_address: Use different address for shipping?
             enabled: Enabled
             first_name: First name
             groups: Groups

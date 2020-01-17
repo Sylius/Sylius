@@ -3,42 +3,6 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
-            "shippingAddress": {
-                "children": {
-                    "firstName": {
-                        "errors": [
-                            "Please enter first name."
-                        ]
-                    },
-                    "lastName": {
-                        "errors": [
-                            "Please enter last name."
-                        ]
-                    },
-                    "phoneNumber": {},
-                    "company": {},
-                    "countryCode": {
-                        "errors": [
-                            "Please select country."
-                        ]
-                    },
-                    "street": {
-                        "errors": [
-                            "Please enter street."
-                        ]
-                    },
-                    "city": {
-                        "errors": [
-                            "Please enter city."
-                        ]
-                    },
-                    "postcode": {
-                        "errors": [
-                            "Please enter postcode."
-                        ]
-                    }
-                }
-            },
             "billingAddress": {
                 "children": {
                     "firstName": {
@@ -75,7 +39,44 @@
                     }
                 }
             },
-            "differentBillingAddress": {}
+            "shippingAddress": {
+                "children": {
+                    "firstName": {
+                        "errors": [
+                            "Please enter first name."
+                        ]
+                    },
+                    "lastName": {
+                        "errors": [
+                            "Please enter last name."
+                        ]
+                    },
+                    "phoneNumber": {},
+                    "company": {},
+                    "countryCode": {
+                        "errors": [
+                            "Please select country."
+                        ]
+                    },
+                    "street": {
+                        "errors": [
+                            "Please enter street."
+                        ]
+                    },
+                    "city": {
+                        "errors": [
+                            "Please enter city."
+                        ]
+                    },
+                    "postcode": {
+                        "errors": [
+                            "Please enter postcode."
+                        ]
+                    }
+                }
+            },
+            "differentBillingAddress": {},
+            "differentShippingAddress": {}
         }
     }
 }

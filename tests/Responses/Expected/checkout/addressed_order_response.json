@@ -37,7 +37,7 @@
             }
         }
     },
-    "shippingAddress": {
+    "billingAddress": {
         "firstName": "Hieronim",
         "lastName": "Bosch",
         "countryCode": "NL",
@@ -45,7 +45,7 @@
         "city": "’s-Hertogenbosch",
         "postcode": "99-999"
     },
-    "billingAddress": {
+    "shippingAddress": {
         "firstName": "Vincent",
         "lastName": "van Gogh",
         "countryCode": "NL",

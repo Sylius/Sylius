@@ -16,7 +16,7 @@ Feature: Preventing not available payment method selection
         Given the payment method "Paypal Express Checkout" is disabled
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
@@ -27,7 +27,7 @@ Feature: Preventing not available payment method selection
         Given the store has "Cash on delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step

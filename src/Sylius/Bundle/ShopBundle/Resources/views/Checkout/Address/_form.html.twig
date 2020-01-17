@@ -1,20 +1,20 @@
-<div id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }}>
+<div id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
     {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
-    <h3 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h3>
+    <h3 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h3>
     {% if form.customer is defined %}
         {% include '@SyliusShop/Common/Form/_login.html.twig' with {'form': form.customer} %}
     {% endif %}
-    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
-    {{ form_row(form.differentBillingAddress,sylius_test_form_attribute('different-billing-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-billing-address'}, 'label_attr': {'data-test-different-billing-address-label': ''}} )) }}
-
-    {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
-</div>
-
-<div id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
-    <div class="ui hidden divider"></div>
-    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
-    <h3 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h3>
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}
+    {{ form_row(form.differentShippingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-shipping-address'}, 'label_attr': {'data-test-different-shipping-address-label': ''}} )) }}
 
     {{ sonata_block_render_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
+</div>
+
+<div id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }}>
+    <div class="ui hidden divider"></div>
+    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
+    <h3 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h3>
+    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
 </div>

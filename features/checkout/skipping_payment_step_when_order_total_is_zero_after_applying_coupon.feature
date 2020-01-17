@@ -19,7 +19,7 @@ Feature: Skipping payment selection when order total is zero after applying coup
         Given I have product "PHP T-Shirt" in the cart
         And I use coupon with code "HOLIDAYPROMO"
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
