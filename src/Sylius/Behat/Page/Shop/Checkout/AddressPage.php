@@ -271,7 +271,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
             'next_step' => '[data-test-next-step]',
-            'shipping_address_book' => '[data-test-shipping-address] .ui.dropdown',
+            'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
             'shipping_city' => '[data-test-shipping-city]',
             'shipping_country' => '[data-test-shipping-country]',
             'shipping_country_province' => '[data-test-shipping-address] [data-test-province-code]',

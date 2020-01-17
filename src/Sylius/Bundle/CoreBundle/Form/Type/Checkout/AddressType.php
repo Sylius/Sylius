@@ -71,19 +71,14 @@ final class AddressType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $orderData = $event->getData();
 
-                if (
-                    isset($orderData['billingAddress']) &&
-                    (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
-                    (!isset($orderData['differentShippingAddress']) || false === $orderData['differentShippingAddress'])
-                ) {
+                $differentBillingAddress = $orderData['differentBillingAddress'] ?? false;
+                $differentShippingAddress = $orderData['differentShippingAddress'] ?? false;
+
+                if (isset($orderData['billingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
                     $orderData['shippingAddress'] = $orderData['billingAddress'];
                 }
 
-                if (
-                    isset($orderData['shippingAddress']) &&
-                    (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
-                    (!isset($orderData['differentShippingAddress']) || false === $orderData['differentShippingAddress'])
-                ) {
+                if (isset($orderData['shippingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
                     $orderData['billingAddress'] = $orderData['shippingAddress'];
                 }
 
