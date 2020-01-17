@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by pfazzi at 2020-01-17T11:51:03Z
+
+I see 1 failing scenario but the error seems to be unrelated whit this change
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-01-17T12:18:50Z
+
+What I mean is that because 1.1.1 is still installed, we can't verify whether 2.0 is working correctly.
+
+It is blocked by `hwi/oauth-bundle` currently, which is required in dev cause it's an optional integration.
+
+---------------------------------------------------------------------------
+
+by pfazzi at 2020-01-17T14:18:35Z
+
+ `hwi/oauth-bundle` has just released version `1.0` which now depends on `"php-http/guzzle6-adapter":     "^2.0"`
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-01-17T18:33:01Z
+
+Thank you, Patrick! :1st_place_medal:
