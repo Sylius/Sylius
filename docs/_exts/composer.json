@@ -1,0 +1,16 @@
+{
+    "name": "fabpot/sphinx-php",
+    "description": "Sphinx extension for PHP projects",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabien Potencier",
+            "email": "fabien@symfony.com"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
