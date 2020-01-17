@@ -34,7 +34,7 @@ final class TemplateEventTest extends KernelTestCase
     {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
-            'First block',
+            'First block (for event: "first_event")',
             'Second block',
             'Third block',
             'The king is dead, long live the king!',

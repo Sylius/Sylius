@@ -32,7 +32,7 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 
     function it_renders_a_template_block(Environment $twig): void
     {
-        $twig->render('block.txt.twig', ['foo' => 'bar'])->willReturn('Block content');
+        $twig->render('block.txt.twig', ['foo' => 'bar', '_event' => 'event_name'])->willReturn('Block content');
 
         $this->render(
             'event_name',
@@ -43,7 +43,7 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 
     function it_merges_template_block_context_with_passed_context(Environment $twig): void
     {
-        $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true])->willReturn('Block content');
+        $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true, '_event' => 'event_name'])->willReturn('Block content');
 
         $this->render(
             'event_name',
@@ -51,33 +51,4 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
             ['sample' => 'Hello']
         )->shouldReturn('Block content');
     }
-
-//    function it_renders_html_debug_comment_prepending_the_comment_if_in_debug_mode_rendering_html_template(Environment $twig): void
-//    {
-//        $this->beConstructedWith($twig, true);
-//
-//        $twig->render('block.html.twig', ['foo' => 'bar'])->willReturn('Block content');
-//
-//        $this->render(
-//            'event_name',
-//            new TemplateBlock('block_name', 'block.html.twig', [], 0, true),
-//            ['foo' => 'bar']
-//        )->shouldReturn(
-//            '<!-- event name: "event_name", block name: "block_name", template: "block.html.twig", priority: 0 -->' . "\n" .
-//            'Block content'
-//        );
-//    }
-//
-//    function it_renders_html_debug_comment_prepending_the_comment_if_not_in_debug_mode_rendering_html_template(Environment $twig): void
-//    {
-//        $this->beConstructedWith($twig, false);
-//
-//        $twig->render('block.html.twig', ['foo' => 'bar'])->willReturn('Block content');
-//
-//        $this->render(
-//            'event_name',
-//            new TemplateBlock('block_name', 'block.html.twig', [], 0, true),
-//            ['foo' => 'bar']
-//        )->shouldReturn('Block content');
-//    }
 }
