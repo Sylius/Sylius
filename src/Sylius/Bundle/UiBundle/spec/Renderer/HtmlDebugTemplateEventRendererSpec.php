@@ -64,7 +64,7 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         $this->render('best_event_ever', ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
     }
 
-    function it_returns_an_empty_string_if_no_blocks_are_found_for_an_event(
+    function it_returns_html_debug_comment_if_no_blocks_are_found_for_an_event(
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
@@ -72,6 +72,10 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
 
         $templateEventRenderer->render(Argument::cetera())->willReturn('');
 
-        $this->render('best_event_ever')->shouldReturn('');
+        $this->render('best_event_ever')->shouldReturn(
+            '<!-- BEGIN EVENT | event name: "best_event_ever" -->' . "\n" .
+            "\n" .
+            '<!-- END EVENT | event name: "best_event_ever" -->'
+        );
     }
 }

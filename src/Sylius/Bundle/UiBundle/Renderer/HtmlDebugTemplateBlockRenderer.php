@@ -29,30 +29,28 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
     {
         $shouldRenderHtmlDebug = strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
 
-        $renderedBlock = '';
+        $renderedParts = [];
 
         if ($shouldRenderHtmlDebug) {
-            $renderedBlock .= sprintf(
+            $renderedParts[] = sprintf(
                 '<!-- BEGIN BLOCK | event name: "%s", block name: "%s", template: "%s", priority: %d -->',
                 $eventName,
                 $templateBlock->getName(),
                 $templateBlock->getTemplate(),
                 $templateBlock->getPriority()
             );
-            $renderedBlock .= "\n";
         }
 
-        $renderedBlock .= $this->templateBlockRenderer->render($eventName, $templateBlock, $context);
+        $renderedParts[] = $this->templateBlockRenderer->render($eventName, $templateBlock, $context);
 
         if ($shouldRenderHtmlDebug) {
-            $renderedBlock .= "\n";
-            $renderedBlock .= sprintf(
+            $renderedParts[] = sprintf(
                 '<!-- END BLOCK | event name: "%s", block name: "%s" -->',
                 $eventName,
-                $templateBlock->getName(),
+                $templateBlock->getName()
             );
         }
 
-        return $renderedBlock;
+        return implode("\n", $renderedParts);
     }
 }

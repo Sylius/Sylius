@@ -32,37 +32,35 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
 
     public function render(string $eventName, array $context = []): string
     {
-        $shouldRenderHtmlDebug = $this->hasAtLeastOneHtmlTemplate($this->templateBlockRegistry->findEnabledForEvent($eventName));
+        $shouldRenderHtmlDebug = $this->shouldRenderHtmlDebug($this->templateBlockRegistry->findEnabledForEvent($eventName));
 
-        $renderedEvent = '';
+        $renderedParts = [];
 
         if ($shouldRenderHtmlDebug) {
-            $renderedEvent .= sprintf(
+            $renderedParts[] = sprintf(
                 '<!-- BEGIN EVENT | event name: "%s" -->',
                 $eventName
             );
-            $renderedEvent .= "\n";
         }
 
-        $renderedEvent .= $this->templateEventRenderer->render($eventName, $context);
+        $renderedParts[] = $this->templateEventRenderer->render($eventName, $context);
 
         if ($shouldRenderHtmlDebug) {
-            $renderedEvent .= "\n";
-            $renderedEvent .= sprintf(
+            $renderedParts[] = sprintf(
                 '<!-- END EVENT | event name: "%s" -->',
                 $eventName
             );
         }
 
-        return $renderedEvent;
+        return implode("\n", $renderedParts);
     }
 
     /**
      * @param TemplateBlock[] $templateBlocks
      */
-    private function hasAtLeastOneHtmlTemplate(array $templateBlocks): bool
+    private function shouldRenderHtmlDebug(array $templateBlocks): bool
     {
-        return count(array_filter($templateBlocks, static function (TemplateBlock $templateBlock): bool {
+        return count($templateBlocks) === 0 || count(array_filter($templateBlocks, static function (TemplateBlock $templateBlock): bool {
             return strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
         })) >= 1;
     }
