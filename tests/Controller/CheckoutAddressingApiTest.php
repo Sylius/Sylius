@@ -100,6 +100,41 @@ EOT;
 
     /**
      * @test
+     *
+     * It is a test for deprecated behaviour since Sylius 1.7 and will be removed in Sylius 2.0
+     */
+    public function it_allows_to_address_order_with_the_same_shipping_and_billing_address_using_different_billing_address_flag(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $cartId = $this->createCart();
+        $this->addItemToCart($cartId);
+
+        $data =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
+                "street": "Surrealism St.",
+                "countryCode": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getAddressingUrl($cartId), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
      */
     public function it_does_not_allow_to_address_order_with_different_addresses_if_billing_address_is_not_defined()
     {
@@ -181,7 +216,7 @@ EOT;
     /**
      * @test
      *
-     * It is deprecated since Sylius 1.7 and will be removed in Sylius 2.0
+     * It is a test for deprecated behaviour since Sylius 1.7 and will be removed in Sylius 2.0
      */
     public function it_allows_to_address_order_with_different_shipping_and_billing_address_using_different_billing_address_flag(): void
     {
