@@ -1,4 +1,4 @@
-sphinx>=2.0,<2.3
+sphinx
 pyOpenSSL
 requests[security]
 sphinx-copybutton
