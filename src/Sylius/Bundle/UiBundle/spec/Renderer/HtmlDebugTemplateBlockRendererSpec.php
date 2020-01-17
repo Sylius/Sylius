@@ -41,8 +41,9 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
             new TemplateBlock('block_name', 'block.html.twig', [], 0, true),
             ['foo' => 'bar']
         )->shouldReturn(
-            '<!-- event name: "event_name", block name: "block_name", template: "block.html.twig", priority: 0 -->' . "\n" .
-            'Block content'
+            '<!-- BEGIN BLOCK | event name: "event_name", block name: "block_name", template: "block.html.twig", priority: 0 -->' . "\n" .
+            'Block content' . "\n" .
+            '<!-- END BLOCK | event name: "event_name", block name: "block_name" -->'
         );
     }
 

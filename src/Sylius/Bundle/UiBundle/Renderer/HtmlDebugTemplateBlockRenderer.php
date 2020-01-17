@@ -18,10 +18,13 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
 
     public function render(string $eventName, TemplateBlock $templateBlock, array $context = []): string
     {
+        $shouldRenderHtmlDebug = strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
+
         $renderedBlock = '';
-        if (strrpos($templateBlock->getTemplate(), '.html.twig') !== false) {
+
+        if ($shouldRenderHtmlDebug) {
             $renderedBlock .= sprintf(
-                '<!-- event name: "%s", block name: "%s", template: "%s", priority: %d -->',
+                '<!-- BEGIN BLOCK | event name: "%s", block name: "%s", template: "%s", priority: %d -->',
                 $eventName,
                 $templateBlock->getName(),
                 $templateBlock->getTemplate(),
@@ -31,6 +34,15 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
         }
 
         $renderedBlock .= $this->templateBlockRenderer->render($eventName, $templateBlock, $context);
+
+        if ($shouldRenderHtmlDebug) {
+            $renderedBlock .= "\n";
+            $renderedBlock .= sprintf(
+                '<!-- END BLOCK | event name: "%s", block name: "%s" -->',
+                $eventName,
+                $templateBlock->getName(),
+            );
+        }
 
         return $renderedBlock;
     }
