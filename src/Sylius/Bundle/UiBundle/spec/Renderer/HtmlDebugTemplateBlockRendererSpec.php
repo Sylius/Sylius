@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
-use Twig\Environment;
 
 final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
 {

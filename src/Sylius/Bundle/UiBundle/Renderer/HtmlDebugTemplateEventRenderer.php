@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
@@ -9,14 +18,10 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 
 final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInterface
 {
-    /**
-     * @var TemplateEventRendererInterface
-     */
+    /** @var TemplateEventRendererInterface */
     private $templateEventRenderer;
 
-    /**
-     * @var TemplateBlockRegistryInterface
-     */
+    /** @var TemplateBlockRegistryInterface */
     private $templateBlockRegistry;
 
     public function __construct(TemplateEventRendererInterface $templateEventRenderer, TemplateBlockRegistryInterface $templateBlockRegistry)
