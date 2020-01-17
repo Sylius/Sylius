@@ -6,7 +6,6 @@
 
 from docutils.parsers.rst import Directive, directives
 from docutils import nodes
-from string import upper
 
 class configurationblock(nodes.General, nodes.Element):
     pass

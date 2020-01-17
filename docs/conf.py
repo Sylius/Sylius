@@ -3,11 +3,20 @@ import sys, os
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.imgmath', 'sphinx.ext.ifconfig', 'sensio.sphinx.configurationblock']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.imgmath',
+    'sphinx.ext.ifconfig',
+    'sensio.sphinx.configurationblock',
+    'sphinx_copybutton',
+]
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'Sylius'
-copyright = u'2011-2019, Paweł Jędrzejewski'
+copyright = u'2011-2020, Paweł Jędrzejewski'
 version = ''
 release = ''
 exclude_patterns = ['_includes/*.rst']
