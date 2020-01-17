@@ -52,6 +52,7 @@
                     }
                 }
             },
+            "differentBillingAddress": {},
             "differentShippingAddress": {}
         }
     }

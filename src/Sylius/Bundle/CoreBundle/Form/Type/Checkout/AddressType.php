@@ -41,6 +41,11 @@ final class AddressType extends AbstractResourceType
             ->add('billingAddress', SyliusAddressType::class, [
                 'constraints' => [new Valid()],
             ])
+            ->add('differentBillingAddress', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'sylius.form.checkout.addressing.different_billing_address',
+            ])
             ->add('differentShippingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -66,11 +71,23 @@ final class AddressType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
                 $orderData = $event->getData();
 
-                if (isset($orderData['billingAddress']) && (!isset($orderData['differentShippingAddress']) || false === $orderData['differentShippingAddress'])) {
+                if (
+                    isset($orderData['billingAddress']) &&
+                    (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
+                    (!isset($orderData['differentShippingAddress']) || false === $orderData['differentShippingAddress'])
+                ) {
                     $orderData['shippingAddress'] = $orderData['billingAddress'];
-
-                    $event->setData($orderData);
                 }
+
+                if (
+                    isset($orderData['shippingAddress']) &&
+                    (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
+                    (!isset($orderData['differentShippingAddress']) || false === $orderData['differentShippingAddress'])
+                ) {
+                    $orderData['billingAddress'] = $orderData['shippingAddress'];
+                }
+
+                $event->setData($orderData);
             })
         ;
     }

@@ -8,6 +8,7 @@ sylius:
             coupon: Coupon
         checkout:
             addressing:
+                different_billing_address: Use different address for billing?
                 different_shipping_address: Use different address for shipping?
             payment_method: Payment Method
             shipping_method: Shipping Method
