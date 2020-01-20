@@ -1,17 +1,17 @@
-{% if order.shippingAddress is not null %}
-    <h4 class="ui top attached styled header">
-        {{ 'sylius.ui.shipping_address'|trans }}
-    </h4>
-    <div class="ui attached segment" id="shipping-address">
-        {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': order.shippingAddress} %}
-    </div>
-{% endif %}
 {% if order.billingAddress is not null %}
     <h4 class="ui attached styled header{% if order.shippingAddress is null %} top{% endif %}">
         {{ 'sylius.ui.billing_address'|trans }}
     </h4>
     <div class="ui attached segment" id="billing-address">
         {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': order.billingAddress} %}
+    </div>
+{% endif %}
+{% if order.shippingAddress is not null %}
+    <h4 class="ui top attached styled header">
+        {{ 'sylius.ui.shipping_address'|trans }}
+    </h4>
+    <div class="ui attached segment" id="shipping-address">
+        {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': order.shippingAddress} %}
     </div>
 {% endif %}
 <div class="ui attached segment" id="edit-addresses">
