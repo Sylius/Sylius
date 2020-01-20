@@ -1,3 +1,5 @@
-sphinx>=1.6,<2.0,!=1.6.4
+sphinx
 pyOpenSSL
 requests[security]
+sphinx-copybutton
+git+https://github.com/fabpot/sphinx-php.git
