@@ -34,7 +34,7 @@ final class TemplateEventTest extends KernelTestCase
     {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
-            'First block',
+            'First block (for event: "first_event")',
             'Second block',
             'Third block',
             'The king is dead, long live the king!',
@@ -49,10 +49,14 @@ final class TemplateEventTest extends KernelTestCase
     {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
-            '<!-- event name: "event", block name: "first", template: "blocks/html/first.html.twig", priority: 5 -->',
+            '<!-- BEGIN EVENT | event name: "event" -->',
+            '<!-- BEGIN BLOCK | event name: "event", block name: "first", template: "blocks/html/first.html.twig", priority: 5 -->',
             '<p id="first">First block</p>',
-            '<!-- event name: "event", block name: "context", template: "blocks/html/context.html.twig", priority: -5 -->',
+            '<!-- END BLOCK | event name: "event", block name: "first" -->',
+            '<!-- BEGIN BLOCK | event name: "event", block name: "context", template: "blocks/html/context.html.twig", priority: -5 -->',
             '<p class="context">The king is dead, long live the king!</p>',
+            '<!-- END BLOCK | event name: "event", block name: "context" -->',
+            '<!-- END EVENT | event name: "event" -->',
         ];
         $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('templateEvents.html.twig'))));
 

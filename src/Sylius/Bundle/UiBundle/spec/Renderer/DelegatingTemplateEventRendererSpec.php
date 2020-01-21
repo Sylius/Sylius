@@ -20,7 +20,7 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
 
-final class TemplateEventRendererSpec extends ObjectBehavior
+final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
 {
     function let(TemplateBlockRegistryInterface $templateBlockRegistry, TemplateBlockRendererInterface $templateBlockRenderer): void
     {
