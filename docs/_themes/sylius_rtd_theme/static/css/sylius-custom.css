@@ -283,7 +283,7 @@ div[class^='highlight'] {
   letter-spacing: 2px;
 }
 
-/* Plus feature */
+/* Plus docs */
 .plus-doc {
   padding: 30px;
   border: 2px dashed #404662;
@@ -301,14 +301,6 @@ div[class^='highlight'] {
   border-radius: 60px;
   font-size: 11px;
   letter-spacing: 2px;
-}
-
-.plus-feature {
-  color: #404662;
-}
-
-.plus-feature:hover {
-    color: #404662;
 }
 
 .plus-feature::after {
