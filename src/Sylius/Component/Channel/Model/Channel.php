@@ -38,9 +38,6 @@ class Channel implements ChannelInterface
     /** @var string|null */
     protected $color;
 
-    /** @var string|null */
-    protected $type;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -137,15 +134,5 @@ class Channel implements ChannelInterface
     public function setColor(?string $color): void
     {
         $this->color = $color;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): void
-    {
-        $this->type = $type;
     }
 }

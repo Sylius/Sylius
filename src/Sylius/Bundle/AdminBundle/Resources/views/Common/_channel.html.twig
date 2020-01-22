@@ -1,11 +1,7 @@
-{% import '@SyliusAdmin/Common/Macro/icons.html.twig' as icons  %}
-
 {% if channel is defined %}
     <div class="channel">
-        {% if channel.type is not empty %}
-            {{ icons.channelType(channel.type) }}
-        {% endif %}
         <span class="ui medium empty circular label channel__item" style="background-color: {{ channel.color|default('#000') }}"></span>
+
         <span class="channel__item">
             {{ channel.name|default(channel.code) }}
         </span>

@@ -39,8 +39,4 @@ interface ChannelInterface extends
     public function getColor(): ?string;
 
     public function setColor(?string $color): void;
-
-    public function getType(): ?string;
-
-    public function setType(?string $type): void;
 }

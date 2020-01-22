@@ -94,10 +94,4 @@ final class ChannelSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
-
-    function its_type_is_mutable(): void
-    {
-        $this->setType('mobile');
-        $this->getType()->shouldReturn('mobile');
-    }
 }

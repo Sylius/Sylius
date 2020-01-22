@@ -217,15 +217,6 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^the (channel "[^"]+") with a (mobile|website|pos) type$/
-     */
-    public function theChannelIsAType(ChannelInterface $channel, string $type): void
-    {
-        $channel->setType($type);
-
-        $this->channelManager->flush();
-    }
 
     /**
      * @Given channel :channel has menu taxon :taxon
