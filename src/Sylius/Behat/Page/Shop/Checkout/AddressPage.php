@@ -250,6 +250,16 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getPreFilledAddress(self::TYPE_BILLING);
     }
 
+    public function getAvailableShippingCountries(): array
+    {
+        return $this->getOptionsFromSelect($this->getElement('shipping_country'));
+    }
+
+    public function getAvailableBillingCountries(): array
+    {
+        return $this->getOptionsFromSelect($this->getElement('billing_country'));
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -281,6 +291,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
             'shipping_street' => '[data-test-shipping-street]',
         ]);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getOptionsFromSelect(NodeElement $element): array
+    {
+        return array_map(
+            /** @return string[] */
+            static function (NodeElement $element): string { return $element->getText(); },
+            $element->findAll('css', 'option[value!=""]')
+        );
     }
 
     private function getPreFilledAddress(string $type): AddressInterface

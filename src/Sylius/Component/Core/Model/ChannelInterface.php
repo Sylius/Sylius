@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
@@ -68,4 +70,17 @@ interface ChannelInterface extends
     public function getMenuTaxon(): ?TaxonInterface;
 
     public function setMenuTaxon(?TaxonInterface $menuTaxon): void;
+
+    /**
+     * @return Collection|CountryInterface[]
+     *
+     * @psalm-return Collection<array-key, CountryInterface>
+     */
+    public function getCountries(): Collection;
+
+    public function addCountry(CountryInterface $country): void;
+
+    public function removeCountry(CountryInterface $country): void;
+
+    public function hasCountry(CountryInterface $country): bool;
 }

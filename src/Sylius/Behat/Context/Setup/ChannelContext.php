@@ -239,6 +239,28 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^(this channel) operates in the ("[^"]+" country)$/
+     */
+    public function channelOperatesInCountry(ChannelInterface $channel, CountryInterface $country): void
+    {
+        $channel->addCountry($country);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(this channel) does not define operating countries$/
+     */
+    public function channelDoesNotDefineOperatingCountries(ChannelInterface $channel): void
+    {
+        foreach ($channel->getCountries() as $country) {
+            $channel->removeCountry($country);
+        }
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

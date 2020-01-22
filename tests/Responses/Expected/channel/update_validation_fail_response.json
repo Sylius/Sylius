@@ -16,6 +16,7 @@
             "locales": {},
             "defaultLocale": {},
             "currencies": {},
+            "countries": {},
             "defaultTaxZone": {},
             "taxCalculationStrategy": {
                 "errors": [

@@ -65,6 +65,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
     }
 
+    public function chooseOperatingCountries(array $countries): void
+    {
+        foreach ($countries as $country) {
+            $this->getElement('countries')->selectOption($country, true);
+        }
+    }
+
     public function chooseBaseCurrency(?string $currency): void
     {
         if (null !== $currency) {
@@ -110,6 +117,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
+            'countries' => '#sylius_channel_countries',
             'currencies' => '#sylius_channel_currencies',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',

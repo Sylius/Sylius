@@ -19,6 +19,7 @@ Or pretty much any other channel type you can imagine.
 * products,
 * currencies,
 * locales (language),
+* countries,
 * themes,
 * hostnames,
 * taxes,

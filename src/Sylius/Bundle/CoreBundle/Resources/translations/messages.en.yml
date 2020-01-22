@@ -32,6 +32,7 @@ sylius:
                 street: Street
                 tax_id: Tax ID
             contact_email: Contact email
+            countries: Countries
             currencies: Currencies
             currency_base: Base currency
             account_verification_required: Is account verification required?

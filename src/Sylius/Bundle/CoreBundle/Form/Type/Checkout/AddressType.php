@@ -17,6 +17,7 @@ use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,13 +35,6 @@ final class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('shippingAddress', SyliusAddressType::class, [
-                'shippable' => true,
-                'constraints' => [new Valid()],
-            ])
-            ->add('billingAddress', SyliusAddressType::class, [
-                'constraints' => [new Valid()],
-            ])
             ->add('differentBillingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -51,6 +45,27 @@ final class AddressType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_shipping_address',
             ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
+                $form = $event->getForm();
+                $order = $event->getData();
+
+                /** @var OrderInterface $order */
+                Assert::isInstanceOf($order, OrderInterface::class);
+
+                $channel = $order->getChannel();
+
+                $form
+                    ->add('shippingAddress', SyliusAddressType::class, [
+                        'shippable' => true,
+                        'constraints' => [new Valid()],
+                        'channel' => $channel,
+                    ])
+                    ->add('billingAddress', SyliusAddressType::class, [
+                        'constraints' => [new Valid()],
+                        'channel' => $channel,
+                    ])
+                ;
+            })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
                 $form = $event->getForm();
                 $resource = $event->getData();

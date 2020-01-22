@@ -65,4 +65,10 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function getPreFilledShippingAddress(): AddressInterface;
 
     public function getPreFilledBillingAddress(): AddressInterface;
+
+    /** @return string[] */
+    public function getAvailableShippingCountries(): array;
+
+    /** @return string[] */
+    public function getAvailableBillingCountries(): array;
 }

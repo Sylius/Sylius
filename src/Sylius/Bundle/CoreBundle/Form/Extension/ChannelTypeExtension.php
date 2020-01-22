@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
@@ -51,6 +52,11 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('currencies', CurrencyChoiceType::class, [
                 'label' => 'sylius.form.channel.currencies',
+                'required' => false,
+                'multiple' => true,
+            ])
+            ->add('countries', CountryChoiceType::class, [
+                'label' => 'sylius.form.channel.countries',
                 'required' => false,
                 'multiple' => true,
             ])
