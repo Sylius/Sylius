@@ -87,7 +87,7 @@ Below you can see the usage for specifying custom options, in this case, ``valid
             _controller: app.controller.book:createAction
             _sylius:
                 form:
-                    type: app_book_custom
+                    type: App\Form\BookType
                     options:
                         validation_groups: [sylius, my_custom_group]
 
@@ -238,7 +238,7 @@ Configuration Reference
             _controller: app.controller.book:createAction
             _sylius:
                 template: Book/addToGenre.html.twig
-                form: app_new_book
+                form: App\Form\BookType
                 event: book_create
                 factory:
                     method: createForGenre
