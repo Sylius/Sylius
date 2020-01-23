@@ -103,6 +103,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I choose :firstCountry and :secondCountry as operating countries
+     */
+    public function iChooseOperatingCountries(string ...$countries): void
+    {
+        $this->createPage->chooseOperatingCountries($countries);
+    }
+
+    /**
      * @When I specify menu taxon as :menuTaxon
      */
     public function iSpecifyMenuTaxonAs(string $menuTaxon): void

@@ -23,6 +23,7 @@
         ]
       },
       "currencies": {},
+      "countries": {},
       "defaultTaxZone": {},
       "taxCalculationStrategy": {
         "errors": [

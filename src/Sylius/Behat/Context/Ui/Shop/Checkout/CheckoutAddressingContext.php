@@ -56,9 +56,10 @@ final class CheckoutAddressingContext implements Context
 
     /**
      * @Given I am at the checkout addressing step
+     * @When I go to the checkout addressing step
      * @When I go back to addressing step of the checkout
      */
-    public function iAmAtTheCheckoutAddressingStep()
+    public function iAmAtTheCheckoutAddressingStep(): void
     {
         $this->addressPage->open();
     }
@@ -383,6 +384,23 @@ final class CheckoutAddressingContext implements Context
     {
         $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @Then I should have only :firstCountry country available to choose from
+     * @Then I should have both :firstCountry and :secondCountry countries available to choose from
+     */
+    public function shouldHaveCountriesToChooseFrom(string ...$countries): void
+    {
+        $availableShippingCountries = $this->addressPage->getAvailableShippingCountries();
+        $availableBillingCountries = $this->addressPage->getAvailableBillingCountries();
+
+        sort($countries);
+        sort($availableShippingCountries);
+        sort($availableBillingCountries);
+
+        Assert::same($availableShippingCountries, $countries);
+        Assert::same($availableBillingCountries, $countries);
     }
 
     /**
