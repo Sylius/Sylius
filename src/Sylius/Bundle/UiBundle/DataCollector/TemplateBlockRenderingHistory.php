@@ -23,36 +23,39 @@ final class TemplateBlockRenderingHistory
     /** @psalm-var list<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
     private $renderedEvents = [];
 
-    /** @psalm-var array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>} */
-    private $currentlyRenderedEvent = [];
+    /** @psalm-var list<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
+    private $currentlyRenderedEvents = [];
 
-    /** @psalm-var array{definition: TemplateBlock, start: float, stop?: float, time?: float} */
-    private $currentlyRenderedBlock = [];
+    /** @psalm-var list<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
+    private $currentlyRenderedBlocks = [];
 
     public function startRenderingEvent(array $eventNames, array $context): void
     {
-        $this->currentlyRenderedEvent = ['names' => $eventNames, 'start' => microtime(true), 'blocks' => []];
+        $this->currentlyRenderedEvents[] = ['names' => $eventNames, 'start' => microtime(true), 'blocks' => []];
     }
 
     public function startRenderingBlock(TemplateBlock $templateBlock, array $context): void
     {
-        $this->currentlyRenderedBlock = ['definition' => $templateBlock, 'start' => microtime(true)];
+        $this->currentlyRenderedBlocks[] = ['definition' => $templateBlock, 'start' => microtime(true)];
     }
 
     public function stopRenderingBlock(TemplateBlock $templateBlock, array $context): void
     {
-        $this->currentlyRenderedBlock['stop'] = microtime(true);
-        $this->currentlyRenderedBlock['time'] = $this->currentlyRenderedBlock['stop'] - $this->currentlyRenderedBlock['start'];
-        $this->currentlyRenderedEvent['blocks'][] = $this->currentlyRenderedBlock;
-        $this->currentlyRenderedBlock = [];
+        $currentlyRenderedBlock = array_pop($this->currentlyRenderedBlocks);
+        $currentlyRenderedBlock['stop'] = microtime(true);
+        $currentlyRenderedBlock['time'] = $currentlyRenderedBlock['stop'] - $currentlyRenderedBlock['start'];
+
+        $currentlyRenderedEvent = array_pop($this->currentlyRenderedEvents);
+        $currentlyRenderedEvent['blocks'][] = $currentlyRenderedBlock;
+        $this->currentlyRenderedEvents[] = $currentlyRenderedEvent;
     }
 
     public function stopRenderingEvent(array $eventNames, array $context): void
     {
-        $this->currentlyRenderedEvent['stop'] = microtime(true);
-        $this->currentlyRenderedEvent['time'] = $this->currentlyRenderedEvent['stop'] - $this->currentlyRenderedEvent['start'];
-        $this->renderedEvents[] = $this->currentlyRenderedEvent;
-        $this->currentlyRenderedEvent = [];
+        $currentlyRenderedEvent = array_pop($this->currentlyRenderedEvents);
+        $currentlyRenderedEvent['stop'] = microtime(true);
+        $currentlyRenderedEvent['time'] = $currentlyRenderedEvent['stop'] - $currentlyRenderedEvent['start'];
+        $this->renderedEvents[] = $currentlyRenderedEvent;
     }
 
     public function getRenderedEvents(): array
@@ -62,6 +65,6 @@ final class TemplateBlockRenderingHistory
 
     public function reset(): void
     {
-        $this->renderedEvents = $this->currentlyRenderedEvent = $this->currentlyRenderedBlock = [];
+        $this->renderedEvents = $this->currentlyRenderedEvents = $this->currentlyRenderedBlocks = [];
     }
 }
