@@ -63,6 +63,6 @@ final class ShowAvailablePluginsCommand extends Command
         $this->plugins->add(new PluginInfo('<info>Customer Reorder</info>', 'Convenient reordering for the customers from the `My account` section.', 'https://github.com/Sylius/CustomerReorderPlugin'));
         $this->plugins->add(new PluginInfo('<info>Invoicing</info>', 'Automatised, basic invoicing system for orders.', 'https://github.com/Sylius/InvoicingPlugin'));
         $this->plugins->add(new PluginInfo('<info>Refund</info>', 'Full and partial refunds of items and/or shipping costs including Credit Memos.', 'https://github.com/Sylius/RefundPlugin'));
-        $this->plugins->add(new PluginInfo('<info>CMS</info>', 'This plugin allows you to add dynamic blocks with images, text or HTML to your storefront as well as pages and FAQs section.','https://github.com/BitBagCommerce/SyliusCmsPlugin' ));
+        $this->plugins->add(new PluginInfo('<info>CMS</info>', 'This plugin allows you to add dynamic blocks with images, text or HTML to your storefront as well as pages and FAQs section.', 'https://github.com/BitBagCommerce/SyliusCmsPlugin'));
     }
 }

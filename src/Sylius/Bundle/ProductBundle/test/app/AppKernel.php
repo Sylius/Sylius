@@ -19,7 +19,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 

@@ -64,7 +64,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isProductOnList(string $productName): bool
     {
-        try{
+        try {
             $this->getElement('product_name', ['%productName%' => $productName]);
         } catch (ElementNotFoundException $e) {
             return false;

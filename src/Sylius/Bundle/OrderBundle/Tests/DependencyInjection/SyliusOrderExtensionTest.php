@@ -19,7 +19,6 @@ use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPas
 use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusOrderExtensionTest extends AbstractExtensionTestCase

@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ChannelSpec extends ObjectBehavior
 {
