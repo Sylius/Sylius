@@ -6,12 +6,13 @@ Require upgraded Sylius version using Composer:
 composer require sylius/sylius:~1.7.0
 ```
 
-Update your `package.json` in order to add `slick-carousel` : 
+Update your `package.json` in order to add `chart.js` and `slick-carousel` : 
 
 ```diff
 {
   "dependencies": {
     "babel-polyfill": "^6.26.0",
++   "chart.js": "^2.9.3",
     "jquery": "^3.4.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
