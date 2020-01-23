@@ -16,8 +16,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -283,14 +283,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I define its type as (mobile|website|pos)$/
-     */
-    public function iDefineItsTypeAs(string $type): void
-    {
-        $this->createPage->setType($type);
-    }
-
-    /**
      * @Then I should be notified that channel with this code already exists
      */
     public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists()
@@ -478,14 +470,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I change its type to (mobile|website|pos)$/
-     */
-    public function iChangeItsTypeTo(string $type): void
-    {
-        $this->updatePage->changeType($type);
-    }
-
-    /**
      * @Given channel :channel should not have default tax zone
      */
     public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel)
@@ -522,14 +506,6 @@ final class ManagingChannelsContext implements Context
             $this->updatePage->getValidationMessage('default_locale'),
             'Default locale has to be enabled.'
         );
-    }
-
-    /**
-     * @Then /^this channel type should be (mobile|website|pos)$/
-     */
-    public function thisChannelTypeShouldBe(string $type): void
-    {
-        Assert::same($this->updatePage->getType(), $type);
     }
 
     /**

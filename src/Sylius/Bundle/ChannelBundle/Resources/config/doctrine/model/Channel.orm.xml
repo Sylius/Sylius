@@ -28,7 +28,6 @@
         <field name="description" type="text" nullable="true" />
         <field name="enabled" type="boolean" />
         <field name="hostname" type="string" nullable="true" />
-        <field name="type" type="string" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

@@ -29,7 +29,6 @@ Feature: Adding a new channel
         And I set its hostname as "m.avengers-gear.com"
         And I set its contact email as "contact@avengers-gear.com"
         And I define its color as "blue"
-        And I define its type as mobile
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
         And I allow to skip shipping step if only one shipping method is available

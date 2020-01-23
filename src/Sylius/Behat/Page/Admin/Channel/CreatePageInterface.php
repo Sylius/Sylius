@@ -49,7 +49,5 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function allowToSkipPaymentStep(): void;
 
-    public function setType(string $type): void;
-
     public function specifyMenuTaxon(string $menuTaxon): void;
 }

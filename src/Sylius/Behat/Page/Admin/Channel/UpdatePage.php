@@ -88,16 +88,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('base_currency')->hasAttribute('disabled');
     }
 
-    public function changeType(string $type): void
-    {
-        $this->getElement('type')->selectOption($type);
-    }
-
-    public function getType(): string
-    {
-        return $this->getElement('type')->getValue();
-    }
-
     public function changeMenuTaxon(string $menuTaxon): void
     {
         $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
@@ -138,8 +128,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'menu_taxon' => '#sylius_channel_menuTaxon',
             'name' => '#sylius_channel_name',
             'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
-            'theme' => '#sylius_channel_themeName',
-            'type' => '#sylius_channel_type',
         ]);
     }
 }
