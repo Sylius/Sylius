@@ -14,7 +14,7 @@
         {{ form_widget(form) }}
     {% endif %}
 
-    {{ sonata_block_render_event(event_prefix ~ '.form', {'resource': resource, 'form': form}) }}
+    {{ sylius_template_event([event_prefix ~ '.form', 'sylius.admin.update.form'], {'metadata': metadata, 'resource': resource, 'form': form}) }}
 
     {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': index_url}} %}
 

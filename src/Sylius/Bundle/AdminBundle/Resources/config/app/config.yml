@@ -63,3 +63,166 @@ liip_imagine:
 
 sonata_block:
     default_contexts: ~
+
+sylius_ui:
+    events:
+        sylius.admin.index:
+            blocks:
+                before_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        postfix: index.before_header 
+                header:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 20
+                    context:
+                        template: "@SyliusAdmin/Crud/Index/_header.html.twig"
+                after_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        postfix: index.after_header
+                content:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 10
+                    context:
+                        template: "@SyliusAdmin/Crud/Index/_content.html.twig"
+                after_content: 
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        postfix: index.after_content 
+        
+        sylius.admin.index.stylesheets:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: index.stylesheets
+                        
+        sylius.admin.index.javascripts:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: index.javascripts
+                        
+        sylius.admin.index.header:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: index.header
+                        
+        sylius.admin.create:
+            blocks:
+                before_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        postfix: create.before_header 
+                header:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 20
+                    context:
+                        template: "@SyliusAdmin/Crud/Create/_header.html.twig"
+                after_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        postfix: create.after_header
+                content:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 10
+                    context:
+                        template: "@SyliusAdmin/Crud/Create/_content.html.twig"
+                after_content: 
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        postfix: create.after_content 
+        
+        sylius.admin.create.stylesheets:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: create.stylesheets
+                        
+        sylius.admin.create.javascripts:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: create.javascripts
+                        
+        sylius.admin.create.header:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: create.header
+                        
+        sylius.admin.create.form:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: create.form
+                        
+        sylius.admin.update:
+            blocks:
+                before_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        postfix: update.before_header 
+                header:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 20
+                    context:
+                        template: "@SyliusAdmin/Crud/Update/_header.html.twig"
+                after_header_legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        postfix: update.after_header
+                content:
+                    template: "@SyliusUi/Block/_include.html.twig"
+                    priority: 10
+                    context:
+                        template: "@SyliusAdmin/Crud/Update/_content.html.twig"
+                after_content: 
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        postfix: update.after_content 
+        
+        sylius.admin.update.stylesheets:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: update.stylesheets
+                        
+        sylius.admin.update.javascripts:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: update.javascripts
+                        
+        sylius.admin.update.header:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: update.header
+                        
+        sylius.admin.update.form:
+            blocks:
+                legacy:
+                    template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    context:
+                        postfix: update.form

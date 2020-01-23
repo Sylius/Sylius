@@ -8,25 +8,17 @@
 {% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
 
 {% block content %}
-{{ sonata_block_render_event(event_prefix ~ '.before_header', {'resource': resource}) }}
-
-{% include '@SyliusAdmin/Crud/Update/_header.html.twig' %}
-
-{{ sonata_block_render_event(event_prefix ~ '.after_header', {'resource': resource}) }}
-
-{% include '@SyliusAdmin/Crud/Update/_content.html.twig' %}
-
-{{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
+    {{ sylius_template_event([event_prefix, 'sylius.admin.update'], _context) }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {{ sonata_block_render_event(event_prefix ~ '.stylesheets') }}
+    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.update.stylesheets'], { 'metadata': metadata }) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
 
-    {{ sonata_block_render_event(event_prefix ~ '.javascripts') }}
+    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.update.javascripts'], { 'metadata': metadata }) }}
 {% endblock %}

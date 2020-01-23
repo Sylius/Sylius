@@ -3,7 +3,7 @@
         {% include configuration.vars.templates.header_title|default('@SyliusAdmin/Crud/Create/_headerTitle.html.twig') %}
         {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Crud/Create/_breadcrumb.html.twig') %}
 
-        {{ sonata_block_render_event(event_prefix ~ '.header', {'resource': resource}) }}
+        {{ sylius_template_event([event_prefix ~ '.header', 'sylius.admin.create.header'], {'metadata': metadata, 'resource': resource}) }}
     </div>
     <div class="middle aligned column">
         {% include configuration.vars.templates.toolbar|default('@SyliusAdmin/Crud/_toolbar.html.twig') ignore missing %}
