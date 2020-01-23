@@ -29,17 +29,17 @@ final class TemplateBlockRenderingHistory
     /** @psalm-var array{definition: TemplateBlock, start: float, stop?: float, time?: float} */
     private $currentlyRenderedBlock = [];
 
-    public function startRenderingEvent(string $eventName, array $context): void
+    public function startRenderingEvent(array $eventNames, array $context): void
     {
-        $this->currentlyRenderedEvent = ['name' => $eventName, 'start' => microtime(true), 'blocks' => []];
+        $this->currentlyRenderedEvent = ['names' => $eventNames, 'start' => microtime(true), 'blocks' => []];
     }
 
-    public function startRenderingBlock(string $eventName, TemplateBlock $templateBlock, array $context): void
+    public function startRenderingBlock(TemplateBlock $templateBlock, array $context): void
     {
         $this->currentlyRenderedBlock = ['definition' => $templateBlock, 'start' => microtime(true)];
     }
 
-    public function stopRenderingBlock(string $eventName, TemplateBlock $templateBlock, array $context): void
+    public function stopRenderingBlock(TemplateBlock $templateBlock, array $context): void
     {
         $this->currentlyRenderedBlock['stop'] = microtime(true);
         $this->currentlyRenderedBlock['time'] = $this->currentlyRenderedBlock['stop'] - $this->currentlyRenderedBlock['start'];
@@ -47,7 +47,7 @@ final class TemplateBlockRenderingHistory
         $this->currentlyRenderedBlock = [];
     }
 
-    public function stopRenderingEvent(string $eventName, array $context): void
+    public function stopRenderingEvent(array $eventNames, array $context): void
     {
         $this->currentlyRenderedEvent['stop'] = microtime(true);
         $this->currentlyRenderedEvent['time'] = $this->currentlyRenderedEvent['stop'] - $this->currentlyRenderedEvent['start'];

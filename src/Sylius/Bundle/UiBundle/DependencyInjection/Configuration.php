@@ -40,14 +40,15 @@ final class Configuration implements ConfigurationInterface
                                     ->canBeDisabled()
                                     ->beforeNormalization()
                                         ->ifString()
-                                        ->then(static function (string $template): array {
+                                        ->then(static function (?string $template): array {
                                             return ['template' => $template];
                                         })
                                     ->end()
                                     ->children()
+                                        ->booleanNode('enabled')->defaultNull()->end()
                                         ->arrayNode('context')->addDefaultsIfNotSet()->ignoreExtraKeys(false)->end()
-                                        ->scalarNode('template')->isRequired()->cannotBeEmpty()->end()
-                                        ->integerNode('priority')->defaultValue(0)->end()
+                                        ->scalarNode('template')->defaultNull()->end()
+                                        ->integerNode('priority')->defaultNull()->end()
         ;
 
         return $treeBuilder;

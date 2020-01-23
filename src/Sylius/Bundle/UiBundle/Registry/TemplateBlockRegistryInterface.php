@@ -17,15 +17,16 @@ interface TemplateBlockRegistryInterface
 {
     /**
      * @return TemplateBlock[][]
-     *
-     * @psalm-return array<string, list<TemplateBlock>>
+     * @psalm-return array<string, array<string, TemplateBlock>>
      */
     public function all(): array;
 
     /**
-     * @return TemplateBlock[]
+     * @param string[] $eventNames
+     * @psalm-param non-empty-list<string> $eventNames
      *
+     * @return TemplateBlock[]
      * @psalm-return list<TemplateBlock>
      */
-    public function findEnabledForEvent(string $eventName): array;
+    public function findEnabledForEvents(array $eventNames): array;
 }

@@ -41,11 +41,11 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             0,
             [
                 'first_event' => [
-                    new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', [], 0, true]),
-                    new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', ['foo' => 'bar'], 0, true]),
+                    'first_block' => new Definition(TemplateBlock::class, ['first_block', 'first_event', 'first.html.twig', [], 0, true]),
+                    'second_block' => new Definition(TemplateBlock::class, ['second_block', 'first_event', 'second.html.twig', ['foo' => 'bar'], 0, true]),
                 ],
                 'second_event' => [
-                    new Definition(TemplateBlock::class, ['another_block', 'another.html.twig', [], 0, true]),
+                    'another_block' => new Definition(TemplateBlock::class, ['another_block', 'second_event', 'another.html.twig', [], 0, true]),
                 ],
             ]
         );
@@ -69,10 +69,10 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             TemplateBlockRegistryInterface::class,
             0,
             ['event_name' => [
-                new Definition(TemplateBlock::class, ['first_block', 'first.html.twig', [], 5, true]),
-                new Definition(TemplateBlock::class, ['second_block', 'second.html.twig', [], 0, true]),
-                new Definition(TemplateBlock::class, ['third_block', 'third.html.twig', [], 0, true]),
-                new Definition(TemplateBlock::class, ['fourth_block', 'fourth.html.twig', [], -5, true]),
+                'first_block' => new Definition(TemplateBlock::class, ['first_block', 'event_name', 'first.html.twig', [], 5, true]),
+                'second_block' => new Definition(TemplateBlock::class, ['second_block', 'event_name', 'second.html.twig', [], 0, true]),
+                'third_block' => new Definition(TemplateBlock::class, ['third_block', 'event_name', 'third.html.twig', [], 0, true]),
+                'fourth_block' => new Definition(TemplateBlock::class, ['fourth_block', 'event_name', 'fourth.html.twig', [], -5, true]),
             ]]
         );
     }

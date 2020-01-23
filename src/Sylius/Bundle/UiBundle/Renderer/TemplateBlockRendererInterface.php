@@ -17,5 +17,5 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
 interface TemplateBlockRendererInterface
 {
-    public function render(string $eventName, TemplateBlock $templateBlock, array $context = []): string;
+    public function render(TemplateBlock $templateBlock, array $context = []): string;
 }

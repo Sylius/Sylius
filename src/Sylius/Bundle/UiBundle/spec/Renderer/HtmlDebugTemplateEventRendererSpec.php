@@ -35,14 +35,14 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'secondBlock.html.twig', [], 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.html.twig', [], 0, true);
 
-        $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
+        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
-        $templateEventRenderer->render('best_event_ever', ['foo' => 'bar'])->willReturn("First block\nSecond block");
+        $templateEventRenderer->render(['best_event_ever'], ['foo' => 'bar'])->willReturn("First block\nSecond block");
 
-        $this->render('best_event_ever', ['foo' => 'bar'])->shouldReturn(
+        $this->render(['best_event_ever'], ['foo' => 'bar'])->shouldReturn(
             '<!-- BEGIN EVENT | event name: "best_event_ever" -->' . "\n" .
             'First block' . "\n" .
             'Second block' . "\n" .
@@ -54,25 +54,25 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'secondBlock.txt.twig', [], 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.txt.twig', [], 0, true);
 
-        $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
+        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
-        $templateEventRenderer->render('best_event_ever', ['foo' => 'bar'])->willReturn("First block\nSecond block");
+        $templateEventRenderer->render(['best_event_ever'], ['foo' => 'bar'])->willReturn("First block\nSecond block");
 
-        $this->render('best_event_ever', ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
+        $this->render(['best_event_ever'], ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
     }
 
     function it_returns_html_debug_comment_if_no_blocks_are_found_for_an_event(
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([]);
+        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([]);
 
         $templateEventRenderer->render(Argument::cetera())->willReturn('');
 
-        $this->render('best_event_ever')->shouldReturn(
+        $this->render(['best_event_ever'])->shouldReturn(
             '<!-- BEGIN EVENT | event name: "best_event_ever" -->' . "\n" .
             "\n" .
             '<!-- END EVENT | event name: "best_event_ever" -->'
