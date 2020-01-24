@@ -154,6 +154,14 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I ship the shipments of order :orderNumber with provided :trackingCode tacking code
+     */
+    public function iShipTheShipmentsOfOrderWithProvidedTackingCode(string $orderNumber, string $trackingCode): void
+    {
+        $this->indexPage->shipShipmentOfNumberWithTrackingCode($orderNumber, $trackingCode);
+    }
+
+    /**
      * @Then I should see order page with details of order :order
      */
     public function iShouldSeeOrderPageWithDetailsOfOrder(OrderInterface $order): void

@@ -63,6 +63,12 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getOrderLinkForRow($position)->clickLink('#');
     }
 
+    public function shipShipmentOfNumberWithTrackingCode(string $orderNumber, string $trackingCode): void
+    {
+        $this->getField($orderNumber, 'actions')->fillField('tracking_code', $trackingCode);
+        $this->getField($orderNumber, 'actions')->pressButton('Ship');
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

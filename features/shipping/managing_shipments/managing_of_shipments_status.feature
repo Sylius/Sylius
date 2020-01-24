@@ -22,3 +22,10 @@ Feature: Shipping a shipment from shipment list
         Then I should be notified that the shipment has been successfully shipped
         And an email with the "UPS" shipment's confirmation for the "#00000001" order should be sent to "donald@duck.com"
         And I should see the shipment of order "#00000001" as "Shipped"
+
+    @ui @email
+    Scenario: Shipping a shipment and providing tracking code from shipment index
+        When I browse shipments
+        And I ship the shipments of order "#0000001" with provided "AWDDXS-SAAQQ-SEFFX-CCDSE" tacking code
+        Then I should be notified that the shipment has been successfully shipped
+        And an email with the shipment's confirmation of the order "#0000001" should be sent to "donald@duck.com"
