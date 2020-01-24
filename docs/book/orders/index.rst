@@ -21,6 +21,7 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     payments
     invoices
     checkout
+    returns
     refunds
 
 .. include:: /book/orders/map.rst.inc
