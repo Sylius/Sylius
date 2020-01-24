@@ -31,16 +31,9 @@ Refund Payments
 Alongside the Credit Memo document, a new refund Payment is created in response to a Refund. This is a convenient object,
 with which you can automate the process of paying the refunds to the customer;s account.
 
-Returns
-~~~~~~~
-
-.. tip::
-
-    In order to allow requesting returns of Orders (and individual order items) in shop for your Customers, you will need
-    the Returns (RMA) functionality which is available in the `Sylius Plus <https://sylius.com/plus/>`_ version.
-
 Learn more
 ----------
 
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin>`_
+* :doc:`Returns </book/orders/returns>`
 * :doc:`Other Sylius plugins </book/plugins/index>`

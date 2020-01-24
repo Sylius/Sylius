@@ -8,6 +8,7 @@ There is also a subchapter dedicated to addresses of your customers.
     :hidden:
 
     customer_and_shopuser
+    customer_pools
     adminuser
     addresses/index
 
