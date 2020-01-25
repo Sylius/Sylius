@@ -35,12 +35,16 @@ $.fn.extend({
             return settings;
           },
           onResponse(response) {
+            var result = response.map(item => ({
+              name: item[choiceName],
+              value: item[choiceValue],
+            }));
+
+            result.unshift({name: '', value: ''});
+
             return {
               success: true,
-              results: response.map(item => ({
-                name: item[choiceName],
-                value: item[choiceValue],
-              })),
+              results: result
             };
           },
         },
