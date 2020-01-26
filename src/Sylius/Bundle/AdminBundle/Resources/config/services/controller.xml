@@ -59,5 +59,11 @@
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Action\ShipShipmentAction" public="true">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Shipper\OrderShipmentShipper" />
+        </service>
     </services>
 </container>

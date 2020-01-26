@@ -154,11 +154,11 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @When I ship the shipments of order :orderNumber with provided :trackingCode tacking code
+     * @When I ship the shipment of order :orderNumber with :trackingCode tracking code
      */
-    public function iShipTheShipmentsOfOrderWithProvidedTackingCode(string $orderNumber, string $trackingCode): void
+    public function iShipTheShipmentOfOrderWithTrackingCode(string $orderNumber, string $trackingCode): void
     {
-        $this->indexPage->shipShipmentOfNumberWithTrackingCode($orderNumber, $trackingCode);
+        $this->indexPage->shipShipmentOfOrderWithTrackingCode($orderNumber, $trackingCode);
     }
 
     /**

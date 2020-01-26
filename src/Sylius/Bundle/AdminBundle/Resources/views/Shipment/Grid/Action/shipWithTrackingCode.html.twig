@@ -1,0 +1,12 @@
+{% if sm_can(data, 'ship', 'sylius_shipment') %}
+    <form class="ui loadable form" novalidate="novalidate" action="{{ path('sylius_admin_shipment_ship', {'id': data.id}) }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="ui inline fields">
+            <input type="text" id="sylius_shipment_ship_tracking" name="sylius_shipment_ship_tracking" placeholder="{{ 'sylius.ui.tracking_code'|trans ~ '...' }}" />
+            <button type="submit" class="ui labeled icon teal button" data-js-disable=".sylius-grid-table-wrapper button, .sylius-grid-table-wrapper a">
+                <i class="plane icon"></i> {{ 'sylius.ui.ship'|trans }}
+            </button>
+        </div>
+    </form>
+{% endif %}
