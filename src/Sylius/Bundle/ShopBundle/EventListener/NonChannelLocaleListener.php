@@ -16,12 +16,17 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 final class NonChannelLocaleListener
 {
+    /** @var RouterInterface */
+    private $router;
+
     /** @var LocaleProviderInterface */
     private $channelBasedLocaleProvider;
 
@@ -35,6 +40,7 @@ final class NonChannelLocaleListener
      * @param string[] $firewallNames
      */
     public function __construct(
+        RouterInterface $router,
         LocaleProviderInterface $channelBasedLocaleProvider,
         FirewallMap $firewallMap,
         array $firewallNames
@@ -45,6 +51,7 @@ final class NonChannelLocaleListener
         $this->channelBasedLocaleProvider = $channelBasedLocaleProvider;
         $this->firewallMap = $firewallMap;
         $this->firewallNames = $firewallNames;
+        $this->router = $router;
     }
 
     /**
@@ -68,8 +75,13 @@ final class NonChannelLocaleListener
 
         $requestLocale = $request->getLocale();
         if (!in_array($requestLocale, $this->channelBasedLocaleProvider->getAvailableLocalesCodes(), true)) {
-            throw new NotFoundHttpException(
-                sprintf('The "%s" locale is unavailable in this channel.', $requestLocale)
+            $event->setResponse(
+                new RedirectResponse(
+                    $this->router->generate(
+                        'sylius_shop_homepage',
+                        ['_locale' => $this->channelBasedLocaleProvider->getDefaultLocaleCode()]
+                    )
+                )
             );
         }
     }

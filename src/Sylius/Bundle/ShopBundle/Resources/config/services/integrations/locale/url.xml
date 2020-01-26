@@ -20,6 +20,7 @@
         </service>
 
         <service id="sylius.listener.non_channel_request_locale" class="Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener">
+            <argument type="service" id="router" />
             <argument type="service" id="sylius.locale_provider" />
             <argument type="service" id="security.firewall.map" />
             <argument type="collection">
