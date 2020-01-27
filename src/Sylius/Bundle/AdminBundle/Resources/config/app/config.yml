@@ -214,3 +214,77 @@ sylius_ui:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: update.form
+       
+        sylius.admin.layout.sidebar:
+            blocks:
+                top_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        event: sylius.admin.layout.sidebar_top
+                logo:
+                    template: "@SyliusAdmin/_logo.html.twig"
+                    priority: 20
+                menu:
+                    template: "@SyliusAdmin/_menu.html.twig"
+                    priority: 10
+                down_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.admin.layout.sidebar_down
+                        
+        sylius.admin.layout.javascripts:
+            blocks:
+                legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.admin.layout.javascripts
+                        
+        sylius.admin.layout.stylesheets:
+            blocks:
+                legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.admin.layout.stylesheets
+
+        sylius.admin.layout.topbar_left:
+            blocks:
+                sidebar_toggle:
+                    template: "@SyliusAdmin/_sidebarToggle.html.twig"
+                    priority: 30
+                legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 25
+                    context:
+                        event: sylius.admin.layout.topbar_left
+                channel_links:
+                    template: "@SyliusAdmin/_channelLinksWidget.html.twig"
+                    priority: 20
+                search:
+                    template: "@SyliusAdmin/_search.html.twig"
+                    priority: 10
+                        
+        sylius.admin.layout.topbar_middle:
+            blocks:
+                legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.admin.layout.topbar_middle
+                        
+        sylius.admin.layout.topbar_right:
+            blocks:
+                notifications:
+                    template: "@SyliusAdmin/_channelLinksWidget.html.twig"
+                    priority: 30
+                support:
+                    template: "@SyliusAdmin/_support.html.twig"
+                    priority: 20
+                security:
+                    template: "@SyliusAdmin/_security.html.twig"
+                    priority: 10
+                legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.admin.layout.topbar_right
