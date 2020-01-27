@@ -26,15 +26,11 @@ final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
         $this->twig = $twig;
     }
 
-    public function render(string $eventName, TemplateBlock $templateBlock, array $context = []): string
+    public function render(TemplateBlock $templateBlock, array $context = []): string
     {
         return $this->twig->render(
             $templateBlock->getTemplate(),
-            array_replace(
-                $templateBlock->getContext(),
-                $context,
-                ['_event' => $eventName]
-            )
+            array_replace($templateBlock->getContext(), $context)
         );
     }
 }

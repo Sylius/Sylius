@@ -50,13 +50,23 @@ final class SyliusUiExtension extends Extension
             $blocksPriorityQueue = new SplPriorityQueue();
 
             foreach ($eventConfiguration['blocks'] as $blockName => $details) {
-                $blocksPriorityQueue->insert(
-                    new Definition(TemplateBlock::class, [$blockName, $details['template'], $details['context'], $details['priority'], $details['enabled']]),
-                    $details['priority']
-                );
+                $details['name'] = $blockName;
+                $details['eventName'] = $eventName;
+
+                $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
-            $blocksForEvents[$eventName] = $blocksPriorityQueue->toArray();
+            foreach ($blocksPriorityQueue->toArray() as $details) {
+                /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
+                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
+                    $details['name'],
+                    $details['eventName'],
+                    $details['template'],
+                    $details['context'],
+                    $details['priority'],
+                    $details['enabled'],
+                ]);
+            }
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);

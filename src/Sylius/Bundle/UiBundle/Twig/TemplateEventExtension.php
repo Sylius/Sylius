@@ -30,7 +30,15 @@ final class TemplateEventExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_template_event', [$this->templateEventRenderer, 'render'], ['is_safe' => ['html']]),
+            new TwigFunction('sylius_template_event', [$this, 'render'], ['is_safe' => ['html']]),
         ];
+    }
+
+    /**
+     * @param string|string[] $eventName
+     */
+    public function render($eventName, array $context = []): string
+    {
+        return $this->templateEventRenderer->render((array) $eventName, $context);
     }
 }

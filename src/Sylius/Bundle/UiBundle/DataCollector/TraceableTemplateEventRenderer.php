@@ -32,13 +32,13 @@ final class TraceableTemplateEventRenderer implements TemplateEventRendererInter
         $this->templateBlockRenderingHistory = $templateBlockRenderingHistory;
     }
 
-    public function render(string $eventName, array $context = []): string
+    public function render(array $eventNames, array $context = []): string
     {
-        $this->templateBlockRenderingHistory->startRenderingEvent($eventName, $context);
+        $this->templateBlockRenderingHistory->startRenderingEvent($eventNames, $context);
 
-        $renderedEvent = $this->templateEventRenderer->render($eventName, $context);
+        $renderedEvent = $this->templateEventRenderer->render($eventNames, $context);
 
-        $this->templateBlockRenderingHistory->stopRenderingEvent($eventName, $context);
+        $this->templateBlockRenderingHistory->stopRenderingEvent($eventNames, $context);
 
         return $renderedEvent;
     }

@@ -30,25 +30,25 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
         $this->templateBlockRegistry = $templateBlockRegistry;
     }
 
-    public function render(string $eventName, array $context = []): string
+    public function render(array $eventNames, array $context = []): string
     {
-        $shouldRenderHtmlDebug = $this->shouldRenderHtmlDebug($this->templateBlockRegistry->findEnabledForEvent($eventName));
+        $shouldRenderHtmlDebug = $this->shouldRenderHtmlDebug($this->templateBlockRegistry->findEnabledForEvents($eventNames));
 
         $renderedParts = [];
 
         if ($shouldRenderHtmlDebug) {
             $renderedParts[] = sprintf(
                 '<!-- BEGIN EVENT | event name: "%s" -->',
-                $eventName
+                implode(', ', $eventNames)
             );
         }
 
-        $renderedParts[] = $this->templateEventRenderer->render($eventName, $context);
+        $renderedParts[] = $this->templateEventRenderer->render($eventNames, $context);
 
         if ($shouldRenderHtmlDebug) {
             $renderedParts[] = sprintf(
                 '<!-- END EVENT | event name: "%s" -->',
-                $eventName
+                implode(', ', $eventNames)
             );
         }
 

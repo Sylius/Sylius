@@ -29,13 +29,13 @@ final class DelegatingTemplateEventRenderer implements TemplateEventRendererInte
         $this->templateBlockRenderer = $templateBlockRenderer;
     }
 
-    public function render(string $eventName, array $context = []): string
+    public function render(array $eventNames, array $context = []): string
     {
-        $templateBlocks = $this->templateBlockRegistry->findEnabledForEvent($eventName);
+        $templateBlocks = $this->templateBlockRegistry->findEnabledForEvents($eventNames);
         $renderedTemplates = [];
 
         foreach ($templateBlocks as $templateBlock) {
-            $renderedTemplates[] = $this->templateBlockRenderer->render($eventName, $templateBlock, $context);
+            $renderedTemplates[] = $this->templateBlockRenderer->render($templateBlock, $context);
         }
 
         return implode("\n", $renderedTemplates);

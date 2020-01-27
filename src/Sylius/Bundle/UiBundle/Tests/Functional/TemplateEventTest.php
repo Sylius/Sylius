@@ -34,7 +34,7 @@ final class TemplateEventTest extends KernelTestCase
     {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
-            'First block (for event: "first_event")',
+            'First block',
             'Second block',
             'Third block',
             'The king is dead, long live the king!',
@@ -71,6 +71,21 @@ final class TemplateEventTest extends KernelTestCase
             'Block: option1=foo, option2=baz',
         ];
         $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('contextTemplateBlock.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
+
+    /** @test */
+    public function it_renders_multiple_events_at_once(): void
+    {
+        // See Kernel.php for the configuration resulting in those lines
+        $expectedLines = [
+            'Generic block #2 (value=42)',
+            'Specific block',
+            'Generic block #1',
+        ];
+
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('multipleEvents.txt.twig'))));
 
         Assert::assertSame($expectedLines, $renderedLines);
     }

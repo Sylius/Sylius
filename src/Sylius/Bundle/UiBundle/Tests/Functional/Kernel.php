@@ -80,6 +80,29 @@ final class Kernel extends HttpKernel
                     ],
                 ],
             ],
+            'multiple_events_generic' => [
+                'blocks' => [
+                    'first' => [
+                        'template' => 'blocks/multipleEvents/genericFirst.txt.twig',
+                    ],
+                    'second' => [
+                        'template' => 'blocks/multipleEvents/genericSecond.txt.twig',
+                        'context' => ['value' => 13],
+                    ],
+                ],
+            ],
+            'multiple_events_specific' => [
+                'blocks' => [
+                    'specific' => [
+                        'template' => 'blocks/multipleEvents/specific.txt.twig',
+                        'priority' => 3,
+                    ],
+                    'second' => [
+                        'context' => ['value' => 42],
+                        'priority' => 5,
+                    ],
+                ],
+            ],
         ]]);
     }
 

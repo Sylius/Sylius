@@ -32,22 +32,20 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 
     function it_renders_a_template_block(Environment $twig): void
     {
-        $twig->render('block.txt.twig', ['foo' => 'bar', '_event' => 'event_name'])->willReturn('Block content');
+        $twig->render('block.txt.twig', ['foo' => 'bar'])->willReturn('Block content');
 
         $this->render(
-            'event_name',
-            new TemplateBlock('block_name', 'block.txt.twig', [], 0, true),
+            new TemplateBlock('block_name', 'event_name', 'block.txt.twig', [], 0, true),
             ['foo' => 'bar']
         )->shouldReturn('Block content');
     }
 
     function it_merges_template_block_context_with_passed_context(Environment $twig): void
     {
-        $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true, '_event' => 'event_name'])->willReturn('Block content');
+        $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true])->willReturn('Block content');
 
         $this->render(
-            'event_name',
-            new TemplateBlock('block_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true),
+            new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true),
             ['sample' => 'Hello']
         )->shouldReturn('Block content');
     }

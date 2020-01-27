@@ -36,25 +36,25 @@ final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry,
         TemplateBlockRendererInterface $templateBlockRenderer
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'secondBlock.txt.twig', [], 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], 0, true);
 
-        $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
+        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
-        $templateBlockRenderer->render('best_event_ever', $firstTemplateBlock, ['foo' => 'bar'])->willReturn('First block');
-        $templateBlockRenderer->render('best_event_ever', $secondTemplateBlock, ['foo' => 'bar'])->willReturn('Second block');
+        $templateBlockRenderer->render($firstTemplateBlock, ['foo' => 'bar'])->willReturn('First block');
+        $templateBlockRenderer->render($secondTemplateBlock, ['foo' => 'bar'])->willReturn('Second block');
 
-        $this->render('best_event_ever', ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
+        $this->render(['best_event_ever'], ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
     }
 
     function it_returns_an_empty_string_if_no_blocks_are_found_for_an_event(
         TemplateBlockRegistryInterface $templateBlockRegistry,
         TemplateBlockRendererInterface $templateBlockRenderer
     ): void {
-        $templateBlockRegistry->findEnabledForEvent('best_event_ever')->willReturn([]);
+        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([]);
 
         $templateBlockRenderer->render(Argument::cetera())->shouldNotBeCalled();
 
-        $this->render('best_event_ever')->shouldReturn('');
+        $this->render(['best_event_ever'])->shouldReturn('');
     }
 }

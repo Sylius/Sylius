@@ -77,15 +77,6 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
-    public function block_configuration_requires_template_to_be_defined(): void
-    {
-        $this->assertPartialConfigurationIsInvalid(
-            [['events' => ['event_name' => ['blocks' => ['block_name' => []]]]]],
-            'events.*.blocks'
-        );
-    }
-
-    /** @test */
     public function block_has_default_priority_set_to_zero(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -106,11 +97,11 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
-    public function block_is_enabled_by_default(): void
+    public function block_is_null_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => []]]]]],
-            ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => true]]]]],
+            ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => null]]]]],
             'events.*.blocks.*.enabled'
         );
     }

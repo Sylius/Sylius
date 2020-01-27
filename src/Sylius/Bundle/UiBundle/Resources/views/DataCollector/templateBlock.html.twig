@@ -66,12 +66,19 @@
 
             {% for event in collector.renderedEvents %}
                 <tr>
-                    <td>{{ event.name }}</td>
+                    <td>
+                        {% for name in event.names %}
+                            {% if loop.first %}<strong>{% endif %}
+                            {{ name }}{% if not loop.last %}, {% endif %}
+                            {% if loop.first %}</strong>{% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ '%.0f'|format(event.time * 1000) }}ms</td>
                     <td>
                         {% if event.blocks|length > 0 %}
                             <table>
                                 <tr>
+                                    {% if event.names|length > 1 %}<th>Origin event</th>{% endif %}
                                     <th>Name</th>
                                     <th>Template</th>
                                     <th>Duration</th>
@@ -79,6 +86,7 @@
                                 </tr>
                                 {% for block in event.blocks %}
                                     <tr>
+                                        {% if event.names|length > 1 %}<td>{{ block.definition.eventName }}</td>{% endif %}
                                         <td>{{ block.definition.name }}</td>
                                         <td>{{ block.definition.template }}</td>
                                         <td>{{ '%.0f'|format(block.time * 1000) }}ms</td>
