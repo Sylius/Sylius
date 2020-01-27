@@ -29,24 +29,49 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.shop.account.address_book.create" class="%sylius.behat.page.shop.account.address_book.create.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface" alias="sylius.behat.page.shop.account.address_book.create" />
+
         <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface" alias="sylius.behat.page.shop.account.address_book.index" />
+
         <service id="sylius.behat.page.shop.account.address_book.update" class="%sylius.behat.page.shop.account.address_book.update.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\AddressBook\UpdatePageInterface" alias="sylius.behat.page.shop.account.address_book.update" />
+
         <service id="sylius.behat.page.shop.account.change_password" class="%sylius.behat.page.shop.account.change_password.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface" alias="sylius.behat.page.shop.account.change_password" />
+
         <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\DashboardPageInterface" alias="sylius.behat.page.shop.account.dashboard" />
+
         <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\LoginPageInterface" alias="sylius.behat.page.shop.account.login" />
+
         <service id="sylius.behat.page.shop.account.order.index" class="%sylius.behat.page.shop.account.order.index.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
+        <service id="Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface" alias="sylius.behat.page.shop.account.order.index" />
+
         <service id="sylius.behat.page.shop.account.order.show" class="%sylius.behat.page.shop.account.order.show.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
+        <service id="Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface" alias="sylius.behat.page.shop.account.order.show" />
+
         <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface" alias="sylius.behat.page.shop.account.profile_update" />
+
         <service id="sylius.behat.page.shop.account.register" class="%sylius.behat.page.shop.account.register.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\RegisterPageInterface" alias="sylius.behat.page.shop.account.register" />
+
         <service id="sylius.behat.page.shop.account.request_password_reset" class="%sylius.behat.page.shop.account.request_password_reset.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\RequestPasswordResetPageInterface" alias="sylius.behat.page.shop.account.request_password_reset" />
+
         <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface" alias="sylius.behat.page.shop.account.reset_password" />
+
         <service id="sylius.behat.page.shop.account.verify" class="%sylius.behat.page.shop.account.verify.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Shop\Account\VerificationPageInterface" alias="sylius.behat.page.shop.account.verify" />
     </services>
 </container>

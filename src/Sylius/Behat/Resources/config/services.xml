@@ -45,6 +45,7 @@
         <service id="sylius.behat.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
             <argument type="service" id="sylius.behat.admin_security" />
         </service>
+        <service id="Sylius\Behat\Service\SharedSecurityServiceInterface" alias="sylius.behat.shared_security" />
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
@@ -68,11 +69,14 @@
         <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
+        <service id="Sylius\Behat\Service\NotificationCheckerInterface" alias="sylius.behat.notification_checker" />
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="router" />
         </service>
+        <service id="Sylius\Behat\Service\Resolver\CurrentPageResolverInterface" alias="sylius.behat.current_page_resolver" />
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+        <service id="Sylius\Behat\Service\SharedStorageInterface" alias="sylius.behat.shared_storage" public="false"/>
     </services>
 </container>

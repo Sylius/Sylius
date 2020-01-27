@@ -19,16 +19,20 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.tax_rate.create" class="%sylius.behat.page.admin.tax_rate.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_tax_rate_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface" alias="sylius.behat.page.admin.tax_rate.create" />
+
         <service id="sylius.behat.page.admin.tax_rate.index" class="%sylius.behat.page.admin.tax_rate.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_tax_rate_index</argument>
         </service>
+
         <service id="sylius.behat.page.admin.tax_rate.update" class="%sylius.behat.page.admin.tax_rate.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_tax_rate_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface" alias="sylius.behat.page.admin.tax_rate.update" />
     </services>
 </container>

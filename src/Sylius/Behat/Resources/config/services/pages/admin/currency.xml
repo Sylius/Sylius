@@ -19,16 +19,22 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.currency.create" class="%sylius.behat.page.admin.currency.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_currency_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Currency\CreatePageInterface" alias="sylius.behat.page.admin.currency.create" />
+
         <service id="sylius.behat.page.admin.currency.index" class="%sylius.behat.page.admin.currency.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_currency_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Currency\IndexPageInterface" alias="sylius.behat.page.admin.currency.index" />
+
         <service id="sylius.behat.page.admin.currency.update" class="%sylius.behat.page.admin.currency.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_currency_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Currency\UpdatePageInterface" alias="sylius.behat.page.admin.currency.update" />
+
     </services>
 </container>

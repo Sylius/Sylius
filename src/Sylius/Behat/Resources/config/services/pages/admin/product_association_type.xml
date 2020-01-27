@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.product_association_type.create" class="%sylius.behat.page.admin.product_association_type.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_association_type_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface" alias="sylius.behat.page.admin.product_association_type.create" />
+
         <service id="sylius.behat.page.admin.product_association_type.index" class="%sylius.behat.page.admin.product_association_type.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_association_type_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductAssociationType\IndexPageInterface" alias="sylius.behat.page.admin.product_association_type.index" />
+
         <service id="sylius.behat.page.admin.product_association_type.update" class="%sylius.behat.page.admin.product_association_type.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_association_type_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface" alias="sylius.behat.page.admin.product_association_type.update" />
     </services>
 </container>

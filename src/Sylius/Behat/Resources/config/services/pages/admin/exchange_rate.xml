@@ -13,16 +13,22 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.exchange_rate.create" class="Sylius\Behat\Page\Admin\ExchangeRate\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_exchange_rate_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface" alias="sylius.behat.page.admin.exchange_rate.create" />
+
         <service id="sylius.behat.page.admin.exchange_rate.index" class="Sylius\Behat\Page\Admin\ExchangeRate\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_exchange_rate_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface" alias="sylius.behat.page.admin.exchange_rate.index" />
+
         <service id="sylius.behat.page.admin.exchange_rate.update" class="Sylius\Behat\Page\Admin\ExchangeRate\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_exchange_rate_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface" alias="sylius.behat.page.admin.exchange_rate.update" />
+
     </services>
 </container>

@@ -23,26 +23,37 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.behat.page.admin.product.create_configurable" class="%sylius.behat.page.admin.product.create_configurable.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPageInterface" alias="sylius.behat.page.admin.product.create_configurable" />
+
         <service id="sylius.behat.page.admin.product.create_simple" class="%sylius.behat.page.admin.product.create_simple.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface" alias="sylius.behat.page.admin.product.create_simple" />
+
         <service id="sylius.behat.page.admin.product.index" class="%sylius.behat.page.admin.product.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_index</argument>
             <argument type="service" id="sylius.behat.checker.image_existence" />
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\IndexPageInterface" alias="sylius.behat.page.admin.product.index" />
+
         <service id="sylius.behat.page.admin.product.index_per_taxon" class="%sylius.behat.page.admin.product.index_per_taxon.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_per_taxon_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface" alias="sylius.behat.page.admin.product.index_per_taxon" />
+
         <service id="sylius.behat.page.admin.product.update_configurable" class="%sylius.behat.page.admin.product.update_configurable.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface" alias="sylius.behat.page.admin.product.update_configurable" />
+
         <service id="sylius.behat.page.admin.product.update_simple" class="%sylius.behat.page.admin.product.update_simple.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface" alias="sylius.behat.page.admin.product.update_simple" />
     </services>
 </container>
