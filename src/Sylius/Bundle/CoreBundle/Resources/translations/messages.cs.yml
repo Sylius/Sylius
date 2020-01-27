@@ -100,7 +100,6 @@ sylius:
             file: Vybrat obrázek
         user:
             billing_address: Fakturační adresa
-            different_billing_address: Použít jinou adresu pro fakturaci?
             enabled: Povoleno
             first_name: Křestní Jméno
             groups: Skupiny

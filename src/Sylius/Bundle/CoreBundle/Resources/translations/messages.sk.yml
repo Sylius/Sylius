@@ -100,7 +100,6 @@ sylius:
             file: Vybrať obrázok
         user:
             billing_address: Fakturačná adresa
-            different_billing_address: Použiť inú fakturačnú adresu?
             enabled: Zapnuté
             first_name: Meno
             groups: Zákaznícke skupiny

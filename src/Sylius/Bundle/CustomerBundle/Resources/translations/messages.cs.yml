@@ -12,7 +12,6 @@ sylius:
             gender: Pohlaví
             birthday: Narozeniny
             billing_address: Fakturační adresa
-            different_billing_address: Použít jinou adresu pro fakturaci?
             only_customer_registration: Vytvořit účet?
             subscribed_to_newsletter: Přihlášeni k odběru novinek
         customer_group:
