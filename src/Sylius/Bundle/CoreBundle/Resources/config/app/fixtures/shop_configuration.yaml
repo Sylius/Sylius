@@ -23,6 +23,7 @@ sylius_fixtures:
                 currency:
                     options:
                         currencies:
+                            - 'EUR'
                             - 'USD'
                             - 'PLN'
                             - 'CAD'
