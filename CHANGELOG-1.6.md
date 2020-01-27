@@ -1,5 +1,140 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.5 (2020-01-27)
+
+#### CVE-2020-5218: Ability to switch channels via GET parameter enabled in production environments
+
+*Please refer to [the original security advisory](https://github.com/Sylius/Sylius/security/advisories/GHSA-prg5-hg25-8grq) for the most updated information.*  
+
+**Impact:**
+
+This vulnerability gives the ability to switch channels via the `_channel_code` GET parameter in production environments. This was meant to be enabled only when `%kernel.debug%` is set to true. 
+
+However, if no `sylius_channel.debug` is set explicitly in the configuration, the default value which is `%kernel.debug%` will be not resolved and cast to boolean, enabling this debug feature even if that parameter is set to false.
+
+**Patches:**
+
+Patch has been provided for Sylius 1.3.x and newer - **1.3.16, 1.4.12, 1.5.9, 1.6.5**. Versions older than 1.3 are not covered by our security support anymore.
+
+**Workarounds:**
+
+Unsupported versions could be patched by adding the following configuration to run in production:
+
+```yaml
+sylius_channel:
+    debug: false
+```
+
+#### Details
+
+- [#10296](https://github.com/Sylius/Sylius/issues/10296) Product show page ([@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp))
+- [#10342](https://github.com/Sylius/Sylius/issues/10342) [Fixture] Togglable default locale loading ([@lchrusciel](https://github.com/lchrusciel))
+- [#10355](https://github.com/Sylius/Sylius/issues/10355) Adding a coupon generator command ([@mamazu](https://github.com/mamazu))
+- [#10361](https://github.com/Sylius/Sylius/issues/10361) Change master branch to v1.6.0-DEV ([@pamil](https://github.com/pamil))
+- [#10382](https://github.com/Sylius/Sylius/issues/10382) [Admin][Shipment] Add filtering shipments by a channel ([@Tomanhez](https://github.com/Tomanhez), [@GSadee](https://github.com/GSadee))
+- [#10383](https://github.com/Sylius/Sylius/issues/10383) [Behat] Make feature filenames consistent with others ([@GSadee](https://github.com/GSadee))
+- [#10388](https://github.com/Sylius/Sylius/issues/10388) Fix product show page margins ([@kulczy](https://github.com/kulczy))
+- [#10391](https://github.com/Sylius/Sylius/issues/10391) [Admin][Product] Show page fixes ([@AdamKasp](https://github.com/AdamKasp))
+- [#10392](https://github.com/Sylius/Sylius/issues/10392) improved code quality ([@oallain](https://github.com/oallain))
+- [#10393](https://github.com/Sylius/Sylius/issues/10393) [Docs] Describe available configuration options for locale fixture ([@lchrusciel](https://github.com/lchrusciel))
+- [#10396](https://github.com/Sylius/Sylius/issues/10396) [Admin] Avoid javascript in saving positions ([@Zales0123](https://github.com/Zales0123))
+- [#10399](https://github.com/Sylius/Sylius/issues/10399) Add info into install command about need of setting the locale in symfony config ()
+- [#10400](https://github.com/Sylius/Sylius/issues/10400) Add discounts and totals in the cart ([@kulczy](https://github.com/kulczy), [@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10406](https://github.com/Sylius/Sylius/issues/10406) [Fixtures] Added random generated order complete date ([@AdamKasp](https://github.com/AdamKasp))
+- [#10409](https://github.com/Sylius/Sylius/issues/10409) Create SECURITY.md ([@gabiudrescu](https://github.com/gabiudrescu), [@pamil](https://github.com/pamil))
+- [#10417](https://github.com/Sylius/Sylius/issues/10417) [Admin] Order summary UI + discounts and taxes viewing logic ([@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp))
+- [#10419](https://github.com/Sylius/Sylius/issues/10419) Add prices and discounts to the order summary box ([@kulczy](https://github.com/kulczy))
+- [#10420](https://github.com/Sylius/Sylius/issues/10420) Change order summary table ([@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp))
+- [#10429](https://github.com/Sylius/Sylius/issues/10429) Add admin user avatar placeholder ([@kulczy](https://github.com/kulczy))
+- [#10438](https://github.com/Sylius/Sylius/issues/10438) Keep all prices in the same currency in checkout ([@pamil](https://github.com/pamil))
+- [#10441](https://github.com/Sylius/Sylius/issues/10441) [Inventory][Product] Move inventory to new tab ([@AdamKasp](https://github.com/AdamKasp))
+- [#10442](https://github.com/Sylius/Sylius/issues/10442) Add an alert about unsaved changes ([@kulczy](https://github.com/kulczy))
+- [#10443](https://github.com/Sylius/Sylius/issues/10443) Unify shipping row on the order summary table ([@kulczy](https://github.com/kulczy))
+- [#10444](https://github.com/Sylius/Sylius/issues/10444) Change dashboard view ([@kulczy](https://github.com/kulczy), [@pamil](https://github.com/pamil))
+- [#10449](https://github.com/Sylius/Sylius/issues/10449) Administrator's avatar ([@Tomanhez](https://github.com/Tomanhez), [@Zales0123](https://github.com/Zales0123))
+- [#10451](https://github.com/Sylius/Sylius/issues/10451) [Admin] Add possibility to configure custom index route in routing ([@GSadee](https://github.com/GSadee))
+- [#10453](https://github.com/Sylius/Sylius/issues/10453) Fix deprecation notice ([@loevgaard](https://github.com/loevgaard))
+- [#10455](https://github.com/Sylius/Sylius/issues/10455) Improve admin product show page UI ([@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+- [#10456](https://github.com/Sylius/Sylius/issues/10456) Make image uploader easier to customize ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10460](https://github.com/Sylius/Sylius/issues/10460) AvatarImage Doctrine mapping fix ([@bartoszpietrzak1994](https://github.com/bartoszpietrzak1994))
+- [#10461](https://github.com/Sylius/Sylius/issues/10461) Fix product show page elements ([@kulczy](https://github.com/kulczy))
+- [#10467](https://github.com/Sylius/Sylius/issues/10467) Drop support for Symfony 4.1 and 4.2 ([@pamil](https://github.com/pamil))
+- [#10471](https://github.com/Sylius/Sylius/issues/10471) Add footer with Sylius version to the admin panel ([@kulczy](https://github.com/kulczy))
+- [#10472](https://github.com/Sylius/Sylius/issues/10472) [Admin] Index of payments ([@Tomanhez](https://github.com/Tomanhez))
+- [#10477](https://github.com/Sylius/Sylius/issues/10477) Improve bulk actions ([@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp))
+- [#10482](https://github.com/Sylius/Sylius/issues/10482) [Promotion] Fix Action creation doc ([@pierre-H](https://github.com/pierre-H))
+- [#10483](https://github.com/Sylius/Sylius/issues/10483) [Admin]Admin choose channel in product show page ([@Tomanhez](https://github.com/Tomanhez))
+- [#10484](https://github.com/Sylius/Sylius/issues/10484) [Admin] Minor fixes payment shipment ([@Tomanhez](https://github.com/Tomanhez))
+- [#10485](https://github.com/Sylius/Sylius/issues/10485) [Promotion] Coupon prefix and suffix ([@Zales0123](https://github.com/Zales0123))
+- [#10491](https://github.com/Sylius/Sylius/issues/10491) [Admin] Form validation error  ([@Tomanhez](https://github.com/Tomanhez))
+- [#10497](https://github.com/Sylius/Sylius/issues/10497) Minor Fixes - Admin choose channel in product show page ([@Tomanhez](https://github.com/Tomanhez))
+- [#10499](https://github.com/Sylius/Sylius/issues/10499) [Admin] Fix css file ([@GSadee](https://github.com/GSadee))
+- [#10510](https://github.com/Sylius/Sylius/issues/10510) Add avatar preview ([@kulczy](https://github.com/kulczy))
+- [#10514](https://github.com/Sylius/Sylius/issues/10514) [Admin] In sections : edit variant and edit product add button product show page in shop ([@Tomanhez](https://github.com/Tomanhez))
+- [#10516](https://github.com/Sylius/Sylius/issues/10516) Fix Psalm false-positives ([@pamil](https://github.com/pamil))
+- [#10518](https://github.com/Sylius/Sylius/issues/10518) [Admin] Unify order link in Orders, Payments, Shipments ([@Tomanhez](https://github.com/Tomanhez))
+- [#10520](https://github.com/Sylius/Sylius/issues/10520) [Admin] Unify payment and shipment labels ([@GSadee](https://github.com/GSadee))
+- [#10521](https://github.com/Sylius/Sylius/issues/10521) [Admin][Product] Disable show in shop button when product is disabled ([@GSadee](https://github.com/GSadee))
+- [#10522](https://github.com/Sylius/Sylius/issues/10522) Fix 'disabled' label ([@kulczy](https://github.com/kulczy))
+- [#10529](https://github.com/Sylius/Sylius/issues/10529) [Fixtures] Improve fixtures. ([@AdamKasp](https://github.com/AdamKasp))
+- [#10531](https://github.com/Sylius/Sylius/issues/10531) Improve filters UI ([@kulczy](https://github.com/kulczy))
+- [#10534](https://github.com/Sylius/Sylius/issues/10534) [Fixtures] Variant name now is concatenated options value. ([@AdamKasp](https://github.com/AdamKasp))
+- [#10536](https://github.com/Sylius/Sylius/issues/10536) [Docs] Make Plugins and Plugin Development Guide more visible ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10539](https://github.com/Sylius/Sylius/issues/10539) [Fixtures] Add tax category to product. ([@AdamKasp](https://github.com/AdamKasp))
+- [#10541](https://github.com/Sylius/Sylius/issues/10541) Update README.md ([@AdamKasp](https://github.com/AdamKasp))
+- [#10542](https://github.com/Sylius/Sylius/issues/10542) [Fixtures] Product fixtures in yaml. ([@AdamKasp](https://github.com/AdamKasp))
+- [#10546](https://github.com/Sylius/Sylius/issues/10546) Improve filters ([@kulczy](https://github.com/kulczy))
+- [#10547](https://github.com/Sylius/Sylius/issues/10547) [Admin] Remove avatar ([@Tomanhez](https://github.com/Tomanhez))
+- [#10552](https://github.com/Sylius/Sylius/issues/10552) [Order] Change OrderItemController methods to protected ([@Zales0123](https://github.com/Zales0123))
+- [#10555](https://github.com/Sylius/Sylius/issues/10555) [Admin][AdminUser] Improvements for removing an avatar ([@GSadee](https://github.com/GSadee))
+- [#10560](https://github.com/Sylius/Sylius/issues/10560) [Behat][AdminUser] Fix filename typo ([@GSadee](https://github.com/GSadee))
+- [#10562](https://github.com/Sylius/Sylius/issues/10562) Avoid js when removing product from cart ([@Zales0123](https://github.com/Zales0123))
+- [#10570](https://github.com/Sylius/Sylius/issues/10570) [Fixtures] Added 'tracked' field to product fixture configuration ([@AdamKasp](https://github.com/AdamKasp))
+- [#10572](https://github.com/Sylius/Sylius/issues/10572) [Fixtures] Minor fixes. ([@AdamKasp](https://github.com/AdamKasp))
+- [#10576](https://github.com/Sylius/Sylius/issues/10576) [Fixtures] Jeans attributes names fix ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10580](https://github.com/Sylius/Sylius/issues/10580) [Admin][Order] Change item to unit discount on summary page ([@GSadee](https://github.com/GSadee))
+- [#10587](https://github.com/Sylius/Sylius/issues/10587) Avoid BC break in ProductExampleFactory ([@Zales0123](https://github.com/Zales0123))
+- [#10588](https://github.com/Sylius/Sylius/issues/10588) [AdminBundle] Payments & Shipments index pages sortable by date ([@Tomanhez](https://github.com/Tomanhez))
+- [#10594](https://github.com/Sylius/Sylius/issues/10594) [CoreBundle] Fixtures creating SimpleProduct, remove options from caps ([@Tomanhez](https://github.com/Tomanhez))
+- [#10595](https://github.com/Sylius/Sylius/issues/10595) Use {{ limit }} to allow min/max value update ([@Prometee](https://github.com/Prometee))
+- [#10596](https://github.com/Sylius/Sylius/issues/10596) [Documentation][Contribution] Improve doc contribution guide ([@lchrusciel](https://github.com/lchrusciel))
+- [#10597](https://github.com/Sylius/Sylius/issues/10597) [AdminBundle] Extract logo to separate twig file ([@Tomanhez](https://github.com/Tomanhez))
+- [#10606](https://github.com/Sylius/Sylius/issues/10606) [Admin][Payment] Not displaying payments in cart state on the list ([@GSadee](https://github.com/GSadee))
+- [#10614](https://github.com/Sylius/Sylius/issues/10614) [AdminBundle] Uncoupled AdminBundle with ShopBundle ([@Tomanhez](https://github.com/Tomanhez))
+- [#10615](https://github.com/Sylius/Sylius/issues/10615) [HOTFIX] [Behat] Fix tax extraction ([@lchrusciel](https://github.com/lchrusciel))
+- [#10616](https://github.com/Sylius/Sylius/issues/10616) [Fixture] Make order fixture more flexible ([@TiMESPLiNTER](https://github.com/TiMESPLiNTER), [@AdamKasp](https://github.com/AdamKasp))
+- [#10617](https://github.com/Sylius/Sylius/issues/10617) Provide an upgrade guide for v1.6.0 ([@pamil](https://github.com/pamil))
+- [#10619](https://github.com/Sylius/Sylius/issues/10619) Sending email  after ship shipment on grid ([@AdamKasp](https://github.com/AdamKasp))
+- [#10620](https://github.com/Sylius/Sylius/issues/10620) Fix bug after rebase ([@AdamKasp](https://github.com/AdamKasp))
+- [#10621](https://github.com/Sylius/Sylius/issues/10621) Fix email after complete payment via grid ([@AdamKasp](https://github.com/AdamKasp))
+- [#10627](https://github.com/Sylius/Sylius/issues/10627) Use fallback locale as default for the new administrators ([@pamil](https://github.com/pamil))
+- [#10628](https://github.com/Sylius/Sylius/issues/10628) Fix OrderExampleFactory ([@Zales0123](https://github.com/Zales0123))
+- [#10630](https://github.com/Sylius/Sylius/issues/10630) [HotFix] Proper order of arguments ([@lchrusciel](https://github.com/lchrusciel))
+- [#10631](https://github.com/Sylius/Sylius/issues/10631) [Core] Improved fixture example factory ([@lchrusciel](https://github.com/lchrusciel))
+- [#10636](https://github.com/Sylius/Sylius/issues/10636) [Admin] Proper tests for shipment mailing ([@lchrusciel](https://github.com/lchrusciel))
+- [#10639](https://github.com/Sylius/Sylius/issues/10639) [Admin] Fix sorting on customer orders list ([@lchrusciel](https://github.com/lchrusciel))
+- [#10640](https://github.com/Sylius/Sylius/issues/10640) Revert "[Admin][Shipment] Add filtering shipments by a channel" ([@lchrusciel](https://github.com/lchrusciel))
+- [#10642](https://github.com/Sylius/Sylius/issues/10642) [Admin][Shipment] Add filtering shipments by a channel ([@Tomanhez](https://github.com/Tomanhez), [@GSadee](https://github.com/GSadee))
+- [#10695](https://github.com/Sylius/Sylius/issues/10695) [Admin][Product] Fix displayed stocks on product show page ([@GSadee](https://github.com/GSadee))
+- [#10700](https://github.com/Sylius/Sylius/issues/10700) [Promotion] Remove coupling to core ([@lchrusciel](https://github.com/lchrusciel))
+- [#10716](https://github.com/Sylius/Sylius/issues/10716) Minor fixtures fixes ([@AdamKasp](https://github.com/AdamKasp))
+- [#10733](https://github.com/Sylius/Sylius/issues/10733) Fix 10719 infinite order fixture loading ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#10744](https://github.com/Sylius/Sylius/issues/10744) [Documentation][Book] Invoices ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10747](https://github.com/Sylius/Sylius/issues/10747) Remove flashing from the bulk button ([@kulczy](https://github.com/kulczy))
+- [#10760](https://github.com/Sylius/Sylius/issues/10760) Add JQuery Dirtyforms in UPGRADE-1.6.md ([@maximehuran](https://github.com/maximehuran))
+- [#10784](https://github.com/Sylius/Sylius/issues/10784) [Docs] Installation guide update ([@lchrusciel](https://github.com/lchrusciel))
+- [#10837](https://github.com/Sylius/Sylius/issues/10837) Remove unused templating engine from RemoveAvatarAction ([@pamil](https://github.com/pamil))
+- [#10842](https://github.com/Sylius/Sylius/issues/10842) [Docs] Update core team ([@lchrusciel](https://github.com/lchrusciel))
+- [#10844](https://github.com/Sylius/Sylius/issues/10844) Clarify BC promise for final controllers ([@pamil](https://github.com/pamil))
+- [#10853](https://github.com/Sylius/Sylius/issues/10853) [Behat][Admin][Order] Fix scenarios for displaying promotions on 1.6 after upmerge ([@GSadee](https://github.com/GSadee))
+- [#10865](https://github.com/Sylius/Sylius/issues/10865) [Admin][Promotion] Fix the prevention of generating too many coupons ([@GSadee](https://github.com/GSadee))
+- [#10884](https://github.com/Sylius/Sylius/issues/10884) [Plugins][Docs] Plugin technical requirements changes ([@Zales0123](https://github.com/Zales0123))
+- [#10889](https://github.com/Sylius/Sylius/issues/10889) [Fixtures] Update product names ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10890](https://github.com/Sylius/Sylius/issues/10890) Fix build - remove redundant validation message part ([@Zales0123](https://github.com/Zales0123))
+- [#11046](https://github.com/Sylius/Sylius/issues/11046) [Docs] Update sensio.sphinx ([@Tomanhez](https://github.com/Tomanhez))
+- [#11060](https://github.com/Sylius/Sylius/issues/11060) Fixed typo in services comment ([@codreanulaurentiu](https://github.com/codreanulaurentiu))
+- [#11061](https://github.com/Sylius/Sylius/issues/11061) [Documentation] Backport of #11054 to 1.6 ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.6.3, v1.6.4 (2019-12-03, 2019-12-05)
 
 #### CVE-2019-16768: Internal exception message exposure in login action.
