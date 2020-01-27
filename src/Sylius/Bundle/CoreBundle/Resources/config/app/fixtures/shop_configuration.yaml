@@ -9,21 +9,62 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                locale: ~
+                locale:
+                    options:
+                        locales:
+                            - 'en_US'
+                            - 'de_DE'
+                            - 'fr_FR'
+                            - 'pl_PL'
+                            - 'es_ES'
+                            - 'es_MX'
+                            - 'pt_PT'
+                            - 'zh_CN'
                 currency:
                     options:
                         currencies:
                             - 'USD'
+                            - 'PLN'
+                            - 'CAD'
+                            - 'CNY'
+                            - 'NZD'
+                            - 'GBP'
+                            - 'AUD'
+                            - 'MXN'
 
                 geographical:
                     options:
                         countries:
                             - 'US'
+                            - 'FR'
+                            - 'DE'
+                            - 'AU'
+                            - 'CA'
+                            - 'MX'
+                            - 'CK'
+                            - 'PT'
+                            - 'ES'
+                            - 'CN'
+                            - 'UK'
                         zones:
                             US:
                                 name: 'United States of America'
                                 countries:
                                     - 'US'
+                            WORLD:
+                                name: 'World'
+                                countries:
+                                    - 'US'
+                                    - 'FR'
+                                    - 'DE'
+                                    - 'AU'
+                                    - 'CA'
+                                    - 'MX'
+                                    - 'CK'
+                                    - 'PT'
+                                    - 'ES'
+                                    - 'CN'
+                                    - 'UK'
 
                 channel:
                     options:
