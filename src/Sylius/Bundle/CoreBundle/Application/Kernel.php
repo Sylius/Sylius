@@ -31,11 +31,11 @@ use Webmozart\Assert\Assert;
 
 class Kernel extends HttpKernel
 {
-    public const VERSION = '1.3.16';
-    public const VERSION_ID = '10316';
+    public const VERSION = '1.3.17-DEV';
+    public const VERSION_ID = '10317';
     public const MAJOR_VERSION = '1';
     public const MINOR_VERSION = '3';
-    public const RELEASE_VERSION = '16';
+    public const RELEASE_VERSION = '17';
     public const EXTRA_VERSION = 'DEV';
 
     public function __construct(string $environment, bool $debug)
