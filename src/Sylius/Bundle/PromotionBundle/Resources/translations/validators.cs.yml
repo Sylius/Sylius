@@ -16,10 +16,6 @@ sylius:
             max_length: Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.
             min_length: Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.
             not_blank: Vyplňte prosím název akce.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Hodnota procentuální slevy musí být minimálně 0%.
-            max: Maximální hodnota procentuální slevy je 100%.
     promotion_coupon:
         code:
             max_length: Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.

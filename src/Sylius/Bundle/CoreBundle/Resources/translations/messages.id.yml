@@ -100,7 +100,6 @@ sylius:
             file: Pilih Gambar
         user:
             billing_address: Alamat Penagihan
-            different_billing_address: Menggunakan alamat berbeda untuk penagihan?
             enabled: Diaktifkan
             first_name: Nama Depan
             groups: Kelompok
