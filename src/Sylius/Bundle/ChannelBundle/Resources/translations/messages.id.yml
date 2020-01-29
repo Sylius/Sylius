@@ -9,4 +9,3 @@ sylius:
             enabled: Diaktifkan
             name: Nama
             url: URL
-            type: Jenis

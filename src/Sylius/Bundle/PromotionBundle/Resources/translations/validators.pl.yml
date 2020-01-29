@@ -16,10 +16,6 @@ sylius:
             max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
             min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
             not_blank: Proszę podać nazwę promocji.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Zniżka procentowa musi wynosić co najmniej 0%.
-            max: Maksymalna zniżka procentowa nie może przekraczać 100%.
     promotion_coupon:
         code:
             max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
@@ -38,6 +34,5 @@ sylius:
             min: Kod kuponu rabatowego musi składać się co najmniej z {{ limit }} znaków.
             max: Kod kuponu rabatowego nie może zawierać więcej niż {{ limit }} znaków.
             not_blank: Wprowadź długość kodu kuponu rabatowego.
-        possible_generation_amount: Nieprawidłowa długość kodu kuponu rabatowego lub ilość kuponów rabatowych. Wygenerowanie %expectedAmount% unikalnych kuponów z długością kodu wynoszącą %codeLength% jest niemożliwe. Możliwa ilość kodów do wygenerowania wynosi %possibleAmount%.
         usage_limit:
             min: Ilość dostępnych do wykorzystania kodów rabatowych musi wynosić co najmniej {{ limit }}.
