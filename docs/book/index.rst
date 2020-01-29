@@ -119,3 +119,15 @@ The collection of Sylius Plugins and basic introduction to the concept of plugin
     plugins/index
 
 .. include:: /book/plugins/map.rst.inc
+
+Organization
+------------
+
+This chapter describes the rules & processes we use to organize our work.
+
+.. toctree::
+    :hidden:
+
+    organization/index
+
+.. include:: /book/organization/map.rst.inc
