@@ -42,3 +42,8 @@ And you should remove `config/packages/sonata_core.yaml` as well.
 Those are excluded from our BC promise:
 
 - `Sylius\Bundle\ShopBundle\EventListener\UserMailerListener` has been removed and replaced with `Sylius\Bundle\CoreBundle\EventListener\MailerListener`
+
+## Billing and shipping addresses have been switched with one another
+
+Until now shipping address used to be the default address of an Order. We have changed that, so now the billing address 
+became the default address during checkout. It is an important change in our checkout process, please have that in mind.
