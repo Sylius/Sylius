@@ -6,7 +6,8 @@ only major releases include BC breaks, whereas minor releases include new featur
 without breaking backwards compatibility.
 
 Since Sylius is based on Symfony, our BC promise extends `Symfony's Backward Compatibility Promise`_
-with a few new rules and exceptions stated in this document.
+with a few new rules and exceptions stated in this document. We also follow `Symfony's Experimental Features`_
+process to be able to innovate safely.
 
 Minor and patch releases
 ------------------------
@@ -21,7 +22,7 @@ Code covered
 
 This BC promise applies to all of Sylius' PHP code except for:
 
-    - code tagged with ``@internal`` tags
+    - code tagged with ``@internal`` or ``@experimental`` tags
     - event listeners
     - model and repository interfaces
     - PHPUnit tests (located at ``tests/``, ``src/**/Tests/``)
@@ -103,3 +104,4 @@ the migration:
 
 .. _Semantic Versioning: http://semver.org/
 .. _Symfony's Backward Compatibility Promise: https://symfony.com/doc/current/contributing/code/bc.html
+.. _Symfony's Experimental Features: https://symfony.com/doc/current/contributing/code/experimental.html
