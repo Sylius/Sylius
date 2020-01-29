@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,6 +28,9 @@ final class DashboardController
     /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;
 
+    /** @var SalesDataProviderInterface */
+    private $salesDataProvider;
+
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
@@ -38,11 +42,13 @@ final class DashboardController
 
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
+        SalesDataProviderInterface $salesDataProvider,
         ChannelRepositoryInterface $channelRepository,
         EngineInterface $templatingEngine,
         RouterInterface $router
     ) {
         $this->statisticsProvider = $statisticsProvider;
+        $this->salesDataProvider = $salesDataProvider;
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
@@ -60,10 +66,11 @@ final class DashboardController
         }
 
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
+        $salesSummary = $this->salesDataProvider->getLastYearSalesSummary($channel);
 
         return $this->templatingEngine->renderResponse(
             '@SyliusAdmin/Dashboard/index.html.twig',
-            ['statistics' => $statistics, 'channel' => $channel]
+            ['statistics' => $statistics, 'channel' => $channel, 'sales_summary' => $salesSummary]
         );
     }
 

@@ -18,21 +18,13 @@ final class SalesSummarySpec extends ObjectBehavior
         ]);
     }
 
-    function it_contains_months_sale_statistics(): void
+    function it_has_months_list(): void
     {
-        $this->getAll()->shouldGenerate([
-            new MonthSale('11.10', 1200),
-            new MonthSale('12.10', 400),
-            new MonthSale('01.11', 500),
-        ]);
+        $this->getMonths()->shouldReturn(['11.10', '12.10', '01.11']);
     }
 
-    public function getMatchers(): array
+    function it_has_sales_list(): void
     {
-        return [
-            'generate' => function (\Traversable $expected, array $actual) {
-                return iterator_to_array($expected) == $actual;
-            }
-        ];
+        $this->getSales()->shouldReturn([1200, 400, 500]);
     }
 }

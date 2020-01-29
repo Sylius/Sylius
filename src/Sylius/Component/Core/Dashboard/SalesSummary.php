@@ -26,10 +26,13 @@ class SalesSummary
         $this->monthsSaleMap = $monthsSaleMap;
     }
 
-    public function getAll(): iterable
+    public function getMonths(): array
     {
-        foreach ($this->monthsSaleMap as $month => $sale) {
-            yield new MonthSale($month, $sale);
-        }
+        return array_keys($this->monthsSaleMap);
+    }
+
+    public function getSales(): array
+    {
+        return array_values($this->monthsSaleMap);
     }
 }
