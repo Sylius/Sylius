@@ -67,10 +67,11 @@ final class DashboardController
 
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
         $salesSummary = $this->salesDataProvider->getLastYearSalesSummary($channel);
+        $currency = $channel->getBaseCurrency()->getCode();
 
         return $this->templatingEngine->renderResponse(
             '@SyliusAdmin/Dashboard/index.html.twig',
-            ['statistics' => $statistics, 'channel' => $channel, 'sales_summary' => $salesSummary]
+            ['statistics' => $statistics, 'channel' => $channel, 'sales_summary' => $salesSummary, 'currency' => $currency]
         );
     }
 
