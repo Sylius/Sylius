@@ -30,6 +30,9 @@
         <parameter key="sylius.form.type.customer_guest.validation_groups" type="collection">
             <parameter>sylius_customer_guest</parameter>
         </parameter>
+        <parameter key="sylius.form.type.customer_checkout_guest.validation_groups" type="collection">
+            <parameter>sylius_customer_checkout_guest</parameter>
+        </parameter>
         <parameter key="sylius.form.type.customer_simple_registration.validation_groups" type="collection">
             <parameter>sylius</parameter>
             <parameter>sylius_user_registration</parameter>
@@ -191,6 +194,13 @@
         <service id="sylius.form.type.customer_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.form.type.customer_guest.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.factory.customer" />
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.customer_checkout_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_checkout_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.customer" />
             <tag name="form.type" />
