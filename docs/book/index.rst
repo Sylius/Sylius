@@ -123,7 +123,7 @@ The collection of Sylius Plugins and basic introduction to the concept of plugin
 Organization
 ------------
 
-This chapter describes the rules & processes we use to organize our work.
+This chapter describes the rules and processes we use to organize our work.
 
 .. toctree::
     :hidden:

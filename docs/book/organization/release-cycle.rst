@@ -1,7 +1,7 @@
 The Release Cycle
 =================
 
-This document explains the **release process** of the Sylius project (i.e. the
+This document explains the **release cycle** of the Sylius project (i.e. the
 code & documentation hosted on the main ``Sylius/Sylius`` `Git repository`_).
 
 Sylius manages its releases through a *time-based model* and follows the

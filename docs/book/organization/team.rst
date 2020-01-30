@@ -88,7 +88,7 @@ This role is currently held by:
 
 * **Magdalena Sadowska** (`CoderMaggie`_)
 
-Protected of the Realm
+Protector of the Realm
 ~~~~~~~~~~~~~~~~~~~~~~
 
 * Creates and publishes security procedures
