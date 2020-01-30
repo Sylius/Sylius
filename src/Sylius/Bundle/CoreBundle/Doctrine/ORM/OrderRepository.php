@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -229,6 +232,31 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function getLastYearSalesPerMonthForChannel(ChannelInterface $channel): array
+    {
+        $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
+        $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
+
+        $query = $this->_em->getConnection()->query(
+            "SELECT
+                DATE_FORMAT(checkout_completed_at, '%m.%y') AS \"date\",
+                SUM(total) as \"total\"
+            FROM sylius_order
+            WHERE checkout_completed_at BETWEEN '$startDate' AND '$endDate'
+            GROUP BY date;"
+        );
+
+        $query->execute();
+        $result = $query->fetchAll();
+
+        $data = [];
+        foreach ($result as $item) {
+            $data[$item['date']] = $item['total'];
+        }
+
+        return $data;
     }
 
     /**

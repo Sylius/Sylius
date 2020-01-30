@@ -52,6 +52,8 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function getTotalSalesForChannel(ChannelInterface $channel): int;
 
+    public function getLastYearSalesPerMonthForChannel(ChannelInterface $channel): array;
+
     public function countFulfilledByChannel(ChannelInterface $channel): int;
 
     /**
