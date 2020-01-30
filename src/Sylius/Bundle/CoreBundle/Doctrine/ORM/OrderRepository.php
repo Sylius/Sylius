@@ -238,13 +238,15 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     {
         $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
         $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
+        $channelId = $channel->getId();
 
         $query = $this->_em->getConnection()->query(
             "SELECT
                 DATE_FORMAT(checkout_completed_at, '%m.%y') AS \"date\",
                 SUM(total) as \"total\"
             FROM sylius_order
-            WHERE checkout_completed_at BETWEEN '$startDate' AND '$endDate'
+            WHERE (channel_id = $channelId)
+            AND (checkout_completed_at BETWEEN '$startDate' AND '$endDate')
             GROUP BY date;"
         );
 
@@ -253,7 +255,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
         $data = [];
         foreach ($result as $item) {
-            $data[$item['date']] = $item['total'];
+            $data[$item['date']] = (int) $item['total'];
         }
 
         return $data;
