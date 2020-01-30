@@ -4,7 +4,7 @@
 Upgrading
 =========
 
-Sylius regularly releases new versions according to our :doc:`release process </contributing/organization/release-process>`.
+Sylius regularly releases new versions according to our :doc:`Release Cycle </book/organization/release-cycle>`.
 Each minor release comes with an ``UPGRADE.md`` file, which is meant to help in the upgrading process.
 
 1. **Update the Sylius library version constraint by modifying the ``composer.json`` file:**
