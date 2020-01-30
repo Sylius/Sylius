@@ -17,9 +17,9 @@ class SalesSummary
 {
     /**
      * @var int[]
-     * @psalm-var array<string, int>
+     * @psalm-var array<string, string>
      */
-    private $monthsSaleMap;
+    private $monthsSaleMap = [];
 
     public function __construct(array $monthsSaleMap)
     {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Dashboard\MonthSale;
 
 final class SalesSummarySpec extends ObjectBehavior
 {
@@ -25,6 +24,6 @@ final class SalesSummarySpec extends ObjectBehavior
 
     function it_has_sales_list(): void
     {
-        $this->getSales()->shouldReturn([1200, 400, 500]);
+        $this->getSales()->shouldReturn(['12.00', '4.00', '5.00']);
     }
 }

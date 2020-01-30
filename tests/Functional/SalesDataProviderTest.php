@@ -34,7 +34,7 @@ final class SalesDataProviderTest extends WebTestCase
     }
 
     /** @test */
-    public function it_provides_different_data_for_each_channel(): void
+    public function it_provides_different_data_for_each_channel_and_only_paid_orders(): void
     {
         $salesSummary = $this->getSummaryForChannel('EXPENSIVE_CHANNEL');
 

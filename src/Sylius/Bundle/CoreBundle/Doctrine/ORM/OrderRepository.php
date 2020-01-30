@@ -247,6 +247,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             FROM sylius_order
             WHERE (channel_id = $channelId)
             AND (checkout_completed_at BETWEEN '$startDate' AND '$endDate')
+            AND (payment_state = 'paid')
             GROUP BY date;"
         );
 

@@ -64,6 +64,7 @@ Sylius\Component\Core\Model\Order:
         customer: "@customer_oliver"
         state: new
         checkoutState: completed
+        paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
     order_002:
         channel: "@channel"
@@ -72,6 +73,7 @@ Sylius\Component\Core\Model\Order:
         customer: "@customer_oliver"
         state: new
         checkoutState: completed
+        paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('-2 month'))>"
     order_003:
         channel: "@channel"
@@ -80,6 +82,7 @@ Sylius\Component\Core\Model\Order:
         customer: "@customer_oliver"
         state: new
         checkoutState: completed
+        paymentState: paid
         checkoutCompletedAt: "<(new \\DateTime('-3 month'))>"
     expensive_order_001:
         channel: "@expensive_channel"
@@ -88,6 +91,16 @@ Sylius\Component\Core\Model\Order:
         customer: "@customer_oliver"
         state: new
         checkoutState: completed
+        paymentState: paid
+        checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
+    expensive_order_002:
+        channel: "@expensive_channel"
+        currencyCode: USD
+        localeCode: en_US
+        customer: "@customer_oliver"
+        state: new
+        checkoutState: completed
+        paymentState: new
         checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
 
 Sylius\Component\Core\Model\OrderItem:
@@ -103,6 +116,9 @@ Sylius\Component\Core\Model\OrderItem:
     expensive_sw_mug_item_1:
         variant: "@mug_sw"
         order: "@expensive_order_001"
+    expensive_sw_mug_item_2:
+        variant: "@mug_sw"
+        order: "@expensive_order_002"
 
 Sylius\Component\Core\Model\OrderItemUnit:
     sw_mug_item_unit1:
@@ -117,6 +133,8 @@ Sylius\Component\Core\Model\OrderItemUnit:
         __construct: ["@expensive_sw_mug_item_1"]
     expensive_sw_mug_item_unit3:
         __construct: ["@expensive_sw_mug_item_1"]
+    expensive_sw_mug_item_unit4:
+        __construct: ["@expensive_sw_mug_item_2"]
 
 Sylius\Component\Core\Model\Channel:
     channel:
