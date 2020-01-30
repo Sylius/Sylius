@@ -30,7 +30,7 @@ final class SalesDataProviderTest extends WebTestCase
             [(new \DateTime('-1 month'))->format('m.y'), (new \DateTime('-2 month'))->format('m.y'), (new \DateTime('-3 month'))->format('m.y')],
             $salesSummary->getMonths()
         );
-        $this->assertSame([2000, 2000, 3000], $salesSummary->getSales());
+        $this->assertSame(['20.00', '20.00', '30.00'], $salesSummary->getSales());
     }
 
     /** @test */
@@ -43,7 +43,7 @@ final class SalesDataProviderTest extends WebTestCase
             [(new \DateTime('-1 month'))->format('m.y')],
             $salesSummary->getMonths()
         );
-        $this->assertSame([33000], $salesSummary->getSales());
+        $this->assertSame(['330.00'], $salesSummary->getSales());
     }
 
     protected function setUp(): void

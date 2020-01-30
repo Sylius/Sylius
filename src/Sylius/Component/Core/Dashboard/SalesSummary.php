@@ -23,7 +23,9 @@ class SalesSummary
 
     public function __construct(array $monthsSaleMap)
     {
-        $this->monthsSaleMap = $monthsSaleMap;
+        foreach ($monthsSaleMap as $month => $sales) {
+            $this->monthsSaleMap[$month] = number_format(abs($sales/100), 2, '.', '');
+        }
     }
 
     public function getMonths(): array
