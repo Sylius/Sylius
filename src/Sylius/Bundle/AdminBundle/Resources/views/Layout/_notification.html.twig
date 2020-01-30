@@ -1,0 +1,16 @@
+<div class="ui floated simple dropdown icon item" id="sylius-version-notification" data-frequency="{{ frequency }}" data-url="{{ path('sylius_admin_ajax_get_version') }}" data-current-version="{{ currentVersion }}">
+    <i class="outline bell icon"></i>
+    <div class="menu">
+        <div class="ui message" id="no-notifications">
+            <span>{{ 'sylius.ui.no_new_notifications'|trans }}</span>
+        </div>
+        <div class="ui message" id="notifications">
+            <span>
+                {{ 'sylius.ui.there_is_a_new_version_of_sylius_available'|trans }}
+                <i class="remove link icon" data-dismiss style="margin-left: 1em; margin-right: -0.5em;"></i>
+            </span>
+            <br/>
+            <span>{{ 'sylius.ui.contact_your_technician_to_upgrade'|trans }}</span>
+        </div>
+    </div>
+</div>
