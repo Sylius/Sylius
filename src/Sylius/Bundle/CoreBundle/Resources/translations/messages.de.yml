@@ -31,7 +31,7 @@ sylius:
                 country: Land
                 postcode: PLZ
                 street: Straße
-            contact_email: Kontakt E-Mail
+            contact_email: Kontakt-E-Mail-Adresse
             currencies: Währungen
             currency_base: Basis-Währung
             account_verification_required: Ist eine Konto Bestätigung erforderlich?
