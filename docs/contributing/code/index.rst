@@ -4,7 +4,6 @@ Contributing Code
 .. toctree::
     :hidden:
 
-    bc
     patches
     security
     standards

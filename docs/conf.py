@@ -14,6 +14,7 @@ extensions = [
     'sensio.sphinx.configurationblock',
     'sensio.sphinx.phpcode',
     'sphinx_copybutton',
+    'sphinxcontrib-redirects',
 ]
 source_suffix = '.rst'
 master_doc = 'index'
@@ -34,3 +35,4 @@ lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
 rst_epilog = """
 """
+redirects_file = 'redirection_map'

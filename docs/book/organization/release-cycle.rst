@@ -1,7 +1,7 @@
-The Release Process
-===================
+The Release Cycle
+=================
 
-This document explains the **release process** of the Sylius project (i.e. the
+This document explains the **release cycle** of the Sylius project (i.e. the
 code & documentation hosted on the main ``Sylius/Sylius`` `Git repository`_).
 
 Sylius manages its releases through a *time-based model* and follows the
@@ -69,15 +69,13 @@ Future Releases
 | 1.7     | Early Sep 2019       | Early Feb 2020         | Late Feb 2020      |
 +---------+----------------------+------------------------+--------------------+
 
-
 Backward Compatibility
 ----------------------
 
-All Sylius releases have to comply with our `Backward Compatibility Promise`_.
+All Sylius releases have to comply with our :doc:`Backward Compatibility Promise <backward-compatibility-promise>`.
 
 Whenever keeping backward compatibility is not possible, the feature, the
 enhancement or the bug fix will be scheduled for the next major version.
 
 .. _Git repository: https://github.com/Sylius/Sylius
 .. _Semantic Versioning: http://semver.org/
-.. _Backward Compatibility Promise: http://docs.sylius.com/en/latest/contributing/code/bc.html

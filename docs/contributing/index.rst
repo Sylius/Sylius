@@ -87,18 +87,5 @@ Contributing Translations
 
     translations/index
 
-Organization
-------------
-
-Sylius is developed by a vibrant community of commercial companies and individual developers.
-The chapter describes the rules & processes we use to organize our work.
-
-.. toctree::
-    :hidden:
-
-    organization/index
-
-.. include:: /contributing/organization/map.rst.inc
-
 .. _Gulp: http://gulpjs.com/
 .. _Node.js: https://nodejs.org/en/download/
