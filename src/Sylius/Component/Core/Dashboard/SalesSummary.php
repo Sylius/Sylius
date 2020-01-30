@@ -19,22 +19,22 @@ class SalesSummary
      * @var int[]
      * @psalm-var array<string, string>
      */
-    private $monthsSaleMap = [];
+    private $monthsSalesMap = [];
 
     public function __construct(array $monthsSaleMap)
     {
         foreach ($monthsSaleMap as $month => $sales) {
-            $this->monthsSaleMap[$month] = number_format(abs($sales/100), 2, '.', '');
+            $this->monthsSalesMap[$month] = number_format(abs($sales/100), 2, '.', '');
         }
     }
 
     public function getMonths(): array
     {
-        return array_keys($this->monthsSaleMap);
+        return array_keys($this->monthsSalesMap);
     }
 
     public function getSales(): array
     {
-        return array_values($this->monthsSaleMap);
+        return array_values($this->monthsSalesMap);
     }
 }

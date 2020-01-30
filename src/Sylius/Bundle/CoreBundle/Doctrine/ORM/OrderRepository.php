@@ -234,34 +234,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function getLastYearSalesPerMonthForChannel(ChannelInterface $channel): array
-    {
-        $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
-        $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
-        $channelId = $channel->getId();
-
-        $query = $this->_em->getConnection()->query(
-            "SELECT
-                DATE_FORMAT(checkout_completed_at, '%m.%y') AS \"date\",
-                SUM(total) as \"total\"
-            FROM sylius_order
-            WHERE (channel_id = $channelId)
-            AND (checkout_completed_at BETWEEN '$startDate' AND '$endDate')
-            AND (payment_state = 'paid')
-            GROUP BY date;"
-        );
-
-        $query->execute();
-        $result = $query->fetchAll();
-
-        $data = [];
-        foreach ($result as $item) {
-            $data[$item['date']] = (int) $item['total'];
-        }
-
-        return $data;
-    }
-
     /**
      * {@inheritdoc}
      */

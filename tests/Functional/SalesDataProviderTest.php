@@ -20,32 +20,6 @@ final class SalesDataProviderTest extends WebTestCase
     /** @var Client */
     private static $client;
 
-    /** @test */
-    public function it_provides_simple_year_sales_summary_grouped_per_month(): void
-    {
-        $salesSummary = $this->getSummaryForChannel('CHANNEL');
-
-        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame(
-            [(new \DateTime('-1 month'))->format('m.y'), (new \DateTime('-2 month'))->format('m.y'), (new \DateTime('-3 month'))->format('m.y')],
-            $salesSummary->getMonths()
-        );
-        $this->assertSame(['20.00', '20.00', '30.00'], $salesSummary->getSales());
-    }
-
-    /** @test */
-    public function it_provides_different_data_for_each_channel_and_only_paid_orders(): void
-    {
-        $salesSummary = $this->getSummaryForChannel('EXPENSIVE_CHANNEL');
-
-        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame(
-            [(new \DateTime('-1 month'))->format('m.y')],
-            $salesSummary->getMonths()
-        );
-        $this->assertSame(['330.00'], $salesSummary->getSales());
-    }
-
     protected function setUp(): void
     {
         self::$client = static::createClient();
@@ -69,6 +43,34 @@ final class SalesDataProviderTest extends WebTestCase
         self::$container->get('sylius.manager.order')->flush();
     }
 
+    /** @test */
+    public function it_provides_simple_year_sales_summary_grouped_per_month(): void
+    {
+        $salesSummary = $this->getSummaryForChannel('CHANNEL');
+        $expectedMonths = $this->getExpectedMonths();
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame(
+            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '30.00', '20.00', '20.00', '0.00'],
+            $salesSummary->getSales()
+        );
+    }
+
+    /** @test */
+    public function it_provides_different_data_for_each_channel_and_only_paid_orders(): void
+    {
+        $salesSummary = $this->getSummaryForChannel('EXPENSIVE_CHANNEL');
+        $expectedMonths = $this->getExpectedMonths();
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame(
+            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '330.00', '0.00'],
+            $salesSummary->getSales()
+        );
+    }
+
     private function getSummaryForChannel(string $channelCode): SalesSummary
     {
         /** @var ChannelRepositoryInterface $channelRepository */
@@ -80,5 +82,22 @@ final class SalesDataProviderTest extends WebTestCase
         $salesDataProvider = self::$container->get('Sylius\Component\Core\Dashboard\SalesDataProviderInterface');
 
         return $salesDataProvider->getLastYearSalesSummary($channel);
+    }
+
+    private function getExpectedMonths(): array
+    {
+        $expectedMonths = [];
+        $period = new \DatePeriod(
+            new \DateTime('first day of next month last year'),
+            \DateInterval::createFromDateString('1 month'),
+            new \DateTime('last day of this month')
+        );
+
+        /** @var \DateTimeInterface $date */
+        foreach ($period as $date) {
+            $expectedMonths[] = $date->format('m.y');
+        }
+
+        return $expectedMonths;
     }
 }
