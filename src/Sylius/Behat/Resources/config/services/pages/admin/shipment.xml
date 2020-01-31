@@ -14,6 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.behat.page.admin.shipment.index.class">Sylius\Behat\Page\Admin\Shipment\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.shipment.show.class">Sylius\Behat\Page\Admin\Shipment\ShowPage</parameter>
     </parameters>
 
     <services>
@@ -22,5 +23,7 @@
         <service id="sylius.behat.page.admin.shipment.index" class="%sylius.behat.page.admin.shipment.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_shipment_index</argument>
         </service>
+
+        <service id="sylius.behat.page.admin.shipment.show" class="%sylius.behat.page.admin.shipment.show.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

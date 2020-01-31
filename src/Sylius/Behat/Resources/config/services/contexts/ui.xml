@@ -115,6 +115,7 @@
             <argument type="service" id="sylius.behat.page.admin.shipment.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show"/>
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.page.admin.shipment.show" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_payment_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingPaymentMethodsContext">

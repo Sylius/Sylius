@@ -17,10 +17,12 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Shipment\ShowPage;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -34,11 +36,19 @@ final class ManagingShipmentsContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $orderShowPage, NotificationCheckerInterface $notificationChecker)
-    {
+    /** @var ShowPage */
+    private $shipmentShowPage;
+
+    public function __construct(
+        IndexPageInterface $indexPage,
+        ShowPageInterface $orderShowPage,
+        NotificationCheckerInterface $notificationChecker,
+        ShowPage $shipmentShowPage
+    ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
         $this->notificationChecker = $notificationChecker;
+        $this->shipmentShowPage = $shipmentShowPage;
     }
 
     /**
@@ -94,6 +104,14 @@ final class ManagingShipmentsContext implements Context
     public function iFilter(): void
     {
         $this->indexPage->filter();
+    }
+
+    /**
+     * @When I view the shipment of the order :order
+     */
+    public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
+    {
+        $this->shipmentShowPage->open([]);//TODO
     }
 
     /**
@@ -175,5 +193,13 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeShipmentForTheOrderInTheList(string $orderNumber, int $position): void
     {
         Assert::true($this->indexPage->isShipmentWithOrderNumberInPosition($orderNumber, $position));
+    }
+
+    /**
+     * @Then I should (also) see one :product item in it
+     */
+    public function iShouldSeeOneItemInIt(ProductInterface $product): void
+    {
+        $this->shipmentShowPage->hasShipmentUnit($product);
     }
 }
