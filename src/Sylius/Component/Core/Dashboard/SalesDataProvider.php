@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
@@ -12,15 +21,9 @@ final class SalesDataProvider implements SalesDataProviderInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var SalesDataArrayNormalizerInterface */
-    private $salesDataArrayNormalizer;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        SalesDataArrayNormalizerInterface $salesDataArrayNormalizer
-    ) {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
-        $this->salesDataArrayNormalizer = $salesDataArrayNormalizer;
     }
 
     public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummary
@@ -48,10 +51,10 @@ final class SalesDataProvider implements SalesDataProviderInterface
             $data[$item['date']] = (int) $item['total'];
         }
 
-        return new SalesSummary($this->salesDataArrayNormalizer->completeNoSalesMonthData(
+        return new SalesSummary(
             (new \DateTime('first day of next month last year')),
             (new \DateTime('last day of this month')),
             $data
-        ));
+        );
     }
 }

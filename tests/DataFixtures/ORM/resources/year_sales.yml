@@ -65,7 +65,7 @@ Sylius\Component\Core\Model\Order:
         state: new
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
     order_002:
         channel: "@channel"
         currencyCode: USD
@@ -74,7 +74,7 @@ Sylius\Component\Core\Model\Order:
         state: new
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('-2 month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('first day of -2 months'))>"
     order_003:
         channel: "@channel"
         currencyCode: USD
@@ -83,7 +83,7 @@ Sylius\Component\Core\Model\Order:
         state: new
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('-3 month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('first day of -3 months'))>"
     expensive_order_001:
         channel: "@expensive_channel"
         currencyCode: USD
@@ -92,7 +92,7 @@ Sylius\Component\Core\Model\Order:
         state: new
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
     expensive_order_002:
         channel: "@expensive_channel"
         currencyCode: USD
@@ -101,7 +101,7 @@ Sylius\Component\Core\Model\Order:
         state: new
         checkoutState: completed
         paymentState: new
-        checkoutCompletedAt: "<(new \\DateTime('-1 month'))>"
+        checkoutCompletedAt: "<(new \\DateTime('first day of previous month'))>"
 
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item_1:

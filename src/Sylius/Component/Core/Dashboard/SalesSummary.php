@@ -15,16 +15,30 @@ namespace Sylius\Component\Core\Dashboard;
 
 class SalesSummary
 {
-    /**
-     * @var int[]
-     * @psalm-var array<string, string>
-     */
+    /** @psalm-var array<string, string> */
     private $monthsSalesMap = [];
 
-    public function __construct(array $monthsSaleMap)
-    {
-        foreach ($monthsSaleMap as $month => $sales) {
-            $this->monthsSalesMap[$month] = number_format(abs($sales/100), 2, '.', '');
+    public function __construct(
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $salesData
+    ) {
+        $period = new \DatePeriod($startDate, \DateInterval::createFromDateString('1 month'), $endDate);
+
+        /** @var \DateTimeInterface $date */
+        foreach ($period as $date) {
+            $periodName = $date->format('m.y');
+            if (!isset($salesData[$periodName])) {
+                $salesData[$periodName] = 0;
+            }
+        }
+
+        uksort($salesData, function (string $date1, string $date2) {
+            return \DateTime::createFromFormat('m.y', $date1) <=> \DateTime::createFromFormat('m.y', $date2);
+        });
+
+        foreach ($salesData as $month => $sales) {
+            $this->monthsSalesMap[$month] = number_format(abs($sales / 100), 2, '.', '');
         }
     }
 
