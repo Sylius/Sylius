@@ -725,6 +725,8 @@ sylius:
         shipping_category: 'Catégorie de livraison'
         shipping_address_changes_history: 'Historique du changement d''adresse d''expédition'
         shipping_charges: 'Frais de port'
+        shipping_estimated_cost: 'Coût estimé des frais de livraison'
+        shipping_discount: 'Réduction sur les frais de livraison'
         shipping_method: 'Moyen de livraison'
         shipping_method_details: 'Détails du mode de livraison'
         shipping_methods: 'Modes de livraison'
