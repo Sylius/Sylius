@@ -743,6 +743,7 @@ sylius:
         shipment_state: 'Shipment state'
         shipments: 'Shipments'
         shipped: 'Shipped'
+        shipped_at: 'Shipped at'
         shipping: 'Shipping'
         shipping_address: 'Shipping address'
         shipping_address_changes_history: 'Shipping address changes history'

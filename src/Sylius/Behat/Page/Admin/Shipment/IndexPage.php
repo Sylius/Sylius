@@ -62,6 +62,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $actions->pressButton('Ship');
     }
 
+    public function getShippedAtDate(string $orderNumber): string
+    {
+        return $this->getField($orderNumber, 'shippedAt')->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -88,6 +93,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $row = $tableAccessor->getRowsWithFields($table, [])[$shipmentNumber];
 
-        return $row->find('css', 'td:nth-child(2)');
+        return $row->find('css', 'td:nth-child(3)');
     }
 }

@@ -119,4 +119,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function resendOrderConfirmationEmail(): void;
 
     public function resendShipmentConfirmationEmail(): void;
+
+    public function getShippedAtDate(): string;
 }

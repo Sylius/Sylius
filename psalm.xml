@@ -45,6 +45,7 @@
             <directory name="src/Sylius/Bundle/PromotionBundle/Tests" />
             <directory name="src/Sylius/Bundle/ReviewBundle/spec" />
             <directory name="src/Sylius/Bundle/ShippingBundle/test" />
+            <directory name="src/Sylius/Bundle/ShippingBundle/spec" />
             <directory name="src/Sylius/Bundle/ShopBundle/spec" />
             <directory name="src/Sylius/Bundle/TaxationBundle/spec" />
             <directory name="src/Sylius/Bundle/TaxationBundle/test" />

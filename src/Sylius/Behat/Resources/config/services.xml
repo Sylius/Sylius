@@ -74,5 +74,9 @@
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+
+        <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
+            <argument>%kernel.project_dir%</argument>
+        </service>
     </services>
 </container>

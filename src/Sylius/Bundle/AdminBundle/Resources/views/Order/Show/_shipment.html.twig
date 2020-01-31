@@ -14,6 +14,9 @@
         <div class="description">
             <i class="globe icon"></i>{{ shipment.method.zone }}
         </div>
+        {% if shipment.shippedAt is not empty %}
+        {{ 'sylius.ui.shipped_at'|trans }}: <span class="shipped-at-date">{{ shipment.shippedAt|date('d-m-Y H:i:s') }}</span>
+        {% endif %}
     </div>
     {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
         {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id})) }}

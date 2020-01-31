@@ -40,6 +40,9 @@ class Shipment implements ShipmentInterface
     /** @var string|null */
     protected $tracking;
 
+    /** @var \DateTimeInterface|null */
+    protected $shippedAt;
+
     public function __construct()
     {
         /** @var ArrayCollection<array-key, ShipmentUnitInterface> $this->units */
@@ -214,5 +217,15 @@ class Shipment implements ShipmentInterface
     public function getShippingUnitTotal(): int
     {
         return 0;
+    }
+
+    public function getShippedAt(): ?\DateTimeInterface
+    {
+        return $this->shippedAt;
+    }
+
+    public function setShippedAt(?\DateTimeInterface $shippedAt): void
+    {
+        $this->shippedAt = $shippedAt;
     }
 }
