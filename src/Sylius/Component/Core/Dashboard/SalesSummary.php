@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-class SalesSummary
+/**
+ * @experimental
+ */
+final class SalesSummary implements SalesSummaryInterface
 {
     /** @psalm-var array<string, string> */
     private $monthsSalesMap = [];

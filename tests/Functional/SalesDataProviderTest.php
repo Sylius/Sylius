@@ -9,6 +9,7 @@ use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Dashboard\SalesSummary;
+use Sylius\Component\Core\Dashboard\SalesSummaryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -71,7 +72,7 @@ final class SalesDataProviderTest extends WebTestCase
         );
     }
 
-    private function getSummaryForChannel(string $channelCode): SalesSummary
+    private function getSummaryForChannel(string $channelCode): SalesSummaryInterface
     {
         /** @var ChannelRepositoryInterface $channelRepository */
         $channelRepository = self::$container->get('sylius.repository.channel');
@@ -79,7 +80,7 @@ final class SalesDataProviderTest extends WebTestCase
         $channel = $channelRepository->findOneByCode($channelCode);
 
         /** @var SalesDataProviderInterface $salesDataProvider */
-        $salesDataProvider = self::$container->get('Sylius\Component\Core\Dashboard\SalesDataProviderInterface');
+        $salesDataProvider = self::$container->get(SalesDataProviderInterface::class);
 
         return $salesDataProvider->getLastYearSalesSummary($channel);
     }

@@ -28,9 +28,6 @@ final class DashboardController
     /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /** @var SalesDataProviderInterface */
-    private $salesDataProvider;
-
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
@@ -40,18 +37,21 @@ final class DashboardController
     /** @var RouterInterface */
     private $router;
 
+    /** @var SalesDataProviderInterface|null */
+    private $salesDataProvider;
+
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
-        SalesDataProviderInterface $salesDataProvider,
         ChannelRepositoryInterface $channelRepository,
         EngineInterface $templatingEngine,
-        RouterInterface $router
+        RouterInterface $router,
+        ?SalesDataProviderInterface $salesDataProvider = null
     ) {
         $this->statisticsProvider = $statisticsProvider;
-        $this->salesDataProvider = $salesDataProvider;
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
+        $this->salesDataProvider = $salesDataProvider;
     }
 
     public function indexAction(Request $request): Response
@@ -66,13 +66,14 @@ final class DashboardController
         }
 
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
-        $salesSummary = $this->salesDataProvider->getLastYearSalesSummary($channel);
-        $currency = $channel->getBaseCurrency()->getCode();
+        $data = ['statistics' => $statistics, 'channel' => $channel];
 
-        return $this->templatingEngine->renderResponse(
-            '@SyliusAdmin/Dashboard/index.html.twig',
-            ['statistics' => $statistics, 'channel' => $channel, 'sales_summary' => $salesSummary, 'currency' => $currency]
-        );
+        if ($this->salesDataProvider !== null) {
+            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            $data['currency'] = $channel->getBaseCurrency()->getCode();
+        }
+
+        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', $data);
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface

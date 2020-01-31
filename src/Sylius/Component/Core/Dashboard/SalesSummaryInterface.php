@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-use Sylius\Component\Core\Model\ChannelInterface;
-
-interface SalesDataProviderInterface
+interface SalesSummaryInterface
 {
-    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface;
+    public function getMonths(): array;
+
+    public function getSales(): array;
 }

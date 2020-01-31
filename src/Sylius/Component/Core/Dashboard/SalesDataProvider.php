@@ -16,6 +16,9 @@ namespace Sylius\Component\Core\Dashboard;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+/**
+ * @experimental
+ */
 final class SalesDataProvider implements SalesDataProviderInterface
 {
     /** @var EntityManagerInterface */
@@ -26,7 +29,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
         $this->entityManager = $entityManager;
     }
 
-    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummary
+    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
     {
         $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
         $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
