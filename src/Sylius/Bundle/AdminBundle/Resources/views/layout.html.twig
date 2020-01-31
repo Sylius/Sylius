@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {% include '@SyliusAdmin/_styles.html.twig' %}
 
-    {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
 
 {% block flash_messages %}
@@ -13,35 +13,19 @@
 {% endblock %}
 
 {% block topbar %}
-    <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
-        <i class="sidebar icon"></i>
-    </a>
-
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_left') }}
-
-    {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
-    {% include '@SyliusAdmin/_search.html.twig' %}
+    {{ sylius_template_event('sylius.admin.layout.topbar_left') }}
 
     <div class="ui left floated dividing empty item"></div>
 
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_middle') }}
+    {{ sylius_template_event('sylius.admin.layout.topbar_middle') }}
 
     <div class="ui right floated dividing empty item"></div>
 
-    {{ sylius_render_notifications_widget() }}
-    {% include '@SyliusAdmin/_support.html.twig' %}
-    {% include '@SyliusAdmin/_security.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
+    {{ sylius_template_event('sylius.admin.layout.topbar_right') }}
 {% endblock %}
 
 {% block sidebar %}
-    {{ sonata_block_render_event('sylius.admin.layout.sidebar_top') }}
-
-    {% include '@SyliusAdmin/_logo.html.twig' %}
-    {{ knp_menu_render('sylius.admin.main', {'template': '@SyliusUi/Menu/sidebar.html.twig', 'currentClass': 'active'}) }}
-
-    {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
+    {{ sylius_template_event('sylius.admin.layout.sidebar') }}
 {% endblock %}
 
 {% block footer %}
@@ -51,5 +35,5 @@
 {% block javascripts %}
     {% include '@SyliusAdmin/_scripts.html.twig' %}
 
-    {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
 {% endblock %}
