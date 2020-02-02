@@ -52,6 +52,13 @@ final class DashboardController
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
         $this->salesDataProvider = $salesDataProvider;
+
+        if ($this->salesDataProvider === null) {
+            @trigger_error(
+                sprintf('Not passing a $salesDataProvider to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function indexAction(Request $request): Response
