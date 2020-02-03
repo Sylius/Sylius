@@ -53,4 +53,3 @@ sylius_grid:
                 item:
                     ship:
                         type: ship_with_tracking_code
-                        label: sylius.form.shipment.tracking_code
