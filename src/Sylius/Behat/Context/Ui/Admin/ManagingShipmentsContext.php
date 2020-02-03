@@ -142,7 +142,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
-        $this->notificationChecker->checkNotification('Shipment has been successfully shipped.', NotificationType::success());
+        $this->notificationChecker->checkNotification('Shipment has been successfully updated.', NotificationType::success());
     }
 
     /**
