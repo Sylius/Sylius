@@ -25,6 +25,9 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @experimental
+ */
 final class ShipShipmentAction
 {
     /** @var ShipmentRepositoryInterface */

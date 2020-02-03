@@ -1,5 +1,5 @@
 {% if sm_can(data, 'ship', 'sylius_shipment') %}
-    <form class="ui loadable form" novalidate="novalidate" action="{{ path('sylius_admin_shipment_ship', {'id': data.id}) }}" method="post">
+    <form class="ui loadable form" novalidate="novalidate" action="{{ path('sylius_admin_shipment_ship_with_tracking_code', {'id': data.id}) }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
         <input type="hidden" name="_method" value="PUT">
         <div class="ui inline fields">
