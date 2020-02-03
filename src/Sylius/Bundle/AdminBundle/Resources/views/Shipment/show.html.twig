@@ -1,0 +1,35 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block content %}
+
+{% include '@SyliusAdmin/Shipment/Show/_header.html.twig' %}
+
+{% include '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig' %}
+
+<div class="ui segment spaceless sylius-grid-table-wrapper">
+    <table class="ui sortable stackable very basic celled table">
+        <thead>
+            <tr>
+                <th class="sylius-table-column-code">{{ 'sylius.ui.product_name'|trans }}</th>
+                <th class="sylius-table-column-code">{{ 'sylius.ui.variant_name'|trans }}</th>
+                <th class="sylius-table-column-code">{{ 'sylius.ui.quantity'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set currentProductName = '' %}
+            {% set currentVariantName = '' %}
+            {% for unit in shipment.units %}
+                {% if currentProductName != unit.orderItem.product.name and currentVariantName != unit.orderItem.variant.name %}
+                <tr class="item">
+                    <td>{{ unit.orderItem.product.name }}</td>
+                    <td>{{ unit.orderItem.variant.name }}</td>
+                    <td>{{ unit.orderItem.quantity }}</td>
+                </tr>
+                {% set currentProductName = unit.orderItem.product.name %}
+                {% set currentVariantName = unit.orderItem.variant.name %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -20,11 +20,20 @@ final class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     public function getRouteName(): string
     {
-        'sylius_admin_shipment_show';
+        return 'sylius_admin_shipment_show';
     }
 
-    public function hasShipmentUnit(ProductInterface $product): bool
+    public function hasShipmentUnit(int $amountOf, ProductInterface $product): bool
     {
-        //TODO
+        $table = $this->getElement('shipment_table');
+
+        return $amountOf === count($table->findAll('css', sprintf('td:contains("%s")', $product->getName())));
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'shipment_table' => 'table tbody',
+        ]);
     }
 }

@@ -111,7 +111,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
-        $this->shipmentShowPage->open([]);//TODO
+        $this->shipmentShowPage->open(['id' => $order->getShipments()->first()->getId()]);
     }
 
     /**
@@ -196,10 +196,10 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should (also) see one :product item in it
+     * @Then I should see :amountOf :product items in it
      */
-    public function iShouldSeeOneItemInIt(ProductInterface $product): void
+    public function iShouldSeeItemsInIt(int $amountOf, ProductInterface $product): void
     {
-        $this->shipmentShowPage->hasShipmentUnit($product);
+        $this->shipmentShowPage->hasShipmentUnit($amountOf, $product);
     }
 }
