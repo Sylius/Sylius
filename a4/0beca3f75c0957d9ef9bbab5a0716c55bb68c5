@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2020-01-30T13:09:18Z
+
+Response to problems:
+**Currency**: Shall we display the symbol with the amount? I mean `$100, $200, $300` on the Y axis? If not then maybe currency code above the Y axis?
+**Consistency with the sales count**: ok, we should do it separately :)
+**Months with no sales**: current solution makes me cry 😢 if no sales in a month then the month should still be displayed, but it should have no bar 💃
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-01-30T15:00:13Z
+
+@CoderMaggie 1st and 3rd problem resolved:
+
+<img width="1152" alt="Zrzut ekranu 2020-01-30 o 16 15 01" src="https://user-images.githubusercontent.com/6212718/73462230-c1390780-437b-11ea-9a4a-10027331f57e.png">
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-02-03T06:36:29Z
+
+Thanks, Mateusz! :tada:
