@@ -9,4 +9,3 @@ sylius:
             enabled: Zapnuté
             name: Názov
             url: URL adresa
-            type: Typ

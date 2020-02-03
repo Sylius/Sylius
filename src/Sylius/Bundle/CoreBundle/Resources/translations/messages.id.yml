@@ -32,6 +32,7 @@ sylius:
                 postcode: Kode pos
                 street: Alamat
             contact_email: Kontak email
+            countries: Negara
             currencies: Mata Uang
             currency_base: Mata uang utama
             account_verification_required: Apakah diperlukan verifikasi akun?

@@ -12,6 +12,9 @@ sylius:
             regex: 'Kod kategorii wysyłki może być złożony tylko z liter, cyfr, myślników i podkreśleń.'
             unique: 'Kategoria wysyłki z podanym kodem już istnieje.'
     shipping_method:
+        calculator:
+            min: 'Opłata za wysyłkę nie może być niższa niż 0.'
+            not_blank: 'Prosze wybrać kalkulator kosztów wysyłki.'
         name:
             max_length: 'Nazwa metody wysyłki nie może być dłuższa niż {{ limit }} znaków.'
             min_length: 'Nazwa metody wysyłki musi mieć co najmniej {{ limit }} znaków.'

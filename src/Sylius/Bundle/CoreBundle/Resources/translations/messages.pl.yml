@@ -32,6 +32,7 @@ sylius:
                 postcode: Kod pocztowy
                 street: Adres
             contact_email: E-mail do kontaktu
+            countries: Kraje
             currencies: Waluty
             currency_base: Waluta podstawowa
             account_verification_required: Czy weryfikacja konta jest wymagana?
@@ -100,7 +101,6 @@ sylius:
             file: Wybierz zdjęcie
         user:
             billing_address: Adres do rachunku
-            different_billing_address: Użyć innego adresu do rozliczeń?
             enabled: Dostępny
             first_name: Imię
             groups: Grupy

@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Nazwa miejscowości nie powinna przekraczać 255 znaków.|Nazwa miejscowości nie powinna przekraczać 255 znaków.
-            min_length: Nazwa miejscowości powinna mieć co najmniej 2 znaki|Nazwa miejscowości powinna mieć co najmniej 2 znaki.
             not_blank: Proszę podać miejscowość.
         country:
             not_blank: Proszę wybrać kraj.
             disabled: Wybrany kraj nie jest dostępny. Proszę wybrać inny.
         first_name:
-            max_length: Imię nie powinno przekraczać 255 znaków|Imię nie powinno przekraczać 255 znaków.
-            min_length: Imię powinno mieć co najmniej 2 znaki|Imię powinno mieć co najmniej 2 znaki.
             not_blank: Proszę podać swoje imię.
         last_name:
-            max_length: Nazwisko nie powinno przekraczać 255 znaków|Nazwisko nie powinno przekraczać 255 znaków.
-            min_length: Nazwisko powinno mieć co najmniej 2 znaki|Nazwisko powinno mieć co najmniej 2 znaki.
             not_blank: Proszę podać swoje nazwisko.
         postcode:
-            max_length: Kod pocztowy nie powinien przekraczać 255 znaków|Kod pocztowy nie powinien przekraczać 255 znaków.
-            min_length: Kod pocztowy powinien mieć co najmniej 2 znaki|Kod pocztowy powinien mieć co najmniej 2 znaki.
             not_blank: Proszę podać kod pocztowy.
         province:
             valid: Proszę wybrać prawidłowe województwo.
         street:
-            max_length: Adres nie powinien przekraczać 255 znaków|Adres nie powinien przekraczać 255 znaków.
-            min_length: Adres powinien mieć co najmniej 2 znaki|Adres powinien mieć co najmniej 2 znaki.
             not_blank: Proszę podać ulicę.
         not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
             unique: Kod województwa musi być unikalny.
         name:
-            max_length: Nazwa województwa nie powinna przekraczać 255 znaków|Nazwa województwa nie powinna przekraczać 255 znaków.
-            min_length: Nazwa województwa powinna mieć co najmniej 2 znaki|Nazwa województwa powinna mieć co najmniej 2 znaki.
             not_blank: Proszę podać nazwę województwa.
             unique: Nazwa województwa musi być unikalna.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
         name:
-            max_length: Nazwa strefy nie powinna przekraczać 255 znaków|Nazwa strefy nie powinna przekraczać 255 znaków.
-            min_length: Nazwa strefy musi składać się z co najmniej 2 znaków|Nazwa strefy musi składać się z co najmniej 2 znaków.
             not_blank: Proszę podać nazwę strefy.
     zone_member:
         code:
