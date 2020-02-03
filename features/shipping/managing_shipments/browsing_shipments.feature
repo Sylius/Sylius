@@ -25,8 +25,8 @@ Feature: Browsing shipments
     Scenario: Browsing shipments and their states in one channel
         When I browse shipments
         Then I should see 2 shipments in the list
-        And the shipment of the "#00000001" order should be "Shipped" for "donald@duck.com"
-        And the shipment of the "#00000002" order should be "Ready" for "iron@man.com"
+        And I should see the shipment of order "#00000001" as "Shipped"
+        And I should see the shipment of order "#00000002" as "Ready"
 
     @ui
     Scenario: Shipments are sorted by newest as default

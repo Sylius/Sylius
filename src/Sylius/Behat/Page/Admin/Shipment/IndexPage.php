@@ -48,19 +48,18 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $this->getField($orderNumber, 'state')->getText();
     }
 
-    private function getField(string $orderNumber, string $fieldName): NodeElement
-    {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
-
-        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
-
-        return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
-    }
-
     public function showOrderPageForNthShipment(int $position): void
     {
         $this->getOrderLinkForRow($position)->clickLink('#');
+    }
+
+    public function shipShipmentOfOrderWithTrackingCode(string $orderNumber, string $trackingCode): void
+    {
+        /** @var NodeElement $actions */
+        $actions = $this->getField($orderNumber, 'actions');
+
+        $actions->fillField('sylius_shipment_ship_tracking', $trackingCode);
+        $actions->pressButton('Ship');
     }
 
     protected function getDefinedElements(): array
@@ -70,6 +69,16 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             'filter_state' => '#criteria_state',
             'shipment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);
+    }
+
+    private function getField(string $orderNumber, string $fieldName): NodeElement
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
+
+        return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
     }
 
     private function getOrderLinkForRow(int $shipmentNumber): NodeElement
