@@ -3,6 +3,7 @@ import 'chart.js/dist/Chart.min';
 const drawChart = function drawChart(canvas) {
   const labels = canvas.getAttribute('data-labels');
   const values = canvas.getAttribute('data-values');
+  const currency = canvas.getAttribute('data-currency');
 
   const chartElement = new Chart(canvas, {
     type: 'bar',
@@ -20,6 +21,9 @@ const drawChart = function drawChart(canvas) {
         yAxes: [{
           ticks: {
             beginAtZero: true,
+            callback: function (value) {
+              return currency + value;
+            },
           },
         }],
         xAxes: [{

@@ -44,6 +44,7 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="templating" />
             <argument type="service" id="router" />
+            <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface" />
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">

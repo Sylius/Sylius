@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,16 +37,28 @@ final class DashboardController
     /** @var RouterInterface */
     private $router;
 
+    /** @var SalesDataProviderInterface|null */
+    private $salesDataProvider;
+
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
         EngineInterface $templatingEngine,
-        RouterInterface $router
+        RouterInterface $router,
+        ?SalesDataProviderInterface $salesDataProvider = null
     ) {
         $this->statisticsProvider = $statisticsProvider;
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
+        $this->salesDataProvider = $salesDataProvider;
+
+        if ($this->salesDataProvider === null) {
+            @trigger_error(
+                sprintf('Not passing a $salesDataProvider to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function indexAction(Request $request): Response
@@ -60,11 +73,14 @@ final class DashboardController
         }
 
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
+        $data = ['statistics' => $statistics, 'channel' => $channel];
 
-        return $this->templatingEngine->renderResponse(
-            '@SyliusAdmin/Dashboard/index.html.twig',
-            ['statistics' => $statistics, 'channel' => $channel]
-        );
+        if ($this->salesDataProvider !== null) {
+            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            $data['currency'] = $channel->getBaseCurrency()->getCode();
+        }
+
+        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', $data);
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
