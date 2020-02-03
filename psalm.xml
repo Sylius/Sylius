@@ -185,8 +185,6 @@
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
                 <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
-                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
-                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
             </errorLevel>
         </TooManyArguments>
 
