@@ -18,61 +18,43 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_change_password';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkValidationMessageFor($element, $message)
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyCurrentPassword($password)
+    public function specifyCurrentPassword(string $password): void
     {
         $this->getElement('current_password')->setValue($password);
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyNewPassword($password)
+    public function specifyNewPassword(string $password): void
     {
         $this->getElement('new_password')->setValue($password);
     }
 
-    /**
-     * @param string $password
-     */
-    public function specifyConfirmationPassword($password)
+    public function specifyConfirmationPassword(string $password): void
     {
         $this->getElement('confirmation')->setValue($password);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'confirmation' => '#sylius_user_change_password_newPassword_second',
-            'current_password' => '#sylius_user_change_password_currentPassword',
-            'new_password' => '#sylius_user_change_password_newPassword_first',
+            'confirmation' => '[data-test-confirmation-new-password]',
+            'current_password' => '[data-test-current-password]',
+            'new_password' => '[data-test-new-password]',
         ]);
     }
 }
