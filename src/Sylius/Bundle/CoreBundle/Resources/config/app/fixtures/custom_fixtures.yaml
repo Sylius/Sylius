@@ -17,6 +17,7 @@ sylius_fixtures:
                     options:
                         amount: 20
                         channel: 'FASHION_WEB'
+                        percentage_of_fulfilled_orders: 60
 
                 address:
                     options:

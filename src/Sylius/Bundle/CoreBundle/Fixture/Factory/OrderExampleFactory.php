@@ -24,15 +24,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
@@ -129,6 +133,9 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
         $this->setOrderCompletedDate($order, $options['complete_date']);
+        if ($this->faker->boolean($options['percentage_of_fulfilled_orders'])) {
+            $this->fulfillOrder($order);
+        }
 
         return $order;
     }
@@ -154,6 +161,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return $this->faker->dateTimeBetween('-1 years', 'now');
             })
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
+
+            ->setDefault('percentage_of_fulfilled_orders', 0)
         ;
     }
 
@@ -317,5 +326,24 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
             $order->setCheckoutCompletedAt($date);
         }
+    }
+
+    protected function fulfillOrder(OrderInterface $order): void
+    {
+        /** @var PaymentInterface $payment */
+        $payment = $order->getPayments()->first();
+
+        $this->stateMachineFactory
+            ->get($payment, PaymentTransitions::GRAPH)
+            ->apply(PaymentTransitions::TRANSITION_COMPLETE)
+        ;
+
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+
+        $this->stateMachineFactory
+            ->get($shipment, ShipmentTransitions::GRAPH)
+            ->apply(ShipmentTransitions::TRANSITION_SHIP)
+        ;
     }
 }
