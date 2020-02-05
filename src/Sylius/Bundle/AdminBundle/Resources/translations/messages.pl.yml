@@ -4,12 +4,7 @@
 sylius:
     email:
         shipment_confirmation:
-            has_been_sent_using: 'zostało właśnie wysłane za pomocą'
-            subject: 'Potwierdzenie wysyłki'
-            thank_you_for_transaction: 'Dziękujemy za pomyślną transakcję.'
-            tracking_code: 'kodu do śledzenia.'
-            you_can_check_its_location: 'Możesz sprawdzić jej lokalizację przy użyciu'
-            your_order_with_number: 'Twoje zamówienie o numerze'
+            subject: 'Potwierdzenie dostawy'
     menu:
         admin:
             main:
