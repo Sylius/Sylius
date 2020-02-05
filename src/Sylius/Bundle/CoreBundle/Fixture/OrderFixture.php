@@ -113,7 +113,7 @@ class OrderFixture extends AbstractFixture
                 ->scalarNode('channel')->cannotBeEmpty()->end()
                 ->scalarNode('customer')->cannotBeEmpty()->end()
                 ->scalarNode('country')->cannotBeEmpty()->end()
-                ->integerNode('percentage_of_fulfilled_orders')->min(0)->max(100)->defaultValue(0)->end()
+                ->booleanNode('fulfilled')->defaultValue(false)->end()
             ->end()
         ;
     }

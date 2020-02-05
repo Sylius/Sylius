@@ -24,9 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -133,7 +131,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
         $this->setOrderCompletedDate($order, $options['complete_date']);
-        if ($this->faker->boolean($options['percentage_of_fulfilled_orders'])) {
+        if ($options['fulfilled']) {
             $this->fulfillOrder($order);
         }
 
@@ -162,7 +160,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             })
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
 
-            ->setDefault('percentage_of_fulfilled_orders', 0)
+            ->setDefault('fulfilled', false)
         ;
     }
 
@@ -330,20 +328,27 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function fulfillOrder(OrderInterface $order): void
     {
-        /** @var PaymentInterface $payment */
-        $payment = $order->getPayments()->first();
+        $this->completePayment($order);
+        $this->completeShipment($order);
+    }
 
-        $this->stateMachineFactory
-            ->get($payment, PaymentTransitions::GRAPH)
-            ->apply(PaymentTransitions::TRANSITION_COMPLETE)
-        ;
+    protected function completePayment(OrderInterface $order): void
+    {
+        foreach ($order->getPayments() as $payment) {
+            $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+            if ($stateMachine->can(PaymentTransitions::TRANSITION_COMPLETE)) {
+                $stateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE);
+            }
+        }
+    }
 
-        /** @var ShipmentInterface $shipment */
-        $shipment = $order->getShipments()->first();
-
-        $this->stateMachineFactory
-            ->get($shipment, ShipmentTransitions::GRAPH)
-            ->apply(ShipmentTransitions::TRANSITION_SHIP)
-        ;
+    protected function completeShipment(OrderInterface $order): void
+    {
+        foreach ($order->getShipments() as $shipment) {
+            $stateMachine = $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
+            if ($stateMachine->can(ShipmentTransitions::TRANSITION_SHIP)) {
+                $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP);
+            }
+        }
     }
 }
