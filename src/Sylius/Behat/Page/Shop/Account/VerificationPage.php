@@ -17,17 +17,11 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class VerificationPage extends SymfonyPage implements VerificationPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function verifyAccount($token)
+    public function verifyAccount(string $token): void
     {
         $this->tryToOpen(['token' => $token]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_user_verification';
