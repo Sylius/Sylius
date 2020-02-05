@@ -17,55 +17,24 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface IndexPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return int
-     */
-    public function getAddressesCount();
+    public function getAddressesCount(): int;
+
+    public function hasAddressOf(string $fullName): bool;
+
+    public function hasNoAddresses(): bool;
+
+    public function hasNoDefaultAddress(): bool;
 
     /**
-     * @param string $fullName
-     *
-     * @return bool
-     */
-    public function hasAddressOf($fullName);
-
-    /**
-     * @return bool
-     */
-    public function hasNoAddresses();
-
-    /**
-     * @return bool
-     */
-    public function hasNoDefaultAddress();
-
-    /**
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
-    public function getFullNameOfDefaultAddress();
+    public function getFullNameOfDefaultAddress(): string;
 
-    /**
-     * @param string $fullName
-     * @param string $value
-     *
-     * @return bool
-     */
-    public function addressOfContains($fullName, $value);
+    public function addressOfContains(string $fullName, string $value): bool;
 
-    /**
-     * @param string $fullName
-     */
-    public function editAddress($fullName);
+    public function editAddress(string $fullName): void;
 
-    /**
-     * @param string $fullName
-     */
-    public function deleteAddress($fullName);
+    public function deleteAddress(string $fullName): void;
 
-    /**
-     * @param string $fullName
-     */
-    public function setAsDefault($fullName);
+    public function setAsDefault(string $fullName): void;
 }

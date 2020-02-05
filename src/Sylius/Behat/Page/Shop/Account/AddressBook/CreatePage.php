@@ -19,18 +19,12 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_create';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillAddressData(AddressInterface $address)
+    public function fillAddressData(AddressInterface $address): void
     {
         $this->getElement('first_name')->setValue($address->getFirstName());
         $this->getElement('last_name')->setValue($address->getLastName());
@@ -42,43 +36,28 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         $this->getElement('country')->selectOption($name);
 
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addAddress()
+    public function addAddress(): void
     {
         $this->getElement('add_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProvinceValidationMessage()
+    public function hasProvinceValidationMessage(): bool
     {
         return null !== $this->getDocument()->find('css', '.sylius-validation-error:contains("province")');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countValidationMessages()
+    public function countValidationMessages(): int
     {
         return count($this->getDocument()->findAll('css', '.sylius-validation-error'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

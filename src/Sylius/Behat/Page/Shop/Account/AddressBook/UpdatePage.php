@@ -18,47 +18,32 @@ use Sylius\Behat\Service\JQueryHelper;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_update';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillField($field, $value)
+    public function fillField(string $field, string $value): void
     {
         $field = $this->getElement(str_replace(' ', '_', strtolower($field)));
         $field->setValue($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSpecifiedProvince()
+    public function getSpecifiedProvince(): string
     {
         $this->waitForElement(5, 'province_name');
 
         return $this->getElement('province_name')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSelectedProvince()
+    public function getSelectedProvince(): string
     {
         $this->waitForElement(5, 'province_code');
 
         return $this->getElement('selected_province')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyProvince($name)
+    public function specifyProvince(string $name): void
     {
         $this->waitForElement(5, 'province_name');
 
@@ -66,10 +51,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         $province->setValue($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectProvince($name)
+    public function selectProvince(string $name): void
     {
         $this->waitForElement(5, 'province_code');
 
@@ -77,10 +59,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         $province->selectOption($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
 
@@ -90,16 +69,13 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    public function saveChanges()
+    public function saveChanges(): void
     {
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
 
         $this->getElement('save_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -116,11 +92,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @param int $timeout
-     * @param string $elementName
-     */
-    private function waitForElement($timeout, $elementName)
+    private function waitForElement(int $timeout, string $elementName): void
     {
         $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);
