@@ -7,7 +7,7 @@
 
     {{ sonata_block_render_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
 
-    <table id="sylius-cart-items" class="ui very basic celled table">
+    <table id="sylius-cart-items" {{ sylius_test_html_attribute('cart-items') }} class="ui very basic celled table">
         <thead>
         <tr>
             <th>{{ 'sylius.ui.item'|trans }}</th>
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {% for key, item in cart.items %}
-                {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id} %}
+                {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id, 'loop_index': loop.index} %}
             {% endfor %}
         </tbody>
     </table>
