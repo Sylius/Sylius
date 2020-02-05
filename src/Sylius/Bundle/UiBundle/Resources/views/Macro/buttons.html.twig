@@ -1,5 +1,5 @@
 {% macro default(url, message, id, icon, class) %}
-    <a class="ui {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}">
+    <a class="ui {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button') }}>
         {% if icon is not empty %}
             <i class="icon {{ icon }}"></i>
         {% endif %}
@@ -54,7 +54,7 @@
 {% macro delete(url, message, labeled = true, resourceId = null) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="ui red {% if labeled %}labeled {% endif %}icon button" type="submit" data-requires-confirmation>
+        <button class="ui red {% if labeled %}labeled {% endif %}icon button" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('delete-button') }}>
             <i class="icon trash"></i> {{ ((message is empty and labeled) ? 'sylius.ui.delete' : message)|trans }}
         </button>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />

@@ -22,7 +22,7 @@ interface CreatePageInterface extends SymfonyPageInterface
 
     public function selectCountry(string $name): void;
 
-    public function addAddress();
+    public function addAddress(): void;
 
     public function hasProvinceValidationMessage(): bool;
 

@@ -25,9 +25,9 @@ interface UpdatePageInterface extends SymfonyPageInterface
 
     public function specifyProvince(string $name): void;
 
-    public function selectProvince(string $name);
+    public function selectProvince(string $name): void;
 
-    public function selectCountry(string $name);
+    public function selectCountry(string $name): void;
 
-    public function saveChanges();
+    public function saveChanges(): void;
 }

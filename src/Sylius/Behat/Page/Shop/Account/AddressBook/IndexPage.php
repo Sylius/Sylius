@@ -26,7 +26,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function getAddressesCount(): int
     {
-        $addressesCount = count($this->getElement('addresses')->findAll('css', 'address'));
+        $addressesCount = count($this->getElement('addresses')->findAll('css', '[data-test-address]'));
 
         if (!$this->hasNoDefaultAddress()) {
             ++$addressesCount;
@@ -42,32 +42,32 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function hasNoAddresses(): bool
     {
-        return $this->getDocument()->hasContent('You have no addresses defined');
+        return $this->hasElement('messages');
     }
 
     public function addressOfContains(string $fullName, string $value): bool
     {
-        $address = $this->getAddressOf($fullName);
+        $address = $this->getAddressPageOf($fullName);
 
-        return $address->has('css', sprintf('address:contains("%s")', $value));
+        return $address->has('css', sprintf('[data-test-address]:contains("%s")', $value));
     }
 
     public function editAddress(string $fullName): void
     {
-        $addressToEdit = $this->getAddressOf($fullName);
-        $addressToEdit->findLink('Edit')->press();
+        $addressToEdit = $this->getAddressPageOf($fullName);
+        $addressToEdit->find('css', '[data-test-edit-button] [data-test-button]')->press();
     }
 
     public function deleteAddress(string $fullName): void
     {
-        $addressToDelete = $this->getAddressOf($fullName);
-        $addressToDelete->pressButton('Delete');
+        $addressToDelete = $this->getAddressPageOf($fullName);
+        $addressToDelete->find('css', '[data-test-delete-button]')->press();
     }
 
     public function setAsDefault(string $fullName): void
     {
-        $addressToSetAsDefault = $this->getAddressOf($fullName);
-        $addressToSetAsDefault->pressButton('Set as default');
+        $addressToSetAsDefault = $this->getAddressPageOf($fullName);
+        $addressToSetAsDefault->find('css', '[data-test-set-as-default-button]')->press();
     }
 
     public function hasNoDefaultAddress(): bool
@@ -77,7 +77,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function getFullNameOfDefaultAddress(): string
     {
-        $fullNameElement = $this->getElement('default_address')->find('css', 'address > strong');
+        $fullNameElement = $this->getElement('default_address')->find('css', '[data-test-name]');
 
         Assert::notNull($fullNameElement, 'There should be a default address\'s full name.');
 
@@ -86,14 +86,21 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     private function getAddressOf(string $fullName): ?NodeElement
     {
-        return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));
+        return $this->getElement('addresses')->find('css', sprintf('[data-test-address]:contains("%s")', $fullName));
+    }
+
+    private function getAddressPageOf(string $fullName): ?NodeElement
+    {
+        return $this->getElement('addresses')->find('css', sprintf('[data-test-address-page]:contains("%s")', $fullName));
+
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'addresses' => '#sylius-addresses',
-            'default_address' => '#sylius-default-address',
+            'addresses' => '[data-test-addresses]',
+            'default_address' => '[data-test-default-address]',
+            'messages' => '[data-test-flash-message="info"]',
         ]);
     }
 }

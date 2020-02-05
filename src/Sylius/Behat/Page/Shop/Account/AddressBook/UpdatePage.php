@@ -79,16 +79,16 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'city' => '#sylius_address_city',
-            'country' => '#sylius_address_countryCode',
-            'first_name' => '#sylius_address_firstName',
-            'last_name' => '#sylius_address_lastName',
-            'postcode' => '#sylius_address_postcode',
-            'province_name' => 'input[name="sylius_address[provinceName]"]',
-            'province_code' => 'select[name="sylius_address[provinceCode]"]',
-            'save_button' => 'button:contains("Save changes")',
-            'selected_province' => 'select[name="sylius_address[provinceCode]"] option[selected="selected"]',
-            'street' => '#sylius_address_street',
+            'city' => '[data-test--city]',
+            'country' => '[data-test--city]',
+            'first_name' => '[data-test--first-name]',
+            'last_name' => '[data-test--last-name]',
+            'postcode' => '[data-test--postcode]',
+            'province_name' => '[data-test-province-name]',
+            'province_code' => '[data-test-province-code]',
+            'save_button' => '[data-test-save-changes]',
+            'selected_province' => '[data-test-province-code] option[selected="selected"]',
+            'street' => '[data-test--street]',
         ]);
     }
 
