@@ -32,10 +32,10 @@ Feature: Generating new coupons
         And there should be 5 coupons related to this promotion
 
     @ui
-    Scenario: Generating new coupons with too long code length
+    Scenario: Generating new coupons with a large long code length value
         When I want to generate new coupons for this promotion
-        And I choose the amount of 5 coupons to be generated
-        And I specify their code length as 16
+        And I choose the amount of 10 coupons to be generated
+        And I specify their code length as 40
         And I generate it
-        Then I should be notified that generating 5 coupons with code length equal to 16 is not possible
-        And there should be 0 coupon related to this promotion
+        Then I should be notified that they have been successfully generated
+        And there should be 10 coupons related to this promotion

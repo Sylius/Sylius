@@ -33,7 +33,7 @@
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generator_instruction.code_length.min</option>
-                <option name="max">15</option>
+                <option name="max">40</option>
                 <option name="maxMessage">sylius.promotion_coupon_generator_instruction.code_length.max</option>
             </constraint>
             <constraint name="NotBlank">

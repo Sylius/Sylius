@@ -68,11 +68,11 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
             $instruction->getSuffix()
         );
 
-        $codeCombination = 16 ** $expectedCodeLength;
-        if ($codeCombination > PHP_INT_MAX) {
-            $codeCombination = 0;
+        $codeCombination = 16 ** $expectedCodeLength * $this->ratio;
+        if ($codeCombination >= PHP_INT_MAX) {
+            return PHP_INT_MAX - $generatedAmount;
         }
 
-        return (int) floor($codeCombination * $this->ratio - $generatedAmount);
+        return (int) $codeCombination - $generatedAmount;
     }
 }
