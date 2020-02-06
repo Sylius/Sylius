@@ -161,6 +161,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
 
             ->setDefault('fulfilled', false)
+            ->setAllowedTypes('fulfilled', ['bool'])
         ;
     }
 
@@ -328,11 +329,11 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
     protected function fulfillOrder(OrderInterface $order): void
     {
-        $this->completePayment($order);
-        $this->completeShipment($order);
+        $this->completePayments($order);
+        $this->completeShipments($order);
     }
 
-    protected function completePayment(OrderInterface $order): void
+    protected function completePayments(OrderInterface $order): void
     {
         foreach ($order->getPayments() as $payment) {
             $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
@@ -342,7 +343,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         }
     }
 
-    protected function completeShipment(OrderInterface $order): void
+    protected function completeShipments(OrderInterface $order): void
     {
         foreach ($order->getShipments() as $shipment) {
             $stateMachine = $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
