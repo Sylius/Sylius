@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
@@ -22,12 +23,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         return 'sylius_shop_product_review_create';
     }
 
-    public function titleReview(string $title): void
+    public function titleReview(?string $title): void
     {
         $this->getElement('title')->setValue($title);
     }
 
-    public function setComment(string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
@@ -39,42 +40,53 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function rateReview(int $rate): void
     {
-        $this->getElement('rate')->selectOption($rate);
+        $this->getElement('rating_option')->selectOption($rate);
     }
 
     public function submitReview(): void
     {
-        $this->getDocument()->pressButton('Add');
+        $this->getElement('add')->press();
     }
 
     public function getRateValidationMessage(): string
     {
-        return $this->getElement('rating')->getParent()->find('css', '.sylius-validation-error')->getText();
+        return $this->getValidationMessageFor('rating');
     }
 
     public function getTitleValidationMessage(): string
     {
-        return $this->getElement('title')->getParent()->find('css', '.sylius-validation-error')->getText();
+        return $this->getValidationMessageFor('title');
     }
 
     public function getCommentValidationMessage(): string
     {
-        return $this->getElement('comment')->getParent()->find('css', '.sylius-validation-error')->getText();
+        return $this->getValidationMessageFor('comment');
     }
 
     public function getAuthorValidationMessage(): string
     {
-        return $this->getElement('author')->getParent()->find('css', '.sylius-validation-error')->getText();
+        return $this->getValidationMessageFor('author');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'author' => '#sylius_product_review_author_email',
-            'comment' => '#sylius_product_review_comment',
+            'add' => '[data-test-add]',
+            'author' => '[data-test-author-email]',
+            'comment' => '[data-test-comment]',
             'rate' => '[name="sylius_product_review[rating]"]',
-            'rating' => '#sylius_product_review_rating',
-            'title' => '#sylius_product_review_title',
+            'rating' => '[data-test-rating]',
+            'rating_error' => '[data-test-rating] [data-test-validation-error]',
+            'rating_option' => '[data-test-rating] input',
+            'title' => '[data-test-title]',
         ]);
+    }
+
+    public function getValidationMessageFor(string $element): string
+    {
+        $errorElement = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
+        Assert::notNull($errorElement);
+
+        return $errorElement->getText();
     }
 }

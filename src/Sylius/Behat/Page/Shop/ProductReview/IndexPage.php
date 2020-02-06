@@ -29,7 +29,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function hasReviewTitled(string $title): bool
     {
-        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+        return $this->hasElement('title', ['%title%' => $title]);
     }
 
     public function hasNoReviewsMessage(): bool
@@ -42,7 +42,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'reviews' => '#sylius-product-reviews',
+            'reviews' => '[data-test-product-reviews]',
+            'title' => '[data-test-product-reviews] .comment:contains("%title%")',
         ]);
     }
 }

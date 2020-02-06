@@ -17,9 +17,9 @@ use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface CreatePageInterface extends PageInterface
 {
-    public function titleReview(string $title): void;
+    public function titleReview(?string $title): void;
 
-    public function setComment(string $comment): void;
+    public function setComment(?string $comment): void;
 
     public function setAuthor(string $author): void;
 
