@@ -31,8 +31,10 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
@@ -129,6 +131,9 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
         $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
         $this->setOrderCompletedDate($order, $options['complete_date']);
+        if ($options['fulfilled']) {
+            $this->fulfillOrder($order);
+        }
 
         return $order;
     }
@@ -154,6 +159,9 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return $this->faker->dateTimeBetween('-1 years', 'now');
             })
             ->setAllowedTypes('complete_date', ['null', \DateTime::class])
+
+            ->setDefault('fulfilled', false)
+            ->setAllowedTypes('fulfilled', ['bool'])
         ;
     }
 
@@ -316,6 +324,32 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
     {
         if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
             $order->setCheckoutCompletedAt($date);
+        }
+    }
+
+    protected function fulfillOrder(OrderInterface $order): void
+    {
+        $this->completePayments($order);
+        $this->completeShipments($order);
+    }
+
+    protected function completePayments(OrderInterface $order): void
+    {
+        foreach ($order->getPayments() as $payment) {
+            $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+            if ($stateMachine->can(PaymentTransitions::TRANSITION_COMPLETE)) {
+                $stateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE);
+            }
+        }
+    }
+
+    protected function completeShipments(OrderInterface $order): void
+    {
+        foreach ($order->getShipments() as $shipment) {
+            $stateMachine = $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
+            if ($stateMachine->can(ShipmentTransitions::TRANSITION_SHIP)) {
+                $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP);
+            }
         }
     }
 }
