@@ -50,7 +50,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function hasProvinceValidationMessage(): bool
     {
-        return null !== $this->getDocument()->find('css', '[data-test-validation-error]:contains("province")');
+        return $this->hasElement('province_validation_message');
     }
 
     public function countValidationMessages(): int
@@ -62,12 +62,13 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'add_button' => '[data-test-add-address]',
-            'city' => '[data-test--city]',
-            'country' => '[data-test--country]',
-            'first_name' => '[data-test--first-name]',
-            'last_name' => '[data-test--last-name]',
-            'postcode' => '[data-test--postcode]',
-            'street' => '[data-test--street]',
+            'city' => '[data-test-city]',
+            'country' => '[data-test-country]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'postcode' => '[data-test-postcode]',
+            'street' => '[data-test-street]',
+            'province_validation_message' => '[data-test-validation-error]:contains("province")',
         ]);
     }
 }

@@ -17,7 +17,7 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface UpdatePageInterface extends SymfonyPageInterface
 {
-    public function fillField(string $field, string $value): void;
+    public function fillField(string $field, ?string $value): void;
 
     public function getSpecifiedProvince(): string;
 

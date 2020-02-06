@@ -23,7 +23,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return 'sylius_shop_account_address_book_update';
     }
 
-    public function fillField(string $field, string $value): void
+    public function fillField(string $field, ?string $value): void
     {
         $field = $this->getElement(str_replace(' ', '_', strtolower($field)));
         $field->setValue($value);
@@ -79,16 +79,16 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'city' => '[data-test--city]',
-            'country' => '[data-test--city]',
-            'first_name' => '[data-test--first-name]',
-            'last_name' => '[data-test--last-name]',
-            'postcode' => '[data-test--postcode]',
+            'city' => '[data-test-city]',
+            'country' => '[data-test-country]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'postcode' => '[data-test-postcode]',
             'province_name' => '[data-test-province-name]',
             'province_code' => '[data-test-province-code]',
             'save_button' => '[data-test-save-changes]',
             'selected_province' => '[data-test-province-code] option[selected="selected"]',
-            'street' => '[data-test--street]',
+            'street' => '[data-test-street]',
         ]);
     }
 

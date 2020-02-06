@@ -2,7 +2,7 @@
 
 <div class="ui top attached styled header">{{ 'sylius.ui.your_default_address'|trans }}</div>
 <div class="ui attached segment" id="sylius-default-address" {{ sylius_test_html_attribute('default-address') }}>
-    <div class="ui stackable two column grid" {{ sylius_test_html_attribute('address-page') }}>
+    <div class="ui stackable two column grid" {{ sylius_test_html_attribute('address', "%s %s"|format(address.firstName, address.lastName)) }}>
         <div class="column">
             {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
         </div>
