@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-02-03T17:49:21Z
+
+👍 but the build failed, so probably there is something wrong with the migrations... can you take a look at it @loic425?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-02-03T19:13:54Z
+
+@Zales0123 it proves the changes work :smile:
+I'll take a look soon.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-02-03T19:17:12Z
+
+Indeed 😄 Thank you!
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-02-04T13:30:45Z
+
+@Zales0123 I check it out. This is not really a migration problem cause database cannot be reverted until first version due to data unique on sylius product translation unique index (slug, locale).
+
+I think we have to empty database before or move this test before testing fixtures and behat features.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-02-04T13:34:42Z
+
+Empty database could hide some problems... But the only other solution is to remove duplicated translations to match the old unique key and this is not acceptable too...
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-02-06T08:43:38Z
+
+Thanks, Loïc! :tada:
