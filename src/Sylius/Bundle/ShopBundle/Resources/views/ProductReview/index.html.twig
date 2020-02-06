@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="ui hidden divider"></div>
-    <div class="ui stackable grid">
+    <div class="ui stackable grid" id="reviews">
         <div class="four wide column">
             {{ sonata_block_render_event('sylius.shop.product_review.index.before_product_box', {'product_reviews': product_reviews}) }}
 
@@ -16,7 +16,7 @@
             {{ sonata_block_render_event('sylius.shop.product_review.index.after_product_box', {'product_reviews': product_reviews}) }}
         </div>
         <div class="twelve wide column">
-            <div class="ui segment" {{ sylius_test_html_attribute('product-reviews') }}>
+            <div class="ui segment" id="sylius-product-reviews" {{ sylius_test_html_attribute('product-reviews') }}>
                 {{ sonata_block_render_event('sylius.shop.product_review.index.before_list', {'product_reviews': product_reviews}) }}
 
                 {% include '@SyliusShop/ProductReview/_list.html.twig' %}

@@ -74,15 +74,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             'add' => '[data-test-add]',
             'author' => '[data-test-author-email]',
             'comment' => '[data-test-comment]',
-            'rate' => '[name="sylius_product_review[rating]"]',
             'rating' => '[data-test-rating]',
             'rating_error' => '[data-test-rating] [data-test-validation-error]',
-            'rating_option' => '[data-test-rating] input',
+            'rating_option' => '[data-test-rating] [data-test-option]',
             'title' => '[data-test-title]',
         ]);
     }
 
-    public function getValidationMessageFor(string $element): string
+    private function getValidationMessageFor(string $element): string
     {
         $errorElement = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
         Assert::notNull($errorElement);
