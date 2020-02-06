@@ -17,86 +17,56 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_product_review_create';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function titleReview($title)
+    public function titleReview(string $title): void
     {
         $this->getElement('title')->setValue($title);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setComment($comment)
+    public function setComment(string $comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setAuthor($author)
+    public function setAuthor(string $author): void
     {
         $this->getElement('author')->setValue($author);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rateReview($rate)
+    public function rateReview(int $rate): void
     {
         $this->getElement('rate')->selectOption($rate);
     }
 
-    public function submitReview()
+    public function submitReview(): void
     {
         $this->getDocument()->pressButton('Add');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRateValidationMessage()
+    public function getRateValidationMessage(): string
     {
         return $this->getElement('rating')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitleValidationMessage()
+    public function getTitleValidationMessage(): string
     {
         return $this->getElement('title')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCommentValidationMessage()
+    public function getCommentValidationMessage(): string
     {
         return $this->getElement('comment')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthorValidationMessage()
+    public function getAuthorValidationMessage(): string
     {
         return $this->getElement('author')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

@@ -17,43 +17,28 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_product_review_index';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countReviews()
+    public function countReviews(): int
     {
         return count($this->getElement('reviews')->findAll('css', '.comment'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasReviewTitled($title)
+    public function hasReviewTitled(string $title): bool
     {
         return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoReviewsMessage()
+    public function hasNoReviewsMessage(): bool
     {
         $reviewsContainerText = $this->getElement('reviews')->getText();
 
         return false !== strpos($reviewsContainerText, 'There are no reviews');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
