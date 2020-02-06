@@ -35,31 +35,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->tableAccessor = $tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_order_index';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countOrders()
+    public function countOrders(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
-    public function openLastOrderPage()
-    {
-        $this->getElement('last_order')->click();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isOrderWithNumberInTheList($number)
+    public function isOrderWithNumberInTheList($number): bool
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields(
@@ -73,10 +59,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order)
+    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order): bool
     {
         $row = $this->tableAccessor->getRowWithFields(
             $this->getElement('customer_orders'),
@@ -86,9 +69,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $row->hasLink('Pay');
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function openLastOrderPage(): void
+    {
+        $this->getElement('last_order')->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

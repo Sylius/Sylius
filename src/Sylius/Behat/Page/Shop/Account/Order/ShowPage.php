@@ -34,18 +34,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->tableAccessor = $tableAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_order_show';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumber()
+    public function getNumber(): string
     {
         $numberText = $this->getElement('number')->getText();
         $numberText = str_replace('#', '', $numberText);
@@ -53,14 +47,42 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $numberText;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName)
-    {
+    public function hasShippingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ): bool {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
         return $this->hasAddress($shippingAddressText, $customerName, $street, $postcode, $city, $countryName);
+    }
+
+    public function hasBillingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ): bool {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
+    }
+
+    public function getTotal(): string
+    {
+        $totalElement = $this->getElement('total');
+
+        return trim(str_replace('Total:', '', $totalElement->getText()));
+    }
+
+    public function getSubtotal(): string
+    {
+        $totalElement = $this->getElement('subtotal');
+
+        return trim(str_replace('Items total:', '', $totalElement->getText()));
     }
 
     public function getOrderShipmentStatus(): string
@@ -73,48 +95,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('shipment_status')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName)
-    {
-        $billingAddressText = $this->getElement('billing_address')->getText();
-
-        return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotal()
-    {
-        $totalElement = $this->getElement('total');
-
-        return trim(str_replace('Total:', '', $totalElement->getText()));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubtotal()
-    {
-        $totalElement = $this->getElement('subtotal');
-
-        return trim(str_replace('Items total:', '', $totalElement->getText()));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function countItems()
+    public function countItems(): int
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('order_items'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentPrice()
+    public function getPaymentPrice(): string
     {
         $paymentsPrice = $this->getElement('payments')->find('css', 'p');
 
@@ -131,9 +117,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('order_payment_status')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isProductInTheList(string $productName): bool
     {
         try {
@@ -157,37 +140,25 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemPrice()
+    public function getItemPrice(): string
     {
         return $this->getElement('product_price')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingProvinceName($provinceName)
+    public function hasShippingProvinceName(string $provinceName): bool
     {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
         return false !== stripos($shippingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingProvinceName($provinceName)
+    public function hasBillingProvinceName(string $provinceName): bool
     {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
         return false !== stripos($billingAddressText, $provinceName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -206,18 +177,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @param string $elementText
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    private function hasAddress($elementText, $customerName, $street, $postcode, $city, $countryName)
-    {
+    private function hasAddress(
+        string $elementText,
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ): bool {
         return
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
