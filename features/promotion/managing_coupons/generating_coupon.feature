@@ -30,3 +30,12 @@ Feature: Generating new coupons
         And I generate these coupons
         Then I should be notified that they have been successfully generated
         And there should be 5 coupons related to this promotion
+
+    @ui
+    Scenario: Generating new coupons with a large long code length value
+        When I want to generate new coupons for this promotion
+        And I choose the amount of 10 coupons to be generated
+        And I specify their code length as 40
+        And I generate it
+        Then I should be notified that they have been successfully generated
+        And there should be 10 coupons related to this promotion
