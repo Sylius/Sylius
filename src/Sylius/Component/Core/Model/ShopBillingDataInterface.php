@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-interface ShopBillingDataInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface ShopBillingDataInterface extends ResourceInterface
 {
     public function getTaxId(): ?string;
 
