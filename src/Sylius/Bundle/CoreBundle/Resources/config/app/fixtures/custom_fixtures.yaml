@@ -13,17 +13,18 @@ sylius_fixtures:
                     options:
                         amount: 3
 
-                new_order:
-                    name: order
-                    options:
-                        amount: 8
-                        channel: 'FASHION_WEB'
                 fulfilled_order:
                     name: order
                     options:
                         amount: 12
                         channel: 'FASHION_WEB'
                         fulfilled: true
+
+                new_order:
+                    name: order
+                    options:
+                        amount: 8
+                        channel: 'FASHION_WEB'
 
                 address:
                     options:
