@@ -5,5 +5,7 @@
     <div class="divider"> / </div>
     <a href="{{ path('sylius_shop_account_order_index') }}" class="section">{{ 'sylius.ui.order_history'|trans }}</a>
     <div class="divider"> / </div>
-    <div class="active section">{{ 'sylius.ui.order'|trans }} <span id="number">#{{ order.number }}</span></div>
+    <div class="active section">
+        {{ 'sylius.ui.order'|trans }} <span id="number" {{ sylius_test_html_attribute('order-number') }}>#{{ order.number }}</span>
+    </div>
 </div>

@@ -17,56 +17,35 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return string
-     */
-    public function getNumber();
+    public function getNumber(): string;
 
-    /**
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName);
+    public function hasShippingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ): bool;
 
-    /**
-     * @param string $customerName
-     * @param string $street
-     * @param string $postcode
-     * @param string $city
-     * @param string $countryName
-     *
-     * @return bool
-     */
-    public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName);
+    public function hasBillingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName
+    ): bool;
+
+    public function getTotal(): string;
+
+    public function getSubtotal(): string;
 
     public function getOrderShipmentStatus(): string;
 
-    /**
-     * @return string
-     */
-    public function getTotal();
-
-    /**
-     * @return string
-     */
-    public function getSubtotal();
-
     public function getShipmentStatus(): string;
 
-    /**
-     * @return int
-     */
-    public function countItems();
+    public function countItems(): int;
 
-    /**
-     * @return string
-     */
-    public function getPaymentPrice();
+    public function getPaymentPrice(): string;
 
     public function getPaymentStatus(): string;
 
@@ -74,22 +53,9 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function isProductInTheList(string $productName): bool;
 
-    /**
-     * @return string
-     */
-    public function getItemPrice();
+    public function getItemPrice(): string;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasShippingProvinceName($provinceName);
+    public function hasShippingProvinceName(string $provinceName): bool;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasBillingProvinceName($provinceName);
+    public function hasBillingProvinceName(string $provinceName): bool;
 }
