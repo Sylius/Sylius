@@ -43,7 +43,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
         ShippingMethodInterface $method3
     ): void {
         $methods = [$method1, $method2, $method3];
-        $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);
+        $methodRepository->findBy(['enabled' => true], ['position' => 'ASC'])->shouldBeCalled()->willReturn($methods);
 
         $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(true);
         $eligibilityChecker->isEligible($subject, $method2)->shouldBeCalled()->willReturn(true);
