@@ -71,14 +71,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function openLastOrderPage(): void
     {
-        $this->getElement('last_order')->click();
+        $this->getElement('last_order')->clickLink('Show');
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer_orders' => 'table',
-            'last_order' => 'table tbody tr:last-child a:contains("Show")',
+            'customer_orders' => '[data-test-grid-table]',
+            'last_order' => '[data-test-grid-table-body] [data-test-row]:last-child [data-test-actions]',
         ]);
     }
 }

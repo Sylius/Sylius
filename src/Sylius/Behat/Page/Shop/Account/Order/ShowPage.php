@@ -87,12 +87,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOrderShipmentStatus(): string
     {
-        return $this->getElement('order_shipment_status')->getText();
+        return $this->getElement('order_shipment_state')->getText();
     }
 
     public function getShipmentStatus(): string
     {
-        return $this->getElement('shipment_status')->getText();
+        return $this->getElement('shipment_state')->getText();
     }
 
     public function countItems(): int
@@ -102,42 +102,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getPaymentPrice(): string
     {
-        $paymentsPrice = $this->getElement('payments')->find('css', 'p');
-
-        return $paymentsPrice->getText();
+        return $this->getElement('payment_price')->getText();
     }
 
     public function getPaymentStatus(): string
     {
-        return $this->getElement('payment_status')->getText();
+        return $this->getElement('payment_state')->getText();
     }
 
     public function getOrderPaymentStatus(): string
     {
-        return $this->getElement('order_payment_status')->getText();
+        return $this->getElement('order_payment_state')->getText();
     }
 
     public function isProductInTheList(string $productName): bool
     {
-        try {
-            $table = $this->getElement('order_items');
-            $rows = $this->tableAccessor->getRowsWithFields(
-                $table,
-                ['item' => $productName]
-            );
-
-            foreach ($rows as $row) {
-                $field = $this->tableAccessor->getFieldFromRow($table, $row, 'item');
-                $name = $field->find('css', '.sylius-product-name');
-                if (null !== $name && $name->getText() === $productName) {
-                    return true;
-                }
-            }
-
-            return false;
-        } catch (\InvalidArgumentException $exception) {
-            return false;
-        }
+        return $this->hasElement('product_name', ['%productName%' => $productName]);
     }
 
     public function getItemPrice(): string
@@ -162,18 +142,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#sylius-billing-address',
-            'shipping_address' => '#sylius-shipping-address',
-            'number' => '#number',
-            'order_items' => '#sylius-order',
-            'order_payment_status' => '#order-payment-status',
-            'order_shipment_status' => '#order-shipment-status',
-            'payment_status' => '#payment-status',
-            'payments' => '#sylius-payments',
-            'product_price' => '#sylius-order td:nth-child(2)',
-            'shipment_status' => '#shipment-status',
-            'subtotal' => '#subtotal',
-            'total' => '#total',
+            'billing_address' => '[data-test-billing-address]',
+            'number' => '[data-test-order-number]',
+            'order_items' => '[data-test-order-table]',
+            'order_payment_state' => '[data-test-order-payment-state]',
+            'order_shipment_state' => '[data-test-order-shipment-state]',
+            'payment_price' => '[data-test-payment-price]',
+            'payment_state' => '[data-test-payment-state]',
+            'product_name' => '[data-test-order-table] [data-test-product-name="%productName%"]',
+            'product_price' => '[data-test-order-table] td:nth-child(2)',
+            'shipment_state' => '[data-test-shipment-state]',
+            'shipping_address' => '[data-test-shipping-address]',
+            'subtotal' => '[data-test-subtotal]',
+            'total' => '[data-test-order-total]',
         ]);
     }
 

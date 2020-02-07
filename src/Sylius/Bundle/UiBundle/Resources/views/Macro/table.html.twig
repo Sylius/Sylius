@@ -22,7 +22,7 @@
 {% endmacro %}
 
 {% macro row(grid, definition, row) %}
-    <tr class="item">
+    <tr class="item" {{ sylius_test_html_attribute('row') }}>
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
         <td class="center aligned"><input class="bulk-select-checkbox" form="bulk-delete" type="checkbox" name="ids[]" value="{{ row.id }}" /></td>
     {% endif %}
@@ -30,7 +30,7 @@
         <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-        <td>
+        <td {{ sylius_test_html_attribute('actions') }}>
             <div class="ui buttons">
                 {% for action in definition.getEnabledActions('item')|sort_by('position') %}
                     {{ sylius_grid_render_action(grid, action, row) }}
