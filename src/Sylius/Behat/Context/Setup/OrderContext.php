@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -572,8 +573,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given :numberOfCustomers customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
-     * @Given then :numberOfCustomers more customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
+     * @Given (then) :numberOfCustomers (more) customers have fulfilled :numberOfOrders orders placed for total of :total mostly :product product
      */
     public function customersHaveFulfilledOrdersPlacedForTotalOfMostlyProduct(
         int $numberOfCustomers,
@@ -582,6 +582,17 @@ final class OrderContext implements Context
         ProductInterface $product
     ): void {
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product, true);
+    }
+
+    /**
+     * @Given (then) :numberOfCustomers (more) customers have paid :numberOfOrders orders placed for total of :total
+     */
+    public function thenMoreCustomersHavePaidOrdersPlacedForTotalOf(
+        int $numberOfCustomers,
+        int $numberOfOrders,
+        string $total
+    ): void {
+        $this->createPaidOrders($numberOfCustomers, $numberOfOrders, $total);
     }
 
     /**
@@ -932,8 +943,34 @@ final class OrderContext implements Context
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
 
             if ($isFulfilled) {
+                $order->setPaymentState(OrderPaymentStates::STATE_PAID);
                 $this->applyTransitionOnOrder($order, OrderTransitions::TRANSITION_FULFILL);
             }
+
+            $this->objectManager->persist($order);
+            $this->sharedStorage->set('order', $order);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    private function createPaidOrders($numberOfCustomers, $numberOfOrders, $total): void
+    {
+        $customers = $this->generateCustomers($numberOfCustomers);
+        $sampleProductVariant = $this->sharedStorage->get('variant');
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfOrders; ++$i) {
+            $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid());
+            $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
+            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+            $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
+            $total -= $price;
+
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
+
+           $order->setPaymentState(OrderPaymentStates::STATE_PAID);
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
@@ -964,6 +1001,7 @@ final class OrderContext implements Context
             $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
 
             if ($isFulfilled) {
+                $order->setPaymentState(OrderPaymentStates::STATE_PAID);
                 $this->applyTransitionOnOrder($order, OrderTransitions::TRANSITION_FULFILL);
             }
 
