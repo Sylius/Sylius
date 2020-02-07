@@ -117,8 +117,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     public function removeProduct(string $productName): void
     {
-        $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'button.sylius-cart-remove-button')->press();
+        $this->getElement('delete_button', ['%name%' => $productName])->press();
     }
 
     public function applyCoupon(string $couponCode): void
@@ -232,6 +231,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'cart_total' => '[data-test-cart-total]',
             'clear_button' => '[data-test-cart-clear-button]',
             'coupon_field' => '[data-test-cart-promotion-coupon-input]',
+            'delete_button' => '[data-test-cart-remove-button="%name%"]',
             'flash_message' => '[data-test-flash-message]',
             'grand_total' => '[data-test-cart-grand-total]',
             'item_image' => '[data-test-cart-item="%number%"] [data-test-main-image]',

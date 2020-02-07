@@ -17,4 +17,21 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface RegisterPageInterface extends SymfonyPageInterface
 {
+    public function getRouteName(): string;
+
+    public function checkValidationMessageFor(string $element, string $message): bool;
+
+    public function register(): void;
+
+    public function specifyEmail(string $email): void;
+
+    public function specifyFirstName(string $firstName): void;
+
+    public function specifyPassword(string $password): void;
+
+    public function specifyPhoneNumber(string $phoneNumber): void;
+
+    public function verifyPassword(string $password): void;
+
+    public function subscribeToTheNewsletter(): void;
 }

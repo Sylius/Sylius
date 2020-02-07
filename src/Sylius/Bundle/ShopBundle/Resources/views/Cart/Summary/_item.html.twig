@@ -21,7 +21,7 @@
         <form action="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             <input type="hidden" name="_csrf_token" value="{{ csrf_token(item.id) }}" />
-            <button type="submit" class="ui circular icon button sylius-cart-remove-button" ><i class="remove icon"></i></button>
+            <button type="submit" class="ui circular icon button sylius-cart-remove-button" {{ sylius_test_html_attribute('cart-remove-button', item.productName) }} ><i class="remove icon"></i></button>
         </form>
     </td>
     <td class="right aligned">
