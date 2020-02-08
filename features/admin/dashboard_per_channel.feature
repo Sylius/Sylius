@@ -18,7 +18,7 @@ Feature: Statistics dashboard per channel
         Given 3 customers have fulfilled 4 orders placed for total of "$8566.00" mostly "Onion" product
         And then 2 more customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
         When I open administration dashboard
-        Then I should see 6 new orders
+        Then I should see 4 new orders
         And I should see 5 new customers
         And there should be total sales of "$8,566.00"
         And the average order value should be "$2,141.50"
