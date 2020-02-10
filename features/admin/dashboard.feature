@@ -15,7 +15,7 @@ Feature: Statistics dashboard in a single channel
     @ui
     Scenario: Seeing basic statistics for entire store
         Given 3 customers have fulfilled 4 orders placed for total of "$8566.00"
-        And then 2 more customers have fulfilled 2 orders placed for total of "$459.00"
+        And then 2 more customers have paid 2 orders placed for total of "$459.00"
         When I open administration dashboard
         Then I should see 6 new orders
         And I should see 5 new customers

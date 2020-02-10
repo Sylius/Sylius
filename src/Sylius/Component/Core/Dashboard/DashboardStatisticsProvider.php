@@ -33,14 +33,11 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics
     {
         return new DashboardStatistics(
-            $this->orderRepository->getTotalSalesForChannel($channel),
-            $this->orderRepository->countFulfilledByChannel($channel),
+            $this->orderRepository->getTotalPaidSalesForChannel($channel),
+            $this->orderRepository->countPaidByChannel($channel),
             $this->customerRepository->countCustomers()
         );
     }

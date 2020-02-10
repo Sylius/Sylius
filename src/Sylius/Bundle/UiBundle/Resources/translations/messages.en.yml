@@ -601,6 +601,7 @@ sylius:
         page: 'Page'
         pages: 'Pages'
         paid: 'Paid'
+        paid_orders: 'Paid orders'
         parent: 'Parent'
         partially_authorized: 'Partially authorized'
         partially_paid: 'Partially paid'
