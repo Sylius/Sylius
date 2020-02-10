@@ -19,104 +19,80 @@ use Sylius\Component\Core\Formatter\StringInflector;
 
 class RegisterPage extends SymfonyPage implements RegisterPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_register';
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message)
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
         $errorLabel = $this
             ->getElement(StringInflector::nameToCode($element))
             ->getParent()
-            ->find('css', '.sylius-validation-error')
+            ->find('css', '[data-test-validation-error]')
         ;
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();
     }
 
-    public function register()
+    public function register(): void
     {
-        $this->getDocument()->pressButton('Create an account');
+        $this->getElement('create_account_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyEmail($email)
+    public function specifyEmail(string $email): void
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getElement('email')->setValue($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFirstName($firstName)
+    public function specifyFirstName(string $firstName): void
     {
-        $this->getDocument()->fillField('First name', $firstName);
+        $this->getElement('first_name')->setValue($firstName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyLastName($lastName)
+    public function specifyLastName(string $lastName): void
     {
-        $this->getDocument()->fillField('Last name', $lastName);
+        $this->getElement('last_name')->setValue($lastName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPassword($password)
+    public function specifyPassword(string $password): void
     {
-        $this->getDocument()->fillField('Password', $password);
+        $this->getElement('password')->setValue($password);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyPhoneNumber($phoneNumber)
+    public function specifyPhoneNumber(string $phoneNumber): void
     {
-        $this->getDocument()->fillField('Phone number', $phoneNumber);
+        $this->getElement('phone_number')->setValue($phoneNumber);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function verifyPassword($password)
+    public function verifyPassword(string $password): void
     {
-        $this->getDocument()->fillField('Verification', $password);
+        $this->getElement('password_verification')->setValue($password);
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
-        $this->getDocument()->checkField('Subscribe to the newsletter');
+        $this->getElement('subscribe_newsletter')->check();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_customer_registration_email',
-            'first_name' => '#sylius_customer_registration_firstName',
-            'last_name' => '#sylius_customer_registration_lastName',
-            'password_verification' => '#sylius_customer_registration_user_plainPassword_second',
-            'password' => '#sylius_customer_registration_user_plainPassword_first',
-            'phone_number' => '#sylius_customer_registration_phoneNumber',
+            'create_account_button' => '[data-test-register-button]',
+            'email' => '[data-test-email]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'password' => '[data-test-password-first]',
+            'password_verification' => '[data-test-password-second]',
+            'phone_number' => '[data-test-phone-number]',
+            'subscribe_newsletter' => '[data-test-subscribed-to-newsletter]',
         ]);
     }
 }
