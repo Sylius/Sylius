@@ -17,36 +17,17 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface UpdatePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $field
-     * @param string $value
-     */
-    public function fillField($field, $value);
+    public function fillField(string $field, ?string $value): void;
 
-    /**
-     * @return string
-     */
-    public function getSpecifiedProvince();
+    public function getSpecifiedProvince(): string;
 
-    /**
-     * @return string
-     */
-    public function getSelectedProvince();
+    public function getSelectedProvince(): string;
 
-    /**
-     * @param string $name
-     */
-    public function specifyProvince($name);
+    public function specifyProvince(string $name): void;
 
-    /**
-     * @param string $name
-     */
-    public function selectProvince($name);
+    public function selectProvince(string $name): void;
 
-    /**
-     * @param string $name
-     */
-    public function selectCountry($name);
+    public function selectCountry(string $name): void;
 
-    public function saveChanges();
+    public function saveChanges(): void;
 }

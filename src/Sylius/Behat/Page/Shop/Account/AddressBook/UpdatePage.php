@@ -18,47 +18,32 @@ use Sylius\Behat\Service\JQueryHelper;
 
 class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_update';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillField($field, $value)
+    public function fillField(string $field, ?string $value): void
     {
         $field = $this->getElement(str_replace(' ', '_', strtolower($field)));
         $field->setValue($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSpecifiedProvince()
+    public function getSpecifiedProvince(): string
     {
         $this->waitForElement(5, 'province_name');
 
         return $this->getElement('province_name')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSelectedProvince()
+    public function getSelectedProvince(): string
     {
         $this->waitForElement(5, 'province_code');
 
         return $this->getElement('selected_province')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyProvince($name)
+    public function specifyProvince(string $name): void
     {
         $this->waitForElement(5, 'province_name');
 
@@ -66,10 +51,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         $province->setValue($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectProvince($name)
+    public function selectProvince(string $name): void
     {
         $this->waitForElement(5, 'province_code');
 
@@ -77,10 +59,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         $province->selectOption($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
 
@@ -90,37 +69,30 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    public function saveChanges()
+    public function saveChanges(): void
     {
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
 
         $this->getElement('save_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'city' => '#sylius_address_city',
-            'country' => '#sylius_address_countryCode',
-            'first_name' => '#sylius_address_firstName',
-            'last_name' => '#sylius_address_lastName',
-            'postcode' => '#sylius_address_postcode',
-            'province_name' => 'input[name="sylius_address[provinceName]"]',
-            'province_code' => 'select[name="sylius_address[provinceCode]"]',
-            'save_button' => 'button:contains("Save changes")',
-            'selected_province' => 'select[name="sylius_address[provinceCode]"] option[selected="selected"]',
-            'street' => '#sylius_address_street',
+            'city' => '[data-test-city]',
+            'country' => '[data-test-country]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'postcode' => '[data-test-postcode]',
+            'province_name' => '[data-test-province-name]',
+            'province_code' => '[data-test-province-code]',
+            'save_button' => '[data-test-save-changes]',
+            'selected_province' => '[data-test-province-code] option[selected="selected"]',
+            'street' => '[data-test-street]',
         ]);
     }
 
-    /**
-     * @param int $timeout
-     * @param string $elementName
-     */
-    private function waitForElement($timeout, $elementName)
+    private function waitForElement(int $timeout, string $elementName): void
     {
         $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);

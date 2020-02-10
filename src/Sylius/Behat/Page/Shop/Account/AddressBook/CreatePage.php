@@ -19,18 +19,12 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_create';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fillAddressData(AddressInterface $address)
+    public function fillAddressData(AddressInterface $address): void
     {
         $this->getElement('first_name')->setValue($address->getFirstName());
         $this->getElement('last_name')->setValue($address->getLastName());
@@ -42,53 +36,39 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectCountry($name)
+    public function selectCountry(string $name): void
     {
         $this->getElement('country')->selectOption($name);
 
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addAddress()
+    public function addAddress(): void
     {
         $this->getElement('add_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProvinceValidationMessage()
+    public function hasProvinceValidationMessage(): bool
     {
-        return null !== $this->getDocument()->find('css', '.sylius-validation-error:contains("province")');
+        return $this->hasElement('province_validation_message');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countValidationMessages()
+    public function countValidationMessages(): int
     {
-        return count($this->getDocument()->findAll('css', '.sylius-validation-error'));
+        return count($this->getDocument()->findAll('css', '[data-test-validation-error]'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_button' => 'button:contains("Add")',
-            'city' => '#sylius_address_city',
-            'country' => '#sylius_address_countryCode',
-            'first_name' => '#sylius_address_firstName',
-            'last_name' => '#sylius_address_lastName',
-            'postcode' => '#sylius_address_postcode',
-            'street' => '#sylius_address_street',
+            'add_button' => '[data-test-add-address]',
+            'city' => '[data-test-city]',
+            'country' => '[data-test-country]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'postcode' => '[data-test-postcode]',
+            'street' => '[data-test-street]',
+            'province_validation_message' => '[data-test-validation-error]:contains("province")',
         ]);
     }
 }

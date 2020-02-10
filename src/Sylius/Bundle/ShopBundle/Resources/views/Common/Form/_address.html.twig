@@ -1,13 +1,15 @@
-{% if type is not defined %}
-     {% set type = null %}
+{% if type is defined %}
+    {% set type = type ~ '-' %}
+{% else %}
+    {% set type = null %}
 {% endif %}
 
 <div class="two fields">
-    {{ form_row(form.firstName, sylius_test_form_attribute(type ~ '-first-name')) }}
-    {{ form_row(form.lastName, sylius_test_form_attribute(type ~ '-last-name')) }}
+    {{ form_row(form.firstName, sylius_test_form_attribute(type ~ 'first-name')) }}
+    {{ form_row(form.lastName, sylius_test_form_attribute(type ~ 'last-name')) }}
 </div>
-{{ form_row(form.company, sylius_test_form_attribute(type ~ '-company')) }}
-{{ form_row(form.street, sylius_test_form_attribute(type ~ '-street')) }}
+{{ form_row(form.company, sylius_test_form_attribute(type ~ 'company')) }}
+{{ form_row(form.street, sylius_test_form_attribute(type ~ 'street')) }}
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
@@ -24,7 +26,7 @@
 {% endif %}
 
 <div class="two fields">
-    {{ form_row(form.city, sylius_test_form_attribute(type ~ '-city')) }}
-    {{ form_row(form.postcode, sylius_test_form_attribute(type ~ '-postcode')) }}
+    {{ form_row(form.city, sylius_test_form_attribute(type ~ 'city')) }}
+    {{ form_row(form.postcode, sylius_test_form_attribute(type ~ 'postcode')) }}
 </div>
 {{ form_row(form.phoneNumber) }}
