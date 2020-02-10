@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Component\Core\Model\ShopBillingData" table="sylius_shop_billing_data">
+    <mapped-superclass name="Sylius\Component\Core\Model\ShopBillingData" table="sylius_shop_billing_data">
         <id name="id" column="id" type="integer">
             <generator/>
         </id>
@@ -27,5 +27,5 @@
         <field name="street" nullable="true" />
         <field name="city" nullable="true" />
         <field name="postcode" nullable="true" />
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

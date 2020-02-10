@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-/** @final */
 class ShopBillingData implements ShopBillingDataInterface
 {
     /** @var int|null */
@@ -36,6 +35,11 @@ class ShopBillingData implements ShopBillingDataInterface
 
     /** @var string|null */
     protected $postcode;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getCompany(): ?string
     {
