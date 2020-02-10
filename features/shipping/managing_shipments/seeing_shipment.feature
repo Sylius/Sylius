@@ -18,5 +18,5 @@ Feature: Seeing basic information about shipment
 
     @ui
     Scenario: Seeing basic information about shipment
-        When I view the shipment of the order "#00000001"
+        When I view the first shipment of the order "#00000001"
         Then I should see 2 "Apple" items in it

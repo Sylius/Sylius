@@ -18,5 +18,5 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface ShowPageInterface extends PageInterface
 {
-    public function hasShipmentUnit(int $amountOf, ProductInterface $product): bool;
+    public function getAmountOfShipmentUnits(ProductInterface $product): int;
 }

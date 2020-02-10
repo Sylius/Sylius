@@ -107,7 +107,7 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @When I view the shipment of the order :order
+     * @When I view the first shipment of the order :order
      */
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
@@ -196,10 +196,10 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see :amountOf :product items in it
+     * @Then I should see :amount :product items in it
      */
-    public function iShouldSeeItemsInIt(int $amountOf, ProductInterface $product): void
+    public function iShouldSeeItemsInIt(int $amount, ProductInterface $product): void
     {
-        $this->shipmentShowPage->hasShipmentUnit($amountOf, $product);
+        Assert::true($amount === $this->shipmentShowPage->getAmountOfShipmentUnits($product));
     }
 }

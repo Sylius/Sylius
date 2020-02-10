@@ -23,11 +23,11 @@ final class ShowPage extends SymfonyPage implements ShowPageInterface
         return 'sylius_admin_shipment_show';
     }
 
-    public function hasShipmentUnit(int $amountOf, ProductInterface $product): bool
+    public function getAmountOfShipmentUnits(ProductInterface $product): int
     {
         $table = $this->getElement('shipment_table');
 
-        return $amountOf === count($table->findAll('css', sprintf('td:contains("%s")', $product->getName())));
+        return count($table->findAll('css', sprintf('td:contains("%s")', $product->getName())));
     }
 
     protected function getDefinedElements(): array

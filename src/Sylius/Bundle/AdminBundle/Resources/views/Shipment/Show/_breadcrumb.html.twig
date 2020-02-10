@@ -3,7 +3,7 @@
 {% set breadcrumbs = [
     { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
     { label: 'sylius.ui.shipments'|trans, url: path('sylius_admin_shipment_index') },
-    { label: 'sylius.ui.shipment'|trans ~ ' for ' ~ 'sylius.ui.order'|trans ~ ' #'~shipment.order.number }
+    { label: 'sylius.ui.shipment'|trans ~ ' for ' ~ 'sylius.ui.order'|trans ~ ' #' ~ shipment.order.number }
 ]
 %}
 
