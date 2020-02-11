@@ -1,0 +1,27 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.shipment'|trans }} | {{ shipment.id }}{% endblock %}
+
+{% block content %}
+    {% include '@SyliusAdmin/Shipment/Show/_header.html.twig' %}
+    {% include '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig' %}
+
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
+        <table class="ui sortable stackable very basic celled table">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.ui.product'|trans }}</th>
+                    <th>{{ 'sylius.ui.variant'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in shipment.units %}
+                    <tr class="item">
+                        <td>{{ unit.orderItem.product.name }}</td>
+                        <td>{{ unit.orderItem.variant.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

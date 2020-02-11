@@ -15,8 +15,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface as OrderShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Shipment\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,17 +29,25 @@ final class ManagingShipmentsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
-    /** @var ShowPageInterface */
+    /** @var OrderShowPageInterface */
     private $orderShowPage;
 
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    public function __construct(IndexPageInterface $indexPage, ShowPageInterface $orderShowPage, NotificationCheckerInterface $notificationChecker)
-    {
+    /** @var ShowPageInterface */
+    private $showPage;
+
+    public function __construct(
+        IndexPageInterface $indexPage,
+        OrderShowPageInterface $orderShowPage,
+        NotificationCheckerInterface $notificationChecker,
+        ShowPageInterface $showPage
+    ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
         $this->notificationChecker = $notificationChecker;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -94,6 +103,14 @@ final class ManagingShipmentsContext implements Context
     public function iFilter(): void
     {
         $this->indexPage->filter();
+    }
+
+    /**
+     * @When I view the first shipment of the order :order
+     */
+    public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
+    {
+        $this->showPage->open(['id' => $order->getShipments()->first()->getId()]);
     }
 
     /**
@@ -175,5 +192,13 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeShipmentForTheOrderInTheList(string $orderNumber, int $position): void
     {
         Assert::true($this->indexPage->isShipmentWithOrderNumberInPosition($orderNumber, $position));
+    }
+
+    /**
+     * @Then I should see :amount :product units in the list
+     */
+    public function iShouldSeeUnitsInTheList(int $amount, string $productName): void
+    {
+        Assert::same($this->showPage->getAmountOfUnits($productName), $amount);
     }
 }

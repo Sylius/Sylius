@@ -53,3 +53,5 @@ sylius_grid:
                 item:
                     ship:
                         type: ship_with_tracking_code
+                    show:
+                        type: show
