@@ -15,14 +15,13 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Order\ShowPageInterface as OrderShowPageInterface;
 use Sylius\Behat\Page\Admin\Shipment\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Shipment\ShowPage;
+use Sylius\Behat\Page\Admin\Shipment\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -30,25 +29,25 @@ final class ManagingShipmentsContext implements Context
     /** @var IndexPageInterface */
     private $indexPage;
 
-    /** @var ShowPageInterface */
+    /** @var OrderShowPageInterface */
     private $orderShowPage;
 
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /** @var ShowPage */
-    private $shipmentShowPage;
+    /** @var ShowPageInterface */
+    private $showPage;
 
     public function __construct(
         IndexPageInterface $indexPage,
-        ShowPageInterface $orderShowPage,
+        OrderShowPageInterface $orderShowPage,
         NotificationCheckerInterface $notificationChecker,
-        ShowPage $shipmentShowPage
+        ShowPageInterface $showPage
     ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
         $this->notificationChecker = $notificationChecker;
-        $this->shipmentShowPage = $shipmentShowPage;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -111,7 +110,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
-        $this->shipmentShowPage->open(['id' => $order->getShipments()->first()->getId()]);
+        $this->showPage->open(['id' => $order->getShipments()->first()->getId()]);
     }
 
     /**
@@ -196,10 +195,10 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see :amount :product items in it
+     * @Then I should see :amount :product units in the list
      */
-    public function iShouldSeeItemsInIt(int $amount, ProductInterface $product): void
+    public function iShouldSeeUnitsInTheList(int $amount, string $productName): void
     {
-        Assert::true($amount === $this->shipmentShowPage->getAmountOfShipmentUnits($product));
+        Assert::same($this->showPage->getAmountOfUnits($productName), $amount);
     }
 }

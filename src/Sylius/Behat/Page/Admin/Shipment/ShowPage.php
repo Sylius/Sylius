@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Shipment;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ProductInterface;
 
 final class ShowPage extends SymfonyPage implements ShowPageInterface
 {
@@ -23,17 +22,17 @@ final class ShowPage extends SymfonyPage implements ShowPageInterface
         return 'sylius_admin_shipment_show';
     }
 
-    public function getAmountOfShipmentUnits(ProductInterface $product): int
+    public function getAmountOfUnits(string $productName): int
     {
-        $table = $this->getElement('shipment_table');
+        $table = $this->getElement('table');
 
-        return count($table->findAll('css', sprintf('td:contains("%s")', $product->getName())));
+        return count($table->findAll('css', sprintf('tr:contains("%s")', $productName)));
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'shipment_table' => 'table tbody',
+            'table' => 'table tbody',
         ]);
     }
 }

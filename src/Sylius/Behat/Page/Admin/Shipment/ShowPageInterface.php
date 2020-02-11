@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Shipment;
 
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 
 interface ShowPageInterface extends PageInterface
 {
-    public function getAmountOfShipmentUnits(ProductInterface $product): int;
+    public function getAmountOfUnits(string $productName): int;
 }
