@@ -22,9 +22,13 @@ final class ProductContext implements Context
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
+    /** @var string */
+    private $locale;
+
+    public function __construct(ProductRepositoryInterface $productRepository, string $locale = 'en_US')
     {
         $this->productRepository = $productRepository;
+        $this->locale = $locale;
     }
 
     /**
@@ -35,7 +39,7 @@ final class ProductContext implements Context
      */
     public function getProductByName($productName)
     {
-        $products = $this->productRepository->findByName($productName, 'en_US');
+        $products = $this->productRepository->findByName($productName, $this->locale);
 
         Assert::eq(
             count($products),

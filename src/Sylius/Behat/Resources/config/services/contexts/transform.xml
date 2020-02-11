@@ -71,6 +71,7 @@
 
         <service id="sylius.behat.context.transform.product" class="Sylius\Behat\Context\Transform\ProductContext">
             <argument type="service" id="sylius.repository.product" />
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.behat.context.transform.product_association_type" class="Sylius\Behat\Context\Transform\ProductAssociationTypeContext">
