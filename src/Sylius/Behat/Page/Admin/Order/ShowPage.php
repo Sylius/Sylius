@@ -379,7 +379,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getShippedAtDate(): string
     {
-        return  $this->getElement('shipment_shipping_at_date')->getText();
+        return  $this->getElement('shipment_shipped_at_date')->getText();
     }
 
     protected function getDefinedElements(): array
@@ -400,7 +400,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'promotion_total' => '#promotion-total',
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
-            'shipment_shipping_at_date' => '#sylius-shipments .shipped-at-date',
+            'shipment_shipped_at_date' => '#sylius-shipments .shipped-at-date',
             'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',

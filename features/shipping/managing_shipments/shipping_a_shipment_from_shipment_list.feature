@@ -13,7 +13,6 @@ Feature: Shipping a shipment from shipment list
         And the customer bought a single "Apple"
         And the customer "Donald Duck" addressed it to "Elm street", "90802" "Duckburg" in the "United States" with identical billing address
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
-        And it is "20-02-2020 10:30:05" now
         And I am logged in as an administrator
 
     @ui @email
@@ -33,7 +32,7 @@ Feature: Shipping a shipment from shipment list
 
     @ui
     Scenario: Setting date when a shipment has been shipped
-        Given this order has already been shipped
+        Given it is "20-02-2020 10:30:05" now
         When I browse shipments
         And I ship the shipment of order "#00000001"
         Then I should see the shipment of order "#00000001" as "Shipped"

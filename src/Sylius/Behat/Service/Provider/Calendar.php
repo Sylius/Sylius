@@ -27,11 +27,14 @@ final class Calendar implements DateTimeProvider
 
     public function today(): \DateTimeInterface
     {
-        /** @var resource $file */
-        $file = fopen($this->projectDirectory . '/var/temporaryDate.txt', 'r');
-        $dateTime = fgets($file);
-        fclose($file);
+        if (file_exists($this->projectDirectory . '/var/temporaryDate.txt')) {
+            $file = fopen($this->projectDirectory . '/var/temporaryDate.txt', 'r');
+            $dateTime = fgets($file);
+            fclose($file);
 
-        return new \DateTimeImmutable($dateTime);
+            return new \DateTimeImmutable($dateTime);
+        }
+
+        return new \DateTimeImmutable();
     }
 }

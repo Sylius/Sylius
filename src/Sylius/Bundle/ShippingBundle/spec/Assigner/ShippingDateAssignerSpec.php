@@ -11,10 +11,9 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ShippingBundle\DateAssigner;
+namespace spec\Sylius\Bundle\ShippingBundle\Assigner;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssignerInterface;
 use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -31,7 +30,7 @@ final class ShippingDateAssignerSpec extends ObjectBehavior
         $this->beConstructedWith($calendar);
     }
 
-    function it_assigns_a_shipped_at_date_to_an_shipment(ShipmentInterface $shipment, DateTimeProvider $calendar): void
+    function it_assigns_a_shipped_at_date_to_a_shipment(ShipmentInterface $shipment, DateTimeProvider $calendar): void
     {
         $calendar->today()->willReturn(new \DateTime('20-05-2019 20:20:20'));
         $shipment->setShippedAt(new \DateTime('20-05-2019 20:20:20'))->shouldBeCalled();

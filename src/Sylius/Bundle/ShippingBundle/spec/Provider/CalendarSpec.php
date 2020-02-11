@@ -11,20 +11,20 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShippingBundle\spec\Provider;
+namespace spec\Sylius\Bundle\ShippingBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssignerInterface;
+use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
 
 final class CalendarSpec extends ObjectBehavior
 {
     function it_implements_a_date_time_provider(): void
     {
-        $this->shouldImplement(ShippingDateAssignerInterface::class);
+        $this->shouldImplement(DateTimeProvider::class);
     }
 
-    function it_provide_a_date(): void
+    function it_provides_a_date(): void
     {
-        $this->today()->shouldReturn(typeOf(new \DateTimeImmutable()));
+        $this->today()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
     }
 }
