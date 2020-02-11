@@ -909,6 +909,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see the shipping date as :dateTime
+     */
+    public function iShouldSeeTheShippingDateAs(string $dateTime): void
+    {
+        Assert::same($this->showPage->getShippedAtDate(), $dateTime);
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

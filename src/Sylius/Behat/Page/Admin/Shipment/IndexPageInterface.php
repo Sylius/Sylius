@@ -30,4 +30,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function showOrderPageForNthShipment(int $position): void;
 
     public function shipShipmentOfOrderWithTrackingCode(string $orderNumber, string $trackingCode): void;
+
+    public function getShippedAtDate(string $orderNumber): string;
 }

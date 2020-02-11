@@ -20,6 +20,11 @@ winzou_state_machine:
                 from: [ready]
                 to: cancelled
         callbacks:
+            before:
+                sylius_assign_date:
+                    on: "ship"
+                    do: ["@sylius.shipping_date_assigner", "assign"]
+                    args: ["object"]
             after:
                 sylius_resolve_state:
                     on: ["ship"]

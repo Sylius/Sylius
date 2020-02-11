@@ -254,5 +254,9 @@
             <argument type="service" id="sylius.factory.zone" />
             <argument type="service" id="sylius.factory.zone_member" />
         </service>
+
+        <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
+            <argument>%kernel.project_dir%</argument>
+        </service>
     </services>
 </container>

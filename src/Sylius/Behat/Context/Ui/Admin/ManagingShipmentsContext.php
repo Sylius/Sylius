@@ -201,4 +201,12 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::same($this->showPage->getAmountOfUnits($productName), $amount);
     }
+
+    /**
+     * @Then I should see the shipment of order :orderNumber shipped at :dateTime
+     */
+    public function iShouldSeeTheShippingDateeAs(string $orderNumber, string $dateTme): void
+    {
+        Assert::same($this->indexPage->getShippedAtDate($orderNumber), $dateTme);
+    }
 }

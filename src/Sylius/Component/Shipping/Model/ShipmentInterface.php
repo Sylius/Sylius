@@ -53,4 +53,8 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     public function setTracking(?string $tracking): void;
 
     public function isTracked(): bool;
+
+    public function getShippedAt(): ?\DateTimeInterface;
+
+    public function setShippedAt(?\DateTimeInterface $shippedAt): void;
 }

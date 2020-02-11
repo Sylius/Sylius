@@ -29,3 +29,11 @@ Feature: Shipping a shipment from shipment list
         And I ship the shipment of order "#00000001" with "AWDDXS-SAAQQ-SEFFX-CCDSE" tracking code
         Then I should be notified that the shipment has been successfully shipped
         And an email with the shipment's confirmation of the order "#00000001" should be sent to "donald@duck.com"
+
+    @ui
+    Scenario: Setting date when a shipment has been shipped
+        Given it is "20-02-2020 10:30:05" now
+        When I browse shipments
+        And I ship the shipment of order "#00000001"
+        Then I should see the shipment of order "#00000001" as "Shipped"
+        And I should see the shipment of order "#00000001" shipped at "20-02-2020 10:30:05"
