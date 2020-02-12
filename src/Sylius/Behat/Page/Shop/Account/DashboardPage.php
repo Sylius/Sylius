@@ -39,19 +39,20 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     public function hasResendVerificationEmailButton(): bool
     {
-        return $this->getDocument()->hasButton('Verify');
+        return $this->hasElement('verification_button');
     }
 
     public function pressResendVerificationEmail(): void
     {
-        $this->getDocument()->pressButton('Verify');
+        $this->getElement('verification_button')->press();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer' => '#customer-information',
-            'verification' => '#verification-form',
+            'customer' => '[data-test-customer-information]',
+            'verification' => '[data-test-verification-form]',
+            'verification_button' => '[data-test-verification-button]'
         ]);
     }
 
