@@ -4,3 +4,4 @@
 sylius_api:
     resource: .
     type: api_platform
+    prefix: /

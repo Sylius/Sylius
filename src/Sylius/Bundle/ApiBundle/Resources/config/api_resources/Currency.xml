@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+
+    <resource class="Sylius\Component\Currency\Model\Currency" shortName="Currency">
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
+    </resource>
+</resources>
