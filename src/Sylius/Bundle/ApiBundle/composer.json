@@ -1,5 +1,5 @@
 {
-    "name": "sylius/admin-api-bundle",
+    "name": "sylius/api-bundle",
     "type": "symfony-bundle",
     "description": "APIs management for Symfony projects.",
     "keywords": ["api", "rest"],
@@ -22,28 +22,27 @@
     "require": {
         "php": "^7.3",
 
-        "friendsofsymfony/oauth-server-bundle": "^1.6",
-        "sylius/core-bundle": "^1.2",
-        "symfony/form": "^4.4",
-        "symfony/framework-bundle": "^4.4",
-        "symfony/validator": "^4.4"
+        "api-platform/core": "^2.5",
+        "sylius/core-bundle": "^1.7"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "matthiasnoback/symfony-config-test": "^4.0",
         "phpspec/phpspec": "^5.0",
-        "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.4",
-        "twig/twig": "^2.0"
-    },
-    "config": {
-        "bin-dir": "bin"
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\ApiBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "spec/",
+            "Tests/"
+        ]
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
+            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -55,7 +54,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.6-dev"
+            "dev-master": "1.7-dev"
         }
     }
 }
