@@ -17,57 +17,36 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_dashboard';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasCustomerName($name)
+    public function hasCustomerName(string $name): bool
     {
         return $this->hasValueInCustomerSection($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasCustomerEmail($email)
+    public function hasCustomerEmail(string $email): bool
     {
         return $this->hasValueInCustomerSection($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isVerified()
+    public function isVerified(): bool
     {
         return !$this->hasElement('verification');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasResendVerificationEmailButton()
+    public function hasResendVerificationEmailButton(): bool
     {
         return $this->getDocument()->hasButton('Verify');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function pressResendVerificationEmail()
+    public function pressResendVerificationEmail(): void
     {
         $this->getDocument()->pressButton('Verify');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -76,12 +55,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    /**
-     * @param string $value
-     *
-     * @return bool
-     */
-    private function hasValueInCustomerSection($value)
+    private function hasValueInCustomerSection(string $value): bool
     {
         $customerText = $this->getElement('customer')->getText();
 
