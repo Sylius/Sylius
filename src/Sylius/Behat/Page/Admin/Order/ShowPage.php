@@ -199,7 +199,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
             $quantity = $row->find('css', 'td:nth-child(6)')->getText();
 
-            $orderPromotionTotal = (float) trim(str_replace('-$', '', $unitOrderPromotion)) * $quantity;
+            $orderPromotionTotal = (float) trim(str_replace('~ -$', '', $unitOrderPromotion)) * $quantity;
             $unitOrderPromotionTotal = (float) trim(str_replace('-$', '', $orderPromotion)) * $quantity;
 
             $promotionTotal += (int) ($orderPromotionTotal * 100);
