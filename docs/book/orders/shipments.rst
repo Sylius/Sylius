@@ -5,13 +5,30 @@ Shipments
 =========
 
 A **Shipment** is a representation of a shipping request for an Order. Sylius can attach multiple shipments to each single Order.
+Shipment consists of **ShipmentUnits**, which are a representation of OrderItemUnits from its Order.
 
 How is a Shipment created for an Order?
-'''''''''''''''''''''''''''''''''''''''
+---------------------------------------
 
 .. warning::
 
     Read more about creating :doc:`Orders </book/orders/orders>` where the process of assigning Shipments is clarified.
+
+.. rst-class:: plus-doc
+
+Splitting shipments
+~~~~~~~~~~~~~~~~~~~
+
+As mentioned in the beginning Sylius Order holds a collection of Shipments. In Sylius Plus edition Orders can be
+fulfilled partially, therefore it is possible to split the default Order's shipment.
+
+To do it Sylius Plus provides a UI, where you can choose which items from the initial shipments you'd like to extract to
+a new split shipment and send it (providing a tracking code or not). Shipments of an Order can be split as long as
+there remains one shipment in state ``ready``.
+
+.. image:: ../../_images/sylius_plus/banner.png
+    :align: center
+    :target: http://sylius.com/plus/?utm_source=docs
 
 The Shipment State Machine
 --------------------------
@@ -41,10 +58,10 @@ The allowed transitions between these states are:
 Shipping Methods
 ----------------
 
-**ShippingMethod** in Sylius is an entity that represent the way an order can be shipped to a customer.
+**ShippingMethod** in Sylius is an entity that represents the way an order can be shipped to a customer.
 
 How to create a ShippingMethod programmatically?
-''''''''''''''''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As usual use a factory to create a new ShippingMethod. Give it a ``code``, set a desired shipping calculator and set a ``zone``.
 It also need a configuration, for instance of the amount (cost).
@@ -117,7 +134,6 @@ There are two events that are triggered on the shipment ``ship`` action:
 +-------------------------------------+
 | ``sylius.shipment.post_ship``       |
 +-------------------------------------+
-
 
 Learn more
 ----------
