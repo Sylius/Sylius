@@ -1,6 +1,8 @@
-{% deprecated "This template has been moved to @SyliusShop/Cart/Block/_cartButton.html.twig and @SyliusShop/Cart/Block/_popupContent.html.twig" %}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% include "@SyliusShop/Cart/Block/_cartButton.html.twig" %}
-
-{% include "@SyliusShop/Cart/Block/_popupContent.html.twig" %}
-
+<div id="sylius-cart-button" class="ui circular cart button">
+    {{ sylius_template_event('sylius.shop.cart.widget.button', {'cart': cart}) }}
+</div>
+<div class="ui large flowing cart hidden popup">
+    {{ sylius_template_event('sylius.shop.cart.widget.popup', {'cart': cart}) }}
+</div>
