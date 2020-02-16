@@ -187,13 +187,9 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
         $localeProvider->getDefaultLocaleCode()->willReturn('ga');
 
-        $router->generate(
-            'sylius_shop_homepage',
-            ['_locale' => 'ga']
-        )->willReturn('/ga/');
-        $redirect = new RedirectResponse('/ga/');
+        $router->generate('sylius_shop_homepage', ['_locale' => 'ga'])->willReturn('/ga/');
 
         $this->restrictRequestLocale($event);
-        $event->setResponse($redirect)->shouldHaveBeenCalledOnce();
+        $event->setResponse(new RedirectResponse('/ga/'))->shouldHaveBeenCalledOnce();
     }
 }

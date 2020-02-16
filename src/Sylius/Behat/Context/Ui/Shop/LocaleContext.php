@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
@@ -24,15 +23,9 @@ final class LocaleContext implements Context
     /** @var HomePageInterface */
     private $homePage;
 
-    /** @var LocaleConverterInterface */
-    private $localeConverter;
-
-    public function __construct(
-        HomePageInterface $homePage,
-        LocaleConverterInterface $localeConverter
-    ) {
+    public function __construct(HomePageInterface $homePage)
+    {
         $this->homePage = $homePage;
-        $this->localeConverter = $localeConverter;
     }
 
     /**
@@ -48,11 +41,11 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @When I show homepage with the locale :locale
+     * @When I show homepage with the locale :localeCode
      */
-    public function iShowHomepageWithTheLocale(string $locale): void
+    public function iShowHomepageWithTheLocale(string $localeCode): void
     {
-        $this->homePage->tryToOpen(['_locale' => $this->localeConverter->convertNameToCode($locale)]);
+        $this->homePage->tryToOpen(['_locale' => $localeCode]);
     }
 
     /**
