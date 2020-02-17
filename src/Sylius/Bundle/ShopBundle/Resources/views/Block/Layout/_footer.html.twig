@@ -1,0 +1,9 @@
+<footer id="footer" class="ui inverted vertical footer segment">
+    <div class="ui container">
+        {{ sylius_template_event('sylius.shop.layout.before_footer') }}
+
+        {% include "@SyliusShop/Block/Layout/_footerContent.html.twig" %}
+
+        {{ sylius_template_event('sylius.shop.layout.after_footer') }}
+    </div>
+</footer>
