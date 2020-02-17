@@ -13,17 +13,10 @@
     {% endblock %}
 
     {% block stylesheets %}
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        {% include '@SyliusShop/_styles.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
+        {{ sylius_template_event('sylius.shop.layout.styles') }}
     {% endblock %}
 
-    {{ sonata_block_render_event('sylius.shop.layout.head') }}
+    {{ sylius_template_event('sylius.shop.layout.head') }}
 </head>
 
 <body class="pushable">
@@ -38,11 +31,9 @@
     <div class="ui container">
         {% block header %}
             <header>
-                {% include '@SyliusShop/_header.html.twig' %}
+                {{ sylius_template_event('sylius.shop.layout.header.block') }}
 
-                {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
-
-                {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+                {% include "@SyliusShop/Block/Layout/_menuTaxon.html.twig" %}
             </header>
         {% endblock %}
 
