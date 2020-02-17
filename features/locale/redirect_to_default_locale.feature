@@ -10,7 +10,7 @@ Feature: Redirect to default locale
         And it uses the "English (United States)" locale by default
 
     @ui
-    Scenario: Do not Redirect if locale is available
+    Scenario: Stay on the current locale if it is available
         When I browse that channel
         And I show homepage with the locale "French (France)"
         Then I should shop using the "français (France)" locale
