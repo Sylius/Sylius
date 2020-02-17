@@ -13,14 +13,14 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {{ sylius_template_event('sylius.shop.layout.styles') }}
+        {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
     {% endblock %}
 
     {{ sylius_template_event('sylius.shop.layout.head') }}
 </head>
 
 <body class="pushable">
-{{ sonata_block_render_event('sylius.shop.layout.before_body') }}
+{{ sylius_template_event('sylius.shop.layout.before_body') }}
 <div class="pusher">
     {% block top %}
         <div id="menu" class="ui large sticky inverted stackable menu">
@@ -31,7 +31,7 @@
     <div class="ui container">
         {% block header %}
             <header>
-                {{ sylius_template_event('sylius.shop.layout.header.block') }}
+                {{ sylius_template_event('sylius.shop.layout.header') }}
 
                 {% include "@SyliusShop/Block/Layout/_menuTaxon.html.twig" %}
             </header>
@@ -39,12 +39,12 @@
 
         {% include '@SyliusShop/_flashes.html.twig' %}
 
-        {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+        {{ sylius_template_event('sylius.shop.layout.before_content') }}
 
         {% block content %}
         {% endblock %}
 
-        {{ sonata_block_render_event('sylius.shop.layout.after_content') }}
+        {{ sylius_template_event('sylius.shop.layout.after_content') }}
     </div>
 
     {% block footer %}
@@ -55,10 +55,10 @@
 {% block javascripts %}
     {% include '@SyliusShop/_scripts.html.twig' %}
 
-    {{ sonata_block_render_event('sylius.shop.layout.javascripts') }}
+    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
 {% endblock %}
 
 {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
-{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+{{ sylius_template_event('sylius.shop.layout.after_body') }}
 </body>
 </html>

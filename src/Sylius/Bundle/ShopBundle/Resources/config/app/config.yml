@@ -57,6 +57,97 @@ sonata_block:
 
 sylius_ui:
     events:
+        sylius.shop.layout.after_body:
+            blocks:
+                after_body_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.after_body
+
+        sylius.shop.layout.after_content:
+            blocks:
+                after_content_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.after_content
+
+        sylius.shop.layout.before_body:
+            blocks:
+                before_body_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.before_body
+
+        sylius.shop.layout.before_content:
+            blocks:
+                before_content_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.before_content
+
+        sylius.shop.layout.footer:
+            blocks:
+                before_footer_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: sylius.shop.layout.before_footer
+                content:
+                    template: "@SyliusShop/Block/Layout/_footerContent.html.twig"
+                    priority: 10
+                after_footer_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.after_footer
+
+        sylius.shop.layout.head:
+            blocks:
+                head_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.head
+
+        sylius.shop.layout.header:
+            blocks:
+                header:
+                    template: "@SyliusShop/Block/Layout/_header.html.twig"
+                    priority: 10
+                after_header_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.after_header
+
+        sylius.shop.layout.header_content:
+            blocks:
+                header_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.header
+
+        sylius.shop.layout.javascripts:
+            blocks:
+                javascripts_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.layout.javascripts
+
+        sylius.shop.layout.stylesheets:
+            blocks:
+                internet_explorer_additions:
+                    template: "@SyliusShop/Block/Layout/_internetExplorerAdditions.html.twig"
+                    priority: 20
+                stylesheets:
+                    template: "@SyliusShop/Block/Layout/_stylesheets.html.twig"
+                    priority: 10
+                stylesheets_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: sylius.shop.layout.stylesheets
+
         sylius.shop.layout.topbar:
             blocks:
                 before_switchers_legacy:
@@ -83,7 +174,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.layout.after_security_widget
-        
+
         sylius.shop.homepage:
             blocks:
                 banner:
