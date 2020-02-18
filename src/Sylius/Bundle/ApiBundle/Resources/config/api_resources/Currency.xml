@@ -9,6 +9,13 @@
         shortName="Currency"
     >
         <attribute name="validation_groups">sylius</attribute>
+        <collectionOperations>
+            <collectionOperation name="get" />
+            <collectionOperation name="post" />
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get" />
+        </itemOperations>
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
