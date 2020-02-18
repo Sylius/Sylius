@@ -20,5 +20,7 @@ interface ApiClientInterface
 
     public function getCurrentPage(): ?string;
 
+    public function getError(): string;
+
     public function isCreationSuccessful(): bool;
 }

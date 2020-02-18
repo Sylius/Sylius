@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
@@ -53,6 +54,7 @@ final class ManagingCurrenciesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -77,15 +79,30 @@ final class ManagingCurrenciesContext implements Context
             $this->client->index('currencies');
         }
 
-        $currencies = $this->client->getCollection();
+        $this->assertCurrencyWithData('name', $currencyName);
+    }
 
-        foreach ($currencies as $currency) {
-            if ($currency['name'] === $currencyName) {
-                return;
-            }
+    /**
+     * @Then there should still be only one currency with code :code
+     */
+    public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
+    {
+        if ($this->client->getCurrentPage() !== 'index') {
+            $this->client->index('currencies');
         }
 
-        throw new \Exception(sprintf('There is not currency "%s" in the list', $currencyName));
+
+        Assert::eq(1, $this->client->countCollectionItems());
+        $this->assertCurrencyWithData('code', $code);
+    }
+
+    /**
+     * @Then I should be notified that currency code must be unique
+     */
+    public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique(): void
+    {
+        Assert::false($this->client->isCreationSuccessful());
+        Assert::same($this->client->getError(), 'Currency code must be unique.');
     }
 
     /** TODO: find a proper way to get currency code by its name */
@@ -98,5 +115,18 @@ final class ManagingCurrenciesContext implements Context
         ];
 
         return $currencyNamesToCodes[$currencyName];
+    }
+
+    private function assertCurrencyWithData(string $element, string $currencyName): void
+    {
+        $currencies = $this->client->getCollection();
+
+        foreach ($currencies as $currency) {
+            if ($currency[$element] === $currencyName) {
+                return;
+            }
+        }
+
+        throw new \Exception(sprintf('There is no currency with %s "%s" in the list', $element, $currencyName));
     }
 }
