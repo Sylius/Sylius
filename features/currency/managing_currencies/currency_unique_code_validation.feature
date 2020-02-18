@@ -8,7 +8,7 @@ Feature: Currency unique code validation
         Given the store has currency "Euro"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add currency with taken code
         Given I want to add a new currency
         When I choose "Euro"
