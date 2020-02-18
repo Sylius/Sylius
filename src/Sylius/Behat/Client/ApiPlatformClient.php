@@ -43,10 +43,7 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $content = json_encode($this->request['body']);
 
-        $this->response = null;
-        $this->client->request(
-            'POST', $this->request['url'], [], [], ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/ld+json'], $content
-        );
+        $this->request('POST', $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
     }
 
     public function countCollectionItems(): int
@@ -57,6 +54,11 @@ final class ApiPlatformClient implements ApiClientInterface
     public function getCollection(): array
     {
         return $this->getResponseContent()['hydra:member'];
+    }
+
+    public function getError(): string
+    {
+        return $this->getResponseContent()['hydra:description'];
     }
 
     public function getCurrentPage(): ?string
@@ -71,6 +73,14 @@ final class ApiPlatformClient implements ApiClientInterface
     public function isCreationSuccessful(): bool
     {
         return $this->getResponse()->getStatusCode() === Response::HTTP_CREATED;
+    }
+
+    private function request(string $method, string $url, array $headers, string $content = null): void
+    {
+        $this->response = null;
+        $this->client->request(
+            $method, $url, [], [], array_merge(['HTTP_ACCEPT' => 'application/ld+json'], $headers), $content
+        );
     }
 
     private function getResponseContent(): array
