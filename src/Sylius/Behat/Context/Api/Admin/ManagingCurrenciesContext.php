@@ -5,17 +5,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Component\BrowserKit\AbstractBrowser;
+use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
 {
+    /** @var AbstractBrowser */
+    private $client;
+
+    public function __construct(AbstractBrowser $client)
+    {
+        $this->client = $client;
+    }
+
     /**
      * @When I want to browse currencies of the store
      */
     public function iWantToSeeAllCurrenciesInStore(): void
     {
-        throw new PendingException();
+        $this->client->request('GET', '/new-api/currencies', [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     /**
@@ -23,14 +31,29 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldSeeCurrenciesInTheList(int $count): void
     {
-        throw new PendingException();
+        $response = $this->getResponseContent();
+
+        Assert::eq($count, count($response['hydra:member']));
     }
 
     /**
-     * @Then I should see the currency :currency in the list
+     * @Then I should see the currency :currencyName in the list
      */
-    public function currencyShouldAppearInTheStore(CurrencyInterface $currency): void
+    public function currencyShouldAppearInTheStore(string $currencyName): void
     {
-        throw new PendingException();
+        $currencies = $this->getResponseContent()['hydra:member'];
+
+        foreach ($currencies as $currency) {
+            if ($currency['name'] === $currencyName) {
+                return;
+            }
+        }
+
+        throw new \Exception(sprintf('There is not currency "%s" in the list', $currencyName));
+    }
+
+    private function getResponseContent(): array
+    {
+        return json_decode($this->client->getResponse()->getContent(), true);
     }
 }
