@@ -12,6 +12,9 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var AbstractBrowser */
     private $client;
 
+    /** @var array */
+    private $request;
+
     /** @var Response|null */
     private $response = null;
 
@@ -22,7 +25,28 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function index(string $resource): void
     {
+        $this->response = null;
         $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+    }
+
+    public function buildCreateRequest(string $resource): void
+    {
+        $this->request = ['url' => '/new-api/'.$resource];
+    }
+
+    public function addRequestData(string $key, string $value): void
+    {
+        $this->request['body'][$key] = $value;
+    }
+
+    public function create(): void
+    {
+        $content = json_encode($this->request['body']);
+
+        $this->response = null;
+        $this->client->request(
+            'POST', $this->request['url'], [], [], ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/ld+json'], $content
+        );
     }
 
     public function countCollectionItems(): int
@@ -35,12 +59,32 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->getResponseContent()['hydra:member'];
     }
 
+    public function getCurrentPage(): ?string
+    {
+        if ($this->getResponseContent()['@type'] === 'hydra:Collection') {
+            return 'index';
+        }
+
+        return null;
+    }
+
+    public function isCreationSuccessful(): bool
+    {
+        return $this->getResponse()->getStatusCode() === Response::HTTP_CREATED;
+    }
+
     private function getResponseContent(): array
+    {
+        return json_decode($this->getResponse()->getContent(), true);
+    }
+
+    private function getResponse(): Response
     {
         if ($this->response === null) {
             $this->response = $this->client->getResponse();
         }
 
-        return json_decode($this->response->getContent(), true);
+        return $this->response;
     }
+
 }
