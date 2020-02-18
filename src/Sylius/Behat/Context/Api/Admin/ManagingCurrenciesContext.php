@@ -102,7 +102,7 @@ final class ManagingCurrenciesContext implements Context
     public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique(): void
     {
         Assert::false($this->client->isCreationSuccessful());
-        Assert::same($this->client->getError(), 'Currency code must be unique.');
+        Assert::same($this->client->getError(), 'code: Currency code must be unique.');
     }
 
     /** TODO: find a proper way to get currency code by its name */
