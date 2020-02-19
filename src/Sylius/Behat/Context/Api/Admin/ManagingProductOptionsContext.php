@@ -32,7 +32,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iBrowseProductOptions(): void
     {
-        $this->client->index('product-options');
+        $this->client->index('product_options');
     }
 
     /**
@@ -50,7 +50,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
     {
-        $this->client->index('product-options');
+        $this->client->index('product_options');
         $this->assertProductOptionWithData('name', $productOptionName);
     }
 
