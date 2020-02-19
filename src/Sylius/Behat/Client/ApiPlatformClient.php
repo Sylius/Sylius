@@ -72,6 +72,17 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
     }
 
+    public function hasItemWithValue(string $key, string $value): bool
+    {
+        foreach ($this->getCollection() as $resource) {
+            if ($resource[$key] === $value) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
         $this->client->request(

@@ -51,19 +51,6 @@ final class ManagingProductOptionsContext implements Context
     public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
     {
         $this->client->index('product_options');
-        $this->assertProductOptionWithData('name', $productOptionName);
-    }
-
-    private function assertProductOptionWithData(string $element, string $currencyName): void
-    {
-        $currencies = $this->client->getCollection();
-
-        foreach ($currencies as $currency) {
-            if ($currency[$element] === $currencyName) {
-                return;
-            }
-        }
-
-        throw new \Exception(sprintf('There is no product option with %s "%s" in the list', $element, $currencyName));
+        Assert::true($this->client->hasItemWithValue('name', $productOptionName));
     }
 }
