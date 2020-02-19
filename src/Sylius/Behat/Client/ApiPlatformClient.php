@@ -23,7 +23,7 @@ final class ApiPlatformClient implements ApiClientInterface
     private $client;
 
     /** @var array */
-    private $request;
+    private $request = ['url' => null, 'body' => []];
 
     public function __construct(AbstractBrowser $client)
     {
@@ -37,12 +37,17 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCreateRequest(string $resource): void
     {
-        $this->request = ['url' => '/new-api/'.$resource];
+        $this->request['url'] = '/new-api/'.$resource;
     }
 
     public function addRequestData(string $key, string $value): void
     {
         $this->request['body'][$key] = $value;
+    }
+
+    public function addCompoundRequestData(array $data): void
+    {
+        $this->request['body'] = array_merge_recursive($this->request['body'], $data);
     }
 
     public function create(): void
