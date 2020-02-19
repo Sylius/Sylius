@@ -27,8 +27,6 @@ interface ApiClientInterface
 
     public function getCollection(): array;
 
-    public function getCurrentPage(): ?string;
-
     public function getError(): string;
 
     public function isCreationSuccessful(): bool;

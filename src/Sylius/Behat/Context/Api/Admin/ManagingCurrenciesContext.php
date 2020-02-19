@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
@@ -45,11 +44,11 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @When I choose :currencyName
+     * @When I choose :currencyCode
      */
-    public function iChoose(string $currencyName): void
+    public function iChoose(string $currencyCode): void
     {
-        $this->client->addRequestData('code', $this->getCurrencyCode($currencyName));
+        $this->client->addRequestData('code', $currencyCode);
     }
 
     /**
@@ -66,7 +65,9 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldSeeCurrenciesInTheList(int $count): void
     {
-        Assert::eq($count, $this->client->countCollectionItems());
+        $itemsCount = $this->client->countCollectionItems();
+
+        Assert::eq($count, $itemsCount, sprintf('Expected %d curencies, but got %d', $count, $itemsCount));
     }
 
     /**
@@ -75,10 +76,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
-        if ($this->client->getCurrentPage() !== 'index') {
-            $this->client->index('currencies');
-        }
-
+        $this->client->index('currencies');
         $this->assertCurrencyWithData('name', $currencyName);
     }
 
@@ -87,11 +85,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        if ($this->client->getCurrentPage() !== 'index') {
-            $this->client->index('currencies');
-        }
-
-
+        $this->client->index('currencies');
         Assert::eq(1, $this->client->countCollectionItems());
         $this->assertCurrencyWithData('code', $code);
     }
@@ -103,18 +97,6 @@ final class ManagingCurrenciesContext implements Context
     {
         Assert::false($this->client->isCreationSuccessful());
         Assert::same($this->client->getError(), 'code: Currency code must be unique.');
-    }
-
-    /** TODO: find a proper way to get currency code by its name */
-    private function getCurrencyCode(string $currencyName): string
-    {
-        $currencyNamesToCodes = [
-            'Euro' => 'EUR',
-            'US Dollar' => 'USD',
-            'British Pound' => 'GBP',
-        ];
-
-        return $currencyNamesToCodes[$currencyName];
     }
 
     private function assertCurrencyWithData(string $element, string $currencyName): void

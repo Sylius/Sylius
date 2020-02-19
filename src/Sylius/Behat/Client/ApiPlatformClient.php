@@ -15,6 +15,7 @@ namespace Sylius\Behat\Client;
 
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
@@ -57,31 +58,22 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function countCollectionItems(): int
     {
-        return (int) $this->getResponseContent()['hydra:totalItems'];
+        return (int) $this->getResponseContentValue('hydra:totalItems');
     }
 
     public function getCollection(): array
     {
-        return $this->getResponseContent()['hydra:member'];
+        return $this->getResponseContentValue('hydra:member');
     }
 
     public function getError(): string
     {
-        return $this->getResponseContent()['hydra:description'];
-    }
-
-    public function getCurrentPage(): ?string
-    {
-        if ($this->getResponseContent()['@type'] === 'hydra:Collection') {
-            return 'index';
-        }
-
-        return null;
+        return $this->getResponseContentValue('hydra:description');
     }
 
     public function isCreationSuccessful(): bool
     {
-        return $this->getResponse()->getStatusCode() === Response::HTTP_CREATED;
+        return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
     }
 
     private function request(string $method, string $url, array $headers, string $content = null): void
@@ -92,18 +84,12 @@ final class ApiPlatformClient implements ApiClientInterface
         );
     }
 
-    private function getResponseContent(): array
+    private function getResponseContentValue(string $key)
     {
-        return json_decode($this->getResponse()->getContent(), true);
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        Assert::keyExists($content, $key);
+
+        return $content[$key];
     }
-
-    private function getResponse(): Response
-    {
-        if ($this->response === null) {
-            $this->response = $this->client->getResponse();
-        }
-
-        return $this->response;
-    }
-
 }
