@@ -77,7 +77,10 @@ final class ManagingCurrenciesContext implements Context
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
         $this->client->index('currencies');
-        $this->assertCurrencyWithData('name', $currencyName);
+        Assert::true(
+            $this->client->hasItemWithValue('name', $currencyName),
+            sprintf('There is no currency with name "%s"', $currencyName)
+        );
     }
 
     /**
@@ -87,7 +90,7 @@ final class ManagingCurrenciesContext implements Context
     {
         $this->client->index('currencies');
         Assert::eq(1, $this->client->countCollectionItems());
-        $this->assertCurrencyWithData('code', $code);
+        Assert::true($this->client->hasItemWithValue('code', $code), sprintf('There is no currency with code "%s"', $code));
     }
 
     /**
@@ -97,20 +100,5 @@ final class ManagingCurrenciesContext implements Context
     {
         Assert::false($this->client->isCreationSuccessful(), 'Currency has been created successfully, but it should not');
         Assert::same($this->client->getError(), 'code: Currency code must be unique.');
-    }
-
-    private function assertCurrencyWithData(string $element, string $currencyName): void
-    {
-        $currencies = $this->client->getCollection();
-
-        foreach ($currencies as $currency) {
-            if ($currency[$element] === $currencyName) {
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(
-            sprintf('There is no currency with %s "%s" in the list', $element, $currencyName)
-        );
     }
 }

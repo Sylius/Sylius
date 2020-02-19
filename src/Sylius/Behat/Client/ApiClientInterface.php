@@ -30,4 +30,6 @@ interface ApiClientInterface
     public function getError(): string;
 
     public function isCreationSuccessful(): bool;
+
+    public function hasItemWithValue(string $key, string $value): bool;
 }
