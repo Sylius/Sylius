@@ -32,6 +32,6 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatSomethingHappened(): void
     {
-        Assert::true($this->client->isCreationSuccessful(), 'Currency could not be created');
+        Assert::true($this->client->isCreationSuccessful(), 'Resource could not be created');
     }
 }

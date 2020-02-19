@@ -21,6 +21,8 @@ interface ApiClientInterface
 
     public function addRequestData(string $key, string $value): void;
 
+    public function addCompoundRequestData(array $data): void;
+
     public function create(): void;
 
     public function countCollectionItems(): int;
