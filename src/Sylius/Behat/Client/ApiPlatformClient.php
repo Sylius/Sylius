@@ -25,9 +25,6 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var array */
     private $request;
 
-    /** @var Response|null */
-    private $response = null;
-
     public function __construct(AbstractBrowser $client)
     {
         $this->client = $client;
@@ -35,7 +32,6 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function index(string $resource): void
     {
-        $this->response = null;
         $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
@@ -78,7 +74,6 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
-        $this->response = null;
         $this->client->request(
             $method, $url, [], [], array_merge(['HTTP_ACCEPT' => 'application/ld+json'], $headers), $content
         );
