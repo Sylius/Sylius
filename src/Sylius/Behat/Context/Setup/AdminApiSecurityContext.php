@@ -23,6 +23,6 @@ final class AdminApiSecurityContext implements Context
     public function iAmLoggedInAsAnAdministrator(): void
     {
         // intentionally left blank
-        // TODO: implement admin authorization in new API
+        // implementation of admin authorization in new API is required
     }
 }
