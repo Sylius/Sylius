@@ -67,7 +67,7 @@ final class ManagingCurrenciesContext implements Context
     {
         $itemsCount = $this->client->countCollectionItems();
 
-        Assert::eq($count, $itemsCount, sprintf('Expected %d curencies, but got %d', $count, $itemsCount));
+        Assert::eq($count, $itemsCount, sprintf('Expected %d currencies, but got %d', $count, $itemsCount));
     }
 
     /**
@@ -95,7 +95,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique(): void
     {
-        Assert::false($this->client->isCreationSuccessful());
+        Assert::false($this->client->isCreationSuccessful(), 'Currency has been created successfully, but it should not');
         Assert::same($this->client->getError(), 'code: Currency code must be unique.');
     }
 
@@ -109,6 +109,8 @@ final class ManagingCurrenciesContext implements Context
             }
         }
 
-        throw new \Exception(sprintf('There is no currency with %s "%s" in the list', $element, $currencyName));
+        throw new \InvalidArgumentException(
+            sprintf('There is no currency with %s "%s" in the list', $element, $currencyName)
+        );
     }
 }
