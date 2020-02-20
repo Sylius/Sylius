@@ -66,7 +66,11 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
     {
-        $this->client->addCompoundRequestData(['values' => [['code' => $code, 'value' => $value]]]);
+        $this->client->addCompoundRequestData([
+            'values' => [
+                ['code' => $code, 'translations' => [['value' => $value, 'locale' => 'en_US']]]
+            ]
+        ]);
     }
 
     /**
