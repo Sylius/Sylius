@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_managing_product_options:
+        api_managing_product_options:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -16,8 +16,9 @@ default:
                 - sylius.behat.context.setup.product_option
                 - sylius.behat.context.setup.admin_security
 
-                - sylius.behat.context.ui.admin.managing_product_options
-                - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.api.admin.managing_product_options
+                - sylius.behat.context.api.admin.notification
 
             filters:
-                tags: "@managing_product_options && @ui"
+                tags: "@managing_product_options && @api"
+            javascript: false
