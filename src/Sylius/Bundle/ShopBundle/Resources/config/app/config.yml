@@ -168,9 +168,14 @@ sylius_ui:
             blocks:
                 before_items_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
+                    priority: 20
                     context:
                         event: sylius.shop.cart.summary.before_items
+                items_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: sylius.shop.cart.summary.items
                 items:
                     template: "@SyliusShop/Cart/Block/_items.html.twig"
                     priority: 10
@@ -210,3 +215,9 @@ sylius_ui:
                     template: "@SyliusShop/Cart/Block/_checkout.html.twig"
                     priority: 10
 
+        sylius.shop.cart.summary.totals:
+            blocks:
+                totals_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    context:
+                        event: sylius.shop.cart.summary.totals
