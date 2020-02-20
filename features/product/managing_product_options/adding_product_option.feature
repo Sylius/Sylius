@@ -8,7 +8,7 @@ Feature: Adding a new product option
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @api
+    @ui @javascript @api
     Scenario: Adding a new product option with two required option values
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"

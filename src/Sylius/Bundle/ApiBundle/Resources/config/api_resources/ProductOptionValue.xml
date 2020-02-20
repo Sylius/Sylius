@@ -5,32 +5,26 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
 
     <resource
-        class="Sylius\Component\Product\Model\ProductOption"
-        shortName="ProductOption"
+        class="Sylius\Component\Product\Model\ProductOptionValue"
+        shortName="ProductOptionValue"
     >
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_option:read</attribute>
+                <attribute>product_option_value:read</attribute>
             </attribute>
         </attribute>
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>product_option:write</attribute>
+                <attribute>product_option_value:write</attribute>
             </attribute>
         </attribute>
-        <attribute name="validation_groups">sylius</attribute>
-        <collectionOperations>
-            <collectionOperation name="get" />
-            <collectionOperation name="post" />
-        </collectionOperations>
+        <collectionOperations />
         <itemOperations>
             <itemOperation name="get" />
         </itemOperations>
+        <attribute name="validation_groups">sylius</attribute>
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="createdAt" writable="false" />
-        <property name="updatedAt" writable="false" />
-        <property name="values" readable="true" writable="true" />
         <property name="translations" readable="true" writable="true" />
     </resource>
 </resources>

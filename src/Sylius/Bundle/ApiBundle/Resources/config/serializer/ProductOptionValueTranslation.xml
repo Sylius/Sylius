@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd">
+
+    <class name="Sylius\Component\Product\Model\ProductOptionValueTranslation">
+        <attribute name="id">
+            <group>product_option_value:read</group>
+        </attribute>
+        <attribute name="value">
+            <group>product_option:read</group>
+            <group>product_option:write</group>
+            <group>product_option_value:read</group>
+            <group>product_option_value:write</group>
+        </attribute>
+        <attribute name="locale">
+            <group>product_option:write</group>
+            <group>product_option_value:write</group>
+        </attribute>
+    </class>
+
+</serializer>
