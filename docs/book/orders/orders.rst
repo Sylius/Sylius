@@ -85,7 +85,13 @@ In order to change the amount of items use the **OrderItemQuantityModifier**.
 
     $this->container->get('sylius.order_item_quantity_modifier')->modify($orderItem, 3);
 
-Add the item to the order. And then call the **CompositeOrderProcessor** on the order to have everything recalculated.
+Add the item to the order. And then call the **CompositeOrderProcessor** on the order to have
+everything recalculated. This **CompositeOrderProcessor** is a called multiple times in the checkout 
+process:
+
+.. image: ../../_images/sylius_order_processor.png
+    :align: center
+    :scale: 70%
 
 .. code-block:: php
 
