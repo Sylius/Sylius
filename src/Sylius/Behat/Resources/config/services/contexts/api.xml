@@ -15,6 +15,10 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
             <argument type="service" id="test.client" />
             <argument type="service" id="session" />
@@ -22,6 +26,10 @@
         <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
             <argument type="service" id="test.client" />
             <argument type="service" id="session" />
+        </service>
+
+        <service id="sylius.behat.context.api.admin.notification" class="Sylius\Behat\Context\Api\Admin\NotificationContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
     </services>
 </container>

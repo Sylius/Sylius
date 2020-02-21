@@ -7,7 +7,7 @@ Feature: Adding a new currency
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new currency
         Given I want to add a new currency
         When I choose "Euro"
