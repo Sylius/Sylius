@@ -97,7 +97,7 @@ everything recalculated.
 .. note::
 
     This **CompositeOrderProcessor** is one of the most powerful concepts. It handles whole order calculation logic and allows
-for really granular operations over the order. It is called multiple times in the checkout process, and internally it works like this:
+    for really granular operations over the order. It is called multiple times in the checkout process, and internally it works like this:
 
     .. image:: ../../_images/sylius_order_processor.png
         :align: center
