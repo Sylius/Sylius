@@ -1,32 +1,37 @@
+{% set setLocales = [] %}
+{% for attributeValue in product.attributes if attributeValue.localeCode not in setLocales %}
+    {%  set setLocales = setLocales|merge([attributeValue.localeCode]) %}
+{% endfor %}
+
 <div id="attributes">
     <h4 class="ui top attached large header">{{ 'sylius.ui.attributes'|trans }}</h4>
     <div class="ui attached segment">
-        <div class="ui top attached tabular menu">
-            {% set setLocales = [] %}
-            {% for attributeValue in product.attributes %}
-                {% if attributeValue.localeCode not in setLocales %}
-                    <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ attributeValue.localeCode|sylius_locale_name }}">{{ attributeValue.localeCode|sylius_locale_name }}</a>
-                    {%  set setLocales = setLocales|merge([attributeValue.localeCode]) %}
-                {% endif %}
+        <div class="ui fluid accordion">
+            {% for locale in setLocales %}
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                    <i class="{{ locale|slice(-2)|lower }} flag"></i>
+                    {{ locale|sylius_locale_name }}
+                </div>
+                <div class="ui content" style="padding: 20px 0">
+                    <div class="ui bottom attached tab segment">
+                        <table class="ui very basic celled table">
+                            <tbody>
+                            {% for attributeValue in product.attributes if attributeValue.localeCode == locale %}
+                                <tr>
+                                    <td class="five wide">
+                                        <strong class="gray text">{{ attributeValue.name }}</strong>
+                                    </td>
+                                    <td>
+                                        {% include [('@SyliusAdmin/Product/Show/Types/'~attributeValue.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attributeValue, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             {% endfor %}
         </div>
-        {% for locale in setLocales %}
-            <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}">
-                <table class="ui very basic celled table">
-                    <tbody>
-                    {% for attributeValue in product.attributes if attributeValue.localeCode == locale %}
-                        <tr>
-                            <td class="five wide">
-                                <strong class="gray text">{{ attributeValue.name }}</strong>
-                            </td>
-                            <td>
-                                {% include [('@SyliusAdmin/Product/Show/Types/'~attributeValue.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attributeValue, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% endfor %}
     </div>
 </div>
