@@ -40,7 +40,7 @@ For the ``Country`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container --parameter=sylius.model.country.class
+    php bin/console debug:container --parameter=sylius.model.country.class
 
 As a result you will get the ``Sylius\Component\Addressing\Model\Country`` - this is the class that you need to be extending.
 
@@ -100,7 +100,7 @@ You can check if the configuration in ``config/_sylius.yaml`` is correct by runn
 
 .. code-block:: bash
 
-    $ php bin/console debug:container --parameter=sylius.model.country.class
+    php bin/console debug:container --parameter=sylius.model.country.class
 
 If all is well the output should look like:
 
@@ -124,7 +124,7 @@ If all is well the output should look like:
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 * via migrations:
 
@@ -132,8 +132,8 @@ Which we strongly recommend over updating the schema.
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:migrations:diff
-    $ php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
 
 .. tip::
 
@@ -167,7 +167,7 @@ Just like for regular models you can also check the class of translatable models
 
 .. code-block:: bash
 
-    $ php bin/console debug:container --parameter=sylius.model.shipping_method.class
+    php bin/console debug:container --parameter=sylius.model.shipping_method.class
 
 **1.** The first thing to do is to add your own fields in class ``App\Entity\Shipping\ShippingMethod`` extending the base ``Sylius\Component\Core\Model\ShippingMethod`` class.
 
@@ -240,7 +240,7 @@ Configuration ``sylius_shipping:`` is provided by default in the sylius-standard
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 * via migrations:
 
@@ -248,8 +248,8 @@ Which we strongly recommend over updating the schema.
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:migrations:diff
-    $ php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
 
 .. tip::
 
@@ -278,7 +278,7 @@ Just like for regular models you can also check the class of translatable models
 
 .. code-block:: bash
 
-    $ php bin/console debug:container --parameter=sylius.model.shipping_method_translation.class
+    php bin/console debug:container --parameter=sylius.model.shipping_method_translation.class
 
 **1.** In order to add a translatable property to your entity, start from defining it on the class `App\Entity\Shipping\ShippingMethodTranslation` is already there in the right place.
 
@@ -382,7 +382,7 @@ Configuration ``sylius_addressing:`` is provided by default in the sylius-standa
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 * via migrations:
 
@@ -390,8 +390,8 @@ Which we strongly recommend over updating the schema.
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:migrations:diff
-    $ php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:migrate
 
 .. tip::
 

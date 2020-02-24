@@ -31,7 +31,7 @@ To find out the correct configuration, please run the following command:
 
 .. code-block:: bash
 
-    $ bin/console debug:config SyliusUserBundle
+    bin/console debug:config SyliusUserBundle
 
 The output of that command should look similar to:
 

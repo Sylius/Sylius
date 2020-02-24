@@ -90,7 +90,7 @@ Done! If you do not see any changes on the ``/shop/login`` url, clear your cache
 
 .. code-block:: bash
 
-    $ php bin/console cache:clear
+    php bin/console cache:clear
 
 * **Admin** templates: Customization of the Country form view.
 
@@ -119,7 +119,7 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 
 .. code-block:: bash
 
-    $ php bin/console cache:clear
+    php bin/console cache:clear
 
 How to customize templates via events?
 --------------------------------------

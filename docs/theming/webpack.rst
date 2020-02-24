@@ -13,7 +13,7 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
 
 .. code-block:: bash
 
-    $ composer require symfony/webpack-encore-bundle
+    composer require symfony/webpack-encore-bundle
 
 **2.** Edit the ``config/packages/assets.yaml`` file:
 
@@ -67,11 +67,11 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
 
 .. code-block:: bash
 
-    $ yarn encore dev
+    yarn encore dev
     # or
-    $ yarn encore production
+    yarn encore production
     # or
-    $ yarn encore dev-server
+    yarn encore dev-server
 
 .. tip::
 

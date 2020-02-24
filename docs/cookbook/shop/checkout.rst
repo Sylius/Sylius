@@ -93,7 +93,7 @@ Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``syliu
 .. tip::
 
     To check if your new state machine configuration is overriding the old one run:
-    ``$ php bin/console debug:winzou:state-machine`` and check the configuration of ``sylius_order_checkout``.
+    ``php bin/console debug:winzou:state-machine`` and check the configuration of ``sylius_order_checkout``.
 
 Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -272,7 +272,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
 
 .. tip::
 
-    If you do not see any changes run ``$ php bin/console cache:clear``.
+    If you do not see any changes run ``php bin/console cache:clear``.
 
 Learn more
 ----------

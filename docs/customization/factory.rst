@@ -35,7 +35,7 @@ For the ``ProductFactory`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.factory.product
+    php bin/console debug:container sylius.factory.product
 
 As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory`` - this is the class that you need to decorate.
 Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``) and implement it.

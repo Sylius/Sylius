@@ -6,8 +6,8 @@ Summary
 
 .. code-block:: bash
 
-    $ composer install
-    $ vendor/bin/phpspec run -fpretty --verbose
+    composer install
+    vendor/bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------

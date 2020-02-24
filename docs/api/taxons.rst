@@ -89,7 +89,7 @@ To create new taxon use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/ \
+    curl http://demo.sylius.com/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -144,7 +144,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/ \
+    curl http://demo.sylius.com/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -192,7 +192,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/ \
+    curl http://demo.sylius.com/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -374,7 +374,7 @@ To see the details of the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/toys \
+    curl http://demo.sylius.com/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -541,7 +541,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/ \
+    curl http://demo.sylius.com/api/v1/taxons/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -822,7 +822,7 @@ To fully update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/toys \
+    curl http://demo.sylius.com/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -868,7 +868,7 @@ To partially update the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/toys \
+    curl http://demo.sylius.com/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -916,7 +916,7 @@ To delete the taxon with ``code = toys`` use the below method:
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/toys \
+    curl http://demo.sylius.com/api/v1/taxons/toys \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -956,7 +956,7 @@ To change the order of products with codes ``yellow_t_shirt`` and ``princess_t_s
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/taxons/womens_t_shirts/products \
+    curl http://demo.sylius.com/api/v1/taxons/womens_t_shirts/products \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
