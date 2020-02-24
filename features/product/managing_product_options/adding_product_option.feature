@@ -29,7 +29,7 @@ Feature: Adding a new product option
         Then I should be notified that it has been successfully created
         And the product option "T-Shirt size" should appear in the registry
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Adding a new product option with one option value
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"

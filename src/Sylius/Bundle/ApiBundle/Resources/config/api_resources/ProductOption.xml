@@ -33,4 +33,5 @@
         <property name="values" readable="true" writable="true" />
         <property name="translations" readable="true" writable="true" />
     </resource>
+
 </resources>

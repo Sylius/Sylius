@@ -6,19 +6,15 @@
 
     <class name="Sylius\Component\Product\Model\ProductOptionValue">
         <attribute name="id">
-            <group>product_option_value:read</group>
+            <group>product_option:read</group>
         </attribute>
         <attribute name="code">
             <group>product_option:read</group>
             <group>product_option:write</group>
-            <group>product_option_value:read</group>
-            <group>product_option_value:write</group>
         </attribute>
         <attribute name="translations">
             <group>product_option:write</group>
             <group>product_option:read</group>
-            <group>product_option_value:read</group>
-            <group>product_option_value:write</group>
         </attribute>
     </class>
 
