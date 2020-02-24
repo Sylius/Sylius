@@ -27,25 +27,25 @@ final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
     public function setUp(Environment $env, FeatureNode $feature, Scenario $scenario, $skip): Setup
     {
         try {
-            $javascript = $env->getSuite()->getSetting('javascript');
+            if ($env->getSuite()->getSetting('javascript')) {
+                return $this->baseTester->setUp($env, $feature, $scenario, $skip);
+            }
         } catch (ParameterNotFoundException $exception) {
             return $this->baseTester->setUp($env, $feature, $scenario, $skip);
         }
 
-        if (!$javascript) {
-            $tags = $scenario->getTags();
-            if (($key = array_search('javascript', $tags)) !== false) {
-                unset($tags[$key]);
-            }
-
-            $scenario = new ScenarioNode(
-                $scenario->getTitle(),
-                $tags,
-                $scenario->getSteps(),
-                $scenario->getKeyword(),
-                $scenario->getLine()
-            );
+        $tags = $scenario->getTags();
+        if (($key = array_search('javascript', $tags)) !== false) {
+            unset($tags[$key]);
         }
+
+        $scenario = new ScenarioNode(
+            $scenario->getTitle(),
+            $tags,
+            $scenario->getSteps(),
+            $scenario->getKeyword(),
+            $scenario->getLine()
+        );
 
         return $this->baseTester->setUp($env, $feature, $scenario, $skip);
     }
