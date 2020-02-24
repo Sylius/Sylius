@@ -71,10 +71,15 @@ Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 .. code-block:: bash
 
-    $ pip3 install -U sphinx
-    $ pip3 install sphinx_copybutton
+    $ pip3 install --no-cache-dir -r ./docs/requirements.txt
 
-Then run ``sphinx-build -b html ./docs ./docs/build`` and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
+Then run
+
+.. code-block:: bash
+
+    sphinx-build -b html ./docs ./docs/build
+
+and view the generated HTML files in the ``docs/build`` directory. You can open them in your browser and check how they look!
 
 .. warning::
 
