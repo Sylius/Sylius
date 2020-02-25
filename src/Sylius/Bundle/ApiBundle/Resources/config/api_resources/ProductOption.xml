@@ -25,6 +25,7 @@
         </collectionOperations>
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="put" />
         </itemOperations>
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

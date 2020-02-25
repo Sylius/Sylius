@@ -50,11 +50,28 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I want to modify the :productOption product option
+     */
+    public function iWantToModifyProductOption(ProductOptionInterface $productOption): void
+    {
+        $this->sharedStorage->set('product_option', $productOption);
+        $this->client->buildUpdateRequest('product_options', $productOption->getCode());
+    }
+
+    /**
      * @When I name it :name in :language
      */
     public function iNameItInLanguage(string $name, string $language): void
     {
-        $this->client->addCompoundRequestData(['translations' => [['name' => $name, 'locale' => $language]]]);
+        $this->client->addCompoundRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+    }
+
+    /**
+     * @When I rename it to :name in :language
+     */
+    public function iRenameItInLanguage(string $name, string $language): void
+    {
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
     }
 
     /**
@@ -95,6 +112,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
      * @Then I should see :count product options in the list
      */
     public function iShouldSeeProductOptionsInTheList(int $count): void
@@ -114,6 +139,15 @@ final class ManagingProductOptionsContext implements Context
 
         $this->client->index('product_options');
         Assert::true($this->client->hasItemWithValue('name', $productOption->getName()));
+    }
+
+    /**
+     * @Then /^(this product option) name should be "([^"]+)"$/
+     */
+    public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
+    {
+        $this->client->show('product_options', $productOption->getCode());
+        Assert::true($this->client->hasValue('name', $name));
     }
 
     /**
