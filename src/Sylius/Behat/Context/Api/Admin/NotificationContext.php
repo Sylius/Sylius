@@ -34,4 +34,13 @@ final class NotificationContext implements Context
     {
         Assert::true($this->client->isCreationSuccessful(), 'Resource could not be created');
     }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+//        $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
+        Assert::true($this->client->isDeletionSuccessful(), 'Resource could not be deleted');
+    }
 }

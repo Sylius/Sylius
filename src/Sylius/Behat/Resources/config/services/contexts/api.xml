@@ -33,6 +33,10 @@
             <argument type="service" id="session" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.notification" class="Sylius\Behat\Context\Api\Admin\NotificationContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
