@@ -13,21 +13,14 @@
     {% endblock %}
 
     {% block stylesheets %}
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        {% include '@SyliusShop/_styles.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
+        {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
     {% endblock %}
 
-    {{ sonata_block_render_event('sylius.shop.layout.head') }}
+    {{ sylius_template_event('sylius.shop.layout.head') }}
 </head>
 
 <body class="pushable">
-{{ sonata_block_render_event('sylius.shop.layout.before_body') }}
+{{ sylius_template_event('sylius.shop.layout.before_body') }}
 <div class="pusher">
     {% block top %}
         <div id="menu" class="ui large sticky inverted stackable menu">
@@ -38,22 +31,20 @@
     <div class="ui container">
         {% block header %}
             <header>
-                {% include '@SyliusShop/_header.html.twig' %}
+                {{ sylius_template_event('sylius.shop.layout.header') }}
 
-                {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
-
-                {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+                {% include "@SyliusShop/Block/Layout/_menuTaxon.html.twig" %}
             </header>
         {% endblock %}
 
         {% include '@SyliusShop/_flashes.html.twig' %}
 
-        {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+        {{ sylius_template_event('sylius.shop.layout.before_content') }}
 
         {% block content %}
         {% endblock %}
 
-        {{ sonata_block_render_event('sylius.shop.layout.after_content') }}
+        {{ sylius_template_event('sylius.shop.layout.after_content') }}
     </div>
 
     {% block footer %}
@@ -64,10 +55,10 @@
 {% block javascripts %}
     {% include '@SyliusShop/_scripts.html.twig' %}
 
-    {{ sonata_block_render_event('sylius.shop.layout.javascripts') }}
+    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
 {% endblock %}
 
 {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
-{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+{{ sylius_template_event('sylius.shop.layout.after_body') }}
 </body>
 </html>
