@@ -17,15 +17,23 @@ interface ApiClientInterface
 {
     public function index(string $resource): void;
 
+    public function show(string $resource, string $id): void;
+
     public function subResourceIndex(string $resource, string $subResource, string $id): void;
 
     public function buildCreateRequest(string $resource): void;
+
+    public function buildUpdateRequest(string $resource, string $id): void;
 
     public function addRequestData(string $key, string $value): void;
 
     public function addCompoundRequestData(array $data): void;
 
+    public function updateRequestData(array $data): void;
+
     public function create(): void;
+
+    public function update(): void;
 
     public function countCollectionItems(): int;
 
@@ -34,6 +42,10 @@ interface ApiClientInterface
     public function getError(): string;
 
     public function isCreationSuccessful(): bool;
+
+    public function isUpdateSuccessful(): bool;
+
+    public function hasValue(string $key, string $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
 }
