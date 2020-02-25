@@ -17,6 +17,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
@@ -24,9 +27,13 @@ final class ManagingProductOptionsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    public function __construct(ApiClientInterface $client, SharedStorageInterface $sharedStorage)
     {
         $this->client = $client;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -101,12 +108,26 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then the product option :productOptionName should be in the registry
-     * @Then the product option :productOptionName should appear in the registry
+     * @Then the product option :productOption should be in the registry
+     * @Then the product option :productOption should appear in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
+    public function theProductOptionShouldAppearInTheRegistry(ProductOptionInterface $productOption): void
     {
+        $this->sharedStorage->set('product_option', $productOption);
+
         $this->client->index('product_options');
-        Assert::true($this->client->hasItemWithValue('name', $productOptionName));
+        Assert::true($this->client->hasItemWithValue('name', $productOption->getName()));
+    }
+
+    /**
+     * @Then /^(product option "[^"]+") should have the "([^"]+)" option value$/
+     */
+    public function thisProductOptionShouldHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValueCode
+    ): void {
+        $this->client->subResourceIndex('product_options', 'values', $productOption->getCode());
+
+        Assert::true($this->client->hasItemWithValue('code', $optionValueCode));
     }
 }
