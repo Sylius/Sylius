@@ -18,7 +18,7 @@
 {% if product.images|length > 1 %}
 <div class="ui divider"></div>
 
-{{ sonata_block_render_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
+{{ sylius_template_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
 
 <div class="ui small images">
     {% for image in product.images %}

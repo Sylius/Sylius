@@ -1,3 +1,5 @@
-{% deprecated "This template has been moved to @SyliusShop/Layout/Block/_header.html.twig" %}
-
-{% include "@SyliusShop/Block/Layout/_header.html.twig" %}
+<div class="ui basic segment">
+    <div class="ui three column stackable grid">
+        {{ sylius_template_event('sylius.shop.layout.header.grid') }}
+    </div>
+</div>

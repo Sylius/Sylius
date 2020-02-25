@@ -1,0 +1,15 @@
+<h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
+<p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+{{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    {% include '@SyliusShop/Login/_form.html.twig' %}
+
+    {{ sylius_template_event('sylius.shop.login.form', {'form': form}) }}
+
+    <button type="submit" class="ui blue submit button" {{ sylius_test_html_attribute('login-button') }}>
+        {{ 'sylius.ui.login'|trans }}
+    </button>
+
+    <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
+
+    <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
+{{ form_end(form, {'render_rest': false}) }}

@@ -13,7 +13,7 @@
                 </div>
             </h1>
 
-            {{ sonata_block_render_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
+            {{ sylius_template_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
 
             {% if lastPayment != false %}
                 {%  if lastPayment.method.instructions is not null %}

@@ -20,7 +20,7 @@
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
         </h1>
 
-        {{ sonata_block_render_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
 
         <input type="hidden" name="_method" value="PUT" />
 
@@ -36,7 +36,7 @@
         {{ form_row(form.phoneNumber) }}
         {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
 
-        {{ sonata_block_render_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
         <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}

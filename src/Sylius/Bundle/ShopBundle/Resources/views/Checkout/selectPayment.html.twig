@@ -3,14 +3,12 @@
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% block content %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_payment', 'orderTotal': order.total} %}
-
-    {{ sonata_block_render_event('sylius.shop.checkout.select_payment.after_steps', {'order': order}) }}
+    {{ sylius_template_event(['sylius.shop.checkout.select_payment.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_payment', 'orderTotal': order.total})) }}
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui padded segment" id="sylius-payment-methods">
-                {{ sonata_block_render_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
+                {{ sylius_template_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
 
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     {{ form_errors(form) }}
@@ -19,7 +17,7 @@
                     {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
                     <div class="ui hidden divider"></div>
 
-                    {{ sonata_block_render_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
+                    {{ sylius_template_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
                     {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
 
                     {{ form_row(form._token) }}
@@ -27,15 +25,7 @@
             </div>
         </div>
         <div class="five wide column">
-            {{ sonata_block_render_event('sylius.shop.checkout.select_payment.before_summary', {'order': order}) }}
-
-            {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.select_payment.before_support', {'order': order}) }}
-
-            {% include '@SyliusShop/Checkout/_support.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.select_payment.after_support', {'order': order}) }}
+            {{ sylius_template_event(['sylius.shop.checkout.select_payment.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>
 {% endblock %}
