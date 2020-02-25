@@ -65,6 +65,6 @@ $(document).ready(() => {
 
   $('[data-js-disable]').on('click', (e) => {
     const $current = $(e.currentTarget);
-    $(document).find($current.attr('data-js-disable')).not($current).addClass('disabled').prop('disabled', true);
+    $(document).find($current.attr('data-js-disable')).addClass('disabled');
   });
 });
