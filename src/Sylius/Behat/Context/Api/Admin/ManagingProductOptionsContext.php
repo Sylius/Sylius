@@ -15,11 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
-use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
