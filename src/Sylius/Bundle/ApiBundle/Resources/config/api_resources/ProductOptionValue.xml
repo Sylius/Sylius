@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+
+    <resource
+        class="Sylius\Component\Product\Model\ProductOptionValue"
+        shortName="ProductOptionValue"
+    >
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>product_option_value:read</attribute>
+            </attribute>
+        </attribute>
+        <attribute name="denormalization_context">
+            <attribute name="groups">
+                <attribute>product_option_value:write</attribute>
+            </attribute>
+        </attribute>
+        <collectionOperations />
+        <itemOperations>
+            <itemOperation name="get" />
+        </itemOperations>
+        <attribute name="validation_groups">sylius</attribute>
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
+        <property name="translations" readable="true" writable="true" />
+    </resource>
+
+</resources>

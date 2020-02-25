@@ -23,7 +23,7 @@ final class ApiPlatformClient implements ApiClientInterface
     private $client;
 
     /** @var array */
-    private $request;
+    private $request = ['url' => null, 'body' => []];
 
     public function __construct(AbstractBrowser $client)
     {
@@ -35,14 +35,26 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
+    public function subResourceIndex(string $resource, string $subResource, string $id): void
+    {
+        $url = sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource);
+
+        $this->client->request('GET', $url, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+    }
+
     public function buildCreateRequest(string $resource): void
     {
-        $this->request = ['url' => '/new-api/'.$resource];
+        $this->request['url'] = '/new-api/'.$resource;
     }
 
     public function addRequestData(string $key, string $value): void
     {
         $this->request['body'][$key] = $value;
+    }
+
+    public function addCompoundRequestData(array $data): void
+    {
+        $this->request['body'] = array_merge_recursive($this->request['body'], $data);
     }
 
     public function create(): void
@@ -70,6 +82,17 @@ final class ApiPlatformClient implements ApiClientInterface
     public function isCreationSuccessful(): bool
     {
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
+    }
+
+    public function hasItemWithValue(string $key, string $value): bool
+    {
+        foreach ($this->getCollection() as $resource) {
+            if ($resource[$key] === $value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function request(string $method, string $url, array $headers, string $content = null): void

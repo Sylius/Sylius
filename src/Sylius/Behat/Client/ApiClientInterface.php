@@ -17,9 +17,13 @@ interface ApiClientInterface
 {
     public function index(string $resource): void;
 
+    public function subResourceIndex(string $resource, string $subResource, string $id): void;
+
     public function buildCreateRequest(string $resource): void;
 
     public function addRequestData(string $key, string $value): void;
+
+    public function addCompoundRequestData(array $data): void;
 
     public function create(): void;
 
@@ -30,4 +34,6 @@ interface ApiClientInterface
     public function getError(): string;
 
     public function isCreationSuccessful(): bool;
+
+    public function hasItemWithValue(string $key, string $value): bool;
 }
