@@ -10,12 +10,12 @@
     >
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product_option:read</attribute>
+                <attribute>product_option_value:read</attribute>
             </attribute>
         </attribute>
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>product_option:write</attribute>
+                <attribute>product_option_value:write</attribute>
             </attribute>
         </attribute>
         <collectionOperations />

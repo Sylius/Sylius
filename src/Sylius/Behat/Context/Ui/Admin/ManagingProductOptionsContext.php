@@ -247,6 +247,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
+     * @Then /^(product option "[^"]+") should have the "([^"]*)" option value$/
      */
     public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
     {

@@ -35,6 +35,13 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
+    public function subResourceIndex(string $resource, string $subResource, string $id): void
+    {
+        $url = sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource);
+
+        $this->client->request('GET', $url, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+    }
+
     public function buildCreateRequest(string $resource): void
     {
         $this->request['url'] = '/new-api/'.$resource;
