@@ -278,11 +278,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ]);
     }
 
-    private function getProductRowElement(ProductInterface $product): NodeElement
-    {
-        return $this->getElement('product_row', ['%name%' => $product->getName()]);
-    }
-
     private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
