@@ -69,9 +69,24 @@ final class ApiPlatformClient implements ApiClientInterface
         return (int) $this->getResponseContentValue('hydra:totalItems');
     }
 
+    public function delete(string $resource, string $id): void
+    {
+        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id ), []);
+    }
+
     public function getCollection(): array
     {
         return $this->getResponseContentValue('hydra:member');
+    }
+
+    public function getCollectionItemsWithValue(string $key, string $value): array
+    {
+        $items = [];
+        foreach ($this->getCollection() as $item) {
+            if ($item[$key] === $value) $items[] = $item;
+        }
+
+        return $items;
     }
 
     public function getError(): string
@@ -82,6 +97,11 @@ final class ApiPlatformClient implements ApiClientInterface
     public function isCreationSuccessful(): bool
     {
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
+    }
+
+    public function isDeletionSuccessful(): bool
+    {
+        return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
     public function hasItemWithValue(string $key, string $value): bool
