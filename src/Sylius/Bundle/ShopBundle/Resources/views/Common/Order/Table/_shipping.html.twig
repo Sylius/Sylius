@@ -11,6 +11,7 @@
         <span>
            <span id="shipping-total" {{ sylius_test_html_attribute('shipping-total') }}>{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment)) }}</span>
             <i id="shipping-promotion-details" class="question circle icon popup-js"
+               {{ sylius_test_html_attribute('shipping-promotion-details') }}
                data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}"
             ></i>
         </span>

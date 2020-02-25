@@ -88,7 +88,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
