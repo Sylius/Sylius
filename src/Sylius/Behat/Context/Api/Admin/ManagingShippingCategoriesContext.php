@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\iterator;
 
 final class ManagingShippingCategoriesContext implements Context
 {
@@ -57,7 +56,7 @@ final class ManagingShippingCategoriesContext implements Context
     /**
      * @When I browse shipping categories
      */
-    public function iWantToBrowseShippingCategories(): void
+    public function iBrowseShippingCategories(): void
     {
         $this->client->index('shipping_categories');
     }
