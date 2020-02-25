@@ -30,8 +30,16 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedThatSomethingHappened(): void
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true($this->client->isCreationSuccessful(), 'Resource could not be created');
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->client->isUpdateSuccessful(), 'Resource could not be edited');
     }
 }
