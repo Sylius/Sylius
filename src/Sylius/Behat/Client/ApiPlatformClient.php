@@ -47,6 +47,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request['url'] = '/new-api/'.$resource;
     }
 
+    public function buildUpdateRequest(string $resource, string $id): void
+    {
+        $this->request['url'] = sprintf('/new-api/%s/%s', $resource, $id);
+    }
+
     public function addRequestData(string $key, string $value): void
     {
         $this->request['body'][$key] = $value;
@@ -57,11 +62,23 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request['body'] = array_merge_recursive($this->request['body'], $data);
     }
 
+    public function updateRequestData(array $data): void
+    {
+        $this->request['body'] = $this->mergeArraysUniquely($this->request['body'], $data);
+    }
+
     public function create(): void
     {
         $content = json_encode($this->request['body']);
 
         $this->request('POST', $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
+    }
+
+    public function update(): void
+    {
+        $content = json_encode($this->request['body']);
+
+        $this->request('PUT', $this->request['url'], ['CONTENT_TYPE' => 'application/ld+json'], $content);
     }
 
     public function countCollectionItems(): int
@@ -99,6 +116,11 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
     }
 
+    public function isUpdateSuccessful(): bool
+    {
+        return $this->client->getResponse()->getStatusCode() === Response::HTTP_OK;
+    }
+
     public function isDeletionSuccessful(): bool
     {
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
@@ -115,6 +137,11 @@ final class ApiPlatformClient implements ApiClientInterface
         return false;
     }
 
+    public function hasValue(string $key, string $value): bool
+    {
+        return $this->getResponseContentValue($key) === $value;
+    }
+
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
         $this->client->request(
@@ -129,5 +156,16 @@ final class ApiPlatformClient implements ApiClientInterface
         Assert::keyExists($content, $key);
 
         return $content[$key];
+    }
+
+    private function mergeArraysUniquely(array $array1, array $array2): array
+    {
+        foreach ($array2 as $key => $value) {
+            if (is_array($value) && is_array(@$array1[$key])) {
+                $value = $this->mergeArraysUniquely($array1[$key], $value);
+            }
+            $array1[$key] = $value;
+        }
+        return $array1;
     }
 }

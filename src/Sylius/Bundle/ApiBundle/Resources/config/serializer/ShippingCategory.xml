@@ -14,10 +14,12 @@
         </attribute>
         <attribute name="name">
             <group>shipping_category:read</group>
+            <group>shipping_category:update</group>
             <group>shipping_category:write</group>
         </attribute>
         <attribute name="description">
             <group>shipping_category:read</group>
+            <group>shipping_category:update</group>
             <group>shipping_category:write</group>
         </attribute>
         <attribute name="createdAt">

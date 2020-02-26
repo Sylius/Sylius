@@ -37,6 +37,14 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
+     * @Given /^I want to modify a (shipping category "([^"]+)")$/
+     */
+    public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
+    {
+        $this->client->buildUpdateRequest('shipping_categories', (string) $shippingCategory->getId());
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -89,6 +97,30 @@ final class ManagingShippingCategoriesContext implements Context
         if ($shippingCategoryName !== '') {
             $this->client->addRequestData('name', $shippingCategoryName);
         }
+    }
+
+    /**
+     * @When /^I modify a (shipping category "([^"]+)")$/
+     */
+    public function iModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
+    {
+        $this->client->buildUpdateRequest('shipping_categories', (string) $shippingCategory->getId());
+    }
+
+    /**
+     * @When I rename it to :name
+     */
+    public function iNameItIn(string $name): void
+    {
+        $this->client->addRequestData('name', $name);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
     }
 
     /**
@@ -156,11 +188,30 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled(): void
+    {
+        $this->client->addRequestData('code', 'NEW_CODE');
+        $this->client->update();
+
+        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+    }
+
+    /**
      * @Then there should still be only one shipping category with code :code
      */
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         $this->client->index('shipping_categories');
         Assert::same(count($this->client->getCollectionItemsWithValue('code', $code)), 1);
+    }
+
+    /**
+     * @Then this shipping category name should be :shippingCategoryName
+     */
+    public function thisShippingCategoryNameShouldBe(string $shippingCategoryName): void
+    {
+        Assert::true($this->client->hasValue('name', $shippingCategoryName));
     }
 }
