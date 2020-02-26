@@ -10,25 +10,38 @@ As it is a private package it cannot be installed by every Sylius user, but only
 Installing Sylius Plus as a plugin to a Sylius application
 ----------------------------------------------------------
 
+**Important Requirements**
+
++---------------+-----------------------+
+| PHP           | ^7.2                  |
++---------------+-----------------------+
+| sylius/sylius | ^1.6                  |
++---------------+-----------------------+
+
+**0.** Prepare project:
+
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard according to :doc:`these instructions </book/installation/installation>`.
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.6** according to
+    :doc:`these instructions </book/installation/installation>`.
+
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.6``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
 .. code-block:: bash
 
-    $ composer config --global --auth http-basic.sylius.repo.packagist.com token YOUR_TOKEN
+    composer config --global --auth http-basic.sylius.repo.packagist.com token YOUR_TOKEN
 
 **2.** Configure the repository with Sylius Plus for your organisation, require it and then run ``composer update``:
 
 .. code-block:: bash
 
-    $ composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    $ composer require sylius/plus --no-update
-    $ composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
-    $ composer update --no-scripts
-    $ composer sync-recipes
+    composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
+    composer require sylius/plus --no-update
+    composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
+    composer update --no-scripts
+    composer sync-recipes
 
 **3.** Configure Sylius Plus in ``config/bundles.php``:
 
@@ -281,15 +294,15 @@ and apply them to your database:
 
 .. code-block:: bash
 
-    $ bin/console doctrine:database:create --if-not-exists
-    $ cp -f vendor/sylius/plus/migrations/* src/Migrations
-    $ bin/console doctrine:migrations:migrate -n
+    bin/console doctrine:database:create --if-not-exists
+    cp -f vendor/sylius/plus/migrations/* src/Migrations
+    bin/console doctrine:migrations:migrate -n
 
 **8.** Install Sylius with Sylius Plus fixtures:
 
 .. code-block:: bash
 
-    $ bin/console sylius:install --fixture-suite plus
+    bin/console sylius:install --fixture-suite plus
 
 .. tip::
 
@@ -297,7 +310,7 @@ and apply them to your database:
 
     .. code-block:: bash
 
-        $ bin/console sylius:install --fixture-suite plus -n
+        bin/console sylius:install --fixture-suite plus -n
 
 **9.** Add wkhtmltopdf binary for Invoicing purposes.
 
@@ -316,15 +329,15 @@ your application's ``.env`` file:
 
 .. code-block:: bash
 
-    $ cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
+    cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
 
 **11.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
-    $ yarn install
-    $ yarn build
-    $ bin/console assets:install --ansi
+    yarn install
+    yarn build
+    bin/console assets:install --ansi
 
 **12.** Additionally check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
