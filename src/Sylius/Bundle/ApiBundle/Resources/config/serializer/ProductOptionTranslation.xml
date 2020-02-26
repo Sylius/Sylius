@@ -11,9 +11,11 @@
         <attribute name="name">
             <group>product_option:read</group>
             <group>product_option:write</group>
+            <group>product_option:update</group>
         </attribute>
         <attribute name="locale">
             <group>product_option:write</group>
+            <group>product_option:update</group>
         </attribute>
     </class>
 
