@@ -14,7 +14,7 @@
             <itemOperation name="get" />
         </itemOperations>
         <property name="id" identifier="true" writable="false" />
-        <property name="name" identifier="true" required="true" />
+        <property name="name" identifier="false" required="true" />
         <property name="locale" identifier="false" required="true" />
     </resource>
 </resources>

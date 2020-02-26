@@ -130,6 +130,21 @@ final class ApiPlatformClient implements ApiClientInterface
         return false;
     }
 
+    public function hasItemWithTranslation(string $locale, string $key, string $translation): bool
+    {
+        foreach ($this->getCollection() as $resource) {
+            if (
+                isset($resource['translations']) &&
+                isset($resource['translations'][$locale]) &&
+                $resource['translations'][$locale][$key] === $translation
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
         $this->client->request(
@@ -146,14 +161,14 @@ final class ApiPlatformClient implements ApiClientInterface
         return $content[$key];
     }
 
-    private function mergeArraysUniquely(array $array1, array $array2): array
+    private function mergeArraysUniquely(array $firstArray, array $secondArray): array
     {
-        foreach ($array2 as $key => $value) {
-            if (is_array($value) && is_array(@$array1[$key])) {
-                $value = $this->mergeArraysUniquely($array1[$key], $value);
+        foreach ($secondArray as $key => $value) {
+            if (is_array($value) && is_array(@$firstArray[$key])) {
+                $value = $this->mergeArraysUniquely($firstArray[$key], $value);
             }
-            $array1[$key] = $value;
+            $firstArray[$key] = $value;
         }
-        return $array1;
+        return $firstArray;
     }
 }
