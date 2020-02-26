@@ -36,6 +36,14 @@ final class NotificationContext implements Context
     }
 
     /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->client->isDeletionSuccessful(), 'Resource could not be deleted');
+    }
+
+    /**
      * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void

@@ -8,7 +8,6 @@
         class="Sylius\Component\Taxation\Model\TaxCategory"
         shortName="TaxCategory"
     >
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>tax_category:read</attribute>
@@ -16,7 +15,7 @@
         </attribute>
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>tax_category:write</attribute>
+                <attribute>tax_category:create</attribute>
             </attribute>
         </attribute>
         <attribute name="validation_groups">sylius</attribute>
