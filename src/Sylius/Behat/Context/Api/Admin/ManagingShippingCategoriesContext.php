@@ -70,20 +70,12 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @When I check (also) the :shippingCategoryName shipping category
-     */
-    public function iCheckTheShippingCategory(string $shippingCategoryName): void
-    {
-        Assert::true($this->client->hasItemWithValue('name', $shippingCategoryName));
-    }
-
-    /**
      * @When I do not specify its code
      * @When I specify its code as :shippingCategoryCode
      */
-    public function iSpecifyItsCodeAs(string $shippingCategoryCode = ''): void
+    public function iSpecifyItsCodeAs(?string $shippingCategoryCode = null): void
     {
-        if ($shippingCategoryCode !== '') {
+        if ($shippingCategoryCode !== null) {
             $this->client->addRequestData('code', $shippingCategoryCode);
         }
     }
@@ -92,9 +84,9 @@ final class ManagingShippingCategoriesContext implements Context
      * @When I name it :shippingCategoryName
      * @When I do not specify its name
      */
-    public function iNameIt(string $shippingCategoryName = ''): void
+    public function iNameIt(?string $shippingCategoryName = null): void
     {
-        if ($shippingCategoryName !== '') {
+        if ($shippingCategoryName !== null) {
             $this->client->addRequestData('name', $shippingCategoryName);
         }
     }
@@ -166,7 +158,11 @@ final class ManagingShippingCategoriesContext implements Context
     public function theShippingCategoryShouldAppearInTheRegistry(ShippingCategoryInterface $shippingCategory): void
     {
         $this->client->index('shipping_categories');
-        Assert::true($this->client->hasItemWithValue('name', $shippingCategory->getName()));
+        $shippingCategoryName = $shippingCategory->getName();
+        Assert::true(
+            $this->client->hasItemWithValue('name', $shippingCategoryName),
+            sprintf('Shipping category with name %s does not exist', $shippingCategoryName)
+        );
     }
 
     /**
@@ -175,7 +171,11 @@ final class ManagingShippingCategoriesContext implements Context
     public function thisShippingCategoryShouldNoLongerExistInTheRegistry(ShippingCategoryInterface $shippingCategory): void
     {
         $this->client->index('shipping_categories');
-        Assert::false($this->client->hasItemWithValue('name', $shippingCategory->getName()));
+        $shippingCategoryName = $shippingCategory->getName();
+        Assert::false(
+            $this->client->hasItemWithValue('name', $shippingCategoryName),
+            sprintf('Shipping category with name %s exist', $shippingCategoryName)
+        );
     }
 
     /**
@@ -184,7 +184,10 @@ final class ManagingShippingCategoriesContext implements Context
     public function shippingCategoryWithNameShouldNotBeAdded(string $shippingCategoryName): void
     {
         $this->client->index('shipping_categories');
-        Assert::false($this->client->hasItemWithValue('name', $shippingCategoryName));
+        Assert::false(
+            $this->client->hasItemWithValue('name', $shippingCategoryName),
+            sprintf('Shipping category with name %s exist', $shippingCategoryName)
+        );
     }
 
     /**
@@ -195,7 +198,7 @@ final class ManagingShippingCategoriesContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+        Assert::false($this->client->hasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
     }
 
     /**
@@ -212,6 +215,9 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function thisShippingCategoryNameShouldBe(string $shippingCategoryName): void
     {
-        Assert::true($this->client->hasValue('name', $shippingCategoryName));
+        Assert::true(
+            $this->client->hasValue('name', $shippingCategoryName),
+            sprintf('Shipping category with name %s does not exist', $shippingCategoryName)
+        );
     }
 }
