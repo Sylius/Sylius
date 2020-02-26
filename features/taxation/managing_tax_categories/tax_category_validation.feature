@@ -7,7 +7,7 @@ Feature: Tax category validation
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new tax category without specifying its code
         Given I want to create a new tax category
         When I name it "Food and Beverage"
@@ -16,20 +16,20 @@ Feature: Tax category validation
         Then I should be notified that code is required
         And tax category with name "Food and Beverage" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new tax category without specifying its name
-        Given I want to create a new tax category
-        When I specify its code as "food_and_beverage"
+        When I want to create a new tax category
+        And I specify its code as "food_and_beverage"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
         And tax category with code "food_and_beverage" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to remove name from existing tax category
         Given the store has a tax category "Alcoholic Drinks" with a code "alcohol"
-        And I want to modify this tax category
-        When I remove its name
+        When I want to modify this tax category
+        And I remove its name
         And I try to save my changes
         Then I should be notified that name is required
         And this tax category should still be named "Alcoholic Drinks"

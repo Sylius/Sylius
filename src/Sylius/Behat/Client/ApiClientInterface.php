@@ -35,13 +35,19 @@ interface ApiClientInterface
 
     public function update(): void;
 
+    public function delete(string $resource, string $id): void;
+
     public function countCollectionItems(): int;
 
     public function getCollection(): array;
 
+    public function getCollectionItemsWithValue(string $key, string $value): array;
+
     public function getError(): string;
 
     public function isCreationSuccessful(): bool;
+
+    public function isDeletionSuccessful(): bool;
 
     public function isUpdateSuccessful(): bool;
 

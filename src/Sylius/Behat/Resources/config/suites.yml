@@ -3,8 +3,9 @@
 
 imports:
     - suites/api/currency/managing_currencies.yml
-    - suites/api/product/managing_product_variants.yml
     - suites/api/product/managing_product_options.yml
+    - suites/api/product/managing_product_variants.yml
+    - suites/api/taxation/managing_tax_categories.yml
     - suites/api/taxon/managing_taxons.yml
 
     - suites/cli/installer.yml

@@ -16,18 +16,17 @@
         </attribute>
         <attribute name="code">
             <group>tax_category:read</group>
-            <group>tax_category:write</group>
+            <group>tax_category:create</group>
         </attribute>
         <attribute name="name">
             <group>tax_category:read</group>
-            <group>tax_category:write</group>
+            <group>tax_category:create</group>
             <group>tax_category:update</group>
         </attribute>
         <attribute name="description">
             <group>tax_category:read</group>
-            <group>tax_category:write</group>
+            <group>tax_category:create</group>
             <group>tax_category:update</group>
         </attribute>
     </class>
-
 </serializer>
