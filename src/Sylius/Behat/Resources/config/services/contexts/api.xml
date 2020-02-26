@@ -36,5 +36,8 @@
         <service id="sylius.behat.context.api.admin.notification" class="Sylius\Behat\Context\Api\Admin\NotificationContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
+        <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+        </service>
     </services>
 </container>

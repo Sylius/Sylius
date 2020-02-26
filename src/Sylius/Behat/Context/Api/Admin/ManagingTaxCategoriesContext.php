@@ -29,27 +29,28 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I delete tax category :taxCategory
-     */
-    public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory): void
-    {
-        $this->client->delete('tax_category', $taxCategory->getCode());
-    }
-
-    /**
-     * @Then /^(this tax category) should no longer exist in the registry$/
-     */
-    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory): void
-    {
-        Assert::false($this->isItemOnIndex('code', $taxCategory->getCode()));
-    }
-
-    /**
-     * @Given I want to create a new tax category
+     * @When I want to create a new tax category
      */
     public function iWantToCreateNewTaxCategory(): void
     {
         $this->client->buildCreateRequest('tax_categories');
+    }
+
+    /**
+     * @When I want to modify a tax category :taxCategory
+     * @When /^I want to modify (this tax category)$/
+     */
+    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
+    {
+        $this->client->buildUpdateRequest('tax_categories', $taxCategory->getCode());
+    }
+
+    /**
+     * @When I delete tax category :taxCategory
+     */
+    public function iDeleteTaxCategory(TaxCategoryInterface $taxCategory): void
+    {
+        $this->client->delete('tax_categories', $taxCategory->getCode());
     }
 
     /**
@@ -93,29 +94,11 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @Then I should see the tax category :taxCategoryName in the list
-     * @Then the tax category :taxCategoryName should appear in the registry
-     */
-    public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
-    {
-        Assert::true($this->isItemOnIndex('name', $taxCategoryName));
-    }
-
-    /**
      * @When I describe it as :description
      */
     public function iDescribeItAs(string $description): void
     {
         $this->client->addRequestData('description', $description);
-    }
-
-    /**
-     * @Given I want to modify a tax category :taxCategory
-     * @Given /^I want to modify (this tax category)$/
-     */
-    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
-    {
-       $this->client->buildUpdateRequest('tax_categories', $taxCategory->getCode());
     }
 
     /**
@@ -132,34 +115,42 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToBrowseTaxCategories(): void
     {
-        $this->client->index('tax_category');
+        $this->client->index('tax_categories');
     }
 
     /**
-     * @When I check (also) the :taxCategoryName tax category
+     * @Then /^(this tax category) should no longer exist in the registry$/
      */
-    public function iCheckTheTaxCategory(string $taxCategoryName): void
+    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory): void
     {
-        Assert::true($this->isItemOnIndex('name', $taxCategoryName));
+        $code = $taxCategory->getCode();
+        Assert::false(
+            $this->isItemOnIndex('code', $code),
+            sprintf('Tax category with code %s exist', $code)
+        );
     }
 
     /**
-     * @When I delete them
+     * @Then I should see the tax category :taxCategoryName in the list
+     * @Then the tax category :taxCategoryName should appear in the registry
      */
-    public function iDeleteThem(): void
+    public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
     {
-        //todo, bulk delete will be cover in separate PR
+        Assert::true(
+            $this->isItemOnIndex('name', $taxCategoryName),
+            sprintf('Tax category with name %s does not exist', $taxCategoryName)
+        );
     }
 
     /**
-     * @Then Not being able to edit code of an existing tax category
+     * @Then I should not be able to edit its code
      */
-    public function notBeingAbleToEditCodeOfAnExistingTaxCategory(): void
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+        Assert::false($this->client->hasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
     }
 
     /**
@@ -169,7 +160,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName): void
     {
         $this->client->show('tax_categories', $taxCategory->getCode());
-        Assert::true($this->client->hasValue('name', $taxCategoryName));
+        Assert::true($this->client->hasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
     }
 
     /**
@@ -181,11 +172,12 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @Then there should still be only one tax category with :element :code
+     * @Then there should still be only one tax category with :element :value
      */
-    public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $code): void
+    public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
-        //todo
+        $this->client->index('tax_categories');
+        Assert::same(count($this->client->getCollectionItemsWithValue($element, $value)), 1);
     }
 
     /**
@@ -193,25 +185,21 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
-        if ($element === 'name') {
-            Assert::same($this->client->getError(), 'name: Please enter tax category name. name: sylius.tax_category.name.min_length');
-        } else {
-            Assert::same($this->client->getError(), sprintf('%s: Please enter tax category %s.', $element, $element));
-        }
+        Assert::contains($this->client->getError(), sprintf('%s: Please enter tax category %s.', $element, $element));
     }
 
     /**
      * @Then tax category with :element :name should not be added
      */
-    public function taxCategoryWithElementValueShouldNotBeAdded(string $element, string $name): void
+    public function taxCategoryWithNamedElementShouldNotBeAdded(string $element, string $name): void
     {
-        Assert::false($this->isItemOnIndex($element, $name));
+        Assert::false($this->isItemOnIndex($element, $name), sprintf('Tax category with %s %s does not exist', $element, $name));
     }
 
     /**
      * @Then I should see a single tax category in the list
      */
-    public function iShouldSeeTaxCategoriesInTheList(): void
+    public function iShouldSeeSingleTaxCategoryInTheList(): void
     {
         Assert::same($this->client->countCollectionItems(), 1);
     }
