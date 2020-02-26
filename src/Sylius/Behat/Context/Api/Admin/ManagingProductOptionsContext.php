@@ -161,4 +161,15 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::true($this->client->hasItemWithValue('code', $optionValueCode));
     }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->addRequestData('code', 'NEW_CODE');
+        $this->client->update();
+
+        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+    }
 }
