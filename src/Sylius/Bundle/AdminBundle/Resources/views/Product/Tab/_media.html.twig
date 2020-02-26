@@ -6,6 +6,6 @@
     <div class="ui attached segment">
         {{ form_row(form.images, {'label': false}) }}
 
-        {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_media', {'form': form}) }}
+        {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_media', 'sylius.admin.product.tab_media'], {'form': form}) }}
     </div>
 </div>

@@ -1,15 +1,11 @@
 {% extends '@SyliusAdmin/Crud/create.html.twig' %}
 
 {% block content %}
-    {{ sonata_block_render_event('sylius.admin.taxon.create.before_content', {'resource': resource}) }}
+    {{ sylius_template_event('sylius.admin.taxon.create.before_content', {'resource': resource}) }}
 
     <div class="ui grid">
         <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
-            {{ sonata_block_render_event('sylius.admin.taxon.create.before_taxon_tree', {'resource': resource}) }}
-
-            {{ render(path('sylius_admin_partial_taxon_tree', {'template': '@SyliusAdmin/Taxon/_treeWithButtons.html.twig'})) }}
-
-            {{ sonata_block_render_event('sylius.admin.taxon.create.after_taxon_tree', {'resource': resource}) }}
+            {{ sylius_template_event('sylius.admin.taxon.create.taxon_tree', {'resource': resource}) }}
         </div>
         <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column">
             {{ parent() }}

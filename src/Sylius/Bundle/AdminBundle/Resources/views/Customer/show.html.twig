@@ -3,32 +3,5 @@
 {% block title %}{{ 'sylius.ui.customer'|trans ~' '~ customer.email }} {{ parent() }}{% endblock %}
 
 {% block content %}
-    {{ sonata_block_render_event('sylius.admin.customer.show.before_header', {'resource': resource}) }}
-
-    <div class="ui stackable two column grid">
-        {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.admin.customer.show.header', {'resource': resource}) }}
-
-        {% set menu = knp_menu_get('sylius.admin.customer.show', [], {'customer': customer}) %}
-        {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
-    </div>
-
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_header', {'resource': resource}) }}
-
-    <div class="ui divider"></div>
-    {% include '@SyliusAdmin/Customer/Show/_breadcrumb.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_breadcrumb', {'resource': resource}) }}
-
-    {{ render(path('sylius_admin_customer_orders_statistics', {'customerId': customer.id})) }}
-
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_statistics', {'resource': resource}) }}
-
-    <div class="ui stackable grid">
-        {% include '@SyliusAdmin/Customer/Show/_content.html.twig' %}
-        {% include '@SyliusAdmin/Customer/Show/_address.html.twig' %}
-    </div>
-
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_content', {'resource': resource}) }}
+    {{ sylius_template_event('sylius.admin.customer.show.content', _context) }}
 {% endblock %}

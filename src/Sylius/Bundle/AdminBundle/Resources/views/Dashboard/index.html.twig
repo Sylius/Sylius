@@ -3,31 +3,5 @@
 {% block title %}{{ 'sylius.ui.dashboard'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
-
-{{ sonata_block_render_event('sylius.admin.dashboard.before_header', {'channel': channel, 'statistics': statistics}) }}
-
-{% include '@SyliusAdmin/Dashboard/_header.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.dashboard.after_header', {'channel': channel, 'statistics': statistics}) }}
-
-{% include '@SyliusAdmin/Dashboard/_statistics.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.dashboard.after_statistics', {'channel': channel, 'statistics': statistics}) }}
-
-{% include '@SyliusAdmin/Dashboard/_chart.html.twig' %}
-
-{% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.dashboard.after_menu', {'channel': channel, 'statistics': statistics}) }}
-
-<div class="ui two column stackable grid">
-    <div class="column">
-        {{ render(url('sylius_admin_partial_customer_latest', {'count': 5, 'template': '@SyliusAdmin/Dashboard/_customers.html.twig'})) }}
-    </div>
-    <div class="column">
-        {{ render(path('sylius_admin_partial_order_latest_in_channel', {'channelCode': channel.code, 'count': 5, 'template': '@SyliusAdmin/Dashboard/_orders.html.twig'})) }}
-    </div>
-</div>
-
-{{ sonata_block_render_event('sylius.admin.dashboard.after_content', {'channel': channel, 'statistics': statistics}) }}
+    {{ sylius_template_event('sylius.admin.dashboard.content', _context) }}
 {% endblock %}

@@ -15,6 +15,6 @@
             </div>
         </div>
 
-        {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_taxonomy', {'form': form}) }}
+        {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_taxonomy', 'sylius.admin.product.tab_taxonomy'], {'form': form}) }}
     </div>
 </div>

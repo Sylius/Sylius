@@ -4,7 +4,7 @@
 
 <div class="ui middle aligned center aligned grid">
     <div class="column">
-        {{ sonata_block_render_event('sylius.admin.login.before_form', {'form': form}) }}
+        {{ sylius_template_event('sylius.admin.login.before_form', {'form': form}) }}
 
         {% if paths.logo is defined %}
             <div style="max-width: 270px; margin: 0 auto; margin-bottom: 40px;">
@@ -27,7 +27,7 @@
                 <button type="submit" class="ui fluid large primary submit button">Login</button>
             </div>
 
-            {{ sonata_block_render_event('sylius.admin.login.form', {'form': form}) }}
+            {{ sylius_template_event('sylius.admin.login.form', {'form': form}) }}
 
         {{ form_end(form, {'render_rest': false}) }}
     </div>
