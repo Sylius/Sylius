@@ -18,8 +18,8 @@ Feature: Adding a new product option
         And I add it
         Then I should be notified that it has been successfully created
         And the product option "T-Shirt size" should appear in the registry
-        And product option "T-Shirt size" should have the "OV1" option value
-        And product option "T-Shirt size" should have the "OV2" option value
+        And product option "T-Shirt size" should have the "S" option value
+        And product option "T-Shirt size" should have the "M" option value
 
     @ui @api
     Scenario: Adding a new product option without any option values
@@ -40,4 +40,4 @@ Feature: Adding a new product option
         And I try to add it
         Then I should be notified that it has been successfully created
         And the product option "T-Shirt size" should appear in the registry
-        And product option "T-Shirt size" should have the "OV1" option value
+        And product option "T-Shirt size" should have the "S" option value

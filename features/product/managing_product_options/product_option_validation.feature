@@ -9,7 +9,7 @@ Feature: Product option validation
         And the store has a product option "T-Shirt color" with a code "t_shirt_color"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new product option without specifying its code
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"

@@ -48,4 +48,6 @@ interface ApiClientInterface
     public function hasValue(string $key, string $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
+
+    public function hasItemWithTranslation(string $locale, string $key, string $translation): bool;
 }
