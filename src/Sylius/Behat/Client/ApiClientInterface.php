@@ -49,5 +49,7 @@ interface ApiClientInterface
 
     public function hasItemWithValue(string $key, string $value): bool;
 
+    public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool;
+
     public function hasItemWithTranslation(string $locale, string $key, string $translation): bool;
 }

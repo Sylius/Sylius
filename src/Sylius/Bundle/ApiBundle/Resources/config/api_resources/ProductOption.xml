@@ -8,6 +8,9 @@
         class="Sylius\Component\Product\Model\ProductOption"
         shortName="ProductOption"
     >
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_option:read</attribute>
