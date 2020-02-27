@@ -10,12 +10,12 @@
                 <div class="sub header">{{ 'sylius.ui.manage_your_saved_addresses'|trans }}</div>
             </h1>
 
-            {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_content_header', {'addresses': addresses}) }}
+            {{ sylius_template_event('sylius.shop.account.address_book.index.after_content_header', {'addresses': addresses}) }}
         </div>
         <div class="middle aligned column">
             <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="circle plus icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
 
-            {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_add_address_button', {'addresses': addresses}) }}
+            {{ sylius_template_event('sylius.shop.account.address_book.index.after_add_address_button', {'addresses': addresses}) }}
         </div>
     </div>
 

@@ -12,7 +12,7 @@
                     {{ 'sylius.ui.contact_us'|trans }}
                     <div class="sub header">{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</div>
 
-                    {{ sonata_block_render_event('sylius.shop.contact.request.after_content_header') }}
+                    {{ sylius_template_event('sylius.shop.contact.request.after_content_header') }}
                 </div>
             </h1>
             <div class="ui segment">
@@ -20,7 +20,7 @@
                 {{ form_row(form.email, sylius_test_form_attribute('contact-email')) }}
                 {{ form_row(form.message, sylius_test_form_attribute('contact-message')) }}
 
-                {{ sonata_block_render_event('sylius.shop.contact.request.form', {'form': form}) }}
+                {{ sylius_template_event('sylius.shop.contact.request.form', {'form': form}) }}
 
                 {{ form_row(form._token) }}
                 <button type="submit" class="ui fluid large primary submit button" {{ sylius_test_html_attribute('send-button') }}>{{ 'sylius.ui.send'|trans }}</button>

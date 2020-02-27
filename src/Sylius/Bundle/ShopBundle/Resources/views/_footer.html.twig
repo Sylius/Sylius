@@ -1,3 +1,5 @@
-{% deprecated "This template has been moved to @SyliusShop/Block/_footer.html.twig" %}
-
-{% include '@SyliusShop/Block/Layout/_footer.html.twig' %}
+<footer id="footer" class="ui inverted vertical footer segment">
+    <div class="ui container">
+        {{ sylius_template_event('sylius.shop.layout.footer') }}
+    </div>
+</footer>

@@ -9,7 +9,7 @@
             <div class="sub header">{{ 'sylius.ui.edit_my_address'|trans }}</div>
         </h1>
 
-        {{ sonata_block_render_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
+        {{ sylius_template_event('sylius.shop.account.address_book.update.after_content_header', {'address': address}) }}
 
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
 
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        {{ sonata_block_render_event('sylius.shop.account.address_book.update.form', {'address': address}) }}
+        {{ sylius_template_event('sylius.shop.account.address_book.update.form', {'address': address}) }}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

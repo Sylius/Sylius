@@ -5,11 +5,5 @@
 {% endblock %}
 
 {% block subcontent %}
-    {% include '@SyliusShop/Account/Order/Index/_header.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.shop.account.order.index.after_content_header', {'orders': orders}) }}
-
-    {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
-
-    {{ sonata_block_render_event('sylius.shop.account.order.index.after_grid', {'orders': orders}) }}
+    {{ sylius_template_event('sylius.shop.account.order.index.subcontent', _context) }}
 {% endblock %}
