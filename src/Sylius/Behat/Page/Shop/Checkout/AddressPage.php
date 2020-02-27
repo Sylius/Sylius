@@ -70,7 +70,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function checkInvalidCredentialsValidation(): bool
     {
         /** @var NodeElement $validationElement */
-        $validationElement =  $this->getElement('login_validation_error')->waitFor(5, function (): bool {
+        $validationElement = $this->waitFor(5, function (): bool {
             try {
                 $validationElement = $this->getElement('login_validation_error');
             } catch (ElementNotFoundException $elementNotFoundException) {
