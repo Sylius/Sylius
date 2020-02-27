@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+
+    <resource
+        class="Sylius\Component\Shipping\Model\ShippingCategory"
+        shortName="ShippingCategory"
+    >
+        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>shipping_category:read</attribute>
+            </attribute>
+        </attribute>
+        <collectionOperations>
+            <collectionOperation name="get" />
+            <collectionOperation name="post">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shipping_category:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get" />
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shipping_category:update</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="delete" />
+        </itemOperations>
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
+        <property name="name" identifier="false" required="true" />
+        <property name="description" identifier="false" required="false" />
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
+    </resource>
+</resources>
