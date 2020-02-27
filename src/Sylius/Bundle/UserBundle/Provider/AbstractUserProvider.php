@@ -66,7 +66,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
-        if(!$user instanceof SyliusUserInterface) {
+        if (!$user instanceof SyliusUserInterface) {
             throw new UnsupportedUserException(
                 sprintf('User must implement "%s".', SyliusUserInterface::class)
             );

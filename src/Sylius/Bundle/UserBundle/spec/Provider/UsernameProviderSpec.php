@@ -67,7 +67,7 @@ final class UsernameProviderSpec extends ObjectBehavior
 
     function it_should_throw_exception_when_unsupported_user_is_used(
         UserInterface $user
-    ):void {
+    ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }
 }

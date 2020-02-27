@@ -82,7 +82,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $instruction->getSuffix()->willReturn(null);
         $couponRepository->countByCodeLength(40, null, null)->willReturn(0);
 
-        $this->getPossibleGenerationAmount($instruction)->shouldReturn(PHP_INT_MAX);
+        $this->getPossibleGenerationAmount($instruction)->shouldReturn(\PHP_INT_MAX);
     }
 
     function it_returns_possible_generation_amount_with_prefix_and_suffix(

@@ -254,6 +254,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
     /**
      * @param string|array $selector
+     *
      * @throws ElementNotFoundException
      */
     private function hasItemWith(string $attributeName, $selector): bool

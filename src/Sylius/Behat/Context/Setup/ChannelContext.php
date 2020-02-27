@@ -217,7 +217,6 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-
     /**
      * @Given channel :channel has menu taxon :taxon
      * @Given /^(this channel) has menu (taxon "[^"]+")$/
