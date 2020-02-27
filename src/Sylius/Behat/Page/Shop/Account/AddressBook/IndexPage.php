@@ -46,7 +46,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function addressOfContains(string $fullName, string $value): bool
     {
-         return $this->hasElement('address', ['%full_name%' => $fullName, '%value%' => $value]);
+        return $this->hasElement('address', ['%full_name%' => $fullName, '%value%' => $value]);
     }
 
     public function editAddress(string $fullName): void

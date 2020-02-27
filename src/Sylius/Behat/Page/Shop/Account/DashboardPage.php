@@ -52,7 +52,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return array_merge(parent::getDefinedElements(), [
             'customer' => '[data-test-customer-information]',
             'verification' => '[data-test-verification-form]',
-            'verification_button' => '[data-test-verification-button]'
+            'verification_button' => '[data-test-verification-button]',
         ]);
     }
 
