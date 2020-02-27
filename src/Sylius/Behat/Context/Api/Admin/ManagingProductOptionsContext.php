@@ -15,11 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
-use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
@@ -53,19 +50,44 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
+     * @When I want to modify the :productOption product option
      */
-    public function iNameItInLanguage(string $name, string $language): void
+    public function iWantToModifyProductOption(ProductOptionInterface $productOption): void
     {
-        $this->client->addCompoundRequestData(['translations' => [['name' => $name, 'locale' => $language]]]);
+        $this->sharedStorage->set('product_option', $productOption);
+        $this->client->buildUpdateRequest('product_options', $productOption->getCode());
+    }
+
+    /**
+     * @When I name it :name in :language
+     * @When I do not name it
+     */
+    public function iNameItInLanguage(?string $name = null, ?string $language = null): void
+    {
+        if ($name !== null && $language !== null) {
+            $this->client->addCompoundRequestData(
+                ['translations' => [$language => ['name' => $name, 'locale' => $language]]]
+            );
+        }
+    }
+
+    /**
+     * @When I rename it to :name in :language
+     */
+    public function iRenameItInLanguage(string $name, string $language): void
+    {
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
     }
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->client->addRequestData('code', $code);
+        if ($code !== null) {
+            $this->client->addRequestData('code', $code);
+        }
     }
 
     /**
@@ -98,6 +120,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
      * @Then I should see :count product options in the list
      */
     public function iShouldSeeProductOptionsInTheList(int $count): void
@@ -116,18 +146,83 @@ final class ManagingProductOptionsContext implements Context
         $this->sharedStorage->set('product_option', $productOption);
 
         $this->client->index('product_options');
-        Assert::true($this->client->hasItemWithValue('name', $productOption->getName()));
+        Assert::true(
+            $this->client->hasItemWithValue('name', $productOption->getName()),
+            sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
+        );
+    }
+
+    /**
+     * @Then the product option with :element :value should not be added
+     */
+    public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
+    {
+        $this->client->index('product_options');
+        Assert::false(
+            $this->client->hasItemWithValue($element, $value),
+            sprintf('Product option should not have %s "%s", but it does,', $element, $value)
+        );
+    }
+
+    /**
+     * @Then there should still be only one product option with :element :value
+     */
+    public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
+    {
+        $this->client->index('product_options');
+        $itemsCount = $this->client->countCollectionItems();
+
+        Assert::eq(1, $this->client->countCollectionItems(), sprintf('Expected 1 product options, but got %d', $itemsCount));
+        Assert::true($this->client->hasItemWithValue($element, $value));
+    }
+
+    /**
+     * @Then /^(this product option) name should be "([^"]+)"$/
+     */
+    public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
+    {
+        $this->client->show('product_options', $productOption->getCode());
+        Assert::true($this->client->hasValue('name', $name));
     }
 
     /**
      * @Then /^(product option "[^"]+") should have the "([^"]+)" option value$/
+     * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(
+    public function productOptionShouldHaveTheOptionValue(
         ProductOptionInterface $productOption,
-        string $optionValueCode
+        string $optionValueName
     ): void {
         $this->client->subResourceIndex('product_options', 'values', $productOption->getCode());
 
-        Assert::true($this->client->hasItemWithValue('code', $optionValueCode));
+        Assert::true($this->client->hasItemWithTranslation('en_US', 'value', $optionValueName));
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->addRequestData('code', 'NEW_CODE');
+        $this->client->update();
+
+        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+    }
+
+    /**
+     * @Then I should be notified that product option with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
+    {
+        Assert::false($this->client->isCreationSuccessful(), 'Product option has been created successfully, but it should not');
+        Assert::same($this->client->getError(), 'code: The option with given code already exists.');
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
+    {
+        Assert::same($this->client->getError(), sprintf('%s: Please enter option %s.', $element, $element));
     }
 }
