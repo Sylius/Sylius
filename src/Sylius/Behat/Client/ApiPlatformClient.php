@@ -82,16 +82,16 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('POST', $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
     }
 
-    public function delete(string $resource, string $id): void
-    {
-        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
-    }
-
     public function update(): void
     {
         $content = json_encode($this->request['body']);
 
         $this->request('PUT', $this->request['url'], ['CONTENT_TYPE' => 'application/ld+json'], $content);
+    }
+
+    public function delete(string $resource, string $id): void
+    {
+        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
     }
 
     public function countCollectionItems(): int
@@ -123,14 +123,14 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
     }
 
-    public function isDeletionSuccessful(): bool
-    {
-        return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
-    }
-
     public function isUpdateSuccessful(): bool
     {
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_OK;
+    }
+
+    public function isDeletionSuccessful(): bool
+    {
+        return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
     public function hasValue(string $key, string $value): bool
