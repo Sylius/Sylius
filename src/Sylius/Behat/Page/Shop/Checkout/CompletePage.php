@@ -93,9 +93,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool
     {
-        $columns = $this->getProductRowElement($product)->findAll('css', 'td');
-        $priceWithoutDiscount = $this->getPriceFromString($columns[1]->getText());
-        $priceWithDiscount = $this->getPriceFromString($columns[3]->getText());
+        $priceWithoutDiscount = $this->getPriceFromString($this->getElement('product_old_price', ['%name%' => $product->getName()])->getText());
+        $priceWithDiscount = $this->getPriceFromString($this->getElement('product_unit_price', ['%name%' => $product->getName()])->getText());
         $discount = $priceWithoutDiscount - $priceWithDiscount;
 
         return $discount === $amount;
@@ -155,9 +154,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function hasProductUnitPrice(ProductInterface $product, string $price): bool
     {
-        $productRowElement = $this->getProductRowElement($product);
-
-        return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
+        return $this->getPriceFromString($this->getElement('product_unit_price', ['%name%' => $product->getName()])->getText()) === $this->getPriceFromString($price);
     }
 
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
@@ -216,11 +213,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return false !== stripos($billingAddressText, $provinceName);
     }
 
-    public function getShippingPromotionDiscount(string $promotionName): string
-    {
-        return $this->getElement('promotion_shipping_discounts')->find('css', '.description')->getText();
-    }
-
     public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool
     {
         $promotionWithDiscount = sprintf('%s: %s', $promotionName, $discount);
@@ -266,15 +258,17 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'extra_notes' => '[data-test-extra-notes]',
             'items_table' => '[data-test-order-table]',
             'locale' => '[data-test-order-locale-name]',
-            'order_promotions_details' => '#order-promotions-details',
+            'order_promotions_details' => '[data-test-order-promotions-details]',
             'order_total' => '[data-test-order-total]',
             'payment_method' => '[data-test-payment-method]',
             'payment_step_label' => '[data-test-step-payment]',
+            'product_old_price' => '[data-test-product-old-price="%name%"]',
             'product_row' => '[data-test-product-row="%name%"]',
+            'product_unit_price' => '[data-test-product-unit-price="%name%"]',
             'promotion_discounts' => '[data-test-promotion-discounts]',
-            'promotions_shipping_details' => '#shipping-promotion-details',
             'promotion_shipping_discounts' => '[data-test-promotion-shipping-discounts]',
             'promotion_total' => '[data-test-promotion-total]',
+            'promotions_shipping_details' => '[data-test-shipping-promotion-details]',
             'shipping_address' => '[data-test-shipping-address]',
             'shipping_method' => '[data-test-shipping-method]',
             'shipping_step_label' => '[data-test-step-shipping]',
@@ -282,11 +276,6 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'tax_total' => '[data-test-tax-total]',
             'validation_errors' => '[data-test-validation-error]',
         ]);
-    }
-
-    private function getProductRowElement(ProductInterface $product): NodeElement
-    {
-        return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
     private function isAddressValid(string $displayedAddress, AddressInterface $address): bool

@@ -4,7 +4,7 @@
         <span class="text">{{ 'sylius.ui.select_address_from_book'|trans }}</span>
         <div class="menu">
             {% for address in app.user.customer.addresses %}
-                <div class="item"
+                <div class="item" {{ sylius_test_html_attribute('address-book-item') }}
                      data-id="{{ address.id }}"
                      data-first-name="{{ address.firstName }}"
                      data-last-name="{{ address.lastName }}"

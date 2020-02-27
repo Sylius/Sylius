@@ -74,8 +74,6 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     public function hasBillingProvinceName(string $provinceName): bool;
 
-    public function getShippingPromotionDiscount(string $promotionName): string;
-
     public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool;
 
     public function hasOrderPromotion(string $promotionName): bool;

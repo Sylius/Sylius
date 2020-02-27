@@ -91,14 +91,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $row = $nameTd->getParent();
 
-        return trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
+        return trim($row->find('css', '[data-test-product-attribute-value]')->getText());
     }
 
     public function getAttributes(): array
     {
         $attributesTable = $this->getElement('attributes');
 
-        return $attributesTable->findAll('css', 'tr > td[data-test-product-attribute-name]');
+        return $attributesTable->findAll('css', '[data-test-product-attribute-name]');
     }
 
     public function getAverageRating(): float
