@@ -26,6 +26,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     $ composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
     $ composer require sylius/plus --no-update
+    $ composer config minimum-stability rc #due to the usage of some pre-stable packages (like SyliusRefundPlugin)
     $ composer update --no-scripts
     $ composer sync-recipes
 

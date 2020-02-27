@@ -97,6 +97,7 @@ Deployment
 .. toctree::
     :hidden:
 
+    deployment/symfonycloud
     deployment/platform-sh
     deployment/cloudways
     deployment/cron-jobs
