@@ -33,9 +33,9 @@ interface ApiClientInterface
 
     public function create(): void;
 
-    public function update(): void;
-
     public function delete(string $resource, string $id): void;
+
+    public function update(): void;
 
     public function countCollectionItems(): int;
 
