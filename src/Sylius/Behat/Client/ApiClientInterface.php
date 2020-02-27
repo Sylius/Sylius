@@ -37,6 +37,8 @@ interface ApiClientInterface
 
     public function update(): void;
 
+    public function delete(string $resource, string $id): void;
+
     public function countCollectionItems(): int;
 
     public function getCollection(): array;
@@ -52,6 +54,8 @@ interface ApiClientInterface
     public function isUpdateSuccessful(): bool;
 
     public function hasValue(string $key, string $value): bool;
+
+    public function isDeletionSuccessful(): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
 
