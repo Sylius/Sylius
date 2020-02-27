@@ -146,7 +146,10 @@ final class ManagingProductOptionsContext implements Context
         $this->sharedStorage->set('product_option', $productOption);
 
         $this->client->index('product_options');
-        Assert::true($this->client->hasItemWithValue('name', $productOption->getName()));
+        Assert::true(
+            $this->client->hasItemWithValue('name', $productOption->getName()),
+            sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
+        );
     }
 
     /**
@@ -155,7 +158,10 @@ final class ManagingProductOptionsContext implements Context
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         $this->client->index('product_options');
-        Assert::false($this->client->hasItemWithValue($element, $value));
+        Assert::false(
+            $this->client->hasItemWithValue($element, $value),
+            sprintf('Product option should not have %s "%s", but it does,', $element, $value)
+        );
     }
 
     /**

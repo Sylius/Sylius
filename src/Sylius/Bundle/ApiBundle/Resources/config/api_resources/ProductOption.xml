@@ -18,7 +18,7 @@
             <collectionOperation name="get" />
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_option:write</attribute>
+                    <attribute name="groups">product_option:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
