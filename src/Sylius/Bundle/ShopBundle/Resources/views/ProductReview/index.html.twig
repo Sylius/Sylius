@@ -4,27 +4,11 @@
     <div class="ui hidden divider"></div>
     <div class="ui stackable grid" id="reviews">
         <div class="four wide column">
-            {{ sonata_block_render_event('sylius.shop.product_review.index.before_product_box', {'product_reviews': product_reviews}) }}
-
-            {{
-                render(url('sylius_shop_partial_product_show_by_slug', {
-                    'slug': app.request.attributes.get('slug'),
-                    'template': '@SyliusShop/Product/_box.html.twig'
-                }))
-            }}
-
-            {{ sonata_block_render_event('sylius.shop.product_review.index.after_product_box', {'product_reviews': product_reviews}) }}
+            {{ sylius_template_event('sylius.shop.product_review.index.product_box', _context) }}
         </div>
         <div class="twelve wide column">
             <div class="ui segment" id="sylius-product-reviews" {{ sylius_test_html_attribute('product-reviews') }}>
-                {{ sonata_block_render_event('sylius.shop.product_review.index.before_list', {'product_reviews': product_reviews}) }}
-
-                {% include '@SyliusShop/ProductReview/_list.html.twig' %}
-
-                {{ sonata_block_render_event('sylius.shop.product_review.index.after_list', {'product_reviews': product_reviews}) }}
-                <a href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
-                    <div class="ui blue labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.add_your_review'|trans }}</div>
-                </a>
+                {{ sylius_template_event('sylius.shop.product_review.index.list', _context) }}
             </div>
         </div>
     </div>

@@ -1,0 +1,8 @@
+<div class="ui two column stackable grid">
+    <div class="column">
+        {{ render(url('sylius_admin_partial_customer_latest', {'count': 5, 'template': '@SyliusAdmin/Dashboard/_customers.html.twig'})) }}
+    </div>
+    <div class="column">
+        {{ render(path('sylius_admin_partial_order_latest_in_channel', {'channelCode': channel.code, 'count': 5, 'template': '@SyliusAdmin/Dashboard/_orders.html.twig'})) }}
+    </div>
+</div>

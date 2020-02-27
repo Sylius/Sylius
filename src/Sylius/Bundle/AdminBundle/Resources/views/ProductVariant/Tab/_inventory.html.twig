@@ -5,4 +5,6 @@
         {{ form_row(form.tracked) }}
         {{ form_row(form.version) }}
     </div>
+
+    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_inventory', 'sylius.admin.product_variant.tab_inventory'], {'form': form}) }}
 </div>

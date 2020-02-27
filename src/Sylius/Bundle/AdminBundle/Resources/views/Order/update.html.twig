@@ -5,46 +5,6 @@
 
 {% block title %}{{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
 
-{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
-
 {% block content %}
-{{ sonata_block_render_event('sylius.admin.order.update.before_header', {'resource': resource}) }}
-
-<div class="ui stackable two column grid">
-    <div class="twelve wide column">
-        {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
-    </div>
-    <div class="four wide right aligned column">
-        {% include '@SyliusAdmin/Order/Update/_actions.html.twig' %}
-    </div>
-</div>
-
-{{ sonata_block_render_event('sylius.admin.order.update.after_header', {'resource': resource}) }}
-    
-{% include '@SyliusAdmin/Order/Update/_breadcrumb.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.order.update.after_breadcrumb', {'resource': resource}) }}
-
-{{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-    <div class="ui segment">
-        <input type="hidden" name="_method" value="PUT" />
-
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
-            {% include '@SyliusAdmin/Common/Form/_address.html.twig' with {'form': form.shippingAddress} %}
-        </div>
-
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
-            {% include '@SyliusAdmin/Common/Form/_address.html.twig' with {'form': form.billingAddress} %}
-        </div>
-
-        {{ sonata_block_render_event('sylius.admin.order.update.form', {'resource': resource}) }}
-
-        {{ form_row(form._token) }}
-        {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path('sylius_admin_order_index')}} %}
-    </div>
-{{ form_end(form, {'render_rest': false}) }}
-
-{{ sonata_block_render_event('sylius.admin.order.update.after_content', {'resource': resource}) }}
+    {{ sylius_template_event('sylius.admin.order.update.content', _context) }}
 {% endblock %}

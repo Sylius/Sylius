@@ -1,0 +1,6 @@
+{{
+    render(url('sylius_shop_partial_product_show_by_slug', {
+        'slug': app.request.attributes.get('slug'),
+        'template': '@SyliusShop/Product/_box.html.twig'
+    }))
+}}

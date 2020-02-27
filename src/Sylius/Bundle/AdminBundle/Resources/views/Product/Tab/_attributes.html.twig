@@ -9,6 +9,6 @@
             {{ form_widget(form.attributes, {'attr': {'translations': form.translations} }) }}
         </div>
 
-        {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_attributes', {'form': form}) }}
+        {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_attributes', 'sylius.admin.product.tab_attributes'], {'form': form}) }}
     </div>
 </div>

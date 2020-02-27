@@ -32,8 +32,6 @@
         {% block header %}
             <header>
                 {{ sylius_template_event('sylius.shop.layout.header') }}
-
-                {% include "@SyliusShop/Block/Layout/_menuTaxon.html.twig" %}
             </header>
         {% endblock %}
 
@@ -53,8 +51,6 @@
 </div>
 
 {% block javascripts %}
-    {% include '@SyliusShop/_scripts.html.twig' %}
-
     {{ sylius_template_event('sylius.shop.layout.javascripts') }}
 {% endblock %}
 

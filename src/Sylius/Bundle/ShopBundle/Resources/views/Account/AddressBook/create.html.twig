@@ -9,7 +9,7 @@
             <div class="sub header">{{ 'sylius.ui.add_address'|trans }}</div>
         </h1>
 
-        {{ sonata_block_render_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
+        {{ sylius_template_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
 
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-        {{ sonata_block_render_event('sylius.shop.account.address_book.create.form', {'address': address}) }}
+        {{ sylius_template_event('sylius.shop.account.address_book.create.form', {'address': address}) }}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

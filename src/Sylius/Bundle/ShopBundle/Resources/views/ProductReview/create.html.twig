@@ -8,11 +8,7 @@
     <div class="ui hidden divider"></div>
     <div class="ui stackable grid" id="reviews">
         <div class="four wide column">
-            {{ sonata_block_render_event('sylius.shop.product_review.create.before_product_box', {'product_review': product_review}) }}
-
-            {% include '@SyliusShop/Product/_box.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.product_review.create.after_product_box', {'product_review': product_review}) }}
+            {{ sylius_template_event('sylius.shop.product_review.create.product_box', _context) }}
         </div>
         <div class="twelve wide column">
             <div class="ui segment">
@@ -23,12 +19,12 @@
                     </div>
                 </div>
 
-                {{ sonata_block_render_event('sylius.shop.product_review.create.before_form', {'product_review': product_review}) }}
+                {{ sylius_template_event('sylius.shop.product_review.create.before_form', {'product_review': product_review}) }}
 
                 {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'ui loadable reply form', 'novalidate': 'novalidate'}}) }}
                     {% include '@SyliusShop/ProductReview/_form.html.twig' %}
 
-                    {{ sonata_block_render_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
+                    {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
 
                     {{ form_row(form._token) }}
                     <button type="submit" class="ui blue labeled large icon submit button" {{ sylius_test_html_attribute('add') }}>
