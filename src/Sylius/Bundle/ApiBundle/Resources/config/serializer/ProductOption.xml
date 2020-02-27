@@ -10,7 +10,7 @@
         </attribute>
         <attribute name="code">
             <group>product_option:read</group>
-            <group>product_option:write</group>
+            <group>product_option:create</group>
         </attribute>
         <attribute name="name">
             <group>product_option:read</group>
@@ -23,12 +23,12 @@
         </attribute>
         <attribute name="values">
             <group>product_option:read</group>
-            <group>product_option:write</group>
+            <group>product_option:create</group>
             <group>product_option:update</group>
         </attribute>
         <attribute name="translations">
             <group>product_option:read</group>
-            <group>product_option:write</group>
+            <group>product_option:create</group>
             <group>product_option:update</group>
         </attribute>
     </class>
