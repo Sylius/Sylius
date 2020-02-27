@@ -163,6 +163,30 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Then the first product option in the list should have :field :value
+     */
+    public function theFirstProductOptionInTheListShouldHave(string $field, string $value): void
+    {
+        Assert::true(
+            $this->client->hasItemOnPositionWithValue(0, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, 1)
+        );
+    }
+
+    /**
+     * @Then the last product option in the list should have :field :value
+     */
+    public function theLastProductOptionInTheListShouldHave(string $field, string $value): void
+    {
+        $count = $this->client->countCollectionItems();
+
+        Assert::true(
+            $this->client->hasItemOnPositionWithValue($count-1, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count-1)
+        );
+    }
+
+    /**
      * @Then the product option with :element :value should not be added
      */
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void

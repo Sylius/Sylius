@@ -130,6 +130,11 @@ final class ApiPlatformClient implements ApiClientInterface
         return false;
     }
 
+    public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool
+    {
+        return $this->getCollection()[$position][$key] === $value;
+    }
+
     public function hasItemWithTranslation(string $locale, string $key, string $translation): bool
     {
         foreach ($this->getCollection() as $resource) {
