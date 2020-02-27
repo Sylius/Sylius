@@ -39,6 +39,8 @@ final class SyliusUiExtension extends Extension
     }
 
     /**
+     * @experimental
+     *
      * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
