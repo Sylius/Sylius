@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * @internal
+ * @experimental
  */
 final class TemplateBlockDataCollector extends DataCollector
 {

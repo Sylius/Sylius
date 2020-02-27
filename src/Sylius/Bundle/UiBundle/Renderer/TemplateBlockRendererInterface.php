@@ -15,6 +15,9 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
+/**
+ * @experimental
+ */
 interface TemplateBlockRendererInterface
 {
     public function render(TemplateBlock $templateBlock, array $context = []): string;

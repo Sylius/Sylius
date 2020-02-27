@@ -18,6 +18,7 @@ use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 
 /**
  * @internal
+ * @experimental
  */
 final class TraceableTemplateBlockRenderer implements TemplateBlockRendererInterface
 {

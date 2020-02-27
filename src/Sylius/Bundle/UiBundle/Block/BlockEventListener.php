@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UiBundle\Block;
 use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
+/**
+ * @deprecated
+ */
 final class BlockEventListener
 {
     /** @var string */

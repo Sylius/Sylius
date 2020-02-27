@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Twig\Environment;
 
+/**
+ * @experimental
+ */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
     /** @var Environment */

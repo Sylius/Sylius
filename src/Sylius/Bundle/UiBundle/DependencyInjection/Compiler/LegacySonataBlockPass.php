@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @internal
+ * @experimental
  */
 final class LegacySonataBlockPass implements CompilerPassInterface
 {
