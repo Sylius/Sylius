@@ -1,0 +1,10 @@
+<div class="extra content">
+    <a href="mailto:{{ customer.email }}">
+        <i class="envelope icon"></i> {{ customer.email }}
+    </a>
+    {% if customer.phoneNumber is not null %}
+        <div id="phone-number">
+            <i class="phone icon"></i> {{ customer.phoneNumber }}
+        </div>
+    {% endif %}
+</div>

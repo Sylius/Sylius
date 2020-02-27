@@ -10,16 +10,5 @@
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
-    {{ sonata_block_render_event('sylius.admin.promotion_coupon.index.before_header', {'resources': resources}) }}
-
-    <div class="ui stackable two column grid">
-        {% include '@SyliusAdmin/PromotionCoupon/Index/_header.html.twig' %}
-        {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}
-    </div>
-
-    {{ sonata_block_render_event('sylius.admin.promotion_coupon.index.after_header', {'resources': resources}) }}
-
-    {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}
-    
-    {{ sonata_block_render_event('sylius.admin.promotion_coupon.index.after_content', {'resources': resources}) }}
+    {{ sylius_template_event('sylius.admin.promotion_coupon.index.content', _context) }}
 {% endblock %}
