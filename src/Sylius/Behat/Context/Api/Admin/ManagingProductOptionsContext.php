@@ -62,13 +62,14 @@ final class ManagingProductOptionsContext implements Context
      * @When I name it :name in :language
      * @When I do not name it
      */
-    public function iNameItInLanguage(?string $name = null, ?string $language = null): void
+    public function iNameItInLanguage(?string $name = null, ?string $language = 'en_US'): void
     {
-        if ($name !== null && $language !== null) {
-            $this->client->addCompoundRequestData(
-                ['translations' => [$language => ['name' => $name, 'locale' => $language]]]
-            );
+        $data = ['translations' => [$language => ['locale' => $language]]];
+        if ($name !== null) {
+            $data['translations'][$language]['name'] = $name;
         }
+
+        $this->client->addCompoundRequestData($data);
     }
 
     /**
@@ -77,6 +78,14 @@ final class ManagingProductOptionsContext implements Context
     public function iRenameItInLanguage(string $name, string $language): void
     {
         $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+    }
+
+    /**
+     * @When I remove its name from :language translation
+     */
+    public function iRemoveItsNameFromTranslation(string $language): void
+    {
+        $this->client->updateRequestData(['translations' => [$language => ['name' => '', 'locale' => $language]]]);
     }
 
     /**
@@ -121,6 +130,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -153,6 +163,30 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Then the first product option in the list should have :field :value
+     */
+    public function theFirstProductOptionInTheListShouldHave(string $field, string $value): void
+    {
+        Assert::true(
+            $this->client->hasItemOnPositionWithValue(0, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, 1)
+        );
+    }
+
+    /**
+     * @Then the last product option in the list should have :field :value
+     */
+    public function theLastProductOptionInTheListShouldHave(string $field, string $value): void
+    {
+        $count = $this->client->countCollectionItems();
+
+        Assert::true(
+            $this->client->hasItemOnPositionWithValue($count-1, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count-1)
+        );
+    }
+
+    /**
      * @Then the product option with :element :value should not be added
      */
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
@@ -178,6 +212,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @Then /^(this product option) name should be "([^"]+)"$/
+     * @Then /^(this product option) should still be named "([^"]+)"$/
      */
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
@@ -223,6 +258,6 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::same($this->client->getError(), sprintf('%s: Please enter option %s.', $element, $element));
+        Assert::contains($this->client->getError(), sprintf('%s: Please enter option %s.', $element, $element));
     }
 }
