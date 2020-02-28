@@ -16,15 +16,15 @@ Feature: Editing tax category
         Then I should be notified that code cannot be changed
         And tax category "Alcohol" should still have code "alcohol"
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled code field when editing tax category
         When I want to modify a tax category "Alcohol"
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui
+    @ui @api
     Scenario: Renaming the tax category
-        Given I want to modify a tax category "Alcohol"
-        When I rename it to "Food & Alcohol"
+        When I want to modify a tax category "Alcohol"
+        And I rename it to "Food & Alcohol"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax category name should be "Food & Alcohol"

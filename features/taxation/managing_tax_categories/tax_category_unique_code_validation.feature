@@ -8,10 +8,10 @@ Feature: Tax category unique code validation
         Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add tax category with taken code
-        Given I want to create a new tax category
-        When I name it "Food and Beverage"
+        When I want to create a new tax category
+        And I name it "Food and Beverage"
         And I specify its code as "alcohol"
         And I try to add it
         Then I should be notified that tax category with this code already exists
