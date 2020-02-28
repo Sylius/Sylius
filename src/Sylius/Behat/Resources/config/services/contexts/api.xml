@@ -28,11 +28,16 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
+        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
             <argument type="service" id="test.client" />
             <argument type="service" id="session" />
         </service>
-        <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
+
+        <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+        </service>
+
+        <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
             <argument type="service" id="test.client" />
             <argument type="service" id="session" />
         </service>
@@ -49,9 +54,7 @@
         <service id="sylius.behat.context.api.admin.notification" class="Sylius\Behat\Context\Api\Admin\NotificationContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
-        <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
-        </service>
+
         <service id="sylius.behat.context.api.admin.managing_customer_groups" class="Sylius\Behat\Context\Api\Admin\ManagingCustomerGroupsContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>

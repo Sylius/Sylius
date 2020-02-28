@@ -157,7 +157,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @Then /^(this tax category) name should be "([^"]+)"$/
      * @Then /^(this tax category) should still be named "([^"]+)"$/
      */
-    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName): void
+    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
         $this->client->show('tax_categories', $taxCategory->getCode());
         Assert::true($this->client->responseHasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
