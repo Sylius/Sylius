@@ -224,7 +224,7 @@ This gap will be more understandable on the below code example.
             return ['sidebar' => ['css' => '.sidebar']]
         }
 
-        protected function getUrl()
+        protected function getUrl(): string
         {
             return 'http://your_domain.com';
         }
@@ -243,7 +243,7 @@ This gap will be more understandable on the below code example.
             return ['sidebar' => ['css' => '.sidebar']]
         }
 
-        protected function getUrl()
+        protected function getUrl(): string
         {
             return 'http://your_domain.com/leagues/'
         }
