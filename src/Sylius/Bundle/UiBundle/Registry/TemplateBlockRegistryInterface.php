@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
+/**
+ * @experimental
+ */
 interface TemplateBlockRegistryInterface
 {
     /**

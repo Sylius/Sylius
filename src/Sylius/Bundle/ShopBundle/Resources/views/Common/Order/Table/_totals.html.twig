@@ -39,6 +39,7 @@
         {% if order.orderPromotionTotal != 0 %}
             <i
                 id="order-promotions-details" class="question circle icon popup-js"
+                {{ sylius_test_html_attribute('order-promotions-details') }}
                 data-html="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}"
             >
             </i>

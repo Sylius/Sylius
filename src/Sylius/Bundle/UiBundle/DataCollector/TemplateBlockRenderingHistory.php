@@ -17,6 +17,7 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
 /**
  * @internal
+ * @experimental
  */
 final class TemplateBlockRenderingHistory
 {

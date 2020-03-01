@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 
+/**
+ * @experimental
+ */
 final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInterface
 {
     /** @var TemplateEventRendererInterface */

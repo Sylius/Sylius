@@ -1,5 +1,20 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.6 (2020-02-28)
+
+#### Details
+
+- [#11065](https://github.com/Sylius/Sylius/issues/11065) user provider fix exception ([@oallain](https://github.com/oallain))
+- [#11079](https://github.com/Sylius/Sylius/issues/11079) [Docs] Add organization section to The Book + set up Sphinx redirections ([@pamil](https://github.com/pamil))
+- [#11095](https://github.com/Sylius/Sylius/issues/11095) [Promotion] Generating long coupons ([@oallain](https://github.com/oallain), [@GSadee](https://github.com/GSadee))
+- [#11097](https://github.com/Sylius/Sylius/issues/11097) [Composer] Add conflicts to fix build for Symfony 3.4 ([@GSadee](https://github.com/GSadee))
+- [#11113](https://github.com/Sylius/Sylius/issues/11113) [Docs][Plus] Splitting shipments ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11114](https://github.com/Sylius/Sylius/issues/11114) Fixed wrongly calculated order-item subtotal ([@peterukena](https://github.com/peterukena))
+- [#11119](https://github.com/Sylius/Sylius/issues/11119) [Docs] Sphinx instalation guide  ([@Tomanhez](https://github.com/Tomanhez))
+- [#11130](https://github.com/Sylius/Sylius/issues/11130) Add documentation to deploy Sylius to SymfonyCloud ([@tucksaun](https://github.com/tucksaun))
+- [#11137](https://github.com/Sylius/Sylius/issues/11137) [Docs] Improve installation steps ([@lchrusciel](https://github.com/lchrusciel))
+- [#11142](https://github.com/Sylius/Sylius/issues/11142) [Docs] Mention Minimum stability in plus installation ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.6.5 (2020-01-27)
 
 #### CVE-2020-5218: Ability to switch channels via GET parameter enabled in production environments

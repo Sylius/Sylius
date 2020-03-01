@@ -15,6 +15,9 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
+/**
+ * @experimental
+ */
 final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
     /** @var TemplateBlockRendererInterface */

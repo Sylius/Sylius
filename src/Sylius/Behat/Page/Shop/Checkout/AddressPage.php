@@ -69,16 +69,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function checkInvalidCredentialsValidation(): bool
     {
-        $this->getElement('login_password')->waitFor(5, function () {
-            $validationElement = $this->getElement('login_password')->getParent()->find('css', '[data-test-login-errors]');
-            if (null === $validationElement) {
-                return false;
+        /** @var NodeElement $validationElement */
+        $validationElement = $this->getDocument()->waitFor(3, function (): ?NodeElement {
+            try {
+                $validationElement = $this->getElement('login_validation_error');
+            } catch (ElementNotFoundException $elementNotFoundException) {
+                return null;
             }
 
-            return $validationElement->isVisible();
+            return $validationElement;
         });
 
-        return $this->checkValidationMessageFor('login_password', 'Invalid credentials.');
+        return $validationElement->getText() === 'Invalid credentials.';
     }
 
     public function checkValidationMessageFor(string $element, string $message): bool
@@ -88,7 +90,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
@@ -211,11 +213,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         $addressBookSelect->click();
         $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('.item[data-id="%s"]', $address->getId()));
+            return $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
         });
 
         if (null === $addressOption) {
-            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('.item[data-id="%s"]', $address->getId()));
+            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
         }
 
         $addressOption->click();
@@ -228,11 +230,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         $addressBookSelect->click();
         $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('.item[data-id="%s"]', $address->getId()));
+            return $addressBookSelect->find('css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
         });
 
         if (null === $addressOption) {
-            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('.item[data-id="%s"]', $address->getId()));
+            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('[data-test-address-book-item][data-id="%s"]', $address->getId()));
         }
 
         $addressOption->click();
@@ -280,6 +282,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'different_shipping_address_label' => '[data-test-different-shipping-address-label]',
             'login_button' => '[data-test-login-button]',
             'login_password' => '[data-test-password-input]',
+            'login_validation_error' => '[data-test-login-validation-error]',
             'next_step' => '[data-test-next-step]',
             'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
             'shipping_city' => '[data-test-shipping-city]',
