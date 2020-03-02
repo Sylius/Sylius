@@ -171,7 +171,8 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->getResponseContentValue($key) === $value;
     }
 
-    public function hasItemWithValue(string $key, string $value): bool
+    /** @param string|float $value */
+    public function hasItemWithValue(string $key, $value): bool
     {
         foreach ($this->getCollection() as $resource) {
             if ($resource[$key] === $value) {

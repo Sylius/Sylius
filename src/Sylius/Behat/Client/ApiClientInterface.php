@@ -64,7 +64,8 @@ interface ApiClientInterface
     /** @param string|int $value */
     public function relatedResourceHasValue(string $resource, string $key, $value): bool;
 
-    public function hasItemWithValue(string $key, string $value): bool;
+    /** @param string|float $value */
+    public function hasItemWithValue(string $key, $value): bool;
 
     public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool;
 
