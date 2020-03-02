@@ -99,7 +99,7 @@ final class TableAccessor implements TableAccessorInterface
     /**
      * {@inheritdoc}
      */
-    public function countTableBodyRows(NodeElement $table)
+    public function countTableBodyRows(NodeElement $table): int
     {
         return count($table->findAll('css', 'tbody > tr'));
     }
@@ -133,7 +133,7 @@ final class TableAccessor implements TableAccessorInterface
     /**
      * @return bool
      */
-    private function hasRowFields(array $columns, array $fields)
+    private function hasRowFields(array $columns, array $fields): bool
     {
         foreach ($fields as $index => $searchedValue) {
             if (!isset($columns[$index])) {
@@ -181,7 +181,7 @@ final class TableAccessor implements TableAccessorInterface
      *
      * @throws \InvalidArgumentException
      */
-    private function getColumnIndex(NodeElement $table, $fieldName)
+    private function getColumnIndex(NodeElement $table, $fieldName): int
     {
         $rows = $table->findAll('css', 'tr');
         Assert::notEmpty($rows, 'There are no rows!');
