@@ -39,6 +39,8 @@ interface ApiClientInterface
 
     public function countCollectionItems(): int;
 
+    public function getApiPrefix(): string;
+
     public function getCollection(): array;
 
     public function getCollectionItemsWithValue(string $key, string $value): array;

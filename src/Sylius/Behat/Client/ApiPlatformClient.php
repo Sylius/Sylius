@@ -32,31 +32,43 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function index(string $resource): void
     {
-        $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->client->request(
+            'GET',
+            sprintf('/%s/%s', $this->getApiPrefix(), $resource),
+            [],
+            [],
+            ['HTTP_ACCEPT' => 'application/ld+json']
+        );
     }
 
     public function show(string $resource, string $id): void
     {
-        $this->client->request('GET', sprintf('/new-api/%s/%s', $resource, $id), [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->client->request(
+            'GET',
+            sprintf('/%s/%s/%s', $this->getApiPrefix(), $resource, $id),
+            [],
+            [],
+            ['HTTP_ACCEPT' => 'application/ld+json']
+        );
     }
 
     public function subResourceIndex(string $resource, string $subResource, string $id): void
     {
-        $url = sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource);
+        $url = sprintf('/%s/%s/%s/%s', $this->getApiPrefix(), $resource, $id, $subResource);
 
         $this->client->request('GET', $url, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function buildCreateRequest(string $resource): void
     {
-        $this->request['url'] = '/new-api/'.$resource;
+        $this->request['url'] = sprintf('/%s/%s', $this->getApiPrefix(), $resource);
     }
 
     public function buildUpdateRequest(string $resource, string $id): void
     {
         $this->show($resource, $id);
 
-        $this->request['url'] = sprintf('/new-api/%s/%s', $resource, $id);
+        $this->request['url'] = sprintf('/%s/%s/%s', $this->getApiPrefix(), $resource, $id);
         $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
     }
 
@@ -91,12 +103,17 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function delete(string $resource, string $id): void
     {
-        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id ), []);
+        $this->request('DELETE', sprintf('/%s/%s/%s', $this->getApiPrefix(), $resource, $id ), []);
     }
 
     public function countCollectionItems(): int
     {
         return (int) $this->getResponseContentValue('hydra:totalItems');
+    }
+
+    public function getApiPrefix(): string
+    {
+        return 'new-api';
     }
 
     public function getCollection(): array
