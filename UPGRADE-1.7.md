@@ -3,7 +3,7 @@
 1. Require upgraded Sylius version using Composer:
 
     ```bash
-    composer require sylius/sylius:~1.7.0
+    composer require sylius/sylius:~1.7.0 --update-with-dependencies
     ```
    
    You might need to adjust your `config.platform.php` setting in `composer.json`, because Sylius 1.7 requires PHP 7.3 or higher.
@@ -26,10 +26,12 @@
    
    Run `yarn install && yarn build` to use them.
 
-3. Remove `SonataCoreBundle` from your list of used bundles in `config/bundles.php` if you are not using it apart from Sylius:
+3. Remove not needed bundles from your list of used bundles in `config/bundles.php` if you are not using it apart from Sylius:
 
     ```diff
     -   Sonata\CoreBundle\SonataCoreBundle::class => ['all' => true],
+    -   Sonata\IntlBundle\SonataIntlBundle::class => ['all' => true],
+    -   Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     ```
     
     You should remove `config/packages/sonata_core.yaml` as well.
