@@ -21,5 +21,5 @@ Feature: Editing exchange rate
     Scenario: Being unable to change currencies
         Given the exchange rate of "US Dollar" to "British Pound" is 1.30
         When I want to edit this exchange rate
-        Then I should see that the source currency is disabled
-        And I should see that the target currency is disabled
+        Then I should not be able to edit its source currency
+        And I should not be able to edit its target currency
