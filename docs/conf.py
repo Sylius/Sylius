@@ -10,7 +10,6 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
-    'sensio.sphinx.refinclude',
     'sensio.sphinx.configurationblock',
     'sensio.sphinx.phpcode',
     'sphinx_copybutton',
