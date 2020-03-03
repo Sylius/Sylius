@@ -42,7 +42,7 @@ This can be done via a CompilerPass.
 
     final class MailPass implements CompilerPassInterface
     {
-        public function process(ContainerBuilder $container)
+        public function process(ContainerBuilder $container): void
         {
             $container->removeDefinition('sylius.listener.order_complete');
         }
