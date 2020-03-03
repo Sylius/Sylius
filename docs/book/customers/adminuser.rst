@@ -39,7 +39,7 @@ using roles system. It is required by the majority of companies on the enterpris
 
 A Role is a set of permissions to perform certain operations within the system, which is assigned to a chosen Administrator.
 
-In Sylius Plus implementation of this system, we are basing on routing to determine what kind of permissions are there to be be assigned.
+In Sylius Plus implementation of this system, we are basing on routing to determine what kind of permissions are there to be assigned.
 This allows us to for example give a role access to only show actions of a chosen entity (like Products or Orders).
 
 It is important to know that one Administrator can have multiple roles assigned.
