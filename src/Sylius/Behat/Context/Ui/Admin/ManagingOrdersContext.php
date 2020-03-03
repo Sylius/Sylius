@@ -217,6 +217,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
+    }
+
+    /**
      * @Then it should have been placed by the customer :customerEmail
      */
     public function itShouldBePlacedByCustomer($customerEmail)
@@ -290,7 +298,6 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^it should have (\d+) items$/
      * @Then I should see :amount orders in the list
-     * @Then I should see a single order in the list
      */
     public function itShouldHaveAmountOfItems($amount = 1)
     {
