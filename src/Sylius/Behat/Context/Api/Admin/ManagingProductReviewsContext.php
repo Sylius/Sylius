@@ -89,21 +89,17 @@ final class ManagingProductReviewsContext implements Context
     /**
      * @When I change its title to :title
      */
-    public function iChangeItsTitleTo(?string $title = null): void
+    public function iChangeItsTitleTo(string $title): void
     {
-        if ($title !== null) {
-            $this->client->addRequestData('title', $title);
-        }
+        $this->client->addRequestData('title', $title);
     }
 
     /**
      * @When I change its comment to :comment
      */
-    public function iChangeItsCommentTo(?string $comment = null): void
+    public function iChangeItsCommentTo(string $comment): void
     {
-        if ($comment !== null) {
-            $this->client->addRequestData('comment', $comment);
-        }
+        $this->client->addRequestData('comment', $comment);
     }
 
     /**
@@ -145,24 +141,6 @@ final class ManagingProductReviewsContext implements Context
     public function iChooseAsItsRating(string $rating): void
     {
         $this->client->buildUpdateRequest('rating', $rating);
-    }
-
-    /**
-     * @Then I should be editing review of product :productName
-     */
-    public function iShouldBeEditingReviewOfProduct(string $productName): void
-    {
-        $name = $this->client->getCollection()['reviewSubject']['name'];
-        Assert::same($name, $productName);
-    }
-
-    /**
-     * @Then I should see the customer's name :customerName
-     */
-    public function iShouldSeeTheCustomerSName(string $customerName): void
-    {
-        $name = $this->client->getCollection()['author']['fullName'];
-        Assert::same($name, $customerName);
     }
 
     /**
