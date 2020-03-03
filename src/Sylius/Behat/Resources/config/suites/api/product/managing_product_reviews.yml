@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_managing_product_reviews:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_review
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_review
+
+                - sylius.behat.context.api.admin.managing_product_reviews
+                - sylius.behat.context.api.admin.notification
+
+            filters:
+                tags: "@managing_product_reviews && @api"
+            javascript: false
