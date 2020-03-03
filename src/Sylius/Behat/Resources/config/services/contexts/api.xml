@@ -40,7 +40,7 @@
         <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
-        
+
         <service id="sylius.behat.context.api.admin.managing_product_reviews" class="Sylius\Behat\Context\Api\Admin\ManagingProductReviewsContext">
             <argument>product_reviews</argument>
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />

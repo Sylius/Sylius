@@ -31,7 +31,8 @@ final class ApiPlatformStateMachineClient implements ApiPlatformStateMachineClie
             'PATCH',
             sprintf('/new-api/%s/%s/apply_transition/%s', $resource, $id, $transition),
             [], [],
-            ['HTTP_ACCEPT' => 'application/ld+json']
+            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'],
+            '{}'
         );
     }
 }
