@@ -5,3 +5,7 @@ sylius_api:
     resource: .
     type: api_platform
     prefix: /
+
+api_authentication_token:
+    path: /authentication-token
+    methods: ['POST']
