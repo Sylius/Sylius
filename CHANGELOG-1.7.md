@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.0 (2019-03-02)
+
+#### Details
+
+- [#11166](https://github.com/Sylius/Sylius/issues/11166) [Behat][ProductAttribute] Remove unnecessary step ([@GSadee](https://github.com/GSadee))
+- [#11167](https://github.com/Sylius/Sylius/issues/11167) Fix UPGRADE-1.7 file ([@Zales0123](https://github.com/Zales0123))
+- [#11168](https://github.com/Sylius/Sylius/issues/11168) [Docs] Remove sensio.sphinx.refinclude ([@Tomanhez](https://github.com/Tomanhez))
+
 ## v1.7.0-RC.1 (2019-03-01)
 
 #### Details

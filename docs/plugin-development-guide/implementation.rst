@@ -16,59 +16,27 @@ take a look at :doc:`customizing models</customization/model>`, :doc:`form</cust
 Model
 *****
 
-The only field we need to add is an additional ``$availableOnDemand`` boolean. We should start with the unit tests (written with
-PHPSpec, PHPUnit, or any other unit testing tool):
+The only field we need to add is an additional ``$availableOnDemand`` boolean. To allow plugin's user to use multiple plugins extending
+the same entity, it's recommended to provide a trait with new properties and methods, together with ORM mapping written in annotations
+(if necessary). Providing an interface containing new methods is advisable.
 
 .. code-block:: php
 
     <?php
 
-    // spec/Entity/ProductVariantSpec.php
+    // src/Model/ProductVariantTrait.php
 
     declare(strict_types=1);
 
-    namespace spec\IronMan\SyliusProductOnDemandPlugin\Entity;
+    namespace IronMan\SyliusProductOnDemandPlugin\Model;
 
-    use IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariantInterface;
-    use PhpSpec\ObjectBehavior;
-    use Sylius\Component\Core\Model\ProductVariant;
-
-    final class ProductVariantSpec extends ObjectBehavior
+    trait ProductVariantTrait
     {
-        function it_is_sylius_product_variant(): void
-        {
-            $this->shouldHaveType(ProductVariant::class);
-        }
-
-        function it_implements_product_variant_interface(): void
-        {
-            $this->shouldImplement(ProductVariantInterface::class);
-        }
-
-        function it_can_be_available_on_demand(): void
-        {
-            $this->isAvailableOnDemand()->shouldReturn(false);
-
-            $this->setAvailableOnDemand(true);
-            $this->isAvailableOnDemand()->shouldReturn(true);
-        }
-    }
-
-.. code-block:: php
-
-    <?php
-
-    // src/Entity/ProductVariant.php
-
-    declare(strict_types=1);
-
-    namespace IronMan\SyliusProductOnDemandPlugin\Entity;
-
-    use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
-
-    class ProductVariant extends BaseProductVariant implements ProductVariantInterface
-    {
-        /** @var bool */
+        /**
+         * @var bool
+         *
+         * @ORM\Column(type="boolean", name="available_on_demand")
+         */
         private $availableOnDemand = false;
 
         public function setAvailableOnDemand(bool $availableOnDemand): void
@@ -86,54 +54,23 @@ PHPSpec, PHPUnit, or any other unit testing tool):
 
     <?php
 
-    // src/Entity/ProductVariantInterface.php
+    // src/Model/ProductVariantInterface.php
 
     declare(strict_types=1);
 
     namespace IronMan\SyliusProductOnDemandPlugin\Entity;
 
-    use Sylius\Component\Core\Model\ProductVariantInterface as BaseProductVariantInterface;
-
-    interface ProductVariantInterface extends BaseProductVariantInterface
+    interface ProductVariantInterface
     {
         public function setAvailableOnDemand(bool $availableOnDemand): void;
 
         public function isAvailableOnDemand(): bool;
     }
 
-Of course you need to remember about entity mapping customization as well:
-
-.. code-block:: yaml
-
-    # src/Resources/config/doctrine/ProductVariant.orm.yml
-
-    IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariant:
-        type: entity
-        table: sylius_product_variant
-        fields:
-            availableOnDemand:
-                type: boolean
-
-Then our new entity should be configured as a resource model:
-
-.. code-block:: yaml
-
-    # src/Resources/config/config.yml
-
-    sylius_product:
-        resources:
-            product_variant:
-                classes:
-                    model: IronMan\SyliusProductOnDemandPlugin\Entity\ProductVariant
-
-This configuration should be placed in ``src/Resources/config/config.yml``. It also has to be imported
-(``- { resource: "@IronManSyliusProductOnDemandPlugin/Resources/config/config.yml" }``) in ``tests/Application/config/services.yaml``
-to make it work in Behat tests. And at the end importing this file should be one of the steps described in plugin installation.
-
 .. warning::
 
     Remember that if you modify or add some mapping, you should either provide a migration for the plugin user (that could be
-    copied to their migration folder) or mention the requirement of migration generation in the installation instructions!
+    copied to their migration folder) or mention the requirement of migration generation in the installation instructions.
 
 Form
 ****
