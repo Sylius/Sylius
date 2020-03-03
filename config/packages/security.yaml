@@ -1,12 +1,15 @@
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
+    sylius.security.new_api_admin_regex: "^/new-api"
     sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
 
 security:
     always_authenticate_before_granting: true
     providers:
         sylius_admin_user_provider:
+            id: sylius.admin_user_provider.email_or_name_based
+        sylius_admin_api_user_provider:
             id: sylius.admin_user_provider.email_or_name_based
         sylius_shop_user_provider:
             id: sylius.shop_user_provider.email_or_name_based
@@ -43,6 +46,21 @@ security:
         oauth_token:
             pattern: "%sylius.security.api_regex%/oauth/v2/token"
             security: false
+
+        new_api:
+            pattern: "%sylius.security.new_api_admin_regex%/.*"
+            stateless: true
+            anonymous: true
+            provider: sylius_admin_api_user_provider
+            json_login:
+                check_path: /new-api/authentication-token
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
         api:
             pattern: "%sylius.security.api_regex%/.*"
@@ -100,4 +118,5 @@ security:
 
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
         - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }

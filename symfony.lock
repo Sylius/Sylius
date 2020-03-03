@@ -142,6 +142,12 @@
     "friends-of-behat/mink": {
         "version": "v1.8.0"
     },
+    "friends-of-behat/mink-browserkit-driver": {
+        "version": "v1.3.3"
+    },
+    "friends-of-behat/mink-extension": {
+        "version": "2.3.1"
+    },
     "friends-of-behat/page-object-extension": {
         "version": "0.1"
     },
@@ -256,6 +262,9 @@
     "lchrusciel/api-test-case": {
         "version": "v3.1.4"
     },
+    "lcobucci/jwt": {
+        "version": "3.3.1"
+    },
     "league/uri": {
         "version": "5.3.0"
     },
@@ -276,6 +285,18 @@
     },
     "league/uri-schemes": {
         "version": "1.2.0"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
     },
     "liip/imagine-bundle": {
         "version": "1.8",
@@ -303,6 +324,9 @@
     },
     "myclabs/deep-copy": {
         "version": "1.8.1"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nelmio/alice": {
         "version": "3.2",
@@ -727,6 +751,9 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
     },
+    "symfony/polyfill-php56": {
+        "version": "v1.14.0"
+    },
     "symfony/polyfill-php70": {
         "version": "v1.9.0"
     },
@@ -735,6 +762,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.12.0"
+    },
+    "symfony/polyfill-util": {
+        "version": "v1.14.0"
     },
     "symfony/process": {
         "version": "v4.1.3"
