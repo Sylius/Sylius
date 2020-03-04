@@ -9,12 +9,12 @@ Feature: Editing shipping method
         And the store has "Standard" shipping category
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled code field when editing shipping category
         When I modify a shipping category "Standard"
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui
+    @ui @api
     Scenario: Renaming the shipping category
         Given I want to modify a shipping category "Standard"
         When I rename it to "Normal"

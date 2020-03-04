@@ -91,7 +91,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function delete(string $resource, string $id): void
     {
-        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id ), []);
+        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
     }
 
     public function countCollectionItems(): int
@@ -133,7 +133,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
-    public function hasValue(string $key, string $value): bool
+    public function responseHasValue(string $key, string $value): bool
     {
         return $this->getResponseContentValue($key) === $value;
     }

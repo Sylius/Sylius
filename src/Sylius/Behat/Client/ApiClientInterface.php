@@ -51,7 +51,7 @@ interface ApiClientInterface
 
     public function isUpdateSuccessful(): bool;
 
-    public function hasValue(string $key, string $value): bool;
+    public function responseHasValue(string $key, string $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
 
