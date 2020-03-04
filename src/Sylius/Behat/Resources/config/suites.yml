@@ -7,6 +7,7 @@ imports:
     - suites/api/product/managing_product_variants.yml
     - suites/api/taxation/managing_tax_categories.yml
     - suites/api/taxon/managing_taxons.yml
+    - suites/api/user/managing_customer_groups.yml
 
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
