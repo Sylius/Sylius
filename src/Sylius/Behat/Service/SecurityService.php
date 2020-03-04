@@ -48,7 +48,7 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function logIn(UserInterface $user)
+    public function logIn(UserInterface $user): void
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
         $this->setToken($token);

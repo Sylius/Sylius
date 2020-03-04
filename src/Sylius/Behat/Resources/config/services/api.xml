@@ -15,6 +15,7 @@
     <services>
         <service id="Sylius\Behat\Client\ApiClientInterface" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>
 </container>

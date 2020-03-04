@@ -184,11 +184,16 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="sylius.behat.context.setup.admin_api_security" class="Sylius\Behat\Context\Setup\AdminApiSecurityContext" />
-
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.admin_security" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" />
+            <argument type="service" id="sylius.repository.admin_user" />
+        </service>
+
+        <service id="sylius.behat.context.setup.admin_api_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.admin_api_security" />
             <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
         </service>
