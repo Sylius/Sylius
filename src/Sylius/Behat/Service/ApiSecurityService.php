@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -51,17 +52,20 @@ final class ApiSecurityService implements SecurityServiceInterface
         $this->sharedStorage->set('token', $token);
     }
 
-    public function logOut()
+    public function logOut(): void
     {
         $this->sharedStorage->set('token', null);
     }
 
-    public function getCurrentToken()
+    public function getCurrentToken(): TokenInterface
     {
-        return $this->sharedStorage->get('token');
+        $token = new JWTUserToken();
+        $token->setRawToken($this->sharedStorage->get('token'));
+
+        return $token;
     }
 
-    public function restoreToken(TokenInterface $token)
+    public function restoreToken(TokenInterface $token): void
     {
         $this->sharedStorage->set('token', (string) $token);
     }
