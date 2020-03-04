@@ -8,10 +8,10 @@ Feature: Customer group unique code validation
         Given the store has a customer group "Retail" with "RETAIL" code
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new customer group with used code
-        Given I want to create a new customer group
-        When I specify its code as "RETAIL"
+        When I want to create a new customer group
+        And I specify its code as "RETAIL"
         And I add it
         Then I should be notified that customer group with this code already exists
         And I should see 1 customer groups in the list
