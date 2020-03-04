@@ -160,6 +160,7 @@ When declaring both options, a union of sets will be resolved.
 Learn more
 ----------
 
+* :doc:`Cookbook: How to create a custom inventory sources filter? </cookbook/inventory/custom-inventory-sources-filter>`
 * :doc:`Order concept documentation </book/orders/orders>`
 * :doc:`Single Source Inventory concept documentation </book/products/inventory>`
 
