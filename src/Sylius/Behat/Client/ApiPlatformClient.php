@@ -133,7 +133,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
-    public function hasValue(string $key, string $value): bool
+    public function responseHasValue(string $key, string $value): bool
     {
         return $this->getResponseContentValue($key) === $value;
     }

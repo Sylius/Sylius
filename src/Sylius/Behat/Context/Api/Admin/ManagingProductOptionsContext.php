@@ -217,7 +217,7 @@ final class ManagingProductOptionsContext implements Context
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
         $this->client->show('product_options', $productOption->getCode());
-        Assert::true($this->client->hasValue('name', $name));
+        Assert::true($this->client->responseHasValue('name', $name));
     }
 
     /**
@@ -241,7 +241,7 @@ final class ManagingProductOptionsContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'));
+        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'));
     }
 
     /**
