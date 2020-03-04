@@ -147,7 +147,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
         $this->client->show('customer_groups', $customerGroup->getCode());
-        Assert::true($this->client->hasValue('name', $name), 'Customer groups name is not ' . $name);
+        Assert::true($this->client->responseHasValue('name', $name), 'Customer groups name is not ' . $name);
     }
 
     /**
@@ -182,7 +182,7 @@ final class ManagingCustomerGroupsContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
+        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
     }
 
     /**
