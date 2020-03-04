@@ -137,6 +137,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
+        $this->client->index('customer_groups');
         Assert::same($this->client->countCollectionItems(), $amountOfCustomerGroups);
     }
 
@@ -154,7 +155,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatNameIsRequired(): void
     {
-        Assert::contains($this->client->getError(), 'name: Please enter tax category name.');
+        Assert::contains($this->client->getError(), 'name: Please enter a customer group name.');
     }
 
     /**
@@ -170,11 +171,11 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeInformedThatThisFormContainsErrors(): void
     {
-        Assert::contains($this->client->getError(), 'This form contains errors');
+        Assert::notEmpty($this->client->getError());
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {

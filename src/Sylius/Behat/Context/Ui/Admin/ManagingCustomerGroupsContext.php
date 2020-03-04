@@ -199,7 +199,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then I should not be able to edit its code
      */
-    public function iShouldNotBeAbleToEditItsCode()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
