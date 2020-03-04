@@ -22,7 +22,7 @@ interface SecurityServiceInterface
     /**
      * @throws \InvalidArgumentException
      */
-    public function logIn(UserInterface $user);
+    public function logIn(UserInterface $user): void;
 
     public function logOut();
 
