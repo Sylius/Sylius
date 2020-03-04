@@ -29,7 +29,7 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @Given I want to create a new shipping category
+     * @When I want to create a new shipping category
      */
     public function iWantToCreateANewShippingCategory(): void
     {
@@ -37,7 +37,7 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @Given I want to modify a shipping category :shippingCategory
+     * @When I want to modify a shipping category :shippingCategory
      */
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
@@ -189,7 +189,10 @@ final class ManagingShippingCategoriesContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exists');
+        Assert::false(
+            $this->client->responseHasValue('code', 'NEW_CODE'),
+            'The shipping category code should not be changed to "NEW_CODE", but it is'
+        );
     }
 
     /**
@@ -207,7 +210,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function thisShippingCategoryNameShouldBe(string $name): void
     {
         Assert::true(
-            $this->client->hasValue('name', $name),
+            $this->client->responseHasValue('name', $name),
             sprintf('Shipping category with name %s does not exists', $name)
         );
     }
@@ -215,6 +218,7 @@ final class ManagingShippingCategoriesContext implements Context
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index('shipping_categories');
+
         return $this->client->hasItemWithValue($property, $value);
     }
 }

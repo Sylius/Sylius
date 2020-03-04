@@ -150,7 +150,7 @@ final class ManagingTaxCategoriesContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->hasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
+        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
     }
 
     /**
@@ -160,7 +160,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName): void
     {
         $this->client->show('tax_categories', $taxCategory->getCode());
-        Assert::true($this->client->hasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
+        Assert::true($this->client->responseHasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
     }
 
     /**
