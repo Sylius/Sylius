@@ -121,11 +121,11 @@ Documentation sections of The Book referring to Sylius Plus features are:
 
 .. toctree::
     :maxdepth: 1
-    
+
     installation/sylius_plus_installation
     architecture/emails
     configuration/channels
-    customers/adminuser
+    customers/admin_user
     customers/customer_pools
     orders/shipments
     orders/returns
