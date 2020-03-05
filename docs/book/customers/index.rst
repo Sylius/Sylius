@@ -9,7 +9,7 @@ There is also a subchapter dedicated to addresses of your customers.
 
     customer_and_shopuser
     customer_pools
-    adminuser
+    admin_user
     addresses/index
 
 .. include:: /book/customers/map.rst.inc
