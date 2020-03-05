@@ -84,6 +84,99 @@ You have the following parameters available:
 * ``channel``: Channel in which an order was placed
 * ``localeCode``: Locale code in which an order was placed
 
+.. rst-class:: plus-doc
+
+Return Requests Emails
+----------------------
+
+.. hint::
+
+   What are Return Requests? :doc:`Check here </book/orders/returns>`!
+
+Return Request Confirmation
+'''''''''''''''''''''''''''
+
+This email is sent after return request has been created by a customer.
+
+**Code**: ``sylius_plus_return_request_confirmation``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestConfirmation.html.twig``
+
+Parameters:
+
+* ``order`` - for which the return request has been created
+
+Return Request Acceptation
+''''''''''''''''''''''''''
+
+This email is sent when the administrator accepts a return request.
+
+**Code**: ``sylius_plus_return_request_accepted``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestAcceptedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` which has been accepted
+* ``order`` of the accepted return request
+
+Return Request Rejection
+''''''''''''''''''''''''
+
+This email is sent when the administrator rejects a return request.
+
+**Code**: ``sylius_plus_return_request_rejected``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestRejectedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` which has been rejected
+* ``order`` of the rejected return request
+
+
+Return Request Resolution Change
+''''''''''''''''''''''''''''''''
+
+This email is sent when the administrator changes return request's resolution proposed by a customer.
+
+**Code**: ``sylius_plus_return_request_resolution_changed``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestResolutionChangedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` whose resolution has been changed
+* ``order`` of the modified return request
+
+Return Request: Repaired Items Sent
+'''''''''''''''''''''''''''''''''''
+
+This email is sent when the administrator marks that a return request's repaired items have been sent back to the Customer.
+
+**Code**: ``sylius_plus_return_request_repaired_items_sent``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestRepairedItemsSentNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` of which the items were sent
+* ``order`` of the return request
+
+.. image:: ../../_images/sylius_plus/banner.png
+   :align: center
+   :target: http://sylius.com/plus/?utm_source=docs
+
 How to send an Email programmatically?
 --------------------------------------
 

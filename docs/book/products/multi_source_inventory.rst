@@ -119,9 +119,48 @@ How does Multi-Source Inventory work on examples?
    You can see all use cases we have designed in Sylius Plus by browsing the Behat scenarios for inventory in the vendor package
    after installing Sylius Plus.
 
+Multi-source inventory fixtures
+-------------------------------
+
+Inventory Sources fixtures
+''''''''''''''''''''''''''
+
+This fixture creates Inventory Sources without products (empty) enabled in chosen channels:
+
+.. code-block:: yaml
+
+   hamburg_warehouse:
+      code: 'hamburg_warehouse'
+      name: 'Hamburg Warehouse'
+      channels:
+         - 'HOME_WEB'
+         - 'FASHION_WEB'
+
+
+Inventory Source Stocks fixtures
+''''''''''''''''''''''''''''''''
+
+This fixture adds inventory source stock to chosen Inventory Source, you can choose which taxons and channels you want
+to include in each inventory source.
+
+When declaring both options, a union of sets will be resolved.
+
+.. code-block:: yaml
+
+   stocks_in_frankfurt_warehouse:
+       inventory_source: 'frankfurt_warehouse'
+       products_from:
+           taxons_codes:
+               - 'caps'
+               - 'dresses'
+           channels_codes:
+               - 'HOME_WEB'
+               - 'FASHION_WEB'
+
 Learn more
 ----------
 
+* :doc:`Cookbook: How to create a custom inventory sources filter? </cookbook/inventory/custom-inventory-sources-filter>`
 * :doc:`Order concept documentation </book/orders/orders>`
 * :doc:`Single Source Inventory concept documentation </book/products/inventory>`
 
