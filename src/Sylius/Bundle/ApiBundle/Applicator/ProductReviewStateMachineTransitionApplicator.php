@@ -29,19 +29,21 @@ final class ProductReviewStateMachineTransitionApplicator
 
     public function accept(ReviewInterface $data): ReviewInterface
     {
-        $stateMachine = $this->stateMachineFactory->get($data, ProductReviewTransitions::GRAPH);
-
-        $stateMachine->apply(ProductReviewTransitions::TRANSITION_ACCEPT);
+        $this->applyTransition($data, ProductReviewTransitions::TRANSITION_ACCEPT);
 
         return $data;
     }
 
     public function reject(ReviewInterface $data): ReviewInterface
     {
-        $stateMachine = $this->stateMachineFactory->get($data, ProductReviewTransitions::GRAPH);
-
-        $stateMachine->apply(ProductReviewTransitions::TRANSITION_REJECT);
+        $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
 
         return $data;
+    }
+
+    private function applyTransition(ReviewInterface $review, string $transition): void
+    {
+        $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
+        $stateMachine->apply($transition);
     }
 }

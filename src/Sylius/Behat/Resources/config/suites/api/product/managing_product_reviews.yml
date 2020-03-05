@@ -13,7 +13,7 @@ default:
                 - sylius.behat.context.transform.product_review
                 - sylius.behat.context.transform.shared_storage
 
-                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.product
@@ -24,3 +24,4 @@ default:
 
             filters:
                 tags: "@managing_product_reviews && @api"
+            javascript: false
