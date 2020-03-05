@@ -37,6 +37,11 @@
             <argument type="string">admin</argument>
         </service>
 
+        <service id="sylius.behat.admin_api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
             <argument type="service" id="session" />
             <argument type="service" id="sylius.behat.cookie_setter" />

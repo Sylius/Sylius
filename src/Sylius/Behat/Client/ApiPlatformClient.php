@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -22,29 +23,31 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var AbstractBrowser */
     private $client;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     /** @var array */
     private $request = ['url' => null, 'body' => []];
 
-    public function __construct(AbstractBrowser $client)
+    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
     {
         $this->client = $client;
+        $this->sharedStorage = $sharedStorage;
     }
 
     public function index(string $resource): void
     {
-        $this->client->request('GET', '/new-api/'.$resource, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request('GET', '/new-api/'.$resource, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function show(string $resource, string $id): void
     {
-        $this->client->request('GET', sprintf('/new-api/%s/%s', $resource, $id), [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request('GET', sprintf('/new-api/%s/%s', $resource, $id), ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function subResourceIndex(string $resource, string $subResource, string $id): void
     {
-        $url = sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource);
-
-        $this->client->request('GET', $url, [], [], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request('GET', sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource), ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function buildCreateRequest(string $resource): void
@@ -171,9 +174,12 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
-        $this->client->request(
-            $method, $url, [], [], array_merge(['HTTP_ACCEPT' => 'application/ld+json'], $headers), $content
-        );
+        $defaultHeaders = ['HTTP_ACCEPT' => 'application/ld+json'];
+        if ($this->sharedStorage->has('token')) {
+            $defaultHeaders['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
+        }
+
+        $this->client->request($method, $url, [], [], array_merge($defaultHeaders, $headers), $content);
     }
 
     private function getResponseContentValue(string $key)

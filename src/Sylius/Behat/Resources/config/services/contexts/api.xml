@@ -15,6 +15,10 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiSecurityClientInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
