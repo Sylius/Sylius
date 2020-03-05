@@ -74,7 +74,7 @@ Sylius Plus gives you all the power of Open Source and much more. It comes with 
 - Returns Management
 - Multi-source Inventory
 - Advanced Users Permissions
-- Enhanced security & monitoring
+- Partial Shipment
 
 What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
 
