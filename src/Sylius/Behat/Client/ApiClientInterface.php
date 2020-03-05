@@ -25,7 +25,8 @@ interface ApiClientInterface
 
     public function buildUpdateRequest(string $resource, string $id): void;
 
-    public function addRequestData(string $key, string $value): void;
+    /** @param string|int */
+    public function addRequestData(string $key, $value): void;
 
     public function addCompoundRequestData(array $data): void;
 
@@ -36,6 +37,8 @@ interface ApiClientInterface
     public function update(): void;
 
     public function delete(string $resource, string $id): void;
+
+    public function applyTransition(string $resource, string $id, string $transition): void;
 
     public function countCollectionItems(): int;
 
@@ -51,7 +54,8 @@ interface ApiClientInterface
 
     public function isUpdateSuccessful(): bool;
 
-    public function responseHasValue(string $key, string $value): bool;
+    /** @param string|int */
+    public function responseHasValue(string $key, $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
 

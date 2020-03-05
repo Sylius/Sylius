@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\ApiPlatformStateMachineClientInterface;
 use Sylius\Behat\Service\SharedStorage;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -25,27 +24,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    /** @var string */
-    private $resource;
-
     /** @var ApiClientInterface */
     private $client;
-
-    /** @var ApiPlatformStateMachineClientInterface */
-    private $stateMachineClient;
 
     /** @var SharedStorage */
     private $sharedStorage;
 
     public function __construct(
-        string $resource,
         ApiClientInterface $client,
-        ApiPlatformStateMachineClientInterface $stateMachineClient,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->resource = $resource;
         $this->client = $client;
-        $this->stateMachineClient = $stateMachineClient;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -55,7 +44,76 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToBrowseProductReviews(): void
     {
-        $this->client->index($this->resource);
+        $this->client->index('product_reviews');
+    }
+
+    /**
+     * @When I want to modify the :productReview product review
+     */
+    public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
+    {
+        $this->client->buildUpdateRequest('product_reviews', (string) $productReview->getId());
+    }
+
+    /**
+     * @When I change its title to :title
+     * @when I remove its title
+     */
+    public function iChangeItsTitleTo(?string $title = ''): void
+    {
+        $this->client->addRequestData('title', $title);
+    }
+
+    /**
+     * @When I change its comment to :comment
+     * @when I remove its comment
+     */
+    public function iChangeItsCommentTo(?string $comment = ''): void
+    {
+        $this->client->updateRequestData(['comment' => $comment]);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
+     * @When I choose :rating as its rating
+     */
+    public function iChooseAsItsRating(int $rating): void
+    {
+        $this->client->updateRequestData(['rating' => $rating]);
+    }
+
+    /**
+     * @When I accept the :productReview product review
+     */
+    public function iAcceptTheProductReview( ReviewInterface $productReview): void
+    {
+        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), 'accept');
+    }
+
+    /**
+     * @When I reject the :productReview product review
+     */
+    public function iRejectTheProductReview( ReviewInterface $productReview): void
+    {
+        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), 'reject');
+    }
+
+    /**
+     * @When I delete the :productReview product review
+     */
+    public function iDeleteTheProductReview(ReviewInterface $productReview): void
+    {
+        $this->sharedStorage->set('product_review_id', $productReview->getId());
+
+        $this->client->delete('product_reviews', (string) $productReview->getId());
     }
 
     /**
@@ -79,47 +137,6 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I want to modify the :productReview product review
-     */
-    public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
-    {
-        $this->client->buildUpdateRequest($this->resource, (string) $productReview->getId());
-    }
-
-    /**
-     * @When I change its title to :title
-     */
-    public function iChangeItsTitleTo(string $title): void
-    {
-        $this->client->addRequestData('title', $title);
-    }
-
-    /**
-     * @When I change its comment to :comment
-     */
-    public function iChangeItsCommentTo(string $comment): void
-    {
-        $this->client->addRequestData('comment', $comment);
-    }
-
-    /**
-     * @When /^I remove its (comment|title)$/
-     */
-    public function iRemoveItsComment(string $element): void
-    {
-        $this->client->addRequestData($element, '');
-    }
-
-    /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then /^(this product review) (comment|title) should be "([^"]+)"$/
      */
     public function thisProductReviewElementShouldBeValue(ReviewInterface $productReview, string $element, string $value): void
@@ -128,35 +145,11 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then (this product review) rating should be :rating
+     * @Then /^(this product review) rating should be (\d+)$/
      */
-    public function thisProductReviewRatingShouldBe(ReviewInterface $productReview, string $rating): void
+    public function thisProductReviewRatingShouldBe(ReviewInterface $productReview, int $rating): void
     {
         $this->assertIfReviewHasElementWithValue($productReview, 'rating', $rating);
-    }
-
-    /**
-     * @When I choose :rating as its rating
-     */
-    public function iChooseAsItsRating(string $rating): void
-    {
-        $this->client->buildUpdateRequest('rating', $rating);
-    }
-
-    /**
-     * @When I accept the :productReview product review
-     */
-    public function iAcceptTheProductReview(ReviewInterface $productReview): void
-    {
-        $this->applyTransition((string) $productReview->getId(), ProductReviewTransitions::TRANSITION_ACCEPT);
-    }
-
-    /**
-     * @When I reject the :productReview product review
-     */
-    public function iRejectTheProductReview(ReviewInterface $productReview): void
-    {
-        $this->applyTransition((string) $productReview->getId(), ProductReviewTransitions::TRANSITION_REJECT);
     }
 
     /**
@@ -173,16 +166,6 @@ final class ManagingProductReviewsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyUpdated(string $action): void
     {
         $this->assertIfReviewHasElementWithValue($this->sharedStorage->get('product_review'), 'status', $action);
-    }
-
-    /**
-     * @When I delete the :productReview product review
-     */
-    public function iDeleteTheProductReview(ReviewInterface $productReview): void
-    {
-        $this->sharedStorage->set('product_review_id', $productReview->getId());
-
-        $this->client->delete($this->resource, (string) $productReview->getId());
     }
 
     /**
@@ -226,27 +209,23 @@ final class ManagingProductReviewsContext implements Context
      */
     public function thisProductAverageRatingShouldBe(ProductInterface $product, int $averageRating): void
     {
-        // todo, this step should be in product context which will be covered in separate RP
+        // TODO, this step should be in product context which will be covered in separate RP
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index($this->resource);
+        $this->client->index('product_reviews');
 
         return $this->client->hasItemWithValue($property, $value);
     }
 
-    private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, string $value): void
+    /** @param string|int $value */
+    private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
     {
-        $this->client->show($this->resource, (string) $productReview->getId());
+        $this->client->show('product_reviews', (string) $productReview->getId());
         Assert::true(
-            $this->client->hasValue($element, $value),
+            $this->client->responseHasValue($element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
-    }
-
-    private function applyTransition(string $id, string $transition): void
-    {
-        $this->stateMachineClient->applyTransition($this->resource, $id, $transition);
     }
 }

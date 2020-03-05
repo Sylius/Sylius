@@ -63,7 +63,8 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
     }
 
-    public function addRequestData(string $key, string $value): void
+    /** @param string|int */
+    public function addRequestData(string $key, $value): void
     {
         $this->request['body'][$key] = $value;
     }
@@ -95,6 +96,16 @@ final class ApiPlatformClient implements ApiClientInterface
     public function delete(string $resource, string $id): void
     {
         $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
+    }
+
+    public function applyTransition(string $resource, string $id, string $transition): void
+    {
+        $this->request(
+            'PATCH',
+            sprintf('/new-api/%s/%s/apply_transition/%s', $resource, $id, $transition),
+            ['CONTENT_TYPE' => 'application/merge-patch+json'],
+            '{}'
+        );
     }
 
     public function countCollectionItems(): int
@@ -136,7 +147,8 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
-    public function responseHasValue(string $key, string $value): bool
+    /** @param string|int */
+    public function responseHasValue(string $key, $value): bool
     {
         return $this->getResponseContentValue($key) === $value;
     }
