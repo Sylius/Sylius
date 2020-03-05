@@ -178,6 +178,7 @@ Learn more
 
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin>`_
 * :doc:`Refunds </book/orders/refunds>`
+* :doc:`Emails related to Return Requests </book/architecture/emails>`
 
 .. image:: ../../_images/sylius_plus/banner.png
   :align: center

@@ -78,6 +78,16 @@ Promotions
 
 .. include:: /cookbook/promotions/map.rst.inc
 
+Inventory
+---------
+
+.. toctree::
+    :hidden:
+
+    inventory/custom-inventory-sources-filter
+
+.. include:: /cookbook/inventory/map.rst.inc
+
 Images
 ------
 
