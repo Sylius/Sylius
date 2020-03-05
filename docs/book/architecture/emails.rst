@@ -144,8 +144,8 @@ This email is sent when the administrator changes return request's resolution pr
 
 Parameters:
 
-* ``returnRequest`` which has been rejected
-* ``order`` of the rejected return request
+* ``returnRequest`` whose resolution has been changed
+* ``order`` of the modified return request
 
 Return Request: Repaired Items Sent
 '''''''''''''''''''''''''''''''''''
@@ -160,8 +160,8 @@ This email is sent when the administrator marks that a return request's repaired
 
 Parameters:
 
-* ``returnRequest`` which has been rejected
-* ``order`` of the rejected return request
+* ``returnRequest`` of which the items were sent
+* ``order`` of the return request
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
