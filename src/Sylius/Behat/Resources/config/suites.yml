@@ -5,6 +5,7 @@ imports:
     - suites/api/admin/login.yml
     - suites/api/currency/managing_currencies.yml
     - suites/api/product/managing_product_options.yml
+    - suites/api/product/managing_product_reviews.yml
     - suites/api/product/managing_product_variants.yml
     - suites/api/shipping/managing_shipping_categories.yml
     - suites/api/taxation/managing_tax_categories.yml

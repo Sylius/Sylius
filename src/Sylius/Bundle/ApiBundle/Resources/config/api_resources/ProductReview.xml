@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource
+        class="Sylius\Component\Core\Model\ProductReview"
+        shortName="ProductReview"
+    >
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>product_review:read</attribute>
+            </attribute>
+        </attribute>
+        <attribute name="denormalization_context">
+            <attribute name="groups">
+                <attribute>product_review:update</attribute>
+            </attribute>
+        </attribute>
+        <attribute name="validation_groups">sylius</attribute>
+        <collectionOperations>
+            <collectionOperation name="get" />
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get" />
+            <itemOperation name="delete" />
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">product_review:update</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="accept_product_review">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/product_reviews/{id}/apply_transition/accept</attribute>
+                <attribute name="controller">sylius.api.state_machine_transition_applicator:accept</attribute>
+            </itemOperation>
+            <itemOperation name="reject_product_review">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/product_reviews/{id}/apply_transition/reject</attribute>
+                <attribute name="controller">sylius.api.state_machine_transition_applicator:reject</attribute>
+            </itemOperation>
+        </itemOperations>
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
+        <property name="id" identifier="true" writable="false" />
+        <property name="title" required="true" readable="true" writable="true" />
+        <property name="rating" readable="true" writable="true" />
+        <property name="comment" readable="true" writable="true" />
+        <property name="author" readable="true" writable="true" />
+        <property name="status" readable="true" writable="true" />
+        <property name="reviewSubject" readable="true" writable="true" />
+    </resource>
+</resources>
