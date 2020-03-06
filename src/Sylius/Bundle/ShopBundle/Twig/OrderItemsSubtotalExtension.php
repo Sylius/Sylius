@@ -13,11 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig;
 
+use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 
 class OrderItemsSubtotalExtension extends \Twig_Extension
 {
+    /** @var OrderItemsSubtotalCalculatorInterface */
+    private $calculator;
+
+    public function __construct(OrderItemsSubtotalCalculatorInterface $calculator)
+    {
+        $this->calculator = $calculator;
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -27,12 +35,6 @@ class OrderItemsSubtotalExtension extends \Twig_Extension
 
     public function getSubtotal(OrderInterface $order): int
     {
-        return array_reduce(
-            $order->getItems()->toArray(),
-            static function (int $subtotal, OrderItemInterface $item) {
-                return $subtotal + $item->getSubtotal();
-            },
-            0
-        );
+        return $this->calculator->getSubtotal($order);
     }
 }
