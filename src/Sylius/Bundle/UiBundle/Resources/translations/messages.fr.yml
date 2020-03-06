@@ -707,7 +707,7 @@ sylius:
         search: 'Rechercher'
         search_products: 'Chercher des produits'
         security_settings: 'Paramètres de Sécurité'
-        see_issue: 'Voir un problème'
+        see_issue: 'Voir le problème'
         select_address_from_book: 'Sélectionner une adresse dans mon carnet d''adresses'
         select_products: 'Sélectionner les produits'
         select_taxon: 'Sélectionnez un taxon'
