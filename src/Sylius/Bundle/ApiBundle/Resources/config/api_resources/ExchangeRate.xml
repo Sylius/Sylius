@@ -5,7 +5,7 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
 
     <resource
-        class="Sylius\Component\Currency\Model\ExchangeRate"
+        class="%sylius.model.exchange_rate.class%"
         shortName="ExchangeRate"
     >
         <attribute name="validation_groups">sylius</attribute>
@@ -15,14 +15,10 @@
             </attribute>
         </attribute>
         <collectionOperations>
-            <collectionOperation name="get">
-                <attribute name="filters">
-                    <attribute>exchange_rate.search_currency</attribute>
-                </attribute>
-            </collectionOperation>
+            <collectionOperation name="get" />
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
-                    <attribute name="groups">exchange_rate:write</attribute>
+                    <attribute name="groups">exchange_rate:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

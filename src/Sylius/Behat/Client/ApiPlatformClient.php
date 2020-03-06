@@ -62,7 +62,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCreateRequest(string $resource): void
     {
-        $this->request['url'] = '/new-api/'.$resource;
+        $this->request['url'] = '/new-api/' . $resource;
     }
 
     public function buildUpdateRequest(string $resource, string $id): void
@@ -123,14 +123,14 @@ final class ApiPlatformClient implements ApiClientInterface
         return (int) $this->getResponseContentValue('hydra:totalItems');
     }
 
-    public function getCollection(): array
+    public function getCollectionItems(): array
     {
         return $this->getResponseContentValue('hydra:member');
     }
 
     public function getCollectionItemsWithValue(string $key, string $value): array
     {
-        $items = array_filter($this->getCollection(), function (array $item) use ($key, $value): bool {
+        $items = array_filter($this->getCollectionItems(), function (array $item) use ($key, $value): bool {
             return $item[$key] === $value;
         });
 
@@ -174,7 +174,7 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @param string|float $value */
     public function hasItemWithValue(string $key, $value): bool
     {
-        foreach ($this->getCollection() as $resource) {
+        foreach ($this->getCollectionItems() as $resource) {
             if ($resource[$key] === $value) {
                 return true;
             }
@@ -185,12 +185,12 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool
     {
-        return $this->getCollection()[$position][$key] === $value;
+        return $this->getCollectionItems()[$position][$key] === $value;
     }
 
     public function hasItemWithTranslation(string $locale, string $key, string $translation): bool
     {
-        foreach ($this->getCollection() as $resource) {
+        foreach ($this->getCollectionItems() as $resource) {
             if (
                 isset($resource['translations']) &&
                 isset($resource['translations'][$locale]) &&

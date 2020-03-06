@@ -50,18 +50,13 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @When /^I want to edit (this exchange rate)$/
+     * @Given /^I am editing (this exchange rate)$/
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
-        $this->sharedStorage->set('exchangeRateId', $exchangeRate->getId());
-    }
-
-    /**
-     * @When /^I am editing (this exchange rate)$/
-     */
-    public function iAmEditingThisExchangeRate(ExchangeRateInterface $exchangeRate): void
-    {
         $this->client->buildUpdateRequest('exchange_rates', $exchangeRate->getId());
+
+        $this->sharedStorage->set('exchange_rate_id', $exchangeRate->getId());
     }
 
     /**
@@ -75,12 +70,12 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When /^I specify its ratio as (-?[0-9\.]+)$/
+     * @When I specify its ratio as :ratio
      * @When I don't specify its ratio
      */
-    public function iSpecifyItsRatioAs(?float $ratio = null): void
+    public function iSpecifyItsRatioAs(?string $ratio = null): void
     {
-        if($ratio !== null) {
+        if ($ratio !== null) {
             $this->client->addRequestData('ratio', $ratio);
         }
     }
@@ -90,7 +85,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheSourceCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('sourceCurrency', '/new-api/currencies/'.$currencyCode);
+        $this->client->addRequestData('sourceCurrency', '/new-api/currencies/' . $currencyCode);
     }
 
     /**
@@ -98,7 +93,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheTargetCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('targetCurrency', '/new-api/currencies/'.$currencyCode);
+        $this->client->addRequestData('targetCurrency', '/new-api/currencies/' . $currencyCode);
     }
 
     /**
@@ -114,7 +109,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo(string $ratio): void
     {
-        $this->client->addRequestData('ratio', $ratio);
+        $this->client->updateRequestData(['ratio' => $ratio]);
     }
 
     /**
@@ -137,53 +132,21 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I choose :name as a currency filter
-     */
-    public function iChooseCurrencyAsACurrencyFilter(string $name): void
-    {
-        $this->client->buildUpdateRequest('rating', $name);//TODO
-    }
-
-    /**
-     * @When I filter
-     */
-    public function iFilter(): void
-    {
-        //TODO
-    }
-
-    /**
-     * @When I check (also) the exchange rate between :sourceCurrencyName and :targetCurrencyName
-     */
-    public function iCheckTheExchangeRateBetweenAnd(string $sourceCurrencyName, string $targetCurrencyName): void
-    {
-        // Intentionally left blank to fulfill after handling bulk delete
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        // Intentionally left blank to fulfill after handling bulk delete
-    }
-
-    /**
      * @Then I should see :count exchange rates on the list
      */
-    public function iShouldSeeExchangeRatesOnTheList(int $count = 0): void
+    public function iShouldSeeExchangeRatesOnTheList(int $count): void
     {
-        Assert::same($this->client->countCollectionItems(), $count);
+        Assert::count($this->client->getCollectionItems(), $count);
     }
 
     /**
      * @Then I should see a single exchange rate in the list
      * @Then I should( still) see one exchange rate on the list
      */
-    public function iShouldSeeOneExchangeRateOnTheList(): void
+    public function iShouldSeeASingleExchangeRateInTheList(): void
     {
         $this->client->index('exchange_rates');
-        Assert::same(count($this->client->getCollection()), 1);
+        Assert::count($this->client->getCollectionItems(), 1);
     }
 
     /**
@@ -195,7 +158,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $targetCurrency
     ): void {
         Assert::true(
-            $this->hasExchangeRateFromResponse($ratio, $sourceCurrency, $targetCurrency),
+            $this->responseHasExchangeRate($ratio, $sourceCurrency, $targetCurrency),
             sprintf(
                 'Exchange rate with ratio %s between %s and %s does not exist',
                 $ratio,
@@ -213,13 +176,16 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): void {
-        Assert::notNull($this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency));
+        Assert::notNull(
+            $this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency),
+            sprintf('Exchange rate for %s and %s currencies does not exist', $sourceCurrency, $targetCurrency)
+        );
     }
 
     /**
      * @Then it should have a ratio of :ratio
      */
-    public function itShouldHaveRatioOf(float $ratio): void
+    public function itShouldHaveARatioOf(float $ratio): void
     {
         $this->client->index('exchange_rates');
 
@@ -235,7 +201,7 @@ final class ManagingExchangeRatesContext implements Context
     public function thisExchangeRateShouldNoLongerBeOnTheList(ExchangeRateInterface $exchangeRate): void
     {
         Assert::false(
-            $this->hasExchangeRateFromResponse(
+            $this->responseHasExchangeRate(
                 $exchangeRate->getRatio(),
                 $exchangeRate->getSourceCurrency(),
                 $exchangeRate->getTargetCurrency()
@@ -264,14 +230,14 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @Then /^(this exchange rate) should have a ratio of ([0-9\.]+)$/
      */
-    public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, string $ratio): void
+    public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, float $ratio): void
     {
         $exchangeRate = $this->getExchangeRateFromResponse(
             $exchangeRate->getSourceCurrency(),
             $exchangeRate->getTargetCurrency()
         );
 
-        $exchangeRate['ratio'] = $ratio;
+        Assert::same($exchangeRate['ratio'], $ratio);
     }
 
     /**
@@ -279,16 +245,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsSourceCurrency(): void
     {
-        $this->client->buildUpdateRequest('exchange_rates', $this->sharedStorage->get('exchangeRateId'));
-
-        $this->client->addRequestData('sourceCurrency', '/new-api/currencies/EUR');
-        $this->client->update();
-
-        $this->client->index('exchange_rates');
-        Assert::false(
-            $this->client->hasItemOnPositionWithValue(0,'sourceCurrency', '/new-api/currencies/EUR'),
-            'The sourceCurrency field with value \'/new-api/currencies/EUR\' exists'
-        );
+        $this->assertIfNotBeAbleToEditItCurrency('sourceCurrency');
     }
 
     /**
@@ -296,16 +253,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsTargetCurrency(): void
     {
-        $this->client->buildUpdateRequest('exchange_rates', $this->sharedStorage->get('exchangeRateId'));
-
-        $this->client->addRequestData('targetCurrency', '/new-api/currencies/EUR');
-        $this->client->update();
-
-        $this->client->index('exchange_rates');
-        Assert::false(
-            $this->client->hasItemOnPositionWithValue(0, 'targetCurrency', '/new-api/currencies/EUR'),
-            'The targetCurrency field with value \'/new-api/currencies/EUR\' exists'
-        );
+        $this->assertIfNotBeAbleToEditItCurrency('targetCurrency');
     }
 
     /**
@@ -340,12 +288,18 @@ final class ManagingExchangeRatesContext implements Context
         Assert::contains($this->client->getError(), 'The currency pair must be unique.');
     }
 
-    /**
-     * @Then I should be notified that they have been successfully deleted
-     */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted(): void
+    private function assertIfNotBeAbleToEditItCurrency(string $currencyType): void
     {
-        // Intentionally left blank to fulfill after handling bulk delete
+        $this->client->buildUpdateRequest('exchange_rates', $this->sharedStorage->get('exchange_rate_id'));
+
+        $this->client->addRequestData($currencyType, '/new-api/currencies/EUR');
+        $this->client->update();
+
+        $this->client->index('exchange_rates');
+        Assert::false(
+            $this->client->hasItemOnPositionWithValue(0, $currencyType, '/new-api/currencies/EUR'),
+            sprintf('It was possible to change %s', $currencyType)
+        );
     }
 
     private function getExchangeRateBetweenCurrencies(string $sourceCode, string $targetCode): ExchangeRateInterface
@@ -365,11 +319,11 @@ final class ManagingExchangeRatesContext implements Context
         $this->client->index('exchange_rates');
 
         /** @var array $item */
-        foreach ($this->client->getCollection() as $item)
+        foreach ($this->client->getCollectionItems() as $item)
         {
             if (
-                $item['sourceCurrency'] === '/new-api/currencies/'.$sourceCurrency->getCode() &&
-                $item['targetCurrency'] === '/new-api/currencies/'.$targetCurrency->getCode()
+                $item['sourceCurrency'] === '/new-api/currencies/' . $sourceCurrency->getCode() &&
+                $item['targetCurrency'] === '/new-api/currencies/' . $targetCurrency->getCode()
             ) {
                 return $item;
             }
@@ -378,11 +332,11 @@ final class ManagingExchangeRatesContext implements Context
         return null;
     }
 
-    private function hasExchangeRateFromResponse(
+    private function responseHasExchangeRate(
         float $ratio,
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): bool {
-        return $this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency)['ratio'] === $ratio ? true : false;
+        return $this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency)['ratio'] === $ratio;
     }
 }
