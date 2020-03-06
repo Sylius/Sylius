@@ -1,9 +1,19 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
 {% block title %}{{ 'sylius.ui.shipment'|trans }} | {{ shipment.id }}{% endblock %}
 
 {% block content %}
-    {% include '@SyliusAdmin/Shipment/Show/_header.html.twig' %}
+    <div class="ui stackable two column grid">
+        <div class="twelve wide column">
+            {% include '@SyliusAdmin/Shipment/Show/_header.html.twig' %}
+        </div>
+        <div class="four wide right aligned column">
+            {{ buttons.default(app.request.headers.get('referer'), '', 'back', 'arrow alternate circle left outline') }}
+        </div>
+    </div>
+
     {% include '@SyliusAdmin/Shipment/Show/_breadcrumb.html.twig' %}
 
     <div class="ui segment spaceless sylius-grid-table-wrapper">
