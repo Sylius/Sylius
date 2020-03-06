@@ -1,0 +1,47 @@
+---------------------------------------------------------------------------
+
+by Pierstoval at 2020-03-06T13:17:42Z
+
+You sure? 😅
+![image](https://user-images.githubusercontent.com/3369266/76086846-3b7d2d00-5fb5-11ea-9216-290d480c5db6.png)
+
+---------------------------------------------------------------------------
+
+by dunglas at 2020-03-06T13:23:54Z
+
+According to the product’s picture it’s definitely a « bonnet », even if there is only one word for both « casquette » and « bonnet » in English.
+
+---------------------------------------------------------------------------
+
+by Pierstoval at 2020-03-06T13:29:57Z
+
+Oh, I didn't understand why you were talking about pictures, but the picture didn't actually show on my browser 😅 I opened it with another browser and I saw it.
+
+Totally okay then 👍
+
+---------------------------------------------------------------------------
+
+by romainricard at 2020-03-06T13:36:59Z
+
+> As you're a native, I suppose you're right
+
+Seconded, this is a _bonnet_ in French.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-03-06T14:49:26Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-03-06T16:07:59Z
+
+Thanks, Kévin! :tada:
