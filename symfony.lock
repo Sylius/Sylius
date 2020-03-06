@@ -437,6 +437,9 @@
     "polishsymfonycommunity/symfony-mocker-container": {
         "version": "v1.0.2"
     },
+    "psalm/plugin-mockery": {
+        "version": "0.3.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
