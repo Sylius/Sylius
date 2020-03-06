@@ -31,7 +31,7 @@ sylius_fixtures:
                                                 translations:
                                                     en_US:
                                                         name: 'Simple'
-                                                        slug: 'bonnets/simple'
+                                                        slug: 'caps/simple'
                                                     fr_FR:
                                                         name: 'Simple'
                                                         slug: 'bonnets/simple'
