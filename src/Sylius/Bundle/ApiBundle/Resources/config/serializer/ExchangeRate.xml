@@ -9,17 +9,17 @@
             <group>exchange_rate:read</group>
         </attribute>
         <attribute name="ratio">
+            <group>exchange_rate:create</group>
             <group>exchange_rate:read</group>
             <group>exchange_rate:update</group>
-            <group>exchange_rate:write</group>
         </attribute>
         <attribute name="sourceCurrency">
+            <group>exchange_rate:create</group>
             <group>exchange_rate:read</group>
-            <group>exchange_rate:write</group>
         </attribute>
         <attribute name="targetCurrency">
+            <group>exchange_rate:create</group>
             <group>exchange_rate:read</group>
-            <group>exchange_rate:write</group>
         </attribute>
         <attribute name="createdAt">
             <group>exchange_rate:read</group>
