@@ -38,14 +38,14 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->sharedStorage = $sharedStorage;
     }
 
-    public function index(string $resource): void
+    public function setResource(string $resource): void
     {
-        $this->request('GET', '/new-api/'.$resource, ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request['url'] = '/new-api/'.$resource;
     }
 
-    public function show(string $resource, string $id): void
+    public function index(): void
     {
-        $this->request('GET', sprintf('/new-api/%s/%s', $resource, $id), ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request('GET', $this->request['url'], ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function showRelated(string $resource): void
@@ -58,21 +58,27 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('GET', $iri, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function subResourceIndex(string $resource, string $subResource, string $id): void
+    public function show(string $id): void
     {
-        $this->request('GET', sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource), ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request('GET', sprintf('%s/%s', $this->request['url'], $id), ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function buildCreateRequest(string $resource): void
+    public function subResourceIndex(string $subResource, string $id): void
     {
-        $this->request['url'] = '/new-api/' . $resource;
+        $this->request('GET', sprintf('%s/%s/%s', $this->request['url'], $id, $subResource), ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function buildUpdateRequest(string $resource, string $id): void
+    public function buildCreateRequest(): void
     {
-        $this->show($resource, $id);
+        $this->request['method'] = 'POST';
+    }
 
-        $this->request['url'] = sprintf('/new-api/%s/%s', $resource, $id);
+    public function buildUpdateRequest(string $id): void
+    {
+        $this->show($id);
+
+        $this->request['method'] = 'PUT';
+        $this->request['url'] = sprintf('%s/%s', $this->request['url'], $id);
         $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
     }
 
@@ -101,19 +107,19 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $content = json_encode($this->request['body']);
 
-        $this->request('POST', $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
+        $this->request($this->request['method'], $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
     }
 
     public function update(): void
     {
         $content = json_encode($this->request['body']);
 
-        $this->request('PUT', $this->request['url'], ['CONTENT_TYPE' => 'application/ld+json'], $content);
+        $this->request($this->request['method'], $this->request['url'], ['CONTENT_TYPE' => 'application/ld+json'], $content);
     }
 
-    public function delete(string $resource, string $id): void
+    public function delete(string $id): void
     {
-        $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
+        $this->request('DELETE', sprintf('%s/%s', $this->request['url'], $id), []);
     }
 
     public function filter(string $resource): void
@@ -124,11 +130,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('GET', $path, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function applyTransition(string $resource, string $id, string $transition): void
+    public function applyTransition(string $id, string $transition): void
     {
         $this->request(
             'PATCH',
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
+            sprintf('%s/%s/%s', $this->request['url'], $id, $transition),
             ['CONTENT_TYPE' => 'application/merge-patch+json'],
             '{}'
         );

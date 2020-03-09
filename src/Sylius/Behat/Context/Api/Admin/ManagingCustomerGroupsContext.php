@@ -26,6 +26,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function __construct(ApiClientInterface $client)
     {
         $this->client = $client;
+        $this->client->setResource('customer_groups');
     }
 
     /**
@@ -33,7 +34,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToCreateANewCustomerGroup(): void
     {
-        $this->client->buildCreateRequest('customer_groups');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -77,7 +78,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->buildUpdateRequest('customer_groups', $customerGroup->getCode());
+        $this->client->buildUpdateRequest($customerGroup->getCode());
     }
 
     /**
@@ -95,7 +96,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iWantToBrowseCustomerGroups(): void
     {
-        $this->client->index('customer_groups');
+        $this->client->index();
     }
 
     /**
@@ -103,7 +104,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->delete('customer_groups', $customerGroup->getCode());
+        $this->client->delete($customerGroup->getCode());
     }
 
     /**
@@ -111,7 +112,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->index('customer_groups');
+        $this->client->index();
         Assert::true(
             $this->client->hasItemWithValue('code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
@@ -124,7 +125,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function thisCustomerGroupWithNameShouldAppearInTheStore(string $name): void
     {
-        $this->client->index('customer_groups');
+        $this->client->index();
         Assert::true(
             $this->client->hasItemWithValue('name', $name),
             sprintf('Customer group with name %s does not exist', $name)
@@ -137,7 +138,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
-        $this->client->index('customer_groups');
+        $this->client->index();
         Assert::same($this->client->countCollectionItems(), $amountOfCustomerGroups);
     }
 
@@ -146,7 +147,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
-        $this->client->show('customer_groups', $customerGroup->getCode());
+        $this->client->show($customerGroup->getCode());
         Assert::true($this->client->responseHasValue('name', $name), 'Customer groups name is not ' . $name);
     }
 
@@ -196,7 +197,7 @@ final class ManagingCustomerGroupsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('customer_groups');
+        $this->client->index();
 
         return $this->client->hasItemWithValue($property, $value);
     }

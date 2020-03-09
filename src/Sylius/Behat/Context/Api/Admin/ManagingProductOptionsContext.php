@@ -30,6 +30,7 @@ final class ManagingProductOptionsContext implements Context
     public function __construct(ApiClientInterface $client, SharedStorageInterface $sharedStorage)
     {
         $this->client = $client;
+        $this->client->setResource('product_options');
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -38,7 +39,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iBrowseProductOptions(): void
     {
-        $this->client->index('product_options');
+        $this->client->index();
     }
 
     /**
@@ -46,7 +47,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iWantToCreateANewProductOption(): void
     {
-        $this->client->buildCreateRequest('product_options');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -55,7 +56,7 @@ final class ManagingProductOptionsContext implements Context
     public function iWantToModifyProductOption(ProductOptionInterface $productOption): void
     {
         $this->sharedStorage->set('product_option', $productOption);
-        $this->client->buildUpdateRequest('product_options', $productOption->getCode());
+        $this->client->buildUpdateRequest($productOption->getCode());
     }
 
     /**
@@ -155,7 +156,7 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->sharedStorage->set('product_option', $productOption);
 
-        $this->client->index('product_options');
+        $this->client->index();
         Assert::true(
             $this->client->hasItemWithValue('name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
@@ -191,7 +192,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
-        $this->client->index('product_options');
+        $this->client->index();
         Assert::false(
             $this->client->hasItemWithValue($element, $value),
             sprintf('Product option should not have %s "%s", but it does,', $element, $value)
@@ -203,7 +204,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
-        $this->client->index('product_options');
+        $this->client->index();
         $itemsCount = $this->client->countCollectionItems();
 
         Assert::eq(1, $this->client->countCollectionItems(), sprintf('Expected 1 product options, but got %d', $itemsCount));
@@ -216,7 +217,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
-        $this->client->show('product_options', $productOption->getCode());
+        $this->client->show($productOption->getCode());
         Assert::true($this->client->responseHasValue('name', $name));
     }
 
@@ -228,7 +229,7 @@ final class ManagingProductOptionsContext implements Context
         ProductOptionInterface $productOption,
         string $optionValueName
     ): void {
-        $this->client->subResourceIndex('product_options', 'values', $productOption->getCode());
+        $this->client->subResourceIndex('values', $productOption->getCode());
 
         Assert::true($this->client->hasItemWithTranslation('en_US', 'value', $optionValueName));
     }
