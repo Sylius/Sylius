@@ -15,10 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Service\SharedStorage;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +24,7 @@ final class ManagingProductReviewsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var SharedStorage */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
@@ -91,19 +88,11 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I accept the :productReview product review
+     * @When /^I (accept|reject) the ("([^"]+)" product review)$/
      */
-    public function iAcceptTheProductReview( ReviewInterface $productReview): void
+    public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), 'accept');
-    }
-
-    /**
-     * @When I reject the :productReview product review
-     */
-    public function iRejectTheProductReview( ReviewInterface $productReview): void
-    {
-        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), 'reject');
+        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), $state);
     }
 
     /**
@@ -202,14 +191,6 @@ final class ManagingProductReviewsContext implements Context
     public function thisProductReviewShouldStillHaveAComment(ReviewInterface $productReview, string $comment): void
     {
         $this->assertIfReviewHasElementWithValue($productReview, 'comment', $comment);
-    }
-
-    /**
-     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
-     */
-    public function thisProductAverageRatingShouldBe(ProductInterface $product, int $averageRating): void
-    {
-        // TODO, this step should be in product context which will be covered in separate RP
     }
 
     private function isItemOnIndex(string $property, string $value): bool
