@@ -25,7 +25,7 @@ interface ApiClientInterface
 
     public function buildUpdateRequest(string $resource, string $id): void;
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function addRequestData(string $key, $value): void;
 
     public function addCompoundRequestData(array $data): void;
@@ -54,7 +54,7 @@ interface ApiClientInterface
 
     public function isUpdateSuccessful(): bool;
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function responseHasValue(string $key, $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;

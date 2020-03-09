@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
@@ -29,14 +30,15 @@ final class ProductReviewContext implements Context
 
     /**
      * @Transform :productReview
+     * @Transform /^"([^"]+)" product review$/
      */
-    public function getProductReviewByTitle($productReviewTitle)
+    public function getProductReviewByTitle(string $title): ReviewInterface
     {
-        $productReview = $this->productReviewRepository->findOneBy(['title' => $productReviewTitle]);
+        $productReview = $this->productReviewRepository->findOneBy(['title' => $title]);
 
         Assert::notNull(
             $productReview,
-            sprintf('Product review with title "%s" does not exist', $productReviewTitle)
+            sprintf('Product review with title "%s" does not exist', $title)
         );
 
         return $productReview;
