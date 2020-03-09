@@ -5,7 +5,7 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
 
     <resource
-        class="Sylius\Component\Currency\Model\Currency"
+        class="%sylius.model.currency.class%"
         shortName="Currency"
     >
         <attribute name="validation_groups">sylius</attribute>
