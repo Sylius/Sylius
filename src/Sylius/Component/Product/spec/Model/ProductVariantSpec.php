@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 final class ProductVariantSpec extends ObjectBehavior
 {
@@ -30,6 +31,11 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_implements_sylius_product_variant_interface(): void
     {
         $this->shouldImplement(ProductVariantInterface::class);
+    }
+
+    function it_implements_toggleable_interface(): void
+    {
+        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_implements_sylius_resource_interface(): void
@@ -64,5 +70,19 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setPosition(10);
         $this->getPosition()->shouldReturn(10);
+    }
+
+    function it_is_enabled_by_default(): void
+    {
+        $this->shouldBeEnabled();
+    }
+
+    function it_is_toggleable(): void
+    {
+        $this->disable();
+        $this->shouldNotBeEnabled();
+
+        $this->enable();
+        $this->shouldBeEnabled();
     }
 }

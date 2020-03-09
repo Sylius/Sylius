@@ -51,6 +51,8 @@
         <field name="position" type="integer">
             <gedmo:sortable-position />
         </field>
+
+        <field name="enabled" column="enabled" type="boolean" />
     </mapped-superclass>
 
 </doctrine-mapping>
