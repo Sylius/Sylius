@@ -26,6 +26,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function __construct(ApiClientInterface $client)
     {
         $this->client = $client;
+        $this->client->setResource('tax_categories');
     }
 
     /**
@@ -33,7 +34,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToCreateNewTaxCategory(): void
     {
-        $this->client->buildCreateRequest('tax_categories');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -42,7 +43,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->buildUpdateRequest('tax_categories', $taxCategory->getCode());
+        $this->client->buildUpdateRequest($taxCategory->getCode());
     }
 
     /**
@@ -50,7 +51,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iDeleteTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->delete('tax_categories', $taxCategory->getCode());
+        $this->client->delete($taxCategory->getCode());
     }
 
     /**
@@ -115,7 +116,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToBrowseTaxCategories(): void
     {
-        $this->client->index('tax_categories');
+        $this->client->index();
     }
 
     /**
@@ -159,7 +160,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
-        $this->client->show('tax_categories', $taxCategory->getCode());
+        $this->client->show($taxCategory->getCode());
         Assert::true($this->client->responseHasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
     }
 
@@ -176,7 +177,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
-        $this->client->index('tax_categories');
+        $this->client->index();
         Assert::same(count($this->client->getCollectionItemsWithValue($element, $value)), 1);
     }
 
@@ -206,7 +207,7 @@ final class ManagingTaxCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('tax_categories');
+        $this->client->index();
 
         return $this->client->hasItemWithValue($property, $value);
     }

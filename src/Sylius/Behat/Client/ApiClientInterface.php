@@ -15,19 +15,21 @@ namespace Sylius\Behat\Client;
 
 interface ApiClientInterface
 {
-    public function index(string $resource): void;
+    public function setResource(string $resource): void;
 
-    public function show(string $resource, string $id): void;
+    public function index(): void;
 
     public function showRelated(string $resource): void;
 
     public function showByIri(string $iri): void;
 
-    public function subResourceIndex(string $resource, string $subResource, string $id): void;
+    public function show(string $id): void;
 
-    public function buildCreateRequest(string $resource): void;
+    public function subResourceIndex(string $subResource, string $id): void;
 
-    public function buildUpdateRequest(string $resource, string $id): void;
+    public function buildCreateRequest(): void;
+
+    public function buildUpdateRequest(string $id): void;
 
     public function buildFilter(array $filters): void;
 
@@ -42,11 +44,11 @@ interface ApiClientInterface
 
     public function update(): void;
 
-    public function delete(string $resource, string $id): void;
+    public function delete(string $id): void;
 
     public function filter(string $resource): void;
 
-    public function applyTransition(string $resource, string $id, string $transition): void;
+    public function applyTransition(string $id, string $transition): void;
 
     public function countCollectionItems(): int;
 

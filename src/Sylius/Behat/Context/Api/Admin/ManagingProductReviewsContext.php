@@ -32,6 +32,7 @@ final class ManagingProductReviewsContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->client->setResource('product_reviews');
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -41,7 +42,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToBrowseProductReviews(): void
     {
-        $this->client->index('product_reviews');
+        $this->client->index();
     }
 
     /**
@@ -49,7 +50,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
     {
-        $this->client->buildUpdateRequest('product_reviews', (string) $productReview->getId());
+        $this->client->buildUpdateRequest((string) $productReview->getId());
     }
 
     /**
@@ -92,7 +93,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), $state);
+        $this->client->applyTransition((string) $productReview->getId(), 'accept');
     }
 
     /**
@@ -102,7 +103,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->sharedStorage->set('product_review_id', $productReview->getId());
 
-        $this->client->delete('product_reviews', (string) $productReview->getId());
+        $this->client->delete((string) $productReview->getId());
     }
 
     /**
@@ -195,7 +196,7 @@ final class ManagingProductReviewsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('product_reviews');
+        $this->client->index();
 
         return $this->client->hasItemWithValue($property, $value);
     }
@@ -203,7 +204,7 @@ final class ManagingProductReviewsContext implements Context
     /** @param string|int $value */
     private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
     {
-        $this->client->show('product_reviews', (string) $productReview->getId());
+        $this->client->show((string) $productReview->getId());
         Assert::true(
             $this->client->responseHasValue($element, $value),
             sprintf('Product review %s is not %s', $element, $value)

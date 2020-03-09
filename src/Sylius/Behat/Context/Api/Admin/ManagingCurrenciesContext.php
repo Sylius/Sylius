@@ -25,6 +25,7 @@ final class ManagingCurrenciesContext implements Context
     public function __construct(ApiClientInterface $client)
     {
         $this->client = $client;
+        $this->client->setResource('currencies');
     }
 
     /**
@@ -32,7 +33,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToSeeAllCurrenciesInStore(): void
     {
-        $this->client->index('currencies');
+        $this->client->index();
     }
 
     /**
@@ -40,7 +41,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToAddNewCurrency(): void
     {
-        $this->client->buildCreateRequest('currencies');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -76,7 +77,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
-        $this->client->index('currencies');
+        $this->client->index();
         Assert::true(
             $this->client->hasItemWithValue('name', $currencyName),
             sprintf('There is no currency with name "%s"', $currencyName)
@@ -88,7 +89,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        $this->client->index('currencies');
+        $this->client->index();
         Assert::eq(1, $this->client->countCollectionItems());
         Assert::true($this->client->hasItemWithValue('code', $code), sprintf('There is no currency with code "%s"', $code));
     }
