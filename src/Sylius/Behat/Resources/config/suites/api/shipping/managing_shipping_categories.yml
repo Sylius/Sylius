@@ -19,3 +19,4 @@ default:
 
             filters:
                 tags: "@managing_shipping_categories && @api"
+            javascript: false
