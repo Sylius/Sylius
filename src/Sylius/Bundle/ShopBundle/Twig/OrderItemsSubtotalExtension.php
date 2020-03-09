@@ -26,7 +26,7 @@ class OrderItemsSubtotalExtension extends \Twig_Extension
      * @param OrderItemsSubtotalCalculatorInterface|null $calculator This argument is optional for backwards
      *                                                               compatibility. If null is passed then an instance
      *                                                               of OrderItemsSubtotalCalculator is used.
-     * @todo Make $calculator argument mandatory in version 2.0
+     * @deprecated  Not passing a calculator is deprecated since 1.6. Argument will no longer be optional from 2.0
      */
     public function __construct(?OrderItemsSubtotalCalculatorInterface $calculator = null)
     {
