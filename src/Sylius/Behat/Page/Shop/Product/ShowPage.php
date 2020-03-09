@@ -128,6 +128,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('product_price')->getText();
     }
 
+    public function getOriginalPrice(): string
+    {
+        return $this->getElement('product_original_price')->getText();
+    }
+
     public function hasAddToCartButton(): bool
     {
         if (!$this->hasElement('add_to_cart_button')) {
@@ -261,6 +266,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
             'out_of_stock' => '[data-test-product-out-of-stock]',
             'product_price' => '[data-test-product-price]',
+            'product_original_price' => '[data-test-product-original-price]',
             'product_name' => '[data-test-product-name]',
             'reviews' => '[data-test-product-reviews]',
             'reviews_comment' => '[data-test-comment="%title%"]',
