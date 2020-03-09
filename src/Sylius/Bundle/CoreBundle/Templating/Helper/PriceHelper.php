@@ -45,6 +45,32 @@ class PriceHelper extends Helper
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
+    {
+        Assert::keyExists($context, 'channel');
+
+        return $this
+            ->productVariantPriceCalculator
+            ->calculateOriginal($productVariant, $context);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function hasDiscount(ProductVariantInterface $productVariant, array $context): bool
+    {
+        Assert::keyExists($context, 'channel');
+
+        return $this->getOriginalPrice($productVariant, $context) > $this->getPrice($productVariant, $context);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getName(): string
     {

@@ -301,6 +301,15 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the product original price should be :price
+     * @Then I should see the product original price :price
+     */
+    public function iShouldSeeTheProductOriginalPrice($price)
+    {
+        Assert::same($this->showPage->getOriginalPrice(), $price);
+    }
+
+    /**
      * @When I set its :optionName to :optionValue
      */
     public function iSetItsOptionTo($optionName, $optionValue)

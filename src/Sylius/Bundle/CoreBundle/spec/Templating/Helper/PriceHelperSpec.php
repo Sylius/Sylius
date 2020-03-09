@@ -54,6 +54,67 @@ final class PriceHelperSpec extends ObjectBehavior
         $productVariantPriceCalculator->calculate($productVariant, $context)->shouldNotBeCalled();
     }
 
+    function it_returns_variant_original_price_for_channel_given_in_context(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ): void {
+        $context = ['channel' => $channel];
+
+        $productVariantPriceCalculator->calculateOriginal($productVariant, $context)->willReturn(1000);
+
+        $this->getOriginalPrice($productVariant, $context)->shouldReturn(1000);
+    }
+
+    function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context_when_getting_original_price(
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ): void {
+        $context = ['lennahc' => ''];
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('getOriginalPrice', [$productVariant, $context]);
+
+        $productVariantPriceCalculator->calculateOriginal($productVariant, $context)->shouldNotBeCalled();
+    }
+
+    function it_returns_true_if_variant_is_discounted_for_channel_given_in_context(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ): void {
+        $context = ['channel' => $channel];
+
+        $productVariantPriceCalculator->calculate($productVariant, $context)->willReturn(950);
+        $productVariantPriceCalculator->calculateOriginal($productVariant, $context)->willReturn(1000);
+
+        $this->hasDiscount($productVariant, $context)->shouldReturn(true);
+    }
+
+    function it_returns_false_if_variant_is_not_discounted_for_channel_given_in_context(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ): void {
+        $context = ['channel' => $channel];
+
+        $productVariantPriceCalculator->calculate($productVariant, $context)->willReturn(1000);
+        $productVariantPriceCalculator->calculateOriginal($productVariant, $context)->willReturn(1000);
+
+        $this->hasDiscount($productVariant, $context)->shouldReturn(false);
+    }
+
+    function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context_when_checking_if_variant_is_discounted(
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ): void {
+        $context = ['lennahc' => ''];
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('hasDiscount', [$productVariant, $context]);
+
+        $productVariantPriceCalculator->calculate($productVariant, $context)->shouldNotBeCalled();
+        $productVariantPriceCalculator->calculateOriginal($productVariant, $context)->shouldNotBeCalled();
+    }
+
     function it_has_name(): void
     {
         $this->getName()->shouldReturn('sylius_calculate_price');
