@@ -20,3 +20,4 @@ default:
 
             filters:
                 tags: "@managing_taxons && @api"
+            javascript: false

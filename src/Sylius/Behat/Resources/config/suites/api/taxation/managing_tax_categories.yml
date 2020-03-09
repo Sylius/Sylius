@@ -18,3 +18,4 @@ default:
 
             filters:
                 tags: "@managing_tax_categories && @api"
+            javascript: false

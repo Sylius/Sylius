@@ -18,3 +18,4 @@ default:
 
             filters:
                 tags: "@managing_customer_groups && @api"
+            javascript: false
