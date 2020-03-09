@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig;
 
+use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator;
 use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -21,9 +22,19 @@ class OrderItemsSubtotalExtension extends \Twig_Extension
     /** @var OrderItemsSubtotalCalculatorInterface */
     private $calculator;
 
-    public function __construct(OrderItemsSubtotalCalculatorInterface $calculator)
+    /**
+     * @param OrderItemsSubtotalCalculatorInterface|null $calculator This argument is optional for backwards
+     *                                                               compatibility. If null is passed then an instance
+     *                                                               of OrderItemsSubtotalCalculator is used.
+     * @todo Make $calculator argument mandatory in version 2.0
+     */
+    public function __construct(?OrderItemsSubtotalCalculatorInterface $calculator = null)
     {
-        $this->calculator = $calculator;
+        if (null !== $calculator) {
+            $this->calculator = $calculator;
+        } else {
+            $this->calculator = new OrderItemsSubtotalCalculator();
+        }
     }
 
     public function getFunctions(): array
