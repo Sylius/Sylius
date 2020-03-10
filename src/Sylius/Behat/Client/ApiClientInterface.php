@@ -65,6 +65,7 @@ interface ApiClientInterface
     /** @param string|int $value */
     public function responseHasValue(string $key, $value): bool;
 
+    /** @param string|int $value */
     public function relatedResourceHasValue(string $resource, string $key, $value): bool;
 
     /** @param string|float $value */
