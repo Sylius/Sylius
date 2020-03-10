@@ -15,7 +15,11 @@
             </attribute>
         </attribute>
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get" >
+                <attribute name="filters">
+                    <attribute>exchange_rate_filter</attribute>
+                </attribute>
+            </collectionOperation>
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
                     <attribute name="groups">exchange_rate:create</attribute>

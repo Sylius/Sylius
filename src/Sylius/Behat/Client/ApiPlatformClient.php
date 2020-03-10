@@ -81,7 +81,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->filters = $filters;
     }
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function addRequestData(string $key, $value): void
     {
         $this->request['body'][$key] = $value;
