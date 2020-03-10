@@ -132,6 +132,22 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @When I choose :currency as a currency filter
+     */
+    public function iChooseCurrencyAsACurrencyFilter(CurrencyInterface $currency): void
+    {
+        $this->client->buildFilter(['currencyCode' => $currency->getCode()]);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter('exchange_rates');
+    }
+
+    /**
      * @Then I should see :count exchange rates on the list
      */
     public function iShouldSeeExchangeRatesOnTheList(int $count): void

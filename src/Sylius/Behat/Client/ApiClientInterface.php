@@ -29,7 +29,9 @@ interface ApiClientInterface
 
     public function buildUpdateRequest(string $resource, string $id): void;
 
-    /** @param string|int $value */
+    public function buildFilter(array $filters): void;
+
+    /** @param string|int */
     public function addRequestData(string $key, $value): void;
 
     public function addCompoundRequestData(array $data): void;
@@ -41,6 +43,8 @@ interface ApiClientInterface
     public function update(): void;
 
     public function delete(string $resource, string $id): void;
+
+    public function filter(string $resource): void;
 
     public function applyTransition(string $resource, string $id, string $transition): void;
 
