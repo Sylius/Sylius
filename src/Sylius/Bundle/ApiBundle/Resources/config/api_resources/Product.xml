@@ -13,13 +13,13 @@
                 <attribute>product:read</attribute>
             </attribute>
         </attribute>
+
+        <collectionOperations />
+
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="groups">
-                    <attribute>product_review:read</attribute>
-                </attribute>
-            </itemOperation>
+            <itemOperation name="get" />
         </itemOperations>
+
         <property name="id" identifier="true" writable="false" />
     </resource>
 </resources>
