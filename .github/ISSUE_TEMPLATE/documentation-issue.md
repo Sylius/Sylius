@@ -1,6 +1,9 @@
 ---
-name: "Documentation Issue 📖"
+name: "Documentation Issue \U0001F4D6"
 about: Report missing or bugged documentation
+title: ''
+labels: ''
+assignees: ''
 
 ---
 

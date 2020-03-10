@@ -1,9 +1,11 @@
 ---
-name: "Bug Report 🐛"
+name: "Bug Report \U0001F41B"
 about: Report a problem or error
+title: ''
+labels: ''
+assignees: ''
 
 ---
-
 
 **Sylius version affected**: 1.x.y
 
