@@ -93,7 +93,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition((string) $productReview->getId(), 'accept');
+        $this->client->applyTransition((string) $productReview->getId(), $state);
     }
 
     /**
