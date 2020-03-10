@@ -58,5 +58,9 @@
         <service id="sylius.behat.context.api.admin.managing_customer_groups" class="Sylius\Behat\Context\Api\Admin\ManagingCustomerGroupsContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
         </service>
+
+        <service id="sylius.behat.context.api.admin.managing_payments" class="Sylius\Behat\Context\Api\Admin\ManagingPaymentsContext">
+            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+        </service>
     </services>
 </container>

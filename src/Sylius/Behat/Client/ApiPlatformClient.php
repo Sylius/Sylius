@@ -45,6 +45,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('GET', sprintf('/new-api/%s/%s', $resource, $id), ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
+    public function showByIri(string $iri): void
+    {
+        $this->request('GET', $iri, ['HTTP_ACCEPT' => 'application/ld+json']);
+    }
+
     public function subResourceIndex(string $resource, string $subResource, string $id): void
     {
         $this->request('GET', sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource), ['HTTP_ACCEPT' => 'application/ld+json']);
@@ -125,6 +130,12 @@ final class ApiPlatformClient implements ApiClientInterface
         });
 
         return $items;
+    }
+
+    /** @return string|int */
+    public function getResponseValue(string $key)
+    {
+        return $this->getResponseContentValue($key);
     }
 
     public function getError(): string
