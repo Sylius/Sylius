@@ -26,8 +26,11 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var array */
-    private $request = ['url' => null, 'body' => []];
+    /** @var string */
+    private $resource;
+
+    /** @var Request */
+    private $request;
 
     /** @var array */
     private $filters;
@@ -40,12 +43,12 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function setResource(string $resource): void
     {
-        $this->request['url'] = '/new-api/'.$resource;
+        $this->resource = $resource;
     }
 
     public function index(): void
     {
-        $this->request('GET', $this->request['url'], ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request(Request::index($this->resource, $this->sharedStorage->get('token')));
     }
 
     public function showRelated(string $resource): void
@@ -58,28 +61,24 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('GET', $iri, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function show(string $id): void
-    {
-        $this->request('GET', sprintf('%s/%s', $this->request['url'], $id), ['HTTP_ACCEPT' => 'application/ld+json']);
-    }
-
     public function subResourceIndex(string $subResource, string $id): void
     {
-        $this->request('GET', sprintf('%s/%s/%s', $this->request['url'], $id, $subResource), ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request(Request::subResourceIndex($this->resource, $id, $subResource, $this->sharedStorage->get('token')));
     }
 
-    public function buildCreateRequest(): void
+    public function show(string $id): void
     {
-        $this->request['method'] = 'POST';
+        $this->request(Request::show($this->resource, $id, $this->sharedStorage->get('token')));
     }
 
-    public function buildUpdateRequest(string $id): void
+    public function create(): void
     {
-        $this->show($id);
+        $this->request($this->request);
+    }
 
-        $this->request['method'] = 'PUT';
-        $this->request['url'] = sprintf('%s/%s', $this->request['url'], $id);
-        $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
+    public function update(): void
+    {
+        $this->request($this->request);
     }
 
     public function buildFilter(array $filters): void
@@ -87,39 +86,38 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->filters = $filters;
     }
 
+    public function delete(string $id): void
+    {
+        $this->request(Request::delete($this->resource, $id, $this->sharedStorage->get('token')));
+    }
+
+    public function applyTransition(string $id, string $transition): void
+    {
+        $this->request(Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token')));
+    }
+
+    public function buildCreateRequest(): void
+    {
+        $this->request = Request::create($this->resource, $this->sharedStorage->get('token'));
+    }
+
+    public function buildUpdateRequest(string $id): void
+    {
+        $this->show($id);
+
+        $this->request = Request::update($this->resource, $id, $this->sharedStorage->get('token'));
+        $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+    }
+
     /** @param string|int $value */
     public function addRequestData(string $key, $value): void
     {
-        $this->request['body'][$key] = $value;
-    }
-
-    public function addCompoundRequestData(array $data): void
-    {
-        $this->request['body'] = array_merge_recursive($this->request['body'], $data);
+        $this->request->updateContent([$key => $value]);
     }
 
     public function updateRequestData(array $data): void
     {
-        $this->request['body'] = $this->mergeArraysUniquely($this->request['body'], $data);
-    }
-
-    public function create(): void
-    {
-        $content = json_encode($this->request['body']);
-
-        $this->request($this->request['method'], $this->request['url'], ['CONTENT_TYPE' => 'application/json'], $content);
-    }
-
-    public function update(): void
-    {
-        $content = json_encode($this->request['body']);
-
-        $this->request($this->request['method'], $this->request['url'], ['CONTENT_TYPE' => 'application/ld+json'], $content);
-    }
-
-    public function delete(string $id): void
-    {
-        $this->request('DELETE', sprintf('%s/%s', $this->request['url'], $id), []);
+        $this->request->updateContent($data);
     }
 
     public function filter(string $resource): void
@@ -130,14 +128,9 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request('GET', $path, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
-    public function applyTransition(string $id, string $transition): void
+    public function addSubResourceData(string $key, array $data): void
     {
-        $this->request(
-            'PATCH',
-            sprintf('%s/%s/%s', $this->request['url'], $id, $transition),
-            ['CONTENT_TYPE' => 'application/merge-patch+json'],
-            '{}'
-        );
+        $this->request->addSubResource($key, $data);
     }
 
     public function countCollectionItems(): int
@@ -225,14 +218,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return false;
     }
 
-    private function request(string $method, string $url, array $headers, string $content = null): void
+    private function request(Request $request): void
     {
-        $defaultHeaders = ['HTTP_ACCEPT' => 'application/ld+json'];
-        if ($this->sharedStorage->has('token')) {
-            $defaultHeaders['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
-        }
-
-        $this->client->request($method, $url, [], [], array_merge($defaultHeaders, $headers), $content);
+        $this->client->request($request->method(), $request->url(), [], [], $request->headers(), $request->content() ?? null);
     }
 
     private function getResponseContentValue(string $key)
@@ -242,16 +230,5 @@ final class ApiPlatformClient implements ApiClientInterface
         Assert::keyExists($content, $key);
 
         return $content[$key];
-    }
-
-    private function mergeArraysUniquely(array $firstArray, array $secondArray): array
-    {
-        foreach ($secondArray as $key => $value) {
-            if (is_array($value) && is_array(@$firstArray[$key])) {
-                $value = $this->mergeArraysUniquely($firstArray[$key], $value);
-            }
-            $firstArray[$key] = $value;
-        }
-        return $firstArray;
     }
 }

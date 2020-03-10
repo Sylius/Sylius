@@ -70,7 +70,7 @@ final class ManagingProductOptionsContext implements Context
             $data['translations'][$language]['name'] = $name;
         }
 
-        $this->client->addCompoundRequestData($data);
+        $this->client->updateRequestData($data);
     }
 
     /**
@@ -105,11 +105,10 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
     {
-        $this->client->addCompoundRequestData([
-            'values' => [
-                ['code' => $code, 'translations' => [['value' => $value, 'locale' => 'en_US']]]
-            ]
-        ]);
+        $this->client->addSubResourceData(
+            'values',
+            ['code' => $code, 'translations' => ['en_US' => ['value' => $value, 'locale' => 'en_US']]]
+        );
     }
 
     /**

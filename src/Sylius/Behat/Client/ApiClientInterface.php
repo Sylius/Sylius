@@ -23,9 +23,17 @@ interface ApiClientInterface
 
     public function showByIri(string $iri): void;
 
+    public function subResourceIndex(string $subResource, string $id): void;
+
     public function show(string $id): void;
 
-    public function subResourceIndex(string $subResource, string $id): void;
+    public function create(): void;
+
+    public function update(): void;
+
+    public function delete(string $id): void;
+
+    public function applyTransition(string $id, string $transition): void;
 
     public function buildCreateRequest(): void;
 
@@ -36,19 +44,11 @@ interface ApiClientInterface
     /** @param string|int $value */
     public function addRequestData(string $key, $value): void;
 
-    public function addCompoundRequestData(array $data): void;
+    public function addSubResourceData(string $key, array $data): void;
 
     public function updateRequestData(array $data): void;
 
-    public function create(): void;
-
-    public function update(): void;
-
-    public function delete(string $id): void;
-
     public function filter(string $resource): void;
-
-    public function applyTransition(string $id, string $transition): void;
 
     public function countCollectionItems(): int;
 
