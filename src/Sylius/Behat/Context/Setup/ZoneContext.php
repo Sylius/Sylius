@@ -65,7 +65,7 @@ final class ZoneContext implements Context
      */
     public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
-        $restOfWorldCountries = Countries::getName('en');
+        $restOfWorldCountries = Countries::getNames('en');
         unset($restOfWorldCountries['US']);
 
         $zone = $this->zoneFactory->createWithMembers(array_keys($restOfWorldCountries));
