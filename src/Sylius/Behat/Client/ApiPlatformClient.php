@@ -29,6 +29,9 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var array */
     private $request = ['url' => null, 'body' => []];
 
+    /** @var array */
+    private $filters;
+
     public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
     {
         $this->client = $client;
@@ -73,7 +76,12 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
     }
 
-    /** @param string|int $value */
+    public function buildFilter(array $filters): void
+    {
+        $this->filters = $filters;
+    }
+
+    /** @param string|int */
     public function addRequestData(string $key, $value): void
     {
         $this->request['body'][$key] = $value;
@@ -106,6 +114,14 @@ final class ApiPlatformClient implements ApiClientInterface
     public function delete(string $resource, string $id): void
     {
         $this->request('DELETE', sprintf('/new-api/%s/%s', $resource, $id), []);
+    }
+
+    public function filter(string $resource): void
+    {
+        $query = http_build_query($this->filters, '', '&', PHP_QUERY_RFC3986);
+        $path = sprintf('/new-api/%s?%s', $resource, $query);
+
+        $this->request('GET', $path, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function applyTransition(string $resource, string $id, string $transition): void
