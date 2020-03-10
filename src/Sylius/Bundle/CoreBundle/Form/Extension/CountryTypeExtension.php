@@ -83,7 +83,7 @@ final class CountryTypeExtension extends AbstractTypeExtension
         return CountryType::class;
     }
 
-    private function getCountryName(string $code): ?string
+    private function getCountryName(string $code): string
     {
         return Countries::getName($code);
     }
