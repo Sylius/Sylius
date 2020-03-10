@@ -63,7 +63,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request['body'] = json_decode($this->client->getResponse()->getContent(), true);
     }
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function addRequestData(string $key, $value): void
     {
         $this->request['body'][$key] = $value;
@@ -102,7 +102,7 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $this->request(
             'PATCH',
-            sprintf('/new-api/%s/%s/apply_transition/%s', $resource, $id, $transition),
+            sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
             ['CONTENT_TYPE' => 'application/merge-patch+json'],
             '{}'
         );
@@ -147,7 +147,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function responseHasValue(string $key, $value): bool
     {
         return $this->getResponseContentValue($key) === $value;
