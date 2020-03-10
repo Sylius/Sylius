@@ -19,6 +19,8 @@ interface ApiClientInterface
 
     public function show(string $resource, string $id): void;
 
+    public function showByIri(string $iri): void;
+
     public function subResourceIndex(string $resource, string $subResource, string $id): void;
 
     public function buildCreateRequest(string $resource): void;
@@ -45,6 +47,9 @@ interface ApiClientInterface
     public function getCollection(): array;
 
     public function getCollectionItemsWithValue(string $key, string $value): array;
+
+    /** @return string|int */
+    public function getResponseValue(string $key);
 
     public function getError(): string;
 
