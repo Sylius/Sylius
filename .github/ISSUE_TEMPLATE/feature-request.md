@@ -1,6 +1,9 @@
 ---
 name: Feature request ✅
 about: Suggest an idea for a feature or improvement
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
