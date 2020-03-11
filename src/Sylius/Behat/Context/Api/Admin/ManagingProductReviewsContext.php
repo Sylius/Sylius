@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
@@ -24,15 +25,20 @@ final class ManagingProductReviewsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->client->setResource('product_reviews');
+        $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -123,7 +129,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeReviewsInTheList(int $amount = 1): void
     {
-        Assert::same($this->client->countCollectionItems(), $amount);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $amount);
     }
 
     /**
@@ -175,7 +181,10 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::contains($this->client->getError(), sprintf('%s: Review %s should not be blank', $element, $element));
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getResponse()),
+            sprintf('%s: Review %s should not be blank', $element, $element)
+        );
     }
 
     /**
@@ -198,7 +207,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->client->index();
 
-        return $this->client->hasItemWithValue($property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
     }
 
     /** @param string|int $value */
@@ -206,7 +215,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->client->show((string) $productReview->getId());
         Assert::true(
-            $this->client->responseHasValue($element, $value),
+            $this->responseChecker->hasValue($this->client->getResponse(), $element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
     }

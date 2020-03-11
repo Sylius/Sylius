@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -24,13 +25,20 @@ final class ManagingProductOptionsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    public function __construct(ApiClientInterface $client, SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->client = $client;
         $this->client->setResource('product_options');
+        $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -142,7 +150,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldSeeProductOptionsInTheList(int $count): void
     {
-        $itemsCount = $this->client->countCollectionItems();
+        $itemsCount = $this->responseChecker->countCollectionItems($this->client->getResponse());
 
         Assert::eq($count, $itemsCount, sprintf('Expected %d product options, but got %d', $count, $itemsCount));
     }
@@ -157,7 +165,7 @@ final class ManagingProductOptionsContext implements Context
 
         $this->client->index();
         Assert::true(
-            $this->client->hasItemWithValue('name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
         );
     }
@@ -168,7 +176,7 @@ final class ManagingProductOptionsContext implements Context
     public function theFirstProductOptionInTheListShouldHave(string $field, string $value): void
     {
         Assert::true(
-            $this->client->hasItemOnPositionWithValue(0, $field, $value),
+            $this->responseChecker->hasItemOnPositionWithValue($this->client->getResponse(), 0, $field, $value),
             sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, 1)
         );
     }
@@ -178,10 +186,10 @@ final class ManagingProductOptionsContext implements Context
      */
     public function theLastProductOptionInTheListShouldHave(string $field, string $value): void
     {
-        $count = $this->client->countCollectionItems();
+        $count = $this->responseChecker->countCollectionItems($this->client->getResponse());
 
         Assert::true(
-            $this->client->hasItemOnPositionWithValue($count-1, $field, $value),
+            $this->responseChecker->hasItemOnPositionWithValue($this->client->getResponse(), $count-1, $field, $value),
             sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count-1)
         );
     }
@@ -193,7 +201,7 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->client->index();
         Assert::false(
-            $this->client->hasItemWithValue($element, $value),
+            $this->responseChecker->hasItemWithValue($this->client->getResponse(), $element, $value),
             sprintf('Product option should not have %s "%s", but it does,', $element, $value)
         );
     }
@@ -204,10 +212,13 @@ final class ManagingProductOptionsContext implements Context
     public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
         $this->client->index();
-        $itemsCount = $this->client->countCollectionItems();
+        $itemsCount = $this->responseChecker->countCollectionItems($this->client->getResponse());
 
-        Assert::eq(1, $this->client->countCollectionItems(), sprintf('Expected 1 product options, but got %d', $itemsCount));
-        Assert::true($this->client->hasItemWithValue($element, $value));
+        Assert::eq(
+            1, $this->responseChecker->countCollectionItems($this->client->getResponse()),
+            sprintf('Expected 1 product options, but got %d', $itemsCount)
+        );
+        Assert::true($this->responseChecker->hasItemWithValue($this->client->getResponse(), $element, $value));
     }
 
     /**
@@ -217,7 +228,7 @@ final class ManagingProductOptionsContext implements Context
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
         $this->client->show($productOption->getCode());
-        Assert::true($this->client->responseHasValue('name', $name));
+        Assert::true($this->responseChecker->hasValue($this->client->getResponse(), 'name', $name));
     }
 
     /**
@@ -230,7 +241,9 @@ final class ManagingProductOptionsContext implements Context
     ): void {
         $this->client->subResourceIndex('values', $productOption->getCode());
 
-        Assert::true($this->client->hasItemWithTranslation('en_US', 'value', $optionValueName));
+        Assert::true(
+            $this->responseChecker->hasItemWithTranslation($this->client->getResponse(), 'en_US', 'value', $optionValueName)
+        );
     }
 
     /**
@@ -238,10 +251,10 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        $this->client->addRequestData('code', 'NEW_CODE');
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
         $this->client->update();
 
-        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'));
+        Assert::false($this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'));
     }
 
     /**
@@ -249,8 +262,14 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
     {
-        Assert::false($this->client->isCreationSuccessful(), 'Product option has been created successfully, but it should not');
-        Assert::same($this->client->getError(), 'code: The option with given code already exists.');
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($this->client->getResponse()),
+            'Product option has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($this->client->getResponse()),
+            'code: The option with given code already exists.'
+        );
     }
 
     /**
@@ -258,6 +277,9 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::contains($this->client->getError(), sprintf('%s: Please enter option %s.', $element, $element));
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getResponse()),
+            sprintf('%s: Please enter option %s.', $element, $element)
+        );
     }
 }

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,10 +24,14 @@ final class ManagingCustomerGroupsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
         $this->client->setResource('customer_groups');
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -114,7 +119,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->index();
         Assert::true(
-            $this->client->hasItemWithValue('code', $customerGroup->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
         );
     }
@@ -127,7 +132,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->index();
         Assert::true(
-            $this->client->hasItemWithValue('name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'name', $name),
             sprintf('Customer group with name %s does not exist', $name)
         );
     }
@@ -139,7 +144,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
         $this->client->index();
-        Assert::same($this->client->countCollectionItems(), $amountOfCustomerGroups);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $amountOfCustomerGroups);
     }
 
     /**
@@ -148,7 +153,10 @@ final class ManagingCustomerGroupsContext implements Context
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
         $this->client->show($customerGroup->getCode());
-        Assert::true($this->client->responseHasValue('name', $name), 'Customer groups name is not ' . $name);
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $name),
+            'Customer groups name is not ' . $name
+        );
     }
 
     /**
@@ -156,7 +164,10 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatNameIsRequired(): void
     {
-        Assert::contains($this->client->getError(), 'name: Please enter a customer group name.');
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getResponse()),
+            'name: Please enter a customer group name.'
+        );
     }
 
     /**
@@ -164,7 +175,10 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists(): void
     {
-        Assert::contains($this->client->getError(), 'Customer group code has to be unique.');
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getResponse()),
+            'Customer group code has to be unique.'
+        );
     }
 
     /**
@@ -172,7 +186,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeInformedThatThisFormContainsErrors(): void
     {
-        Assert::notEmpty($this->client->getError());
+        Assert::notEmpty($this->responseChecker->getError($this->client->getResponse()));
     }
 
     /**
@@ -180,10 +194,13 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        $this->client->addRequestData('code', 'NEW_CODE');
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
         $this->client->update();
 
-        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist'
+        );
     }
 
     /**
@@ -199,6 +216,6 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->index();
 
-        return $this->client->hasItemWithValue($property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
     }
 }

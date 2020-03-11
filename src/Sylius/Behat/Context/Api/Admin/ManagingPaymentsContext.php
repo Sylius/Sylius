@@ -16,8 +16,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\PaymentTransitions;
@@ -28,12 +28,19 @@ final class ManagingPaymentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var IriConverterInterface */
     private $iriConverter;
 
-    public function __construct(ApiClientInterface $client, IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
+    ) {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
 
@@ -91,7 +98,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldSeePaymentsInTheList(int $count = 1): void
     {
-        Assert::same($this->client->countCollectionItems(), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $count);
     }
 
     /**
@@ -102,11 +109,22 @@ final class ManagingPaymentsContext implements Context
         string $paymentState,
         CustomerInterface $customer
     ): void {
-        foreach ($this->client->getCollectionItemsWithValue('state', StringInflector::nameToLowercaseCode($paymentState)) as $payment) {
+        $payments = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getResponse(),
+            'state',
+            StringInflector::nameToLowercaseCode($paymentState)
+        );
+
+        foreach ($payments as $payment) {
             $this->client->showByIri($payment['order']);
+            $response = $this->client->getResponse();
+
+            if (!$this->responseChecker->hasValue($response, 'number', $orderNumber)) {
+                continue;
+            }
+
             if (
-                $this->client->responseHasValue('number', $orderNumber) &&
-                $this->client->relatedResourceHasValue('customer', 'email', $customer->getEmail())
+                $this->responseChecker->relatedResourceHasValue($response, 'customer', 'email', $customer->getEmail())
             ) {
                 return;
             }
@@ -120,9 +138,9 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
     {
-        Assert::true(
-            $this->client->hasItemOnPositionWithValue($position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber))
-        );
+        Assert::true($this->responseChecker->hasItemOnPositionWithValue(
+            $this->client->getResponse(), $position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber)
+        ));
     }
 
     /**
