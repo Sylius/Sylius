@@ -33,12 +33,12 @@
             <itemOperation name="accept_product_review">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/product_reviews/{id}/accept</attribute>
-                <attribute name="controller">sylius.api.state_machine_transition_applicator:accept</attribute>
+                <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:accept</attribute>
             </itemOperation>
             <itemOperation name="reject_product_review">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/product_reviews/{id}/reject</attribute>
-                <attribute name="controller">sylius.api.state_machine_transition_applicator:reject</attribute>
+                <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:reject</attribute>
             </itemOperation>
         </itemOperations>
         <property name="createdAt" writable="false" />

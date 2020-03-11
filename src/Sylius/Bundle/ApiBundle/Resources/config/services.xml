@@ -17,7 +17,11 @@
     </imports>
 
     <services>
-        <service id="sylius.api.state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator" public="true">
+        <service id="sylius.api.payment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator" public="true">
+            <argument id="sm.factory" type="service" />
+        </service>
+
+        <service id="sylius.api.product_review_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>
     </services>
