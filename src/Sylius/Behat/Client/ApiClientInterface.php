@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Symfony\Component\HttpFoundation\Response;
+
 interface ApiClientInterface
 {
     public function setResource(string $resource): void;
@@ -50,30 +52,5 @@ interface ApiClientInterface
 
     public function filter(string $resource): void;
 
-    public function countCollectionItems(): int;
-
-    public function getCollectionItems(): array;
-
-    public function getCollectionItemsWithValue(string $key, string $value): array;
-
-    public function getError(): string;
-
-    public function isCreationSuccessful(): bool;
-
-    public function isDeletionSuccessful(): bool;
-
-    public function isUpdateSuccessful(): bool;
-
-    /** @param string|int $value */
-    public function responseHasValue(string $key, $value): bool;
-
-    /** @param string|int $value */
-    public function relatedResourceHasValue(string $resource, string $key, $value): bool;
-
-    /** @param string|float $value */
-    public function hasItemWithValue(string $key, $value): bool;
-
-    public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool;
-
-    public function hasItemWithTranslation(string $locale, string $key, string $translation): bool;
+    public function getResponse(): Response;
 }

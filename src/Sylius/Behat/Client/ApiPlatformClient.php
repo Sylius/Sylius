@@ -16,7 +16,6 @@ namespace Sylius\Behat\Client;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
@@ -133,102 +132,13 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->addSubResource($key, $data);
     }
 
-    public function countCollectionItems(): int
+    public function getResponse(): Response
     {
-        return (int) $this->getResponseContentValue('hydra:totalItems');
-    }
-
-    public function getCollectionItems(): array
-    {
-        return $this->getResponseContentValue('hydra:member');
-    }
-
-    public function getCollectionItemsWithValue(string $key, string $value): array
-    {
-        $items = array_filter($this->getCollectionItems(), function (array $item) use ($key, $value): bool {
-            return $item[$key] === $value;
-        });
-
-        return $items;
-    }
-
-    public function getError(): string
-    {
-        return $this->getResponseContentValue('hydra:description');
-    }
-
-    public function isCreationSuccessful(): bool
-    {
-        return $this->client->getResponse()->getStatusCode() === Response::HTTP_CREATED;
-    }
-
-    public function isUpdateSuccessful(): bool
-    {
-        return $this->client->getResponse()->getStatusCode() === Response::HTTP_OK;
-    }
-
-    public function isDeletionSuccessful(): bool
-    {
-        return $this->client->getResponse()->getStatusCode() === Response::HTTP_NO_CONTENT;
-    }
-
-    /** @param string|int $value */
-    public function responseHasValue(string $key, $value): bool
-    {
-        return $this->getResponseContentValue($key) === $value;
-    }
-
-    /** @param string|int $value */
-    public function relatedResourceHasValue(string $resource, string $key, $value): bool
-    {
-        $this->showRelated($resource);
-
-        return $this->getResponseContentValue($key) === $value;
-    }
-
-    /** @param string|float $value */
-    public function hasItemWithValue(string $key, $value): bool
-    {
-        foreach ($this->getCollectionItems() as $resource) {
-            if ($resource[$key] === $value) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function hasItemOnPositionWithValue(int $position, string $key, string $value): bool
-    {
-        return $this->getCollectionItems()[$position][$key] === $value;
-    }
-
-    public function hasItemWithTranslation(string $locale, string $key, string $translation): bool
-    {
-        foreach ($this->getCollectionItems() as $resource) {
-            if (
-                isset($resource['translations']) &&
-                isset($resource['translations'][$locale]) &&
-                $resource['translations'][$locale][$key] === $translation
-            ) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->client->getResponse();
     }
 
     private function request(Request $request): void
     {
         $this->client->request($request->method(), $request->url(), [], [], $request->headers(), $request->content() ?? null);
-    }
-
-    private function getResponseContentValue(string $key)
-    {
-        $content = json_decode($this->client->getResponse()->getContent(), true);
-
-        Assert::keyExists($content, $key);
-
-        return $content[$key];
     }
 }

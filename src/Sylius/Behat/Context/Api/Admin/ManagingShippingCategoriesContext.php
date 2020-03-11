@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,10 +24,14 @@ final class ManagingShippingCategoriesContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
         $this->client->setResource('shipping_categories');
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -122,7 +127,10 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
     {
-        Assert::same($this->client->getError(), 'code: The shipping category with given code already exists.');
+        Assert::same(
+            $this->responseChecker->getError($this->client->getResponse()),
+            'code: The shipping category with given code already exists.'
+        );
     }
 
     /**
@@ -131,7 +139,8 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::same(
-            $this->client->getError(), sprintf('%s: Please enter shipping category %s.', $element, $element)
+            $this->responseChecker->getError($this->client->getResponse()),
+            sprintf('%s: Please enter shipping category %s.', $element, $element)
         );
     }
 
@@ -142,7 +151,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
         $this->client->index();
-        Assert::same($this->client->countCollectionItems(), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $count);
     }
 
     /**
@@ -191,7 +200,7 @@ final class ManagingShippingCategoriesContext implements Context
         $this->client->update();
 
         Assert::false(
-            $this->client->responseHasValue('code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
             'The shipping category code should not be changed to "NEW_CODE", but it is'
         );
     }
@@ -202,7 +211,10 @@ final class ManagingShippingCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         $this->client->index();
-        Assert::same(count($this->client->getCollectionItemsWithValue('code', $code)), 1);
+        Assert::same(
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->getResponse(), 'code', $code)),
+            1
+        );
     }
 
     /**
@@ -211,7 +223,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function thisShippingCategoryNameShouldBe(string $name): void
     {
         Assert::true(
-            $this->client->responseHasValue('name', $name),
+            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $name),
             sprintf('Shipping category with name %s does not exists', $name)
         );
     }
@@ -220,6 +232,6 @@ final class ManagingShippingCategoriesContext implements Context
     {
         $this->client->index();
 
-        return $this->client->hasItemWithValue($property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
     }
 }
