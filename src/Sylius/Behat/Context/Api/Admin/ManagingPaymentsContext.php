@@ -57,11 +57,11 @@ final class ManagingPaymentsContext implements Context
     ): void {
         foreach ($this->client->getCollectionItemsWithValue('state', StringInflector::nameToLowercaseCode($paymentState)) as $payment) {
             $this->client->showByIri($payment['order']);
-            if ($this->client->responseHasValue('number', $orderNumber)) {
-                $this->client->showByIri($this->client->getResponseValue('customer'));
-                if ($this->client->responseHasValue('email', $customer->getEmail())) {
-                    return;
-                }
+            if (
+                $this->client->responseHasValue('number', $orderNumber) &&
+                $this->client->relatedResourceHasValue('customer', 'email', $customer->getEmail())
+            ) {
+                return;
             }
         }
 
@@ -74,7 +74,7 @@ final class ManagingPaymentsContext implements Context
     public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
     {
         Assert::true(
-            $this->client->hasItemOnPositionWithValue($position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber)),
+            $this->client->hasItemOnPositionWithValue($position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber))
         );
     }
 }
