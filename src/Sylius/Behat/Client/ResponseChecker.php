@@ -37,6 +37,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $items;
     }
 
+    public function getValue(Response $response, string $key)
+    {
+        return $this->getResponseContentValue($response, $key);
+    }
+
     public function getError(Response $response): string
     {
         return $this->getResponseContentValue($response, 'hydra:description');
@@ -63,7 +68,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $this->getResponseContentValue($response, $key) === $value;
     }
 
-    public function hasItemWithValue(Response $response, string $key, string $value): bool
+    public function hasItemWithValue(Response $response, string $key, $value): bool
     {
         foreach ($this->getCollection($response) as $resource) {
             if ($resource[$key] === $value) {

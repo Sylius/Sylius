@@ -50,14 +50,9 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request(Request::index($this->resource, $this->sharedStorage->get('token')));
     }
 
-    public function showRelated(string $resource): void
-    {
-        $this->request('GET', $this->getResponseContentValue($resource), ['HTTP_ACCEPT' => 'application/ld+json']);
-    }
-
     public function showByIri(string $iri): void
     {
-        $this->request('GET', $iri, ['HTTP_ACCEPT' => 'application/ld+json']);
+        $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
     }
 
     public function subResourceIndex(string $subResource, string $id): void
@@ -80,14 +75,17 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request($this->request);
     }
 
-    public function buildFilter(array $filters): void
-    {
-        $this->filters = $filters;
-    }
-
     public function delete(string $id): void
     {
         $this->request(Request::delete($this->resource, $id, $this->sharedStorage->get('token')));
+    }
+
+    public function filter(): void
+    {
+        $query = http_build_query($this->filters, '', '&', PHP_QUERY_RFC3986);
+        $path = sprintf('/new-api/%s?%s', $this->resource, $query);
+
+        $this->request(Request::custom($path, 'GET', $this->sharedStorage->get('token')));
     }
 
     public function applyTransition(string $id, string $transition): void
@@ -108,6 +106,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
+    public function buildFilter(array $filters): void
+    {
+        $this->filters = $filters;
+    }
+
     /** @param string|int $value */
     public function addRequestData(string $key, $value): void
     {
@@ -117,14 +120,6 @@ final class ApiPlatformClient implements ApiClientInterface
     public function updateRequestData(array $data): void
     {
         $this->request->updateContent($data);
-    }
-
-    public function filter(string $resource): void
-    {
-        $query = http_build_query($this->filters, '', '&', PHP_QUERY_RFC3986);
-        $path = sprintf('/new-api/%s?%s', $resource, $query);
-
-        $this->request('GET', $path, ['HTTP_ACCEPT' => 'application/ld+json']);
     }
 
     public function addSubResourceData(string $key, array $data): void
