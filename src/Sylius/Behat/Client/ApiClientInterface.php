@@ -19,6 +19,10 @@ interface ApiClientInterface
 
     public function show(string $resource, string $id): void;
 
+    public function showRelated(string $resource): void;
+
+    public function showByIri(string $iri): void;
+
     public function subResourceIndex(string $resource, string $subResource, string $id): void;
 
     public function buildCreateRequest(string $resource): void;
@@ -56,6 +60,9 @@ interface ApiClientInterface
 
     /** @param string|int $value */
     public function responseHasValue(string $key, $value): bool;
+
+    /** @param string|int $value */
+    public function relatedResourceHasValue(string $resource, string $key, $value): bool;
 
     public function hasItemWithValue(string $key, string $value): bool;
 

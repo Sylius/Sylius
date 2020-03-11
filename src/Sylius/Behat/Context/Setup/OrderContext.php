@@ -177,6 +177,24 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the customer :customer added :product product to the cart
+     */
+    public function theCustomerAddedProductToTheCart(CustomerInterface $customer, ProductInterface $product): void
+    {
+        $cart = $this->createCart($customer);
+        $this->addProductVariantsToOrderWithChannelPrice(
+            $cart,
+            $this->sharedStorage->get('channel'),
+            $this->variantResolver->getVariant($product),
+            1
+        );
+
+        $this->orderRepository->add($cart);
+
+        $this->sharedStorage->set('cart', $cart);
+    }
+
+    /**
      * @Given /^(I) placed (an order "[^"]+")$/
      */
     public function iPlacedAnOrder(ShopUserInterface $user, $orderNumber)
