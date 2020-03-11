@@ -63,7 +63,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsSlugTo(?string $slug = null, $language = 'en_US'): void
     {
-        $data = ['translations' => [$language => ['locale' => $language, 'slug' => $slug]]];
+        $data = ['translations' => [$language => ['slug' => $slug]]];
 
         $this->client->addCompoundRequestData($data);
     }
