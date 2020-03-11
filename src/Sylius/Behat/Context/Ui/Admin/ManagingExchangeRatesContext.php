@@ -250,17 +250,17 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then I should see that the source currency is disabled
+     * @Then I should not be able to edit its source currency
      */
-    public function iShouldSeeThatTheSourceCurrencyIsDisabled()
+    public function iShouldNotBeAbleToEditItsSourceCurrency(): void
     {
         Assert::true($this->updatePage->isSourceCurrencyDisabled());
     }
 
     /**
-     * @Then I should see that the target currency is disabled
+     * @Then I should not be able to edit its target currency
      */
-    public function iShouldSeeThatTheTargetCurrencyIsDisabled()
+    public function iShouldNotBeAbleToEditItsTargetCurrency(): void
     {
         Assert::true($this->updatePage->isTargetCurrencyDisabled());
     }
