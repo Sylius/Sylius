@@ -93,15 +93,23 @@ sylius_ui:
         
         sylius.admin.index.stylesheets:
             blocks:
+                styles:
+                    template: "@SyliusAdmin/Layout/_styles.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 0
                     context:
                         postfix: index.stylesheets
                         
         sylius.admin.index.javascripts:
             blocks:
+                scripts:
+                    template: "@SyliusAdmin/Layout/_scripts.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 0
                     context:
                         postfix: index.javascripts
                         
