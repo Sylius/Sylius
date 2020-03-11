@@ -23,6 +23,8 @@ interface ResponseCheckerInterface
 
     public function getCollectionItemsWithValue(Response $response, string $key, string $value): array;
 
+    public function getValue(Response $response, string $key);
+
     public function getError(Response $response): string;
 
     public function isCreationSuccessful(Response $response): bool;
@@ -34,7 +36,7 @@ interface ResponseCheckerInterface
     /** @param string|int $value */
     public function hasValue(Response $response, string $key, $value): bool;
 
-    public function hasItemWithValue(Response $response, string $key, string $value): bool;
+    public function hasItemWithValue(Response $response, string $key, $value): bool;
 
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, string $value): bool;
 

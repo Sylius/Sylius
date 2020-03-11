@@ -95,6 +95,11 @@ final class Request
         );
     }
 
+    public static function custom(string $url, string $method, string $token): self
+    {
+        return new self($url, $method, ['HTTP_Authorization' => 'Bearer '.$token]);
+    }
+
     public function url(): string
     {
         return $this->url;

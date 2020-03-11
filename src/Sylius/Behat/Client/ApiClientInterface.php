@@ -21,8 +21,6 @@ interface ApiClientInterface
 
     public function index(): void;
 
-    public function showRelated(string $resource): void;
-
     public function showByIri(string $iri): void;
 
     public function subResourceIndex(string $subResource, string $id): void;
@@ -34,6 +32,8 @@ interface ApiClientInterface
     public function update(): void;
 
     public function delete(string $id): void;
+
+    public function filter(): void;
 
     public function applyTransition(string $id, string $transition): void;
 
@@ -49,8 +49,6 @@ interface ApiClientInterface
     public function addSubResourceData(string $key, array $data): void;
 
     public function updateRequestData(array $data): void;
-
-    public function filter(string $resource): void;
 
     public function getResponse(): Response;
 }

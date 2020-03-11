@@ -40,6 +40,7 @@ final class ManagingPaymentsContext implements Context
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
+        $this->client->setResource('payments');
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
@@ -50,7 +51,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index('payments');
+        $this->client->index();
     }
 
     /**
@@ -117,15 +118,16 @@ final class ManagingPaymentsContext implements Context
 
         foreach ($payments as $payment) {
             $this->client->showByIri($payment['order']);
-            $response = $this->client->getResponse();
+            $orderResponse = $this->client->getResponse();
 
-            if (!$this->responseChecker->hasValue($response, 'number', $orderNumber)) {
+            if (!$this->responseChecker->hasValue($orderResponse, 'number', $orderNumber)) {
                 continue;
             }
 
-            if (
-                $this->responseChecker->relatedResourceHasValue($response, 'customer', 'email', $customer->getEmail())
-            ) {
+            $this->client->showByIri($this->responseChecker->getValue($orderResponse, 'customer'));
+            $customerResponse = $this->client->getResponse();
+
+            if ($this->responseChecker->hasValue($customerResponse, 'email', $customer->getEmail())) {
                 return;
             }
         }
