@@ -240,7 +240,7 @@ sylius_ui:
         sylius.admin.layout.javascripts:
             blocks:
                 scripts:
-                    template: "@SyliusAdmin/Layout/_scripts.html.twig"
+                    template: "@SyliusAdmin/_scripts.html.twig"
                     priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
@@ -251,7 +251,7 @@ sylius_ui:
         sylius.admin.layout.stylesheets:
             blocks:
                 styles:
-                    template: "@SyliusAdmin/Layout/_styles.html.twig"
+                    template: "@SyliusAdmin/_styles.html.twig"
                     priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
