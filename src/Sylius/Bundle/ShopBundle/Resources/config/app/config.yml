@@ -781,7 +781,7 @@ sylius_ui:
 
         sylius.shop.layout.javascripts:
             blocks:
-                styles:
+                scripts:
                     template: "@SyliusShop/_scripts.html.twig"
                     priority: 10
                 legacy:
