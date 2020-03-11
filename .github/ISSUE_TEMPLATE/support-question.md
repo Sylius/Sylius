@@ -1,7 +1,10 @@
 ---
-name: "Support Question 🚫"
+name: "Support Question \U0001F6AB"
 about: See http://docs.sylius.com/en/latest/support/index.html for questions about
   using Sylius
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
