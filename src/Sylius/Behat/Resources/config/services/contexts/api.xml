@@ -25,7 +25,6 @@
 
         <service id="sylius.behat.context.api.admin.managing_exchange_rates" class="Sylius\Behat\Context\Api\Admin\ManagingExchangeRatesContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
-            <argument type="service" id="sylius.repository.exchange_rate" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

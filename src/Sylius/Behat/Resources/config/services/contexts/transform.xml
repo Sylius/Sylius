@@ -53,6 +53,12 @@
         <service id="sylius.behat.context.transform.date_time" class="Sylius\Behat\Context\Transform\DateTimeContext">
         </service>
 
+        <service id="sylius.behat.context.transform.exchange_rate" class="Sylius\Behat\Context\Transform\ExchangeRateContext">
+            <argument type="service" id="sylius.currency_name_converter" />
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.repository.exchange_rate" />
+        </service>
+
         <service id="sylius.behat.context.transform.lexical" class="Sylius\Behat\Context\Transform\LexicalContext">
         </service>
 
