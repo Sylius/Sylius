@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,10 +24,14 @@ final class ManagingTaxCategoriesContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
         $this->client->setResource('tax_categories');
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -151,7 +156,10 @@ final class ManagingTaxCategoriesContext implements Context
         $this->client->addRequestData('code', 'NEW_CODE');
         $this->client->update();
 
-        Assert::false($this->client->responseHasValue('code', 'NEW_CODE'), 'The code field with value NEW_CODE exist');
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist'
+        );
     }
 
     /**
@@ -161,7 +169,10 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
         $this->client->show($taxCategory->getCode());
-        Assert::true($this->client->responseHasValue('name', $taxCategoryName), sprintf('Tax category name is not %s', $taxCategoryName));
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $taxCategoryName),
+            sprintf('Tax category name is not %s', $taxCategoryName)
+        );
     }
 
     /**
@@ -169,7 +180,10 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists(): void
     {
-        Assert::same($this->client->getError(), 'code: The tax category with given code already exists.');
+        Assert::same(
+            $this->responseChecker->getError($this->client->getResponse()),
+            'code: The tax category with given code already exists.'
+        );
     }
 
     /**
@@ -178,7 +192,10 @@ final class ManagingTaxCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
         $this->client->index();
-        Assert::same(count($this->client->getCollectionItemsWithValue($element, $value)), 1);
+        Assert::same(
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->getResponse(), $element, $value)),
+            1
+        );
     }
 
     /**
@@ -186,7 +203,10 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
-        Assert::contains($this->client->getError(), sprintf('%s: Please enter tax category %s.', $element, $element));
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getResponse()),
+            sprintf('%s: Please enter tax category %s.', $element, $element)
+        );
     }
 
     /**
@@ -202,13 +222,13 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldSeeSingleTaxCategoryInTheList(): void
     {
-        Assert::same($this->client->countCollectionItems(), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), 1);
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index();
 
-        return $this->client->hasItemWithValue($property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
     }
 }
