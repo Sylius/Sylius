@@ -209,7 +209,8 @@ from the channel they have access to.
 Additional Admin User Fixtures
 ------------------------------
 
-Two new fields have been added to the Admin User fixtures: ``channel`` and ``roles``. They can be configured as below:
+Three new fields have been added to the Admin User fixtures: ``channel``, ``roles`` and ``enable_permission_checker``.
+They can be configured as below:
 
 .. code-block:: yaml
 
@@ -226,6 +227,7 @@ Two new fields have been added to the Admin User fixtures: ``channel`` and ``rol
                                     channel: 'DEFAULT_CHANNEL_CODE'
                                     roles:
                                         - 'SUPER_ADMIN_CODE'
+                                    enable_permission_checker: true
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
