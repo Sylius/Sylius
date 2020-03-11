@@ -16,7 +16,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
-use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingExchangeRatesContext implements Context
@@ -24,19 +23,14 @@ final class ManagingExchangeRatesContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ExchangeRateRepositoryInterface */
-    private $exchangeRateRepository;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
-        ExchangeRateRepositoryInterface $exchangeRateRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->exchangeRateRepository = $exchangeRateRepository;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -121,13 +115,10 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I delete the exchange rate between :sourceCurrency and :targetCurrency
+     * @When /^I delete the (exchange rate between "[^"]+" and "[^"]+")$/
      */
-    public function iDeleteTheExchangeRateBetweenAnd(CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency) : void
+    public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate) : void
     {
-        /** @var ExchangeRateInterface */
-        $exchangeRate = $this->getExchangeRateBetweenCurrencies($sourceCurrency->getCode(), $targetCurrency->getCode());
-
         $this->client->delete('exchange_rates', $exchangeRate->getId());
     }
 
@@ -223,7 +214,7 @@ final class ManagingExchangeRatesContext implements Context
                 $exchangeRate->getTargetCurrency()
             ),
             sprintf(
-                'Exchange rate with ratio %s between %s and %s still exists',
+                'Exchange rate with ratio %s between %s and %s still exists, but it should not.',
                 $exchangeRate->getRatio(),
                 $exchangeRate->getSourceCurrency()->getName(),
                 $exchangeRate->getTargetCurrency()->getName()
@@ -316,16 +307,6 @@ final class ManagingExchangeRatesContext implements Context
             $this->client->hasItemOnPositionWithValue(0, $currencyType, '/new-api/currencies/EUR'),
             sprintf('It was possible to change %s', $currencyType)
         );
-    }
-
-    private function getExchangeRateBetweenCurrencies(string $sourceCode, string $targetCode): ExchangeRateInterface
-    {
-        /** @var ExchangeRateInterface|null */
-        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($sourceCode, $targetCode);
-
-        Assert::notNull($exchangeRate);
-
-        return $exchangeRate;
     }
 
     private function getExchangeRateFromResponse(

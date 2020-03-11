@@ -31,7 +31,7 @@ interface ApiClientInterface
 
     public function buildFilter(array $filters): void;
 
-    /** @param string|int */
+    /** @param string|int $value */
     public function addRequestData(string $key, $value): void;
 
     public function addCompoundRequestData(array $data): void;
