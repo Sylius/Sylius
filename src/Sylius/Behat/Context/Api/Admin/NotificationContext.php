@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class NotificationContext implements Context
@@ -22,9 +23,13 @@ final class NotificationContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -32,7 +37,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->client->isCreationSuccessful(), 'Resource could not be created');
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()), 'Resource could not be created');
     }
 
     /**
@@ -40,7 +45,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->client->isDeletionSuccessful(), 'Resource could not be deleted');
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()), 'Resource could not be deleted');
     }
 
     /**
@@ -48,6 +53,6 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->client->isUpdateSuccessful(), 'Resource could not be edited');
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()), 'Resource could not be edited');
     }
 }
