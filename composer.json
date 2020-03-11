@@ -222,6 +222,7 @@
             "spec\\Sylius\\Bundle\\AddressingBundle\\": "src/Sylius/Bundle/AddressingBundle/spec/",
             "spec\\Sylius\\Bundle\\AdminApiBundle\\": "src/Sylius/Bundle/AdminApiBundle/spec/",
             "spec\\Sylius\\Bundle\\AdminBundle\\": "src/Sylius/Bundle/AdminBundle/spec/",
+            "spec\\Sylius\\Bundle\\ApiBundle\\": "src/Sylius/Bundle/ApiBundle/spec/",
             "spec\\Sylius\\Bundle\\AttributeBundle\\": "src/Sylius/Bundle/AttributeBundle/spec/",
             "spec\\Sylius\\Bundle\\ChannelBundle\\": "src/Sylius/Bundle/ChannelBundle/spec/",
             "spec\\Sylius\\Bundle\\CoreBundle\\": "src/Sylius/Bundle/CoreBundle/spec/",

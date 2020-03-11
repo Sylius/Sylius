@@ -17,6 +17,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
@@ -36,6 +38,21 @@ final class ManagingPaymentsContext implements Context
     public function iAmBrowsingPayments(): void
     {
         $this->client->index('payments');
+    }
+
+    /**
+     * @When I complete the payment of order :order
+     */
+    public function iCompleteThePaymentOfOrder(OrderInterface $order): void
+    {
+        $payment = $order->getLastPayment();
+        Assert::notNull($payment);
+
+        $this->client->applyTransition(
+            'payments',
+            (string) $payment->getId(),
+            PaymentTransitions::TRANSITION_COMPLETE
+        );
     }
 
     /**
@@ -76,5 +93,25 @@ final class ManagingPaymentsContext implements Context
         Assert::true(
             $this->client->hasItemOnPositionWithValue($position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber))
         );
+    }
+
+    /**
+     * @Then I should be notified that the payment has been completed
+     */
+    public function iShouldBeNotifiedThatThePaymentHasBeenCompleted(): void
+    {
+        Assert::true($this->client->isUpdateSuccessful());
+    }
+
+    /**
+     * @Then I should see the payment of order :order as :paymentState
+     */
+    public function iShouldSeeThePaymentOfOrderAs(OrderInterface $order, string $paymentState): void
+    {
+        $payment = $order->getLastPayment();
+        Assert::notNull($payment);
+
+        $this->client->show('payments', (string) $payment->getId());
+        Assert::true($this->client->responseHasValue('state', StringInflector::nameToLowercaseCode($paymentState)));
     }
 }
