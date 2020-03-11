@@ -14,6 +14,8 @@
             </attribute>
         </attribute>
 
+        <attribute name="validation_groups">sylius</attribute>
+
         <collectionOperations />
 
         <itemOperations>
@@ -23,5 +25,6 @@
         <property name="id" identifier="false" writable="false" />
         <property name="number" identifier="true" writable="false" />
         <property name="customer" writable="false" />
+        <property name="channel" writable="false" readable="true" />
     </resource>
 </resources>
