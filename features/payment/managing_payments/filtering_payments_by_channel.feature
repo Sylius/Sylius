@@ -15,11 +15,11 @@ Feature: Filtering payments by channel
         And there is an "#00000002" order with "Orange" product in "Canada" channel
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Filtering payments by channel on index
         When I browse payments
         And I choose "Canada" as a channel filter
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000002" order
-        But I should not see a payment of order "#00000001"
+        But I should not see the payment of the "#00000001" order
