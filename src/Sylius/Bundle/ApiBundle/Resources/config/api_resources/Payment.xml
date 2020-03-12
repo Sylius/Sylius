@@ -22,8 +22,8 @@
 
         <collectionOperations>
             <collectionOperation name="get">
-                <attribute name="order">
-                    <attribute name="position">ASC</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.search_payment_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
