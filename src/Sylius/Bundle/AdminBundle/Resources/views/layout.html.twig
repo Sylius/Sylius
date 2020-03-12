@@ -3,8 +3,6 @@
 {% block title %} | Sylius{% endblock %}
 
 {% block stylesheets %}
-    {% include '@SyliusAdmin/_styles.html.twig' %}
-
     {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
 
@@ -33,7 +31,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% include '@SyliusAdmin/_scripts.html.twig' %}
-
     {{ sylius_template_event('sylius.admin.layout.javascripts') }}
 {% endblock %}

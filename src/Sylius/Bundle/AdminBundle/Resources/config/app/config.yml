@@ -95,6 +95,7 @@ sylius_ui:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 5
                     context:
                         postfix: index.stylesheets
                         
@@ -102,6 +103,7 @@ sylius_ui:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
+                    priority: 5
                     context:
                         postfix: index.javascripts
                         
@@ -237,15 +239,23 @@ sylius_ui:
                         
         sylius.admin.layout.javascripts:
             blocks:
+                scripts:
+                    template: "@SyliusAdmin/_scripts.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
                     context:
                         event: sylius.admin.layout.javascripts
                         
         sylius.admin.layout.stylesheets:
             blocks:
+                styles:
+                    template: "@SyliusAdmin/_styles.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
                     context:
                         event: sylius.admin.layout.stylesheets
 
