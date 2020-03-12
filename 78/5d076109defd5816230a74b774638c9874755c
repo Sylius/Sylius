@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by Prometee at 2020-03-11T18:09:03Z
+
+@lchrusciel I will change those priorities and use the right event too. I commit the wrong event with `sylius.admin.index.*`, the right one is `sylius.admin.layout.*`
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-03-12T09:37:30Z
+
+Thank you, Francis! :1st_place_medal:
