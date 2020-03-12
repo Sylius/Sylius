@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
@@ -95,6 +96,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I filter them by :taxon taxon
+     */
+    public function iFilterThemByTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->buildFilter(['productTaxons.taxon.code' => $taxon->getCode()]);
+        $this->client->filter();
+    }
+
+    /**
      * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
@@ -117,5 +127,47 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Given I am browsing products
+     * @When I browse products
+     * @When I want to browse products
+     */
+    public function iWantToBrowseProducts(): void
+    {
+        $this->client->index();
+    }
+
+    /**
+     * @Then I should see :numberOfProducts products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count): void
+    {
+        Assert::count($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then I should( still) see a product with :field :value
+     */
+    public function iShouldSeeProductWith(string $field, string $value): void
+    {
+        Assert::true(
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+        );
+    }
+
+    /**
+     * @Then I should not see any product with :field :value
+     */
+    public function iShouldNotSeeAnyProductWith(string $field, string $value): void
+    {
+        Assert::false(
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+        );
     }
 }

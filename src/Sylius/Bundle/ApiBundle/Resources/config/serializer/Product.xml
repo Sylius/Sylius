@@ -33,5 +33,10 @@
             <group>product:read</group>
             <group>product:create</group>
         </attribute>
+        <attribute name="productTaxons">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
     </class>
 </serializer>
