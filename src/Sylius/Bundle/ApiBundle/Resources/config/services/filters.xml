@@ -9,9 +9,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.api.search_payment_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="state">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.filter.exchange_rate" class="Sylius\Bundle\ApiBundle\Filters\ExchangeRateFilter">
-            <tag name="api_platform.filter" id="exchange_rate_filter" />
             <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" id="exchange_rate_filter" />
         </service>
     </services>
 </container>

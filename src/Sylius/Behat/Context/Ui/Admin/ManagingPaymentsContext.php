@@ -152,6 +152,7 @@ final class ManagingPaymentsContext implements Context
 
     /**
      * @Then I should not see a payment of order :orderNumber
+     * @Then I should not see the payment of the :orderNumber order
      */
     public function iShouldNotSeeAPaymentOfOrder(string $orderNumber): void
     {

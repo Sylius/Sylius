@@ -13,11 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="filters.xml"/>
+        <import resource="services/filters.xml"/>
     </imports>
 
     <services>
-        <service id="sylius.api.state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator" public="true">
+        <service id="sylius.api.payment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator" public="true">
+            <argument id="sm.factory" type="service" />
+        </service>
+
+        <service id="sylius.api.product_review_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>
     </services>
