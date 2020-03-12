@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\PaymentTransitions;
@@ -26,9 +28,13 @@ final class ManagingPaymentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
+    public function __construct(ApiClientInterface $client, IriConverterInterface $iriConverter)
     {
         $this->client = $client;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -53,6 +59,22 @@ final class ManagingPaymentsContext implements Context
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE
         );
+    }
+
+    /**
+     * @When I choose :state as a payment state
+     */
+    public function iChooseAsAPaymentState(string $state): void
+    {
+        $this->client->buildFilter(['state' => $state]);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter('payments');
     }
 
     /**
@@ -113,5 +135,21 @@ final class ManagingPaymentsContext implements Context
 
         $this->client->show('payments', (string) $payment->getId());
         Assert::true($this->client->responseHasValue('state', StringInflector::nameToLowercaseCode($paymentState)));
+    }
+
+    /**
+     * @Then I should see (also) the payment of the :order order
+     */
+    public function iShouldSeeThePaymentOfTheOrder(OrderInterface $order): void
+    {
+        Assert::true($this->client->hasItemWithValue('order', $this->iriConverter->getIriFromItem($order)));
+    }
+
+    /**
+     * @Then I should not see the payment of the :order order
+     */
+    public function iShouldNotSeeThePaymentOfTheOrder(OrderInterface $order): void
+    {
+        Assert::false($this->client->hasItemWithValue('order', $this->iriConverter->getIriFromItem($order)));
     }
 }

@@ -66,6 +66,7 @@
 
         <service id="sylius.behat.context.api.admin.managing_payments" class="Sylius\Behat\Context\Api\Admin\ManagingPaymentsContext">
             <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
         </service>
     </services>
 </container>
