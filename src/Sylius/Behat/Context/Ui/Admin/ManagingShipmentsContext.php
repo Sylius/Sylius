@@ -205,8 +205,8 @@ final class ManagingShipmentsContext implements Context
     /**
      * @Then I should see the shipment of order :orderNumber shipped at :dateTime
      */
-    public function iShouldSeeTheShippingDateeAs(string $orderNumber, string $dateTme): void
+    public function iShouldSeeTheShippingDateAs(string $orderNumber, string $dateTime): void
     {
-        Assert::same($this->indexPage->getShippedAtDate($orderNumber), $dateTme);
+        Assert::same($this->indexPage->getShippedAtDate($orderNumber), $dateTime);
     }
 }
