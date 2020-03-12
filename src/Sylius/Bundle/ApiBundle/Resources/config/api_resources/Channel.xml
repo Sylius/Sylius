@@ -24,7 +24,7 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" readable="true" />
+        <property name="code" identifier="true" writable="false" readable="true" />
         <property name="name" writable="true"  readable="true"/>
     </resource>
 </resources>

@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,9 +27,13 @@ final class ManagingShipmentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
+    public function __construct(ApiClientInterface $client, IriConverterInterface $iriConverter)
     {
         $this->client = $client;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -48,25 +54,26 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @Then I should see the shipment of order :orderNumber as :shippingState
+     * @Then /^I should see the shipment of (order "[^"]+") as "([^"]+)"$/
      */
-    public function iShouldSeeTheShipmentOfOrderAs(string $orderNumber, string $shippingState): void
+    public function iShouldSeeTheShipmentOfOrderAs(OrderInterface $order, string $shippingState): void
     {
         Assert::true(
-            $this->isShipmentWithOrderNumberAndState($orderNumber, $shippingState),
-            sprintf('Shipment for order %s with state %s does not exist', $orderNumber, $shippingState)
+            $this->client->hasItemWithKeysAndValues([
+                'order' => $this->iriConverter->getIriFromItem($order),
+                'state' => strtolower($shippingState)]),
+            sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState)
         );
     }
 
     /**
-     * @Then /^I should see shipment for (the "[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
+     * @Then /^I should see shipment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
      */
-    public function iShouldSeeShipmentForTheOrderInTheList(string $orderNumber, int $position): void
+    public function iShouldSeeShipmentForTheOrderInTheList(OrderInterface $order, int $position): void
     {
-
         Assert::true(
-            $this->client->hasItemOnPositionWithValue(--$position, 'order', sprintf('/new-api/orders/%s', $orderNumber)),
-            sprintf('On position %s there is no shipment for order %s', $position, $orderNumber)
+            $this->client->hasItemOnPositionWithValue(--$position, 'order', $this->iriConverter->getIriFromItem($order)),
+            sprintf('On position %s there is no shipment for order %s', $position, $order->getNumber())
         );
     }
 
@@ -86,30 +93,18 @@ final class ManagingShipmentsContext implements Context
             $orderIri = $shipment['order'];
             $this->client->showByIri($orderIri);
 
-            if (
-                $this->client->responseHasValue('number', $orderNumber) &&
-                $this->client->relatedResourceHasValue('customer', 'email', $customer->getEmail())
-            ) {
-                $this->client->showByIri($orderIri);
-                if ($this->client->relatedResourceHasValue('channel', 'name', $channel->getName())) {
-                    return;
-                }
+            if (!$this->client->responseHasValue('number', $orderNumber)) {
+                continue;
+            }
+            if (!$this->client->relatedResourceHasValue('customer', 'email', $customer->getEmail())) {
+                continue;
+            }
+            $this->client->showByIri($orderIri);
+            if ($this->client->relatedResourceHasValue('channel', 'name', $channel->getName())) {
+                return;
             }
         }
 
         throw new \InvalidArgumentException('There is no shipment with given data');
-    }
-
-    private function isShipmentWithOrderNumberAndState(string $orderNumber, string $state): bool
-    {
-        $items = $this->client->getCollectionItemsWithValue('state', strtolower($state));
-
-        foreach ($items as $item) {
-            if ($item['order'] === sprintf('/new-api/orders/%s', $orderNumber)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

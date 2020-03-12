@@ -219,6 +219,27 @@ final class ApiPlatformClient implements ApiClientInterface
         return false;
     }
 
+    public function hasItemWithKeysAndValues(array $parameters): bool
+    {
+        foreach ($this->getCollectionItems() as $item) {
+            if ($this->elementHasKeysAndValues($item, $parameters)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function elementHasKeysAndValues(array $element, array $parameters): bool {
+        foreach ($parameters as $key => $value) {
+            if ($element[$key] !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private function request(string $method, string $url, array $headers, string $content = null): void
     {
         $defaultHeaders = ['HTTP_ACCEPT' => 'application/ld+json'];
