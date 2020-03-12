@@ -70,6 +70,14 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
+     * @When I choose :channel as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
+    {
+        $this->client->buildFilter(['order.channel.code' => $channel->getCode()]);
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
