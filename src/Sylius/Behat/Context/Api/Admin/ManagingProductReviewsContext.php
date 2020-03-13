@@ -207,7 +207,10 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Product review could not be edited'
+        );
     }
 
     /**
@@ -215,7 +218,10 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product review could not be deleted'
+        );
     }
 
     private function isItemOnIndex(string $property, string $value): bool
