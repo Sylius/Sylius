@@ -19,8 +19,9 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
@@ -53,6 +54,30 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I choose :shipmentState as a shipment state
+     */
+    public function iChooseShipmentState(string $state): void
+    {
+        $this->client->addFilter('state', $state);
+    }
+
+    /**
+     * @When I choose :channel as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
+    {
+        $this->client->addFilter('order.channel.code', $channel->getCode());
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
+    }
+
+    /**
      * @Then I should see( only) :count shipment(s) in the list
      * @Then I should see a single shipment in the list
      */
@@ -62,12 +87,28 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I ship the shipment of order :order
+     */
+    public function iShipShipmentOfOrder(OrderInterface $order): void
+    {
+        $this->client->applyTransition((string) $order->getShipments()->first()->getId(), ShipmentTransitions::TRANSITION_SHIP);
+    }
+
+    /**
+     * @Then I should be notified that the shipment has been successfully shipped
+     */
+    public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'state'), 'shipped', 'Shipment is not shipped');
+    }
+
+    /**
      * @Then /^I should see the shipment of (order "[^"]+") as "([^"]+)"$/
      */
     public function iShouldSeeTheShipmentOfOrderAs(OrderInterface $order, string $shippingState): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
+            $this->responseChecker->hasItemWithValues($this->client->index(), [
                 'order' => $this->iriConverter->getIriFromItem($order),
                 'state' => strtolower($shippingState)
             ]),
@@ -92,6 +133,20 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @Then I should see the shipment of order :order shipped at :dateTime
+     */
+    public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
+    {
+         $shipmentShowResponse = $this->client->show((string) $order->getShipments()->first()->getId());
+
+         if (
+             strtotime($this->responseChecker->getValue($shipmentShowResponse, 'shippedAt')) != strtotime($dateTime)
+         ) {
+             throw new \InvalidArgumentException('Shipment was shipped in different date');
+         }
+    }
+
+    /**
      * @Then the shipment of the :orderNumber order should be :shippingState for :customer
      * @Then the shipment of the :orderNumber order should be :shippingState for :customer in :channel channel
      */
@@ -105,8 +160,7 @@ final class ManagingShipmentsContext implements Context
 
         foreach ($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'state',
             StringInflector::nameToLowercaseCode($shippingState)) as $shipment) {
-            $orderIri = $shipment['order'];
-            $orderShowResponse = $this->client->showByIri($orderIri);
+            $orderShowResponse = $this->client->showByIri($shipment['order']);
 
             if (!$this->responseChecker->HasValue($orderShowResponse, 'number', $orderNumber)) {
                 continue;
@@ -123,5 +177,36 @@ final class ManagingShipmentsContext implements Context
         }
 
         throw new \InvalidArgumentException('There is no shipment with given data');
+    }
+
+    /**
+     * @Then I should see a shipment of order :order
+     */
+    public function iShouldSeeShipmentWithOrderNumber(OrderInterface $order): void
+    {
+        Assert::true(
+            $this->isShipmentForOrder($order),
+            sprintf('There is no shipment for order %s', $order->getNumber())
+        );
+    }
+
+    /**
+     * @Then I should not see a shipment of order :order
+     */
+    public function iShouldNotSeeShipmentWithOrderNumber(OrderInterface $order): void
+    {
+        Assert::false(
+            $this->isShipmentForOrder($order),
+            sprintf('There is shipment for order %s', $order->getNumber())
+        );
+    }
+
+    private function isShipmentForOrder(OrderInterface $order): bool
+    {
+         return $this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(),
+            'order',
+            $this->iriConverter->getIriFromItem($order)
+        );
     }
 }
