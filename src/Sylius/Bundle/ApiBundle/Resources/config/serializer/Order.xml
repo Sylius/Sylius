@@ -19,12 +19,15 @@
         <attribute name="id">
             <group>order:read</group>
         </attribute>
+
         <attribute name="number">
             <group>order:read</group>
         </attribute>
+
         <attribute name="channel">
             <group>order:read</group>
         </attribute>
+
         <attribute name="customer">
             <group>order:read</group>
         </attribute>

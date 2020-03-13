@@ -42,4 +42,6 @@ interface ResponseCheckerInterface
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, string $value): bool;
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
+
+    public function hasItemWithValues(Response $response, array $parameters): bool;
 }
