@@ -1,23 +1,31 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
-
-    <resource
-        class="%sylius.model.payment.class%"
-        shortName="Payment"
-    >
-        <attribute name="validation_groups">sylius</attribute>
-
-        <attribute name="order">
-            <attribute name="createdAt">DESC</attribute>
-        </attribute>
-
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.payment.class%" shortName="Payment">
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>payment:read</attribute>
             </attribute>
+        </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <attribute name="order">
+            <attribute name="createdAt">DESC</attribute>
         </attribute>
 
         <collectionOperations>
@@ -30,7 +38,7 @@
 
         <itemOperations>
             <itemOperation name="get" />
-            <itemOperation name="complete_payment">
+            <itemOperation name="complete">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/payments/{id}/complete</attribute>
                 <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
