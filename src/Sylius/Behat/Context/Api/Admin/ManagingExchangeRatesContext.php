@@ -36,7 +36,6 @@ final class ManagingExchangeRatesContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->client->setResource('exchange_rates');
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -312,6 +311,30 @@ final class ManagingExchangeRatesContext implements Context
             $this->responseChecker->getError($this->client->getResponse()),
             'The currency pair must be unique.'
         );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
     }
 
     private function assertIfNotBeAbleToEditItCurrency(string $currencyType): void

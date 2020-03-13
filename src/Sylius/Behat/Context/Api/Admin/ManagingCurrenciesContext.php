@@ -29,7 +29,6 @@ final class ManagingCurrenciesContext implements Context
     public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
-        $this->client->setResource('currencies');
         $this->responseChecker = $responseChecker;
     }
 
@@ -112,5 +111,13 @@ final class ManagingCurrenciesContext implements Context
             'Currency has been created successfully, but it should not'
         );
         Assert::same($this->responseChecker->getError($this->client->getResponse()), 'code: Currency code must be unique.');
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
     }
 }

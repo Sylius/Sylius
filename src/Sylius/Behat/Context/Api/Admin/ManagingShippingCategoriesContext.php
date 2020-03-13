@@ -30,7 +30,6 @@ final class ManagingShippingCategoriesContext implements Context
     public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
-        $this->client->setResource('shipping_categories');
         $this->responseChecker = $responseChecker;
     }
 
@@ -226,6 +225,30 @@ final class ManagingShippingCategoriesContext implements Context
             $this->responseChecker->hasValue($this->client->getResponse(), 'name', $name),
             sprintf('Shipping category with name %s does not exists', $name)
         );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool

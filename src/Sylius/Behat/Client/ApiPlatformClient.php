@@ -34,14 +34,10 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var array */
     private $filters;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
+    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $resource)
     {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
-    }
-
-    public function setResource(string $resource): void
-    {
         $this->resource = $resource;
     }
 

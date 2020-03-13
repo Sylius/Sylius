@@ -30,7 +30,6 @@ final class ManagingCustomerGroupsContext implements Context
     public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
-        $this->client->setResource('customer_groups');
         $this->responseChecker = $responseChecker;
     }
 
@@ -210,6 +209,30 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $code = $customerGroup->getCode();
         Assert::false($this->isItemOnIndex('code', $code), sprintf('Customer group with code %s exist', $code));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool

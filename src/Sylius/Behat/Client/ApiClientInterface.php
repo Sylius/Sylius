@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
-    public function setResource(string $resource): void;
-
     public function index(): void;
 
     public function showByIri(string $iri): void;

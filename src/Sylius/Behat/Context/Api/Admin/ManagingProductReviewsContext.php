@@ -37,7 +37,6 @@ final class ManagingProductReviewsContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->client->setResource('product_reviews');
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -201,6 +200,22 @@ final class ManagingProductReviewsContext implements Context
     public function thisProductReviewShouldStillHaveAComment(ReviewInterface $productReview, string $comment): void
     {
         $this->assertIfReviewHasElementWithValue($productReview, 'comment', $comment);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool

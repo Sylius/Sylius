@@ -16,7 +16,6 @@ default:
                 - sylius.behat.context.setup.currency
 
                 - sylius.behat.context.api.admin.managing_currencies
-                - sylius.behat.context.api.admin.notification
 
             filters:
                 tags: "@managing_currencies && @api"
