@@ -149,7 +149,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldBeNotifiedThatThePaymentHasBeenCompleted(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()), 'Resource could not be completed');
     }
 
     /**
