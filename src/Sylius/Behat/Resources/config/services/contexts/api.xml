@@ -20,18 +20,18 @@
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.currency" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_exchange_rates" class="Sylius\Behat\Context\Api\Admin\ManagingExchangeRatesContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.exchange_rate" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_product_options" class="Sylius\Behat\Context\Api\Admin\ManagingProductOptionsContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.product_option" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
@@ -42,7 +42,7 @@
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.tax_category" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
@@ -52,28 +52,23 @@
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.shipping_category" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_product_reviews" class="Sylius\Behat\Context\Api\Admin\ManagingProductReviewsContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.product_review" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="sylius.behat.context.api.admin.notification" class="Sylius\Behat\Context\Api\Admin\NotificationContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-        </service>
-
         <service id="sylius.behat.context.api.admin.managing_customer_groups" class="Sylius\Behat\Context\Api\Admin\ManagingCustomerGroupsContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.customer_group" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_payments" class="Sylius\Behat\Context\Api\Admin\ManagingPaymentsContext">
-            <argument type="service" id="Sylius\Behat\Client\ApiClientInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.payment" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
         </service>

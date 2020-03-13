@@ -37,7 +37,6 @@ final class ManagingProductOptionsContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->client->setResource('product_options');
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -281,5 +280,21 @@ final class ManagingProductOptionsContext implements Context
             $this->responseChecker->getError($this->client->getResponse()),
             sprintf('%s: Please enter option %s.', $element, $element)
         );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
     }
 }

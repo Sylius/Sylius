@@ -40,7 +40,6 @@ final class ManagingPaymentsContext implements Context
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->client->setResource('payments');
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
