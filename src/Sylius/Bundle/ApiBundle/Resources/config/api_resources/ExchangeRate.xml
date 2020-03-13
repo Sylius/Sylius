@@ -1,23 +1,33 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
-
-    <resource
-        class="%sylius.model.exchange_rate.class%"
-        shortName="ExchangeRate"
-    >
-        <attribute name="validation_groups">sylius</attribute>
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.exchange_rate.class%" shortName="ExchangeRate">
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>exchange_rate:read</attribute>
             </attribute>
         </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
         <collectionOperations>
             <collectionOperation name="get" >
                 <attribute name="filters">
-                    <attribute>exchange_rate_filter</attribute>
+                    <attribute>sylius.api.exchange_rate_filter</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">
@@ -26,6 +36,7 @@
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="put">
@@ -35,6 +46,7 @@
             </itemOperation>
             <itemOperation name="delete" />
         </itemOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="ratio" identifier="false" required="true" />
         <property name="sourceCurrency" identifier="false" required="true" />
