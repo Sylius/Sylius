@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,12 +29,19 @@ final class ManagingPaymentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var IriConverterInterface */
     private $iriConverter;
 
-    public function __construct(ApiClientInterface $client, IriConverterInterface $iriConverter)
-    {
+    public function __construct(
+        ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
+    ) {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
 
@@ -43,7 +51,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index('payments');
+        $this->client->index();
     }
 
     /**
@@ -55,7 +63,6 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         $this->client->applyTransition(
-            'payments',
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE
         );
@@ -82,7 +89,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iFilter(): void
     {
-        $this->client->filter('payments');
+        $this->client->filter();
     }
 
     /**
@@ -91,7 +98,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldSeePaymentsInTheList(int $count = 1): void
     {
-        Assert::same($this->client->countCollectionItems(), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -102,12 +109,24 @@ final class ManagingPaymentsContext implements Context
         string $paymentState,
         CustomerInterface $customer
     ): void {
-        foreach ($this->client->getCollectionItemsWithValue('state', StringInflector::nameToLowercaseCode($paymentState)) as $payment) {
+        $payments = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'state',
+            StringInflector::nameToLowercaseCode($paymentState)
+        );
+
+        foreach ($payments as $payment) {
             $this->client->showByIri($payment['order']);
-            if (
-                $this->client->responseHasValue('number', $orderNumber) &&
-                $this->client->relatedResourceHasValue('customer', 'email', $customer->getEmail())
-            ) {
+            $orderResponse = $this->client->getLastResponse();
+
+            if (!$this->responseChecker->hasValue($orderResponse, 'number', $orderNumber)) {
+                continue;
+            }
+
+            $this->client->showByIri($this->responseChecker->getValue($orderResponse, 'customer'));
+            $customerResponse = $this->client->getLastResponse();
+
+            if ($this->responseChecker->hasValue($customerResponse, 'email', $customer->getEmail())) {
                 return;
             }
         }
@@ -120,9 +139,9 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldSeePaymentForTheOrderInTheList(string $orderNumber, int $position): void
     {
-        Assert::true(
-            $this->client->hasItemOnPositionWithValue($position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber))
-        );
+        Assert::true($this->responseChecker->hasItemOnPositionWithValue(
+            $this->client->getLastResponse(), $position - 1, 'order', sprintf('/new-api/orders/%s', $orderNumber)
+        ));
     }
 
     /**
@@ -130,7 +149,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldBeNotifiedThatThePaymentHasBeenCompleted(): void
     {
-        Assert::true($this->client->isUpdateSuccessful());
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -141,8 +160,10 @@ final class ManagingPaymentsContext implements Context
         $payment = $order->getLastPayment();
         Assert::notNull($payment);
 
-        $this->client->show('payments', (string) $payment->getId());
-        Assert::true($this->client->responseHasValue('state', StringInflector::nameToLowercaseCode($paymentState)));
+        $this->client->show((string) $payment->getId());
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->getLastResponse(), 'state', StringInflector::nameToLowercaseCode($paymentState))
+        );
     }
 
     /**
@@ -150,7 +171,9 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
-        Assert::true($this->client->hasItemWithValue('order', $this->iriConverter->getIriFromItem($order)));
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(), 'order', $this->iriConverter->getIriFromItem($order))
+        );
     }
 
     /**
@@ -158,6 +181,8 @@ final class ManagingPaymentsContext implements Context
      */
     public function iShouldNotSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
-        Assert::false($this->client->hasItemWithValue('order', $this->iriConverter->getIriFromItem($order)));
+        Assert::false($this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(), 'order', $this->iriConverter->getIriFromItem($order))
+        );
     }
 }

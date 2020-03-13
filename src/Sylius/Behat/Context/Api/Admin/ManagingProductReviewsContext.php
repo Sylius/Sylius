@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
@@ -24,14 +25,19 @@ final class ManagingProductReviewsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -41,7 +47,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToBrowseProductReviews(): void
     {
-        $this->client->index('product_reviews');
+        $this->client->index();
     }
 
     /**
@@ -49,7 +55,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
     {
-        $this->client->buildUpdateRequest('product_reviews', (string) $productReview->getId());
+        $this->client->buildUpdateRequest((string) $productReview->getId());
     }
 
     /**
@@ -92,7 +98,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition('product_reviews', (string) $productReview->getId(), $state);
+        $this->client->applyTransition((string) $productReview->getId(), $state);
     }
 
     /**
@@ -102,7 +108,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->sharedStorage->set('product_review_id', $productReview->getId());
 
-        $this->client->delete('product_reviews', (string) $productReview->getId());
+        $this->client->delete((string) $productReview->getId());
     }
 
     /**
@@ -122,7 +128,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeReviewsInTheList(int $amount = 1): void
     {
-        Assert::same($this->client->countCollectionItems(), $amount);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amount);
     }
 
     /**
@@ -174,7 +180,10 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::contains($this->client->getError(), sprintf('%s: Review %s should not be blank', $element, $element));
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s: Review %s should not be blank', $element, $element)
+        );
     }
 
     /**
@@ -193,19 +202,35 @@ final class ManagingProductReviewsContext implements Context
         $this->assertIfReviewHasElementWithValue($productReview, 'comment', $comment);
     }
 
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+    }
+
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index('product_reviews');
+        $this->client->index();
 
-        return $this->client->hasItemWithValue($property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }
 
     /** @param string|int $value */
     private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
     {
-        $this->client->show('product_reviews', (string) $productReview->getId());
+        $this->client->show((string) $productReview->getId());
         Assert::true(
-            $this->client->responseHasValue($element, $value),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), $element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
     }

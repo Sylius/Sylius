@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
@@ -23,14 +24,19 @@ final class ManagingExchangeRatesContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
+        ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -39,7 +45,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iWantToAddNewExchangeRate(): void
     {
-        $this->client->buildCreateRequest('exchange_rates');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -48,7 +54,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
-        $this->client->buildUpdateRequest('exchange_rates', $exchangeRate->getId());
+        $this->client->buildUpdateRequest($exchangeRate->getId());
 
         $this->sharedStorage->set('exchange_rate_id', $exchangeRate->getId());
     }
@@ -60,7 +66,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iBrowseExchangeRatesOfTheStore(): void
     {
-        $this->client->index('exchange_rates');
+        $this->client->index();
     }
 
     /**
@@ -119,7 +125,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate) : void
     {
-        $this->client->delete('exchange_rates', $exchangeRate->getId());
+        $this->client->delete($exchangeRate->getId());
     }
 
     /**
@@ -135,7 +141,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iFilter(): void
     {
-        $this->client->filter('exchange_rates');
+        $this->client->filter();
     }
 
     /**
@@ -143,7 +149,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeExchangeRatesOnTheList(int $count): void
     {
-        Assert::count($this->client->getCollectionItems(), $count);
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -152,8 +158,8 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeASingleExchangeRateInTheList(): void
     {
-        $this->client->index('exchange_rates');
-        Assert::count($this->client->getCollectionItems(), 1);
+        $this->client->index();
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
     /**
@@ -194,10 +200,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function itShouldHaveARatioOf(float $ratio): void
     {
-        $this->client->index('exchange_rates');
+        $this->client->index();
 
         Assert::true(
-            $this->client->hasItemWithValue('ratio', $ratio),
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'ratio', (float) $ratio),
             sprintf('ExchangeRate with ratio %s does not exist', $ratio)
         );
     }
@@ -229,7 +235,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): void {
-        $this->client->index('exchange_rates');
+        $this->client->index();
 
         Assert::null($this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency));
     }
@@ -268,7 +274,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
-        Assert::contains($this->client->getError(), sprintf('%s: Please enter exchange rate %s.', $element, $element));
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s: Please enter exchange rate %s.', $element, $element)
+        );
     }
 
     /**
@@ -276,7 +285,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
-        Assert::contains($this->client->getError(), 'The ratio must be greater than 0.');
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The ratio must be greater than 0.'
+        );
     }
 
     /**
@@ -284,7 +296,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer(): void
     {
-        Assert::contains($this->client->getError(), 'The source and target currencies must differ.');
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The source and target currencies must differ.'
+        );
     }
 
     /**
@@ -292,19 +307,48 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique(): void
     {
-        Assert::contains($this->client->getError(), 'The currency pair must be unique.');
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The currency pair must be unique.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function assertIfNotBeAbleToEditItCurrency(string $currencyType): void
     {
-        $this->client->buildUpdateRequest('exchange_rates', $this->sharedStorage->get('exchange_rate_id'));
+        $this->client->buildUpdateRequest($this->sharedStorage->get('exchange_rate_id'));
 
         $this->client->addRequestData($currencyType, '/new-api/currencies/EUR');
         $this->client->update();
 
-        $this->client->index('exchange_rates');
+        $this->client->index();
         Assert::false(
-            $this->client->hasItemOnPositionWithValue(0, $currencyType, '/new-api/currencies/EUR'),
+            $this->responseChecker->hasItemOnPositionWithValue(
+                $this->client->getLastResponse(), 0, $currencyType, '/new-api/currencies/EUR'
+            ),
             sprintf('It was possible to change %s', $currencyType)
         );
     }
@@ -313,10 +357,10 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): ?array {
-        $this->client->index('exchange_rates');
+        $this->client->index();
 
         /** @var array $item */
-        foreach ($this->client->getCollectionItems() as $item)
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $item)
         {
             if (
                 $item['sourceCurrency'] === '/new-api/currencies/' . $sourceCurrency->getCode() &&
