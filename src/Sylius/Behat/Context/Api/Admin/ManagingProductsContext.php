@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
@@ -22,9 +23,13 @@ final class ManagingProductsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    public function __construct(ApiClientInterface $client)
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
+    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
     {
         $this->client = $client;
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -32,7 +37,7 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {
-        $this->client->buildCreateRequest('products');
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -45,27 +50,39 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
-     * @When I rename it to :name in :language
+     * @When I name it :name in :localeCode
+     * @When I rename it to :name in :localeCode
      */
-    public function iRenameItToIn(string $name, string $language): void
+    public function iRenameItToIn(string $name, string $localeCode): void
     {
-        $data = ['translations' => [$language => ['locale' => $language]]];
-        $data['translations'][$language]['name'] = $name;
+        $data = [
+            'translations' => [
+                $localeCode => [
+                    'locale' => $localeCode,
+                    'name' => $name,
+                ],
+            ],
+        ];
 
-        $this->client->addCompoundRequestData($data);
+        $this->client->updateRequestData($data);
     }
 
     /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :language
+     * @When I set its slug to :slug in :localeCode
      * @When I remove its slug
      */
-    public function iSetItsSlugTo(?string $slug = null, $language = 'en_US'): void
+    public function iSetItsSlugTo(?string $slug = null, $localeCode = 'en_US'): void
     {
-        $data = ['translations' => [$language => ['slug' => $slug]]];
+        $data = [
+            'translations' => [
+                $localeCode => [
+                    'slug' => $slug,
+                ],
+            ],
+        ];
 
-        $this->client->addCompoundRequestData($data);
+        $this->client->updateRequestData($data);
     }
 
     /**
@@ -85,8 +102,20 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldAppearInTheShop(string $productName): void
     {
-        $this->client->index('products');
+        $this->client->index();
 
-        Assert::true($this->client->hasItemWithTranslation('en_US', 'name', $productName));
+        Assert::true(
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($this->client->getLastResponse(),'en_US', 'name', $productName)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 }

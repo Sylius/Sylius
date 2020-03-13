@@ -9,17 +9,20 @@
         shortName="ProductTranslation"
     >
         <attribute name="validation_groups">sylius</attribute>
+
         <collectionOperations />
+
         <itemOperations>
             <itemOperation name="get" />
         </itemOperations>
+
         <property name="id" identifier="true" writable="false" />
-        <property name="name" identifier="false" required="true" />
-        <property name="locale" identifier="false" required="true" />
-        <property name="slug" identifier="false" required="true" />
-        <property name="description" identifier="false" required="false" />
-        <property name="metaKeywords" identifier="false" required="false" />
-        <property name="metaDescription" identifier="false" required="false" />
-        <property name="shortDescription" identifier="false" required="false" />
+        <property name="name" required="true" />
+        <property name="locale" required="true" />
+        <property name="slug" required="true" />
+        <property name="description" required="false" />
+        <property name="metaKeywords" required="false" />
+        <property name="metaDescription" required="false" />
+        <property name="shortDescription" required="false" />
     </resource>
 </resources>

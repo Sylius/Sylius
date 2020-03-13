@@ -21,7 +21,6 @@
         <attribute name="translations">
             <group>product:read</group>
             <group>product:create</group>
-            <group>product:update</group>
         </attribute>
     </class>
 </serializer>
