@@ -73,7 +73,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iChooseAsAPaymentState(string $state): void
     {
-        $this->client->buildFilter(['state' => $state]);
+        $this->client->addFilter('state', $state);
     }
 
     /**
@@ -81,7 +81,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
-        $this->client->buildFilter(['order.channel.code' => $channel->getCode()]);
+        $this->client->addFilter('order.channel.code', $channel->getCode());
     }
 
     /**

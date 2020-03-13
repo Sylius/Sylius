@@ -133,7 +133,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseCurrencyAsACurrencyFilter(CurrencyInterface $currency): void
     {
-        $this->client->buildFilter(['currencyCode' => $currency->getCode()]);
+        $this->client->addFilter('currencyCode', $currency->getCode());
     }
 
     /**
