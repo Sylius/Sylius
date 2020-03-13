@@ -127,7 +127,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'code: The shipping category with given code already exists.'
         );
     }
@@ -138,7 +138,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::same(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter shipping category %s.', $element, $element)
         );
     }
@@ -150,7 +150,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
         $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -199,7 +199,7 @@ final class ManagingShippingCategoriesContext implements Context
         $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
             'The shipping category code should not be changed to "NEW_CODE", but it is'
         );
     }
@@ -211,7 +211,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         $this->client->index();
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->getResponse(), 'code', $code)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'code', $code)),
             1
         );
     }
@@ -222,7 +222,7 @@ final class ManagingShippingCategoriesContext implements Context
     public function thisShippingCategoryNameShouldBe(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $name),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name),
             sprintf('Shipping category with name %s does not exists', $name)
         );
     }
@@ -232,7 +232,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -240,7 +240,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -248,13 +248,13 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index();
 
-        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }
 }

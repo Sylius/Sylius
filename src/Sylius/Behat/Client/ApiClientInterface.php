@@ -48,5 +48,5 @@ interface ApiClientInterface
 
     public function updateRequestData(array $data): void;
 
-    public function getResponse(): Response;
+    public function getLastResponse(): Response;
 }

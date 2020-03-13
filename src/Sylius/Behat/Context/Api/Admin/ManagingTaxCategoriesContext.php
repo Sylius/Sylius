@@ -156,7 +156,7 @@ final class ManagingTaxCategoriesContext implements Context
         $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist'
         );
     }
@@ -169,7 +169,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->client->show($taxCategory->getCode());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $taxCategoryName),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $taxCategoryName),
             sprintf('Tax category name is not %s', $taxCategoryName)
         );
     }
@@ -180,7 +180,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'code: The tax category with given code already exists.'
         );
     }
@@ -192,7 +192,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->client->index();
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->getResponse(), $element, $value)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), $element, $value)),
             1
         );
     }
@@ -203,7 +203,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter tax category %s.', $element, $element)
         );
     }
@@ -221,7 +221,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldSeeSingleTaxCategoryInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
     /**
@@ -229,7 +229,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -237,7 +237,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -245,13 +245,13 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index();
 
-        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }
 }

@@ -118,7 +118,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'code', $customerGroup->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
         );
     }
@@ -131,7 +131,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
             sprintf('Customer group with name %s does not exist', $name)
         );
     }
@@ -143,7 +143,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
         $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $amountOfCustomerGroups);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amountOfCustomerGroups);
     }
 
     /**
@@ -153,7 +153,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         $this->client->show($customerGroup->getCode());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'name', $name),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name),
             'Customer groups name is not ' . $name
         );
     }
@@ -164,7 +164,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatNameIsRequired(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'name: Please enter a customer group name.'
         );
     }
@@ -175,7 +175,7 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'Customer group code has to be unique.'
         );
     }
@@ -185,7 +185,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeInformedThatThisFormContainsErrors(): void
     {
-        Assert::notEmpty($this->responseChecker->getError($this->client->getResponse()));
+        Assert::notEmpty($this->responseChecker->getError($this->client->getLastResponse()));
     }
 
     /**
@@ -197,7 +197,7 @@ final class ManagingCustomerGroupsContext implements Context
         $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist'
         );
     }
@@ -216,7 +216,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -224,7 +224,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -232,13 +232,13 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index();
 
-        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }
 }
