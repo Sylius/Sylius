@@ -35,11 +35,20 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="filters">
+                    <attribute>sylius.api.search_shipment_filter</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="ship">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipments/{id}/ship</attribute>
+                <attribute name="controller">sylius.api.shipment_machine_transition_applicator::ship</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" />

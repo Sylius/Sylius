@@ -20,7 +20,7 @@ Feature: Filtering shipments by state
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Shipped"
         When I browse shipments
         And I choose "Shipped" as a shipment state
