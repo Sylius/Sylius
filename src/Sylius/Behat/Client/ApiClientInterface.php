@@ -17,29 +17,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
-    public function index(): void;
+    public function index(): Response;
 
-    public function showByIri(string $iri): void;
+    public function showByIri(string $iri): Response;
 
-    public function subResourceIndex(string $subResource, string $id): void;
+    public function subResourceIndex(string $subResource, string $id): Response;
 
-    public function show(string $id): void;
+    public function show(string $id): Response;
 
-    public function create(): void;
+    public function create(): Response;
 
-    public function update(): void;
+    public function update(): Response;
 
-    public function delete(string $id): void;
+    public function delete(string $id): Response;
 
-    public function filter(): void;
+    public function filter(): Response;
 
-    public function applyTransition(string $id, string $transition): void;
+    public function applyTransition(string $id, string $transition): Response;
 
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;
 
-    public function buildFilter(array $filters): void;
+    /** @param string|int $value */
+    public function addFilter(string $key, $value): void;
 
     /** @param string|int $value */
     public function addRequestData(string $key, $value): void;

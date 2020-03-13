@@ -29,6 +29,9 @@ final class Request implements RequestInterface
     /** @var array */
     private $content = [];
 
+    /** @var array */
+    private $filters = [];
+
     private function __construct(string $url, string $method, array $headers = [])
     {
         $this->url = $url;
@@ -128,6 +131,16 @@ final class Request implements RequestInterface
     public function updateContent(array $newValues): void
     {
         $this->content = $this->mergeArraysUniquely($this->content, $newValues);
+    }
+
+    public function filters(): array
+    {
+        return $this->filters;
+    }
+
+    public function updateFilters(array $newFilters): void
+    {
+        $this->filters = $this->mergeArraysUniquely($this->filters, $newFilters);
     }
 
     public function addSubResource(string $key, array $subResource): void

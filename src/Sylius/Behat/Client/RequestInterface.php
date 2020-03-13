@@ -43,5 +43,9 @@ interface RequestInterface
 
     public function updateContent(array $newValues): void;
 
+    public function filters(): array;
+
+    public function updateFilters(array $newFilters): void;
+
     public function addSubResource(string $key, array $subResource): void;
 }
