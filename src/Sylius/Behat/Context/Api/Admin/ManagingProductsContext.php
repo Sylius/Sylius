@@ -25,12 +25,19 @@ final class ManagingProductsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $productReviewClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        ApiClientInterface $client,
+        ApiClientInterface $productReviewClient,
+        ResponseCheckerInterface $responseChecker
+    ) {
         $this->client = $client;
+        $this->productReviewClient = $productReviewClient;
         $this->responseChecker = $responseChecker;
     }
 
@@ -131,6 +138,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
      * @Given I am browsing products
      * @When I browse products
      * @When I want to browse products
@@ -146,7 +161,7 @@ final class ManagingProductsContext implements Context
      */
     public function iDeleteProduct(ProductInterface $product): void
     {
-        $this->client->delete('products', $product->getCode());
+        $this->client->delete($product->getCode());
     }
 
     /**
@@ -154,7 +169,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductsInTheList(int $count): void
     {
-        Assert::count($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -187,6 +202,29 @@ final class ManagingProductsContext implements Context
     public function productShouldNotExist(ProductInterface $product): void
     {
         $this->client->index();
-        $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $product->getCode());
+        Assert::false(
+            $this
+                ->responseChecker
+                ->hasItemWithValue($this->client->getLastResponse(), 'code', $product->getCode())
+        );
+    }
+
+    /**
+     * @Then /^there should be no reviews of (this product)$/
+     */
+    public function thereAreNoProductReviews(ProductInterface $product): void
+    {
+        $this->productReviewClient->index();
+        Assert::true(
+            empty(
+                $this
+                    ->responseChecker
+                    ->getCollectionItemsWithValue(
+                        $this->productReviewClient->getLastResponse(),
+                        'reviewSubject',
+                        '/new-api/products/' . $product->getCode()
+                )
+            )
+        );
     }
 }

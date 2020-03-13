@@ -48,6 +48,7 @@
 
         <service id="sylius.behat.context.api.admin.managing_products" class="Sylius\Behat\Context\Api\Admin\ManagingProductsContext">
             <argument type="service" id="sylius.behat.api_platform_client.products" />
+            <argument type="service" id="sylius.behat.api_platform_client.product_review" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
