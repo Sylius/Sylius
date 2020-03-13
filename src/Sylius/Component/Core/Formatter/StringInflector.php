@@ -20,6 +20,11 @@ final class StringInflector
         return str_replace([' ', '-'], '_', $value);
     }
 
+    public static function nameToSlug(string $value): string
+    {
+        return str_replace([' '], '-', strtolower($value));
+    }
+
     public static function nameToLowercaseCode(string $value): string
     {
         return strtolower(self::nameToCode($value));

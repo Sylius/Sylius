@@ -57,9 +57,11 @@ final class ProductOptionContext implements Context
      * @Given the store has (also) a product option :name
      * @Given the store has a product option :name with a code :code
      */
-    public function theStoreHasAProductOptionWithACode($name, $code = null)
+    public function theStoreHasAProductOptionWithACode(string $name, ?string $code = null): void
     {
-        $this->createProductOption($name, $code);
+        $productOption = $this->createProductOption($name, $code);
+
+        $this->sharedStorage->set('product_option', $productOption);
     }
 
     /**

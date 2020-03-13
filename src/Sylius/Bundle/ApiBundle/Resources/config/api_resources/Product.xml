@@ -26,7 +26,7 @@
         <collectionOperations>
             <collectionOperation name="get">
                 <attribute name="filters">
-                    <attribute>product_taxon_code</attribute>
+                    <attribute>sylius.api.product_taxon_code_filter</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">
@@ -38,6 +38,11 @@
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">product:update</attribute>
+                </attribute>
+            </itemOperation>
             <itemOperation name="delete" />
         </itemOperations>
 
@@ -48,5 +53,7 @@
         <property name="translations" readable="true" writable="true" />
         <property name="productTaxons" readable="true" writable="true" />
         <property name="reviews" required="false" />
+        <property name="options" required="false" />
+        <property name="channels" required="false" />
     </resource>
 </resources>

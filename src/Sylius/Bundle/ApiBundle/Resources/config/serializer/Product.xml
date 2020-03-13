@@ -32,6 +32,7 @@
         <attribute name="translations">
             <group>product:read</group>
             <group>product:create</group>
+            <group>product:update</group>
         </attribute>
         <attribute name="productTaxons">
             <group>product:read</group>
@@ -40,6 +41,11 @@
         <attribute name="reviews">
             <group>product:read</group>
             <group>product:create</group>
+        </attribute>
+        <attribute name="options">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
         </attribute>
     </class>
 </serializer>

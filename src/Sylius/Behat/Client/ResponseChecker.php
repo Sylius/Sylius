@@ -80,7 +80,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, string $value): bool
+    public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool
     {
         return $this->getCollection($response)[$position][$key] === $value;
     }
