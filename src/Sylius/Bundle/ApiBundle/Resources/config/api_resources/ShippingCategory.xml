@@ -1,19 +1,29 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
-
-    <resource
-        class="%sylius.model.shipping_category.class%"
-        shortName="ShippingCategory"
-    >
-        <attribute name="validation_groups">sylius</attribute>
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.shipping_category.class%" shortName="ShippingCategory">
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipping_category:read</attribute>
             </attribute>
         </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
         <collectionOperations>
             <collectionOperation name="get" />
             <collectionOperation name="post">
@@ -22,6 +32,7 @@
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="put">
@@ -31,6 +42,7 @@
             </itemOperation>
             <itemOperation name="delete" />
         </itemOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" identifier="false" required="true" />
