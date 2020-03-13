@@ -15,7 +15,7 @@ namespace Sylius\Behat\Client;
 
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
-final class Request
+final class Request implements RequestInterface
 {
     /** @var string */
     private $url;
@@ -36,12 +36,12 @@ final class Request
         $this->headers = array_merge($this->headers, $headers);
     }
 
-    public static function index(string $resource, string $token): self
+    public static function index(string $resource, string $token): RequestInterface
     {
         return new self('/new-api/'.$resource, HttpRequest::METHOD_GET, ['HTTP_Authorization' => 'Bearer '.$token]);
     }
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): self
+    public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource),
@@ -50,7 +50,7 @@ final class Request
         );
     }
 
-    public static function show(string $resource, string $id, string $token): self
+    public static function show(string $resource, string $id, string $token): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
@@ -59,7 +59,7 @@ final class Request
         );
     }
 
-    public static function create(string $resource, string $token): self
+    public static function create(string $resource, string $token): RequestInterface
     {
         return new self(
             '/new-api/'.$resource,
@@ -68,7 +68,7 @@ final class Request
         );
     }
 
-    public static function update(string $resource, string $id, string $token): self
+    public static function update(string $resource, string $id, string $token): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
@@ -77,7 +77,7 @@ final class Request
         );
     }
 
-    public static function delete(string $resource, string $id, string $token): self
+    public static function delete(string $resource, string $id, string $token): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
@@ -86,7 +86,7 @@ final class Request
         );
     }
 
-    public static function transition(string $resource, string $id, string $transition, string $token): self
+    public static function transition(string $resource, string $id, string $transition, string $token): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
@@ -95,7 +95,7 @@ final class Request
         );
     }
 
-    public static function custom(string $url, string $method, string $token): self
+    public static function custom(string $url, string $method, string $token): RequestInterface
     {
         return new self($url, $method, ['HTTP_Authorization' => 'Bearer '.$token]);
     }

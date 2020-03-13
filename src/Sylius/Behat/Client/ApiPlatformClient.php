@@ -28,7 +28,7 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var string */
     private $resource;
 
-    /** @var Request */
+    /** @var RequestInterface */
     private $request;
 
     /** @var array */
@@ -132,7 +132,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
-    private function request(Request $request): void
+    private function request(RequestInterface $request): void
     {
         $this->client->request($request->method(), $request->url(), [], [], $request->headers(), $request->content() ?? null);
     }
