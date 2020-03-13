@@ -39,7 +39,8 @@ interface ApiClientInterface
 
     public function buildUpdateRequest(string $id): void;
 
-    public function buildFilter(array $filters): void;
+    /** @param string|int $value */
+    public function addFilter(string $key, $value): void;
 
     /** @param string|int $value */
     public function addRequestData(string $key, $value): void;

@@ -31,9 +31,6 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var RequestInterface */
     private $request;
 
-    /** @var array */
-    private $filters;
-
     public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $resource)
     {
         $this->client = $client;
@@ -43,7 +40,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function index(): void
     {
-        $this->request(Request::index($this->resource, $this->sharedStorage->get('token')));
+        $this->request = Request::index($this->resource, $this->sharedStorage->get('token'));
+        $this->request($this->request);
     }
 
     public function showByIri(string $iri): void
@@ -78,10 +76,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function filter(): void
     {
-        $query = http_build_query($this->filters, '', '&', PHP_QUERY_RFC3986);
-        $path = sprintf('/new-api/%s?%s', $this->resource, $query);
-
-        $this->request(Request::custom($path, 'GET', $this->sharedStorage->get('token')));
+        $this->request($this->request);
     }
 
     public function applyTransition(string $id, string $transition): void
@@ -102,9 +97,10 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
-    public function buildFilter(array $filters): void
+    /** @param string|int $value */
+    public function addFilter(string $key, $value): void
     {
-        $this->filters = $filters;
+        $this->request->updateFilters([$key => $value]);
     }
 
     /** @param string|int $value */
@@ -130,6 +126,6 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(RequestInterface $request): void
     {
-        $this->client->request($request->method(), $request->url(), [], [], $request->headers(), $request->content() ?? null);
+        $this->client->request($request->method(), $request->url(), $request->filters(), [], $request->headers(), $request->content() ?? null);
     }
 }
