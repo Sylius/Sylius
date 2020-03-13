@@ -37,6 +37,8 @@ final class OrderContext implements Context
 
     /**
      * @Transform :order
+     * @Transform /^"([^"]+)" order$/
+     * @Transform /^order "([^"]+)"$/
      */
     public function getOrderByNumber(string $orderNumber): OrderInterface
     {
@@ -51,7 +53,7 @@ final class OrderContext implements Context
     /**
      * @Transform /^latest order$/
      */
-    public function getLatestOrder()
+    public function getLatestOrder(): OrderInterface
     {
         $orders = $this->orderRepository->findLatest(1);
 
@@ -65,7 +67,7 @@ final class OrderContext implements Context
      * @Transform /^order placed by "([^"]+)"$/
      * @Transform /^the order of "([^"]+)"$/
      */
-    public function getOrderByCustomer($email)
+    public function getOrderByCustomer(string $email): OrderInterface
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         Assert::notNull($customer, sprintf('Cannot find customer with email %s.', $email));
@@ -82,7 +84,7 @@ final class OrderContext implements Context
      * @Transform /^the order "([^"]+)"$/
      * @Transform /^the "([^"]+)" order$/
      */
-    public function getOrderNumber($orderNumber)
+    public function getOrderNumber(string $orderNumber): string
     {
         return str_replace('#', '', $orderNumber);
     }

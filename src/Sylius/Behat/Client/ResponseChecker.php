@@ -100,6 +100,17 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    public function hasItemWithValues(Response $response, array $parameters): bool
+    {
+        foreach ($this->getCollection($response) as $item) {
+            if ($this->itemHasValues($item, $parameters)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function getResponseContentValue(Response $response, string $key)
     {
         $content = json_decode($response->getContent(), true);
@@ -107,5 +118,15 @@ final class ResponseChecker implements ResponseCheckerInterface
         Assert::keyExists($content, $key);
 
         return $content[$key];
+    }
+
+    private function itemHasValues(array $element, array $parameters): bool {
+        foreach ($parameters as $key => $value) {
+            if ($element[$key] !== $value) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
