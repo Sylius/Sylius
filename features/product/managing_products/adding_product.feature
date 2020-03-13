@@ -69,7 +69,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
 
-    @ui
+    @ui @api
     Scenario: Adding a new configurable product without options
         Given I want to create a new configurable product
         When I specify its code as "WHISKEY_GENTLEMEN"
