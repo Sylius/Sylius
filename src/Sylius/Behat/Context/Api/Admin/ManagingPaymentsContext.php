@@ -160,10 +160,11 @@ final class ManagingPaymentsContext implements Context
         $payment = $order->getLastPayment();
         Assert::notNull($payment);
 
-        $this->client->show((string) $payment->getId());
         Assert::true($this->responseChecker->hasValue(
-            $this->client->getLastResponse(), 'state', StringInflector::nameToLowercaseCode($paymentState))
-        );
+            $this->client->show((string) $payment->getId()),
+            'state',
+            StringInflector::nameToLowercaseCode($paymentState)
+        ));
     }
 
     /**
@@ -172,8 +173,10 @@ final class ManagingPaymentsContext implements Context
     public function iShouldSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->getLastResponse(), 'order', $this->iriConverter->getIriFromItem($order))
-        );
+            $this->client->getLastResponse(),
+            'order',
+            $this->iriConverter->getIriFromItem($order)
+        ));
     }
 
     /**
@@ -182,7 +185,9 @@ final class ManagingPaymentsContext implements Context
     public function iShouldNotSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
-            $this->client->getLastResponse(), 'order', $this->iriConverter->getIriFromItem($order))
-        );
+            $this->client->getLastResponse(),
+            'order',
+            $this->iriConverter->getIriFromItem($order)
+        ));
     }
 }
