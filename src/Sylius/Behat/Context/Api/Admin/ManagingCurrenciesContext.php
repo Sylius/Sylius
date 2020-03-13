@@ -118,6 +118,9 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Currency could not be created'
+        );
     }
 }

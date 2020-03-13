@@ -232,7 +232,10 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Shipping category could not be created'
+        );
     }
 
     /**
@@ -240,7 +243,10 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Shipping category could not be edited'
+        );
     }
 
     /**
@@ -248,7 +254,10 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Shipping category could not be deleted'
+        );
     }
 
     private function isItemOnIndex(string $property, string $value): bool

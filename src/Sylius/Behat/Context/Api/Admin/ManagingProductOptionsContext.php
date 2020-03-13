@@ -288,7 +288,10 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Product option could not be created'
+        );
     }
 
     /**
@@ -296,6 +299,9 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Product option could not be edited'
+        );
     }
 }
