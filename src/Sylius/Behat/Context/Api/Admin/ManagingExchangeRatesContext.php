@@ -158,8 +158,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeASingleExchangeRateInTheList(): void
     {
-        $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
     }
 
     /**
@@ -200,10 +199,8 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function itShouldHaveARatioOf(float $ratio): void
     {
-        $this->client->index();
-
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'ratio', (float) $ratio),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'ratio', (float) $ratio),
             sprintf('ExchangeRate with ratio %s does not exist', $ratio)
         );
     }
@@ -353,10 +350,9 @@ final class ManagingExchangeRatesContext implements Context
         $this->client->addRequestData($currencyType, '/new-api/currencies/EUR');
         $this->client->update();
 
-        $this->client->index();
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
-                $this->client->getLastResponse(), 0, $currencyType, '/new-api/currencies/EUR'
+                $this->client->index(), 0, $currencyType, '/new-api/currencies/EUR'
             ),
             sprintf('It was possible to change %s', $currencyType)
         );
@@ -366,10 +362,8 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): ?array {
-        $this->client->index();
-
         /** @var array $item */
-        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $item)
+        foreach ($this->responseChecker->getCollection($this->client->index()) as $item)
         {
             if (
                 $item['sourceCurrency'] === '/new-api/currencies/' . $sourceCurrency->getCode() &&

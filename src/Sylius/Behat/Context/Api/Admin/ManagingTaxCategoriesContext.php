@@ -153,10 +153,9 @@ final class ManagingTaxCategoriesContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
-        $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist'
         );
     }
@@ -167,9 +166,8 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
-        $this->client->show($taxCategory->getCode());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $taxCategoryName),
+            $this->responseChecker->hasValue($this->client->show($taxCategory->getCode()), 'name', $taxCategoryName),
             sprintf('Tax category name is not %s', $taxCategoryName)
         );
     }
@@ -190,9 +188,8 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
-        $this->client->index();
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), $element, $value)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), $element, $value)),
             1
         );
     }
@@ -259,8 +256,6 @@ final class ManagingTaxCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index();
-
-        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
     }
 }

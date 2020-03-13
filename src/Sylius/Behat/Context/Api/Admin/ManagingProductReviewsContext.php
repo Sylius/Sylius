@@ -226,17 +226,14 @@ final class ManagingProductReviewsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index();
-
-        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
     }
 
     /** @param string|int $value */
     private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
     {
-        $this->client->show((string) $productReview->getId());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), $element, $value),
+            $this->responseChecker->hasValue($this->client->show((string) $productReview->getId()), $element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
     }

@@ -81,9 +81,8 @@ final class ManagingCurrenciesContext implements Context
      */
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
-        $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $currencyName),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $currencyName),
             sprintf('There is no currency with name "%s"', $currencyName)
         );
     }
@@ -93,10 +92,10 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        $this->client->index();
-        Assert::eq(1, $this->responseChecker->countCollectionItems($this->client->getLastResponse()));
+        $response = $this->client->index();
+        Assert::same($this->responseChecker->countCollectionItems($response), 1);
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $code),
+            $this->responseChecker->hasItemWithValue($response, 'code', $code),
             sprintf('There is no currency with code "%s"', $code)
         );
     }
@@ -106,11 +105,12 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique(): void
     {
+        $response = $this->client->getLastResponse();
         Assert::false(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            $this->responseChecker->isCreationSuccessful($response),
             'Currency has been created successfully, but it should not'
         );
-        Assert::same($this->responseChecker->getError($this->client->getLastResponse()), 'code: Currency code must be unique.');
+        Assert::same($this->responseChecker->getError($response), 'code: Currency code must be unique.');
     }
 
     /**

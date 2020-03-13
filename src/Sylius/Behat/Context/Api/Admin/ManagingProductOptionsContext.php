@@ -162,9 +162,8 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->sharedStorage->set('product_option', $productOption);
 
-        $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
         );
     }
@@ -198,9 +197,8 @@ final class ManagingProductOptionsContext implements Context
      */
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
-        $this->client->index();
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $element, $value),
+            $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
             sprintf('Product option should not have %s "%s", but it does,', $element, $value)
         );
     }
@@ -210,15 +208,11 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
-        $this->client->index();
-        $itemsCount = $this->responseChecker->countCollectionItems($this->client->getLastResponse());
+        $response = $this->client->index();
+        $itemsCount = $this->responseChecker->countCollectionItems($response);
 
-        Assert::same(
-            1,
-            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
-            sprintf('Expected 1 product options, but got %d', $itemsCount)
-        );
-        Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $element, $value));
+        Assert::same($itemsCount, 1, sprintf('Expected 1 product options, but got %d', $itemsCount));
+        Assert::true($this->responseChecker->hasItemWithValue($response, $element, $value));
     }
 
     /**
@@ -227,8 +221,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
-        $this->client->show($productOption->getCode());
-        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+        Assert::true($this->responseChecker->hasValue($this->client->show($productOption->getCode()), 'name', $name));
     }
 
     /**
@@ -239,11 +232,12 @@ final class ManagingProductOptionsContext implements Context
         ProductOptionInterface $productOption,
         string $optionValueName
     ): void {
-        $this->client->subResourceIndex('values', $productOption->getCode());
-
-        Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', 'value', $optionValueName)
-        );
+        Assert::true($this->responseChecker->hasItemWithTranslation(
+            $this->client->subResourceIndex('values', $productOption->getCode()),
+            'en_US',
+            'value',
+            $optionValueName
+        ));
     }
 
     /**
@@ -252,9 +246,8 @@ final class ManagingProductOptionsContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
-        $this->client->update();
 
-        Assert::false($this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'));
+        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
     /**
@@ -262,12 +255,13 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
     {
+        $response = $this->client->getLastResponse();
         Assert::false(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            $this->responseChecker->isCreationSuccessful($response),
             'Product option has been created successfully, but it should not'
         );
         Assert::same(
-            $this->responseChecker->getError($this->client->getLastResponse()),
+            $this->responseChecker->getError($response),
             'code: The option with given code already exists.'
         );
     }
