@@ -15,13 +15,13 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Component\Core\Model\Customer">
-        <attribute name="id">
-            <group>customer:read</group>
+    <class name="Sylius\Component\Core\Model\Channel">
+        <attribute name="code">
+            <group>channel:read</group>
         </attribute>
 
-        <attribute name="email">
-            <group>customer:read</group>
+        <attribute name="name">
+            <group>channel:read</group>
         </attribute>
     </class>
 </serializer>
