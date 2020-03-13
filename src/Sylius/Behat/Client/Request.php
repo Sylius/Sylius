@@ -38,7 +38,7 @@ final class Request implements RequestInterface
 
     public static function index(string $resource, string $token): RequestInterface
     {
-        return new self('/new-api/'.$resource, HttpRequest::METHOD_GET, ['HTTP_Authorization' => 'Bearer '.$token]);
+        return new self('/new-api/' . $resource, HttpRequest::METHOD_GET, ['HTTP_Authorization' => 'Bearer ' . $token]);
     }
 
     public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): RequestInterface
@@ -46,7 +46,7 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource),
             HttpRequest::METHOD_GET,
-            ['HTTP_Authorization' => 'Bearer '.$token]
+            ['HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
@@ -55,7 +55,7 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
             HttpRequest::METHOD_GET,
-            ['HTTP_Authorization' => 'Bearer '.$token]
+            ['HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
@@ -64,7 +64,7 @@ final class Request implements RequestInterface
         return new self(
             '/new-api/'.$resource,
             HttpRequest::METHOD_POST,
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_Authorization' => 'Bearer '.$token]
+            ['CONTENT_TYPE' => 'application/json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
@@ -73,7 +73,7 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
             HttpRequest::METHOD_PUT,
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_Authorization' => 'Bearer '.$token]
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
@@ -82,7 +82,7 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/new-api/%s/%s', $resource, $id),
             HttpRequest::METHOD_DELETE,
-            ['HTTP_Authorization' => 'Bearer '.$token]
+            ['HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
@@ -91,13 +91,13 @@ final class Request implements RequestInterface
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
             HttpRequest::METHOD_PATCH,
-            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer '.$token]
+            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
     public static function custom(string $url, string $method, string $token): RequestInterface
     {
-        return new self($url, $method, ['HTTP_Authorization' => 'Bearer '.$token]);
+        return new self($url, $method, ['HTTP_Authorization' => 'Bearer ' . $token]);
     }
 
     public function url(): string
@@ -130,9 +130,9 @@ final class Request implements RequestInterface
         $this->content = $this->mergeArraysUniquely($this->content, $newValues);
     }
 
-    public function addSubResource(string $key, array $subresource): void
+    public function addSubResource(string $key, array $subResource): void
     {
-        $this->content[$key][] = $subresource;
+        $this->content[$key][] = $subResource;
     }
 
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array
@@ -143,6 +143,7 @@ final class Request implements RequestInterface
             }
             $firstArray[$key] = $value;
         }
+
         return $firstArray;
     }
 }

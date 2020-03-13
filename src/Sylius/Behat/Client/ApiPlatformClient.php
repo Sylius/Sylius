@@ -123,7 +123,7 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->addSubResource($key, $data);
     }
 
-    public function getResponse(): Response
+    public function getLastResponse(): Response
     {
         return $this->client->getResponse();
     }

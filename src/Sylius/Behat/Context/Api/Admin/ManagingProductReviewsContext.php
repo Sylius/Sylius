@@ -128,7 +128,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldSeeReviewsInTheList(int $amount = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), $amount);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amount);
     }
 
     /**
@@ -181,7 +181,7 @@ final class ManagingProductReviewsContext implements Context
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Review %s should not be blank', $element, $element)
         );
     }
@@ -207,7 +207,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -215,14 +215,14 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function isItemOnIndex(string $property, string $value): bool
     {
         $this->client->index();
 
-        return $this->responseChecker->hasItemWithValue($this->client->getResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
     }
 
     /** @param string|int $value */
@@ -230,7 +230,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->client->show((string) $productReview->getId());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getResponse(), $element, $value),
+            $this->responseChecker->hasValue($this->client->getLastResponse(), $element, $value),
             sprintf('Product review %s is not %s', $element, $value)
         );
     }

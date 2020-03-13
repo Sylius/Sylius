@@ -149,7 +149,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeExchangeRatesOnTheList(int $count): void
     {
-        Assert::count($this->responseChecker->getCollection($this->client->getResponse()), $count);
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -159,7 +159,7 @@ final class ManagingExchangeRatesContext implements Context
     public function iShouldSeeASingleExchangeRateInTheList(): void
     {
         $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getResponse()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
     /**
@@ -203,7 +203,7 @@ final class ManagingExchangeRatesContext implements Context
         $this->client->index();
 
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getResponse(), 'ratio', (float) $ratio),
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'ratio', (float) $ratio),
             sprintf('ExchangeRate with ratio %s does not exist', $ratio)
         );
     }
@@ -275,7 +275,7 @@ final class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter exchange rate %s.', $element, $element)
         );
     }
@@ -286,7 +286,7 @@ final class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'The ratio must be greater than 0.'
         );
     }
@@ -297,7 +297,7 @@ final class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'The source and target currencies must differ.'
         );
     }
@@ -308,7 +308,7 @@ final class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->client->getResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'The currency pair must be unique.'
         );
     }
@@ -318,7 +318,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -326,7 +326,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -334,7 +334,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function assertIfNotBeAbleToEditItCurrency(string $currencyType): void
@@ -347,7 +347,7 @@ final class ManagingExchangeRatesContext implements Context
         $this->client->index();
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
-                $this->client->getResponse(), 0, $currencyType, '/new-api/currencies/EUR'
+                $this->client->getLastResponse(), 0, $currencyType, '/new-api/currencies/EUR'
             ),
             sprintf('It was possible to change %s', $currencyType)
         );
@@ -360,7 +360,7 @@ final class ManagingExchangeRatesContext implements Context
         $this->client->index();
 
         /** @var array $item */
-        foreach ($this->responseChecker->getCollection($this->client->getResponse()) as $item)
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $item)
         {
             if (
                 $item['sourceCurrency'] === '/new-api/currencies/' . $sourceCurrency->getCode() &&

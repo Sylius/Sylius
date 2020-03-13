@@ -68,6 +68,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $this->getResponseContentValue($response, $key) === $value;
     }
 
+    /** @param string|int $value */
     public function hasItemWithValue(Response $response, string $key, $value): bool
     {
         foreach ($this->getCollection($response) as $resource) {

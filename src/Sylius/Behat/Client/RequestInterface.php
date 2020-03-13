@@ -43,5 +43,5 @@ interface RequestInterface
 
     public function updateContent(array $newValues): void;
 
-    public function addSubResource(string $key, array $subresource): void;
+    public function addSubResource(string $key, array $subResource): void;
 }
