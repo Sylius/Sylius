@@ -116,9 +116,8 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $customerGroup->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $customerGroup->getCode()),
             sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
         );
     }
@@ -129,9 +128,8 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function thisCustomerGroupWithNameShouldAppearInTheStore(string $name): void
     {
-        $this->client->index();
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
             sprintf('Customer group with name %s does not exist', $name)
         );
     }
@@ -142,8 +140,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
-        $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amountOfCustomerGroups);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $amountOfCustomerGroups);
     }
 
     /**
@@ -151,9 +148,8 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, string $name): void
     {
-        $this->client->show($customerGroup->getCode());
         Assert::true(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name),
+            $this->responseChecker->hasValue($this->client->show($customerGroup->getCode()), 'name', $name),
             'Customer groups name is not ' . $name
         );
     }
@@ -194,10 +190,9 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
-        $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist'
         );
     }
@@ -246,8 +241,6 @@ final class ManagingCustomerGroupsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        $this->client->index();
-
-        return $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
     }
 }

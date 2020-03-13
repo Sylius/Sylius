@@ -149,8 +149,7 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
-        $this->client->index();
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
     }
 
     /**
@@ -196,10 +195,9 @@ final class ManagingShippingCategoriesContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
-        $this->client->update();
 
         Assert::false(
-            $this->responseChecker->hasValue($this->client->getLastResponse(), 'code', 'NEW_CODE'),
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The shipping category code should not be changed to "NEW_CODE", but it is'
         );
     }
@@ -209,9 +207,8 @@ final class ManagingShippingCategoriesContext implements Context
      */
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
-        $this->client->index();
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'code', $code)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code)),
             1
         );
     }
