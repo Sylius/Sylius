@@ -38,50 +38,50 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->resource = $resource;
     }
 
-    public function index(): void
+    public function index(): Response
     {
         $this->request = Request::index($this->resource, $this->sharedStorage->get('token'));
-        $this->request($this->request);
+        return $this->request($this->request);
     }
 
-    public function showByIri(string $iri): void
+    public function showByIri(string $iri): Response
     {
-        $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
+        return $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
     }
 
-    public function subResourceIndex(string $subResource, string $id): void
+    public function subResourceIndex(string $subResource, string $id): Response
     {
-        $this->request(Request::subResourceIndex($this->resource, $id, $subResource, $this->sharedStorage->get('token')));
+        return $this->request(Request::subResourceIndex($this->resource, $id, $subResource, $this->sharedStorage->get('token')));
     }
 
-    public function show(string $id): void
+    public function show(string $id): Response
     {
-        $this->request(Request::show($this->resource, $id, $this->sharedStorage->get('token')));
+        return $this->request(Request::show($this->resource, $id, $this->sharedStorage->get('token')));
     }
 
-    public function create(): void
+    public function create(): Response
     {
-        $this->request($this->request);
+        return $this->request($this->request);
     }
 
-    public function update(): void
+    public function update(): Response
     {
-        $this->request($this->request);
+        return $this->request($this->request);
     }
 
-    public function delete(string $id): void
+    public function delete(string $id): Response
     {
-        $this->request(Request::delete($this->resource, $id, $this->sharedStorage->get('token')));
+        return $this->request(Request::delete($this->resource, $id, $this->sharedStorage->get('token')));
     }
 
-    public function filter(): void
+    public function filter(): Response
     {
-        $this->request($this->request);
+        return $this->request($this->request);
     }
 
-    public function applyTransition(string $id, string $transition): void
+    public function applyTransition(string $id, string $transition): Response
     {
-        $this->request(Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token')));
+        return $this->request(Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token')));
     }
 
     public function buildCreateRequest(): void
@@ -124,8 +124,10 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
-    private function request(RequestInterface $request): void
+    private function request(RequestInterface $request): Response
     {
         $this->client->request($request->method(), $request->url(), $request->filters(), [], $request->headers(), $request->content() ?? null);
+
+        return $this->getLastResponse();
     }
 }
