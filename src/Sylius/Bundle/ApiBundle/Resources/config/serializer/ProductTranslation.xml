@@ -11,16 +11,13 @@
         <attribute name="name">
             <group>product:read</group>
             <group>product:create</group>
-            <group>product:update</group>
         </attribute>
         <attribute name="locale">
             <group>product:create</group>
-            <group>product:update</group>
         </attribute>
         <attribute name="slug">
             <group>product:create</group>
             <group>product:read</group>
         </attribute>
     </class>
-
 </serializer>
