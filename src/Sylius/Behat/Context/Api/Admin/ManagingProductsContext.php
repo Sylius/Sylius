@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -140,6 +141,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I delete the :product product
+     * @When I try to delete the :product product
+     */
+    public function iDeleteProduct(ProductInterface $product): void
+    {
+        $this->client->delete('products', $product->getCode());
+    }
+
+    /**
      * @Then I should see :numberOfProducts products in the list
      */
     public function iShouldSeeProductsInTheList(int $count): void
@@ -169,5 +179,14 @@ final class ManagingProductsContext implements Context
                 ->responseChecker
                 ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
         );
+    }
+
+    /**
+     * @Then /^(this product) should not exist in the product catalog$/
+     */
+    public function productShouldNotExist(ProductInterface $product): void
+    {
+        $this->client->index();
+        $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $product->getCode());
     }
 }

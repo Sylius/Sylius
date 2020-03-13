@@ -38,6 +38,7 @@
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
