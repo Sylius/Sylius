@@ -39,7 +39,7 @@ In the ``config/packages/_sylius.yaml`` file, add the path to the installed pack
                     - "%kernel.project_dir%/themes"
 
 Create your custom theme based on BootstrapTheme. In the ``themes`` directory, create a new folder
-- name it as you like, e.g. "BootstrapChildTheme" and create ``composer.json`` with basic information
+- name it as you like, e.g. ``BootstrapChildTheme`` and create ``composer.json`` with basic information
 
 .. code-block:: JSON
 
