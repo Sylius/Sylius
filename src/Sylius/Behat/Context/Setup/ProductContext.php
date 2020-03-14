@@ -900,6 +900,36 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^the ("([^"]*)" product) is enabled$/
+     */
+    public function theProductIsEnabled(ProductInterface $product): void
+    {
+        $product->setEnabled(true);
+        Assert::count($product->getVariants(), 1);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
+        $variant->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("([^"]*)" product) is disabled$/
+     */
+    public function theProductIsDisabled(ProductInterface $product): void
+    {
+        $product->setEnabled(false);
+        Assert::count($product->getVariants(), 1);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
+        $variant->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);

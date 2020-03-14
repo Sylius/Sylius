@@ -58,11 +58,12 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
 
-        if (empty($data) || !array_key_exists('variant', $data) || !array_key_exists('code', $data)) {
-            return;
+        if (!empty($data) && array_key_exists('variant', $data) && array_key_exists('code', $data)) {
+            $data['variant']['code'] = $data['code'];
         }
-
-        $data['variant']['code'] = $data['code'];
+        if (!empty($data) && array_key_exists('variant', $data) && array_key_exists('enabled', $data)) {
+            $data['variant']['enabled'] = $data['enabled'];
+        }
 
         $event->setData($data);
     }

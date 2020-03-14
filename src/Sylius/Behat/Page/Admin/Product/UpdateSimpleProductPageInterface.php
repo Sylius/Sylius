@@ -108,4 +108,10 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function showProductInChannel(string $channel): void;
 
     public function showProductInSingleChannel(): void;
+
+    public function disable(): void;
+
+    public function isEnabled(): bool;
+
+    public function enable(): void;
 }

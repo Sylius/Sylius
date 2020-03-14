@@ -27,6 +27,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface as VariantUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -74,6 +75,9 @@ final class ManagingProductsContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
+    /** @var VariantUpdatePageInterface */
+    private $variantUpdatePage;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -86,7 +90,8 @@ final class ManagingProductsContext implements Context
         VariantCreatePageInterface $variantCreatePage,
         GeneratePageInterface $variantGeneratePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        VariantUpdatePageInterface $variantUpdatePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -100,6 +105,7 @@ final class ManagingProductsContext implements Context
         $this->variantGeneratePage = $variantGeneratePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->variantUpdatePage = $variantUpdatePage;
     }
 
     /**
@@ -1056,6 +1062,54 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @When /^I disable it$/
+     */
+    public function iDisableIt(): void
+    {
+        $this->updateSimpleProductPage->disable();
+    }
+
+    /**
+     * @Then /^(this product) should be disabled along with its variant$/
+     */
+    public function thisProductShouldBeDisabledAlongWithItsVariant(ProductInterface $product): void
+    {
+        Assert::true($product->isSimple());
+        $this->iWantToModifyAProduct($product);
+
+        Assert::false($this->updateSimpleProductPage->isEnabled());
+
+        $this->variantUpdatePage->open(
+            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()]
+        );
+        Assert::false($this->variantUpdatePage->isEnabled());
+    }
+
+    /**
+     * @When /^I enable it$/
+     */
+    public function iEnableIt(): void
+    {
+        $this->updateSimpleProductPage->enable();
+    }
+
+    /**
+     * @Then /^(this product) should be enabled along with its variant$/
+     */
+    public function thisProductShouldBeEnabledAlongWithItsVariant(ProductInterface $product): void
+    {
+        Assert::true($product->isSimple());
+        $this->iWantToModifyAProduct($product);
+
+        Assert::true($this->updateSimpleProductPage->isEnabled());
+
+        $this->variantUpdatePage->open(
+            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()]
+        );
+        Assert::true($this->variantUpdatePage->isEnabled());
     }
 
     /**
