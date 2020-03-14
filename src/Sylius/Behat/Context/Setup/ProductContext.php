@@ -880,6 +880,26 @@ final class ProductContext implements Context
         $this->saveProduct($product);
     }
 
+    /**
+     * @Given /^the ("[^"]+" product variant) is enabled$/
+     */
+    public function theProductVariantIsEnabled(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("([^"]*)" product variant) is disabled$/
+     */
+    public function theProductVariantIsDisabled(ProductVariantInterface $productVariant): void
+    {
+        $productVariant->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);

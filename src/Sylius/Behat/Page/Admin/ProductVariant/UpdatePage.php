@@ -119,6 +119,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => 'a:contains("Show product in shop page")',
             'tracked' => '#sylius_product_variant_tracked',
+            'enabled' => '#sylius_product_variant_enabled',
         ]);
+    }
+
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getElement('enabled')->isChecked();
+    }
+
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
     }
 }
