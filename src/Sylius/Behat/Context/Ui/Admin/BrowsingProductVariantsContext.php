@@ -272,6 +272,17 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^I should see that the ("([^"]*)" variant) is enabled$/
+     */
+    public function iShouldSeeThatTheVariantIsEnabled(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'name' => $productVariant->getName(),
+            'enabled' => 'Enabled',
+        ]));
+    }
+
+    /**
      * @param int $expectedAmount
      * @param ProductVariantInterface $variant
      *
