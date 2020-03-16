@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -523,6 +524,22 @@ final class ProductContext implements Context
     public function iShouldBeInformedThatTheProductDoesNotExist()
     {
         Assert::eq($this->errorPage->getTitle(), 'The "product" has not been found');
+    }
+
+    /**
+     * @Then /^I should be able to select between (\d+) variants$/
+     */
+    public function iShouldBeAbleToSelectBetweenVariants(int $count)
+    {
+        Assert::count($this->showPage->getVariantsNames(), $count);
+    }
+
+    /**
+     * @Then /^I should not be able to select the ("([^"]*)" variant)$/
+     */
+    public function iShouldNotBeAbleToSelectTheVariant(ProductVariantInterface $productVariant)
+    {
+        Assert::true(!in_array($productVariant->getName(), $this->showPage->getVariantsNames(), true));
     }
 
     /**

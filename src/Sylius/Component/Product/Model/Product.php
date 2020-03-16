@@ -350,6 +350,15 @@ class Product implements ProductInterface
         return $this->variants->contains($variant);
     }
 
+    public function getEnabledVariants(): Collection
+    {
+        return $this->variants->filter(
+            function (ProductVariantInterface $productVariant) {
+                return $productVariant->isEnabled();
+            }
+        );
+    }
+
     /**
      * {@inheritdoc}
      */

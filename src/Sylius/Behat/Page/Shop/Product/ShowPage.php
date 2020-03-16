@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
@@ -248,6 +249,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
+    public function getVariantsNames(): array
+    {
+        $variantsNames = [];
+        /** @var NodeElement $variantRow */
+        foreach ($this->getElement('variants_rows')->findAll('css', 'td:first-child') as $variantRow) {
+            $variantsNames[] = $variantRow->getText();
+        }
+        return $variantsNames;
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -269,6 +280,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'quantity' => '[data-test-quantity]',
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
+            'variants_rows' => '[data-test-product-variants] tbody tr',
         ]);
     }
 }

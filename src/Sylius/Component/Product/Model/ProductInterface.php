@@ -63,6 +63,8 @@ interface ProductInterface extends
 
     public function hasVariant(ProductVariantInterface $variant): bool;
 
+    public function getEnabledVariants(): Collection;
+
     public function hasOptions(): bool;
 
     /**
