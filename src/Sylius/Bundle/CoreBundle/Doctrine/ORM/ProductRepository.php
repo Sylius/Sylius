@@ -108,6 +108,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                  ->select('min(v.position)')
                  ->innerJoin('m.variants', 'v')
                  ->andWhere('m.id = :product_id')
+                 ->andWhere('v.enabled = :enabled')
              ;
 
             $queryBuilder
@@ -123,6 +124,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                     )
                 )
                 ->setParameter('channelCode', $channel->getCode())
+                ->setParameter('enabled', true)
             ;
         }
 
