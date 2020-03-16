@@ -47,5 +47,13 @@
         <attribute name="paymentState">
             <group>order:read</group>
         </attribute>
+
+        <attribute name="total">
+            <group>order:read</group>
+        </attribute>
+
+        <attribute name="orderPromotionTotal">
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>

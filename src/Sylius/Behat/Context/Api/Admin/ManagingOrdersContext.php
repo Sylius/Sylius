@@ -101,6 +101,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then this order should have state :state
      * @Then its state should be :state
      */
     public function itsStateShouldBe(string $state): void
@@ -170,5 +171,32 @@ final class ManagingOrdersContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Transition "cancel" cannot be applied on state "cancelled"'
         );
+    }
+
+    /**
+     * @Then /^the order's total should(?:| still) be "([^"]+)"$/
+     */
+    public function theOrdersTotalShouldBe(string $total): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'total'),
+            $this->getPriceFromString($total)
+        );
+    }
+
+    /**
+     * @Then /^the order's promotion total should(?:| still) be "([^"]+)"$/
+     */
+    public function theOrdersPromotionTotalShouldBe(string $promotionTotal): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'orderPromotionTotal'),
+            $this->getPriceFromString($promotionTotal)
+        );
+    }
+
+    private function getPriceFromString(string $price): int
+    {
+        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }

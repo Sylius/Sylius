@@ -22,11 +22,12 @@ default:
                 - sylius.behat.context.transform.currency
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
-                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
 
                 - sylius.behat.context.api.admin.managing_orders
 

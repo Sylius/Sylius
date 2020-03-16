@@ -49,5 +49,7 @@
         <property name="shipments" writable="false" />
         <property name="state" writable="false" />
         <property name="paymentState" writable="false" />
+        <property name="total" writable="false" />
+        <property name="orderPromotionTotal" writable="false" />
     </resource>
 </resources>
