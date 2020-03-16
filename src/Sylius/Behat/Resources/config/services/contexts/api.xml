@@ -19,6 +19,11 @@
             <argument type="service" id="Sylius\Behat\Client\ApiSecurityClientInterface" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_administrators" class="Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.administrator" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">
             <argument type="service" id="sylius.behat.api_platform_client.currency" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
