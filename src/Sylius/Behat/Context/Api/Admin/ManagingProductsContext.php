@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
@@ -36,19 +37,14 @@ final class ManagingProductsContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
     public function __construct(
         ApiClientInterface $client,
         ApiClientInterface $productReviewClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        ResponseCheckerInterface $responseChecker
     ) {
         $this->client = $client;
         $this->productReviewClient = $productReviewClient;
         $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -234,7 +230,18 @@ final class ManagingProductsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product option could not be edited'
+            'Product could not be edited'
+        );
+    }
+
+    /**
+     * @Then I should be notified that this product is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisProductIsInUseAndCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product can be deleted, but it should not'
         );
     }
 
@@ -243,7 +250,11 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product still exists, but it should not'
+
+        );
     }
 
     /**
@@ -262,7 +273,8 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            sprintf('Product has not %s with %s', $field, $value)
         );
     }
 
@@ -276,7 +288,8 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }
 
@@ -311,7 +324,8 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($response, 'en_US', 'name', $name)
+                ->hasItemWithTranslation($response, 'en_US', 'name', $name),
+            sprintf('Product with name %s does not exist', $name)
         );
     }
 
@@ -325,7 +339,8 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithValue($response, 'code', $product->getCode())
+                ->hasItemWithValue($response, 'code', $product->getCode()),
+            sprintf('Product with name %s still exists, but it should not', $product->getName())
         );
     }
 
@@ -347,7 +362,8 @@ final class ManagingProductsContext implements Context
                     1,
                     'options',
                     $options
-                )
+                ),
+            sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }
 
@@ -362,7 +378,8 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($response, $locale, 'slug', $slug)
+                ->hasItemWithTranslation($response, $locale, 'slug', $slug),
+            sprintf('Product with slug %s does not exist', $slug)
         );
     }
 
@@ -382,8 +399,50 @@ final class ManagingProductsContext implements Context
                         'reviewSubject',
                         '/new-api/products/' . $product->getCode()
                 )
-            )
+            ),
+            'Should be no reviews, but some exist'
         );
     }
 
+    /**
+     * @Then /^(this product) should still exist in the product catalog$/
+     */
+    public function productShouldExistInTheProductCatalog(ProductInterface $product): void
+    {
+        $response = $this->client->index();
+        $code = $product->getCode();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'code', $code),
+            sprintf('Product with code %s does not exist', $code)
+        );
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        $response = $this->client->index();
+
+        Assert::true(
+            $this->hasProductImage($response, $product),
+            'Image does not exists'
+        );
+    }
+
+    private function hasProductImage(Response $response, ProductInterface $product): bool
+    {
+        foreach ($this->responseChecker->getCollection($response) as $productFromResponse) {
+            if (
+                isset($productFromResponse['images']) &&
+                isset($productFromResponse['images'][0]) &&
+                $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

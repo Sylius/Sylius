@@ -20,7 +20,7 @@ Feature: Prevent deletion of purchased product
         Then I should be notified that this product is in use and cannot be deleted
         And this product should still exist in the product catalog
 
-    @ui
+    @ui @api
     Scenario: Purchased product images should be kept
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type

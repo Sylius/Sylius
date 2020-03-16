@@ -55,5 +55,6 @@
         <property name="reviews" required="false" />
         <property name="options" required="false" />
         <property name="channels" required="false" />
+        <property name="images" required="false" />
     </resource>
 </resources>
