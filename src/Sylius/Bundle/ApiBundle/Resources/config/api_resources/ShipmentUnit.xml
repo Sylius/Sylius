@@ -28,6 +28,12 @@
 
         <collectionOperations />
 
+        <itemOperations>
+            <itemOperation name="get" />
+        </itemOperations>
+
+        <collectionOperations />
+
         <property name="id" identifier="true" writable="false" />
     </resource>
 </resources>
