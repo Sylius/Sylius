@@ -40,6 +40,7 @@
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

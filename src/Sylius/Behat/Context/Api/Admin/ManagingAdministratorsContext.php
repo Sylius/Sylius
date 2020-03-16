@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use function GuzzleHttp\Psr7\str;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
@@ -108,6 +110,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I delete administrator with email :adminUser
+     */
+    public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
+    {
+        $this->client->delete((string) $adminUser->getId());
+    }
+
+    /**
      * @Then I should see a single administrator in the list
      * @Then there should be :count administrators in the list
      */
@@ -125,6 +135,17 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
             sprintf('Administrator with email %s does not exist', $email)
+        );
+    }
+
+    /**
+     * @Then there should not be :email administrator anymore
+     */
+    public function thereShouldNotBeAdministratorAnymore(string $email): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
+            sprintf('Administrator with email %s exists, but it should not', $email)
         );
     }
 
@@ -160,6 +181,17 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Administrator could not be created'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Administrator could not be deleted'
         );
     }
 
