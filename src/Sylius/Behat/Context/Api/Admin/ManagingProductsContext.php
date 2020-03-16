@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -37,14 +37,19 @@ final class ManagingProductsContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ApiClientInterface $productReviewClient,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->productReviewClient = $productReviewClient;
         $this->responseChecker = $responseChecker;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -98,7 +103,7 @@ final class ManagingProductsContext implements Context
                     'price' => $price,
                 ],
             ],
-            'channel' => '/new-api/channels/' . $channel->getCode()
+            'channel' => $this->iriConverter->getIriFromItem($channel),
         ];
 
         $this->client->updateRequestData($data);
@@ -137,9 +142,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAddTheOptionToIt(ProductOption $productOption): void
     {
-        $this
-            ->client
-            ->updateRequestData(['options' => ['/new-api/product_options/' . $productOption->getCode()]]);
+        $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromItem($productOption)]]);
     }
 
     /**
@@ -209,9 +212,7 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($response,'en_US', 'name', $productName)
+            $this->responseChecker->hasItemWithTranslation($response,'en_US', 'name', $productName)
         );
     }
 
@@ -253,12 +254,11 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
             'Product still exists, but it should not'
-
         );
     }
 
     /**
-     * @Then I should see :numberOfProducts products in the list
+     * @Then I should see :count products in the list
      */
     public function iShouldSeeProductsInTheList(int $count): void
     {
@@ -283,8 +283,6 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
-        $this->client->update();
-
         Assert::false(
             $this
                 ->responseChecker
@@ -299,18 +297,16 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', '_NEW');
-        $response = $this->client->index();
+        $this->client->update();
 
         Assert::false(
-            $this
-                ->responseChecker
-                ->hasItemOnPositionWithValue(
-                    $response,
-                    0,
-                    'code',
-                    '/new-api/products/_NEW',
-                    ),
-                sprintf('It was possible to change %s', '_NEW')
+            $this->responseChecker->hasItemOnPositionWithValue(
+                $this->client->getLastResponse(),
+                0,
+                'code',
+                '/new-api/products/_NEW'
+            ),
+            sprintf('It was possible to change %s', '_NEW')
         );
     }
 
@@ -322,9 +318,7 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($response, 'en_US', 'name', $name),
+            $this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $name),
             sprintf('Product with name %s does not exist', $name)
         );
     }
@@ -337,9 +331,7 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::false(
-            $this
-                ->responseChecker
-                ->hasItemWithValue($response, 'code', $product->getCode()),
+            $this->responseChecker->hasItemWithValue($response, 'code', $product->getCode()),
             sprintf('Product with name %s still exists, but it should not', $product->getName())
         );
     }
@@ -352,17 +344,15 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         $options = [];
-        $options[0] = sprintf('/new-api/product_options/%s', $productOption->getCode());
+        $options[0] = sprintf($this->iriConverter->getIriFromItem($productOption));
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemOnPositionWithValue(
-                    $response,
-                    1,
-                    'options',
-                    $options
-                ),
+            $this->responseChecker->hasItemOnPositionWithValue(
+                $response,
+                1,
+                'options',
+                $options
+            ),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }
@@ -371,15 +361,13 @@ final class ManagingProductsContext implements Context
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, string $slug, $locale = 'en_US'): void
+    public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
     {
-        $response = $this->client->index();
+        $response = $this->client->show($product->getCode());
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($response, $locale, 'slug', $slug),
-            sprintf('Product with slug %s does not exist', $slug)
+            $this->responseChecker->hasTranslation($response, $localeCode, 'slug', $slug),
+            sprintf('Product\'s slug %s does not exist', $slug)
         );
     }
 
@@ -390,15 +378,11 @@ final class ManagingProductsContext implements Context
     {
         $response = $this->productReviewClient->index();
 
-        Assert::true(
-            empty(
-                $this
-                    ->responseChecker
-                    ->getCollectionItemsWithValue(
-                        $response,
-                        'reviewSubject',
-                        '/new-api/products/' . $product->getCode()
-                )
+        Assert::isEmpty(
+            $this->responseChecker->getCollectionItemsWithValue(
+                $response,
+                'reviewSubject',
+                $this->iriConverter->getIriFromItem($product)
             ),
             'Should be no reviews, but some exist'
         );
@@ -423,17 +407,15 @@ final class ManagingProductsContext implements Context
      */
     public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
     {
-        $response = $this->client->index();
+        $response = $this->client->show($product->getCode());
 
-        Assert::true(
-            $this->hasProductImage($response, $product),
-            'Image does not exists'
-        );
+        Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
     }
 
     private function hasProductImage(Response $response, ProductInterface $product): bool
     {
-        foreach ($this->responseChecker->getCollection($response) as $productFromResponse) {
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
+
             if (
                 isset($productFromResponse['images']) &&
                 isset($productFromResponse['images'][0]) &&
@@ -441,7 +423,6 @@ final class ManagingProductsContext implements Context
             ) {
                 return true;
             }
-        }
 
         return false;
     }

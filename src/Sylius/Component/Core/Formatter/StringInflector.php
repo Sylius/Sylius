@@ -22,7 +22,7 @@ final class StringInflector
 
     public static function nameToSlug(string $value): string
     {
-        return str_replace([' '], '-', strtolower($value));
+        return str_replace(['_'], '-', StringInflector::nameToLowercaseCode($value));
     }
 
     public static function nameToLowercaseCode(string $value): string

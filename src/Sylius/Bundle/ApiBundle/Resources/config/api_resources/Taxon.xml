@@ -2,12 +2,9 @@
 
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd">
-
-    <resource
-        class="%sylius.model.taxon.class%"
-        shortName="Taxon"
-    >
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.taxon.class%" shortName="Taxon">
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
