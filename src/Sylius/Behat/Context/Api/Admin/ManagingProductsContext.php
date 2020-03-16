@@ -225,9 +225,7 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($response,'en_US', 'name', $productName)
+            $this->responseChecker->hasItemWithTranslation($response,'en_US', 'name', $productName)
         );
     }
 
@@ -288,7 +286,8 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+            ,
             sprintf('Product has not %s with %s', $field, $value)
         );
     }
@@ -301,7 +300,8 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+            ,
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }
@@ -394,7 +394,7 @@ final class ManagingProductsContext implements Context
                 'reviewSubject',
                 $this->iriConverter->getIriFromItem($product)
             ),
-            'Should be no reviews, but some exist'
+        'Should be no reviews, but some exist'
         );
     }
 
