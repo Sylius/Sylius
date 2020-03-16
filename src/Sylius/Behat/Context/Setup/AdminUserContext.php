@@ -66,7 +66,7 @@ final class AdminUserContext implements Context
     public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {
         /** @var AdminUserInterface $adminUser */
-        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true, 'api' => true]);
 
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
