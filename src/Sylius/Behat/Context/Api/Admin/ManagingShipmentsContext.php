@@ -54,7 +54,7 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
-     * @When I choose :shipmentState as a shipment state
+     * @When I choose :state as a shipment state
      */
     public function iChooseShipmentState(string $state): void
     {
@@ -92,6 +92,18 @@ final class ManagingShipmentsContext implements Context
     public function iShipShipmentOfOrder(OrderInterface $order): void
     {
         $this->client->applyTransition((string) $order->getShipments()->first()->getId(), ShipmentTransitions::TRANSITION_SHIP);
+    }
+
+    /**
+     * @When I ship the shipment of order :order with :trackingCode tracking code
+     */
+    public function iShipTheShipmentOfOrderWithTrackingCode(OrderInterface $order, string $trackingCode): void
+    {
+        $this->client->applyTransition(
+            (string) $order->getShipments()->first()->getId(),
+            ShipmentTransitions::TRANSITION_SHIP,
+            ['tracking' => $trackingCode]
+        );
     }
 
     /**
@@ -137,13 +149,11 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
-         $shipmentShowResponse = $this->client->show((string) $order->getShipments()->first()->getId());
-
-         if (
-             strtotime($this->responseChecker->getValue($shipmentShowResponse, 'shippedAt')) != strtotime($dateTime)
-         ) {
-             throw new \InvalidArgumentException('Shipment was shipped in different date');
-         }
+         Assert::eq(
+             new \DateTime($this->responseChecker->getValue($this->client->show((string) $order->getShipments()->first()->getId()), 'shippedAt')),
+             new \DateTime($dateTime),
+             'Shipment was shipped in different date'
+         );
     }
 
     /**

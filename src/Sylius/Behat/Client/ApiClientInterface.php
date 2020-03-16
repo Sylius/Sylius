@@ -33,7 +33,7 @@ interface ApiClientInterface
 
     public function filter(): Response;
 
-    public function applyTransition(string $id, string $transition): Response;
+    public function applyTransition(string $id, string $transition, array $content = []): Response;
 
     public function buildCreateRequest(): void;
 

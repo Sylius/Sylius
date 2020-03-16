@@ -25,7 +25,7 @@
             <argument id="sm.factory" type="service" />
         </service>
 
-        <service id="sylius.api.shipment_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator" public="true">
+        <service id="sylius.api.shipment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>
     </services>

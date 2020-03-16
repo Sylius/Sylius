@@ -79,8 +79,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
-    public function applyTransition(string $id, string $transition): Response
+    public function applyTransition(string $id, string $transition, array $content = []): Response
     {
+        $this->request->setContent($content);
         return $this->request(Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token')));
     }
 

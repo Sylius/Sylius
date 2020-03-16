@@ -47,7 +47,7 @@
             <itemOperation name="ship">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipments/{id}/ship</attribute>
-                <attribute name="controller">sylius.api.shipment_machine_transition_applicator::ship</attribute>
+                <attribute name="controller">sylius.api.shipment_state_machine_transition_applicator::ship</attribute>
             </itemOperation>
         </itemOperations>
 

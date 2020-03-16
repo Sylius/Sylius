@@ -21,7 +21,7 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 
 final class ShipmentStateMachineTransitionApplicatorSpec extends ObjectBehavior
 {
-    function let(StateMachineFactoryInterface $stateMachineFactory)
+    function let(StateMachineFactoryInterface $stateMachineFactory): void
     {
         $this->beConstructedWith($stateMachineFactory);
     }
