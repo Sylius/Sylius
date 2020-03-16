@@ -29,7 +29,7 @@ final class ShipmentStateMachineTransitionApplicator
 
     public function ship(ShipmentInterface $data): ShipmentInterface
     {
-        $this->applyTransition( $data, ShipmentTransitions::TRANSITION_SHIP);
+        $this->applyTransition($data, ShipmentTransitions::TRANSITION_SHIP);
 
         return $data;
     }
