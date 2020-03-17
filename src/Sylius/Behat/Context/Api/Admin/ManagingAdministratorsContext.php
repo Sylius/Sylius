@@ -238,4 +238,19 @@ final class ManagingAdministratorsContext implements Context
             'email: This email is invalid.'
         );
     }
+
+    /**
+     * @Then I should be notified that it cannot be deleted
+     */
+    public function iShouldBeNotifiedThatItCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Administrator could be deleted'
+        );
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot remove currently logged in user.'
+        );
+    }
 }
