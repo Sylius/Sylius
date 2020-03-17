@@ -19,5 +19,9 @@
         <attribute name="id">
             <group>shipping_method:read</group>
         </attribute>
+
+        <attribute name="name">
+            <group>shipping_method:read</group>
+        </attribute>
     </class>
 </serializer>
