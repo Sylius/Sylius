@@ -16,6 +16,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
@@ -41,6 +43,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I delete shipping method :shippingMethod
+     */
+    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->delete($shippingMethod->getCode());
+    }
+
+    /**
      * @Then I should see :count shipping methods in the list
      */
     public function iShouldSeeShippingMethodsInTheList(int $count): void
@@ -56,6 +66,29 @@ final class ManagingShippingMethodsContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $shippingMethodName),
             sprintf('Shipping method with name %s does not exists', $shippingMethodName)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Shipping method could not be deleted'
+        );
+    }
+
+    /**
+     * @Then /^(this shipping method) should no longer exist in the registry$/
+     */
+    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void {
+        $shippingMethodName = $shippingMethod->getName();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $shippingMethodName),
+            sprintf('Shipping category with name %s exist', $shippingMethodName)
         );
     }
 }
