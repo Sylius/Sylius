@@ -34,6 +34,11 @@
             <group>product:create</group>
             <group>product:update</group>
         </attribute>
+        <attribute name="mainTaxon">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
         <attribute name="productTaxons">
             <group>product:read</group>
             <group>product:create</group>

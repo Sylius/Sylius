@@ -79,18 +79,29 @@ final class ManagingProductsContext implements Context
     /**
      * @When I name it :name in :localeCode
      * @When I rename it to :name in :localeCode
+     * @When I do not name it
      */
-    public function iRenameItToIn(string $name, string $localeCode): void
+    public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
     {
         $data = [
             'translations' => [
                 $localeCode => [
                     'locale' => $localeCode,
-                    'name' => $name,
-                    'slug' => StringInflector::nameToSlug($name)
                 ],
             ],
         ];
+
+        if ($name !== null) {
+            $data = [
+                'translations' => [
+                    $localeCode => [
+                        'locale' => $localeCode,
+                        'name' => $name,
+                        'slug' => StringInflector::nameToSlug($name)
+                    ],
+                ],
+            ];
+        }
 
         $this->client->updateRequestData($data);
     }
@@ -156,6 +167,14 @@ final class ManagingProductsContext implements Context
         $productOptions[] = $this->iriConverter->getIriFromItem($productOption);
 
         $this->client->updateRequestData(['options' => $productOptions]);
+    }
+
+    /**
+     * @When /^I choose main (taxon "[^"]+")$/
+     */
+    public function iChooseMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->addRequestData('mainTaxon', $this->iriConverter->getIriFromItem($taxon));
     }
 
     /**
@@ -226,6 +245,22 @@ final class ManagingProductsContext implements Context
 
         Assert::true(
             $this->responseChecker->hasItemWithTranslation($response,'en_US', 'name', $productName)
+        );
+    }
+
+    /**
+     * @When I remove its name from :localeCode translation
+     */
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'name' => '',
+                    'locale' => $localeCode,
+                    ],
+                ],
+            ],
         );
     }
 
@@ -327,6 +362,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^(this product) main (taxon should be "[^"]+")$/
+     * @Then main taxon of product :product should be :taxon
+     */
+    public function thisProductMainTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $response = $this->client->index();
+
+        $this
+            ->responseChecker
+            ->hasItemWithValue($response, 'mainTaxon', $this->iriConverter->getIriFromItem($taxon))
+        ;
+    }
+
+    /**
      * @Then /^(this product) name should be "([^"]+)"$/
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name): void
@@ -420,6 +469,15 @@ final class ManagingProductsContext implements Context
         $response = $this->client->show($product->getCode());
 
         Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
+    }
+
+    /**
+     * @Then product with :element :value should not be added
+     */
+    public function productWithNameShouldNotBeAdded(string $element, string $value): void
+    {
+//        $this->iWantToBrowseProducts();
+//        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
     private function hasProductImage(Response $response, ProductInterface $product): bool
