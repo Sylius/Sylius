@@ -56,15 +56,15 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
     {
         $token = $this->tokenStorage->getToken();
-        if (!$token) {
+        if ($token === null) {
             return false;
         }
 
         $loggedUser = $token->getUser();
-        if (!$loggedUser) {
+        if ($loggedUser === null) {
             return false;
         }
 
-        return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
+        return $loggedUser->getId() === $user->getId();
     }
 }

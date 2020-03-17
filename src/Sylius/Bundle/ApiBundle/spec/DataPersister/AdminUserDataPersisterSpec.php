@@ -42,11 +42,9 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         TokenInterface $token
     ): void {
         $userToBeDeleted->getId()->willReturn(1);
-        $userToBeDeleted->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
 
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(2);
-        $currentlyLoggedInUser->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
         $token->getUser()->willReturn($currentlyLoggedInUser);
 
         $decoratedDataPersister->remove($userToBeDeleted)->shouldBeCalled();
@@ -62,11 +60,9 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         TokenInterface $token
     ): void {
         $userToBeDeleted->getId()->willReturn(1);
-        $userToBeDeleted->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
 
         $tokenStorage->getToken()->willReturn($token);
         $currentlyLoggedInUser->getId()->willReturn(1);
-        $currentlyLoggedInUser->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
         $token->getUser()->willReturn($currentlyLoggedInUser);
 
         $decoratedDataPersister->remove($userToBeDeleted)->shouldNotBeCalled();
@@ -84,7 +80,6 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         TokenInterface $tokenInterface
     ): void {
         $userToBeDeleted->getId()->willReturn(11);
-        $userToBeDeleted->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
 
         $tokenStorage->getToken()->willReturn($tokenInterface);
         $tokenInterface->getUser()->willReturn(null);
@@ -100,7 +95,6 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         AdminUserInterface $userToBeDeleted
     ): void {
         $userToBeDeleted->getId()->willReturn(11);
-        $userToBeDeleted->getRoles()->willReturn(['ROLE_ADMINISTRATION_ACCESS']);
 
         $tokenStorage->getToken()->willReturn(null);
 
