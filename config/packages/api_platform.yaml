@@ -7,3 +7,5 @@ api_platform:
             apiKey:
                 name: Authorization
                 type: header
+    exception_to_status:
+        SM\SMException: 422

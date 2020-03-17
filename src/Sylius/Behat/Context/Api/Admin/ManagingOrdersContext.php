@@ -108,7 +108,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show($this->sharedStorage->get('order')->getNumber()),
+                $this->client->getLastResponse(),
                 'state',
                 strtolower($state)
             ),
@@ -188,7 +188,7 @@ final class ManagingOrdersContext implements Context
     public function theOrdersTotalShouldBe(int $total): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'total'),
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
             $total
         );
     }
@@ -199,7 +199,7 @@ final class ManagingOrdersContext implements Context
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'orderPromotionTotal'),
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal
         );
     }
