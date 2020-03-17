@@ -19,7 +19,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to log in
+     * @When I want to log in
      */
     public function iWantToLogIn(): void
     {
@@ -55,7 +55,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn(): void
     {
-        Assert::true($this->client->isLoggedIn(), 'Admin should be logged in, but they is not.');
+        Assert::true($this->client->isLoggedIn(), 'Admin should be logged in, but they are not.');
     }
 
     /**
@@ -63,7 +63,7 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->client->isLoggedIn(), 'Admin should not be logged in, but they is.');
+        Assert::false($this->client->isLoggedIn(), 'Admin should not be logged in, but they are.');
     }
 
     /**
@@ -72,5 +72,31 @@ final class LoginContext implements Context
     public function iShouldBeNotifiedAboutBadCredentials(): void
     {
         Assert::same($this->client->getErrorMessage(), 'Invalid credentials.');
+    }
+
+    /**
+     * @Then I should be able to log in as :username authenticated by :password password
+     */
+    public function iShouldBeAbleToLogInAsAuthenticatedByPassword(string $username, string $password): void
+    {
+        $this->logIn($username, $password);
+        $this->iShouldBeLoggedIn();
+    }
+
+    /**
+     * @Then I should not be able to log in as :username authenticated by :password password
+     */
+    public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword(string $username, string $password): void
+    {
+        $this->logIn($username, $password);
+        $this->iShouldNotBeLoggedIn();
+    }
+
+    private function logIn(string $username, string $password): void
+    {
+        $this->iWantToLogIn();
+        $this->iSpecifyTheUsername($username);
+        $this->iSpecifyThePasswordAs($password);
+        $this->iLogIn();
     }
 }

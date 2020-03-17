@@ -17,6 +17,7 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
@@ -27,10 +28,17 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    public function __construct(ContextAwareDataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage)
-    {
+    /** @var PasswordUpdaterInterface */
+    private $passwordUpdater;
+
+    public function __construct(
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
+        TokenStorageInterface $tokenStorage,
+        PasswordUpdaterInterface $passwordUpdater
+    ) {
         $this->decoratedDataPersister = $decoratedDataPersister;
         $this->tokenStorage = $tokenStorage;
+        $this->passwordUpdater = $passwordUpdater;
     }
 
     public function supports($data, array $context = []): bool
@@ -40,6 +48,8 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
+        $this->passwordUpdater->updatePassword($data);
+
         return $this->decoratedDataPersister->persist($data);
     }
 

@@ -18,20 +18,35 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class AdminUserDataPersisterSpec extends ObjectBehavior
 {
-    function let(ContextAwareDataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage): void
-    {
-        $this->beConstructedWith($decoratedDataPersister, $tokenStorage);
+    function let(
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
+        TokenStorageInterface $tokenStorage,
+        PasswordUpdaterInterface $passwordUpdater
+    ): void {
+        $this->beConstructedWith($decoratedDataPersister, $tokenStorage, $passwordUpdater);
     }
 
     function it_supports_only_admin_user_entity(AdminUserInterface $adminUser, ProductInterface $product): void
     {
         $this->supports($adminUser)->shouldReturn(true);
         $this->supports($product)->shouldReturn(false);
+    }
+
+    function it_updates_password_during_persisting_an_admin_user(
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
+        PasswordUpdaterInterface $passwordUpdater,
+        AdminUserInterface $adminUser
+    ): void {
+        $passwordUpdater->updatePassword($adminUser)->shouldBeCalled();
+        $decoratedDataPersister->persist($adminUser)->shouldBeCalled();
+
+        $this->persist($adminUser);
     }
 
     function it_removes_admin_user_if_it_is_different_than_currently_logged_in_admin_user(

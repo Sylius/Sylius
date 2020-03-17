@@ -28,18 +28,25 @@
             </attribute>
         </attribute>
 
-        <attribute name="validation_groups">
-            <attribute>sylius</attribute>
-            <attribute>sylius_user_create</attribute>
-        </attribute>
+        <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="get" />
-            <collectionOperation name="post" />
+            <collectionOperation name="post">
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                    <attribute>sylius_user_create</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin_user:update</attribute>
+                </attribute>
+            </itemOperation>
             <itemOperation name="delete" />
         </itemOperations>
 
