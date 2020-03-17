@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
-use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -22,13 +21,13 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
 {
-    /** @var DataPersisterInterface */
+    /** @var ContextAwareDataPersisterInterface */
     private $decoratedDataPersister;
 
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    public function __construct(DataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage)
+    public function __construct(ContextAwareDataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage)
     {
         $this->decoratedDataPersister = $decoratedDataPersister;
         $this->tokenStorage = $tokenStorage;
@@ -61,9 +60,6 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
         }
 
         $loggedUser = $token->getUser();
-        if ($loggedUser === null) {
-            return false;
-        }
 
         return $loggedUser->getId() === $user->getId();
     }
