@@ -9,3 +9,4 @@ api_platform:
                 type: header
     exception_to_status:
         SM\SMException: 422
+        Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422

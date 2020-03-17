@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
-use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class AdminUserDataPersisterSpec extends ObjectBehavior
 {
-    function let(DataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage): void
+    function let(ContextAwareDataPersisterInterface $decoratedDataPersister, TokenStorageInterface $tokenStorage): void
     {
         $this->beConstructedWith($decoratedDataPersister, $tokenStorage);
     }
@@ -35,7 +35,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
     }
 
     function it_removes_admin_user_if_it_is_different_than_currently_logged_in_admin_user(
-        DataPersisterInterface $decoratedDataPersister,
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
         TokenStorageInterface $tokenStorage,
         AdminUserInterface $userToBeDeleted,
         AdminUserInterface $currentlyLoggedInUser,
@@ -53,7 +53,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
     }
 
     function it_does_not_allow_to_remove_currently_logged_in_admin_user(
-        DataPersisterInterface $decoratedDataPersister,
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
         TokenStorageInterface $tokenStorage,
         AdminUserInterface $userToBeDeleted,
         AdminUserInterface $currentlyLoggedInUser,
@@ -73,24 +73,8 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         ;
     }
 
-    function it_removes_admin_user_if_no_user_is_logged_in(
-        DataPersisterInterface $decoratedDataPersister,
-        TokenStorageInterface $tokenStorage,
-        AdminUserInterface $userToBeDeleted,
-        TokenInterface $tokenInterface
-    ): void {
-        $userToBeDeleted->getId()->willReturn(11);
-
-        $tokenStorage->getToken()->willReturn($tokenInterface);
-        $tokenInterface->getUser()->willReturn(null);
-
-        $decoratedDataPersister->remove($userToBeDeleted)->shouldBeCalled();
-
-        $this->remove($userToBeDeleted);
-    }
-
     function it_removes_admin_user_if_there_is_no_token(
-        DataPersisterInterface $decoratedDataPersister,
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
         TokenStorageInterface $tokenStorage,
         AdminUserInterface $userToBeDeleted
     ): void {
