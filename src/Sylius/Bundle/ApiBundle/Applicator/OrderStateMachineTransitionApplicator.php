@@ -15,9 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Shipping\ShipmentTransitions;
 
 final class OrderStateMachineTransitionApplicator
 {

@@ -66,12 +66,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I cancel this order
+     * @When /^I cancel (this order)$/
      */
-    public function iCancelThisOrder(): void
+    public function iCancelThisOrder(OrderInterface $order): void
     {
         $this->client->applyTransition(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'number'),
+            $this->responseChecker->getValue($this->client->show($order->getNumber()), 'number'),
             OrderTransitions::TRANSITION_CANCEL
         );
     }
@@ -121,10 +121,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveShipmentState(string $state): void
     {
-        $shipmentIri = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'shipments')[0];
+        $shipmentsIri = $this->responseChecker->getValue(
+            $this->client->show($this->sharedStorage->get('order')->getNumber()),
+            'shipments'
+        );
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($shipmentIri), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($shipmentsIri[0]), 'state', strtolower($state)),
             sprintf('Shipment for this order is not %s', $state)
         );
     }
@@ -134,10 +137,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState($state): void
     {
-        $paymentIri = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'payments')[0];
+        $paymentsIri = $this->responseChecker->getValue(
+            $this->client->show($this->sharedStorage->get('order')->getNumber()),
+            'payments'
+        );
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($paymentIri), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($paymentsIri[0]), 'state', strtolower($state)),
             sprintf('payment for this order is not %s', $state)
         );
     }
@@ -147,7 +153,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrderShouldHaveNumberOfPayments(int $number): void
     {
-        Assert::eq(count($this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'payments')), $number);
+        Assert::count(
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'payments'),
+            $number
+        );
     }
 
     /**
@@ -162,11 +171,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should not be able to cancel this order
+     * @Then /^I should not be able to cancel (this order)$/
      */
-    public function iShouldNotBeAbleToCancelThisOrder(): void
+    public function iShouldNotBeAbleToCancelThisOrder(OrderInterface $order): void
     {
-        $this->iCancelThisOrder();
+        $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Transition "cancel" cannot be applied on state "cancelled"'
@@ -174,29 +183,24 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^the order's total should(?:| still) be "([^"]+)"$/
+     * @Then /^the order's total should(?:| still) be ("[^"]+")$/
      */
-    public function theOrdersTotalShouldBe(string $total): void
+    public function theOrdersTotalShouldBe(int $total): void
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'total'),
-            $this->getPriceFromString($total)
+            $total
         );
     }
 
     /**
-     * @Then /^the order's promotion total should(?:| still) be "([^"]+)"$/
+     * @Then /^the order's promotion total should(?:| still) be ("[^"]+")$/
      */
-    public function theOrdersPromotionTotalShouldBe(string $promotionTotal): void
+    public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getNumber()), 'orderPromotionTotal'),
-            $this->getPriceFromString($promotionTotal)
+            $promotionTotal
         );
-    }
-
-    private function getPriceFromString(string $price): int
-    {
-        return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }
