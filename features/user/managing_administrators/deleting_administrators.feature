@@ -16,7 +16,7 @@ Feature: Deleting an administrator
         Then I should be notified that it has been successfully deleted
         And there should not be "mr.banana@example.com" administrator anymore
 
-    @ui
+    @ui @api
     Scenario: The administrator account of currently logged in user cannot be deleted
         When I want to browse administrators
         And I delete administrator with email "ted@example.com"

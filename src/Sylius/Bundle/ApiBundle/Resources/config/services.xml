@@ -17,6 +17,12 @@
     </imports>
 
     <services>
+        <service id="sylius.api.data_persister.admin_user" class="Sylius\Bundle\ApiBundle\DataPersister\AdminUserDataPersister" decorates="api_platform.doctrine.orm.data_persister">
+            <argument type="service" id="sylius.api.data_persister.admin_user.inner" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
         <service id="sylius.api.payment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>

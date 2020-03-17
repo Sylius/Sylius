@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
-use function GuzzleHttp\Psr7\str;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -236,6 +235,21 @@ final class ManagingAdministratorsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'email: This email is invalid.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it cannot be deleted
+     */
+    public function iShouldBeNotifiedThatItCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Administrator could be deleted'
+        );
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot remove currently logged in user.'
         );
     }
 }

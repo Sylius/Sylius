@@ -40,10 +40,7 @@ final class AdminUserContext implements Context
     {
         $adminUser = $this->adminUserRepository->findOneBy(['email' => $email]);
 
-        Assert::notNull(
-            $adminUser,
-            sprintf('Administrator with email "%s" does not exist', $email)
-        );
+        Assert::notNull($adminUser, sprintf('Administrator with email "%s" does not exist', $email));
 
         return $adminUser;
     }
