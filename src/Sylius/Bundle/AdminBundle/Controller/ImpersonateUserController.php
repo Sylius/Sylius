@@ -72,11 +72,10 @@ final class ImpersonateUserController
 
         $this->addFlash($request, $username);
 
-        $redirectUrl = $request->headers->get('referer');
-
-        if (null === $redirectUrl) {
-            $redirectUrl = $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()]);
-        }
+        $redirectUrl = $request->headers->get(
+            'referer',
+            $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()])
+        );
 
         return new RedirectResponse($redirectUrl);
     }
