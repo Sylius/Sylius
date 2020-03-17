@@ -24,12 +24,14 @@
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="delete" />
         </itemOperations>
 
         <collectionOperations>
             <collectionOperation name="get" />
         </collectionOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
     </resource>
 </resources>
