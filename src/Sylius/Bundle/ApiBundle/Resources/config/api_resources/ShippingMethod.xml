@@ -26,13 +26,9 @@
             <itemOperation name="get" />
         </itemOperations>
 
-        <collectionOperations />
-
-        <itemOperations>
-            <itemOperation name="get" />
-        </itemOperations>
-
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="get" />
+        </collectionOperations>
 
         <property name="id" identifier="true" writable="false" />
     </resource>

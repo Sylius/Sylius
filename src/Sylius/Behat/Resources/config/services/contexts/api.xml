@@ -66,6 +66,11 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_shipping_methods" class="Sylius\Behat\Context\Api\Admin\ManagingShippingMethodsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shipping_method" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_product_reviews" class="Sylius\Behat\Context\Api\Admin\ManagingProductReviewsContext">
             <argument type="service" id="sylius.behat.api_platform_client.product_review" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
