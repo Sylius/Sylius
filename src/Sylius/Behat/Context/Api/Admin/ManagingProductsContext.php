@@ -212,7 +212,9 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($response,'en_US', 'name', $productName)
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($response,'en_US', 'name', $productName)
         );
     }
 
@@ -298,6 +300,7 @@ final class ManagingProductsContext implements Context
     {
         $this->client->addRequestData('code', '_NEW');
         $this->client->update();
+        $this->client->index();
 
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
@@ -315,11 +318,11 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name): void
     {
-        $response = $this->client->index();
+        $response = $this->client->show($product->getCode());
 
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $name),
-            sprintf('Product with name %s does not exist', $name)
+            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $name),
+            sprintf('Product\'s name %s does not exist', $name)
         );
     }
 
@@ -337,22 +340,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^this product should have (?:a|an) ("[^"]+" option)$/
+     * @Then /^(this product) should have (?:a|an) ("[^"]+" option)$/
      */
-    public function thisProductShouldHaveOption(ProductOptionInterface $productOption): void
+    public function thisProductShouldHaveOption(ProductInterface $product, ProductOptionInterface $productOption): void
     {
-        $response = $this->client->index();
+        $response = $this->client->show($product->getCode());
 
-        $options = [];
-        $options[0] = sprintf($this->iriConverter->getIriFromItem($productOption));
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
 
-        Assert::true(
-            $this->responseChecker->hasItemOnPositionWithValue(
-                $response,
-                1,
-                'options',
-                $options
-            ),
+        Assert::same(
+            $productFromResponse['options']['0'],
+            $this->iriConverter->getIriFromItem($productOption),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }
