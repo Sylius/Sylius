@@ -101,6 +101,21 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    public function hasTranslation(Response $response, string $locale, string $key, string $translation): bool
+    {
+        $resource = $this->getResponseContent($response);
+
+        if (
+            isset($resource['translations']) &&
+            isset($resource['translations'][$locale]) &&
+            $resource['translations'][$locale][$key] === $translation
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function hasItemWithValues(Response $response, array $parameters): bool
     {
         foreach ($this->getCollection($response) as $item) {
@@ -110,6 +125,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return false;
+    }
+
+    public function getResponseContent(Response $response): array
+    {
+        return json_decode($response->getContent(), true);
     }
 
     private function getResponseContentValue(Response $response, string $key)

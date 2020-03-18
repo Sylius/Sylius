@@ -44,5 +44,9 @@ interface ResponseCheckerInterface
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
 
+    public function hasTranslation(Response $response, string $locale, string $key, string $translation): bool;
+
     public function hasItemWithValues(Response $response, array $parameters): bool;
+
+    public function getResponseContent(Response $response): array;
 }
