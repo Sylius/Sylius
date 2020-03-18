@@ -23,6 +23,10 @@
         </attribute>
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="createdAt">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="get">
                 <attribute name="filters">

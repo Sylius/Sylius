@@ -244,7 +244,7 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($response,'en_US', 'name', $productName)
+            $this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $productName)
         );
     }
 
@@ -258,10 +258,9 @@ final class ManagingProductsContext implements Context
                 $localeCode => [
                     'name' => '',
                     'locale' => $localeCode,
-                    ],
                 ],
             ],
-        );
+        ]);
     }
 
     /**
@@ -306,6 +305,28 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that (code|name|slug) is required$/
+     */
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter product %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that code has to be unique
+     */
+    public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product code must be unique.'
+        );
+    }
+
+    /**
      * @Then I should see :count products in the list
      */
     public function iShouldSeeProductsInTheList(int $count): void
@@ -324,6 +345,20 @@ final class ManagingProductsContext implements Context
                 ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
             ,
             sprintf('Product has not %s with %s', $field, $value)
+        );
+    }
+
+    /**
+     * @Then I should( still) see a product with code :value
+     */
+    public function iShouldSeeProductWithCode(string $value): void
+    {
+        Assert::true(
+            $this
+                ->responseChecker
+                ->hasItemWithValue($this->client->getLastResponse(), 'code', $value)
+            ,
+            sprintf('Product has not code with %s', $value)
         );
     }
 
@@ -367,12 +402,11 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $response = $this->client->index();
+        $response = $this->client->show($product->getCode());
 
-        $this
-            ->responseChecker
-            ->hasItemWithValue($response, 'mainTaxon', $this->iriConverter->getIriFromItem($taxon))
-        ;
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
+
+        Assert::same($productFromResponse['mainTaxon'], $this->iriConverter->getIriFromItem($taxon));
     }
 
     /**
@@ -417,6 +451,16 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the first product on the list should have :field :value
+     */
+    public function theFirstProductOnTheListShouldHave(string $field, string $value): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->index());
+
+        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
+    }
+
+    /**
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
@@ -443,7 +487,7 @@ final class ManagingProductsContext implements Context
                 'reviewSubject',
                 $this->iriConverter->getIriFromItem($product)
             ),
-        'Should be no reviews, but some exist'
+            'Should be no reviews, but some exist'
         );
     }
 
@@ -472,12 +516,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then product with :element :value should not be added
+     * @Then /^product with (name|code) "([^"]+)" should not be added$/
      */
-    public function productWithNameShouldNotBeAdded(string $element, string $value): void
+    public function productWithNameShouldNotBeAdded(string $field, string $value): void
     {
-//        $this->iWantToBrowseProducts();
-//        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
+        Assert::false($this->hasProductWithFieldValue($this->client->index(), $field, $value));
     }
 
     private function hasProductImage(Response $response, ProductInterface $product): bool
@@ -491,6 +534,32 @@ final class ManagingProductsContext implements Context
             ) {
                 return true;
             }
+
+        return false;
+    }
+
+    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
+    {
+        if ($field === 'code') {
+            return $product['code'];
+        }
+
+        if ($field === 'name') {
+            return $product['translations']['en_US']['name'];
+        }
+
+        return null;
+    }
+
+    private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
+    {
+        if ($field === 'code') {
+            return $this->responseChecker->hasItemWithValue($response, $field, $value);
+        }
+
+        if ($field === 'name') {
+            return $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value);
+        }
 
         return false;
     }
