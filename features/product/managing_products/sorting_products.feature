@@ -22,7 +22,7 @@ Feature: Sorting listed products
         And I should see a product with code "L_PUG"
         But the first product on the list should have code "B_PUG"
 
-    @ui
+    @ui @api
     Scenario: Changing the codes sorting order
         Given I am browsing products
         When I switch the way products are sorted by code

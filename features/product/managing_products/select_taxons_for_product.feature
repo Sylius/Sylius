@@ -18,7 +18,7 @@ Feature: Select taxon for an existing product
         And I choose main taxon "T-Shirts"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product main taxon should be "T-Shirts"
+        And main taxon of product "T-Shirt Banana" should be "T-Shirts"
 
     @ui @javascript @api
     Scenario: Specifying main taxon for simple product
@@ -26,5 +26,5 @@ Feature: Select taxon for an existing product
         And I choose main taxon "Sad"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product main taxon should be "Sad"
+        And main taxon of product "T-Shirt Batman" should be "Sad"
 

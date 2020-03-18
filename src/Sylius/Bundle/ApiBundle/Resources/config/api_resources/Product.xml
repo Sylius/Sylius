@@ -30,6 +30,7 @@
         <collectionOperations>
             <collectionOperation name="get">
                 <attribute name="filters">
+                    <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                 </attribute>
             </collectionOperation>

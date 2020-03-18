@@ -83,24 +83,11 @@ final class ManagingProductsContext implements Context
      */
     public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
     {
-        $data = [
-            'translations' => [
-                $localeCode => [
-                    'locale' => $localeCode,
-                ],
-            ],
-        ];
+        $data['translations'][$localeCode]['locale'] = $localeCode;
 
         if ($name !== null) {
-            $data = [
-                'translations' => [
-                    $localeCode => [
-                        'locale' => $localeCode,
-                        'name' => $name,
-                        'slug' => StringInflector::nameToSlug($name)
-                    ],
-                ],
-            ];
+            $data['translations'][$localeCode]['name'] = $name;
+            $data['translations'][$localeCode]['slug'] = StringInflector::nameToSlug($name);
         }
 
         $this->client->updateRequestData($data);
@@ -174,7 +161,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->addRequestData('mainTaxon', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItem($taxon)]);
     }
 
     /**
@@ -193,6 +180,16 @@ final class ManagingProductsContext implements Context
     {
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
         $this->client->filter();
+    }
+
+    /**
+     * @When I switch the way products are sorted by :field
+     * @When I start sorting products by :field
+     * @Given the products are already sorted by :field
+     */
+    public function iSortProductsBy(string $field): void
+    {
+        $this->client->sort('order', $field, 'desc');
     }
 
     /**
@@ -340,25 +337,8 @@ final class ManagingProductsContext implements Context
     public function iShouldSeeProductWith(string $field, string $value): void
     {
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
-            ,
+            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
             sprintf('Product has not %s with %s', $field, $value)
-        );
-    }
-
-    /**
-     * @Then I should( still) see a product with code :value
-     */
-    public function iShouldSeeProductWithCode(string $value): void
-    {
-        Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithValue($this->client->getLastResponse(), 'code', $value)
-            ,
-            sprintf('Product has not code with %s', $value)
         );
     }
 
@@ -404,9 +384,9 @@ final class ManagingProductsContext implements Context
     {
         $response = $this->client->show($product->getCode());
 
-        $productFromResponse = $this->responseChecker->getResponseContent($response);
+        $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($productFromResponse['mainTaxon'], $this->iriConverter->getIriFromItem($taxon));
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromItem($taxon));
     }
 
     /**
@@ -455,7 +435,7 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $products = $this->responseChecker->getCollection($this->client->index());
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
     }

@@ -10,6 +10,8 @@
         </attribute>
         <attribute name="code">
             <group>taxon:read</group>
+            <group>taxon:create</group>
+            <group>taxon:update</group>
         </attribute>
         <attribute name="translations">
             <group>taxon:read</group>
