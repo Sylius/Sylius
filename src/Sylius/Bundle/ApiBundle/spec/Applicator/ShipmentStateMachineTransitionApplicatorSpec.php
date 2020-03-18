@@ -18,21 +18,26 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachine;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class ShipmentStateMachineTransitionApplicatorSpec extends ObjectBehavior
 {
-    function let(StateMachineFactoryInterface $stateMachineFactory): void
+    function let(StateMachineFactoryInterface $stateMachineFactory, EventDispatcherInterface $eventDispatcher): void
     {
-        $this->beConstructedWith($stateMachineFactory);
+        $this->beConstructedWith($stateMachineFactory, $eventDispatcher);
     }
 
-    function it_ships_shipment(
+    function it_ships_shipment_and_sends_emails(
         StateMachineFactoryInterface $stateMachineFactory,
         ShipmentInterface $shipment,
-        StateMachine $stateMachine
+        StateMachine $stateMachine,
+        EventDispatcherInterface $eventDispatcher
     ): void {
         $stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
+
+        $eventDispatcher->dispatch('sylius.shipment.post_ship', new GenericEvent($shipment->getWrappedObject()))->shouldBeCalled();
 
         $this->ship($shipment);
     }
