@@ -85,6 +85,12 @@
             <argument>shipments</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.order" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>orders</argument>
+        </service>
+
         <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">
             <argument type="service" id="test.client" />
         </service>
