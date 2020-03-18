@@ -138,6 +138,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.admin" class="Sylius\Behat\Context\Transform\AdminUserContext">
+            <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

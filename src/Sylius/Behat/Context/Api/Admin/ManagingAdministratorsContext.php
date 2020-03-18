@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
@@ -52,6 +53,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I specify its email as :email
      * @When I do not specify its email
+     * @When I change its email to :email
      */
     public function iSpecifyItsEmailAs(string $email = null): void
     {
@@ -63,6 +65,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I specify its name as :username
      * @When I do not specify its name
+     * @When I change its name to :username
      */
     public function iSpecifyItsNameAs(string $username = null): void
     {
@@ -74,6 +77,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I specify its password as :password
      * @When I do not specify its password
+     * @When I change its password to :password
      */
     public function iSpecifyItsPasswordAs(string $password = null): void
     {
@@ -108,6 +112,31 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $response = $this->client->update();
+        $this->responseChecker->isUpdateSuccessful($response);
+    }
+
+    /**
+     * @When I delete administrator with email :adminUser
+     */
+    public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
+    {
+        $this->client->delete((string) $adminUser->getId());
+    }
+
+    /**
+     * @When /^I want to edit (this administrator)$/
+     */
+    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
+    {
+        $this->client->buildUpdateRequest((string) $adminUser->getId());
+    }
+
+    /**
      * @Then I should see a single administrator in the list
      * @Then there should be :count administrators in the list
      */
@@ -129,6 +158,17 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @Then there should not be :email administrator anymore
+     */
+    public function thereShouldNotBeAdministratorAnymore(string $email): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
+            sprintf('Administrator with email %s exists, but it should not', $email)
+        );
+    }
+
+    /**
      * @Then there should still be only one administrator with an email :email
      */
     public function thereShouldStillBeOnlyOneAdministratorWithAnEmail(string $email): void
@@ -142,6 +182,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @Then there should still be only one administrator with name :username
+     * @Then this administrator with name :username should appear in the store
      */
     public function thisAdministratorWithNameShouldAppearInTheStore(string $username): void
     {
@@ -160,6 +201,28 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Administrator could not be created'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Administrator could not be edited'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Administrator could not be deleted'
         );
     }
 
@@ -204,6 +267,21 @@ final class ManagingAdministratorsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'email: This email is invalid.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it cannot be deleted
+     */
+    public function iShouldBeNotifiedThatItCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Administrator could be deleted'
+        );
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot remove currently logged in user.'
         );
     }
 }
