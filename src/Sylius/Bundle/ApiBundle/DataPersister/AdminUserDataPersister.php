@@ -50,7 +50,7 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
     {
         $this->passwordUpdater->updatePassword($data);
 
-        return $this->decoratedDataPersister->persist($data);
+        return $this->decoratedDataPersister->persist($data, $context);
     }
 
     public function remove($data, array $context = [])
@@ -59,7 +59,7 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
             throw new CannotRemoveCurrentlyLoggedInUser();
         }
 
-        return $this->decoratedDataPersister->remove($data);
+        return $this->decoratedDataPersister->remove($data, $context);
     }
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool

@@ -44,7 +44,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         AdminUserInterface $adminUser
     ): void {
         $passwordUpdater->updatePassword($adminUser)->shouldBeCalled();
-        $decoratedDataPersister->persist($adminUser)->shouldBeCalled();
+        $decoratedDataPersister->persist($adminUser, [])->shouldBeCalled();
 
         $this->persist($adminUser);
     }
@@ -62,7 +62,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         $currentlyLoggedInUser->getId()->willReturn(2);
         $token->getUser()->willReturn($currentlyLoggedInUser);
 
-        $decoratedDataPersister->remove($userToBeDeleted)->shouldBeCalled();
+        $decoratedDataPersister->remove($userToBeDeleted, [])->shouldBeCalled();
 
         $this->remove($userToBeDeleted);
     }
@@ -80,7 +80,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         $currentlyLoggedInUser->getId()->willReturn(1);
         $token->getUser()->willReturn($currentlyLoggedInUser);
 
-        $decoratedDataPersister->remove($userToBeDeleted)->shouldNotBeCalled();
+        $decoratedDataPersister->remove($userToBeDeleted, [])->shouldNotBeCalled();
 
         $this
             ->shouldThrow(CannotRemoveCurrentlyLoggedInUser::class)
@@ -97,7 +97,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
 
         $tokenStorage->getToken()->willReturn(null);
 
-        $decoratedDataPersister->remove($userToBeDeleted)->shouldBeCalled();
+        $decoratedDataPersister->remove($userToBeDeleted, [])->shouldBeCalled();
 
         $this->remove($userToBeDeleted);
     }

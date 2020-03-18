@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
-final class CannotRemoveCurrentlyLoggedInUser extends \Exception
+final class CannotRemoveCurrentlyLoggedInUser extends \RuntimeException
 {
     public function __construct()
     {
