@@ -103,7 +103,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given I want to create a new simple product
+     * @When I want to create a new simple product
      */
     public function iWantToCreateANewSimpleProduct()
     {
@@ -415,9 +415,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         $currentPage = $this->resolveCurrentPage();
 

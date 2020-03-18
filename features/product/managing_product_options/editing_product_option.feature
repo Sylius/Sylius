@@ -21,5 +21,5 @@ Feature: Editing product options
 
     @ui @api
     Scenario: Not being able to edit code of an existing product option
-        Given I want to modify the "T-Shirt size" product option
+        When I want to modify the "T-Shirt size" product option
         Then I should not be able to edit its code

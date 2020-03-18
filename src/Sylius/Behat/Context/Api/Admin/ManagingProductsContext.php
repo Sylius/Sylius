@@ -13,9 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductOption;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
@@ -23,17 +31,30 @@ final class ManagingProductsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $productReviewClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
+    public function __construct(
+        ApiClientInterface $client,
+        ApiClientInterface $productReviewClient,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
+    ) {
         $this->client = $client;
+        $this->productReviewClient = $productReviewClient;
         $this->responseChecker = $responseChecker;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
      * @When I want to create a new configurable product
+     * @When I want to create a new simple product
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {
@@ -60,8 +81,29 @@ final class ManagingProductsContext implements Context
                 $localeCode => [
                     'locale' => $localeCode,
                     'name' => $name,
+                    'slug' => StringInflector::nameToSlug($name)
                 ],
             ],
+        ];
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     */
+    public function iSetItsPriceTo(string $price, ChannelInterface $channel): void
+    {
+        $localeCode = $channel->getLocales()->first()->getCode();
+
+        $data = [
+            'translations' => [
+                $localeCode => [
+                    'locale' => $localeCode,
+                    'price' => $price,
+                ],
+            ],
+            'channel' => $this->iriConverter->getIriFromItem($channel),
         ];
 
         $this->client->updateRequestData($data);
@@ -77,6 +119,7 @@ final class ManagingProductsContext implements Context
         $data = [
             'translations' => [
                 $localeCode => [
+                    'locale' => $localeCode,
                     'slug' => $slug,
                 ],
             ],
@@ -95,6 +138,70 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add the :productOption option to it
+     */
+    public function iAddTheOptionToIt(ProductOption $productOption): void
+    {
+        $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromItem($productOption)]]);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
+     * @When I filter them by :taxon taxon
+     */
+    public function iFilterThemByTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
+        $this->client->filter();
+    }
+
+    /**
+     * @Given I am browsing products
+     * @When I browse products
+     * @When I want to browse products
+     */
+    public function iWantToBrowseProducts(): void
+    {
+        $this->client->index();
+    }
+
+    /**
+     * @When I delete the :product product
+     * @When I try to delete the :product product
+     */
+    public function iDeleteProduct(ProductInterface $product): void
+    {
+        $this->client->delete($product->getCode());
+    }
+
+    /**
+     * @When I want to modify the :product product
+     * @When /^I want to modify (this product)$/
+     * @When I modify the :product product
+     */
+    public function iWantToModifyAProduct(ProductInterface $product): void
+    {
+        $this->client->buildUpdateRequest($product->getCode());
+    }
+
+    /**
+     * @When I enable slug modification
+     * @When I enable slug modification in :localeCode
+     */
+    public function iEnableSlugModification(): void
+    {
+        //intentionally blank line
+    }
+
+    /**
      * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
@@ -102,12 +209,12 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldAppearInTheShop(string $productName): void
     {
-        $this->client->index();
+        $response = $this->client->index();
 
         Assert::true(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(),'en_US', 'name', $productName)
+                ->hasItemWithTranslation($response,'en_US', 'name', $productName)
         );
     }
 
@@ -117,5 +224,204 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Product could not be edited'
+        );
+    }
+
+    /**
+     * @Then I should be notified that this product is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisProductIsInUseAndCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product can be deleted, but it should not'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product still exists, but it should not'
+        );
+    }
+
+    /**
+     * @Then I should see :count products in the list
+     */
+    public function iShouldSeeProductsInTheList(int $count): void
+    {
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then I should( still) see a product with :field :value
+     */
+    public function iShouldSeeProductWith(string $field, string $value): void
+    {
+        Assert::true(
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            sprintf('Product has not %s with %s', $field, $value)
+        );
+    }
+
+    /**
+     * @Then I should not see any product with :field :value
+     */
+    public function iShouldNotSeeAnyProductWith(string $field, string $value): void
+    {
+        Assert::false(
+            $this
+                ->responseChecker
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
+        );
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->addRequestData('code', '_NEW');
+        $this->client->update();
+        $this->client->index();
+
+        Assert::false(
+            $this->responseChecker->hasItemOnPositionWithValue(
+                $this->client->getLastResponse(),
+                0,
+                'code',
+                '/new-api/products/_NEW'
+            ),
+            sprintf('It was possible to change %s', '_NEW')
+        );
+    }
+
+    /**
+     * @Then /^(this product) name should be "([^"]+)"$/
+     */
+    public function thisProductNameShouldBe(ProductInterface $product, string $name): void
+    {
+        $response = $this->client->show($product->getCode());
+
+        Assert::true(
+            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $name),
+            sprintf('Product\'s name %s does not exist', $name)
+        );
+    }
+
+    /**
+     * @Then /^(this product) should not exist in the product catalog$/
+     */
+    public function productShouldNotExist(ProductInterface $product): void
+    {
+        $response = $this->client->index();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($response, 'code', $product->getCode()),
+            sprintf('Product with name %s still exists, but it should not', $product->getName())
+        );
+    }
+
+    /**
+     * @Then /^(this product) should have (?:a|an) ("[^"]+" option)$/
+     */
+    public function thisProductShouldHaveOption(ProductInterface $product, ProductOptionInterface $productOption): void
+    {
+        $response = $this->client->show($product->getCode());
+
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
+
+        Assert::same(
+            $productFromResponse['options']['0'],
+            $this->iriConverter->getIriFromItem($productOption),
+            sprintf('Product with option %s does not exist', $productOption->getName())
+        );
+    }
+
+    /**
+     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
+     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
+     */
+    public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
+    {
+        $response = $this->client->show($product->getCode());
+
+        Assert::true(
+            $this->responseChecker->hasTranslation($response, $localeCode, 'slug', $slug),
+            sprintf('Product\'s slug %s does not exist', $slug)
+        );
+    }
+
+    /**
+     * @Then /^there should be no reviews of (this product)$/
+     */
+    public function thereAreNoProductReviews(ProductInterface $product): void
+    {
+        $response = $this->productReviewClient->index();
+
+        Assert::isEmpty(
+            $this->responseChecker->getCollectionItemsWithValue(
+                $response,
+                'reviewSubject',
+                $this->iriConverter->getIriFromItem($product)
+            ),
+            'Should be no reviews, but some exist'
+        );
+    }
+
+    /**
+     * @Then /^(this product) should still exist in the product catalog$/
+     */
+    public function productShouldExistInTheProductCatalog(ProductInterface $product): void
+    {
+        $response = $this->client->index();
+        $code = $product->getCode();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'code', $code),
+            sprintf('Product with code %s does not exist', $code)
+        );
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should still have an accessible image$/
+     */
+    public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
+    {
+        $response = $this->client->show($product->getCode());
+
+        Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
+    }
+
+    private function hasProductImage(Response $response, ProductInterface $product): bool
+    {
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
+
+            if (
+                isset($productFromResponse['images']) &&
+                isset($productFromResponse['images'][0]) &&
+                $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
+            ) {
+                return true;
+            }
+
+        return false;
     }
 }

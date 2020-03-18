@@ -24,7 +24,11 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="filters">
+                    <attribute>sylius.api.product_taxon_code_filter</attribute>
+                </attribute>
+            </collectionOperation>
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
                     <attribute name="groups">product:create</attribute>
@@ -34,6 +38,12 @@
 
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">product:update</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
@@ -41,5 +51,10 @@
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
         <property name="translations" readable="true" writable="true" />
+        <property name="productTaxons" readable="true" writable="true" />
+        <property name="reviews" required="false" />
+        <property name="options" required="false" />
+        <property name="channels" required="false" />
+        <property name="images" required="false" />
     </resource>
 </resources>
