@@ -37,7 +37,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
         $variantsPrices = [];
 
         /** @var ProductVariantInterface $variant */
-        foreach ($product->getVariants() as $variant) {
+        foreach ($product->getEnabledVariants() as $variant) {
             $variantsPrices[] = $this->constructOptionsMap($variant, $channel);
         }
 

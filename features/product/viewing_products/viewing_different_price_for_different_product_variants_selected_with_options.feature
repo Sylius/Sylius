@@ -34,3 +34,11 @@ Feature: Viewing different price for different product variants selected with op
         And I set its volume to "1L"
         Then the product price should be "Unavailable"
         Then I should be unable to add it to the cart
+
+    @ui @javascript
+    Scenario: Viewing an unavailable message if selected option combination is disabled
+        Given this product "0,5L" volume variant is disabled
+        When I view product "Wyborowa Vodka"
+        And I set its volume to "0,5L"
+        Then the product price should be "Unavailable"
+        Then I should be unable to add it to the cart
