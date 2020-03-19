@@ -66,12 +66,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             ['number' => $order->getNumber()]
         );
 
-        return $row->hasLink('Pay');
+        return $row->has('css', '[data-test-button="sylius.ui.pay"]');
     }
 
     public function openLastOrderPage(): void
     {
-        $this->getElement('last_order')->clickLink('Show');
+        $this->getElement('last_order')->find('css', '[data-test-button="sylius.ui.show"]')->click();
     }
 
     protected function getDefinedElements(): array
