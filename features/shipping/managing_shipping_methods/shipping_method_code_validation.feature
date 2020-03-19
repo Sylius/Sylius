@@ -33,7 +33,7 @@ Feature: Shipping method code validation
         Given I want to create a new shipping method
         When I name it "FedEx Carrier First US Division" in "English (United States)"
         And I specify its code as "PEC-US_01"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
         And I add it

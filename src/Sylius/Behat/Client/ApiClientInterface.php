@@ -42,7 +42,7 @@ interface ApiClientInterface
     /** @param string|int $value */
     public function addFilter(string $key, $value): void;
 
-    /** @param string|int $value */
+    /** @param string|int|array $value */
     public function addRequestData(string $key, $value): void;
 
     public function addSubResourceData(string $key, array $data): void;

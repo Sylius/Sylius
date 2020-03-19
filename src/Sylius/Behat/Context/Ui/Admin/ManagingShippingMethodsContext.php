@@ -98,9 +98,9 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I define it for the :zoneName zone
+     * @When I define it for the zone named :zoneName
      */
-    public function iDefineItForTheZone($zoneName)
+    public function iDefineItForTheZone(string $zoneName): void
     {
         $this->createPage->chooseZone($zoneName);
     }
