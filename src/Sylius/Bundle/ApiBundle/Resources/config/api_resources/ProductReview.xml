@@ -44,12 +44,12 @@
             </itemOperation>
             <itemOperation name="accept">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/product_reviews/{id}/accept</attribute>
+                <attribute name="path">/product-reviews/{id}/accept</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:accept</attribute>
             </itemOperation>
             <itemOperation name="reject">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/product_reviews/{id}/reject</attribute>
+                <attribute name="path">/product-reviews/{id}/reject</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:reject</attribute>
             </itemOperation>
         </itemOperations>

@@ -1,6 +1,7 @@
 api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
+    path_segment_name_generator: api_platform.path_segment_name_generator.dash
     swagger:
         versions: [3]
         api_keys:
