@@ -53,6 +53,9 @@
             <group>admin_user:create</group>
             <group>admin_user:update</group>
         </attribute>
+        <attribute name="avatar">
+            <group>admin_user:read</group>
+        </attribute>
         <attribute name="createdAt">
             <group>admin_user:read</group>
         </attribute>

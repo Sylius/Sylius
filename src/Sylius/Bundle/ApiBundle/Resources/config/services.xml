@@ -17,6 +17,13 @@
     </imports>
 
     <services>
+        <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="sylius.repository.avatar_image" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
         <service id="sylius.api.data_persister.admin_user" class="Sylius\Bundle\ApiBundle\DataPersister\AdminUserDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="security.token_storage" />
