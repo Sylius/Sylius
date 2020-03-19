@@ -60,9 +60,6 @@ final class ZoneContext implements Context
         return $zone;
     }
 
-    /**
-     * @return ZoneInterface
-     */
     private function getZoneBy(array $parameters): ZoneInterface
     {
         $existingZone = $this->zoneRepository->findOneBy($parameters);

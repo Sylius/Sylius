@@ -26,6 +26,7 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="name" identifier="false" required="true" />
+        <property name="description" identifier="false" />
         <property name="locale" identifier="false" required="true" />
     </resource>
 </resources>

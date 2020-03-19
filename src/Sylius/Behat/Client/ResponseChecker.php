@@ -69,6 +69,12 @@ final class ResponseChecker implements ResponseCheckerInterface
     }
 
     /** @param string|int $value */
+    public function hasValueInCollection(Response $response, string $key, $value): bool
+    {
+        return in_array($value, $this->getResponseContentValue($response, $key), true);
+    }
+
+    /** @param string|int $value */
     public function hasItemWithValue(Response $response, string $key, $value): bool
     {
         foreach ($this->getCollection($response) as $resource) {
@@ -89,8 +95,7 @@ final class ResponseChecker implements ResponseCheckerInterface
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool
     {
         foreach ($this->getCollection($response) as $resource) {
-            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation)
-            {
+            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
                 return true;
             }
         }
@@ -102,15 +107,7 @@ final class ResponseChecker implements ResponseCheckerInterface
     {
         $resource = $this->getResponseContent($response);
 
-        if (
-            isset($resource['translations']) &&
-            isset($resource['translations'][$locale]) &&
-            $resource['translations'][$locale][$key] === $translation
-        ) {
-            return true;
-        }
-
-        return false;
+        return isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation;
     }
 
     public function hasItemWithValues(Response $response, array $parameters): bool
