@@ -35,9 +35,6 @@ final class Request implements RequestInterface
     /** @var array */
     private $files = [];
 
-    /** @var array */
-    private $sorting = [];
-
     private function __construct(string $url, string $method, array $headers = [])
     {
         $this->url = $url;
@@ -170,11 +167,6 @@ final class Request implements RequestInterface
     public function updateFiles(array $newFiles): void
     {
         $this->files = array_merge($this->files, $newFiles);
-    }
-
-    public function updateSorting(array $newSorters): void
-    {
-        $this->sorting = $this->mergeArraysUniquely($this->sorting, $newSorters);
     }
 
     public function addSubResource(string $key, array $subResource): void

@@ -33,7 +33,7 @@ interface ApiClientInterface
 
     public function filter(): Response;
 
-    public function sort(string $type, string $field, string $value): Response;
+    public function sort(string $field, string $value): Response;
 
     public function applyTransition(string $id, string $transition, array $content = []): Response;
 

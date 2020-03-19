@@ -189,7 +189,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSortProductsBy(string $field): void
     {
-        $this->client->sort('order', $field, 'desc');
+        $this->client->sort( $field, 'desc');
     }
 
     /**
