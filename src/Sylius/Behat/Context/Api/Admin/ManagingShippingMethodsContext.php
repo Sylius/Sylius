@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
@@ -69,6 +70,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -77,8 +79,9 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code): void
+    public function iSpecifyItsCodeAs(?string $code = ''): void
     {
         $this->client->addRequestData('code', $code);
     }
@@ -93,13 +96,13 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I name it :name in :localeCode
+     * @When I rename it to :name in :localeCode
+     * @When I do not name it
+     * @When I remove its name from :localeCode translation
      */
-    public function iNameItIn(string $name, string $localeCode): void
+    public function iNameItIn(?string $name = '', ?string $localeCode = 'en_US'): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
-        $data['translations'][$localeCode]['name'] = $name;
-
-        $this->client->updateRequestData($data);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name, 'locale' => $localeCode]]]);
     }
 
     /**
@@ -115,10 +118,29 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When /^I define it for the (zone named "[^"]+")$/
+     * @When I do not specify its zone
      */
-    public function iDefineItForTheZone(ZoneInterface $zone): void
+    public function iDefineItForTheZone(ZoneInterface $zone = null): void
     {
-        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+        if (null !== $zone) {
+            $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+        }
+    }
+
+    /**
+     * @When I disable it
+     */
+    public function iDisableIt(): void
+    {
+        $this->client->addRequestData('enabled', false);
+    }
+
+    /**
+     * @When I enable it
+     */
+    public function iEnableIt(): void
+    {
+        $this->client->addRequestData('enabled', true);
     }
 
     /**
@@ -143,6 +165,24 @@ final class ManagingShippingMethodsContext implements Context
     public function iSpecifyItsAmountAsForChannel(ChannelInterface $channel, int $amount): void
     {
         $this->client->addRequestData('configuration', [$channel->getCode() => ['amount' => $amount]]);
+    }
+
+    /**
+     * @When I want to modify a shipping method :shippingMethod
+     * @When /^I want to modify (this shipping method)$/
+     */
+    public function iWantToModifyShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->buildUpdateRequest($shippingMethod->getCode());
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
     }
 
     /**
@@ -211,6 +251,138 @@ final class ManagingShippingMethodsContext implements Context
                 $this->iriConverter->getIriFromItem($channel)
             ),
             sprintf('Shipping method is not assigned to %s channel', $channel->getName())
+        );
+    }
+
+    /**
+     * @Then /^(this shipping method) name should be "([^"]+)"$/
+     * @Then /^(this shipping method) should still be named "([^"]+)"$/
+     */
+    public function thisShippingMethodNameShouldBe(ShippingMethodInterface $shippingMethod, string $name): void
+    {
+        Assert::true(
+            $this->responseChecker->hasTranslation(
+                $this->client->show($shippingMethod->getCode()),
+                'en_US',
+                'name',
+                $name
+            ),
+            'Shipping method name has not been changed'
+        );
+    }
+
+    /**
+     * @Then /^(this shipping method) should be disabled$/
+     */
+    public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue(
+                $this->client->show($shippingMethod->getCode()),
+                'enabled',
+                false
+            ),
+            'Shipping method name is not disabled'
+        );
+    }
+
+    /**
+     * @Then /^(this shipping method) should be enabled$/
+     */
+    public function thisShippingMethodShouldBeEnabled(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue(
+                $this->client->show($shippingMethod->getCode()),
+                'enabled',
+                true
+            ),
+            'Shipping method name is not disabled'
+        );
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->addRequestData('code', 'NEW_CODE');
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Shipping method could not be edited'
+        );
+    }
+
+    /**
+     * @Then I should be notified that shipping method with this code already exists
+     */
+    public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Shipping method  has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'code: The shipping method with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one shipping method with code :value
+     */
+    public function thereShouldStillBeOnlyOneShippingMethodWith(string $value): void
+    {
+        $response = $this->client->index();
+        $itemsCount = $this->responseChecker->countCollectionItems($response);
+
+        Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
+        Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $value));
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s: Please enter shipping method %s.', $element, $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that zone has to be selected
+     */
+    public function iShouldBeNotifiedThatZoneHasToBeSelected(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'zone: Please select shipping method zone.'
+        );
+    }
+
+    /**
+     * @Then shipping method with :element :value should not be added
+     */
+    public function theShippingMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
+            sprintf('Shipping method should not have %s "%s", but it does,', $element, $value)
         );
     }
 }

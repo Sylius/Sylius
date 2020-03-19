@@ -22,13 +22,16 @@
         <attribute name="name">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
         <attribute name="description">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
         <attribute name="locale">
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
     </class>
 </serializer>

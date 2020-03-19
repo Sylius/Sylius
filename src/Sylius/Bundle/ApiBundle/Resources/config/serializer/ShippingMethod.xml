@@ -23,6 +23,7 @@
         <attribute name="translations">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
 
         <attribute name="code">
@@ -33,26 +34,37 @@
         <attribute name="position">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
 
         <attribute name="zone">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
+        </attribute>
+
+        <attribute name="enabled">
+            <group>shipping_method:read</group>
+            <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
 
         <attribute name="channels">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
 
         <attribute name="calculator">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
 
         <attribute name="configuration">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shipping_method:update</group>
         </attribute>
     </class>
 </serializer>

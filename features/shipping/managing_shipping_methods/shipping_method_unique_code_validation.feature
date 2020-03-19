@@ -11,7 +11,7 @@ Feature: Shipping method unique code validation
         And the store allows shipping with "UPS Ground" identified by "UPS"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @api @javascript
     Scenario: Trying to add shipping method with taken code
         Given I want to create a new shipping method
         When I specify its code as "UPS"
