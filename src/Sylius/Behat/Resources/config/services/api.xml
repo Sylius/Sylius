@@ -28,13 +28,13 @@
         <service id="sylius.behat.api_platform_client.customer_group" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>customer_groups</argument>
+            <argument>customer-groups</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.exchange_rate" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>exchange_rates</argument>
+            <argument>exchange-rates</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.payment" class="Sylius\Behat\Client\ApiPlatformClient">
@@ -46,13 +46,13 @@
         <service id="sylius.behat.api_platform_client.product_option" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>product_options</argument>
+            <argument>product-options</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.product_review" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>product_reviews</argument>
+            <argument>product-reviews</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.products" class="Sylius\Behat\Client\ApiPlatformClient">
@@ -64,19 +64,19 @@
         <service id="sylius.behat.api_platform_client.shipping_category" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>shipping_categories</argument>
+            <argument>shipping-categories</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.shipping_method" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>shipping_methods</argument>
+            <argument>shipping-methods</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.tax_category" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>tax_categories</argument>
+            <argument>tax-categories</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.shipment" class="Sylius\Behat\Client\ApiPlatformClient">
