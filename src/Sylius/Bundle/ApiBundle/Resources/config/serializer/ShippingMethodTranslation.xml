@@ -15,38 +15,15 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Component\Core\Model\ShippingMethod">
+    <class name="Sylius\Component\Shipping\Model\ShippingMethodTranslation">
         <attribute name="id">
             <group>shipping_method:read</group>
         </attribute>
-
-        <attribute name="translations">
+        <attribute name="name">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
         </attribute>
-
-        <attribute name="code">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-        </attribute>
-
-        <attribute name="position">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-        </attribute>
-
-        <attribute name="zone">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-        </attribute>
-
-        <attribute name="calculator">
-            <group>shipping_method:read</group>
-            <group>shipping_method:create</group>
-        </attribute>
-
-        <attribute name="configuration">
-            <group>shipping_method:read</group>
+        <attribute name="locale">
             <group>shipping_method:create</group>
         </attribute>
     </class>

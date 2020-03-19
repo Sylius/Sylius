@@ -108,6 +108,10 @@
         <service id="sylius.behat.context.transform.shared_storage" class="Sylius\Behat\Context\Transform\SharedStorageContext">
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
+        <service id="sylius.behat.context.transform.shipping_calculator" class="Sylius\Behat\Context\Transform\ShippingCalculatorContext">
+            <argument>%sylius.shipping_calculators%</argument>
+            <argument type="service" id="translator"/>
+        </service>
 
         <service id="sylius.behat.context.transform.shipping_category" class="Sylius\Behat\Context\Transform\ShippingCategoryContext">
             <argument type="service" id="sylius.repository.shipping_category" />
