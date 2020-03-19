@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -40,16 +41,21 @@ final class ManagingProductsContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ApiClientInterface $client,
         ApiClientInterface $productReviewClient,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->productReviewClient = $productReviewClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -142,7 +148,14 @@ final class ManagingProductsContext implements Context
      */
     public function iAddTheOptionToIt(ProductOption $productOption): void
     {
-        $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromItem($productOption)]]);
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $productOptions = $this->responseChecker->getValue($this->client->show($product->getCode()), 'options');
+
+        $productOptions[] = $this->iriConverter->getIriFromItem($productOption);
+
+        $this->client->updateRequestData(['options' => $productOptions]);
     }
 
     /**
@@ -348,9 +361,8 @@ final class ManagingProductsContext implements Context
 
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
-        Assert::same(
-            $productFromResponse['options']['0'],
-            $this->iriConverter->getIriFromItem($productOption),
+        Assert::true(
+            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options']),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }
