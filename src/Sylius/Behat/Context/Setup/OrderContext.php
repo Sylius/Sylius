@@ -679,6 +679,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^(this order) has already been shipped$/
+     * @Given the order :order is already shipped
      */
     public function thisOrderHasAlreadyBeenShipped(OrderInterface $order)
     {

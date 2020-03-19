@@ -58,6 +58,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order): void
@@ -73,6 +74,32 @@ final class ManagingOrdersContext implements Context
         $this->client->applyTransition(
             $this->responseChecker->getValue($this->client->show($order->getNumber()), 'number'),
             OrderTransitions::TRANSITION_CANCEL
+        );
+    }
+
+    /**
+     * @When /^I mark (this order) as paid$/
+     */
+    public function iMarkThisOrderAsAPaid(OrderInterface $order): void
+    {
+        $this->client->customEndPoint(
+            sprintf('/new-api/payments/%s/complete', (string) $order->getLastPayment()->getId()),
+            'PATCH',
+            $this->sharedStorage->get('token')
+        );
+
+        $this->sharedStorage->set('order', $order);
+    }
+
+    /**
+     * @When /^I ship (this order)$/
+     */
+    public function iShipThisOrder(OrderInterface $order): void
+    {
+        $this->client->customEndPoint(
+            sprintf('/new-api/shipments/%s/ship', (string) $order->getShipments()->first()->getId()),
+            'PATCH',
+            $this->sharedStorage->get('token')
         );
     }
 
@@ -106,13 +133,14 @@ final class ManagingOrdersContext implements Context
      */
     public function itsStateShouldBe(string $state): void
     {
+        $order = $this->sharedStorage->get('order');
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->getLastResponse(),
+                $this->client->show($order->getNumber()),
                 'state',
                 strtolower($state)
             ),
-            sprintf('Order have different state then %s', $state)
+            sprintf('Order have different state then %s but %s', $state, $this->responseChecker->getValue($this->client->getLastResponse(), 'state'))
         );
     }
 
@@ -178,7 +206,7 @@ final class ManagingOrdersContext implements Context
         $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Transition "cancel" cannot be applied on state "cancelled"'
+            'Transition "cancel" cannot be applied'
         );
     }
 
