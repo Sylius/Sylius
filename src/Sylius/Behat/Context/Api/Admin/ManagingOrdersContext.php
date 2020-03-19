@@ -21,12 +21,20 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $shipmentsClient;
+
+    /** @var ApiClientInterface */
+    private $paymentsClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -39,11 +47,15 @@ final class ManagingOrdersContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $shipmentsClient,
+        ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->shipmentsClient = $shipmentsClient;
+        $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -58,6 +70,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order): void
@@ -73,6 +86,28 @@ final class ManagingOrdersContext implements Context
         $this->client->applyTransition(
             $this->responseChecker->getValue($this->client->show($order->getNumber()), 'number'),
             OrderTransitions::TRANSITION_CANCEL
+        );
+    }
+
+    /**
+     * @When /^I mark (this order) as paid$/
+     */
+    public function iMarkThisOrderAsAPaid(OrderInterface $order): void
+    {
+        $this->paymentsClient->applyTransition(
+            (string) $order->getLastPayment()->getId(),
+            PaymentTransitions::TRANSITION_COMPLETE
+        );
+    }
+
+    /**
+     * @When /^I ship (this order)$/
+     */
+    public function iShipThisOrder(OrderInterface $order): void
+    {
+        $this->shipmentsClient->applyTransition(
+            (string) $order->getShipments()->first()->getId(),
+            ShipmentTransitions::TRANSITION_SHIP
         );
     }
 
@@ -106,14 +141,11 @@ final class ManagingOrdersContext implements Context
      */
     public function itsStateShouldBe(string $state): void
     {
-        Assert::true(
-            $this->responseChecker->hasValue(
-                $this->client->getLastResponse(),
-                'state',
-                strtolower($state)
-            ),
-            sprintf('Order have different state then %s', $state)
-        );
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $orderState = $this->responseChecker->getValue($this->client->show($order->getNumber()), 'state');
+
+        Assert::same($orderState, strtolower($state));
     }
 
     /**
@@ -178,7 +210,7 @@ final class ManagingOrdersContext implements Context
         $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Transition "cancel" cannot be applied on state "cancelled"'
+            'Transition "cancel" cannot be applied'
         );
     }
 
