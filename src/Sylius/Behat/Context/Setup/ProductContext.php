@@ -930,6 +930,22 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^(this product) "([^"]+)" ([^"]+) variant is disabled$/
+     */
+    public function theVolumeVariantIsDisabled(ProductInterface $product, $optionValueName, $optionName)
+    {
+        $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
+        foreach ($product->getVariants() as $variant) {
+            if ($variant->getOptionValues()->contains($optionValue)) {
+                $variant->setEnabled(false);
+                break;
+            }
+        }
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
