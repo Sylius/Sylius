@@ -3,6 +3,7 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
+            "enabled": {},
             "translations": {},
             "version": {},
             "tracked": {},
