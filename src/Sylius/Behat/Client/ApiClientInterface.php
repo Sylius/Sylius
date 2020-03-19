@@ -35,9 +35,14 @@ interface ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response;
 
+    public function upload(string $url, array $content, array $files): Response;
+
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;
+
+    /** @param string|int $value */
+    public function addParameter(string $key, $value): void;
 
     /** @param string|int $value */
     public function addFilter(string $key, $value): void;

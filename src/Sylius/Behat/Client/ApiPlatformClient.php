@@ -87,6 +87,15 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request);
     }
 
+    public function upload(string $url, array $parameters, array $files): Response
+    {
+        $request = Request::upload($url, $this->sharedStorage->get('token'));
+        $request->updateParameters($parameters);
+        $request->updateFiles($files);
+
+        return $this->request($request);
+    }
+
     public function buildCreateRequest(): void
     {
         $this->request = Request::create($this->resource, $this->sharedStorage->get('token'));
@@ -101,9 +110,15 @@ final class ApiPlatformClient implements ApiClientInterface
     }
 
     /** @param string|int $value */
+    public function addParameter(string $key, $value): void
+    {
+        $this->request->updateParameters([$key => $value]);
+    }
+
+    /** @param string|int $value */
     public function addFilter(string $key, $value): void
     {
-        $this->request->updateFilters([$key => $value]);
+        $this->addParameter($key, $value);
     }
 
     /** @param string|int|array $value */
@@ -129,7 +144,14 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(RequestInterface $request): Response
     {
-        $this->client->request($request->method(), $request->url(), $request->filters(), [], $request->headers(), $request->content() ?? null);
+        $this->client->request(
+            $request->method(),
+            $request->url(),
+            $request->parameters(),
+            $request->files(),
+            $request->headers(),
+            $request->content() ?? null
+        );
 
         return $this->getLastResponse();
     }

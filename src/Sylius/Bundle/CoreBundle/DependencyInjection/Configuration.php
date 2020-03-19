@@ -86,6 +86,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(AvatarImage::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(AvatarImageRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()

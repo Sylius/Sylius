@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Webmozart\Assert\Assert;
 
 final class ManagingAdministratorsContext implements Context
@@ -24,13 +28,35 @@ final class ManagingAdministratorsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $avatarImageClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    /** @var \ArrayAccess */
+    private $minkParameters;
+
+    public function __construct(
+        ApiClientInterface $client,
+        ApiClientInterface $avatarImageClient,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage,
+        \ArrayAccess $minkParameters
+    ) {
         $this->client = $client;
+        $this->avatarImageClient = $avatarImageClient;
         $this->responseChecker = $responseChecker;
+        $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
+        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -129,11 +155,39 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @Given /^I am editing (my) details$/
      * @When /^I want to edit (this administrator)$/
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
     {
         $this->client->buildUpdateRequest((string) $adminUser->getId());
+    }
+
+    /**
+     * @When /^I (?:|upload|update) the "([^"]+)" image as (my) avatar$/
+     */
+    public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
+    {
+        $response = $this->client->upload(
+            '/new-api/avatar-images',
+            ['owner' => $this->iriConverter->getIriFromItem($administrator)],
+            ['file' => new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar))]
+        );
+
+        $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
+    }
+
+    /**
+     * @When I remove the avatar
+     */
+    public function iRemoveTheAvatarImage(): void
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->sharedStorage->get('administrator');
+        $avatar = $administrator->getAvatar();
+        Assert::notNull($avatar);
+
+        $this->avatarImageClient->delete((string) $avatar->getId());
     }
 
     /**
@@ -283,5 +337,41 @@ final class ManagingAdministratorsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Cannot remove currently logged in user.'
         );
+    }
+
+    /**
+     * @Then /^I should see the "([^"]*)" image as (my) avatar$/
+     */
+    public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
+    {
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->show((string) $administrator->getId()),
+            'avatar',
+            $this->sharedStorage->get(StringInflector::nameToCode($avatar))
+        ));
+    }
+
+    /**
+     * @Then I should not see the :avatar avatar image in the additional information section of my account
+     */
+    public function iShouldNotSeeTheAvatarImage(string $avatar): void
+    {
+        /** @var AdminUserInterface $administrator */
+        $administrator = $this->sharedStorage->get('administrator');
+
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->show((string) $administrator->getId()),
+            'avatar',
+            null
+        ));
+    }
+
+    /**
+     * @Then I should see the :avatar avatar image in the top bar next to my name
+     * @Then I should not see the :avatar avatar image in the top bar next to my name
+     */
+    public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
+    {
+        // intentionally left blank, as it is ui step
     }
 }

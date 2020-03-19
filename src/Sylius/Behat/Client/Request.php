@@ -30,7 +30,10 @@ final class Request implements RequestInterface
     private $content = [];
 
     /** @var array */
-    private $filters = [];
+    private $parameters = [];
+
+    /** @var array */
+    private $files = [];
 
     private function __construct(string $url, string $method, array $headers = [])
     {
@@ -98,6 +101,15 @@ final class Request implements RequestInterface
         );
     }
 
+    public static function upload(string $url, string $token): RequestInterface
+    {
+        return new self(
+            $url,
+            HttpRequest::METHOD_POST,
+            ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_Authorization' => 'Bearer ' . $token]
+        );
+    }
+
     public static function custom(string $url, string $method, string $token): RequestInterface
     {
         return new self($url, $method, ['HTTP_Authorization' => 'Bearer ' . $token]);
@@ -133,14 +145,24 @@ final class Request implements RequestInterface
         $this->content = $this->mergeArraysUniquely($this->content, $newValues);
     }
 
-    public function filters(): array
+    public function parameters(): array
     {
-        return $this->filters;
+        return $this->parameters;
     }
 
-    public function updateFilters(array $newFilters): void
+    public function updateParameters(array $newParameters): void
     {
-        $this->filters = $this->mergeArraysUniquely($this->filters, $newFilters);
+        $this->parameters = $this->mergeArraysUniquely($this->parameters, $newParameters);
+    }
+
+    public function files(): array
+    {
+        return $this->files;
+    }
+
+    public function updateFiles(array $newFiles): void
+    {
+        $this->files = array_merge($this->files, $newFiles);
     }
 
     public function addSubResource(string $key, array $subResource): void

@@ -29,6 +29,8 @@ interface RequestInterface
 
     public static function transition(string $resource, string $id, string $transition, string $token): self;
 
+    public static function upload(string $url, string $token): RequestInterface;
+
     public static function custom(string $url, string $method, string $token): self;
 
     public function url(): string;
@@ -43,9 +45,13 @@ interface RequestInterface
 
     public function updateContent(array $newValues): void;
 
-    public function filters(): array;
+    public function parameters(): array;
 
-    public function updateFilters(array $newFilters): void;
+    public function updateParameters(array $newParameters): void;
+
+    public function files(): array;
+
+    public function updateFiles(array $newFiles): void;
 
     public function addSubResource(string $key, array $subResource): void;
 }
