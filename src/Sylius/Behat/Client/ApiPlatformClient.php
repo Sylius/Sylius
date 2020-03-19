@@ -127,14 +127,6 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
-    public function customEndPoint(string $url, string $method, string $token, array $content = []): Response
-    {
-        $request = Request::custom($url, $method, $token);
-        $request->setContent($content);
-
-        return $this->request($request);
-    }
-
     private function request(RequestInterface $request): Response
     {
         $this->client->request($request->method(), $request->url(), $request->filters(), [], $request->headers(), $request->content() ?? null);

@@ -21,12 +21,20 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $shipmentsClient;
+
+    /** @var ApiClientInterface */
+    private $paymentsClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -39,11 +47,15 @@ final class ManagingOrdersContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $shipmentsClient,
+        ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->shipmentsClient = $shipmentsClient;
+        $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -82,13 +94,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order): void
     {
-        $this->client->customEndPoint(
-            sprintf('/new-api/payments/%s/complete', (string) $order->getLastPayment()->getId()),
-            'PATCH',
-            $this->sharedStorage->get('token')
+        $this->paymentsClient->applyTransition(
+            (string) $order->getLastPayment()->getId(),
+            PaymentTransitions::TRANSITION_COMPLETE
         );
-
-        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -96,10 +105,9 @@ final class ManagingOrdersContext implements Context
      */
     public function iShipThisOrder(OrderInterface $order): void
     {
-        $this->client->customEndPoint(
-            sprintf('/new-api/shipments/%s/ship', (string) $order->getShipments()->first()->getId()),
-            'PATCH',
-            $this->sharedStorage->get('token')
+        $this->shipmentsClient->applyTransition(
+            (string) $order->getShipments()->first()->getId(),
+            ShipmentTransitions::TRANSITION_SHIP
         );
     }
 
@@ -133,15 +141,11 @@ final class ManagingOrdersContext implements Context
      */
     public function itsStateShouldBe(string $state): void
     {
+        /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-        Assert::true(
-            $this->responseChecker->hasValue(
-                $this->client->show($order->getNumber()),
-                'state',
-                strtolower($state)
-            ),
-            sprintf('Order have different state then %s but %s', $state, $this->responseChecker->getValue($this->client->getLastResponse(), 'state'))
-        );
+        $orderState = $this->responseChecker->getValue($this->client->show($order->getNumber()), 'state');
+
+        Assert::same($orderState, strtolower($state));
     }
 
     /**

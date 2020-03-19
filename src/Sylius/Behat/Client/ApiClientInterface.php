@@ -50,6 +50,4 @@ interface ApiClientInterface
     public function updateRequestData(array $data): void;
 
     public function getLastResponse(): Response;
-
-    public function customEndPoint(string $url, string $method, string $token, array $content = []): Response;
 }
