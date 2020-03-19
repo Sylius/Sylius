@@ -37,6 +37,9 @@ interface ResponseCheckerInterface
     public function hasValue(Response $response, string $key, $value): bool;
 
     /** @param string|int $value */
+    public function hasValueInCollection(Response $response, string $key, $value): bool;
+
+    /** @param string|int $value */
     public function hasItemWithValue(Response $response, string $key, $value): bool;
 
     /** @param string|array $value */

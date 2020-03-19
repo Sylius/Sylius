@@ -40,6 +40,11 @@
             <group>shipping_method:create</group>
         </attribute>
 
+        <attribute name="channels">
+            <group>shipping_method:read</group>
+            <group>shipping_method:create</group>
+        </attribute>
+
         <attribute name="calculator">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>

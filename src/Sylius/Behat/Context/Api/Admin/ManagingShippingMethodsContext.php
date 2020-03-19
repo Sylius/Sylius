@@ -92,12 +92,23 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
+     * @When I name it :name in :localeCode
      */
-    public function iNameItIn(string $name, string $language): void
+    public function iNameItIn(string $name, string $localeCode): void
     {
-        $data = ['translations' => [$language => ['locale' => $language]]];
-        $data['translations'][$language]['name'] = $name;
+        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data['translations'][$localeCode]['name'] = $name;
+
+        $this->client->updateRequestData($data);
+    }
+
+    /**
+     * @When I describe it as :description in :localeCode
+     */
+    public function iDescribeItAsIn(string $description, string $localeCode): void
+    {
+        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data['translations'][$localeCode]['description'] = $description;
 
         $this->client->updateRequestData($data);
     }
@@ -108,6 +119,14 @@ final class ManagingShippingMethodsContext implements Context
     public function iDefineItForTheZone(ZoneInterface $zone): void
     {
         $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+    }
+
+    /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel(ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
     }
 
     /**
@@ -164,8 +183,8 @@ final class ManagingShippingMethodsContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $shippingMethodName),
-            sprintf('Shipping method with name %s exist', $shippingMethodName)
+            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $shippingMethodName),
+            sprintf('Shipping method with name %s does not exists', $shippingMethodName)
         );
     }
 
@@ -176,7 +195,22 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Zone could not be created'
+            'Shipping method could not be created'
+        );
+    }
+
+    /**
+     * @Then the shipping method :shippingMethod should be available in channel :channel
+     */
+    public function theShippingMethodShouldBeAvailableInChannel(ShippingMethodInterface $shippingMethod, ChannelInterface $channel): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValueInCollection(
+                $this->client->show($shippingMethod->getCode()),
+                'channels',
+                $this->iriConverter->getIriFromItem($channel)
+            ),
+            sprintf('Shipping method is not assigned to %s channel', $channel->getName())
         );
     }
 }
