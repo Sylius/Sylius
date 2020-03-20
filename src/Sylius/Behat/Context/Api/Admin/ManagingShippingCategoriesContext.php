@@ -153,12 +153,11 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @Then /^the (shipping category "([^"]+)") should be in the registry$/
-     * @Then /^the (shipping category "([^"]+)") should appear in the registry$/
+     * @Then the shipping category :shippingMethodName should be in the registry
+     * @Then the shipping category :shippingMethodName should appear in the registry
      */
-    public function theShippingCategoryShouldAppearInTheRegistry(ShippingCategoryInterface $shippingCategory): void
+    public function theShippingCategoryShouldAppearInTheRegistry(string $shippingCategoryName): void
     {
-        $shippingCategoryName = $shippingCategory->getName();
         Assert::true(
             $this->isItemOnIndex('name', $shippingCategoryName),
             sprintf('Shipping category with name %s does not exists', $shippingCategoryName)
