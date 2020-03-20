@@ -25,6 +25,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.filter_archival_shipping_methods" parent="api_platform.doctrine.orm.exists_filter">
+            <argument type="collection">
+                <argument key="archivedAt">false</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.product_taxon_code_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
                 <argument key="productTaxons.taxon.code">exact</argument>

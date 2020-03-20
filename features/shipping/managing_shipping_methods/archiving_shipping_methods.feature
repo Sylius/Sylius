@@ -20,14 +20,14 @@ Feature: Archiving obsolete shipping methods
         When I archive the "UPS Carrier" shipping method
         Then the shipping method "UPS Carrier" should still exist in the registry
 
-    @ui
+    @ui @api
     Scenario: Seeing only archived shipping methods
         Given the shipping method "UPS Carrier" is archival
         And I am browsing shipping methods
         When I filter archival shipping methods
         Then the only shipping method on the list should be "UPS Carrier"
 
-    @ui
+    @ui @api
     Scenario: Restoring an archival shipping method
         Given the shipping method "UPS Carrier" is archival
         And I am browsing archival shipping methods
