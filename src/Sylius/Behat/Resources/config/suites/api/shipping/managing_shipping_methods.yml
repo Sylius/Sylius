@@ -26,7 +26,6 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_calculator
                 - sylius.behat.context.transform.shipping_method
-                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.api.admin.managing_shipping_methods
