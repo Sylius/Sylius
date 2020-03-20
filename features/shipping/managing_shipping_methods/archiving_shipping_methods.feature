@@ -9,7 +9,7 @@ Feature: Archiving obsolete shipping methods
         And the store allows shipping with "UPS Carrier" and "FedEx Carrier"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Archiving a shipping method
         Given I am browsing shipping methods
         When I archive the "UPS Carrier" shipping method

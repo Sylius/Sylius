@@ -28,9 +28,8 @@ final class ShippingMethodDataPersister implements ContextAwareDataPersisterInte
     /** @var ContextAwareDataPersisterInterface */
     private $decoratedDataPersister;
 
-    public function __construct(
-        ContextAwareDataPersisterInterface $decoratedDataPersister
-    ) {
+    public function __construct(ContextAwareDataPersisterInterface $decoratedDataPersister)
+    {
         $this->decoratedDataPersister = $decoratedDataPersister;
     }
 

@@ -17,6 +17,8 @@
     </imports>
 
     <services>
+        <service id="sylius.api.archive_shipping_method_action" class="Sylius\Bundle\ApiBundle\Controller\ArchiveShippingMethodAction" public="true" />
+
         <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
             <argument type="service" id="sylius.factory.avatar_image" />
             <argument type="service" id="sylius.repository.avatar_image" />
@@ -51,6 +53,11 @@
 
         <service id="sylius.api.order_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
+        </service>
+
+        <service id="sylius.api.doctrine.query_collection_extension.hide_archived_shipping_method" class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension" public="true">
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
     </services>
 </container>

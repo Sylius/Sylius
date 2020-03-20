@@ -66,5 +66,17 @@
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
         </attribute>
+
+        <attribute name="createdAt">
+            <group>shipping_method:read</group>
+        </attribute>
+
+        <attribute name="updatedAt">
+            <group>shipping_method:read</group>
+        </attribute>
+
+        <attribute name="archivedAt">
+            <group>shipping_method:read</group>
+        </attribute>
     </class>
 </serializer>
