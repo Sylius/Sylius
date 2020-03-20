@@ -24,7 +24,7 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
-            <attribute name="createdAt">ASC</attribute>
+            <attribute name="code">ASC</attribute>
         </attribute>
 
         <collectionOperations>
