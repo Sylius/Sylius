@@ -46,7 +46,6 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Given I am browsing shipping methods
      * @When I want to browse shipping methods
-     * @Given I am browsing shipping methods
      */
     public function iBrowseShippingMethods(): void
     {
