@@ -24,6 +24,10 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="put">
@@ -35,7 +39,11 @@
         </itemOperations>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="filters">
+                    <attribute>sylius.api.shipping_method_order_filter</attribute>
+                </attribute>
+            </collectionOperation>
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:create</attribute>
