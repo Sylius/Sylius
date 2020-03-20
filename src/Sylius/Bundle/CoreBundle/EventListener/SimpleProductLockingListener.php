@@ -26,13 +26,9 @@ final class SimpleProductLockingListener
     /** @var EntityManagerInterface */
     private $manager;
 
-    /** @var ProductVariantResolverInterface */
-    private $variantResolver;
-
-    public function __construct(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
+    public function __construct(EntityManagerInterface $manager)
     {
         $this->manager = $manager;
-        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -46,7 +42,7 @@ final class SimpleProductLockingListener
 
         if ($product->isSimple()) {
             /** @var ProductVariantInterface $productVariant */
-            $productVariant = $this->variantResolver->getVariant($product);
+            $productVariant = $product->getVariants()->first();
             $this->manager->lock($productVariant, LockMode::OPTIMISTIC, $productVariant->getVersion());
         }
     }
