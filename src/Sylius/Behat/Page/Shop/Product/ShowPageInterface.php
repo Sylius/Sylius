@@ -77,4 +77,6 @@ interface ShowPageInterface extends PageInterface
     public function visit(string $url): void;
 
     public function getVariantsNames(): array;
+
+    public function getOptionValues(string $optionName): array;
 }

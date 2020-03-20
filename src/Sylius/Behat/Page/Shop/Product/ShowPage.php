@@ -259,6 +259,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $variantsNames;
     }
 
+    public function getOptionValues(string $optionCode): array
+    {
+        $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
+        return array_map(
+            function (NodeElement $element) {
+                return $element->getText();
+            },
+            $optionElement->findAll('css', 'option')
+        );
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
