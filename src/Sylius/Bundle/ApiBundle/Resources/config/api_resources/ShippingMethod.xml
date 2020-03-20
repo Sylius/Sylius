@@ -24,6 +24,10 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="put">

@@ -410,6 +410,26 @@ final class ManagingShippingMethodsContext implements Context
     {
         $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same($shippingMethods[0]['code'], $value);
+        Assert::same(reset($shippingMethods)['code'], $value);
+    }
+
+    /**
+     * @Then the first shipping method on the list should have name :value
+     */
+    public function theFirstShippingMethodOnTheListShouldHave(string $value): void
+    {
+        $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(reset($shippingMethods)['translations']['en_US']['name'], $value);
+    }
+
+    /**
+     * @Then the last shipping method on the list should have name :value
+     */
+    public function theLastShippingMethodOnTheListShouldHave(string $value): void
+    {
+        $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($shippingMethods)['translations']['en_US']['name'], $value);
     }
 }
