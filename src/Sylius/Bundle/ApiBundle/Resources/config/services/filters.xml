@@ -50,5 +50,10 @@
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.translation_order_filter" class="Sylius\Bundle\ApiBundle\Filters\TranslationOrderFilter">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>

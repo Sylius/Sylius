@@ -30,14 +30,14 @@ Feature: Sorting listed shipping methods by name or code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "marine"
 
-    @ui
+    @ui @api
     Scenario: Shipping methods can be sorted by their names
         Given I am browsing shipping methods
         When I start sorting shipping methods by name
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Aardvark Stagecoach"
 
-    @ui
+    @ui @api
     Scenario: Changing the order of sorting shipping methods by their names
         Given I am browsing shipping methods
         And the shipping methods are already sorted by name
