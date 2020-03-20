@@ -31,6 +31,11 @@
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="sylius.api.data_persister.shipping_method" class="Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
         <service id="sylius.api.payment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator" public="true">
             <argument id="sm.factory" type="service" />
         </service>

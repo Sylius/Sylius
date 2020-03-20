@@ -11,3 +11,4 @@ api_platform:
     exception_to_status:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
+        Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
