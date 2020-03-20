@@ -15,14 +15,14 @@ Feature: Sorting listed products
         And this product is named "Ekstremalny Mops" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Products are sorted by ascending codes by default
         Given I am browsing products
         Then I should see 3 products in the list
         And I should see a product with code "L_PUG"
         But the first product on the list should have code "B_PUG"
 
-    @ui
+    @ui @api
     Scenario: Changing the codes sorting order
         Given I am browsing products
         When I switch the way products are sorted by code

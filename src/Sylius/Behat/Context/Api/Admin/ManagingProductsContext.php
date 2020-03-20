@@ -79,18 +79,16 @@ final class ManagingProductsContext implements Context
     /**
      * @When I name it :name in :localeCode
      * @When I rename it to :name in :localeCode
+     * @When I do not name it
      */
-    public function iRenameItToIn(string $name, string $localeCode): void
+    public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
     {
-        $data = [
-            'translations' => [
-                $localeCode => [
-                    'locale' => $localeCode,
-                    'name' => $name,
-                    'slug' => StringInflector::nameToSlug($name)
-                ],
-            ],
-        ];
+        $data['translations'][$localeCode]['locale'] = $localeCode;
+
+        if ($name !== null) {
+            $data['translations'][$localeCode]['name'] = $name;
+            $data['translations'][$localeCode]['slug'] = StringInflector::nameToSlug($name);
+        }
 
         $this->client->updateRequestData($data);
     }
@@ -159,6 +157,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I choose main (taxon "[^"]+")$/
+     */
+    public function iChooseMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItem($taxon)]);
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -174,6 +180,16 @@ final class ManagingProductsContext implements Context
     {
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
         $this->client->filter();
+    }
+
+    /**
+     * @When I switch the way products are sorted by :field
+     * @When I start sorting products by :field
+     * @Given the products are already sorted by :field
+     */
+    public function iSortProductsBy(string $field): void
+    {
+        $this->client->sort( $field, 'desc');
     }
 
     /**
@@ -225,10 +241,23 @@ final class ManagingProductsContext implements Context
         $response = $this->client->index();
 
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($response,'en_US', 'name', $productName)
+            $this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $productName)
         );
+    }
+
+    /**
+     * @When I remove its name from :localeCode translation
+     */
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'name' => '',
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -273,6 +302,28 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that (code|name|slug) is required$/
+     */
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter product %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that code has to be unique
+     */
+    public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product code must be unique.'
+        );
+    }
+
+    /**
      * @Then I should see :count products in the list
      */
     public function iShouldSeeProductsInTheList(int $count): void
@@ -286,9 +337,7 @@ final class ManagingProductsContext implements Context
     public function iShouldSeeProductWith(string $field, string $value): void
     {
         Assert::true(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
             sprintf('Product has not %s with %s', $field, $value)
         );
     }
@@ -301,7 +350,8 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
+            ,
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }
@@ -324,6 +374,19 @@ final class ManagingProductsContext implements Context
             ),
             sprintf('It was possible to change %s', '_NEW')
         );
+    }
+
+    /**
+     * @Then /^(this product) main (taxon should be "[^"]+")$/
+     * @Then main taxon of product :product should be :taxon
+     */
+    public function thisProductMainTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $response = $this->client->show($product->getCode());
+
+        $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
+
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromItem($taxon));
     }
 
     /**
@@ -365,6 +428,16 @@ final class ManagingProductsContext implements Context
             in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options']),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
+    }
+
+    /**
+     * @Then the first product on the list should have :field :value
+     */
+    public function theFirstProductOnTheListShouldHave(string $field, string $value): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
     }
 
     /**
@@ -422,6 +495,14 @@ final class ManagingProductsContext implements Context
         Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
     }
 
+    /**
+     * @Then /^product with (name|code) "([^"]+)" should not be added$/
+     */
+    public function productWithNameShouldNotBeAdded(string $field, string $value): void
+    {
+        Assert::false($this->hasProductWithFieldValue($this->client->index(), $field, $value));
+    }
+
     private function hasProductImage(Response $response, ProductInterface $product): bool
     {
         $productFromResponse = $this->responseChecker->getResponseContent($response);
@@ -433,6 +514,32 @@ final class ManagingProductsContext implements Context
             ) {
                 return true;
             }
+
+        return false;
+    }
+
+    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
+    {
+        if ($field === 'code') {
+            return $product['code'];
+        }
+
+        if ($field === 'name') {
+            return $product['translations']['en_US']['name'];
+        }
+
+        return null;
+    }
+
+    private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
+    {
+        if ($field === 'code') {
+            return $this->responseChecker->hasItemWithValue($response, $field, $value);
+        }
+
+        if ($field === 'name') {
+            return $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value);
+        }
 
         return false;
     }

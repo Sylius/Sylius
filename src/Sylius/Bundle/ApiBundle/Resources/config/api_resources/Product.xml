@@ -23,9 +23,14 @@
         </attribute>
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="createdAt">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="get">
                 <attribute name="filters">
+                    <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                 </attribute>
             </collectionOperation>
@@ -56,5 +61,6 @@
         <property name="options" required="false" />
         <property name="channels" required="false" />
         <property name="images" required="false" />
+        <property name="mainTaxon" required="false" />
     </resource>
 </resources>

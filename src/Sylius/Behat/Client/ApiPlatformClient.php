@@ -79,6 +79,13 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
+    public function sort(string $field, string $value): Response
+    {
+        $this->request->updateParameters(['order' => [$field => $value]]);
+
+        return $this->request($this->request);
+    }
+
     public function applyTransition(string $id, string $transition, array $content = []): Response
     {
         $request = Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token'));

@@ -111,9 +111,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given I want to create a new configurable product
+     * @When I want to create a new configurable product
      */
-    public function iWantToCreateANewConfigurableProduct()
+    public function iWantToCreateANewConfigurableProduct(): void
     {
         $this->createConfigurableProductPage->open();
     }
@@ -130,14 +130,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I do not name it
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      */
-    public function iRenameItToIn($name, $language)
+    public function iRenameItToIn(?string $name = null, ?string $language = null): void
     {
-        $currentPage = $this->resolveCurrentPage();
+        if ($name !== null && $language !== null) {
+            $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->nameItIn($name, $language);
+            $currentPage->nameItIn($name, $language);
+        }
     }
 
     /**
@@ -550,7 +553,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given product with :element :value should not be added
+     * @Then product with :element :value should not be added
      */
     public function productWithNameShouldNotBeAdded($element, $value)
     {

@@ -78,7 +78,7 @@ Feature: Products validation
         Then I should be notified that price must be defined for every channel
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @api
     Scenario: Adding a new configurable product without specifying its code
         Given I want to create a new configurable product
         When I name it "Dice Brewing" in "English (United States)"
@@ -86,7 +86,7 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @api
     Scenario: Adding a new configurable product with duplicated code
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         And I want to create a new configurable product
@@ -96,15 +96,16 @@ Feature: Products validation
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @api
     Scenario: Adding a new configurable product without specifying its name
-        Given I want to create a new configurable product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new configurable product
+        And I specify its code as "BOARD_DICE_BREWING"
+        When I do not name it
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to remove name from existing simple product
         Given the store has a "Dice Brewing" product
         And I want to modify this product
@@ -113,7 +114,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And this product should still be named "Dice Brewing"
 
-    @ui
+    @ui @api
     Scenario: Not seeing validation error for duplicated code if product code has not been changed
         Given the store has a "Dice Brewing" product
         And I want to modify this product

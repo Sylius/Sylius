@@ -34,6 +34,7 @@ final class TaxonContext implements Context
      * @Transform /^"([^"]+)" as a parent taxon$/
      * @Transform /^"([^"]+)" parent taxon$/
      * @Transform /^parent taxon to "([^"]+)"$/
+     * @Transform /^taxon should be "([^"]+)"$/
      * @Transform /^taxon with "([^"]+)" name/
      * @Transform /^taxon "([^"]+)"$/
      * @Transform :taxon
