@@ -20,7 +20,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
@@ -45,6 +44,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Given I am browsing shipping methods
      * @When I want to browse shipping methods
      */
     public function iBrowseShippingMethods(): void
@@ -160,6 +160,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I archive the :shippingMethod shipping method
+     */
+    public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->customItemAction($shippingMethod->getCode(), 'archive');
+    }
+
+    /**
      * @When I specify its amount as :amount for :channel channel
      */
     public function iSpecifyItsAmountAsForChannel(ChannelInterface $channel, int $amount): void
@@ -194,27 +202,27 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipping method :shippingMethodName should be in the registry
-     * @Then the shipping method :shippingMethodName should appear in the registry
+     * @Then the shipping method :name should be in the registry
+     * @Then the shipping method :name should appear in the registry
      */
-    public function theShippingMethodShouldAppearInTheRegistry(string $shippingMethodName): void
+    public function theShippingMethodShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $shippingMethodName),
-            sprintf('Shipping method with name %s does not exists', $shippingMethodName)
+            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $name),
+            sprintf('Shipping method with name %s does not exists', $name)
         );
     }
 
     /**
-     * @Given /^(this shipping method) should still be in the registry$/
+     * @Then /^(this shipping method) should still be in the registry$/
      */
     public function thisShippingMethodShouldAppearInTheRegistry(ShippingMethodInterface $shippingMethod): void
     {
-        $shippingMethodName = $shippingMethod->getName();
+        $name = $shippingMethod->getName();
 
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $shippingMethodName),
-            sprintf('Shipping method with name %s does not exists', $shippingMethodName)
+            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $name),
+            sprintf('Shipping method with name %s does not exists', $name)
         );
     }
 
@@ -364,6 +372,18 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
         Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $value));
+    }
+
+    /**
+     * @Then the only shipping method on the list should be :name
+     */
+    public function theOnlyShippingMethodOnTheListShouldBe(string $name): void
+    {
+        $response = $this->client->index();
+        $itemsCount = $this->responseChecker->countCollectionItems($response);
+
+        Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
+        Assert::true($this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $name));
     }
 
     /**

@@ -94,6 +94,11 @@ final class Request implements RequestInterface
 
     public static function transition(string $resource, string $id, string $transition, string $token): RequestInterface
     {
+        return self::customItemAction($resource, $id, $transition, $token);
+    }
+
+    public static function customItemAction(string $resource, string $id, string $transition, string $token): RequestInterface
+    {
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
             HttpRequest::METHOD_PATCH,

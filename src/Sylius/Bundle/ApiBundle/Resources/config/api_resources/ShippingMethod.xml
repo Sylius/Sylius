@@ -32,6 +32,12 @@
                 </attribute>
             </itemOperation>
             <itemOperation name="delete" />
+
+            <itemOperation name="archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipping-methods/{id}/archive</attribute>
+                <attribute name="controller">sylius.api.archive_shipping_method_action</attribute>
+            </itemOperation>
         </itemOperations>
 
         <collectionOperations>
@@ -47,6 +53,7 @@
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
+        <property name="archivedAt" writable="false" />
         <property name="name" writable="true" />
         <property name="position" writable="true" />
         <property name="enabled" writable="true" />
