@@ -15,14 +15,14 @@ Feature: Sorting listed shipping methods by name or code
         And this shipping method is named "Sterowiec Mopsów" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Shipping methods can be sorted by code in ascending order
         Given I am browsing shipping methods
         When I start sorting shipping methods by code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "aerial"
 
-    @ui
+    @ui @api
     Scenario: Changing the order of sorting by code
         Given I am browsing shipping methods
         When I start sorting shipping methods by code

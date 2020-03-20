@@ -39,6 +39,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.shipping_method_order_filter" parent="api_platform.doctrine.orm.order_filter">
+            <argument type="collection">
+                <argument key="code"/>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.exchange_rate_filter" class="Sylius\Bundle\ApiBundle\Filters\ExchangeRateFilter">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />

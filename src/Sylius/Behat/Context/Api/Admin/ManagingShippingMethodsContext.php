@@ -46,6 +46,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I want to browse shipping methods
+     * @Given I am browsing shipping methods
      */
     public function iBrowseShippingMethods(): void
     {
@@ -183,6 +184,22 @@ final class ManagingShippingMethodsContext implements Context
     public function iSaveMyChanges(): void
     {
         $this->client->update();
+    }
+
+    /**
+     * @When I start sorting shipping methods by :field
+     */
+    public function iSortShippingMethodsBy(string $field): void
+    {
+        $this->client->sort($field, 'asc');
+    }
+
+    /**
+     * @When I switch the way shipping methods are sorted by :field
+     */
+    public function iSwitchTheWayShippingMethodsAreSortedBy(string $field): void
+    {
+        $this->client->sort($field, 'desc');
     }
 
     /**
@@ -384,5 +401,15 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
             sprintf('Shipping method should not have %s "%s", but it does,', $element, $value)
         );
+    }
+
+    /**
+     * @Then the first shipping method on the list should have code :value
+     */
+    public function theFirstProductOnTheListShouldHave(string $value): void
+    {
+        $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same($shippingMethods[0]['code'], $value);
     }
 }
