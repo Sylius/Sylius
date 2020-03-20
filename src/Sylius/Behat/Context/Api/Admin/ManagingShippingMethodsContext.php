@@ -53,7 +53,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I delete shipping method :shippingMethod
+     * @When I (try to )delete shipping method :shippingMethod
      */
     public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -206,6 +206,19 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Given /^(this shipping method) should still be in the registry$/
+     */
+    public function thisShippingMethodShouldAppearInTheRegistry(ShippingMethodInterface $shippingMethod): void
+    {
+        $shippingMethodName = $shippingMethod->getName();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithTranslation($this->client->index(), 'en_US', 'name', $shippingMethodName),
+            sprintf('Shipping method with name %s does not exists', $shippingMethodName)
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
@@ -351,6 +364,17 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
         Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $value));
+    }
+
+    /**
+     * @Then I should be notified that it is in use
+     */
+    public function iShouldBeNotifiedThatItIsInUse(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the shipping method is in use.'
+        );
     }
 
     /**
