@@ -48,6 +48,7 @@
             <collectionOperation name="get">
                 <attribute name="filters">
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
+                    <attribute>sylius.api.translation_order_filter</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">

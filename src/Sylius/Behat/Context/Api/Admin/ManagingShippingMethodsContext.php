@@ -195,19 +195,36 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I start sorting shipping methods by :field
+     * @When I start sorting shipping methods by code
      */
-    public function iSortShippingMethodsBy(string $field): void
+    public function iSortShippingMethodsByCode(): void
     {
-        $this->client->sort($field, 'asc');
+        $this->client->sort('code', 'asc');
     }
 
     /**
-     * @When I switch the way shipping methods are sorted by :field
+     * @When I start sorting shipping methods by name
+     * @Given the shipping methods are already sorted by name
      */
-    public function iSwitchTheWayShippingMethodsAreSortedBy(string $field): void
+    public function iSortShippingMethodsByName(): void
     {
-        $this->client->sort($field, 'desc');
+        $this->client->sort('translation.name', 'asc');
+    }
+
+    /**
+     * @When I switch the way shipping methods are sorted by code
+     */
+    public function iSwitchTheWayShippingMethodsAreSortedByCode(): void
+    {
+        $this->client->sort('code', 'desc');
+    }
+
+    /**
+     * @When I switch the way shipping methods are sorted by name
+     */
+    public function iSwitchTheWayShippingMethodsAreSortedByName(): void
+    {
+        $this->client->sort('translation.name', 'desc');
     }
 
     /**
