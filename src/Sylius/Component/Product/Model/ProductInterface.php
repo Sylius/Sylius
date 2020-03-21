@@ -63,6 +63,11 @@ interface ProductInterface extends
 
     public function hasVariant(ProductVariantInterface $variant): bool;
 
+    /**
+     * @return Collection|ProductVariantInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductVariantInterface>
+     */
     public function getEnabledVariants(): Collection;
 
     public function hasOptions(): bool;
