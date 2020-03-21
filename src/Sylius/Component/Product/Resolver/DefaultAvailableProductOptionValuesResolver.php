@@ -8,7 +8,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
-class DefaultAvailableProductOptionValuesResolverInterface implements AvailableProductOptionValuesResolverInterface
+class DefaultAvailableProductOptionValuesResolver implements AvailableProductOptionValuesResolverInterface
 {
     /**
      * @inheritDoc
