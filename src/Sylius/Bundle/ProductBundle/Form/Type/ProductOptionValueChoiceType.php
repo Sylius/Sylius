@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -21,6 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductOptionValueChoiceType extends AbstractType
 {
+    /** @var AvailableProductOptionValuesResolverInterface */
+    private $availableProductOptionValuesResolver;
+
+    public function __construct(AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver)
+    {
+        $this->availableProductOptionValuesResolver = $availableProductOptionValuesResolver;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -29,7 +39,10 @@ final class ProductOptionValueChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => function (Options $options): iterable {
-                    return $options['option']->getValues();
+                    return $this->availableProductOptionValuesResolver->resolve(
+                        $options['product'],
+                        $options['option']
+                    );
                 },
                 'choice_value' => 'code',
                 'choice_label' => 'value',
@@ -37,8 +50,10 @@ final class ProductOptionValueChoiceType extends AbstractType
             ])
             ->setRequired([
                 'option',
+                'product',
             ])
             ->addAllowedTypes('option', [ProductOptionInterface::class])
+            ->addAllowedTypes('product', [ProductInterface::class])
         ;
     }
 

@@ -49,11 +49,14 @@ final class ProductVariantMatchType extends AbstractType
                 'entry_name' => function (ProductOptionInterface $productOption) {
                     return $productOption->getCode();
                 },
-                'entry_options' => function (ProductOptionInterface $productOption) {
-                    return [
-                        'label' => $productOption->getName(),
-                        'option' => $productOption,
-                    ];
+                'entry_options' => function (Options $options) {
+                    return function (ProductOptionInterface $productOption) use ($options) {
+                        return [
+                            'label' => $productOption->getName(),
+                            'option' => $productOption,
+                            'product' => $options['product'],
+                        ];
+                    };
                 },
             ])
 
