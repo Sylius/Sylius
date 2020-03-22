@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Resolver;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
@@ -13,7 +14,7 @@ class DefaultAvailableProductOptionValuesResolver implements AvailableProductOpt
     /**
      * @inheritDoc
      */
-    public function resolve(ProductInterface $product, ProductOptionInterface $productOption): iterable
+    public function resolve(ProductInterface $product, ProductOptionInterface $productOption): Collection
     {
         if (!$product->hasOption($productOption)) {
             throw new \InvalidArgumentException(
