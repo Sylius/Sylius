@@ -15,4 +15,4 @@ Feature: Viewing product's enabled variants only
     @ui
     Scenario: Seeing only enabled variants options
         When I view product "Super Cool T-Shirt"
-        Then I should not be able to select the "Yellow" color
+        Then I should not be able to select the "Yellow" color option value
