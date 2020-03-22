@@ -54,6 +54,7 @@ final class ProductVariantMatchType extends AbstractType
                         return [
                             'label' => $productOption->getName(),
                             'option' => $productOption,
+                            'only_available_values' => true,
                             'product' => $options['product'],
                         ];
                     };

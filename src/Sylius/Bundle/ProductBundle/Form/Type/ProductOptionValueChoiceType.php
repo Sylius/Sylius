@@ -39,21 +39,31 @@ final class ProductOptionValueChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => function (Options $options): iterable {
-                    return $this->availableProductOptionValuesResolver->resolve(
-                        $options['product'],
-                        $options['option']
-                    );
+                    $productOption = $options['option'];
+                    if ($options['only_available_values']) {
+                        if ($options['product'] === null) {
+                            throw new \RuntimeException(
+                                'You must specify the "product" option when "only_available_values" is true.'
+                            );
+                        }
+                        return $this->availableProductOptionValuesResolver->resolve(
+                            $options['product'],
+                            $productOption
+                        );
+                    }
+                    return $productOption->getValues();
                 },
                 'choice_value' => 'code',
                 'choice_label' => 'value',
                 'choice_translation_domain' => false,
+                'only_available_values' => false,
+                'product' => null,
             ])
             ->setRequired([
                 'option',
-                'product',
             ])
             ->addAllowedTypes('option', [ProductOptionInterface::class])
-            ->addAllowedTypes('product', [ProductInterface::class])
+            ->addAllowedTypes('product', ['null', ProductInterface::class])
         ;
     }
 
