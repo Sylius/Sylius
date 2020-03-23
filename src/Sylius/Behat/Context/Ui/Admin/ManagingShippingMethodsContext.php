@@ -345,6 +345,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @Then I should be notified that :element has to be selected
+     * @Then I should be notified that the :element has to be selected
      */
     public function iShouldBeNotifiedThatElementHasToBeSelected($element)
     {

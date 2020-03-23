@@ -257,6 +257,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I remove its zone
+     */
+    public function iRemoveItsZone(): void
+    {
+        $this->client->addRequestData('zone', '');
+    }
+
+    /**
      * @Then I should see :count shipping methods in the list
      */
     public function iShouldSeeShippingMethodsInTheList(int $count): void
@@ -490,6 +498,17 @@ final class ManagingShippingMethodsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'zone: Please select shipping method zone.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the zone has to be selected
+     */
+    public function iShouldBeNotifiedThatTheZoneHasToBeSelected(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Invalid IRI "".'
         );
     }
 
