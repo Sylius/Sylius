@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
@@ -39,17 +40,21 @@ interface ApiClientInterface
 
     public function customItemAction(string $id, string $action): Response;
 
-    public function upload(string $url, array $content, array $files): Response;
+    public function upload(): Response;
 
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;
+
+    public function buildUploadRequest(): void;
 
     /** @param string|int $value */
     public function addParameter(string $key, $value): void;
 
     /** @param string|int $value */
     public function addFilter(string $key, $value): void;
+
+    public function addFile(string $key, UploadedFile $file): void;
 
     /** @param string|int|array $value */
     public function addRequestData(string $key, $value): void;

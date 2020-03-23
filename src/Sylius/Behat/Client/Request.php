@@ -106,10 +106,10 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function upload(string $url, string $token): RequestInterface
+    public static function upload(string $resource, string $token): RequestInterface
     {
         return new self(
-            $url,
+            sprintf('/new-api/%s', $resource),
             HttpRequest::METHOD_POST,
             ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_Authorization' => 'Bearer ' . $token]
         );

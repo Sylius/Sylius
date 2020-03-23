@@ -29,7 +29,7 @@ final class ManagingAdministratorsContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $avatarImageClient;
+    private $avatarImagesClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -45,14 +45,14 @@ final class ManagingAdministratorsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $avatarImageClient,
+        ApiClientInterface $avatarImagesClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage,
         \ArrayAccess $minkParameters
     ) {
         $this->client = $client;
-        $this->avatarImageClient = $avatarImageClient;
+        $this->avatarImagesClient = $avatarImagesClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -168,11 +168,10 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
-        $response = $this->client->upload(
-            '/new-api/avatar-images',
-            ['owner' => $this->iriConverter->getIriFromItem($administrator)],
-            ['file' => new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar))]
-        );
+        $this->avatarImagesClient->buildUploadRequest();
+        $this->avatarImagesClient->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+        $this->avatarImagesClient->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
+        $response = $this->avatarImagesClient->upload();
 
         $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
     }
@@ -187,7 +186,7 @@ final class ManagingAdministratorsContext implements Context
         $avatar = $administrator->getAvatar();
         Assert::notNull($avatar);
 
-        $this->avatarImageClient->delete((string) $avatar->getId());
+        $this->avatarImagesClient->delete((string) $avatar->getId());
     }
 
     /**

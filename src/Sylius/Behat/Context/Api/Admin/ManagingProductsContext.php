@@ -33,7 +33,7 @@ final class ManagingProductsContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $productReviewClient;
+    private $productReviewsClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -46,13 +46,13 @@ final class ManagingProductsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productReviewClient,
+        ApiClientInterface $productReviewsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->productReviewClient = $productReviewClient;
+        $this->productReviewsClient = $productReviewsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -459,7 +459,7 @@ final class ManagingProductsContext implements Context
      */
     public function thereAreNoProductReviews(ProductInterface $product): void
     {
-        $response = $this->productReviewClient->index();
+        $response = $this->productReviewsClient->index();
 
         Assert::isEmpty(
             $this->responseChecker->getCollectionItemsWithValue(
