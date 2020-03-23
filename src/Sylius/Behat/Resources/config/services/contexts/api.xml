@@ -39,6 +39,11 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_locales" class="Sylius\Behat\Context\Api\Admin\ManagingLocalesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.locale" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_product_options" class="Sylius\Behat\Context\Api\Admin\ManagingProductOptionsContext">
             <argument type="service" id="sylius.behat.api_platform_client.product_option" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

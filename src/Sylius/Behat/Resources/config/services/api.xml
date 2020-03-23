@@ -43,6 +43,12 @@
             <argument>exchange-rates</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.locale" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>locales</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.payment" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
