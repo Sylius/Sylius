@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
@@ -44,7 +45,17 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I am browsing shipping methods
+     * @Given I am browsing archival shipping methods
+     */
+    public function iAmBrowsingArchivalShippingMethods(): void
+    {
+        $this->client->index();
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I am browsing shipping methods
      * @When I want to browse shipping methods
      */
     public function iBrowseShippingMethods(): void
@@ -164,7 +175,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->customItemAction($shippingMethod->getCode(), 'archive');
+        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
         $this->client->index();
     }
 
@@ -173,7 +184,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->client->customItemAction($shippingMethod->getCode(), 'restore');
+        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
         $this->client->index();
     }
 
@@ -241,16 +252,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iFilterArchivalShippingMethods(): void
     {
-        $this->client->addFilter('exists[archivedAt]', true);
-        $this->client->filter();
-    }
-
-    /**
-     * @When I am browsing archival shipping methods
-     */
-    public function iAmBrowsingArchivalShippingMethods(): void
-    {
-        $this->client->index();
         $this->client->addFilter('exists[archivedAt]', true);
         $this->client->filter();
     }

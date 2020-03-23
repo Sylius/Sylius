@@ -38,7 +38,7 @@ interface ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response;
 
-    public function customItemAction(string $id, string $action): Response;
+    public function customItemAction(string $id, string $type, string $action): Response;
 
     public function upload(): Response;
 

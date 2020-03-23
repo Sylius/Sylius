@@ -13,13 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
+use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class ArchivizationShippingMethodApplicator
 {
+    /** @var DateTimeProvider */
+    private $calendar;
+
+    public function __construct(DateTimeProvider $calendar)
+    {
+        $this->calendar = $calendar;
+    }
+
     public function archive(ShippingMethodInterface $data): ShippingMethodInterface
     {
-        $data->setArchivedAt(new \DateTime());
+        $data->setArchivedAt($this->calendar->today());
 
         return $data;
     }
