@@ -165,6 +165,16 @@ final class ManagingShippingMethodsContext implements Context
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->customItemAction($shippingMethod->getCode(), 'archive');
+        $this->client->index();
+    }
+
+    /**
+     * @When I restore the :shippingMethod shipping method
+     */
+    public function iRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->customItemAction($shippingMethod->getCode(), 'restore');
+        $this->client->index();
     }
 
     /**
@@ -224,6 +234,25 @@ final class ManagingShippingMethodsContext implements Context
     public function iSwitchTheWayShippingMethodsAreSortedByName(): void
     {
         $this->client->sort('translation.name', 'desc');
+    }
+
+    /**
+     * @When I filter archival shipping methods
+     */
+    public function iFilterArchivalShippingMethods(): void
+    {
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I am browsing archival shipping methods
+     */
+    public function iAmBrowsingArchivalShippingMethods(): void
+    {
+        $this->client->index();
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
     }
 
     /**
@@ -412,11 +441,22 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theOnlyShippingMethodOnTheListShouldBe(string $name): void
     {
-        $response = $this->client->index();
+        $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
         Assert::same($itemsCount, 1, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
         Assert::true($this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $name));
+    }
+
+    /**
+     * @Then I should see :amount shipping methods on the list
+     */
+    public function iShouldSeeShippingMethodOnTheList(int $amount): void
+    {
+        $response = $this->client->getLastResponse();
+        $itemsCount = $this->responseChecker->countCollectionItems($response);
+
+        Assert::same($itemsCount, $amount, sprintf('Expected 1 shipping method, but got %d', $itemsCount));
     }
 
     /**
@@ -491,5 +531,13 @@ final class ManagingShippingMethodsContext implements Context
         $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(end($shippingMethods)['translations']['en_US']['name'], $value);
+    }
+
+    /**
+     * @Then I should be viewing non archival shipping methods
+     */
+    public function iShouldBeViewingNonArchivalShippingMethods(): void
+    {
+        // Intentionally left blank
     }
 }

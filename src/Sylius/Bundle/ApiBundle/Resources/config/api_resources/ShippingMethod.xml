@@ -40,7 +40,13 @@
             <itemOperation name="archive">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipping-methods/{id}/archive</attribute>
-                <attribute name="controller">sylius.api.archive_shipping_method_action</attribute>
+                <attribute name="controller">sylius.api.archivation_shipping_method_applicator:archive</attribute>
+            </itemOperation>
+
+            <itemOperation name="restore">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipping-methods/{id}/restore</attribute>
+                <attribute name="controller">sylius.api.archivation_shipping_method_applicator:restore</attribute>
             </itemOperation>
         </itemOperations>
 
@@ -49,6 +55,7 @@
                 <attribute name="filters">
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
                     <attribute>sylius.api.translation_order_filter</attribute>
+                    <attribute>sylius.api.filter_archival_shipping_methods</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">

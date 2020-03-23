@@ -11,15 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Controller;
+namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-final class ArchiveShippingMethodAction
+final class ArchivizationShippingMethodApplicator
 {
-    public function __invoke(ShippingMethodInterface $data): ShippingMethodInterface
+    public function archive(ShippingMethodInterface $data): ShippingMethodInterface
     {
         $data->setArchivedAt(new \DateTime());
+
+        return $data;
+    }
+
+    public function restore(ShippingMethodInterface $data): ShippingMethodInterface
+    {
+        $data->setArchivedAt(null);
 
         return $data;
     }

@@ -17,7 +17,7 @@
     </imports>
 
     <services>
-        <service id="sylius.api.archive_shipping_method_action" class="Sylius\Bundle\ApiBundle\Controller\ArchiveShippingMethodAction" public="true" />
+        <service id="sylius.api.archivation_shipping_method_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ArchivizationShippingMethodApplicator" public="true" />
 
         <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
             <argument type="service" id="sylius.factory.avatar_image" />
