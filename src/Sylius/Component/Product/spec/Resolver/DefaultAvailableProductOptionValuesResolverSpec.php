@@ -4,10 +4,10 @@ namespace spec\Sylius\Component\Product\Resolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface;
 
 class DefaultAvailableProductOptionValuesResolverSpec extends ObjectBehavior
