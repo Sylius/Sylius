@@ -15,6 +15,7 @@ namespace Sylius\Behat\Client;
 
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformClient implements ApiClientInterface
@@ -101,13 +102,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request);
     }
 
-    public function upload(string $url, array $parameters, array $files): Response
+    public function upload(): Response
     {
-        $request = Request::upload($url, $this->sharedStorage->get('token'));
-        $request->updateParameters($parameters);
-        $request->updateFiles($files);
-
-        return $this->request($request);
+        return $this->request($this->request);
     }
 
     public function buildCreateRequest(): void
@@ -123,6 +120,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
+    public function buildUploadRequest(): void
+    {
+        $this->request = Request::upload($this->resource, $this->sharedStorage->get('token'));
+    }
+
     /** @param string|int $value */
     public function addParameter(string $key, $value): void
     {
@@ -133,6 +135,11 @@ final class ApiPlatformClient implements ApiClientInterface
     public function addFilter(string $key, $value): void
     {
         $this->addParameter($key, $value);
+    }
+
+    public function addFile(string $key, UploadedFile $file): void
+    {
+        $this->request->updateFiles([$key => $file]);
     }
 
     /** @param string|int|array $value */
