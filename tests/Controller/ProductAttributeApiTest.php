@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+use ApiTestCase\JsonApiTestCase;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\HttpFoundation\Response;
