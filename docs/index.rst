@@ -131,10 +131,10 @@ The Cookbook
 
    cookbook/index
 
-The REST API Reference
-----------------------
+The Sylius API
+--------------
 
-:doc:`The API guide </api/index>` covers the REST API of Sylius platform.
+In :doc:`the Sylius API chapter </api/index>` you'll understand both the new Sylius API and the old Admin API.
 
 .. toctree::
    :hidden:
