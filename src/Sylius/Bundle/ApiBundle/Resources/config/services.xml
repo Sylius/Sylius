@@ -61,5 +61,9 @@
             <argument>%sylius.model.shipping_method.class%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
+
+        <service id="sylius.api.swagger_documentation_normalizer" class="Sylius\Bundle\ApiBundle\Swagger\DocumentationNormalizer" decorates="api_platform.swagger.normalizer.documentation" public="true" autoconfigure="false">
+            <argument type="service" id="sylius.api.swagger_documentation_normalizer.inner" />
+        </service>
     </services>
 </container>
