@@ -95,9 +95,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request);
     }
 
-    public function customItemAction(string $id, string $action): Response
+    public function customItemAction(string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->resource, $id, $action, $this->sharedStorage->get('token'));
+        $request = Request::customItemAction($this->resource, $id, $type, $action, $this->sharedStorage->get('token'));
 
         return $this->request($request);
     }

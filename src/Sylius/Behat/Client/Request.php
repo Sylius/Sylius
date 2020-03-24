@@ -94,14 +94,14 @@ final class Request implements RequestInterface
 
     public static function transition(string $resource, string $id, string $transition, string $token): RequestInterface
     {
-        return self::customItemAction($resource, $id, $transition, $token);
+        return self::customItemAction($resource, $id, HttpRequest::METHOD_PATCH,  $transition, $token);
     }
 
-    public static function customItemAction(string $resource, string $id, string $transition, string $token): RequestInterface
+    public static function customItemAction(string $resource, string $id, string $type, string $action, string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $transition),
-            HttpRequest::METHOD_PATCH,
+            sprintf('/new-api/%s/%s/%s', $resource, $id, $action),
+            $type,
             ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
     }

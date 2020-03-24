@@ -55,7 +55,7 @@
                 <attribute name="filters">
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
                     <attribute>sylius.api.translation_order_filter</attribute>
-                    <attribute>sylius.api.filter_archival_shipping_methods</attribute>
+                    <attribute>sylius.api.filter_archived_shipping_methods</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">

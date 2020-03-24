@@ -25,7 +25,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.filter_archival_shipping_methods" parent="api_platform.doctrine.orm.exists_filter">
+        <service id="sylius.api.filter_archived_shipping_methods" parent="api_platform.doctrine.orm.exists_filter">
             <argument type="collection">
                 <argument key="archivedAt">false</argument>
             </argument>
