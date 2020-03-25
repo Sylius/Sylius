@@ -56,6 +56,8 @@
         </field>
 
         <gedmo:tree type="nested" />
+
+        <field name="enabled" column="enabled" type="boolean" />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -8,5 +8,6 @@ sylius:
             name: Name
             parent: Parent
             slug: Slug
+            enabled: Enabled
         taxonomy:
             name: Name
