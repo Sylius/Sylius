@@ -17,9 +17,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Countries;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
 
@@ -85,14 +85,26 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then the country :countryName should appear in the store
+     * @Then the country :country should appear in the store
      */
-    public function theCountryShouldAppearInTheStore(string $countryName): void
+    public function theCountryShouldAppearInTheStore(CountryInterface $country): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $countryName),
-            sprintf('There is no country with name "%s"', $countryName)
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $country->getCode()),
+            sprintf('There is no country with name "%s"', $country->getName())
         );
+    }
+
+    /**
+     * @Then the country :country should have the :province province
+     */
+    public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province)
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->subResourceIndex('provinces', $country->getCode()),
+            'code',
+            $province->getCode()
+        ));
     }
 
     /**
@@ -178,6 +190,29 @@ final class ManagingCountriesContext implements Context
         );
         Assert::keyNotExists(\json_decode($countryUpdateSerialised, true), 'code');
     }
+
+    /**
+     * @When I add the :provinceName province with :provinceCode code
+     */
+    public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $provinceCode, 'name' => $provinceName]
+        );
+    }
+
+    /**
+     * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
+     */
+    public function iAddTheProvinceWithCodeAndAbbreviation(string $provinceName, string $provinceCode, string $provinceAbbreviation)
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $provinceCode, 'name' => $provinceName, 'abbreviation' => $provinceAbbreviation]
+        );
+    }
+
 
     private function getCountryCodeByName(string $countryName): string
     {
