@@ -27,7 +27,7 @@ Sylius checkout flow is built from 4 steps, which have to be done in a certain o
 
 .. note::
 
-    We do not present the order serialization in this chapter, because it is the same order serialization as described in :doc:`the article about orders </api/orders>`.
+    We do not present the order serialization in this chapter, because it is the same order serialization as described in :doc:`the article about orders </api/admin_api/orders>`.
 
 Addressing step
 ---------------
@@ -81,7 +81,7 @@ Definition
 
 .. note::
 
-    Remember a cart with `id = 21` :doc:`for the Cart API documentation </api/carts>`? We will take the same cart as an exemplary cart for checkout process.
+    Remember a cart with `id = 21` :doc:`for the Cart API documentation </api/admin_api/carts>`? We will take the same cart as an exemplary cart for checkout process.
 
 Example
 ^^^^^^^

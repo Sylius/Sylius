@@ -8,19 +8,19 @@ Exchange Rate API response structure
 
 If you request an exchange rate via API, you will receive an object with the following fields:
 
-+----------------+-------------------------------------------------------------------------------+
-| Field          | Description                                                                   |
-+================+===============================================================================+
-| id             | Id of the exchange rate                                                       |
-+----------------+-------------------------------------------------------------------------------+
-| ratio          | Exchange rate's ratio                                                         |
-+----------------+-------------------------------------------------------------------------------+
-| sourceCurrency | :doc:`The currency object serialized with the default data </api/currencies>` |
-+----------------+-------------------------------------------------------------------------------+
-| targetCurrency | :doc:`The currency object serialized with the default data </api/currencies>` |
-+----------------+-------------------------------------------------------------------------------+
-| updatedAt      | Last update date of the exchange rate                                         |
-+----------------+-------------------------------------------------------------------------------+
++----------------+-----------------------------------------------------------------------------------------+
+| Field          | Description                                                                             |
++================+=========================================================================================+
+| id             | Id of the exchange rate                                                                 |
++----------------+-----------------------------------------------------------------------------------------+
+| ratio          | Exchange rate's ratio                                                                   |
++----------------+-----------------------------------------------------------------------------------------+
+| sourceCurrency | :doc:`The currency object serialized with the default data </api/admin_api/currencies>` |
++----------------+-----------------------------------------------------------------------------------------+
+| targetCurrency | :doc:`The currency object serialized with the default data </api/admin_api/currencies>` |
++----------------+-----------------------------------------------------------------------------------------+
+| updatedAt      | Last update date of the exchange rate                                                   |
++----------------+-----------------------------------------------------------------------------------------+
 
 If you request for more detailed data, you will receive the default data with the additional field:
 

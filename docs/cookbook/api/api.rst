@@ -65,7 +65,7 @@ In order to execute this request that will create a new Supplier (:doc:`you have
 
 .. tip::
 
-    Read more about authorizing in API :doc:`here </api/authorization>`.
+    Read more about authorizing in API :doc:`here </api/admin_api/authorization>`.
 
 Viewing a single resource instance via API
 ------------------------------------------
