@@ -52,4 +52,4 @@ Third scenario::
 Learn more
 ----------
 
-* :doc:`Carts API </api/carts>`
+* :doc:`Carts API </api/admin_api/carts>`

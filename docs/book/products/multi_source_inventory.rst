@@ -109,7 +109,7 @@ Example:
 .. warning::
 
    To use the Sylius Plus API, you need to be authorized as an administrator with the ``ROLE_API_ACCESS`` role.
-   Check out the :doc:`API Authorization chapter </api/authorization>`.
+   Check out the :doc:`API Authorization chapter </api/admin_api/authorization>`.
 
 How does Multi-Source Inventory work on examples?
 -------------------------------------------------
