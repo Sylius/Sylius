@@ -5,9 +5,3 @@ framework:
     templating: { engines: ["twig"] }
     session:
         handler_id: ~
-    serializer:
-        enabled: true
-        enable_annotations: false
-        mapping:
-            paths:
-                - '%kernel.project_dir%/src/Sylius/Bundle/ApiBundle/Resources/config/serializer/'
