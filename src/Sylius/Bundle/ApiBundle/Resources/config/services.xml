@@ -14,7 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
         <import resource="services/filters.xml" />
-        <import resource="services/contextBuilders.xml" />
+        <import resource="services/context_builders.xml" />
     </imports>
 
     <services>
@@ -85,8 +85,9 @@
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
         </service>
 
-
-
-
+        <service id="sylius.api.collection_data_provider.product" class="Sylius\Bundle\ApiBundle\DataProvider\LatestProductCollectionDataProvider">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
     </services>
 </container>

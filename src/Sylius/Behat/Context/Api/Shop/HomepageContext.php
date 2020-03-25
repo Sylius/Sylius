@@ -16,10 +16,11 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
-final class HomePageContext implements Context
+final class HomepageContext implements Context
 {
     /** @var ApiClientInterface */
     private $productsClient;
@@ -27,12 +28,17 @@ final class HomePageContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ApiClientInterface $productsClient,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -40,7 +46,7 @@ final class HomePageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction(HttpRequest::METHOD_GET, 'new-api/products/get-latest');
+        $this->productsClient->customAction('new-api/shop/products/latest', HttpRequest::METHOD_GET);
     }
 
     /**

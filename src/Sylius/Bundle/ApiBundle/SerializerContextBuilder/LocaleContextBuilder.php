@@ -16,28 +16,31 @@ namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class LocaleContextBuilder implements SerializerContextBuilderInterface
 {
-    private $decorated;
-    private $localeContext;
-    private $translationLocaleProvider;
+    /** @var SerializerContextBuilderInterface  */
+    private $decoratedLocaleBuilder;
 
-    public function __construct(SerializerContextBuilderInterface $decorated, LocaleContextInterface $localeContext, TranslationLocaleProviderInterface $translationLocaleProvider)
+    /** @var LocaleContextInterface  */
+    private $localeContext;
+
+    public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder, LocaleContextInterface $localeContext)
     {
-        $this->decorated = $decorated;
+        $this->decoratedLocaleBuilder = $decoratedLocaleBuilder;
         $this->localeContext = $localeContext;
-        $this->translationLocaleProvider = $translationLocaleProvider;
     }
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
-        $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
-
-        $context[ContextKeys::LOCALE_CODE] = $this->localeContext->getLocaleCode();
-        $context[ContextKeys::FALLBACK_LOCALE_CODE] = $this->translationLocaleProvider->getDefaultLocaleCode();
+        $context = $this->decoratedLocaleBuilder->createFromRequest($request, $normalization, $extractedAttributes);
+        try {
+            $context[ContextKeys::LOCALE_CODE] = $this->localeContext->getLocaleCode();
+        } catch (LocaleNotFoundException $exception) {
+        }
 
         return $context;
     }

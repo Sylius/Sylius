@@ -102,9 +102,10 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request);
     }
 
-    public function customAction(string $type, string $action): Response
+    public function customAction(string $url, string $method): Response
     {
-        $request = Request::custom($action, $type, $this->sharedStorage->get('token'));
+        $token = $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+        $request = Request::custom($url, $method, $token);
 
         return $this->request($request);
     }

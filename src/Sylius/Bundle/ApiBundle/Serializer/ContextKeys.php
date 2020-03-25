@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-final class ContextKeys
+class ContextKeys
 {
     public const CHANNEL = 'sylius_api_channel';
     public const LOCALE_CODE = 'sylius_api_locale_code';
-    public const FALLBACK_LOCALE_CODE = 'sylius_api_fallback_locale_code';
 
     private function __construct()
     {

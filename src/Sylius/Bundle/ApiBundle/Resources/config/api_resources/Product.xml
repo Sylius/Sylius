@@ -16,11 +16,10 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product.class%" shortName="Product">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>product:read</attribute>
+                <attribute>admin:product:read</attribute>
+                <attribute>shop:product:read</attribute>
             </attribute>
         </attribute>
         <attribute name="validation_groups">sylius</attribute>
@@ -31,27 +30,45 @@
 
         <collectionOperations>
             <collectionOperation name="get">
+                <attribute name="path">admin/products</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_filter</attribute>
                 </attribute>
             </collectionOperation>
+
             <collectionOperation name="post">
+                <attribute name="path">admin/products</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product:create</attribute>
+                    <attribute name="groups">admin:product:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="get_latest">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">shop/products/latest</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shop:product:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="path">admin/products/{id}</attribute>
+            </itemOperation>
             <itemOperation name="put">
+                <attribute name="path">admin/products/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product:update</attribute>
+                    <attribute name="groups">admin:product:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete" />
+            <itemOperation name="delete">
+                <attribute name="path">admin/products/{id}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

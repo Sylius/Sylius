@@ -16,24 +16,30 @@ namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
 final class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
-    private $decorated;
+    /** @var SerializerContextBuilderInterface  */
+    private $decoratedContextBuilder;
+
+    /** @var ChannelContextInterface  */
     private $channelContext;
 
-    public function __construct(SerializerContextBuilderInterface $decorated, ChannelContextInterface $channelContext)
+    public function __construct(SerializerContextBuilderInterface $decoratedContextBuilder, ChannelContextInterface $channelContext)
     {
-        $this->decorated = $decorated;
+        $this->decoratedContextBuilder = $decoratedContextBuilder;
         $this->channelContext = $channelContext;
     }
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
-        $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);
-
-        $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
+        $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
+        try {
+            $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
+        } catch (ChannelNotFoundException $exception) {
+        }
 
         return $context;
     }
