@@ -27,8 +27,10 @@ final class LocaleContextBuilder implements SerializerContextBuilderInterface
     /** @var LocaleContextInterface  */
     private $localeContext;
 
-    public function __construct(SerializerContextBuilderInterface $decoratedLocaleBuilder, LocaleContextInterface $localeContext)
-    {
+    public function __construct(
+        SerializerContextBuilderInterface $decoratedLocaleBuilder,
+        LocaleContextInterface $localeContext
+    ) {
         $this->decoratedLocaleBuilder = $decoratedLocaleBuilder;
         $this->localeContext = $localeContext;
     }
