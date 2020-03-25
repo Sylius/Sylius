@@ -15,11 +15,3 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
-
-framework:
-    serializer:
-        enabled: true
-        enable_annotations: false
-        mapping:
-            paths:
-                - '%kernel.project_dir%/src/Sylius/Bundle/ApiBundle/Resources/config/serializer/'
