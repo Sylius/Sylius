@@ -19,7 +19,7 @@
 
     ```diff
         parameters:
-    +       sylius.security.new_api_admin_route: "/api"
+    +       sylius.security.new_api_admin_route: "/new-api"
     +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
         
         security:
