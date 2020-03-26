@@ -19,7 +19,8 @@
 
     ```diff
         parameters:
-    +       sylius.security.new_api_admin_regex: "^/new-api"
+    +       sylius.security.new_api_admin_route: "/new-api"
+    +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
         
         security:
             providers:
@@ -33,7 +34,7 @@
     +               anonymous: true
     +               provider: sylius_admin_api_user_provider
     +               json_login:
-    +                   check_path: /new-api/authentication-token
+    +                   check_path: "%sylius.security.new_api_admin_regex%/authentication-token"
     +                   username_path: email
     +                   password_path: password
     +                   success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -53,5 +54,5 @@
     ```yaml
        sylius_api:
            resource: "@SyliusApiBundle/Resources/config/routing.yml"
-           prefix: /new-api
+           prefix: "%sylius.security.new_api_admin_route%"
     ```
