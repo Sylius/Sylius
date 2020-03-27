@@ -30,7 +30,7 @@ Feature: Sorting listed products
         And I should see a product with code "B_PUG"
         But the first product on the list should have code "X_PUG"
 
-    @ui
+    @ui @api
     Scenario: Products can be sorted by their names
         Given I am browsing products
         When I start sorting products by name
@@ -38,7 +38,7 @@ Feature: Sorting listed products
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Berserk Pug"
 
-    @ui
+    @ui @api
     Scenario: Changing the names sorting order
         Given I am browsing products
         And the products are already sorted by name

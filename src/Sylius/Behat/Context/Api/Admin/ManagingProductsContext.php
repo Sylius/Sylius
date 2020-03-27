@@ -183,13 +183,36 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I switch the way products are sorted by :field
-     * @When I start sorting products by :field
-     * @Given the products are already sorted by :field
+     * @When I start sorting products by code
      */
-    public function iSortProductsBy(string $field): void
+    public function iStartSortingProductsByCode(): void
     {
-        $this->client->sort($field, 'desc');
+        $this->client->sort('code', 'asc');
+    }
+
+    /**
+     * @When I switch the way products are sorted by code
+     */
+    public function iSwitchTheWayProductsAreSortedByCode(): void
+    {
+        $this->client->sort('code', 'desc');
+    }
+
+    /**
+     * @When I start sorting products by name
+     * @Given the products are already sorted by name
+     */
+    public function iStartSortingProductsByName(): void
+    {
+        $this->client->sort('translation.name', 'asc');
+    }
+
+    /**
+     * @When I switch the way products are sorted by name
+     */
+    public function iSwitchTheWayProductsAreSortedByName(): void
+    {
+        $this->client->sort('translation.name', 'desc');
     }
 
     /**
