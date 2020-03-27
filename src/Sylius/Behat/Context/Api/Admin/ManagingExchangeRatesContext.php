@@ -85,7 +85,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheSourceCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('sourceCurrency', '/new-api/currencies/' . $currencyCode);
+        $this->client->addRequestData('sourceCurrency', '/new-api/admin/currencies/' . $currencyCode);
     }
 
     /**
@@ -93,7 +93,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTheTargetCurrency(string $currencyCode): void
     {
-        $this->client->addRequestData('targetCurrency', '/new-api/currencies/' . $currencyCode);
+        $this->client->addRequestData('targetCurrency', '/new-api/admin/currencies/' . $currencyCode);
     }
 
     /**
@@ -347,12 +347,12 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->buildUpdateRequest($this->sharedStorage->get('exchange_rate_id'));
 
-        $this->client->addRequestData($currencyType, '/new-api/currencies/EUR');
+        $this->client->addRequestData($currencyType, '/new-api/admin/currencies/EUR');
         $this->client->update();
 
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
-                $this->client->index(), 0, $currencyType, '/new-api/currencies/EUR'
+                $this->client->index(), 0, $currencyType, '/new-api/admin/currencies/EUR'
             ),
             sprintf('It was possible to change %s', $currencyType)
         );
@@ -366,8 +366,8 @@ final class ManagingExchangeRatesContext implements Context
         foreach ($this->responseChecker->getCollection($this->client->index()) as $item)
         {
             if (
-                $item['sourceCurrency'] === '/new-api/currencies/' . $sourceCurrency->getCode() &&
-                $item['targetCurrency'] === '/new-api/currencies/' . $targetCurrency->getCode()
+                $item['sourceCurrency'] === '/new-api/admin/currencies/' . $sourceCurrency->getCode() &&
+                $item['targetCurrency'] === '/new-api/admin/currencies/' . $targetCurrency->getCode()
             ) {
                 return $item;
             }
