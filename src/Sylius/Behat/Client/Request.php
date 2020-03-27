@@ -179,6 +179,11 @@ final class Request implements RequestInterface
         $this->content[$key][] = $subResource;
     }
 
+    public function removeSubResource(string $subResource, int $key): void
+    {
+        unset($this->content[$subResource][$key]);
+    }
+
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array
     {
         foreach ($secondArray as $key => $value) {

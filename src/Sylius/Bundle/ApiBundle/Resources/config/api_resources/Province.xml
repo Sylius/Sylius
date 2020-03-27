@@ -40,7 +40,6 @@
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
         <property name="abbreviation" writable="true" />
-        <property name="country" writable="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
     </resource>

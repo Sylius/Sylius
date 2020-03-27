@@ -43,11 +43,5 @@
            <group>province:read</group>
            <group>province:write</group>
        </attribute>
-       <attribute name="country">
-           <group>country:create</group>
-           <group>country:update</group>
-           <group>province:read</group>
-           <group>province:write</group>
-       </attribute>
     </class>
 </serializer>

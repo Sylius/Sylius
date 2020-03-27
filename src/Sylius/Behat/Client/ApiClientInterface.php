@@ -63,6 +63,8 @@ interface ApiClientInterface
 
     public function addSubResourceData(string $key, array $data): void;
 
+    public function removeSubResource(string $subResource, int $key): void;
+
     public function updateRequestData(array $data): void;
 
     public function getLastResponse(): Response;

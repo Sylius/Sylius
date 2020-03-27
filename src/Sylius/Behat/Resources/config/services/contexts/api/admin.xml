@@ -35,7 +35,8 @@
             <argument type="service" id="sylius.behat.api_platform_client.country" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="serializer" />
-            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.iri_converter" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">

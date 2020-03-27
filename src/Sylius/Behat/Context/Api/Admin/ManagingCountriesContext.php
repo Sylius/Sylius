@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
@@ -34,19 +35,24 @@ final class ManagingCountriesContext implements Context
     /** @var SerializerInterface */
     private $serializer;
 
-    /** @var RepositoryInterface */
-    private $countryRepository;
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    /** @var IriConverterInterface */
+    private $iriConverter;
 
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SerializerInterface $serializer,
-        RepositoryInterface $countryRepository
+        SharedStorageInterface $sharedStorage,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->serializer = $serializer;
-        $this->countryRepository = $countryRepository;
+        $this->sharedStorage = $sharedStorage;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -98,12 +104,24 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then the country :country should have the :province province
      */
-    public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province)
+    public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->subResourceIndex('provinces', $country->getCode()),
             'code',
             $province->getCode()
+        ));
+    }
+
+    /**
+     * @Then /^(this country) should have the "([^"]*)" province$/
+     */
+    public function thisCountryShouldHaveTheProvince(CountryInterface $country, $provinceName): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->subResourceIndex('provinces', $country->getCode()),
+            'name',
+            $provinceName
         ));
     }
 
@@ -126,6 +144,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
+        $this->sharedStorage->set('country', $country);
         $this->client->buildUpdateRequest($country->getCode());
     }
 
@@ -184,10 +203,10 @@ final class ManagingCountriesContext implements Context
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
-        $countryUpdateSerialised = $this->serializer->serialize(
-            $this->countryRepository->findOneBy([]),
-            'json', ['groups' => 'country:update']
-        );
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        $countryUpdateSerialised = $this->serializer->serialize($country, 'json', ['groups' => 'country:update']);
         Assert::keyNotExists(\json_decode($countryUpdateSerialised, true), 'code');
     }
 
@@ -205,7 +224,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddTheProvinceWithCodeAndAbbreviation(string $provinceName, string $provinceCode, string $provinceAbbreviation)
+    public function iAddTheProvinceWithCodeAndAbbreviation(string $provinceName, string $provinceCode, string $provinceAbbreviation): void
     {
         $this->client->addSubResourceData(
             'provinces',
@@ -213,6 +232,40 @@ final class ManagingCountriesContext implements Context
         );
     }
 
+    /**
+     * @When I delete the :province province of this country
+     */
+    public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province): void
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        foreach ($country->getProvinces() as $key => $provinceValue) {
+            if ($province->getId() === $provinceValue->getId()) {
+                $this->client->removeSubResource('provinces', $key);
+            }
+        }
+    }
+
+    /**
+     * @Then this country should not have the :provinceName province
+     */
+    public function thisCountryShouldNotHaveTheProvince(string $provinceName): void
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+        /** @var ProvinceInterface $province */
+        $province = $this->sharedStorage->get('province');
+
+        Assert::false(
+            $this->responseChecker->hasValueInCollection(
+                $this->client->show($country->getCode()),
+                'provinces',
+                $this->iriConverter->getIriFromItem($province),
+            ),
+            sprintf('The country "%s" should not have the "%" province', $country->getName(), $province->getName())
+        );
+    }
 
     private function getCountryCodeByName(string $countryName): string
     {
