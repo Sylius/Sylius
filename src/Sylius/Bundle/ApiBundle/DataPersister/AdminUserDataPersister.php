@@ -69,6 +69,7 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
             return false;
         }
 
+        /** @var UserInterface $loggedUser */
         $loggedUser = $token->getUser();
 
         return $loggedUser->getId() === $user->getId();
