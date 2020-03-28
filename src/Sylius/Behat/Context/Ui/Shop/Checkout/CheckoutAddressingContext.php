@@ -148,19 +148,19 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @When I specify shipping country province as :province
+     * @When I specify shipping country province as :provinceName
      */
-    public function iSpecifyShippingCountryProvinceAs($province)
+    public function iSpecifyShippingCountryProvinceAs($provinceName)
     {
-        $this->addressPage->selectShippingAddressProvince($province);
+        $this->addressPage->selectShippingAddressProvince($provinceName);
     }
 
     /**
-     * @When I specify billing country province as :province
+     * @When I specify billing country province as :provinceName
      */
-    public function iSpecifyBillingCountryProvinceAs($province)
+    public function iSpecifyBillingCountryProvinceAs($provinceName)
     {
-        $this->addressPage->selectBillingAddressProvince($province);
+        $this->addressPage->selectBillingAddressProvince($provinceName);
     }
 
     /**
