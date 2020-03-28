@@ -19,7 +19,8 @@
 
     ```diff
         parameters:
-    +       sylius.security.new_api_admin_route: "/new-api"
+    +       sylius.security.new_api_route: "/new-api"
+    +       sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
     +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
         
         security:
@@ -28,13 +29,13 @@
     +               id: sylius.admin_user_provider.email_or_name_based
             
             firewalls:
-    +           new_api:
+    +           new_api_admin:
     +               pattern: "%sylius.security.new_api_admin_regex%/.*"
     +               stateless: true
     +               anonymous: true
     +               provider: sylius_admin_api_user_provider
     +               json_login:
-    +                   check_path: "%sylius.security.new_api_admin_regex%/authentication-token"
+    +                   check_path: "%sylius.security.new_api_admin_route%/authentication-token"
     +                   username_path: email
     +                   password_path: password
     +                   success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -44,9 +45,9 @@
     +                       - lexik_jwt_authentication.jwt_token_authenticator
             
             access_control:
-    +           - { path: "%sylius.security.new_api_admin_regex%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +           - { path: "%sylius.security.new_api_admin_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +           - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
+    +           - { path: "%sylius.security.new_api_route%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
     ```
 
 4. Add `sylius_api.yaml` file to `config/routes/` directory:
@@ -54,5 +55,5 @@
     ```yaml
        sylius_api:
            resource: "@SyliusApiBundle/Resources/config/routing.yml"
-           prefix: "%sylius.security.new_api_admin_route%"
+           prefix: "%sylius.security.new_api_route%"
     ```

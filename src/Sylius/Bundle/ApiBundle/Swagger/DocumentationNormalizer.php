@@ -61,7 +61,7 @@ final class DocumentationNormalizer implements NormalizerInterface
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/authentication-token' => [
+                '/new-api/admin/authentication-token' => [
                     'post' => [
                         'tags' => ['Token'],
                         'operationId' => 'postCredentialsItem',

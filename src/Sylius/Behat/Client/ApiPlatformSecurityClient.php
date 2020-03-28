@@ -22,7 +22,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = '/new-api/authentication-token';
+        $this->request['url'] = '/new-api/admin/authentication-token';
         $this->request['method'] = 'POST';
     }
 
