@@ -166,6 +166,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save changes
      */
     public function iSaveMyChanges(): void
     {
@@ -249,21 +250,35 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Then this country should not have the :provinceName province
+     * @Then province with name :provinceName should not be added in this country
      */
     public function thisCountryShouldNotHaveTheProvince(string $provinceName): void
     {
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
-        /** @var ProvinceInterface $province */
-        $province = $this->sharedStorage->get('province');
 
-        Assert::false(
-            $this->responseChecker->hasValueInCollection(
-                $this->client->show($country->getCode()),
-                'provinces',
-                $this->iriConverter->getIriFromItem($province),
-            ),
-            sprintf('The country "%s" should not have the "%" province', $country->getName(), $province->getName())
+        $response = $this->client->show($country->getCode());
+        $countryFromResponse = $this->responseChecker->getResponseContent($response);
+
+        foreach ($countryFromResponse['provinces'] as $provinceFromResponse)
+        {
+            /** @var ProvinceInterface $province */
+            $province = $this->iriConverter->getItemFromIri($provinceFromResponse);
+            Assert::false(
+                $province->getName() === $provinceName,
+                sprintf('The country "%s" should not have the "%s" province', $country->getName(), $province->getName())
+            );
+        }
+    }
+
+    /**
+     * @Then I should be notified that province code must be unique
+     */
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'provinces[1].code: Province code must be unique.'
         );
     }
 
