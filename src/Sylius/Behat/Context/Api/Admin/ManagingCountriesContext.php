@@ -114,6 +114,20 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @Then the province should still be named :province in this country
+     */
+    public function theProvinceShouldStillBeNamedInThisCountry(ProvinceInterface $province): void
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->subResourceIndex('provinces', $country->getCode()),
+            'code',
+            $province->getCode()
+        ));
+    }
+
+    /**
      * @Then /^(this country) should have the "([^"]*)" province$/
      */
     public function thisCountryShouldHaveTheProvince(CountryInterface $country, $provinceName): void
@@ -141,6 +155,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When /^I want to edit (this country)$/
+     * @When I want to create a new province in country :country
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
@@ -212,6 +227,28 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I name the province :provinceName
+     */
+    public function iNameTheProvince(string $provinceName): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['name' => $provinceName]
+        );
+    }
+
+    /**
+     * @When I specify the province code as :provinceCode
+     */
+    public function iSpecifyTheProvinceCodeAs(string $provinceCode): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $provinceCode]
+        );
+    }
+
+    /**
      * @When I add the :provinceName province with :provinceCode code
      */
     public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
@@ -249,6 +286,43 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I remove :province province name
+     */
+    public function iRemoveProvinceName(ProvinceInterface $province)
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        foreach ($country->getProvinces() as $key => $provinceValue) {
+            if ($province->getId() === $provinceValue->getId()) {
+                $this->client->updateSubResource('provinces', $key, ['code' => $provinceValue->getCode(), 'name' => '']);
+            }
+        }
+    }
+
+    /**
+     * @Then province with code :provinceCode should not be added in this country
+     */
+    public function provinceWithCodeShouldNotBeAddedInThisCountry(string $provinceCode)
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        $response = $this->client->show($country->getCode());
+        $countryFromResponse = $this->responseChecker->getResponseContent($response);
+
+        foreach ($countryFromResponse['provinces'] as $provinceFromResponse)
+        {
+            /** @var ProvinceInterface $province */
+            $province = $this->iriConverter->getItemFromIri($provinceFromResponse);
+            Assert::false(
+                $province->getCode() === $provinceCode,
+                sprintf('The country "%s" should not have the "%s" province', $country->getName(), $province->getName())
+            );
+        }
+    }
+
+    /**
      * @Then this country should not have the :provinceName province
      * @Then province with name :provinceName should not be added in this country
      */
@@ -280,6 +354,26 @@ final class ManagingCountriesContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'provinces[1].code: Province code must be unique.'
         );
+    }
+
+    /**
+     * @Then I should be notified that :field is required
+     */
+    public function iShouldBeNotifiedThatFieldIsRequired(string $field)
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            \sprintf('Please enter province %s.', $field)
+        );
+    }
+
+    /**
+     * @When I do not specify the province code
+     * @When I do not name the province
+     */
+    public function iDoNotSpecifyTheProvinceCode()
+    {
+        // Intentionally left blank
     }
 
     private function getCountryCodeByName(string $countryName): string

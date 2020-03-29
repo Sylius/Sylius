@@ -179,6 +179,12 @@ final class Request implements RequestInterface
         $this->content[$key][] = $subResource;
     }
 
+    public function updateSubResource(string $subResource, int $key, array $newValues): void
+    {
+        // @TODO : FIX ME, this doesn't edit the resource but creates a new one
+        $this->content[$subResource][$key] = $newValues;
+    }
+
     public function removeSubResource(string $subResource, int $key): void
     {
         unset($this->content[$subResource][$key]);

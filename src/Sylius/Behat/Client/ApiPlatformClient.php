@@ -172,6 +172,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->removeSubResource($subResource, $key);
     }
 
+    public function updateSubResource(string $subResource, int $key, array $value): void
+    {
+        $this->request->updateSubResource($subResource, $key, $value);
+    }
+
     public function getLastResponse(): Response
     {
         return $this->client->getResponse();
