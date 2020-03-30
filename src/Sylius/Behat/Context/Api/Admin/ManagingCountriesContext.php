@@ -103,6 +103,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Then the country :country should have the :province province
+     * @Then /^(this country) should have the ("[^"]*" province)$/
      */
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
@@ -124,18 +125,6 @@ final class ManagingCountriesContext implements Context
             $this->client->subResourceIndex('provinces', $country->getCode()),
             'code',
             $province->getCode()
-        ));
-    }
-
-    /**
-     * @Then /^(this country) should have the "([^"]*)" province$/
-     */
-    public function thisCountryShouldHaveTheProvince(CountryInterface $country, $provinceName): void
-    {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('provinces', $country->getCode()),
-            'name',
-            $provinceName
         ));
     }
 
