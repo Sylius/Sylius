@@ -40,6 +40,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->addSelect('child')
             ->innerJoin('o.parent', 'parent')
             ->leftJoin('o.children', 'child')
+            ->andWhere('o.enabled = true')
             ->andWhere('parent.code = :parentCode')
             ->addOrderBy('o.position')
             ->setParameter('parentCode', ($menuTaxon !== null) ? $menuTaxon->getCode() : 'category')
