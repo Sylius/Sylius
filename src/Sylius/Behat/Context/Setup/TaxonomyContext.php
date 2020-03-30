@@ -140,6 +140,28 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is enabled/
+     */
+    public function theTaxonIsEnabled(TaxonInterface $taxon)
+    {
+        $taxon->setEnabled(true);
+
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is disabled$/
+     */
+    public function theTaxonIsDisabled(TaxonInterface $taxon)
+    {
+        $taxon->setEnabled(false);
+
+        $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $name
      *
      * @return TaxonInterface

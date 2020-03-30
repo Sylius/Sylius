@@ -205,6 +205,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         });
     }
 
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
+    }
+
     public function disable(): void
     {
         $this->getElement('enabled')->uncheck();

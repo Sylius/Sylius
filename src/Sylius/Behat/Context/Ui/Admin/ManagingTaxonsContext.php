@@ -423,6 +423,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I enable it$/
+     */
+    public function iEnableIt(): void
+    {
+        $this->updatePage->enable();
+    }
+
+    /**
      * @When /^I disable it$/
      */
     public function iDisableIt(): void
@@ -431,7 +439,15 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^it should be marked as disabled$/
+     * @Then /^(?:this taxon|it) should be marked as enabled/
+     */
+    public function itShouldBeMarkedAsEnabled(): void
+    {
+        Assert::true($this->updatePage->isEnabled());
+    }
+
+    /**
+     * @Then /^(?:this taxon|it) should be marked as disabled$/
      */
     public function itShouldBeMarkedAsDisabled(): void
     {

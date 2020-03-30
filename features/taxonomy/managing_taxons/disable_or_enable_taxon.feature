@@ -20,3 +20,21 @@ Feature: Toggle the taxon
         Then I should be notified that it has been successfully created
         And the "Jeans" taxon should appear in the registry
         And it should be marked as disabled
+
+    @ui
+    Scenario: Enabling a Taxon
+        Given the "T-Shirts" taxon is disabled
+        And I want to modify the "T-Shirts" taxon
+        When I enable it
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And it should be marked as enabled
+
+    @ui
+    Scenario: Disabling a Taxon
+        Given the "T-Shirts" taxon is enabled
+        And I want to modify the "T-Shirts" taxon
+        When I disable it
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And it should be marked as disabled
