@@ -53,6 +53,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->innerJoin('o.translations', 'translation')
+            ->andWhere('o.enabled = true')
             ->andWhere('translation.slug = :slug')
             ->andWhere('translation.locale = :locale')
             ->setParameter('slug', $slug)

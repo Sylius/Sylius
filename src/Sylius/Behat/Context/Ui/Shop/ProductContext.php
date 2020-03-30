@@ -582,6 +582,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When /^I try to browse products from (taxon "([^"]+)")$/
+     */
+    public function iTryToBrowseProductsFrom(TaxonInterface $taxon)
+    {
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @Then I should be informed that the taxon does not exist
+     */
+    public function iShouldBeInformedThatTheTaxonDoesNotExist()
+    {
+        Assert::eq($this->errorPage->getTitle(), 'Requested page is invalid.');
+    }
+
+    /**
      * @param string $productName
      * @param string $productAssociationName
      *
