@@ -118,7 +118,7 @@ final class Request implements RequestInterface
     public static function custom(string $url, string $method, ?string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s', $url),
+            $url,
             $method,
             ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
