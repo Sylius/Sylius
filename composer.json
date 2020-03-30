@@ -34,7 +34,7 @@
         "friendsofsymfony/rest-bundle": "^2.1",
         "fzaninotto/faker": "^1.6",
         "gedmo/doctrine-extensions": "^2.4.12",
-        "jms/serializer-bundle": "^2.0",
+        "jms/serializer-bundle": "^2.0 || ^3.0",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
         "knplabs/knp-menu": "^3.1",
