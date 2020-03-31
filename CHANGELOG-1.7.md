@@ -1,6 +1,31 @@
 # CHANGELOG FOR `1.7.X`
 
-## v1.7.0 (2019-03-02)
+## v1.7.1 (2020-03-31)
+
+#### Details
+
+- [#11111](https://github.com/Sylius/Sylius/issues/11111) [Docs] Recommend trait usage in Plugin Development Guide ([@Zales0123](https://github.com/Zales0123))
+- [#11147](https://github.com/Sylius/Sylius/issues/11147) [Plus Docs] Installation guide improvement and Administrator Roles ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11169](https://github.com/Sylius/Sylius/issues/11169) [missing return] Update basic-usage ([@DurandSacha](https://github.com/DurandSacha))
+- [#11146](https://github.com/Sylius/Sylius/issues/11146) [Behat][Admin] Fix step with checking number of orders in the list ([@GSadee](https://github.com/GSadee))
+- [#11177](https://github.com/Sylius/Sylius/issues/11177) [Documentation] Sylius Plus docs part 2; including fixes to links ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11176](https://github.com/Sylius/Sylius/issues/11176) [Order] add margin around resent shipment button ([@AdamKasp](https://github.com/AdamKasp))
+- [#11181](https://github.com/Sylius/Sylius/issues/11181) Sylius Plus feature scope update ([@dukusz](https://github.com/dukusz))
+- [#11182](https://github.com/Sylius/Sylius/issues/11182) [Docs][Plus] Add docs about administrators per channel ([@GSadee](https://github.com/GSadee))
+- [#11179](https://github.com/Sylius/Sylius/issues/11179) [Maintenance] Remove uneeded step ([@lchrusciel](https://github.com/lchrusciel))
+- [#11183](https://github.com/Sylius/Sylius/issues/11183) [Docs][Plus] Update docs about admin user fixtures ([@GSadee](https://github.com/GSadee))
+- [#11192](https://github.com/Sylius/Sylius/issues/11192) Fixtures: fix French translation of cap ([@dunglas](https://github.com/dunglas))
+- [#11209](https://github.com/Sylius/Sylius/issues/11209) Rename to a more explicit word ([@Prometee](https://github.com/Prometee))
+- [#11211](https://github.com/Sylius/Sylius/issues/11211) Use the sylius_ui for css and js on admin login screen ([@Prometee](https://github.com/Prometee))
+- [#11189](https://github.com/Sylius/Sylius/issues/11189) [Minor] [Behat] Typo fix ([@lchrusciel](https://github.com/lchrusciel))
+- [#11236](https://github.com/Sylius/Sylius/issues/11236) Typo fix ([@TheDevilOnLine](https://github.com/TheDevilOnLine))
+- [#11259](https://github.com/Sylius/Sylius/issues/11259) [Behat] Rework Shop > Product  > Show ([@oallain](https://github.com/oallain))
+- [#11299](https://github.com/Sylius/Sylius/issues/11299) Remove useless interface in custom_fixture.rst ([@dunglas](https://github.com/dunglas))
+- [#11304](https://github.com/Sylius/Sylius/issues/11304) [Docs] Require tagged plugins for Sylius Store ([@Zales0123](https://github.com/Zales0123))
+- [#11310](https://github.com/Sylius/Sylius/issues/11310) Install symfony/polyfill-php80 to fix the psalm build ([@Zales0123](https://github.com/Zales0123))
+- [#11311](https://github.com/Sylius/Sylius/issues/11311) [Psalm] Fix build on 1.7 as well ([@Zales0123](https://github.com/Zales0123))
+
+## v1.7.0 (2020-03-02)
 
 #### Details
 
@@ -8,7 +33,7 @@
 - [#11167](https://github.com/Sylius/Sylius/issues/11167) Fix UPGRADE-1.7 file ([@Zales0123](https://github.com/Zales0123))
 - [#11168](https://github.com/Sylius/Sylius/issues/11168) [Docs] Remove sensio.sphinx.refinclude ([@Tomanhez](https://github.com/Tomanhez))
 
-## v1.7.0-RC.1 (2019-03-01)
+## v1.7.0-RC.1 (2020-03-01)
 
 #### Details
 
