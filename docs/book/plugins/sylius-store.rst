@@ -14,6 +14,11 @@ Since Sylius is an open-source platform, there is a precise flow for the plugin 
 
 **2.** Remember about the tests and code quality! Check out :ref:`book_plugins_technical_requirements` for more details.
 
+.. warning::
+
+    Beware! Your plugin needs to have at least one tag (even if it's `0.1`). We're not putting plugins in `dev-master` version
+    into the Sylius Store.
+
 **3.** Send it to the project maintainers. The preferred way is to use `plugin request submit form <https://store.sylius.com/submit>`_.
 
 **4.** One of our Plugin Curators will contact you with the feedback regarding your plugin's code quality, test suite,
