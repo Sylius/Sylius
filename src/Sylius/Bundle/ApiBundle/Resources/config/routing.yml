@@ -13,3 +13,11 @@ sylius_api_admin_authentication_token:
 sylius_api_shop_authentication_token:
     path: /shop/authentication-token
     methods: ['POST']
+
+swagger_ui_admin:
+    path: /admin/docs
+    controller: api_platform.swagger.action.ui
+
+swagger_ui_shop:
+    path: /shop/docs
+    controller: api_platform.swagger.action.ui

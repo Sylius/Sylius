@@ -63,25 +63,15 @@
         </service>
 
         <service
-            id="sylius.api.swagger_admin_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
+            id="sylius.api.swagger_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\DocumentationNormalizer"
             decorates="api_platform.swagger.normalizer.documentation"
             public="true"
             autoconfigure="false"
             decoration-priority="20"
         >
-            <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
-        </service>
-
-        <service
-            id="sylius.api.swagger_shop_authentication_documentation_normalizer"
-            class="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            public="true"
-            autoconfigure="false"
-            decoration-priority="10"
-        >
-            <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+            <argument type="service" id="sylius.api.swagger_documentation_normalizer.inner" />
+            <argument type="service" id="request_stack" />
         </service>
     </services>
 </container>

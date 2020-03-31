@@ -65,10 +65,11 @@
             
             access_control:
     +           - { path: "%sylius.security.new_api_admin_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +           - { path: "%sylius.security.new_api_admin_regex%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +           - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
     +           - { path: "%sylius.security.new_api_shop_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +           - { path: "%sylius.security.new_api_shop_regex%/account", role: ROLE_USER }
-    +           - { path: "%sylius.security.new_api_route%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +           - { path: "%sylius.security.new_api_shop_regex%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
     ```
 
 4. Add `sylius_api.yaml` file to `config/routes/` directory:
