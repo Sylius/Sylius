@@ -34,7 +34,7 @@
                 <attribute name="filters">
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
-                    <attribute>sylius.api.translation_order_filter</attribute>
+                    <attribute>sylius.api.translation_order_name_filter</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">
