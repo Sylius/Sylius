@@ -48,7 +48,7 @@ Feature: Sorting listed products
         But the first product on the list should have name "Xtreme Pug"
 
     @ui @api
-    Scenario: Sort products ascending by name form chosen locale translations
+    Scenario: Sort products ascending by name from chosen locale translations
         When I change my locale to "Polish (Poland)"
         And I browse products
         And I sort the products ascending by name
@@ -56,7 +56,7 @@ Feature: Sorting listed products
         And the first product on the list should have name "Ekstremalny Mops"
 
     @ui @api
-    Scenario: Sort products descending by name form chosen locale translations
+    Scenario: Sort products descending by name from chosen locale translations
         When I change my locale to "Polish (Poland)"
         And I browse products
         And the products are already sorted ascending by name

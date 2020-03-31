@@ -28,7 +28,7 @@ final class TranslationOrderNameFilter extends AbstractContextAwareFilter
         string $resourceClass,
         string $operationName = null
     ): void {
-        if ($property === 'order') {
+        if ('order' === $property) {
             if (!isset($value['translation.name'])) {
                 return;
             }
@@ -39,13 +39,14 @@ final class TranslationOrderNameFilter extends AbstractContextAwareFilter
                 $queryBuilder
                     ->addSelect('translation')
                     ->innerJoin(
-                        'o.translations',
+                        sprintf('%s.translations', $queryBuilder->getRootAliases()[0]),
                         'translation',
                         'WITH',
                         'translation.locale = :locale'
                     )
                     ->orderBy('translation.name', $direction)
-                    ->setParameter('locale', $value['localeCode']);
+                    ->setParameter('locale', $value['localeCode'])
+                ;
 
                 return;
             }
@@ -53,7 +54,8 @@ final class TranslationOrderNameFilter extends AbstractContextAwareFilter
             $queryBuilder
                 ->addSelect('translation')
                 ->innerJoin('o.translations', 'translation')
-                ->orderBy('translation.name', $direction);
+                ->orderBy('translation.name', $direction)
+            ;
         }
     }
 
