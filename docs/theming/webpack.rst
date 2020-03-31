@@ -47,7 +47,7 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
     // templates/bundles/SyliusAdminBundle/_styles.html.twig
     {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
 
-    // templates/bundles/SyliusAdminBundle/_logo.html.twig
+    // templates/bundles/SyliusAdminBundle/Layout/_logo.html.twig
     {{ asset('build/admin/images/admin-logo.svg', 'admin') }}
 
     // templates/bundles/SyliusShopBundle/_scripts.html.twig
@@ -56,7 +56,7 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
     // templates/bundles/SyliusShopBundle/_styles.html.twig
     {{ encore_entry_link_tags('shop-entry', null, 'shop') }}
 
-    // templates/bundles/SyliusShopBundle/_header.html.twig
+    // templates/bundles/SyliusShopBundle/Layout/Header/_logo.html.twig
     {{ asset('build/shop/images/logo.png', 'shop') }}
 
 .. warning::
