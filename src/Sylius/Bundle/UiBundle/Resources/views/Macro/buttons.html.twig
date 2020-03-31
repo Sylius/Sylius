@@ -1,5 +1,5 @@
 {% macro default(url, message, id, icon, class) %}
-    <a class="ui {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button') }}>
+    <a class="ui {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
             <i class="icon {{ icon }}"></i>
         {% endif %}

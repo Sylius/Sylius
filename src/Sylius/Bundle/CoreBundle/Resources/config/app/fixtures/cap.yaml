@@ -25,7 +25,7 @@ sylius_fixtures:
                                             en_US:
                                                 name: 'Caps'
                                             fr_FR:
-                                                name: 'Casquettes'
+                                                name: 'Bonnets'
                                         children:
                                             -   code: 'simple_caps'
                                                 translations:
@@ -34,7 +34,7 @@ sylius_fixtures:
                                                         slug: 'caps/simple'
                                                     fr_FR:
                                                         name: 'Simple'
-                                                        slug: 'casquette/simple'
+                                                        slug: 'bonnets/simple'
 
                                             -   code: 'caps_with_pompons'
                                                 translations:
@@ -43,7 +43,7 @@ sylius_fixtures:
                                                         slug: 'caps/with-pompons'
                                                     fr_FR:
                                                         name: 'À pompon'
-                                                        slug: 'casquette/a-pompon'
+                                                        slug: 'bonnets/a-pompon'
 
                 cap_attribute:
                     name: product_attribute
