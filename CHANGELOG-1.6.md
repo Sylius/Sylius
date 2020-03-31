@@ -1,5 +1,22 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.7 (2020-03-31)
+
+#### Details
+
+- [#11168](https://github.com/Sylius/Sylius/issues/11168) [Docs] Remove sensio.sphinx.refinclude ([@Tomanhez](https://github.com/Tomanhez))
+- [#11111](https://github.com/Sylius/Sylius/issues/11111) [Docs] Recommend trait usage in Plugin Development Guide ([@Zales0123](https://github.com/Zales0123))
+- [#11147](https://github.com/Sylius/Sylius/issues/11147) [Plus Docs] Installation guide improvement and Administrator Roles ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11169](https://github.com/Sylius/Sylius/issues/11169) [missing return] Update basic-usage ([@DurandSacha](https://github.com/DurandSacha))
+- [#11146](https://github.com/Sylius/Sylius/issues/11146) [Behat][Admin] Fix step with checking number of orders in the list ([@GSadee](https://github.com/GSadee))
+- [#11177](https://github.com/Sylius/Sylius/issues/11177) [Documentation] Sylius Plus docs part 2; including fixes to links ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11181](https://github.com/Sylius/Sylius/issues/11181) Sylius Plus feature scope update ([@dukusz](https://github.com/dukusz))
+- [#11179](https://github.com/Sylius/Sylius/issues/11179) [Maintenance] Remove uneeded step ([@lchrusciel](https://github.com/lchrusciel))
+- [#11192](https://github.com/Sylius/Sylius/issues/11192) Fixtures: fix French translation of cap ([@dunglas](https://github.com/dunglas))
+- [#11299](https://github.com/Sylius/Sylius/issues/11299) Remove useless interface in custom_fixture.rst ([@dunglas](https://github.com/dunglas))
+- [#11304](https://github.com/Sylius/Sylius/issues/11304) [Docs] Require tagged plugins for Sylius Store ([@Zales0123](https://github.com/Zales0123))
+- [#11310](https://github.com/Sylius/Sylius/issues/11310) Install symfony/polyfill-php80 to fix the psalm build ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.6.6 (2020-02-28)
 
 #### Details
