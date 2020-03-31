@@ -219,7 +219,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSortShippingMethodsByCode(): void
     {
-        $this->client->sort('code', 'asc');
+        $this->client->sort(['code' => 'asc']);
     }
 
     /**
@@ -228,7 +228,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSortShippingMethodsByName(): void
     {
-        $this->client->sort('translation.name', 'asc');
+        $this->client->sort(['translation.name' => 'asc']);
     }
 
     /**
@@ -236,7 +236,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSwitchTheWayShippingMethodsAreSortedByCode(): void
     {
-        $this->client->sort('code', 'desc');
+        $this->client->sort(['code' => 'desc']);
     }
 
     /**
@@ -244,7 +244,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSwitchTheWayShippingMethodsAreSortedByName(): void
     {
-        $this->client->sort('translation.name', 'desc');
+        $this->client->sort(['translation.name' => 'desc']);
     }
 
     /**

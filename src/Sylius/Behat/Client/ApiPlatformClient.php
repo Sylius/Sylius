@@ -80,9 +80,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($this->request);
     }
 
-    public function sort(string $field, string $value): Response
+    public function sort(array $sorting): Response
     {
-        $this->request->updateParameters(['order' => [$field => $value]]);
+        $this->request->updateParameters(['order' => $sorting]);
 
         return $this->request($this->request);
     }
