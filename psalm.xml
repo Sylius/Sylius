@@ -211,5 +211,6 @@
         <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
         <InvalidCatch errorLevel="info" />
 
+        <UndefinedDocblockClass errorLevel="info" />
     </issueHandlers>
 </psalm>
