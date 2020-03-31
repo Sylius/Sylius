@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class DocumentationNormalizer implements NormalizerInterface
+final class AdminAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
 {
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
@@ -35,7 +35,7 @@ final class DocumentationNormalizer implements NormalizerInterface
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
-        $docs['components']['schemas']['Token'] = [
+        $docs['components']['schemas']['AdminUserToken'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -45,7 +45,7 @@ final class DocumentationNormalizer implements NormalizerInterface
             ],
         ];
 
-        $docs['components']['schemas']['Credentials'] = [
+        $docs['components']['schemas']['AdminUserCredentials'] = [
             'type' => 'object',
             'properties' => [
                 'email' => [
@@ -63,7 +63,7 @@ final class DocumentationNormalizer implements NormalizerInterface
             'paths' => [
                 '/new-api/admin/authentication-token' => [
                     'post' => [
-                        'tags' => ['Token'],
+                        'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',
                         'summary' => 'Get JWT token to login.',
                         'requestBody' => [
@@ -71,7 +71,7 @@ final class DocumentationNormalizer implements NormalizerInterface
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Credentials',
+                                        '$ref' => '#/components/schemas/AdminUserCredentials',
                                     ],
                                 ],
                             ],
@@ -82,7 +82,7 @@ final class DocumentationNormalizer implements NormalizerInterface
                                 'content' => [
                                     'application/json' => [
                                         'schema' => [
-                                            '$ref' => '#/components/schemas/Token',
+                                            '$ref' => '#/components/schemas/AdminUserToken',
                                         ],
                                     ],
                                 ],

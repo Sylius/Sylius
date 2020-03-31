@@ -8,7 +8,7 @@ Feature: Signing in to the store validation
         Given the store operates on a single channel in "United States"
         And there is a user "ted@example.com" identified by "bear"
 
-    @ui
+    @ui @api
     Scenario: Trying to sign in with bad credentials
         When I want to log in
         And I specify the username as "bear@example.com"
@@ -27,7 +27,7 @@ Feature: Signing in to the store validation
         Then I should be notified about disabled account
         And I should not be logged in
 
-    @ui
+    @ui @api
     Scenario: Trying to sign in after my account was deleted
         Given my account "ted@example.com" was deleted
         When I want to log in

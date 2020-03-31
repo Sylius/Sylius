@@ -15,8 +15,11 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
-    <imports>
-        <import resource="api/admin.xml" />
-        <import resource="api/shop.xml" />
-    </imports>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.behat.context.api.shop.login" class="Sylius\Behat\Context\Api\Shop\LoginContext">
+            <argument type="service" id="sylius.behat.client.shop_api_platform_security_client" />
+        </service>
+    </services>
 </container>

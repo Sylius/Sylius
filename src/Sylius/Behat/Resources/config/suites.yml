@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/account/login.yml
     - suites/api/admin/login.yml
     - suites/api/currency/managing_currencies.yml
     - suites/api/currency/managing_exchange_rates.yml
