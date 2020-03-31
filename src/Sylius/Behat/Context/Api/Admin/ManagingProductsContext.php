@@ -30,11 +30,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $adminClient;
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $adminUsersClient;
 
     /** @var ApiClientInterface */
     private $productReviewsClient;
@@ -48,25 +50,20 @@ final class ManagingProductsContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var array */
-    private $sortTypes;
-
     public function __construct(
-        ApiClientInterface $adminClient,
         ApiClientInterface $client,
+        ApiClientInterface $adminUsersClient,
         ApiClientInterface $productReviewsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->adminClient = $adminClient;
         $this->client = $client;
+        $this->adminUsersClient = $adminUsersClient;
         $this->productReviewsClient = $productReviewsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
-
-        $this->sortTypes = ['ascending' => 'asc', 'descending' => 'desc'];
     }
 
     /**
@@ -77,11 +74,10 @@ final class ManagingProductsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $this->adminClient->buildUpdateRequest((string) $adminUser->getId());
+        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
 
-        $this->adminClient->updateRequestData(['localeCode' => $localeCode]);
-
-        $this->adminClient->update();
+        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
+        $this->adminUsersClient->update();
     }
 
     /**
@@ -214,7 +210,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSwitchTheWayProductsAreSortedByCode(string $sortType = 'ascending'): void
     {
-        $this->client->sort(['code' => $this->sortTypes[$sortType]]);
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
@@ -226,7 +222,7 @@ final class ManagingProductsContext implements Context
     public function iStartSortingProductsByName(string $sortType = 'ascending'): void
     {
         $this->client->sort([
-            'translation.name' => $this->sortTypes[$sortType],
+            'translation.name' => self::SORT_TYPES[$sortType],
             'localeCode' => $this->getAdminLocaleCode(),
         ]);
     }
@@ -544,10 +540,10 @@ final class ManagingProductsContext implements Context
 
     private function getAdminLocaleCode(): string
     {
-        /** @var AdminUserInterface $admin */
-        $admin = $this->sharedStorage->get('administrator');
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
 
-        $response = $this->adminClient->show((string) $admin->getId());
+        $response = $this->adminUsersClient->show((string) $adminUser->getId());
 
         return $this->responseChecker->getValue($response, 'localeCode');
     }
@@ -569,15 +565,10 @@ final class ManagingProductsContext implements Context
     {
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
-        if (
-            isset($productFromResponse['images']) &&
+        return
             isset($productFromResponse['images'][0]) &&
             $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
-        ) {
-            return true;
-        }
-
-        return false;
+        ;
     }
 
     private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
