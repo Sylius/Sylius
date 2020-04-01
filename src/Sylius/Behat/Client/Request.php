@@ -115,7 +115,7 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function custom(string $url, string $method, string $token): RequestInterface
+    public static function custom(string $url, string $method, ?string $token): RequestInterface
     {
         return new self(
             $url,

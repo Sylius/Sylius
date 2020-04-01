@@ -40,6 +40,8 @@ interface ApiClientInterface
 
     public function customItemAction(string $id, string $type, string $action): Response;
 
+    public function customAction(string $url, string $method): Response;
+
     public function upload(): Response;
 
     public function buildCreateRequest(): void;
