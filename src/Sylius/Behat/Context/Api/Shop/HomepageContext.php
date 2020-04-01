@@ -25,6 +25,9 @@ final class HomepageContext implements Context
     /** @var ApiClientInterface */
     private $productsClient;
 
+    /** @var ApiClientInterface */
+    private $taxonsClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -33,10 +36,12 @@ final class HomepageContext implements Context
 
     public function __construct(
         ApiClientInterface $productsClient,
+        ApiClientInterface $taxonsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->productsClient = $productsClient;
+        $this->taxonsClient = $taxonsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -50,10 +55,44 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @When I check available taxons
+     */
+    public function iCheckAvailableTaxons(): void
+    {
+        $this->taxonsClient->customAction('new-api/shop/taxons/from-menu-taxon', HttpRequest::METHOD_GET);
+    }
+
+    /**
      * @Then I should see :count products in the list
      */
     public function iShouldSeeProductsInTheList(int $count): void
     {
         Assert::eq($this->responseChecker->countCollectionItems($this->productsClient->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then I should see :firstMenuItem and :secondMenuItem in the menu
+     */
+    public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
+    {
+        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $menuItems = array_column($response, 'name');
+
+        Assert::allOneOf($menuItems, $expectedMenuItems);
+    }
+
+    /**
+     * @Then I should not see :firstMenuItem and :secondMenuItem in the menu
+     */
+    public function iShouldNotSeeAndInTheMenu(string ...$unexpectedMenuItems): void
+    {
+        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $menuItems = array_column($response, 'name');
+
+        foreach ($unexpectedMenuItems as $unexpectedMenuItem) {
+            if (in_array($unexpectedMenuItem, $menuItems, true)) {
+                throw new \InvalidArgumentException(sprintf('There is menu item %s but it should not be', $unexpectedMenuItem));
+            }
+        }
     }
 }
