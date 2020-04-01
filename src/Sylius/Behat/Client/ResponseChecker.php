@@ -121,6 +121,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    public function isItemOnIndex(Response $response, string $property, string $value): bool
+    {
+        return $this->hasItemWithValue($response, $property, $value);
+    }
+
     public function getResponseContent(Response $response): array
     {
         return json_decode($response->getContent(), true);

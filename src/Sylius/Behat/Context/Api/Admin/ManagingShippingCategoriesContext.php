@@ -183,7 +183,7 @@ final class ManagingShippingCategoriesContext implements Context
     ): void {
         $shippingCategoryName = $shippingCategory->getName();
         Assert::false(
-            $this->isItemOnIndex('name', $shippingCategoryName),
+            $this->responseChecker->isItemOnIndex('name', $shippingCategoryName),
             sprintf('Shipping category with name %s exist', $shippingCategoryName)
         );
     }

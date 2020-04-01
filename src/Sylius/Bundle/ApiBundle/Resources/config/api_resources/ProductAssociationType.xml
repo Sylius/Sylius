@@ -42,6 +42,7 @@
                     <attribute name="groups">product_association_type:update</attribute>
                 </attribute>
             </itemOperation>
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

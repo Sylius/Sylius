@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
@@ -98,7 +99,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I want to browse product association types
      */
-    public function iWantToBrowseProductAssociationTypes()
+    public function iWantToBrowseProductAssociationTypes(): void
     {
         $this->client->index();
     }
@@ -106,7 +107,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should see :count product association types in the list
      */
-    public function iShouldSeeProductAssociationTypesInTheList(int $count)
+    public function iShouldSeeProductAssociationTypesInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
     }
@@ -114,11 +115,43 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should see the product association type :name in the list
      */
-    public function iShouldSeeTheProductAssociationTypeInTheList(string $name)
+    public function iShouldSeeTheProductAssociationTypeInTheList(string $name): void
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
             sprintf('There is no product association type with name "%s"', $name)
+        );
+    }
+
+    /**
+     * @When I delete the :productAssociationType product association type
+     */
+    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $this->sharedStorage->set('product_association_type_code', $productAssociationType->getCode());
+        $this->client->delete($productAssociationType->getCode());
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()),
+            'Product association type could not be deleted'
+        );
+    }
+
+    /**
+     * @Then this product association type should no longer exist in the registry
+     */
+    public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(): void
+    {
+        $code = $this->sharedStorage->get('product_association_type_code');
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $code),
+            sprintf('Product association type with code %s exist', $code)
         );
     }
 }
