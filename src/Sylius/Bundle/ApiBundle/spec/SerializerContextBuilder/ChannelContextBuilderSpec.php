@@ -26,7 +26,7 @@ final class ChannelContextBuilderSpec extends ObjectBehavior
         $this->beConstructedWith($decoratedContextBuilder, $channelContext);
     }
 
-    function it_updates_context_when_channel_context_has_channel(
+    function it_updates_an_context_when_channel_context_has_channel(
         SerializerContextBuilderInterface $decoratedContextBuilder,
         Request $request,
         ChannelContextInterface $channelContext,

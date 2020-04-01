@@ -33,7 +33,7 @@ class LatestProductCollectionDataProviderSpec extends ObjectBehavior
         $this->supports(TaxonInterface::class, 'get_latest')->shouldReturn(false);
     }
 
-    function it_throw_exception_if_context_has_not_channel(): void
+    function it_throws_an_exception_if_context_has_not_channel(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -41,7 +41,7 @@ class LatestProductCollectionDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throw_exception_if_context_has_not_locale(ChannelInterface $channel): void
+    function it_throws_an_exception_if_context_has_not_locale(ChannelInterface $channel): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

@@ -5,7 +5,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.taxon.class%" shortName="Taxon">
-        <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="normalization_context">
@@ -15,17 +14,33 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="path">admin/taxons</attribute>
+            </collectionOperation>
             <collectionOperation name="post">
+                <attribute name="path">admin/taxons</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">taxon:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="get_from_menu_taxon">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/taxons/from-menu-taxon</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:taxon:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="path">admin/taxons/{id}</attribute>
+            </itemOperation>
             <itemOperation name="put">
+                <attribute name="path">admin/taxons/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">taxon:update</attribute>
                 </attribute>

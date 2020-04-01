@@ -25,7 +25,7 @@ final class LocaleContextBuilderSpec extends ObjectBehavior
        $this->beConstructedWith($decoratedSerializerContextBuilder, $localeContext);
    }
 
-   function it_updates_context_when_locale_context_has_locale(
+   function it_updates_an_context_when_locale_context_has_locale(
        Request $request,
        SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
        LocaleContextInterface $localeContext

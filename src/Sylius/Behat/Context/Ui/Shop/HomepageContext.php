@@ -34,7 +34,7 @@ final class HomepageContext implements Context
 
     /**
      * @When I check latest products
-     * @When I visit the homepage
+     * @When I check available taxons
      */
     public function iCheckLatestProducts(): void
     {
