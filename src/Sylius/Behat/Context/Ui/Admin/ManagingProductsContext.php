@@ -340,11 +340,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I switch the way products are sorted by :field
+     * @When I switch the way products are sorted :sortType by :field
      * @When I start sorting products by :field
-     * @Given the products are already sorted by :field
+     * @When the products are already sorted :sortType by :field
+     * @When I sort the products :sortType by :field
      */
-    public function iSortProductsBy($field)
+    public function iSortProductsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
     }

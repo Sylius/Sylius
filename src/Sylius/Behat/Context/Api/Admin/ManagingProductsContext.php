@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -29,8 +30,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $adminUsersClient;
 
     /** @var ApiClientInterface */
     private $productReviewsClient;
@@ -46,16 +52,32 @@ final class ManagingProductsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $adminUsersClient,
         ApiClientInterface $productReviewsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->adminUsersClient = $adminUsersClient;
         $this->productReviewsClient = $productReviewsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @When I change my locale to :localeCode
+     */
+    public function iSwitchTheLocaleToTheLocale(string $localeCode): void
+    {
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
+
+        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
+        $this->adminUsersClient->update();
     }
 
     /**
@@ -184,35 +206,25 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I start sorting products by code
+     * @When I switch the way products are sorted :sortType by code
      */
-    public function iStartSortingProductsByCode(): void
+    public function iSwitchTheWayProductsAreSortedByCode(string $sortType = 'ascending'): void
     {
-        $this->client->sort('code', 'asc');
-    }
-
-    /**
-     * @When I switch the way products are sorted by code
-     */
-    public function iSwitchTheWayProductsAreSortedByCode(): void
-    {
-        $this->client->sort('code', 'desc');
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
      * @When I start sorting products by name
-     * @Given the products are already sorted by name
+     * @When I sort the products :sortType by name
+     * @When I switch the way products are sorted :sortType by name
+     * @Given the products are already sorted :sortType by name
      */
-    public function iStartSortingProductsByName(): void
+    public function iStartSortingProductsByName(string $sortType = 'ascending'): void
     {
-        $this->client->sort('translation.name', 'asc');
-    }
-
-    /**
-     * @When I switch the way products are sorted by name
-     */
-    public function iSwitchTheWayProductsAreSortedByName(): void
-    {
-        $this->client->sort('translation.name', 'desc');
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
     }
 
     /**
@@ -526,19 +538,14 @@ final class ManagingProductsContext implements Context
         Assert::false($this->hasProductWithFieldValue($this->client->index(), $field, $value));
     }
 
-    private function hasProductImage(Response $response, ProductInterface $product): bool
+    private function getAdminLocaleCode(): string
     {
-        $productFromResponse = $this->responseChecker->getResponseContent($response);
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
 
-            if (
-                isset($productFromResponse['images']) &&
-                isset($productFromResponse['images'][0]) &&
-                $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
-            ) {
-                return true;
-            }
+        $response = $this->adminUsersClient->show((string) $adminUser->getId());
 
-        return false;
+        return $this->responseChecker->getValue($response, 'localeCode');
     }
 
     private function getFieldValueOfFirstProduct(array $product, string $field): ?string
@@ -548,10 +555,20 @@ final class ManagingProductsContext implements Context
         }
 
         if ($field === 'name') {
-            return $product['translations']['en_US']['name'];
+            return $product['translations'][$this->getAdminLocaleCode()]['name'];
         }
 
         return null;
+    }
+
+    private function hasProductImage(Response $response, ProductInterface $product): bool
+    {
+        $productFromResponse = $this->responseChecker->getResponseContent($response);
+
+        return
+            isset($productFromResponse['images'][0]) &&
+            $productFromResponse['images'][0]['path'] === $product->getImages()->first()->getPath()
+        ;
     }
 
     private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
@@ -561,7 +578,7 @@ final class ManagingProductsContext implements Context
         }
 
         if ($field === 'name') {
-            return $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value);
+            return $this->responseChecker->hasItemWithTranslation($response, $this->getAdminLocaleCode(), $field, $value);
         }
 
         return false;
