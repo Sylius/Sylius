@@ -38,8 +38,7 @@ final class ChannelContextBuilder implements SerializerContextBuilderInterface
         $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
         try {
             $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {
-        }
+        } catch (ChannelNotFoundException $exception) {}
 
         return $context;
     }

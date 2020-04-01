@@ -17,7 +17,6 @@ use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class LocaleContextBuilder implements SerializerContextBuilderInterface
@@ -39,8 +38,7 @@ final class LocaleContextBuilder implements SerializerContextBuilderInterface
         $context = $this->decoratedLocaleBuilder->createFromRequest($request, $normalization, $extractedAttributes);
         try {
             $context[ContextKeys::LOCALE_CODE] = $this->localeContext->getLocaleCode();
-        } catch (LocaleNotFoundException $exception) {
-        }
+        } catch (LocaleNotFoundException $exception) {}
 
         return $context;
     }

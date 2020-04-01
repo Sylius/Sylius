@@ -50,7 +50,8 @@
                 <attribute name="path">shop/products/latest</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:shop:product:read</attribute>
+                        <attribute>admin:product:read</attribute>
+                        <attribute>shop:product:read</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
