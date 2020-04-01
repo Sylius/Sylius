@@ -94,4 +94,31 @@ final class ManagingProductAssociationTypesContext implements Context
             sprintf('There is no product association type with name "%s"', $Name)
         );
     }
+
+    /**
+     * @When I want to browse product association types
+     */
+    public function iWantToBrowseProductAssociationTypes()
+    {
+        $this->client->index();
+    }
+
+    /**
+     * @Then I should see :count product association types in the list
+     */
+    public function iShouldSeeProductAssociationTypesInTheList(int $count)
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
+    }
+
+    /**
+     * @Then I should see the product association type :name in the list
+     */
+    public function iShouldSeeTheProductAssociationTypeInTheList(string $name)
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            sprintf('There is no product association type with name "%s"', $name)
+        );
+    }
 }
