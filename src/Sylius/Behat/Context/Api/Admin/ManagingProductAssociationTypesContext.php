@@ -17,7 +17,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
@@ -31,14 +33,19 @@ final class ManagingProductAssociationTypesContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var SerializerInterface */
+    private $serializer;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        SerializerInterface $serializer
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -153,5 +160,65 @@ final class ManagingProductAssociationTypesContext implements Context
             $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $code),
             sprintf('Product association type with code %s exist', $code)
         );
+    }
+
+    /**
+     * @When I want to modify the :productAssociationType product association type
+     */
+    public function iWantToModifyTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $this->client->buildUpdateRequest($productAssociationType->getCode());
+    }
+
+    /**
+     * @When I rename it to :name in :language
+     */
+    public function iRenameItToIn(string $name, string $language): void
+    {
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Product association type could not be edited'
+        );
+    }
+
+    /**
+     * @Then this product association type name should be :name
+     */
+    public function thisProductAssociationTypeNameShouldBe(string $name): void
+    {
+        /** @var ProductAssociationType $productAssociationType */
+        $productAssociationType = $this->sharedStorage->get('product_association_type');
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->show($productAssociationType->getCode()), 'name', $name),
+            sprintf('Product association type name is not %s', $name)
+        );
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled(): void
+    {
+        /** @var ProductAssociationType $productAssociationType */
+        $productAssociationType = $this->sharedStorage->get('product_association_type');
+
+        $productAssociationTypeSerialised = $this->serializer->serialize($productAssociationType, 'json', ['groups' => 'product_association_type:update']);
+        Assert::keyNotExists(\json_decode($productAssociationTypeSerialised, true), 'code');
     }
 }
