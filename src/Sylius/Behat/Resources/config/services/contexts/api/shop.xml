@@ -22,8 +22,9 @@
             <argument type="service" id="sylius.behat.client.shop_api_platform_security_client" />
         </service>
 
-        <service id="sylius.behat.context.api.shop.home_page" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
+        <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
             <argument type="service" id="sylius.behat.api_platform_client.products" />
+            <argument type="service" id="sylius.behat.api_platform_client.taxon" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
