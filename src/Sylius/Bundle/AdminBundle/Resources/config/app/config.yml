@@ -73,7 +73,7 @@ sylius_ui:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 25
                     context:
-                        postfix: index.before_header 
+                        postfix: index.before_header
                 header:
                     template: "@SyliusAdmin/Crud/Index/_header.html.twig"
                     priority: 20
@@ -85,40 +85,40 @@ sylius_ui:
                 content:
                     template: "@SyliusAdmin/Crud/Index/_content.html.twig"
                     priority: 10
-                after_content: 
+                after_content:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        postfix: index.after_content 
-        
+                        postfix: index.after_content
+
         sylius.admin.index.stylesheets:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: index.stylesheets
-                        
+
         sylius.admin.index.javascripts:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: index.javascripts
-                        
+
         sylius.admin.index.header:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: index.header
-                        
+
         sylius.admin.create:
             blocks:
                 before_header_legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 25
                     context:
-                        postfix: create.before_header 
+                        postfix: create.before_header
                 header:
                     template: "@SyliusAdmin/Crud/Create/_header.html.twig"
                     priority: 20
@@ -130,47 +130,47 @@ sylius_ui:
                 content:
                     template: "@SyliusAdmin/Crud/Create/_content.html.twig"
                     priority: 10
-                after_content: 
+                after_content:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        postfix: create.after_content 
-        
+                        postfix: create.after_content
+
         sylius.admin.create.stylesheets:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: create.stylesheets
-                        
+
         sylius.admin.create.javascripts:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: create.javascripts
-                        
+
         sylius.admin.create.header:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: create.header
-                        
+
         sylius.admin.create.form:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: create.form
-                        
+
         sylius.admin.update:
             blocks:
                 before_header_legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 25
                     context:
-                        postfix: update.before_header 
+                        postfix: update.before_header
                 header:
                     template: "@SyliusAdmin/Crud/Update/_header.html.twig"
                     priority: 20
@@ -182,40 +182,40 @@ sylius_ui:
                 content:
                     template: "@SyliusAdmin/Crud/Update/_content.html.twig"
                     priority: 10
-                after_content: 
+                after_content:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        postfix: update.after_content 
-        
+                        postfix: update.after_content
+
         sylius.admin.update.stylesheets:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: update.stylesheets
-                        
+
         sylius.admin.update.javascripts:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: update.javascripts
-                        
+
         sylius.admin.update.header:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: update.header
-                        
+
         sylius.admin.update.form:
             blocks:
                 legacy:
                     template: "@SyliusAdmin/Crud/Block/_legacySonataEvent.html.twig"
                     context:
                         postfix: update.form
-       
+
         sylius.admin.layout.sidebar:
             blocks:
                 top_legacy:
@@ -234,18 +234,26 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.layout.sidebar_down
-                        
+
         sylius.admin.layout.javascripts:
             blocks:
+                scripts:
+                    template: "@SyliusAdmin/Layout/_scripts.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 0
                     context:
                         event: sylius.admin.layout.javascripts
-                        
+
         sylius.admin.layout.stylesheets:
             blocks:
+                styles:
+                    template: "@SyliusAdmin/Layout/_styles.html.twig"
+                    priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 0
                     context:
                         event: sylius.admin.layout.stylesheets
 
@@ -265,14 +273,14 @@ sylius_ui:
                 search:
                     template: "@SyliusAdmin/Layout/_search.html.twig"
                     priority: 10
-                        
+
         sylius.admin.layout.topbar_middle:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.layout.topbar_middle
-                        
+
         sylius.admin.layout.topbar_right:
             blocks:
                 notifications:
@@ -289,28 +297,28 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.layout.topbar_right
-                        
+
         sylius.admin.order.update.form:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.order.update.form
-                        
+
         sylius.admin.product_variant.generate.form:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product_variant.generate.form
-                        
+
         sylius.admin.promotion_coupon.generate.form:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.promotion_coupon.generate.form
-                        
+
         sylius.admin.login.before_form:
             blocks:
                 legacy:
@@ -324,7 +332,7 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.login.form
-                        
+
         sylius.admin.taxon.update.before_content:
             blocks:
                 legacy:
@@ -354,7 +362,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.taxon.create.after_taxon_tree
-                        
+
         sylius.admin.taxon.update.taxon_tree:
             blocks:
                 before_legacy:
@@ -370,7 +378,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.taxon.update.after_taxon_tree
-                        
+
         sylius.admin.login.content:
             blocks:
                 before_legacy:
@@ -393,21 +401,21 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.dashboard.header
-                        
+
         sylius.admin.product_variant.create.tab_taxes:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product_variant.create.tab_taxes
-                        
+
         sylius.admin.product_variant.update.tab_taxes:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product_variant.update.tab_taxes
-                        
+
         sylius.admin.product_variant.create.tab_details:
             blocks:
                 legacy:
@@ -428,14 +436,14 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.create.tab_associations
-                        
+
         sylius.admin.product.update.tab_associations:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.update.tab_associations
-                        
+
         sylius.admin.product.create.tab_attributes:
             blocks:
                 legacy:
@@ -449,42 +457,42 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.update.tab_attributes
-                        
+
         sylius.admin.product.create.tab_details:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.create.tab_details
-                        
+
         sylius.admin.product.update.tab_details:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.update.tab_details
-                        
+
         sylius.admin.product.create.tab_media:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.create.tab_media
-                        
+
         sylius.admin.product.update.tab_media:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.update.tab_media
-                        
+
         sylius.admin.product.create.tab_taxonomy:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.admin.product.create.tab_taxonomy
-                        
+
         sylius.admin.product.update.tab_taxonomy:
             blocks:
                 legacy:
@@ -515,7 +523,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.promotion_coupon.index.after_content
-                        
+
         sylius.admin.promotion_coupon.generate.content:
             blocks:
                 before_header_legacy:
@@ -547,7 +555,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.promotion_coupon.generate.after_content
-                        
+
         sylius.admin.customer.show.address:
             blocks:
                 before_legacy:
@@ -649,7 +657,7 @@ sylius_ui:
                 notes:
                     template: "@SyliusAdmin/Order/Show/_notes.html.twig"
                     priority: 10
-                    
+
         sylius.admin.order.show.sidebar:
             blocks:
                 before_customer_information_legacy:
@@ -765,7 +773,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.product_variant.generate.after_content
-                        
+
         sylius.admin.order.history.content:
             blocks:
                 before_header_legacy:
@@ -811,7 +819,7 @@ sylius_ui:
                 breadcrumb:
                     template: "@SyliusAdmin/Product/Index/Header/_breadcrumb.html.twig"
                     priority: 10
-        
+
         sylius.admin.product_variant.index.header.content:
             blocks:
                 content:
@@ -889,7 +897,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.customer.show.after_content
-                        
+
         sylius.admin.dashboard.content:
             blocks:
                 before_header_legacy:
@@ -957,7 +965,7 @@ sylius_ui:
                 content:
                     template: "@SyliusAdmin/Crud/Index/_content.html.twig"
                     priority: 10
-                    
+
         sylius.admin.product.index.content.sidebar:
             blocks:
                 before_legacy:
