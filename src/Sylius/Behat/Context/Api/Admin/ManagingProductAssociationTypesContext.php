@@ -104,17 +104,19 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I browse product association types
      * @When I want to browse product association types
      */
-    public function iWantToBrowseProductAssociationTypes(): void
+    public function iBrowseProductAssociationTypes(): void
     {
         $this->client->index();
     }
 
     /**
      * @Then I should see :count product association types in the list
+     * @Then I should see a single product association type in the list
      */
-    public function iShouldSeeProductAssociationTypesInTheList(int $count): void
+    public function iShouldSeeProductAssociationTypesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
     }
@@ -141,6 +143,7 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @Then I should be notified that it has been successfully deleted
+     * @Then I should be notified that they have been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
@@ -220,5 +223,29 @@ final class ManagingProductAssociationTypesContext implements Context
 
         $productAssociationTypeSerialised = $this->serializer->serialize($productAssociationType, 'json', ['groups' => 'product_association_type:update']);
         Assert::keyNotExists(\json_decode($productAssociationTypeSerialised, true), 'code');
+    }
+
+    /**
+     * @When I check the :productAssociationType product association type
+     * @When I check also the :productAssociationType product association type
+     */
+    public function iCheckTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $productAssociationTypeToDelete = [];
+        if ($this->sharedStorage->has('product_association_type_to_delete')) {
+            $productAssociationTypeToDelete = $this->sharedStorage->get('product_association_type_to_delete');
+        }
+        $productAssociationTypeToDelete[] = $productAssociationType->getCode();
+        $this->sharedStorage->set('product_association_type_to_delete', $productAssociationTypeToDelete);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        foreach ($this->sharedStorage->get('product_association_type_to_delete') as $code) {
+            $this->client->delete($code);
+        }
     }
 }
