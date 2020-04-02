@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -66,8 +67,9 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I name it :productAssociationTypeName in :localeCode
+     * @When I do not name it
      */
-    public function iNameItIn(string $productAssociationTypeName, string $localeCode): void
+    public function iNameItIn(string $productAssociationTypeName = null, string $localeCode = 'en_US'): void
     {
         $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $productAssociationTypeName, 'locale' => $localeCode]]]);
     }
@@ -88,7 +90,7 @@ final class ManagingProductAssociationTypesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Product aAssociation type could not be created'
+            'Product association type could not be created'
         );
     }
 
@@ -123,6 +125,7 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @Then I should see the product association type :name in the list
+     * @Then this product association type should still be named :name
      */
     public function iShouldSeeTheProductAssociationTypeInTheList(string $name): void
     {
@@ -183,6 +186,7 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -296,5 +300,50 @@ final class ManagingProductAssociationTypesContext implements Context
             1,
             sprintf("More then one Product association type have code %s.", $code)
         );
+    }
+
+    /**
+     * @When I do not specify its code
+     */
+    public function iDoNotSpecifyItsCode(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
+     * @Then I should be notified that :type is required
+     */
+    public function iShouldBeNotifiedThatCodeIsRequired(string $type): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter association type %s.', $type)
+        );
+    }
+
+    /**
+     * @Then the product association type with :type :value should not be added
+     */
+    public function theProductAssociationTypeWithNameShouldNotBeAdded(string $type, string $value): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), $type, $value),
+            sprintf('Product association type with %s %s exist', $type, $value)
+        );
+    }
+
+    /**
+     * @When I remove its name from :localeCode translation
+     */
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'name' => null,
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
     }
 }
