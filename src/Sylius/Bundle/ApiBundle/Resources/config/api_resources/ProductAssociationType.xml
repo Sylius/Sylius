@@ -27,7 +27,11 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="filters">
+                    <attribute>sylius.api.product_association_type_filter</attribute>
+                </attribute>
+            </collectionOperation>
             <collectionOperation name="post">
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_association_type:create</attribute>

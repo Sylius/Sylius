@@ -248,4 +248,30 @@ final class ManagingProductAssociationTypesContext implements Context
             $this->client->delete($code);
         }
     }
+
+    /**
+     * @When I filter product association types with code containing :value
+     */
+    public function iFilterProductAssociationTypesWithCodeContaining(string $value)
+    {
+        $this->client->addFilter('code', $value);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter product association types with name containing :value
+     */
+    public function iFilterProductAssociationTypesWithNameContaining(string $value)
+    {
+        $this->client->addFilter('translations.name', $value);
+        $this->client->filter();
+    }
+
+    /**
+     * @Then I should see only one product association type in the list
+     */
+    public function iShouldSeeOnlyOneProductAssociationTypeInTheList()
+    {
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), 1);
+    }
 }
