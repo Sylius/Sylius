@@ -60,7 +60,7 @@ You should also delete Behat suite named ``greeting_customer`` from ``tests/Beha
     
 .. important::
     After you have change name of plugin, please run in your main directory of plugin (cd MyPlugin/ && composer install). 
-    If you don't       rerun this command you can have this error : 
+    If you don't rerun this command you may have this error : 
     ```bash
     $ (cd tests/Application && bin/console assets:install public -e test)
     PHP Fatal error: Uncaught Symfony\Component\Debug\Exception\ClassNotFoundException: Attempted to load class "Kernel" from namespace "Tests\FMDD\SyliusEmailOrderAdminPlugin\Application".
