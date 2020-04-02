@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/mailer-bundle
+    composer require sylius/mailer-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
-    $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/mailer-bundle
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar require sylius/mailer-bundle
 
 Adding required bundles to the kernel
 -------------------------------------

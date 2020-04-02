@@ -8,7 +8,7 @@ To list all available suites and fixtures, use the ``sylius:fixtures:list`` comm
 
 .. code-block:: bash
 
-    $ bin/console sylius:fixtures:list
+    bin/console sylius:fixtures:list
 
     Available suites:
      - default
@@ -26,7 +26,7 @@ To load a suite, use the ``sylius:fixtures:load [suite]`` command.
 
 .. code-block:: bash
 
-    $ bin/console sylius:fixtures:load default
+    bin/console sylius:fixtures:load default
 
     Running suite "default"...
     Running fixture "country"...

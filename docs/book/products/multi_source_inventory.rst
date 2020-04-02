@@ -84,7 +84,7 @@ Sylius Plus provides a route that allows changing inventory source stock with an
 
 .. code-block:: bash
 
-   $ POST /api/v1/inventory-sources/{code}/update-stocks
+   POST /api/v1/inventory-sources/{code}/update-stocks
 
 The ``code`` is a code of inventory source on which stock is to be updated. Content of the request should contain an array
 of updated stocks, with the product variant code and target on hand value.

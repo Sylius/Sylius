@@ -23,7 +23,7 @@ To run Sylius console in ``prod`` environment, add the following parameters to e
 
 .. code-block:: bash
 
-   $ bin/console --env=prod --no-debug cache:clear
+   bin/console --env=prod --no-debug cache:clear
 
 You can access the website in production mode via the ``/index.php`` file in your website root (``public/``) or just ``/`` path. (on Apache)
 
@@ -37,7 +37,7 @@ To run Sylius console in ``staging`` environment, add the following parameters t
 
 .. code-block:: bash
 
-   $ bin/console --env=staging --no-debug cache:clear
+   bin/console --env=staging --no-debug cache:clear
 
 You can access the website in staging mode via the ``/index.php`` file in your website root (``public/``) or just ``/`` path. (on Apache)
 
@@ -50,7 +50,7 @@ To run Sylius console in ``test`` environment, add the following parameters to e
 
 .. code-block:: bash
 
-   $ bin/console --env=test cache:clear
+   bin/console --env=test cache:clear
 
 Final Thoughts
 --------------

@@ -16,8 +16,8 @@ Using the Taxation Component
 
 .. code-block:: bash
 
-    $ mkdir project/
-    $ cd project/
+    mkdir project/
+    cd project/
 
 **2.** Open a terminal and use Composer to grab the library.
 
@@ -34,7 +34,7 @@ Using the Taxation Component
 
 .. code-block:: bash
 
-    $ composer require sylius/taxation
+    composer require sylius/taxation
 
 The name ``sylius/taxation`` is written at the top of the documentation for
 whatever component you want.
@@ -70,7 +70,7 @@ You can open the "script.php" file in browser or run it via console:
 
 .. code-block:: bash
 
-    $ php script.php
+    php script.php
 
 Using all of the Components
 ---------------------------
@@ -80,7 +80,7 @@ them one by one, you can include the ``sylius/sylius`` package:
 
 .. code-block:: bash
 
-    $ composer require sylius/sylius
+    composer require sylius/sylius
 
 Now what?
 ---------

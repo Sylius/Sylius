@@ -46,7 +46,7 @@ For the ``CustomerProfileType`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.form.type.customer_profile
+    php bin/console debug:container sylius.form.type.customer_profile
 
 As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType`` - this is the class that you need to be extending.
 

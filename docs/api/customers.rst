@@ -99,7 +99,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/ \
+    curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -149,7 +149,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/ \
+    curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -213,7 +213,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/399 \
+    curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -272,7 +272,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/ \
+    curl http://demo.sylius.com/api/v1/customers/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -442,7 +442,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/399 \
+    curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -469,7 +469,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/399 \
+    curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT
@@ -548,7 +548,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/399 \
+    curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -584,7 +584,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/399 \
+    curl http://demo.sylius.com/api/v1/customers/399 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -623,7 +623,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.com/api/v1/customers/7/orders/ \
+    curl http://demo.sylius.com/api/v1/customers/7/orders/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 

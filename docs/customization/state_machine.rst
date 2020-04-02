@@ -40,7 +40,7 @@ After that your new step will be available alongside other steps that already we
 
 .. tip::
 
-    Run ``$ php bin/console debug:winzou:state-machine sylius_order``
+    Run ``php bin/console debug:winzou:state-machine sylius_order``
     to check if the state machine has changed to your implementation.
 
 How to add a new transition?
@@ -65,7 +65,7 @@ After that your new transition will be available alongside other transitions tha
 
 .. tip::
 
-    Run ``$ php bin/console debug:winzou:state-machine sylius_order``
+    Run ``php bin/console debug:winzou:state-machine sylius_order``
     to check if the state machine has changed to your implementation.
 
 How to remove a state and its transitions?

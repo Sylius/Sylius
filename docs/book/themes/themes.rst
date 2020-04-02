@@ -128,7 +128,7 @@ In the administration panel go to channels and change the theme of your desired 
 
 .. code-block:: bash
 
-   $ php bin/console cache:clear
+   php bin/console cache:clear
 
 Learn more
 ----------

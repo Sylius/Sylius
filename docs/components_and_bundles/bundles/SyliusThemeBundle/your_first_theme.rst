@@ -126,4 +126,4 @@ your theme files by using this command:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:theme:assets:install
+    php bin/console sylius:theme:assets:install

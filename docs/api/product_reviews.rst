@@ -65,7 +65,7 @@ To create a new product review for the product with ``code = MUG-TH`` use the be
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST \
@@ -126,7 +126,7 @@ Example
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X POST
@@ -209,7 +209,7 @@ To see the details of the product review with ``id = 1``, which is defined for t
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -283,7 +283,7 @@ To see the first page of all product reviews for the product with ``code = MUG-T
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/ \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json"
 
@@ -446,7 +446,7 @@ To fully update the product review with ``id = 1`` for the product with ``code =
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PUT \
@@ -493,7 +493,7 @@ To partially update the product review with ``id = 1`` for the product with ``co
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Content-Type: application/json" \
         -X PATCH \
@@ -539,7 +539,7 @@ To delete the product review with ``id = 1`` from the product with ``code = MUG-
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1 \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X DELETE
@@ -550,7 +550,7 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
-    
+
 Accept a Product Review
 --------------------------
 
@@ -580,7 +580,7 @@ To accept the product review with ``id = 1`` from the product with ``code = MUG-
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1/accept \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1/accept \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -591,7 +591,7 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
-    
+
 Reject a Product Review
 --------------------------
 
@@ -621,7 +621,7 @@ To reject the product review with ``id = 1`` from the product with ``code = MUG-
 
 .. code-block:: bash
 
-    $ curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1/reject \
+    curl http://demo.sylius.org/api/v1/products/MUG-TH/reviews/1/reject \
         -H "Authorization: Bearer SampleToken" \
         -H "Accept: application/json" \
         -X POST
@@ -632,4 +632,4 @@ Exemplary Response
 .. code-block:: text
 
     STATUS: 204 No Content
-    
+

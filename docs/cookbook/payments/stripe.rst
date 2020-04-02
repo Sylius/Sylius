@@ -23,7 +23,7 @@ Stripe is not available by default in Sylius, to have it you need to add its pac
 
 .. code-block:: bash
 
-    $ php composer require stripe/stripe-php:~4.1
+    php composer require stripe/stripe-php:~4.1
 
 Add a payment method with the Stripe gateway in the Admin Panel
 ---------------------------------------------------------------
