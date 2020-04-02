@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
-final class PaymentStateMachineTransitionApplicator
+final class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
     /** @var StateMachineFactoryInterface $stateMachineFactory */
     private $stateMachineFactory;
