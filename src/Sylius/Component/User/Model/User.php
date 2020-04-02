@@ -95,7 +95,11 @@ class User implements UserInterface
      */
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
-    /** @var Collection<array-key, UserOAuthInterface> */
+    /**
+     * @var UserOAuthInterface[]
+     *
+     * @psalm-var Collection<array-key, UserOAuthInterface>
+     */
     protected $oauthAccounts;
 
     /** @var string|null */
