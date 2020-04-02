@@ -1,5 +1,14 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.2 (2020-04-02)
+
+#### Details
+
+- [#11315](https://github.com/Sylius/Sylius/issues/11315) [UI] Fix stylesheets problem on the login page ([@Zales0123](https://github.com/Zales0123))
+- [#11317](https://github.com/Sylius/Sylius/issues/11317) Fix BC breaks introduced with new template event system ([@pamil](https://github.com/pamil))
+- [#11322](https://github.com/Sylius/Sylius/issues/11322) Fix Psalm docblock marked as a regular one ([@pamil](https://github.com/pamil))
+- [#11135](https://github.com/Sylius/Sylius/issues/11135) [Docs] Improved coping UX ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.7.1 (2020-03-31)
 
 #### Details
