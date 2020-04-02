@@ -252,7 +252,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I filter product association types with code containing :value
      */
-    public function iFilterProductAssociationTypesWithCodeContaining(string $value)
+    public function iFilterProductAssociationTypesWithCodeContaining(string $value): void
     {
         $this->client->addFilter('code', $value);
         $this->client->filter();
@@ -261,7 +261,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I filter product association types with name containing :value
      */
-    public function iFilterProductAssociationTypesWithNameContaining(string $value)
+    public function iFilterProductAssociationTypesWithNameContaining(string $value): void
     {
         $this->client->addFilter('translations.name', $value);
         $this->client->filter();
@@ -270,8 +270,31 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should see only one product association type in the list
      */
-    public function iShouldSeeOnlyOneProductAssociationTypeInTheList()
+    public function iShouldSeeOnlyOneProductAssociationTypeInTheList(): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), 1);
+    }
+
+    /**
+     * @Then I should be notified that product association type with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductAssociationTypeWithThisCodeAlreadyExists(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The association type with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one product association type with a code :code
+     */
+    public function thereShouldStillBeOnlyOneProductAssociationTypeWithACode(string $code): void
+    {
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code),
+            1,
+            sprintf("More then one Product association type have code %s.", $code)
+        );
     }
 }
