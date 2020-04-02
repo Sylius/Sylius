@@ -32,7 +32,7 @@ For the ``ProductRepository`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.repository.product
+    php bin/console debug:container sylius.repository.product
 
 As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository`` - this is the class that you need to be extending.
 To make your class more reusable, you should create a new interface ``src/Repository/ProductRepositoryInterface.php``

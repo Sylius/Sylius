@@ -5,7 +5,7 @@ The first step is to create a new plugin using our ``PluginSkeleton``.
 
 .. code-block:: bash
 
-    $ composer create-project sylius/plugin-skeleton IronManSyliusProductOnDemandPlugin
+    composer create-project sylius/plugin-skeleton IronManSyliusProductOnDemandPlugin
 
 .. note::
 

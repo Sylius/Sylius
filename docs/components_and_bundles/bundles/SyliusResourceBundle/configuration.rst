@@ -94,7 +94,7 @@ Sounds crazy? Spin up the built-in server and give it a try:
 
 .. code-block:: bash
 
-    $ php bin/console server:run
+    php bin/console server:run
 
 You should see something like:
 
@@ -108,8 +108,8 @@ Now, in a separate Terminal window, call these commands:
 
 .. code-block:: bash
 
-   $ curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
-   $ curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
+   curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
+   curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
 
 As you can guess, other CRUD actions are available through this API.
 
@@ -131,7 +131,7 @@ Run the ``debug:router`` command to see available routes:
 
 .. code-block:: bash
 
-    $ php bin/console debug:router
+    php bin/console debug:router
 
     ------------------------ --------------- -------- ------ -------------------------
     Name                     Method          Scheme   Host   Path

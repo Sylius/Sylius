@@ -26,7 +26,7 @@ To begin creating your new project, run this command:
 
 .. code-block:: bash
 
-    $ composer create-project sylius/sylius-standard acme
+    composer create-project sylius/sylius-standard acme
 
 .. note::
 
@@ -36,7 +36,7 @@ This will create a new Symfony project in the ``acme`` directory. Next, move to 
 
 .. code-block:: bash
 
-    $ cd acme
+    cd acme
 
 Sylius uses environment variables to configure the connection with database and mailer services.
 You can look up the default values in ``.env`` file and customise them by creating ``.env.local`` with variables you want to override.
@@ -51,7 +51,7 @@ After everything is in place, run the following command to install Sylius:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:install
+    php bin/console sylius:install
 
 .. warning::
 
@@ -72,13 +72,13 @@ Having Yarn installed, go to your project directory to install the dependencies:
 
 .. code-block:: bash
 
-    $ yarn install
+    yarn install
 
 Then build the frontend assets by running:
 
 .. code-block:: bash
 
-    $ yarn build
+    yarn build
 
 Accessing the Shop
 ------------------

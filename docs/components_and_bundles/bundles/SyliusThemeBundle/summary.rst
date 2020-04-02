@@ -6,9 +6,9 @@ Tests
 
 .. code-block:: bash
 
-    $ composer install
-    $ vendor/bin/phpspec run -f pretty
-    $ vendor/bin/phpunit
+    composer install
+    vendor/bin/phpspec run -f pretty
+    vendor/bin/phpunit
 
 Bug tracking
 ------------

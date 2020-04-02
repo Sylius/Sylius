@@ -23,14 +23,14 @@ then clone your fork to you local destination:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:YOUR_USERNAME/Sylius.git
+    git clone git@github.com:YOUR_USERNAME/Sylius.git
 
 Under the name ``origin`` you will have from now on the access to your fork.
 Add also the main repository as the ``upstream`` remote.
 
 .. code-block:: bash
 
-    $ git remote add upstream git@github.com:Sylius/Sylius.git
+    git remote add upstream git@github.com:Sylius/Sylius.git
 
 
 Choose the right Base Branch
@@ -49,7 +49,7 @@ Create a dedicated branch for your changes (for organization):
 
 .. code-block:: bash
 
-    $ git checkout -b docs/improving_foo_and_bar
+    git checkout -b docs/improving_foo_and_bar
 
 You can now make your changes directly to this branch and commit them.
 Remember to name your commits descriptively, keep them possibly small, with just unitary changes (such that change something only in one part of the docs, not everywhere).
@@ -71,7 +71,7 @@ Our recommendation is to install ``Sphinx`` via `Pip`_.
 
 .. code-block:: bash
 
-    $ pip3 install --no-cache-dir -r ./docs/requirements.txt
+    pip3 install --no-cache-dir -r ./docs/requirements.txt
 
 Then run
 
@@ -88,8 +88,8 @@ and view the generated HTML files in the ``docs/build`` directory. You can open 
 
     .. code-block:: bash
 
-        $ pip uninstall sphinx
-        $ pip3 uninstall sphinx
+        pip uninstall sphinx
+        pip3 uninstall sphinx
 
     If you have installed old sphinx by your operating system tools like: brew, apt-get or yum, you have to uninstall it too.
 

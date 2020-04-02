@@ -165,7 +165,7 @@ Use the below command to add your Platform.sh project as the ``platform`` remote
 
 .. code-block:: bash
 
-    $ git remote add platform [PROJECT-ID]@git.[CLUSTER].platform.sh:[PROJECT-ID].git
+    git remote add platform [PROJECT-ID]@git.[CLUSTER].platform.sh:[PROJECT-ID].git
 
 The ``PROJECT-ID`` is the unique identifier of your project,
 and ``CLUSTER`` can be ``eu`` or ``us`` - depending on where are you deploying your project.
@@ -175,14 +175,14 @@ and ``CLUSTER`` can be ``eu`` or ``us`` - depending on where are you deploying y
 
 .. code-block:: bash
 
-    $ git add . && git commit -m "Platform.sh configuration"
+    git add . && git commit -m "Platform.sh configuration"
 
 5. Push your project to the Platform.sh remote repository
 ---------------------------------------------------------
 
 .. code-block:: bash
 
-    $ git push platform master
+    git push platform master
 
 The output of this command shows you on which URL your online store can be accessed.
 
@@ -196,7 +196,7 @@ When you get connected please run:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:install --env prod
+    php bin/console sylius:install --env prod
 
 .. warning::
 

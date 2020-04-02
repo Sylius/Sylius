@@ -45,7 +45,7 @@ For the ``ProductController`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.controller.product
+    php bin/console debug:container sylius.controller.product
 
 As a result you will get the ``Sylius\Bundle\ResourceBundle\Controller\ResourceController`` - this is the class that you need to extend.
 
@@ -131,7 +131,7 @@ getting a list of recommended products from your external api.
 
 .. tip::
 
-    Run ``$ php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
 
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
@@ -197,7 +197,7 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
 .. tip::
 
-    Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
 
 **3.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 

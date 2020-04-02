@@ -12,17 +12,17 @@ Provides output while running ``sylius:fixtures:load`` command.
 
     # Without logger
 
-    $ bin/console sylius:fixtures:load my_suite
-    $ _
+    bin/console sylius:fixtures:load my_suite
+    _
 
     # With logger
 
-    $ bin/console sylius:fixtures:load my_suite
+    bin/console sylius:fixtures:load my_suite
     Running suite "my_suite"...
     Running fixture "country"...
     Running fixture "locale"...
     Running fixture "currency"...
-    $ _
+    _
 
 The logger does not have any configuration options. It can be enabled in such a way:
 

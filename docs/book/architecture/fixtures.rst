@@ -18,7 +18,7 @@ To check what fixtures are defined in Sylius run:
 
 .. code-block:: bash
 
-   $ php bin/console sylius:fixtures:list
+   php bin/console sylius:fixtures:list
 
 How to load Sylius fixtures?
 ----------------------------
@@ -27,7 +27,7 @@ The recommended way to load the predefined set of Sylius fixtures is here:
 
 .. code-block:: bash
 
-   $ php bin/console sylius:fixtures:load
+   php bin/console sylius:fixtures:load
 
 What data is loaded by fixtures in Sylius?
 ------------------------------------------

@@ -24,8 +24,8 @@ Set your user information up with your real name and a working email address:
 
 .. code-block:: bash
 
-    $ git config --global user.name "Your Name"
-    $ git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
+    git config --global user.email "you@example.com"
 
 .. tip::
 
@@ -50,14 +50,14 @@ Set your user information up with your real name and a working email address:
 
     .. code-block:: bash
 
-        $ git config core.autocrlf
+        git config core.autocrlf
 
     This will return either "false", "input" or "true"; "true" and "false" being
     the wrong values. Change it to "input" by typing:
 
     .. code-block:: bash
 
-        $ git config --global core.autocrlf input
+        git config --global core.autocrlf input
 
     Replace --global by --local if you want to set it only for the active
     repository
@@ -76,14 +76,14 @@ Get the Sylius source code:
 
 .. code-block:: bash
 
-      $ git clone git@github.com:USERNAME/Sylius.git
+      git clone git@github.com:USERNAME/Sylius.git
 
 * Add the upstream repository as a remote:
 
 .. code-block:: bash
 
-      $ cd sylius
-      $ git remote add upstream git://github.com/Sylius/Sylius.git
+      cd sylius
+      git remote add upstream git://github.com/Sylius/Sylius.git
 
 Step 2: Work on your Patch
 --------------------------
@@ -115,7 +115,7 @@ topic branch, starting from the previously chosen base branch:
 
 .. code-block:: bash
 
-    $ git checkout -b BRANCH_NAME master
+    git checkout -b BRANCH_NAME master
 
 .. tip::
 
@@ -188,21 +188,21 @@ If you are basing on the ``master`` branch:
 
 .. code-block:: bash
 
-    $ git checkout master
-    $ git fetch upstream
-    $ git merge upstream/master
-    $ git checkout BRANCH_NAME
-    $ git rebase master
+    git checkout master
+    git fetch upstream
+    git merge upstream/master
+    git checkout BRANCH_NAME
+    git rebase master
 
 If you are basing on the ``1.0`` branch:
 
 .. code-block:: bash
 
-    $ git checkout 1.0
-    $ git fetch upstream
-    $ git merge upstream/1.0
-    $ git checkout BRANCH_NAME
-    $ git rebase 1.0
+    git checkout 1.0
+    git fetch upstream
+    git merge upstream/1.0
+    git checkout BRANCH_NAME
+    git rebase 1.0
 
 When doing the ``rebase`` command, you might have to fix merge conflicts.
 ``git status`` will show you the *unmerged* files. Resolve all the conflicts,
@@ -210,14 +210,14 @@ then continue the rebase:
 
 .. code-block:: bash
 
-    $ git add ... # add resolved files
-    $ git rebase --continue
+    git add ... # add resolved files
+    git rebase --continue
 
 Push your branch remotely:
 
 .. code-block:: bash
 
-    $ git push --force-with-lease origin BRANCH_NAME
+    git push --force-with-lease origin BRANCH_NAME
 
 Make a Pull Request
 ~~~~~~~~~~~~~~~~~~~
@@ -319,15 +319,15 @@ patch. Before re-submitting the patch, rebase with your base branch (``master`` 
 
 .. code-block:: bash
 
-    $ git rebase -f upstream/master
-    $ git push --force-with-lease origin BRANCH_NAME
+    git rebase -f upstream/master
+    git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
-    $ git rebase -f upstream/1.0
-    $ git push --force-with-lease origin BRANCH_NAME
+    git rebase -f upstream/1.0
+    git push --force-with-lease origin BRANCH_NAME
 
 .. note::
 
@@ -340,15 +340,15 @@ convert many commits to one commit. To do this, use the rebase command:
 
 .. code-block:: bash
 
-    $ git rebase -i upstream/master
-    $ git push --force-with-lease origin BRANCH_NAME
+    git rebase -i upstream/master
+    git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
-    $ git rebase -i upstream/1.0
-    $ git push --force-with-lease origin BRANCH_NAME
+    git rebase -i upstream/1.0
+    git push --force-with-lease origin BRANCH_NAME
 
 After you type this command, an editor will popup showing a list of commits:
 

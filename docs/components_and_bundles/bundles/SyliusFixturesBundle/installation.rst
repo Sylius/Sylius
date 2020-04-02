@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/fixtures-bundle
+    composer require sylius/fixtures-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
-    $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/fixtures-bundle
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar require sylius/fixtures-bundle
 
 Adding required bundles to the kernel
 -------------------------------------

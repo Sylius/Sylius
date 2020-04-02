@@ -17,7 +17,7 @@ Quickstart to plugins development:
 
 .. code-block:: bash
 
-    $ composer create-project sylius/plugin-skeleton SyliusMyFirstPlugin
+    composer create-project sylius/plugin-skeleton SyliusMyFirstPlugin
 
 .. note::
 

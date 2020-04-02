@@ -11,7 +11,7 @@ Set up the HWIOAuthBundle
 
 .. code-block:: bash
 
-    $ composer require hwi/oauth-bundle
+    composer require hwi/oauth-bundle
 
 * Enable the bundle:
 
