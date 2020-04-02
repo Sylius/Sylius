@@ -11,52 +11,25 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
+        <import resource="services/applicators.xml" />
         <import resource="services/context_builders.xml" />
+        <import resource="services/data_persisters.xml" />
+        <import resource="services/data_providers.xml" />
         <import resource="services/event_subscribers.xml"/>
         <import resource="services/filters.xml"/>
     </imports>
 
     <services>
-        <service id="sylius.api.archivation_shipping_method_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ArchivizationShippingMethodApplicator" public="true">
-            <argument type="service" id="sylius.calendar" />
-        </service>
-
         <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
             <argument type="service" id="sylius.factory.avatar_image" />
             <argument type="service" id="sylius.repository.avatar_image" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="api_platform.iri_converter" />
-        </service>
-
-        <service id="sylius.api.data_persister.admin_user" class="Sylius\Bundle\ApiBundle\DataPersister\AdminUserDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="sylius.security.password_updater" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
-        <service id="sylius.api.data_persister.shipping_method" class="Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
-        <service id="sylius.api.payment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator" public="true">
-            <argument id="sm.factory" type="service" />
-        </service>
-
-        <service id="sylius.api.product_review_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator" public="true">
-            <argument id="sm.factory" type="service" />
-        </service>
-
-        <service id="sylius.api.shipment_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\ShipmentStateMachineTransitionApplicator" public="true">
-            <argument id="sm.factory" type="service" />
-            <argument type="service" id="event_dispatcher" />
-        </service>
-
-        <service id="sylius.api.order_state_machine_transition_applicator" class="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicator" public="true">
-            <argument id="sm.factory" type="service" />
         </service>
 
         <service id="sylius.api.doctrine.query_collection_extension.hide_archived_shipping_method" class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension" public="true">
@@ -84,16 +57,6 @@
             decoration-priority="10"
         >
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
-        </service>
-
-        <service id="sylius.api.collection_data_provider.product" class="Sylius\Bundle\ApiBundle\DataProvider\LatestProductCollectionDataProvider">
-            <argument type="service" id="sylius.repository.product" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
-        </service>
-
-        <service id="sylius.api.collection_data_provider.taxon" class="Sylius\Bundle\ApiBundle\DataProvider\TaxonFromChannelMenuTaxonCollectionDataProvider">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
     </services>
 </container>
