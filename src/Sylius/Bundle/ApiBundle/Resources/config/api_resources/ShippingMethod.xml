@@ -42,13 +42,13 @@
             <itemOperation name="archive">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipping-methods/{id}/archive</attribute>
-                <attribute name="controller">sylius.api.archivation_shipping_method_applicator:archive</attribute>
+                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
             </itemOperation>
 
             <itemOperation name="restore">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipping-methods/{id}/restore</attribute>
-                <attribute name="controller">sylius.api.archivation_shipping_method_applicator:restore</attribute>
+                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
             </itemOperation>
         </itemOperations>
 

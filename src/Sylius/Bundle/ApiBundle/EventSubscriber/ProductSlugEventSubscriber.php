@@ -32,7 +32,7 @@ final class ProductSlugEventSubscriber implements EventSubscriberInterface
         $this->slugGenerator = $slugGenerator;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::VIEW => ['generateSlug', EventPriorities::PRE_VALIDATE],
@@ -44,7 +44,10 @@ final class ProductSlugEventSubscriber implements EventSubscriberInterface
         $product = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if (!$product instanceof ProductInterface || !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT])) {
+        if (
+            !$product instanceof ProductInterface ||
+            !in_array($method, [Request::METHOD_POST, Request::METHOD_PUT], true)
+        ) {
             return;
         }
 
