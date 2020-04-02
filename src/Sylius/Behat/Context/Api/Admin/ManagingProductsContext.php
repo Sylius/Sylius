@@ -109,7 +109,6 @@ final class ManagingProductsContext implements Context
 
         if ($name !== null) {
             $data['translations'][$localeCode]['name'] = $name;
-            $data['translations'][$localeCode]['slug'] = StringInflector::nameToSlug($name);
         }
 
         $this->client->updateRequestData($data);
@@ -260,9 +259,11 @@ final class ManagingProductsContext implements Context
      * @When I enable slug modification
      * @When I enable slug modification in :localeCode
      */
-    public function iEnableSlugModification(): void
+    public function iEnableSlugModification(string $localeCode = 'en_US'): void
     {
-        //intentionally blank line
+        $data['translations'][$localeCode]['slug'] = '';
+
+        $this->client->updateRequestData($data);
     }
 
     /**
@@ -337,7 +338,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (code|name|slug) is required$/
+     * @Then /^I should be notified that (code|name) is required$/
      */
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
