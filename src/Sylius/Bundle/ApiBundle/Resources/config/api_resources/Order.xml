@@ -34,6 +34,9 @@
             <itemOperation name="get" />
 
             <itemOperation name="cancel">
+                <attribute name="openapi_context">
+                    <attribute name="summary">Cancels Order</attribute>
+                </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/orders/{id}/cancel</attribute>
                 <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>

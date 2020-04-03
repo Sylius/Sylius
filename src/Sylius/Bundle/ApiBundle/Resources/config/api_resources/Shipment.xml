@@ -47,6 +47,9 @@
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="ship">
+                <attribute name="openapi_context">
+                    <attribute name="summary">Ships Shipment</attribute>
+                </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipments/{id}/ship</attribute>
                 <attribute name="controller">sylius.api.shipment_state_machine_transition_applicator::ship</attribute>

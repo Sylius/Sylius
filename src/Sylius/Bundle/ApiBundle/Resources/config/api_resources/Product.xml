@@ -46,6 +46,9 @@
             </collectionOperation>
 
             <collectionOperation name="get_latest">
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrives 3 latest Products</attribute>
+                </attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="path">shop/products/latest</attribute>
                 <attribute name="normalization_context">
