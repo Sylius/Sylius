@@ -57,3 +57,15 @@ You should also delete Behat suite named ``greeting_customer`` from ``tests/Beha
     You **don't have to** remove all these files mentioned above. They can be adapted to suit your plugin functionality. However, as
     they provide default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones on
     your own.
+    
+.. important::
+    After you have change name of plugin, please run in your main directory of plugin (cd MyPlugin/ && composer install). 
+    If you don't rerun this command you may have this error : 
+    ```bash
+    $ (cd tests/Application && bin/console assets:install public -e test)
+    PHP Fatal error: Uncaught Symfony\Component\Debug\Exception\ClassNotFoundException: Attempted to load class "Kernel" from namespace "Tests\FMDD\SyliusEmailOrderAdminPlugin\Application".
+    Did you forget a "use" statement for e.g. "Symfony\Component\HttpKernel\Kernel" or "Sylius\Bundle\CoreBundle\Application\Kernel"? in C:\Users\FMDD\Plugins\SyliusEmailOrderAdminPlugin\tests\Application\bin\console:36
+    Stack trace:
+    #0 {main}
+    thrown in C:\Users\FMDD\Plugins\SyliusEmailOrderAdminPlugin\tests\Application\bin\console on line 36
+    ```
