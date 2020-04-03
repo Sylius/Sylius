@@ -40,12 +40,18 @@
             <itemOperation name="delete" />
 
             <itemOperation name="archive">
+                <attribute name="openapi_context">
+                    <attribute name="summary">Archives Shipping Method</attribute>
+                </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipping-methods/{id}/archive</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
             </itemOperation>
 
             <itemOperation name="restore">
+                <attribute name="openapi_context">
+                    <attribute name="summary">Restores archived Shipping Method</attribute>
+                </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipping-methods/{id}/restore</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
