@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-04-02T07:53:12Z
+
+Hello Joachim! Thank you for your fix... but I'm wondering why it was not detected before 😄 To be honest, I see no places where this placeholder is visible in the Admin panel - did you encounter this problem somewhere or just saw a missing translation? :) If it's not needed, maybe we should just remove a `placeholder` attribute from the `LocaleChoiceType` 💃
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-04-02T10:34:04Z
+
+I used the locale choice type in my own project and then I saw the missing translation key. From my point of view it would be no problem to delete although I really like placeholders :D You decide, @Zales0123 ;)
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-04-02T10:40:39Z
+
+Here is a screenshot so you can see it from my pov
+
+![image](https://user-images.githubusercontent.com/2412177/78240322-237ac980-74df-11ea-919b-e5b2dd696d5d.png)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-03T19:07:29Z
+
+Thanks, Joachim! :1st_place_medal:
