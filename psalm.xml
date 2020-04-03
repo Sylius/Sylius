@@ -123,6 +123,7 @@
 
         <InternalMethod>
             <errorLevel type="info">
+                <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
             </errorLevel>
         </InternalMethod>

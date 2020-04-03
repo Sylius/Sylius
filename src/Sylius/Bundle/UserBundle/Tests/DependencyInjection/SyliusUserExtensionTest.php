@@ -133,7 +133,7 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
         Assert::assertSame('_password', $shopUserListenerDefinition->getArgument(4));
     }
 
-    protected function getContainerExtensions(): iterable
+    protected function getContainerExtensions(): array
     {
         return [
             new SyliusUserExtension(),
