@@ -71,7 +71,14 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iNameItIn(string $productAssociationTypeName = null, string $localeCode = 'en_US'): void
     {
-        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $productAssociationTypeName, 'locale' => $localeCode]]]);
+        $this->client->updateRequestData([
+            'translations' => [
+                 $localeCode => [
+                      'name' => $productAssociationTypeName,
+                      'locale' => $localeCode
+                 ]
+            ]
+        ]);
     }
 
     /**
@@ -97,11 +104,11 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then the product association type :name should appear in the store
      */
-    public function theProductAssociationTypeShouldAppearInTheStore(string $Name): void
+    public function theProductAssociationTypeShouldAppearInTheStore(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $Name),
-            sprintf('There is no product association type with name "%s"', $Name)
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            sprintf('There is no product association type with name "%s"', $name)
         );
     }
 
@@ -140,7 +147,6 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
     {
-        $this->sharedStorage->set('product_association_type_code', $productAssociationType->getCode());
         $this->client->delete($productAssociationType->getCode());
     }
 
@@ -157,14 +163,13 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then this product association type should no longer exist in the registry
+     * @Then /^(this product association type) should no longer exist in the registry$/
      */
-    public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(): void
+    public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(ProductAssociationTypeInterface $productAssociationType): void
     {
-        $code = $this->sharedStorage->get('product_association_type_code');
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $code),
-            sprintf('Product association type with code %s exist', $code)
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $productAssociationType->getCode()),
+            sprintf('Product association type with code %s exist', $productAssociationType->getCode())
         );
     }
 
