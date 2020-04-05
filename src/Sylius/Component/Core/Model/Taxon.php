@@ -15,11 +15,12 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Comparable;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
-class Taxon extends BaseTaxon implements TaxonInterface
+class Taxon extends BaseTaxon implements TaxonInterface, Comparable
 {
     use TimestampableTrait;
 
@@ -100,5 +101,13 @@ class Taxon extends BaseTaxon implements TaxonInterface
     public static function getTranslationClass(): string
     {
         return TaxonTranslation::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function compareTo($other): int
+    {
+        return $this->code === $other->getCode() ? 0 : 1;
     }
 }
