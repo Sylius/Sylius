@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
@@ -30,7 +31,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_order_processor_if_exist(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
-        $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
+        $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
         $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor');
@@ -54,7 +55,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_order_processor_with_custom_priority(): void
     {
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
-        $this->setDefinition('sylius.order_processing.order_processor', $compositeOrderProcessorDefinition);
+        $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
         $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor', ['priority' => 10]);
@@ -86,17 +87,13 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * @param string $serviceId
-     * @param string $method
-     */
     private function assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall(string $serviceId, string $method): void
     {
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat(
             $definition,
-            new \PHPUnit_Framework_Constraint_Not(new DefinitionHasMethodCallConstraint($method))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method))
         );
     }
 

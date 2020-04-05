@@ -20,22 +20,15 @@ use Webmozart\Assert\Assert;
 
 final class OrderRecalculationListener
 {
-    /**
-     * @var OrderProcessorInterface
-     */
+    /** @var OrderProcessorInterface */
     private $orderProcessor;
 
-    /**
-     * @param OrderProcessorInterface $orderProcessor
-     */
     public function __construct(OrderProcessorInterface $orderProcessor)
     {
         $this->orderProcessor = $orderProcessor;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function recalculateOrder(GenericEvent $event): void

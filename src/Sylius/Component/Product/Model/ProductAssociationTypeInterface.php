@@ -25,19 +25,11 @@ interface ProductAssociationTypeInterface extends
     ResourceInterface,
     TranslatableInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductAssociationTypeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

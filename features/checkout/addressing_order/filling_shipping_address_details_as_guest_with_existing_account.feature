@@ -17,6 +17,6 @@ Feature: Addressing an order and signing in
         When I specify the email as "francis@underwood.com"
         And I specify the password as "whitehouse"
         And I sign in
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step

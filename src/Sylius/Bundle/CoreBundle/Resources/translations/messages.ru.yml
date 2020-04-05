@@ -18,13 +18,19 @@ sylius:
             channels: Каналы
         promotion_action:
             add_product_configuration:
-                product: Товар
+                product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
-            name: Название
+            name: Округ
             roles: Роли
         channel:
+            billing_data:
+                city: Город
+                company: Компания
+                country: Страна
+                postcode: Индекс
+                street: Улица
             contact_email: Контактный email
             currencies: Валюты
             currency_base: Базовая валюта
@@ -67,7 +73,7 @@ sylius:
             channels: Каналы
             enabled: Активен
         product_filter:
-            name: Название
+            name: Округ
             code: Код
         product_variant:
             tax_category: Категория налогов
@@ -123,7 +129,7 @@ sylius:
             product: Связанные продукты
             type: Типы взаимосвязи
         product_association_type:
-            name: Название
+            name: Округ
         promotion_filter:
             products: Фильтр товаров
             taxons: Фильтр таксонов
@@ -136,7 +142,7 @@ sylius:
                 products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
-                amount: Сумма
+                amount: Количество
         payment_method:
             channels: Каналы
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: файловая система
             cache:
                 header: кеш
-                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: существует
             logs:
                 header: журналы
-                help: 'Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не существует
             not_writable: не доступно для записи
             parameters:
                 header: parameters.yml
-                help: 'Чтобы задать права доступа запустите команду: sudo chmod + w %path%'
+                help: "Чтобы задать права доступа запустите команду: sudo chmod + w %path%"
             vendors: поставщики
             writable: доступно для записи
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: не устаревшее
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

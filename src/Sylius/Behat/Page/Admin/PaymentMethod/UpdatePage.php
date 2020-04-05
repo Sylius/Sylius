@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -22,90 +23,57 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPaypalGatewayUsername($username)
+    public function setPaypalGatewayUsername(string $username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPaypalGatewayPassword($password)
+    public function setPaypalGatewayPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPaypalGatewaySignature($signature)
+    public function setPaypalGatewaySignature(string $signature): void
     {
         $this->getDocument()->fillField('Signature', $signature);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameIt($name, $languageCode)
+    public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isPaymentMethodEnabled()
+    public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isFactoryNameFieldDisabled()
+    public function isFactoryNameFieldDisabled(): bool
     {
         return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableInChannel($channelName)
+    public function isAvailableInChannel(string $channelName): bool
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethodInstructions($language)
+    public function getPaymentMethodInstructions(string $language): string
     {
         return $this->getElement('instructions', ['%language%' => $language])->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel' => '.checkbox:contains("%channel%") input',

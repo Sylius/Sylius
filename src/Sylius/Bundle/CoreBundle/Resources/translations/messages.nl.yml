@@ -25,6 +25,12 @@ sylius:
             name: Naam
             roles: Rollen
         channel:
+            billing_data:
+                city: Plaats
+                company: Bedrijf
+                country: Land
+                postcode: Postcode
+                street: Straat
             contact_email: Contact e-mail
             currencies: Valuta's
             currency_base: Standaardvaluta
@@ -45,7 +51,7 @@ sylius:
             file: Afbeelding
         locale:
             code: Code
-            enabled: Toegestaan
+            enabled: Ingeschakeld
         order_filter:
             created_at_from: Gemaakt na
             created_at_to: Gemaakt voor
@@ -65,7 +71,7 @@ sylius:
             variant_selection_method: Variant selectie methode
             main_taxon: Hoofdcategorie
             channels: Kanalen
-            enabled: Toegestaan
+            enabled: Ingeschakeld
         product_filter:
             name: Naam
             code: Code
@@ -94,8 +100,8 @@ sylius:
             file: Selecteer afbeelding
         user:
             billing_address: Factuuradres
-            different_billing_address: Gebruik een ander adres voor facturering?
-            enabled: Actief
+            different_billing_address: Gebruik een ander factuuradres?
+            enabled: Ingeschakeld
             first_name: Voornaam
             groups: Groepen
             roles: Rollen
@@ -136,7 +142,7 @@ sylius:
                 products: Producten
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Hoeveelheid
+                amount: Bedrag
         payment_method:
             channels: Kanalen
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: bestandssysteem
             cache:
                 header: cache
-                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
+                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
             exists: bestaat
             logs:
                 header: logs
-                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
+                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
             not_exists: niet bestaand
             not_writable: niet schrijfbaar
             parameters:
                 header: parameters.yml
-                help: 'Machtigingen uitvoeren instellen: sudo chmod a + w %path%'
+                help: "Machtigingen uitvoeren instellen: sudo chmod a + w %path%"
             vendors: vendors
             writable: schrijfbaar
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: niet verouderd
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

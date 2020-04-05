@@ -4,6 +4,7 @@
 sylius:
     form:
         attribute:
+            name: Naam
             type: Tipe
         attribute_type:
             select: Kies

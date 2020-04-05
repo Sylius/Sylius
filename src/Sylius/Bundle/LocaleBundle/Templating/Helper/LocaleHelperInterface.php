@@ -18,9 +18,8 @@ use Symfony\Component\Templating\Helper\HelperInterface;
 interface LocaleHelperInterface extends HelperInterface
 {
     /**
-     * @param string $localeCode
-     *
-     * @return string|null
+     * @param string $code The code to be converted to a name
+     * @param string|null $localeCode The locale that the returned name should be in
      */
-    public function convertCodeToName(string $localeCode): ?string;
+    public function convertCodeToName(string $code, ?string $localeCode = null): ?string;
 }

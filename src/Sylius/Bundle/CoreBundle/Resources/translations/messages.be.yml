@@ -22,9 +22,15 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Ліміт карыстання на кліента
         group:
-            name: Імя
+            name: Назва
             roles: Ролі
         channel:
+            billing_data:
+                city: Горад
+                company: Кампанія
+                country: Краіна
+                postcode: Паштовы код
+                street: Вуліца
             contact_email: Кантактны емейл
             currencies: Валюты
             currency_base: Базавая валюта
@@ -55,7 +61,7 @@ sylius:
             payment_state: Статус аплаты
             channel: Усе каналы
         page:
-            body: Цела
+            body: Змест
             id: ID
             title: Назва
         product:
@@ -67,7 +73,7 @@ sylius:
             channels: Каналы
             enabled: Уключана
         product_filter:
-            name: Імя
+            name: Назва
             code: Код
         product_variant:
             tax_category: Катэгорыя падатку
@@ -123,7 +129,7 @@ sylius:
             product: Звязаны прадукт
             type: Тып узаемасувязі
         product_association_type:
-            name: Імя
+            name: Назва
         promotion_filter:
             products: Фільтр прадуктаў
             taxons: Фільтр катэгорый
@@ -136,7 +142,7 @@ sylius:
                 products: Прадукты
             total_of_items_from_taxon:
                 taxon: Катэгорыя
-                amount: Сума
+                amount: Колькасць
         payment_method:
             channels: Каналы
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: файлавая сістэма
             cache:
                 header: кэш
-                help: 'Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: існуе
             logs:
                 header: журналы
-                help: 'Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не існуе
             not_writable: адсутнасць мажлівасці запісу
             parameters:
                 header: parameters.yml
-                help: 'Каб вызначыць дазволы, выканайце: sudo chmod a+w %path%'
+                help: "Каб вызначыць дазволы, выканайце: sudo chmod a+w %path%"
             vendors: пастаўшчыкі
             writable: мае мажлівасць запісу
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: не састарэлае
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

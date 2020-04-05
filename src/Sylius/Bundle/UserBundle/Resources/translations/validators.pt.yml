@@ -4,7 +4,7 @@
 sylius:
     user:
         email:
-            not_blank: Por favor insira o seu e-mail.
+            not_blank: Por favor introduza o seu endereço de e-mail.
             invalid: Este endereço de e-mail é inválido.
             not_registered: Utilizador com este e-mail não existe. Por favor, registe-se primeiro.
         plainPassword:

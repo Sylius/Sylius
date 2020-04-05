@@ -17,14 +17,9 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 final class PasswordUpdater implements PasswordUpdaterInterface
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
+    /** @var UserPasswordEncoderInterface */
     private $userPasswordEncoder;
 
-    /**
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userPasswordEncoder = $passwordEncoder;
@@ -35,7 +30,7 @@ final class PasswordUpdater implements PasswordUpdaterInterface
      */
     public function updatePassword(CredentialsHolderInterface $user): void
     {
-        if ('' !== $password = $user->getPlainPassword()) {
+        if ('' !== $user->getPlainPassword()) {
             $user->setPassword($this->userPasswordEncoder->encode($user));
             $user->eraseCredentials();
         }

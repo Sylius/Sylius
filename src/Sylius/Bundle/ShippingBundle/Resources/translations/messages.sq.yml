@@ -21,8 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Taksa fikse për dërgimin
+                amount: Shuma
             per_unit_rate_configuration:
                 label: Tarife fikse per njesi
+                amount: Shuma
         shipping_category:
             description: Përshkrimi
             name: Emri

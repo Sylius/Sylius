@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -20,22 +21,15 @@ use Webmozart\Assert\Assert;
 
 final class ReviewCreateListener
 {
-    /**
-     * @var CustomerContextInterface
-     */
+    /** @var CustomerContextInterface */
     private $customerContext;
 
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(CustomerContextInterface $customerContext)
     {
         $this->customerContext = $customerContext;
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function ensureReviewHasAuthor(GenericEvent $event): void
@@ -48,6 +42,10 @@ final class ReviewCreateListener
             return;
         }
 
-        $subject->setAuthor($this->customerContext->getCustomer());
+        $customer = $this->customerContext->getCustomer();
+
+        Assert::isInstanceOf($customer, CustomerInterface::class);
+
+        $subject->setAuthor($customer);
     }
 }

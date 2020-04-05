@@ -17,13 +17,13 @@ There is a pretty straightforward way to disable an e-mail using just a few line
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_mailer.yaml
     sylius_mailer:
         emails:
             order_confirmation:
                 enabled: false
 
-That's all. With that configuration placed in your ``app/config/config.yml`` the order confirmation email will not be sent.
+That's all. With that configuration the order confirmation email will not be sent.
 
 Disabling the listener responsible for that action
 --------------------------------------------------
@@ -35,12 +35,12 @@ This can be done via a CompilerPass.
 
     <?php
 
-    namespace AppBundle\DependencyInjection\Compiler;
+    namespace App\DependencyInjection\Compiler;
 
     use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-    class MailPass implements CompilerPassInterface
+    final class MailPass implements CompilerPassInterface
     {
         public function process(ContainerBuilder $container)
         {
@@ -48,21 +48,22 @@ This can be done via a CompilerPass.
         }
     }
 
-The above compiler pass needs to be added to your bundle in the ``AppBundle/AppBundle.php`` file:
+The above compiler pass needs to be added to your kernel in the ``src/Kernel.php`` file:
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle;
+    namespace App;
 
-    use AppBundle\DependencyInjection\Compiler\MailPass;
-    use Symfony\Component\HttpKernel\Bundle\Bundle;
-    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use App\DependencyInjection\Compiler\MailPass;
+    // ...
 
-    class AppBundle extends Bundle
+    final class Kernel extends BaseKernel
     {
-        public function build(ContainerBuilder $container)
+        // ...
+
+        public function build(ContainerBuilder $container): void
         {
             parent::build($container);
 
@@ -70,7 +71,7 @@ The above compiler pass needs to be added to your bundle in the ``AppBundle/AppB
         }
     }
 
-That's it, we have removed the definition of the listner that is responsible for sending the order confirmation email.
+That's it, we have removed the definition of the listener that is responsible for sending the order confirmation email.
 
 Learn more
 ----------

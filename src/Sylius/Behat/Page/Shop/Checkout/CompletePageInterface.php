@@ -13,172 +13,68 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface CompletePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $productName
-     * @param string $quantity
-     *
-     * @return bool
-     */
-    public function hasItemWithProductAndQuantity($productName, $quantity);
+    public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool;
 
-    /**
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    public function hasShippingAddress(AddressInterface $address);
+    public function hasShippingAddress(AddressInterface $address): bool;
 
-    /**
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    public function hasBillingAddress(AddressInterface $address);
+    public function hasBillingAddress(AddressInterface $address): bool;
 
-    /**
-     * @return bool
-     */
-    public function getPaymentMethodName();
+    public function getPaymentMethodName(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasPaymentMethod();
+    public function hasPaymentMethod(): bool;
 
-    /**
-     * @param ShippingMethodInterface $shippingMethod
-     *
-     * @return bool
-     */
-    public function hasShippingMethod(ShippingMethodInterface $shippingMethod);
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, int $amount): bool;
 
-    /**
-     * @param ProductInterface $product
-     * @param float $amount
-     *
-     * @return bool
-     */
-    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount);
+    public function hasOrderTotal(int $total): bool;
 
-    /**
-     * @param float $total
-     *
-     * @return bool
-     */
-    public function hasOrderTotal($total);
+    public function getBaseCurrencyOrderTotal(): string;
 
-    /**
-     * @param string $notes
-     */
-    public function addNotes($notes);
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool;
 
-    /**
-     * @param string $promotionTotal
-     *
-     * @return bool
-     */
-    public function hasPromotionTotal($promotionTotal);
+    public function addNotes(string $notes): void;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return bool
-     */
-    public function hasPromotion($promotionName);
+    public function hasPromotionTotal(string $promotionTotal): bool;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return bool
-     */
-    public function hasShippingPromotion($promotionName);
+    public function hasPromotion(string $promotionName): bool;
 
-    /**
-     * @param string $taxTotal
-     *
-     * @return bool
-     */
-    public function hasTaxTotal($taxTotal);
+    public function hasShippingPromotion(string $promotionName): bool;
 
-    /**
-     * @param string $price
-     *
-     * @return bool
-     */
-    public function hasShippingTotal($price);
+    public function getTaxTotal(): string;
 
-    /**
-     * @param ProductInterface $product
-     * @param string $price
-     *
-     * @return bool
-     */
-    public function hasProductUnitPrice(ProductInterface $product, $price);
+    public function getShippingTotal(): string;
 
-    /**
-     * @param string $localeName
-     *
-     * @return bool
-     */
-    public function hasLocale($localeName);
+    public function hasShippingTotal(): bool;
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return bool
-     */
-    public function hasCurrency($currencyCode);
+    public function hasProductUnitPrice(ProductInterface $product, string $price): bool;
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return bool
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
-    public function changeAddress();
+    public function getValidationErrors(): string;
 
-    public function changeShippingMethod();
+    public function hasLocale(string $localeName): bool;
 
-    public function changePaymentMethod();
+    public function hasCurrency(string $currencyCode): bool;
 
-    public function confirmOrder();
+    public function confirmOrder(): void;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasShippingProvinceName($provinceName);
+    public function changeAddress(): void;
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasBillingProvinceName($provinceName);
+    public function changeShippingMethod(): void;
 
-    /**
-     * @return string
-     */
-    public function getBaseCurrencyOrderTotal();
+    public function changePaymentMethod(): void;
 
-    /**
-     * @param string $promotionName
-     *
-     * @return string
-     */
-    public function getShippingPromotionDiscount($promotionName);
+    public function hasShippingProvinceName(string $provinceName): bool;
 
-    /**
-     * @return string
-     */
-    public function getValidationErrors();
+    public function hasBillingProvinceName(string $provinceName): bool;
+
+    public function hasShippingPromotionWithDiscount(string $promotionName, string $discount): bool;
+
+    public function hasOrderPromotion(string $promotionName): bool;
 }

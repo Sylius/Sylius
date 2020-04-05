@@ -6,16 +6,16 @@ sylius:
         address:
             city: 城市
             company: 公司
-            country: 国家
-            first_name: 名
-            last_name: 姓
+            country: test
+            first_name: 名字
+            last_name: 姓氏
             phone_number: 电话号码
             postcode: 邮编
             street: 街道地址
             province: 省/直辖市/自治区
             zone: 区域
         country:
-            add_province: 添加省份
+            add_province: 添加省
             name: 名称
             provinces: 省份
             select: 请选择
@@ -30,7 +30,7 @@ sylius:
             name: 名称
             type: 类型
             types:
-                country: 国家
+                country: test
                 province: 省/直辖市/自治区
                 zone: 区域
             scope: 范围

@@ -4,7 +4,7 @@
 default:
     suites:
         ui_locales:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -19,5 +19,6 @@ default:
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
+
             filters:
                 tags: "@locales && @ui"

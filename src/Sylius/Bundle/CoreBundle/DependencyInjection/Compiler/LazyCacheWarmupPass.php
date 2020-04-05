@@ -32,10 +32,6 @@ final class LazyCacheWarmupPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param string $id
-     */
     private function markServiceAsLazy(ContainerBuilder $container, string $id): void
     {
         try {

@@ -15,7 +15,7 @@ sylius:
             not_blank: Angiv venligst dit køn.
         email:
             already_used: Denne email er allerede i brug, venligst login eller brug glemt adgangskode funktionen.
-            max: E-mail må ikke være længere end {{ limit }} tegn.
+            max: Emailen må ikke være længere end {{ limit }} tegn.
             not_blank: Indtast venligst din email.
             invalid: Denne email er ugyldig.
             unique: Denne e-mail er allerede i brug.

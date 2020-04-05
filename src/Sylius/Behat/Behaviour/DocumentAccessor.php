@@ -17,8 +17,5 @@ use Behat\Mink\Element\DocumentElement;
 
 trait DocumentAccessor
 {
-    /**
-     * @return DocumentElement
-     */
-    abstract protected function getDocument();
+    abstract protected function getDocument(): DocumentElement;
 }

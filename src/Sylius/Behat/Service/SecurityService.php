@@ -22,24 +22,19 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityService implements SecurityServiceInterface
 {
-    /**
-     * @var SessionInterface
-     */
+    /** @var SessionInterface */
     private $session;
 
-    /**
-     * @var CookieSetterInterface
-     */
+    /** @var CookieSetterInterface */
     private $cookieSetter;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionTokenVariable;
 
+    /** @var string */
+    private $firewallContextName;
+
     /**
-     * @param SessionInterface $session
-     * @param CookieSetterInterface $cookieSetter
      * @param string $firewallContextName
      */
     public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, $firewallContextName)
@@ -47,6 +42,7 @@ final class SecurityService implements SecurityServiceInterface
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
+        $this->firewallContextName = $firewallContextName;
     }
 
     /**
@@ -54,7 +50,7 @@ final class SecurityService implements SecurityServiceInterface
      */
     public function logIn(UserInterface $user)
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
         $this->setToken($token);
     }
 
@@ -88,9 +84,6 @@ final class SecurityService implements SecurityServiceInterface
         $this->setToken($token);
     }
 
-    /**
-     * @param TokenInterface $token
-     */
     private function setToken(TokenInterface $token)
     {
         $serializedToken = serialize($token);

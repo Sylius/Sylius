@@ -15,11 +15,13 @@ Every time a customer registers via the registration form, a user registration e
 
 **Code**: ``user_registration``
 
-**The default template**: ``SyliusShopBundle:Email:userRegistration.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/userRegistration.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Email Verification
 ------------------
@@ -28,11 +30,13 @@ When a customer registers via the registration form, besides the User Confirmati
 
 **Code**: ``verification_token``
 
-**The default template**: ``SyliusShopBundle:Email:verification.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/verification.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Password Reset
 --------------
@@ -41,11 +45,13 @@ This e-mail is used when the user requests to reset their password in the login 
 
 **Code**: ``reset_password_token``
 
-**The default template**: ``SyliusShopBundle:Email:passwordReset.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/passwordReset.html.twig``
 
 You also have the following parameters available:
 
 * ``user``: Instance of the user model
+* ``channel``: Currently used channel
+* ``localeCode``: Currently used locale code
 
 Order Confirmation
 ------------------
@@ -54,11 +60,13 @@ This e-mail is sent when order is placed.
 
 **Code**: ``order_confirmation``
 
-**The default template**: ``SyliusShopBundle:Email:orderConfirmation.html.twig``
+**The default template**: ``@SyliusShopBundle/Email/orderConfirmation.html.twig``
 
 You also have the following parameters available:
 
 * ``order``: Instance of the order, with all its data
+* ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
 
 Shipment Confirmation
 ---------------------
@@ -67,12 +75,107 @@ This e-mail is sent when the order's shipping process has started.
 
 **Code**: ``shipment_confirmation``
 
-**The default template**: ``SyliusAdminBundle:Email:shipmentConfirmation.html.twig``
+**The default template**: ``@SyliusAdminBundle/Email/shipmentConfirmation.html.twig``
 
 You have the following parameters available:
 
 * ``shipment``: Shipment instance
 * ``order``: Instance of the order, with all its data
+* ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
+
+.. rst-class:: plus-doc
+
+Return Requests Emails
+----------------------
+
+.. hint::
+
+   What are Return Requests? :doc:`Check here </book/orders/returns>`!
+
+Return Request Confirmation
+'''''''''''''''''''''''''''
+
+This email is sent after return request has been created by a customer.
+
+**Code**: ``sylius_plus_return_request_confirmation``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestConfirmation.html.twig``
+
+Parameters:
+
+* ``order`` - for which the return request has been created
+
+Return Request Acceptation
+''''''''''''''''''''''''''
+
+This email is sent when the administrator accepts a return request.
+
+**Code**: ``sylius_plus_return_request_accepted``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestAcceptedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` which has been accepted
+* ``order`` of the accepted return request
+
+Return Request Rejection
+''''''''''''''''''''''''
+
+This email is sent when the administrator rejects a return request.
+
+**Code**: ``sylius_plus_return_request_rejected``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestRejectedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` which has been rejected
+* ``order`` of the rejected return request
+
+
+Return Request Resolution Change
+''''''''''''''''''''''''''''''''
+
+This email is sent when the administrator changes return request's resolution proposed by a customer.
+
+**Code**: ``sylius_plus_return_request_resolution_changed``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestResolutionChangedNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` whose resolution has been changed
+* ``order`` of the modified return request
+
+Return Request: Repaired Items Sent
+'''''''''''''''''''''''''''''''''''
+
+This email is sent when the administrator marks that a return request's repaired items have been sent back to the Customer.
+
+**Code**: ``sylius_plus_return_request_repaired_items_sent``
+
+**The default template**:
+``@SyliusPlusPlugin/Returns/Infrastructure``
+``/Resources/views/Emails/returnRequestRepairedItemsSentNotification.html.twig``
+
+Parameters:
+
+* ``returnRequest`` of which the items were sent
+* ``order`` of the return request
+
+.. image:: ../../_images/sylius_plus/banner.png
+   :align: center
+   :target: http://sylius.com/plus/?utm_source=docs
 
 How to send an Email programmatically?
 --------------------------------------
@@ -95,7 +198,7 @@ Example using **Sender**:
     /** @var SenderInterface $sender */
     $sender = $this->container->get('sylius.email_sender');
 
-    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['bannanowa@gmail.com'], ['user' => $user]);
+    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['sylius@example.com'], ['user' => $user, 'channel' => $channel, 'localeCode' => $localeCode]);
 
 Example using **EmailManager**:
 

@@ -4,11 +4,11 @@
 sylius:
     form:
         tax_category:
-            name: Naziv
+            name: Naziv regije
             description: Opis
         tax_rate:
             category: Kategorija
-            name: Naziv
+            name: Naziv regije
             amount: Iznos
             included_in_price: Uključeno u cijenu?
             calculator: Kalkulator

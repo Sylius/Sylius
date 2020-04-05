@@ -15,29 +15,19 @@ namespace Sylius\Component\Core\Model;
 
 abstract class Image implements ImageInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var \SplFileInfo
-     */
+    /** @var \SplFileInfo|null */
     protected $file;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $path;
 
-    /**
-     * @var object
-     */
+    /** @var object|null */
     protected $owner;
 
     /**

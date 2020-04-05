@@ -17,10 +17,7 @@ trait ChoosesName
 {
     use DocumentAccessor;
 
-    /**
-     * @param string $name
-     */
-    public function chooseName($name)
+    public function chooseName(string $name): void
     {
         $this->getDocument()->selectFieldOption('Name', $name);
     }

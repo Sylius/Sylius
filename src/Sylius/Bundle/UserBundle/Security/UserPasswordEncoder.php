@@ -19,14 +19,9 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {
-    /**
-     * @var EncoderFactoryInterface
-     */
+    /** @var EncoderFactoryInterface */
     private $encoderFactory;
 
-    /**
-     * @param EncoderFactoryInterface $encoderFactory
-     */
     public function __construct(EncoderFactoryInterface $encoderFactory)
     {
         $this->encoderFactory = $encoderFactory;
@@ -37,7 +32,8 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
      */
     public function encode(CredentialsHolderInterface $user): string
     {
-        $encoder = $this->encoderFactory->getEncoder(get_class($user));
+        /** @psalm-suppress InvalidArgument */
+        $encoder = $this->encoderFactory->getEncoder($user);
 
         return $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
     }

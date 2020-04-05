@@ -27,10 +27,6 @@ final class PromotionUsageLimitEligibilityChecker implements PromotionEligibilit
             return true;
         }
 
-        if ($promotion->getUsed() < $usageLimit) {
-            return true;
-        }
-
-        return false;
+        return $promotion->getUsed() < $usageLimit;
     }
 }

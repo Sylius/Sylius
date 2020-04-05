@@ -15,7 +15,7 @@ sylius:
                     taxons: تاكسونس
                 configuration:
                     admin_users: مدير
-                    channels: قنوات
+                    channels: القنوات
                     countries: البلدان
                     currencies: العملات
                     exchange_rates: سعر الصرف

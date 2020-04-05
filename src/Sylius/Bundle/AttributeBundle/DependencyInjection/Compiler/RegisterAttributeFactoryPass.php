@@ -33,11 +33,10 @@ final class RegisterAttributeFactoryPass implements CompilerPassInterface
 
         foreach (array_keys($container->getParameter('sylius.attribute.subjects')) as $subject) {
             $oldAttributeFactory = $container->getDefinition(sprintf('sylius.factory.%s_attribute', $subject));
-            $attributeFactoryDefinition = new Definition(AttributeFactory::class);
+            $attributeFactoryDefinition = new Definition(AttributeFactory::class, [$oldAttributeFactory, $registry]);
+            $attributeFactoryDefinition->setPublic(true);
 
-            $attributeFactory = $container->setDefinition(sprintf('sylius.factory.%s_attribute', $subject), $attributeFactoryDefinition);
-            $attributeFactory->addArgument($oldAttributeFactory);
-            $attributeFactory->addArgument($registry);
+            $container->setDefinition(sprintf('sylius.factory.%s_attribute', $subject), $attributeFactoryDefinition);
         }
     }
 }

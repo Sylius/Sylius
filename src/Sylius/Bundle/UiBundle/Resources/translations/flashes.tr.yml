@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Siparişin güncellenmesinde beklenmedik bir sorun oluştu. Lütfen, siparişi tekrar güncellemeyi deneyin.'
         promotion_integrity: 'Bu promosyon kodu  "%promotionName%" için artık uygun değilsiniz.'
         total_integrity: 'Siparişinizin toplamı değiştirildi, sipariş bilgilerinizi kontrol edin ve tekrar onaylayın.'
-        update_error: 'Ürünün güncellenmesinde beklenmedik bir sorun oluştu. Lütfen ürünü tekrar güncellemeyi deneyin.'
+        update_error: 'Siparişin güncellenmesinde beklenmedik bir sorun oluştu. Lütfen, siparişi tekrar güncellemeyi deneyin.'
     payment:
         apply_state_machine_transition_error: 'Ödemenin güncellenmesinde beklenmedik bir sorun oluştu. Lütfen ödemeyi tekrar güncellemeyi deneyin.'
     product:

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Installation
 ============
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 Use the following command to add the bundle to your `composer.json` and download package.
@@ -8,14 +15,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/inventory-bundle
+    composer require sylius/inventory-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
-    $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/inventory-bundle
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar require sylius/inventory-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -47,7 +54,7 @@ Let's assume we want to implement a book store application and track the books i
 
 You have to create a `Book` and an `InventoryUnit` entity, living inside your application code.
 We think that **keeping the app-specific bundle structure simple** is a good practice, so
-let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle`` namespace.
+let's assume you have your ``App`` registered under ``App\Bundle\AppBundle`` namespace.
 
 We will create `Book` entity.
 
@@ -55,8 +62,8 @@ We will create `Book` entity.
 
     <?php
 
-    // src/App/AppBundle/Entity/Book.php
-    namespace App\AppBundle\Entity;
+    // src/Entity/Book.php
+    namespace App\Entity;
 
     use Sylius\Component\Inventory\Model\StockableInterface;
     use Doctrine\ORM\Mapping as ORM;
@@ -160,8 +167,8 @@ The next step requires the creating of the `InventoryUnit` entity, let’s do th
 
     <?php
 
-    // src/App/AppBundle/Entity/InventoryUnit.php
-    namespace App\AppBundle\Entity;
+    // src/Entity/InventoryUnit.php
+    namespace App\Entity;
 
     use Sylius\Component\Inventory\Model\InventoryUnit as BaseInventoryUnit;
     use Doctrine\ORM\Mapping as ORM;
@@ -196,7 +203,7 @@ Put this configuration inside your ``app/config/config.yml``.
         resources:
             inventory_unit:
                 classes:
-                    model: App\AppBundle\Entity\InventoryUnit
+                    model: App\Entity\InventoryUnit
 
 
 Updating database schema
@@ -208,7 +215,7 @@ For "**doctrine/orm**" driver run the following command.
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 .. warning::
 

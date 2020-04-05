@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class OrderProductEligibility extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.order.product_eligibility';
 
     /**

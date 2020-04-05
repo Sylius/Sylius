@@ -23,31 +23,18 @@ final class CurrencyNotFoundException extends \RuntimeException
         parent::__construct($message ?: 'Currency could not be found!', 0, $previousException);
     }
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return self
-     */
     public static function notFound(string $currencyCode): self
     {
         return new self(sprintf('Currency "%s" cannot be found!', $currencyCode));
     }
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return self
-     */
     public static function disabled(string $currencyCode): self
     {
         return new self(sprintf('Currency "%s" is disabled!', $currencyCode));
     }
 
     /**
-     * @param string $currencyCode
      * @param array|string[] $availableCurrenciesCodes
-     *
-     * @return self
      */
     public static function notAvailable(string $currencyCode, array $availableCurrenciesCodes): self
     {

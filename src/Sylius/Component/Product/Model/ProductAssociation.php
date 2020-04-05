@@ -21,23 +21,19 @@ class ProductAssociation implements ProductAssociationInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var ProductAssociationTypeInterface
-     */
+    /** @var ProductAssociationTypeInterface */
     protected $type;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     protected $owner;
 
     /**
      * @var Collection|ProductInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductInterface>
      */
     protected $associatedProducts;
 
@@ -45,6 +41,8 @@ class ProductAssociation implements ProductAssociationInterface
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, ProductInterface> $this->associatedProducts */
         $this->associatedProducts = new ArrayCollection();
     }
 

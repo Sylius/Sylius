@@ -10,4 +10,5 @@ sylius:
         verify_email: 'Uspješno ste potvrdili svoju email adresu.'
         verify_email_by_invalid_token: 'Kod za potvrdu email adrese je netočan.'
         verify_email_request: 'Poslalan vam je email koji sadrži link sa kodom za potvrdu vašeg računa.'
+        verify_no_user: 'Korisnik nije prijavljen.'
         verify_verified_email: 'Vaša email adresa je već potvrđena.'

@@ -6,6 +6,7 @@
             "usageLimit": {},
             "expiresAt": {},
             "perCustomerUsageLimit": {},
+            "reusableFromCancelledOrders": {},
             "code": {
                 "errors": [
                     "Please enter coupon code."

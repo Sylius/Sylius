@@ -27,34 +27,30 @@ class ProductVariant implements ProductVariantInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var ProductInterface
-     */
+    /** @var ProductInterface */
     protected $product;
 
     /**
      * @var Collection|ProductOptionValueInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductOptionValueInterface>
      */
     protected $optionValues;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()
     {
         $this->initializeTranslationsCollection();
+
+        /** @var ArrayCollection<array-key, ProductOptionValueInterface> $this->optionValues */
         $this->optionValues = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
@@ -179,8 +175,6 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductVariantTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

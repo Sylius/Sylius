@@ -16,25 +16,35 @@ There are three places in the Sylius platform where the configuration for images
 
 These configs provide you with a set of filters for resizing images to **thumbnails**.
 
-+-----------------------------------------+------------------+
-| ``sylius_admin_product_tiny_thumbnail`` | size: [64, 64]   |
-+-----------------------------------------+------------------+
-| ``sylius_admin_product_thumbnail``      | size: [50, 50]   |
-+-----------------------------------------+------------------+
-| ``sylius_shop_product_tiny_thumbnail``  | size: [64, 64]   |
-+-----------------------------------------+------------------+
-| ``sylius_shop_product_small_thumbnail`` | size: [150, 112] |
-+-----------------------------------------+------------------+
-| ``sylius_shop_product_thumbnail``       | size: [260, 260] |
-+-----------------------------------------+------------------+
-| ``sylius_shop_product_large_thumbnail`` | size: [550, 412] |
-+-----------------------------------------+------------------+
-| ``sylius_small``                        | size: [120, 90]  |
-+-----------------------------------------+------------------+
-| ``sylius_medium``                       | size: [240, 180] |
-+-----------------------------------------+------------------+
-| ``sylius_large``                        | size: [640, 480] |
-+-----------------------------------------+------------------+
++---------------------------------------------+------------------+
+| ``sylius_admin_product_original``           | size: original   |
++---------------------------------------------+------------------+
+| ``sylius_admin_admin_user_avatar_thumbnail``| size: [50, 50]   |
++---------------------------------------------+------------------+
+| ``sylius_admin_product_large_thumbnail``    | size: [550, 412] |
++---------------------------------------------+------------------+
+| ``sylius_admin_product_small_thumbnail``    | size: [150, 112] |
++---------------------------------------------+------------------+
+| ``sylius_admin_product_tiny_thumbnail``     | size: [64, 64]   |
++---------------------------------------------+------------------+
+| ``sylius_admin_product_thumbnail``          | size: [50, 50]   |
++---------------------------------------------+------------------+
+| ``sylius_shop_product_original``            | size: original   |
++---------------------------------------------+------------------+
+| ``sylius_shop_product_tiny_thumbnail``      | size: [64, 64]   |
++---------------------------------------------+------------------+
+| ``sylius_shop_product_small_thumbnail``     | size: [150, 112] |
++---------------------------------------------+------------------+
+| ``sylius_shop_product_thumbnail``           | size: [260, 260] |
++---------------------------------------------+------------------+
+| ``sylius_shop_product_large_thumbnail``     | size: [550, 412] |
++---------------------------------------------+------------------+
+| ``sylius_small``                            | size: [120, 90]  |
++---------------------------------------------+------------------+
+| ``sylius_medium``                           | size: [240, 180] |
++---------------------------------------------+------------------+
+| ``sylius_large``                            | size: [640, 480] |
++---------------------------------------------+------------------+
 
 How to resize images with filters?
 ----------------------------------
@@ -49,20 +59,20 @@ The ``imagine_filter('name')`` is a twig filter. This is how you would get an im
 
 .. note::
 
-    Sylius stores images on entities by saving a ``path`` to the file in the database. 
-    The imagine_filter root path is ``/web/media/image``.
+    Sylius stores images on entities by saving a ``path`` to the file in the database.
+    The imagine_filter root path is ``/public/media/image``.
 
 How to add custom image resizing filters?
 -----------------------------------------
 
 If the filters we have in Sylius by deafult are not suitable for your needs, you can easily add your own.
 
-All you need to do is to configure new filter in the ``app/config/config.yml`` file.
+All you need to do is to configure new filter in the ``config/packages/liip_imagine.yaml`` file.
 For example you can create a filter for advertisement banners:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/liip_imagine.yaml
     liip_imagine:
         filter_sets:
             advert_banner:

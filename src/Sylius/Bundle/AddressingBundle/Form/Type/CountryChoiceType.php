@@ -15,24 +15,28 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CountryChoiceType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * @param RepositoryInterface $countryRepository
-     */
     public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
     }
 
     /**
@@ -50,14 +54,6 @@ final class CountryChoiceType extends AbstractType
                         $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
                     }
 
-                    if ($options['choice_filter']) {
-                        $countries = array_filter($countries, $options['choice_filter']);
-                    }
-
-                    usort($countries, function (CountryInterface $a, CountryInterface $b): int {
-                        return $a->getName() <=> $b->getName();
-                    });
-
                     return $countries;
                 },
                 'choice_value' => 'code',
@@ -68,6 +64,17 @@ final class CountryChoiceType extends AbstractType
                 'placeholder' => 'sylius.form.country.select',
             ])
             ->setAllowedTypes('choice_filter', ['null', 'callable'])
+            ->setNormalizer('choices', static function (Options $options, array $countries): array {
+                if ($options['choice_filter']) {
+                    $countries = array_filter($countries, $options['choice_filter']);
+                }
+
+                usort($countries, static function (CountryInterface $firstCountry, CountryInterface $secondCountry): int {
+                    return $firstCountry->getName() <=> $secondCountry->getName();
+                });
+
+                return $countries;
+            })
         ;
     }
 

@@ -4,7 +4,7 @@
 sylius:
     form:
         attribute:
-            add: добавяне
+            add: Добави
             add_attributes: Добави атрибути
             choices: Избор
             code: Код
@@ -16,7 +16,7 @@ sylius:
             configuration: Конфигурация
             date: Дата
             datetime: Дата и час
-            integer: Целочислено
+            integer: Цяло число
             percent: Процент
             select: Изберете
             text: Текст

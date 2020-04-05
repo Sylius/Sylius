@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,54 +25,47 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class DashboardController
 {
-    /**
-     * @var DashboardStatisticsProviderInterface
-     */
+    /** @var DashboardStatisticsProviderInterface */
     private $statisticsProvider;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * @param DashboardStatisticsProviderInterface $statisticsProvider
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param EngineInterface $templatingEngine
-     * @param RouterInterface $router
-     */
+    /** @var SalesDataProviderInterface|null */
+    private $salesDataProvider;
+
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
         EngineInterface $templatingEngine,
-        RouterInterface $router
+        RouterInterface $router,
+        ?SalesDataProviderInterface $salesDataProvider = null
     ) {
         $this->statisticsProvider = $statisticsProvider;
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
+        $this->salesDataProvider = $salesDataProvider;
+
+        if ($this->salesDataProvider === null) {
+            @trigger_error(
+                sprintf('Not passing a $salesDataProvider to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function indexAction(Request $request): Response
     {
         $channelCode = $request->query->get('channel');
 
-        /** @var ChannelInterface $channel */
+        /** @var ChannelInterface|null $channel */
         $channel = $this->findChannelByCodeOrFindFirst($channelCode);
 
         if (null === $channel) {
@@ -79,18 +73,16 @@ final class DashboardController
         }
 
         $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
+        $data = ['statistics' => $statistics, 'channel' => $channel];
 
-        return $this->templatingEngine->renderResponse(
-            'SyliusAdminBundle:Dashboard:index.html.twig',
-            ['statistics' => $statistics, 'channel' => $channel]
-        );
+        if ($this->salesDataProvider !== null) {
+            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            $data['currency'] = $channel->getBaseCurrency()->getCode();
+        }
+
+        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', $data);
     }
 
-    /**
-     * @param string|null $channelCode
-     *
-     * @return ChannelInterface|null
-     */
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         $channel = null;

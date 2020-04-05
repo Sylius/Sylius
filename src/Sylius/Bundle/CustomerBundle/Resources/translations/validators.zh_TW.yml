@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        email:
+            not_blank: 請輸入您的電郵地址。
+            invalid: 這不是正確的電郵地址。
+            unique: 此電郵位址已被使用。

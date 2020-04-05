@@ -3,7 +3,7 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
-            "shippingAddress": {
+            "billingAddress": {
                 "children": {
                     "firstName": {},
                     "lastName": {},
@@ -16,7 +16,7 @@
                     "provinceName": {}
                 }
             },
-            "billingAddress": {
+            "shippingAddress": {
                 "children": {
                     "firstName": {
                         "errors": [
@@ -52,7 +52,8 @@
                     }
                 }
             },
-            "differentBillingAddress": {}
+            "differentBillingAddress": {},
+            "differentShippingAddress": {}
         }
     }
 }

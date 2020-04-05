@@ -15,24 +15,16 @@ namespace Sylius\Component\Promotion\Model;
 
 class PromotionAction implements PromotionActionInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $type;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
-    /**
-     * @var PromotionInterface
-     */
+    /** @var PromotionInterface|null */
     protected $promotion;
 
     /**
@@ -56,6 +48,10 @@ class PromotionAction implements PromotionActionInterface
      */
     public function setType(?string $type): void
     {
+        if ($this->type !== $type) {
+            $this->configuration = [];
+        }
+
         $this->type = $type;
     }
 

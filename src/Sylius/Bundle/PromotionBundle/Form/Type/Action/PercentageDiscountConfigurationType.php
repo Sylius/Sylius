@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
+use Sylius\Bundle\PromotionBundle\Form\DataTransformer\PercentFloatToLocalizedStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,13 +37,13 @@ final class PercentageDiscountConfigurationType extends AbstractType
                     new Range([
                         'min' => 0,
                         'max' => 1,
-                        'minMessage' => 'sylius.promotion_action.percentage_discount_configuration.min',
-                        'maxMessage' => 'sylius.promotion_action.percentage_discount_configuration.max',
+                        'notInRangeMessage' => 'sylius.promotion_action.percentage_discount_configuration.not_in_range',
                         'groups' => ['sylius'],
                     ]),
                 ],
             ])
         ;
+        $builder->get('percentage')->resetViewTransformers()->addViewTransformer(new PercentFloatToLocalizedStringTransformer());
     }
 
     /**

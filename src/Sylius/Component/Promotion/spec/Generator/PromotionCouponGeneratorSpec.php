@@ -58,6 +58,8 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);
         $instruction->getExpiresAt()->willReturn(null);
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
         $instruction->getCodeLength()->willReturn(6);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
 
@@ -74,6 +76,42 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $this->generate($promotion, $instruction);
     }
 
+    function it_generates_coupons_with_prefix_and_suffix_according_to_an_instruction(
+        FactoryInterface $promotionCouponFactory,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        ObjectManager $objectManager,
+        PromotionInterface $promotion,
+        PromotionCouponInterface $promotionCoupon,
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        GenerationPolicyInterface $generationPolicy
+    ): void {
+        $instruction->getAmount()->willReturn(1);
+        $instruction->getUsageLimit()->willReturn(null);
+        $instruction->getExpiresAt()->willReturn(null);
+        $instruction->getPrefix()->willReturn('PREFIX_');
+        $instruction->getSuffix()->willReturn('_SUFFIX');
+        $instruction->getCodeLength()->willReturn(6);
+        $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
+
+        $promotionCouponFactory->createNew()->willReturn($promotionCoupon);
+        $promotionCouponRepository->findOneBy(Argument::any())->willReturn(null);
+
+        $promotionCoupon->setPromotion($promotion)->shouldBeCalled();
+        $promotionCoupon->setCode(Argument::that(function (string $couponCode): bool {
+            return
+                strpos($couponCode, 'PREFIX_') === 0 &&
+                strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX')
+            ;
+        }))->shouldBeCalled();
+        $promotionCoupon->setUsageLimit(null)->shouldBeCalled();
+        $promotionCoupon->setExpiresAt(null)->shouldBeCalled();
+
+        $objectManager->persist($promotionCoupon)->shouldBeCalled();
+        $objectManager->flush()->shouldBeCalled();
+
+        $this->generate($promotion, $instruction);
+    }
+
     function it_throws_a_failed_generation_exception_when_generation_is_not_possible(
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
@@ -81,6 +119,8 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
     ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(1);
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(false);
 
         $this->shouldThrow(FailedGenerationException::class)->during('generate', [$promotion, $instruction]);
@@ -95,6 +135,8 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
     ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(-1);
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
         $promotionCouponFactory->createNew()->willReturn($promotionCoupon);
         $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [$promotion, $instruction]);

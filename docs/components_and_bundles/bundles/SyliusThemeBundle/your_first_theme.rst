@@ -14,7 +14,7 @@ Make sure it's enabled with the default options:
 Themes location and definition
 ------------------------------
 
-Private themes should be added to ``app/themes`` directory by default. Every theme should have a default configuration
+Private themes should be added to ``themes`` directory by default. Every theme should have a default configuration
 located in ``composer.json`` file. The only required parameter is ``name``, but it is worth to define other ones
 (:doc:`have a look at theme configuration reference <theme_configuration_reference>`).
 
@@ -41,12 +41,12 @@ Same comes with the bundle resources, eg. for ``FOSUserBundle`` the paths should
     │   ├── public
     │   │   └── asset.jpg
     │   ├── translations
-    │   │   └── messages.en.yml
+    │   │   └── messages.en.yaml
     │   └── views
     │       └── template.html.twig
     ├── composer.json
     ├── translations
-    │   └── messages.en.yml
+    │   └── messages.en.yaml
     └── views
         └── template.html.twig
 
@@ -126,4 +126,4 @@ your theme files by using this command:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:theme:assets:install
+    php bin/console sylius:theme:assets:install

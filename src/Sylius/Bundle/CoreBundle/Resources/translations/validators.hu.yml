@@ -5,6 +5,11 @@ sylius:
     channel:
         contact_email:
             invalid: Ez az e-mail cím érvénytelen.
+            max: E-mail nem lehet {{ limit }} karakternél hosszabb.
+            min: E-mailnek legalább {{ limit }} karakter hosszúnak kell lennie.
+    channel_pricing:
+        price:
+            not_blank: Kérjük, írja be az árat.
     checkout:
         shipping_method:
             not_blank: Kérjük, válassza ki a szállítási formát.
@@ -12,6 +17,8 @@ sylius:
         email:
             invalid: Ez az e-mail cím érvénytelen.
             not_blank: Kérjük adja meg e-mail címét!
+        message:
+            not_blank: Kérjük adjon meg egy üzenetet!
     customer:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.

@@ -14,17 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Templating\Helper\CheckoutStepsHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-final class CheckoutStepsExtension extends \Twig_Extension
+final class CheckoutStepsExtension extends AbstractExtension
 {
-    /**
-     * @var CheckoutStepsHelper
-     */
+    /** @var CheckoutStepsHelper */
     private $checkoutStepsHelper;
 
-    /**
-     * @param CheckoutStepsHelper $checkoutStepsHelper
-     */
     public function __construct(CheckoutStepsHelper $checkoutStepsHelper)
     {
         $this->checkoutStepsHelper = $checkoutStepsHelper;
@@ -36,8 +33,8 @@ final class CheckoutStepsExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('sylius_is_shipping_required', [$this->checkoutStepsHelper, 'isShippingRequired']),
-            new \Twig_Function('sylius_is_payment_required', [$this->checkoutStepsHelper, 'isPaymentRequired']),
+            new TwigFunction('sylius_is_shipping_required', [$this->checkoutStepsHelper, 'isShippingRequired']),
+            new TwigFunction('sylius_is_payment_required', [$this->checkoutStepsHelper, 'isPaymentRequired']),
         ];
     }
 }

@@ -18,13 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface ZoneMemberInterface extends ResourceInterface, CodeAwareInterface
 {
-    /**
-     * @return ZoneInterface|null
-     */
     public function getBelongsTo(): ?ZoneInterface;
 
-    /**
-     * @param ZoneInterface|null $belongsTo
-     */
     public function setBelongsTo(?ZoneInterface $belongsTo): void;
 }

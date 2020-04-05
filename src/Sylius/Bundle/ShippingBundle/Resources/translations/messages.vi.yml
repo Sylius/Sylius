@@ -3,8 +3,19 @@
 
 sylius:
     form:
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Số tiền
+            per_unit_rate_configuration:
+                amount: Số tiền
         shipping_category:
+            description: Mô tả
             name: Tên
         shipping_method:
+            calculator: Máy tính
+            category: Danh mục
             channels: Kênh
+            configuration: Cấu hình
+            description: Mô tả
+            enabled: Đã kích hoạt
             name: Tên

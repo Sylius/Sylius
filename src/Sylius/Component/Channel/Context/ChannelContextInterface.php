@@ -18,8 +18,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 interface ChannelContextInterface
 {
     /**
-     * @return ChannelInterface
-     *
      * @throws ChannelNotFoundException
      */
     public function getChannel(): ChannelInterface;

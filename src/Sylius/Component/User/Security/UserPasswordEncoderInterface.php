@@ -17,10 +17,5 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 interface UserPasswordEncoderInterface
 {
-    /**
-     * @param CredentialsHolderInterface $user
-     *
-     * @return string
-     */
     public function encode(CredentialsHolderInterface $user): string;
 }

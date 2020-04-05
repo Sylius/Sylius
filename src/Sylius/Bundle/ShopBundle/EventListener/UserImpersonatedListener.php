@@ -15,33 +15,21 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 
 final class UserImpersonatedListener
 {
-    /**
-     * @var CartStorageInterface
-     */
+    /** @var CartStorageInterface */
     private $cartStorage;
 
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @param CartStorageInterface $cartStorage
-     * @param ChannelContextInterface $channelContext
-     * @param OrderRepositoryInterface $orderRepository
-     */
     public function __construct(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
@@ -52,17 +40,18 @@ final class UserImpersonatedListener
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * @param UserEvent $event
-     */
     public function onUserImpersonated(UserEvent $event): void
     {
-        $customer = $event->getUser()->getCustomer();
+        $user = $event->getUser();
 
-        /** @var ChannelInterface $channel */
+        if (!$user instanceof ShopUserInterface) {
+            return;
+        }
+
+        $customer = $user->getCustomer();
+
         $channel = $this->channelContext->getChannel();
 
-        /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findLatestCartByChannelAndCustomer($channel, $customer);
 
         if ($cart === null) {

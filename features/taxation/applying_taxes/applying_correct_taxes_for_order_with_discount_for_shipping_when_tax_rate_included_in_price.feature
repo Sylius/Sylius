@@ -20,7 +20,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And I have product "Symfony Mug" in the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "$61.25"
-        And my cart taxes should be "$4.66"
+        And my included in price taxes should be "$4.66"
 
     @ui
     Scenario: Properly rounded down tax
@@ -29,7 +29,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And I have product "Symfony Mug" in the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "$61.16"
-        And my cart taxes should be "$4.65"
+        And my included in price taxes should be "$4.65"
 
     @ui
     Scenario: Properly calculated taxes when item belongs to different tax category and has tax included in price
@@ -41,7 +41,7 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And I have product "Sonata Mug" in the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "$55.00"
-        And my cart taxes should be "$5.96"
+        And my included in price taxes should be "$5.96"
 
     @ui
     Scenario: Properly calculated taxes when item belongs to different tax category and not has tax included in price
@@ -53,4 +53,5 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And I have product "Sonata Mug" in the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "$57.30"
-        And my cart taxes should be "$6.39"
+        And my included in price taxes should be "$4.09"
+        And my cart taxes should be "$2.30"

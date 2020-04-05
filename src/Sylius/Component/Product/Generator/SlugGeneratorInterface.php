@@ -15,10 +15,5 @@ namespace Sylius\Component\Product\Generator;
 
 interface SlugGeneratorInterface
 {
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
     public function generate(string $name): string;
 }

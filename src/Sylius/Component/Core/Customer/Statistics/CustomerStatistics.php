@@ -17,9 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class CustomerStatistics
 {
-    /**
-     * @var array|PerChannelCustomerStatistics[]
-     */
+    /** @var array|PerChannelCustomerStatistics[] */
     private $perChannelsStatistics;
 
     /**
@@ -32,12 +30,9 @@ final class CustomerStatistics
         $this->perChannelsStatistics = $perChannelStatistics;
     }
 
-    /**
-     * @return int
-     */
     public function getAllOrdersCount(): int
     {
-        return array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {
+        return (int) array_sum(array_map(function (PerChannelCustomerStatistics $statistics) {
             return $statistics->getOrdersCount();
         }, $this->perChannelsStatistics));
     }

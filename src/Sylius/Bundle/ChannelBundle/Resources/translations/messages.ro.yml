@@ -7,5 +7,5 @@ sylius:
             color: Culoare
             description: Descriere
             enabled: Activat
-            name: Nume
+            name: Nume produs
             url: Adresă

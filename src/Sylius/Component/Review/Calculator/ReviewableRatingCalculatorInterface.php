@@ -17,10 +17,5 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 
 interface ReviewableRatingCalculatorInterface
 {
-    /**
-     * @param ReviewableInterface $reviewable
-     *
-     * @return float
-     */
     public function calculate(ReviewableInterface $reviewable): float;
 }

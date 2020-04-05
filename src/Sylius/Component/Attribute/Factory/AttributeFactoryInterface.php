@@ -18,10 +18,5 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface AttributeFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param string $type
-     *
-     * @return AttributeInterface
-     */
     public function createTyped(string $type): AttributeInterface;
 }

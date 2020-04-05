@@ -17,42 +17,27 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getRatio()
+    public function getRatio(): string
     {
         return $this->getElement('ratio')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeRatio($ratio)
+    public function changeRatio(string $ratio): void
     {
         $this->getElement('ratio')->setValue($ratio);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSourceCurrencyDisabled()
+    public function isSourceCurrencyDisabled(): bool
     {
         return null !== $this->getElement('sourceCurrency')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isTargetCurrencyDisabled()
+    public function isTargetCurrencyDisabled(): bool
     {
         return null !== $this->getElement('targetCurrency')->getAttribute('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'ratio' => '#sylius_exchange_rate_ratio',

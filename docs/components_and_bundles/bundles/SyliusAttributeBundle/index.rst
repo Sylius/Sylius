@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 SyliusAttributeBundle
 =====================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 This bundle provides easy integration of the :doc:`Sylius Attribute component </components_and_bundles/components/Attribute/index>`
 with any Symfony full-stack application.

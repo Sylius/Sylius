@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Potvrdenie odoslania zásielky'
     menu:
         admin:
             main:
@@ -14,7 +17,7 @@ sylius:
                     products: Produkty
                     taxons: Kategórie
                 configuration:
-                    admin_users: Administrátor
+                    admin_users: Administrátory
                     channels: Kanály
                     countries: Krajiny
                     currencies: Meny

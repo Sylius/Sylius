@@ -28,7 +28,11 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
      */
     public function validate($product, Constraint $constraint): void
     {
+        /** @var ProductInterface $product */
         Assert::isInstanceOf($product, ProductInterface::class);
+
+        /** @var HasAllVariantPricesDefined $constraint */
+        Assert::isInstanceOf($constraint, HasAllVariantPricesDefined::class);
 
         if ($product->isSimple()) {
             return;
@@ -36,11 +40,11 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 
         $channels = $product->getChannels();
 
-        /* @var ProductVariantInterface $productVariant */
+        /** @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
             /** @var ChannelInterface $channel */
             foreach ($channels as $channel) {
-                /** @var ChannelPricingInterface $channelPricing */
+                /** @var ChannelPricingInterface|null $channelPricing */
                 $channelPricing = $productVariant->getChannelPricingForChannel($channel);
                 if (null === $channelPricing || null === $channelPricing->getPrice()) {
                     $this->context->buildViolation($constraint->message)

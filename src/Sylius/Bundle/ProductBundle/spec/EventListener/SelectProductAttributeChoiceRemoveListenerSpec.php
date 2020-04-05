@@ -16,6 +16,8 @@ namespace spec\Sylius\Bundle\ProductBundle\EventListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\UnitOfWork;
+use Mockery;
+use Mockery\MockInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -33,7 +35,6 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_removes_select_product_attribute_choices(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork,
         ProductAttributeValueRepositoryInterface $productAttributeValueRepository,
         ProductAttributeInterface $productAttribute,
         ProductAttributeValueInterface $productAttributeValue
@@ -43,8 +44,9 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
-        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
-        $unitOfWork->getEntityChangeSet($productAttribute)->willReturn([
+        /** @var UnitOfWork|MockInterface $unitOfWork */
+        $unitOfWork = Mockery::mock(UnitOfWork::class);
+        $unitOfWork->shouldReceive('getEntityChangeSet')->withArgs([$productAttribute->getWrappedObject()])->andReturn([
             'configuration' => [
                 ['choices' => [
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
@@ -55,6 +57,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
                 ]],
             ],
         ]);
+
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $entityManager
             ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
@@ -79,7 +83,6 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_added_new_choice(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork,
         ProductAttributeInterface $productAttribute
     ): void {
         $event->getEntity()->willReturn($productAttribute);
@@ -87,8 +90,9 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
-        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
-        $unitOfWork->getEntityChangeSet($productAttribute)->willReturn([
+        /** @var UnitOfWork|MockInterface $unitOfWork */
+        $unitOfWork = Mockery::mock(UnitOfWork::class);
+        $unitOfWork->shouldReceive('getEntityChangeSet')->withArgs([$productAttribute->getWrappedObject()])->andReturn([
             'configuration' => [
                 ['choices' => [
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
@@ -100,10 +104,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ],
         ]);
 
-        $entityManager
-            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
-            ->shouldNotBeCalled()
-        ;
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $entityManager->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);
@@ -112,7 +114,6 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_changed_value(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        UnitOfWork $unitOfWork,
         ProductAttributeInterface $productAttribute
     ): void {
         $event->getEntity()->willReturn($productAttribute);
@@ -120,8 +121,9 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
-        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
-        $unitOfWork->getEntityChangeSet($productAttribute)->willReturn([
+        /** @var UnitOfWork|MockInterface $unitOfWork */
+        $unitOfWork = Mockery::mock(UnitOfWork::class);
+        $unitOfWork->shouldReceive('getEntityChangeSet')->withArgs([$productAttribute->getWrappedObject()])->andReturn([
             'configuration' => [
                 ['choices' => [
                     '8ec40814-adef-4194-af91-5559b5f19236' => 'Banana',
@@ -134,10 +136,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
             ],
         ]);
 
-        $entityManager
-            ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
-            ->shouldNotBeCalled()
-        ;
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $entityManager->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 
         $this->postUpdate($event);

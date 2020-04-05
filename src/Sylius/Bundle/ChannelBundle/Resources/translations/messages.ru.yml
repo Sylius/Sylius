@@ -7,5 +7,5 @@ sylius:
             color: Цвет
             description: Описание
             enabled: Активен
-            name: Название
+            name: Округ
             url: URL

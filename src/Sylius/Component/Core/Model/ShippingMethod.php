@@ -23,18 +23,16 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
-    /**
-     * @var ZoneInterface
-     */
+    /** @var ZoneInterface */
     protected $zone;
 
-    /**
-     * @var TaxCategoryInterface
-     */
+    /** @var TaxCategoryInterface */
     protected $taxCategory;
 
     /**
-     * @var Collection
+     * @var Collection|ChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
      */
     protected $channels;
 
@@ -42,6 +40,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 
@@ -79,6 +78,9 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getChannels(): Collection
     {

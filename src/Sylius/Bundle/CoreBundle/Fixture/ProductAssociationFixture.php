@@ -34,7 +34,7 @@ class ProductAssociationFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode('type')->cannotBeEmpty()->end()
                 ->scalarNode('owner')->cannotBeEmpty()->end()
-                ->arrayNode('associated_products')->prototype('scalar')->end()->end()
+                ->arrayNode('associated_products')->scalarPrototype()->end()->end()
         ;
     }
 }

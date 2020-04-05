@@ -14,17 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\Twig;
 
 use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-final class AggregateAdjustmentsExtension extends \Twig_Extension
+final class AggregateAdjustmentsExtension extends AbstractExtension
 {
-    /**
-     * @var AdjustmentsHelper
-     */
+    /** @var AdjustmentsHelper */
     private $adjustmentsHelper;
 
-    /**
-     * @param AdjustmentsHelper $adjustmentsHelper
-     */
     public function __construct(AdjustmentsHelper $adjustmentsHelper)
     {
         $this->adjustmentsHelper = $adjustmentsHelper;
@@ -36,7 +33,7 @@ final class AggregateAdjustmentsExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('sylius_aggregate_adjustments', [$this->adjustmentsHelper, 'getAggregatedAdjustments']),
+            new TwigFunction('sylius_aggregate_adjustments', [$this->adjustmentsHelper, 'getAggregatedAdjustments']),
         ];
     }
 }

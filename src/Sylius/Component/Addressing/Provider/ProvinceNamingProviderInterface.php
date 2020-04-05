@@ -17,17 +17,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 
 interface ProvinceNamingProviderInterface
 {
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
     public function getName(AddressInterface $address): string;
 
-    /**
-     * @param AddressInterface $address
-     *
-     * @return string
-     */
     public function getAbbreviation(AddressInterface $address): string;
 }

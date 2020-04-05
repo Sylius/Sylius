@@ -28,32 +28,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ShowAvailablePaymentMethodsController
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var PaymentMethodsResolverInterface
-     */
+    /** @var PaymentMethodsResolverInterface */
     private $paymentMethodResolver;
 
-    /**
-     * @var ViewHandlerInterface
-     */
+    /** @var ViewHandlerInterface */
     private $restViewHandler;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     * @param OrderRepositoryInterface $orderRepository
-     * @param PaymentMethodsResolverInterface $paymentMethodResolver
-     * @param ViewHandlerInterface $restViewHandler
-     */
     public function __construct(
         FactoryInterface $stateMachineFactory,
         OrderRepositoryInterface $orderRepository,
@@ -66,11 +52,6 @@ final class ShowAvailablePaymentMethodsController
         $this->restViewHandler = $restViewHandler;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function showAction(Request $request): Response
     {
         /** @var OrderInterface $cart */
@@ -92,10 +73,6 @@ final class ShowAvailablePaymentMethodsController
     }
 
     /**
-     * @param mixed $cartId
-     *
-     * @return OrderInterface
-     *
      * @throws NotFoundHttpException
      */
     private function getCartOr404($cartId): OrderInterface
@@ -109,23 +86,11 @@ final class ShowAvailablePaymentMethodsController
         return $cart;
     }
 
-    /**
-     * @param OrderInterface $cart
-     * @param string $transition
-     *
-     * @return bool
-     */
     private function isCheckoutTransitionPossible(OrderInterface $cart, string $transition): bool
     {
         return $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->can($transition);
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param string $locale
-     *
-     * @return array
-     */
     private function getPaymentMethods(PaymentInterface $payment, string $locale): array
     {
         $paymentMethods = $this->paymentMethodResolver->getSupportedMethods($payment);

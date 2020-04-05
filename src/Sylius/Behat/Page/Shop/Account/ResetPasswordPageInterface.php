@@ -13,22 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ResetPasswordPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkValidationMessageFor($element, $message);
+    public function reset(): void;
 
-    public function reset();
+    public function specifyNewPassword(string $password): void;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyConfirmPassword(string $password): void;
+
+    public function checkValidationMessageFor(string $element, string $message): bool;
 }

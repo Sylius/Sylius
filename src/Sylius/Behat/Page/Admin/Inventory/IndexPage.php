@@ -17,18 +17,12 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterType($field, $type)
+    public function specifyFilterType(string $field, string $type): void
     {
         $this->getDocument()->fillField(sprintf('criteria_%s_value', $field), $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFilterValue($field, $value)
+    public function specifyFilterValue(string $field, string $value): void
     {
         $this->getDocument()->fillField(sprintf('criteria_%s_value', $field), $value);
     }

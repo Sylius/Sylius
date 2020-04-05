@@ -8,6 +8,7 @@ sylius:
             enabled: Aktivert
             password:
                 label: Passord
+            remember_me: Husk meg
             shipping_address: Leveringsadresse
             username: Brukernavn
         user_filter:

@@ -39,12 +39,4 @@ final class SyliusPayumBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterGatewayConfigTypePass());
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace(): string
-    {
-        return 'Sylius\Bundle\PayumBundle\Model';
-    }
 }

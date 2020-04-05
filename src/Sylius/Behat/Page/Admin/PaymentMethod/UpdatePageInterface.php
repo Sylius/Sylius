@@ -17,57 +17,25 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    /**
-     * @param string $name
-     * @param string $languageCode
-     */
-    public function nameIt($name, $languageCode);
+    public function nameIt(string $name, string $languageCode): void;
 
-    /**
-     * @param string $username
-     */
-    public function setPaypalGatewayUsername($username);
+    public function setPaypalGatewayUsername(string $username): void;
 
-    /**
-     * @param string $password
-     */
-    public function setPaypalGatewayPassword($password);
+    public function setPaypalGatewayPassword(string $password): void;
 
-    /**
-     * @param string $signature
-     */
-    public function setPaypalGatewaySignature($signature);
+    public function setPaypalGatewaySignature(string $signature): void;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function isCodeDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isFactoryNameFieldDisabled();
+    public function isFactoryNameFieldDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isPaymentMethodEnabled();
+    public function isPaymentMethodEnabled(): bool;
 
-    /**
-     * @param string $channelName
-     *
-     * @return bool
-     */
-    public function isAvailableInChannel($channelName);
+    public function isAvailableInChannel(string $channelName): bool;
 
-    /**
-     * @param string $language
-     *
-     * @return string
-     */
-    public function getPaymentMethodInstructions($language);
+    public function getPaymentMethodInstructions(string $language): string;
 }

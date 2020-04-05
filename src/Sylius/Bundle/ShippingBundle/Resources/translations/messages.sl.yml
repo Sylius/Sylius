@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Število
+                equal: Enako kot
             type: Vrsta pravila
         shipment:
             state: Stanje
@@ -20,6 +21,9 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Pavšalno na pošiljko
+                amount: Znesek
+            per_unit_rate_configuration:
+                amount: Znesek
         shipping_category:
             description: Opis
             name: Ime

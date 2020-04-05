@@ -22,9 +22,7 @@ class Country implements CountryInterface
 {
     use ToggleableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
     /**
@@ -36,17 +34,17 @@ class Country implements CountryInterface
 
     /**
      * @var Collection|ProvinceInterface[]
+     *
+     * @psalm-var Collection<array-key, ProvinceInterface>
      */
     protected $provinces;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, ProvinceInterface> $this->provinces */
         $this->provinces = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) ($this->getName() ?? $this->getCode());

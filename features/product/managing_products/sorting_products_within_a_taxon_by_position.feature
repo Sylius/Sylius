@@ -27,14 +27,14 @@ Feature: Sorting listed products from a taxon by position
         When I am browsing products from "Soft Toys" taxon
         Then the last product on the list should have name "Big pug"
 
-    @ui @javascript
+    @ui
     Scenario: Product with position 0 is set as the first one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 0
         And I save my new configuration
         Then the first product on the list should have name "Young pug"
 
-    @ui @javascript
+    @ui
     Scenario: Product with the highest position is set as the last one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 12
@@ -47,3 +47,10 @@ Feature: Sorting listed products from a taxon by position
         And I start sorting products by position
         Then I should see 3 products in the list
         And they should have order like "Small pug", "Young pug" and "Old pug"
+
+    @ui
+    Scenario: Being unable to use a non-numeric string as a product position
+        Given I am browsing products from "Soft Toys" taxon
+        When I set the position of "Young pug" to "test"
+        And I save my new configuration
+        Then I should be notified that the position "test" is invalid

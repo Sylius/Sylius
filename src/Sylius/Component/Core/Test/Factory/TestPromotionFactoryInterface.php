@@ -18,18 +18,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 
 interface TestPromotionFactoryInterface
 {
-    /**
-     * @param string $name
-     *
-     * @return PromotionInterface
-     */
     public function create(string $name): PromotionInterface;
 
-    /**
-     * @param string $name
-     * @param ChannelInterface $channel
-     *
-     * @return PromotionInterface
-     */
     public function createForChannel(string $name, ChannelInterface $channel): PromotionInterface;
 }

@@ -16,21 +16,11 @@ namespace Sylius\Component\Locale\Converter;
 interface LocaleConverterInterface
 {
     /**
-     * @param string $name
-     * @param string|null $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertNameToCode(string $name, ?string $locale = null): string;
 
     /**
-     * @param string $code
-     * @param string|null $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertCodeToName(string $code, ?string $locale = null): string;

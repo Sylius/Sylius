@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 class UniqueCurrencyPair extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.exchange_rate.unique_currency_pair';
 
     /**

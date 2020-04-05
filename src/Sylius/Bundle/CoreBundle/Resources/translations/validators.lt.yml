@@ -7,6 +7,9 @@ sylius:
             invalid: Šis adresas yra neteisingas.
             max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
             min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
+    channel_pricing:
+        price:
+            not_blank: Įveskite kainą.
     checkout:
         shipping_method:
             not_blank: Pasirinkite pristatymo būdą.
@@ -14,6 +17,8 @@ sylius:
         email:
             invalid: Šis adresas yra neteisingas.
             not_blank: Įveskite savo elektroninio pašto adresą.
+        message:
+            not_blank: Įveskite savo pranešimą.
     customer:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.

@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanal ne može biti obrisan, najmanje jedan kanal je obvezan.'
+    checkout:
+        complete_error: 'Došlo je do neočekivane pogreške prilikom završavanja narudžbe. Molimo vas pokušajte ponovno napraviti narudžbu.'
+    contact:
+        request_success: 'Vaš zahtjev za kontaktom je uspješno podnesen.'
+        request_error: 'Došlo je do pogreške prilikom slanja zahtjeva za kontaktom. Molimo vas pokušajte poslije.'
+    customer:
+        add_address: 'Adresa je uspješno dodana.'
+        impersonate: 'Uspješno utjelovljen kupac %name%.'
+        set_address_as_default: 'Adresa je postavljena kao zadana.'
+    order:
+        apply_state_machine_transition_error: 'Došlo je do neočekivane pogreške prilikom izmjene narudžbe. Molimo vas pokušajte promijeniti narudžbu ponovno.'
+        promotion_integrity: 'Niste više kvalificirani za ovu promociju %promotionName%.'
+        total_integrity: 'Cijena vaše narudžbe je promijenjena, provjerite informacije o vašoj narudžbi i potvrdite još jednom.'
+        update_error: 'Došlo je do neočekivane pogreške prilikom izmjene narudžbe. Molimo vas pokušajte promijeniti narudžbu ponovno.'
+    payment:
+        apply_state_machine_transition_error: 'Došlo je do neočekivane pogreške prilikom izmjene plaćanja. Molimo vas pokušajte ponovno izmjeniti plaćanje.'
+    product:
+        out_of_stock: 'Na skladištu je ostalo još samo %quantity% komada ovog proizvoda.'
+    product_variant:
+        update_error: 'Došlo je do neočekivane pogreške prilikom izmjene varijante proizvoda. Molimo vas pokušajte ponovno izmjeniti varijantu proizvoda.'

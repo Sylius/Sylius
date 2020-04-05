@@ -6,12 +6,16 @@ code=0
 commands=(
     validate-composer
     validate-composer-security
-    validate-behat-features
     validate-doctrine-schema
     validate-twig
+    validate-yaml-files
     validate-yarn-packages
+    test-doctrine-migrations
+    test-phpstan
+    test-psalm
     test-phpspec
     test-phpunit
+    test-installer
     test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript

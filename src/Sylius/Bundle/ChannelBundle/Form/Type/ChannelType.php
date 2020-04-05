@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ChannelBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,7 +45,7 @@ final class ChannelType extends AbstractResourceType
                 'label' => 'sylius.form.channel.hostname',
                 'required' => false,
             ])
-            ->add('color', TextType::class, [
+            ->add('color', ColorType::class, [
                 'label' => 'sylius.form.channel.color',
                 'required' => false,
             ])

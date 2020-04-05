@@ -7,6 +7,8 @@ sylius:
             not_blank: Lütfen vergi kategorisinin adını giriniz.
         code:
             not_blank: Lütfen vergi kategorisinin adını giriniz.
+            regex: Vergi katagorisi kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
+            unique: Girilen vergi katagori kodu zaten var.
     tax_rate:
         category:
             not_blank: Lütfen vergi kategorisi seçiniz.
@@ -16,3 +18,9 @@ sylius:
             not_blank: Lütfen vergi oranını giriniz.
         calculator:
             not_blank: Lütfen vergi hesaplama şekli seçiniz.
+        zone:
+            not_blank: Lütfen bölge seçiniz.
+        code:
+            not_blank: Lütfen vergi oranı numarası giriniz.
+            regex: Vergi oranı kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
+            unique: Girilen vergi oran kodu zaten var.

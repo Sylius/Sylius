@@ -1,12 +1,19 @@
+.. rst-class:: outdated
+
 Processors
 ==========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Order processors are responsible of manipulating the orders to apply different predefined adjustments or other modifications based on order state.
 
 Registering custom processors
 -----------------------------
 
-Once you have your own :ref:`component_order_processors_order-processor-interface` implementation you need to register it as a service.
+Once you have your own :ref:`component_order_processors_order-processor-interface` implementation, if services autowiring and auto-configuration are not enabled, you need to register it as a service.
 
 .. code-block:: xml
 
@@ -18,7 +25,7 @@ Once you have your own :ref:`component_order_processors_order-processor-interfac
                                    http://symfony.com/schema/dic/services/services-1.0.xsd">
 
         <services>
-            <service id="acme.order_processor.custom" class="Acme\ShopBundle\OrderProcessor\CustomOrderProcessor">
+            <service id="app.order_processor.custom" class="App\OrderProcessor\CustomOrderProcessor">
                 <tag name="sylius.order_processor" priority="0" />
             </service>
         </services>

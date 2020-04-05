@@ -28,7 +28,7 @@ Feature: Editing a select product attribute
     @ui @javascript
     Scenario: Adding a new value to an existing select product attribute
         When I want to edit this product attribute
-        And I add value "Orange skin"
+        And I add value "Orange skin" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product attribute should have value "Orange skin"

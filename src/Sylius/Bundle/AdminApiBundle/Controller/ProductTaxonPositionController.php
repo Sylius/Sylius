@@ -24,20 +24,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class ProductTaxonPositionController
 {
-    /**
-     * @var ProductTaxonRepositoryInterface
-     */
+    /** @var ProductTaxonRepositoryInterface */
     private $productTaxonRepository;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $manager;
 
-    /**
-     * @param RepositoryInterface $productTaxonRepository
-     * @param EntityManagerInterface $manager
-     */
     public function __construct(
         RepositoryInterface $productTaxonRepository,
         EntityManagerInterface $manager
@@ -46,11 +38,6 @@ final class ProductTaxonPositionController
         $this->manager = $manager;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
     public function updatePositionsAction(Request $request): JsonResponse
     {
         $productsPositions = $request->request->get('productsPositions');

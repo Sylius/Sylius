@@ -13,6 +13,8 @@ sylius:
             not_blank: Kérjük, írja be a termék nevét.
             min_length: Termék neve legalább 1 karakter hosszúnak kell lennie. |Termék neve legalább {{ limit }} karakter hosszú.
             max_length: Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.
+    product_variant:
+        combination: A változat ebben a választék készletben már létezik.
     option:
         code:
             not_blank: Kérjük, írja be az opció kódját.

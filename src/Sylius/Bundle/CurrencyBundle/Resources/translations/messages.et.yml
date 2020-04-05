@@ -4,5 +4,6 @@
 sylius:
     form:
         currency:
+            base: Baasvaluuta
             code: Nimi
             enabled: Lubatud

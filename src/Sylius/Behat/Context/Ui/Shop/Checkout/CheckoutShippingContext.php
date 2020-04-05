@@ -21,26 +21,15 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutShippingContext implements Context
 {
-    /**
-     * @var SelectShippingPageInterface
-     */
+    /** @var SelectShippingPageInterface */
     private $selectShippingPage;
 
-    /**
-     * @var SelectPaymentPageInterface
-     */
+    /** @var SelectPaymentPageInterface */
     private $selectPaymentPage;
 
-    /**
-     * @var CompletePageInterface
-     */
+    /** @var CompletePageInterface */
     private $completePage;
 
-    /**
-     * @param SelectShippingPageInterface $selectShippingPage
-     * @param SelectPaymentPageInterface $selectPaymentPage
-     * @param CompletePageInterface $completePage
-     */
     public function __construct(
         SelectShippingPageInterface $selectShippingPage,
         SelectPaymentPageInterface $selectPaymentPage,
@@ -62,12 +51,12 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
+     * @Given I have selected :shippingMethodName shipping method
+     * @When I select :shippingMethodName shipping method
      */
-    public function iSelectShippingMethod($shippingMethod)
+    public function iSelectShippingMethod(string $shippingMethodName): void
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**
@@ -189,6 +178,14 @@ final class CheckoutShippingContext implements Context
     public function iShouldSeeShippingMethod($shippingMethodName)
     {
         Assert::true($this->selectShippingPage->hasShippingMethod($shippingMethodName));
+    }
+
+    /**
+     * @Then I should see selected :shippingMethodName shipping method
+     */
+    public function iShouldSeeSelectedShippingMethod($shippingMethodName)
+    {
+        Assert::same($this->selectShippingPage->getSelectedShippingMethodName(), $shippingMethodName);
     }
 
     /**

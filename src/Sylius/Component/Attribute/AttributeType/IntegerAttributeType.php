@@ -35,7 +35,7 @@ final class IntegerAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
@@ -61,12 +61,6 @@ final class IntegerAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param int|null $value
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(ExecutionContextInterface $context, ?int $value): ConstraintViolationListInterface
     {
         return $context->getValidator()->validate($value, [new NotBlank([])]);

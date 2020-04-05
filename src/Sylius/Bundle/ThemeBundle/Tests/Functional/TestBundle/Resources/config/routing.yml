@@ -1,5 +1,0 @@
-template:
-    path:     /template/{templateName}
-    defaults: { _controller: TestBundle:Templating:renderTemplate }
-    requirements:
-        templateName: .+

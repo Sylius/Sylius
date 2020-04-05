@@ -6,12 +6,15 @@ Sylius\Component\Core\Model\Channel:
             expose: true
             type: string
             groups: [Detailed]
+        menuTaxon:
+            expose: true
+            groups: [Detailed]
     relations:
-        - rel: self
-          href:
-            route: sylius_admin_api_channel_show
-            parameters:
-                code: expr(object.getCode())
-                version: 1
-          exclusion:
-            groups: [Default, Detailed, DetailedCart]
+        -   rel: self
+            href:
+                route: sylius_admin_api_channel_show
+                parameters:
+                    code: expr(object.getCode())
+                    version: 1
+            exclusion:
+                groups: [Default, Detailed, DetailedCart]

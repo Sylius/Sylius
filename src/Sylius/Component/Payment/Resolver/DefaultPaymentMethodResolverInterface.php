@@ -18,10 +18,5 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 interface DefaultPaymentMethodResolverInterface
 {
-    /**
-     * @param PaymentInterface $payment
-     *
-     * @return PaymentMethodInterface
-     */
     public function getDefaultPaymentMethod(PaymentInterface $payment): PaymentMethodInterface;
 }

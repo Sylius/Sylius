@@ -23,7 +23,7 @@ sylius:
             order_percentage_discount: Prozentualer Rabatt
             shipping_percentage_discount: Prozentualer Versandrabatt
             fixed_discount_configuration:
-                amount: Anzahl
+                amount: Steuersatz
             percentage_discount_configuration:
                 percentage: Prozent
             type: Typ
@@ -31,7 +31,7 @@ sylius:
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_coupon_generator_instruction:
-            amount: Anzahl
+            amount: Steuersatz
             code_length: Codelänge
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
@@ -54,7 +54,7 @@ sylius:
                 exclude: Ausgenommen
                 variants: Produkte
             item_total_configuration:
-                amount: Anzahl
+                amount: Steuersatz
             nth_order_configuration:
                 nth: N-ter
             shipping_country_configuration:

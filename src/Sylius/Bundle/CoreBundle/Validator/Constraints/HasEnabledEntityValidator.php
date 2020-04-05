@@ -25,19 +25,12 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    /**
-     * @var ManagerRegistry
-     */
+    /** @var ManagerRegistry */
     private $registry;
 
-    /**
-     * @var PropertyAccessor
-     */
+    /** @var PropertyAccessor */
     private $accessor;
 
-    /**
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
@@ -52,6 +45,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     public function validate($entity, Constraint $constraint): void
     {
+        /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
 
         $enabled = $this->accessor->getValue($entity, $constraint->enabledPath);
@@ -92,8 +86,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      *
      * @param array|\Iterator $result
      * @param object $entity
-     *
-     * @return bool
      */
     private function isLastEnabledEntity($result, $entity): bool
     {
@@ -102,10 +94,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * @param string|null $manager
      * @param object $entity
-     *
-     * @return ObjectManager|null
      */
     private function getProperObjectManager(?string $manager, $entity): ?ObjectManager
     {
@@ -129,9 +118,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * @param ObjectManager|null $objectManager
-     * @param string $exceptionMessage
-     *
      * @throws ConstraintDefinitionException
      */
     private function validateObjectManager(?ObjectManager $objectManager, string $exceptionMessage): void
@@ -142,9 +128,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * @param ObjectManager $objectManager
      * @param object $entity
-     * @param string $enabledPropertyPath
      *
      * @throws ConstraintDefinitionException
      */

@@ -13,12 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface VerificationPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $token
-     */
-    public function verifyAccount($token);
+    public function verifyAccount(string $token): void;
 }

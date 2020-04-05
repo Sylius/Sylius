@@ -1,9 +1,9 @@
 {
     "name": "sylius/attribute-bundle",
     "type": "symfony-bundle",
-    "description": "Managing object attributes for Symfony2 applications.",
+    "description": "Managing object attributes for Symfony applications.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -20,23 +20,21 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
 
-        "sonata-project/intl-bundle": "^2.2",
+        "ramsey/uuid": "^3.7",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/attribute": "^1.0",
-        "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "sylius/attribute": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "doctrine/orm": "~2.5.0",
-        "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
-        "symfony/dependency-injection": "^3.2",
-        "symfony/form": "^3.2",
-        "symfony/browser-kit": "^3.2",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "doctrine/orm": "^2.5",
+        "phpspec/phpspec": "^5.0",
+        "phpunit/phpunit": "^7.0",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/form": "^4.4",
+        "symfony/browser-kit": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
@@ -46,9 +44,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\AttributeBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\AttributeBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -60,10 +58,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
+            "dev-master": "1.6-dev"
         }
     }
 }

@@ -1,9 +1,11 @@
 {% form_theme form '@SyliusAdmin/Form/imagesTheme.html.twig' %}
 
 <div class="ui tab" data-tab="media">
-    <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
-    <br>
-    {{ form_row(form.images, {'label': false}) }}
+    <h3 class="ui top attached header">{{ 'sylius.ui.media'|trans }}</h3>
 
-    {{ sonata_block_render_event('sylius.admin.product.' ~ action ~ '.tab_media', {'form': form}) }}
+    <div class="ui attached segment">
+        {{ form_row(form.images, {'label': false}) }}
+
+        {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_media', 'sylius.admin.product.tab_media'], {'form': form}) }}
+    </div>
 </div>

@@ -29,87 +29,74 @@ use Webmozart\Assert\Assert;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /**
-     * @var BaseCustomerInterface
-     */
+    /** @var CustomerInterface|null */
     protected $customer;
 
-    /**
-     * @var ChannelInterface
-     */
+    /** @var ChannelInterface|null */
     protected $channel;
 
-    /**
-     * @var AddressInterface
-     */
+    /** @var AddressInterface|null */
     protected $shippingAddress;
 
-    /**
-     * @var AddressInterface
-     */
+    /** @var AddressInterface|null */
     protected $billingAddress;
 
     /**
-     * @var Collection|BasePaymentInterface[]
+     * @var Collection|PaymentInterface[]
+     *
+     * @psalm-var Collection<array-key, PaymentInterface>
      */
     protected $payments;
 
     /**
      * @var Collection|ShipmentInterface[]
+     *
+     * @psalm-var Collection<array-key, ShipmentInterface>
      */
     protected $shipments;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $currencyCode;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $localeCode;
 
-    /**
-     * @var BaseCouponInterface
-     */
+    /** @var BaseCouponInterface|null */
     protected $promotionCoupon;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $checkoutState = OrderCheckoutStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $paymentState = OrderPaymentStates::STATE_CART;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
     /**
      * @var Collection|BasePromotionInterface[]
+     *
+     * @psalm-var Collection<array-key, BasePromotionInterface>
      */
     protected $promotions;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $tokenValue;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $customerIp;
 
     public function __construct()
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, PaymentInterface> $this->payments */
         $this->payments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ShipmentInterface> $this->shipments */
         $this->shipments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, BasePromotionInterface> $this->promotions */
         $this->promotions = new ArrayCollection();
     }
 
@@ -126,6 +113,8 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
+        Assert::nullOrisInstanceOf($customer, CustomerInterface::class);
+
         $this->customer = $customer;
     }
 
@@ -226,6 +215,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getItemUnits(): Collection
     {
+        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */
@@ -250,6 +240,9 @@ class Order extends BaseOrder implements OrderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getPayments(): Collection
     {
@@ -270,6 +263,8 @@ class Order extends BaseOrder implements OrderInterface
     public function addPayment(BasePaymentInterface $payment): void
     {
         /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
+
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
@@ -282,6 +277,8 @@ class Order extends BaseOrder implements OrderInterface
     public function removePayment(BasePaymentInterface $payment): void
     {
         /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
+
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
             $payment->setOrder(null);
@@ -312,12 +309,12 @@ class Order extends BaseOrder implements OrderInterface
         return $payment !== false ? $payment : null;
     }
 
-    /**
-     * @return bool
-     */
     public function isShippingRequired(): bool
     {
-        foreach ($this->getItems() as $orderItem) {
+        foreach ($this->items as $orderItem) {
+            /** @var OrderItemInterface $orderItem */
+            Assert::isInstanceOf($orderItem, OrderItemInterface::class);
+
             if ($orderItem->getVariant()->isShippingRequired()) {
                 return true;
             }
@@ -508,6 +505,9 @@ class Order extends BaseOrder implements OrderInterface
             $taxTotal += $taxAdjustment->getAmount();
         }
         foreach ($this->items as $item) {
+            /** @var OrderItemInterface $item */
+            Assert::isInstanceOf($item, OrderItemInterface::class);
+
             $taxTotal += $item->getTaxTotal();
         }
 
@@ -529,19 +529,17 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * Returns amount of order discount. Does not include order item and shipping discounts.
+     * Returns amount of order discount. Does not include shipping discounts.
      *
      * {@inheritdoc}
      */
     public function getOrderPromotionTotal(): int
     {
-        $orderPromotionTotal = 0;
-
-        foreach ($this->items as $item) {
-            $orderPromotionTotal += $item->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        }
-
-        return $orderPromotionTotal;
+        return
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) +
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) +
+            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+        ;
     }
 
     /**

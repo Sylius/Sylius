@@ -19,6 +19,8 @@ final class CompositeLocaleContext implements LocaleContextInterface
 {
     /**
      * @var PriorityQueue|LocaleContextInterface[]
+     *
+     * @psalm-var PriorityQueue<LocaleContextInterface>
      */
     private $localeContexts;
 
@@ -27,10 +29,6 @@ final class CompositeLocaleContext implements LocaleContextInterface
         $this->localeContexts = new PriorityQueue();
     }
 
-    /**
-     * @param LocaleContextInterface $localeContext
-     * @param int $priority
-     */
     public function addContext(LocaleContextInterface $localeContext, int $priority = 0): void
     {
         $this->localeContexts->insert($localeContext, $priority);

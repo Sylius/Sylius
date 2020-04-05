@@ -7,6 +7,6 @@ sylius:
             description: Beschreibung
             name: Name
             parent: Übergeordnet
-            slug: Kategorie SEO-URL
+            slug: Produkt SEO-URL
         taxonomy:
             name: Name

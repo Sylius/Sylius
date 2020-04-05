@@ -19,7 +19,9 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface as CoreUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 final class UsernameOrEmailProviderSpec extends ObjectBehavior
@@ -93,5 +95,11 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
         $user->getId()->willReturn(1);
 
         $this->refreshUser($user)->shouldReturn($refreshedUser);
+    }
+
+    function it_should_throw_exception_when_unsupported_user_is_used(
+        CoreUserInterface $user
+    ): void {
+        $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }
 }

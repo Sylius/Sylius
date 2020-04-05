@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class PromotionSubjectCoupon extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.promotion_coupon.is_invalid';
 
     /**

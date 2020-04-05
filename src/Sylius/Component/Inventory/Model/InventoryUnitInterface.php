@@ -17,8 +17,5 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface InventoryUnitInterface extends ResourceInterface
 {
-    /**
-     * @return StockableInterface|null
-     */
     public function getStockable(): ?StockableInterface;
 }

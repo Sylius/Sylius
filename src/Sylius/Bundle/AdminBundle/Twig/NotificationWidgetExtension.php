@@ -14,36 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-final class NotificationWidgetExtension extends \Twig_Extension
+final class NotificationWidgetExtension extends AbstractExtension
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $areNotificationsEnabled;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $checkFrequency;
 
-    /**
-     * @param bool $areNotificationsEnabled
-     * @param int $checkFrequency
-     */
     public function __construct(bool $areNotificationsEnabled, int $checkFrequency)
     {
         $this->areNotificationsEnabled = $areNotificationsEnabled;
         $this->checkFrequency = $checkFrequency;
     }
 
-    /**
-     * @return array
-     */
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function(
+            new TwigFunction(
                 'sylius_render_notifications_widget',
                 [$this, 'renderWidget'],
                 [
@@ -54,12 +46,7 @@ final class NotificationWidgetExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param \Twig_Environment $environment
-     *
-     * @return string
-     */
-    public function renderWidget(\Twig_Environment $environment): string
+    public function renderWidget(Environment $environment): string
     {
         if (!$this->areNotificationsEnabled) {
             return '';

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        expire_password_reset_token: 'Koda za ponastavitev gesla je potekla.'
+        change_password: 'Vaše geslo je bilo uspešno spremenjeno!'
+        reset_password: 'Vaše geslo je bilo uspešno ponastavljeno!'
+        reset_password_request: 'Navodila za ponastavitev gesla smo poslali na vpisan elektronski naslov, če le ta obstaja v našem sistemu.'
+        verify_email: 'Elektronski naslov je bil uspešno potrjen.'
+        verify_email_by_invalid_token: 'Potrditvena koda ni veljavna.'
+        verify_email_request: 'Potrditvena koda je bila poslana na vaš elektronski naslov.'
+        verify_verified_email: 'Elektronski naslov je že potrjen.'

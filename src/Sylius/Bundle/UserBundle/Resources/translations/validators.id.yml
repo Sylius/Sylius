@@ -5,3 +5,12 @@ sylius:
     user:
         email:
             not_blank: Masukkan email Anda.
+            invalid: Email ini tidak valid.
+            not_registered: Pengguna dengan email ini tidak ada. Silahkan daftar dulu.
+        plainPassword:
+            not_blank: Silahkan masukkan kata sandi anda.
+            mismatch: Sandi yang dimasukkan tidak cocok
+            wrong_current: Asalkan password berbeda dari yang sekarang.
+        password:
+            min: Kata sandi harus minimal {{ limit }} karakter.
+            max: Sandi tidak boleh lebih lama dari {{ limit }} karakter.

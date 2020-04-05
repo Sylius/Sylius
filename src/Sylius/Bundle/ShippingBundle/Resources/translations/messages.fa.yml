@@ -37,5 +37,6 @@ sylius:
             description: شرح
             enabled: فعال
             name: نام
+            position: جایگاه
             tax_category: نوع مالیات
             translations: زبان های

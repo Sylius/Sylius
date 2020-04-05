@@ -20,6 +20,8 @@ final class CompositeCartContext implements CartContextInterface
 {
     /**
      * @var PriorityQueue|CartContextInterface[]
+     *
+     * @psalm-var PriorityQueue<CartContextInterface>
      */
     private $cartContexts;
 
@@ -28,10 +30,6 @@ final class CompositeCartContext implements CartContextInterface
         $this->cartContexts = new PriorityQueue();
     }
 
-    /**
-     * @param CartContextInterface $cartContext
-     * @param int $priority
-     */
     public function addContext(CartContextInterface $cartContext, int $priority = 0): void
     {
         $this->cartContexts->insert($cartContext, $priority);

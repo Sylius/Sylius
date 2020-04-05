@@ -20,6 +20,31 @@ final class OrderApiTest extends CheckoutApiTestCase
     /**
      * @test
      */
+    public function it_denies_getting_orders_for_non_authenticated_user()
+    {
+        $this->client->request('GET', '/api/v1/orders/');
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_orders_list_without_cart_state()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/orders.yml');
+
+        $this->client->request('GET', $this->getOrderUrl(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'order/order_index_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
     public function it_denies_getting_an_order_for_non_authenticated_user()
     {
         $this->client->request('GET', $this->getOrderUrl(-1));
@@ -79,9 +104,11 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_get_an_order_with_promotion()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
-        $this->loadFixturesFromFile('resources/checkout_promotion.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+            'resources/checkout_promotion.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -96,9 +123,12 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_get_an_order_with_coupon_based_promotion()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
-        $this->loadFixturesFromFile('resources/checkout_coupon_based_promotion.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+            'resources/checkout_coupon_based_promotion.yml',
+        ]);
+
         $cartId = $this->createCart();
 
         $this->addItemToCart($cartId);
@@ -145,8 +175,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_cancel_an_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -190,8 +222,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_returns_not_found_response_when_shipping_does_not_exist_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -206,8 +240,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_ship_an_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -232,8 +268,10 @@ final class OrderApiTest extends CheckoutApiTestCase
      */
     public function it_allows_to_ship_an_order_with_shipment_code()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -289,8 +327,10 @@ EOT;
      */
     public function it_returns_not_found_response_when_completing_payment_does_not_exist_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -305,8 +345,10 @@ EOT;
      */
     public function it_allows_to_complete_the_payment_for_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -331,8 +373,10 @@ EOT;
      */
     public function it_allows_to_complete_the_payment_and_ship_the_order()
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/checkout.yml');
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yml',
+            'resources/checkout.yml',
+        ]);
 
         $orderId = $this->prepareOrder();
 
@@ -357,20 +401,12 @@ EOT;
         $this->assertResponse($response, 'order/order_fulfilled_show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @param mixed $orderId
-     *
-     * @return string
-     */
-    private function getOrderUrl($orderId)
+    private function getOrderUrl(?int $orderId = null): string
     {
-        return '/api/v1/orders/' . $orderId;
+        return '/api/v1/orders/' . (string) $orderId;
     }
 
     /**
-     * @param mixed $orderId
-     * @param mixed $shipmentId
-     *
      * @return string
      */
     private function getShipOrderShipmentUrl($orderId, $shipmentId)
@@ -379,9 +415,6 @@ EOT;
     }
 
     /**
-     * @param mixed $orderId
-     * @param mixed $paymentId
-     *
      * @return string
      */
     private function getCompleteOrderPaymentUrl($orderId, $paymentId)
@@ -390,8 +423,6 @@ EOT;
     }
 
     /**
-     * @param mixed $orderId
-     *
      * @return string
      */
     private function getCancelUrl($orderId)

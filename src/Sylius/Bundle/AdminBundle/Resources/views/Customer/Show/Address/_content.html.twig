@@ -1,0 +1,7 @@
+<div class="ui attached segment" id="default-address">
+    {% if customer.defaultAddress is not null %}
+        {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
+    {% else %}
+        {{ 'sylius.ui.this_customer_does_not_have_a_default_address'|trans }}
+    {% endif %}
+</div>

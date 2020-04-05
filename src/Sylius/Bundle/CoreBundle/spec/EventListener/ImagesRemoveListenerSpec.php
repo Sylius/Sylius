@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Event\PostFlushEventArgs;
+use Doctrine\ORM\UnitOfWork;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
 final class ImagesRemoveListenerSpec extends ObjectBehavior
@@ -35,36 +38,80 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         $this->shouldHaveType(ImagesRemoveListener::class);
     }
 
-    function it_removes_file_on_post_remove_event(
-        ImageUploaderInterface $imageUploader,
-        CacheManager $cacheManager,
-        FilterManager $filterManager,
-        LifecycleEventArgs $event,
+    function it_saves_scheduled_entity_deletions_images_paths(
+        OnFlushEventArgs $event,
+        EntityManagerInterface $entityManager,
+        UnitOfWork $unitOfWork,
         ImageInterface $image,
-        FilterConfiguration $filterConfiguration
+        ProductInterface $product
     ): void {
-        $event->getEntity()->willReturn($image);
-        $image->getPath()->willReturn('image/path');
+        $event->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 
-        $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
-        $filterConfiguration->all()->willReturn(['sylius_small' => 'thumbnalis']);
-        $imageUploader->remove('image/path')->shouldBeCalled();
-        $cacheManager->remove('image/path', ['sylius_small'])->shouldBeCalled();
+        $image->getPath()->shouldBeCalled();
 
-        $this->postRemove($event);
+        $this->onFlush($event);
     }
 
-    function it_does_nothing_if_entity_is_not_image(
+    function it_removes_saved_images_paths(
         ImageUploaderInterface $imageUploader,
         CacheManager $cacheManager,
         FilterManager $filterManager,
-        LifecycleEventArgs $event
+        OnFlushEventArgs $onFlushEvent,
+        PostFlushEventArgs $postFlushEvent,
+        EntityManagerInterface $entityManager,
+        UnitOfWork $unitOfWork,
+        ImageInterface $image,
+        ProductInterface $product,
+        FilterConfiguration $filterConfiguration
     ): void {
-        $event->getEntity()->willReturn(new \stdClass());
-        $filterManager->getFilterConfiguration()->shouldNotBeCalled();
-        $imageUploader->remove(Argument::any())->shouldNotBeCalled();
-        $cacheManager->remove(Argument::any(), Argument::any())->shouldNotBeCalled();
+        $onFlushEvent->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 
-        $this->postRemove($event);
+        $image->getPath()->willReturn('image/path');
+
+        $this->onFlush($onFlushEvent);
+
+        $imageUploader->remove('image/path')->shouldBeCalled();
+
+        $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
+        $filterConfiguration->all()->willReturn(['test' => 'Test']);
+
+        $cacheManager->remove('image/path', ['test'])->shouldBeCalled();
+
+        $this->postFlush($postFlushEvent);
+    }
+
+    function it_removes_saved_images_paths_from_both_filesystem_and_service_property(
+        ImageUploaderInterface $imageUploader,
+        CacheManager $cacheManager,
+        FilterManager $filterManager,
+        OnFlushEventArgs $onFlushEvent,
+        PostFlushEventArgs $postFlushEvent,
+        EntityManagerInterface $entityManager,
+        UnitOfWork $unitOfWork,
+        ImageInterface $image,
+        ProductInterface $product,
+        FilterConfiguration $filterConfiguration
+    ): void {
+        $onFlushEvent->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+        $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
+
+        $image->getPath()->willReturn('image/path');
+
+        $this->onFlush($onFlushEvent);
+
+        $imageUploader->remove('image/path')->shouldBeCalledOnce();
+
+        $filterManager->getFilterConfiguration()->willReturn($filterConfiguration);
+        $filterConfiguration->all()->willReturn(['test' => 'Test']);
+
+        $cacheManager->remove('image/path', ['test'])->shouldBeCalledOnce();
+
+        $this->postFlush($postFlushEvent);
+        $this->postFlush($postFlushEvent);
     }
 }

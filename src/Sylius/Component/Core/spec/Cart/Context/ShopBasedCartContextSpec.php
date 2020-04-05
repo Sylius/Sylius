@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Cart\Context;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -86,7 +87,9 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
         $cart->setCustomer($customer)->shouldBeCalled();
-        $cart->setShippingAddress($defaultAddress)->shouldBeCalled();
+        $cart->setBillingAddress(Argument::that(static function (AddressInterface $address): bool {
+            return $address->getCustomer() === null;
+        }))->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -122,5 +125,66 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
             ->shouldThrow(CartNotFoundException::class)
             ->during('getCart')
         ;
+    }
+
+    function it_caches_a_cart(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer
+    ): void {
+        $cartContext->getCart()->shouldBeCalledTimes(1)->willReturn($cart);
+
+        $shopperContext->getChannel()->shouldBeCalledTimes(1)->willReturn($channel);
+        $shopperContext->getLocaleCode()->shouldBeCalledTimes(1)->willReturn('pl');
+        $shopperContext->getCustomer()->shouldBeCalledTimes(1)->willReturn($customer);
+        $customer->getDefaultAddress()->shouldBeCalledTimes(1)->willReturn(null);
+
+        $channel->getBaseCurrency()->shouldBeCalledTimes(1)->willReturn($currency);
+        $currency->getCode()->shouldBeCalledTimes(1)->willReturn('PLN');
+
+        $cart->setChannel($channel)->shouldBeCalledTimes(1);
+        $cart->setCurrencyCode('PLN')->shouldBeCalledTimes(1);
+        $cart->setLocaleCode('pl')->shouldBeCalledTimes(1);
+        $cart->setCustomer($customer)->shouldBeCalledTimes(1);
+
+        $this->getCart()->shouldReturn($cart);
+        $this->getCart()->shouldReturn($cart);
+    }
+
+    function it_recreates_a_cart_after_it_is_reset(
+        CartContextInterface $cartContext,
+        ShopperContextInterface $shopperContext,
+        OrderInterface $firstCart,
+        OrderInterface $secondCart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        CustomerInterface $customer
+    ): void {
+        $cartContext->getCart()->shouldBeCalledTimes(2)->willReturn($firstCart, $secondCart);
+
+        $shopperContext->getChannel()->shouldBeCalledTimes(2)->willReturn($channel);
+        $shopperContext->getLocaleCode()->shouldBeCalledTimes(2)->willReturn('pl');
+        $shopperContext->getCustomer()->shouldBeCalledTimes(2)->willReturn($customer);
+        $customer->getDefaultAddress()->shouldBeCalledTimes(2)->willReturn(null);
+
+        $channel->getBaseCurrency()->shouldBeCalledTimes(2)->willReturn($currency);
+        $currency->getCode()->shouldBeCalledTimes(2)->willReturn('PLN');
+
+        $firstCart->setChannel($channel)->shouldBeCalledTimes(1);
+        $firstCart->setCurrencyCode('PLN')->shouldBeCalledTimes(1);
+        $firstCart->setLocaleCode('pl')->shouldBeCalledTimes(1);
+        $firstCart->setCustomer($customer)->shouldBeCalledTimes(1);
+
+        $secondCart->setChannel($channel)->shouldBeCalledTimes(1);
+        $secondCart->setCurrencyCode('PLN')->shouldBeCalledTimes(1);
+        $secondCart->setLocaleCode('pl')->shouldBeCalledTimes(1);
+        $secondCart->setCustomer($customer)->shouldBeCalledTimes(1);
+
+        $this->getCart()->shouldReturn($firstCart);
+        $this->reset();
+        $this->getCart()->shouldReturn($secondCart);
     }
 }

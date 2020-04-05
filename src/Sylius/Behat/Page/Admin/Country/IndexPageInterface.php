@@ -18,17 +18,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param CountryInterface $country
-     *
-     * @return bool
-     */
-    public function isCountryDisabled(CountryInterface $country);
+    public function isCountryDisabled(CountryInterface $country): bool;
 
-    /**
-     * @param CountryInterface $country
-     *
-     * @return bool
-     */
-    public function isCountryEnabled(CountryInterface $country);
+    public function isCountryEnabled(CountryInterface $country): bool;
 }

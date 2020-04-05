@@ -25,3 +25,4 @@ sylius_admin_ajax_get_version:
     path: /get-version
     defaults:
         _controller: sylius.controller.admin.notification:getVersionAction
+        _format: json

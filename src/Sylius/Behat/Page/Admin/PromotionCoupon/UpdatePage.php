@@ -21,44 +21,29 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * @param int $limit
-     */
-    public function setCustomerUsageLimit($limit)
+    public function setCustomerUsageLimit(int $limit): void
     {
         $this->getDocument()->fillField('Per-Customer Usage Limit', $limit);
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     */
-    public function setExpiresAt(\DateTimeInterface $date)
+    public function setExpiresAt(\DateTimeInterface $date): void
     {
         $timestamp = $date->getTimestamp();
 
         $this->getDocument()->fillField('Expires at', date('Y-m-d', $timestamp));
     }
 
-    /**
-     * @param int $limit
-     */
-    public function setUsageLimit($limit)
+    public function setUsageLimit(string $limit): void
     {
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
-    /**
-     * @return NodeElement
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_coupon_code',

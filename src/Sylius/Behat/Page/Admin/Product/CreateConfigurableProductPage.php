@@ -17,18 +17,19 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $localeCode)
+    public function nameItIn(string $name, string $localeCode): void
     {
+        $this->clickTabIfItsNotActive('details');
+
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
@@ -38,18 +39,29 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectOption($optionName)
+    public function isMainTaxonChosen(string $taxonName): bool
+    {
+        $this->openTaxonBookmarks();
+        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+
+        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+    }
+
+    public function selectMainTaxon(TaxonInterface $taxon): void
+    {
+        $this->openTaxonBookmarks();
+
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
+    }
+
+    public function selectOption(string $optionName): void
     {
         $this->getDocument()->selectFieldOption('Options', $optionName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImage($path, $type = null)
+    public function attachImage(string $path, ?string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -65,24 +77,27 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
+            'search' => '.ui.fluid.search.selection.dropdown',
+            'search_item_selected' => 'div.menu > div.item.selected',
             'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
+            'taxonomy' => 'a[data-tab="taxonomy"]',
         ]);
     }
 
-    /**
-     * @param string $tabName
-     */
-    private function clickTabIfItsNotActive($tabName)
+    private function openTaxonBookmarks(): void
+    {
+        $this->getElement('taxonomy')->click();
+    }
+
+    private function clickTabIfItsNotActive(string $tabName): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
         if (!$attributesTab->hasClass('active')) {
@@ -90,10 +105,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    /**
-     * @return NodeElement
-     */
-    private function getLastImageElement()
+    private function getLastImageElement(): NodeElement
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');

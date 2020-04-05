@@ -21,7 +21,7 @@ sylius:
             not_blank: Vă rugăm să alegeți anul expirării.
     payment:
         currency_code:
-            not_valid: Codul valutei introdus este invalid.
+            not_valid: Codul de valută pe care l-aţi introdus nu este valid.
         method:
             not_blank: 'Selectează o metodă de plată.'
     payment_method:

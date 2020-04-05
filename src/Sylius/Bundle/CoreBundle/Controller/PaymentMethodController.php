@@ -20,12 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentMethodController extends ResourceController
 {
-    /**
-     * @param Request $request
-     * @param string $template
-     *
-     * @return Response
-     */
     public function getPaymentGatewaysAction(Request $request, string $template): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

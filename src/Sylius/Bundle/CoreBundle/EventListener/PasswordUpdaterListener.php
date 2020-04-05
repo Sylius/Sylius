@@ -21,15 +21,13 @@ use Webmozart\Assert\Assert;
 final class PasswordUpdaterListener extends BasePasswordUpdaterListener
 {
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function customerUpdateEvent(GenericEvent $event): void
     {
-        /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
 
+        /** @var CustomerInterface $customer */
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
         $user = $customer->getUser();

@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: E-mail
-            enabled: Omogući
+            enabled: Omogućeno
             password:
                 label: Lozinka
                 confirmation: Verifikacija

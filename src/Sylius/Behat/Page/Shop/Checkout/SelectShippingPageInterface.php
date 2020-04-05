@@ -13,70 +13,35 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface SelectShippingPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $shippingMethod
-     */
-    public function selectShippingMethod($shippingMethod);
+    public function selectShippingMethod(string $shippingMethod): void;
 
-    /**
-     * @return string[]
-     */
-    public function getShippingMethods();
+    public function getShippingMethods(): array;
 
-    /**
-     * @return bool
-     */
-    public function hasNoShippingMethodsMessage();
+    public function getSelectedShippingMethodName(): ?string;
 
-    /**
-     * @param string $shippingMethodName
-     * @param string $fee
-     *
-     * @return bool
-     */
-    public function hasShippingMethodFee($shippingMethodName, $fee);
+    public function hasNoShippingMethodsMessage(): bool;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemSubtotal($itemName);
+    public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool;
 
-    public function nextStep();
+    public function getItemSubtotal(string $itemName): string;
 
-    public function changeAddress();
+    public function nextStep(): void;
 
-    public function changeAddressByStepLabel();
+    public function changeAddress(): void;
 
-    /**
-     * @return mixed string
-     */
-    public function getPurchaserEmail();
+    public function changeAddressByStepLabel(): void;
 
-    /**
-     * @return string
-     */
-    public function getValidationMessageForShipment();
+    public function getPurchaserEmail(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasNoAvailableShippingMethodsWarning();
+    public function getValidationMessageForShipment(): string;
 
-    /**
-     * @return bool
-     */
-    public function isNextStepButtonUnavailable();
+    public function hasNoAvailableShippingMethodsWarning(): bool;
 
-    /**
-     * @param string $shippingMethodName
-     *
-     * @return bool
-     */
-    public function hasShippingMethod($shippingMethodName);
+    public function isNextStepButtonUnavailable(): bool;
+
+    public function hasShippingMethod(string $shippingMethodName): bool;
 }

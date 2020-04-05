@@ -22,14 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductsToCodesTransformer implements DataTransformerInterface
 {
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @param ProductRepositoryInterface $productRepository
-     */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
@@ -59,10 +54,6 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     public function reverseTransform($products): array
     {
         Assert::isInstanceOf($products, Collection::class);
-
-        if (null === $products) {
-            return [];
-        }
 
         $productCodes = [];
 

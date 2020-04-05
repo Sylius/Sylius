@@ -4,7 +4,7 @@
 default:
     suites:
         ui_impersonating_customers:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.address
@@ -28,5 +28,6 @@ default:
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.login
+
             filters:
                 tags: "@impersonating_customers && @ui"

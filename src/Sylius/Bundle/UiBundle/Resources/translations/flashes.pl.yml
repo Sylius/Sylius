@@ -17,7 +17,7 @@ sylius:
         apply_state_machine_transition_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji zamówienia. Prosimy spróbować ponownie.'
         promotion_integrity: 'Nie możesz ponownie skorzystać z promocji o nazwie %promotionName%.'
         total_integrity: 'Zmieniono sumę za Twoje zamówienie. Sprawdź zamówienie i zatwierdź je ponownie.'
-        update_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji produktu. Spróbuj uaktualnić go ponownie.'
+        update_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji zamówienia. Prosimy spróbować ponownie.'
     payment:
         apply_state_machine_transition_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji płatności. Spróbuj uaktualnić ją ponownie.'
     product:

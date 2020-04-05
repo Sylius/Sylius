@@ -26,7 +26,7 @@ How to create an Adjustment programmatically?
 
 The Adjustments alone are a bit useless. They should be created alongside Orders.
 
-As usually get a factory and create an adjustment.
+As usual, get a factory and create an adjustment.
 Then give it a ``type`` - you can find all the available types on the `AdjustmentInterface <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Model/AdjustmentInterface.php>`_.
 The adjustment needs also the ``amount`` - which is the amount of money that will be **added to the orders total**.
 
@@ -59,6 +59,13 @@ To see changes on the order you need to update it in the database.
 .. code-block:: php
 
    $this->container->get('sylius.manager.order')->flush();
+
+.. tip::
+
+    An adjustment can be locked with ``$adjustment->lock()``.
+    It can be useful when the total order price is recalculated and a promotion isn't applicable anymore
+    but you still want it to be applied to the order.
+    In case of an expired coupon that still should be included in the order for example.
 
 Learn more
 ----------

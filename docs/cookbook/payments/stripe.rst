@@ -1,5 +1,18 @@
+.. warning::
+
+    On September 14, 2019 the Strong Customer Authentication (SCA) requirement has been introduced.
+    The implementation provided by Sylius Core was not *SCA Ready* and has been deprecated.
+    Please have a look at the `official documentation of Stripe regarding this topic <https://stripe.com/guides/strong-customer-authentication>`_.
+
+.. rst-class:: outdated
+
 How to configure Stripe Credit Card payment?
 ============================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 One of very important payment methods in e-commerce are credit cards. Payments via credit card are in Sylius supported by `Stripe <http://stripe.com/docs>`_.
 
@@ -10,7 +23,7 @@ Stripe is not available by default in Sylius, to have it you need to add its pac
 
 .. code-block:: bash
 
-    $ php composer require stripe/stripe-php:~4.1
+    php composer require stripe/stripe-php:~4.1
 
 Add a payment method with the Stripe gateway in the Admin Panel
 ---------------------------------------------------------------
@@ -29,6 +42,10 @@ Go to the ``http://localhost:8000/admin/payment-methods/new/stripe_checkout`` ur
 .. tip::
 
     If your are not sure how to do it check how we do it :doc:`for Paypal in this cookbook </cookbook/payments/paypal>`.
+
+.. warning::
+
+    When your project is behind a loadbalancer and uses https you probably need to configure `trusted proxies <http://symfony.com/doc/current/deployment/proxies.html>`_. Otherwise the payment will not succeed and the user will endlessly loopback to the payment page without any notice.
 
 Choosing Stripe Credit Card method in Checkout
 ----------------------------------------------

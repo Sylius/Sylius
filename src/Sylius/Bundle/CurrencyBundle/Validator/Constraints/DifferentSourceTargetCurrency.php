@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 class DifferentSourceTargetCurrency extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.exchange_rate.different_source_target_currency';
 
     /**

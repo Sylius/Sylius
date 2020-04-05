@@ -15,10 +15,18 @@ and **priority** that is useful for them, because the exclusive promotion should
 
    The ``usageLimit`` of a promotion is the **total number of times this promotion can be used**.
 
+.. tip::
+
+   **Promotion priorities** are numbers that you assign to the promotion. The larger the number, the higher the priority.
+   So a promotion with priority 3 would be applied before a promotion with priority set to 1.
+
+   What can you use the priority for? Well, imagine that you have two different promotions, one's action is to give 10% discount
+   on whole order and the other one gives 5$ discount from the order total. Business (and money) wise, which one should we apply first? ;)
+
 How to create a Promotion programmatically?
 -------------------------------------------
 
-Just as usually, use a factory. The promotion needs a ``code`` and a ``name``.
+Just as usual, use a factory. The promotion needs a ``code`` and a ``name``.
 
 .. code-block:: php
 
@@ -124,7 +132,7 @@ How to create an PromotionAction programmatically?
 In order to create a new PromotionAction we can use the dedicated `PromotionActionFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/PromotionActionFactory.php>`_.
 
 It has special methods for creating all types of actions available by default.
-In the example below you can how to create a simple Fixed Discount action, that reduces the total of an order by 10$.
+In the example below you can see how to create a simple Fixed Discount action, that reduces the total of an order by 10$.
 
 .. code-block:: php
 

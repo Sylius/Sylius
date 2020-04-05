@@ -11,7 +11,7 @@ sylius:
             coupon: Kupon
         checkout:
             addressing:
-                different_billing_address: Uporabimo drug naslov za dostavo?
+                different_billing_address: Uporabimo drug naslov za račun?
             payment_method: Način plačila
             shipping_method: Način pošiljanja
         promotion:
@@ -19,10 +19,18 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Izdelek
+        promotion_coupon:
+            per_customer_usage_limit: Omejitev uporabe na kupca
         group:
             name: Ime
             roles: Vloge
         channel:
+            billing_data:
+                city: Mesto
+                company: Podjetje
+                country: Država
+                postcode: Poštna številka
+                street: Ulica
             currencies: Valute
             hostname: Ime gostitelja
             locale_default: Privzeto območje
@@ -59,6 +67,7 @@ sylius:
             channels: Kanali
             enabled: Omogočeno
         product_filter:
+            name: Ime
             code: Koda
         product_variant:
             tax_category: Kategorija davka
@@ -79,10 +88,18 @@ sylius:
             zone: Cona
         taxon:
             code: Koda
+            file: Izberite sliko
             images: Slike
+        taxonomy:
+            file: Izberite sliko
         user:
+            billing_address: Naslov za račun
+            different_billing_address: Uporabimo drug naslov za račun?
+            enabled: Omogočeno
+            first_name: Ime
             groups: Skupine
             roles: Vloge
+            last_name: Priimek
             password: Geslo
             shipping_address: Naslov za dostavo
         user_filter:
@@ -107,10 +124,20 @@ sylius:
         product_association_type:
             name: Ime
         promotion_rule:
+            customer_group:
+                group: Skupina kupcev
+            has_taxon:
+                taxons: Taksoni
+            product:
+                products: Izdelki
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
+                amount: Znesek
         payment_method:
             channels: Kanali
+        zone:
+            scopes:
+                shipping: Dostava
     installer:
         extensions:
             header: razširitve
@@ -127,8 +154,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Večbajtni niz
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -154,8 +181,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: ni opuščeno
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
@@ -165,3 +192,4 @@ sylius:
                 header: Opuščeni časovni pas
                 help: Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).
             version: Različica PHP
+            version_recommended: Priporočena različica PHP

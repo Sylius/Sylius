@@ -1,9 +1,26 @@
-# UPGRADE FROM 1.0.1 to 1.0.2
+# UPGRADE FROM `v1.0.17` TO `v1.0.18`
+
+* **BC BREAK**: `OrderShowMenuBuilder` constructor now requires the fourth argument being 
+  `Symfony\Component\Security\Csrf\CsrfTokenManagerInterface` instance due to security reasons.
+
+# UPGRADE FROM `v1.0.16` TO `v1.0.17`
+
+* **BC BREAK**: `Sylius\Bundle\ResourceBundle\Controller::applyStateMachineTransitionAction` method now includes CSRF token checks due 
+  to security reasons. If you used it for REST API, these checks can be disabled by adding 
+  `csrf_protection: false` to your routing configuration. 
+
+# UPGRADE FROM `v1.0.8` TO `v1.0.9`
+
+* `Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper`'s `resolveVariant(ProductInterface $product): ProductVariantInterface`
+  signature was changed to `resolveVariant(ProductInterface $product): ?ProductVariantInterface` in order to reflect 
+  the real behaviour.
+
+# UPGRADE FROM `v1.0.1` TO `v1.0.2`
 
 * `Sylius\Bundle\AdminApiBundle\Model\ClientManager`'s `findClientByPublicId($publicId): ClientInterface` signature
   was changed to `findClientByPublicId($publicId): ?ClientInterface` in order to reflect the real behaviour.
 
-# UPGRADE FROM 1.0.0-beta.3 to 1.0.0
+# UPGRADE FROM `v1.0.0-beta.3` TO `v1.0.0`
 
 ## Application:
 
@@ -20,7 +37,7 @@
   {
         // Other registrered bundles
     
-	    if (in_array($this->getEnvironment(), ['prod']))
+        if (in_array($this->getEnvironment(), ['prod']))
         {
             $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
         }
@@ -259,7 +276,7 @@
 * ImagineBundle has been upgraded from ^1.6 to ^1.9.1 to move past a BC break in console commands: https://github.com/liip/LiipImagineBundle/releases/tag/1.9.1.
 
 * If `sylius_shop.locale_switcher` is set to `storage`, `LocaleStrippingRouter` is loaded, which strips out `_locale` parameter
-  from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: http://docs.sylius.org/en/latest/cookbook/disabling-localised-urls.html
+  from the URL if it's the same as the one already in the storage. In order to disable localized urls, follow this cookbook entry: http://docs.sylius.com/en/latest/cookbook/disabling-localised-urls.html
  
 * `ShopUserLogoutHandler` has different parameters in constructor:
     * `HttpUtils $httpUtils`
@@ -315,7 +332,7 @@
   * `UserInterface::setExpiresAt`
   * `UserInterface::setLastLogin`
 
-# UPGRADE FROM 1.0.0-beta.2 to 1.0.0-beta.3
+# UPGRADE FROM `v1.0.0-beta.2` TO `v1.0.0-beta.3`
 
 ## Packages:
 
@@ -397,7 +414,7 @@
   * from `SyliusCoreBundle/Resources/config/serializer/Model.TaxRate.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.TaxRate.yml`
   * from `SyliusCoreBundle/Resources/config/serializer/Model.Taxon.yml` to `SyliusAdminApiBundle/Resources/config/serializer/Model.Taxon.yml`
 
-# UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
+# UPGRADE FROM `v1.0.0-beta.1` TO `v1.0.0-beta.2`
 
 * Bundles, container extensions and bundles configurations were made final and can't be extended anymore, follow Symfony
   best practices and do not extend them.

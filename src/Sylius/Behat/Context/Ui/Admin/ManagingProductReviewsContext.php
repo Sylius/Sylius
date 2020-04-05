@@ -23,26 +23,15 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -54,11 +43,28 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I browse product reviews
      * @When I want to browse product reviews
      */
     public function iWantToBrowseProductReviews()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I check (also) the :productReviewTitle product review
+     */
+    public function iCheckTheProductReview(string $productReviewTitle): void
+    {
+        $this->indexPage->checkResourceOnPage(['title' => $productReviewTitle]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
     }
 
     /**
@@ -70,11 +76,12 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @Then I should see a single product review in the list
      * @Then I should see :amount reviews in the list
      */
-    public function iShouldSeeReviewsInTheList($amount)
+    public function iShouldSeeReviewsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
@@ -91,7 +98,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsTitleTo($title = null)
     {
-        $this->updatePage->specifyTitle($title);
+        $this->updatePage->specifyTitle($title ?? '');
     }
 
     /**
@@ -100,7 +107,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeItsCommentTo($comment = null)
     {
-        $this->updatePage->specifyComment($comment);
+        $this->updatePage->specifyComment($comment ?? '');
     }
 
     /**

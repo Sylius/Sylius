@@ -14,7 +14,7 @@ The new Rule needs a RuleChecker class:
 
     <?php
 
-    namespace AppBundle\Promotion\Checker\Rule;
+    namespace App\Promotion\Checker\Rule;
 
     use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
     use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -26,7 +26,7 @@ The new Rule needs a RuleChecker class:
         /**
          * {@inheritdoc}
          */
-        public function isEligible(PromotionSubjectInterface $subject, array $configuration)
+        public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
         {
             return $subject->getCustomer()->isPremium();
         }
@@ -43,7 +43,7 @@ Create the configuration form type class:
 
     <?php
 
-    namespace AppBundle\Form\Type\Rule;
+    namespace App\Form\Type\Rule;
 
     use Symfony\Component\Form\AbstractType;
 
@@ -58,26 +58,27 @@ Create the configuration form type class:
         }
     }
 
-And configure it in the ``app/config/services.yml``:
+And configure it in the ``config/services.yaml``:
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/services.yaml
     app.form.type.promotion_rule.premium_customer_configuration:
-        class: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType
+        class: App\Form\Type\Rule\PremiumCustomerConfigurationType
         tags:
             - { name: form.type }
 
 
-Register the new rule checker as a service in the ``app/config/services.yml``:
+Register the new rule checker as a service in the ``config/services.yaml``:
 
 .. code-block:: yaml
 
-    # apps/config/services.yml
-    app.promotion_rule_checker.premium_customer:
-        class: AppBundle\Promotion\Checker\Rule\PremiumCustomerRuleChecker
-        tags:
-            - { name: sylius.promotion_rule_checker, type: premium_customer, form_type: AppBundle\Form\Type\Rule\PremiumCustomerConfigurationType, label: Premium customer }
+    # config/services.yaml
+    services:
+        app.promotion_rule_checker.premium_customer:
+            class: App\Promotion\Checker\Rule\PremiumCustomerRuleChecker
+            tags:
+                - { name: sylius.promotion_rule_checker, type: premium_customer, form_type: App\Form\Type\Rule\PremiumCustomerConfigurationType, label: Premium customer }
 
 
 That's all. You will now be able to choose the new rule while creating a new promotion.

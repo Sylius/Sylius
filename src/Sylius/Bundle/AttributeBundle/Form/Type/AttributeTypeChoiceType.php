@@ -19,14 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AttributeTypeChoiceType extends AbstractType
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $attributeTypes;
 
-    /**
-     * @param array $attributeTypes
-     */
     public function __construct(array $attributeTypes)
     {
         $this->attributeTypes = $attributeTypes;

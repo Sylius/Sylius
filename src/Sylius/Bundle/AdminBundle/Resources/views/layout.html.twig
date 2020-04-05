@@ -1,50 +1,35 @@
-{% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
+{% extends '@SyliusUi/Layout/sidebar.html.twig' %}
 
 {% block title %} | Sylius{% endblock %}
 
 {% block stylesheets %}
-    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
+{% endblock %}
 
-    {{ sonata_block_render_event('sylius.admin.layout.stylesheets') }}
+{% block flash_messages %}
+    {% include '@SyliusAdmin/_flashes.html.twig' %}
 {% endblock %}
 
 {% block topbar %}
-    <a class="icon item" id="sidebar-toggle" title="{{ 'sylius.ui.toggle_sidebar'|trans }}">
-        <i class="sidebar icon"></i>
-    </a>
-
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_left') }}
-
-    {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/_channelLinks.html.twig'})) }}
-    {% include '@SyliusAdmin/_search.html.twig' %}
+    {{ sylius_template_event('sylius.admin.layout.topbar_left') }}
 
     <div class="ui left floated dividing empty item"></div>
 
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_middle') }}
+    {{ sylius_template_event('sylius.admin.layout.topbar_middle') }}
 
     <div class="ui right floated dividing empty item"></div>
 
-    {{ sylius_render_notifications_widget() }}
-    {% include '@SyliusAdmin/_security.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.admin.layout.topbar_right') }}
+    {{ sylius_template_event('sylius.admin.layout.topbar_right') }}
 {% endblock %}
 
 {% block sidebar %}
-    {{ sonata_block_render_event('sylius.admin.layout.sidebar_top') }}
-
-    <a class="item" href="{{ path('sylius_admin_dashboard') }}"><b>Sylius</b></a>
-    {{ knp_menu_render('sylius.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
-
-    {{ sonata_block_render_event('sylius.admin.layout.sidebar_down') }}
+    {{ sylius_template_event('sylius.admin.layout.sidebar') }}
 {% endblock %}
 
 {% block footer %}
-    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+{{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.com" target="_blank">Sylius v{{ sylius_meta.version }}</a>. {{ 'sylius.ui.see_issue'|trans }}? <a href="https://github.com/Sylius/Sylius/issues" target="_blank">{{ 'sylius.ui.report_it'|trans }}!</a>
 {% endblock %}
 
 {% block javascripts %}
-    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
-
-    {{ sonata_block_render_event('sylius.admin.layout.javascripts') }}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
 {% endblock %}

@@ -13,49 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface RegisterPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkValidationMessageFor($element, $message);
+    public function getRouteName(): string;
 
-    public function register();
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function register(): void;
 
-    /**
-     * @param string $firstName
-     */
-    public function specifyFirstName($firstName);
+    public function specifyEmail(string $email): void;
 
-    /**
-     * @param string $lastName
-     */
-    public function specifyLastName($lastName);
+    public function specifyFirstName(string $firstName): void;
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
-    /**
-     * @param string $phoneNumber
-     */
-    public function specifyPhoneNumber($phoneNumber);
+    public function specifyPhoneNumber(string $phoneNumber): void;
 
-    /**
-     * @param string $password
-     */
-    public function verifyPassword($password);
+    public function verifyPassword(string $password): void;
 
-    public function subscribeToTheNewsletter();
+    public function subscribeToTheNewsletter(): void;
 }

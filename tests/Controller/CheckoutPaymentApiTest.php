@@ -222,8 +222,6 @@ EOT;
     }
 
     /**
-     * @param mixed $cartId
-     *
      * @return string
      */
     private function getSelectPaymentUrl($cartId)

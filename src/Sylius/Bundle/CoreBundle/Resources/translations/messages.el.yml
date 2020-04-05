@@ -25,6 +25,12 @@ sylius:
             name: Ονομασία
             roles: Ρόλοι
         channel:
+            billing_data:
+                city: Πόλη
+                company: Εταιρεία
+                country: Χώρα
+                postcode: Ταχ. Κώδικας
+                street: Οδός
             contact_email: Email επικοινωνίας
             currencies: Νομίσματα
             currency_base: Βασικό νόμισμα
@@ -68,7 +74,7 @@ sylius:
             enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
-            code: Κωδικός
+            code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
             shipping_category: Κατηγορία αποστολής
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Συμβολοσειρά χαρακτήρων πολλών byte
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: σύστημα αρχείων
             cache:
                 header: προσωρινή Μνήμη
-                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: υπάρχει
             logs:
                 header: αρχεία καταγραφής
-                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: δεν υπάρχει
             not_writable: χωρίς δυνατότητα εγγραφής
             parameters:
                 header: parameters.yml
-                help: 'Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo chmod a + w %path%'
+                help: "Για να ορίσεις τα δικαιώματα εκτέλεσε το παρακάτω: sudo chmod a + w %path%"
             vendors: προμηθευτές
             writable: εγγράψιμο
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: μη παρωχημένο
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

@@ -19,16 +19,9 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 interface ShippingMethodsResolverInterface
 {
     /**
-     * @param ShippingSubjectInterface $subject
-     *
      * @return ShippingMethodInterface[]
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array;
 
-    /**
-     * @param ShippingSubjectInterface $subject
-     *
-     * @return bool
-     */
     public function supports(ShippingSubjectInterface $subject): bool;
 }

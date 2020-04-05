@@ -13,8 +13,8 @@ Feature: Select product attribute validation
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"
         And I specify its code as "mug_material"
-        And I add value "Banana Skin"
-        And I also add value "Orange Skin"
+        And I add value "Banana Skin" in "English (United States)"
+        And I also add value "Orange Skin" in "English (United States)"
         And I check multiple option
         And I specify its min entries value as 8
         And I specify its max entries value as 6
@@ -27,8 +27,8 @@ Feature: Select product attribute validation
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"
         And I specify its code as "mug_material"
-        And I add value "Banana Skin"
-        And I also add value "Orange Skin"
+        And I add value "Banana Skin" in "English (United States)"
+        And I also add value "Orange Skin" in "English (United States)"
         And I check multiple option
         And I specify its min entries value as 4
         And I specify its max entries value as 6
@@ -41,8 +41,8 @@ Feature: Select product attribute validation
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"
         And I specify its code as "mug_material"
-        And I add value "Banana Skin"
-        And I also add value "Orange Skin"
+        And I add value "Banana Skin" in "English (United States)"
+        And I also add value "Orange Skin" in "English (United States)"
         And I do not check multiple option
         And I specify its min entries value as 4
         And I specify its max entries value as 6

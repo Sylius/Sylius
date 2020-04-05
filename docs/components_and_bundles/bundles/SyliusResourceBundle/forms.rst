@@ -13,7 +13,7 @@ Create a FormType class for your resource
 
     <?php
 
-    namespace AppBundle\Form\Type;
+    namespace App\Form\Type;
 
     use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
     use Symfony\Component\Form\FormBuilderInterface;
@@ -53,7 +53,7 @@ Register the FormType as a service
 .. code-block:: yaml
 
     app.book.form.type:
-        class: AppBundle\Form\Type\BookType
+        class: App\Form\Type\BookType
         tags:
             - { name: form.type }
         arguments: ['%app.model.book.class%', '%app.book.form.type.validation_groups%']
@@ -67,7 +67,7 @@ Configure the form for your resource
         resources:
             app.book:
                 classes:
-                    model: AppBundle\Entity\Book
-                    form: AppBundle\Form\Type\BookType
+                    model: App\Entity\Book
+                    form: App\Form\Type\BookType
 
 That's it. Your new class will be used for all forms!

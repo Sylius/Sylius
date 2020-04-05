@@ -8,7 +8,7 @@ sylius:
             add_attributes: Adaugă atribut
             choices: Opțiuni
             code: Cod
-            name: Nume
+            name: Nume produs
             translations: Traduceri
             type: Tip
         attribute_type:

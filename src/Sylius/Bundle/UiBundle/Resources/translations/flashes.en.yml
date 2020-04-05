@@ -17,10 +17,14 @@ sylius:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
         promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
         total_integrity: 'Your order total has been changed, check your order information and confirm it again.'
-        update_error: 'There was an unexpected problem with updating a product. Please, try to update product again.'
+        update_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
     payment:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
     product:
         out_of_stock: 'There is only %quantity% of this product in the stock.'
     product_variant:
         update_error: 'There was an unexpected problem with updating a product variant. Please, try to update product variant again.'
+    promotion:
+        update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

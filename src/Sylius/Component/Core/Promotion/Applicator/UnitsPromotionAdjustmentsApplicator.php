@@ -25,20 +25,12 @@ use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
 {
-    /**
-     * @var AdjustmentFactoryInterface
-     */
+    /** @var AdjustmentFactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var IntegerDistributorInterface
-     */
+    /** @var IntegerDistributorInterface */
     private $distributor;
 
-    /**
-     * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param IntegerDistributorInterface $distributor
-     */
     public function __construct(
         AdjustmentFactoryInterface $adjustmentFactory,
         IntegerDistributorInterface $distributor
@@ -67,11 +59,6 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         }
     }
 
-    /**
-     * @param OrderItemInterface $item
-     * @param PromotionInterface $promotion
-     * @param int $itemPromotionAmount
-     */
     private function applyAdjustmentsOnItemUnits(
         OrderItemInterface $item,
         PromotionInterface $promotion,
@@ -90,11 +77,6 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         }
     }
 
-    /**
-     * @param PromotionInterface $promotion
-     * @param OrderItemUnitInterface $unit
-     * @param int $amount
-     */
     private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, int $amount): void
     {
         $adjustment = $this->adjustmentFactory

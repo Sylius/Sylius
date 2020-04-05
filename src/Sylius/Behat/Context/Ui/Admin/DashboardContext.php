@@ -14,31 +14,30 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     */
     public function __construct(DashboardPageInterface $dashboardPage)
     {
         $this->dashboardPage = $dashboardPage;
     }
 
     /**
-     * @When I open administration dashboard
+     * @When I (try to )open administration dashboard
      */
     public function iOpenAdministrationDashboard()
     {
-        $this->dashboardPage->open();
+        try {
+            $this->dashboardPage->open();
+        } catch (UnexpectedPageException $e) {
+        }
     }
 
     /**

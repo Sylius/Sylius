@@ -28,6 +28,10 @@ install_package() {
         rm -fr "${SYLIUS_CACHE_DIR}/composer-${cache_key}.json.md5sum" 2>/dev/null
     fi
 
+    if [ ! -z "${SYMFONY_VERSION}" ]; then
+        $(dirname "${BASH_SOURCE[0]}")/require-symfony-version composer.json "${SYMFONY_VERSION}"
+    fi
+
     if ${cache_support} && has_sylius_cache && is_package_cache_fresh "${package_path}"; then
         print_info "Restoring composer.lock from cache (cache key: ${cache_key})"
         restore_composer_lock_from_cache "${cache_key}"

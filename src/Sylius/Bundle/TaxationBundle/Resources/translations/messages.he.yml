@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        tax_category:
+            name: שם
+            description: תיאור
+        tax_rate:
+            category: קטגוריה
+            name: שם
+            amount: כמות
+            calculator: מחשבון

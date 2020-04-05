@@ -23,8 +23,5 @@ interface ProductVariantTranslationInterface extends ResourceInterface, Translat
      */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 }

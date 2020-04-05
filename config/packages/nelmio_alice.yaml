@@ -1,0 +1,3 @@
+nelmio_alice:
+    functions_blacklist:
+        - 'current'

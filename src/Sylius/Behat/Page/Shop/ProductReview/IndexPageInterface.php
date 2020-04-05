@@ -13,24 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface IndexPageInterface extends PageInterface
 {
-    /**
-     * @return int
-     */
-    public function countReviews();
+    public function countReviews(): int;
 
-    /**
-     * @param string $title
-     *
-     * @return bool
-     */
-    public function hasReviewTitled($title);
+    public function hasReviewTitled(string $title): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasNoReviewsMessage();
+    public function hasNoReviewsMessage(): bool;
 }

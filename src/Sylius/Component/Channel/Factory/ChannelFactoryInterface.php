@@ -18,10 +18,5 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface ChannelFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param string $name
-     *
-     * @return ChannelInterface
-     */
     public function createNamed(string $name): ChannelInterface;
 }

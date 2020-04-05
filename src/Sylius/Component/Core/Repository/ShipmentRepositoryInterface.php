@@ -19,23 +19,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(): QueryBuilder;
 
-    /**
-     * @param mixed $shipmentId
-     * @param mixed $orderId
-     *
-     * @return ShipmentInterface|null
-     */
     public function findOneByOrderId($shipmentId, $orderId): ?ShipmentInterface;
 
     /**
-     * @param string $name
-     * @param string $locale
-     *
      * @return array|ShipmentInterface[]
      */
     public function findByName(string $name, string $locale): array;

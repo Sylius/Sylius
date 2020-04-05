@@ -24,32 +24,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -258,7 +244,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iNameTheProvince($provinceName = null)
     {
-        $this->updatePage->nameProvince($provinceName);
+        $this->updatePage->nameProvince($provinceName ?? '');
     }
 
     /**
@@ -267,7 +253,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iSpecifyTheProvinceCode($provinceCode = null)
     {
-        $this->updatePage->specifyProvinceCode($provinceCode);
+        $this->updatePage->specifyProvinceCode($provinceCode ?? '');
     }
 
     /**

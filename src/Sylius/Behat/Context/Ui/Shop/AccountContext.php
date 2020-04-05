@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
@@ -29,50 +28,27 @@ use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
 {
-    /**
-     * @var DashboardPageInterface
-     */
+    /** @var DashboardPageInterface */
     private $dashboardPage;
 
-    /**
-     * @var ProfileUpdatePageInterface
-     */
+    /** @var ProfileUpdatePageInterface */
     private $profileUpdatePage;
 
-    /**
-     * @var ChangePasswordPageInterface
-     */
+    /** @var ChangePasswordPageInterface */
     private $changePasswordPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $orderIndexPage;
 
-    /**
-     * @var ShowPageInterface
-     */
+    /** @var ShowPageInterface */
     private $orderShowPage;
 
-    /**
-     * @var LoginPageInterface
-     */
+    /** @var LoginPageInterface */
     private $loginPage;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param DashboardPageInterface $dashboardPage
-     * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param ChangePasswordPageInterface $changePasswordPage
-     * @param IndexPageInterface $orderIndexPage
-     * @param ShowPageInterface $orderShowPage
-     * @param LoginPageInterface $loginPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         DashboardPageInterface $dashboardPage,
         ProfileUpdatePageInterface $profileUpdatePage,
@@ -170,11 +146,10 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage(
-            $this->profileUpdatePage,
+        Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             StringInflector::nameToCode($element),
             sprintf('Please enter your %s.', $element)
-        );
+        ));
     }
 
     /**
@@ -182,11 +157,10 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage(
-            $this->profileUpdatePage,
+        Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             StringInflector::nameToCode($element),
             sprintf('This %s is invalid.', $element)
-        );
+        ));
     }
 
     /**
@@ -194,7 +168,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed()
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, 'email', 'This email is already used.');
+        Assert::true($this->profileUpdatePage->checkValidationMessageFor('email', 'This email is already used.'));
     }
 
     /**
@@ -252,11 +226,10 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
     {
-        $this->assertFieldValidationMessage(
-            $this->changePasswordPage,
+        Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'current_password',
             'Provided password is different than the current one.'
-        );
+        ));
     }
 
     /**
@@ -264,11 +237,10 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
     {
-        $this->assertFieldValidationMessage(
-            $this->changePasswordPage,
+        Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'new_password',
             'The entered passwords don\'t match'
-        );
+        ));
     }
 
     /**
@@ -276,11 +248,10 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
-        $this->assertFieldValidationMessage(
-            $this->changePasswordPage,
+        Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'new_password',
             'Password must be at least 4 characters long.'
-        );
+        ));
     }
 
     /**
@@ -454,12 +425,34 @@ final class AccountContext implements Context
     }
 
     /**
-     * @param PageInterface $page
-     * @param string $element
-     * @param string $expectedMessage
+     * @Then I should see its payment status as :paymentStatus
      */
-    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
+    public function shouldSeePaymentStatus(string $paymentStatus): void
     {
-        Assert::true($page->checkValidationMessageFor($element, $expectedMessage));
+        Assert::same($this->orderShowPage->getPaymentStatus(), $paymentStatus);
+    }
+
+    /**
+     * @Then I should see its order's payment status as :orderPaymentState
+     */
+    public function iShouldSeeItsOrderSPaymentStatusAs(string $orderPaymentState): void
+    {
+        Assert::same($this->orderShowPage->getOrderPaymentStatus(), $orderPaymentState);
+    }
+
+    /**
+     * @Then the order's shipment status should be :orderShipmentStatus
+     */
+    public function theOrderShipmentStatusShouldBe(string $orderShipmentStatus): void
+    {
+        Assert::same($this->orderShowPage->getOrderShipmentStatus(), $orderShipmentStatus);
+    }
+
+    /**
+     * @Then the shipment status should be :shipmentStatus
+     */
+    public function theShipmentStatusShouldBe(string $shipmentStatus): void
+    {
+        Assert::same($this->orderShowPage->getShipmentStatus(), $shipmentStatus);
     }
 }

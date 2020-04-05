@@ -24,9 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractConfigurablePromotionElementType extends AbstractResourceType
 {
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
     /**
@@ -88,10 +86,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
         ;
     }
 
-    /**
-     * @param FormInterface $form
-     * @param string $configurationType
-     */
     protected function addConfigurationFields(FormInterface $form, string $configurationType): void
     {
         $form->add('configuration', $configurationType, [
@@ -99,22 +93,12 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
         ]);
     }
 
-    /**
-     * @param FormInterface $form
-     * @param mixed $data
-     *
-     * @return string|null
-     */
     protected function getRegistryIdentifier(FormInterface $form, $data = null): ?string
     {
         if ($data instanceof ConfigurablePromotionElementInterface && null !== $data->getType()) {
             return $data->getType();
         }
 
-        if (null !== $form->getConfig()->hasOption('configuration_type')) {
-            return $form->getConfig()->getOption('configuration_type');
-        }
-
-        return null;
+        return $form->getConfig()->getOption('configuration_type');
     }
 }

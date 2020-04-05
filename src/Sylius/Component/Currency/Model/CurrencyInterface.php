@@ -22,8 +22,5 @@ interface CurrencyInterface extends
     TimestampableInterface,
     ResourceInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 }

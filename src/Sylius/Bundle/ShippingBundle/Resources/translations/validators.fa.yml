@@ -11,10 +11,6 @@ sylius:
             not_blank: 'لطفا کد نوع ارسال کالا را وارد کنید.'
             unique: 'نوع ارسالی با این کد قبلا در سیستم ثبت شده است.'
     shipping_method:
-        calculator:
-            max_length: sylius.روش_ارسال.ماشین_حساب.بلندترین_طول
-            min_length: sylius.روش_ارسال.ماشین_حساب.کوتاهترین_طول
-            not_blank: sylius.روش_ارسال.ماشین_حساب.خالی_نیست
         name:
             max_length: 'شیوه ی ارسال نباید بیش از {{ limit }} حرف باشد.'
             min_length: 'شیوه ارسال باید حداقل {{ limit }} حرف داشته باشد.'

@@ -7,7 +7,7 @@ sylius:
             city: Město
             company: Firma
             country: Země
-            first_name: Křestní jméno
+            first_name: Křestní Jméno
             last_name: Příjmení
             phone_number: Telefonní číslo
             postcode: PSČ

@@ -27,23 +27,19 @@ class ProductOption implements ProductOptionInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     /**
      * @var Collection|ProductOptionValueInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductOptionValueInterface>
      */
     protected $values;
 
@@ -51,13 +47,12 @@ class ProductOption implements ProductOptionInterface
     {
         $this->initializeTranslationsCollection();
 
+        /** @var ArrayCollection<array-key, ProductOptionValueInterface> $this->values */
         $this->values = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -158,8 +153,6 @@ class ProductOption implements ProductOptionInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductOptionTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

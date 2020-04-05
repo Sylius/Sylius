@@ -16,10 +16,6 @@ sylius:
             max_length: Názov akcie nesmie byť dlhší ako 1 znak.|Názov akcie nesmie byť dlhší ako {{ limit }} znakov.
             min_length: Názov akcie musí obsahovať aspoň 1 znak.|Názov akcie musí obsahovať aspoň {{ limit }} znakov.
             not_blank: Zadajte názov akcie.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Percentuálna zľava musí byť minimálne 0%.
-            max: Maximálna percentuálna zľava je 100%.
     promotion_coupon:
         code:
             max_length: Kód kupónu nesmie byť dlhší ako 1 znak.|Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
@@ -38,6 +34,5 @@ sylius:
             min: Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
             max: Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
             not_blank: Prosím, zadajte dĺžku kódu kupónu.
-        possible_generation_amount: Neplatná dĺžka kódu kupónov, alebo suma kupónov. Nie je možné vygenerovať %expectedAmount% unikátnych kupónov a dĺžkou kódu rovnou %codeLength%. Je možné vygenerovať sumu %possibleAmount%.
         usage_limit:
             min: Limit využitia vygenerovaných kupónov musí byť najmenej {{ limit }}.

@@ -25,6 +25,12 @@ sylius:
             name: Navn
             roles: Roller
         channel:
+            billing_data:
+                city: Poststed
+                company: Firma
+                country: Land
+                postcode: Postnummer
+                street: Gate
             contact_email: Kontakt e-post
             currencies: Valutaer
             currency_base: Standardvaluta
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte streng
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: filsystem
             cache:
                 header: mellomlagring/cache
-                help: 'For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: finnes
             logs:
                 header: logger
-                help: 'For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "For å sette rettighetene kjør kommandoen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: finnes ikke
             not_writable: ikke skrivbar
             parameters:
                 header: parameters.yml
-                help: 'For å sette rettighetene kjør kommandoen: sudo chmod a+w %path%'
+                help: "For å sette rettighetene kjør kommandoen: sudo chmod a+w %path%"
             vendors: leverandører
             writable: skrivbar
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: ikke foreldet
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

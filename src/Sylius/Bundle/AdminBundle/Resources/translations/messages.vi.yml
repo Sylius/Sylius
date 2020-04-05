@@ -9,12 +9,16 @@ sylius:
                     attributes: Thuộc tính
                     inventory: Hàng tồn kho
                     options: Tùy chọn
+                    products: Sản phẩm
                     taxons: Phân loại
                 configuration:
                     channels: Kênh
                     countries: Quốc gia
+                    exchange_rates: Tỷ giá ngoại tệ
+                    header: Cấu hình
                     locales: Miền địa phương
                     payment_methods: Phương thức thanh toán
+                    shipping_categories: Thể loại
                     shipping_methods: Phương thức vận chuyển
                 marketing:
                     header: Tiếp thị

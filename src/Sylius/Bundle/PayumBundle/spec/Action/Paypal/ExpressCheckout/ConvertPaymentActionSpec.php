@@ -18,7 +18,9 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -45,7 +47,9 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductInterface $product,
+        CustomerInterface $customer,
+        AddressInterface $billingAddress
     ): void {
         $request->getTo()->willReturn('array');
 
@@ -61,12 +65,24 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $order->getShippingTotal()->willReturn(8000);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $orderItem->getDiscountedUnitPrice()->willReturn(80000);
+        $orderItem->getUnitPrice()->willReturn(80000);
         $orderItem->getQuantity()->willReturn(1);
 
         $productVariant->getProduct()->willReturn($product);
 
         $product->getName()->willReturn('Lamborghini Aventador Model');
+
+        $order->getCustomer()->willReturn($customer);
+        $customer->getEmail()->willReturn('john@doe.com');
+
+        $order->getBillingAddress()->willReturn($billingAddress);
+        $billingAddress->getCountryCode()->willReturn('US');
+        $billingAddress->getFullName()->willReturn('John Doe');
+        $billingAddress->getStreet()->willReturn('Main St. 123');
+        $billingAddress->getCity()->willReturn('New York');
+        $billingAddress->getPostcode()->willReturn('20500');
+        $billingAddress->getPhoneNumber()->willReturn('888222111');
+        $billingAddress->getProvinceCode()->willReturn('NY');
 
         $request->getSource()->willReturn($payment);
         $payment->getOrder()->willReturn($order);
@@ -77,6 +93,15 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
             'PAYMENTREQUEST_0_CURRENCYCODE' => 'PLN',
             'PAYMENTREQUEST_0_AMT' => 880.00,
             'PAYMENTREQUEST_0_ITEMAMT' => 880.00,
+            'EMAIL' => 'john@doe.com',
+            'LOCALECODE' => 'US',
+            'PAYMENTREQUEST_0_SHIPTONAME' => 'John Doe',
+            'PAYMENTREQUEST_0_SHIPTOSTREET' => 'Main St. 123',
+            'PAYMENTREQUEST_0_SHIPTOCITY' => 'New York',
+            'PAYMENTREQUEST_0_SHIPTOZIP' => '20500',
+            'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE' => 'US',
+            'PAYMENTREQUEST_0_SHIPTOPHONENUM' => '888222111',
+            'PAYMENTREQUEST_0_SHIPTOSTATE' => 'NY',
             'L_PAYMENTREQUEST_0_NAME0' => 'Lamborghini Aventador Model',
             'L_PAYMENTREQUEST_0_AMT0' => 800.00,
             'L_PAYMENTREQUEST_0_QTY0' => 1,

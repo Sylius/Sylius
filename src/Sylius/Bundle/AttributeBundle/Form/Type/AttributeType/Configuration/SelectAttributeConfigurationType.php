@@ -28,11 +28,14 @@ class SelectAttributeConfigurationType extends AbstractType
     {
         $builder
             ->add('choices', SelectAttributeChoicesCollectionType::class, [
-                'entry_type' => TextType::class,
+                'entry_type' => SelectAttributeValueTranslationsType::class,
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'required' => false,
+                'entry_options' => [
+                    'entry_type' => TextType::class,
+                ],
             ])
             ->add('multiple', CheckboxType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.select.multiple',

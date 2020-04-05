@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 
@@ -23,129 +23,56 @@ interface ShowPageInterface extends PageInterface
     /**
      * @throws ElementNotFoundException
      */
-    public function addToCart();
+    public function addToCart(): void;
 
     /**
-     * @param string $quantity
-     *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithQuantity($quantity);
+    public function addToCartWithQuantity(string $quantity): void;
 
     /**
-     * @param string $variant
-     *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithVariant($variant);
+    public function addToCartWithVariant(string $variant): void;
 
     /**
-     * @param ProductOptionInterface $option
-     * @param string $optionValue
-     *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithOption(ProductOptionInterface $option, $optionValue);
+    public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void;
 
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @return string
-     */
-    public function getCurrentVariantName();
-
-    /**
-     * @param string $url
-     */
-    public function visit($url);
-
-    /**
-     * @param string $name
-     *
-     * @return string|null
-     */
     public function getAttributeByName(string $name): ?string;
 
-    /**
-     * @return array
-     */
-    public function getAttributes();
+    public function getAttributes(): array;
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return bool
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+    public function getAverageRating(): float;
 
-    /**
-     * @param int $timeout
-     */
-    public function waitForValidationErrors($timeout);
+    public function getCurrentUrl(): string;
 
-    /**
-     * @return bool
-     */
-    public function isOutOfStock();
+    public function getCurrentVariantName(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasAddToCartButton();
+    public function getName(): string;
 
-    /**
-     * @return string
-     */
-    public function getPrice();
+    public function getPrice(): string;
 
-    /**
-     * @return int
-     */
-    public function countReviews();
+    public function hasAddToCartButton(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isMainImageDisplayed();
+    public function hasAssociation(string $productAssociationName): bool;
 
-    /**
-     * @param string $title
-     *
-     * @return bool
-     */
-    public function hasReviewTitled($title);
+    public function hasProductInAssociation(string $productName, string $productAssociationName): bool;
 
-    /**
-     * @return float
-     */
-    public function getAverageRating();
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
-    /**
-     * @param string $optionName
-     * @param string $optionValue
-     */
-    public function selectOption($optionName, $optionValue);
+    public function hasReviewTitled(string $title): bool;
 
-    /**
-     * @param string $variantName
-     */
-    public function selectVariant($variantName);
+    public function isOutOfStock(): bool;
 
-    /**
-     * @param string $productAssociationName
-     *
-     * @return bool
-     */
-    public function hasAssociation($productAssociationName);
+    public function isMainImageDisplayed(): bool;
 
-    /**
-     * @param string $productName
-     * @param string $productAssociationName
-     *
-     * @return bool
-     */
-    public function hasProductInAssociation($productName, $productAssociationName);
+    public function countReviews(): int;
+
+    public function selectOption(string $optionCode, string $optionValue): void;
+
+    public function selectVariant(string $variantName): void;
+
+    public function visit(string $url): void;
 }

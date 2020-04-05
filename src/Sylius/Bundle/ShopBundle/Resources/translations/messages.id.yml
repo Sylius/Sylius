@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        contact_request:
+            content: 'Konten'
+            message_from: 'Pesan dari'
+            subject: 'Permintaan kontak'
+        order_confirmation:
+            subject: 'Konfirmasi pesanan'
+            view_order_or_change_payment_method: 'Lihat perintah atau metode pembayaran perubahan'
+            your_order_number: 'Nomor pesanan Anda'
+        password_reset:
+            hello: 'Halo'
+        verification_token:
+            hello: 'Halo'
+    lightbox:
+        image_album_label: 'Gambar %1 dari %2'
+    menu:
+        shop:
+            account:
+                address_book: 'Buku alamat'
+                change_password: 'Ganti kata sandi'
+                dashboard: 'Dasbor'
+                header: 'Akun Anda'
+                order_history: 'Riwayat pembelian'
+                personal_information: 'Informasi pribadi'

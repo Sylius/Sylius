@@ -19,10 +19,18 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Termék
+        promotion_coupon:
+            per_customer_usage_limit: Felhasználókénti felhasználási korlát
         group:
             name: Név
             roles: Szerepek
         channel:
+            billing_data:
+                city: Település
+                company: Cég
+                country: Ország
+                postcode: Irányítószám
+                street: Utca
             currencies: Pénznemek
             currency_base: Alapértelmezett pénznem
             hostname: Hoszt neve
@@ -118,10 +126,15 @@ sylius:
         product_association_type:
             name: Név
         promotion_rule:
+            customer_group:
+                group: Felhasználói csoport
+            has_taxon:
+                taxons: Taxonok
             product:
                 products: Termékek
             total_of_items_from_taxon:
                 taxon: Taxonómia
+                amount: Összeg
         payment_method:
             channels: Csatornák
         zone:
@@ -145,8 +158,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -172,8 +185,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nem elavult
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

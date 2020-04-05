@@ -18,8 +18,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 interface CartContextInterface
 {
     /**
-     * @return OrderInterface
-     *
      * @throws CartNotFoundException
      */
     public function getCart(): OrderInterface;

@@ -20,19 +20,12 @@ interface ZoneMatcherInterface
 {
     /**
      * Returns the best matching zone for given address.
-     *
-     * @param AddressInterface $address
-     * @param string|null      $scope
-     *
-     * @return ZoneInterface|null
      */
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface;
 
     /**
      * Returns all matching zones for given address.
      *
-     * @param AddressInterface $address
-     * @param string|null      $scope
      *
      * @return array|ZoneInterface[]
      */

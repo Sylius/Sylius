@@ -25,42 +25,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $taxonFactory;
 
-    /**
-     * @var TaxonRepositoryInterface
-     */
+    /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $localeRepository;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var TaxonSlugGeneratorInterface
-     */
+    /** @var TaxonSlugGeneratorInterface */
     private $taxonSlugGenerator;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $taxonFactory
-     * @param TaxonRepositoryInterface $taxonRepository
-     * @param RepositoryInterface $localeRepository
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
@@ -83,31 +65,54 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     public function create(array $options = []): TaxonInterface
     {
+        return $this->createTaxon($options);
+    }
+
+    protected function createTaxon(array $options = [], ?TaxonInterface $parentTaxon = null): ?TaxonInterface
+    {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var TaxonInterface $taxon */
+        /** @var TaxonInterface|null $taxon */
         $taxon = $this->taxonRepository->findOneBy(['code' => $options['code']]);
 
         if (null === $taxon) {
+            /** @var TaxonInterface $taxon */
             $taxon = $this->taxonFactory->createNew();
         }
 
         $taxon->setCode($options['code']);
 
-        foreach ($this->getLocales() as $localeCode) {
-            $taxon->setCurrentLocale($localeCode);
-            $taxon->setFallbackLocale($localeCode);
+        if (null !== $parentTaxon) {
+            $taxon->setParent($parentTaxon);
+        }
 
-            $taxon->setName($options['name']);
-            $taxon->setDescription($options['description']);
-            $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
+        // add translation for each defined locales
+        foreach ($this->getLocales() as $localeCode) {
+            $this->createTranslation($taxon, $localeCode, $options);
+        }
+
+        // create or replace with custom translations
+        foreach ($options['translations'] as $localeCode => $translationOptions) {
+            $this->createTranslation($taxon, $localeCode, $translationOptions);
         }
 
         foreach ($options['children'] as $childOptions) {
-            $taxon->addChild($this->create($childOptions));
+            $this->createTaxon($childOptions, $taxon);
         }
 
         return $taxon;
+    }
+
+    protected function createTranslation(TaxonInterface $taxon, string $localeCode, array $options = []): void
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        $taxon->setCurrentLocale($localeCode);
+        $taxon->setFallbackLocale($localeCode);
+
+        $taxon->setName($options['name']);
+        $taxon->setDescription($options['description']);
+        $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
     }
 
     /**
@@ -126,14 +131,13 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->paragraph;
             })
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])
             ->setAllowedTypes('children', ['array'])
         ;
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

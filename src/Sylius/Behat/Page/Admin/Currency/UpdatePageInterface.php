@@ -17,32 +17,17 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    public function disable();
+    public function disable(): void;
 
-    /**
-     * @return bool
-     */
-    public function canBeDisabled();
+    public function canBeDisabled(): bool;
 
-    /**
-     * @return bool
-     */
-    public function canHaveExchangeRateChanged();
+    public function canHaveExchangeRateChanged(): bool;
 
-    /**
-     * @param string $exchangeRate
-     */
-    public function changeExchangeRate($exchangeRate);
+    public function changeExchangeRate(string $exchangeRate): void;
 
-    /**
-     * @return string
-     */
-    public function getExchangeRateValue();
+    public function getExchangeRateValue(): string;
 
-    /**
-     * @return string
-     */
-    public function getCodeDisabledAttribute();
+    public function getCodeDisabledAttribute(): string;
 }

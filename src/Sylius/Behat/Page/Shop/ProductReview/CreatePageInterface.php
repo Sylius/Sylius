@@ -13,49 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface CreatePageInterface extends PageInterface
 {
-    /**
-     * @param string $title
-     */
-    public function titleReview($title);
+    public function titleReview(?string $title): void;
 
-    /**
-     * @param string $comment
-     */
-    public function setComment($comment);
+    public function setComment(?string $comment): void;
 
-    /**
-     * @param string $author
-     */
-    public function setAuthor($author);
+    public function setAuthor(string $author): void;
 
-    /**
-     * @param int $rate
-     */
-    public function rateReview($rate);
+    public function rateReview(int $rate): void;
 
-    public function submitReview();
+    public function submitReview(): void;
 
-    /**
-     * @return string
-     */
-    public function getRateValidationMessage();
+    public function getRateValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getTitleValidationMessage();
+    public function getTitleValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getCommentValidationMessage();
+    public function getCommentValidationMessage(): string;
 
-    /**
-     * @return string
-     */
-    public function getAuthorValidationMessage();
+    public function getAuthorValidationMessage(): string;
 }

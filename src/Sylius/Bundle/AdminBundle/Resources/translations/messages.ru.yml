@@ -12,13 +12,13 @@ sylius:
                     inventory: Остатки
                     options: Список опций
                     products: Товары
-                    taxons: Таксоны
+                    taxons: Категории
                 configuration:
                     admin_users: Администраторы
                     channels: Каналы
                     countries: Страны
                     currencies: Валюты
-                    exchange_rates: Курсы валют
+                    exchange_rates: Обменный курс
                     header: Конфигурация
                     locales: Языки
                     payment_methods: Способы оплаты
@@ -29,7 +29,7 @@ sylius:
                     zones: Зоны
                 marketing:
                     header: Маркетинг
-                    product_reviews: Обзоры товара
+                    product_reviews: Отзывы о товаре
                     promotions: Рекламные акции
                 customers:
                     customers: Клиенты

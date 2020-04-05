@@ -13,33 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface DashboardPageInterface extends PageInterface
 {
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasCustomerName($name);
+    public function hasCustomerName(string $name): bool;
 
-    /**
-     * @param string $email
-     *
-     * @return bool
-     */
-    public function hasCustomerEmail($email);
+    public function hasCustomerEmail(string $email): bool;
 
-    /**
-     * @return bool
-     */
-    public function isVerified();
+    public function isVerified(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasResendVerificationEmailButton();
+    public function hasResendVerificationEmailButton(): bool;
 
-    public function pressResendVerificationEmail();
+    public function pressResendVerificationEmail(): void;
 }

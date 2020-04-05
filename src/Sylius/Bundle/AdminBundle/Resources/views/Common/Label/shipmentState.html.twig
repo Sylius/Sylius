@@ -1,0 +1,15 @@
+{%
+    set viewOptions = {
+        cancelled: { icon: 'ban', color: 'red' },
+        cart: { icon: 'adjust', color: 'grey' },
+        ready: { icon: 'clock', color: 'blue' },
+        shipped: { icon: 'plane', color: 'green' },
+    }
+%}
+
+{% set value = 'sylius.ui.' ~ data %}
+
+<span class="ui {{ viewOptions[data]['color'] }} label">
+    <i class="{{ viewOptions[data]['icon'] }} icon"></i>
+    {{ value|trans }}
+</span>

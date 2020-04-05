@@ -22,14 +22,10 @@ class User implements UserInterface
 {
     use TimestampableTrait, ToggleableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $username;
 
     /**
@@ -60,9 +56,7 @@ class User implements UserInterface
      */
     protected $plainPassword;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $lastLogin;
 
     /**
@@ -79,29 +73,19 @@ class User implements UserInterface
      */
     protected $passwordResetToken;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $passwordRequestedAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $verifiedAt;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $locked = false;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $credentialsExpireAt;
 
     /**
@@ -112,33 +96,34 @@ class User implements UserInterface
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
-     * @var Collection|UserOAuth[]
+     * @var UserOAuthInterface[]
+     *
+     * @psalm-var Collection<array-key, UserOAuthInterface>
      */
     protected $oauthAccounts;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $email;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $emailCanonical;
+
+    /** @var string|null */
+    protected $encoderName;
 
     public function __construct()
     {
-        $this->salt = base_convert(sha1(uniqid((string) mt_rand(), true)), 16, 36);
+        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
+
+        /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
 
         // Set here to overwrite default value from trait
         $this->enabled = false;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getUsername();
@@ -320,9 +305,6 @@ class User implements UserInterface
         $this->emailVerificationToken = $verificationToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPasswordResetToken(): ?string
     {
         return $this->passwordResetToken;
@@ -509,9 +491,23 @@ class User implements UserInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getEncoderName(): ?string
+    {
+        return $this->encoderName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEncoderName(?string $encoderName): void
+    {
+        $this->encoderName = $encoderName;
+    }
+
+    /**
      * The serialized data have to contain the fields used by the equals method and the username.
-     *
-     * @return string
      */
     public function serialize(): string
     {
@@ -523,6 +519,7 @@ class User implements UserInterface
             $this->locked,
             $this->enabled,
             $this->id,
+            $this->encoderName,
         ]);
     }
 
@@ -543,15 +540,11 @@ class User implements UserInterface
             $this->username,
             $this->locked,
             $this->enabled,
-            $this->id
+            $this->id,
+            $this->encoderName,
         ] = $data;
     }
 
-    /**
-     * @param \DateTimeInterface|null $date
-     *
-     * @return bool
-     */
     protected function hasExpired(?\DateTimeInterface $date): bool
     {
         return null !== $date && new \DateTime() >= $date;

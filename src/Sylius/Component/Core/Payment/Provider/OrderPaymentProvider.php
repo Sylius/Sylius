@@ -26,26 +26,15 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
-    /**
-     * @var DefaultPaymentMethodResolverInterface
-     */
+    /** @var DefaultPaymentMethodResolverInterface */
     private $defaultPaymentMethodResolver;
 
-    /**
-     * @var PaymentFactoryInterface
-     */
+    /** @var PaymentFactoryInterface */
     private $paymentFactory;
 
-    /**
-     * @var StateMachineFactoryInterface
-     */
+    /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
-     * @param PaymentFactoryInterface $paymentFactory
-     * @param StateMachineFactoryInterface $stateMachineFactory
-     */
     public function __construct(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
@@ -81,11 +70,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         return $payment;
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return PaymentInterface|null
-     */
     private function getLastPayment(OrderInterface $order): ?PaymentInterface
     {
         $lastCancelledPayment = $order->getLastPayment(PaymentInterface::STATE_CANCELLED);
@@ -93,36 +77,20 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
             return $lastCancelledPayment;
         }
 
-        $lastFailedPayment = $order->getLastPayment(PaymentInterface::STATE_FAILED);
-        if (null !== $lastFailedPayment) {
-            return $lastFailedPayment;
-        }
-
-        return null;
+        return $order->getLastPayment(PaymentInterface::STATE_FAILED);
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param OrderInterface $order
-     *
-     * @return PaymentMethodInterface|null
-     */
     private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order): ?PaymentMethodInterface
     {
         try {
             $payment->setOrder($order);
-            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
 
-            return $paymentMethod;
+            return $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
         } catch (UnresolvedDefaultPaymentMethodException $exception) {
             return null;
         }
     }
 
-    /**
-     * @param PaymentInterface $payment
-     * @param string $targetState
-     */
     private function applyRequiredTransition(PaymentInterface $payment, string $targetState): void
     {
         if ($targetState === $payment->getState()) {

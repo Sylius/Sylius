@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 final class UserImpersonatedListenerSpec extends ObjectBehavior
 {
@@ -72,6 +73,15 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         $orderRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $cartStorage->removeForChannel($channel)->shouldBeCalled();
+
+        $this->onUserImpersonated($event);
+    }
+
+    function it_does_nothing_when_the_user_is_not_a_shop_user_type(
+        UserEvent $event,
+        UserInterface $user
+    ): void {
+        $event->getUser()->willReturn($user);
 
         $this->onUserImpersonated($event);
     }

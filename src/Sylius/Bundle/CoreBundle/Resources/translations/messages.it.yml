@@ -22,9 +22,15 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Limite di utilizzo per cliente
         group:
-            name: Nome
+            name: "Nome\n"
             roles: Regole
         channel:
+            billing_data:
+                city: Città
+                company: Azienda
+                country: Paese
+                postcode: CAP
+                street: Indirizzo
             contact_email: Email di contatto
             currencies: Valute
             currency_base: Valuta base
@@ -67,7 +73,7 @@ sylius:
             channels: Canali
             enabled: Abilitato
         product_filter:
-            name: Nome
+            name: "Nome\n"
             code: Codice
         product_variant:
             tax_category: Categoria fiscale
@@ -123,7 +129,7 @@ sylius:
             product: Prodotto associato
             type: Tipi di associazione
         product_association_type:
-            name: Nome
+            name: "Nome\n"
         promotion_filter:
             products: Filtro prodotti
             taxons: Filtro Taxons
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Stringa multibyte
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: file system
             cache:
                 header: cache
-                help: 'Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: esiste
             logs:
                 header: logs
-                help: 'Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: non esiste
             not_writable: non scrivibile
             parameters:
                 header: parameters.yml
-                help: 'Per impostare le autorizzazioni eseguire: sudo chmod a+w %path%'
+                help: "Per impostare le autorizzazioni eseguire: sudo chmod a+w %path%"
             vendors: fornitori
             writable: scrivibile
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: non deprecato
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

@@ -21,10 +21,10 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Jednolita stawka za dostawę
-                amount: Kwota
+                amount: Wartość
             per_unit_rate_configuration:
                 label: Jednolita stawka za jednostkę
-                amount: Kwota
+                amount: Wartość
         shipping_category:
             description: Opis
             name: Nazwa
@@ -35,11 +35,11 @@ sylius:
             channels: Kanały
             configuration: Konfiguracja
             description: Opis
-            enabled: Aktywne
+            enabled: Dostępny
             match_all_category_requirement: Wszystkie przedmioty muszą pochodzić z tej samej kategorii wysyłki
             match_any_category_requirement: Przynajmniej 1 przedmiot musi pochodzić z kategorii wysyłki
             match_none_category_requirement: Żaden przedmiot nie musi pochodzić z kategorii wysyłki
             name: Nazwa
-            position: Pozycja
+            position: Położenie
             tax_category: Kategoria podatkowa
             translations: Tłumaczenia

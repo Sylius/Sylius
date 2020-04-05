@@ -14,28 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $optionName
-     */
-    public function selectOption($optionName);
+    public function selectOption(string $optionName): void;
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $name
-     * @param string $localeCode
-     */
-    public function nameItIn($name, $localeCode);
+    public function nameItIn(string $name, string $localeCode): void;
 
-    /**
-     * @param string $path
-     * @param string $type
-     */
-    public function attachImage($path, $type = null);
+    public function isMainTaxonChosen(string $taxonName): bool;
+
+    public function selectMainTaxon(TaxonInterface $taxon): void;
+
+    public function attachImage(string $path, ?string $type = null): void;
 }

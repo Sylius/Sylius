@@ -17,8 +17,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderAddressesSaverInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function saveAddresses(OrderInterface $order): void;
 }

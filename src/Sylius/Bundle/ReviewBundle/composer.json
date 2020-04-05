@@ -1,9 +1,9 @@
 {
     "name": "sylius/review-bundle",
     "type": "symfony-bundle",
-    "description": "Review system for Symfony2 ecommerce applications.",
+    "description": "Review system for Symfony ecommerce applications.",
     "keywords": ["review", "shop", "webshop", "ecommerce", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -32,26 +32,28 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
 
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/mailer-bundle": "^1.0",
-        "sylius/resource-bundle": "^1.0",
-        "sylius/review": "^1.0",
-        "sylius/user-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "sylius/mailer-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.2",
+        "sylius/review": "^1.2",
+        "sylius/user-bundle": "^1.2",
+        "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0",
-        "phpunit/phpunit": "^5.6",
-        "symfony/form": "^3.2",
-        "symfony/validator": "^3.2",
-        "symfony/browser-kit": "^3.2",
-        "symfony/dependency-injection": "^3.2",
-        "symfony/security-bundle": "^3.2",
-        "symfony/swiftmailer-bundle": "^3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "phpspec/phpspec": "^5.0",
+        "phpunit/phpunit": "^7.0",
+        "symfony/form": "^4.4",
+        "symfony/validator": "^4.4",
+        "symfony/browser-kit": "^4.4",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/security-bundle": "^4.4",
+        "symfony/swiftmailer-bundle": "^3.1",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+    },
+    "conflict": {
+        "twig/twig": "^3.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -61,9 +63,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/",
-            "AppBundle\\": "test/src/AppBundle/"
-        }
+            "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/"
+        },
+        "classmap": ["test/app/AppKernel.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -75,10 +77,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
-        "incenteev-parameters": {
-            "file": "test/app/config/parameters.yml"
+            "dev-master": "1.6-dev"
         }
     }
 }

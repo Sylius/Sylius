@@ -13,21 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\ShopBundle\EventListener\UserMailerListener">
-            <argument type="service" id="sylius.email_sender" />
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
-            <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
-        </service>
+        <defaults public="true" />
 
         <service id="sylius.email_manager.contact" class="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+        <service id="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface" alias="sylius.email_manager.contact" />
 
         <service id="sylius.email_manager.order" class="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
         </service>
+        <service id="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface" alias="sylius.email_manager.order" />
     </services>
 </container>

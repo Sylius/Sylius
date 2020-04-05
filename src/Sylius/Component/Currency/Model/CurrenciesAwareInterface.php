@@ -19,23 +19,14 @@ interface CurrenciesAwareInterface
 {
     /**
      * @return Collection|CurrencyInterface[]
+     *
+     * @psalm-return Collection<array-key, CurrencyInterface>
      */
     public function getCurrencies(): Collection;
 
-    /**
-     * @param CurrencyInterface $currency
-     *
-     * @return bool
-     */
     public function hasCurrency(CurrencyInterface $currency): bool;
 
-    /**
-     * @param CurrencyInterface $currency
-     */
     public function addCurrency(CurrencyInterface $currency): void;
 
-    /**
-     * @param CurrencyInterface $currency
-     */
     public function removeCurrency(CurrencyInterface $currency): void;
 }

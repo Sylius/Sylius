@@ -22,7 +22,7 @@ Now let’s start the process of installing Sylius on Cloudways.
 2. Install the latest version of Sylius via SSH
 -----------------------------------------------
 
-Open the SSH terminal from the **Server Management tab**. You can also use PuTTY for this purpose. Find the SSH credentials under 
+Open the SSH terminal from the **Server Management tab**. You can also use PuTTY for this purpose. Find the SSH credentials under
 the **Master Credentials** heading and login to the SSH terminal:
 
 .. image:: ../../_images/cloudways-ssh.png
@@ -32,7 +32,7 @@ After the login, move to the application folder using the ``cd`` command and run
 
 .. code-block:: bash
 
-    $ composer create-project sylius/sylius-standard myshop
+    composer create-project sylius/sylius-standard myshop
 
 The command will start installing the long list of dependencies for Sylius. Once the installation finishes, Sylius will ask for the database credentials.
 You can find the database username and password in the Application Access Details.
@@ -54,7 +54,7 @@ If the need arises, you can obviously change these settings later.
 
 Sylius requires several Node packages, which also needs to be installed and updated before setting up the shop. In addition, I also need to start and setup Gulp.
 
-Now move to the myshop folder by using ``cd myshop`` and run the following command ``yarn install``. Once the command finishes, run the next command, ``yarn run gulp``.
+Now move to the myshop folder by using ``cd myshop`` and run the following command ``yarn install``. Once the command finishes, run the next command, ``yarn build``.
 
 4. Install Sylius for the production environment
 ------------------------------------------------
@@ -63,7 +63,7 @@ Now run the following command:
 
 .. code-block:: bash
 
-    $ bin/console sylius:install -e prod
+    bin/console sylius:install -e prod
 
 5. Update The Webroot of the Application
 ----------------------------------------

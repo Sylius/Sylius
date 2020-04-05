@@ -25,44 +25,24 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $gatewayFactories;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param array $gatewayFactories
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -97,7 +77,7 @@ final class ManagingPaymentMethodsContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->nameIt($name, $language);
+        $currentPage->nameIt($name ?? '', $language);
     }
 
     /**
@@ -152,17 +132,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I choose :gatewayName gateway
-     */
-    public function iChooseGateway($gatewayName)
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->chooseGateway($gatewayName);
-    }
-
-    /**
      * @Then this payment method :element should be :value
      */
     public function thisPaymentMethodElementShouldBe($element, $value)
@@ -185,7 +154,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -222,10 +191,27 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I check (also) the :paymentMethodName payment method
+     */
+    public function iCheckThePaymentMethod(string $paymentMethodName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $paymentMethodName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
      * @Then the payment method :paymentMethodName should appear in the registry
      * @Then the payment method :paymentMethodName should be in the registry
+     * @Then I should see the payment method :paymentMethodName in the list
      */
-    public function thePaymentMethodShouldAppearInTheRegistry($paymentMethodName)
+    public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
         $this->indexPage->open();
 
@@ -278,9 +264,10 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should see a single payment method in the list
      * @Then I should see :amount payment methods in the list
      */
-    public function iShouldSeePaymentMethodsInTheList($amount)
+    public function iShouldSeePaymentMethodsInTheList(int $amount = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $amount);
     }

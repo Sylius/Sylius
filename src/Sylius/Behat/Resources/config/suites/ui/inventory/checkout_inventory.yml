@@ -4,7 +4,7 @@
 default:
     suites:
         ui_checkout_inventory:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.user
@@ -31,5 +31,6 @@ default:
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.checkout.thank_you
+
             filters:
                 tags: "@checkout_inventory && @ui"

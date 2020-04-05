@@ -17,8 +17,5 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $currencyName
-     */
-    public function chooseCurrencyFilter($currencyName);
+    public function chooseCurrencyFilter(string $currencyName): void;
 }

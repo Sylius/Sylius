@@ -19,7 +19,7 @@ sylius:
             name: Nombre
             provinces: Provincias
             select: Selecciona
-            enabled: Activado
+            enabled: '¿Activado?'
         province:
             name: Nombre
             abbreviation: Abreviatura
@@ -33,10 +33,10 @@ sylius:
                 country: País
                 province: Provincia
                 zone: Zona
-            scope: Alcance
+            scope: Ámbito
             scopes:
                 all: Todos
-            select: Seleccionar
+            select: Selecciona
             select_scope: Seleccione ámbito
         zone_member:
-            select: Seleccionar
+            select: Selecciona

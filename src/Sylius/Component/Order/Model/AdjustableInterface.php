@@ -18,32 +18,18 @@ use Doctrine\Common\Collections\Collection;
 interface AdjustableInterface
 {
     /**
-     * @param string|null $type
+     * @return AdjustmentInterface[]
      *
-     * @return Collection|AdjustmentInterface[]
+     * @psalm-return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustments(?string $type = null): Collection;
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     public function addAdjustment(AdjustmentInterface $adjustment): void;
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     public function removeAdjustment(AdjustmentInterface $adjustment): void;
 
-    /**
-     * @param string|null $type
-     *
-     * @return int
-     */
     public function getAdjustmentsTotal(?string $type = null): int;
 
-    /**
-     * @param string|null $type
-     */
     public function removeAdjustments(?string $type = null): void;
 
     /**

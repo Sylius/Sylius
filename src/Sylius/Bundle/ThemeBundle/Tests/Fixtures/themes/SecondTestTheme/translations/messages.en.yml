@@ -1,3 +1,0 @@
-test:
-  theme: 'That should be overridden by first test theme.'
-  parent_theme: 'PARENT_THEME/translations'

@@ -21,24 +21,16 @@ class Promotion implements PromotionInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
     /**
@@ -55,43 +47,39 @@ class Promotion implements PromotionInterface
      */
     protected $exclusive = false;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $usageLimit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $used = 0;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     protected $startsAt;
 
-    /**
-     * @var \DateTimeInterface
-     */
+    /** @var \DateTimeInterface */
     protected $endsAt;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $couponBased = false;
 
     /**
      * @var Collection|PromotionCouponInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionCouponInterface>
      */
     protected $coupons;
 
     /**
      * @var Collection|PromotionRuleInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionRuleInterface>
      */
     protected $rules;
 
     /**
      * @var Collection|PromotionActionInterface[]
+     *
+     * @psalm-var Collection<array-key, PromotionActionInterface>
      */
     protected $actions;
 
@@ -99,8 +87,13 @@ class Promotion implements PromotionInterface
     {
         $this->createdAt = new \DateTime();
 
+        /** @var ArrayCollection<array-key, PromotionCouponInterface> $this->coupons */
         $this->coupons = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, PromotionRuleInterface> $this->rules */
         $this->rules = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, PromotionActionInterface> $this->actions */
         $this->actions = new ArrayCollection();
     }
 
@@ -173,7 +166,7 @@ class Promotion implements PromotionInterface
      */
     public function setPriority(?int $priority): void
     {
-        $this->priority = null === $priority ? -1 : $priority;
+        $this->priority = $priority ?? -1;
     }
 
     /**

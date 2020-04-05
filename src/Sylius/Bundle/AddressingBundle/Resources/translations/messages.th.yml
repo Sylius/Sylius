@@ -16,18 +16,18 @@ sylius:
             zone: โซน
         country:
             add_province: เพิ่มจังหวัด
-            name: ชื่อ
+            name: ชื่อภาษา
             provinces: จังหวัด
             select: เลือก
             enabled: เปิดใช้งาน
         province:
-            name: ชื่อ
+            name: ชื่อภาษา
             abbreviation: ตัวย่อ
             select: เลือก
         zone:
             add_member: เพิ่มสมาชิก
             members: สมาชิก
-            name: ชื่อ
+            name: ชื่อภาษา
             type: ชนิด
             types:
                 country: ประเทศ

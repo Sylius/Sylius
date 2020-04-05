@@ -19,24 +19,24 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
-    /**
-     * @var SenderInterface
-     */
+    /** @var SenderInterface */
     private $emailSender;
 
-    /**
-     * @param SenderInterface $emailSender
-     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationEmail(OrderInterface $order): void
     {
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order]);
+        $this->emailSender->send(
+            Emails::ORDER_CONFIRMATION,
+            [$order->getCustomer()->getEmail()],
+            [
+                'order' => $order,
+                'channel' => $order->getChannel(),
+                'localeCode' => $order->getLocaleCode(),
+            ])
+        ;
     }
 }

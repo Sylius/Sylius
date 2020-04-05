@@ -20,7 +20,7 @@ Implement the ResourceInterface in your model class.
 
     <?php
 
-    namespace AppBundle\Entity;
+    namespace App\Entity;
 
     use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -38,7 +38,7 @@ Implement the ResourceInterface in your model class.
 Configure the class as a resource.
 ----------------------------------
 
-In your ``app/config/config.yml`` add:
+In your ``config/packages/sylius_resource.yaml`` add:
 
 .. code-block:: yaml
 
@@ -46,7 +46,7 @@ In your ``app/config/config.yml`` add:
         resources:
             app.book:
                 classes:
-                    model: AppBundle\Entity\Book
+                    model: App\Entity\Book
 
 That's it! Your Book entity is now registered as Sylius Resource.
 
@@ -66,11 +66,11 @@ You can also configure several doctrine drivers.
         resources:
             app.book:
                 classes:
-                    model: AppBundle\Entity\Book
+                    model: App\Entity\Book
             app.article:
                 driver: doctrine/phpcr-odm
                 classes:
-                    model: AppBundle\Document\ArticleDocument
+                    model: App\Document\ArticleDocument
 
 Generate API routing.
 ---------------------
@@ -80,7 +80,7 @@ Generate API routing.
     Learn more about using Sylius REST API in these articles:
     :doc:`REST API Reference </api/index>`, :doc:`How to use Sylius API? - Cookbook </cookbook/api/api>`.
 
-Add the following lines to ``app/config/routing.yml``:
+Add the following lines to ``config/routes.yaml``:
 
 .. code-block:: yaml
 
@@ -94,7 +94,7 @@ Sounds crazy? Spin up the built-in server and give it a try:
 
 .. code-block:: bash
 
-    $ php bin/console server:run
+    php bin/console server:run
 
 You should see something like:
 
@@ -108,8 +108,8 @@ Now, in a separate Terminal window, call these commands:
 
 .. code-block:: bash
 
-   $ curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
-   $ curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
+   curl -i -X POST -H "Content-Type: application/json" -d '{"title": "Lord of The Rings", "author": "J. R. R. Tolkien", "description": "Amazing!"}' http://localhost:8000/books/
+   curl -i -X GET -H "Accept: application/json" http://localhost:8000/books/
 
 As you can guess, other CRUD actions are available through this API.
 
@@ -131,7 +131,7 @@ Run the ``debug:router`` command to see available routes:
 
 .. code-block:: bash
 
-    $ php bin/console debug:router
+    php bin/console debug:router
 
     ------------------------ --------------- -------- ------ -------------------------
     Name                     Method          Scheme   Host   Path

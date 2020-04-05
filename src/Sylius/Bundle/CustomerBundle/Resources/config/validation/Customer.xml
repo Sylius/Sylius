@@ -57,6 +57,7 @@
                 <option name="groups">
                     <value>sylius</value>
                     <value>sylius_customer_guest</value>
+                    <value>sylius_customer_checkout_guest</value>
                 </option>
             </constraint>
             <constraint name="Length">
@@ -65,13 +66,16 @@
                 <option name="groups">
                     <value>sylius</value>
                     <value>sylius_customer_guest</value>
+                    <value>sylius_customer_checkout_guest</value>
                 </option>
             </constraint>
             <constraint name="Email">
                 <option name="message">sylius.customer.email.invalid</option>
+                <option name="strict">true</option>
                 <option name="groups">
                     <value>sylius</value>
                     <value>sylius_customer_guest</value>
+                    <value>sylius_customer_checkout_guest</value>
                 </option>
             </constraint>
         </property>

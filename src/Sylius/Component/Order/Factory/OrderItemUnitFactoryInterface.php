@@ -19,10 +19,5 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface OrderItemUnitFactoryInterface extends FactoryInterface
 {
-    /**
-     * @param OrderItemInterface $orderItem
-     *
-     * @return OrderItemUnitInterface
-     */
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface;
 }

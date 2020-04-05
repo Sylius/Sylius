@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Behat;
+namespace spec\Sylius\Behat\Service\Setter;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Service\Setter\ChannelContextSetter;

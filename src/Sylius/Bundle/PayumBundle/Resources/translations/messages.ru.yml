@@ -9,7 +9,7 @@ sylius:
             paypal:
                 password: Пароль
                 signature: Подпись
-                username: Логин
+                username: Имя пользователя
                 sandbox: Песочница
             stripe:
                 publishable_key: Публикуемый ключ

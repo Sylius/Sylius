@@ -20,9 +20,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class ProductOptionRepository extends BaseProductOptionRepository
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     protected $associationHydrator;
 
     /**

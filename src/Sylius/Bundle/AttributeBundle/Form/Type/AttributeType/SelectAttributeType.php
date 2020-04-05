@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -22,6 +23,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SelectAttributeType extends AbstractType
 {
+    /** @var string */
+    private $defaultLocaleCode;
+
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -39,14 +48,20 @@ final class SelectAttributeType extends AbstractType
             && isset($options['configuration']['multiple'])
             && !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
+                /**
+                 * @param mixed $array
+                 *
+                 * @return mixed
+                 */
                 function ($array) {
-                    if (count($array) > 0) {
+                    if (is_array($array) && count($array) > 0) {
                         return $array[0];
                     }
 
                     return null;
                 },
-                function ($string) {
+                /** @param mixed $string */
+                function ($string): array {
                     if (null !== $string) {
                         return [$string];
                     }
@@ -65,11 +80,25 @@ final class SelectAttributeType extends AbstractType
         $resolver
             ->setRequired('configuration')
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
+            ->setDefault('locale_code', $this->defaultLocaleCode)
             ->setNormalizer('choices', function (Options $options) {
                 if (is_array($options['configuration'])
                     && isset($options['configuration']['choices'])
                     && is_array($options['configuration']['choices'])) {
-                    $choices = array_flip($options['configuration']['choices']);
+                    $choices = [];
+                    $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
+
+                    foreach ($options['configuration']['choices'] as $key => $choice) {
+                        if (isset($options[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
+                            $choices[$key] = $choice[$localeCode];
+
+                            continue;
+                        }
+
+                        $choices[$key] = $choice[$this->defaultLocaleCode];
+                    }
+
+                    $choices = array_flip($choices);
                     ksort($choices);
 
                     return $choices;
@@ -77,7 +106,7 @@ final class SelectAttributeType extends AbstractType
 
                 return [];
             })
-            ->setNormalizer('multiple', function (Options $options) {
+            ->setNormalizer('multiple', function (Options $options): bool {
                 if (is_array($options['configuration']) && isset($options['configuration']['multiple'])) {
                     return $options['configuration']['multiple'];
                 }

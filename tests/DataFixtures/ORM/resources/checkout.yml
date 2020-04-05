@@ -16,7 +16,8 @@ Sylius\Component\Core\Model\Product:
         code: "MUG"
         channels: ["@channel"]
         currentLocale: "en_US"
-        currentTranslation: "@mug_translation"
+        translations:
+            en_US: "@mug_translation"
 
 Sylius\Component\Core\Model\ProductTranslation:
     mug_translation:
@@ -31,7 +32,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "MUG_SW"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@sw_mug_translation"
+        translations:
+            en_US: "@sw_mug_translation"
         updatedAt: <(new DateTime('2015-10-10'))>
         channelPricings:
             CHANNEL: "@sw_mug_web_channel_pricing"
@@ -40,7 +42,8 @@ Sylius\Component\Core\Model\ProductVariant:
         code: "HARD_AVAILABLE_MUG"
         product: "@mug"
         currentLocale: "en_US"
-        currentTranslation: "@hard_available_mug_translation"
+        translations:
+            en_US: "@hard_available_mug_translation"
         updatedAt: <(new DateTime('2015-10-05'))>
         channelPricings:
             CHANNEL: "@hard_available_mug_web_channel_pricing"
@@ -66,31 +69,6 @@ Sylius\Component\Core\Model\ChannelPricing:
         channelCode: "CHANNEL"
         price: 2000
 
-Sylius\Component\Core\Model\ShippingMethod:
-    ups:
-        code: "UPS"
-        enabled: true
-        calculator: "flat_rate"
-        configuration:
-            CHANNEL:
-                amount: 1000
-        zone: "@zone_eu"
-        currentLocale: "en_US"
-        currentTranslation: "@ups_translation"
-        channels: ["@channel"]
-    dhl:
-        code: "DHL"
-        enabled: true
-        calculator: "flat_rate"
-        configuration:
-            CHANNEL:
-                amount: 2000
-        zone: "@zone_eu"
-        channel: ["@channel"]
-        currentLocale: "en_US"
-        currentTranslation: "@dhl_translation"
-        channels: ["@channel"]
-
 Sylius\Component\Shipping\Model\ShippingMethodTranslation:
     ups_translation:
         name: "UPS"
@@ -103,13 +81,40 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
         translatable: "@dhl"
         description: <paragraph(2)>
 
+Sylius\Component\Core\Model\ShippingMethod:
+    ups:
+        code: "UPS"
+        enabled: true
+        calculator: "flat_rate"
+        configuration:
+            CHANNEL:
+                amount: 1000
+        zone: "@zone_eu"
+        currentLocale: "en_US"
+        translations:
+            en_US: "@ups_translation"
+        channels: ["@channel"]
+    dhl:
+        code: "DHL"
+        enabled: true
+        calculator: "flat_rate"
+        configuration:
+            CHANNEL:
+                amount: 2000
+        zone: "@zone_eu"
+        currentLocale: "en_US"
+        translation:
+            en_US: "@dhl_translation"
+        channels: ["@channel"]
+
 Sylius\Component\Core\Model\PaymentMethod:
     cash_on_delivery:
         code: "cod"
         enabled: true
         gatewayConfig: "@offline"
         currentLocale: "en_US"
-        currentTranslation: "@cash_on_delivery_translation1"
+        translations:
+            en_US: "@cash_on_delivery_translation1"
         channels: ["@channel"]
     pay_by_check:
         code: "pbc"
@@ -171,7 +176,7 @@ Sylius\Component\Taxation\Model\TaxCategory:
 Sylius\Component\Core\Model\TaxRate:
     eu_taxable_goods_rate:
         code: "eu_taxable_goods_rate"
-        name: "EU Regular Tax 20%"
+        name: "EU Regular Tax 20\\%"
         amount: 0.2
         zone: "@zone_eu"
         calculator: "default"

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 How to add images to an entity?
 ===============================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Extending entities with an ``images`` field is quite a popular use case.
 In this cookbook we will present how to **add image to the Shipping Method entity**.
@@ -17,7 +24,9 @@ you have to create your own ShippingMethod class that will extend it:
 
     <?php
 
-    namespace AppBundle\Entity;
+    declare(strict_types=1);
+
+    namespace App\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\Common\Collections\Collection;
@@ -42,7 +51,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function getImages()
+        public function getImages(): Collection
         {
             return $this->images;
         }
@@ -50,7 +59,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function getImagesByType($type)
+        public function getImagesByType(string $type): Collection
         {
             return $this->images->filter(function (ImageInterface $image) use ($type) {
                 return $type === $image->getType();
@@ -60,7 +69,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function hasImages()
+        public function hasImages(): bool
         {
             return !$this->images->isEmpty();
         }
@@ -68,7 +77,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function hasImage(ImageInterface $image)
+        public function hasImage(ImageInterface $image): bool
         {
             return $this->images->contains($image);
         }
@@ -76,7 +85,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function addImage(ImageInterface $image)
+        public function addImage(ImageInterface $image): void
         {
             $image->setOwner($this);
             $this->images->add($image);
@@ -85,7 +94,7 @@ you have to create your own ShippingMethod class that will extend it:
         /**
          * {@inheritdoc}
          */
-        public function removeImage(ImageInterface $image)
+        public function removeImage(ImageInterface $image): void
         {
             if ($this->hasImage($image)) {
                 $image->setOwner(null);
@@ -101,27 +110,29 @@ you have to create your own ShippingMethod class that will extend it:
 2. Register your extended ShippingMethod as a resource's model class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With such a configuration in the ``config.yml`` you will register your ShippingMethod class in order to override the default one:
+With such a configuration you will register your ``ShippingMethod`` class in order to override the default one:
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_shipping.yaml
     sylius_shipping:
         resources:
             shipping_method:
                 classes:
-                    model: AppBundle\Entity\ShippingMethod
+                    model: App\Entity\ShippingMethod
 
 3. Create the ShippingMethodImage class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``AppBundle\Entity`` namespace place the ``ShippingMethodImage`` class which should look like this:
+In the ``App\Entity`` namespace place the ``ShippingMethodImage`` class which should look like this:
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Entity;
+    declare(strict_types=1);
+
+    namespace App\Entity;
 
     use Sylius\Component\Core\Model\Image;
 
@@ -137,13 +148,13 @@ of the ``ShippingMethodImage``.
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/doctrine/ShippingMethodImage.orm.yml
-    AppBundle\Entity\ShippingMethodImage:
+    # App/Resources/config/doctrine/ShippingMethodImage.orm.yml
+    App\Entity\ShippingMethodImage:
         type: entity
         table: app_shipping_method_image
         manyToOne:
             owner:
-                targetEntity: AppBundle\Entity\ShippingMethod
+                targetEntity: App\Entity\ShippingMethod
                 inversedBy: images
                 joinColumn:
                     name: owner_id
@@ -158,13 +169,13 @@ The newly added ``images`` field has to be added to the mapping, with a relation
 
 .. code-block:: yaml
 
-    # AppBundle/Resources/config/doctrine/ShippingMethod.orm.yml
-    AppBundle\Entity\ShippingMethod:
+    # App/Resources/config/doctrine/ShippingMethod.orm.yml
+    App\Entity\ShippingMethod:
         type: entity
         table: sylius_shipping_method
         oneToMany:
             images:
-                targetEntity: AppBundle\Entity\ShippingMethodImage
+                targetEntity: App\Entity\ShippingMethodImage
                 mappedBy: owner
                 orphanRemoval: true
                 cascade:
@@ -182,18 +193,20 @@ The ``ShippingMethodImage`` class needs to be registered as a Sylius resource:
         resources:
             app.shipping_method_image:
                 classes:
-                    model: AppBundle\Entity\ShippingMethodImage
+                    model: App\Entity\ShippingMethodImage
 
 7. Create the ShippingMethodImageType class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is how the class for ``ShippingMethodImageType`` should look like. Place it in the ``AppBundle\Form\Type\`` directory.
+This is how the class for ``ShippingMethodImageType`` should look like. Place it in the ``App\Form\Type\`` directory.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Form\Type;
+    declare(strict_types=1);
+
+    namespace App\Form\Type;
 
     use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 
@@ -202,7 +215,7 @@ This is how the class for ``ShippingMethodImageType`` should look like. Place it
         /**
          * {@inheritdoc}
          */
-        public function getBlockPrefix()
+        public function getBlockPrefix(): string
         {
             return 'app_shipping_method_image';
         }
@@ -218,7 +231,7 @@ After creating the form type class, you need to register it as a ``form.type`` s
     # services.yml
     services:
         app.form.type.shipping_method_image:
-            class: AppBundle\Form\Type\ShippingMethodImageType
+            class: App\Form\Type\ShippingMethodImageType
             tags:
                 - { name: form.type }
             arguments: ['%app.model.shipping_method_image.class%']
@@ -235,7 +248,7 @@ What is more the new form type needs to be configured as the resource form of th
         resources:
             app.shipping_method_image:
                 classes:
-                    form: AppBundle\Form\Type\ShippingMethodImageType
+                    form: App\Form\Type\ShippingMethodImageType
 
 10. Extend the ShippingMethodType with the images field
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -252,9 +265,11 @@ It needs to have the images field as a CollectionType.
 
     <?php
 
-    namespace AppBundle\Form\Extension;
+    declare(strict_types=1);
 
-    use AppBundle\Form\Type\ShippingMethodImageType;
+    namespace App\Form\Extension;
+
+    use App\Form\Type\ShippingMethodImageType;
     use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
     use Symfony\Component\Form\AbstractTypeExtension;
     use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -265,7 +280,7 @@ It needs to have the images field as a CollectionType.
         /**
          * {@inheritdoc}
          */
-        public function buildForm(FormBuilderInterface $builder, array $options)
+        public function buildForm(FormBuilderInterface $builder, array $options): void
         {
             $builder->add('images', CollectionType::class, [
                 'entry_type' => ShippingMethodImageType::class,
@@ -279,7 +294,7 @@ It needs to have the images field as a CollectionType.
         /**
          * {@inheritdoc}
          */
-        public function getExtendedType()
+        public function getExtendedType(): string
         {
             return ShippingMethodType::class;
         }
@@ -288,13 +303,13 @@ It needs to have the images field as a CollectionType.
 .. tip::
 
     In case you need only a single image upload, this can be done in 2 very easy steps.
-    
+
     First, in the code for the form provided above set ``allow_add`` and ``allow_delete`` to ``false``
-    
+
     Second, in the ``__construct`` method of the ``ShippingMethod`` entity you defined earlier add the following:
-    
+
     .. code-block:: php
-    
+
         public function __construct()
         {
             parent::__construct();
@@ -309,29 +324,28 @@ Register the form extension as a service:
     # services.yml
     services:
         app.form.extension.type.shipping_method:
-            class: AppBundle\Form\Extension\ShippingMethodTypeExtension
+            class: App\Form\Extension\ShippingMethodTypeExtension
             tags:
                 - { name: form.type_extension, extended_type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType }
 
-11. Override the definition of the ImageUploader service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+11. Declare the ImagesUploadListener service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to handle the image upload you need to attach the image upload listener to the ``ShippingMethod`` entity events:
+In order to handle the image upload you need to attach the ``ImagesUploadListener`` to the ``ShippingMethod`` entity events:
 
 .. code-block:: yaml
 
     # services.yml
     services:
-        sylius.listener.image_upload:
+        app.listener.images_upload:
             class: Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener
-            arguments: ['@sylius.image_uploader']
+            parent: sylius.listener.images_upload
+            autowire: true
+            autoconfigure: false
+            public: false
             tags:
-                - { name: kernel.event_listener, event: "sylius.product.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.product.pre_update", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.taxon.pre_update", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_create", method: "uploadImages" }
-                - { name: kernel.event_listener, event: "sylius.shipping_method.pre_update", method: "uploadImages" }
+                - { name: kernel.event_listener, event: sylius.shipping_method.pre_create, method: uploadImages }
+                - { name: kernel.event_listener, event: sylius.shipping_method.pre_update, method: uploadImages }
 
 12. Render the images field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -394,6 +408,46 @@ and render the ``{{ form_row(form.images) }}`` field.
 .. tip::
 
     Learn more about customizing templates :doc:`here </customization/template>`.
+
+13. Validation
+^^^^^^^^^^^^^^
+
+Your form so far is working fine, but don't forget about validation.
+The easiest way is using validation config files under the ``App/Resources/config/validation`` folder.
+
+This could look like this e.g.:
+
+.. code-block:: yaml
+
+    # src\Resources\config\validation\ShippingMethodImage.yml
+    App\Entity\ShippingMethodImage:
+      properties:
+        file:
+          - Image:
+              groups: [sylius]
+              maxHeight: 1000
+              maxSize: 10240000
+              maxWidth: 1000
+              mimeTypes:
+                - "image/png"
+                - "image/jpg"
+                - "image/jpeg"
+                - "image/gif"
+              mimeTypesMessage: 'This file format is not allowed. Please use PNG, JPG or GIF files.'
+              minHeight: 200
+              minWidth: 200
+
+This defines the validation constraints for each image entity.
+Now connecting the validation of the ``ShippingMethod`` to the validation of each single ``Image Entity`` is left:
+
+.. code-block:: yaml
+
+    # src\Resources\config\validation\ShippingMethod.yml
+    App\Entity\ShippingMethod:
+      properties:
+        ...
+        images:
+          - Valid: ~    
 
 Learn more
 ----------

@@ -15,15 +15,15 @@
     <class name="Sylius\Component\Core\Model\ChannelPricing">
         <property name="price">
             <constraint name="Range">
-                <option name="min">0.01</option>
+                <option name="min">0.00</option>
                 <option name="minMessage">sylius.channel_pricing.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="originalPrice">
             <constraint name="Range">
-                <option name="min">0.01</option>
-                <option name="minMessage">sylius.channel_pricing.original_price.min</option>
+                <option name="min">0.00</option>
+                <option name="minMessage">sylius.channel_pricing.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

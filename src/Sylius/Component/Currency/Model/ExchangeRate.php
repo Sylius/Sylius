@@ -19,24 +19,16 @@ class ExchangeRate implements ExchangeRateInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var float|null
-     */
+    /** @var float|null */
     protected $ratio;
 
-    /**
-     * @var CurrencyInterface|null
-     */
+    /** @var CurrencyInterface|null */
     protected $sourceCurrency;
 
-    /**
-     * @var CurrencyInterface|null
-     */
+    /** @var CurrencyInterface|null */
     protected $targetCurrency;
 
     public function __construct()
@@ -58,6 +50,7 @@ class ExchangeRate implements ExchangeRateInterface
     public function getRatio(): ?float
     {
         // It looks like Doctrine is hydrating decimal field as string, force casting to float.
+        /** @psalm-suppress DocblockTypeContradiction */
         return is_string($this->ratio) ? (float) $this->ratio : $this->ratio;
     }
 

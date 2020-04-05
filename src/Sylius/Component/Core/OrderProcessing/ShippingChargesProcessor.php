@@ -24,20 +24,12 @@ use Webmozart\Assert\Assert;
 
 final class ShippingChargesProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $adjustmentFactory;
 
-    /**
-     * @var DelegatingCalculatorInterface
-     */
+    /** @var DelegatingCalculatorInterface */
     private $shippingChargesCalculator;
 
-    /**
-     * @param FactoryInterface $adjustmentFactory
-     * @param DelegatingCalculatorInterface $shippingChargesCalculator
-     */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         DelegatingCalculatorInterface $shippingChargesCalculator
@@ -61,6 +53,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
             try {
                 $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
 
+                /** @var AdjustmentInterface $adjustment */
                 $adjustment = $this->adjustmentFactory->createNew();
                 $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
                 $adjustment->setAmount($shippingCharge);

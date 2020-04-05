@@ -16,57 +16,47 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Page\TestPlugin\MainPageInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ChannelContextSetterInterface
-     */
+    /** @var ChannelContextSetterInterface */
     private $channelContextSetter;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $channelCreatePage;
 
-    /**
-     * @var HomePageInterface
-     */
+    /** @var HomePageInterface */
     private $homePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ChannelContextSetterInterface $channelContextSetter
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param CreatePageInterface $channelCreatePage
-     * @param HomePageInterface $homePage
-     */
+    /** @var MainPageInterface */
+    private $pluginMainPage;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ChannelContextSetterInterface $channelContextSetter,
         ChannelRepositoryInterface $channelRepository,
         CreatePageInterface $channelCreatePage,
-        HomePageInterface $homePage
+        HomePageInterface $homePage,
+        MainPageInterface $pluginMainPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelContextSetter = $channelContextSetter;
         $this->channelRepository = $channelRepository;
         $this->channelCreatePage = $channelCreatePage;
         $this->homePage = $homePage;
+        $this->pluginMainPage = $pluginMainPage;
     }
 
     /**
@@ -104,5 +94,21 @@ final class ChannelContext implements Context
 
         $defaultLocale = $channel->getDefaultLocale();
         $this->homePage->open(['_locale' => $defaultLocale->getCode()]);
+    }
+
+    /**
+     * @When I visit plugin's main page
+     */
+    public function visitPluginMainPage(): void
+    {
+        $this->pluginMainPage->open();
+    }
+
+    /**
+     * @Then I should see a plugin's main page with content :content
+     */
+    public function shouldSeePluginMainPageWithContent(string $content): void
+    {
+        Assert::same($this->pluginMainPage->getContent(), $content);
     }
 }

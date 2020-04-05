@@ -7,109 +7,96 @@
  * file that was distributed with this source code.
  */
 
-(function ($) {
-    'use strict';
+import $ from 'jquery';
 
-    $.fn.extend({
-        notification: function () {
-            var HUB_REQUEST_TIME = 'hub_request_time';
-            var LAST_SYLIUS_VERSION = 'last_sylius_version';
-            var SYLIUS_VERSION_DISMISSED = 'sylius_version_dismissed';
-            var MILISECONDS_MULTIPLIER = 1000;
+const HUB_REQUEST_TIME = 'hub_request_time';
+const LAST_SYLIUS_VERSION = 'last_sylius_version';
+const SYLIUS_VERSION_DISMISSED = 'sylius_version_dismissed';
+const MILISECONDS_MULTIPLIER = 1000;
 
-            var notificationMenu = $('#sylius-version-notification');
-            var askFrequency = notificationMenu.attr('data-frequency') * MILISECONDS_MULTIPLIER;
+const store = function store(key, value) {
+  localStorage.setItem(key, value);
+};
 
-            $(notificationMenu).find('i[data-dismiss]').on('click', function () {
-                store(SYLIUS_VERSION_DISMISSED, getLatestSyliusVersion());
+const retrieve = function retrieve(key) {
+  return localStorage.getItem(key);
+};
 
-                updateNotification();
-            });
+const milisecondsSinceLastRequest = function milisecondsSinceLastRequest() {
+  return new Date().getTime() - parseInt(retrieve(HUB_REQUEST_TIME), 10);
+};
 
-            updateNotification();
+const getDismissedSyliusVersion = function getDismissedSyliusVersion() {
+  return retrieve(SYLIUS_VERSION_DISMISSED);
+};
 
-            function updateNotification() {
-                if (isLatest() || isDismissed()) {
-                    hideNotification();
+$.fn.extend({
+  notification() {
+    const notificationMenu = $('#sylius-version-notification');
+    const askFrequency = notificationMenu.attr('data-frequency') * MILISECONDS_MULTIPLIER;
 
-                    return;
-                }
+    const getCurrentSyliusVersion = function getCurrentSyliusVersion() {
+      return notificationMenu.data('current-version');
+    };
 
-                showNotification();
-            }
+    const getLatestSyliusVersion = function getLatestSyliusVersion() {
+      if (retrieve(HUB_REQUEST_TIME) !== undefined && milisecondsSinceLastRequest() < askFrequency) {
+        return retrieve(LAST_SYLIUS_VERSION);
+      }
 
-            function showNotification()
-            {
-                var notificationMenu = $('#sylius-version-notification');
+      $.ajax({
+        type: 'GET',
+        url: notificationMenu.attr('data-url'),
+        accept: 'application/json',
+        success(response) {
+          if (undefined !== response && undefined !== response.version && response.version !== retrieve(LAST_SYLIUS_VERSION)) {
+            store(LAST_SYLIUS_VERSION, response.version.toString());
+          }
+        },
+        complete() {
+          store(HUB_REQUEST_TIME, new Date().getTime().toString());
+        },
+      });
 
-                $('#notifications').css('display', 'block');
-                $('#no-notifications').css('display', 'none');
-                notificationMenu.find('.bell.icon').removeClass('outline').addClass('yellow');
-            }
+      return retrieve(LAST_SYLIUS_VERSION);
+    };
 
-            function hideNotification()
-            {
-                var notificationMenu = $('#sylius-version-notification');
+    const isLatest = function isLatest() {
+      return getCurrentSyliusVersion() === getLatestSyliusVersion();
+    };
 
-                $('#notifications').css('display', 'none');
-                $('#no-notifications').css('display', 'block');
-                notificationMenu.find('.bell.icon').removeClass('yellow').addClass('outline');
-            }
+    const isDismissed = function isDismissed() {
+      return getLatestSyliusVersion() === getDismissedSyliusVersion();
+    };
 
-            function getCurrentSyliusVersion()
-            {
-                return notificationMenu.data('current-version');
-            }
+    const showNotification = function showNotification() {
+      $('#notifications').css('display', 'block');
+      $('#no-notifications').css('display', 'none');
+      notificationMenu.find('.bell.icon').removeClass('outline').addClass('yellow');
+    };
 
-            function getLatestSyliusVersion()
-            {
-                if (retrieve(HUB_REQUEST_TIME) !== undefined && milisecondsSinceLastRequest() < askFrequency) {
-                    return retrieve(LAST_SYLIUS_VERSION);
-                }
+    const hideNotification = function hideNotification() {
+      $('#notifications').css('display', 'none');
+      $('#no-notifications').css('display', 'block');
+      notificationMenu.find('.bell.icon').removeClass('yellow').addClass('outline');
+    };
 
-                $.ajax({
-                    type: "GET",
-                    url: notificationMenu.attr('data-url'),
-                    accept: "application/json",
-                    success: function (data) {
-                        if (undefined !== data && data.version !== retrieve(LAST_SYLIUS_VERSION)) {
-                            store(LAST_SYLIUS_VERSION, data.version.toString());
-                        }
-                    },
-                    complete: function () {
-                        store(HUB_REQUEST_TIME, new Date().getTime().toString());
-                    }
-                });
+    const updateNotification = function updateNotification() {
+      if (isLatest() || isDismissed()) {
+        hideNotification();
 
-                return retrieve(LAST_SYLIUS_VERSION);
-            }
+        return;
+      }
 
-            function getDismissedSyliusVersion()
-            {
-                return retrieve(SYLIUS_VERSION_DISMISSED);
-            }
+      showNotification();
+    };
 
-            function isLatest()
-            {
-                return getCurrentSyliusVersion() === getLatestSyliusVersion();
-            }
+    $(notificationMenu).find('i[data-dismiss]').on('click', () => {
+      store(SYLIUS_VERSION_DISMISSED, getLatestSyliusVersion());
 
-            function isDismissed()
-            {
-                return getLatestSyliusVersion() === getDismissedSyliusVersion();
-            }
-
-            function milisecondsSinceLastRequest() {
-                return new Date().getTime() - parseInt(retrieve(HUB_REQUEST_TIME));
-            }
-
-            function store(key, value) {
-                localStorage.setItem(key, value);
-            }
-
-            function retrieve(key) {
-                return localStorage.getItem(key);
-            }
-        }
+      updateNotification();
     });
-})(jQuery);
+
+    updateNotification();
+  },
+});

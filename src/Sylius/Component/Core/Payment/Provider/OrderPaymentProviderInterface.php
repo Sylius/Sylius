@@ -18,11 +18,5 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface OrderPaymentProviderInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param string $targetState
-     *
-     * @return PaymentInterface|null
-     */
     public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface;
 }

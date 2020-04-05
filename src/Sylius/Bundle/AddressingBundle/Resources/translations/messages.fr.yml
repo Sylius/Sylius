@@ -11,13 +11,13 @@ sylius:
             last_name: Nom
             phone_number: Téléphone
             postcode: Code postal
-            street: Rue
-            province: Région
+            street: Voie
+            province: Etat
             zone: Zone
         country:
             add_province: Ajouter une région
             name: Nom
-            provinces: Etat
+            provinces: Etats
             select: Sélectionner
             enabled: Activé
         province:
@@ -31,7 +31,7 @@ sylius:
             type: Type
             types:
                 country: Pays
-                province: Région
+                province: Etat
                 zone: Zone
             scope: Champ d'application
             scopes:

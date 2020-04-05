@@ -22,20 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class BrowsingProductVariantsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $defaultProductVariantResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param ProductVariantResolverInterface $defaultProductVariantResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         ProductVariantResolverInterface $defaultProductVariantResolver
@@ -60,6 +52,14 @@ final class BrowsingProductVariantsContext implements Context
         $this->indexPage->open(['productId' => $product->getId()]);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]));
+    }
+
+    /**
+     * @Then I should see the product variant :productVariantName in the list
+     */
+    public function iShouldSeeTheProductVariantInTheList(string $productVariantName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productVariantName]));
     }
 
     /**
@@ -93,6 +93,7 @@ final class BrowsingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I browse variants of (this product)$/
      * @When /^I (?:|want to )view all variants of (this product)$/
      * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
@@ -109,6 +110,14 @@ final class BrowsingProductVariantsContext implements Context
     public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
     {
         Assert::same($this->indexPage->countItems(), (int) $numberOfProductVariants);
+    }
+
+    /**
+     * @Then I should see a single product variant in the list
+     */
+    public function iShouldSeeASingleProductVariantInTheList(): void
+    {
+        $this->iShouldSeeProductVariantsInTheList(1);
     }
 
     /**
@@ -252,6 +261,14 @@ final class BrowsingProductVariantsContext implements Context
         $this->indexPage->open(['productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->indexPage->getOnHandQuantityFor($productVariant), (int) $amountInStock);
+    }
+
+    /**
+     * @Then /^I should be on the list of (this product)'s variants$/
+     */
+    public function iShouldBeOnTheListOfThisProductVariants(ProductInterface $product): void
+    {
+        Assert::true($this->indexPage->isOpen(['productId' => $product->getId()]));
     }
 
     /**

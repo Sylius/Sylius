@@ -9,7 +9,7 @@ Sylius is a game-changing e-commerce solution for PHP, based on the Symfony fram
 Philosophy
 ----------
 
-Sylius is completely open source (MIT license) and free, maintained by diverse and creative community of developers and companies.
+Sylius is completely open source (MIT license) and free, maintained by a diverse and creative community of developers and companies.
 
 What are our core values and what makes us different from other solutions?
 
@@ -20,6 +20,19 @@ What are our core values and what makes us different from other solutions?
 * `Highest quality of code <https://scrutinizer-ci.com/g/Sylius/Sylius/>`_
 
 And much more, but we will let you discover it yourself.
+
+.. rst-class:: plus-doc
+
+Sylius Plus
+^^^^^^^^^^^
+
+There exists a commercial edition of Sylius, which is called `Sylius Plus <https://sylius.com/plus/>`_.
+
+Sylius Plus gives you all the power of Open Source and much more. It comes with a set of enterprise-grade features
+and technical support from its creators. As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
+
+In this documentation you will find also chapters dedicated to features introduced by the Sylius Plus edition, they will
+be marked with a frame just like this section.
 
 The Three Natures of Sylius
 ---------------------------
@@ -44,6 +57,12 @@ E-Commerce Components for PHP
 
 If you use a different framework than Symfony, you are welcome to use Sylius components, which will make it much easier to implement a webshop with any PHP application and project.
 They provide you with default models, services and logic for all aspects of e-commerce, completely separated and ready to use.
+
+Roadmap
+-------
+
+Are you wondering about Sylius plans for the next releases? If so then you should follow our `Roadmap <https://sylius.com/roadmap>`_.
+Through our :doc:`Slack and Forum </support/index>` you can contribute by conversation and votes on the most desired features and improvements.
 
 Final Thoughts
 --------------

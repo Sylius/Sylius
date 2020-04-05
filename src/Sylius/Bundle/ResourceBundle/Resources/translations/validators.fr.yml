@@ -1,7 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    resource:
-        not_enabled: "La ressource spécifiée est désactivée"
-        not_disabled: "La ressource spécifiée est activée"

@@ -2,6 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        contact_email:
+            invalid: Несапраўдны адрас.
+    channel_pricing:
+        price:
+            not_blank: Калі ласка, увядзіце кошт.
+    checkout:
+        shipping_method:
+            not_blank: Калі ласка, выберыце метад дастаўкі.
+    contact:
+        email:
+            invalid: Несапраўдны адрас.
+            not_blank: Калі ласка, увядзіце свой адрас электроннай пошты.
     locale:
         code:
             not_blank: Калі ласка, увядзіце код лакалі.
@@ -10,3 +23,6 @@ sylius:
         onHand:
             min: На руках павінна быць больш за {{ limit }}.
             not_blank: Калі ласка, увядзіце колькасць на руках.
+    user:
+        email:
+            invalid: Несапраўдны адрас.

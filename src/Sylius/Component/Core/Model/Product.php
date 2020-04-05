@@ -25,38 +25,40 @@ use Webmozart\Assert\Assert;
 
 class Product extends BaseProduct implements ProductInterface, ReviewableProductInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
     /**
      * @var Collection|ProductTaxonInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductTaxonInterface>
      */
     protected $productTaxons;
 
     /**
      * @var Collection|ChannelInterface[]
+     *
+     * @psalm-var Collection<array-key, ChannelInterface>
      */
     protected $channels;
 
-    /**
-     * @var BaseTaxonInterface
-     */
+    /** @var BaseTaxonInterface */
     protected $mainTaxon;
 
     /**
      * @var Collection|ReviewInterface[]
+     *
+     * @psalm-var Collection<array-key, ReviewInterface>
      */
     protected $reviews;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $averageRating = 0;
 
     /**
      * @var Collection|ImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ImageInterface>
      */
     protected $images;
 
@@ -64,9 +66,16 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     {
         parent::__construct();
 
+        /** @var ArrayCollection<array-key, ProductTaxonInterface> $this->productTaxons */
         $this->productTaxons = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ReviewInterface> $this->reviews */
         $this->reviews = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 
@@ -167,6 +176,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
+     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
     public function getChannels(): Collection
     {
@@ -264,7 +276,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function removeReview(ReviewInterface $review): void
     {
-        $this->reviews->remove($review);
+        $this->reviews->removeElement($review);
     }
 
     /**
@@ -349,7 +361,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * @param string|null $locale
+     * {@inheritdoc}
      *
      * @return ProductTranslationInterface
      */
@@ -359,7 +371,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * {@inheritdoc}
+     * @return ProductTranslationInterface
      */
     protected function createTranslation(): BaseProductTranslationInterface
     {

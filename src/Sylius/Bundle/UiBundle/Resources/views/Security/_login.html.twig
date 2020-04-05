@@ -4,20 +4,22 @@
 
 <div class="ui middle aligned center aligned grid">
     <div class="column">
-        {{ sonata_block_render_event('sylius.admin.login.before_form', {'form': form}) }}
+        {{ sylius_template_event('sylius.admin.login.before_form', {'form': form}) }}
 
         {% if paths.logo is defined %}
-        <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
+            <div style="max-width: 270px; margin: 0 auto; margin-bottom: 40px;">
+                <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
+            </div>
         {% endif %}
 
         {% if last_error %}
             <div class="ui left aligned basic segment">
-                {{ messages.error(last_error.message) }}
+                {{ messages.error(last_error.messageKey) }}
             </div>
         {% endif %}
 
         {{ form_start(form, {'action': action|default('/'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
-            <div class="ui left aligned segment">
+            <div class="ui left aligned very padded segment">
                 {{ form_row(form._username, {'value': last_username|default('')}) }}
                 {{ form_row(form._password) }}
                 {{ form_row(form._remember_me) }}
@@ -25,7 +27,7 @@
                 <button type="submit" class="ui fluid large primary submit button">Login</button>
             </div>
 
-            {{ sonata_block_render_event('sylius.admin.login.form', {'form': form}) }}
+            {{ sylius_template_event('sylius.admin.login.form', {'form': form}) }}
 
         {{ form_end(form, {'render_rest': false}) }}
     </div>

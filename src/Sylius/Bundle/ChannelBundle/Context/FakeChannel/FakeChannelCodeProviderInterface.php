@@ -17,10 +17,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface FakeChannelCodeProviderInterface
 {
-    /**
-     * @param Request $request
-     *
-     * @return string|null
-     */
     public function getCode(Request $request): ?string;
 }

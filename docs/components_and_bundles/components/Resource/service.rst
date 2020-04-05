@@ -11,7 +11,7 @@ This interface should be implemented by a service responsible for managing local
 .. note::
    For more detailed information go to `Sylius API LocaleProviderInterface`_.
 
-.. _Sylius API LocaleProviderInterface: http://api.sylius.org/Sylius/Component/Resource/Provider/LocaleProviderInterface.html
+.. _Sylius API LocaleProviderInterface: http://api.sylius.com/Sylius/Component/Resource/Provider/LocaleProviderInterface.html
 
 .. _component_resource_repository_translatable-resource-repository-interface:
 
@@ -29,4 +29,4 @@ and an array of translatable fields into your custom repository.
 
    For more detailed information go to `Sylius API TranslatableResourceRepositoryInterface`_.
 
-.. _Sylius API TranslatableResourceRepositoryInterface: http://api.sylius.org/Sylius/Component/Resource/Repository/TranslatableRepositoryInterface.html
+.. _Sylius API TranslatableResourceRepositoryInterface: http://api.sylius.com/Sylius/Component/Resource/Repository/TranslatableRepositoryInterface.html

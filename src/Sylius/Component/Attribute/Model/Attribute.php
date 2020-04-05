@@ -26,34 +26,22 @@ class Attribute implements AttributeInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type = TextAttributeType::TYPE;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configuration = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $storageType;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
     public function __construct()
@@ -176,8 +164,6 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return AttributeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface
@@ -188,9 +174,6 @@ class Attribute implements AttributeInterface
         return $translation;
     }
 
-    /**
-     * @return AttributeTranslationInterface
-     */
     protected function createTranslation(): AttributeTranslationInterface
     {
         return new AttributeTranslation();

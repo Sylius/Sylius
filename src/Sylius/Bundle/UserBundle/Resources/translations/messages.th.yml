@@ -5,13 +5,13 @@ sylius:
     form:
         user:
             email: อีเมล
-            enabled: เปิดใช้งานแล้ว
+            enabled: เปิดใช้งาน
             password:
-                label: รหัสผ่าน
+                label: Password
                 confirmation: ยืนยันรหัสผ่าน
             remember_me: จำฉันไว้
             shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
-            username: ชื่อผู้ใช้
+            username: Username
         user_filter:
             query: ค้นหา
         user_change_password:

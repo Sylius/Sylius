@@ -36,5 +36,5 @@ sylius:
                     groups: Групи
                     header: Клієнт
                 sales:
-                    header: Продажі
+                    header: Збут
                     orders: Замовлення

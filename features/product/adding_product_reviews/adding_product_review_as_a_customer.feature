@@ -9,10 +9,10 @@ Feature: Adding product review as a customer
         And the store has a product "Necronomicon"
         And I am a logged in customer
 
-    @ui @javascript
+    @ui
     Scenario: Adding product reviews as a logged in customer
-        Given I want to review product "Necronomicon"
-        When I leave a comment "Great book for every advanced sorcerer.", titled "Scary but astonishing"
+        When I want to review product "Necronomicon"
+        And I leave a comment "Great book for every advanced sorcerer.", titled "Scary but astonishing"
         And I rate it with 5 points
         And I add it
         Then I should be notified that my review is waiting for the acceptation

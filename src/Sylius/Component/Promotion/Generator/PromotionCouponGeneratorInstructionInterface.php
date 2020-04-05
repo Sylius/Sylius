@@ -15,29 +15,22 @@ namespace Sylius\Component\Promotion\Generator;
 
 interface PromotionCouponGeneratorInstructionInterface
 {
-    /**
-     * @return int|null
-     */
     public function getAmount(): ?int;
 
-    /**
-     * @param int|null $amount
-     */
     public function setAmount(?int $amount): void;
 
-    /**
-     * @return int|null
-     */
+    public function getPrefix(): ?string;
+
+    public function setPrefix(?string $prefix): void;
+
     public function getCodeLength(): ?int;
 
-    /**
-     * @param int|null $codeLength
-     */
     public function setCodeLength(?int $codeLength): void;
 
-    /**
-     * @return \DateTimeInterface|null
-     */
+    public function getSuffix(): ?string;
+
+    public function setSuffix(?string $suffix): void;
+
     public function getExpiresAt(): ?\DateTimeInterface;
 
     /**
@@ -45,13 +38,7 @@ interface PromotionCouponGeneratorInstructionInterface
      */
     public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
-    /**
-     * @return int|null
-     */
     public function getUsageLimit(): ?int;
 
-    /**
-     * @param int $usageLimit
-     */
     public function setUsageLimit(int $usageLimit): void;
 }

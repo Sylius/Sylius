@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Calculating shipping cost
 =========================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Calculating shipping cost is as simple as using the ``sylius.shipping_calculator`` service and calling ``calculate`` method on ``ShippingSubjectInterface``.
 

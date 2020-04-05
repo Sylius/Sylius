@@ -23,3 +23,9 @@ sylius:
             unique: Ky kupon ekziston tashmë.
         usage_limit:
             min: Kufiri i përdorimit të kuponit duhet të jetë të paktën {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Sasia e kuponave për t'u të gjeneruar duhet të jetë të paktën {{ limit }}.
+            not_blank: Fut sasinë e kuponave për t'u gjeneruar.
+        usage_limit:
+            min: Kufiri i përdorimit të kuponave të gjeneruar duhet të jetë të paktën {{ limit }}.

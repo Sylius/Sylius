@@ -7,7 +7,7 @@ sylius:
             city: Cidade
             company: Empresa
             country: País
-            first_name: Primeiro nome
+            first_name: Nome próprio
             last_name: Apelido
             phone_number: Número de telefone
             postcode: Código postal

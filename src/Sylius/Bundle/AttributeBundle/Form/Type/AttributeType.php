@@ -24,21 +24,14 @@ use Symfony\Component\Form\FormEvents;
 
 abstract class AttributeType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $attributeTranslationType;
 
-    /**
-     * @var FormTypeRegistryInterface
-     */
+    /** @var FormTypeRegistryInterface */
     protected $formTypeRegistry;
 
     /**
      * {@inheritdoc}
-     *
-     * @param string $attributeTranslationType
-     * @param FormTypeRegistryInterface $formTypeRegistry
      */
     public function __construct(
         string $dataClass,

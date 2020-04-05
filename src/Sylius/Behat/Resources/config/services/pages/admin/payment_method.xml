@@ -19,6 +19,8 @@
     </parameters>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.behat.page.admin.payment_method.create" class="%sylius.behat.page.admin.payment_method.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_payment_method_create</argument>
         </service>

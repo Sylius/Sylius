@@ -110,4 +110,9 @@ final class OrderItemSpec extends ObjectBehavior
 
         $this->getSubtotal()->shouldReturn(19000);
     }
+
+    function it_has_no_variant_by_default(): void
+    {
+        $this->getVariant()->shouldReturn(null);
+    }
 }

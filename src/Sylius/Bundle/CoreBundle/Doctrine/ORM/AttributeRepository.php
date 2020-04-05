@@ -20,9 +20,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class AttributeRepository extends EntityRepository
 {
-    /**
-     * @var AssociationHydrator
-     */
+    /** @var AssociationHydrator */
     protected $associationHydrator;
 
     /**

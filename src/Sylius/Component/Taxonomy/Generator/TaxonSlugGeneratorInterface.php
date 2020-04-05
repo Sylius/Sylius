@@ -17,11 +17,5 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface TaxonSlugGeneratorInterface
 {
-    /**
-     * @param TaxonInterface $taxon
-     * @param string|null $locale
-     *
-     * @return string
-     */
     public function generate(TaxonInterface $taxon, ?string $locale = null): string;
 }

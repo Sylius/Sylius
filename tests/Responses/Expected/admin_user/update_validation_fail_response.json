@@ -21,6 +21,11 @@
                 "errors": [
                     "Please choose a locale."
                 ]
+            },
+            "avatar": {
+                "children": {
+                    "file": {}
+                }
             }
         }
     }

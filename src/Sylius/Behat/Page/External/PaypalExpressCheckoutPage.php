@@ -14,28 +14,29 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\External;
 
 use Behat\Mink\Session;
+use FriendsOfBehat\PageObjectExtension\Page\Page;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Behat\Page\Page;
-use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPageInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $securityTokenRepository;
 
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RepositoryInterface $securityTokenRepository
-     */
-    public function __construct(Session $session, array $parameters, RepositoryInterface $securityTokenRepository)
+    public function __construct(Session $session, $minkParameters, RepositoryInterface $securityTokenRepository)
     {
-        parent::__construct($session, $parameters);
+        parent::__construct($session, $minkParameters);
 
         $this->securityTokenRepository = $securityTokenRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function authorize()
+    {
+        $this->getDriver()->visit($this->findAuthorizeToken()->getTargetUrl() . '?token=EC-2d9EV13959UR209410U&PayerID=UX8WBNYWGBVMG');
     }
 
     /**
@@ -57,7 +58,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    protected function getUrl(array $urlParameters = []): string
     {
         return 'https://www.sandbox.paypal.com';
     }
@@ -65,7 +66,7 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     /**
      * {@inheritdoc}
      */
-    protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = []): void
     {
         $position = strpos($this->getSession()->getCurrentUrl(), $this->getUrl($urlParameters));
         if (0 !== $position) {
@@ -78,16 +79,36 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
      *
      * @throws \RuntimeException
      */
+    private function findAuthorizeToken()
+    {
+        return $this->findToken('authorize');
+    }
+
+    /**
+     * @return TokenInterface
+     *
+     * @throws \RuntimeException
+     */
     private function findCaptureToken()
+    {
+        return $this->findToken('capture');
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return TokenInterface
+     */
+    private function findToken($name)
     {
         $tokens = $this->securityTokenRepository->findAll();
 
         foreach ($tokens as $token) {
-            if (strpos($token->getTargetUrl(), 'capture')) {
+            if (strpos($token->getTargetUrl(), $name)) {
                 return $token;
             }
         }
 
-        throw new \RuntimeException('Cannot find capture token, check if you are after proper checkout steps');
+        throw new \RuntimeException(sprintf('Cannot find "%s" token, check if you are after proper checkout steps', $name));
     }
 }

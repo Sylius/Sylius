@@ -2,43 +2,53 @@
     "name": "sylius/shop-bundle",
     "type": "symfony-bundle",
     "description": "Sylius eCommerce storefront.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
-    "homepage": "http://sylius.org",
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "store",
+        "webshop",
+        "sylius"
+    ],
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
-            "homepage": "http://sylius.org"
+            "name": "Sylius project",
+            "homepage": "http://sylius.com"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
 
-        "sonata-project/intl-bundle": "^2.2",
-        "sylius/core-bundle": "^1.0",
-        "sylius/ui-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2"
+        "sylius/core-bundle": "^1.2",
+        "sylius/ui-bundle": "^1.2",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/security-bundle": "^4.4",
+        "twig/intl-extra": "^2.12",
+        "twig/twig": "^2.12"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^2.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpunit/phpunit": "^5.6",
-        "phpspec/phpspec": "^4.0",
-        "symfony/dependency-injection": "^3.2"
+        "matthiasnoback/symfony-config-test": "^4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+        "phpspec/phpspec": "^5.0",
+        "phpunit/phpunit": "^7.0",
+        "symfony/dependency-injection": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\ShopBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\ShopBundle\\": ""
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -50,7 +60,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.6-dev"
         }
     }
 }

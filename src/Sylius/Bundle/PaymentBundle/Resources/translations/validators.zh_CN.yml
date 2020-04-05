@@ -21,7 +21,7 @@ sylius:
             not_blank: 请选择到期年份。
     payment:
         currency_code:
-            not_valid: 您输入的币种代码是无效的。
+            not_valid: 您输入的姓名无效
         method:
             not_blank: '请选择一种支付方式。'
     payment_method:

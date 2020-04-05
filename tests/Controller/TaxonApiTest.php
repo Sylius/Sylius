@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -437,8 +433,10 @@ EOT;
     public function it_allows_to_update_position_of_product_in_a_taxon()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $productTaxons = $this->loadFixturesFromFiles([
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         /** @var TaxonInterface $taxon */
         $taxon = $productTaxons['mugs'];
@@ -471,8 +469,10 @@ EOT;
     public function it_does_not_allow_to_update_position_of_product_in_a_taxon_with_incorrect_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $productTaxons = $this->loadFixturesFromFile('resources/product_taxons.yml');
+        $productTaxons = $this->loadFixturesFromFiles([
+            'resources/products.yml',
+            'resources/product_taxons.yml',
+        ]);
 
         /** @var TaxonInterface $taxon */
         $taxon = $productTaxons['mugs'];
@@ -496,8 +496,6 @@ EOT;
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return string
      */
     private function getTaxonUrl(TaxonInterface $taxon)
@@ -506,8 +504,6 @@ EOT;
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return string
      */
     private function getTaxonProductsPositionsChangeUrl(TaxonInterface $taxon)

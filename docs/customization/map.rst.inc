@@ -10,3 +10,6 @@
 * :doc:`/customization/flash`
 * :doc:`/customization/state_machine`
 * :doc:`/customization/grid`
+* :doc:`/customization/fixtures`
+* :doc:`/customization/fixture_suites`
+* :doc:`/customization/tips_and_tricks`

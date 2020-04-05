@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanali nuk mund të fshihet. Të paktën një kanal duhet të jetë i aktivizuar.'

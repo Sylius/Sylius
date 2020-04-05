@@ -25,6 +25,12 @@ sylius:
             name: نام
             roles: نقش ها
         channel:
+            billing_data:
+                city: شهر
+                company: شرکت
+                country: کشور
+                postcode: کد پستی
+                street: خیابان
             contact_email: ایمیل مخاطب
             currencies: واحدهای پول
             currency_base: ارز پایه
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: معتبر
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

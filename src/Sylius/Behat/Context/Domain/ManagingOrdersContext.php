@@ -26,56 +26,30 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $orderItemRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $addressRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $adjustmentRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $orderManager;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @var UnpaidOrdersStateUpdaterInterface
-     */
+    /** @var UnpaidOrdersStateUpdaterInterface */
     private $unpaidOrdersStateUpdater;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param OrderRepositoryInterface $orderRepository
-     * @param RepositoryInterface $orderItemRepository
-     * @param RepositoryInterface $addressRepository
-     * @param RepositoryInterface $adjustmentRepository
-     * @param ObjectManager $orderManager
-     * @param ProductVariantResolverInterface $variantResolver
-     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,

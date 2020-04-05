@@ -21,14 +21,9 @@ use Webmozart\Assert\Assert;
 
 final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
-    /**
-     * @var PaymentMethodRepositoryInterface
-     */
+    /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     */
     public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
@@ -39,6 +34,8 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
      */
     public function getSupportedMethods(BasePaymentInterface $payment): array
     {
+        /** @var PaymentInterface $payment */
+        Assert::isInstanceOf($payment, PaymentInterface::class);
         Assert::true($this->supports($payment), 'This payment method is not support by resolver');
 
         return $this->paymentMethodRepository->findEnabledForChannel($payment->getOrder()->getChannel());

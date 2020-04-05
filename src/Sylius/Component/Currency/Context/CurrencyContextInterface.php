@@ -16,8 +16,6 @@ namespace Sylius\Component\Currency\Context;
 interface CurrencyContextInterface
 {
     /**
-     * @return string
-     *
      * @throws CurrencyNotFoundException
      */
     public function getCurrencyCode(): string;

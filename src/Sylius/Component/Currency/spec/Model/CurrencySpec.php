@@ -39,6 +39,18 @@ final class CurrencySpec extends ObjectBehavior
         $this->getCode()->shouldReturn('RSD');
     }
 
+    function it_does_not_return_name_when_it_has_no_code()
+    {
+        $this->setCode(null);
+        $this->getName()->shouldReturn(null);
+    }
+
+    function it_returns_name_of_currency_code(): void
+    {
+        $this->setCode('EUR');
+        $this->getName()->shouldReturn('Euro');
+    }
+
     function it_initializes_creation_date_by_default(): void
     {
         $this->getCreatedAt()->shouldHaveType(\DateTimeInterface::class);

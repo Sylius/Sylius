@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 How to customize Sylius Checkout?
 =================================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Why would you override the Checkout process?
 --------------------------------------------
@@ -25,7 +32,7 @@ Overwrite the state machine of Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open the `CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
-and place its content in the ``app/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml``
+and place its content in the ``src/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml``
 which is a `standard procedure of overriding configs in Symfony <http://symfony.com/doc/current/bundles/inheritance.html#overriding-resources-templates-routing-etc>`_.
 Remove the ``shipping_selected`` and ``shipping_skipped`` states, ``select_shipping`` and ``skip_shipping`` transitions.
 Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``sylius_process_cart`` callback.
@@ -86,17 +93,16 @@ Remove the ``select_shipping`` and ``skip_shipping`` transition from the ``syliu
 .. tip::
 
     To check if your new state machine configuration is overriding the old one run:
-    ``$ php bin/console debug:winzou:state-machine`` and check the configuration of ``sylius_order_checkout``.
+    ``php bin/console debug:winzou:state-machine`` and check the configuration of ``sylius_order_checkout``.
 
 Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The next step of customizing Checkout is to adjust the Checkout Resolver to match the changes you have made in the state machine.
-Make these changes in the ``config.yml``.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # config/packages/sylius_shop.yaml
     sylius_shop:
         checkout_resolver:
             pattern: /checkout/.+
@@ -122,7 +128,7 @@ You will achieve that by overriding two files:
 
 .. code-block:: html
 
-    {# app/Resources/SyliusShopBundle/views/Checkout/_steps.html.twig #}
+    {# templates/SyliusShopBundle/Checkout/_steps.html.twig #}
     {% if active is not defined or active == 'address' %}
         {% set steps = {'address': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
     {% elseif active == 'select_payment' %}
@@ -166,7 +172,7 @@ You will achieve that by overriding two files:
 
 .. code-block:: html
 
-    {# app/Resources/SyliusShopBundle/views/Checkout/SelectPayment/_navigation.html.twig #}
+    {# templates/SyliusShopBundle/Checkout/SelectPayment/_navigation.html.twig #}
     {% set enabled = order.payments|length %}
 
     <div class="ui two column grid">
@@ -266,7 +272,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
 
 .. tip::
 
-    If you do not see any changes run ``$ php bin/console cache:clear``.
+    If you do not see any changes run ``php bin/console cache:clear``.
 
 Learn more
 ----------

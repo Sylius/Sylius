@@ -25,20 +25,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodChoiceType extends AbstractType
 {
-    /**
-     * @var PaymentMethodsResolverInterface
-     */
+    /** @var PaymentMethodsResolverInterface */
     private $paymentMethodsResolver;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @param PaymentMethodsResolverInterface $paymentMethodsResolver
-     * @param RepositoryInterface $paymentMethodRepository
-     */
     public function __construct(
         PaymentMethodsResolverInterface $paymentMethodsResolver,
         RepositoryInterface $paymentMethodRepository

@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\LocaleFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
+final class LocaleFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -35,7 +36,31 @@ final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
      */
     public function locales_can_be_set(): void
     {
-        $this->assertConfigurationIsValid([['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true]]], 'locales');
+        $this->assertConfigurationIsValid([['locales' => ['en_US', 'pl_PL', 'es_ES']]], 'locales');
+    }
+
+    /**
+     * @test
+     */
+    public function default_locale_may_not_be_loaded(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['load_default_locale' => false]],
+            ['load_default_locale' => false],
+            'load_default_locale'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function default_locale_is_added_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['load_default_locale' => true],
+            'load_default_locale'
+        );
     }
 
     /**

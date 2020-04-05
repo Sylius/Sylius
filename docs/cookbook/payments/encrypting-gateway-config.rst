@@ -2,7 +2,7 @@ How to encrypt gateway config stored in the database?
 =====================================================
 
 **1.** Add defuse/php-encryption to your project
-.. code-block:: 
+.. code-block::
 
     composer require defuse/php-encryption
 
@@ -18,25 +18,22 @@ How to encrypt gateway config stored in the database?
 
     var_dump(Key::createNewRandomKey()->saveToAsciiSafeString());
 
-**3.** Store your generated key in a parameter in ``app/config/parameters.yml``.
+**3.** Store your generated key in a environmental variable in ``.env``.
+
+.. code-block:: text
+
+    # .env
+    DEFUSE_SECRET: "YOUR_GENERATED_KEY"
+
+**4.** Add the following code to the application configuration in the ``config/packages/payum.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/parameters.yml
-
-    parameters:
-        # ...
-        defuse_secret: "YOUR_GENERATED_KEY"
-
-**4.** Add the following code to the application configuration in the ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    # app/config/config.yml
+    # config/packages/payum.yaml
 
     payum:
         dynamic_gateways:
             encryption:
-                defuse_secret_key: "%defuse_secret%"
+                defuse_secret_key: "%env(DEFUSE_SECRET)%"
 
 **5.** Existing gateway configs will be automatically encrypted when updated. New gateway configs will be encrypted by default.

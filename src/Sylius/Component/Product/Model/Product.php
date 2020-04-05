@@ -30,33 +30,37 @@ class Product implements ProductInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
     /**
      * @var Collection|AttributeValueInterface[]
+     *
+     * @psalm-var Collection<array-key, AttributeValueInterface>
      */
     protected $attributes;
 
     /**
      * @var Collection|ProductVariantInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductVariantInterface>
      */
     protected $variants;
 
     /**
      * @var Collection|ProductOptionInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductOptionInterface>
      */
     protected $options;
 
     /**
      * @var Collection|ProductAssociationInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductAssociationInterface>
      */
     protected $associations;
 
@@ -65,15 +69,20 @@ class Product implements ProductInterface
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, AttributeValueInterface> $this->attributes */
         $this->attributes = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductAssociationInterface> $this->associations */
         $this->associations = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->variants */
         $this->variants = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ProductOptionInterface> $this->options */
         $this->options = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -220,6 +229,7 @@ class Product implements ProductInterface
      */
     public function addAttribute(?AttributeValueInterface $attribute): void
     {
+        /** @var ProductAttributeValueInterface $attribute */
         Assert::isInstanceOf(
             $attribute,
             ProductAttributeValueInterface::class,
@@ -237,6 +247,7 @@ class Product implements ProductInterface
      */
     public function removeAttribute(?AttributeValueInterface $attribute): void
     {
+        /** @var ProductAttributeValueInterface $attribute */
         Assert::isInstanceOf(
             $attribute,
             ProductAttributeValueInterface::class,
@@ -438,8 +449,6 @@ class Product implements ProductInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface
@@ -450,22 +459,12 @@ class Product implements ProductInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
     }
 
-    /**
-     * @param ProductAttributeValueInterface $attributeValue
-     * @param string $localeCode
-     * @param string|null $fallbackLocaleCode
-     *
-     * @return AttributeValueInterface
-     */
-    private function getAttributeInDifferentLocale(
+    protected function getAttributeInDifferentLocale(
         ProductAttributeValueInterface $attributeValue,
         string $localeCode,
         ?string $fallbackLocaleCode = null
@@ -484,13 +483,7 @@ class Product implements ProductInterface
         return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
     }
 
-    /**
-     * @param string $attributeCode
-     * @param string $localeCode
-     *
-     * @return bool
-     */
-    private function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
+    protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
     {
         $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
         if (null === $attributeValue) {

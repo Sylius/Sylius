@@ -35,7 +35,7 @@ final class TextareaAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
@@ -61,12 +61,6 @@ final class TextareaAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param string|null $value
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?string $value

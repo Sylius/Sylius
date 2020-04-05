@@ -23,14 +23,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionActionFactory implements PromotionActionFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $decoratedFactory;
 
-    /**
-     * @param FactoryInterface $decoratedFactory
-     */
     public function __construct(FactoryInterface $decoratedFactory)
     {
         $this->decoratedFactory = $decoratedFactory;
@@ -99,12 +94,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * @param string $type
-     * @param array $configuration
-     *
-     * @return PromotionActionInterface
-     */
     private function createAction(string $type, array $configuration): PromotionActionInterface
     {
         /** @var PromotionActionInterface $action */

@@ -8,10 +8,15 @@ sylius:
             last_name: Mbiemri
             email: Email
             phone_number: Numri i telefonit
+            gender: Gjinia
+            birthday: Ditëlindja
             billing_address: Adresa e faturimit
             different_billing_address: Përdor adresë tjetër për faturën?
+            only_customer_registration: Krijo llogari?
         customer_group:
             name: Emri
             roles: Funksionet
     gender:
         unknown: E panjohur
+        male: Mashkull
+        female: Femër

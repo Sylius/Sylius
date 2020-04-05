@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\PaymentMethodFixture;
 
-final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
+final class PaymentMethodFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -69,6 +70,43 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     public function payment_method_gateway_configuration_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => []]]]], 'custom.*.gatewayConfig');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_instructions_configuration_must_by_string(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['instructions' => 'test']]]], 'custom.*.instructions');
+        $this->assertConfigurationIsInvalid([['custom' => [['instructions' => ['test']]]]], 'Invalid type for path "payment_method.custom.0.instructions". Expected scalar, but got array');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_instructions_configuration_can_be_null(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['instructions' => null]]]], 'custom.*.instructions');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_instructions_configuration_default_null(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [[]]]],
+            ['custom' => [[]]],
+            'custom.*.instructions'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_instructions_configuration_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [[]]]], 'custom.*.instructions');
     }
 
     /**

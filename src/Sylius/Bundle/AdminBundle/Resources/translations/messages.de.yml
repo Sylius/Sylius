@@ -23,10 +23,10 @@ sylius:
                     locales: Gebietsschemata
                     payment_methods: Bezahlmethoden
                     shipping_categories: Versandkategorien
-                    shipping_methods: Versandmethoden
+                    shipping_methods: Versandarten
                     tax_categories: Steuerkategorien
                     tax_rates: Steuersätze
-                    zones: Versandgebiete
+                    zones: Gebiete
                 marketing:
                     header: Marketing
                     product_reviews: Produkt-Bewertung

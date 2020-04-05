@@ -19,7 +19,7 @@ sylius:
             name: שם
             provinces: מחוזות
             select: בחירה
-            enabled: מופעל
+            enabled: הופעל
         province:
             name: שם
             abbreviation: ראשי תיבות או שם מקוצר של מחוז
@@ -35,7 +35,7 @@ sylius:
                 zone: איזור
             scope: תחום
             scopes:
-                all: כל התחומים
+                all: הכל
             select: בחירה
             select_scope: בחרו תחום
         zone_member:

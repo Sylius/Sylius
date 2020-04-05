@@ -1,0 +1,29 @@
+sylius_admin_payment:
+    resource: |
+        alias: sylius.payment
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        only: ['index']
+        grid: sylius_admin_payment
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_payments
+            index:
+                icon: payment
+    type: sylius.resource
+
+sylius_admin_payment_complete:
+    path: /payments/{id}/complete
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            event: complete
+            section: admin
+            permission: true
+            state_machine:
+                graph: sylius_payment
+                transition: complete
+            redirect: referer
+            flash: sylius.payment.completed

@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -49,5 +50,22 @@ class AdminUserSpec extends ObjectBehavior
         $this->getLocaleCode()->shouldReturn(null);
         $this->setLocaleCode('en_US');
         $this->getLocaleCode()->shouldReturn('en_US');
+    }
+
+    function it_does_not_have_an_avatar_by_default(): void
+    {
+        $this->getAvatar()->shouldReturn(null);
+    }
+
+    function its_image_is_mutable(ImageInterface $image): void
+    {
+        $this->setImage($image);
+        $this->getImage()->shouldReturn($image);
+    }
+
+    function its_avatar_is_an_image(ImageInterface $image): void
+    {
+        $this->setAvatar($image);
+        $this->getAvatar()->shouldReturn($image);
     }
 }

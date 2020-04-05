@@ -8,6 +8,7 @@ sylius:
                 count: Broj
                 equal: Jednako
         shipment:
+            state: stanje
             states:
                 checkout: Plaćanje
                 pending: Na čekanju
@@ -16,14 +17,16 @@ sylius:
                 cancelled: Otkazano
             tracking_code: Kod Praćenja
         shipping_calculator:
+            flat_rate_configuration:
+                amount: Iznos
             per_unit_rate_configuration:
-                amount: Količina
+                amount: Iznos
         shipping_category:
             description: Opis
             name: Ime
         shipping_method:
             calculator: Kalkulator
-            category: Kategorija
+            category: Kategorija poreske stope
             channels: Kanali
             configuration: Konfiguracija
             description: Opis

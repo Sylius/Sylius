@@ -16,12 +16,6 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 interface FormatMoneyHelperInterface
 {
     /**
-     * @param int $amount
-     * @param string $currencyCode
-     * @param string $localeCode
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function formatAmount(int $amount, string $currencyCode, string $localeCode): string;

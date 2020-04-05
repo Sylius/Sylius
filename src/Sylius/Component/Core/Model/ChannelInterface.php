@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
@@ -25,93 +27,60 @@ interface ChannelInterface extends
     CurrenciesAwareInterface,
     LocalesAwareInterface
 {
-    /**
-     * @return CurrencyInterface|null
-     */
     public function getBaseCurrency(): ?CurrencyInterface;
 
-    /**
-     * @param CurrencyInterface|null $currency
-     */
     public function setBaseCurrency(?CurrencyInterface $currency): void;
 
-    /**
-     * @return LocaleInterface|null
-     */
     public function getDefaultLocale(): ?LocaleInterface;
 
-    /**
-     * @param LocaleInterface|null $locale
-     */
     public function setDefaultLocale(?LocaleInterface $locale): void;
 
-    /**
-     * @return ZoneInterface|null
-     */
     public function getDefaultTaxZone(): ?ZoneInterface;
 
-    /**
-     * @param ZoneInterface|null $defaultTaxZone
-     */
     public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void;
 
-    /**
-     * @return string|null
-     */
     public function getTaxCalculationStrategy(): ?string;
 
-    /**
-     * @param string|null $taxCalculationStrategy
-     */
     public function setTaxCalculationStrategy(?string $taxCalculationStrategy): void;
 
-    /**
-     * @return string|null
-     */
     public function getThemeName(): ?string;
 
-    /**
-     * @param string|null $themeName
-     */
     public function setThemeName(?string $themeName): void;
 
-    /**
-     * @return string|null
-     */
     public function getContactEmail(): ?string;
 
-    /**
-     * @param string|null $contactEmail
-     */
     public function setContactEmail(?string $contactEmail): void;
 
-    /**
-     * @return bool
-     */
     public function isSkippingShippingStepAllowed(): bool;
 
-    /**
-     * @param bool $skippingShippingStepAllowed
-     */
     public function setSkippingShippingStepAllowed(bool $skippingShippingStepAllowed): void;
 
-    /**
-     * @return bool
-     */
     public function isSkippingPaymentStepAllowed(): bool;
 
-    /**
-     * @param bool $skippingPaymentStepAllowed
-     */
     public function setSkippingPaymentStepAllowed(bool $skippingPaymentStepAllowed): void;
 
-    /**
-     * @return bool
-     */
     public function isAccountVerificationRequired(): bool;
 
-    /**
-     * @param bool $accountVerificationRequired
-     */
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void;
+
+    public function getShopBillingData(): ?ShopBillingDataInterface;
+
+    public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void;
+
+    public function getMenuTaxon(): ?TaxonInterface;
+
+    public function setMenuTaxon(?TaxonInterface $menuTaxon): void;
+
+    /**
+     * @return Collection|CountryInterface[]
+     *
+     * @psalm-return Collection<array-key, CountryInterface>
+     */
+    public function getCountries(): Collection;
+
+    public function addCountry(CountryInterface $country): void;
+
+    public function removeCountry(CountryInterface $country): void;
+
+    public function hasCountry(CountryInterface $country): bool;
 }

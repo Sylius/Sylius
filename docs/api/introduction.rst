@@ -8,7 +8,7 @@ This part of the documentation is about RESTful JSON/XML API for the Sylius plat
 
 .. note::
 
-    This documentation assumes you have at least some experience with `REST APIs <http://symfony.com/doc/current/quick_tour>`_.
+    This documentation assumes you have at least some experience with `REST APIs <https://en.wikipedia.org/wiki/Representational_state_transfer>`_.
 
 .. tip::
 

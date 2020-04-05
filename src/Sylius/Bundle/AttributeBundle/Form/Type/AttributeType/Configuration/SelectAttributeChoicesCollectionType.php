@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Ramsey\Uuid\Uuid;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,34 +23,49 @@ use Symfony\Component\Form\FormEvents;
 
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
+    /** @var string */
+    private $defaultLocaleCode;
+
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    {
+        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+    }
+
     /**
-     * {@inheritdoc}
+     * @psalm-suppress InvalidScalarArgument Some weird magic going on here, not sure about refactor
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
             $form = $event->getForm();
 
             if (null !== $data) {
-                $fixedArray = [];
-                foreach ($data as $key => $value) {
+                $fixedData = [];
+                foreach ($data as $key => $values) {
                     if (!is_int($key)) {
-                        $fixedArray[$key] = $value;
+                        $fixedData[$key] = $this->resolveValues($values);
 
                         continue;
                     }
 
+                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
+                        continue;
+                    }
+
                     $newKey = $this->getUniqueKey();
-                    $fixedArray[$newKey] = $value;
+                    $fixedData[$newKey] = $this->resolveValues($values);
 
                     if ($form->offsetExists($key)) {
-                        $form->offsetUnset($key);
-                        $form->offsetSet(null, $newKey);
+                        $type = get_class($form->get($key)->getConfig()->getType()->getInnerType());
+                        $options = $form->get($key)->getConfig()->getOptions();
+
+                        $form->remove($key);
+                        $form->add($newKey, $type, $options);
                     }
                 }
 
-                $event->setData($fixedArray);
+                $event->setData($fixedData);
             }
         });
     }
@@ -70,11 +86,20 @@ class SelectAttributeChoicesCollectionType extends AbstractType
         return 'sylius_select_attribute_choices_collection';
     }
 
-    /**
-     * @return string
-     */
     private function getUniqueKey(): string
     {
         return Uuid::uuid1()->toString();
+    }
+
+    private function resolveValues(array $values): array
+    {
+        $fixedValues = [];
+        foreach ($values as $locale => $value) {
+            if ('' !== $value && null !== $value) {
+                $fixedValues[$locale] = $value;
+            }
+        }
+
+        return $fixedValues;
     }
 }

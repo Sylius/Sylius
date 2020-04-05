@@ -20,22 +20,14 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class ShipmentEmailManager implements ShipmentEmailManagerInterface
 {
-    /**
-     * @var SenderInterface
-     */
+    /** @var SenderInterface */
     private $emailSender;
 
-    /**
-     * @param SenderInterface $emailSender
-     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationEmail(ShipmentInterface $shipment): void
     {
         /** @var OrderInterface $order */
@@ -44,6 +36,8 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
         $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, [$order->getCustomer()->getEmail()], [
             'shipment' => $shipment,
             'order' => $order,
+            'channel' => $order->getChannel(),
+            'localeCode' => $order->getLocaleCode(),
         ]);
     }
 }

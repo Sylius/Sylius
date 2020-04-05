@@ -26,38 +26,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var NotificationCheckerInterface
-     */
+    /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -86,13 +69,13 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs($position = null)
+    public function iSpecifyItsPositionAs(int $position = null)
     {
         $this->createPage->specifyPosition($position);
     }
@@ -157,10 +140,27 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipping method :shipmentMethod should appear in the registry
-     * @Then the shipping method :shipmentMethod should be in the registry
+     * @When I check (also) the :shippingMethodName shipping method
      */
-    public function theShipmentMethodShouldAppearInTheRegistry($shipmentMethodName)
+    public function iCheckTheShippingMethod(string $shippingMethodName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $shippingMethodName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see the shipping method :shipmentMethodName in the list
+     * @Then the shipping method :shipmentMethodName should appear in the registry
+     * @Then the shipping method :shipmentMethodName should be in the registry
+     */
+    public function theShipmentMethodShouldAppearInTheRegistry(string $shipmentMethodName): void
     {
         $this->iWantToBrowseShippingMethods();
 
@@ -291,11 +291,13 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should see :count shipping methods on the list
+     * @Then I should see a single shipping method in the list
+     * @Then I should see :numberOfShippingMethods shipping methods in the list
+     * @Then I should see :numberOfShippingMethods shipping methods on the list
      */
-    public function thereShouldBeNoShippingMethodsOnTheList($count)
+    public function thereShouldBeNoShippingMethodsOnTheList(int $numberOfShippingMethods = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $count);
+        Assert::same($this->indexPage->countItems(), $numberOfShippingMethods);
     }
 
     /**
@@ -354,11 +356,12 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveItsNameFromTranslation($language)
     {
-        $this->createPage->nameIt(null, $language);
+        $this->createPage->nameIt('', $language);
     }
 
     /**
      * @Given I am browsing shipping methods
+     * @When I browse shipping methods
      * @When I want to browse shipping methods
      */
     public function iWantToBrowseShippingMethods()
@@ -413,14 +416,6 @@ final class ManagingShippingMethodsContext implements Context
     public function iSortShippingMethodsBy($field)
     {
         $this->indexPage->sortBy($field);
-    }
-
-    /**
-     * @Then I should see :numberOfShippingMethods shipping methods in the list
-     */
-    public function iShouldSeeShippingMethodsInTheList($numberOfShippingMethods)
-    {
-        Assert::same($this->indexPage->countItems(), (int) $numberOfShippingMethods);
     }
 
     /**
@@ -496,6 +491,20 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that shipping charge for :channel channel cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            'Shipping charge cannot be lower than 0.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
@@ -508,7 +517,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @param ShippingMethodInterface $shippingMethod
      * @param bool $state
      */
     private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)

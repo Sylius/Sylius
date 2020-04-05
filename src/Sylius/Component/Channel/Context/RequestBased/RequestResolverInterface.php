@@ -18,10 +18,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface RequestResolverInterface
 {
-    /**
-     * @param Request $request
-     *
-     * @return ChannelInterface|null
-     */
     public function findChannel(Request $request): ?ChannelInterface;
 }

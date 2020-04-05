@@ -5,7 +5,7 @@ sylius:
     form:
         currency:
             base: Monedă de bază
-            code: Nume
+            code: Nume produs
             enabled: Activat
             exchange_rate: Cursul de schimb
         exchange_rate:

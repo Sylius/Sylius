@@ -17,25 +17,11 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code);
+    public function specifyCode(string $code): void;
 
-    /**
-     * @param string $name
-     * @param string $language
-     */
-    public function nameItIn($name, $language);
+    public function nameItIn(string $name, string $language): void;
 
-    /**
-     * @param string $code
-     * @param string $value
-     */
-    public function addOptionValue($code, $value);
+    public function addOptionValue(string $code, string $value): void;
 
-    /**
-     * @param string $message
-     */
-    public function checkValidationMessageForOptionValues($message);
+    public function checkValidationMessageForOptionValues(string $message): bool;
 }

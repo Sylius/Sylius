@@ -8,3 +8,4 @@ sylius:
             description: Descripció
         tax_rate:
             name: Nom
+            amount: Total

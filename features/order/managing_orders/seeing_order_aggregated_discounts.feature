@@ -22,8 +22,7 @@ Feature: Seeing aggregated discounts of an order
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
         Then the order's items total should be "$280.00"
-        And the order's shipping promotion should be "Eagle eye promotion -$5.00"
-        And the order's promotion discount should be "Eagle eye promotion -$20.00"
+        And the order's shipping promotion should be "-$5.00"
         And the order's promotion total should be "-$20.00"
         And there should be a shipping charge "DHL $10.00"
         And the order's shipping total should be "$5.00"
@@ -32,16 +31,13 @@ Feature: Seeing aggregated discounts of an order
     @ui
     Scenario: Seeing multiple order promotions aggregated in summary
         Given there is a promotion "Big order discount"
-        And it gives "$50.00" discount to every order with quantity at least 3
+        And it gives "$70.00" discount to every order with quantity at least 3
         And the customer bought 2 "Longbow" products
         And the customer bought 3 "Bastard sword" products
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
-        Then the order's items total should be "$830.00"
-        And the order's shipping promotion should be "Eagle eye promotion -$5.00"
-        And the order's promotion discount should be "Eagle eye promotion -$20.00"
-        And the order's promotion discount should be "Big order discount -$50.00"
-        And the order's promotion total should be "-$70.00"
+        Then the order's items total should be "$810.00"
+        And the order's shipping promotion should be "-$5.00"
         And there should be a shipping charge "DHL $10.00"
         And the order's shipping total should be "$5.00"
-        And the order's total should be "$835.00"
+        And the order's total should be "$815.00"

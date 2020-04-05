@@ -8,3 +8,7 @@ sylius:
             code: Ad
             enabled: Etkin
             exchange_rate: Döviz Kuru
+        exchange_rate:
+            source_currency: Para birimi kaybağı
+            target_currency: Hedef para birimi
+            ratio: Oran

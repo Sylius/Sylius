@@ -19,39 +19,25 @@ class TaxRate implements TaxRateInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var TaxCategoryInterface
-     */
+    /** @var TaxCategoryInterface */
     protected $category;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $amount = 0.0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $includedInPrice = false;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $calculator;
 
     public function __construct()
@@ -171,9 +157,6 @@ class TaxRate implements TaxRateInterface
         $this->calculator = $calculator;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLabel(): ?string
     {
         return sprintf('%s (%s%%)', $this->name, $this->getAmountAsPercentage());

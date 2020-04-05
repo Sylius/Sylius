@@ -17,10 +17,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderPaymentMethodSelectionRequirementCheckerInterface
 {
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     public function isPaymentMethodSelectionRequired(OrderInterface $order): bool;
 }

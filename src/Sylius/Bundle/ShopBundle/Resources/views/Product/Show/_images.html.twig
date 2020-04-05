@@ -13,12 +13,12 @@
 
 <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
 <a href="{{ original_path }}" class="ui fluid image" data-lightbox="sylius-product-image">
-    <img src="{{ path }}" id="main-image" alt="{{ product.name }}" />
+    <img src="{{ path }}" id="main-image" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }} />
 </a>
 {% if product.images|length > 1 %}
 <div class="ui divider"></div>
 
-{{ sonata_block_render_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
+{{ sylius_template_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
 
 <div class="ui small images">
     {% for image in product.images %}

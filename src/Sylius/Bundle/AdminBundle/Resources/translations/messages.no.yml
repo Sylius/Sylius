@@ -23,7 +23,7 @@ sylius:
                     locales: Nasjonale innstillinger
                     payment_methods: Betalingsmetoder
                     shipping_categories: Fraktkategorier
-                    shipping_methods: Leveringsmetoder
+                    shipping_methods: Fraktalternativ
                     tax_categories: Merverdikategorier
                     tax_rates: Skattesatser
                     zones: Soner

@@ -19,23 +19,11 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 
 interface TaxonTranslationInterface extends SlugAwareInterface, ResourceInterface, TranslationInterface
 {
-    /**
-     * @return string|null
-     */
     public function getName(): ?string;
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string;
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void;
 }

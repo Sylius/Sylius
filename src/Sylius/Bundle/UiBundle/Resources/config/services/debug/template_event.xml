@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory" />
+
+        <service id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockDataCollector">
+            <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory" />
+            <tag name="data_collector" template="@SyliusUi/DataCollector/templateBlock.html.twig" id="sylius_ui.template_block" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface">
+            <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateBlockRenderer.inner" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateEventRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface">
+            <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TraceableTemplateEventRenderer.inner" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\DataCollector\TemplateBlockRenderingHistory" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateBlockRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface">
+            <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateBlockRenderer.inner" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateEventRenderer" decorates="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface">
+            <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\HtmlDebugTemplateEventRenderer.inner" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
+        </service>
+    </services>
+</container>

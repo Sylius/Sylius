@@ -36,7 +36,7 @@ final class TextAttributeType implements AttributeTypeInterface
      */
     public function getType(): string
     {
-        return static::TYPE;
+        return self::TYPE;
     }
 
     /**
@@ -62,13 +62,6 @@ final class TextAttributeType implements AttributeTypeInterface
         }
     }
 
-    /**
-     * @param ExecutionContextInterface $context
-     * @param string|null $value
-     * @param array $validationConfiguration
-     *
-     * @return ConstraintViolationListInterface
-     */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?string $value,

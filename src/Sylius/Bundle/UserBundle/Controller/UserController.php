@@ -24,6 +24,7 @@ use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
 use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormInterface;
@@ -36,11 +37,6 @@ use Webmozart\Assert\Assert;
 
 class UserController extends ResourceController
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function changePasswordAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -69,11 +65,6 @@ class UserController extends ResourceController
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestPasswordResetTokenAction(Request $request): Response
     {
         /** @var GeneratorInterface $generator */
@@ -82,11 +73,6 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestPasswordResetPinAction(Request $request): Response
     {
         /** @var GeneratorInterface $generator */
@@ -95,16 +81,10 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
-    /**
-     * @param Request $request
-     * @param string $token
-     *
-     * @return Response
-     */
     public function resetPasswordAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['passwordResetToken' => $token]);
         if (null === $user) {
             throw new NotFoundHttpException('Token not found.');
@@ -137,12 +117,6 @@ class UserController extends ResourceController
         );
     }
 
-    /**
-     * @param Request $request
-     * @param string $token
-     *
-     * @return Response
-     */
     public function verifyAction(Request $request, string $token): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -150,14 +124,14 @@ class UserController extends ResourceController
 
         $response = $this->redirectToRoute($redirectRoute);
 
-        /** @var UserInterface $user */
+        /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['emailVerificationToken' => $token]);
         if (null === $user) {
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
             }
 
-            $this->addFlash('error', 'sylius.user.verify_email_by_invalid_token');
+            $this->addTranslatedFlash('error', 'sylius.user.verify_email_by_invalid_token');
 
             return $this->redirectToRoute($redirectRoute);
         }
@@ -178,16 +152,11 @@ class UserController extends ResourceController
         }
 
         $flashMessage = $this->getSyliusAttribute($request, 'flash', 'sylius.user.verify_email');
-        $this->addFlash('success', $flashMessage);
+        $this->addTranslatedFlash('success', $flashMessage);
 
         return $response;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function requestVerificationTokenAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -199,7 +168,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_UNAUTHORIZED));
             }
 
-            $this->addFlash('notice', 'sylius.user.verify_no_user');
+            $this->addTranslatedFlash('notice', 'sylius.user.verify_no_user');
 
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
@@ -209,11 +178,12 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
             }
 
-            $this->addFlash('notice', 'sylius.user.verify_verified_email');
+            $this->addTranslatedFlash('notice', 'sylius.user.verify_verified_email');
 
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
 
+        /** @var GeneratorInterface $tokenGenerator */
         $tokenGenerator = $this->container->get(sprintf('sylius.%s.token_generator.email_verification', $this->metadata->getName()));
         $user->setEmailVerificationToken($tokenGenerator->generate());
 
@@ -226,18 +196,11 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $this->addFlash('success', 'sylius.user.verify_email_request');
+        $this->addTranslatedFlash('success', 'sylius.user.verify_email_request');
 
         return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
     }
 
-    /**
-     * @param Request $request
-     * @param GeneratorInterface $generator
-     * @param string $senderEvent
-     *
-     * @return Response
-     */
     protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, string $senderEvent): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -251,7 +214,12 @@ class UserController extends ResourceController
         }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
-            $user = $this->repository->findOneByEmail($passwordReset->getEmail());
+            $userRepository = $this->repository;
+
+            /** @var UserRepositoryInterface $userRepository */
+            Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+
+            $user = $userRepository->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);
             }
@@ -260,7 +228,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
-            $this->addFlash('success', 'sylius.user.reset_password_request');
+            $this->addTranslatedFlash('success', 'sylius.user.reset_password_request');
             $redirectRoute = $this->getSyliusAttribute($request, 'redirect', null);
             Assert::notNull($redirectRoute, 'Redirect is not configured.');
 
@@ -290,18 +258,14 @@ class UserController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    protected function addFlash($type, $message): void
+    protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
         $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     /**
-     * @param RequestConfiguration $configuration
-     * @param string $type
      * @param object $object
-     *
-     * @return FormInterface
      */
     protected function createResourceForm(
         RequestConfiguration $configuration,
@@ -315,13 +279,6 @@ class UserController extends ResourceController
         return $this->container->get('form.factory')->create($type, $object);
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     *
-     * @return Response
-     */
     protected function handleExpiredToken(Request $request, RequestConfiguration $configuration, UserInterface $user): Response
     {
         $user->setPasswordResetToken(null);
@@ -333,7 +290,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->addFlash('error', 'sylius.user.expire_password_reset_token');
+        $this->addTranslatedFlash('error', 'sylius.user.expire_password_reset_token');
 
         $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
@@ -341,11 +298,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @param GeneratorInterface $generator
-     * @param UserInterface $user
-     * @param string $senderEvent
-     */
     protected function handleResetPasswordRequest(
         GeneratorInterface $generator,
         UserInterface $user,
@@ -363,14 +315,6 @@ class UserController extends ResourceController
         $dispatcher->dispatch($senderEvent, new GenericEvent($user));
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
-     * @return Response
-     */
     protected function handleResetPassword(
         Request $request,
         RequestConfiguration $configuration,
@@ -385,7 +329,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
 
         $this->manager->flush();
-        $this->addFlash('success', 'sylius.user.reset_password');
+        $this->addTranslatedFlash('success', 'sylius.user.reset_password');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
@@ -399,14 +343,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @param Request $request
-     * @param RequestConfiguration $configuration
-     * @param UserInterface $user
-     * @param string $newPassword
-     *
-     * @return Response
-     */
     protected function handleChangePassword(
         Request $request,
         RequestConfiguration $configuration,
@@ -419,7 +355,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
 
         $this->manager->flush();
-        $this->addFlash('success', 'sylius.user.change_password');
+        $this->addTranslatedFlash('success', 'sylius.user.change_password');
 
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
 
@@ -433,9 +369,6 @@ class UserController extends ResourceController
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
-    /**
-     * @return UserInterface|null
-     */
     protected function getUser(): ?UserInterface
     {
         $user = parent::getUser();
@@ -451,13 +384,6 @@ class UserController extends ResourceController
         return null;
     }
 
-    /**
-     * @param Request $request
-     * @param string $attribute
-     * @param mixed $default
-     *
-     * @return mixed
-     */
     private function getSyliusAttribute(Request $request, string $attribute, $default = null)
     {
         $attributes = $request->attributes->get('_sylius');

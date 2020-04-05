@@ -4,7 +4,7 @@
 default:
     suites:
         ui_shopping_cart:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -13,6 +13,8 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shipping_category
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.zone
 
@@ -22,6 +24,7 @@ default:
                 - sylius.behat.context.setup.exchange_rate
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shipping_category
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
@@ -32,5 +35,6 @@ default:
                 - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.registration
                 - sylius.behat.context.ui.user
+
             filters:
                 tags: "@shopping_cart && @ui"

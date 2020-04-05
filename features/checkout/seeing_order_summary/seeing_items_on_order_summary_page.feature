@@ -19,7 +19,7 @@ Feature: Seeing order items on order summary page
         And I have 2 products "Targaryen Jacket" in the cart
         And I have 3 products "Stark T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And I should have 4 "Lannister Coat" products in the cart

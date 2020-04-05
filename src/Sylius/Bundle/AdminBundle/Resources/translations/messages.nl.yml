@@ -9,7 +9,7 @@ sylius:
                     association_types: Relatietypes
                     attributes: Attributen
                     header: Catalogus
-                    inventory: Voorraad
+                    inventory: Locaties
                     options: Opties
                     products: Producten
                     taxons: Taxa
@@ -17,12 +17,12 @@ sylius:
                     admin_users: Beheerders
                     channels: Kanalen
                     countries: Landen
-                    currencies: Valuta
+                    currencies: Valuta's
                     exchange_rates: Wisselkoersen
                     header: Configuratie
                     locales: Talen/Regio's
                     payment_methods: Betaalmethoden
-                    shipping_categories: Verzendcategorieën
+                    shipping_categories: Verzend categorieën
                     shipping_methods: Verzendmethoden
                     tax_categories: Belastingcategorieën
                     tax_rates: BTW-tarieven

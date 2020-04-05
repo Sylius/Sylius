@@ -25,7 +25,14 @@ sylius:
             name: Nazwa
             roles: Role
         channel:
+            billing_data:
+                city: Miejscowość
+                company: Firma
+                country: Kraj
+                postcode: Kod pocztowy
+                street: Adres
             contact_email: E-mail do kontaktu
+            countries: Kraje
             currencies: Waluty
             currency_base: Waluta podstawowa
             account_verification_required: Czy weryfikacja konta jest wymagana?
@@ -45,7 +52,7 @@ sylius:
             file: Zdjęcie
         locale:
             code: Kod
-            enabled: Aktywne
+            enabled: Dostępny
         order_filter:
             created_at_from: Stworzony po
             created_at_to: Stworzony przed
@@ -65,7 +72,7 @@ sylius:
             variant_selection_method: Metody wyboru wariantu
             main_taxon: Główne grupy
             channels: Kanały
-            enabled: Aktywne
+            enabled: Dostępny
         product_filter:
             name: Nazwa
             code: Kod
@@ -94,8 +101,7 @@ sylius:
             file: Wybierz zdjęcie
         user:
             billing_address: Adres do rachunku
-            different_billing_address: Użyć innego adresu do rozliczeń?
-            enabled: Aktywne
+            enabled: Dostępny
             first_name: Imię
             groups: Grupy
             roles: Role
@@ -136,7 +142,7 @@ sylius:
                 products: Produkty
             total_of_items_from_taxon:
                 taxon: Takson
-                amount: Kwota
+                amount: Wartość
         payment_method:
             channels: Kanały
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Wielobajtowy łańcuch znaków
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: system plików
             cache:
                 header: cache
-                help: 'Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: istnieje
             logs:
                 header: logi
-                help: 'Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: nie istnieje
             not_writable: niezapisywalny
             parameters:
                 header: parameters.yml
-                help: 'Aby ustawić uprawnienia uruchom: sudo chmod a+w %path%'
+                help: "Aby ustawić uprawnienia uruchom: sudo chmod a+w %path%"
             vendors: dostawcy
             writable: zapisywalny
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nieprzestarzałe
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

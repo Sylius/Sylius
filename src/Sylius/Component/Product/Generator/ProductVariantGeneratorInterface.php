@@ -18,8 +18,6 @@ use Sylius\Component\Product\Model\ProductInterface;
 interface ProductVariantGeneratorInterface
 {
     /**
-     * @param ProductInterface $product
-     *
      * @throws \InvalidArgumentException
      */
     public function generate(ProductInterface $product): void;

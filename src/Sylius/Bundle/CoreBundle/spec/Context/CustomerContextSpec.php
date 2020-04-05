@@ -48,4 +48,17 @@ final class CustomerContextSpec extends ObjectBehavior
 
         $this->getCustomer()->shouldReturn(null);
     }
+
+    function it_returns_null_if_user_is_not_a_shop_user_instance(
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenInterface $token,
+        \stdClass $user
+    ): void {
+        $tokenStorage->getToken()->willReturn($token);
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $token->getUser()->willReturn($user);
+
+        $this->getCustomer()->shouldReturn(null);
+    }
 }

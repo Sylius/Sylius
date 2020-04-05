@@ -20,11 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductSlugController extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');

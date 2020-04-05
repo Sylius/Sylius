@@ -7,49 +7,58 @@ Installation
 The Sylius main application can serve as an end-user app, as well as a foundation
 for your custom e-commerce application.
 
-.. warning::
-
-    This article assumes you're familiar with `Composer`_, a dependency manager
-    for PHP. It also assumes you have `Composer installed globally`_.
+To create your Sylius-based application, first make sure you use PHP 7.2 or higher
+and have `Composer`_ installed.
 
 .. note::
 
-    If you downloaded the Composer phar archive, you should use
-    ``php composer.phar`` where this guide uses ``composer``.
-
-.. tip::
-
-    If you prefer to work with **Vagrant** head to :doc:`this guide </book/installation/vagrant_installation>`.
+    In order to inform you about newest Sylius releases and be aware of shops based on Sylius,
+    the Core Team uses an internal statistical service called GUS.
+    The only data that is collected and stored in its database are hostname, user agent, locale,
+    environment (test, dev or prod), current Sylius version and the date of last contact.
+    If you do not want your shop to send requests to GUS, please visit :doc:`this guide </cookbook/configuration/disabling-admin-notifications>`
+    for further instructions.
 
 Initiating A New Sylius Project
 -------------------------------
 
-To create a new project using Sylius Standard Edition, run this command:
+To begin creating your new project, run this command:
 
 .. code-block:: bash
 
-    $ composer create-project sylius/sylius-standard acme
+    composer create-project sylius/sylius-standard acme
 
 .. note::
 
-    Make sure to use PHP ^7.1. Using an older PHP version will result in installing an older version of Sylius.
+    Make sure to use PHP ^7.2. Using an older PHP version will result in installing an older version of Sylius.
 
-This will create a new Symfony project in ``acme`` directory. When all the
-dependencies are installed, you'll be asked to fill the ``parameters.yml``
-file via interactive script. Please follow the steps. After everything is in
-place, run the following commands:
+This will create a new Symfony project in the ``acme`` directory. Next, move to the project directory:
 
 .. code-block:: bash
 
-    $ cd acme # Move to the newly created directory
-    $ php bin/console sylius:install
+    cd acme
 
-This package has the whole ``sylius/sylius`` package in vendors, so you can easily update it and focus on your custom development.
+Sylius uses environment variables to configure the connection with database and mailer services.
+You can look up the default values in ``.env`` file and customise them by creating ``.env.local`` with variables you want to override.
+For example, if you want to change your database name from the default ``sylius_%kernel.environment%`` to ``my_custom_sylius_database``,
+the contents of that new file should look like the following snippet:
+
+.. code-block:: text
+
+    DATABASE_URL=mysql://username:password@host/my_custom_sylius_database
+
+After everything is in place, run the following command to install Sylius:
+
+.. code-block:: bash
+
+    php bin/console sylius:install
 
 .. warning::
 
     During the ``sylius:install`` command you will be asked to provide important information, but also its execution ensures
-    that the default **currency** (USD) and the default **locale** (English - US) are set they can be later on changed in the ``parameters.yml`` file.
+    that the default **currency** (USD) and the default **locale** (English - US) are set.
+    They can be changed later, respectively in the "Configuration > Channels" section of the admin and in the ``config/services.yaml`` file. If you want
+    to change these before running the installation command, set the ``locale`` and ``sylius_installer_currency`` parameters in the ``config/services.yaml`` file.
     From now on all the prices will be stored in the database in USD as integers, and all the products will have to be added with a base american english name translation.
 
 Installing assets
@@ -57,56 +66,31 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** already has a ``Gulpfile.js``, therefore you just need to get `Gulp`_ using `Yarn`_.
+**Sylius** uses `Gulp`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
 
-.. note::
-
-    We recommend using stable versions (`^1.0.0`) of `Yarn`_.
-
-Having Yarn installed go to your project directory and run:
+Having Yarn installed, go to your project directory to install the dependencies:
 
 .. code-block:: bash
 
-    $ yarn install
+    yarn install
 
-And now you can use gulp for installing views, by just running a simple command:
-
-.. code-block:: bash
-
-    $ yarn run gulp
-
-Although if you have Gulp installed globally then run just:
+Then build the frontend assets by running:
 
 .. code-block:: bash
 
-    $ gulp
+    yarn build
 
 Accessing the Shop
 ------------------
 
-.. tip::
-
-    We strongly recommend using the Symfony built-in web server by running the
-    ``php bin/console server:start 127.0.0.1:8000``
-    command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
+We strongly recommend using the Symfony Local Web Server by running the ``symfony server:start``
+command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
 
 .. note::
+    Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
+    If you are using a built-in server check `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
-    The localhost's 8000 port may be already occupied by some other process.
-    If so you should try other ports, like for instance:
-    ``php bin/console server:start 127.0.0.1:8081``
-    Want to know more about using a built-in server, see `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
-
-You can log in as an administrator, with the credentials you have provided during the installation process.
-Since now you can play with your clean Sylius installation.
-
-Accessing the Administration Panel
-----------------------------------
-
-.. note::
-
-    Have a look at the ``/admin`` url, where you will find the administration panel.
-    Remember that you have to be logged in as an administrator using the credentials provided while installing Sylius.
+You can log to the administrator panel located at ``/admin`` with the credentials you have provided during the installation process.
 
 How to start developing? - Project Structure
 --------------------------------------------
@@ -115,11 +99,11 @@ After you have successfully gone through the installation process of **Sylius-St
 
 In the root directory of your project you will find these important subdirectories:
 
-* ``app/config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
-* ``var/logs/`` - these are the logs of your application
+* ``config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
+* ``var/log/`` - these are the logs of your application
 * ``var/cache/`` - this is the cache of you project
-* ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
-* ``web/`` - there you will be placing assets of your project
+* ``src/`` - this is where you will be adding all you custom logic in the ``App``
+* ``public/`` - there you will be placing assets of your project
 
 .. tip::
 
@@ -129,11 +113,8 @@ In the root directory of your project you will find these important subdirectori
 Contributing
 ------------
 
-.. tip::
-
-    If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
+If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
 .. _Yarn: https://yarnpkg.com/lang/en/
 .. _Composer: http://packagist.org
-.. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally

@@ -17,17 +17,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ProductFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode
@@ -35,15 +29,18 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
+                ->booleanNode('tracked')->end()
+                ->scalarNode('slug')->end()
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
-                ->arrayNode('taxons')->prototype('scalar')->end()->end()
-                ->arrayNode('channels')->prototype('scalar')->end()->end()
-                ->arrayNode('product_attributes')->prototype('scalar')->end()->end()
-                ->arrayNode('product_options')->prototype('scalar')->end()->end()
-                ->arrayNode('images')->prototype('scalar')->end()->end()
+                ->arrayNode('taxons')->scalarPrototype()->end()->end()
+                ->arrayNode('channels')->scalarPrototype()->end()->end()
+                ->arrayNode('product_attributes')->variablePrototype()->end()->end()
+                ->arrayNode('product_options')->scalarPrototype()->end()->end()
+                ->arrayNode('images')->variablePrototype()->end()->end()
                 ->booleanNode('shipping_required')->end()
+                ->scalarNode('tax_category')->end()
         ;
     }
 }

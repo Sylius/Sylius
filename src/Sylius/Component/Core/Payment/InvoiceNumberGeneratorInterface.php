@@ -18,11 +18,5 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 interface InvoiceNumberGeneratorInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param PaymentInterface $payment
-     *
-     * @return string
-     */
     public function generate(OrderInterface $order, PaymentInterface $payment): string;
 }

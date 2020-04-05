@@ -8,7 +8,7 @@ Sylius\Component\Product\Model\ProductOption:
             xml_attribute: true
             groups: [Default, Detailed]
         code:
-            exopse: true
+            expose: true
             type: string
             groups: [Default, Detailed]
         position:

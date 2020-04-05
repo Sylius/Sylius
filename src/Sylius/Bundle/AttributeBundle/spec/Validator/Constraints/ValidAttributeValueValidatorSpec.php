@@ -56,7 +56,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         $attributeValue->getAttribute()->willReturn($attribute);
         $attribute->getConfiguration()->willReturn(['min' => 2, 'max' => 255]);
 
-        $attributeType->validate($attributeValue, Argument::any(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
+        $attributeType->validate($attributeValue, Argument::type(ExecutionContextInterface::class), ['min' => 2, 'max' => 255])->shouldBeCalled();
 
         $this->validate($attributeValue, $attributeValueConstraint);
     }

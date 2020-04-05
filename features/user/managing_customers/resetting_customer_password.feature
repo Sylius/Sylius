@@ -12,5 +12,5 @@ Feature: Resetting a customer's password
     Scenario: Sending reset password email to a customer
         When I view details of the customer "goodman@example.com"
         And I reset their password
-        Then I should be notified that email with reset instruction has been send
+        Then I should be notified that email with reset instruction has been sent
         And the email with reset token should be sent to "goodman@example.com"

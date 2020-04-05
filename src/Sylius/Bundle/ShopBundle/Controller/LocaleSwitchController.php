@@ -23,32 +23,18 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class LocaleSwitchController
 {
-    /**
-     * @var EngineInterface
-     */
+    /** @var EngineInterface */
     private $templatingEngine;
 
-    /**
-     * @var LocaleContextInterface
-     */
+    /** @var LocaleContextInterface */
     private $localeContext;
 
-    /**
-     * @var LocaleProviderInterface
-     */
+    /** @var LocaleProviderInterface */
     private $localeProvider;
 
-    /**
-     * @var LocaleSwitcherInterface
-     */
+    /** @var LocaleSwitcherInterface */
     private $localeSwitcher;
 
-    /**
-     * @param EngineInterface $templatingEngine
-     * @param LocaleContextInterface $localeContext
-     * @param LocaleProviderInterface $localeProvider
-     * @param LocaleSwitcherInterface $localeSwitcher
-     */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
@@ -61,9 +47,6 @@ final class LocaleSwitchController
         $this->localeSwitcher = $localeSwitcher;
     }
 
-    /**
-     * @return Response
-     */
     public function renderAction(): Response
     {
         return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_localeSwitch.html.twig', [
@@ -72,12 +55,6 @@ final class LocaleSwitchController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param string|null $code
-     *
-     * @return Response
-     */
     public function switchAction(Request $request, ?string $code = null): Response
     {
         if (null === $code) {

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Custom calculators
 ==================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Sylius ships with several default calculators, but you can easily register your own.
 
@@ -10,12 +17,12 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
 
 .. code-block:: php
 
-    # src/AppBundle/Shipping/Calculator/DHLCalculator.php
+    # src/Shipping/Calculator/DHLCalculator.php
     <?php
 
     declare(strict_types=1);
 
-    namespace AppBundle\Shipping\Calculator;
+    namespace App\Shipping\Calculator;
 
     use Sylius\Component\Shipping\Calculator\CalculatorInterface;
     use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -58,7 +65,7 @@ Now, you need to register your new service in container and tag it with ``sylius
 
     services:
         app.shipping_calculator.dhl:
-            class: AppBundle\Shipping\Calculator\DHLCalculator
+            class: App\Shipping\Calculator\DHLCalculator
             arguments: ['@app.dhl_service']
             tags:
                 - { name: sylius.shipping_calculator, calculator: dhl, label: "DHL" }
@@ -75,12 +82,12 @@ First step is to create a form type which will be displayed if our calculator is
 
 .. code-block:: php
 
-    # src/AppBundle/Form/Type/Shipping/Calculator/DHLConfigurationType.php
+    # src/Form/Type/Shipping/Calculator/DHLConfigurationType.php
     <?php
 
     declare(strict_types=1);
 
-    namespace AppBundle\Form\Type\Shipping\Calculator;
+    namespace App\Form\Type\Shipping\Calculator;
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -136,13 +143,13 @@ We also need to register the form type in the container and set this form type i
 
     services:
         app.shipping_calculator.dhl:
-            class: AppBundle\Shipping\Calculator\DHLCalculator
+            class: App\Shipping\Calculator\DHLCalculator
             arguments: ['@app.dhl_service']
             tags:
-                - { name: sylius.shipping_calculator, calculator: dhl, form_type: AppBundle\Form\Type\Shipping\Calculator\DHLConfigurationType, label: "DHL" }
+                - { name: sylius.shipping_calculator, calculator: dhl, form_type: App\Form\Type\Shipping\Calculator\DHLConfigurationType, label: "DHL" }
 
         app.form.type.shipping_calculator.dhl:
-            class: AppBundle\Form\Type\Shipping\Calculator\DHLConfigurationType
+            class: App\Form\Type\Shipping\Calculator\DHLConfigurationType
             tags:
                 - { name: form.type }
 
@@ -150,12 +157,12 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
 
 .. code-block:: php
 
-    # src/AppBundle/Shipping/Calculator/DHLCalculator.php
+    # src/Shipping/Calculator/DHLCalculator.php
     <?php
 
     declare(strict_types=1);
 
-    namespace AppBundle\Shipping\Calculator;
+    namespace App\Shipping\Calculator;
 
     use Sylius\Component\Shipping\Calculator\CalculatorInterface;
     use Sylius\Component\Shipping\Model\ShipmentInterface;

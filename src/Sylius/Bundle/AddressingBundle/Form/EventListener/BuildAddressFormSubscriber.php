@@ -29,20 +29,12 @@ use Symfony\Component\Form\FormInterface;
  */
 final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ObjectRepository
-     */
+    /** @var ObjectRepository */
     private $countryRepository;
 
-    /**
-     * @var FormFactoryInterface
-     */
+    /** @var FormFactoryInterface */
     private $formFactory;
 
-    /**
-     * @param ObjectRepository     $countryRepository
-     * @param FormFactoryInterface $factory
-     */
     public function __construct(ObjectRepository $countryRepository, FormFactoryInterface $factory)
     {
         $this->countryRepository = $countryRepository;
@@ -60,12 +52,9 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSetData(FormEvent $event): void
     {
-        /** @var AddressInterface $address */
+        /** @var AddressInterface|null $address */
         $address = $event->getData();
         if (null === $address) {
             return;
@@ -76,7 +65,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var CountryInterface $country */
+        /** @var CountryInterface|null $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
         if (null === $country) {
             return;
@@ -93,9 +82,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         $form->add($this->createProvinceNameTextForm($address->getProvinceName()));
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preSubmit(FormEvent $event): void
     {
         $data = $event->getData();
@@ -107,7 +93,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var CountryInterface $country */
+        /** @var CountryInterface|null $country */
         $country = $this->countryRepository->findOneBy(['code' => $data['countryCode']]);
         if (null === $country) {
             return;
@@ -124,12 +110,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         $form->add($this->createProvinceNameTextForm());
     }
 
-    /**
-     * @param CountryInterface $country
-     * @param string|null $provinceCode
-     *
-     * @return FormInterface
-     */
     private function createProvinceCodeChoiceForm(CountryInterface $country, ?string $provinceCode = null): FormInterface
     {
         return $this->formFactory->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
@@ -140,11 +120,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         ]);
     }
 
-    /**
-     * @param string|null $provinceName
-     *
-     * @return FormInterface
-     */
     private function createProvinceNameTextForm(?string $provinceName = null): FormInterface
     {
         return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [

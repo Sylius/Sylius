@@ -1,0 +1,21 @@
+<div id="header" class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular cube icon"></i>
+            <div class="content">
+                <span>{{ product.name }}</span>
+                <div class="sub header">{{ 'sylius.ui.show_product'|trans }}</div>
+            </div>
+        </h1>
+        {% include "@SyliusAdmin/Product/Show/_breadcrumb.html.twig" %}
+    </div>
+    <div class="middle aligned column">
+        <div class="ui right floated buttons">
+            {% include '@SyliusAdmin/Product/_showInShopButton.html.twig' %}
+            <a id="edit-product" class="ui labeled icon button" href= {{path('sylius_admin_product_update', {'id':product.id}) }}>
+                <i class="edit icon"></i>
+                {{ 'sylius.ui.edit'|trans }}
+            </a>
+        </div>
+    </div>
+</div>

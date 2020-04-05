@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: Катэгорыя
             name: Назва
-            amount: Сума
+            amount: Колькасць
             included_in_price: Уваходзіць у цэну?
             calculator: Калькулятар

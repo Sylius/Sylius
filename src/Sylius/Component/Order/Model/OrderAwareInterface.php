@@ -15,13 +15,7 @@ namespace Sylius\Component\Order\Model;
 
 interface OrderAwareInterface
 {
-    /**
-     * @return OrderInterface|null
-     */
     public function getOrder(): ?OrderInterface;
 
-    /**
-     * @param OrderInterface|null $order
-     */
     public function setOrder(?OrderInterface $order): void;
 }

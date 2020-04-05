@@ -22,10 +22,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addProvince($name, $code, $abbreviation = null)
+    public function addProvince(string $name, string $code, string $abbreviation = null): void
     {
         $this->getDocument()->clickLink('Add province');
 
@@ -42,16 +39,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      *{@inheritdoc}
      */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'provinces' => '#sylius_country_provinces',
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastProvinceElement(): NodeElement
     {
         $provinces = $this->getElement('provinces');

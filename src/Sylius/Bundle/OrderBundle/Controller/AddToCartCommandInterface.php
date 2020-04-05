@@ -18,13 +18,7 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 interface AddToCartCommandInterface
 {
-    /**
-     * @return OrderInterface
-     */
     public function getCart(): OrderInterface;
 
-    /**
-     * @return OrderItemInterface
-     */
     public function getCartItem(): OrderItemInterface;
 }

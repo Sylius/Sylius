@@ -18,10 +18,5 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface as Bas
 
 interface ProductVariantRepositoryInterface extends BaseProductVariantRepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 }

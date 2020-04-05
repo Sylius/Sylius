@@ -1,0 +1,24 @@
+{% block body %}
+    {% autoescape false %}
+        {% set homepageUrl = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('assets/shop/img/logo.png') : absolute_url(asset('assets/shop/img/logo.png')) %}
+
+        <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
+            <div style="max-width: 600px; margin: 20px auto;">
+                <div style="margin-bottom: 30px; text-align: center;">
+                    <a href="{{ homepageUrl|raw }}">
+                        <img src="{{ logo }}" alt="Sylius" style="width: 170px">
+                    </a>
+                </div>
+
+                <div style="background: #fff; padding: 40px 30px;">
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div style="text-align: center; padding: 20px 0;">
+                    <a href="https://sylius.com" target="_blank" style="color: #1abb9c; text-decoration: none;">sylius.com</a>
+                </div>
+            </div>
+        </div>
+    {% endautoescape %}
+{% endblock %}

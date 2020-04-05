@@ -19,19 +19,12 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class CommandDirectoryChecker
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -83,9 +76,6 @@ final class CommandDirectoryChecker
         }
     }
 
-    /**
-     * @param string $name
-     */
     public function setCommandName(string $name): void
     {
         $this->name = $name;

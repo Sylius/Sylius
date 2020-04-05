@@ -11,8 +11,8 @@ sylius:
         shipment:
             state: Cтатус
             states:
-                checkout: Оформление заказа
-                pending: В обработке
+                checkout: Сверка
+                pending: Ожидает
                 ready: Готов
                 shipped: Доставлено
                 returned: Возвращено
@@ -21,13 +21,13 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Фиксированная ставка за доставку
-                amount: Сумма
+                amount: Количество
             per_unit_rate_configuration:
                 label: Фиксированная ставка за единицу товара
-                amount: Сумма
+                amount: Количество
         shipping_category:
             description: Описание
-            name: Название
+            name: Округ
         shipping_method:
             calculator: Калькулятор
             category: Категория
@@ -39,7 +39,7 @@ sylius:
             match_all_category_requirement: Все единицы товара должны соответствовать способу доставки
             match_any_category_requirement: По крайней мере одна единица товара должны соответствовать способу доставки
             match_none_category_requirement: Ни одна из единиц товара не должна соответствовать способу доставки
-            name: Название
+            name: Округ
             position: Позиция
             tax_category: Категория налогов
             translations: '﻿Переводы'

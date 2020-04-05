@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        country:
+            name: Nosaukums
+        province:
+            name: Nosaukums
+        zone:
+            name: Nosaukums

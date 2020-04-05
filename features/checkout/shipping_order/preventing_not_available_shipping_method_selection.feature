@@ -15,7 +15,7 @@ Feature: Preventing not available shipping method selection
         And the store has disabled "Dragon Post" shipping method with "$30.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
@@ -26,7 +26,7 @@ Feature: Preventing not available shipping method selection
         And the store has "Raven Post" shipping method with "$10.00" fee within the "US" zone
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
@@ -36,7 +36,7 @@ Feature: Preventing not available shipping method selection
         And the store has "Dragon Post" shipping method with "$30.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Raven Post" shipping method
 
@@ -47,7 +47,7 @@ Feature: Preventing not available shipping method selection
         And the store has disabled "Raven Post" shipping method with "$10.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Raven Post" shipping method
         And I should not be able to select "Dragon Post" shipping method
@@ -59,6 +59,6 @@ Feature: Preventing not available shipping method selection
         And the store has an archival "Dragon Post" shipping method with "$30.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
-        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method

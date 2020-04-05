@@ -24,32 +24,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationController
 {
-    /**
-     * @var ClientInterface
-     */
+    /** @var ClientInterface */
     private $client;
 
-    /**
-     * @var MessageFactory
-     */
+    /** @var MessageFactory */
     private $messageFactory;
 
-    /**
-     * @var UriInterface
-     */
+    /** @var UriInterface */
     private $hubUri;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $environment;
 
-    /**
-     * @param ClientInterface $client
-     * @param MessageFactory $messageFactory
-     * @param string $hubUri
-     * @param string $environment
-     */
     public function __construct(
         ClientInterface $client,
         MessageFactory $messageFactory,
@@ -62,11 +48,6 @@ final class NotificationController
         $this->environment = $environment;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
     public function getVersionAction(Request $request): JsonResponse
     {
         $content = [

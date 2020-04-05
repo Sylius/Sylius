@@ -18,14 +18,9 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
 {
-    /**
-     * @var MoneyFormatterInterface
-     */
+    /** @var MoneyFormatterInterface */
     private $moneyFormatter;
 
-    /**
-     * @param MoneyFormatterInterface $moneyFormatter
-     */
     public function __construct(MoneyFormatterInterface $moneyFormatter)
     {
         $this->moneyFormatter = $moneyFormatter;

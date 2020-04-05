@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
+@trigger_error('The "MugProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
+
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -20,52 +22,39 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MugProductFixture extends AbstractFixture
 {
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $taxonFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productAttributeFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productOptionFixture;
 
-    /**
-     * @var AbstractResourceFixture
-     */
+    /** @var AbstractResourceFixture */
     private $productFixture;
 
-    /**
-     * @var \Faker\Generator
-     */
+    /** @var string */
+    private $baseLocaleCode;
+
+    /** @var \Faker\Generator */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $productAttributeFixture
-     * @param AbstractResourceFixture $productOptionFixture
-     * @param AbstractResourceFixture $productFixture
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $productAttributeFixture,
         AbstractResourceFixture $productOptionFixture,
-        AbstractResourceFixture $productFixture
+        AbstractResourceFixture $productFixture,
+        string $baseLocaleCode
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;
+        $this->baseLocaleCode = $baseLocaleCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -96,16 +85,23 @@ class MugProductFixture extends AbstractFixture
             'children' => [
                 [
                     'code' => 'mugs',
-                    'name' => 'Mugs',
+                    'translations' => [
+                        'en_US' => [
+                            'name' => 'Mugs',
+                        ],
+                        'fr_FR' => [
+                            'name' => 'Tasses',
+                        ],
+                    ],
                 ],
             ],
         ]]]);
 
         $mugMaterials = [
-            $this->faker->uuid => 'Invisible porcelain',
-            $this->faker->uuid => 'Banana skin',
-            $this->faker->uuid => 'Porcelain',
-            $this->faker->uuid => 'Centipede',
+            $this->faker->uuid => [$this->baseLocaleCode => 'Invisible porcelain'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Banana skin'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Porcelain'],
+            $this->faker->uuid => [$this->baseLocaleCode => 'Centipede'],
         ];
         $this->productAttributeFixture->load(['custom' => [
             [
@@ -144,8 +140,14 @@ class MugProductFixture extends AbstractFixture
                 ],
                 'product_options' => ['mug_type'],
                 'images' => [
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'main'],
-                    [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'), 'thumbnail'],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
+                        'type' => 'main',
+                    ],
+                    [
+                        'path' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg'),
+                        'type' => 'thumbnail',
+                    ],
                 ],
             ];
         }
@@ -164,11 +166,6 @@ class MugProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
     private function getUniqueNames(int $amount): array
     {
         $productsNames = [];

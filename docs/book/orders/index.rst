@@ -12,12 +12,16 @@ with a few additional ones, like promotions, payments, shipments or checkout in 
     :hidden:
 
     orders
+    cart-flow
     taxation
     adjustments
     promotions
     coupons
     shipments
     payments
+    invoices
     checkout
+    returns
+    refunds
 
 .. include:: /book/orders/map.rst.inc

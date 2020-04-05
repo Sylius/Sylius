@@ -25,38 +25,21 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductAttributesContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @var SharedSecurityServiceInterface
-     */
+    /** @var SharedSecurityServiceInterface */
     private $sharedSecurityService;
 
-    /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     * @param SharedSecurityServiceInterface $sharedSecurityService
-     */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
@@ -85,7 +68,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -106,14 +89,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I( also) add value :value
+     * @When I( also) add value :value in :localeCode
      */
-    public function iAddValue(string $value): void
+    public function iAddValue(string $value, string $localeCode): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->addAttributeValue($value);
+        $currentPage->addAttributeValue($value, $localeCode);
     }
 
     /**
@@ -151,7 +134,7 @@ final class ManagingProductAttributesContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $name],
-            sprintf('td span.ui.label:contains("%s")', $type)
+            sprintf('td span.ui.label:contains("%s")', ucfirst($type))
         ));
     }
 
@@ -193,6 +176,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function theTypeFieldShouldBeDisabled()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true($currentPage->isTypeDisabled());
@@ -251,6 +235,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When I browse product attributes
      * @When I want to see all product attributes in store
      */
     public function iWantToSeeAllProductAttributesInStore()
@@ -330,11 +315,28 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) product attributes in the list$/
+     * @When I check (also) the :productAttributeName product attribute
      */
-    public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
+    public function iCheckTheProductAttribute(string $productAttributeName): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amountOfProductAttributes);
+        $this->indexPage->checkResourceOnPage(['name' => $productAttributeName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see a single product attribute in the list
+     * @Then I should see :amountOfProductAttributes product attributes in the list
+     */
+    public function iShouldSeeCustomersInTheList(int $amountOfProductAttributes = 1): void
+    {
+        Assert::same($this->indexPage->countItems(), $amountOfProductAttributes);
     }
 
     /**
@@ -435,9 +437,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
@@ -449,8 +448,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertValidationMessage(string $expectedMessage): void

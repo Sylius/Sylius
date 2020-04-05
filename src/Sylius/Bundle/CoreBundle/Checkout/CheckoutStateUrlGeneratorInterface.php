@@ -18,24 +18,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 interface CheckoutStateUrlGeneratorInterface extends UrlGeneratorInterface
 {
-    /**
-     * @param OrderInterface $order
-     * @param array $parameters
-     * @param int $referenceType
-     *
-     * @return string
-     */
     public function generateForOrderCheckoutState(
         OrderInterface $order,
         array $parameters = [],
         int $referenceType = self::ABSOLUTE_PATH
     ): string;
 
-    /**
-     * @param array $parameters
-     * @param int $referenceType
-     *
-     * @return string
-     */
     public function generateForCart(array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string;
 }

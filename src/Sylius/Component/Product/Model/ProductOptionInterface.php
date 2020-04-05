@@ -48,29 +48,18 @@ interface ProductOptionInterface extends
 
     /**
      * @return Collection|ProductOptionValueInterface[]
+     *
+     * @psalm-return Collection<array-key, ProductOptionValueInterface>
      */
     public function getValues(): Collection;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     */
     public function addValue(ProductOptionValueInterface $optionValue): void;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     */
     public function removeValue(ProductOptionValueInterface $optionValue): void;
 
-    /**
-     * @param ProductOptionValueInterface $optionValue
-     *
-     * @return bool
-     */
     public function hasValue(ProductOptionValueInterface $optionValue): bool;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductOptionTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

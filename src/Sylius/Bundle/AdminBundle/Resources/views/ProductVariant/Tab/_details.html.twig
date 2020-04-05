@@ -35,14 +35,7 @@
             {{ form_row(form.depth) }}
             {{ form_row(form.weight) }}
         </div>
-        <div class="ui hidden divider"></div>
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h4>
-            {{ form_row(form.onHand) }}
-            {{ form_row(form.tracked) }}
-            {{ form_row(form.version) }}
-        </div>
     </div>
 
-    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.tab_details', {'form': form}) }}
+    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_details', 'sylius.admin.product_variant.tab_details'], {'form': form}) }}
 </div>

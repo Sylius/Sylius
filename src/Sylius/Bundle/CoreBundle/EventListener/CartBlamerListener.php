@@ -24,29 +24,18 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class CartBlamerListener
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $cartManager;
 
-    /**
-     * @var CartContextInterface
-     */
+    /** @var CartContextInterface */
     private $cartContext;
 
-    /**
-     * @param ObjectManager $cartManager
-     * @param CartContextInterface $cartContext
-     */
     public function __construct(ObjectManager $cartManager, CartContextInterface $cartContext)
     {
         $this->cartManager = $cartManager;
         $this->cartContext = $cartContext;
     }
 
-    /**
-     * @param UserEvent $userEvent
-     */
     public function onImplicitLogin(UserEvent $userEvent): void
     {
         $user = $userEvent->getUser();
@@ -57,9 +46,6 @@ final class CartBlamerListener
         $this->blame($user);
     }
 
-    /**
-     * @param InteractiveLoginEvent $interactiveLoginEvent
-     */
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
@@ -70,9 +56,6 @@ final class CartBlamerListener
         $this->blame($user);
     }
 
-    /**
-     * @param ShopUserInterface $user
-     */
     private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
@@ -86,8 +69,6 @@ final class CartBlamerListener
     }
 
     /**
-     * @return OrderInterface|null
-     *
      * @throws UnexpectedTypeException
      */
     private function getCart(): ?OrderInterface

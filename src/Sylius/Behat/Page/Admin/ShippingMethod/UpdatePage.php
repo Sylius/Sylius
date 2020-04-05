@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
-use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -23,57 +23,34 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableInChannel($channelName)
+    public function isAvailableInChannel(string $channelName): bool
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
-    public function removeZone()
+    public function removeZone(): void
     {
         $this->getDocument()->selectFieldOption('Zone', 'Select');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidationMessageForAmount($channelCode)
+    public function getValidationMessageForAmount(string $channelCode): string
     {
         $foundElement = $this->getElement('amount', ['%channelCode%' => $channelCode]);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
-        }
-
-        return $validationMessage->getText();
+        return $foundElement->find('css', '.sylius-validation-error')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',

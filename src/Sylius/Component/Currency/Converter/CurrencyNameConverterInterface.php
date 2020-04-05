@@ -16,11 +16,6 @@ namespace Sylius\Component\Currency\Converter;
 interface CurrencyNameConverterInterface
 {
     /**
-     * @param string $name
-     * @param string|null $locale
-     *
-     * @return string
-     *
      * @throws \InvalidArgumentException
      */
     public function convertToCode(string $name, ?string $locale = null): string;

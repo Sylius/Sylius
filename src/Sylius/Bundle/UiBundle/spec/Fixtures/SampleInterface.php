@@ -25,9 +25,6 @@ interface SampleInterface
      */
     public function getString();
 
-    /**
-     * @return mixed
-     */
     public function getBizarrelyNamedProperty();
 
     /**

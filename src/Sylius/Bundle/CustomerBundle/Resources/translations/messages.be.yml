@@ -11,7 +11,7 @@ sylius:
             billing_address: Адрас для аплаты
             different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
         customer_group:
-            name: Імя
+            name: Назва
             roles: Ролі
     gender:
         unknown: Невядома

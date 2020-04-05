@@ -18,51 +18,33 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var PaymentMethodRepositoryInterface
-     */
+    /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $paymentMethodExampleFactory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $paymentMethodTranslationFactory;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $paymentMethodManager;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $gatewayFactories;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
-     * @param ExampleFactoryInterface $paymentMethodExampleFactory
-     * @param FactoryInterface $paymentMethodTranslationFactory
-     * @param ObjectManager $paymentMethodManager
-     * @param array $gatewayFactories
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
@@ -101,7 +83,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode
+     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
@@ -109,7 +91,7 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
+     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
      */
     public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
         $paymentMethodName,
@@ -169,6 +151,28 @@ final class PaymentContext implements Context
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
+    }
+
+    /**
+     * @Given the payment method :paymentMethod requires authorization before capturing
+     */
+    public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
+    {
+        $config = $paymentMethod->getGatewayConfig();
+        $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
+        $paymentMethod->setGatewayConfig($config);
+
+        $this->paymentMethodManager->flush();
+    }
+
+    /**
+     * @Then /^the (latest order) should have a payment with state "([^"]+)"$/
+     */
+    public function theLatestOrderHasAuthorizedPayment(OrderInterface $order, string $state)
+    {
+        $payment = $order->getLastPayment();
+
+        Assert::eq($payment->getState(), $state);
     }
 
     /**

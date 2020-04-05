@@ -15,22 +15,19 @@ namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderShippingStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -39,8 +36,11 @@ final class OrderShippingStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order): void
+    public function resolve(BaseOrderInterface $order): void
     {
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
@@ -56,12 +56,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $shipmentState
-     *
-     * @return int
-     */
     private function countOrderShipmentsInState(OrderInterface $order, string $shipmentState): int
     {
         $shipments = $order->getShipments();
@@ -74,13 +68,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         ;
     }
 
-    /**
-     * @param OrderInterface $order
-     * @param string $shipmentState
-     * @param string $orderShippingState
-     *
-     * @return bool
-     */
     private function allShipmentsInStateButOrderStateNotUpdated(
         OrderInterface $order,
         string $shipmentState,
@@ -92,11 +79,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         return $shipmentAmount === $shipmentInStateAmount && $orderShippingState !== $order->getShippingState();
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool
-     */
     private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order): bool
     {
         $shipmentInShippedStateAmount = $this->countOrderShipmentsInState($order, ShipmentInterface::STATE_SHIPPED);

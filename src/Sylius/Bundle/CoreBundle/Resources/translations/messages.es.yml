@@ -25,6 +25,12 @@ sylius:
             name: Nombre
             roles: Roles
         channel:
+            billing_data:
+                city: Ciudad
+                company: Empresa
+                country: País
+                postcode: Código postal
+                street: Calle
             contact_email: Email de contacto
             currencies: Monedas
             currency_base: Moneda base
@@ -45,7 +51,7 @@ sylius:
             file: Imagen
         locale:
             code: Código
-            enabled: Activado
+            enabled: '¿Activado?'
         order_filter:
             created_at_from: Creado después de
             created_at_to: Creado antes de
@@ -65,7 +71,7 @@ sylius:
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
             channels: Canales
-            enabled: Activado
+            enabled: '¿Activado?'
         product_filter:
             name: Nombre
             code: Código
@@ -95,12 +101,12 @@ sylius:
         user:
             billing_address: Dirección de facturación
             different_billing_address: '¿Usar una dirección diferente para la facturación?'
-            enabled: Activado
+            enabled: '¿Activado?'
             first_name: Nombre
             groups: Grupos
             roles: Roles
             last_name: Apellidos
-            password: Contraseña
+            password: Contraseña de API
             shipping_address: Dirección de envío
         user_filter:
             query: Búsqueda
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: sistema de archivos
             cache:
                 header: cache
-                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: existe
             logs:
                 header: registros
-                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: no existe
             not_writable: no escribible
             parameters:
                 header: parameters.yml
-                help: 'Para ajustar los permisos ejecuta: sudo chmod a+w %path%'
+                help: "Para ajustar los permisos ejecuta: sudo chmod a+w %path%"
             vendors: vendors
             writable: escribible
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: no obsoleto
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

@@ -1,0 +1,3 @@
+services:
+    Sylius\Component\Core\Generator\ImagePathGeneratorInterface:
+        class: Sylius\Behat\Service\Generator\UploadedImagePathGenerator

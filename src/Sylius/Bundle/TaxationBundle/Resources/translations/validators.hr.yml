@@ -5,6 +5,10 @@ sylius:
     tax_category:
         name:
             not_blank: Unesite ime poreznih kategorija.
+        code:
+            not_blank: Molimo vas unesite kod kategorije poreza.
+            regex: Kategorija poreza se može sastojati samo od slova, brojeva, povlaka i podvlaka.
+            unique: Kategorija poreza sa unesenim kodom već postoji.
     tax_rate:
         category:
             not_blank: Odaberite poreznu kategoriju.
@@ -14,3 +18,9 @@ sylius:
             not_blank: Unesite iznos porezne stope.
         calculator:
             not_blank: Odaberite porezni kalkulator.
+        zone:
+            not_blank: Odaberite poreznu zonu.
+        code:
+            not_blank: Molimo vas unesite kod porezne stope.
+            regex: Kod stope poreza se može sastojati samo od slova, brojeva, povlaka i podvlaka.
+            unique: Stopa poreza sa unesenim kodom već postoji.

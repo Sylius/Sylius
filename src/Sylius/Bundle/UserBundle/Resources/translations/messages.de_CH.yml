@@ -13,7 +13,7 @@ sylius:
             shipping_address: Lieferadresse
             username: Benutzername
         user_filter:
-            query: Suche
+            query: Suchen
         user_change_password:
             confirmation: Bestätigung
             current: Aktuelles Passwort

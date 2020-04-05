@@ -92,8 +92,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * @param OrderInterface $order
-     *
      * @throws \InvalidArgumentException
      */
     private function release(OrderInterface $order): void
@@ -119,9 +117,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     */
     private function giveBack(OrderInterface $order): void
     {
         /** @var OrderItemInterface $orderItem */

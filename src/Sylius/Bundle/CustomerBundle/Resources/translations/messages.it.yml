@@ -16,7 +16,7 @@ sylius:
             only_customer_registration: Crea un account?
             subscribed_to_newsletter: Iscriviti alla newsletter
         customer_group:
-            name: Nome
+            name: "Nome\n"
             roles: Regole
     gender:
         unknown: Sconosciuto

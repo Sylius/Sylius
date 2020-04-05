@@ -22,30 +22,21 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function nameItIn($name, $language)
+    public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_option_translations_%s_name', $language), $name
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isThereOptionValue($optionValue)
+    public function isThereOptionValue(string $optionValue): bool
     {
         $optionValues = $this->getElement('values');
 
         return $optionValues->has('css', sprintf('input[value="%s"]', $optionValue));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addOptionValue($code, $value)
+    public function addOptionValue(string $code, string $value): void
     {
         $this->getDocument()->clickLink('Add value');
 
@@ -55,10 +46,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $optionValueForm->fillField('English (United States)', $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeOptionValue($optionValue)
+    public function removeOptionValue(string $optionValue): void
     {
         if ($this->isThereOptionValue($optionValue)) {
             $optionValues = $this->getElement('values');
@@ -74,18 +62,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
+    protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_option_code',
@@ -94,9 +76,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement
-     */
     private function getLastOptionValueElement(): NodeElement
     {
         $optionValues = $this->getElement('values');

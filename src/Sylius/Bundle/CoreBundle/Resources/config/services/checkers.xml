@@ -13,11 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.checker.order_shipping_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker">
             <argument type="service" id="sylius.shipping_methods_resolver" />
         </service>
+        <service id="Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_shipping_method_selection_requirement" />
+
         <service id="sylius.checker.order_payment_method_selection_requirement" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker" >
             <argument type="service" id="sylius.payment_methods_resolver"/>
         </service>
+        <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
     </services>
 </container>

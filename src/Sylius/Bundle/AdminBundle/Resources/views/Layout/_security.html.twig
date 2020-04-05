@@ -1,0 +1,15 @@
+<div class="ui floated simple dropdown item">
+    {% include '@SyliusAdmin/AdminUser/_avatarImage.html.twig' %}
+    <span>{{ app.user.firstName|default(app.user.email) }}</span>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a href="{{ path('sylius_admin_admin_user_update', {'id': app.user.id}) }}" class="item">
+            <i class="user icon"></i>
+            {{ 'sylius.ui.my_account'|trans }}
+        </a>
+        <a href="{{ path('sylius_admin_logout') }}" id="sylius-logout-button" class="item">
+            <i class="sign out icon"></i>
+            {{ 'sylius.ui.logout'|trans }}
+        </a>
+    </div>
+</div>

@@ -22,47 +22,32 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseZone($name)
+    public function chooseZone(string $name): void
     {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCategory($name)
+    public function chooseCategory(string $name): void
     {
         $this->getDocument()->selectFieldOption('Category', $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCalculator($name)
+    public function chooseCalculator(string $name): void
     {
         $this->getDocument()->selectFieldOption('Calculator', $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyAmount($amount)
+    public function specifyAmount(string $amount): void
     {
         $this->getDocument()->fillField('Amount', $amount);
     }
 
-    public function chooseIncludedInPrice()
+    public function chooseIncludedInPrice(): void
     {
         $this->getDocument()->find('css', 'label[for=sylius_tax_rate_includedInPrice]')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_tax_rate_amount',

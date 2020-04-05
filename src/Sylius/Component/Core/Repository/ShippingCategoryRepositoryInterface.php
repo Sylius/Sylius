@@ -18,8 +18,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ShippingCategoryRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(): QueryBuilder;
 }

@@ -13,24 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return bool
-     */
-    public function hasPayAction();
+    public function hasPayAction(): bool;
 
-    public function pay();
+    public function pay(): void;
 
-    /**
-     * @param string $paymentMethodName
-     */
-    public function choosePaymentMethod($paymentMethodName);
+    public function choosePaymentMethod(string $paymentMethodName): void;
 
-    /**
-     * @return string[]
-     */
-    public function getNotifications();
+    public function getNotifications(): array;
+
+    public function getAmountOfItems(): int;
 }

@@ -25,6 +25,8 @@ class Taxon extends BaseTaxon implements TaxonInterface
 
     /**
      * @var Collection|ImageInterface[]
+     *
+     * @psalm-var Collection<array-key, ImageInterface>
      */
     protected $images;
 
@@ -33,6 +35,8 @@ class Taxon extends BaseTaxon implements TaxonInterface
         parent::__construct();
 
         $this->createdAt = new \DateTime();
+
+        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 

@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Using the services
 ==================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 When using the bundle, you have access to several handy services.
 

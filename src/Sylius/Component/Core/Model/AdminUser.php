@@ -17,20 +17,17 @@ use Sylius\Component\User\Model\User;
 
 class AdminUser extends User implements AdminUserInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $firstName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $lastName;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $localeCode;
+
+    /** @var ImageInterface */
+    protected $avatar;
 
     public function __construct()
     {
@@ -85,5 +82,26 @@ class AdminUser extends User implements AdminUserInterface
     public function setLocaleCode(?string $code): void
     {
         $this->localeCode = $code;
+    }
+
+    public function getImage(): ?ImageInterface
+    {
+        return $this->avatar;
+    }
+
+    public function setImage(?ImageInterface $image): void
+    {
+        $image->setOwner($this);
+        $this->avatar = $image;
+    }
+
+    public function getAvatar(): ?ImageInterface
+    {
+        return $this->getImage();
+    }
+
+    public function setAvatar(?ImageInterface $avatar): void
+    {
+        $this->setImage($avatar);
     }
 }

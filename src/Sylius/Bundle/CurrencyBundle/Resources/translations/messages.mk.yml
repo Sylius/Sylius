@@ -4,5 +4,6 @@
 sylius:
     form:
         currency:
+            code: Име
             enabled: Овозможено
             exchange_rate: Курс на конверзија

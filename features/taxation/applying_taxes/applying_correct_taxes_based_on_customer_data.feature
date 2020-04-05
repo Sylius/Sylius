@@ -26,7 +26,7 @@ Feature: Apply correct taxes based on customer data
     Scenario: Proper taxes after specifying shipping address
         Given I am a logged in customer
         When I add product "PHP T-Shirt" to the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
@@ -34,6 +34,6 @@ Feature: Apply correct taxes based on customer data
     Scenario: Proper taxes after specifying shipping address
         Given I am a logged in customer
         When I add product "PHP T-Shirt" to the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "Germany" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "Germany" for "Jon Snow"
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"

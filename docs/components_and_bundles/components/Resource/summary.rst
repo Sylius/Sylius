@@ -1,13 +1,13 @@
 Summary
 =======
 
-`phpspec2 <http://phpspec.net>`_ examples
+`phpspec <http://phpspec.net>`_ examples
 -----------------------------------------
 
 .. code-block:: bash
 
-    $ composer install
-    $ bin/phpspec run -fpretty --verbose
+    composer install
+    vendor/bin/phpspec run -fpretty --verbose
 
 Bug tracking
 ------------

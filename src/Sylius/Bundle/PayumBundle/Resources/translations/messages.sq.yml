@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        gateway_config:
+            type: Lloji
         gateway_configuration:
             paypal:
                 password: Fjalëkalimi

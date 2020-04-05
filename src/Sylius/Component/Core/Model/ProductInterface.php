@@ -36,58 +36,36 @@ interface ProductInterface extends
      *             User selects the values and we match them to variant.
      */
     public const VARIANT_SELECTION_CHOICE = 'choice';
+
     public const VARIANT_SELECTION_MATCH = 'match';
 
-    /**
-     * @return string
-     */
     public function getVariantSelectionMethod(): string;
 
     /**
-     * @param string|null $variantSelectionMethod
-     *
      * @throws \InvalidArgumentException
      */
     public function setVariantSelectionMethod(?string $variantSelectionMethod): void;
 
-    /**
-     * @return bool
-     */
     public function isVariantSelectionMethodChoice(): bool;
 
-    /**
-     * @return string
-     */
     public function getVariantSelectionMethodLabel(): string;
 
-    /**
-     * @return string|null
-     */
     public function getShortDescription(): ?string;
 
-    /**
-     * @param string|null $shortDescription
-     */
     public function setShortDescription(?string $shortDescription): void;
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getMainTaxon(): ?TaxonInterface;
 
-    /**
-     * @param TaxonInterface|null $mainTaxon
-     */
     public function setMainTaxon(?TaxonInterface $mainTaxon): void;
 
     /**
      * @return Collection|ReviewInterface[]
+     *
+     * @psalm-return Collection<array-key, ReviewInterface>
      */
     public function getAcceptedReviews(): Collection;
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface;

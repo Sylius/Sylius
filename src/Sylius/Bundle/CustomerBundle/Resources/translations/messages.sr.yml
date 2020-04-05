@@ -4,4 +4,9 @@
 sylius:
     form:
         customer:
+            first_name: Име
+            last_name: Презиме
             phone_number: Број телефона
+            billing_address: Адреса за наплату
+        customer_group:
+            name: Име

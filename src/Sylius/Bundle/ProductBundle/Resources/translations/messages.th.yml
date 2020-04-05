@@ -4,7 +4,7 @@
 sylius:
     form:
         product:
-            name: ชื่อ
+            name: ชื่อภาษา
             description: คำอธิบาย
             attributes: คุณลักษณะ (Attribute)
             options: ตัวเลือก
@@ -13,17 +13,17 @@ sylius:
             slug: Slug
             taxons: การจัดหมวดหมู่
         product_variant:
-            name: ชื่อ
+            name: ชื่อภาษา
         association_type:
-            name: ชื่อ
+            name: ชื่อภาษา
             translations: การแปลภาษา
         association:
             type: ชนิดที่เกี่ยวข้อง
             product: สินค้าที่เกี่ยวข้อง
         variant:
-            name: ชื่อ
+            name: ชื่อภาษา
         option:
-            name: ชื่อ
+            name: ชื่อภาษา
             position: ตำแหน่ง
             values: ค่าที่เป็นไปได้
         option_value:

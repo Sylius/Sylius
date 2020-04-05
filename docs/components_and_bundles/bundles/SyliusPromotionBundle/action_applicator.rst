@@ -1,5 +1,12 @@
-How actions are applied ?
-=========================
+.. rst-class:: outdated
+
+How actions are applied?
+========================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Everything related to this subject is located in ``Sylius\Component\Promotion\Action``.
 

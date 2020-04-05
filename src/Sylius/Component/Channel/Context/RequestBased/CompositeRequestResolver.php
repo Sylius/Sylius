@@ -21,6 +21,8 @@ final class CompositeRequestResolver implements RequestResolverInterface
 {
     /**
      * @var PriorityQueue|RequestResolverInterface[]
+     *
+     * @psalm-var PriorityQueue<RequestResolverInterface>
      */
     private $requestResolvers;
 
@@ -29,10 +31,6 @@ final class CompositeRequestResolver implements RequestResolverInterface
         $this->requestResolvers = new PriorityQueue();
     }
 
-    /**
-     * @param RequestResolverInterface $requestResolver
-     * @param int $priority
-     */
     public function addResolver(RequestResolverInterface $requestResolver, int $priority = 0): void
     {
         $this->requestResolvers->insert($requestResolver, $priority);

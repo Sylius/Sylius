@@ -21,44 +21,36 @@ class Order implements OrderInterface
 {
     use TimestampableTrait;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
+    /** @var \DateTimeInterface|null */
     protected $checkoutCompletedAt;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $number;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $notes;
 
     /**
      * @var Collection|OrderItemInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderItemInterface>
      */
     protected $items;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $itemsTotal = 0;
 
     /**
      * @var Collection|AdjustmentInterface[]
+     *
+     * @psalm-var Collection<array-key, AdjustmentInterface>
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     /**
@@ -68,15 +60,17 @@ class Order implements OrderInterface
      */
     protected $total = 0;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $state = OrderInterface::STATE_CART;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, OrderItemInterface> $this->items */
         $this->items = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
     }
 
@@ -430,9 +424,6 @@ class Order implements OrderInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
@@ -441,9 +432,6 @@ class Order implements OrderInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {

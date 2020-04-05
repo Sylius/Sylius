@@ -5,4 +5,6 @@ sylius:
     menu:
         shop:
             account:
+                address_book: 'Βιβλίο διευθύνσεων'
                 change_password: 'Αλλαγή κωδικού πρόσβασης'
+                dashboard: 'Dashboard'

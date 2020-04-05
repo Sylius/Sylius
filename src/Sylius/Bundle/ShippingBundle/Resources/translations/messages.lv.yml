@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Summa
+            per_unit_rate_configuration:
+                amount: Summa
+        shipping_category:
+            description: Apraksts
+            name: Nosaukums
+        shipping_method:
+            calculator: '- Kalkulators'
+            category: Kategorija
+            description: Apraksts
+            name: Nosaukums

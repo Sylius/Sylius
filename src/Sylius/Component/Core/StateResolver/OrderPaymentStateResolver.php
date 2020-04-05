@@ -16,21 +16,18 @@ namespace Sylius\Component\Core\StateResolver;
 use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /**
-     * @param FactoryInterface $stateMachineFactory
-     */
     public function __construct(FactoryInterface $stateMachineFactory)
     {
         $this->stateMachineFactory = $stateMachineFactory;
@@ -39,8 +36,11 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(OrderInterface $order): void
+    public function resolve(BaseOrderInterface $order): void
     {
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
         $targetTransition = $this->getTargetTransition($order);
 
@@ -49,10 +49,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param StateMachineInterface $stateMachine
-     * @param string $transition
-     */
     private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
     {
         if ($stateMachine->can($transition)) {
@@ -60,11 +56,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         }
     }
 
-    /**
-     * @param OrderInterface $order
-     *
-     * @return string|null
-     */
     private function getTargetTransition(OrderInterface $order): ?string
     {
         $refundedPaymentTotal = 0;
@@ -100,14 +91,28 @@ final class OrderPaymentStateResolver implements StateResolverInterface
             return OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY;
         }
 
+        $authorizedPaymentTotal = 0;
+        $authorizedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_AUTHORIZED);
+
+        foreach ($authorizedPayments as $payment) {
+            $authorizedPaymentTotal += $payment->getAmount();
+        }
+
+        if (0 < $authorizedPayments->count() && $authorizedPaymentTotal >= $order->getTotal()) {
+            return OrderPaymentTransitions::TRANSITION_AUTHORIZE;
+        }
+
+        if ($authorizedPaymentTotal < $order->getTotal() && 0 < $authorizedPaymentTotal) {
+            return OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE;
+        }
+
         return null;
     }
 
     /**
-     * @param OrderInterface $order
-     * @param string $state
-     *
      * @return Collection|PaymentInterface[]
+     *
+     * @psalm-return Collection<array-key, PaymentInterface>
      */
     private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {

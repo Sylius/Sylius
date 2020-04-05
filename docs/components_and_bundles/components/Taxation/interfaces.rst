@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Interfaces
 ==========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Model Interfaces
 ----------------
@@ -13,7 +20,7 @@ To create taxable object which has specific type of tax category, the object cla
 .. note::
     For more detailed information go to `Sylius API Taxable Interface`_.
 
-.. _Sylius API Taxable Interface: http://api.sylius.org/Sylius/Component/Taxation/Model/TaxableInterface.html
+.. _Sylius API Taxable Interface: http://api.sylius.com/Sylius/Component/Taxation/Model/TaxableInterface.html
 
 Tax Category Interface
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -26,7 +33,7 @@ To create object which provides information about tax category, the object class
 
     For more detailed information go to `Sylius API Tax Category Interface`_.
 
-.. _Sylius API Tax Category Interface: http://api.sylius.org/Sylius/Component/Taxation/Model/TaxCategoryInterface.html
+.. _Sylius API Tax Category Interface: http://api.sylius.com/Sylius/Component/Taxation/Model/TaxCategoryInterface.html
 
 Tax Rate Interface
 ~~~~~~~~~~~~~~~~~~
@@ -39,7 +46,7 @@ To create object which provides information about tax rate, the object class nee
 
     For more detailed information go to `Sylius API Tax Rate Interface`_.
 
-.. _Sylius API Tax Rate Interface: http://api.sylius.org/Sylius/Component/Taxation/Model/TaxCategoryInterface.html
+.. _Sylius API Tax Rate Interface: http://api.sylius.com/Sylius/Component/Taxation/Model/TaxCategoryInterface.html
 
 Calculator Interfaces
 ---------------------
@@ -53,7 +60,7 @@ the calculator class needs implement the **CalculatorInterface**.
 .. note::
     For more detailed information about the interfaces go to `Sylius API Calculator Interface`_.
 
-.. _Sylius API Calculator Interface: http://api.sylius.org/Sylius/Component/Taxation/Calculator/CalculatorInterface.html
+.. _Sylius API Calculator Interface: http://api.sylius.com/Sylius/Component/Taxation/Calculator/CalculatorInterface.html
 
 Resolver Interfaces
 -------------------
@@ -67,4 +74,4 @@ implement **TaxRateResolverInterface**. The criteria describes tax rate object.
 .. note::
     For more detailed information about the interfaces go to `Sylius API Tax Rate Resolver Interface`_.
 
-.. _Sylius API Tax Rate Resolver Interface: http://api.sylius.org/Sylius/Component/Taxation/Resolver/TaxRateResolverInterface.html
+.. _Sylius API Tax Rate Resolver Interface: http://api.sylius.com/Sylius/Component/Taxation/Resolver/TaxRateResolverInterface.html

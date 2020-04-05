@@ -17,25 +17,13 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
-    public function enable();
+    public function enable(): void;
 
-    /**
-     * @param string $username
-     */
-    public function specifyUsername($username);
+    public function specifyUsername(string $username): void;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function specifyEmail(string $email): void;
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
-    /**
-     * @param string $localeCode
-     */
-    public function specifyLocale($localeCode);
+    public function specifyLocale(string $localeCode): void;
 }

@@ -28,7 +28,7 @@ Each currency defined in the system should have an ExchangeRate configured.
 
 **ExchangeRate** is a separate entity that holds a relation between two currencies and specifies their exchange rate.
 
-Exchange rates are used for viewing the *approximate* price in a currency different form the base currency of a channel.
+Exchange rates are used for viewing the *approximate* price in a currency different from the base currency of a channel.
 
 Learn more
 ----------

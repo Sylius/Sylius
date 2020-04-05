@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Shipping method requirements
 ============================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Sylius has a very flexible system for displaying only the right shipping methods to the user.
 

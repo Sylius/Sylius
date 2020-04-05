@@ -17,10 +17,5 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 interface DelegatingCalculatorInterface
 {
-    /**
-     * @param ShipmentInterface $subject
-     *
-     * @return int
-     */
     public function calculate(ShipmentInterface $subject): int;
 }

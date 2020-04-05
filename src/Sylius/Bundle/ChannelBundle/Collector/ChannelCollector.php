@@ -23,16 +23,9 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class ChannelCollector extends DataCollector
 {
-    /**
-     * @var ChannelContextInterface
-     */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
-    /**
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param ChannelContextInterface $channelContext
-     * @param bool $channelChangeSupport
-     */
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
         ChannelContextInterface $channelContext,
@@ -42,15 +35,12 @@ final class ChannelCollector extends DataCollector
 
         $this->data = [
             'channel' => null,
-            'channels' => $channelRepository->findAll(),
+            'channels' => array_map([$this, 'pluckChannel'], $channelRepository->findAll()),
             'channel_change_support' => $channelChangeSupport,
         ];
     }
 
-    /**
-     * @return ChannelInterface|null
-     */
-    public function getChannel(): ?ChannelInterface
+    public function getChannel(): ?array
     {
         return $this->data['channel'];
     }
@@ -63,9 +53,6 @@ final class ChannelCollector extends DataCollector
         return $this->data['channels'];
     }
 
-    /**
-     * @return bool
-     */
     public function isChannelChangeSupported(): bool
     {
         return $this->data['channel_change_support'];
@@ -77,9 +64,17 @@ final class ChannelCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null): void
     {
         try {
-            $this->data['channel'] = $this->channelContext->getChannel();
+            $this->data['channel'] = $this->pluckChannel($this->channelContext->getChannel());
         } catch (ChannelNotFoundException $exception) {
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(): void
+    {
+        $this->data['channel'] = null;
     }
 
     /**
@@ -88,5 +83,14 @@ final class ChannelCollector extends DataCollector
     public function getName(): string
     {
         return 'sylius.channel_collector';
+    }
+
+    private function pluckChannel(ChannelInterface $channel): array
+    {
+        return [
+            'name' => $channel->getName(),
+            'hostname' => $channel->getHostname(),
+            'code' => $channel->getCode(),
+        ];
     }
 }

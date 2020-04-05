@@ -7,61 +7,62 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
-    'use strict';
+import 'semantic-ui-css/components/dropdown';
+import $ from 'jquery';
 
-    $.fn.extend({
-        addressBook: function () {
-            var element = $(this);
-            var select = element.find('.address-book-select');
+const parseKey = function parseKey(key) {
+  return key.replace(/(_\w)/g, words => words[1].toUpperCase());
+};
 
-            select.dropdown({
-                forceSelection: false,
+$.fn.extend({
+  addressBook() {
+    const element = this;
+    const select = element.find('.address-book-select');
+    const findByName = function findByName(name) {
+      return element.find(`[name*="[${parseKey(name)}]"]`);
+    };
 
-                onChange: function (name, text, choice) {
-                    var provinceCode = choice.data()['provinceCode'];
-                    var provinceName = choice.data()['provinceName'];
+    select.dropdown({
+      forceSelection: false,
 
-                    $.each(element.find('input'), function (key, input) {
-                        $(input).val('');
-                    });
-                    $.each(element.find('select'), function (key, select) {
-                        $(select).val('');
-                    });
+      onChange(name, text, choice) {
+        const { provinceCode, provinceName } = choice.data();
+        const provinceContainer = select.parent().find('.province-container').get(0);
 
-                    $.each(choice.data(), function (property, value) {
-                        var field = findByName(property);
+        element.find('input:not([type="radio"]):not([type="checkbox"]), select').each((index, input) => {
+          $(input).val('');
+        });
 
-                        if (-1 !== property.indexOf('countryCode')) {
-                            field.val(value).change();
+        Object.entries(choice.data()).forEach(([property, value]) => {
+          const field = findByName(property);
 
-                            var exists = setInterval(function () {
-                                var provinceCodeField = findByName('provinceCode');
-                                var provinceNameField = findByName('provinceName');
+          if (property.indexOf('countryCode') !== -1) {
+            field.val(value).change();
 
-                                if (0 !== provinceCodeField.length && ('' !== provinceCode || undefined != provinceCode)) {
-                                    provinceCodeField.val(provinceCode);
+            const exists = setInterval(() => {
+              const provinceCodeField = findByName('provinceCode');
+              const provinceNameField = findByName('provinceName');
 
-                                    clearInterval(exists);
-                                } else if (0 !== provinceNameField.length && ('' !== provinceName || undefined != provinceName)) {
-                                    provinceNameField.val(provinceName);
+              if (!provinceContainer.hasAttribute('data-loading')) {
+                if (provinceCodeField.length !== 0 && (provinceCode !== '' || provinceCode != undefined)) {
+                  provinceCodeField.val(provinceCode);
 
-                                    clearInterval(exists);
-                                }
-                            }, 100);
-                        } else {
-                            field.val(value);
-                        }
-                    });
+                  clearInterval(exists);
+                } else if (provinceNameField.length !== 0 && (provinceName !== '' || provinceName != undefined)) {
+                  provinceNameField.val(provinceName);
+
+                  clearInterval(exists);
                 }
-            });
-
-            var parseKey = function (key) {
-                return key.replace(/(_\w)/g, function (words) {return words[1].toUpperCase()});
-            };
-            var findByName = function (name) {
-                return element.find('[name*=' + parseKey(name) + ']');
-            };
-        }
+              }
+            }, 100);
+          } else if (field.is('[type="radio"]') || field.is('[type="checkbox"]')) {
+            field.prop('checked', false);
+            field.filter(`[value="${value}"]`).prop('checked', true);
+          } else {
+            field.val(value);
+          }
+        });
+      },
     });
-})( jQuery );
+  },
+});

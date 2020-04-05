@@ -20,20 +20,12 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
 {
-    /**
-     * @var ReviewableRatingCalculatorInterface
-     */
+    /** @var ReviewableRatingCalculatorInterface */
     private $averageRatingCalculator;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $reviewSubjectManager;
 
-    /**
-     * @param ReviewableRatingCalculatorInterface $averageRatingCalculator
-     * @param ObjectManager $reviewSubjectManager
-     */
     public function __construct(
         ReviewableRatingCalculatorInterface $averageRatingCalculator,
         ObjectManager $reviewSubjectManager
@@ -58,14 +50,12 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
         $this->modifyReviewSubjectAverageRating($review->getReviewSubject());
     }
 
-    /**
-     * @param ReviewableInterface $reviewSubject
-     */
     private function modifyReviewSubjectAverageRating(ReviewableInterface $reviewSubject): void
     {
         $averageRating = $this->averageRatingCalculator->calculate($reviewSubject);
 
         $reviewSubject->setAverageRating($averageRating);
-        $this->reviewSubjectManager->flush($reviewSubject);
+
+        $this->reviewSubjectManager->flush();
     }
 }

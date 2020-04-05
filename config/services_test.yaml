@@ -1,0 +1,2 @@
+imports:
+    - { resource: "../src/Sylius/Behat/Resources/config/services.xml" }

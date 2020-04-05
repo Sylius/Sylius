@@ -20,17 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithContentType = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'CONTENT_TYPE' => 'application/json',
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private static $authorizedHeaderWithAccept = [
         'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         'ACCEPT' => 'application/json',
@@ -114,7 +110,7 @@ final class ProductApiTest extends JsonApiTestCase
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $product = $products['product1'];
 
-        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', $this->getProductUrl($product), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
@@ -160,11 +156,40 @@ EOT;
     /**
      * @test
      */
+    public function it_does_not_allow_to_create_product_with_too_long_translations()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $longString = str_repeat('s', 256);
+
+        $data =
+<<<EOT
+        {
+            "code": "MUG_TH",
+            "translations": {
+                "en_US": {
+                    "name": "{$longString}",
+                    "slug": "{$longString}"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product/create_with_long_translations_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
     public function it_does_not_allow_to_create_product_without_required_fields()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('POST', '/api/v1/products/', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -426,8 +451,8 @@ EOT;
                     "attribute": "mug_color",
                     "localeCode": "en_US",
                     "value": [
-                        "green", 
-                        "yellow"
+                        "7a968ac4-a1e3-4a37-a707-f22a839130c4", 
+                        "ff62a939-d946-4d6b-b742-b7115875ae75"
                     ]
                 }
             ],
@@ -525,8 +550,6 @@ EOT;
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return string
      */
     private function getProductUrl(ProductInterface $product)

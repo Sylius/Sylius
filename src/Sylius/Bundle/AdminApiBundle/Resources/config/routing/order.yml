@@ -4,14 +4,15 @@
 sylius_admin_api_order:
     resource: |
         alias: sylius.order
+        path: ''
         section: admin_api
-        only: [show]
+        only: [show, index]
         grid: sylius_admin_order
         serialization_version: $version
     type: sylius.resource_api
 
 sylius_admin_api_order_cancel:
-    path: /orders/{id}/cancel
+    path: /{id}/cancel
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:applyStateMachineTransitionAction
@@ -20,10 +21,11 @@ sylius_admin_api_order_cancel:
             state_machine:
                 graph: sylius_order
                 transition: cancel
+            csrf_protection: false
             return_content: false
 
 sylius_admin_api_order_shipment_ship:
-    path: /orders/{orderId}/shipments/{id}/ship
+    path: /{orderId}/shipments/{id}/ship
     methods: [PUT]
     defaults:
         _controller: sylius.controller.shipment:updateAction
@@ -41,7 +43,7 @@ sylius_admin_api_order_shipment_ship:
             form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
 
 sylius_admin_api_order_payment_complete:
-    path: /orders/{orderId}/payments/{id}/complete
+    path: /{orderId}/payments/{id}/complete
     methods: [PUT]
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
@@ -56,4 +58,5 @@ sylius_admin_api_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             section: admin_api
+            csrf_protection: false
             return_content: false

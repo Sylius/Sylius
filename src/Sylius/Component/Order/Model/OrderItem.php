@@ -18,59 +18,50 @@ use Doctrine\Common\Collections\Collection;
 
 class OrderItem implements OrderItemInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var OrderInterface
-     */
+    /** @var OrderInterface|null */
     protected $order;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $quantity = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $unitPrice = 0;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $total = 0;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $immutable = false;
 
     /**
      * @var Collection|OrderItemUnitInterface[]
+     *
+     * @psalm-var Collection<array-key, OrderItemUnitInterface>
      */
     protected $units;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $unitsTotal = 0;
 
     /**
      * @var Collection|AdjustmentInterface[]
+     *
+     * @psalm-var Collection<array-key, AdjustmentInterface>
      */
     protected $adjustments;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $adjustmentsTotal = 0;
 
     public function __construct()
     {
+        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, OrderItemUnitInterface> $this->units */
         $this->units = new ArrayCollection();
     }
 
@@ -386,9 +377,6 @@ class OrderItem implements OrderItemInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function addToAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {
@@ -397,9 +385,6 @@ class OrderItem implements OrderItemInterface
         }
     }
 
-    /**
-     * @param AdjustmentInterface $adjustment
-     */
     protected function subtractFromAdjustmentsTotal(AdjustmentInterface $adjustment): void
     {
         if (!$adjustment->isNeutral()) {

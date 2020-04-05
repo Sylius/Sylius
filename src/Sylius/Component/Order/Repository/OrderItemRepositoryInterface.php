@@ -18,11 +18,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface OrderItemRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @param mixed $id
-     * @param mixed $cartId
-     *
-     * @return OrderItemInterface|null
-     */
     public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface;
 }

@@ -11,34 +11,34 @@ Feature: Coupon generate instruction validation
         And I am logged in as an administrator
 
     @ui
-    Scenario: Trying to generate a new coupons without specifying its amount
-        Given I want to generate a new coupons for this promotion
-        When I do not specify its amount
-        And I specify its code length as 6
+    Scenario: Trying to generate new coupons without specifying their amount
+        When I want to generate new coupons for this promotion
+        And I do not specify its amount
+        And I specify their code length as 6
         And I limit generated coupons usage to 25 times
         And I make generated coupons valid until "26.03.2017"
-        And I try to generate it
+        And I try to generate these coupons
         Then I should be notified that generate amount is required
         And there should be 0 coupon related to this promotion
 
     @ui
-    Scenario: Trying to generate a new coupons without specifying its code length
-        Given I want to generate a new coupons for this promotion
-        When I do not specify its code length
-        And I specify its amount as 4
+    Scenario: Trying to generate new coupons without specifying their code length
+        When I want to generate new coupons for this promotion
+        And I do not specify their code length
+        And I choose the amount of 4 coupons to be generated
         And I limit generated coupons usage to 25 times
         And I make generated coupons valid until "26.03.2017"
-        And I try to generate it
+        And I try to generate these coupons
         Then I should be notified that generate code length is required
         And there should be 0 coupon related to this promotion
 
     @ui
-    Scenario: Trying to generate a new coupons with amount and code length impossible to generate
-        Given I want to generate a new coupons for this promotion
-        When I specify its code length as 1
-        And I specify its amount as 20
+    Scenario: Trying to generate new coupons with amount and code length impossible to generate
+        When I want to generate new coupons for this promotion
+        And I specify their code length as 1
+        And I choose the amount of 20 coupons to be generated
         And I limit generated coupons usage to 25 times
         And I make generated coupons valid until "26.03.2017"
-        And I try to generate it
+        And I try to generate these coupons
         Then I should be notified that generating 20 coupons with code length equal to 1 is not possible
         And there should be 0 coupon related to this promotion

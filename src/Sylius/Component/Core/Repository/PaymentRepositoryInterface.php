@@ -19,16 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(): QueryBuilder;
 
-    /**
-     * @param mixed $paymentId
-     * @param mixed $orderId
-     *
-     * @return PaymentInterface|null
-     */
     public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface;
 }

@@ -18,13 +18,19 @@ sylius:
             channels: Ausgabekanäle
         promotion_action:
             add_product_configuration:
-                product: Verkäuflich
+                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
             name: Name
             roles: Rollen
         channel:
+            billing_data:
+                city: Stadt
+                company: Firma
+                country: Land
+                postcode: Postleitzahl
+                street: Strasse / Nr.
             contact_email: Kontakt E-Mail
             currencies: Währungen
             currency_base: Basis-Währung
@@ -59,7 +65,7 @@ sylius:
             id: ID
             title: Titel
         product:
-            images: Fotos
+            images: Bilder
             restricted_zone: Beschränktes Versandgebiet
             short_description: Kurzbeschreibung
             variant_selection_method: Varianten
@@ -89,7 +95,7 @@ sylius:
         taxon:
             code: Code
             file: Foto auswählen
-            images: Fotos
+            images: Bilder
         taxonomy:
             file: Foto auswählen
         user:
@@ -103,11 +109,11 @@ sylius:
             password: Passwort
             shipping_address: Lieferadresse
         user_filter:
-            query: Suche
+            query: Suchen
         variant:
             depth: Tiefe
             height: Höhe
-            on_hand: Auf Lager
+            on_hand: Aktueller Lagerbestand
             price: Preis
             sku: Bestandseinheit
             shipping_required: Ist ein Versand erforderlich?
@@ -136,7 +142,7 @@ sylius:
                 products: Produkte
             total_of_items_from_taxon:
                 taxon: Produktgruppe
-                amount: Anzahl
+                amount: Steuersatz
         payment_method:
             channels: Ausgabekanäle
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: Dateisystem
             cache:
                 header: Cache
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existiert
             logs:
                 header: Protokoll/Logs
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: Existiert nicht
             not_writable: Schreibgeschützt
             parameters:
                 header: parameters.yml
-                help: 'Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%'
+                help: "Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%"
             vendors: Verkäufer
             writable: Beschreibbar
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Nicht veraltet
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

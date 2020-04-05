@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        payment:
+            state:
+                completed: הושלם
+                failed: נכשל
+                new: חדש
+                unknown: לא ידוע
+                cancelled: בוטל
+        payment_method:
+            description: תיאור
+            name: שם
+            position: מיקום

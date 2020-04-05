@@ -17,60 +17,39 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyTitle($title)
+    public function specifyTitle(string $title): void
     {
         $this->getElement('title')->setValue($title);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyComment($comment)
+    public function specifyComment(string $comment): void
     {
         $this->getElement('comment')->setValue($comment);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseRating($rating)
+    public function chooseRating(string $rating): void
     {
         $position = (int) $rating - 1;
 
         $this->getElement('rating', ['%position%' => $position])->getParent()->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRating()
+    public function getRating(): string
     {
         return $this->getElement('checked_rating')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductName()
+    public function getProductName(): string
     {
         return $this->getElement('product_name')->getHtml();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCustomerName()
+    public function getCustomerName(): string
     {
         return $this->getElement('customer_name')->getHtml();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'checked_rating' => 'input[checked="checked"]',

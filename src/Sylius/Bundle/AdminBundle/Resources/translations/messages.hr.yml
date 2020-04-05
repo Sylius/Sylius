@@ -12,6 +12,7 @@ sylius:
                     inventory: Skladište
                     options: Opcije
                     products: Proizvodi
+                    taxons: Taksoni
                 configuration:
                     admin_users: Administratori
                     channels: Kanali
@@ -25,7 +26,7 @@ sylius:
                     shipping_methods: Načini slanja
                     tax_categories: Kategorije poreza
                     tax_rates: Stope poreza
-                    zones: Regije
+                    zones: Područja (Zone)
                 marketing:
                     header: Marketing
                     product_reviews: Recenzije proizvoda
@@ -33,7 +34,7 @@ sylius:
                 customers:
                     customers: Kupci
                     groups: Grupe
-                    header: Kupac
+                    header: Kupci
                 sales:
-                    header: Prodaja
+                    header: Prodaja u trenutnom mjesecu
                     orders: Narudžbe

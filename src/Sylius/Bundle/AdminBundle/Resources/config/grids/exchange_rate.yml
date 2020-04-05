@@ -14,7 +14,7 @@ sylius_grid:
                     sortable: ~
                 sourceCurrency:
                     type: twig
-                    label: sylius.ui.base_currency
+                    label: sylius.ui.source_currency
                     path: .
                     options:
                         template: "@SyliusAdmin/ExchangeRate/Grid/Field/sourceCurrencyName.html.twig"
@@ -45,5 +45,8 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    delete:
+                        type: delete
+                bulk:
                     delete:
                         type: delete

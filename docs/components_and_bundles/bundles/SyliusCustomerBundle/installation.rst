@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Installation
 ============
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
 Use the following command to add the bundle to your `composer.json` and download the package.
@@ -8,14 +15,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/customer-bundle
+    composer require sylius/customer-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
-    $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/customer-bundle
+    curl -sS https://getcomposer.org/installer | php
+    php composer.phar require sylius/customer-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -48,9 +55,6 @@ Don't worry, everything was automatically installed via Composer.
         );
     }
 
-.. note::
-
-    Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
 Configure Doctrine extensions
 -----------------------------
@@ -72,7 +76,7 @@ Run the following command.
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 .. warning::
 

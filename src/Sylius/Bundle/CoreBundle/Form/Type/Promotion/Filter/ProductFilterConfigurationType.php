@@ -20,14 +20,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductFilterConfigurationType extends AbstractType
 {
-    /**
-     * @var DataTransformerInterface
-     */
+    /** @var DataTransformerInterface */
     private $productsToCodesTransformer;
 
-    /**
-     * @param DataTransformerInterface $productsToCodesTransformer
-     */
     public function __construct(DataTransformerInterface $productsToCodesTransformer)
     {
         $this->productsToCodesTransformer = $productsToCodesTransformer;

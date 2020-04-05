@@ -19,8 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 interface PreQualifiedPromotionsProviderInterface
 {
     /**
-     * @param PromotionSubjectInterface $subject
-     *
      * @return PromotionInterface[]
      */
     public function getPromotions(PromotionSubjectInterface $subject): array;

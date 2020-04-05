@@ -22,15 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AddressType extends AbstractResourceType
 {
-    /**
-     * @var EventSubscriberInterface
-     */
+    /** @var EventSubscriberInterface */
     private $buildAddressFormSubscriber;
 
     /**
-     * @param string $dataClass
      * @param string[] $validationGroups
-     * @param EventSubscriberInterface $buildAddressFormSubscriber
      */
     public function __construct(string $dataClass, array $validationGroups, EventSubscriberInterface $buildAddressFormSubscriber)
     {
@@ -87,7 +83,7 @@ final class AddressType extends AbstractResourceType
             ->setDefaults([
                 'validation_groups' => function (Options $options) {
                     if ($options['shippable']) {
-                        $this->validationGroups[] = 'shippable';
+                        return array_merge($this->validationGroups, ['shippable']);
                     }
 
                     return $this->validationGroups;

@@ -13,17 +13,17 @@ sylius:
             slug: שם מקוצר לשימוש בקישורים
             taxons: קבוצות טקסונומיות
         product_variant:
-            name: שם גרסה
+            name: שם
         association_type:
-            name: שם מקשור
+            name: שם
             translations: תרגומים
         association:
             type: סוג משקור
             product: מוצר מקושר
         variant:
-            name: שם גירסה
+            name: שם
         option:
-            name: שם הגדרה
+            name: שם
             position: מיקום
             values: ערכים אפשריים
         option_value:

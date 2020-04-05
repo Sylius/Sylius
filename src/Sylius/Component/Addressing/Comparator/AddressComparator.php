@@ -25,11 +25,6 @@ final class AddressComparator implements AddressComparatorInterface
         return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);
     }
 
-    /**
-     * @param AddressInterface $address
-     *
-     * @return array
-     */
     private function normalizeAddress(AddressInterface $address): array
     {
         return array_map(function ($value) {

@@ -37,6 +37,20 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
+    public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array
+    {
+        return $this->createTranslationBasedQueryBuilder($locale)
+            ->addSelect('child')
+            ->innerJoin('o.parent', 'parent')
+            ->leftJoin('o.children', 'child')
+            ->andWhere('parent.code = :parentCode')
+            ->addOrderBy('o.position')
+            ->setParameter('parentCode', ($menuTaxon !== null) ? $menuTaxon->getCode() : 'category')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -87,11 +101,12 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findByNamePart(string $phrase, ?string $locale = null): array
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
     {
         return $this->createTranslationBasedQueryBuilder($locale)
             ->andWhere('translation.name LIKE :name')
             ->setParameter('name', '%' . $phrase . '%')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
@@ -105,12 +120,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
     }
 
-    /**
-     * @param string|null $locale
-     *
-     * @return QueryBuilder
-     */
-    private function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
+    protected function createTranslationBasedQueryBuilder(?string $locale): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

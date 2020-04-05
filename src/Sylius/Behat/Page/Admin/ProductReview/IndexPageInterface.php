@@ -17,13 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param array $parameters
-     */
-    public function accept(array $parameters);
+    public function accept(array $parameters): void;
 
-    /**
-     * @param array $parameters
-     */
-    public function reject(array $parameters);
+    public function reject(array $parameters): void;
 }

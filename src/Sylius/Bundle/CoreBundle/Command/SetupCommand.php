@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,26 +45,23 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->get('sylius.setup.locale')->setup($input, $output);
-        $this->get('sylius.setup.channel')->setup($locale, $currency);
+        $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
+        $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
+        $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
+
+        return 0;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param string $localeCode
-     */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, string $localeCode): void
     {
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln('Create your administrator account.');
 
-        $userManager = $this->get('sylius.manager.admin_user');
-        $userFactory = $this->get('sylius.factory.admin_user');
+        $userManager = $this->getContainer()->get('sylius.manager.admin_user');
+        $userFactory = $this->getContainer()->get('sylius.factory.admin_user');
 
         try {
             $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
@@ -81,16 +79,13 @@ EOT
         $outputStyle->newLine();
     }
 
-    /**
-     * @param AdminUserInterface $user
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return AdminUserInterface
-     */
-    private function configureNewUser(AdminUserInterface $user, InputInterface $input, OutputInterface $output): AdminUserInterface
-    {
-        $userRepository = $this->get('sylius.repository.admin_user');
+    private function configureNewUser(
+        AdminUserInterface $user,
+        InputInterface $input,
+        OutputInterface $output
+    ): AdminUserInterface {
+        /** @var UserRepositoryInterface $userRepository */
+        $userRepository = $this->getAdminUserRepository();
 
         if ($input->getOption('no-interaction')) {
             Assert::null($userRepository->findOneByEmail('sylius@example.com'));
@@ -102,10 +97,44 @@ EOT
             return $user;
         }
 
+        $email = $this->getAdministratorEmail($input, $output);
+        $user->setEmail($email);
+        $user->setUsername($this->getAdministratorUsername($input, $output, $email));
+        $user->setPlainPassword($this->getAdministratorPassword($input, $output));
+
+        return $user;
+    }
+
+    private function createEmailQuestion(): Question
+    {
+        return (new Question('E-mail: '))
+            ->setValidator(
+                /**
+                 * @param mixed $value
+                 */
+                function ($value): string {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->getContainer()->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    foreach ($errors as $error) {
+                        throw new \DomainException($error->getMessage());
+                    }
+
+                    return $value;
+                }
+            )
+            ->setMaxAttempts(3)
+        ;
+    }
+
+    private function getAdministratorEmail(InputInterface $input, OutputInterface $output): string
+    {
+        /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
+        /** @var UserRepositoryInterface $userRepository */
+        $userRepository = $this->getAdminUserRepository();
 
         do {
-            $question = $this->createEmailQuestion($output);
+            $question = $this->createEmailQuestion();
             $email = $questionHelper->ask($input, $output, $question);
             $exists = null !== $userRepository->findOneByEmail($email);
 
@@ -114,41 +143,30 @@ EOT
             }
         } while ($exists);
 
-        $user->setEmail($email);
-        $user->setUsername($email);
-        $user->setPlainPassword($this->getAdministratorPassword($input, $output));
-
-        return $user;
+        return $email;
     }
 
-    /**
-     * @param OutputInterface $output
-     *
-     * @return Question
-     */
-    private function createEmailQuestion(OutputInterface $output): Question
+    private function getAdministratorUsername(InputInterface $input, OutputInterface $output, string $email): string
     {
-        return (new Question('E-mail:'))
-            ->setValidator(function ($value) {
-                /** @var ConstraintViolationListInterface $errors */
-                $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
-                foreach ($errors as $error) {
-                    throw new \DomainException($error->getMessage());
-                }
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+        /** @var UserRepositoryInterface $userRepository */
+        $userRepository = $this->getAdminUserRepository();
 
-                return $value;
-            })
-            ->setMaxAttempts(3)
-        ;
+        do {
+            $question = new Question('Username (press enter to use email): ', $email);
+            $username = $questionHelper->ask($input, $output, $question);
+            $exists = null !== $userRepository->findOneBy(['username' => $username]);
+
+            if ($exists) {
+                $output->writeln('<error>Username is already in use!</error>');
+            }
+        } while ($exists);
+
+        return $username;
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return mixed
-     */
-    private function getAdministratorPassword(InputInterface $input, OutputInterface $output)
+    private function getAdministratorPassword(InputInterface $input, OutputInterface $output): string
     {
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
@@ -169,28 +187,22 @@ EOT
         return $password;
     }
 
-    /**
-     * @return \Closure
-     */
     private function getPasswordQuestionValidator(): \Closure
     {
-        return function ($value) {
-            /** @var ConstraintViolationListInterface $errors */
-            $errors = $this->get('validator')->validate($value, [new NotBlank()]);
-            foreach ($errors as $error) {
-                throw new \DomainException($error->getMessage());
-            }
+        return
+            /** @param mixed $value */
+            function ($value): string {
+                /** @var ConstraintViolationListInterface $errors */
+                $errors = $this->getContainer()->get('validator')->validate($value, [new NotBlank()]);
+                foreach ($errors as $error) {
+                    throw new \DomainException($error->getMessage());
+                }
 
-            return $value;
-        };
+                return $value;
+            }
+        ;
     }
 
-    /**
-     * @param string $message
-     * @param \Closure $validator
-     *
-     * @return Question
-     */
     private function createPasswordQuestion(string $message, \Closure $validator): Question
     {
         return (new Question($message))
@@ -199,5 +211,10 @@ EOT
             ->setHidden(true)
             ->setHiddenFallback(false)
         ;
+    }
+
+    private function getAdminUserRepository(): UserRepositoryInterface
+    {
+        return $this->getContainer()->get('sylius.repository.admin_user');
     }
 }

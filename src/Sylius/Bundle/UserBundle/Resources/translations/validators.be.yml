@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: Калі ласка, увядзіце свой адрас электроннай пошты.
+            invalid: Несапраўдны адрас.
+            not_registered: Карыстальніка з такой паштовай скрыняй не існуе. Калі ласка зарэгіструйцеся.
+        plainPassword:
+            not_blank: Увядзіце пароль, калі ласка.
+            mismatch: Уведзеныя паролі павінны супадаць
+            wrong_current: Уведзены пароль адрозніваецца ад існуючага.
+        password:
+            min: Пароль павінен змяшчаць не менш за {{ limit }} сімвалаў.
+            max: Пароль не можа быць даўжэй за {{ limit }} сімвалаў.

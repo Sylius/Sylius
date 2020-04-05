@@ -38,7 +38,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');
-        $encoderFactory->getEncoder(get_class($user->getWrappedObject()))->willReturn($passwordEncoder);
+        $encoderFactory->getEncoder($user->getWrappedObject())->willReturn($passwordEncoder);
         $passwordEncoder->encodePassword('topSecretPlainPassword', 'typicalSalt')->willReturn('topSecretEncodedPassword');
 
         $this->encode($user)->shouldReturn('topSecretEncodedPassword');

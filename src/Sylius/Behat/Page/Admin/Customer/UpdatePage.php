@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
@@ -20,10 +21,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullName()
+    public function getFullName(): string
     {
         $firstNameElement = $this->getElement('first_name')->getValue();
         $lastNameElement = $this->getElement('last_name')->getValue();
@@ -31,95 +29,62 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return sprintf('%s %s', $firstNameElement, $lastNameElement);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeFirstName($firstName)
+    public function changeFirstName(string $firstName): void
     {
         $this->getDocument()->fillField('First name', $firstName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->getElement('first_name')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeLastName($lastName)
+    public function changeLastName(string $lastName): void
     {
         $this->getDocument()->fillField('Last name', $lastName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->getElement('last_name')->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeEmail($email)
+    public function changeEmail(string $email): void
     {
         $this->getDocument()->fillField('Email', $email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changePassword($password)
+    public function changePassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPassword()
+    public function getPassword(): string
     {
-        return $this->getElement('password');
+        return $this->getElement('password')->getValue();
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
         $this->getDocument()->checkField('Subscribe to the newsletter');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSubscribedToTheNewsletter()
+    public function isSubscribedToTheNewsletter(): bool
     {
         return $this->getDocument()->hasCheckedField('Subscribe to the newsletter');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getGroupName()
+    public function getGroupName(): string
     {
         return $this->getElement('group')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_customer_email',

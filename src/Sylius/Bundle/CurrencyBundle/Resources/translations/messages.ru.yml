@@ -5,7 +5,7 @@ sylius:
     form:
         currency:
             base: Базовая валюта
-            code: Название
+            code: Округ
             enabled: Активен
             exchange_rate: Обменный курс
         exchange_rate:

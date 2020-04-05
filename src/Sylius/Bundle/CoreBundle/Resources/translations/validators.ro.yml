@@ -21,7 +21,7 @@ sylius:
     contact:
         email:
             invalid: Adresa de email nu este validă.
-            not_blank: Introdu adresa ta de email.
+            not_blank: Vă rugăm să completați adresa de e-mail.
         message:
             not_blank: Scrie-ne un mesaj.
     currency:
@@ -86,7 +86,7 @@ sylius:
             unique: Acest e-mail este deja folosit.
             min: Adresa de email trebuie să aibă minim {{ min }} caractere.
             max: Adresa de email poate să aibă maxim {{ max }} caractere.
-            invalid: Această adresă de e-mail este invalidă.
+            invalid: Adresa de email nu este validă.
         username:
             unique: Acest nume de utilizator este deja folosit.
             not_blank: Introdu un nume de utilizator.

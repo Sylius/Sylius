@@ -1,0 +1,16 @@
+{%
+    set viewOptions = {
+    cart: { icon: "adjust", color: "grey" } ,
+    cancelled: { icon: "ban", color: "red" } ,
+    shipped: { icon: "plane", color: "green" } ,
+    partially_shipped: { icon: "adjust", color: "yellow" } ,
+    ready: { icon: "clock", color: "blue" } ,
+    }
+%}
+
+{% set value = 'sylius.ui.' ~ state %}
+
+<div class="ui top attached label {{ viewOptions[state]['color'] }}" style="margin-left: 1rem; width: calc(100% - 2rem); margin-top: 1rem;">
+    <i class="{{ viewOptions[state]['icon'] }} icon"></i>
+    {{ 'sylius.ui.state'|trans }}: <span id="order-shipment-status" {{ sylius_test_html_attribute('order-shipment-state') }}>{{ value|trans }}</span>
+</div>

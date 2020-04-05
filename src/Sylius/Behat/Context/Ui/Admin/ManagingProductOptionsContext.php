@@ -23,32 +23,18 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
 {
-    /**
-     * @var IndexPageInterface
-     */
+    /** @var IndexPageInterface */
     private $indexPage;
 
-    /**
-     * @var CreatePageInterface
-     */
+    /** @var CreatePageInterface */
     private $createPage;
 
-    /**
-     * @var UpdatePageInterface
-     */
+    /** @var UpdatePageInterface */
     private $updatePage;
 
-    /**
-     * @var CurrentPageResolverInterface
-     */
+    /** @var CurrentPageResolverInterface */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
@@ -117,7 +103,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iRenameItToInLanguage($name = null, $language)
     {
-        $this->updatePage->nameItIn($name, $language);
+        $this->updatePage->nameItIn($name ?? '', $language);
     }
 
     /**
@@ -134,7 +120,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -142,16 +128,34 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iAddTheOptionValueWithCodeAndValue($value, $code)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->addOptionValue($code, $value);
     }
 
     /**
+     * @When I check (also) the :productOptionName product option
+     */
+    public function iCheckTheProductOption(string $productOptionName): void
+    {
+        $this->indexPage->checkResourceOnPage(['name' => $productOptionName]);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @Then I should see the product option :productOptionName in the list
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry($productOptionName)
+    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
     {
         $this->iBrowseProductOptions();
 
@@ -233,11 +237,12 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) product options in the list$/
+     * @Then I should see a single product option in the list
+     * @Then I should see :amount product options in the list
      */
-    public function iShouldSeeProductOptionsInTheList($amount)
+    public function iShouldSeeProductOptionsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**

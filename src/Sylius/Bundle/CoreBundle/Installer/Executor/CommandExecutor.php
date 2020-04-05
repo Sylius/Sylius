@@ -22,26 +22,15 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class CommandExecutor
 {
-    /**
-     * @var InputInterface
-     */
+    /** @var InputInterface */
     private $input;
 
-    /**
-     * @var OutputInterface
-     */
+    /** @var OutputInterface */
     private $output;
 
-    /**
-     * @var Application
-     */
+    /** @var Application */
     private $application;
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param Application $application
-     */
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)
     {
         $this->input = $input;
@@ -50,12 +39,6 @@ final class CommandExecutor
     }
 
     /**
-     * @param string $command
-     * @param array $parameters
-     * @param OutputInterface|null $output
-     *
-     * @return self
-     *
      * @throws \Exception
      */
     public function runCommand(string $command, array $parameters = [], ?OutputInterface $output = null): self
@@ -85,9 +68,6 @@ final class CommandExecutor
         return $this;
     }
 
-    /**
-     * @return array
-     */
     private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];

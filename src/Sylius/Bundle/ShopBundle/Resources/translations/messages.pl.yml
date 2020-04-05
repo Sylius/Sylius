@@ -2,6 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Treść'
+        order_confirmation:
+            subject: 'Potwierdzenie zamówienia'
+            view_order_or_change_payment_method: 'Wyświetl zamówienie lub zmień metodę płatności'
+        password_reset:
+            hello: 'Witaj'
+        verification_token:
+            hello: 'Witaj'
+    lightbox:
+        image_album_label: 'Obraz %1 z %2'
     menu:
         shop:
             account:

@@ -19,3 +19,9 @@ sylius:
             unique: Šis kuponas jau egzistuoja.
         usage_limit:
             min: Kupono naudojimo limitas turi būti ne mažiau kaip {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Generuojamų kuponų kiekis turi būti ne mažesnis kaip {{ limit }}.
+            not_blank: Įveskite generuotinų kuponų kiekį.
+        usage_limit:
+            min: Sugeneruotų kuponų naudojimo limitas turi būti ne mažesnis kaip {{ limit }}.

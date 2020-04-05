@@ -5,7 +5,7 @@ How to send a custom e-mail?
 
     This cookbook is suitable for a clean :doc:`sylius-standard installation </book/installation/installation>`.
     For more general tips, while using :doc:`SyliusMailerBundle </components_and_bundles/bundles/SyliusMailerBundle/index>`
-    go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.org/blog/sending-configurable-e-mails-in-symfony>`_.
+    go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_.
 
 Currently **Sylius** is sending e-mails only in a few "must-have" cases - see :doc:`E-mails documentation </book/architecture/emails>`.
 Of course these cases may not be sufficient for your business needs. If so, you will need to create your own custom e-mails inside the system.
@@ -26,11 +26,11 @@ To achieve that you will need to:
 1. Create a new e-mail that will be sent:
 -----------------------------------------
 
-* prepare a template for your email in the ``app/Resources/views/Email``.
+* prepare a template for your email in the ``templates/Email``.
 
 .. code-block:: twig
 
-    {# app/Resources/views/Email/out_of_stock.html.twig #}
+    {# templates/Email/out_of_stock.html.twig #}
     {% block subject %}
         One of your products has become out of stock.
     {% endblock %}
@@ -41,11 +41,11 @@ To achieve that you will need to:
         {% endautoescape %}
     {% endblock %}
 
-* configure the email under ``sylius_mailer:`` in the ``app/config/emails.yml`` included in ``app/config/yml``.
+* configure the email under ``sylius_mailer:`` in the ``config/packages/sylius_mailer.yaml``.
 
 .. code-block:: yaml
 
-    # app/config/emails.yml
+    # config/packages/sylius_mailer.yaml
     sylius_mailer:
         sender:
             name: Example.com
@@ -53,13 +53,7 @@ To achieve that you will need to:
         emails:
             out_of_stock:
                 subject: "A product has become out of stock!"
-                template: "AppBundle:Email:out_of_stock.html.twig"
-
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "emails.yml" }
+                template: "Email/out_of_stock.html.twig"
 
 2. Create an Email Manager class:
 ---------------------------------
@@ -71,35 +65,24 @@ To achieve that you will need to:
 
     <?php
 
-    namespace AppBundle\EmailManager;
+    namespace App\EmailManager;
 
     use Sylius\Component\Core\Model\OrderInterface;
     use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
     use Sylius\Component\Mailer\Sender\SenderInterface;
     use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-    class OutOfStockEmailManager
+    final class OutOfStockEmailManager
     {
-        /**
-         * @var SenderInterface
-         */
+        /** @var SenderInterface */
         private $emailSender;
 
-        /**
-         * @var AvailabilityCheckerInterface $availabilityChecker
-         */
+        /** @var AvailabilityCheckerInterface */
         private $availabilityChecker;
 
-        /**
-         * @var RepositoryInterface $adminUserRepository
-         */
+        /** @var RepositoryInterface $adminUserRepository */
         private $adminUserRepository;
 
-        /**
-         * @param SenderInterface $emailSender
-         * @param AvailabilityCheckerInterface $availabilityChecker
-         * @param RepositoryInterface $adminUserRepository
-         */
         public function __construct(
             SenderInterface $emailSender,
             AvailabilityCheckerInterface $availabilityChecker,
@@ -110,15 +93,12 @@ To achieve that you will need to:
             $this->adminUserRepository = $adminUserRepository;
         }
 
-        /**
-         * @param OrderInterface $order
-         */
-        public function sendOutOfStockEmail(OrderInterface $order)
+        public function sendOutOfStockEmail(OrderInterface $order): void
         {
             // get all admins, but remember to put them into an array
             $admins = $this->adminUserRepository->findAll()->toArray();
 
-            foreach($order->getItems() as $item) {
+            foreach ($order->getItems() as $item) {
                 $variant = $item->getVariant();
 
                 $stockIsSufficient = $this->availabilityChecker->isStockSufficient($variant, 1);
@@ -126,7 +106,8 @@ To achieve that you will need to:
                 if ($stockIsSufficient) {
                     continue;
                 }
-                foreach($admins as $admin) {
+
+                foreach ($admins as $admin) {
                     $this->emailSender->send('out_of_stock', [$admin->getEmail()], ['variant' => $variant]);
                 }
             }
@@ -138,18 +119,17 @@ To achieve that you will need to:
 
 .. code-block:: yaml
 
-    # app/config/services.yml
+    # config/packages/_sylius.yaml
     services:
-        app.email_manager.out_of_stock:
-        class: AppBundle\EmailManager\OutOfStockEmailManager
-        arguments: ['@sylius.email_sender', '@sylius.availability_checker', '@sylius.repository.admin_user']
+        App\EmailManager\OutOfStockEmailManager:
+            arguments: ['@sylius.email_sender', '@sylius.availability_checker', '@sylius.repository.admin_user']
 
 4. Customize the state machine callback of Order's Payment:
 -----------------------------------------------------------
 
 .. code-block:: yaml
 
-    # app/config/state_machine.yml
+    # config/packages/_sylius.yaml
     winzou_state_machine:
         sylius_order_payment:
             callbacks:
@@ -159,12 +139,6 @@ To achieve that you will need to:
                         do: ["@app.email_manager.out_of_stock", "sendOutOfStockEmail"]
                         args: ["object"]
 
-.. code-block:: yaml
-
-    # app/config/config.yml
-    imports:
-        - { resource: "state_machine.yml" }
-
 **Done!**
 
 Learn More
@@ -173,4 +147,4 @@ Learn More
 * :doc:`Emails Concept </book/architecture/emails>`
 * :doc:`State Machine Concept </book/architecture/state_machine>`
 * :doc:`Customization Guide - State Machine </customization/state_machine>`
-* `Sending configurable e-mails in Symfony Blogpost <http://sylius.org/blog/sending-configurable-e-mails-in-symfony>`_
+* `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_

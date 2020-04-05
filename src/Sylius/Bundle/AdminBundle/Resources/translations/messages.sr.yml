@@ -5,17 +5,26 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Атрибути
+                    options: Опције
+                    products: Производи
                 configuration:
                     countries: Земље
+                    exchange_rates: Курсна листа
                     header: Подешавања
                     locales: Локални
-                    payment_methods: Опције плаћања
+                    payment_methods: Методи плаћања
+                    shipping_categories: Категорије испорука
                     shipping_methods: Начини доставе
                     tax_categories: Категорија пореза
                     tax_rates: Пореске стопе
                     zones: Зоне
                 marketing:
                     promotions: Промоције
+                customers:
+                    customers: Купци
+                    groups: Групе
                 sales:
                     header: Продаје
                     orders: Наруџбине

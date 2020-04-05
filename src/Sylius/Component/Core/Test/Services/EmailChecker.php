@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $spoolDirectory;
 
-    /**
-     * @param string $spoolDirectory
-     */
     public function __construct(string $spoolDirectory)
     {
         $this->spoolDirectory = $spoolDirectory;
@@ -59,7 +54,11 @@ final class EmailChecker implements EmailCheckerInterface
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $sentMessage) {
             if ($this->isMessageTo($sentMessage, $recipient)) {
-                if (false !== strpos($sentMessage->getBody(), $message)) {
+                $body = strip_tags($sentMessage->getBody());
+                $body = str_replace("\n", ' ', $body);
+                $body = preg_replace('/ {2,}/', ' ', $body);
+
+                if (false !== strpos($body, $message)) {
                     return true;
                 }
             }
@@ -95,36 +94,25 @@ final class EmailChecker implements EmailCheckerInterface
         return $this->spoolDirectory;
     }
 
-    /**
-     * @param \Swift_Message $message
-     * @param string $recipient
-     *
-     * @return bool
-     */
     private function isMessageTo(\Swift_Message $message, string $recipient): bool
     {
         return array_key_exists($recipient, $message->getTo());
     }
 
     /**
-     * @param string $recipient
-     *
-     * @throws /InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function assertRecipientIsValid(string $recipient): void
     {
         Assert::notEmpty($recipient, 'The recipient cannot be empty.');
-        Assert::string($recipient, sprintf('The recipient must be a string, %s given.', gettype($recipient)));
         Assert::notEq(
             false,
-            filter_var($recipient, FILTER_VALIDATE_EMAIL),
+            filter_var($recipient, \FILTER_VALIDATE_EMAIL),
             'Given recipient is not a valid email address.'
         );
     }
 
     /**
-     * @param string $directory
-     *
      * @return array|\Swift_Message[]
      */
     private function getMessages(string $directory): array

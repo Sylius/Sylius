@@ -19,11 +19,5 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 interface AddToCartCommandFactoryInterface
 {
-    /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     *
-     * @return AddToCartCommandInterface
-     */
     public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface;
 }

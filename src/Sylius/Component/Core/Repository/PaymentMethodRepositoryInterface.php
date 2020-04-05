@@ -19,17 +19,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface as Base
 
 interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryInterface
 {
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return array
-     */
     public function findEnabledForChannel(ChannelInterface $channel): array;
 }

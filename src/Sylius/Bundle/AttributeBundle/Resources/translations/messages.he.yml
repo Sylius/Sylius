@@ -4,6 +4,14 @@
 sylius:
     form:
         attribute:
+            add: הוסף
+            name: שם
+            translations: תרגומים
             type: סוג
         attribute_type:
+            date: תאריך
             select: בחירה
+            text: טקסט
+        attribute_type_configuration:
+            text:
+                max: אורך מירבי

@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: 'Kanalen kan ikke slettes. Der kræves mindst én aktiveret kanal.'
+    checkout:
+        complete_error: 'Der var et uventet problem med at gennemføre ordren. Prøv at gennemføre ordren igen.'
+    contact:
+        request_success: 'Din besked er blevet afsendt korrekt.'
+        request_error: 'Der skete en fejl under afsendelsen af beskeden. Prøv venligst igen senere.'
+    customer:
+        add_address: 'Adressen er blevet tilføjet.'
+        set_address_as_default: 'Adressen er angivet som standard.'

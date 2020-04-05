@@ -30,7 +30,7 @@ sylius:
                 format: Format
             select:
                 multiple: Banyak
-                values: Nilai
+                values: Nilai-nilai
                 choose: Pilih salah satu
                 min: Minimal jumlah inputan
                 max: Maksimal jumlah inputan

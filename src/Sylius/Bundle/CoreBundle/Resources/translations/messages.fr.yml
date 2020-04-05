@@ -25,6 +25,12 @@ sylius:
             name: Nom
             roles: Rôles
         channel:
+            billing_data:
+                city: Ville
+                company: Société
+                country: Pays
+                postcode: Code postal
+                street: Adresse
             contact_email: Email de contact
             currencies: Devises
             currency_base: Devise de référence
@@ -144,7 +150,7 @@ sylius:
         zone:
             scopes:
                 shipping: Expédition
-                tax: TVA
+                tax: Tva
     installer:
         extensions:
             header: Extensions
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Chaîne de caractères multi-octets
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: Système de fichiers
             cache:
                 header: Cache
-                help: 'Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existe
             logs:
                 header: logs
-                help: 'Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: N'existe pas
             not_writable: pas accessible en écriture
             parameters:
                 header: parameters.yml
-                help: 'Pour définir les autorisations exécuter : sudo chmod a+w %path%'
+                help: "Pour définir les autorisations exécuter : sudo chmod a+w %path%"
             vendors: vendors
             writable: accessible en écriture
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

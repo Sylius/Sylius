@@ -19,6 +19,9 @@ sylius:
             min_length: Kredittkortets CVV koden må være maksimalt {{ limit }} sifre.
         expiry_year:
             not_blank: Velg utløpsår.
+    payment:
+        currency_code:
+            not_valid: Valutakoden du oppga er ugyldig.
     payment_method:
         gateway:
             not_blank: Vennligst velg betalingsmetode.

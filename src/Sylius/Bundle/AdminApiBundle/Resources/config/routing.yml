@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 fos_oauth_server_token:
-  resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
 sylius_admin_api:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/main.yml"

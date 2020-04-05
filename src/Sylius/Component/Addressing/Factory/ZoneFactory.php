@@ -14,24 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ZoneFactory implements ZoneFactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $factory;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $zoneMemberFactory;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param FactoryInterface $zoneMemberFactory
-     */
     public function __construct(FactoryInterface $factory, FactoryInterface $zoneMemberFactory)
     {
         $this->factory = $factory;
@@ -66,6 +59,7 @@ final class ZoneFactory implements ZoneFactoryInterface
         /** @var ZoneInterface $zone */
         $zone = $this->createNew();
         foreach ($membersCodes as $memberCode) {
+            /** @var ZoneMemberInterface $zoneMember */
             $zoneMember = $this->zoneMemberFactory->createNew();
             $zoneMember->setCode($memberCode);
 

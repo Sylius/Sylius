@@ -14,32 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface ChangePasswordPageInterface extends PageInterface
 {
-    /**
-     * @param string $password
-     */
-    public function specifyCurrentPassword($password);
+    public function specifyCurrentPassword(string $password): void;
+
+    public function specifyNewPassword(string $password): void;
+
+    public function specifyConfirmationPassword(string $password): void;
 
     /**
-     * @param string $password
-     */
-    public function specifyNewPassword($password);
-
-    /**
-     * @param string $password
-     */
-    public function specifyConfirmationPassword($password);
-
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 }

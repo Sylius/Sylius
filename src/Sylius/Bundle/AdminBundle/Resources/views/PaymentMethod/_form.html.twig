@@ -16,6 +16,19 @@
 
 <div class="ui segment">
     <h4 class="ui dividing header">{{ 'sylius.ui.gateway_configuration'|trans }}</h4>
+
+    {% if resource.gatewayConfig.factoryName == 'stripe_checkout' %}
+        <div class="ui icon negative orange message sylius-flash-message">
+            <i class="close icon"></i>
+            <i class="warning icon"></i>
+            <div class="content">
+                <div class="header">
+                    {{ 'sylius.ui.gateway.no_sca_support_notice'|trans }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {{ form_row(form.gatewayConfig.factoryName) }}
     {% if form.gatewayConfig.config is defined %}
         {% for field in form.gatewayConfig.config %}

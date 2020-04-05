@@ -15,10 +15,11 @@ namespace Sylius\Bundle\AdminApiBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminApiBundle\Fixture\ApiAccessTokenFixture;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 
-final class ApiAccessTokenFixtureTest extends \PHPUnit_Framework_TestCase
+final class ApiAccessTokenFixtureTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

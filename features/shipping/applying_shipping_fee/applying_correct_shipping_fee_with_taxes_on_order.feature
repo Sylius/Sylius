@@ -32,7 +32,7 @@ Feature: Apply correct shipping fee with taxes on order
     @ui
     Scenario: Proper shipping fee and tax after addressing
         Given I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as shipping country with "DHL-World" method
+        When I proceed selecting "Germany" as billing country with "DHL-World" method
         And I choose "Offline" payment method
         Then my cart total should be "$122.00"
         And my cart taxes should be "$2.00"

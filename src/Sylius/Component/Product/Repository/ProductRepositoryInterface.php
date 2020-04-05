@@ -19,18 +19,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ProductRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $name
-     * @param string $locale
-     *
      * @return array|ProductInterface[]
      */
     public function findByName(string $name, string $locale): array;
 
     /**
-     * @param string $phrase
-     * @param string $locale
-     *
      * @return array|ProductInterface[]
      */
-    public function findByNamePart(string $phrase, string $locale): array;
+    public function findByNamePart(string $phrase, string $locale, ?int $limit = null): array;
 }

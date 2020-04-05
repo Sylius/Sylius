@@ -26,6 +26,8 @@
     </imports>
 
     <services>
+        <defaults public="true" />
+
         <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
             <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
         </service>

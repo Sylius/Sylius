@@ -68,3 +68,10 @@ sylius_grid:
                                 parameters:
                                     id: resource.id
                                     promotionId: $promotionId
+                bulk:
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    promotionId: $promotionId

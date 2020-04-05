@@ -47,7 +47,7 @@ Routing Generator Configuration Reference
                 code: $code
             section: admin
             templates: :Book
-            form: AppBundle/Form/Type/SimpleBookType
+            form: App/Form/Type/SimpleBookType
             redirect: create
             except: ['show']
             only: ['create', 'index']

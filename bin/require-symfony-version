@@ -1,0 +1,74 @@
+#!/usr/bin/env php
+<?php
+
+$packages = [
+    'symfony/asset',
+    'symfony/browser-kit',
+    'symfony/cache',
+    'symfony/config',
+    'symfony/console',
+    'symfony/css-selector',
+    'symfony/debug',
+    'symfony/debug-bundle',
+    'symfony/dependency-injection',
+    'symfony/doctrine-bridge',
+    'symfony/dom-crawler',
+    'symfony/event-dispatcher',
+    'symfony/expression-language',
+    'symfony/filesystem',
+    'symfony/finder',
+    'symfony/form',
+    'symfony/framework-bundle',
+    'symfony/http-foundation',
+    'symfony/http-kernel',
+    'symfony/inflector',
+    'symfony/intl',
+    'symfony/ldap',
+    'symfony/lock',
+    'symfony/messenger',
+    'symfony/monolog-bridge',
+    'symfony/options-resolver',
+    'symfony/process',
+    'symfony/property-access',
+    'symfony/property-info',
+    'symfony/proxy-manager-bridge',
+    'symfony/routing',
+    'symfony/security',
+    'symfony/security-bundle',
+    'symfony/security-core',
+    'symfony/security-csrf',
+    'symfony/security-guard',
+    'symfony/security-http',
+    'symfony/serializer',
+    'symfony/stopwatch',
+    'symfony/symfony',
+    'symfony/templating',
+    'symfony/translation',
+    'symfony/twig-bridge',
+    'symfony/twig-bundle',
+    'symfony/validator',
+    'symfony/var-dumper',
+    'symfony/web-link',
+    'symfony/web-profiler-bundle',
+    'symfony/web-server-bundle',
+    'symfony/workflow',
+];
+
+$path = $argv[1];
+$version = $argv[2];
+
+$contents = json_decode(file_get_contents($path), true);
+
+foreach ($contents['require'] ?? [] as $key => $value) {
+    if (in_array($key, $packages, true)) {
+        $contents['require'][$key] = $version;
+    }
+}
+
+foreach ($contents['require-dev'] ?? [] as $key => $value) {
+    if (in_array($key, $packages, true)) {
+        $contents['require-dev'][$key] = $version;
+    }
+}
+
+file_put_contents($path, json_encode($contents, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE));

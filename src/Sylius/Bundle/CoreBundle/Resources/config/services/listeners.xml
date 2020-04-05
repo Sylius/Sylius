@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.listener.cart_blamer" class="Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.context.cart" />
@@ -34,7 +36,13 @@
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="liip_imagine.filter.manager" />
-            <tag name="doctrine.event_listener" event="postRemove" />
+            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
+            <tag name="doctrine.event_listener" event="postFlush" lazy="true" />
+        </service>
+        <service id="sylius.listener.avatar_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
+            <argument type="service" id="sylius.image_uploader" />
+            <tag name="kernel.event_listener" event="sylius.admin_user.pre_create" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.admin_user.pre_update" method="uploadImage" />
         </service>
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
@@ -47,12 +55,12 @@
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
-            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
         <service id="sylius.listener.canonicalizer" class="Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener">
             <argument type="service" id="sylius.canonicalizer" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
+            <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener">
             <argument type="service" id="sylius.security.password_updater" />
@@ -60,8 +68,8 @@
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.admin_user.pre_update" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
+            <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
         <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
             <argument type="service" id="translator" />
@@ -88,6 +96,19 @@
             <argument type="service" id="security.firewall.map" />
             <argument type="service" id="session" />
             <tag name="kernel.event_subscriber"/>
+        </service>
+  
+        <service id="sylius.listener.customer_default_address" class="Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener">
+            <tag name="kernel.event_listener" event="sylius.address.pre_create" method="preCreate" />
+        </service>
+
+        <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
+            <argument type="service" id="session" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
+            <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
+            <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
         </service>
     </services>
 </container>

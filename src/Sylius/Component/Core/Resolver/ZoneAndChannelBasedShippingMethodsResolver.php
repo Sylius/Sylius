@@ -25,26 +25,15 @@ use Webmozart\Assert\Assert;
 
 class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
-    /**
-     * @var ShippingMethodRepositoryInterface
-     */
+    /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
-    /**
-     * @var ZoneMatcherInterface
-     */
+    /** @var ZoneMatcherInterface */
     private $zoneMatcher;
 
-    /**
-     * @var ShippingMethodEligibilityCheckerInterface
-     */
+    /** @var ShippingMethodEligibilityCheckerInterface */
     private $eligibilityChecker;
 
-    /**
-     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneMatcherInterface $zoneMatcher
-     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-     */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneMatcherInterface $zoneMatcher,
@@ -63,7 +52,9 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         /** @var ShipmentInterface $subject */
+        Assert::isInstanceOf($subject, ShipmentInterface::class);
         Assert::true($this->supports($subject));
+
         /** @var OrderInterface $order */
         $order = $subject->getOrder();
 

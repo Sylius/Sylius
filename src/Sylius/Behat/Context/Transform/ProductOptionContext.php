@@ -19,14 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class ProductOptionContext implements Context
 {
-    /**
-     * @var ProductOptionRepositoryInterface
-     */
+    /** @var ProductOptionRepositoryInterface */
     private $productOptionRepository;
 
-    /**
-     * @param ProductOptionRepositoryInterface $productOptionRepository
-     */
     public function __construct(ProductOptionRepositoryInterface $productOptionRepository)
     {
         $this->productOptionRepository = $productOptionRepository;

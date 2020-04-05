@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Interfaces
 ==========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Model Interfaces
 ----------------
@@ -19,7 +26,7 @@ This interface should be implemented by model representing a single InventoryUni
 
     For more detailed information go to `Sylius API InventoryUnitInterface`_.
 
-.. _Sylius API InventoryUnitInterface: http://api.sylius.org/Sylius/Component/Inventory/Model/InventoryUnitInterface.html
+.. _Sylius API InventoryUnitInterface: http://api.sylius.com/Sylius/Component/Inventory/Model/InventoryUnitInterface.html
 
 .. _component_inventory_model_stockable-interface:
 
@@ -31,7 +38,7 @@ This interface provides basic operations for any model that can be stored.
 .. note::
     For more detailed information go to `Sylius API StockableInterface`_.
 
-.. _Sylius API StockableInterface: http://api.sylius.org/Sylius/Component/Inventory/Model/StockableInterface.html
+.. _Sylius API StockableInterface: http://api.sylius.com/Sylius/Component/Inventory/Model/StockableInterface.html
 
 Service Interfaces
 ------------------
@@ -46,7 +53,7 @@ This interface provides methods for checking availability of stockable objects.
 .. note::
     For more detailed information go to `Sylius API AvailabilityCheckerInterface`_.
 
-.. _Sylius API AvailabilityCheckerInterface: http://api.sylius.org/Sylius/Component/Inventory/Checker/AvailabilityCheckerInterface.html
+.. _Sylius API AvailabilityCheckerInterface: http://api.sylius.com/Sylius/Component/Inventory/Checker/AvailabilityCheckerInterface.html
 
 .. _component_inventory_factory_inventory-unit-factory-interface:
 
@@ -58,6 +65,6 @@ This interface is implemented by services responsible for creating collection of
 .. note::
     For more detailed information go to `Sylius API InventoryUnitFactoryInterface`_.
 
-.. _Sylius API InventoryUnitFactoryInterface: http://api.sylius.org/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.html
+.. _Sylius API InventoryUnitFactoryInterface: http://api.sylius.com/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.html
 
 .. _component_inventory_operator_inventory-operator-interface:

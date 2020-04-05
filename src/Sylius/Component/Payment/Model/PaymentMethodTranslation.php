@@ -17,29 +17,18 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class PaymentMethodTranslation extends AbstractTranslation implements PaymentMethodTranslationInterface
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $description;
 
-    /**
-     * @var string
-     */
+    /** @var string|null */
     protected $instructions;
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();

@@ -4,4 +4,7 @@
 sylius:
     form:
         channel:
+            color: Väri
             description: Kuvaus
+            enabled: Aktiivinen
+            name: Nimi

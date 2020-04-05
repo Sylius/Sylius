@@ -8,6 +8,8 @@ sylius:
             enabled: Уключана
             password:
                 label: Пароль
+                confirmation: Праверка
+            remember_me: Запомніць мяне
             shipping_address: Адрас дастаўкі
             username: Юзернэйм
         user_filter:

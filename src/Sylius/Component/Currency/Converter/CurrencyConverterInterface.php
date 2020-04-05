@@ -15,12 +15,5 @@ namespace Sylius\Component\Currency\Converter;
 
 interface CurrencyConverterInterface
 {
-    /**
-     * @param int $value
-     * @param string $sourceCurrencyCode
-     * @param string $targetCurrencyCode
-     *
-     * @return int
-     */
     public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int;
 }

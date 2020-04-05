@@ -21,7 +21,7 @@ sylius:
             not_blank: Por favor selecione o ano de validade.
     payment:
         currency_code:
-            not_valid: O código de moeda que você inseriu é inválido.
+            not_valid: O usuário digitado está incorreto.
         method:
             not_blank: 'Por favor, selecione um método de pagamento.'
     payment_method:

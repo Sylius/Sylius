@@ -19,9 +19,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $name
-     * @param string $locale
-     *
      * @return ShippingMethodInterface[]
      */
     public function findByName(string $name, string $locale): array;

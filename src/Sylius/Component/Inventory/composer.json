@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Flexible inventory management for PHP applications.",
     "keywords": ["shop", "ecommerce", "stock", "inventory", "sylius"],
-    "homepage": "http://sylius.org",
+    "homepage": "http://sylius.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.org"
+            "homepage": "http://sylius.com"
         },
         {
             "name": "Community contributions",
@@ -20,13 +20,13 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
 
-        "sylius/resource": "^1.0",
+        "sylius/resource": "^1.2",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^4.0"
+        "phpspec/phpspec": "^5.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -47,7 +47,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.6-dev"
         }
     }
 }

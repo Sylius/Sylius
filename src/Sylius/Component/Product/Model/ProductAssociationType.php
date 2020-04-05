@@ -25,19 +25,13 @@ class ProductAssociationType implements ProductAssociationTypeInterface
         getTranslation as private doGetTranslation;
     }
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $code;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
     public function __construct()
@@ -48,9 +42,6 @@ class ProductAssociationType implements ProductAssociationTypeInterface
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
@@ -97,8 +88,6 @@ class ProductAssociationType implements ProductAssociationTypeInterface
     }
 
     /**
-     * @param string|null $locale
-     *
      * @return ProductAssociationTypeTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

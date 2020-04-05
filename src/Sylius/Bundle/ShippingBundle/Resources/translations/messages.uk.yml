@@ -16,15 +16,15 @@ sylius:
                 ready: Готове
                 shipped: Доставлене
                 returned: Повернене
-                cancelled: Скасоване
+                cancelled: Скасовано
             tracking_code: Код відстеження
         shipping_calculator:
             flat_rate_configuration:
                 label: Фіксована ставка за доставку
-                amount: Сума
+                amount: Обсяг
             per_unit_rate_configuration:
                 label: Фіксована ставка за одиницю
-                amount: Сума
+                amount: Обсяг
         shipping_category:
             description: Опис
             name: Назва
@@ -35,7 +35,7 @@ sylius:
             channels: Канали
             configuration: Конфігурація
             description: Опис
-            enabled: Увімкнено
+            enabled: Ввімкнено
             name: Назва
             position: Позиція
             tax_category: Категорія податку

@@ -30,5 +30,5 @@ sylius:
             description: Descrizione
             enabled: Abilitato?
             instructions: Istruzioni
-            name: Nome
+            name: "Nome\n"
             position: Posizione

@@ -28,6 +28,8 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
     {
         /** @var AttributeInterface $attribute */
         Assert::isInstanceOf($attribute, AttributeInterface::class);
+
+        /** @var ValidSelectAttributeConfiguration $constraint */
         Assert::isInstanceOf($constraint, ValidSelectAttributeConfiguration::class);
 
         if (SelectAttributeType::TYPE !== $attribute->getType()) {

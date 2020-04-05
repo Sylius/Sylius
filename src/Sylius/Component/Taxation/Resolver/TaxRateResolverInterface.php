@@ -18,11 +18,5 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 interface TaxRateResolverInterface
 {
-    /**
-     * @param TaxableInterface $taxable
-     * @param array $criteria
-     *
-     * @return TaxRateInterface|null
-     */
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface;
 }

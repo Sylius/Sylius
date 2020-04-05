@@ -16,46 +16,32 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShopBillingData;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 
 final class ChannelContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var DefaultChannelFactoryInterface
-     */
+    /** @var DefaultChannelFactoryInterface */
     private $unitedStatesChannelFactory;
 
-    /**
-     * @var DefaultChannelFactoryInterface
-     */
+    /** @var DefaultChannelFactoryInterface */
     private $defaultChannelFactory;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $channelManager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
-     * @param DefaultChannelFactoryInterface $defaultChannelFactory
-     * @param ChannelRepositoryInterface $channelRepository
-     * @param ObjectManager $channelManager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
@@ -118,11 +104,14 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
+     * @Given the store (also) operates on a channel named :channelName with hostname :hostname
      */
-    public function theStoreOperatesOnAChannelNamed($channelName, $currencyCode = null)
+    public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
     {
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
+
+        $defaultData['channel']->setHostname($hostname);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
@@ -204,7 +193,64 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @param ChannelInterface $channel
+     * @Given channel :channel billing data is :company, :street, :postcode :city, :country with :taxId tax ID
+     */
+    public function channelBillingDataIs(
+        ChannelInterface $channel,
+        string $company,
+        string $street,
+        string $postcode,
+        string $city,
+        CountryInterface $country,
+        string $taxId
+    ): void {
+        $shopBillingData = new ShopBillingData();
+        $shopBillingData->setCompany($company);
+        $shopBillingData->setStreet($street);
+        $shopBillingData->setPostcode($postcode);
+        $shopBillingData->setCity($city);
+        $shopBillingData->setCountryCode($country->getCode());
+        $shopBillingData->setTaxId($taxId);
+
+        $channel->setShopBillingData($shopBillingData);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given channel :channel has menu taxon :taxon
+     * @Given /^(this channel) has menu (taxon "[^"]+")$/
+     */
+    public function channelHasMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
+    {
+        $channel->setMenuTaxon($taxon);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(this channel) operates in the ("[^"]+" country)$/
+     */
+    public function channelOperatesInCountry(ChannelInterface $channel, CountryInterface $country): void
+    {
+        $channel->addCountry($country);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(this channel) does not define operating countries$/
+     */
+    public function channelDoesNotDefineOperatingCountries(ChannelInterface $channel): void
+    {
+        foreach ($channel->getCountries() as $country) {
+            $channel->removeCountry($country);
+        }
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

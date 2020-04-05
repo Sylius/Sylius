@@ -17,9 +17,7 @@ use Sylius\Component\Order\Model\OrderSequence as BaseOrderSequence;
 
 class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $version = 1;
 
     /**

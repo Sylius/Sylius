@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\DescribesIt;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -26,69 +28,51 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use DescribesIt;
     use Toggles;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setHostname($hostname)
+    public function setHostname(string $hostname): void
     {
         $this->getDocument()->fillField('Hostname', $hostname);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setContactEmail($contactEmail)
+    public function setContactEmail(string $contactEmail): void
     {
         $this->getDocument()->fillField('Contact email', $contactEmail);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function defineColor($color)
+    public function defineColor(string $color): void
     {
         $this->getDocument()->fillField('Color', $color);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseCurrency($currencyCode)
+    public function chooseCurrency(string $currencyCode): void
     {
         $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseLocale($language)
+    public function chooseLocale(string $language): void
     {
         $this->getDocument()->selectFieldOption('Locales', $language);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseDefaultTaxZone($taxZone)
+    public function chooseDefaultTaxZone(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseDefaultLocale($locale)
+    public function chooseDefaultLocale(?string $locale): void
     {
         if (null !== $locale) {
-            $this->getElement('locales')->selectOption($locale);
             $this->getElement('default_locale')->selectOption($locale);
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseBaseCurrency($currency)
+    public function chooseOperatingCountries(array $countries): void
+    {
+        foreach ($countries as $country) {
+            $this->getElement('countries')->selectOption($country, true);
+        }
+    }
+
+    public function chooseBaseCurrency(?string $currency): void
     {
         if (null !== $currency) {
             $this->getElement('currencies')->selectOption($currency);
@@ -96,44 +80,44 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy(string $taxZone): void
     {
         $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
 
-    public function allowToSkipShippingStep()
+    public function allowToSkipShippingStep(): void
     {
         $this->getDocument()->checkField('Skip shipping step if only one shipping method is available?');
     }
 
-    public function allowToSkipPaymentStep()
+    public function allowToSkipPaymentStep(): void
     {
         $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
+    public function specifyMenuTaxon(string $menuTaxon): void
+    {
+        $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $menuTaxonElement, $menuTaxon);
+    }
+
+    protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
+    protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',
+            'countries' => '#sylius_channel_countries',
             'currencies' => '#sylius_channel_currencies',
             'base_currency' => '#sylius_channel_baseCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
+            'menu_taxon' => '#sylius_channel_menuTaxon',
             'name' => '#sylius_channel_name',
         ]);
     }

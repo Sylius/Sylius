@@ -20,22 +20,14 @@ use Webmozart\Assert\Assert;
 
 final class OrderCompleteListener
 {
-    /**
-     * @var OrderEmailManagerInterface
-     */
+    /** @var OrderEmailManagerInterface */
     private $orderEmailManager;
 
-    /**
-     * @param OrderEmailManagerInterface $orderEmailManager
-     */
     public function __construct(OrderEmailManagerInterface $orderEmailManager)
     {
         $this->orderEmailManager = $orderEmailManager;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function sendConfirmationEmail(GenericEvent $event): void
     {
         $order = $event->getSubject();

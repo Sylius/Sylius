@@ -17,15 +17,9 @@ use Behat\Mink\Element\NodeElement;
 
 trait ChecksCodeImmutability
 {
-    /**
-     * @return NodeElement
-     */
-    abstract protected function getCodeElement();
+    abstract protected function getCodeElement(): NodeElement;
 
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled()
+    public function isCodeDisabled(): bool
     {
         return 'disabled' === $this->getCodeElement()->getAttribute('disabled');
     }

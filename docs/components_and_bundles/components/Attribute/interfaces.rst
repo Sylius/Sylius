@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Interfaces
 ==========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Model Interfaces
 ----------------
@@ -18,7 +25,7 @@ used for describing a product's attribute.
 
    For more detailed information go to `Sylius API AttributeInterface`_.
 
-.. _Sylius API AttributeInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeInterface.html
+.. _Sylius API AttributeInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeInterface.html
 
 .. _component_attribute_model_attribute-value-interface:
 
@@ -33,7 +40,7 @@ e.g. the :ref:`component_product_model_product`.
 .. note::
    For more detailed information go to `Sylius API AttributeValueInterface`_.
 
-.. _Sylius API AttributeValueInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeValueInterface.html
+.. _Sylius API AttributeValueInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeValueInterface.html
 
 .. _component_attribute_model_attribute-translation-interface:
 
@@ -46,7 +53,7 @@ of an :ref:`component_attribute_model_attribute` for specified locale.
 .. note::
    For more detailed information go to `Sylius API AttributeTranslationInterface`_.
 
-.. _Sylius API AttributeTranslationInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeTranslationInterface.html
+.. _Sylius API AttributeTranslationInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeTranslationInterface.html
 
 .. _component_attribute_model_attribute-subject-interface:
 
@@ -61,7 +68,7 @@ It will ask you to implement the management of :ref:`component_attribute_model_a
 .. note::
    For more detailed information go to `Sylius API AttributeSubjectInterface`_.
 
-.. _Sylius API AttributeSubjectInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeSubjectInterface.html
+.. _Sylius API AttributeSubjectInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeSubjectInterface.html
 
 .. _component_attribute_model_attribute-type-interface:
 

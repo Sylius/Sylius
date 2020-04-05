@@ -16,7 +16,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Changing address of my order
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -25,7 +25,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Addressing my order after selecting payment method
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
@@ -35,7 +35,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Addressing my order after selecting shipping method
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded selecting "Free" shipping method
         When I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
@@ -45,7 +45,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Changing shipping method of my order
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded selecting "Free" shipping method
         When I go back to shipping step of the checkout
         And I select "Raven Post" shipping method
@@ -55,7 +55,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Selecting shipping method after selecting payment method
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to shipping step of the checkout
         And I select "Raven Post" shipping method
@@ -65,7 +65,7 @@ Feature: Changing checkout steps
     @ui
     Scenario: Selecting payment method after complete checkout
         Given I had product "PHP T-Shirt" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to payment step of the checkout
         And I select "PayPal Express Checkout" payment method

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: אנא הזן את כתובת דואר האלקטרוני שלך.
+            invalid: כתובת דואר האלקטרוני אינה תקנית.

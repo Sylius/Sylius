@@ -39,4 +39,17 @@ final class CountryNameExtensionSpec extends ObjectBehavior
     {
         $this->translateCountryIsoCode('IE', 'es')->shouldReturn('Irlanda');
     }
+
+    function it_fallbacks_to_country_code_when_there_is_no_translation(): void
+    {
+        $this->translateCountryIsoCode('country_code_without_translation')->shouldReturn('country_code_without_translation');
+    }
+
+    function it_fallbacks_to_an_empty_string_when_there_is_no_code(CountryInterface $country): void
+    {
+        $country->getCode()->willReturn(null);
+
+        $this->translateCountryIsoCode($country)->shouldReturn('');
+        $this->translateCountryIsoCode(null)->shouldReturn('');
+    }
 }

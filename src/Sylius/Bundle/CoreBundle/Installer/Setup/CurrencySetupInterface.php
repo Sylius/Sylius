@@ -20,12 +20,5 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface CurrencySetupInterface
 {
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @param QuestionHelper $questionHelper
-     *
-     * @return CurrencyInterface
-     */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface;
 }

@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: E-mail
-            enabled: Toegestaan
+            enabled: Ingeschakeld
             password:
                 label: Wachtwoord
                 confirmation: Verificatie

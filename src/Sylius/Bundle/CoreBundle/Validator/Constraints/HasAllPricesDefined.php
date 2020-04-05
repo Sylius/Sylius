@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class HasAllPricesDefined extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.product_variant.channel_pricing.all_defined';
 
     /**

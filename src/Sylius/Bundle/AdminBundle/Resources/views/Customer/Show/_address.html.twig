@@ -1,17 +1,3 @@
 <div class="eight wide column">
-    {{ sonata_block_render_event('sylius.admin.customer.show.before_address', {'resource': resource}) }}
-
-    <h4 class="ui top attached styled header">
-        {{ 'sylius.ui.default_address'|trans }}
-    </h4>
-
-    <div class="ui attached segment" id="default-address">
-        {% if customer.defaultAddress is not null %}
-            {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
-        {% else %}
-            {{ 'sylius.ui.this_customer_does_not_have_a_default_address'|trans }}
-        {% endif %}
-    </div>
-
-    {{ sonata_block_render_event('sylius.admin.customer.show.after_address', {'resource': resource}) }}
+    {{ sylius_template_event('sylius.admin.customer.show.address', _context) }}
 </div>

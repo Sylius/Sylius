@@ -22,9 +22,15 @@ sylius:
         promotion_coupon:
             per_customer_usage_limit: Limita de utilizare per client
         group:
-            name: Nume
+            name: Nume produs
             roles: Roluri
         channel:
+            billing_data:
+                city: Oraș
+                company: Firmă
+                country: Țară
+                postcode: Cod poștal
+                street: Adresă
             contact_email: E-mail de contact
             currencies: Monede
             currency_base: Monedă de bază
@@ -67,7 +73,7 @@ sylius:
             channels: Canale
             enabled: Activat
         product_filter:
-            name: Nume
+            name: Nume produs
             code: Cod
         product_variant:
             tax_category: Categoria de taxă
@@ -123,7 +129,7 @@ sylius:
             product: Produs asociat
             type: Tipul de asociere
         product_association_type:
-            name: Nume
+            name: Nume produs
         promotion_filter:
             products: Filtru produse
             taxons: Filtru de taxoni
@@ -136,7 +142,7 @@ sylius:
                 products: Produse
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Sumă
+                amount: Valoare
         payment_method:
             channels: Canale
         product_attribute:
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: file system
             cache:
                 header: cache
-                help: 'Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: ''whoami'': rwx %path%'
+                help: "Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
             exists: există
             logs:
                 header: logs
-                help: 'Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: ''whoami'': rwx %path%'
+                help: "Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
             not_exists: nu există
             not_writable: nu sunt drepturi de scriere
             parameters:
                 header: parameters.yml
-                help: 'Pentru a seta permisiunile executa: sudo chmod o + w %path%'
+                help: "Pentru a seta permisiunile executa: sudo chmod o + w %path%"
             vendors: vendors
             writable: are drepturi de scriere
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nu este deprecat
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

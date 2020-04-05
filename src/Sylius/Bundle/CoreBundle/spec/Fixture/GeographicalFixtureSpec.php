@@ -143,6 +143,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         $zone->setCode('POLAND')->shouldBeCalled();
         $zone->setName('Poland')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+        $zone->setScope('tax')->shouldBeCalled();
 
         $countryManager->persist($country)->shouldBeCalled();
         $zoneManager->persist($zone)->shouldBeCalled();

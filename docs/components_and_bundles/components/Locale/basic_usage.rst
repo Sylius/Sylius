@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 Basic Usage
 ===========
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 LocaleContext
 -------------
@@ -37,4 +44,4 @@ The **LocaleProvider** allows you to get all available locales.
 
     For more detailed information go to `Sylius API LocaleProvider`_.
 
-.. _Sylius API LocaleProvider: http://api.sylius.org/Sylius/Component/Locale/Provider/LocaleProvider.html
+.. _Sylius API LocaleProvider: http://api.sylius.com/Sylius/Component/Locale/Provider/LocaleProvider.html

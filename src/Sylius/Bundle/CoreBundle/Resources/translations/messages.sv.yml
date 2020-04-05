@@ -25,6 +25,12 @@ sylius:
             name: Namn
             roles: Roller
         channel:
+            billing_data:
+                city: Ort
+                company: Företag
+                country: Land
+                postcode: Postnummer
+                street: Gatuadress
             contact_email: Kontakt e-post
             currencies: Valutor
             currency_base: Basvaluta
@@ -71,7 +77,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
-            shipping_category: Kategori
+            shipping_category: Fraktkategori
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
@@ -162,8 +168,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte sträng
-            "off": false
-            "on": true
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -174,16 +180,16 @@ sylius:
             header: filsystem
             cache:
                 header: cache
-                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: tillgängligt
             logs:
                 header: loggar
-                help: 'För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: ej tillgängligt
             not_writable: ej skrivbart
             parameters:
                 header: parameters.yml
-                help: 'För att ställa in rättigheter kör: sudo chmod a+w %path%'
+                help: "För att ställa in rättigheter kör: sudo chmod a+w %path%"
             vendors: vendors
             writable: skrivbar
         settings:
@@ -192,8 +198,8 @@ sylius:
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: inte utdaterad
-            "off": false
-            "on": true
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

@@ -17,15 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    /**
-     * @param string $field
-     * @param string $type
-     */
-    public function specifyFilterType($field, $type);
+    public function specifyFilterType(string $field, string $type): void;
 
-    /**
-     * @param string $field
-     * @param string $value
-     */
-    public function specifyFilterValue($field, $value);
+    public function specifyFilterValue(string $field, string $value): void;
 }

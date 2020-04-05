@@ -12,17 +12,17 @@ Provides output while running ``sylius:fixtures:load`` command.
 
     # Without logger
 
-    $ bin/console sylius:fixtures:load my_suite
-    $ _
+    bin/console sylius:fixtures:load my_suite
+    _
 
     # With logger
 
-    $ bin/console sylius:fixtures:load my_suite
+    bin/console sylius:fixtures:load my_suite
     Running suite "my_suite"...
     Running fixture "country"...
     Running fixture "locale"...
     Running fixture "currency"...
-    $ _
+    _
 
 The logger does not have any configuration options. It can be enabled in such a way:
 
@@ -41,7 +41,7 @@ Purges the relational database. Uses ``delete`` purge mode and the default entit
 
 Configuration options:
 
-    - ``purge_mode`` - sets how database is purged, available values: ``delete`` (default), ``truncate``
+    - ``mode`` - sets how database is purged, available values: ``delete`` (default), ``truncate``
     - ``managers`` - an array of entity managers' names used to purge the database, ``[null]`` by default
     - ``exclude`` - an array of table/view names to be excluded from purge, ``[]`` by default
 
@@ -55,7 +55,7 @@ Example configuration:
                 listeners:
                     orm_purger:
                         options:
-                            purge_mode: truncate
+                            mode: truncate
                             managers:
                                 - custom_manager
                             exclude:

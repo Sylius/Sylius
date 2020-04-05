@@ -23,20 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class SimpleProductLockingListener
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $manager;
 
-    /**
-     * @var ProductVariantResolverInterface
-     */
+    /** @var ProductVariantResolverInterface */
     private $variantResolver;
 
-    /**
-     * @param EntityManagerInterface $manager
-     * @param ProductVariantResolverInterface $variantResolver
-     */
     public function __construct(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
     {
         $this->manager = $manager;
@@ -44,8 +36,6 @@ final class SimpleProductLockingListener
     }
 
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function lock(GenericEvent $event): void

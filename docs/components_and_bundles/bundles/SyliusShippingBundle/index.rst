@@ -1,5 +1,12 @@
+.. rst-class:: outdated
+
 SyliusShippingBundle
 ====================
+
+.. danger::
+
+   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
+   You can help us making documentation up to date via Sylius Github. Thank you!
 
 **SyliusShippingBundle** is the shipment management component for Symfony e-commerce applications.
 

@@ -7,6 +7,7 @@ Feature: Adding a new channel
     Background:
         Given the store has currency "Euro"
         And the store has locale "English (United States)"
+        And the store operates in "United States" and "Poland"
         And I am logged in as an administrator
 
     @ui
@@ -31,6 +32,7 @@ Feature: Adding a new channel
         And I define its color as "blue"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
+        And I choose "United States" and "Poland" as operating countries
         And I allow to skip shipping step if only one shipping method is available
         And I allow to skip payment step if only one payment method is available
         And I add it

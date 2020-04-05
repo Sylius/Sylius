@@ -25,31 +25,22 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $productAssociationFactory;
 
-    /**
-     * @var ProductRepositoryInterface
-     */
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $productAssociationTypeRepository;
 
     /**
-     * @var Collection
+     * @var Collection|ProductAssociationInterface[]
+     *
+     * @psalm-var Collection<array-key, ProductAssociationInterface>
      */
     private $productAssociations;
 
-    /**
-     * @param FactoryInterface $productAssociationFactory
-     * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productAssociationTypeRepository
-     */
     public function __construct(
         FactoryInterface $productAssociationFactory,
         ProductRepositoryInterface $productRepository,
@@ -92,6 +83,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             return null;
         }
 
+        /**
+         * @psalm-var Collection<array-key, ProductAssociationInterface> $productAssociations
+         */
         $productAssociations = new ArrayCollection();
         foreach ($values as $productAssociationTypeCode => $productCodes) {
             if (null === $productCodes) {
@@ -109,11 +103,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociations;
     }
 
-    /**
-     * @param Collection $products
-     *
-     * @return string|null
-     */
     private function getCodesAsStringFromProducts(Collection $products): ?string
     {
         if ($products->isEmpty()) {
@@ -130,11 +119,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return implode(',', $codes);
     }
 
-    /**
-     * @param string $productAssociationTypeCode
-     *
-     * @return ProductAssociationInterface
-     */
     private function getProductAssociationByTypeCode(string $productAssociationTypeCode): ProductAssociationInterface
     {
         foreach ($this->productAssociations as $productAssociation) {
@@ -155,10 +139,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociation;
     }
 
-    /**
-     * @param ProductAssociationInterface $productAssociation
-     * @param string $productCodes
-     */
     private function setAssociatedProductsByProductCodes(
         ProductAssociationInterface $productAssociation,
         string $productCodes
@@ -171,9 +151,6 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         }
     }
 
-    /**
-     * @param Collection|null $productAssociations
-     */
     private function setProductAssociations(?Collection $productAssociations): void
     {
         $this->productAssociations = $productAssociations;

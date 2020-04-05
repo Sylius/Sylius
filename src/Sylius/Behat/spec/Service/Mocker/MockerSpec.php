@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Behat;
+namespace spec\Sylius\Behat\Service\Mocker;
 
 use Mockery\MockInterface;
 use Payum\Core\Bridge\Guzzle\HttpClient;

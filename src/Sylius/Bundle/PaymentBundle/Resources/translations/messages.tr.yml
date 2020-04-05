@@ -29,4 +29,6 @@ sylius:
         payment_method:
             description: Açıklama
             enabled: Etkin?
+            instructions: Talimatlar
             name: Ad
+            position: Konum

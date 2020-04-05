@@ -4,8 +4,8 @@
 sylius:
     user:
         email:
-            not_blank: Introdu adresa ta de email.
-            invalid: Această adresă de e-mail este invalidă.
+            not_blank: Vă rugăm să completați adresa de e-mail.
+            invalid: Adresa de email nu este validă.
             not_registered: Nu exista un utilizator cu această adresă de email. Întregistrează-te mai întâi.
         plainPassword:
             not_blank: Te rugăm să introduci parola.

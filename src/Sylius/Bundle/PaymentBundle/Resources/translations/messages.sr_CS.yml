@@ -13,15 +13,18 @@ sylius:
             method: Metod plaćanja
             state:
                 header: Stanje plaćanja
+                checkout: Plaćanje
                 completed: Završeno
                 authorized: Autorizovano
                 failed: Nеuspеšno
+                new: Novo
                 pending: Na čekanju
                 processing: Obrađivanje
                 unknown: Nеpoznato
                 void: Otkazano
                 cancelled: Otkazano
         payment_method:
+            description: Opis
             enabled: Omogućeno?
             instructions: Instrunkcije
             name: Ime

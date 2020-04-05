@@ -17,10 +17,7 @@ trait SpecifiesItsCode
 {
     use DocumentAccessor;
 
-    /**
-     * @param string $code
-     */
-    public function specifyCode($code)
+    public function specifyCode(string $code): void
     {
         $this->getDocument()->fillField('Code', $code);
     }

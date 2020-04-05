@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 class UniqueReviewerEmail extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'sylius.review.author.already_exists';
 
     /**

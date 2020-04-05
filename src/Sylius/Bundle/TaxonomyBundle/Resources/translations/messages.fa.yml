@@ -6,7 +6,7 @@ sylius:
         taxon:
             description: شرح
             name: نام
-            parent: رده پدر
+            parent: شاخه بالادستی
             slug: حلزون
         taxonomy:
             name: نام

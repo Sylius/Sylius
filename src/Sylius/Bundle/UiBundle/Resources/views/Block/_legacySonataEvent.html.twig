@@ -1,0 +1,4 @@
+{{ sonata_block_render_event(
+    event,
+    _context|filter((value, key) => key in sonata_block_whitelisted_variables())
+) }}

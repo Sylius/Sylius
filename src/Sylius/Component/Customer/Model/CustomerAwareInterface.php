@@ -15,13 +15,7 @@ namespace Sylius\Component\Customer\Model;
 
 interface CustomerAwareInterface
 {
-    /**
-     * @return CustomerInterface|null
-     */
     public function getCustomer(): ?CustomerInterface;
 
-    /**
-     * @param CustomerInterface|null $customer
-     */
     public function setCustomer(?CustomerInterface $customer): void;
 }
