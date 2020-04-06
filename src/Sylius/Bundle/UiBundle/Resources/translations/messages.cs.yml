@@ -583,7 +583,7 @@ sylius:
         orders: 'Objednávky'
         orders_statistics: 'Statistiky objednávek'
         original_price: 'Původní cena'
-        out_of_stock: 'Není skladam'
+        out_of_stock: 'Není skladem'
         overview_of_your_store: 'Přehled obchodu'
         page: 'Strana'
         pages: 'Stránky'
