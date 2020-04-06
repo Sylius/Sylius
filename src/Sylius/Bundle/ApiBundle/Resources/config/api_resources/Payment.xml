@@ -45,6 +45,7 @@
                     <attribute name="summary">Completes Payment</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="path">/payments/{id}/complete</attribute>
                 <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
             </itemOperation>

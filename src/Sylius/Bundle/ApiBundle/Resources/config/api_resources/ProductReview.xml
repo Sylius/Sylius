@@ -50,6 +50,7 @@
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="path">/product-reviews/{id}/accept</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:accept</attribute>
             </itemOperation>
@@ -59,6 +60,7 @@
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="path">/product-reviews/{id}/reject</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:reject</attribute>
             </itemOperation>
