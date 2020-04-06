@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-final class ProductReviewStateMachineTransitionApplicator
+final class ProductReviewStateMachineTransitionApplicator implements ProductReviewStateMachineTransitionApplicatorInterface
 {
     /** @var StateMachineFactoryInterface $stateMachineFactory */
     private $stateMachineFactory;

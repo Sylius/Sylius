@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-final class ArchivingShippingMethodApplicator
+final class ArchivingShippingMethodApplicator implements ArchivingShippingMethodApplicatorInterface
 {
     /** @var DateTimeProvider */
     private $calendar;
