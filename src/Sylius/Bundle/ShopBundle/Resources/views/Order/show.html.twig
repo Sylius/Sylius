@@ -2,6 +2,8 @@
 
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
 {% block content %}
     <div class="ui segment">
         {% include '@SyliusShop/Order/_summary.html.twig' %}
