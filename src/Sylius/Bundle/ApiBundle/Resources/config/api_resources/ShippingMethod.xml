@@ -44,6 +44,7 @@
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="path">/shipping-methods/{id}/archive</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
             </itemOperation>
@@ -53,6 +54,7 @@
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="path">/shipping-methods/{id}/restore</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
             </itemOperation>
