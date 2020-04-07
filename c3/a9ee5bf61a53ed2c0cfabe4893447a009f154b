@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------
+
+by Coosos at 2020-01-14T15:00:39Z
+
+@lchrusciel
+Last commit who remove is_null check is not included : https://github.com/Sylius/Sylius/pull/10689/commits/b4edb101c5298823fca9198dcbd114182027bade
+
+EDIT : I let you do to avoid making a bad manipulation
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-01-16T08:32:56Z
+
+When I tried to code one, I've found one scenario added already: https://github.com/Sylius/Sylius/blob/master/features/inventory/cart_inventory/prevent_buying_more_products_than_available_in_a_stock.feature#L26-L30
+
+Also, tested manually and it works at the current master:
+![image](https://user-images.githubusercontent.com/6213903/72506651-9f4f6900-3842-11ea-9c5f-b8e0e5f4e499.png)
+
+@Coosos can you check it as well?
+
+---------------------------------------------------------------------------
+
+by Coosos at 2020-01-16T21:38:02Z
+
+@lchrusciel
+
+I've checked with demo version (1.5 and master) and I reproduced.
+Example to reproduce (fresh installation) :
+
+In ``\Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator``, line 45, add (just after assert) :
+
+```php
+$this->context->addViolation(
+   $constraint->message,
+   ['%itemName%' => 'Example item']
+);
+```
+
+And with the browser, test to add a product, no error is displayed
+
+![image](https://user-images.githubusercontent.com/5632327/72563670-75339080-38ae-11ea-8293-8cf3b9a2ddc8.png)
+
+With the fix, the error is displayed :+1:
+
+![image](https://user-images.githubusercontent.com/5632327/72563849-d491a080-38ae-11ea-910b-8d95beffa43d.png)
