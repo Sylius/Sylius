@@ -18,6 +18,12 @@ Feature: Impersonating shop users
         Then I should be logged in as "Tanith Low"
 
     @ui
+    Scenario: Impersonating a customer in new tab
+        When I impersonate the customer "remnant@london.uk"
+        And I visit the store
+        Then I should be logged in as "Tanith Low"
+
+    @ui
     Scenario: Inability to impersonate a customer with no account
         Given the store has customer "harold@thrasher.ie" with first name "Harold"
         When I view their details
