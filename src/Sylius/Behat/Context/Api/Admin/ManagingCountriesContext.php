@@ -21,7 +21,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\Intl\Countries;
-use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
@@ -32,9 +31,6 @@ final class ManagingCountriesContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var SerializerInterface */
-    private $serializer;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -44,13 +40,11 @@ final class ManagingCountriesContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SerializerInterface $serializer,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
-        $this->serializer = $serializer;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
     }
@@ -77,6 +71,124 @@ final class ManagingCountriesContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When /^I want to edit (this country)$/
+     * @When I want to create a new province in country :country
+     */
+    public function iWantToEditThisCountry(CountryInterface $country): void
+    {
+        $this->sharedStorage->set('country', $country);
+        $this->client->buildUpdateRequest($country->getCode());
+    }
+
+    /**
+     * @When I enable it
+     */
+    public function iEnableIt(): void
+    {
+        $this->client->addRequestData('enabled', true);
+    }
+
+    /**
+     * @When I disable it
+     */
+    public function iDisableIt(): void
+    {
+        $this->client->addRequestData('enabled', false);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
+     * @When I name the province :provinceName
+     */
+    public function iNameTheProvince(string $provinceName): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['name' => $provinceName]
+        );
+    }
+
+    /**
+     * @When I specify the province code as :provinceCode
+     */
+    public function iSpecifyTheProvinceCodeAs(string $provinceCode): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $provinceCode]
+        );
+    }
+
+    /**
+     * @When I add the :provinceName province with :provinceCode code
+     */
+    public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $provinceCode, 'name' => $provinceName]
+        );
+    }
+
+    /**
+     * @When I add the :name province with :code code and :abbreviation abbreviation
+     */
+    public function iAddTheProvinceWithCodeAndAbbreviation(string $name, string $code, string $abbreviation): void
+    {
+        $this->client->addSubResourceData(
+            'provinces',
+            ['code' => $code, 'name' => $name, 'abbreviation' => $abbreviation]
+        );
+    }
+
+    /**
+     * @When I delete the :province province of this country
+     */
+    public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province): void
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        foreach ($country->getProvinces() as $key => $provinceValue) {
+            if ($province->getId() === $provinceValue->getId()) {
+                $this->client->removeSubResource('provinces', $key);
+            }
+        }
+    }
+
+    /**
+     * @When I remove :province province name
+     */
+    public function iRemoveProvinceName(ProvinceInterface $province)
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+
+        foreach ($country->getProvinces() as $key => $provinceValue) {
+            if ($province->getId() === $provinceValue->getId()) {
+                $this->client->updateSubResource('provinces', $key, ['code' => $provinceValue->getCode(), 'name' => '']);
+            }
+        }
+    }
+
+    /**
+     * @When I do not specify the province code
+     * @When I do not name the province
+     */
+    public function iDoNotSpecifyTheProvinceCode()
+    {
+        // Intentionally left blank
     }
 
     /**
@@ -143,41 +255,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I want to edit (this country)$/
-     * @When I want to create a new province in country :country
-     */
-    public function iWantToEditThisCountry(CountryInterface $country): void
-    {
-        $this->sharedStorage->set('country', $country);
-        $this->client->buildUpdateRequest($country->getCode());
-    }
-
-    /**
-     * @When I enable it
-     */
-    public function iEnableIt(): void
-    {
-        $this->client->addRequestData('enabled', true);
-    }
-
-    /**
-     * @When I disable it
-     */
-    public function iDisableIt(): void
-    {
-        $this->client->addRequestData('enabled', false);
-    }
-
-    /**
-     * @When I save my changes
-     * @When I try to save changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
@@ -189,7 +266,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(this country) should be ([^"]+)$/
+     * @Then /^(this country) should be (enabled|disabled)$/
      */
     public function thisCountryShouldBeDisabled(CountryInterface $country, string $enabled): void
     {
@@ -204,89 +281,13 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
-        $countryUpdateSerialised = $this->serializer->serialize($country, 'json', ['groups' => 'country:update']);
-        Assert::keyNotExists(\json_decode($countryUpdateSerialised, true), 'code');
-    }
-
-    /**
-     * @When I name the province :provinceName
-     */
-    public function iNameTheProvince(string $provinceName): void
-    {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['name' => $provinceName]
-        );
-    }
-
-    /**
-     * @When I specify the province code as :provinceCode
-     */
-    public function iSpecifyTheProvinceCodeAs(string $provinceCode): void
-    {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $provinceCode]
-        );
-    }
-
-    /**
-     * @When I add the :provinceName province with :provinceCode code
-     */
-    public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
-    {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $provinceCode, 'name' => $provinceName]
-        );
-    }
-
-    /**
-     * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
-     */
-    public function iAddTheProvinceWithCodeAndAbbreviation(string $provinceName, string $provinceCode, string $provinceAbbreviation): void
-    {
-        $this->client->addSubResourceData(
-            'provinces',
-            ['code' => $provinceCode, 'name' => $provinceName, 'abbreviation' => $provinceAbbreviation]
-        );
-    }
-
-    /**
-     * @When I delete the :province province of this country
-     */
-    public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province): void
-    {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
-
-        foreach ($country->getProvinces() as $key => $provinceValue) {
-            if ($province->getId() === $provinceValue->getId()) {
-                $this->client->removeSubResource('provinces', $key);
-            }
-        }
-    }
-
-    /**
-     * @When I remove :province province name
-     */
-    public function iRemoveProvinceName(ProvinceInterface $province)
-    {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
-
-        foreach ($country->getProvinces() as $key => $provinceValue) {
-            if ($province->getId() === $provinceValue->getId()) {
-                $this->client->updateSubResource('provinces', $key, ['code' => $provinceValue->getCode(), 'name' => '']);
-            }
-        }
+        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
     /**
@@ -296,14 +297,8 @@ final class ManagingCountriesContext implements Context
     {
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
-
-        $response = $this->client->show($country->getCode());
-        $countryFromResponse = $this->responseChecker->getResponseContent($response);
-
-        foreach ($countryFromResponse['provinces'] as $provinceFromResponse)
-        {
-            /** @var ProvinceInterface $province */
-            $province = $this->iriConverter->getItemFromIri($provinceFromResponse);
+        /** @var ProvinceInterface $province */
+        foreach ($this->getProvincesOfCountry($country) as $province) {
             Assert::false(
                 $province->getCode() === $provinceCode,
                 sprintf('The country "%s" should not have the "%s" province', $country->getName(), $province->getName())
@@ -319,14 +314,8 @@ final class ManagingCountriesContext implements Context
     {
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
-
-        $response = $this->client->show($country->getCode());
-        $countryFromResponse = $this->responseChecker->getResponseContent($response);
-
-        foreach ($countryFromResponse['provinces'] as $provinceFromResponse)
-        {
-            /** @var ProvinceInterface $province */
-            $province = $this->iriConverter->getItemFromIri($provinceFromResponse);
+        /** @var ProvinceInterface $province */
+        foreach ($this->getProvincesOfCountry($country) as $province) {
             Assert::false(
                 $province->getName() === $provinceName,
                 sprintf('The country "%s" should not have the "%s" province', $country->getName(), $province->getName())
@@ -348,21 +337,12 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then I should be notified that :field is required
      */
-    public function iShouldBeNotifiedThatFieldIsRequired(string $field)
+    public function iShouldBeNotifiedThatFieldIsRequired(string $field): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             \sprintf('Please enter province %s.', $field)
         );
-    }
-
-    /**
-     * @When I do not specify the province code
-     * @When I do not name the province
-     */
-    public function iDoNotSpecifyTheProvinceCode()
-    {
-        // Intentionally left blank
     }
 
     private function getCountryCodeByName(string $countryName): string
@@ -375,5 +355,15 @@ final class ManagingCountriesContext implements Context
         );
 
         return $countryList[$countryName];
+    }
+
+    private function getProvincesOfCountry(CountryInterface $country): iterable
+    {
+        $response = $this->client->show($country->getCode());
+        $countryFromResponse = $this->responseChecker->getResponseContent($response);
+
+        foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {
+            yield $this->iriConverter->getItemFromIri($provinceFromResponse);
+        }
     }
 }

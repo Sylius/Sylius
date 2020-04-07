@@ -29,4 +29,4 @@ Feature: Editing country
     Scenario: Seeing disabled code field while editing country
         Given the store has country "United States"
         When I want to edit this country
-        Then the code field should be disabled
+        Then I should not be able to edit its code
