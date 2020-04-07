@@ -20,4 +20,4 @@ Feature: Editing a product association type
     @ui @api
     Scenario: Seeing a disabled code field while editing a product association type
         When I want to modify the "Cross sell" product association type
-        Then the code field should be disabled
+        Then I should not be able to edit its code
