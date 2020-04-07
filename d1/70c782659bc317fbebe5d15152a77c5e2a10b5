@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------
+
+by oallain at 2020-03-07T11:02:39Z
+
+Hi @lchrusciel @Zales0123 ,
+
+I add behat tests for this feature.
+
+Regards
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-04-07T10:52:57Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "impersonate-new-tab"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-04-07T10:53:13Z
+
+Thanks, @oallain! :1st_place_medal:
