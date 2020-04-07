@@ -14,37 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Tests\Calculator;
 
 use Mockery;
-use PHPUnit\Framework\TestCase;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator;
 use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 
-final class OrderItemsSubtotalCalculatorTest extends TestCase
+final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
 {
-    private function getOrderItemMock(int $subTotal): OrderItemInterface
-    {
-        $orderItem = Mockery::mock(OrderItemInterface::class);
-        $orderItem
-            ->shouldReceive('getSubTotal')
-            ->once()
-            ->andReturn($subTotal)
-        ;
-
-        return $orderItem;
-    }
-
-    private function getOrderMock(array $orderItems): OrderInterface
-    {
-        $order = Mockery::mock(OrderInterface::class);
-        $order
-            ->shouldReceive('getItems->toArray')
-            ->once()
-            ->andReturn($orderItems);
-
-        return $order;
-    }
-
     /**
      * @test
      */
@@ -82,8 +59,26 @@ final class OrderItemsSubtotalCalculatorTest extends TestCase
         $this->assertEquals(0, $subTotal);
     }
 
-    public function tearDown()
+    private function getOrderItemMock(int $subTotal): OrderItemInterface
     {
-        Mockery::close();
+        $orderItem = Mockery::mock(OrderItemInterface::class);
+        $orderItem
+            ->shouldReceive('getSubTotal')
+            ->once()
+            ->andReturn($subTotal)
+        ;
+
+        return $orderItem;
+    }
+
+    private function getOrderMock(array $orderItems): OrderInterface
+    {
+        $order = Mockery::mock(OrderInterface::class);
+        $order
+            ->shouldReceive('getItems->toArray')
+            ->once()
+            ->andReturn($orderItems);
+
+        return $order;
     }
 }
