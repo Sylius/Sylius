@@ -24,16 +24,16 @@ class OrderItemsSubtotalExtension extends \Twig_Extension
 
     public function __construct(?OrderItemsSubtotalCalculatorInterface $calculator = null)
     {
-        if (null !== $calculator) {
-            $this->calculator = $calculator;
-        } else {
-            $this->calculator = new OrderItemsSubtotalCalculator();
+        if (null === $calculator) {
+            $calculator = new OrderItemsSubtotalCalculator();
 
             @trigger_error(
                 'Not passing a calculator is deprecated since 1.6. Argument will no longer be optional from 2.0.',
                 \E_USER_DEPRECATED
             );
         }
+        
+        $this->calculator = $calculator;        
     }
 
     public function getFunctions(): array
