@@ -55,6 +55,12 @@
             <argument>payments</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.product_association_type" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>product-association-types</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.product_option" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
