@@ -15,9 +15,11 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Comparable;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ImagesAwareInterface;
+use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
@@ -30,6 +32,11 @@ final class TaxonSpec extends ObjectBehavior
     function it_implements_an_image_aware_interface(): void
     {
         $this->shouldImplement(ImagesAwareInterface::class);
+    }
+
+    function it_implements_doctrine_comparable(): void
+    {
+        $this->shouldImplement(Comparable::class);
     }
 
     function it_initializes_an_image_collection_by_default(): void
@@ -59,5 +66,17 @@ final class TaxonSpec extends ObjectBehavior
         $this->addImage($image);
 
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
+    }
+
+    function it_is_comparable(): void
+    {
+        $this->setCode('test');
+
+        $otherTaxon = new Taxon();
+        $otherTaxon->setCode('test');
+        $this->compareTo($otherTaxon)->shouldReturn(0);
+
+        $otherTaxon->setCode('other');
+        $this->compareTo($otherTaxon)->shouldReturn(1);
     }
 }
