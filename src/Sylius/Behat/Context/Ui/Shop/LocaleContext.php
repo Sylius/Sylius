@@ -41,6 +41,14 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @When I show homepage with the locale :localeCode
+     */
+    public function iShowHomepageWithTheLocale(string $localeCode): void
+    {
+        $this->homePage->tryToOpen(['_locale' => $localeCode]);
+    }
+
+    /**
      * @Then I should shop using the :locale locale
      * @Then I should still shop using the :locale locale
      */

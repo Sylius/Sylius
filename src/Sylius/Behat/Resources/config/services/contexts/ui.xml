@@ -284,6 +284,7 @@
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.page.admin.impersonate_user" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.removing_taxons" class="Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext">
