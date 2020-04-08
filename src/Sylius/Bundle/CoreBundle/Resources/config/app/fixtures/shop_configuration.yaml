@@ -67,6 +67,19 @@ sylius_fixtures:
                                     - 'CN'
                                     - 'UK'
 
+                menu_taxon:
+                    name: taxon
+                    options:
+                        custom:
+                            category:
+                                code: 'MENU_CATEGORY'
+                                name: 'Category'
+                                translations:
+                                    en_US:
+                                        name: 'Category'
+                                    fr_FR:
+                                        name: 'Catégorie'
+
                 channel:
                     options:
                         custom:
@@ -86,6 +99,7 @@ sylius_fixtures:
                                     street: 'Test St. 15'
                                     city: 'eCommerce Town'
                                     postcode: '00 33 22'
+                                menu_taxon: 'MENU_CATEGORY'
 
                 payment_method:
                     options:
