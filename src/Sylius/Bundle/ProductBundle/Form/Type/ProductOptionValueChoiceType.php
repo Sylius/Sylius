@@ -40,17 +40,19 @@ final class ProductOptionValueChoiceType extends AbstractType
             ->setDefaults([
                 'choices' => function (Options $options): iterable {
                     $productOption = $options['option'];
-                    if ($options['only_available_values']) {
-                        if ($options['product'] === null) {
+                    if (true === $options['only_available_values']) {
+                        if (null === $options['product']) {
                             throw new \RuntimeException(
                                 'You must specify the "product" option when "only_available_values" is true.'
                             );
                         }
+
                         return $this->availableProductOptionValuesResolver->resolve(
                             $options['product'],
                             $productOption
                         );
                     }
+
                     return $productOption->getValues();
                 },
                 'choice_value' => 'code',

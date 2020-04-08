@@ -9,7 +9,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
-class DefaultAvailableProductOptionValuesResolver implements AvailableProductOptionValuesResolverInterface
+final class AvailableProductOptionValuesResolver implements AvailableProductOptionValuesResolverInterface
 {
     /**
      * @inheritDoc
@@ -32,6 +32,7 @@ class DefaultAvailableProductOptionValuesResolver implements AvailableProductOpt
                         return true;
                     }
                 }
+
                 return false;
             }
         );
