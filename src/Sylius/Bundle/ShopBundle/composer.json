@@ -40,7 +40,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^3.4|^4.3"
+        "symfony/dependency-injection": "^3.4|^4.3",
+        "mockery/mockery": "^1.3"
     },
     "config": {
         "bin-dir": "bin"

@@ -212,4 +212,8 @@
         <InvalidCatch errorLevel="info" />
 
     </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+    </plugins>
 </psalm>
