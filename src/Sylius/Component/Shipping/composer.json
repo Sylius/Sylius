@@ -23,7 +23,7 @@
         "php": "^7.2",
 
         "sylius/resource": "^1.6",
-        "sylius/registry": "^1.6",
+        "sylius/registry": "^1.4",
         "symfony/options-resolver": "^3.4|^4.3"
     },
     "require-dev": {
