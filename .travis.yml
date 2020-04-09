@@ -2,7 +2,7 @@ language: php
 
 dist: trusty
 
-sudo: false
+sudo: true
 
 env:
     global:
