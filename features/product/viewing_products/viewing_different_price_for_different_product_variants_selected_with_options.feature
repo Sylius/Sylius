@@ -21,4 +21,3 @@ Feature: Viewing different price for different product variants selected with op
         When I view product "Wyborowa Vodka"
         And I set its volume to "0,7L"
         Then I should see the product price "$25.00"
-        
