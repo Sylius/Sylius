@@ -1,0 +1,90 @@
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-03-06T15:13:12Z
+
+Sorry I don't know how to fix the memory issues on the php 7.2 installation build. The others pass.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-01T07:48:34Z
+
+@lchrusciel Is there anymore that needs to be done before this can be merged?
+I'm waiting on this to release a plugin that allows setting a minimum order value. It can be done by duplicating this logic in the plugin as well, but I'd rather not.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-07T11:22:49Z
+
+> Hey Youri,
+>
+> thanks a lot for your contribution. I would like to merge it in the nearest days. Could you take my comments into account?
+>
+> However, we are slightly blocked by red build on v1.6 :(
+
+Do you have any idea about the memory issues of the 7.2 installation build? That is what's failing, maybe because of the new package not being in the composer cache or something like that.
+Let's see if the new build has the same issue or not.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-07T12:09:22Z
+
+Seems to be something specific to Travis:
+```
+=> Storing composer.lock in cache (cache key: e82419b5c6d676d78173acda5ffa8b24)
+The command "etc/travis/run-suite install "${SYLIUS_SUITE}"" failed and exited with 1 during .
+Your build has been stopped.
+```
+Is it possible for you to clear the composer cache somehow?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-07T12:12:43Z
+
+I've restarted this build again
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-07T12:47:11Z
+
+```
+Installing: CoreBundle
+> composer install --ansi --no-interaction --prefer-dist --quiet
+Warning: proc_open(): fork failed - Cannot allocate memory in phar:///home/travis/.phpenv/versions/7.2.29/bin/composer/vendor/symfony/console/Application.php on line 952
+The following exception is caused by a lack of memory or swap, or not having swap configured
+Check https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors for details
+PHP Warning:  proc_open(): fork failed - Cannot allocate memory in phar:///home/travis/.phpenv/versions/7.2.29/bin/composer/vendor/symfony/console/Application.php on line 952
+
+  [ErrorException]
+  proc_open(): fork failed - Cannot allocate memory
+
+```
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-07T12:53:07Z
+
+So composer crashes because it seems to need more memory. Typical :stuck_out_tongue_closed_eyes:
+
+I don't usually work with Travis, so I kind of don't know if it is possible at all to increase the available memory for composer.
+
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-09T08:57:36Z
+
+@lchrusciel Hi Lukasz,
+In order to resolve the memory issues, I added the creation and activation of a swap file in the CI VM.
+The build passes now. Are we good to go?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-09T15:07:37Z
+
+Hey @4c0n, In the meantime, I have fixed it in #11341, where I've reduced the number of tags to solve. We should do it anyway. Your proposal is good to go, however, I would like to revert the last change.
+
+Nonetheless, it can be done in separate PR
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-09T15:10:21Z
+
+Thanks, Youri! :tada:
