@@ -17,10 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Locale\Model\Locale;
-use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductAssociationTypesContext implements Context
@@ -34,19 +31,14 @@ final class ManagingProductAssociationTypesContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var SerializerInterface */
-    private $serializer;
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        SerializerInterface $serializer
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
-        $this->serializer = $serializer;
     }
 
     /**
@@ -210,12 +202,10 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then this product association type name should be :name
+     * @Then /^(this product association type) name should be "([^"]+)"$/
      */
-    public function thisProductAssociationTypeNameShouldBe(string $name): void
+    public function thisProductAssociationTypeNameShouldBe(ProductAssociationTypeInterface $productAssociationType, string $name): void
     {
-        /** @var ProductAssociationType $productAssociationType */
-        $productAssociationType = $this->sharedStorage->get('product_association_type');
         Assert::true(
             $this->responseChecker->hasValue($this->client->show($productAssociationType->getCode()), 'name', $name),
             sprintf('Product association type name is not %s', $name)
@@ -223,15 +213,16 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled(): void
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
-        /** @var ProductAssociationType $productAssociationType */
-        $productAssociationType = $this->sharedStorage->get('product_association_type');
+        $this->client->addRequestData('code', 'NEW_CODE');
 
-        $productAssociationTypeSerialised = $this->serializer->serialize($productAssociationType, 'json', ['groups' => 'product_association_type:update']);
-        Assert::keyNotExists(\json_decode($productAssociationTypeSerialised, true), 'code');
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
+            'The shipping category code should not be changed to "NEW_CODE", but it is'
+        );
     }
 
     /**
