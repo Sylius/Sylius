@@ -931,22 +931,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) "([^"]+)" ([^"]+) variant is disabled$/
-     */
-    public function theVolumeVariantIsDisabled(ProductInterface $product, $optionValueName, $optionName): void
-    {
-        $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
-        foreach ($product->getVariants() as $variant) {
-            if ($variant->getOptionValues()->contains($optionValue)) {
-                $variant->setEnabled(false);
-                break;
-            }
-        }
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^all (the product) variants with the "([^"]*)" ([^\s]+) are disabled$/
      */
     public function allTheProductVariantsWithTheColorAreDisabled(
