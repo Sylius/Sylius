@@ -35,10 +35,10 @@
         "php": "^7.2",
 
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/mailer-bundle": "^1.2",
-        "sylius/resource-bundle": "^1.2",
-        "sylius/review": "^1.2",
-        "sylius/user-bundle": "^1.2",
+        "sylius/mailer-bundle": "^1.6",
+        "sylius/resource-bundle": "^1.6",
+        "sylius/review": "^1.6",
+        "sylius/user-bundle": "^1.6",
         "symfony/framework-bundle": "^3.4|^4.3"
     },
     "require-dev": {

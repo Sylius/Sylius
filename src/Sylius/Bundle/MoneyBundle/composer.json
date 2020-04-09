@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.2",
 
-        "sylius/resource-bundle": "^1.2",
+        "sylius/resource-bundle": "^1.6",
         "symfony/framework-bundle": "^3.4|^4.3",
         "symfony/intl": "^3.4|^4.3",
         "symfony/templating": "^3.4|^4.3",
@@ -33,7 +33,7 @@
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "twig/twig": "^2.0",
-        "sylius/currency-bundle": "^1.2",
+        "sylius/currency-bundle": "^1.6",
         "symfony/form": "^3.4|^4.3",
         "symfony/browser-kit": "^3.4|^4.3",
         "symfony/dependency-injection": "^3.4|^4.3",

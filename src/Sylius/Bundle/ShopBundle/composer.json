@@ -29,8 +29,8 @@
         "php": "^7.2",
 
         "sonata-project/intl-bundle": "^2.2",
-        "sylius/core-bundle": "^1.2",
-        "sylius/ui-bundle": "^1.2",
+        "sylius/core-bundle": "^1.6",
+        "sylius/ui-bundle": "^1.6",
         "symfony/framework-bundle": "^3.4|^4.3",
         "symfony/security-bundle": "^3.4|^4.3",
         "twig/twig": "^2.6"
