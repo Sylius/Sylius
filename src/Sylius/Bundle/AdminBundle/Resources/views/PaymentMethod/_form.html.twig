@@ -32,7 +32,7 @@
     {{ form_row(form.gatewayConfig.factoryName) }}
     {% if form.gatewayConfig.config is defined %}
         {% for field in form.gatewayConfig.config %}
-            {% if loop.index is odd %}<div class="two fields">{% endif %}
+            {% if loop.index is odd and not loop.last %}<div class="two fields">{% endif %}
             {{ form_row(field) }}
             {% if loop.index is even %}</div>{% endif %}
         {% endfor %}
