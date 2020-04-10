@@ -24,8 +24,8 @@
 
         "ramsey/uuid": "^3.7",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/attribute": "^1.2",
-        "sylius/resource-bundle": "^1.2",
+        "sylius/attribute": "^1.6",
+        "sylius/resource-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {

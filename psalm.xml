@@ -222,4 +222,8 @@
     <stubs>
         <file name="etc/psalm/ZendPriorityQueueStub.php" />
     </stubs>
+
+    <plugins>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+    </plugins>
 </psalm>
