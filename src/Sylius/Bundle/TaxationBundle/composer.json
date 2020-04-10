@@ -23,9 +23,9 @@
         "php": "^7.3",
 
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sylius/registry": "^1.2",
-        "sylius/resource-bundle": "^1.2",
-        "sylius/taxation": "^1.2",
+        "sylius/registry": "^1.4",
+        "sylius/resource-bundle": "^1.6",
+        "sylius/taxation": "^1.6",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {

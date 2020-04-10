@@ -23,7 +23,7 @@
         "php": "^7.3",
 
         "friendsofsymfony/oauth-server-bundle": "^1.6",
-        "sylius/core-bundle": "^1.2",
+        "sylius/core-bundle": "^1.6",
         "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.4",
         "symfony/validator": "^4.4"

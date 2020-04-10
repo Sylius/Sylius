@@ -28,8 +28,8 @@
     "require": {
         "php": "^7.3",
 
-        "sylius/core-bundle": "^1.2",
-        "sylius/ui-bundle": "^1.2",
+        "sylius/core-bundle": "^1.6",
+        "sylius/ui-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
         "symfony/security-bundle": "^4.4",
         "twig/intl-extra": "^2.12",
