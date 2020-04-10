@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Calculator;
 
-final class DefaultCalculators
+interface DefaultCalculators
 {
     /**
      * Flat rate per shipment calculator.
@@ -24,8 +24,4 @@ final class DefaultCalculators
      * Fixed price per unit calculator.
      */
     public const PER_UNIT_RATE = 'per_unit_rate';
-
-    private function __construct()
-    {
-    }
 }
