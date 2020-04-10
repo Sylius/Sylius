@@ -10,7 +10,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface;
 
-class DefaultAvailableProductOptionValuesResolverSpec extends ObjectBehavior
+class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
 {
     private const PRODUCT_CODE = 'PRODUCT_CODE';
     private const PRODUCT_OPTION_CODE = 'PRODUCT_OPTION_CODE';
