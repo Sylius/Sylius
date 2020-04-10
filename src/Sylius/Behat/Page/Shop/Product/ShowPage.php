@@ -256,12 +256,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         foreach ($this->getElement('variants_rows')->findAll('css', 'td:first-child') as $variantRow) {
             $variantsNames[] = $variantRow->getText();
         }
+
         return $variantsNames;
     }
 
     public function getOptionValues(string $optionCode): array
     {
         $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
+
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
