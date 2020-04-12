@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     {% for key, variant in product.enabledVariants %}
-        <tr>
+        <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
                 {{ variant.name }}
                 {% if product.hasOptions() %}

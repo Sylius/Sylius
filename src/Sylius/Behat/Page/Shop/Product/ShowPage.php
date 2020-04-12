@@ -293,7 +293,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'quantity' => '[data-test-quantity]',
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
-            'variants_rows' => '[data-test-product-variants] tbody tr',
+            'variants_rows' => '[data-test-product-variants-row]',
         ]);
     }
 }
