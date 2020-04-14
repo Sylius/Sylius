@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/account/customer_registration.yml
     - suites/api/account/login.yml
     - suites/api/admin/login.yml
     - suites/api/currency/managing_currencies.yml
@@ -36,9 +37,9 @@ imports:
 
     - suites/ui/account/address_book.yml
     - suites/ui/account/customer.yml
+    - suites/ui/account/customer_registration.yml
     - suites/ui/account/email_verification.yml
     - suites/ui/account/login.yml
-    - suites/ui/account/registration.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
