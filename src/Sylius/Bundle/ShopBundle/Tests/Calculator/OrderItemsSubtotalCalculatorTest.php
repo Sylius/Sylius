@@ -27,10 +27,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
      */
     public function it_can_be_instantiated(): OrderItemsSubtotalCalculator
     {
-        $calculator = new OrderItemsSubtotalCalculator();
-        $this->assertInstanceOf(OrderItemsSubtotalCalculatorInterface::class, $calculator);
-
-        return $calculator;
+        return new OrderItemsSubtotalCalculator();
     }
 
     /**
