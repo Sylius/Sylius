@@ -122,7 +122,7 @@ final class ManagingShipmentsContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(), [
                 'order' => $this->iriConverter->getIriFromItem($order),
-                'state' => strtolower($shippingState)
+                'state' => strtolower($shippingState),
             ]),
             sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState)
         );
@@ -149,7 +149,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
-         Assert::eq(
+        Assert::eq(
              new \DateTime($this->responseChecker->getValue($this->client->show((string) $order->getShipments()->first()->getId()), 'shippedAt')),
              new \DateTime($dateTime),
              'Shipment was shipped in different date'
@@ -213,7 +213,7 @@ final class ManagingShipmentsContext implements Context
 
     private function isShipmentForOrder(OrderInterface $order): bool
     {
-         return $this->responseChecker->hasItemWithValue(
+        return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
             $this->iriConverter->getIriFromItem($order)

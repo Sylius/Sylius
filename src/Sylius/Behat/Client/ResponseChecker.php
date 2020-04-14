@@ -135,7 +135,8 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $content[$key];
     }
 
-    private function itemHasValues(array $element, array $parameters): bool {
+    private function itemHasValues(array $element, array $parameters): bool
+    {
         foreach ($parameters as $key => $value) {
             if ($element[$key] !== $value) {
                 return false;

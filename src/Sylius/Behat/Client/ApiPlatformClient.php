@@ -42,6 +42,7 @@ final class ApiPlatformClient implements ApiClientInterface
     public function index(): Response
     {
         $this->request = Request::index($this->resource, $this->sharedStorage->get('token'));
+
         return $this->request($this->request);
     }
 

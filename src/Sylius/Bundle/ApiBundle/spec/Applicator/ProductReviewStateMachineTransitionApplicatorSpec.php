@@ -21,7 +21,8 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBehavior
 {
-    function let(StateMachineFactoryInterface $stateMachineFactory) {
+    function let(StateMachineFactoryInterface $stateMachineFactory)
+    {
         $this->beConstructedWith($stateMachineFactory);
     }
 

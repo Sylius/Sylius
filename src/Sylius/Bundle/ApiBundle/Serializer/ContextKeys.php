@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 class ContextKeys
 {
     public const CHANNEL = 'sylius_api_channel';
+
     public const LOCALE_CODE = 'sylius_api_locale_code';
 
     private function __construct()

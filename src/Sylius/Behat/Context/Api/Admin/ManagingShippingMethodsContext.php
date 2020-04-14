@@ -303,7 +303,8 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then /^(this shipping method) should no longer exist in the registry$/
      */
-    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void {
+    public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod): void
+    {
         $shippingMethodName = $shippingMethod->getName();
 
         Assert::false(

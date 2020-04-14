@@ -36,7 +36,6 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         Request $request,
         ViewEvent $event
     ): void {
-
         $event->getControllerResult()->willReturn($product);
         $event->getRequest()->willReturn($request);
         $request->getMethod()->willReturn(Request::METHOD_POST);
@@ -60,7 +59,6 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         Request $request,
         ViewEvent $event
     ): void {
-
         $event->getControllerResult()->willReturn($product);
         $event->getRequest()->willReturn($request);
         $request->getMethod()->willReturn(Request::METHOD_POST);
@@ -84,7 +82,6 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         Request $request,
         ViewEvent $event
     ): void {
-
         $event->getControllerResult()->willReturn($product);
         $event->getRequest()->willReturn($request);
         $request->getMethod()->willReturn(Request::METHOD_POST);

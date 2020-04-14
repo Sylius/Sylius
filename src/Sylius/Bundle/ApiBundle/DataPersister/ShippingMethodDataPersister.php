@@ -15,13 +15,8 @@ namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
 {

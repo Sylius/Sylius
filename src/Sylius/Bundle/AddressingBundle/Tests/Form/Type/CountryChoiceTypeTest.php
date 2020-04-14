@@ -58,7 +58,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getExtensions():array
+    protected function getExtensions(): array
     {
         $type = new CountryChoiceType($this->countryRepository->reveal());
 

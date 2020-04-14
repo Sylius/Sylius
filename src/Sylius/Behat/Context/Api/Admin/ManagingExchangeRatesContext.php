@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
@@ -123,7 +125,7 @@ final class ManagingExchangeRatesContext implements Context
     /**
      * @When /^I delete the (exchange rate between "[^"]+" and "[^"]+")$/
      */
-    public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate) : void
+    public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate): void
     {
         $this->client->delete($exchangeRate->getId());
     }
@@ -363,8 +365,7 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $targetCurrency
     ): ?array {
         /** @var array $item */
-        foreach ($this->responseChecker->getCollection($this->client->index()) as $item)
-        {
+        foreach ($this->responseChecker->getCollection($this->client->index()) as $item) {
             if (
                 $item['sourceCurrency'] === '/new-api/admin/currencies/' . $sourceCurrency->getCode() &&
                 $item['targetCurrency'] === '/new-api/admin/currencies/' . $targetCurrency->getCode()

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\Filters;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
-use Webmozart\Assert\Assert;
 
 final class ExchangeRateFilter extends AbstractContextAwareFilter
 {

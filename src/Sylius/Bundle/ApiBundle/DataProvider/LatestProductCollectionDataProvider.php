@@ -32,7 +32,7 @@ final class LatestProductCollectionDataProvider implements CollectionDataProvide
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return is_a($resourceClass, ProductInterface::class, true) && $operationName === "get_latest";
+        return is_a($resourceClass, ProductInterface::class, true) && $operationName === 'get_latest';
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable

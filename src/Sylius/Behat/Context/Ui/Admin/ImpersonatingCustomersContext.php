@@ -33,7 +33,7 @@ final class ImpersonatingCustomersContext implements Context
     private $homePage;
 
     /** @var ImpersonateUserPageInterface */
-    protected $impersonateUserPage;
+    private $impersonateUserPage;
 
     public function __construct(
         ShowPageInterface $customerShowPage,

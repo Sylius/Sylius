@@ -187,8 +187,8 @@ final class ManagingProductOptionsContext implements Context
         $count = $this->responseChecker->countCollectionItems($this->client->getLastResponse());
 
         Assert::true(
-            $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), $count-1, $field, $value),
-            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count-1)
+            $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), $count - 1, $field, $value),
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count - 1)
         );
     }
 

@@ -18,7 +18,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -386,8 +385,7 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this
                 ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value)
-            ,
+                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value)
         );
     }

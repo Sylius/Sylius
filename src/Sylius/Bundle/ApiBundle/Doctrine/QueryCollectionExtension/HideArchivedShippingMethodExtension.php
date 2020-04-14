@@ -42,7 +42,7 @@ final class HideArchivedShippingMethodExtension implements ContextAwareQueryColl
             return;
         }
 
-        $rootAlias  = $queryBuilder->getRootAliases()[0];
+        $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder->andWhere(sprintf('%s.archivedAt IS NULL', $rootAlias));
     }

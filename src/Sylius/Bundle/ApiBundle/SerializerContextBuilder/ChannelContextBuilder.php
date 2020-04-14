@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
-    /** @var SerializerContextBuilderInterface  */
+    /** @var SerializerContextBuilderInterface */
     private $decoratedContextBuilder;
 
-    /** @var ChannelContextInterface  */
+    /** @var ChannelContextInterface */
     private $channelContext;
 
     public function __construct(SerializerContextBuilderInterface $decoratedContextBuilder, ChannelContextInterface $channelContext)
@@ -36,9 +36,11 @@ final class ChannelContextBuilder implements SerializerContextBuilderInterface
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
+
         try {
             $context[ContextKeys::CHANNEL] = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {}
+        } catch (ChannelNotFoundException $exception) {
+        }
 
         return $context;
     }

@@ -67,9 +67,9 @@ final class ManagingProductAssociationTypesContext implements Context
             'translations' => [
                  $localeCode => [
                       'name' => $productAssociationTypeName,
-                      'locale' => $localeCode
-                 ]
-            ]
+                      'locale' => $localeCode,
+                 ],
+            ],
         ]);
     }
 
@@ -294,7 +294,7 @@ final class ManagingProductAssociationTypesContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code),
             1,
-            sprintf("More then one Product association type have code %s.", $code)
+            sprintf('More then one Product association type have code %s.', $code)
         );
     }
 
