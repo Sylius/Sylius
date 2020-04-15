@@ -73,6 +73,14 @@ It's possible to add more inventory sources filter, with higher or lower priorit
 
    How to create a custom Inventory Sources Filter? Read :doc:`this Cookbook </cookbook/index>`.
 
+Resolving InventorySourceStock for ordered products
+---------------------------------------------------
+
+.. warning::
+
+    Standard Sylius distribution is releasing a stock inventory when the whole order is paid, while in Plus version,
+    it has been switched to be released after shipment has been shipped.
+
 Inventory API
 -------------
 
