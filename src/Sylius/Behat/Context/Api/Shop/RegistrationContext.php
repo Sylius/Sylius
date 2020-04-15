@@ -35,7 +35,12 @@ final class RegistrationContext implements Context
      */
     public function iWantToRegisterNewAccount(): void
     {
-        // Intentionally left empty
+        $this->content = [
+            'firstName' => 'First',
+            'lastName' => 'Last',
+            'email' => 'example@example.com',
+            'password' => 'example',
+        ];
     }
 
     /**
@@ -176,7 +181,6 @@ final class RegistrationContext implements Context
         $decodedResponse = json_decode($this->client->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         Assert::keyExists($decodedResponse, 'violations');
-
         Assert::oneOf(
             ['propertyPath' => $path, 'message' => $message],
             $decodedResponse['violations']
