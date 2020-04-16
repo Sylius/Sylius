@@ -129,6 +129,7 @@ Documentation sections of The Book referring to Sylius Plus features are:
     customers/customer_pools
     orders/shipments
     orders/returns
+    products/multi_source_inventory
 
 
 .. image:: ../_images/sylius_plus/banner.png
