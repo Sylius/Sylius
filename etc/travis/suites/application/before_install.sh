@@ -5,10 +5,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/application.
 
 print_header "Activating memcached extension" "Sylius"
 run_command "echo \"extension = memcached.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini" || exit $?
-run_command "echo \"memory_limit=6144M\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini" || exit $?
-
-print_header "Updating Composer" "Sylius"
-run_command "composer self-update --preview"
 
 # Download and configure Symfony webserver
 print_header "Downloading Symfony CLI" "Sylius"

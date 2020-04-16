@@ -17,6 +17,7 @@
 >
     <imports>
         <import resource="services/applicators.xml" />
+        <import resource="services/command_handlers.xml" />
         <import resource="services/context_builders.xml" />
         <import resource="services/data_persisters.xml" />
         <import resource="services/data_providers.xml" />
@@ -57,6 +58,12 @@
             decoration-priority="10"
         >
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+        </service>
+
+        <service id="sylius.validator.unique_shop_user_email" class="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.unique_shop_user_email" />
         </service>
     </services>
 </container>

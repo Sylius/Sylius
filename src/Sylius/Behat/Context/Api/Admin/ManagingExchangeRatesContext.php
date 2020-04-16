@@ -56,9 +56,9 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
-        $this->client->buildUpdateRequest($exchangeRate->getId());
+        $this->client->buildUpdateRequest((string) $exchangeRate->getId());
 
-        $this->sharedStorage->set('exchange_rate_id', $exchangeRate->getId());
+        $this->sharedStorage->set('exchange_rate_id', (string) $exchangeRate->getId());
     }
 
     /**
@@ -127,7 +127,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate): void
     {
-        $this->client->delete($exchangeRate->getId());
+        $this->client->delete((string) $exchangeRate->getId());
     }
 
     /**

@@ -83,6 +83,7 @@ final class UserContext implements Context
         $user = $this->sharedStorage->get('user');
 
         $this->userRepository->remove($user);
+        $this->userManager->clear();
     }
 
     /**
