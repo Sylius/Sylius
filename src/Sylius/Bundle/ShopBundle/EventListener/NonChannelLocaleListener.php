@@ -57,7 +57,7 @@ final class NonChannelLocaleListener
         }
 
         $request = $event->getRequest();
-        if ($request->attributes && in_array($request->attributes->get('_route'), ['_wdt', '_profiler'])) {
+        if ($request->attributes && in_array($request->attributes->get('_route'), ['_wdt', '_profiler', '_profiler_search', '_profiler_search_results'])) {
             return;
         }
 
