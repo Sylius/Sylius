@@ -272,7 +272,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function thereShouldBePromotion(int $amount = 1): void
     {
-        Assert::same($amount, $this->indexPage->countItems());
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
@@ -669,6 +669,17 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::false($this->updatePage->hasAnyRule());
+    }
+
+    /**
+     * @When /^I filter promotions by coupon code equal "([^"]+)"/
+     */
+    public function iFilterPromotionsByCouponCodeEqual(string $value): void
+    {
+        $this->indexPage->specifyFilterType('coupon_code', 'equal');
+        $this->indexPage->specifyFilterValue('coupon_code', $value);
+
+        $this->indexPage->filter();
     }
 
     /**
