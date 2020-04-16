@@ -64,7 +64,7 @@ final class NonChannelLocaleListener
         }
 
         $request = $event->getRequest();
-        if (in_array($request->attributes->get('_route'), ['_wdt', '_profiler'])) {
+        if (in_array($request->attributes->get('_route'), ['_wdt', '_profiler', '_profiler_search', '_profiler_search_results'])) {
             return;
         }
 
@@ -91,6 +91,6 @@ final class NonChannelLocaleListener
         return
             null !== $firewall &&
             in_array($firewall->getName(), $this->firewallNames)
-        ;
+            ;
     }
 }
