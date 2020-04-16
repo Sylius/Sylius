@@ -1,0 +1,4 @@
+Documentation: ['docs/']
+Maintenance: ['etc/', '.travis.yml', '.symfony.insight.yaml', 'UPGRADE-*', 'README.md']
+Admin: ['src/Bundle/AdminBundle/']
+Shop: ['src/Bundle/ShopBundle/']
