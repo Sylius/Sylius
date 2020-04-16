@@ -15,3 +15,11 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+
+framework:
+    messenger:
+        buses:
+            sylius_default.bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'
