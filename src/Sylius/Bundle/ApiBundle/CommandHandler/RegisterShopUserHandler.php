@@ -15,42 +15,30 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class RegisterShopUserHandler implements MessageHandlerInterface
+final class RegisterShopUserHandler implements MessageHandlerInterface
 {
-    /** @var CanonicalizerInterface */
-    protected $canonicalizer;
-
     /** @var FactoryInterface */
-    protected $shopUserFactory;
-
-    /** @var FactoryInterface */
-    protected $customerFactory;
-
-    /** @var CustomerRepositoryInterface */
-    protected $customerRepository;
+    private $shopUserFactory;
 
     /** @var ObjectManager */
-    protected $shopUserManager;
+    private $shopUserManager;
+
+    /** @var CustomerProviderInterface */
+    private $customerProvider;
 
     public function __construct(
-        CanonicalizerInterface $canonicalizer,
         FactoryInterface $shopUserFactory,
-        FactoryInterface $customerFactory,
-        CustomerRepositoryInterface $customerRepository,
-        ObjectManager $shopUserManager
+        ObjectManager $shopUserManager,
+        CustomerProviderInterface $customerProvider
     ) {
-        $this->canonicalizer = $canonicalizer;
         $this->shopUserFactory = $shopUserFactory;
-        $this->customerFactory = $customerFactory;
-        $this->customerRepository = $customerRepository;
         $this->shopUserManager = $shopUserManager;
+        $this->customerProvider = $customerProvider;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -59,32 +47,16 @@ class RegisterShopUserHandler implements MessageHandlerInterface
         $user = $this->shopUserFactory->createNew();
         $user->setPlainPassword($command->password);
 
-        $customer = $this->provideCustomer($command->email);
+        $customer = $this->customerProvider->provide($command->email);
+        if ($customer->getUser() !== null) {
+            throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));
+        }
+
         $customer->setFirstName($command->firstName);
         $customer->setLastName($command->lastName);
-        $customer->setEmail($command->email);
         $customer->setPhoneNumber($command->phoneNumber);
         $customer->setUser($user);
 
         $this->shopUserManager->persist($user);
-    }
-
-    protected function provideCustomer(string $email): CustomerInterface
-    {
-        $emailCanonical = $this->canonicalizer->canonicalize($email);
-
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
-
-        if ($customer === null) {
-            /** @var CustomerInterface $customer */
-            $customer = $this->customerFactory->createNew();
-        }
-
-        if ($customer->getUser() !== null) {
-            throw new \DomainException(sprintf('User with email "%s" is already registered.', $emailCanonical));
-        }
-
-        return $customer;
     }
 }

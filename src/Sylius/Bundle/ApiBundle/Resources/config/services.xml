@@ -23,6 +23,7 @@
         <import resource="services/data_providers.xml" />
         <import resource="services/event_subscribers.xml"/>
         <import resource="services/filters.xml"/>
+        <import resource="services/providers.xml"/>
     </imports>
 
     <services>
