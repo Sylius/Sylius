@@ -11,6 +11,7 @@
 /docs/.doctrees
 
 /composer.lock
+/yarn.lock
 /node_modules
 
 /etc/build/*
