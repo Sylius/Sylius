@@ -16,7 +16,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
+ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,29 +30,61 @@ use Webmozart\Assert\Assert;
 
 final class AddressType extends AbstractResourceType
 {
+    /** @var AddressComparatorInterface|null */
+    private $addressComparator;
+
+    public function __construct(string $dataClass, array $validationGroups = [], ?AddressComparatorInterface $addressComparator = null)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        if (null === $addressComparator) {
+            @trigger_error(
+                sprintf(
+                    'Not passing an $addressComparator to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.',
+                    __CLASS__,
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->addressComparator = $addressComparator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('differentBillingAddress', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => 'sylius.form.checkout.addressing.different_billing_address',
-            ])
-            ->add('differentShippingAddress', CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'label' => 'sylius.form.checkout.addressing.different_shipping_address',
-            ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
                 $form = $event->getForm();
                 $order = $event->getData();
-
                 /** @var OrderInterface $order */
                 Assert::isInstanceOf($order, OrderInterface::class);
 
                 $channel = $order->getChannel();
 
+                $differentBillingOrShippingAddressChecked = null !== $this->addressComparator
+                    && null !== $order->getBillingAddress() && null !== $order->getShippingAddress()
+                    && !$this->addressComparator->equal($order->getBillingAddress(), $order->getShippingAddress());
+
                 $form
+                    ->add('differentBillingAddress', CheckboxType::class, [
+                        'mapped' => false,
+                        'required' => false,
+                        'label' => 'sylius.form.checkout.addressing.different_billing_address',
+                        'attr' => [
+                            'checked' => $differentBillingOrShippingAddressChecked,
+                        ],
+                    ])
+                    ->add('differentShippingAddress', CheckboxType::class, [
+                        'mapped' => false,
+                        'required' => false,
+                        'label' => 'sylius.form.checkout.addressing.different_shipping_address',
+                        'attr' => [
+                            'checked' => $differentBillingOrShippingAddressChecked,
+                        ],
+                    ])
                     ->add('shippingAddress', SyliusAddressType::class, [
                         'shippable' => true,
                         'constraints' => [new Valid()],

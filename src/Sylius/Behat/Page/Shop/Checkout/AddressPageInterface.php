@@ -71,4 +71,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     /** @return string[] */
     public function getAvailableBillingCountries(): array;
+
+    public function isDifferentShippingAddressChecked(): bool;
+
+    public function isShippingAddressVisible(): bool;
 }
