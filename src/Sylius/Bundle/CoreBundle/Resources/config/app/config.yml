@@ -22,6 +22,7 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
 
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
