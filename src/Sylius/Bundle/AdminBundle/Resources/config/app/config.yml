@@ -906,28 +906,25 @@ sylius_ui:
             blocks:
                 before_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 55
+                    priority: 45
                     context:
                         event: sylius.admin.dashboard.before_header
                 header:
                     template: "@SyliusAdmin/Dashboard/_header.html.twig"
-                    priority: 50
+                    priority: 40
                 after_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
+                    priority: 35
                     context:
                         event: sylius.admin.dashboard.after_header
                 statistics:
                     template: "@SyliusAdmin/Dashboard/_statistics.html.twig"
-                    priority: 40
+                    priority: 30
                 after_statistics_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 25
                     context:
                         event: sylius.admin.customer.show.after_statistics
-                chart:
-                    template: "@SyliusAdmin/Dashboard/_chart.html.twig"
-                    priority: 30
                 menu:
                     template: "@SyliusAdmin/Dashboard/_menu.html.twig"
                     priority: 20
