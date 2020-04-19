@@ -1,17 +1,20 @@
-{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+{% if breadcrumbs|default([])|length > 0 %}
+    {% set update_url = path(
+            configuration.vars.index.route.name|default(configuration.getRouteName('update')),
+            configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({ 'id': resource.id }))
+        )
+    %}
 
-{% set index_url = path(
-        configuration.vars.index.route.name|default(configuration.getRouteName('index')),
-        configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
-    )
-%}
-
-{% set breadcrumbs = [
-        { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
-        { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: index_url },
-        { label: resource.name|default(resource.code|default(resource.id)) },
-        { label: 'sylius.ui.edit'|trans }
-    ]
-%}
-
-{{ breadcrumb.crumble(breadcrumbs) }}
+    {% include '@SyliusAdmin/Crud/_breadcrumb.html.twig' with {
+        'breadcrumbs': [
+            { label: resource.name|default(resource.code|default(resource.id)), url: update_url }
+        ]|merge(breadcrumbs|default([]))
+    } %}
+{% else %}
+    {% include '@SyliusAdmin/Crud/_breadcrumb.html.twig' with {
+        'breadcrumbs': [
+            { label: resource.name|default(resource.code|default(resource.id)) },
+            { label: 'sylius.ui.edit'|trans }
+        ]|merge(breadcrumbs|default([]))
+    } %}
+{% endif %}
