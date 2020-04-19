@@ -117,6 +117,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I delete zone named :zoneName
+     */
+    public function iDeleteZoneNamed(ZoneInterface $zoneName): void
+    {
+        $this->client->delete($zoneName->getCode());
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -184,12 +192,46 @@ final class ManagingZonesContext implements Context
 
     /**
      * @Then I should see the zone named :name in the list
+     * @Then I should still see the zone named :name in the list
      */
     public function iShouldSeeTheZoneNamedInTheList(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
             sprintf('There is no zone with name "%s"', $name)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful(
+            $this->client->getLastResponse()),
+            'Zone could not be deleted'
+        );
+    }
+
+    /**
+     * @Then the zone named :name should no longer exist in the registry
+     */
+    public function theZoneNamedShouldNoLongerExistInTheRegistry(string $name): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            sprintf('Zone with name %s exist', $name)
+        );
+    }
+
+    /**
+     * @Then I should be notified that this zone cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
+    {
+        Assert::false(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Zone can be deleted, but it should not'
         );
     }
 }

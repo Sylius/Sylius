@@ -46,6 +46,7 @@
                     <attribute name="groups">zone:update</attribute>
                 </attribute>
             </itemOperation>
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
