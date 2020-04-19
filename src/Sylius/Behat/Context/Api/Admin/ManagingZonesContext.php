@@ -68,7 +68,7 @@ final class ManagingZonesContext implements Context
     public function iAddACountry(CountryInterface $country): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => $country->getCode()
+            'code' => $country->getCode(),
         ]);
     }
 
@@ -78,7 +78,7 @@ final class ManagingZonesContext implements Context
     public function iAddAProvince(ProvinceInterface $province): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => $province->getCode()
+            'code' => $province->getCode(),
         ]);
     }
 
@@ -88,7 +88,7 @@ final class ManagingZonesContext implements Context
     public function iAddAZone(ZoneInterface $zoneName): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => $zoneName->getCode()
+            'code' => $zoneName->getCode(),
         ]);
     }
 
@@ -106,6 +106,14 @@ final class ManagingZonesContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When I want to see all zones in store
+     */
+    public function iWantToSeeAllZonesInStore(): void
+    {
+        $this->client->index();
     }
 
     /**
@@ -163,6 +171,25 @@ final class ManagingZonesContext implements Context
         Assert::true(
             $this->responseChecker->hasValue($this->client->show('EU'), 'scope', $scope),
             sprintf('Its Zone does not have %s scope', $scope)
+        );
+    }
+
+    /**
+     * @Then I should see :count zones in the list
+     */
+    public function iShouldSeeZonesInTheList(int $count): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then I should see the zone named :name in the list
+     */
+    public function iShouldSeeTheZoneNamedInTheList(string $name): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
+            sprintf('There is no zone with name "%s"', $name)
         );
     }
 }
