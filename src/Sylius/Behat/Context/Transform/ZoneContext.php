@@ -40,6 +40,8 @@ final class ZoneContext implements Context
 
     /**
      * @Transform /^zone named "([^"]+)"$/
+     * @Transform :zoneName
+     * @Transform :zoneNamed
      */
     public function getZoneByName(string $name): ZoneInterface
     {

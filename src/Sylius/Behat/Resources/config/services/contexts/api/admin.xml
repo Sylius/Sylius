@@ -133,5 +133,10 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
+
+        <service id="sylius.behat.context.api.admin.managing_zones" class="Sylius\Behat\Context\Api\Admin\ManagingZonesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.zone" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
     </services>
 </container>
