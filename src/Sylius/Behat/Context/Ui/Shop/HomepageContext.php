@@ -58,6 +58,7 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should see :firstMenuItem in the menu
      * @Then I should see :firstMenuItem and :secondMenuItem in the menu
      */
     public function iShouldSeeAndInTheMenu(string ...$menuItems): void

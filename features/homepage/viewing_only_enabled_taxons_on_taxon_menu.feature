@@ -12,10 +12,10 @@ Feature: Viewing only enabled taxons in taxon menu
         And the "Accessories" taxon has children taxons "Caps" and "Belts"
         And channel "United States" has menu taxon "Category"
 
-    @ui @todo
+    @ui
     Scenario: Viewing only enabled taxons in taxon menu
         Given the "Clothes" taxon is disabled
         And the "Belts" taxon is disabled
         When I visit the homepage
-        Then I should see "Accessories" and "Caps" in the menu
-        And I should not see "Clothes", "T-Shirts", "Coats" and "Belts" in the menu
+        Then I should see "Caps" in the menu
+        And I should not see "T-Shirts", "Coats" and "Belts" in the menu
