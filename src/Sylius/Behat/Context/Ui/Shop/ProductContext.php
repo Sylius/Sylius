@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\Shop\MenuElementInterface;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
@@ -622,6 +623,14 @@ final class ProductContext implements Context
                 throw new \InvalidArgumentException(sprintf('Vertical menu should not contain %s element', $menuItem));
             }
         }
+    }
+
+    /**
+     * @Then /^I should not see go level up link in the vertical menu$/
+     */
+    public function iShouldNotSeeGoLevelUpLinkInTheVerticalMenu()
+    {
+        Assert::false($this->verticalMenuElement->hasGoLevelUpLink());
     }
 
     /**

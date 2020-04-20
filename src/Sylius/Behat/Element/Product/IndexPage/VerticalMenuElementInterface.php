@@ -16,4 +16,6 @@ namespace Sylius\Behat\Element\Product\IndexPage;
 interface VerticalMenuElementInterface
 {
     public function getMenuItems(): array;
+
+    public function hasGoLevelUpLink(): bool;
 }

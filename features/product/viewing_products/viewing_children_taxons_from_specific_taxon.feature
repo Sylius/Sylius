@@ -17,3 +17,9 @@ Feature: Viewving children taxons of current taxon on the sidebar
         When I try to browse products from taxon "Clothes"
         Then I should not see "Coats" in the vertical menu
         And I should see "T-Shirts" and "Trousers" in the vertical menu
+
+    @ui
+    Scenario: Cannot go to parent disabled taxon from the vertical menu
+        Given the "Clothes" taxon is disabled
+        When I try to browse products from taxon "T-Shirts"
+        Then I should not see go level up link in the vertical menu
