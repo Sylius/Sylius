@@ -17,7 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -25,8 +27,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $adminUsersClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -34,14 +41,21 @@ final class ManagingShippingMethodsContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $adminUsersClient,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->adminUsersClient = $adminUsersClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -55,8 +69,23 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I change my locale to :localeCode
+     */
+    public function iSwitchTheLocaleToTheLocale(string $localeCode): void
+    {
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
+
+        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
+        $this->adminUsersClient->update();
+    }
+
+    /**
      * @When I am browsing shipping methods
      * @When I want to browse shipping methods
+     * @When I browse shipping methods
      */
     public function iBrowseShippingMethods(): void
     {
@@ -215,20 +244,25 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I start sorting shipping methods by code
+     * @When I sort the shipping methods :sortType by code
+     * @When I switch the way shipping methods are sorted :sortType by code
      */
-    public function iSortShippingMethodsByCode(): void
+    public function iSortShippingMethodsByCode(string $sortType = 'ascending'): void
     {
-        $this->client->sort(['code' => 'asc']);
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
     }
 
     /**
-     * @When I start sorting shipping methods by name
-     * @Given the shipping methods are already sorted by name
+     * @When I sort the shipping methods :sortType by name
+     * @When I switch the way shipping methods are sorted :sortType by name
+     * @Given the shipping methods are already sorted :sortType by name
      */
-    public function iSortShippingMethodsByName(): void
+    public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
     {
-        $this->client->sort(['translation.name' => 'asc']);
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
     }
 
     /**
@@ -522,7 +556,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $shippingMethods = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same(reset($shippingMethods)['translations']['en_US']['name'], $value);
+        Assert::same(reset($shippingMethods)['translations'][$this->getAdminLocaleCode()]['name'], $value);
     }
 
     /**
@@ -541,5 +575,15 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeViewingNonArchivalShippingMethods(): void
     {
         // Intentionally left blank
+    }
+
+    private function getAdminLocaleCode(): string
+    {
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->sharedStorage->get('administrator');
+
+        $response = $this->adminUsersClient->show((string) $adminUser->getId());
+
+        return $this->responseChecker->getValue($response, 'localeCode');
     }
 }

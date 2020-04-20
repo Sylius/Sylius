@@ -26,7 +26,7 @@ Feature: Sorting listed shipping methods by name or code
     Scenario: Changing the order of sorting by code
         Given I am browsing shipping methods
         When I sort the shipping methods ascending by code
-        And I switch the way shipping methods are sorted by code
+        And I switch the way shipping methods are sorted descending by code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "marine"
 
@@ -40,12 +40,12 @@ Feature: Sorting listed shipping methods by name or code
     @ui @api
     Scenario: Changing the order of sorting shipping methods by their names
         Given I am browsing shipping methods
-        And the shipping methods are already sorted ascending by name
-        When I switch the way shipping methods are sorted by name
+        When the shipping methods are already sorted ascending by name
+        And I switch the way shipping methods are sorted descending by name
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Pug Blimp"
 
-    @ui
+    @ui @api
     Scenario: Sort shipping methods ascending by name from chosen locale translations
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
@@ -53,11 +53,11 @@ Feature: Sorting listed shipping methods by name or code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Łódź Podwodna Morskich Jednorożców"
 
-    @ui
+    @ui @api
     Scenario: Sort shipping methods descending by name from chosen locale translations
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
         And the shipping methods are already sorted ascending by name
-        And I sort the shipping methods ascending by name
+        And I sort the shipping methods descending by name
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Zwykły Dyliżans Mrówkojadów"

@@ -165,15 +165,16 @@ final class ShippingContext implements Context
     /**
      * @Given /^(this shipping method) is named "([^"]+)" in the ("[^"]+" locale)$/
      */
-    public function thisShippingMethodIsNamedInLocale(ShippingMethodInterface $shippingMethod, string $name, $locale)
-    {
+    public function thisShippingMethodIsNamedInLocale(
+        ShippingMethodInterface $shippingMethod,
+        string $name,
+        string $locale
+    ): void {
         $translations = $shippingMethod->getTranslations();
         /** @var ShippingMethodTranslationInterface $translation */
         foreach ($translations as $translation) {
             if ($translation->getLocale() === $locale) {
                 $translation->setName($name);
-
-                $this->shippingMethodManager->flush();
 
                 return;
             }
@@ -184,8 +185,6 @@ final class ShippingContext implements Context
         $translation->setName($name);
 
         $shippingMethod->addTranslation($translation);
-
-        $this->shippingMethodManager->flush();
     }
 
     /**

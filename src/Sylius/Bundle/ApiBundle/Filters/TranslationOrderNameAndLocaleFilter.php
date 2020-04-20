@@ -62,7 +62,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
     public function getDescription(string $resourceClass): array
     {
         return [
-            'order[localeCode => translation.name]' => [
+            'order[translation.name]' => [
                 'type' => 'string',
                 'required' => false,
                 'property' => 'translation',
@@ -74,7 +74,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
                     ],
                 ],
             ],
-            'localeCode' => [
+            'localeCode for order[translation.name]' => [
                 'type' => 'string',
                 'required' => false,
                 'property' => 'localeCode',
