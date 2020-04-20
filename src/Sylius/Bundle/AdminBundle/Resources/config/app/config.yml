@@ -670,39 +670,39 @@ sylius_ui:
             blocks:
                 before_customer_information_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 55
+                    priority: 90
                     context:
                         event: sylius.admin.order.show.before_customer_information
                 customer:
                     template: "@SyliusAdmin/Order/Show/_customer.html.twig"
-                    priority: 50
-                before_addresses_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
-                    context:
-                        event: sylius.admin.order.show.before_addresses
-                addresses:
-                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
-                    priority: 40
+                    priority: 80
                 before_payments_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 70
                     context:
                         event: sylius.admin.order.show.before_payments
                 payments:
                     template: "@SyliusAdmin/Order/Show/_payments.html.twig"
-                    priority: 30
+                    priority: 60
                 shipments:
                     template: "@SyliusAdmin/Order/Show/_shipments.html.twig"
+                    priority: 50
+                after_shipments_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 40
+                    context:
+                        event: sylius.admin.order.show.after_shipments
+                before_addresses_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 30
+                    context:
+                        event: sylius.admin.order.show.before_addresses
+                addresses:
+                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
                     priority: 20
                 resend_email:
                     template: "@SyliusAdmin/Order/Show/_resendEmail.html.twig"
                     priority: 10
-                after_shipments_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.admin.order.show.after_shipments
 
         sylius.admin.customer.show.information:
             blocks:
