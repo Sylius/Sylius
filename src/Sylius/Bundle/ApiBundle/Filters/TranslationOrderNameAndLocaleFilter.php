@@ -18,7 +18,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
-final class TranslationOrderNameFilter extends AbstractContextAwareFilter
+final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilter
 {
     protected function filterProperty(
         string $property,
@@ -62,7 +62,7 @@ final class TranslationOrderNameFilter extends AbstractContextAwareFilter
     public function getDescription(string $resourceClass): array
     {
         return [
-            'order[translation.name]' => [
+            'order[localeCode => translation.name]' => [
                 'type' => 'string',
                 'required' => false,
                 'property' => 'translation',

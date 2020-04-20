@@ -410,10 +410,10 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I switch the way shipping methods are sorted by :field
-     * @When I start sorting shipping methods by :field
-     * @Given the shipping methods are already sorted by :field
+     * @When I sort the shipping methods ascending by :field
+     * @Given the shipping methods are already sorted ascending by :field
      */
-    public function iSortShippingMethodsBy($field)
+    public function iSortShippingMethodsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
     }
