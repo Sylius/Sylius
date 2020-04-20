@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\Shop\MenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
@@ -38,16 +39,21 @@ final class ProductContext implements Context
     /** @var ErrorPageInterface */
     private $errorPage;
 
+    /** @var MenuElementInterface */
+    private $verticalMenuElement;
+
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,
         ProductReviewIndexPageInterface $productReviewsIndexPage,
-        ErrorPageInterface $errorPage
+        ErrorPageInterface $errorPage,
+        MenuElementInterface $verticalMenuElement
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
         $this->errorPage = $errorPage;
+        $this->verticalMenuElement = $verticalMenuElement;
     }
 
     /**
@@ -595,6 +601,27 @@ final class ProductContext implements Context
     public function iShouldBeInformedThatTheTaxonDoesNotExist()
     {
         Assert::eq($this->errorPage->getTitle(), 'Requested page is invalid.');
+    }
+
+    /**
+     * @Then I should see :firstMenuItem and :secondMenuItem in the vertical menu
+     */
+    public function iShouldSeeInTheVerticalMenu(string ...$menuItems)
+    {
+        Assert::allOneOf($menuItems, $this->verticalMenuElement->getMenuItems());
+    }
+
+    /**
+     * @Then I should not see :firstMenuItem in the vertical menu
+     */
+    public function iShouldNotSeeInTheVerticalMenu(string ...$menuItems)
+    {
+        $actualMenuItems = $this->verticalMenuElement->getMenuItems();
+        foreach ($menuItems as $menuItem) {
+            if (in_array($menuItem, $actualMenuItems)) {
+                throw new \InvalidArgumentException(sprintf('Vertical menu should not contain %s element', $menuItem));
+            }
+        }
     }
 
     /**
