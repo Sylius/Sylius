@@ -24,7 +24,7 @@
 
         "knplabs/gaufrette": "^0.8",
         "payum/payum": "^1.3",
-        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/guzzle6-adapter": "^2.0",
         "sylius/addressing": "^1.6",
         "sylius/attribute": "^1.6",
         "sylius/channel": "^1.6",

@@ -43,9 +43,9 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.6",
+        "hwi/oauth-bundle": "^1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^2.0",
-        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^4.4",

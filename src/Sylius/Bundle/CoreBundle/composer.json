@@ -56,7 +56,7 @@
         "liip/imagine-bundle": "^2.3"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^0.6",
+        "hwi/oauth-bundle": "^1.0",
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
