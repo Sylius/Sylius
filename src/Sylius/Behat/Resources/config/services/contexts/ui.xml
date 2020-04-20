@@ -448,7 +448,7 @@
             <argument type="service" id="sylius.behat.page.shop.product.index" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
             <argument type="service" id="sylius.behat.page.error" />
-            <argument type="service" id="sylius.behat.element.shop.vertical_menu" />
+            <argument type="service" id="sylius.behat.element.product.index.vertical_menu" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.browsing_product" class="Sylius\Behat\Context\Ui\Shop\BrowsingProductContext">

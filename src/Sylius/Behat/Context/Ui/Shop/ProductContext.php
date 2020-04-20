@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Element\Shop\MenuElementInterface;
+use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
@@ -39,7 +39,7 @@ final class ProductContext implements Context
     /** @var ErrorPageInterface */
     private $errorPage;
 
-    /** @var MenuElementInterface */
+    /** @var VerticalMenuElementInterface */
     private $verticalMenuElement;
 
     public function __construct(
@@ -47,7 +47,7 @@ final class ProductContext implements Context
         IndexPageInterface $indexPage,
         ProductReviewIndexPageInterface $productReviewsIndexPage,
         ErrorPageInterface $errorPage,
-        MenuElementInterface $verticalMenuElement
+        VerticalMenuElementInterface $verticalMenuElement
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;

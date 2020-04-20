@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Element\Shop;
+namespace Sylius\Behat\Element\Product\IndexPage;
 
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class VerticalMenuElement extends Element implements MenuElementInterface
+final class VerticalMenuElement extends Element implements VerticalMenuElementInterface
 {
     public function getMenuItems(): array
     {
