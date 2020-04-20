@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -29,12 +30,17 @@ final class ManagingZonesContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -110,6 +116,7 @@ final class ManagingZonesContext implements Context
 
     /**
      * @When I want to see all zones in store
+     * @When I browse zones
      */
     public function iWantToSeeAllZonesInStore(): void
     {
@@ -122,6 +129,30 @@ final class ManagingZonesContext implements Context
     public function iDeleteZoneNamed(ZoneInterface $zoneName): void
     {
         $this->client->delete($zoneName->getCode());
+    }
+
+    /**
+     * @When I check the :zoneName zone
+     * @When I check also the :zoneName zone
+     */
+    public function iCheckTheZone(ZoneInterface $zoneName): void
+    {
+        $ZoneToDelete = [];
+        if ($this->sharedStorage->has('zone_to_delete')) {
+            $ZoneToDelete = $this->sharedStorage->get('zone_to_delete');
+        }
+        $ZoneToDelete[] = $zoneName->getCode();
+        $this->sharedStorage->set('zone_to_delete', $ZoneToDelete);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        foreach ($this->sharedStorage->get('zone_to_delete') as $code) {
+            $this->client->delete($code);
+        }
     }
 
     /**
@@ -184,10 +215,11 @@ final class ManagingZonesContext implements Context
 
     /**
      * @Then I should see :count zones in the list
+     * @Then I should see a single zone in the list
      */
-    public function iShouldSeeZonesInTheList(int $count): void
+    public function iShouldSeeZonesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), $count);
     }
 
     /**
@@ -204,6 +236,7 @@ final class ManagingZonesContext implements Context
 
     /**
      * @Then I should be notified that it has been successfully deleted
+     * @Then I should be notified that they have been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {

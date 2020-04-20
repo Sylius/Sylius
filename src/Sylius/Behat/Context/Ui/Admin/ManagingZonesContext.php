@@ -330,14 +330,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should see the zone :zoneName in the list
-     */
-    public function iShouldSeeTheZoneInTheList(string $zoneName): void
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
-    }
-
-    /**
      * @Then I should be notified that this zone cannot be deleted
      */
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted()
