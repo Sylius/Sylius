@@ -42,6 +42,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
 
         foreach ($order->getItems() as $item) {
             /** @var OrderItemInterface $item */
+            /** @psalm-suppress RedundantConditionGivenDocblockType */
             Assert::isInstanceOf($item, OrderItemInterface::class);
 
             if ($item->isImmutable()) {

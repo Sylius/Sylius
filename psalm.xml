@@ -183,7 +183,7 @@
 
         <TooManyArguments>
             <errorLevel type="info">
-                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
             </errorLevel>
             <errorLevel type="suppress">
