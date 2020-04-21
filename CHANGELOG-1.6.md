@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.8 (2020-04-21)
+
+#### Details
+
+- [#11018](https://github.com/Sylius/Sylius/issues/11018) Fix: Check PropertyPath value for add error to form ([@Coosos](https://github.com/Coosos))
+- [#11191](https://github.com/Sylius/Sylius/issues/11191) Separated order items subtotal calculation logic from twig extension ([@4c0n](https://github.com/4c0n))
+- [#11341](https://github.com/Sylius/Sylius/issues/11341) [Maintenance] Upgrade packages dependencies & fix 1.6 build ([@lchrusciel](https://github.com/lchrusciel))
+- [#11342](https://github.com/Sylius/Sylius/issues/11342) [Maintenance] Remove memory swap ([@lchrusciel](https://github.com/lchrusciel))
+- [#11346](https://github.com/Sylius/Sylius/issues/11346) [ADMIN] fix closed gateway config field in payment method form ([@bigboss86](https://github.com/bigboss86))
+- [#11363](https://github.com/Sylius/Sylius/issues/11363) Introduce Probot Autolabeler ([@Zales0123](https://github.com/Zales0123))
+- [#11364](https://github.com/Sylius/Sylius/issues/11364) fix #11362 : ignore channel locale listener on profiler routes ([@thi3rry](https://github.com/thi3rry))
+- [#11380](https://github.com/Sylius/Sylius/issues/11380) Use !default for SCSS variables to allow overriding them ([@pamil](https://github.com/pamil))
+
 ## v1.6.7 (2020-03-31)
 
 #### Details
