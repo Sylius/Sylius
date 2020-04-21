@@ -127,7 +127,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
                 return StringInflector::nameToCode($options['name']);
             })
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                return (string) $this->faker->words(3, true);
             })
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();

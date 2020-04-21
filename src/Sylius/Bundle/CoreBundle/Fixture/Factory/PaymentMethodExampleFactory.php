@@ -95,7 +95,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     {
         $resolver
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                return (string) $this->faker->words(3, true);
             })
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);

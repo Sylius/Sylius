@@ -86,7 +86,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return StringInflector::nameToCode($options['name']);
             })
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                return (string) $this->faker->words(3, true);
             })
             ->setDefault('amount', function (Options $options): float {
                 return $this->faker->randomFloat(2, 0, 0.4);

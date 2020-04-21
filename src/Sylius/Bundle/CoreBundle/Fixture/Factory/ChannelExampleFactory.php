@@ -132,7 +132,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                return (string) $this->faker->words(3, true);
             })
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
@@ -141,10 +141,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $options['code'] . '.localhost';
             })
             ->setDefault('color', function (Options $options): string {
-                return $this->faker->colorName;
+                return (string) $this->faker->colorName;
             })
             ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
+                return (bool) $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)
