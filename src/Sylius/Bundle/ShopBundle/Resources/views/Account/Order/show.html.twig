@@ -1,6 +1,6 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
-{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ parent() }}{% endblock %}
+{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
     {% include '@SyliusShop/Account/Order/Show/_breadcrumb.html.twig' %}
