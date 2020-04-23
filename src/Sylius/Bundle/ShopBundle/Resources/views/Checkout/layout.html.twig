@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.checkout'|trans }} - {{ parent() }}{% endblock %}
+
 {% block top %}
     {# Clear the topmost section. We do not want it in the checkout.  #}
 {% endblock %}
