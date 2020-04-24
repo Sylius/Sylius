@@ -185,7 +185,8 @@
     "conflict": {
         "sylius/grid-bundle": "1.7.4",
         "symfony/symfony": "3.4.7",
-        "twig/twig": "2.6.1"
+        "twig/twig": "2.6.1",
+        "api-platform/core": "2.5.5"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
