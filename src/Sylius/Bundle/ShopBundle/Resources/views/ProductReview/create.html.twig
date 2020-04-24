@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.write_your_own_review'|trans }} | {{ parent() }}{% endblock %}
+
 {% set product = product_review.reviewSubject %}
 
 {% block content %}

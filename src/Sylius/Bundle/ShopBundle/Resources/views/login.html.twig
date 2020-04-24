@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.customer_login'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     {% include '@SyliusShop/Login/_header.html.twig' %}
 

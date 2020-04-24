@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     {% include '@SyliusShop/Register/_header.html.twig' %}
 
