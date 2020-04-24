@@ -77,6 +77,13 @@ final class LocaleHelperSpec extends ObjectBehavior
         $this->convertCodeToName('en')->shouldReturn('English');
     }
 
+    function it_fallbacks_to_the_code_if_the_name_is_not_in_the_database(LocaleConverterInterface $localeConverter): void
+    {
+        $localeConverter->convertCodeToName('en_DG', null)->willThrow(new \InvalidArgumentException());
+
+        $this->convertCodeToName('en_DG')->shouldReturn('en_DG');
+    }
+
     function it_has_a_name(): void
     {
         $this->getName()->shouldReturn('sylius_locale');
