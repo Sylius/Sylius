@@ -78,3 +78,6 @@
            resource: "@SyliusApiBundle/Resources/config/routing.yml"
            prefix: "%sylius.security.new_api_route%"
     ```
+
+5. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
+The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
