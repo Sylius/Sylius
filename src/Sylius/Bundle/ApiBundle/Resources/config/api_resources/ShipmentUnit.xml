@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipment_unit.class%" shortName="ShipmentUnit">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipment_unit:read</attribute>
@@ -25,13 +23,17 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

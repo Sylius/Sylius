@@ -19,12 +19,11 @@
         <attribute name="messenger">true</attribute>
         <attribute name="output">false</attribute>
 
-        <attribute name="route_prefix">shop</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="post">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="path">/register</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Register a shop user</attribute>

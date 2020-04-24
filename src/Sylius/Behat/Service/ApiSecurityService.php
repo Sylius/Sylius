@@ -36,7 +36,7 @@ final class ApiSecurityService implements SecurityServiceInterface
     {
         $this->client->request(
             'POST',
-            '/new-api/admin/authentication-token',
+            '/new-api/authentication-token',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],

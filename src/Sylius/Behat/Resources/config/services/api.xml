@@ -119,14 +119,8 @@
             <argument type="service" id="test.client" />
         </service>
 
-        <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
+        <service id="sylius.behat.client.api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
-            <argument type="service" id="test.client" />
-            <argument>shop</argument>
         </service>
     </services>
 </container>

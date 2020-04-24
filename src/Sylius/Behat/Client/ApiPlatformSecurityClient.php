@@ -24,18 +24,14 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     /** @var array */
     private $request = [];
 
-    /** @var string */
-    private $section;
-
-    public function __construct(AbstractBrowser $client, string $section)
+    public function __construct(AbstractBrowser $client)
     {
         $this->client = $client;
-        $this->section = $section;
     }
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf('/new-api/%s/authentication-token', $this->section);
+        $this->request['url'] = sprintf('/new-api/authentication-token');
         $this->request['method'] = 'POST';
     }
 
