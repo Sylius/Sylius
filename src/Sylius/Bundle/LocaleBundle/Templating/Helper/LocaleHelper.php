@@ -41,7 +41,11 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
      */
     public function convertCodeToName(string $code, ?string $localeCode = null): ?string
     {
-        return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
+        try {
+            return $this->localeConverter->convertCodeToName($code, $this->getLocaleCode($localeCode));
+        } catch (\InvalidArgumentException $e) {
+            return $code;
+        }
     }
 
     /**
