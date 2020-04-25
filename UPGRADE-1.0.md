@@ -179,7 +179,7 @@
 
 ### Order / OrderBundle
 
-* In order to be compatibile with Doctrine ORM 2.6+ and be more consistent,
+* In order to be compatible with Doctrine ORM 2.6+ and be more consistent,
   `OrderRepositoryInterface::count()` signature was changed to `OrderRepositoryInterface::countPlacedOrders()`.
   
 * The following methods no longer have a default null argument and require one to be explicitly passed:
