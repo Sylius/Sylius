@@ -54,15 +54,73 @@ final class SalesDataProviderTest extends WebTestCase
     }
 
     /** @test */
-    public function it_provides_simple_year_sales_summary_grouped_per_month(): void
+    public function it_provides_year_sales_summary_grouped_by_year(): void
     {
-        $salesSummary = $this->getSummaryForChannel('CHANNEL');
-        $expectedMonths = $this->getExpectedMonths();
+        /** @var \DateTimeInterface $startDate */
+        $startDate = new \DateTime('first day of first month last year');
+
+        /** @var \DateTimeInterface $startDate */
+        $endDate = new \DateTime('last day of last month this year');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'year', 'CHANNEL');
+
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'y');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame($expectedPeriods, $salesSummary->getPerionds());
+        $this->assertSame(['0.00', '70.00'], $salesSummary->getSales());
+    }
+
+    /** @test */
+    public function it_provides_month_sales_summary_grouped_per_month(): void
+    {
+        /** @var \DateTimeInterface $startDate */
+        $startDate = new \DateTime('first day of -2 month');
+
+        /** @var \DateTimeInterface $startDate */
+        $endDate = new \DateTime('last day of this month');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'month', 'CHANNEL');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'm');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getPeriods());
+        $this->assertSame(['40.00', '0.00'], $salesSummary->getSales());
+    }
+
+    /** @test */
+    public function it_provides_week_sales_summary_grouped_per_week(): void
+    {
+        /** @var \DateTimeInterface $startDate */
+        $startDate = new \DateTime('first day of this month');
+
+        /** @var \DateTimeInterface $startDate */
+        $endDate = new \DateTime('last day of this month');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'week', 'CHANNEL');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 week', 'W');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getPeriods());
+        $this->assertSame(['0.00', '0.00', '0.00', '0.00'], $salesSummary->getSales());
+    }
+
+    /** @test */
+    public function it_provides_day_sales_summary_grouped_per_hour(): void
+    {
+        /** @var \DateTimeInterface $startDate */
+        $startDate = new \DateTime('today 00:00:00');
+
+        /** @var \DateTimeInterface $startDate */
+        $endDate = new \DateTime('today 00:00:00');
+
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'hour', 'CHANNEL');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 hour', 'H');
+
+        $this->assertInstanceOf(SalesSummary::class, $salesSummary);
+        $this->assertSame($expectedPeriods, $salesSummary->getPeriods());
         $this->assertSame(
-            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '30.00', '20.00', '20.00', '0.00'],
+            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'],
             $salesSummary->getSales()
         );
     }
@@ -74,14 +132,14 @@ final class SalesDataProviderTest extends WebTestCase
         $expectedMonths = $this->getExpectedMonths();
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
-        $this->assertSame($expectedMonths, $salesSummary->getMonths());
+        $this->assertSame($expectedMonths, $salesSummary->getPeriods());
         $this->assertSame(
             ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '330.00', '0.00'],
             $salesSummary->getSales()
         );
     }
 
-    private function getSummaryForChannel(string $channelCode): SalesSummaryInterface
+    private function getSummaryForChannel(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $period, string $channelCode): SalesSummaryInterface
     {
         /** @var ChannelRepositoryInterface $channelRepository */
         $channelRepository = self::$container->get('sylius.repository.channel');
@@ -91,7 +149,7 @@ final class SalesDataProviderTest extends WebTestCase
         /** @var SalesDataProviderInterface $salesDataProvider */
         $salesDataProvider = self::$container->get(SalesDataProviderInterface::class);
 
-        return $salesDataProvider->getLastYearSalesSummary($channel);
+        return $salesDataProvider->getSalesSummary($startDate, $endDate, $period, $channelCode);
     }
 
     private function getExpectedMonths(): array
@@ -109,5 +167,22 @@ final class SalesDataProviderTest extends WebTestCase
         }
 
         return $expectedMonths;
+    }
+
+    private function getExpectedPeriods(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval, string $dateFormat): array
+    {
+        $expectedPeriods = [];
+        $period = new \DatePeriod(
+            $startDate,
+            \DateInterval::createFromDateString($interval),
+            $endDate
+        );
+
+        /** @var \DateTimeInterface $date */
+        foreach ($period as $date) {
+            $expectedPeriods[] = $date->format($dateFormat);
+        }
+
+        return $expectedPeriods;
     }
 }
