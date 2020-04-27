@@ -59,7 +59,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('new-api/shop/taxons/from-menu-taxon', HttpRequest::METHOD_GET);
+        $this->taxonsClient->customAction('new-api/admin/taxons', HttpRequest::METHOD_GET);
     }
 
     /**
@@ -75,8 +75,8 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
-        $menuItems = array_column($response, 'name');
+        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true)['hydra:member'];
+        $menuItems = array_column(array_column(array_column($response, 'translations'), 'en_US'), 'name');
 
         Assert::allOneOf($menuItems, $expectedMenuItems);
     }
