@@ -13,7 +13,7 @@ Feature: Editing a zone
         And the store has a zone "South America" with code "SA"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @api
     Scenario: Removing a country from a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member

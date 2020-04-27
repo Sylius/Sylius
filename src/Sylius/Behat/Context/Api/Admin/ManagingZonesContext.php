@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -20,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
@@ -33,14 +35,19 @@ final class ManagingZonesContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -156,14 +163,36 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully created
+     * @When I want to modify the zone named :zoneName
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    public function iWantToModifyTheZoneNamed(ZoneInterface $zoneName)
     {
-        Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Zone could not be created'
-        );
+        $this->client->buildUpdateRequest($zoneName->getCode());
+    }
+
+    /**
+     * @When I remove the :country country member
+     */
+    public function iRemoveTheCountryMember(CountryInterface $country)
+    {
+        /** @var ZoneInterface $zone */
+        $zone = $this->sharedStorage->get('zone');
+        $countryIri = $this->iriConverter->getIriFromItem($country);
+
+        $members = $this->responseChecker->getValue($this->client->show($zone->getCode(), 'members'));
+        foreach ($members as $key => $member) {
+            if ($countryIri === $member) {
+                $this->client->removeSubResource('members', $member);
+            }
+        }
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->client->update();
     }
 
     /**
@@ -235,6 +264,53 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @Then the zone named :name should no longer exist in the registry
+     */
+    public function theZoneNamedShouldNoLongerExistInTheRegistry(string $name): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            sprintf('Zone with name %s exist', $name)
+        );
+    }
+
+    /**
+     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
+     */
+    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->subResourceIndex('members', $zone->getCode()),
+            'code',
+            $zoneMember->getCode()
+        ));
+
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Zone could not be created'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Zone could not be edited'
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been successfully deleted
      * @Then I should be notified that they have been successfully deleted
      */
@@ -243,17 +319,6 @@ final class ManagingZonesContext implements Context
         Assert::true($this->responseChecker->isDeletionSuccessful(
             $this->client->getLastResponse()),
             'Zone could not be deleted'
-        );
-    }
-
-    /**
-     * @Then the zone named :name should no longer exist in the registry
-     */
-    public function theZoneNamedShouldNoLongerExistInTheRegistry(string $name): void
-    {
-        Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
-            sprintf('Zone with name %s exist', $name)
         );
     }
 
