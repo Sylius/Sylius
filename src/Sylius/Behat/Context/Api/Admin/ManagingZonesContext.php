@@ -115,6 +115,7 @@ final class ManagingZonesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -165,7 +166,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I want to modify the zone named :zoneName
      */
-    public function iWantToModifyTheZoneNamed(ZoneInterface $zoneName)
+    public function iWantToModifyTheZoneNamed(ZoneInterface $zoneName): void
     {
         $this->client->buildUpdateRequest($zoneName->getCode());
     }
@@ -173,7 +174,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I remove the :country country member
      */
-    public function iRemoveTheCountryMember(CountryInterface $country)
+    public function iRemoveTheCountryMember(CountryInterface $country): void
     {
         /** @var ZoneInterface $zone */
         $zone = $this->sharedStorage->get('zone');
@@ -190,7 +191,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->client->update();
     }
@@ -264,6 +265,18 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @Then there should still be only one zone with code :code
+     */
+    public function thereShouldStillBeOnlyOneZoneWithCode(string $code): void
+    {
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code),
+            1,
+            sprintf('There should be only one zone with code "%s"', $code)
+        );
+    }
+
+    /**
      * @Then the zone named :name should no longer exist in the registry
      */
     public function theZoneNamedShouldNoLongerExistInTheRegistry(string $name): void
@@ -277,7 +290,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
      */
-    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
+    public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->subResourceIndex('members', $zone->getCode()),
@@ -302,7 +315,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
@@ -330,6 +343,17 @@ final class ManagingZonesContext implements Context
         Assert::false(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
             'Zone can be deleted, but it should not'
+        );
+    }
+
+    /**
+     * @Then I should be notified that zone with this code already exists
+     */
+    public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'code: Zone code must be unique.'
         );
     }
 }
