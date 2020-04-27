@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by vic-blt at 2020-04-23T13:49:48Z
+
+Hi Lukasz,
+
+> Welcome to our community! :)
+
+Thank you :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-24T09:19:09Z
+
+Btw. @vic-blt can you share some screenshots of the change done by this solution? Or an example code?
+
+---------------------------------------------------------------------------
+
+by vic-blt at 2020-04-24T12:48:06Z
+
+Without the fix :
+![without_fix](https://user-images.githubusercontent.com/48869999/80213161-0c8c4a80-8639-11ea-9044-a88d7902c8a9.png)
+
+With the fix :
+![with_fix](https://user-images.githubusercontent.com/48869999/80213151-09915a00-8639-11ea-9c32-d85e31f68c94.png)
+
+You can see that without the fix, `data-form-collection-index` in `data-prototype` attribute, is already set to 0, which makes collection items having the same index because when `data-prototype` attribute of parent collection is modified by `prototype = prototype.replace(/__name__/g, this.count);`, `data-form-collection-index` value of sub collection is also replaced by `this.count` which is the index of parent collection.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-24T15:40:30Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "issue-9738-fix-nested-form-collections"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-27T10:49:03Z
+
+Thank you, Victorien! :tada:
