@@ -8,16 +8,16 @@ Feature: Zone validation
         Given the store has country "United States"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a zone without specifying its code
         When I want to create a new zone consisting of country
         And I name it "European Union"
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
-        And zone with code "European Union" should not be added
+        And zone with name "European Union" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to add a zone without specifying its name
         When I want to create a new zone consisting of country
         And I specify its code as "EU"
@@ -26,7 +26,7 @@ Feature: Zone validation
         Then I should be notified that name is required
         And zone with code "EU" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to add a zone without any countries
         When I want to create a new zone consisting of country
         And I name it "European Union"
@@ -36,14 +36,14 @@ Feature: Zone validation
         Then I should be notified that at least one zone member is required
         And zone with name "European Union" should not be added
 
-    @ui
+    @ui @api
     Scenario: Seeing a disabled type field when adding country type zone
         When I want to create a new zone consisting of country
-        Then the type field should be disabled
+        Then I should not be able to edit its type
         And it should be of country type
 
-    @ui
+    @ui @api
     Scenario: Seeing a disabled type field when adding province type zone
         When I want to create a new zone consisting of province
-        Then the type field should be disabled
+        Then I should not be able to edit its type
         And it should be of province type

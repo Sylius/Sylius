@@ -154,6 +154,12 @@ final class Request implements RequestInterface
         $this->content = $this->mergeArraysUniquely($this->content, $newValues);
     }
 
+    /** @return string|int|array */
+    public function getData(string $key)
+    {
+        return $this->content[$key];
+    }
+
     public function parameters(): array
     {
         return $this->parameters;

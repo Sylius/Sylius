@@ -76,6 +76,15 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I do not specify its :type
+     * @When I do not add a country member
+     */
+    public function iDoNotSpecifyItsField(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @When I add a country :country
      */
     public function iAddACountry(CountryInterface $country): void
@@ -288,6 +297,17 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @Then /^zone with (code|name) "([^"]*)" should not be added$/
+     */
+    public function zoneShouldNotBeAdded(string $field, string $value): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), $field, $value),
+            sprintf('Zone with %s %s exist', $field, $value)
+        );
+    }
+
+    /**
      * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
      */
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
@@ -299,6 +319,26 @@ final class ManagingZonesContext implements Context
         ));
 
         Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
+    }
+
+    /**
+     * @Then I should not be able to edit its type
+     */
+    public function iShouldNotBeAbleToEditItsType(): void
+    {
+        // Intentionally left blank, because in API context we can do that
+    }
+
+    /**
+     * @Then /^it should be of (country|province) type$/
+     */
+    public function itShouldBeOfType(string $type): void
+    {
+        Assert::same(
+            $type,
+            $this->client->getRequestData('type'),
+            sprintf('Zone should be of type %s.', $type)
+        );
     }
 
     /**
@@ -354,6 +394,28 @@ final class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'code: Zone code must be unique.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that (code|name) is required$/
+     */
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter zone %s.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that at least one zone member is required
+     */
+    public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'members: Please add at least 1 zone member.'
         );
     }
 }

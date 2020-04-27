@@ -289,9 +289,9 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then the type field should be disabled
+     * @Then I should not be able to edit its type
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsType()
     {
         Assert::true($this->createPage->isTypeFieldDisabled());
     }
