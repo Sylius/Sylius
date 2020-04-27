@@ -76,7 +76,16 @@ final class DashboardController
         $data = ['statistics' => $statistics, 'channel' => $channel];
 
         if ($this->salesDataProvider !== null) {
-            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            // this data will be getting from UI after improve graph on dashboard
+            $startDate = (new \DateTime('first day of next month last year'));
+            $endDate = (new \DateTime('last day of this month'));
+            $interval = 'month';
+            $dateFormat = 'n';
+
+            $data['sales_summary'] = $this
+                ->salesDataProvider
+                ->getSalesSummary($startDate, $endDate, $interval, $channel, $dateFormat)
+            ;
             $data['currency'] = $channel->getBaseCurrency()->getCode();
         }
 

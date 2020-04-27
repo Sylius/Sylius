@@ -14,60 +14,48 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Dashboard;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Resolver\SalesSummaryProviderResolver;
 
 /**
  * @experimental
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {
+    /** @var SalesSummaryProviderResolver */
+    private $salesSummaryProviderResolver;
+
+    /** @var IntervalsConverterInterface */
+    private $intervalsConverter;
+
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var OrderRepositoryInterface|EntityRepository */
-    private $orderRepository;
-
-    public function __construct(EntityManagerInterface $entityManager, OrderRepositoryInterface $orderRepository)
-    {
+    public function __construct(
+        SalesSummaryProviderResolver $salesSummaryProviderResolver,
+        IntervalsConverterInterface $intervalsConverter,
+        EntityManagerInterface $entityManager
+    ) {
+        $this->salesSummaryProviderResolver = $salesSummaryProviderResolver;
+        $this->intervalsConverter = $intervalsConverter;
         $this->entityManager = $entityManager;
-        $this->orderRepository = $orderRepository;
     }
 
     public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
     {
-        $startDate = (new \DateTime('first day of next month last year'));
-        $startDate->setTime(0, 0, 0);
-        $endDate = (new \DateTime('last day of this month'));
-        $endDate->setTime(23, 59, 59);
-
-        /** @psalm-suppress PossiblyUndefinedMethod */
-        $queryBuilder = $this->orderRepository->createQueryBuilder('o')
-            ->select("DATE_FORMAT(o.checkoutCompletedAt, '%m.%y') AS date")
-            ->addSelect('SUM(o.total) as total')
-            ->where('o.channel = :channel')
-            ->andWhere('o.checkoutCompletedAt >= :startDate')
-            ->andWhere('o.checkoutCompletedAt <= :endDate')
-            ->andWhere('o.paymentState = :state')
-            ->groupBy('date')
-            ->setParameter('channel', $channel)
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
-            ->setParameter('state', OrderPaymentStates::STATE_PAID)
-        ;
-        $result = $queryBuilder->getQuery()->getScalarResult();
-
-        $data = [];
-        foreach ($result as $item) {
-            $data[$item['date']] = (int) $item['total'];
-        }
+    function getSalesSummary(
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        string $interval,
+        ChannelInterface $channel,
+        string $dateFormat
+    ): SalesSummaryInterface {
+        $provider = $this->salesSummaryProviderResolver->getSalesSummaryProvider($this->entityManager->getConnection());
 
         return new SalesSummary(
-            $startDate,
-            $endDate,
-            $data
+            $this->intervalsConverter->getIntervals($startDate, $endDate, $interval),
+            $provider->getSalesSummary($channel, $startDate, $endDate, $interval),
+            $dateFormat
         );
     }
 }

@@ -36,6 +36,11 @@ doctrine:
                 dql:
                     string_functions:
                         DATE_FORMAT: Sylius\Bundle\CoreBundle\Doctrine\DQL\DateFormat
+                        DAY: Sylius\Bundle\CoreBundle\Doctrine\DQL\Day
+                        HOUR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Hour
+                        MONTH: Sylius\Bundle\CoreBundle\Doctrine\DQL\Month
+                        YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
+
 knp_gaufrette:
     adapters:
         sylius_image:
