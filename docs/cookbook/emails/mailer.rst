@@ -22,7 +22,7 @@ on by default, so there is nothing to worry about if you did not change anything
 
 .. warning::
 
-    Remember that the parameters like username or password must not be commited publicly to your repository.
+    Remember that the parameters like username or password must not be committed publicly to your repository.
     Save them as environment variables on your server.
 
 Learn More

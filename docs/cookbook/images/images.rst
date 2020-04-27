@@ -65,7 +65,7 @@ The ``imagine_filter('name')`` is a twig filter. This is how you would get an im
 How to add custom image resizing filters?
 -----------------------------------------
 
-If the filters we have in Sylius by deafult are not suitable for your needs, you can easily add your own.
+If the filters we have in Sylius by default are not suitable for your needs, you can easily add your own.
 
 All you need to do is to configure new filter in the ``config/packages/liip_imagine.yaml`` file.
 For example you can create a filter for advertisement banners:
