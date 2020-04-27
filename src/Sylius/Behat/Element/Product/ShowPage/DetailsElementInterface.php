@@ -19,6 +19,8 @@ interface DetailsElementInterface
 
     public function hasChannel(string $channelName): bool;
 
+    public function countChannels(): int;
+
     public function getProductCurrentStock(): int;
 
     public function getProductTaxCategory(): string;
