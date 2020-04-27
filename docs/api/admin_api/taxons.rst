@@ -933,7 +933,7 @@ Set position of product in a Taxon
 
 The products in Sylius can by grouped by taxon, therefore for every product there is a relation between the product and the assigned taxon.
 What is more, every product can have a specific position in the taxon to which it belongs. To put products in a specific order
-you will need to call the ``/api/v1/taxons/{code}/products`` endpoint wih the ``PUT`` method.
+you will need to call the ``/api/v1/taxons/{code}/products`` endpoint with the ``PUT`` method.
 
 Definition
 ^^^^^^^^^^

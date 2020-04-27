@@ -160,7 +160,7 @@ This first requires a :doc:`custom repository method </customization/repository>
 .. note::
 
     The repository method has to return a queryBuilder object, since the query has to adjustable depending on the filters and sorting the user later applies.
-    Furthermore, all sub entities you wish to use later for filtering have to be joined explicitely in the query.
+    Furthermore, all sub entities you wish to use later for filtering have to be joined explicitly in the query.
 
 Then you can set up your filter to accordingly:
 
