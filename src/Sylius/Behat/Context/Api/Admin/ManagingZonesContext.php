@@ -21,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
@@ -61,6 +62,7 @@ final class ManagingZonesContext implements Context
 
     /**
      * @When I name it :name
+     * @When I rename it to :name
      */
     public function iNameIt(string $name): void
     {
@@ -185,16 +187,23 @@ final class ManagingZonesContext implements Context
      */
     public function iRemoveTheCountryMember(CountryInterface $country): void
     {
-        /** @var ZoneInterface $zone */
-        $zone = $this->sharedStorage->get('zone');
-        $countryIri = $this->iriConverter->getIriFromItem($country);
+        $this->removeZoneMember($country);
+    }
 
-        $members = $this->responseChecker->getValue($this->client->show($zone->getCode(), 'members'));
-        foreach ($members as $key => $member) {
-            if ($countryIri === $member) {
-                $this->client->removeSubResource('members', $member);
-            }
-        }
+    /**
+     * @When I remove the :province province member
+     */
+    public function iRemoveTheProvinceMember(ProvinceInterface $province): void
+    {
+        $this->removeZoneMember($province);
+    }
+
+    /**
+     * @When I remove the :zoneName zone member
+     */
+    public function iRemoveTheZoneMember(ZoneInterface $zoneName): void
+    {
+        $this->removeZoneMember($zoneName);
     }
 
     /**
@@ -215,6 +224,34 @@ final class ManagingZonesContext implements Context
             'code',
             $country->getCode()
         ));
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->addRequestData('code', 'NEW_CODE');
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist'
+        );
+    }
+
+    /**
+     * @Then I can not add a zone :zoneName
+     */
+    public function iCanNotAddAZone(ZoneInterface $zoneName): void
+    {
+        $this->client->addSubResourceData('members', [
+            'code' => $zoneName->getCode(),
+        ]);
+
+        Assert::contains(
+            $this->responseChecker->getError($this->client->update()),
+            'members: Chosen zone member is already in this zone.'
+        );
     }
 
     /**
@@ -318,7 +355,18 @@ final class ManagingZonesContext implements Context
             $zoneMember->getCode()
         ));
 
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->subResourceIndex('members', $zone->getCode())), 1);
+    }
+
+    /**
+     * @Then /^(this zone) name should be "([^"]*)"$/
+     */
+    public function thisZoneNameShouldBe(ZoneInterface $zone, string $name): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->show($zone->getCode()), 'name', $name),
+            sprintf('Its Zone does not have name %s.', $name)
+        );
     }
 
     /**
@@ -417,5 +465,22 @@ final class ManagingZonesContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'members: Please add at least 1 zone member.'
         );
+    }
+
+    /**
+     * @param CountryInterface|ZoneInterface|ProvinceInterface $objectToRemove
+     */
+    private function removeZoneMember($objectToRemove): void
+    {
+        /** @var ZoneInterface $zone */
+        $zone = $this->sharedStorage->get('zone');
+        $iri = $this->iriConverter->getItemIriFromResourceClass(ZoneMember::class, ['code' => $objectToRemove->getCode()]);
+
+        $members = $this->responseChecker->getValue($this->client->show($zone->getCode()), 'members');
+        foreach ($members as $key => $member) {
+            if ($iri === $member) {
+                $this->client->removeSubResource('members', $member);
+            }
+        }
     }
 }

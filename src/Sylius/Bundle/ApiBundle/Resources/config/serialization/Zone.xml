@@ -26,6 +26,7 @@
         <attribute name="name">
             <group>zone:read</group>
             <group>zone:create</group>
+            <group>zone:update</group>
         </attribute>
         <attribute name="type">
             <group>zone:read</group>
