@@ -36,23 +36,20 @@ final class SalesDataProvider implements SalesDataProviderInterface
 
     public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
     {
-        $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
-        $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
-        $channelId = $channel->getId();
+        $startDate = (new \DateTime('first day of next month last year'));
+        $startDate->setTime(0,0,0);
+        $endDate = (new \DateTime('last day of this month'));
+        $endDate->setTime(23,59,59);
 
-        $query = $this->entityManager->getConnection()->query(
-            "SELECT
-                DATE_FORMAT(checkout_completed_at, '%m.%y') AS \"date\",
-                SUM(total) as \"total\"
-            FROM sylius_order
-            WHERE (channel_id = $channelId)
-            AND (checkout_completed_at BETWEEN '$startDate' AND '$endDate')
-            AND (payment_state = 'paid')
-            GROUP BY date;"
-        );
-
-        $query->execute();
-        $result = $query->fetchAll();
+        $qb = $this->orderRepository->createQueryBuilder('so');
+        $qb->select("date_format(so.checkoutCompletedAt, '%m.%y') AS date, SUM(so.total) as total")
+            ->where($qb->expr()->eq('so.channel', ':channel'))
+            ->andWhere('so.checkoutCompletedAt BETWEEN :startDate AND :endDate')
+            ->groupBy('date')
+            ->setParameter('channel', $channel)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
+        $result = $qb->getQuery()->getScalarResult();
 
         $data = [];
         foreach ($result as $item) {
@@ -60,8 +57,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
         }
 
         return new SalesSummary(
-            (new \DateTime('first day of next month last year')),
-            (new \DateTime('last day of this month')),
+            $startDate,
+            $endDate,
             $data
         );
     }
