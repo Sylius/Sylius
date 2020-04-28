@@ -142,6 +142,7 @@ security:
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
 
         - { path: "%sylius.security.new_api_admin_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_admin_regex%/taxons", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
 
         - { path: "%sylius.security.new_api_shop_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -15,30 +15,40 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-final class TaxonFromChannelMenuTaxonCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+final class TaxonCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
+    /** @var UserContextInterface */
+    private $userContext;
+
+    public function __construct(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext)
     {
         $this->taxonRepository = $taxonRepository;
+        $this->userContext = $userContext;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return is_a($resourceClass, TaxonInterface::class, true) && $operationName === 'get_from_menu_taxon';
+        return is_a($resourceClass, TaxonInterface::class, true);
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
+
+        $user = $this->userContext->getUser();
+        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles())) {
+            return $this->taxonRepository->findAll();
+        }
 
         return $this->taxonRepository->findChildrenByChannelMenuTaxon($channelMenuTaxon);
     }

@@ -10,6 +10,7 @@
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
+                <attribute>taxon:read</attribute>
                 <attribute>taxon_translation:read</attribute>
             </attribute>
         </attribute>
