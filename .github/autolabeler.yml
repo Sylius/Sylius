@@ -1,4 +1,4 @@
+Admin: ['src/Sylius/Bundle/AdminBundle/']
 Documentation: ['docs/']
 Maintenance: ['etc/', '.travis.yml', '.symfony.insight.yaml', 'UPGRADE-*', 'README.md']
-Admin: ['src/Bundle/AdminBundle/']
-Shop: ['src/Bundle/ShopBundle/']
+Shop: ['src/Sylius/Bundle/ShopBundle/']
