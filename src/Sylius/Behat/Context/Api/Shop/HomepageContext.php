@@ -75,9 +75,11 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true)['hydra:member'];
-        $menuItems = array_column(array_column(array_column($response, 'translations'), 'en_US'), 'name');
+        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        Assert::keyExists($response, 'hydra:member');
+        $menuItems = array_column(array_column(array_column($response['hydra:member'], 'translations'), 'en_US'), 'name');
 
+        Assert::notEmpty($menuItems);
         Assert::allOneOf($menuItems, $expectedMenuItems);
     }
 

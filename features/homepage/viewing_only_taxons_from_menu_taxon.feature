@@ -26,7 +26,7 @@ Feature: Viewing only taxons from the menu taxon
         And I should not see "T-Shirts" and "Guns" in the menu
         And I should not see "Rifles" and "Revolvers" in the menu
 
-    @ui @api
+    @ui
     Scenario: Seeing correct taxons after switching the channel
         Given the store operates on another channel named "Poland"
         And channel "United States" has menu taxon "Guns"
