@@ -21,9 +21,13 @@
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.context.user" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
+            <argument type="service" id="security.token_storage" />
+        </service>
+
         <service id="sylius.api.collection_data_provider.taxon" class="Sylius\Bundle\ApiBundle\DataProvider\TaxonCollectionDataProvider">
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="sylius.api.context.user" />
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
     </services>

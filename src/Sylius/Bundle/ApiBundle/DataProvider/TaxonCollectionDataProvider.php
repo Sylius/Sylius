@@ -15,10 +15,10 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class TaxonCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
@@ -26,13 +26,13 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
     /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    /** @var UserContextInterface */
+    private $userContext;
 
-    public function __construct(TaxonRepositoryInterface $taxonRepository, TokenStorageInterface $tokenStorage)
+    public function __construct(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext)
     {
         $this->taxonRepository = $taxonRepository;
-        $this->tokenStorage = $tokenStorage;
+        $this->userContext = $userContext;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -45,8 +45,8 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
 
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user !== 'anon.' && in_array('ROLE_API_ACCESS', $user->getRoles())) {
+        $user = $this->userContext->getUser();
+        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles())) {
             return $this->taxonRepository->findAll();
         }
 
