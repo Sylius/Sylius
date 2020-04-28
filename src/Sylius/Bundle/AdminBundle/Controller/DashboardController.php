@@ -76,7 +76,14 @@ final class DashboardController
         $data = ['statistics' => $statistics, 'channel' => $channel];
 
         if ($this->salesDataProvider !== null) {
-            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            $startDate = $request->query->get('startDate');
+            $endDate = $request->query->get('endDate');
+            $interval = $request->query->get('interval');
+            $dateFormat = $request->query->get('dateFormat');
+            $data['sales_summary'] = $this
+                ->salesDataProvider
+                ->getSalesSummary($startDate, $endDate, $interval, $channel, $dateFormat)
+            ;
             $data['currency'] = $channel->getBaseCurrency()->getCode();
         }
 

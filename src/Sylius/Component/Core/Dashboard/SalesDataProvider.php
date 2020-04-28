@@ -29,21 +29,30 @@ final class SalesDataProvider implements SalesDataProviderInterface
         $this->entityManager = $entityManager;
     }
 
-    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
-    {
-        $startDate = (new \DateTime('first day of next month last year'))->format('Y/m/d');
-        $endDate = (new \DateTime('last day of this month'))->format('Y/m/d');
+    public function getSalesSummary(
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        string $period,
+        ChannelInterface $channel,
+        string $dateFormat
+    ): SalesSummaryInterface {
+        $formattedStartDate = $startDate->format('Y/m/d H:i:s');
+        $formattedEndDate = $endDate->format('Y/m/d H:i:s');
         $channelId = $channel->getId();
 
         $query = $this->entityManager->getConnection()->query(
             "SELECT
-                DATE_FORMAT(checkout_completed_at, '%m.%y') AS \"date\",
-                SUM(total) as \"total\"
+                DATE_FORMAT(checkout_completed_at, '%m.%y') AS date,
+                DATE_FORMAT(checkout_completed_at, '%y.%m') as month,
+                DATE_FORMAT(checkout_completed_at, '%y.%m.%d') as day,
+                DATE_FORMAT(checkout_completed_at, '%y.%m.%d %H') as hour,
+                DATE_FORMAT(checkout_completed_at, '%y') as year,
+            SUM(total) as total
             FROM sylius_order
             WHERE (channel_id = $channelId)
-            AND (checkout_completed_at BETWEEN '$startDate' AND '$endDate')
+            AND (checkout_completed_at BETWEEN '$formattedStartDate' AND '$formattedEndDate')
             AND (payment_state = 'paid')
-            GROUP BY date;"
+            GROUP BY '$period';"
         );
 
         $query->execute();
@@ -54,10 +63,6 @@ final class SalesDataProvider implements SalesDataProviderInterface
             $data[$item['date']] = (int) $item['total'];
         }
 
-        return new SalesSummary(
-            (new \DateTime('first day of next month last year')),
-            (new \DateTime('last day of this month')),
-            $data
-        );
+        return new SalesSummary($startDate, $endDate, $period, $data, $dateFormat);
     }
 }

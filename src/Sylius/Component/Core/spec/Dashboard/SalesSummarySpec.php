@@ -26,7 +26,7 @@ final class SalesSummarySpec extends ObjectBehavior
         );
     }
 
-    function it_has_months_list(): void
+    function it_has_periods_list(): void
     {
         $this->getMonths()->shouldReturn(
             ['02.10', '03.10', '04.10', '05.10', '06.10', '07.10', '08.10', '09.10', '10.10', '11.10', '12.10', '01.11']

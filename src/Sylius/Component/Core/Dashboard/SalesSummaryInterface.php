@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Dashboard;
 
 interface SalesSummaryInterface
 {
-    public function getMonths(): array;
+    public function getPeriods(): array;
 
     public function getSales(): array;
 }
