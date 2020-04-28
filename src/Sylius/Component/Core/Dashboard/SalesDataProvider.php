@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Dashboard;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
  * @experimental
@@ -24,9 +25,13 @@ final class SalesDataProvider implements SalesDataProviderInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, OrderRepositoryInterface $orderRepository)
     {
         $this->entityManager = $entityManager;
+        $this->orderRepository = $orderRepository;
     }
 
     public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
