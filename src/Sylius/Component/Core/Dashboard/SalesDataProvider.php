@@ -37,12 +37,12 @@ final class SalesDataProvider implements SalesDataProviderInterface
     public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
     {
         $startDate = (new \DateTime('first day of next month last year'));
-        $startDate->setTime(0,0,0);
+        $startDate->setTime(0, 0, 0);
         $endDate = (new \DateTime('last day of this month'));
-        $endDate->setTime(23,59,59);
+        $endDate->setTime(23, 59, 59);
 
         $qb = $this->orderRepository->createQueryBuilder('so');
-        $qb->select("date_format(so.checkoutCompletedAt, '%m.%y') AS date, SUM(so.total) as total")
+        $qb->select($this->getSelectStatement())
             ->where($qb->expr()->eq('so.channel', ':channel'))
             ->andWhere('so.checkoutCompletedAt BETWEEN :startDate AND :endDate')
             ->groupBy('date')
@@ -61,5 +61,21 @@ final class SalesDataProvider implements SalesDataProviderInterface
             $endDate,
             $data
         );
+    }
+
+    /**
+     * add DATE_FORMAT support for postgres by using
+     * DoctrineExtensions\Query\Postgresql\DateFormat in doctrine configuration
+     *
+     * @return string
+     */
+    private function getSelectStatement()
+    {
+        $dateFormat = '%m.%y';
+        if ($this->entityManager->getConnection()->getDatabasePlatform()->getName() == 'postgresql') {
+            $dateFormat = 'mm.yyyy';
+        }
+
+        return "DATE_FORMAT(so.checkoutCompletedAt, '" . $dateFormat . "') AS date, SUM(so.total) as total";
     }
 }
