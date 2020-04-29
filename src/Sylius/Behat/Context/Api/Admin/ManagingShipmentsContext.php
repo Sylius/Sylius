@@ -20,7 +20,10 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
@@ -35,14 +38,19 @@ final class ManagingShipmentsContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var RepositoryInterface */
+    private $shipmentUnitRepository;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        RepositoryInterface $shipmentUnitRepository
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->shipmentUnitRepository = $shipmentUnitRepository;
     }
 
     /**
@@ -75,6 +83,14 @@ final class ManagingShipmentsContext implements Context
     public function iFilter(): void
     {
         $this->client->filter();
+    }
+
+    /**
+     * @When I view the first shipment of the order :order
+     */
+    public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
+    {
+        $this->client->show((string) $order->getShipments()->first()->getId());
     }
 
     /**
@@ -209,6 +225,28 @@ final class ManagingShipmentsContext implements Context
             $this->isShipmentForOrder($order),
             sprintf('There is shipment for order %s', $order->getNumber())
         );
+    }
+
+    /**
+     * @Then I should see :amount :product units in the list
+     */
+    public function iShouldSeeUnitsInTheList(int $amount, ProductInterface $product): void
+    {
+        $shipmentUnitsFromResponse = $this->responseChecker->getResponseContent($this->client->getLastResponse())['units'];
+
+        $productUnitsCounter = 0;
+        foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
+            /** @var ShipmentUnitInterface $shipmentUnit */
+            $shipmentUnit = $this->shipmentUnitRepository->findOneBy(['id' => explode('/', $shipmentUnitFromResponse)[4]]);
+            /** @var ProductInterface $productFromResponse */
+            $productFromResponse = $shipmentUnit->getShippable()->getProduct();
+
+            if ($productFromResponse->getCode() === $product->getCode()) {
+                ++$productUnitsCounter;
+            }
+        }
+
+        Assert::same($productUnitsCounter, $amount);
     }
 
     private function isShipmentForOrder(OrderInterface $order): bool
