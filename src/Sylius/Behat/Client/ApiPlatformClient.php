@@ -174,9 +174,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(RequestInterface $request): Response
     {
-        try {
+        if ($this->sharedStorage->has('hostname')) {
             $this->client->setServerParameter('HTTP_HOST', $this->sharedStorage->get('hostname'));
-        } catch (\InvalidArgumentException $exception) {
         }
 
         $this->client->request(
