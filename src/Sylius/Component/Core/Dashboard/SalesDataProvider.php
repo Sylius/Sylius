@@ -32,7 +32,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
     public function getSalesSummary(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        string $period,
+        string $interval,
         ChannelInterface $channel,
         string $dateFormat
     ): SalesSummaryInterface {
@@ -41,18 +41,19 @@ final class SalesDataProvider implements SalesDataProviderInterface
         $channelId = $channel->getId();
 
         $query = $this->entityManager->getConnection()->query(
-            "SELECT
+            "
+            SELECT
                 DATE_FORMAT(checkout_completed_at, '%m.%y') AS date,
-                DATE_FORMAT(checkout_completed_at, '%y.%m') as month,
-                DATE_FORMAT(checkout_completed_at, '%y.%m.%d') as day,
-                DATE_FORMAT(checkout_completed_at, '%y.%m.%d %H') as hour,
-                DATE_FORMAT(checkout_completed_at, '%y') as year,
+                DATE_FORMAT(checkout_completed_at, '%y.%m') AS month,
+                DATE_FORMAT(checkout_completed_at, '%y.%m.%d') AS day,
+                DATE_FORMAT(checkout_completed_at, '%y.%m.%d %H') AS hour,
+                DATE_FORMAT(checkout_completed_at, '%y') AS year,
             SUM(total) as total
             FROM sylius_order
             WHERE (channel_id = $channelId)
             AND (checkout_completed_at BETWEEN '$formattedStartDate' AND '$formattedEndDate')
             AND (payment_state = 'paid')
-            GROUP BY '$period';"
+            GROUP BY '$interval', checkout_completed_at;"
         );
 
         $query->execute();
@@ -60,9 +61,9 @@ final class SalesDataProvider implements SalesDataProviderInterface
 
         $data = [];
         foreach ($result as $item) {
-            $data[$item['date']] = (int) $item['total'];
+            $data[$item[$interval]] = (int) $item['total'];
         }
 
-        return new SalesSummary($startDate, $endDate, $period, $data, $dateFormat);
+        return new SalesSummary($startDate, $endDate, $interval, $data, $dateFormat);
     }
 }

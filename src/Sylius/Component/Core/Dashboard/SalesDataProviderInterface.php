@@ -20,7 +20,7 @@ interface SalesDataProviderInterface
     public function getSalesSummary(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        string $period,
+        string $interval,
         ChannelInterface $channel,
         string $dateFormat
     ): SalesSummaryInterface;

@@ -24,14 +24,14 @@ final class SalesSummary implements SalesSummaryInterface
     public function __construct(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        string $period,
+        string $interval,
         array $salesData,
         string $dateFormat
     ) {
-        $period = new \DatePeriod($startDate, \DateInterval::createFromDateString($period), $endDate);
+        $interval = new \DatePeriod($startDate, \DateInterval::createFromDateString(sprintf('1 %s ', $interval)), $endDate);
 
         /** @var \DateTimeInterface $date */
-        foreach ($period as $date) {
+        foreach ($interval as $date) {
             $periodName = $date->format($dateFormat);
             if (!isset($salesData[$periodName])) {
                 $salesData[$periodName] = 0;
@@ -42,12 +42,12 @@ final class SalesSummary implements SalesSummaryInterface
             return \DateTime::createFromFormat('m.y', $date1) <=> \DateTime::createFromFormat('m.y', $date2);
         });
 
-        foreach ($salesData as $period => $sales) {
-            $this->monthsSalesMap[$period] = number_format(abs($sales / 100), 2, '.', '');
+        foreach ($salesData as $interval => $sales) {
+            $this->monthsSalesMap[$interval] = number_format(abs($sales / 100), 2, '.', '');
         }
     }
 
-    public function getPeriods(): array
+    public function getIntervals(): array
     {
         return array_keys($this->monthsSalesMap);
     }
