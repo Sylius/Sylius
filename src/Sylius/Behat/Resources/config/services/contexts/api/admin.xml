@@ -19,7 +19,7 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
-            <argument type="service" id="sylius.behat.client.api_platform_security_client" />
+            <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_administrators" class="Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext">

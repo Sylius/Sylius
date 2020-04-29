@@ -30,7 +30,7 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.login" class="Sylius\Behat\Context\Api\Shop\LoginContext">
-            <argument type="service" id="sylius.behat.client.api_platform_security_client" />
+            <argument type="service" id="sylius.behat.client.shop_api_platform_security_client" />
         </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
