@@ -61,7 +61,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/admin/authentication-token' => [
+                '/new-api/admin-user-authentication-token' => [
                     'post' => [
                         'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',
