@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
@@ -75,11 +76,10 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When /^I want to edit (this country)$/
-     * @When I want to create a new province in country :country
+     * @When /^I want to create a new province in (country "([^"]+)")$/
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
-        $this->sharedStorage->set('country', $country);
         $this->client->buildUpdateRequest($country->getCode());
     }
 
@@ -159,25 +159,12 @@ final class ManagingCountriesContext implements Context
     {
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
+        $iri = $this->iriConverter->getItemIriFromResourceClass(Province::class, ['code' => $province->getCode()]);
 
-        foreach ($country->getProvinces() as $key => $provinceValue) {
-            if ($province->getId() === $provinceValue->getId()) {
-                $this->client->removeSubResource('provinces', $key);
-            }
-        }
-    }
-
-    /**
-     * @When I remove :province province name
-     */
-    public function iRemoveProvinceName(ProvinceInterface $province)
-    {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
-
-        foreach ($country->getProvinces() as $key => $provinceValue) {
-            if ($province->getId() === $provinceValue->getId()) {
-                $this->client->updateSubResource('provinces', $key, ['code' => $provinceValue->getCode(), 'name' => '']);
+        $provinces = $this->responseChecker->getValue($this->client->show($country->getCode()), 'provinces');
+        foreach ($provinces as $countryProvince) {
+            if ($iri === $countryProvince) {
+                $this->client->removeSubResource('provinces', $countryProvince);
             }
         }
     }
@@ -186,7 +173,7 @@ final class ManagingCountriesContext implements Context
      * @When I do not specify the province code
      * @When I do not name the province
      */
-    public function iDoNotSpecifyTheProvinceCode()
+    public function iDoNotSpecifyTheProvinceCode(): void
     {
         // Intentionally left blank
     }
@@ -291,12 +278,10 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then province with code :provinceCode should not be added in this country
+     * @Then /^province with code ("[^"]*") should not be added in (this country)$/
      */
-    public function provinceWithCodeShouldNotBeAddedInThisCountry(string $provinceCode)
+    public function provinceWithCodeShouldNotBeAddedInThisCountry(string $provinceCode, CountryInterface $country): void
     {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
         /** @var ProvinceInterface $province */
         foreach ($this->getProvincesOfCountry($country) as $province) {
             Assert::false(

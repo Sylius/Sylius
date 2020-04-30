@@ -55,7 +55,5 @@ interface RequestInterface
 
     public function addSubResource(string $key, array $subResource): void;
 
-    public function updateSubResource(string $subResource, int $key, array $value): void;
-
-    public function removeSubResource(string $subResource, int $key): void;
+    public function removeSubResource(string $subResource, string $id): void;
 }

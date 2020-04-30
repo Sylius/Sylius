@@ -26,7 +26,7 @@ Feature: Province validation
         Then I should be notified that name is required
         And province with code "GB-SCT" should not be added in this country
 
-    @ui @javascript @api
+    @ui @javascript
     Scenario: Trying to remove name from an existing province
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         When I want to edit this country
