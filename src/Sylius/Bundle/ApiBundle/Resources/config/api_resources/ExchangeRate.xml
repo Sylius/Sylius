@@ -26,6 +26,7 @@
 
         <collectionOperations>
             <collectionOperation name="get" >
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.exchange_rate_filter</attribute>
                 </attribute>

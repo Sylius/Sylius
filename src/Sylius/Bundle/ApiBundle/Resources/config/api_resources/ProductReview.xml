@@ -51,6 +51,7 @@
             </itemOperation>
 
             <itemOperation name="accept">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
@@ -61,6 +62,7 @@
             </itemOperation>
 
             <itemOperation name="reject">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>
