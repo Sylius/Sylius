@@ -22,7 +22,6 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
@@ -32,25 +31,34 @@ final class ManagingShipmentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $shipmentUnitClient;
+
+    /** @var ApiClientInterface */
+    private $productClient;
+
+    /** @var ApiClientInterface */
+    private $productVariantClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
     /** @var IriConverterInterface */
     private $iriConverter;
 
-    /** @var RepositoryInterface */
-    private $shipmentUnitRepository;
-
     public function __construct(
         ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        RepositoryInterface $shipmentUnitRepository
+        ApiClientInterface $shipmentUnitClient,
+        ApiClientInterface $productClient,
+        ApiClientInterface $productVariantClient,
+        ResponseCheckerInterface $responseChecker, IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
+        $this->shipmentUnitClient = $shipmentUnitClient;
+        $this->productClient = $productClient;
+        $this->productVariantClient = $productVariantClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
-        $this->shipmentUnitRepository = $shipmentUnitRepository;
     }
 
     /**
@@ -232,16 +240,21 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeUnitsInTheList(int $amount, ProductInterface $product): void
     {
-        $shipmentUnitsFromResponse = $this->responseChecker->getResponseContent($this->client->getLastResponse())['units'];
+        $shipmentUnitsFromResponse = $this->responseChecker->getValue($this->client->getLastResponse(), 'units');
 
         $productUnitsCounter = 0;
         foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
-            /** @var ShipmentUnitInterface $shipmentUnit */
-            $shipmentUnit = $this->shipmentUnitRepository->findOneBy(['id' => explode('/', $shipmentUnitFromResponse)[4]]);
-            /** @var ProductInterface $productFromResponse */
-            $productFromResponse = $shipmentUnit->getShippable()->getProduct();
+            $shipmentUnitResponse = $this->shipmentUnitClient->showByIri($shipmentUnitFromResponse);
+            $productVariantResponse = $this->productVariantClient->show(
+                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['id']
+            );
+            $productResponse = $this->productClient->show(
+                $this->responseChecker->getValue($productVariantResponse, 'id')
+            );
 
-            if ($productFromResponse->getCode() === $product->getCode()) {
+            $productNameFromResponse = $this->responseChecker->getValue($productResponse, 'name');
+
+            if ($productNameFromResponse === $product->getName()) {
                 ++$productUnitsCounter;
             }
         }

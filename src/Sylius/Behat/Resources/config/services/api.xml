@@ -73,6 +73,12 @@
             <argument>product-reviews</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.product_variant" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>product-variants</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.product" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -101,6 +107,12 @@
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>shipments</argument>
+        </service>
+
+        <service id="sylius.behat.api_platform_client.shipment_unit" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>shipment-units</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.order" class="Sylius\Behat\Client\ApiPlatformClient">

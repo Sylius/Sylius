@@ -113,9 +113,11 @@
 
         <service id="sylius.behat.context.api.admin.managing_shipments" class="Sylius\Behat\Context\Api\Admin\ManagingShipmentsContext">
             <argument type="service" id="sylius.behat.api_platform_client.shipment" />
+            <argument type="service" id="sylius.behat.api_platform_client.shipment_unit" />
+            <argument type="service" id="sylius.behat.api_platform_client.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.product_variant" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="sylius.repository.shipment_unit" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_orders" class="Sylius\Behat\Context\Api\Admin\ManagingOrdersContext">
