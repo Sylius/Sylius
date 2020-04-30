@@ -23,6 +23,17 @@
             <join-column name="shipment_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
+        <many-to-many field="shippable" target-entity="Sylius\Component\">
+            <join-table name="sylius_shipment_unit_shippable">
+                <join-columns>
+                    <join-column/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

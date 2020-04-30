@@ -15,10 +15,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="%sylius.model.shipment_unit.class%" shortName="ShipmentUnit">
+    <resource class="%sylius.model.order_item_unit.class%" shortName="OrderItemUnit">
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>shipment_unit:read</attribute>
+                <attribute>order_item_unit:read</attribute>
             </attribute>
         </attribute>
 

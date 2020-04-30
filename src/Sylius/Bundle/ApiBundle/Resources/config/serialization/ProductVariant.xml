@@ -15,12 +15,12 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Component\Shipping\Model\ShipmentUnit">
+    <class name="Sylius\Component\Core\Model\ProductVariant">
         <attribute name="id">
-            <group>shipment_unit:read</group>
+            <group>product_variant:read</group>
         </attribute>
-        <attribute name="shippable">
-            <group>shipment_unit:read</group>
+        <attribute name="product">
+            <group>product_variant:read</group>
         </attribute>
     </class>
 </serializer>
