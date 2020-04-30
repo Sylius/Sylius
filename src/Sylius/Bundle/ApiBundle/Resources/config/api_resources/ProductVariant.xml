@@ -5,8 +5,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
@@ -15,7 +13,9 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

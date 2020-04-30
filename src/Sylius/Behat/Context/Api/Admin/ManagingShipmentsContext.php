@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ApiIriClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -31,7 +32,7 @@ final class ManagingShipmentsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ApiClientInterface */
+    /** @var ApiIriClientInterface */
     private $iriClient;
 
     /** @var ResponseCheckerInterface */
@@ -42,7 +43,7 @@ final class ManagingShipmentsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $iriClient,
+        ApiIriClientInterface $iriClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter
     ) {
