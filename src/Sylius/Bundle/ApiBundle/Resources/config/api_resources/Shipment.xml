@@ -36,6 +36,7 @@
 
         <collectionOperations>
             <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
@@ -47,6 +48,7 @@
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
             </itemOperation>
             <itemOperation name="ship">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>

@@ -34,7 +34,9 @@
             <collectionOperation name="get">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
             </collectionOperation>
-            <collectionOperation name="post" />
+            <collectionOperation name="post">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
