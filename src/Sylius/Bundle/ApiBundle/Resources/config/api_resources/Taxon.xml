@@ -14,11 +14,9 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
-                <attribute name="path">admin/taxons</attribute>
-            </collectionOperation>
+            <collectionOperation name="get" />
             <collectionOperation name="post">
-                <attribute name="path">admin/taxons</attribute>
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">taxon:create</attribute>
                 </attribute>
@@ -27,10 +25,12 @@
 
         <itemOperations>
             <itemOperation name="get">
-                <attribute name="path">admin/taxons/{id}</attribute>
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="path">/taxons/{id}</attribute>
             </itemOperation>
             <itemOperation name="put">
-                <attribute name="path">admin/taxons/{id}</attribute>
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="path">/taxons/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">taxon:update</attribute>
                 </attribute>

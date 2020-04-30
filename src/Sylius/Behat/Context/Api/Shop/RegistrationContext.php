@@ -103,7 +103,7 @@ final class RegistrationContext implements Context
     {
         $this->client->request(
             'POST',
-            '/new-api/shop/register',
+            '/new-api/register',
             [],
             [],
             ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json'],

@@ -35,7 +35,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf('/new-api/%s/authentication-token', $this->section);
+        $this->request['url'] = sprintf('/new-api/%s-user-authentication-token', $this->section);
         $this->request['method'] = 'POST';
     }
 

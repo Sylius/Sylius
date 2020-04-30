@@ -51,7 +51,7 @@ final class HomepageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction('new-api/shop/products/latest', HttpRequest::METHOD_GET);
+        $this->productsClient->customAction('new-api/products/latest', HttpRequest::METHOD_GET);
     }
 
     /**
@@ -59,7 +59,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('new-api/admin/taxons', HttpRequest::METHOD_GET);
+        $this->taxonsClient->customAction('new-api/taxons', HttpRequest::METHOD_GET);
     }
 
     /**
