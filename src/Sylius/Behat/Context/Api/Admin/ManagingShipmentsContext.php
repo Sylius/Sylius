@@ -32,13 +32,7 @@ final class ManagingShipmentsContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $shipmentUnitClient;
-
-    /** @var ApiClientInterface */
-    private $productClient;
-
-    /** @var ApiClientInterface */
-    private $productVariantClient;
+    private $iriClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -48,15 +42,12 @@ final class ManagingShipmentsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $shipmentUnitClient,
-        ApiClientInterface $productClient,
-        ApiClientInterface $productVariantClient,
-        ResponseCheckerInterface $responseChecker, IriConverterInterface $iriConverter
+        ApiClientInterface $iriClient,
+        ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->shipmentUnitClient = $shipmentUnitClient;
-        $this->productClient = $productClient;
-        $this->productVariantClient = $productVariantClient;
+        $this->iriClient = $iriClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
@@ -244,17 +235,17 @@ final class ManagingShipmentsContext implements Context
 
         $productUnitsCounter = 0;
         foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
-            $shipmentUnitResponse = $this->shipmentUnitClient->showByIri($shipmentUnitFromResponse);
-            $productVariantResponse = $this->productVariantClient->show(
-                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['id']
+            $shipmentUnitResponse = $this->iriClient->showByIri($shipmentUnitFromResponse);
+            $productVariantResponse = $this->iriClient->showByIri(
+                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id']
             );
-            $productResponse = $this->productClient->show(
-                $this->responseChecker->getValue($productVariantResponse, 'id')
+            $productResponse = $this->iriClient->showByIri(
+                $this->responseChecker->getValue($productVariantResponse, 'product')
             );
 
-            $productNameFromResponse = $this->responseChecker->getValue($productResponse, 'name');
+            $productName = $this->responseChecker->getValue($productResponse, 'translations')['en_US']['name'];
 
-            if ($productNameFromResponse === $product->getName()) {
+            if ($productName === $product->getName()) {
                 ++$productUnitsCounter;
             }
         }
