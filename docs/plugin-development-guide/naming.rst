@@ -30,6 +30,8 @@ to reflect your plugin functionality. Basing on the vendor and plugin names esta
 
     * ``Acme\SyliusExamplePlugin`` -> ``IronMan\SyliusProductOnDemandPlugin``
 
+* Don't forget to re-build up the list of files to autoload with ``composer dump-autoload``
+
 That's it! All other files are just a boilerplate to show you what can be done in the Sylius plugin. They can be deleted with no harm:
 
 * All files from ``features/`` directory
