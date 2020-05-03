@@ -10,7 +10,7 @@ Feature: Adding a new channel with shop billing data
         And the store operates in "United States"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new channel with shop billing data
         Given I want to create a new channel
         When I specify its code as "MOBILE"

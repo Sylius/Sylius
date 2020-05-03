@@ -22,7 +22,14 @@
             </attribute>
         </attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
+            <collectionOperation name="post">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="get">
@@ -34,7 +41,26 @@
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" writable="false" readable="true" />
+        <property name="code" identifier="true" required="true" />
         <property name="name" writable="true"  readable="true"/>
+        <property name="description" writable="true"  readable="true"/>
+        <property name="hostname" writable="true"  readable="true"/>
+        <property name="color" writable="true"  readable="true"/>
+        <property name="baseCurrency" writable="true"  readable="true"/>
+        <property name="defaultLocale" writable="true"  readable="true"/>
+        <property name="defaultTaxZone" writable="true"  readable="true"/>
+        <property name="taxCalculationStrategy" writable="true"  readable="true"/>
+        <property name="currencies" writable="true"  readable="true"/>
+        <property name="locales" writable="true"  readable="true"/>
+        <property name="countries" writable="true"  readable="true"/>
+        <property name="themeName" writable="true"  readable="true"/>
+        <property name="contactEmail" writable="true"  readable="true"/>
+        <property name="skippingShippingStepAllowed" writable="true"  readable="true"/>
+        <property name="skippingPaymentStepAllowed" writable="true"  readable="true"/>
+        <property name="accountVerificationRequired" writable="true"  readable="true"/>
+        <property name="shopBillingData" readable="true" writable="true">
+            <subresource resourceClass="Sylius\Component\Core\Model\ShopBillingData" collection="true" />
+        </property>
+        <property name="menuTaxon" writable="true"  readable="true"/>
     </resource>
 </resources>

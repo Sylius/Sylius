@@ -40,6 +40,7 @@ final class CountryContext implements Context
      * @Transform /^"([^"]+)" as shipping country$/
      * @Transform /^"([^"]+)" as billing country$/
      * @Transform :country
+     * @Transform :otherCountry
      */
     public function getCountryByName($countryName)
     {

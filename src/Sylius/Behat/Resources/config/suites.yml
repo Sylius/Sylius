@@ -6,6 +6,7 @@ imports:
     - suites/api/account/customer_registration.yml
     - suites/api/account/login.yml
     - suites/api/admin/login.yml
+    - suites/api/channel/managing_channels.yml
     - suites/api/currency/managing_currencies.yml
     - suites/api/currency/managing_exchange_rates.yml
     - suites/api/homepage/viewing_products.yml
