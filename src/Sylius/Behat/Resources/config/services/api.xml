@@ -128,5 +128,10 @@
             <argument type="service" id="test.client" />
             <argument>shop</argument>
         </service>
+
+        <service id="sylius.behat.api_platform_client.iri" class="Sylius\Behat\Client\ApiPlatformIriClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
     </services>
 </container>
