@@ -13,55 +13,58 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
  * @experimental
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    /** @var OrderRepositoryInterface|EntityRepository */
+    private $orderRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->orderRepository = $orderRepository;
     }
 
-    public function getSalesSummary(
+    function getSalesSummary(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
         string $interval,
         ChannelInterface $channel,
         string $dateFormat
     ): SalesSummaryInterface {
-        $formattedStartDate = $startDate->format('Y/m/d H:i:s');
-        $formattedEndDate = $endDate->format('Y/m/d H:i:s');
-        $channelId = $channel->getId();
-
-        $query = $this->entityManager->getConnection()->query(
-            "
-            SELECT
-                DATE_FORMAT(checkout_completed_at, '%m.%y') AS date,
-                DATE_FORMAT(checkout_completed_at, '%y.%m') AS month,
-                DATE_FORMAT(checkout_completed_at, '%y.%m.%d') AS day,
-                DATE_FORMAT(checkout_completed_at, '%y.%m.%d %H') AS hour,
-                DATE_FORMAT(checkout_completed_at, '%y') AS year,
-            SUM(total) as total
-            FROM sylius_order
-            WHERE (channel_id = $channelId)
-            AND (checkout_completed_at BETWEEN '$formattedStartDate' AND '$formattedEndDate')
-            AND (payment_state = 'paid')
-            GROUP BY '$interval', checkout_completed_at;"
-        );
-
-        $query->execute();
-        $result = $query->fetchAll();
+        $ordersTotals = $this->orderRepository->createQueryBuilder('o')
+            ->select('HOUR(o.checkoutCompletedAt) AS hour')
+            ->addSelect('DAY(o.checkoutCompletedAt) AS day')
+            ->addSelect('MONTH(o.checkoutCompletedAt) AS month')
+            ->addSelect('YEAR(o.checkoutCompletedAt) AS year')
+            ->addSelect('SUM(o.total) AS total')
+            ->where('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.channel = :channel')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('channel', $channel)
+            ->groupBy($interval)
+            ->addGroupBy('o.checkoutCompletedAt')
+            ->getQuery()
+            ->getResult()
+        ;
 
         $data = [];
-        foreach ($result as $item) {
-            $data[$item[$interval]] = (int) $item['total'];
+
+        foreach ($ordersTotals as $item) {
+            $data[$item[$interval]] = 0;
+        }
+        foreach ($ordersTotals as $item) {
+            $data[$item[$interval]] += (int) $item['total'];
         }
 
         return new SalesSummary($startDate, $endDate, $interval, $data, $dateFormat);

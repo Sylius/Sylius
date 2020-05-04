@@ -25,7 +25,7 @@
             id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface"
             class="Sylius\Component\Core\Dashboard\SalesDataProvider"
         >
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.repository.order" />
         </service>
     </services>
 </container>

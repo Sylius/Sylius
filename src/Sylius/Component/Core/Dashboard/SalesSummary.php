@@ -19,7 +19,7 @@ namespace Sylius\Component\Core\Dashboard;
 final class SalesSummary implements SalesSummaryInterface
 {
     /** @psalm-var array<string, string> */
-    private $monthsSalesMap = [];
+    private $intervalsSalesMap = [];
 
     public function __construct(
         \DateTimeInterface $startDate,
@@ -28,32 +28,32 @@ final class SalesSummary implements SalesSummaryInterface
         array $salesData,
         string $dateFormat
     ) {
-        $interval = new \DatePeriod($startDate, \DateInterval::createFromDateString(sprintf('1 %s ', $interval)), $endDate);
+        $dateIntervals = new \DatePeriod($startDate, \DateInterval::createFromDateString(sprintf('1 %s', $interval)), $endDate);
 
         /** @var \DateTimeInterface $date */
-        foreach ($interval as $date) {
+        foreach ($dateIntervals as $date) {
             $periodName = $date->format($dateFormat);
             if (!isset($salesData[$periodName])) {
                 $salesData[$periodName] = 0;
             }
         }
 
-        uksort($salesData, function (string $date1, string $date2) {
-            return \DateTime::createFromFormat('m.y', $date1) <=> \DateTime::createFromFormat('m.y', $date2);
+        uksort($salesData, function (string $date1, string $date2) use ($dateFormat) {
+            return \DateTime::createFromFormat($dateFormat, $date1) <=> \DateTime::createFromFormat($dateFormat, $date2);
         });
 
         foreach ($salesData as $interval => $sales) {
-            $this->monthsSalesMap[$interval] = number_format(abs($sales / 100), 2, '.', '');
+            $this->intervalsSalesMap[$interval] = number_format(abs($sales / 100), 2, '.', '');
         }
     }
 
     public function getIntervals(): array
     {
-        return array_keys($this->monthsSalesMap);
+        return array_keys($this->intervalsSalesMap);
     }
 
     public function getSales(): array
     {
-        return array_values($this->monthsSalesMap);
+        return array_values($this->intervalsSalesMap);
     }
 }
