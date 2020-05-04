@@ -51,7 +51,7 @@ Replace:
 
     parameters:
         # ...
-        sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++""
+        sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
 
 With:
 
