@@ -82,3 +82,6 @@
     ```
 
 1. All consts classes has been changed from final classes to interfaces. As a result initialization of `\Sylius\Bundle\UserBundle\UserEvents` is not longer possible. The whole list of changed classes can be found [here](https://github.com/Sylius/Sylius/pull/11347).
+
+1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
+The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
