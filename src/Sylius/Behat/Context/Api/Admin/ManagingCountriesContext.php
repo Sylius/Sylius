@@ -153,12 +153,10 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I delete the :province province of this country
+     * @When /^I delete the ("[^"]+" province) of (this country)$/
      */
-    public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province): void
+    public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
         $iri = $this->iriConverter->getItemIriFromResourceClass(Province::class, ['code' => $province->getCode()]);
 
         $provinces = $this->responseChecker->getValue($this->client->show($country->getCode()), 'provinces');
