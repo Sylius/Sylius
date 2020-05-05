@@ -17,7 +17,7 @@ use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
+final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
     /**
      * {@inheritdoc}
