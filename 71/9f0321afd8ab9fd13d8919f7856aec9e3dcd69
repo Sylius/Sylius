@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-23T11:38:14Z
+
+Should be rebased once, master will be fixed
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-04-23T14:26:54Z
+
+@lchrusciel OK. Any ideas how to test this?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-24T09:08:14Z
+
+Master should be fixed now. Can you rebase?
+
+Let's add this change to UPGRADE.md also.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-05T13:48:08Z
+
+Thank you, Victor! :tada:
