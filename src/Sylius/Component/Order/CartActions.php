@@ -13,13 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order;
 
-final class CartActions
+interface CartActions
 {
     public const ADD = 'add';
 
     public const REMOVE = 'remove';
-
-    private function __construct()
-    {
-    }
 }

@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-final class SyliusLocaleEvents
+interface SyliusLocaleEvents
 {
     public const CODE_CHANGED = 'sylius.locale.code_changed';
-
-    private function __construct()
-    {
-    }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-final class Emails
+interface Emails
 {
     public const CONTACT_REQUEST = 'contact_request';
 
@@ -24,8 +24,4 @@ final class Emails
     public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
 
     public const USER_REGISTRATION = 'user_registration';
-
-    private function __construct()
-    {
-    }
 }

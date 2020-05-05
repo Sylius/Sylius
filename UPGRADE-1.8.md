@@ -8,14 +8,14 @@
     +   Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     ```
 
-2. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
+1. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
 
     ```diff
         imports:
     +       - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
     ```
 
-3. Add configuration of new ApiBundle in your `config/packages/security.yaml` file:
+1. Add configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
     ```diff
         parameters:
@@ -73,10 +73,12 @@
     +                       - lexik_jwt_authentication.jwt_token_authenticator
     ```
 
-4. Add `sylius_api.yaml` file to `config/routes/` directory:
+1. Add `sylius_api.yaml` file to `config/routes/` directory:
 
     ```yaml
        sylius_api:
            resource: "@SyliusApiBundle/Resources/config/routing.yml"
            prefix: "%sylius.security.new_api_route%"
     ```
+
+1. All consts classes has been changed from final classes to interfaces. As a result initialization of `\Sylius\Bundle\UserBundle\UserEvents` is not longer possible. The whole list of changed classes can be found [here](https://github.com/Sylius/Sylius/pull/11347).
