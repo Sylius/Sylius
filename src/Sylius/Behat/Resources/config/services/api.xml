@@ -25,6 +25,12 @@
             <argument>avatar-images</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.country" class="Sylius\Behat\Client\ApiPlatformClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>countries</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.currency" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />

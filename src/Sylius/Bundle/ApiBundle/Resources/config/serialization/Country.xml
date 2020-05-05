@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Addressing\Model\Country">
+        <attribute name="id">
+            <group>country:read</group>
+        </attribute>
+        <attribute name="createdAt">
+           <group>country:read</group>
+       </attribute>
+        <attribute name="updatedAt">
+           <group>country:read</group>
+       </attribute>
+       <attribute name="code">
+           <group>country:read</group>
+           <group>country:create</group>
+       </attribute>
+       <attribute name="enabled">
+           <group>country:read</group>
+           <group>country:create</group>
+           <group>country:update</group>
+       </attribute>
+       <attribute name="provinces">
+           <group>country:read</group>
+           <group>country:create</group>
+           <group>country:update</group>
+       </attribute>
+    </class>
+</serializer>
