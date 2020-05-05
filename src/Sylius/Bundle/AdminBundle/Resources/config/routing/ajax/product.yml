@@ -41,5 +41,6 @@ sylius_admin_ajax_product_index:
         _controller: sylius.controller.product:indexAction
         _format: json
         _sylius:
+            serialization_groups: [Default]
             permission: true
             grid: sylius_admin_product
