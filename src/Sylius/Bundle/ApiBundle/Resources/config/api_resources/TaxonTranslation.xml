@@ -5,21 +5,24 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.taxon_translation.class%" shortName="TaxonTranslation">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
+                <attribute>taxon:read</attribute>
                 <attribute>taxon_translation:read</attribute>
             </attribute>
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

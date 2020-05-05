@@ -51,7 +51,7 @@ final class HomepageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction('new-api/shop/products/latest', HttpRequest::METHOD_GET);
+        $this->productsClient->customAction('new-api/products/latest', HttpRequest::METHOD_GET);
     }
 
     /**
@@ -59,7 +59,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('new-api/shop/taxons/from-menu-taxon', HttpRequest::METHOD_GET);
+        $this->taxonsClient->customAction('new-api/taxons', HttpRequest::METHOD_GET);
     }
 
     /**
@@ -76,8 +76,10 @@ final class HomepageContext implements Context
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
         $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
-        $menuItems = array_column($response, 'name');
+        Assert::keyExists($response, 'hydra:member');
+        $menuItems = array_column(array_column(array_column($response['hydra:member'], 'translations'), 'en_US'), 'name');
 
+        Assert::notEmpty($menuItems);
         Assert::allOneOf($menuItems, $expectedMenuItems);
     }
 

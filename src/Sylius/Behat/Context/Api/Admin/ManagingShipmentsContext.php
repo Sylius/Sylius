@@ -16,11 +16,14 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ApiIriClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 
@@ -28,6 +31,9 @@ final class ManagingShipmentsContext implements Context
 {
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiIriClientInterface */
+    private $iriClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -37,10 +43,12 @@ final class ManagingShipmentsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiIriClientInterface $iriClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
+        $this->iriClient = $iriClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
@@ -75,6 +83,14 @@ final class ManagingShipmentsContext implements Context
     public function iFilter(): void
     {
         $this->client->filter();
+    }
+
+    /**
+     * @When I view the first shipment of the order :order
+     */
+    public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
+    {
+        $this->client->show((string) $order->getShipments()->first()->getId());
     }
 
     /**
@@ -209,6 +225,33 @@ final class ManagingShipmentsContext implements Context
             $this->isShipmentForOrder($order),
             sprintf('There is shipment for order %s', $order->getNumber())
         );
+    }
+
+    /**
+     * @Then I should see :amount :product units in the list
+     */
+    public function iShouldSeeUnitsInTheList(int $amount, ProductInterface $product): void
+    {
+        $shipmentUnitsFromResponse = $this->responseChecker->getValue($this->client->getLastResponse(), 'units');
+
+        $productUnitsCounter = 0;
+        foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
+            $shipmentUnitResponse = $this->iriClient->showByIri($shipmentUnitFromResponse);
+            $productVariantResponse = $this->iriClient->showByIri(
+                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id']
+            );
+            $productResponse = $this->iriClient->showByIri(
+                $this->responseChecker->getValue($productVariantResponse, 'product')
+            );
+
+            $productName = $this->responseChecker->getValue($productResponse, 'translations')['en_US']['name'];
+
+            if ($productName === $product->getName()) {
+                ++$productUnitsCounter;
+            }
+        }
+
+        Assert::same($productUnitsCounter, $amount);
     }
 
     private function isShipmentForOrder(OrderInterface $order): bool

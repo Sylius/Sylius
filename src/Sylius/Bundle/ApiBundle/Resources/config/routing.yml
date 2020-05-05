@@ -6,10 +6,10 @@ sylius_api:
     type: api_platform
     prefix: /
 
-sylius_api_admin_authentication_token:
-    path: /admin/authentication-token
+sylius_api_admin_user_authentication_token:
+    path: /admin-user-authentication-token
     methods: ['POST']
 
-sylius_api_shop_authentication_token:
-    path: /shop/authentication-token
+sylius_api_shop_user_authentication_token:
+    path: /shop-user-authentication-token
     methods: ['POST']

@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipment.class%" shortName="Shipment">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipment:read</attribute>
@@ -38,6 +36,7 @@
 
         <collectionOperations>
             <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
@@ -45,8 +44,11 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
             <itemOperation name="ship">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>

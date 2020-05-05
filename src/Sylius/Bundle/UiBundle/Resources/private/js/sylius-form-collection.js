@@ -44,8 +44,9 @@ class CollectionForm {
     event.preventDefault();
 
     let prototype = this.$element.data('prototype');
+    let prototypeName = new RegExp(this.$element.data('prototype-name'), 'g');
 
-    prototype = prototype.replace(/__name__/g, this.count);
+    prototype = prototype.replace(prototypeName, this.count);
 
     this.$list.append(prototype);
     this.count = this.count + 1;
@@ -68,9 +69,10 @@ class CollectionForm {
     if (url) {
       $container.load(url, { id: value, position });
     } else {
-      let prototype = this.$element.find(`[data-form-prototype="${value}"]`).val();
+      let $prototype = this.$element.find(`[data-form-prototype="${value}"]`);
+      let prototypeName = new RegExp($prototype.data('subprototype-name'), 'g');
 
-      prototype = prototype.replace(/__name__/g, index);
+      let prototype = $prototype.val().replace(prototypeName, index);
 
       $container.replaceWith(prototype);
     }

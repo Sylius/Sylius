@@ -110,6 +110,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
         $channel->setTaxCalculationStrategy('order_items_based');
+        $channel->setHostname('us.store.com');
 
         $defaultData = [
             'channel' => $channel,

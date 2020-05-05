@@ -28,7 +28,7 @@ Feature: Viewing only taxons from the menu taxon
 
     @ui @api
     Scenario: Seeing correct taxons after switching the channel
-        Given the store operates on another channel named "Poland"
+        Given the store also operates on a channel named "Poland" with hostname "pl.store.com"
         And channel "United States" has menu taxon "Guns"
         And channel "Poland" has menu taxon "Clothes"
         When I change my current channel to "Poland"

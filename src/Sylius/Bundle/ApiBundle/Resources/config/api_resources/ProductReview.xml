@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_review.class%" shortName="ProductReview">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_review:read</attribute>
@@ -33,19 +31,27 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="delete" />
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+            <itemOperation name="delete">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
             <itemOperation name="put">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_review:update</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="accept">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
@@ -56,6 +62,7 @@
             </itemOperation>
 
             <itemOperation name="reject">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>

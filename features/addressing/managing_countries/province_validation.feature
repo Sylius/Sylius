@@ -8,7 +8,7 @@ Feature: Province validation
         Given the store has country "United Kingdom"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Trying to add a new province without specifying its code
         When I want to create a new province in country "United Kingdom"
         And I name the province "Scotland"
@@ -17,7 +17,7 @@ Feature: Province validation
         Then I should be notified that code is required
         And province with name "Scotland" should not be added in this country
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Trying to add a new province without specifying its name
         When I want to create a new province in country "United Kingdom"
         And I specify the province code as "GB-SCT"

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment;
 
-final class PaymentTransitions
+interface PaymentTransitions
 {
     public const GRAPH = 'sylius_payment';
 
@@ -32,8 +32,4 @@ final class PaymentTransitions
     public const TRANSITION_REFUND = 'refund';
 
     public const TRANSITION_VOID = 'void';
-
-    private function __construct()
-    {
-    }
 }

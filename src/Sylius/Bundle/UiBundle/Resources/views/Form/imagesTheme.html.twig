@@ -7,15 +7,19 @@
 
     {% apply spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
-                {% if prototype is defined and allow_add %}
-                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-                {%- endif -%}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
+            {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
                 {% endfor %}
             {% endif %}
 

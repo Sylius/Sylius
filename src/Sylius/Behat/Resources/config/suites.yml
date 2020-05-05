@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/addressing/managing_countries.yml
     - suites/api/account/customer_registration.yml
     - suites/api/account/login.yml
     - suites/api/admin/login.yml

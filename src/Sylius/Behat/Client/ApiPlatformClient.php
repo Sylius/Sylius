@@ -167,6 +167,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->addSubResource($key, $data);
     }
 
+    public function removeSubResource(string $subResource, string $id): void
+    {
+        $this->request->removeSubResource($subResource, $id);
+    }
+
     public function getLastResponse(): Response
     {
         return $this->client->getResponse();
@@ -174,6 +179,10 @@ final class ApiPlatformClient implements ApiClientInterface
 
     private function request(RequestInterface $request): Response
     {
+        if ($this->sharedStorage->has('hostname')) {
+            $this->client->setServerParameter('HTTP_HOST', $this->sharedStorage->get('hostname'));
+        }
+
         $this->client->request(
             $request->method(),
             $request->url(),

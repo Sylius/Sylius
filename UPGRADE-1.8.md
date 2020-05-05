@@ -8,22 +8,19 @@
     +   Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     ```
 
-2. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
+1. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
 
     ```diff
         imports:
     +       - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
     ```
 
-3. Add configuration of new ApiBundle in your `config/packages/security.yaml` file:
+1. Add configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
     ```diff
         parameters:
     +       sylius.security.new_api_route: "/new-api"
-    +       sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    +       sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    +       sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
+    +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
         
         security:
             providers:
@@ -31,15 +28,18 @@
     +               id: sylius.admin_user_provider.email_or_name_based
     +           sylius_api_shop_user_provider:
     +               id: sylius.shop_user_provider.email_or_name_based
+    +           sylius_api_chain_provider:
+    +               chain:
+    +                   providers: [sylius_api_shop_user_provider, sylius_api_admin_user_provider]
             
             firewalls:
-    +           new_api_admin:
-    +               pattern: "%sylius.security.new_api_admin_regex%/.*"
+    +           new_api_admin_user:
+    +               pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
+    +               provider: sylius_admin_user_provider
     +               stateless: true
     +               anonymous: true
-    +               provider: sylius_api_admin_user_provider
     +               json_login:
-    +                   check_path: "%sylius.security.new_api_admin_route%/authentication-token"
+    +                   check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
     +                   username_path: email
     +                   password_path: password
     +                   success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -47,14 +47,14 @@
     +               guard:
     +                   authenticators:
     +                       - lexik_jwt_authentication.jwt_token_authenticator
-                
-    +           new_api_shop:
-    +               pattern: "%sylius.security.new_api_shop_regex%/.*"
+    +   
+    +           new_api_shop_user:
+    +               pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
+    +               provider: sylius_shop_user_provider
     +               stateless: true
     +               anonymous: true
-    +               provider: sylius_api_shop_user_provider
     +               json_login:
-    +                   check_path: "%sylius.security.new_api_shop_route%/authentication-token"
+    +                   check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
     +                   username_path: email
     +                   password_path: password
     +                   success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -62,16 +62,18 @@
     +               guard:
     +                   authenticators:
     +                       - lexik_jwt_authentication.jwt_token_authenticator
-            
-            access_control:
-    +           - { path: "%sylius.security.new_api_admin_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    +           - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
-    +           - { path: "%sylius.security.new_api_shop_regex%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-    +           - { path: "%sylius.security.new_api_shop_regex%/account", role: ROLE_USER }
-    +           - { path: "%sylius.security.new_api_route%/docs", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +   
+    +           new_api:
+    +               pattern: "%sylius.security.new_api_regex%/*"
+    +               provider: sylius_api_chain_provider
+    +               stateless: true
+    +               anonymous: lazy
+    +               guard:
+    +                   authenticators:
+    +                       - lexik_jwt_authentication.jwt_token_authenticator
     ```
 
-4. Add `sylius_api.yaml` file to `config/routes/` directory:
+1. Add `sylius_api.yaml` file to `config/routes/` directory:
 
     ```yaml
        sylius_api:
@@ -79,5 +81,7 @@
            prefix: "%sylius.security.new_api_route%"
     ```
 
-5. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
+1. All consts classes has been changed from final classes to interfaces. As a result initialization of `\Sylius\Bundle\UserBundle\UserEvents` is not longer possible. The whole list of changed classes can be found [here](https://github.com/Sylius/Sylius/pull/11347).
+
+1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
 The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.

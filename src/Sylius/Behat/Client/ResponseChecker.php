@@ -86,6 +86,18 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
+    /** @param string|int $value */
+    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, $value): bool
+    {
+        foreach ($this->getResponseContentValue($response, $subResource) as $resource) {
+            if ($resource[$key] === $value) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /** @param string|array $value */
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool
     {

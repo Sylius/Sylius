@@ -325,7 +325,7 @@ your application's ``.env`` file:
     WKHTMLTOPDF_PATH=/your-path
     ###< knplabs/knp-snappy-bundle ###
 
-**10.** Copy templates that are overriden by Sylius Plus into ``templates/bundles``:
+**10.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
 
 .. code-block:: bash
 
