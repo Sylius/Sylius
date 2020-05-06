@@ -135,7 +135,7 @@
         "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.2",
         "symfony/web-profiler-bundle": "^4.4",
-        "vimeo/psalm": "3.7.2"
+        "vimeo/psalm": "^3.11"
     },
     "replace": {
         "sylius/addressing": "self.version",
