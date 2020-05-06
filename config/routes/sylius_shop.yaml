@@ -6,6 +6,9 @@ sylius_shop:
 
 sylius_shop_payum:
     resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 
 sylius_shop_default_locale:
     path: /
