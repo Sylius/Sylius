@@ -74,8 +74,8 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2020-01-01 00:00:01');
         $endDate = new \DateTime('2020-12-31 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'month', 'CHANNEL', 'm');
-        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'm');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'month', 'CHANNEL', 'n');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'n');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
         $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
@@ -91,8 +91,8 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2020-01-15 00:00:01');
         $endDate = new \DateTime('2020-01-15 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'hour', 'CHANNEL', 'H');
-        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 hour', 'H');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'hour', 'CHANNEL', 'G');
+        $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 hour', 'G');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
         $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
@@ -105,8 +105,8 @@ final class SalesDataProviderTest extends WebTestCase
     /** @test */
     public function it_provides_different_data_for_each_channel_and_only_paid_orders(): void
     {
-        $startDate = new \DateTime('2020-01-01 00:00:01');
-        $endDate = new \DateTime('2020-12-31 23:59:59');
+        $startDate = new \DateTime('2019-01-01 00:00:01');
+        $endDate = new \DateTime('2019-12-31 23:59:59');
 
         $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'year', 'EXPENSIVE_CHANNEL', 'Y');
         $expectedMonths = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
@@ -114,7 +114,7 @@ final class SalesDataProviderTest extends WebTestCase
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
         $this->assertSame($expectedMonths, $salesSummary->getIntervals());
         $this->assertSame(
-            ['110.00', '110.00'],
+            ['330.00'],
             $salesSummary->getSales()
         );
     }
@@ -143,7 +143,7 @@ final class SalesDataProviderTest extends WebTestCase
 
         /** @var \DateTimeInterface $date */
         foreach ($interval as $date) {
-            $expectedPeriods[] = $date->format($dateFormat);
+            $expectedPeriods[] = (int) $date->format($dateFormat);
         }
 
         return $expectedPeriods;

@@ -26,11 +26,16 @@ final class SalesDataProvider implements SalesDataProviderInterface
     /** @var OrderRepositoryInterface|EntityRepository */
     private $orderRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    /** @var IntervalsConverterInterface */
+    private $intervalsConverter;
+
+    public function __construct(OrderRepositoryInterface $orderRepository, IntervalsConverterInterface $intervalsConverter)
     {
         $this->orderRepository = $orderRepository;
+        $this->intervalsConverter = $intervalsConverter;
     }
 
+    /** @psalm-suppress PossiblyUndefinedMethod */
     function getSalesSummary(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
@@ -67,6 +72,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
             $data[$item[$interval]] += (int) $item['total'];
         }
 
-        return new SalesSummary($startDate, $endDate, $interval, $data, $dateFormat);
+        $dateIntervals = $this->intervalsConverter->getIntervals($startDate, $endDate, $interval);
+
+        return new SalesSummary($dateIntervals, $data, $dateFormat);
     }
 }

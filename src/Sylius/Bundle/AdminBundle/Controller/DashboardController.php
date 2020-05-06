@@ -80,7 +80,7 @@ final class DashboardController
             $startDate = (new \DateTime('first day of next month last year'));
             $endDate = (new \DateTime('last day of this month'));
             $interval = 'month';
-            $dateFormat = 'm';
+            $dateFormat = 'n';
 
             $data['sales_summary'] = $this
                 ->salesDataProvider

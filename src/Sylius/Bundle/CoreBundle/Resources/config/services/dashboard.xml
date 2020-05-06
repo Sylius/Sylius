@@ -26,6 +26,12 @@
             class="Sylius\Component\Core\Dashboard\SalesDataProvider"
         >
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="Sylius\Component\Core\Dashboard\IntervalsConverterInterface" />
         </service>
+
+        <service
+            id="Sylius\Component\Core\Dashboard\IntervalsConverterInterface"
+            class="Sylius\Component\Core\Dashboard\IntervalsConverter"
+        />
     </services>
 </container>

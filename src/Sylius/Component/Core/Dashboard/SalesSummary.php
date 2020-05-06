@@ -22,16 +22,12 @@ final class SalesSummary implements SalesSummaryInterface
     private $intervalsSalesMap = [];
 
     public function __construct(
-        \DateTimeInterface $startDate,
-        \DateTimeInterface $endDate,
-        string $interval,
+        \DatePeriod $datePeriod,
         array $salesData,
         string $dateFormat
     ) {
-        $dateIntervals = new \DatePeriod($startDate, \DateInterval::createFromDateString(sprintf('1 %s', $interval)), $endDate);
-
         /** @var \DateTimeInterface $date */
-        foreach ($dateIntervals as $date) {
+        foreach ($datePeriod as $date) {
             $periodName = $date->format($dateFormat);
             if (!isset($salesData[$periodName])) {
                 $salesData[$periodName] = 0;

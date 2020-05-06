@@ -20,11 +20,9 @@ final class SalesSummarySpec extends ObjectBehavior
     function let(): void
     {
         $this->beConstructedWith(
-            new \DateTime('01-02-2010'),
-            new \DateTime('31-01-2011'),
-            'month',
+            new \DatePeriod(new \DateTime('01-01-2010'), \DateInterval::createFromDateString('1 month'), new \DateTime('31-12-2010')),
             [9 => 1200, 10 => 400, 11 => 500],
-            'm'
+            'n'
         );
     }
 
