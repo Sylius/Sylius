@@ -200,6 +200,12 @@ sylius_fixtures:
                                 name: 'Christmas'
                                 channels:
                                     - 'FASHION_WEB'
+                                coupon_based: true
+                                coupons:
+                                    - code: 'abcde'
+                                      expires_at: 'tomorrow'
+                                      usage_limit: 10
+                                      per_customer_usage_limit: 1
                             new_year:
                                 code: 'new_year'
                                 name: 'New Year'
