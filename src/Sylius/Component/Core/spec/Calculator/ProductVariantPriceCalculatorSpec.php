@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Calculator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -24,7 +24,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 {
     function it_implements_product_variant_price_calculator_interface(): void
     {
-        $this->shouldImplement(ProductVariantPriceCalculatorInterface::class);
+        $this->shouldImplement(ProductVariantPricesCalculatorInterface::class);
     }
 
     function it_gets_price_for_product_variant_in_given_channel(

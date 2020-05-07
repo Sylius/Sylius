@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Templating\Helper\Helper;
 use Webmozart\Assert\Assert;
 
 class PriceHelper extends Helper
 {
-    /** @var ProductVariantPriceCalculatorInterface */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $productVariantPriceCalculator;
 
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
