@@ -1,0 +1,6 @@
+sylius_theme:
+    sources:
+        filesystem:
+            directories:
+                - "%kernel.project_dir%/vendor/sylius/bootstrap-theme"
+    legacy_mode: true

@@ -41,4 +41,10 @@ adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 adminConfig.externals = Object.assign({}, adminConfig.externals, { window: 'window', document: 'document' });
 adminConfig.name = 'admin';
 
-module.exports = [shopConfig, adminConfig];
+const bootstrapTheme = require('./vendor/sylius/bootstrap-theme/webpack.config');
+bootstrapTheme.entry['app'] = './vendor/sylius/bootstrap-theme/assets/app.js';
+bootstrapTheme.resolve.alias['sylius/ui'] = uiBundleScripts;
+bootstrapTheme.resolve.alias['sylius/ui-resources'] = uiBundleResources;
+bootstrapTheme.externals = Object.assign({}, bootstrapTheme.externals, { window: 'window', document: 'document' });
+
+module.exports = [bootstrapTheme, shopConfig, adminConfig];

@@ -1,0 +1,4 @@
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build'
+    builds:
+        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
