@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by kulczy at 2020-05-06T11:37:35Z
+
+it would be a bit clearer to put it under the `tabs` comment rather than `menu`
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-06T18:44:03Z
+
+We need to resolve https://github.com/Sylius/Sylius/pull/11427 to merge this PR
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-05-07T06:05:47Z
+
+Probably rebase should fix the build
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-07T12:50:39Z
+
+Thank you, @SirDomin! :tada:
