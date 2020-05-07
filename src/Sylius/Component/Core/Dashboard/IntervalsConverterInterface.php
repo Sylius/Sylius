@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
-interface SalesSummaryInterface
+interface IntervalsConverterInterface
 {
-    public function getIntervals(): array;
-
-    public function getSales(): array;
+    public function getIntervals(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $intervalName): \DatePeriod;
 }
