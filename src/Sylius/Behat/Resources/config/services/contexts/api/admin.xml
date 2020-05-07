@@ -38,6 +38,11 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
+        <service id="sylius.behat.context.api.managing_provinces" class="Sylius\Behat\Context\Api\Admin\ManagingProvincesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.province" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_currencies" class="Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext">
             <argument type="service" id="sylius.behat.api_platform_client.currency" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

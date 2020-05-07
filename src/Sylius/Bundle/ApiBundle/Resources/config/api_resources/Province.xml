@@ -36,6 +36,9 @@
             <itemOperation name="get">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
             </itemOperation>
+            <itemOperation name="put">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
