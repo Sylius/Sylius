@@ -219,7 +219,6 @@ a {
         }
     }
 }
-
 // ----------------------------------
 // ------------ Toggle
 // ----------------------------------
@@ -227,4 +226,12 @@ a {
 .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before,
 .ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
     background-color: $sylius-brand-color !important;
+}
+
+// ----------------------------------
+// ------------ Tabs
+// ----------------------------------
+
+.ui.top.attached.tabular.menu {
+    flex-wrap: wrap;
 }
