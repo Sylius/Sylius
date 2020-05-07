@@ -182,6 +182,7 @@
             <errorLevel type="info">
                 <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
+                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
             </errorLevel>
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
@@ -216,7 +217,6 @@
         <!-- remove after guzzlehttp-release -->
         <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
         <InvalidCatch errorLevel="info" />
-
     </issueHandlers>
 
     <stubs>

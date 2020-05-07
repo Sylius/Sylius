@@ -171,7 +171,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                /** @var string $words */
+                $words = $this->faker->words(3, true);
+
+                return $words;
             })
 
             ->setDefault('code', function (Options $options): string {
@@ -193,7 +196,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('description', function (Options $options): string {
-                return $this->faker->paragraphs(3, true);
+                /** @var string $paragraphs */
+                $paragraphs = $this->faker->paragraphs(3, true);
+
+                return $paragraphs;
             })
 
             ->setDefault('main_taxon', LazyOption::randomOne($this->taxonRepository))
