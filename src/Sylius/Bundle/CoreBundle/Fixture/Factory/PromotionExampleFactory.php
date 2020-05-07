@@ -67,7 +67,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $this->configureOptions($this->optionsResolver);
 
         if ($this->couponFactory === null) {
-            @trigger_error(sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            @trigger_error(sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
     }
 
@@ -164,12 +164,8 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
-    /**
-     * @param FactoryInterface|null $couponFactory
-     *
-     * @return \Closure
-     */
-    private static function getCouponNormalizer (?FactoryInterface $couponFactory): \Closure {
+    private static function getCouponNormalizer (?FactoryInterface $couponFactory): \Closure
+    {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
             if (null === $couponFactory) {
                 throw new \RuntimeException('You must configure a $couponFactory');
