@@ -20,23 +20,23 @@ final class SalesSummarySpec extends ObjectBehavior
     function let(): void
     {
         $this->beConstructedWith(
-            new \DatePeriod(new \DateTime('01-01-2010'), \DateInterval::createFromDateString('1 month'), new \DateTime('31-12-2010')),
-            [9 => 1200, 10 => 400, 11 => 500],
-            'n'
+            new \DateTime('01-02-2010'),
+            new \DateTime('31-01-2011'),
+            ['11.10' => 1200, '12.10' => 400, '01.11' => 500]
         );
     }
 
-    function it_has_intervals_list(): void
+    function it_has_months_list(): void
     {
-        $this->getIntervals()->shouldReturn(
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12]
+        $this->getMonths()->shouldReturn(
+            ['02.10', '03.10', '04.10', '05.10', '06.10', '07.10', '08.10', '09.10', '10.10', '11.10', '12.10', '01.11']
         );
     }
 
     function it_has_sales_list(): void
     {
         $this->getSales()->shouldReturn(
-            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '4.00', '5.00', '0.00']
+            ['0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '12.00', '4.00', '5.00']
         );
     }
 }
