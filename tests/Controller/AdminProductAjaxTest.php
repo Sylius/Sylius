@@ -19,7 +19,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class AdminProductAjaxTest extends JsonApiTestCase
+final class AdminProductAjaxTest extends JsonApiTestCase
 {
     /**
      * @test
@@ -42,8 +42,12 @@ class AdminProductAjaxTest extends JsonApiTestCase
     public function it_allows_to_get_a_products_list()
     {
         $this->loadFixturesFromFile('authentication/administrator.yml');
-        $this->loadFixturesFromFile('resources/products.yml');
-        $this->loadFixturesFromFile('resources/many_products.yml');
+        $this->loadFixturesFromFiles([
+            'resources/product_association_types.yml',
+            'resources/products.yml',
+            'resources/many_products.yml',
+            'resources/product_associations.yml'
+        ]);
 
         $this->authenticateAdminUser();
 
