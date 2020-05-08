@@ -85,3 +85,34 @@
 
 1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
 The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
+
+1. Change dependency in `Sylius\Component\Core\Dashboard\SalesDataProvider`:
+
+    ```diff
+   -        public function __construct(EntityManagerInterface $entityManager)
+   -        {
+   -            $this->entityManager = $entityManager;
+   -        }
+   +        public function __construct(OrderRepositoryInterface $orderRepository, IntervalsConverterInterface $intervalsConverter) 
+   +        {
+   +            $this->orderRepository = $orderRepository;
+   +            $this->intervalsConverter = $intervalsConverter;  
+   +        }
+
+   ```
+   
+1. Method `getLastYearSalesSummary` in `Sylius\Component\Core\Dashboard\SalesDataProviderInterface` has been renamed to `getSalesSummary` and now needs different arguments:
+    ```diff
+   -        public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface;
+   +        public function getSalesSummary(
+   +             \DateTimeInterface $startDate,
+   +             \DateTimeInterface $endDate,
+   +             string $interval,
+   +             ChannelInterface $channel,
+   +             string $dateFormat
+   +        ): SalesSummaryInterface;
+   ```
+   
+1. Variable `$monthsSalesMap` has been renamed to `$intervalsSalesMap` in `Sylius\Component\Core\Dashboard\SalesSummary`
+
+1. Function `getMonths` in `Sylius\Component\Core\Dashboard\SalesSummaryInterface` has been renamed to `getIntervals`
