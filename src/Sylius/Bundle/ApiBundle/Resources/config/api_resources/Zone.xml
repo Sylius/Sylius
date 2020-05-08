@@ -46,7 +46,9 @@
                     <attribute name="groups">zone:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete" />
+            <itemOperation name="delete">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

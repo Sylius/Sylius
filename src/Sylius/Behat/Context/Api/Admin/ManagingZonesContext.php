@@ -107,12 +107,12 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I add a zone :zoneName
+     * @When I add a zone :zone
      */
-    public function iAddAZone(ZoneInterface $zoneName): void
+    public function iAddAZone(ZoneInterface $zone): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => $zoneName->getCode(),
+            'code' => $zone->getCode(),
         ]);
     }
 
@@ -143,24 +143,24 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I delete zone named :zoneName
+     * @When I delete zone named :zone
      */
-    public function iDeleteZoneNamed(ZoneInterface $zoneName): void
+    public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
-        $this->client->delete($zoneName->getCode());
+        $this->client->delete($zone->getCode());
     }
 
     /**
-     * @When I check the :zoneName zone
-     * @When I check also the :zoneName zone
+     * @When I check the :zone zone
+     * @When I check also the :zone zone
      */
-    public function iCheckTheZone(ZoneInterface $zoneName): void
+    public function iCheckTheZone(ZoneInterface $zone): void
     {
         $ZoneToDelete = [];
         if ($this->sharedStorage->has('zone_to_delete')) {
             $ZoneToDelete = $this->sharedStorage->get('zone_to_delete');
         }
-        $ZoneToDelete[] = $zoneName->getCode();
+        $ZoneToDelete[] = $zone->getCode();
         $this->sharedStorage->set('zone_to_delete', $ZoneToDelete);
     }
 
@@ -175,11 +175,11 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I want to modify the zone named :zoneName
+     * @When I want to modify the zone named :zone
      */
-    public function iWantToModifyTheZoneNamed(ZoneInterface $zoneName): void
+    public function iWantToModifyTheZoneNamed(ZoneInterface $zone): void
     {
-        $this->client->buildUpdateRequest($zoneName->getCode());
+        $this->client->buildUpdateRequest($zone->getCode());
     }
 
     /**
@@ -199,11 +199,11 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I remove the :zoneName zone member
+     * @When I remove the :zone zone member
      */
-    public function iRemoveTheZoneMember(ZoneInterface $zoneName): void
+    public function iRemoveTheZoneMember(ZoneInterface $zone): void
     {
-        $this->removeZoneMember($zoneName);
+        $this->removeZoneMember($zone);
     }
 
     /**
@@ -215,12 +215,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then the zone named :zoneName with the :country country member should appear in the registry
+     * @Then the zone named :zone with the :country country member should appear in the registry
      */
-    public function theZoneNamedWithTheCountryMemberShouldAppearInTheRegistry(ZoneInterface $zoneName, CountryInterface $country): void
-    {
+    public function theZoneNamedWithTheCountryMemberShouldAppearInTheRegistry(
+        ZoneInterface $zone,
+        CountryInterface $country
+    ): void {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('members', $zoneName->getCode()),
+            $this->client->subResourceIndex('members', $zone->getCode()),
             'code',
             $country->getCode()
         ));
@@ -235,17 +237,17 @@ final class ManagingZonesContext implements Context
 
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
-            'The code field with value NEW_CODE exist'
+            'The code field with value NEW_CODE exists'
         );
     }
 
     /**
-     * @Then I can not add a zone :zoneName
+     * @Then I can not add a zone :zone
      */
-    public function iCanNotAddAZone(ZoneInterface $zoneName): void
+    public function iCanNotAddAZone(ZoneInterface $zone): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => $zoneName->getCode(),
+            'code' => $zone->getCode(),
         ]);
 
         Assert::contains(
@@ -255,26 +257,30 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then the zone named :zoneName with the :province province member should appear in the registry
+     * @Then the zone named :zone with the :province province member should appear in the registry
      */
-    public function theZoneNamedWithTheProvinceMemberShouldAppearInTheRegistry(ZoneInterface $zoneName, ProvinceInterface $province): void
-    {
+    public function theZoneNamedWithTheProvinceMemberShouldAppearInTheRegistry(
+        ZoneInterface $zone,
+        ProvinceInterface $province
+    ): void {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('members', $zoneName->getCode()),
+            $this->client->subResourceIndex('members', $zone->getCode()),
             'code',
             $province->getCode()
         ));
     }
 
     /**
-     * @Then the zone named :zoneNamed with the :zoneName zone member should appear in the registry
+     * @Then the zone named :zone with the :otherZone zone member should appear in the registry
      */
-    public function theZoneNamedWithTheZoneMemberShouldAppearInTheRegistry(ZoneInterface $zoneNamed, ZoneInterface $zoneName): void
-    {
+    public function theZoneNamedWithTheZoneMemberShouldAppearInTheRegistry(
+        ZoneInterface $zone,
+        ZoneInterface $otherZone
+    ): void {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('members', $zoneNamed->getCode()),
+            $this->client->subResourceIndex('members', $zone->getCode()),
             'code',
-            $zoneName->getCode()
+            $otherZone->getCode()
         ));
     }
 
@@ -329,7 +335,7 @@ final class ManagingZonesContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
-            sprintf('Zone with name %s exist', $name)
+            sprintf('Zone with name %s exists', $name)
         );
     }
 
@@ -340,7 +346,7 @@ final class ManagingZonesContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(), $field, $value),
-            sprintf('Zone with %s %s exist', $field, $value)
+            sprintf('Zone with %s %s exists', $field, $value)
         );
     }
 
@@ -355,7 +361,10 @@ final class ManagingZonesContext implements Context
             $zoneMember->getCode()
         ));
 
-        Assert::same($this->responseChecker->countCollectionItems($this->client->subResourceIndex('members', $zone->getCode())), 1);
+        Assert::same(
+            $this->responseChecker->countCollectionItems($this->client->subResourceIndex('members', $zone->getCode())),
+            1
+        );
     }
 
     /**
@@ -472,15 +481,8 @@ final class ManagingZonesContext implements Context
      */
     private function removeZoneMember($objectToRemove): void
     {
-        /** @var ZoneInterface $zone */
-        $zone = $this->sharedStorage->get('zone');
         $iri = $this->iriConverter->getItemIriFromResourceClass(ZoneMember::class, ['code' => $objectToRemove->getCode()]);
 
-        $members = $this->responseChecker->getValue($this->client->show($zone->getCode()), 'members');
-        foreach ($members as $key => $member) {
-            if ($iri === $member) {
-                $this->client->removeSubResource('members', $member);
-            }
-        }
+        $this->client->removeSubResource('members', $iri);
     }
 }

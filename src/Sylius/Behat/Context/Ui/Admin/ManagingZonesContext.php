@@ -233,7 +233,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should not be able to edit its code
      */
-    public function iShouldNotBeAbleToEditItsCode()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -291,7 +291,7 @@ final class ManagingZonesContext implements Context
     /**
      * @Then I should not be able to edit its type
      */
-    public function iShouldNotBeAbleToEditItsType()
+    public function iShouldNotBeAbleToEditItsType(): void
     {
         Assert::true($this->createPage->isTypeFieldDisabled());
     }

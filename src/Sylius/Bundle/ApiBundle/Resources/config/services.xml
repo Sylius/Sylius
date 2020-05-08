@@ -21,10 +21,10 @@
         <import resource="services/context_builders.xml" />
         <import resource="services/data_persisters.xml" />
         <import resource="services/data_providers.xml" />
-        <import resource="services/event_subscribers.xml"/>
-        <import resource="services/filters.xml"/>
-        <import resource="services/providers.xml"/>
-        <import resource="services/validator.xml"/>
+        <import resource="services/event_subscribers.xml" />
+        <import resource="services/filters.xml" />
+        <import resource="services/providers.xml" />
+        <import resource="services/validator.xml" />
     </imports>
 
     <services>
