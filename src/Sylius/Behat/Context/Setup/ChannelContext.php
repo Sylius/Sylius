@@ -80,9 +80,10 @@ final class ChannelContext implements Context
     /**
      * @Given the store operates on a single channel in the "United States" named :channelIdentifier
      */
-    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed($channelIdentifier)
+    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed(string $channelName)
     {
-        $defaultData = $this->unitedStatesChannelFactory->create($channelIdentifier, $channelIdentifier);
+        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+        $defaultData = $this->unitedStatesChannelFactory->create($channelCode, $channelName);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
