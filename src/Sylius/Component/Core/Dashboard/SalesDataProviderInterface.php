@@ -17,11 +17,5 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface SalesDataProviderInterface
 {
-    public function getSalesSummary(
-        \DateTimeInterface $startDate,
-        \DateTimeInterface $endDate,
-        string $interval,
-        ChannelInterface $channel,
-        string $dateFormat
-    ): SalesSummaryInterface;
+    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface;
 }

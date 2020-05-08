@@ -10,11 +10,5 @@ doctrine:
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: UTF8
+
         url: '%env(resolve:DATABASE_URL)%'
-    orm:
-        dql:
-            string_functions:
-                DAY: DoctrineExtensions\Query\Mysql\Day
-                HOUR: DoctrineExtensions\Query\Mysql\Hour
-                MONTH: DoctrineExtensions\Query\Mysql\Month
-                YEAR: DoctrineExtensions\Query\Mysql\Year

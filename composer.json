@@ -20,7 +20,6 @@
     ],
     "require": {
         "php": "^7.3",
-        "beberlei/doctrineextensions": "^1.2",
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
