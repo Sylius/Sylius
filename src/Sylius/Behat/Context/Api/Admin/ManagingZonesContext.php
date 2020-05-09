@@ -379,26 +379,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should not be able to edit its type
-     */
-    public function iShouldNotBeAbleToEditItsType(): void
-    {
-        // Intentionally left blank, because in API context we can do that
-    }
-
-    /**
-     * @Then /^it should be of (country|province) type$/
-     */
-    public function itShouldBeOfType(string $type): void
-    {
-        Assert::same(
-            $type,
-            $this->client->getRequestData('type'),
-            sprintf('Zone should be of type %s.', $type)
-        );
-    }
-
-    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void

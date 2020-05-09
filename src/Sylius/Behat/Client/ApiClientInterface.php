@@ -61,9 +61,6 @@ interface ApiClientInterface
     /** @param string|int|array $value */
     public function addRequestData(string $key, $value): void;
 
-    /** @return string|int|array */
-    public function getRequestData(string $key);
-
     public function addSubResourceData(string $key, array $data): void;
 
     public function removeSubResource(string $subResource, string $id): void;

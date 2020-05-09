@@ -45,8 +45,6 @@ interface RequestInterface
 
     public function updateContent(array $newValues): void;
 
-    public function getData(string $key);
-
     public function parameters(): array;
 
     public function updateParameters(array $newParameters): void;

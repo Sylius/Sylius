@@ -55,16 +55,3 @@ Feature: Editing a zone
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this zone name should be "EU"
-
-    @ui @api
-    Scenario: Seeing a disabled code field when editing a zone
-        Given the store has a zone "European Union" with code "EU"
-        And it has the "France" country member
-        When I want to modify the zone named "European Union"
-        Then I should not be able to edit its code
-
-    @ui @api
-    Scenario: Not seeing zone itself in member select when editing a zone of type zone
-        Given the store has a zone "European Union" with code "EU"
-        When I want to modify the zone named "European Union"
-        Then I can not add a zone "European Union"

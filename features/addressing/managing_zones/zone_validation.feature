@@ -5,7 +5,8 @@ Feature: Zone validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store has country "United States"
+        Given the store operates in "France" and "Germany"
+        And the store has country "United States"
         And I am logged in as an administrator
 
     @ui @api
@@ -37,12 +38,25 @@ Feature: Zone validation
         And zone with name "European Union" should not be added
 
     @ui @api
+    Scenario: Being unable to edit code of an existing zone
+        Given the store has a zone "European Union" with code "EU"
+        And it has the "France" country member
+        When I want to modify the zone named "European Union"
+        Then I should not be able to edit its code
+
+    @ui @api
+    Scenario: Not seeing zone itself in member select when editing a zone of type zone
+        Given the store has a zone "European Union" with code "EU"
+        When I want to modify the zone named "European Union"
+        Then I can not add a zone "European Union"
+
+    @ui
     Scenario: Seeing a disabled type field when adding country type zone
         When I want to create a new zone consisting of country
         Then I should not be able to edit its type
         And it should be of country type
 
-    @ui @api
+    @ui
     Scenario: Seeing a disabled type field when adding province type zone
         When I want to create a new zone consisting of province
         Then I should not be able to edit its type
