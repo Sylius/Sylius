@@ -20,21 +20,11 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations>
-            <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </collectionOperation>
-        </collectionOperations>
+        <collectionOperations />
 
         <itemOperations>
             <itemOperation name="get">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
-            <itemOperation name="put">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop_billing_data:update</attribute>
-                </attribute>
             </itemOperation>
         </itemOperations>
 

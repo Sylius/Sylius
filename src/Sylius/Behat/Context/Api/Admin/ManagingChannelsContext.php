@@ -30,9 +30,6 @@ final class ManagingChannelsContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ApiClientInterface */
-    private $shopBillingDatasClient;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -44,12 +41,10 @@ final class ManagingChannelsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $shopBillingDatasClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->shopBillingDatasClient = $shopBillingDatasClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
@@ -184,7 +179,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iAddIt(): void
     {
-        $this->createBillingData();
+        $this->client->addSubResourceData('shopBillingData', $this->shopBillingData);
 
         $this->client->create();
     }
@@ -238,18 +233,5 @@ final class ManagingChannelsContext implements Context
     public function iShouldSeeChannelsInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
-    }
-
-    private function createBillingData(): void
-    {
-        if (!empty($this->shopBillingData)) {
-            $this->shopBillingDatasClient->buildCreateRequest();
-            foreach ($this->shopBillingData as $field => $value) {
-                $this->shopBillingDatasClient->addRequestData($field, $value);
-            }
-            $this->shopBillingDatasClient->create();
-            $iri = $this->responseChecker->getValue($this->shopBillingDatasClient->getLastResponse(), '@id');
-            $this->client->addRequestData('shopBillingData', $iri);
-        }
     }
 }
