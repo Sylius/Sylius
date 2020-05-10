@@ -57,7 +57,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Given I want to create a new channel
+     * @When I want to create a new channel
      */
     public function iWantToCreateANewChannel()
     {

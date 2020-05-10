@@ -42,25 +42,25 @@
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="name" writable="true"  readable="true"/>
-        <property name="description" writable="true"  readable="true"/>
-        <property name="hostname" writable="true"  readable="true"/>
-        <property name="color" writable="true"  readable="true"/>
-        <property name="baseCurrency" writable="true"  readable="true"/>
-        <property name="defaultLocale" writable="true"  readable="true"/>
-        <property name="defaultTaxZone" writable="true"  readable="true"/>
-        <property name="taxCalculationStrategy" writable="true"  readable="true"/>
-        <property name="currencies" writable="true"  readable="true"/>
-        <property name="locales" writable="true"  readable="true"/>
-        <property name="countries" writable="true"  readable="true"/>
-        <property name="themeName" writable="true"  readable="true"/>
-        <property name="contactEmail" writable="true"  readable="true"/>
-        <property name="skippingShippingStepAllowed" writable="true"  readable="true"/>
-        <property name="skippingPaymentStepAllowed" writable="true"  readable="true"/>
-        <property name="accountVerificationRequired" writable="true"  readable="true"/>
+        <property name="name" writable="true" readable="true" />
+        <property name="description" writable="true" readable="true" />
+        <property name="hostname" writable="true" readable="true" />
+        <property name="color" writable="true" readable="true" />
+        <property name="baseCurrency" writable="true" readable="true" />
+        <property name="defaultLocale" writable="true" readable="true" />
+        <property name="defaultTaxZone" writable="true" readable="true" />
+        <property name="taxCalculationStrategy" writable="true" readable="true" />
+        <property name="currencies" writable="true" readable="true" />
+        <property name="locales" writable="true" readable="true" />
+        <property name="countries" writable="true" readable="true" />
+        <property name="themeName" writable="true" readable="true" />
+        <property name="contactEmail" writable="true" readable="true" />
+        <property name="skippingShippingStepAllowed" writable="true" readable="true" />
+        <property name="skippingPaymentStepAllowed" writable="true" readable="true" />
+        <property name="accountVerificationRequired" writable="true" readable="true" />
         <property name="shopBillingData" readable="true" writable="true">
-            <subresource resourceClass="Sylius\Component\Core\Model\ShopBillingData" collection="true" />
+            <subresource resourceClass="Sylius\Component\Core\Model\ShopBillingData" collection="false" />
         </property>
-        <property name="menuTaxon" writable="true"  readable="true"/>
+        <property name="menuTaxon" writable="true" readable="true" />
     </resource>
 </resources>

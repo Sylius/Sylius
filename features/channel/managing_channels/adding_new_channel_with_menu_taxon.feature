@@ -18,6 +18,7 @@ Feature: Adding a new channel with menu taxon
         And I name it "Mobile channel"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
+        And I select the "Order items based" as tax calculation strategy
         And I specify menu taxon as "Clothes"
         And I add it
         Then I should be notified that it has been successfully created

@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -30,7 +31,7 @@ final class ManagingChannelsContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $billingDataClient;
+    private $shopBillingDatasClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -39,29 +40,26 @@ final class ManagingChannelsContext implements Context
     private $iriConverter;
 
     /** @var array */
-    private $billingData = [];
+    private $shopBillingData = [];
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $billingDataClient,
+        ApiClientInterface $shopBillingDatasClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->billingDataClient = $billingDataClient;
+        $this->shopBillingDatasClient = $shopBillingDatasClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
     }
 
     /**
-     * @Given I want to create a new channel
+     * @When I want to create a new channel
      */
     public function iWantToCreateANewChannel(): void
     {
         $this->client->buildCreateRequest();
-
-        // @see https://github.com/Sylius/Sylius/issues/11414
-        $this->client->addRequestData('taxCalculationStrategy', 'order_items_based');
     }
 
     /**
@@ -70,7 +68,7 @@ final class ManagingChannelsContext implements Context
      * @When I set its :field as :value
      * @When I define its :field as :value
      */
-    public function iSpecifyItsCodeAs(string $field, string $value): void
+    public function iSpecifyItsAs(string $field, string $value): void
     {
         $this->client->addRequestData($field, $value);
     }
@@ -147,7 +145,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSpecifyCompanyAs(string $company): void
     {
-        $this->billingData['company'] = $company;
+        $this->shopBillingData['company'] = $company;
     }
 
     /**
@@ -155,7 +153,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSpecifyTaxIdAs(string $taxId): void
     {
-        $this->billingData['taxId'] = $taxId;
+        $this->shopBillingData['taxId'] = $taxId;
     }
 
     /**
@@ -167,10 +165,18 @@ final class ManagingChannelsContext implements Context
         string $city,
         CountryInterface $country
     ): void {
-        $this->billingData['street'] = $street;
-        $this->billingData['city'] = $city;
-        $this->billingData['postcode'] = $postcode;
-        $this->billingData['countryCode'] = $country->getCode();
+        $this->shopBillingData['street'] = $street;
+        $this->shopBillingData['city'] = $city;
+        $this->shopBillingData['postcode'] = $postcode;
+        $this->shopBillingData['countryCode'] = $country->getCode();
+    }
+
+    /**
+     * @When I select the :taxCalculationStrategy as tax calculation strategy
+     */
+    public function iSelectTaxCalculationStrategy(string $taxCalculationStrategy): void
+    {
+        $this->client->addRequestData('taxCalculationStrategy', StringInflector::nameToLowercaseCode($taxCalculationStrategy));
     }
 
     /**
@@ -236,13 +242,13 @@ final class ManagingChannelsContext implements Context
 
     private function createBillingData(): void
     {
-        if (!empty($this->billingData)) {
-            $this->billingDataClient->buildCreateRequest();
-            foreach ($this->billingData as $field => $value) {
-                $this->billingDataClient->addRequestData($field, $value);
+        if (!empty($this->shopBillingData)) {
+            $this->shopBillingDatasClient->buildCreateRequest();
+            foreach ($this->shopBillingData as $field => $value) {
+                $this->shopBillingDatasClient->addRequestData($field, $value);
             }
-            $this->billingDataClient->create();
-            $iri = $this->responseChecker->getValue($this->billingDataClient->getLastResponse(), '@id');
+            $this->shopBillingDatasClient->create();
+            $iri = $this->responseChecker->getValue($this->shopBillingDatasClient->getLastResponse(), '@id');
             $this->client->addRequestData('shopBillingData', $iri);
         }
     }

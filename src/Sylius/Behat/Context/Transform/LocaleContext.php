@@ -55,14 +55,14 @@ final class LocaleContext implements Context
     /**
      * @Transform :locale
      */
-    public function getProductByName(string $localeName): LocaleInterface
+    public function getLocaleByName(string $name): LocaleInterface
     {
-        $locale = $this->localeRepository->findOneByCode($this->localeNameConverter->convertNameToCode($localeName));
+        $locale = $this->localeRepository->findOneBy(['code' => $this->localeNameConverter->convertNameToCode($name)]);
 
         Assert::isInstanceOf(
             $locale,
             LocaleInterface::class,
-            sprintf('Cannot find "%s" locale.', $localeName)
+            sprintf('Cannot find "%s" locale.', $name)
         );
 
         return $locale;
