@@ -252,7 +252,7 @@ final class ManagingZonesContext implements Context
 
         Assert::contains(
             $this->responseChecker->getError($this->client->update()),
-            'members: Chosen zone member is already in this zone.'
+            'members: Zone member cannot be the same as a zone.'
         );
     }
 

@@ -11,17 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 final class ZoneCannotContainItself extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.zone_member.unique';
+    public $message = 'sylius.zone_member.cannot_be_the_same_as_zone';
 
     public function validatedBy(): string
     {
-        return 'sylius.validator.zone_cannot_contain_itself';
+        return 'sylius_zone_cannot_contain_itself_validator';
     }
 }

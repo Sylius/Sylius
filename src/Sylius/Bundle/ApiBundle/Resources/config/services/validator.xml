@@ -21,9 +21,5 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_shop_user_email" />
         </service>
-
-        <service id="sylius.validator.zone_cannot_contain_itself" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ZoneCannotContainItselfValidator">
-            <tag name="validator.constraint_validator" alias="sylius.validator.zone_cannot_contain_itself" />
-        </service>
     </services>
 </container>

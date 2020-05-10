@@ -45,7 +45,7 @@ Feature: Zone validation
         Then I should not be able to edit its code
 
     @ui @api
-    Scenario: Not seeing zone itself in member select when editing a zone of type zone
+    Scenario: Being unable to add itself to members during editing an existing zone
         Given the store has a zone "European Union" with code "EU"
         When I want to modify the zone named "European Union"
         Then I can not add a zone "European Union"

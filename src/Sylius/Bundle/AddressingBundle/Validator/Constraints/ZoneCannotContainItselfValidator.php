@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\Validator\Constraint;

@@ -53,6 +53,12 @@
                 <option name="message">sylius.zone_member.unique</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneCannotContainItself">
+                <option name="message">sylius.zone_member.cannot_be_the_same_as_zone</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
             <constraint name="Valid" />
             <constraint name="Count">
                 <option name="min">1</option>
