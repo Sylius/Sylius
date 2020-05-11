@@ -16,7 +16,6 @@
 
 import os
 
-from sphinx.builders import html as builders
 from sphinx.util import logging;
 
 TEMPLATE = """<html>
@@ -36,7 +35,7 @@ def generate_redirects(app):
     in_suffix = next(iter(app.config.source_suffix))
 
     # TODO(stephenfin): Add support for DirectoryHTMLBuilder
-    if not type(app.builder) == builders.StandaloneHTMLBuilder:
+    if not app.builder.name in ["html", "readthedocs"]:
         logger.warn("The 'sphinxcontib-redirects' plugin is only supported "
                      "by the 'html' builder. Skipping...")
         return
