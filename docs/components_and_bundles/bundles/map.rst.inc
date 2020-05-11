@@ -12,5 +12,5 @@
 * :doc:`/components_and_bundles/bundles/SyliusShippingBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusTaxationBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusTaxonomyBundle/index`
-* :doc:`/components_and_bundles/bundles/SyliusThemeBundle/index`
+* `SyliusThemeBundle <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/bundles/SyliusUserBundle/index`

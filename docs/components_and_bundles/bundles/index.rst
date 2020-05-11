@@ -18,7 +18,6 @@ Sylius Bundles Documentation
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index
-    SyliusThemeBundle/index
     SyliusUserBundle/index
 
 .. include:: /components_and_bundles/bundles/map.rst.inc
