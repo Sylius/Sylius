@@ -1,7 +1,7 @@
 * :doc:`/components_and_bundles/bundles/SyliusAddressingBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusAttributeBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusCustomerBundle/index`
-* :doc:`/components_and_bundles/bundles/SyliusFixturesBundle/index`
+* `SyliusFixturesBundle <https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/bundles/SyliusGridBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusInventoryBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusMailerBundle/index`

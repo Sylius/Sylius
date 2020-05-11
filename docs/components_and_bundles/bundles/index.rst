@@ -7,7 +7,6 @@ Sylius Bundles Documentation
     SyliusAddressingBundle/index
     SyliusAttributeBundle/index
     SyliusCustomerBundle/index
-    SyliusFixturesBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index
     SyliusMailerBundle/index

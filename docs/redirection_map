@@ -1,3 +1,11 @@
+components_and_bundles/bundles/SyliusFixturesBundle/architecture.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/builtin_listeners.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/commands.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/custom_fixture.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/custom_listener.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/index.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/installation.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusFixturesBundle/summary.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusThemeBundle/configuration_sources.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusThemeBundle/configuration_sources/creating_custom.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusThemeBundle/configuration_sources/filesystem.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
