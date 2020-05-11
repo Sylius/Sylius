@@ -1,9 +1,3 @@
-.. raw:: html
-
-    <div style="padding: 20px; background: #ffedcc; border-radius: 4px; margin-bottom: 20px;">
-    <strong>EXPERIMENTAL.</strong> This guide is based on "Sylius" and "Sylius-Standard" master branches.
-    </div>
-
 Using Webpack Encore in Sylius
 ------------------------------
 
