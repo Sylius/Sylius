@@ -13,9 +13,9 @@ Installing Sylius Plus as a plugin to a Sylius application
 **Important Requirements**
 
 +---------------+-----------------------+
-| PHP           | ^7.2                  |
+| PHP           | ^7.3                  |
 +---------------+-----------------------+
-| sylius/sylius | ^1.6                  |
+| sylius/sylius | ^1.7                  |
 +---------------+-----------------------+
 
 **0.** Prepare project:
@@ -25,7 +25,7 @@ Installing Sylius Plus as a plugin to a Sylius application
     If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.6** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.6``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.7``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -345,6 +345,12 @@ your application's ``.env`` file:
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_
 
 **Phew! That's all, you can now run the application just like you usually do with Sylius (using Symfony Server for example).**
+
+Upgrading Sylius Plus
+---------------------
+
+To upgrade Sylius Plus in an existing application, please follow upgrade instructions from
+`Sylius/PlusInformationCenter <https://github.com/Sylius/PlusInformationCenter>`_ repository.
 
 .. image:: ../../_images/sylius_plus/banner.png
     :align: center
