@@ -6,7 +6,7 @@
 * :doc:`/components_and_bundles/components/Grid/index`
 * :doc:`/components_and_bundles/components/Inventory/index`
 * :doc:`/components_and_bundles/components/Locale/index`
-* :doc:`/components_and_bundles/components/Mailer/index`
+* `Mailer <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/components/Order/index`
 * :doc:`/components_and_bundles/components/Payment/index`
 * :doc:`/components_and_bundles/components/Product/index`

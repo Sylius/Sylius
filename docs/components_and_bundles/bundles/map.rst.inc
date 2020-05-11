@@ -4,7 +4,7 @@
 * `SyliusFixturesBundle <https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/bundles/SyliusGridBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusInventoryBundle/index`
-* :doc:`/components_and_bundles/bundles/SyliusMailerBundle/index`
+* `SyliusMailerBundle <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/bundles/SyliusOrderBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusProductBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusPromotionBundle/index`

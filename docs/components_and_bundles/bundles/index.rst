@@ -9,7 +9,6 @@ Sylius Bundles Documentation
     SyliusCustomerBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index
-    SyliusMailerBundle/index
     SyliusOrderBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index

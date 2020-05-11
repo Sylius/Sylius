@@ -28,7 +28,6 @@ We recommend checking out :doc:`/components_and_bundles/components/general/index
     Grid/index
     Inventory/index
     Locale/index
-    Mailer/index
     Order/index
     Payment/index
     Product/index

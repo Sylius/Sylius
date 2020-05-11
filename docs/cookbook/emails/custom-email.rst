@@ -4,7 +4,7 @@ How to send a custom e-mail?
 .. note::
 
     This cookbook is suitable for a clean :doc:`sylius-standard installation </book/installation/installation>`.
-    For more general tips, while using :doc:`SyliusMailerBundle </components_and_bundles/bundles/SyliusMailerBundle/index>`
+    For more general tips, while using `SyliusMailerBundle <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
     go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_.
 
 Currently **Sylius** is sending e-mails only in a few "must-have" cases - see :doc:`E-mails documentation </book/architecture/emails>`.
