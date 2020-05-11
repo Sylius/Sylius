@@ -53,6 +53,11 @@ components_and_bundles/components/Mailer/index.rst https://github.com/Sylius/Syl
 components_and_bundles/components/Mailer/installation.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/components/Mailer/interfaces.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/components/Mailer/models.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
+components_and_bundles/components/Registry/basic_usage.rst https://github.com/Sylius/Registry/blob/master/docs/index.md
+components_and_bundles/components/Registry/exceptions.rst https://github.com/Sylius/Registry/blob/master/docs/index.md
+components_and_bundles/components/Registry/index.rst https://github.com/Sylius/Registry/blob/master/docs/index.md
+components_and_bundles/components/Registry/installation.rst https://github.com/Sylius/Registry/blob/master/docs/index.md
+components_and_bundles/components/Registry/interfaces.rst https://github.com/Sylius/Registry/blob/master/docs/index.md
 components_and_bundles/components/Resource/factory.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md
 components_and_bundles/components/Resource/index.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md
 components_and_bundles/components/Resource/installation.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md

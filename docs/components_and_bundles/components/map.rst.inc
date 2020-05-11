@@ -11,7 +11,7 @@
 * :doc:`/components_and_bundles/components/Payment/index`
 * :doc:`/components_and_bundles/components/Product/index`
 * :doc:`/components_and_bundles/components/Promotion/index`
-* :doc:`/components_and_bundles/components/Registry/index`
+* `Registry <https://github.com/Sylius/Registry/blob/master/docs/index.md>`_
 * `Resource <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/components/Shipping/index`
 * :doc:`/components_and_bundles/components/Taxation/index`
