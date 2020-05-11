@@ -32,6 +32,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                dql:
+                    string_functions:
+                        DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
 
 knp_gaufrette:
     adapters:
