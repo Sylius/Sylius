@@ -3,8 +3,7 @@ Customizing Grids
 
 .. note::
 
-    We assume that you are familiar with grids. If not check the documentation of the :doc:`Grid Bundle </components_and_bundles/bundles/SyliusGridBundle/index>`
-    and :doc:`Grid Component </components_and_bundles/components/Grid/index>` first.
+    We assume that you are familiar with grids. If not check the documentation of the `GridBundle <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_ first.
 
 .. tip::
 
@@ -224,5 +223,4 @@ After these two steps your admin product grid should not have the image field.
 Learn more
 ----------
 
-* :doc:`Grid - Component Documentation </components_and_bundles/components/Grid/index>`
-* :doc:`Grid - Bundle Documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_

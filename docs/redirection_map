@@ -6,6 +6,17 @@ components_and_bundles/bundles/SyliusFixturesBundle/custom_listener.rst https://
 components_and_bundles/bundles/SyliusFixturesBundle/index.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusFixturesBundle/installation.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusFixturesBundle/summary.rst https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/configuration.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/custom_action.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/custom_bulk_action.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/custom_field_type.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/custom_filter.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/field_configuration.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/field_types.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/filters.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/index.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/installation.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/bundles/SyliusGridBundle/your_first_grid.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusMailerBundle/configuration.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusMailerBundle/index.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusMailerBundle/installation.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
@@ -34,6 +45,9 @@ components_and_bundles/bundles/SyliusThemeBundle/summary.rst https://github.com/
 components_and_bundles/bundles/SyliusThemeBundle/theme_configuration_reference.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusThemeBundle/theme_inheritance.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
 components_and_bundles/bundles/SyliusThemeBundle/your_first_theme.rst https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md
+components_and_bundles/components/Grid/index.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/components/Grid/installation.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
+components_and_bundles/components/Grid/summary.rst https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md
 components_and_bundles/components/Mailer/basic_usage.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/components/Mailer/index.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md
 components_and_bundles/components/Mailer/installation.rst https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md

@@ -25,7 +25,6 @@ We recommend checking out :doc:`/components_and_bundles/components/general/index
     Attribute/index
     Channel/index
     Currency/index
-    Grid/index
     Inventory/index
     Locale/index
     Order/index

@@ -283,7 +283,7 @@ Definition
 
 .. tip::
 
-    You can find a list of all search options in :doc:`GridBundle docs</components_and_bundles/bundles/SyliusGridBundle/filters>`.
+    You can find a list of all search options in `GridBundle docs <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_.
 
 Example
 ^^^^^^^

@@ -3,7 +3,7 @@
 * :doc:`/components_and_bundles/components/Attribute/index`
 * :doc:`/components_and_bundles/components/Channel/index`
 * :doc:`/components_and_bundles/components/Currency/index`
-* :doc:`/components_and_bundles/components/Grid/index`
+* `Grid <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/components/Inventory/index`
 * :doc:`/components_and_bundles/components/Locale/index`
 * `Mailer <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
