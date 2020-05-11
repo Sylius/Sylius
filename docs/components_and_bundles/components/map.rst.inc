@@ -12,7 +12,7 @@
 * :doc:`/components_and_bundles/components/Product/index`
 * :doc:`/components_and_bundles/components/Promotion/index`
 * :doc:`/components_and_bundles/components/Registry/index`
-* :doc:`/components_and_bundles/components/Resource/index`
+* `Resource <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`/components_and_bundles/components/Shipping/index`
 * :doc:`/components_and_bundles/components/Taxation/index`
 * :doc:`/components_and_bundles/components/Taxonomy/index`

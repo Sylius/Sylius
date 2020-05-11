@@ -33,7 +33,6 @@ We recommend checking out :doc:`/components_and_bundles/components/general/index
     Product/index
     Promotion/index
     Registry/index
-    Resource/index
     Shipping/index
     Taxation/index
     Taxonomy/index

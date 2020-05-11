@@ -20,8 +20,8 @@ This interface should be implemented by any custom model representing a payment.
 Also it keeps all of the default :ref:`component_payment_payment-states`.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_code-aware-interface` and
-   :ref:`component_resource_model_timestampable-interface`.
+   This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_ and
+   `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
    For more detailed information go to `Sylius API PaymentInterface`_.
 
@@ -36,7 +36,7 @@ In order to create a custom payment method class, which could be used by other
 models or services from this component, it needs to implement this interface.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_timestampable-interface`
+   This interface extends the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_
    and the :ref:`component_payment_model_payment-method-translation-interface`.
 
    For more detailed information go to `Sylius API PaymentMethodInterface`_.

@@ -12,7 +12,6 @@ Sylius Bundles Documentation
     SyliusOrderBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
-    SyliusResourceBundle/index
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index

@@ -17,7 +17,7 @@ If you don’t have it yet, create a file ``config/packages/sylius_resource.yaml
                 classes:
                     model: App\Entity\Supplier
 
-That's it! Your class is now a resource. In order to learn what does it mean, please refer to the :doc:`SyliusResourceBundle </components_and_bundles/bundles/SyliusResourceBundle/index>` documentation.
+That's it! Your class is now a resource. In order to learn what does it mean, please refer to the `SyliusResourceBundle <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_ documentation.
 
 Grid Definition
 ---------------

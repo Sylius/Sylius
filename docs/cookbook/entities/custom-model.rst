@@ -187,5 +187,5 @@ Learn more
 ----------
 
 * :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`
