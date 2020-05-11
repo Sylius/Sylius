@@ -24,7 +24,7 @@
 
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>province:write</attribute>
+                <attribute>province:update</attribute>
             </attribute>
         </attribute>
 

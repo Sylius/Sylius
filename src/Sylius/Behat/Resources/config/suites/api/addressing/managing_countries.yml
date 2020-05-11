@@ -17,7 +17,6 @@ default:
                 - sylius.behat.context.setup.geographical
 
                 - sylius.behat.context.api.admin.managing_countries
-                - sylius.behat.context.api.managing_provinces
 
             filters:
                 tags: "@managing_countries && @api"
