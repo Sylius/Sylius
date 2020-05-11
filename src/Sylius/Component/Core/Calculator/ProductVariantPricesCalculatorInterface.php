@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ProductVariantPricesCalculatorInterface extends ProductVariantPriceCalculatorInterface
 {
-
     /**
      * @throws MissingChannelConfigurationException when price for given channel does not exist
      */
