@@ -27,9 +27,6 @@ abstract class AbstractConfigurableShippingMethodElementType extends AbstractRes
     /** @var FormTypeRegistryInterface */
     private $formTypeRegistry;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(string $dataClass, array $validationGroups = [], FormTypeRegistryInterface $formTypeRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
@@ -37,9 +34,6 @@ abstract class AbstractConfigurableShippingMethodElementType extends AbstractRes
         $this->formTypeRegistry = $formTypeRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -73,9 +67,6 @@ abstract class AbstractConfigurableShippingMethodElementType extends AbstractRes
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

@@ -19,17 +19,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class TotalWeightGreaterThanOrEqualConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventSubscriber(new AddWeightFormSubscriber());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method_rule_total_weight_greater_than_or_equal_configuration';

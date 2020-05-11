@@ -18,9 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodRuleCollectionType extends AbstractConfigurationCollectionType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -28,9 +25,6 @@ final class ShippingMethodRuleCollectionType extends AbstractConfigurationCollec
         $resolver->setDefault('entry_type', ShippingMethodRuleType::class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method_rule_collection';

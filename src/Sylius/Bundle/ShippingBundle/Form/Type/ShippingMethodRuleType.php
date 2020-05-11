@@ -17,9 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ShippingMethodRuleType extends AbstractConfigurableShippingMethodElementType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         parent::buildForm($builder, $options);
@@ -34,9 +31,6 @@ final class ShippingMethodRuleType extends AbstractConfigurableShippingMethodEle
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method_rule';

@@ -20,9 +20,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterRuleCheckersPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.registry.shipping_method_rule_checker') || !$container->has('sylius.form_registry.shipping_method_rule_checker')) {

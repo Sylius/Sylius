@@ -25,9 +25,6 @@ use Symfony\Component\Validator\Constraints\Type;
 
 final class AmountType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -57,9 +54,6 @@ final class AmountType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_total';
