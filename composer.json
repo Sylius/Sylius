@@ -132,7 +132,7 @@
         "psr/event-dispatcher": "^1.0",
         "sspooky13/yaml-standards": "^5.0",
         "stripe/stripe-php": "^4.1",
-        "sylius-labs/coding-standard": "^3.0",
+        "sylius-labs/coding-standard": "^3.1",
         "symfony/browser-kit": "^4.4",
         "symfony/debug-bundle": "^4.4",
         "symfony/dotenv": "^4.4",
