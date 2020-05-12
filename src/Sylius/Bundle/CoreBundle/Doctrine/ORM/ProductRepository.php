@@ -56,6 +56,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                 ->setParameter('taxonId', $taxonId)
             ;
         }
+
         return $queryBuilder;
     }
 

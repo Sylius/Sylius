@@ -50,7 +50,6 @@ sylius_grid:
                     form_options:
                         class: "%sylius.model.channel.class%"
                     options:
-                        class: "%sylius.model.channel.class%"
                         field: "channels.id"
             actions:
                 main:
@@ -109,6 +108,3 @@ sylius_grid:
                 bulk:
                     delete:
                         type: delete
-    templates:
-        filter:
-            entities: '@SyliusUi/Grid/Filter/entities.html.twig'

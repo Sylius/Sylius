@@ -49,9 +49,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
 
     public function chooseChannelFilter(string $channelName): void
     {
-//        $this->getElement('criteria_channel', )
         $this->getElement('filter_channel')->selectOption($channelName);
-
     }
 
     public function hasProductAccessibleImage(string $productCode): bool
