@@ -34,6 +34,12 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
+    "ocramius/package-versions": {
+        "version": "1.5.1"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.2.3"
+    },
     "php": {
         "version": "7.3"
     },

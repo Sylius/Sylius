@@ -47,9 +47,9 @@ def generate_redirects(app):
             logger.debug("Redirecting '%s' to '%s'" % (from_path, to_path))
 
             from_path = from_path.replace(in_suffix, '.html')
-            to_path_prefix = '..%s' % os.path.sep * (
-                len(from_path.split(os.path.sep)) - 1)
-            to_path = to_path_prefix + to_path.replace(in_suffix, '.html')
+            if not to_path.startswith('http://') and not to_path.startswith('https://'):
+                to_path_prefix = '..%s' % os.path.sep * (len(from_path.split(os.path.sep)) - 1)
+                to_path = to_path_prefix + to_path.replace(in_suffix, '.html')
 
             redirected_filename = os.path.join(app.builder.outdir, from_path)
             redirected_directory = os.path.dirname(redirected_filename)

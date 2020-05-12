@@ -119,6 +119,6 @@ Learn more
 ----------
 
 * :doc:`API Guide </api/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`
 * `The Lionframe docs <http://lakion.com/lionframe>`_

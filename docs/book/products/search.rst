@@ -39,7 +39,7 @@ The search bar in many shops should be more sophisticated, than just a simple te
 searching by price, reviews, sizes or colors.
 
 If you would like to extend this built-in functionality read
-:doc:`this article about grids customizations </customization/grid>`, and :doc:`the GridBundle docs </components_and_bundles/bundles/SyliusGridBundle/index>`.
+:doc:`this article about grids customizations </customization/grid>`, and `the GridBundle docs <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_.
 
 ElasticSearch
 -------------
@@ -57,5 +57,4 @@ Learn more
 ----------
 
 * `SyliusElasticSearchPlugin <https://github.com/Sylius/SyliusElasticSearchPlugin>`_
-* :doc:`Grid Bundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`Grid Component documentation </components_and_bundles/components/Grid/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_

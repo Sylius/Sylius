@@ -34,7 +34,7 @@ This interface should be implemented by models representing a **Promotion**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+    This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_ and `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
     You will find more information about this interface in `Sylius API PromotionInterface`_.
 
@@ -72,8 +72,8 @@ This interface should be implemented by models representing a **Coupon**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_code-aware-interface`
-    and the :ref:`component_resource_model_timestampable-interface`.
+    This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_
+    and the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
     You will find more information about this interface in `Sylius API CouponInterface`_.
 
@@ -214,7 +214,7 @@ PromotionRepositoryInterface
 In order to be able to find active promotions in your system you should create a repository class which implements this interface.
 
 .. note::
-    This interface extends the :ref:`component_resource_repository_repository-interface`.
+    This interface extends the `RepositoryInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Repository/RepositoryInterface.php>`_.
 
     For more detailed information about this interface go to `Sylius API PromotionRepositoryInterface`_.
 
