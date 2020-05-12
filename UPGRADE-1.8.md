@@ -85,3 +85,6 @@
 
 1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
 The later is being decorated by `sylius.context.channel.cached` which caches the channel per request and reduces the amount of database queries.
+
+1. A serialization group has been added to the route `sylius_admin_ajax_product_index` to avoid an infinite loop, or a
+time out during this ajax request (previously no serialization group was defined on this route).
