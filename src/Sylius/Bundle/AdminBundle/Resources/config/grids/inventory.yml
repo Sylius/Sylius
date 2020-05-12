@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product_variant.class%"
                     repository:
                         method: createInventoryListQueryBuilder
-                        arguments: ["%locale%"]
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
             fields:
                 name:
                     type: twig
