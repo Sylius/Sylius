@@ -231,9 +231,9 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then /^the code field should be disabled$/
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -289,9 +289,9 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then the type field should be disabled
+     * @Then I should not be able to edit its type
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsType(): void
     {
         Assert::true($this->createPage->isTypeFieldDisabled());
     }
@@ -327,14 +327,6 @@ final class ManagingZonesContext implements Context
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]));
-    }
-
-    /**
-     * @Then I should see the zone :zoneName in the list
-     */
-    public function iShouldSeeTheZoneInTheList(string $zoneName): void
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $zoneName]));
     }
 
     /**
