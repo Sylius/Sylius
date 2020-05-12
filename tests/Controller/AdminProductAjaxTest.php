@@ -46,7 +46,7 @@ final class AdminProductAjaxTest extends JsonApiTestCase
             'resources/product_association_types.yml',
             'resources/products.yml',
             'resources/many_products.yml',
-            'resources/product_associations.yml'
+            'resources/product_associations.yml',
         ]);
 
         $this->authenticateAdminUser();

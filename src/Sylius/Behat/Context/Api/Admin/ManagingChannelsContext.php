@@ -210,7 +210,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(),'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
             sprintf('Channel with name %s does not exist', $name)
         );
     }

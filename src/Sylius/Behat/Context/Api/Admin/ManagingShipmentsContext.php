@@ -23,7 +23,6 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
 

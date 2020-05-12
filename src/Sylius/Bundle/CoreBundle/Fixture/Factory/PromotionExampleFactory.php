@@ -164,7 +164,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
-    private static function getCouponNormalizer (?FactoryInterface $couponFactory): \Closure
+    private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
     {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
             if (null === $couponFactory) {

@@ -17,5 +17,5 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserContextInterface
 {
-   public function getUser(): ?UserInterface;
+    public function getUser(): ?UserInterface;
 }

@@ -46,7 +46,8 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {}])
+            ->during('validate', ['', new class() extends Constraint {
+            }])
         ;
     }
 
