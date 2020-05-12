@@ -109,12 +109,6 @@
             <argument>shipping-methods</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.shop_billing_data" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>shop-billing-datas</argument>
-        </service>
-
         <service id="sylius.behat.api_platform_client.tax_category" class="Sylius\Behat\Client\ApiPlatformClient">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />

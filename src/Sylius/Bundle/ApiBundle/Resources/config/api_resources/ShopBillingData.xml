@@ -1,10 +1,14 @@
 <?xml version="1.0" ?>
 
 <!--
+
  This file is part of the Sylius package.
+
  (c) Paweł Jędrzejewski
+
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
+
 -->
 
 <resources xmlns="https://api-platform.com/schema/metadata"
@@ -29,11 +33,11 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="company" writable="true"  readable="true"/>
-        <property name="taxId" writable="true"  readable="true"/>
-        <property name="countryCode" writable="true"  readable="true"/>
-        <property name="street" writable="true"  readable="true"/>
-        <property name="city" writable="true"  readable="true"/>
-        <property name="postcode" writable="true"  readable="true"/>
+        <property name="company" writable="true" readable="true" />
+        <property name="taxId" writable="true" readable="true" />
+        <property name="countryCode" writable="true" readable="true" />
+        <property name="street" writable="true" readable="true" />
+        <property name="city" writable="true" readable="true" />
+        <property name="postcode" writable="true" readable="true" />
     </resource>
 </resources>
