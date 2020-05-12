@@ -27,7 +27,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 
 final class ZoneContext implements Context
 {
@@ -65,7 +65,7 @@ final class ZoneContext implements Context
      */
     public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
-        $restOfWorldCountries = Intl::getRegionBundle()->getCountryNames('en');
+        $restOfWorldCountries = Countries::getNames('en');
         unset($restOfWorldCountries['US']);
 
         $zone = $this->zoneFactory->createWithMembers(array_keys($restOfWorldCountries));

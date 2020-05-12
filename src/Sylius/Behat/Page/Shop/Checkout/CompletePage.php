@@ -21,7 +21,7 @@ use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Routing\RouterInterface;
 
 class CompletePage extends SymfonyPage implements CompletePageInterface
@@ -304,7 +304,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     private function getCountryName(string $countryCode): string
     {
-        return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
+        return strtoupper(Countries::getName($countryCode, 'en'));
     }
 
     private function getPriceFromString(string $price): int
