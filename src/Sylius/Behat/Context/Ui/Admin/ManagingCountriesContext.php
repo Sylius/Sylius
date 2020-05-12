@@ -267,9 +267,10 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I remove :provinceName province name
      */
-    public function iRemoveProvinceName($provinceName)
+    public function iRemoveProvinceName(string $provinceName): void
     {
         $this->updatePage->removeProvinceName($provinceName);
+        $this->iSaveMyChanges();
     }
 
     /**

@@ -29,6 +29,9 @@ final class ManagingCountriesContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $provincesClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -40,11 +43,13 @@ final class ManagingCountriesContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $provincesClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
+        $this->provincesClient = $provincesClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -171,9 +176,19 @@ final class ManagingCountriesContext implements Context
      * @When I do not specify the province code
      * @When I do not name the province
      */
-    public function iDoNotSpecifyTheProvinceCode(): void
+    public function iDoNotSpecifyTheProvince(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @When I remove :province province name
+     */
+    public function iRemoveProvinceName(ProvinceInterface $province): void
+    {
+        $this->provincesClient->buildUpdateRequest($province->getCode());
+        $this->provincesClient->addRequestData('name', '');
+        $this->provincesClient->update();
     }
 
     /**
@@ -325,6 +340,17 @@ final class ManagingCountriesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             \sprintf('Please enter province %s.', $field)
+        );
+    }
+
+    /**
+     * @Then I should be notified that name of the province is required
+     */
+    public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->provincesClient->getLastResponse()),
+            'Please enter province name.'
         );
     }
 

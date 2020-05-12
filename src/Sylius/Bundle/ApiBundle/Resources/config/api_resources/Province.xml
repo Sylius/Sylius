@@ -24,7 +24,7 @@
 
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>province:write</attribute>
+                <attribute>province:update</attribute>
             </attribute>
         </attribute>
 
@@ -34,6 +34,9 @@
 
         <itemOperations>
             <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+            <itemOperation name="put">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
             </itemOperation>
         </itemOperations>
