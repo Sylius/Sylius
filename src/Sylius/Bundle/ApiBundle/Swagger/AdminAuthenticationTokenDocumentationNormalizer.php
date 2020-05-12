@@ -38,17 +38,43 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
         $docs['components']['schemas']['AdminUserToken'] = [
             'type' => 'object',
             'properties' => [
-                'token' => [
+                'access_token' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'expires_in' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'token_type' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'scope' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'refresh_token' => [
                     'type' => 'string',
                     'readOnly' => true,
                 ],
             ],
         ];
-
         $docs['components']['schemas']['AdminUserCredentials'] = [
             'type' => 'object',
             'properties' => [
-                'email' => [
+                'client_id' => [
+                    'type' => 'string',
+                    'example' => '5sxomk2lm680w80w00s0kssc4so4cccg0ksokks4csc88skgo0',
+                ],'client_secret' => [
+                    'type' => 'string',
+                    'example' => '3h14yv3xn8mcwow4480wkgcow0wcc4gsscccg4ckwkws8gc4os',
+                ],
+                'grant_type' => [
+                    'type' => 'string',
+                    'example' => 'password',
+                ],
+                'username' => [
                     'type' => 'string',
                     'example' => 'api@example.com',
                 ],
@@ -61,13 +87,13 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/admin-user-authentication-token' => [
+                '/api/oauth/v2/token ' => [
                     'post' => [
                         'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',
-                        'summary' => 'Get JWT token to login.',
+                        'summary' => 'Get Oauth token to login.',
                         'requestBody' => [
-                            'description' => 'Create new JWT Token',
+                            'description' => 'Create new Oauth Token',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
@@ -78,7 +104,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
                         ],
                         'responses' => [
                             Response::HTTP_OK => [
-                                'description' => 'Get JWT token',
+                                'description' => 'Get Oauth token',
                                 'content' => [
                                     'application/json' => [
                                         'schema' => [

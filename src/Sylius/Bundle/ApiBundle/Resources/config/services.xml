@@ -66,5 +66,11 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_shop_user_email" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Command\CreateClientCommand">
+            <argument>null</argument>
+            <argument type="service" id="fos_oauth_server.client_manager.default" />
+            <tag name="console.command" />
+        </service>
     </services>
 </container>

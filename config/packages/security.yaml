@@ -1,7 +1,7 @@
 parameters:
     sylius.security.admin_regex: "^/admin"
     sylius.security.api_regex: "^/api"
-    sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
+    sylius.security.shop_regex: "^/(?!admin|new-api|api/.*|api$|media/.*)[^/]++"
     sylius.security.new_api_route: "/new-api"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
 
@@ -54,44 +54,42 @@ security:
             pattern: "%sylius.security.api_regex%/oauth/v2/token"
             security: false
 
-        new_api_admin_user:
-            pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
-            provider: sylius_admin_user_provider
-            stateless: true
-            anonymous: true
-            json_login:
-                check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
-
-        new_api_shop_user:
-            pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
-            provider: sylius_shop_user_provider
-            stateless: true
-            anonymous: true
-            json_login:
-                check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
-
+#        new_api_admin_user:
+#            pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
+#            provider: sylius_admin_user_provider
+#            stateless: true
+#            anonymous: true
+#            json_login:
+#                check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
+#                username_path: email
+#                password_path: password
+#                success_handler: lexik_jwt_authentication.handler.authentication_success
+#                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
+#
+#        new_api_shop_user:
+#            pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
+#            provider: sylius_shop_user_provider
+#            stateless: true
+#            anonymous: true
+#            json_login:
+#                check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
+#                username_path: email
+#                password_path: password
+#                success_handler: lexik_jwt_authentication.handler.authentication_success
+#                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
+#
         new_api:
             pattern: "%sylius.security.new_api_regex%/*"
-            provider: sylius_api_chain_provider
+            provider: sylius_admin_user_provider
+            fos_oauth: true
             stateless: true
-            anonymous: lazy
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+            anonymous: true
 
         api:
             pattern: "%sylius.security.api_regex%/.*"

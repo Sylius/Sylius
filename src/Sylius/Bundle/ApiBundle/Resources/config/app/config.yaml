@@ -15,6 +15,21 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+# Configurations for Swagger still doesn't work properly
+    oauth:
+        enabled: true
+        clientId: '5sxomk2lm680w80w00s0kssc4so4cccg0ksokks4csc88skgo0'
+        clientSecret: '3h14yv3xn8mcwow4480wkgcow0wcc4gsscccg4ckwkws8gc4os'
+        type: 'oauth2'
+        flow: 'password'
+        tokenUrl: '/api/oauth/v2/token'
+        authorizationUrl: '/api/oauth/v2/auth'
+        scopes: [api_access]
+        
+fos_oauth_server:
+    service:
+        options:
+            supported_scopes: api_access
 
 framework:
     messenger:
