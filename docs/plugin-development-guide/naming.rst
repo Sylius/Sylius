@@ -22,9 +22,9 @@ to reflect your plugin functionality. Basing on the vendor and plugin names esta
 
     * ``acme_sylius_example_plugin`` -> ``iron_man_sylius_product_on_demand_plugin``
 
-* In ``tests/Application/Kernel.php``:
+* In ``tests/Application/config/bundles.php``:
 
-    * ``\Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin()`` -> ``\IronMan\SyliusProductOnDemandPlugin\SyliusProductOnDemandPlugin()``
+    * ``Acme\SyliusExamplePlugin\AcmeSyliusExamplePlugin::class`` -> ``IronMan\SyliusProductOnDemandPlugin\SyliusProductOnDemandPlugin::class``
 
 * In ``phpspec.yml.dist`` (if you want to use PHPSpec in your plugin):
 
@@ -59,10 +59,10 @@ You should also delete Behat suite named ``greeting_customer`` from ``tests/Beha
     You **don't have to** remove all these files mentioned above. They can be adapted to suit your plugin functionality. However, as
     they provide default, dummy features only for the presentation reasons, it's just easier to delete them and implement new ones on
     your own.
-    
+
 .. important::
-    After you have change name of plugin, please run in your main directory of plugin (cd MyPlugin/ && composer install). 
-    If you don't rerun this command you may have this error : 
+    After you have change name of plugin, please run in your main directory of plugin (cd MyPlugin/ && composer install).
+    If you don't rerun this command you may have this error :
     ```bash
     $ (cd tests/Application && bin/console assets:install public -e test)
     PHP Fatal error: Uncaught Symfony\Component\Debug\Exception\ClassNotFoundException: Attempted to load class "Kernel" from namespace "Tests\FMDD\SyliusEmailOrderAdminPlugin\Application".
