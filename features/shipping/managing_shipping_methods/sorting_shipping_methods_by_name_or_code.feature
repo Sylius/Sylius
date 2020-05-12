@@ -46,7 +46,7 @@ Feature: Sorting listed shipping methods by name or code
         And the first shipping method on the list should have name "Pug Blimp"
 
     @ui @api
-    Scenario: Sort shipping methods ascending by name from chosen locale translations
+    Scenario: Sorting shipping methods ascending by name from chosen locale translation
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
         And I sort the shipping methods ascending by name
@@ -54,7 +54,7 @@ Feature: Sorting listed shipping methods by name or code
         And the first shipping method on the list should have name "Łódź Podwodna Morskich Jednorożców"
 
     @ui @api
-    Scenario: Sort shipping methods descending by name from chosen locale translations
+    Scenario: Sorting shipping methods descending by name from chosen locale translation
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
         And the shipping methods are already sorted ascending by name
