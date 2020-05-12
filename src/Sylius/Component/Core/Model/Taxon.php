@@ -104,7 +104,7 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function compareTo($other): int
     {
