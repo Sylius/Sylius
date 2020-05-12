@@ -31,6 +31,12 @@
             <argument type="service" id="behat.mink.parameters" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_channels" class="Sylius\Behat\Context\Api\Admin\ManagingChannelsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.channel" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_countries" class="Sylius\Behat\Context\Api\Admin\ManagingCountriesContext">
             <argument type="service" id="sylius.behat.api_platform_client.country" />
             <argument type="service" id="sylius.behat.api_platform_client.province" />
