@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Dashboard;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
@@ -25,7 +27,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var OrderRepositoryInterface */
+    /** @var OrderRepositoryInterface|EntityRepository */
     private $orderRepository;
 
     public function __construct(EntityManagerInterface $entityManager, OrderRepositoryInterface $orderRepository)
@@ -41,15 +43,21 @@ final class SalesDataProvider implements SalesDataProviderInterface
         $endDate = (new \DateTime('last day of this month'));
         $endDate->setTime(23, 59, 59);
 
-        $qb = $this->orderRepository->createQueryBuilder('so');
-        $qb->select($this->getSelectStatement())
-            ->where($qb->expr()->eq('so.channel', ':channel'))
-            ->andWhere('so.checkoutCompletedAt BETWEEN :startDate AND :endDate')
+        /** @psalm-suppress PossiblyUndefinedMethod */
+        $queryBuilder = $this->orderRepository->createQueryBuilder('o')
+            ->select("DATE_FORMAT(o.checkoutCompletedAt, '%m.%y') AS date")
+            ->addSelect("SUM(o.total) as total")
+            ->where('o.channel = :channel')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->andWhere('o.paymentState = :state')
             ->groupBy('date')
             ->setParameter('channel', $channel)
             ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate);
-        $result = $qb->getQuery()->getScalarResult();
+            ->setParameter('endDate', $endDate)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+        ;
+        $result = $queryBuilder->getQuery()->getScalarResult();
 
         $data = [];
         foreach ($result as $item) {
@@ -61,21 +69,5 @@ final class SalesDataProvider implements SalesDataProviderInterface
             $endDate,
             $data
         );
-    }
-
-    /**
-     * add DATE_FORMAT support for postgres by using
-     * DoctrineExtensions\Query\Postgresql\DateFormat in doctrine configuration
-     *
-     * @return string
-     */
-    private function getSelectStatement()
-    {
-        $dateFormat = '%m.%y';
-        if ($this->entityManager->getConnection()->getDatabasePlatform()->getName() == 'postgresql') {
-            $dateFormat = 'mm.yyyy';
-        }
-
-        return "DATE_FORMAT(so.checkoutCompletedAt, '" . $dateFormat . "') AS date, SUM(so.total) as total";
     }
 }
