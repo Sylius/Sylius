@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by Prometee at 2020-05-06T10:43:50Z
+
+To fail the test it require more than just adding product related to another, it require also to change the php config : `memory_limit` or `max_execution_time` to a lower values.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2020-05-06T10:51:43Z
+
+I will try fail it with products related to another, because in my case I have only 20 products and the bug occurred.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-06T10:52:24Z
+
+Would be awesome to have failing test for that, to prevent regression in the future
+
+---------------------------------------------------------------------------
+
+by Prometee at 2020-05-08T15:30:21Z
+
+I was not enable to set a timeout on the request but the test will fail if the `serialization_groups` is changed because the json result will be different.
+
+For the record here is the failing test :
+![image](https://user-images.githubusercontent.com/861820/81419133-0ffdf680-914e-11ea-829a-34fe0ab7f1a0.png)
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-12T19:48:08Z
+
+Thank you, Francis! :tada:
