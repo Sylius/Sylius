@@ -17,7 +17,7 @@ use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
- * @deprecated
+ * @deprecated since Sylius 1.8, use ProductVariantPricesCalculatorInterface instead
  */
 interface ProductVariantPriceCalculatorInterface
 {
