@@ -72,7 +72,7 @@ This interface should be implemented by model representing a shipping category a
 shipments and connect it with right shipment method.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+    This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_ and `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
     For more detailed information go to `Sylius API ShippingCategoryInterface`_.
 
@@ -87,7 +87,7 @@ This interface provides default requirements for system of matching shipping met
 and allows to add a new restriction to a basic shipping method.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
+    This interface extends the `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_, `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_
     and :ref:`component_shipping_model_shipping-method-translation-interface`.
 
     For more detailed information go to `Sylius API ShippingMethodInterface`_.

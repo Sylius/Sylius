@@ -200,7 +200,7 @@ How to use themes for customizations?
 
 You can refer to the theme documentation available here:
 - :doc:`Themes (The book) </book/themes/themes>`
-- :doc:`SyliusThemeBundle (Bundle documentation) </components_and_bundles/bundles/SyliusThemeBundle/index>`
+- `SyliusThemeBundle (Bundle documentation) <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_
 
 Global Twig variables
 ---------------------

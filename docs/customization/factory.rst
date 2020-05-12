@@ -125,4 +125,4 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
 Learn more
 ----------
 
-* :doc:`SyliusResourceBundle creating resources </components_and_bundles/bundles/SyliusResourceBundle/create_resource>`
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_

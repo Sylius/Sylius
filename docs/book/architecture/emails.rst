@@ -5,7 +5,7 @@ E-Mails
 =======
 
 Sylius is sending various e-mails and this chapter is a reference about all of them. Continue reading to learn what e-mails are sent, when and how to customize the templates.
-To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </components_and_bundles/bundles/SyliusMailerBundle/index>`.
+To understand how e-mail sending works internally, please refer to `SyliusMailerBundle documentation <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_.
 And to learn more about mailer services configuration, read :doc:`the dedicated cookbook </cookbook/emails/mailer>`.
 
 User Confirmation
@@ -212,5 +212,4 @@ Example using **EmailManager**:
 Learn more
 ----------
 
-* :doc:`Mailer - Component Documentation </components_and_bundles/components/Mailer/index>`
-* :doc:`Mailer - Bundle Documentation </components_and_bundles/bundles/SyliusMailerBundle/index>`
+* `Mailer - Documentation <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_

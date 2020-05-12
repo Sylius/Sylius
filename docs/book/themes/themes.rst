@@ -133,4 +133,4 @@ In the administration panel go to channels and change the theme of your desired 
 Learn more
 ----------
 
-* :doc:`Theme - Bundle Documentation </components_and_bundles/bundles/SyliusThemeBundle/index>`.
+* `Theme - Bundle Documentation <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_.
