@@ -219,11 +219,6 @@
             <tag name="sylius.sales_provider" database-platform="mysql" />
         </service>
 
-        <service id="sylius.sales_summary.provider" class="Sylius\Component\Core\Provider\SalesSummaryProvider">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="service.sales_summary_provider.resolver" />
-        </service>
-
         <service id="service.sales_summary_provider.resolver" class="Sylius\Component\Core\Resolver\SalesSummaryProviderResolver">
             <argument type="tagged_locator" tag="sylius.sales_provider" index-by="database-platform" />
         </service>

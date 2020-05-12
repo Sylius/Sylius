@@ -13,35 +13,41 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Provider\SalesSummaryProviderInterface;
+use Sylius\Component\Core\Resolver\SalesSummaryProviderResolver;
 
 /**
  * @experimental
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {
-    /** @var SalesSummaryProviderInterface */
-    private $salesSummaryProvider;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(SalesSummaryProviderInterface $salesSummaryProvider)
+    /** @var SalesSummaryProviderResolver */
+    private $salesSummaryProviderResolver;
+
+    public function __construct(EntityManagerInterface $entityManager, SalesSummaryProviderResolver $salesSummaryProviderResolver)
     {
-        $this->salesSummaryProvider = $salesSummaryProvider;
+        $this->entityManager = $entityManager;
+        $this->salesSummaryProviderResolver = $salesSummaryProviderResolver;
     }
 
-    public function getLastYearSalesSummary(ChannelInterface $channel): SalesSummaryInterface
+    public function getLastYearSalesSummary(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): SalesSummaryInterface {
+        $data = $this->getSalesSummary($channel, $startDate, $endDate);
+
+        return new SalesSummary($startDate, $endDate, $data);
+    }
+
+    private function getSalesSummary(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate): array
     {
-        $startDate = (new \DateTime('first day of next month last year'));
-        $startDate->setTime(0, 0, 0);
-        $endDate = (new \DateTime('last day of this month'));
-        $endDate->setTime(23, 59, 59);
+        $provider = $this->salesSummaryProviderResolver->getSalesSummaryProvider($this->entityManager->getConnection());
 
-        $data = $this->salesSummaryProvider->getSalesSummary($channel, $startDate, $endDate);
-
-        return new SalesSummary(
-            $startDate,
-            $endDate,
-            $data
-        );
+        return $provider->getSalesSummary($channel, $startDate, $endDate);
     }
 }
