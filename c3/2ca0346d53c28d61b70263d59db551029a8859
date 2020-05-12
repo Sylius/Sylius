@@ -1,0 +1,74 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2019-07-31T12:22:17Z
+
+@pamil @lchrusciel
+Not compatible yet... This is introduced on Symfony 4.3 and be removed on Symfony 5.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2019-10-29T12:43:47Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2019-10-29T12:54:07Z
+
+Do not stale.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-11-08T09:46:00Z
+
+Hello @loic425! It's definitely a change we would like to make, but it has to be rebased with the `master` branch. As far as I know, you will have some fun with solving the conflicts in `LocaleSetup` and `CountryNameExtension` :) I hope you'll find some time to do it 🚀 Tests also need some polishing 🖖
+
+---------------------------------------------------------------------------
+
+by loic425 at 2019-11-08T10:16:26Z
+
+> Hello @loic425! It's definitely a change we would like to make, but it has to be rebased with the `master` branch. As far as I know, you will have some fun with solving the conflicts in `LocaleSetup` and `CountryNameExtension` :) I hope you'll find some time to do it 🚀 Tests also need some polishing 🖖
+
+I think I can work on it soon. :)
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-11-08T11:53:07Z
+
+The master branch requires Symfony ^4.3 now, could be merged after being rebased and having conflicts fixed.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2019-11-08T13:22:17Z
+
+@pamil Done, let's wait for Travis build.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-02-06T13:57:26Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-02-07T11:34:04Z
+
+@pamil Do not stale 🙏
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-02-07T13:06:40Z
+
+Ref. #10928
+
+---------------------------------------------------------------------------
+
+by loic425 at 2020-03-10T15:32:07Z
+
+@pamil @lchrusciel I just finished this old PR for Symfony 5 support and this time, all tests are OK 🎉
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-12T20:18:51Z
+
+Thanks, Loïc! :tada:
