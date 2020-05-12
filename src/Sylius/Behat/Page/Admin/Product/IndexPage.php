@@ -37,9 +37,21 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->imageExistenceChecker = $imageExistenceChecker;
     }
 
+    public function filter(): void
+    {
+        $this->getElement('filter')->press();
+    }
+
     public function filterByTaxon(string $taxonName): void
     {
         $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
+    }
+
+    public function chooseChannelFilter(string $channelName): void
+    {
+//        $this->getElement('criteria_channel', )
+        $this->getElement('filter_channel')->selectOption($channelName);
+
     }
 
     public function hasProductAccessibleImage(string $productCode): bool
@@ -63,6 +75,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
+            'filter_channel' => '#criteria_channel',
         ]);
     }
 }

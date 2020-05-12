@@ -12,7 +12,7 @@ Feature: Filtering products by a channel
         And the store also has a product "Hp" with channel "Web-US"
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Filtering products by a chosen channel
         When I browse products
         And I choose "Web-EU" as a channel filter
@@ -22,7 +22,7 @@ Feature: Filtering products by a channel
         And I should see a product with name "Macbook-pro"
         But I should not see any product with name "Hp"
 
-    @todo
+    @ui
     Scenario: Filtering products by a chosen channel
         When I browse products
         And I choose "Web-US" as a channel filter

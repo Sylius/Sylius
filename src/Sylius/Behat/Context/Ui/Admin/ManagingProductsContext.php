@@ -249,6 +249,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose :channelName as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(string $channelName)
+    {
+        $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then I should see the product :productName in the list
      * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop

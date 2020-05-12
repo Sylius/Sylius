@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as CrudIndexPageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface IndexPageInterface extends CrudIndexPageInterface
 {
@@ -22,4 +23,8 @@ interface IndexPageInterface extends CrudIndexPageInterface
     public function hasProductAccessibleImage(string $productCode): bool;
 
     public function showProductPage(string $productName): void;
+
+    public function chooseChannelFilter(string $channelName) :void;
+
+    public function filter(): void;
 }

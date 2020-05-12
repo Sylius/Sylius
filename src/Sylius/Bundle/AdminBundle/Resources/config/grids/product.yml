@@ -44,6 +44,14 @@ sylius_grid:
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        class: "%sylius.model.channel.class%"
+                        field: "channels.id"
             actions:
                 main:
                     create:
@@ -101,3 +109,6 @@ sylius_grid:
                 bulk:
                     delete:
                         type: delete
+    templates:
+        filter:
+            entities: '@SyliusUi/Grid/Filter/entities.html.twig'
