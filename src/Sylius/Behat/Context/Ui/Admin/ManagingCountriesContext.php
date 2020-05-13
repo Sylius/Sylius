@@ -274,10 +274,18 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that province code must be unique$/
+     * @Then I should be notified that province code must be unique
      */
-    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique()
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
     {
         Assert::same($this->updatePage->getValidationMessage('code'), 'Province code must be unique.');
+    }
+
+    /**
+     * @Then I should be notified that name of the province is required
+     */
+    public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
+    {
+        Assert::same($this->updatePage->getValidationMessage('name'), 'Please enter province name.');
     }
 }
