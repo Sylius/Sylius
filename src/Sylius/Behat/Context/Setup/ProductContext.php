@@ -870,10 +870,10 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the store has a product :product with channel :channel
-     * @Given the store also has a product :product with channel :channel
+     * @Given the store has a product :productName in channel :channel
+     * @Given the store also has a product :productName in channel :channel
      */
-    public function theStoreHasAProductWithChannel(String $productName, ChannelInterface $channel): void
+    public function theStoreHasAProductWithChannel(string $productName, ChannelInterface $channel): void
     {
         $product = $this->createProduct($productName, 0, $channel);
 

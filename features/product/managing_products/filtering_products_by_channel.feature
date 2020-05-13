@@ -7,9 +7,9 @@ Feature: Filtering products by a channel
     Background:
         Given the store operates on a channel named "Web-EU"
         And the store also operates on a channel named "Web-US"
-        And the store has a product "MacBook Air" with channel "Web-EU"
-        And the store also has a product "MacBook Pro" with channel "Web-EU"
-        And the store also has a product "HP Spectre" with channel "Web-US"
+        And the store has a product "MacBook Air" in channel "Web-EU"
+        And the store also has a product "MacBook Pro" in channel "Web-EU"
+        And the store also has a product "HP Spectre" in channel "Web-US"
         And I am logged in as an administrator
 
     @ui

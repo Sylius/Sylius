@@ -49,7 +49,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
 
     public function chooseChannelFilter(string $channelName): void
     {
-        $this->getElement('filter_channel')->selectOption($channelName);
+        $this->getElement('channel_filter')->selectOption($channelName);
     }
 
     public function hasProductAccessibleImage(string $productCode): bool
@@ -72,8 +72,8 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'channel_filter' => '#criteria_channel',
             'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
-            'filter_channel' => '#criteria_channel',
         ]);
     }
 }

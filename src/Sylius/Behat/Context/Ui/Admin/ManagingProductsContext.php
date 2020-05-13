@@ -251,7 +251,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I choose :channelName as a channel filter
      */
-    public function iChooseChannelAsAChannelFilter(string $channelName)
+    public function iChooseChannelAsAChannelFilter(string $channelName): void
     {
         $this->indexPage->chooseChannelFilter($channelName);
     }
