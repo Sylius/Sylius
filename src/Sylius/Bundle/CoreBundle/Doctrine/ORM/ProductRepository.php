@@ -129,6 +129,19 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $queryBuilder;
     }
 
+    public function createListQueryBuilderByChannelAndLocaleCode(ChannelInterface $channel, string $localeCode): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = true')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setParameter('channel', $channel)
+            ->setParameter('locale', $localeCode)
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */

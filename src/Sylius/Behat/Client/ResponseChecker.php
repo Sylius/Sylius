@@ -20,6 +20,11 @@ final class ResponseChecker implements ResponseCheckerInterface
 {
     public function countCollectionItems(Response $response): int
     {
+        return count($this->getCollection($response));
+    }
+
+    public function countTotalCollectionItems(Response $response): int
+    {
         return (int) $this->getResponseContentValue($response, 'hydra:totalItems');
     }
 

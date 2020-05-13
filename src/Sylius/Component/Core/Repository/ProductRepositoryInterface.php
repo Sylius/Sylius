@@ -34,6 +34,8 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
         bool $includeAllDescendants = false
     ): QueryBuilder;
 
+    public function createListQueryBuilderByChannelAndLocaleCode(ChannelInterface $channel, string $localeCode): QueryBuilder;
+
     /**
      * @return array|ProductInterface[]
      */

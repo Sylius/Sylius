@@ -42,9 +42,11 @@ final class Request implements RequestInterface
         $this->headers = array_merge($this->headers, $headers);
     }
 
-    public static function index(string $resource, string $token): RequestInterface
+    public static function index(string $resource, ?string $token = null): RequestInterface
     {
-        return new self('/new-api/' . $resource, HttpRequest::METHOD_GET, ['HTTP_Authorization' => 'Bearer ' . $token]);
+        $headers = $token ? ['HTTP_Authorization' => 'Bearer ' . $token] : [];
+
+        return new self('/new-api/' . $resource, HttpRequest::METHOD_GET, $headers);
     }
 
     public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): RequestInterface

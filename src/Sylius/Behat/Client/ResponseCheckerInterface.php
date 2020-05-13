@@ -19,6 +19,8 @@ interface ResponseCheckerInterface
 {
     public function countCollectionItems(Response $response): int;
 
+    public function countTotalCollectionItems(Response $response): int;
+
     public function getCollection(Response $response): array;
 
     public function getCollectionItemsWithValue(Response $response, string $key, string $value): array;
