@@ -25,9 +25,9 @@ final class CreateClientCommand extends Command
     /** @var ClientManagerInterface|null */
     private $clientManager;
 
-    public function __construct(?string $name = null, ClientManagerInterface $clientManager = null)
+    public function __construct(ClientManagerInterface $clientManager = null)
     {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->clientManager = $clientManager;
     }
@@ -36,7 +36,7 @@ final class CreateClientCommand extends Command
     {
         $this
             ->setName('sylius:new-api:oauth-server:create-client')
-            ->setDescription('Creates a new client')
+            ->setDescription('Creates a new client for new-api')
             ->addOption(
                 'redirect-uri',
                 null,

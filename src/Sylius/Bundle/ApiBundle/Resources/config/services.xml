@@ -68,7 +68,6 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Command\CreateClientCommand">
-            <argument>null</argument>
             <argument type="service" id="fos_oauth_server.client_manager.default" />
             <tag name="console.command" />
         </service>
