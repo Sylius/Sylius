@@ -1,4 +1,4 @@
-
+<?xml version="1.0"?>
 <psalm
     totallyTyped="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -88,8 +88,8 @@
                 <referencedClass name="Doctrine\Common\Persistence\ObjectManager" />
                 <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
-		<referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
-		<referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
+                <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Controller\Controller" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" />
@@ -99,7 +99,7 @@
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\RegionBundleInterface" />
                 <referencedClass name="Symfony\Component\Security\Core\Role\Role" />
                 <referencedClass name="Symfony\Component\Translation\TranslatorInterface" />
-		<referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
+		        <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
             </errorLevel>
         </DeprecatedClass>
         <DeprecatedInterface>
