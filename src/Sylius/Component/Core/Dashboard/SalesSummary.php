@@ -22,25 +22,9 @@ final class SalesSummary implements SalesSummaryInterface
     private $intervalsSalesMap = [];
 
     public function __construct(
-        \DatePeriod $datePeriod,
-        array $salesData,
-        string $dateFormat
+        array $salesData
     ) {
-        /** @var \DateTimeInterface $date */
-        foreach ($datePeriod as $date) {
-            $periodName = $date->format($dateFormat);
-            if (!isset($salesData[$periodName])) {
-                $salesData[$periodName] = 0;
-            }
-        }
-
-        uksort($salesData, function (string $date1, string $date2) use ($dateFormat) {
-            return \DateTime::createFromFormat($dateFormat, $date1) <=> \DateTime::createFromFormat($dateFormat, $date2);
-        });
-
-        foreach ($salesData as $interval => $sales) {
-            $this->intervalsSalesMap[$interval] = number_format(abs($sales / 100), 2, '.', '');
-        }
+        $this->intervalsSalesMap = $salesData;
     }
 
     public function getIntervals(): array

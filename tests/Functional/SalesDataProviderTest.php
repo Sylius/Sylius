@@ -16,6 +16,7 @@ namespace Sylius\Tests\Functional;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Dashboard\SalesSummary;
 use Sylius\Component\Core\Dashboard\SalesSummaryInterface;
@@ -59,7 +60,7 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2019-01-01 00:00:01');
         $endDate = new \DateTime('2020-12-31 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'year', 'CHANNEL', 'Y');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::year(), 'CHANNEL');
 
         $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
 
@@ -74,7 +75,7 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2020-01-01 00:00:01');
         $endDate = new \DateTime('2020-12-31 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'month', 'CHANNEL', 'n');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::month(), 'CHANNEL');
         $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 month', 'n');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
@@ -91,7 +92,7 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2020-01-15 00:00:01');
         $endDate = new \DateTime('2020-01-15 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'hour', 'CHANNEL', 'G');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::hour(), 'CHANNEL');
         $expectedPeriods = $this->getExpectedPeriods($startDate, $endDate, '1 hour', 'G');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
@@ -108,7 +109,7 @@ final class SalesDataProviderTest extends WebTestCase
         $startDate = new \DateTime('2019-01-01 00:00:01');
         $endDate = new \DateTime('2019-12-31 23:59:59');
 
-        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, 'year', 'EXPENSIVE_CHANNEL', 'Y');
+        $salesSummary = $this->getSummaryForChannel($startDate, $endDate, Interval::year(), 'EXPENSIVE_CHANNEL');
         $expectedMonths = $this->getExpectedPeriods($startDate, $endDate, '1 year', 'Y');
 
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
@@ -119,7 +120,7 @@ final class SalesDataProviderTest extends WebTestCase
         );
     }
 
-    private function getSummaryForChannel(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval, string $channelCode, string $dateFormat): SalesSummaryInterface
+    private function getSummaryForChannel(\DateTimeInterface $startDate, \DateTimeInterface $endDate, Interval $interval, string $channelCode): SalesSummaryInterface
     {
         /** @var ChannelRepositoryInterface $channelRepository */
         $channelRepository = self::$container->get('sylius.repository.channel');
@@ -129,7 +130,7 @@ final class SalesDataProviderTest extends WebTestCase
         /** @var SalesDataProviderInterface $salesDataProvider */
         $salesDataProvider = self::$container->get(SalesDataProviderInterface::class);
 
-        return $salesDataProvider->getSalesSummary($startDate, $endDate, $interval, $channel, $dateFormat);
+        return $salesDataProvider->getSalesSummary($channel, $startDate, $endDate, $interval);
     }
 
     private function getExpectedPeriods(\DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval, string $dateFormat): array

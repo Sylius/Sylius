@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Dashboard\Interval;
 
 final class SalesSummarySpec extends ObjectBehavior
 {
@@ -22,7 +23,7 @@ final class SalesSummarySpec extends ObjectBehavior
         $this->beConstructedWith(
             new \DatePeriod(new \DateTime('01-01-2010'), \DateInterval::createFromDateString('1 month'), new \DateTime('31-12-2010')),
             [9 => 1200, 10 => 400, 11 => 500],
-            'n'
+            Interval::month()
         );
     }
 

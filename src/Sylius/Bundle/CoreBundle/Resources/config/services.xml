@@ -213,18 +213,5 @@
         <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
             <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
         </service>
-
-        <service id="sylius.empty_sales_summary.provider" class="Sylius\Component\Core\Provider\EmptySalesSummaryProvider">
-            <tag name="sylius.sales_provider" database-platform="unHandled" />
-        </service>
-
-        <service id="sylius.last_year_sales_summary.mysql_provider" class="Sylius\Component\Core\Provider\MySQLSalesSummaryProvider">
-            <argument type="service" id="sylius.repository.order"/>
-            <tag name="sylius.sales_provider" database-platform="mysql" />
-        </service>
-
-        <service id="service.sales_summary_provider.resolver" class="Sylius\Component\Core\Resolver\SalesSummaryProviderResolver">
-            <argument type="tagged_locator" tag="sylius.sales_provider" index-by="database-platform" />
-        </service>
     </services>
 </container>

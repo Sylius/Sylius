@@ -39,6 +39,7 @@ doctrine:
                         DAY: Sylius\Bundle\CoreBundle\Doctrine\DQL\Day
                         HOUR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Hour
                         MONTH: Sylius\Bundle\CoreBundle\Doctrine\DQL\Month
+                        WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
                         YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
 
 knp_gaufrette:
