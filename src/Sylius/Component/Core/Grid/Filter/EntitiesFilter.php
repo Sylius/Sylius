@@ -7,6 +7,9 @@ namespace Sylius\Component\Core\Grid\Filter;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
+/**
+ * @experimental
+ */
 final class EntitiesFilter implements FilterInterface
 {
     /**
