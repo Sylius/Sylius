@@ -42,14 +42,17 @@ The available transitions between these states are:
         process:
             from: [new]
             to: processing
-        complete:
+        authorize:
             from: [new, processing]
+            to: authorized
+        complete:
+            from: [new, processing, authorized]
             to: completed
         fail:
             from: [new, processing]
             to: failed
         cancel:
-            from: [new, processing]
+            from: [new, processing, authorized]
             to: cancelled
         refund:
             from: [completed]
