@@ -22,7 +22,7 @@ final class Day extends FunctionNode
 {
     public $date;
 
-    public function parse(Parser $parser)
+    public function parse(Parser $parser): void
     {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
@@ -32,8 +32,18 @@ final class Day extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 
-    public function getSql(SqlWalker $sqlWalker)
+    public function getSql(SqlWalker $sqlWalker): string
     {
-        return sprintf('DAY(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
+        $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+
+        switch ($platformName) {
+            case 'mysql':
+                return sprintf('DAY(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
+
+            case 'postgresql':
+                return sprintf('EXTRACT(DAY FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
+        }
+
+        throw new \RuntimeException(sprintf('Platform "%s" is not supported!', $platformName));
     }
 }
