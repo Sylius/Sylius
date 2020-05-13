@@ -99,7 +99,7 @@
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\RegionBundleInterface" />
                 <referencedClass name="Symfony\Component\Security\Core\Role\Role" />
                 <referencedClass name="Symfony\Component\Translation\TranslatorInterface" />
-		        <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
+                <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
             </errorLevel>
         </DeprecatedClass>
         <DeprecatedInterface>
