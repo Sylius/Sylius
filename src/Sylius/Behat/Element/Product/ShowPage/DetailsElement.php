@@ -39,7 +39,7 @@ final class DetailsElement extends Element implements DetailsElementInterface
 
     public function countChannels(): int
     {
-        if (! $this->hasElement('channels')) {
+        if (!$this->hasElement('channels')) {
             return 0;
         }
 

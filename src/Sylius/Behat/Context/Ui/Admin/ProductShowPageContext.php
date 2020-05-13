@@ -187,7 +187,7 @@ final class ProductShowPageContext implements Context
     /**
      * @Then I should not see price for channel :channelName
      */
-    public function iShouldNotSeePriceForChannel(string $channelName)
+    public function iShouldNotSeePriceForChannel(string $channelName): void
     {
         Assert::same($this->pricingElement->getPriceForChannel($channelName), '');
     }
