@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface as SymfonyContainer
 /**
  * @internal
  */
-final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryInterface
+final class SubResourceClassNameResolvingExtractorPropertyMetadataFactory implements PropertyMetadataFactoryInterface
 {
     /** @var PropertyMetadataFactoryInterface */
     private $decoratedPropertyMetadataFactory;

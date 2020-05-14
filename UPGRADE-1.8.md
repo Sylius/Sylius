@@ -88,3 +88,12 @@ The later is being decorated by `sylius.context.channel.cached` which caches the
 
 1. A serialization group has been added to the route `sylius_admin_ajax_product_index` to avoid an infinite loop, or a
 time out during this ajax request (previously no serialization group was defined on this route).
+
+## Known workarounds
+
+1. Due to limitation of usage of parameters as `resourceClass` in subresource definition in ApiPlatform, we've introduced 
+`\Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\SubResourceClassNameResolvingExtractorPropertyMetadataFactory`
+ class which decorates **only** XML version of `\ApiPlatform\Core\Metadata\Property\Factory\ExtractorPropertyMetadataFactory`
+ (service with id: `api_platform.metadata.property.metadata_factory.xml`). Therefore, this functionality is not available 
+ for yaml config. Also, `SubResourceClassNameResolvingExtractorPropertyMetadataFactory` should be removed once ApiPlatform 
+ will support this functionality out-of-the-box.
