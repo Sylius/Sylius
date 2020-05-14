@@ -21,10 +21,11 @@ use Doctrine\ORM\Query\SqlWalker;
 
 final class DateFormat extends FunctionNode
 {
-    /** @var ArithmeticExpression|null  */
-    public $date = null;
-    /** @var ArithmeticExpression|null  */
-    public $pattern = null;
+    /** @var ArithmeticExpression|null */
+    public $date;
+
+    /** @var ArithmeticExpression|null */
+    public $pattern;
 
     public function parse(Parser $parser)
     {

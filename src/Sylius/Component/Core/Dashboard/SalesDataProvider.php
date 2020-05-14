@@ -46,7 +46,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
         /** @psalm-suppress PossiblyUndefinedMethod */
         $queryBuilder = $this->orderRepository->createQueryBuilder('o')
             ->select("DATE_FORMAT(o.checkoutCompletedAt, '%m.%y') AS date")
-            ->addSelect("SUM(o.total) as total")
+            ->addSelect('SUM(o.total) as total')
             ->where('o.channel = :channel')
             ->andWhere('o.checkoutCompletedAt >= :startDate')
             ->andWhere('o.checkoutCompletedAt <= :endDate')
