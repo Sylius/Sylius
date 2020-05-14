@@ -45,4 +45,18 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
 
         $this->getStatisticsForChannel($channel)->shouldBeLike($expectedStats);
     }
+
+    function it_obtains_order_and_customer_statistics_by_given_channel_and_period(
+        OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository,
+        ChannelInterface $channel
+    ): void {
+        $expectedStats = new DashboardStatistics(450, 2, 6);
+
+        $orderRepository->getTotalPaidSalesForChannelInPeriod($channel, new \DateTime('yesterday'), new \DateTime())->willReturn(450);
+        $orderRepository->countPaidByChannelInPeriod($channel, new \DateTime('yesterday'), new \DateTime())->willReturn(2);
+        $customerRepository->countCustomersInPeriod(new \DateTime('yesterday'), new \DateTime())->willReturn(6);
+
+        $this->getStatisticsForChannel($channel)->shouldBeLike($expectedStats);
+    }
 }

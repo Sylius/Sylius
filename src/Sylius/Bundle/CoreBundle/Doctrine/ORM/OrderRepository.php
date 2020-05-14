@@ -244,6 +244,26 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function getTotalPaidSalesForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): int {
+        return (int) $this->createQueryBuilder('o')
+            ->select('SUM(o.total)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -272,6 +292,27 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getSingleScalarResult()
         ;
     }
+
+    public function countPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): int {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.paymentState = :state')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderPaymentStates::STATE_PAID)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
 
     /**
      * {@inheritdoc}

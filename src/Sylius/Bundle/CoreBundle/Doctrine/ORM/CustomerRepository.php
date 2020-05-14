@@ -18,9 +18,6 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function countCustomers(): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -30,9 +27,19 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function countCustomersInPeriod(\DateTimeInterface $startDate, \DateTimeInterface $endDate): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->where('o.createdAt >= :startDate')
+            ->andWhere('o.createdAt <= :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function findLatest(int $count): array
     {
         return $this->createQueryBuilder('o')
