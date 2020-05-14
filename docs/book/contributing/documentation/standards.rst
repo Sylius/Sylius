@@ -48,7 +48,7 @@ Example
 Code Examples
 -------------
 
-* The code follows the :doc:`Sylius Coding Standards </contributing/code/standards>`
+* The code follows the :doc:`Sylius Coding Standards </book/contributing/code/standards>`
   as well as the `Twig Coding Standards`_;
 * To avoid horizontal scrolling on code blocks, we prefer to break a line
   correctly if it crosses the 85th character, which in many IDEs is signalised by a vertical line;

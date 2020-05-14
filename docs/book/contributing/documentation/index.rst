@@ -9,4 +9,4 @@ Contributing Documentation
     standards
     license
 
-.. include:: /contributing/documentation/map.rst.inc
+.. include:: /book/contributing/documentation/map.rst.inc

@@ -9,4 +9,4 @@ Contributing Code
     standards
     license
 
-.. include:: /contributing/code/map.rst.inc
+.. include:: /book/contributing/code/map.rst.inc

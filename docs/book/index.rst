@@ -159,3 +159,27 @@ This chapter describes the rules and processes we use to organize our work.
     organization/index
 
 .. include:: /book/organization/map.rst.inc
+
+Support
+-------
+
+How to get support for Sylius?
+
+.. toctree::
+   :hidden:
+
+   support/index
+
+.. include:: /book/support/map.rst.inc
+
+Contributing
+------------
+
+Guides you how to contribute to Sylius.
+
+.. toctree::
+   :hidden:
+
+   contributing/index
+
+.. include:: /book/contributing/map.rst.inc

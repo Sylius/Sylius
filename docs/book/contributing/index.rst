@@ -1,5 +1,5 @@
-The Contribution Guide
-======================
+Contributing
+============
 
 .. note::
 
@@ -68,7 +68,7 @@ Contributing Code
 
     code/index
 
-.. include:: /contributing/code/map.rst.inc
+.. include:: /book/contributing/code/map.rst.inc
 
 Contributing Documentation
 --------------------------
@@ -78,7 +78,7 @@ Contributing Documentation
 
     documentation/index
 
-.. include:: /contributing/documentation/map.rst.inc
+.. include:: /book/contributing/documentation/map.rst.inc
 
 Contributing Translations
 -------------------------
