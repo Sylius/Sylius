@@ -82,5 +82,12 @@ contributing/organization/core-team.rst book/organization/team.rst
 contributing/organization/index.rst book/organization/index.rst
 contributing/organization/release-process.rst book/organization/release-cycle.rst
 contributing/organization/vision-and-strategy.rst book/organization/index.rst
-contributing/translations/index.rst book/contributing/translations/index.rst
 contributing/support/index.rst book/contributing/support/index.rst
+contributing/translations/index.rst book/contributing/translations/index.rst
+plugin-development-guide/idea.rst book/plugins/guide/idea.rst
+plugin-development-guide/implementation.rst book/plugins/guide/implementation.rst
+plugin-development-guide/index.rst book/plugins/guide/index.rst
+plugin-development-guide/installation.rst book/plugins/guide/installation.rst
+plugin-development-guide/naming.rst book/plugins/guide/naming.rst
+plugin-development-guide/specification.rst book/plugins/guide/specification.rst
+plugin-development-guide/summary.rst book/plugins/guide/summary.rst

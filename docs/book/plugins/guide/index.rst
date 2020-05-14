@@ -9,6 +9,7 @@ BDD methodology says the most accurate way to explain some process is using an e
 With respect to that rule, let's create some simple first plugin together!
 
 .. toctree::
+   :hidden:
 
    idea
    installation
@@ -16,6 +17,8 @@ With respect to that rule, let's create some simple first plugin together!
    specification
    implementation
    summary
+
+.. include:: /book/plugins/guide/map.rst.inc
 
 .. seealso::
 

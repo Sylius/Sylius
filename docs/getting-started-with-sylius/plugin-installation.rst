@@ -36,5 +36,5 @@ Learn more
 ##########
 
 * :doc:`Plugins </book/plugins/index>`
-* :doc:`Plugin development guide </plugin-development-guide/index>`
+* :doc:`Plugin development guide </book/plugins/guide/index>`
 * :doc:`Official plugins </book/plugins/official-plugins>`
