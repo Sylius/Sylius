@@ -51,7 +51,10 @@ final class HomepageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction('new-api/products/latest', HttpRequest::METHOD_GET);
+        $this->productsClient->customAction(
+            'new-api/products?itemsPerPage=3&order[createdAt]=desc',
+            HttpRequest::METHOD_GET
+        );
     }
 
     /**

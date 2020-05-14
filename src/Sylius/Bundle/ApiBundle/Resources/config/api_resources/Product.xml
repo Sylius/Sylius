@@ -18,8 +18,7 @@
     <resource class="%sylius.model.product.class%" shortName="Product">
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>admin:product:read</attribute>
-                <attribute>shop:product:read</attribute>
+                <attribute>product:read</attribute>
             </attribute>
         </attribute>
         <attribute name="validation_groups">sylius</attribute>
@@ -30,7 +29,6 @@
 
         <collectionOperations>
             <collectionOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
@@ -41,21 +39,7 @@
             <collectionOperation name="post">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product:create</attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="get_latest">
-                <attribute name="openapi_context">
-                    <attribute name="summary">Retrieves 3 latest Products</attribute>
-                </attribute>
-                <attribute name="method">GET</attribute>
-                <attribute name="path">products/latest</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product:read</attribute>
-                        <attribute>shop:product:read</attribute>
-                    </attribute>
+                    <attribute name="groups">product:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -69,7 +53,7 @@
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="path">products/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product:update</attribute>
+                    <attribute name="groups">product:update</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="delete">

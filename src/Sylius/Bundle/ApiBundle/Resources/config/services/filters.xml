@@ -41,7 +41,8 @@
 
         <service id="sylius.api.product_order_filter" parent="api_platform.doctrine.orm.order_filter">
             <argument type="collection">
-                <argument key="code"/>
+                <argument key="code" />
+                <argument key="createdAt" />
             </argument>
             <tag name="api_platform.filter" />
         </service>

@@ -22,6 +22,7 @@
         <import resource="services/data_persisters.xml" />
         <import resource="services/data_providers.xml" />
         <import resource="services/event_subscribers.xml" />
+        <import resource="services/extensions.xml" />
         <import resource="services/filters.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/validator.xml" />
@@ -33,11 +34,6 @@
             <argument type="service" id="sylius.repository.avatar_image" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="api_platform.iri_converter" />
-        </service>
-
-        <service id="sylius.api.doctrine.query_collection_extension.hide_archived_shipping_method" class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension" public="true">
-            <argument>%sylius.model.shipping_method.class%</argument>
-            <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
