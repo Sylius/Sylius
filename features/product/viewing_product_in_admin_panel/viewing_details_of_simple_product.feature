@@ -25,6 +25,14 @@ Feature: Viewing details of a simple product
         And I should see original price "$25.00" for channel "United States"
 
     @ui
+    Scenario: Viewing price block without channel enable
+        Given this product is unavailable in "United States" channel
+        When I access "Iron shield" product page
+        Then I should see product name "Iron shield"
+        And I should see the product in neither channel
+        And I should not see price for channel "United States"
+
+    @ui
     Scenario: Viewing details block
         Given the store has a tax category "No tax" with a code "nt"
         And product's "Iron shield" code is "123456789"

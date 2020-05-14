@@ -37,6 +37,17 @@ final class DetailsElement extends Element implements DetailsElementInterface
         return false;
     }
 
+    public function countChannels(): int
+    {
+        if (!$this->hasElement('channels')) {
+            return 0;
+        }
+
+        $channels = $this->getElement('channels')->findAll('css', 'span.channel-name');
+
+        return \count($channels);
+    }
+
     public function getProductCurrentStock(): int
     {
         return (int) $this->getElement('current_stock')->getText();

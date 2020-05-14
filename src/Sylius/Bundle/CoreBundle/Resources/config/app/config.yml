@@ -33,7 +33,9 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
-
+                dql:
+                    string_functions:
+                        DATE_FORMAT: Sylius\Bundle\CoreBundle\Doctrine\DQL\DateFormat
 knp_gaufrette:
     adapters:
         sylius_image:

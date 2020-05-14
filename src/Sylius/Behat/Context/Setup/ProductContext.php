@@ -173,6 +173,15 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is(?:| also) unavailable in ("[^"]+" channel)$/
+     */
+    public function thisProductIsAlsoUnavailableInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $product->removeChannel($channel);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the store( also) has a product :productName with code :code
      * @Given the store( also) has a product :productName with code :code, created at :date
      */

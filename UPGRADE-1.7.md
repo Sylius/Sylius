@@ -82,3 +82,18 @@ We've moved the following templates:
 
 Until now shipping address used to be the default address of an Order. We have changed that, so now the billing address 
 became the default address during checkout. It is an important change in our checkout process, please have that in mind.
+
+## Postgres support
+
+In case when you are using Postgres in your project, function `DATE_FORMAT` should be overridden.
+Adjust configuration in `config/packages/doctrine.yaml` to change `DATE_FORMAT` implementation:
+
+```yaml
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                dql:
+                    string_functions:
+                        DATE_FORMAT: App\Doctrine\DQL\DateFormat # OR any other path to your implementation
+```

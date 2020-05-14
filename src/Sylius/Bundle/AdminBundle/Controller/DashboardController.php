@@ -91,9 +91,7 @@ final class DashboardController
         }
 
         if (null === $channel) {
-            $channels = $this->channelRepository->findAll();
-
-            $channel = current($channels) === false ? null : current($channels);
+            $channel = $this->channelRepository->findOneBy([]);
         }
 
         return $channel;

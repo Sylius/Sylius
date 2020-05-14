@@ -21,28 +21,25 @@ The transitions on the order checkout state machine are:
 
 .. code-block:: yaml
 
-   transitions:
-      address:
-          from: [cart]
-          to: addressed
-      readdress:
-          from: [payment_selected, shipping_selected, addressed]
-          to: cart
-      select_shipping:
-          from: [addressed]
-          to: shipping_selected
-      reselect_shipping:
-          from: [payment_selected, shipping_selected]
-          to: addressed
-      select_payment:
-          from: [shipping_selected]
-          to: payment_selected
-      reselect_payment:
-          from: [payment_selected]
-          to: shipping_selected
-      complete:
-          from: [payment_selected]
-          to: completed
+    transitions:
+        address:
+            from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]
+            to: addressed
+        skip_shipping:
+            from: [addressed]
+            to: shipping_skipped
+        select_shipping:
+            from: [addressed, shipping_selected, payment_selected, payment_skipped]
+            to: shipping_selected
+        skip_payment:
+            from: [shipping_selected, shipping_skipped]
+            to: payment_skipped
+        select_payment:
+            from: [payment_selected, shipping_skipped, shipping_selected]
+            to: payment_selected
+        complete:
+            from: [payment_selected, payment_skipped]
+            to: completed
 
 .. image:: ../../_images/sylius_order_checkout.png
     :align: center
@@ -52,7 +49,7 @@ Steps of Checkout
 -----------------
 
 Checkout in Sylius is divided into 4 steps. Each of these steps occurs when the Order goes into a certain state.
-See the Checkout state machine in the `state_machine.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine.yml>`_
+See the Checkout state machine in the `state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
 together with the routing file for checkout: `checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_.
 
 .. note::
