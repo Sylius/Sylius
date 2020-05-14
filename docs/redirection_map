@@ -91,3 +91,6 @@ plugin-development-guide/installation.rst book/plugins/guide/installation.rst
 plugin-development-guide/naming.rst book/plugins/guide/naming.rst
 plugin-development-guide/specification.rst book/plugins/guide/specification.rst
 plugin-development-guide/summary.rst book/plugins/guide/summary.rst
+theming/bootstrap-theme.rst book/themes/bootstrap-theme.rst
+theming/index.rst book/themes/index.rst
+theming/webpack.rst cookbook/frontend/webpack.rst
