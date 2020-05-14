@@ -53,10 +53,13 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
     ): void {
         $expectedStats = new DashboardStatistics(450, 2, 6);
 
-        $orderRepository->getTotalPaidSalesForChannelInPeriod($channel, new \DateTime('yesterday'), new \DateTime())->willReturn(450);
-        $orderRepository->countPaidByChannelInPeriod($channel, new \DateTime('yesterday'), new \DateTime())->willReturn(2);
-        $customerRepository->countCustomersInPeriod(new \DateTime('yesterday'), new \DateTime())->willReturn(6);
+        $yesterday = new \DateTime('yesterday');
+        $today = new \DateTime();
 
-        $this->getStatisticsForChannel($channel)->shouldBeLike($expectedStats);
+        $orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $yesterday, $today)->willReturn(450);
+        $orderRepository->countPaidForChannelInPeriod($channel, $yesterday, $today)->willReturn(2);
+        $customerRepository->countCustomersInPeriod($yesterday, $today)->willReturn(6);
+        
+        $this->getStatisticsForChannelInPeriod($channel, $yesterday, $today)->shouldBeLike($expectedStats);
     }
 }

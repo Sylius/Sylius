@@ -72,15 +72,16 @@ final class DashboardController
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
+        // this data will be getting from UI after improve graph on dashboard
+        $startDate = (new \DateTime('first day of next month last year'));
+        $endDate = (new \DateTime('last day of this month'));
 
-        $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
+        $statistics = $this->statisticsProvider->getStatisticsForChannelInPeriod($channel, $startDate, $endDate);
         $data = ['statistics' => $statistics, 'channel' => $channel];
 
         if ($this->salesDataProvider !== null) {
             // this data will be getting from UI after improve graph on dashboard
-            $startDate = (new \DateTime('first day of next month last year'));
-            $endDate = (new \DateTime('last day of this month'));
-            $interval = Interval::week();
+            $interval = Interval::month();
 
             $data['sales_summary'] = $this
                 ->salesDataProvider

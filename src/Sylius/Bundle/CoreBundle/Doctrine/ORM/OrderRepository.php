@@ -313,7 +313,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-
     /**
      * {@inheritdoc}
      */
