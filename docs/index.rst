@@ -61,18 +61,6 @@ The Customization Guide
 
 .. include:: /customization/map.rst.inc
 
-Theming Guide
--------------
-
-:doc:`The Theming Guide </theming/index>` is useful when trying do develop custom layout for Sylius shops.
-
-.. toctree::
-   :hidden:
-
-   theming/index
-
-.. include:: /theming/map.rst.inc
-
 The Cookbook
 ------------
 
