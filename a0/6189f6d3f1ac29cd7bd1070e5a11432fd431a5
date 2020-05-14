@@ -1,0 +1,78 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-05-05T16:05:16Z
+
+I think there are ways of adding this feature without deprecating anything or adding any BC breaks.
+1. Use the current `ProductVariantPriceCalculatorInterface` for a new implementation which will return the original price.
+2. Introduce a new interface `ProductVariantOriginalPriceCalculatorInterface` and it's implementation.
+3. Introduce a new interface `ProductVariantChannelPricingResolver` which will return an instance of `ChannelPricingInterface` for a given product variant and channel.
+This can be used to complement 1st and/or 2nd option(s). It can be used directly in the view layer (through Twig extension), similar to `sylius_resolve_variant`.
+
+I find the 3rd option more practical and flexible. An instance of `ChannelPricingInterface` can be easily used in the view layer for all kinds of calculations.
+
+Also, there's `ChannelPricingInterface::isPriceReduced` which can be used for/instead of `sylius_has_discount`
+
+P.S. I can help with the implementation this presents interest.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-06T08:10:35Z
+
+@vvasiloi 2nd idea looks like a good solution! It'd not introduce any more new abstractions, so the complexity would stay almost the same.
+
+---------------------------------------------------------------------------
+
+by FlashPanther at 2020-05-06T09:06:17Z
+
+Thanks for your feedback @vvasiloi , @pamil .
+
+I followed @lchrusciel comment : [here](https://github.com/Sylius/Sylius/pull/11200/files#r396510427)
+
+**Idea 1 :** @JulienLoison proposed this in pull request #11200 , right ?
+**Idea 2 :** Yes, but some code will be duplicated ...
+**Idea 3 :** Maybe more complicated ... @vvasiloi "P.S. I can help with the implementation this presents interest." ( I appreciate !)
+
+Which solution do I have to choose ?
+
+(Sorry, first pull request in this project). :smile:
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-05-06T09:46:51Z
+
+> Idea 1 : @JulienLoison proposed this in pull request #11200 , right ?
+
+@FlashPanther No, there's a new method in the current interface, instead of a new interface.
+
+> @vvasiloi 2nd idea looks like a good solution! It'd not introduce any more new abstractions, so the complexity would stay almost the same.
+
+@pamil It is actually a new abstraction, since it adds a new interface. Perhaps you were referring to the 1st, which reuses the current interface.
+
+---------------------------------------------------------------------------
+
+by patrickallaert at 2020-05-06T10:59:04Z
+
+> > Idea 1 : @JulienLoison proposed this in pull request #11200 , right ?
+>
+> @FlashPanther No, there's a new method in the current interface, instead of a new interface.
+
+Correct, but that was flagged as a BC Break, hence the new proposal of @FlashPanther which was based on the commit of @JulienLoison introduced in #11200.
+
+---------------------------------------------------------------------------
+
+by FlashPanther at 2020-05-11T16:39:01Z
+
+Of course ... Psalm analysis triggers errors because of deprecated class ...
+Am I wrong ? Do I have to change something ?
+
+---------------------------------------------------------------------------
+
+by FlashPanther at 2020-05-13T18:54:56Z
+
+@pamil : ok for you ? (requested for review)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-14T07:21:56Z
+
+Thanks, tdevos! :tada:
