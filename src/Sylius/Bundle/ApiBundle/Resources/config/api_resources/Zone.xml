@@ -59,7 +59,7 @@
         <property name="scope" readable="true" writable="true" />
         <property name="type" readable="true" writable="true" />
         <property name="members" readable="true" writable="true">
-            <subresource resourceClass="Sylius\Component\Addressing\Model\ZoneMember" collection="true" />
+            <subresource collection="true" />
         </property>
     </resource>
 </resources>
