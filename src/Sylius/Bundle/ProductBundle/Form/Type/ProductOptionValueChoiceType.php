@@ -26,7 +26,7 @@ final class ProductOptionValueChoiceType extends AbstractType
     /** @var AvailableProductOptionValuesResolverInterface|null */
     private $availableProductOptionValuesResolver;
 
-    public function __construct(?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver)
+    public function __construct(?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver = null)
     {
         if (null === $availableProductOptionValuesResolver) {
             @trigger_error(
