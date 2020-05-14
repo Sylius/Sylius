@@ -61,5 +61,10 @@
         >
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
         </service>
+
+        <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
+            <argument type="service" id="sylius.api.api_platform.metadata.property.metadata_factory.xml.inner" />
+            <argument type="service" id="service_container" />
+        </service>
     </services>
 </container>
