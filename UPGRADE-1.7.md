@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.7.4` TO `v1.7.5`
+
+We've brought back the attribute types templates to SyliusAttributeBundle after BC break in v1.7.0.
+
 # UPGRADE FROM `v1.6.X` TO `v1.7.0`
 
 1. Require upgraded Sylius version using Composer:

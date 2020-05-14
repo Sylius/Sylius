@@ -4,7 +4,15 @@
         <tr>
             <td class="sylius-product-attribute-name" {{ sylius_test_html_attribute('product-attribute-name', attribute.name) }}>{{ attribute.name }}</td>
             <td class="sylius-product-attribute-value" {{ sylius_test_html_attribute('product-attribute-value', attribute.name) }}>
-                {% include [('@SyliusShop/Product/Show/Types/'~attribute.attribute.type~'.html.twig'), '@SyliusShop/Product/Show/Types/default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+                {% include [
+                    '@SyliusShop/Product/Show/Types/'~attribute.attribute.type~'.html.twig',
+                    '@SyliusAttribute/Types/'~attribute.attribute.type~'.html.twig',
+                    '@SyliusShop/Product/Show/Types/default.html.twig'
+                ] with {
+                    'attribute': attribute,
+                    'locale': configuration.request.locale,
+                    'fallbackLocale': configuration.request.defaultLocale
+                } %}
             </td>
         </tr>
     {% endfor %}
