@@ -1,5 +1,7 @@
 language: php
 
+dist: trusty
+
 sudo: false
 
 env:
@@ -40,7 +42,6 @@ matrix:
             services:
                 - memcached
                 - mysql
-            dist: trusty
         -   
             php: 7.3
             env:
@@ -52,7 +53,6 @@ matrix:
                 apt:
                     packages:
                         - parallel
-            dist: trusty
 
 cache:
     yarn: true
