@@ -19,6 +19,7 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
     private $decoratedPropertyMetadataFactory;
     /** @var ContainerInterface */
     private $container;
+    /** @var array */
     private $collectedParameters = [];
 
     public function __construct(PropertyMetadataFactoryInterface $decoratedPropertyMetadataFactory, ContainerInterface $container)
@@ -57,6 +58,7 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
      *
      * @return mixed The source with the placeholders replaced by the container
      *               parameters. Arrays are resolved recursively.
+     * @psalm-suppress all
      */
     protected function resolve($value)
     {
