@@ -52,7 +52,7 @@
         <property name="code" identifier="true" required="true" />
         <property name="enabled" writable="true" />
         <property name="provinces" readable="true" writable="true">
-            <subresource resourceClass="Sylius\Component\Addressing\Model\Province" collection="true" />
+            <subresource resourceClass="%sylius.model.province.class%" collection="true" />
         </property>
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
