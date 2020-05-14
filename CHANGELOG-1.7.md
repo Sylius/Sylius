@@ -1,5 +1,33 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.4 (2020-05-14)
+
+#### Details
+
+- [#11369](https://github.com/Sylius/Sylius/issues/11369) [Docs] Don't use $HOME in SymfonyCloud deployment cookbook ([@tucksaun](https://github.com/tucksaun))
+- [#11387](https://github.com/Sylius/Sylius/issues/11387) Remove the doc reference to a promotion action that no longer exists in Core. ([@gabiudrescu](https://github.com/gabiudrescu))
+- [#11390](https://github.com/Sylius/Sylius/issues/11390) Bug #9738 Fix nested form collections ([@vic-blt](https://github.com/vic-blt))
+- [#11391](https://github.com/Sylius/Sylius/issues/11391) Fallback to the locale code if the associated name isn't found ([@dunglas](https://github.com/dunglas))
+- [#11398](https://github.com/Sylius/Sylius/issues/11398) [Docs] Fix typos ([@pgrimaud](https://github.com/pgrimaud))
+- [#11400](https://github.com/Sylius/Sylius/issues/11400) Error on show product without pricing ([@oallain](https://github.com/oallain), [@pamil](https://github.com/pamil))
+- [#11403](https://github.com/Sylius/Sylius/issues/11403) Fix Autolabeler configuration ([@Zales0123](https://github.com/Zales0123))
+- [#11409](https://github.com/Sylius/Sylius/issues/11409) Typo in code block in documentation ([@jacquesbh](https://github.com/jacquesbh))
+- [#11415](https://github.com/Sylius/Sylius/issues/11415) Doc : add renaming bundle in bundles.php ([@davidroberto](https://github.com/davidroberto), [@pamil](https://github.com/pamil))
+- [#11416](https://github.com/Sylius/Sylius/issues/11416) doc : add the composer dump-autoload instruction ([@davidroberto](https://github.com/davidroberto))
+- [#11425](https://github.com/Sylius/Sylius/issues/11425) [UI] Add tabs wrapping on Product show page > Attributes section ()
+- [#11427](https://github.com/Sylius/Sylius/issues/11427) [Maintenance] Upgrade psalm version ([@lchrusciel](https://github.com/lchrusciel))
+- [#11430](https://github.com/Sylius/Sylius/issues/11430) Fix all Psalm errors ([@pamil](https://github.com/pamil))
+- [#11441](https://github.com/Sylius/Sylius/issues/11441) [Composer] Add conflict to doctrine/inflector ^1.4 to fix taxons ([@GSadee](https://github.com/GSadee))
+- [#11446](https://github.com/Sylius/Sylius/issues/11446) [Docs] Remove unexisting "staging" environment section ([@pamil](https://github.com/pamil))
+- [#11449](https://github.com/Sylius/Sylius/issues/11449) synchronise dependencies ([@arti0090](https://github.com/arti0090))
+- [#11450](https://github.com/Sylius/Sylius/issues/11450) [Docs] Enable redirections on ReadTheDocs ([@pamil](https://github.com/pamil))
+- [#11453](https://github.com/Sylius/Sylius/issues/11453) [Documentation][Cookbook] Fix login & failure path ([@bchatard](https://github.com/bchatard))
+- [#11454](https://github.com/Sylius/Sylius/issues/11454) [Docs] Extract technical packages documentation to an external URLs ([@pamil](https://github.com/pamil))
+- [#11461](https://github.com/Sylius/Sylius/issues/11461) [Docs][Plus] Add Plus upgrading guide ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#11462](https://github.com/Sylius/Sylius/issues/11462) [Dashboard] Add DQL to sales provider ([@oliver-schulz](https://github.com/oliver-schulz), [@AdamKasp](https://github.com/AdamKasp))
+- [#11463](https://github.com/Sylius/Sylius/issues/11463) [Admin] Use findOneBy() instead of findAll() to get the first channel ([@pamil](https://github.com/pamil))
+- [#11464](https://github.com/Sylius/Sylius/issues/11464) [Docs] Update order related state machine diagrams in the Book ([@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.7.3 (2020-04-21)
 
 #### Details
