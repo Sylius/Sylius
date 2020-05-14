@@ -106,6 +106,8 @@ $(document).ready(() => {
 
   $(`${formsList}, .check-unsaved`).dirtyForms();
 
+  $('#more-details').accordion({ exclusive: false });
+
   $('.variants-accordion__title').on('click', '.icon.button', function(e) {
     $(e.delegateTarget).next('.variants-accordion__content').toggle();
     $(this).find('.dropdown.icon').toggleClass('counterclockwise rotated');
