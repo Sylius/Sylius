@@ -14,7 +14,7 @@ Before working on Sylius, set a Symfony friendly environment up with the followi
 software:
 
 * Git
-* PHP version 7.1 or above
+* PHP version 7.3 or above
 * MySQL
 
 Configure Git
@@ -146,7 +146,7 @@ in mind the following:
   more difficult (submit CS fixes as a separate patch);
 
 * In addition to this "code" pull request, you must also update the documentation when appropriate.
-  See more in :doc:`contributing documentation </contributing/documentation/overview>` section.
+  See more in :doc:`contributing documentation </book/contributing/documentation/overview>` section.
 
 * Write good commit messages (see the tip below).
 

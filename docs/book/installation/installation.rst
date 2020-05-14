@@ -113,7 +113,7 @@ In the root directory of your project you will find these important subdirectori
 Contributing
 ------------
 
-If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
+If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
 .. _Yarn: https://yarnpkg.com/lang/en/

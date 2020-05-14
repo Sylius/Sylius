@@ -121,18 +121,6 @@ In :doc:`the BDD Guide </bdd/index>` you will learn how to write clean and reusa
 
 .. include:: /bdd/map.rst.inc
 
-The Contribution Guide
-----------------------
-
-:doc:`The Contribution Guide </contributing/index>` to Sylius.
-
-.. toctree::
-   :hidden:
-
-   contributing/index
-
-.. include:: /contributing/map.rst.inc
-
 Support
 -------
 
