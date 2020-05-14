@@ -135,7 +135,7 @@ Other Payment Gateways
     Learn more about integrating payment gateways in the :doc:`dedicated guide </cookbook/payments/custom-payment-gateway>` and in `the Payum docs <https://github.com/Payum/Payum/blob/master/docs/index.md>`_.
 
 When the Payment Gateway you are trying to use does have a bridge available and you integrate them on your own,
-use our guide on :doc:`extension development </plugin-development-guide/index>`.
+use our guide on :doc:`extension development </book/plugins/guide/index>`.
 
 Troubleshooting
 ---------------
