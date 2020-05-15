@@ -39,16 +39,21 @@ final class ManagingZonesContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var string */
+    private $zoneMemberClass;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        string $zoneMemberClass
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
+        $this->zoneMemberClass = $zoneMemberClass;
     }
 
     /**
@@ -461,7 +466,7 @@ final class ManagingZonesContext implements Context
      */
     private function removeZoneMember($objectToRemove): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($objectToRemove), ['code' => $objectToRemove->getCode()]);
+        $iri = $this->iriConverter->getItemIriFromResourceClass($this->zoneMemberClass, ['code' => $objectToRemove->getCode()]);
 
         $this->client->removeSubResource('members', $iri);
     }
