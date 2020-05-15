@@ -25,6 +25,10 @@ matrix:
             services:
                 - memcached
                 - mysql
+            addons:
+                apt:
+                    packages:
+                        - php7.4-gd
         -   
             php: 7.4
             env:
