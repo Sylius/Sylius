@@ -2,7 +2,7 @@
 Feature: Viewing only enabled taxons in taxon menu
     In order to not access disabled taxons
     As a Visitor
-    I want to see only enabled taxons on taxon menu
+    I want to see only enabled taxons in taxon menu
 
     Background:
         Given the store operates on a single channel in "United States"
