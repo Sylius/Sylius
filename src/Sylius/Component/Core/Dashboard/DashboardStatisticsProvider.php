@@ -41,4 +41,16 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
             $this->customerRepository->countCustomers()
         );
     }
+
+    public function getStatisticsForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate
+    ): DashboardStatistics {
+        return new DashboardStatistics(
+            $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $startDate, $endDate),
+            $this->orderRepository->countPaidForChannelInPeriod($channel, $startDate, $endDate),
+            $this->customerRepository->countCustomersInPeriod($startDate, $endDate)
+        );
+    }
 }

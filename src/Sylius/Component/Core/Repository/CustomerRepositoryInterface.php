@@ -20,6 +20,8 @@ interface CustomerRepositoryInterface extends RepositoryInterface
 {
     public function countCustomers(): int;
 
+    public function countCustomersInPeriod(\DateTimeInterface $startDate, \DateTimeInterface $endDate): int;
+
     /**
      * @return array|CustomerInterface[]
      */

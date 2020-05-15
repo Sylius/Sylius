@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -71,12 +72,21 @@ final class DashboardController
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
+        // this data will be getting from UI after improve graph on dashboard
+        $startDate = (new \DateTime('first day of next month last year'));
+        $endDate = (new \DateTime('last day of this month'));
 
-        $statistics = $this->statisticsProvider->getStatisticsForChannel($channel);
+        $statistics = $this->statisticsProvider->getStatisticsForChannelInPeriod($channel, $startDate, $endDate);
         $data = ['statistics' => $statistics, 'channel' => $channel];
 
         if ($this->salesDataProvider !== null) {
-            $data['sales_summary'] = $this->salesDataProvider->getLastYearSalesSummary($channel);
+            // this data will be getting from UI after improve graph on dashboard
+            $interval = Interval::month();
+
+            $data['sales_summary'] = $this
+                ->salesDataProvider
+                ->getSalesSummary($channel, $startDate, $endDate, $interval)
+            ;
             $data['currency'] = $channel->getBaseCurrency()->getCode();
         }
 
