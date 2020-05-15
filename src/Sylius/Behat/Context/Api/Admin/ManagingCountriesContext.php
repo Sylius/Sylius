@@ -162,7 +162,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass(Province::class, ['code' => $province->getCode()]);
+        $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($province), ['code' => $province->getCode()]);
 
         $provinces = $this->responseChecker->getValue($this->client->show($country->getCode()), 'provinces');
         foreach ($provinces as $countryProvince) {

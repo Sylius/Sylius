@@ -461,7 +461,7 @@ final class ManagingZonesContext implements Context
      */
     private function removeZoneMember($objectToRemove): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass(ZoneMember::class, ['code' => $objectToRemove->getCode()]);
+        $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($objectToRemove), ['code' => $objectToRemove->getCode()]);
 
         $this->client->removeSubResource('members', $iri);
     }
