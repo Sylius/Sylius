@@ -15,7 +15,7 @@ The **name and description** fields need to be translatable.
 2. Generate the SupplierTranslation entity
 ------------------------------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model.
 
 .. warning::

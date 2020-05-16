@@ -134,7 +134,7 @@ Documentation sections of The Book referring to Sylius Plus features are:
 
 .. image:: ../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs
 
 Sylius Plugins
 --------------

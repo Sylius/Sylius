@@ -3,7 +3,7 @@ Contributing
 
 .. note::
 
-    This section is based on the great `Symfony documentation <http://symfony.com/doc/current>`_.
+    This section is based on the great `Symfony documentation <https://symfony.com/doc/current>`_.
 
 Install to Contribute
 ---------------------
@@ -51,7 +51,7 @@ And now you can use gulp for installing views, by just running a simple command:
 
     yarn build
 
-For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.com/en/latest/contributing/index.html>`_ that comes up in the following chapters:
+For the contributing process questions, please refer to the `Contributing Guide <https://docs.sylius.com/en/latest/contributing/index.html>`_ that comes up in the following chapters:
 
 .. toctree::
     :maxdepth: 1

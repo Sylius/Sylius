@@ -3,20 +3,20 @@
     "type": "library",
     "description": "Component for handling object attributes in PHP projects.",
     "keywords": ["shop", "ecommerce", "attribute", "feature"],
-    "homepage": "http://sylius.com",
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {

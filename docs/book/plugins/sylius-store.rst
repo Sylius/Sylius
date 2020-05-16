@@ -24,7 +24,7 @@ Since Sylius is an open-source platform, there is a precise flow for the plugin 
 **4.** One of our Plugin Curators will contact you with the feedback regarding your plugin's code quality, test suite,
 and general feeling. They will also ask you to provide some changes in the code (if needed) to make this plugin visible in the Sylius Store.
 
-**5.** Wait for your Plugin to be featured in `the list of plugins <http://sylius.com/plugins/>`_ on the Sylius website.
+**5.** Wait for your Plugin to be featured in `the list of plugins <https://sylius.com/plugins/>`_ on the Sylius website.
 
 .. _book_plugins_technical_requirements:
 

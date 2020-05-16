@@ -1,12 +1,12 @@
 How to resize images?
 =====================
 
-In Sylius we are using the `LiipImagineBundle <http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html>`_
+In Sylius we are using the `LiipImagineBundle <https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html>`_
 for handling images.
 
 .. tip::
 
-    You will find a reference to the types of filters in the LiipImagineBundle `in their documentation <http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html>`_.
+    You will find a reference to the types of filters in the LiipImagineBundle `in their documentation <https://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html>`_.
 
 There are three places in the Sylius platform where the configuration for images can be found:
 
@@ -88,4 +88,4 @@ For example you can create a filter for advertisement banners:
 Learn more
 ----------
 
-* `The LiipImagineBundle documentation <http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html>`_
+* `The LiipImagineBundle documentation <https://symfony.com/doc/current/bundles/LiipImagineBundle/index.html>`_

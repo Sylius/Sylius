@@ -137,7 +137,7 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **4.** Additionally if you want to give the administrator an ability to add the ``flag`` to any of countries,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
@@ -253,7 +253,7 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **4.** Additionally if you need  to add the ``estimatedDeliveryTime`` to any of your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
@@ -395,7 +395,7 @@ Which we strongly recommend over updating the schema.
 
 .. tip::
 
-    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+    Read more about the database modifications and migrations in the `Symfony documentation here <https://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
 
 **5.** If you need to add delivery conditions to your shipping methods in the admin panel,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.

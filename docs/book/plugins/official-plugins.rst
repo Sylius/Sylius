@@ -2,7 +2,7 @@ Official Sylius Plugins
 =======================
 
 Sylius as an organization is providing some of its own plugins in the open source model. All the official plugins
-developed by Sylius can be found in the `github organization <http://github.com/Sylius>`_ (just like the main repository).
+developed by Sylius can be found in the `github organization <https://github.com/Sylius>`_ (just like the main repository).
 
 You can recognize a Sylius official plugin by this badge in its readme:
 

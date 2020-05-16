@@ -28,7 +28,7 @@ there remains one shipment in state ``ready``.
 
 .. image:: ../../_images/sylius_plus/banner.png
     :align: center
-    :target: http://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs
 
 The Shipment State Machine
 --------------------------

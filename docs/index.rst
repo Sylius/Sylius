@@ -107,6 +107,6 @@ Components & Bundles
 
 .. include:: /components_and_bundles/map.rst.inc
 
-.. _Sylius: http://sylius.com
-.. _`Symfony Framework`: http://symfony.com
-.. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
+.. _Sylius: https://sylius.com
+.. _`Symfony Framework`: https://symfony.com
+.. _`Quick Tour`: https://symfony.com/doc/current/quick_tour
