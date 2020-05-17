@@ -40,7 +40,7 @@ final class AddressType extends AbstractResourceType
         if (null === $addressComparator) {
             @trigger_error(
                 sprintf(
-                    'Not passing an $addressComparator to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.',
+                    'Not passing an $addressComparator to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
                     __CLASS__,
                 ),
                 \E_USER_DEPRECATED
@@ -56,35 +56,26 @@ final class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+            ->add('differentBillingAddress', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'sylius.form.checkout.addressing.different_billing_address',
+            ])
+            ->add('differentShippingAddress', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'sylius.form.checkout.addressing.different_shipping_address',
+            ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
                 $form = $event->getForm();
-                $order = $event->getData();
                 /** @var OrderInterface $order */
+                $order = $event->getData();
+
                 Assert::isInstanceOf($order, OrderInterface::class);
 
                 $channel = $order->getChannel();
 
-                $differentBillingOrShippingAddressChecked = null !== $this->addressComparator
-                    && null !== $order->getBillingAddress() && null !== $order->getShippingAddress()
-                    && !$this->addressComparator->equal($order->getBillingAddress(), $order->getShippingAddress());
-
                 $form
-                    ->add('differentBillingAddress', CheckboxType::class, [
-                        'mapped' => false,
-                        'required' => false,
-                        'label' => 'sylius.form.checkout.addressing.different_billing_address',
-                        'attr' => [
-                            'checked' => $differentBillingOrShippingAddressChecked,
-                        ],
-                    ])
-                    ->add('differentShippingAddress', CheckboxType::class, [
-                        'mapped' => false,
-                        'required' => false,
-                        'label' => 'sylius.form.checkout.addressing.different_shipping_address',
-                        'attr' => [
-                            'checked' => $differentBillingOrShippingAddressChecked,
-                        ],
-                    ])
                     ->add('shippingAddress', SyliusAddressType::class, [
                         'shippable' => true,
                         'constraints' => [new Valid()],
@@ -95,6 +86,18 @@ final class AddressType extends AbstractResourceType
                         'channel' => $channel,
                     ])
                 ;
+            })
+            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
+                $form = $event->getForm();
+                /** @var OrderInterface $order */
+                $order = $event->getData();
+
+                Assert::isInstanceOf($order, OrderInterface::class);
+
+                $areAddressesDifferent = $this->areAddressesDifferent($order);
+
+                $form->get('differentBillingAddress')->setData($areAddressesDifferent);
+                $form->get('differentShippingAddress')->setData($areAddressesDifferent);
             })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
                 $form = $event->getForm();
@@ -146,5 +149,18 @@ final class AddressType extends AbstractResourceType
     public function getBlockPrefix(): string
     {
         return 'sylius_checkout_address';
+    }
+
+    private function areAddressesDifferent(OrderInterface $order): bool
+    {
+        if (null === $this->addressComparator) {
+            return false;
+        }
+
+        if (null === $order->getBillingAddress() || null === $order->getShippingAddress()) {
+            return false;
+        }
+
+        return !$this->addressComparator->equal($order->getBillingAddress(), $order->getShippingAddress());
     }
 }

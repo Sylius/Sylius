@@ -301,7 +301,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_password' => '[data-test-password-input]',
             'login_validation_error' => '[data-test-login-validation-error]',
             'next_step' => '[data-test-next-step]',
-            'shipping_address' => '#sylius-shipping-address',
+            'shipping_address' => '[data-test-shipping-address]',
             'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
             'shipping_city' => '[data-test-shipping-city]',
             'shipping_country' => '[data-test-shipping-country]',
