@@ -17,7 +17,8 @@ use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
- use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -94,7 +95,7 @@ final class AddressType extends AbstractResourceType
 
                 Assert::isInstanceOf($order, OrderInterface::class);
 
-                $areAddressesDifferent = $this->areAddressesDifferent($order);
+                $areAddressesDifferent = $this->areAddressesDifferent($order->getBillingAddress(), $order->getShippingAddress());
 
                 $form->get('differentBillingAddress')->setData($areAddressesDifferent);
                 $form->get('differentShippingAddress')->setData($areAddressesDifferent);
@@ -151,16 +152,12 @@ final class AddressType extends AbstractResourceType
         return 'sylius_checkout_address';
     }
 
-    private function areAddressesDifferent(OrderInterface $order): bool
+    private function areAddressesDifferent(?AddressInterface $firstAddress, ?AddressInterface $secondAddress): bool
     {
-        if (null === $this->addressComparator) {
+        if (null === $this->addressComparator || null === $firstAddress || null === $secondAddress) {
             return false;
         }
 
-        if (null === $order->getBillingAddress() || null === $order->getShippingAddress()) {
-            return false;
-        }
-
-        return !$this->addressComparator->equal($order->getBillingAddress(), $order->getShippingAddress());
+        return !$this->addressComparator->equal($firstAddress, $secondAddress);
     }
 }
