@@ -23,18 +23,22 @@
         <attribute name="name">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="description">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="hostname">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="color">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="baseCurrency">
             <group>channel:read</group>
@@ -43,46 +47,57 @@
         <attribute name="defaultLocale">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="defaultTaxZone">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="taxCalculationStrategy">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="currencies">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="locales">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="countries">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="themeName">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="contactEmail">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="skippingShippingStepAllowed">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="skippingPaymentStepAllowed">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="accountVerificationRequired">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
         <attribute name="shopBillingData">
             <group>channel:read</group>
@@ -91,6 +106,7 @@
         <attribute name="menuTaxon">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>channel:update</group>
         </attribute>
     </class>
 </serializer>

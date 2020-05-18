@@ -16,12 +16,12 @@ Feature: Editing channel
         Then I should be notified that code cannot be changed
         And channel "Web Channel" should still have code "MOBILE"
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled code field when editing channel
         When I want to modify a channel "Web Channel"
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui
+    @ui @api
     Scenario: Renaming the channel
         Given I want to modify a channel "Web Channel"
         When I rename it to "Website store"
@@ -29,7 +29,7 @@ Feature: Editing channel
         Then I should be notified that it has been successfully edited
         And this channel name should be "Website store"
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled base currency field during channel edition
         When I want to modify a channel "Web Channel"
-        Then the base currency field should be disabled
+        Then I should not be able to edit its base currency

@@ -284,6 +284,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my change of shop billing data
      */
     public function iSaveMyChanges()
     {
@@ -343,9 +344,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -498,9 +499,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then the base currency field should be disabled
+     * @Then I should not be able to edit its base currency
      */
-    public function theBaseCurrencyFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsBaseCurrency(): void
     {
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
     }

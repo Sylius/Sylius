@@ -33,8 +33,11 @@
 
         <service id="sylius.behat.context.api.admin.managing_channels" class="Sylius\Behat\Context\Api\Admin\ManagingChannelsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin.channel" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin.shop_billing_data" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.converter.country_name" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_countries" class="Sylius\Behat\Context\Api\Admin\ManagingCountriesContext">

@@ -123,6 +123,11 @@
             <argument>admin</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.admin.shop_billing_data" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>shop-billing-datas</argument>
+            <argument>admin</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.shop.order" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>orders</argument>
             <argument>shop</argument>
