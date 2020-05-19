@@ -1,4 +1,4 @@
-.. note:: 
+.. note::
 
     In order to add a new locale to your store you have to assign it to a channel.
 
@@ -20,7 +20,7 @@ To support multiple languages we are using **Locales** in **Sylius**. Locales ar
 Base Locale
 -----------
 
-During the :doc:`installation </book/installation/installation>` you provided a default base locale. This is the language in which everything
+During the :doc:`installation </book/setup>` you provided a default base locale. This is the language in which everything
 in your system will be saved in the database - all the product names, texts on website, e-mails etc.
 
 Locale Context

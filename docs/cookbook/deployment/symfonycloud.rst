@@ -203,4 +203,4 @@ Learn more
 
 * SymfonyCloud documentation: `Getting started <https://symfony.com/doc/master/cloud/getting-started.html>`_
 * SymfonyCloud documentation: `Moving to production <https://symfony.com/doc/master/cloud/cookbooks/go_live.html>`_
-* :doc:`Installation Guide </book/installation/installation>`
+* :doc:`Installation Guide </book/setup>`

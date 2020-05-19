@@ -1,4 +1,4 @@
-How to use installer commands?
+How to Use Installer Commands?
 ==============================
 
 Sylius platform ships with the ``sylius:install`` command, which takes care of creating the database, schema, dumping the assets and basic store configuration.
@@ -53,8 +53,8 @@ You can reinstall all web assets by simply calling:
 
     php bin/console sylius:install:assets
 
-How to load custom fixtures suite?
-==================================
+How to load custom fixtures suite during installation?
+------------------------------------------------------
 
 If you have your custom fixtures suite, you can load it during install by providing at `fixture-suite` parameter:
 

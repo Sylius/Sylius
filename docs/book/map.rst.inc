@@ -1,5 +1,5 @@
 * :doc:`/book/introduction/index`
-* :doc:`/book/installation/index`
+* :doc:`/book/setup`
 * :doc:`/book/architecture/index`
 * :doc:`/book/configuration/index`
 * :doc:`/book/customers/index`

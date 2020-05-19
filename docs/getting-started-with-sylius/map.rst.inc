@@ -1,4 +1,4 @@
-* :doc:`/getting-started-with-sylius/installation`
+* :doc:`/book/setup`
 * :doc:`/getting-started-with-sylius/basic-configuration`
 * :doc:`/getting-started-with-sylius/shipping-and-payment`
 * :doc:`/getting-started-with-sylius/first-product`

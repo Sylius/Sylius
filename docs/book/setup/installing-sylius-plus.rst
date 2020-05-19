@@ -1,8 +1,7 @@
-
 .. rst-class:: plus-doc
 
-Sylius Plus Installation
-========================
+How to Install Sylius Plus?
+===========================
 
 Sylius Plus is an advanced extension to Sylius applications that adds new features and experience.
 As it is a private package it cannot be installed by every Sylius user, but only by those having the license.
@@ -22,8 +21,8 @@ Installing Sylius Plus as a plugin to a Sylius application
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.6** according to
-    :doc:`these instructions </book/installation/installation>`.
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.7** according to
+    :doc:`these instructions </book/setup>`.
 
     If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.7``.
 

@@ -16,18 +16,17 @@ Introduction aims to describe the philosophy of Sylius. It will also teach you a
 
 .. include:: /book/introduction/map.rst.inc
 
-Installation
-------------
+Setup
+-----
 
-The installation chapter is of course a comprehensive guide to installing Sylius on your machine, but it also provides
+The setup chapter is of course a comprehensive guide to installing Sylius on your machine, but it also provides
 a general instruction on upgrading Sylius in your project.
 
 .. toctree::
-    :hidden:
+    :titlesonly:
+    :maxdepth: 2
 
-    installation/index
-
-.. include:: /book/installation/map.rst.inc
+    setup
 
 Architecture
 ------------
@@ -122,7 +121,8 @@ Documentation sections of The Book referring to Sylius Plus features are:
 .. toctree::
     :maxdepth: 1
 
-    installation/sylius_plus_installation
+    setup/installing-sylius-plus
+    setup/upgrading-sylius-plus
     architecture/emails
     configuration/channels
     customers/admin_user

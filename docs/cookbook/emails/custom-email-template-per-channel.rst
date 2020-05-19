@@ -3,7 +3,7 @@ How to customize email templates per channel?
 
 .. note::
 
-    This cookbook is suitable for a clean :doc:`sylius-standard installation </book/installation/installation>`.
+    This cookbook is suitable for a clean :doc:`sylius-standard installation </book/setup>`.
     For more general tips, while using `SyliusMailerBundle <https://github.com/Sylius/SyliusMailerBundle/blob/master/docs/index.md>`_
     go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.com/blog/sending-configurable-e-mails-in-symfony>`_.
 

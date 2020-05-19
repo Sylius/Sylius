@@ -121,7 +121,6 @@ Configuration
     :hidden:
 
     configuration/disabling-shop-admin-api
-    configuration/installation-commands
     configuration/disabling-admin-notifications
 
 .. include:: /cookbook/configuration/map.rst.inc

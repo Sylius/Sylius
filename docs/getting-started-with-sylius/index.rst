@@ -32,7 +32,7 @@ and simplest way from an idea ("I want to sell some stuff online") to the first 
 .. toctree::
     :hidden:
 
-    installation
+    /book/setup
     basic-configuration
     shipping-and-payment
     first-product
