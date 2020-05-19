@@ -1,5 +1,5 @@
-How to Upgrade Sylius Application?
-==================================
+Upgrading Sylius Application
+============================
 
 Sylius regularly releases new versions according to our :doc:`Release Cycle </book/organization/release-cycle>`.
 Each minor release comes with an ``UPGRADE.md`` file, which is meant to help in the upgrading process.

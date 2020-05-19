@@ -1,7 +1,7 @@
 .. rst-class:: plus-doc
 
-How to Upgrade Sylius Plus Application?
-=======================================
+Upgrading Sylius Plus Application
+=================================
 
 Sylius regularly releases new versions, usually every two weeks.
 Each release comes with an ``UPGRADE.md`` file, which is meant to help in the upgrading process.
