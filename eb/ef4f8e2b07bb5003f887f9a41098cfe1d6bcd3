@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-20T14:31:40Z
+
+It's only a change in the fixtures (and there's no way to get `en_UK` locale or `UK` country using the admin panel).
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-20T14:35:05Z
+
+I'm wondering, how much is it possible to have a store with such configuration. It seems that ~upgrading of this library~ merging of #10565 changes our behavior slightly
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-20T14:45:56Z
+
+These are only fixtures (and it won't change the behaviour of existing applications).
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-20T15:04:27Z
+
+Thank you, Tomasz! :1st_place_medal:
