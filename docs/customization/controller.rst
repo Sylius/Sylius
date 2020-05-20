@@ -203,7 +203,7 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
 .. code-block:: yaml
 
-    app_shop_custom_procuct:
+    app_shop_custom_product:
         path: /custom/product
         methods: [GET]
         defaults:
