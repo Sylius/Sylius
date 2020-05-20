@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------
+
+by stale[bot] at 2019-12-20T15:22:55Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by gabiudrescu at 2020-01-07T19:17:26Z
+
+I wouldn't leave this gem to get lost
+
+---------------------------------------------------------------------------
+
+by gabiudrescu at 2020-01-08T09:28:44Z
+
+I would add to this debug panel for cart the promotions that were evaluated for eligibility and why they were rejected or not. With the current implementation, it takes a lot of concentration to understand why a promotion was applied to cart or why it didn't.
+
+and if you have a couple of hundred of them... things can get really really messy.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-20T17:38:23Z
+
+Added an icon for the cart:
+
+<img width="233" alt="CleanShot 2020-05-20 at 19 37 28@2x" src="https://user-images.githubusercontent.com/1897953/82478596-6fa2bd00-9ad1-11ea-95da-1d7e32f75b35.png">
+<img width="494" alt="CleanShot 2020-05-20 at 19 37 17@2x" src="https://user-images.githubusercontent.com/1897953/82478599-70d3ea00-9ad1-11ea-8bf4-261e5172f5e5.png">
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-20T18:37:57Z
+
+Thanks, Paweł! :tada:
