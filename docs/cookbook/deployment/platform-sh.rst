@@ -4,7 +4,7 @@ How to deploy Sylius to Platform.sh?
 .. tip::
 
     Start with reading `Platform.sh documentation <https://docs.platform.sh/frameworks/symfony.html>`_.
-    Also Symfony provides `a guide on deploying projects to Platform.sh <http://symfony.com/doc/current/deployment/platformsh.html>`_.
+    Also Symfony provides `a guide on deploying projects to Platform.sh <https://symfony.com/doc/current/deployment/platformsh.html>`_.
 
 The process of deploying Sylius to Platform.sh is based on the guidelines prepared for Symfony projects in general.
 In this guide you will find sufficient instructions to have your application up and running on Platform.sh.
@@ -235,5 +235,5 @@ Learn more
 ----------
 
 * Platform.sh documentation: `Configuring Symfony projects for Platform.sh <https://docs.platform.sh/frameworks/symfony.html>`_
-* Symfony documentation: `Deploying Symfony to Platform.sh <http://symfony.com/doc/current/deployment/platformsh.html>`_
+* Symfony documentation: `Deploying Symfony to Platform.sh <https://symfony.com/doc/current/deployment/platformsh.html>`_
 * :doc:`Installation Guide </book/installation/installation>`

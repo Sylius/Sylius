@@ -14,7 +14,7 @@ A Supplier needs three essential fields: ``name``, ``description`` and ``enabled
 2. Generate the entity
 ----------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model, or the `SymfonyMakerBundle <https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html>`_ for Symfony 4.
 
 .. warning::

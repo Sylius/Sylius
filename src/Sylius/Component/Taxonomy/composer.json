@@ -3,20 +3,20 @@
     "type": "library",
     "description": "Taxonomies - categorization of domain models in PHP projects.",
     "keywords": ["taxonomy", "ecommerce", "categorization", "taxon", "classification"],
-    "homepage": "http://sylius.com",
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {

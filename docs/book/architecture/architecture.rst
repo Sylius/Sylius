@@ -22,7 +22,7 @@ Fullstack Symfony
 developers to work better and faster by providing them with certainty of developing an application that is fully compatible
 with the business rules, that is structured, maintainable and upgradable, but also it allows to save time by providing generic re-usable modules.
 
-`Learn more about Symfony <http://symfony.com/what-is-symfony>`_.
+`Learn more about Symfony <https://symfony.com/what-is-symfony>`_.
 
 Doctrine
 --------
@@ -141,7 +141,7 @@ Third Party Libraries
 Sylius uses a lot of libraries for various tasks:
 
 * `Payum <https://github.com/Payum/Payum>`_ for payments
-* `KnpMenu <http://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
+* `KnpMenu <https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
 * `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
 * `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
 * `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination

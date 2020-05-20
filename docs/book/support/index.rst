@@ -22,7 +22,7 @@ The most important rooms for newcomers are:
 But there are many more specific channels also.
 If you have any suggestions regarding its organization, please let us know on Slack!
 
-Slack requires inviting new members, but this can be done automatically, just go to `sylius.com/slack <http://sylius.com/slack>`_,
+Slack requires inviting new members, but this can be done automatically, just go to `sylius.com/slack <https://sylius.com/slack>`_,
 enter your email and you will get an invitation.
 If possible, please use your GitHub username - it will help us to recognize each other easily!
 

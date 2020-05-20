@@ -6,7 +6,7 @@ Events
 
 .. tip::
 
-    You can learn more about events in general in `the Symfony documentation <http://symfony.com/doc/current/event_dispatcher.html>`_.
+    You can learn more about events in general in `the Symfony documentation <https://symfony.com/doc/current/event_dispatcher.html>`_.
 
 What is the naming convention of Sylius events?
 -----------------------------------------------

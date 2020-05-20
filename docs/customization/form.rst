@@ -124,7 +124,7 @@ Need more information?
 
 .. warning::
 
-    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/form/create_form_type_extension.html>`_.
+    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <https://symfony.com/doc/current/form/create_form_type_extension.html>`_.
 
 For instance the ``ProductVariant`` admin form is defined under ``Sylius/Bundle/ProductBundle/Form/Type/ProductVariantType.php`` and later extended in
 ``Sylius/Bundle/CoreBundle/Form/Extension/ProductVariantTypeExtension.php``. If you again extend the base type form like this:
@@ -269,6 +269,6 @@ Overriding forms completely
 .. tip::
 
     If you need to create a new form type on top of an existing one -  create this new alternative form type and define `getParent()`
-    to the old one. `See details in the Symfony docs <http://symfony.com/doc/current/form/create_custom_field_type.html>`_.
+    to the old one. `See details in the Symfony docs <https://symfony.com/doc/current/form/create_custom_field_type.html>`_.
 
 .. include:: /customization/plugins.rst.inc

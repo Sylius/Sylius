@@ -373,7 +373,7 @@ container. The calculators are retrieved by name.
 .. hint::
     You can read more about each of the available calculators in the :doc:`calculators` chapter.
 
-.. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
+.. _InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php
 .. _UndefinedShippingMethodException: http://api.sylius.com/Sylius/Component/Shipping/Calculator/UndefinedShippingMethodException.html
 
 Resolvers

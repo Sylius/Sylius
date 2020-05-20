@@ -231,7 +231,7 @@ They can be configured as below:
 
 .. image:: ../../_images/sylius_plus/banner.png
    :align: center
-   :target: http://sylius.com/plus/?utm_source=docs
+   :target: https://sylius.com/plus/?utm_source=docs
 
 Learn more
 ----------

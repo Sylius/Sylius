@@ -41,4 +41,4 @@ To run Sylius console in ``test`` environment, add the following parameters to e
 Final Thoughts
 --------------
 
-You can read more about Symfony environments in `this cookbook article <http://symfony.com/doc/current/cookbook/configuration/environments.html>`_.
+You can read more about Symfony environments in `this cookbook article <https://symfony.com/doc/current/cookbook/configuration/environments.html>`_.
