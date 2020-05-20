@@ -72,9 +72,9 @@
             <tag name="data_collector" template="@SyliusCore/Collector/sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
 
-        <service id="sylius.collector.core_debug_cart" class="Sylius\Bundle\CoreBundle\Collector\DebugCartCollector" public="false">
+        <service id="Sylius\Bundle\CoreBundle\Collector\CartCollector" public="false">
             <argument type="service" id="sylius.context.cart" />
-            <tag name="data_collector" template="@SyliusCore/Collector/debug_cart.html.twig" id="sylius_core_debug_cart" priority="-512" />
+            <tag name="data_collector" template="@SyliusCore/Collector/cart.html.twig" id="sylius_cart" priority="-512" />
         </service>
 
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
