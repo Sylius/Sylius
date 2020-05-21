@@ -379,7 +379,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         /** @var ProductAttributeInterface|null $productAttribute */
         $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
 
-        Assert::notNull($productAttribute);
+        Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
 
         /** @var ProductAttributeValueInterface $productAttributeValue */
         $productAttributeValue = $this->productAttributeValueFactory->createNew();
