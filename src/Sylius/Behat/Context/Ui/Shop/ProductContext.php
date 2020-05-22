@@ -306,7 +306,16 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductOriginalPrice($price)
     {
+        Assert::true($this->showPage->isOriginalPriceVisible());
         Assert::same($this->showPage->getOriginalPrice(), $price);
+    }
+
+    /**
+     * @Then I should not see any original price
+     */
+    public function iShouldNotSeeTheProductOriginalPrice(): void
+    {
+        Assert::false($this->showPage->isOriginalPriceVisible());
     }
 
     /**

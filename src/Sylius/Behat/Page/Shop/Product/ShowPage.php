@@ -133,6 +133,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('product_original_price')->getText();
     }
 
+    public function isOriginalPriceVisible(): bool
+    {
+        try {
+            return null !== $this->getElement('product_original_price')->find('css','del');
+        } catch (ElementNotFoundException $elementNotFoundException) {
+            return false;
+        }
+    }
+
     public function hasAddToCartButton(): bool
     {
         if (!$this->hasElement('add_to_cart_button')) {

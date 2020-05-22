@@ -879,6 +879,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" product variant) has original price at ("[^"]+")$/
+     */
+    public function productVariantHasOriginalPrice(ProductVariantInterface $productVariant, int $price): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+
+        $productVariant->getChannelPricingForChannel($channel)->setOriginalPrice($price);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the store has a product :productName in channel :channel
      * @Given the store also has a product :productName in channel :channel
      */
