@@ -1,0 +1,16 @@
+{
+    "@context": "\/new-api\/contexts\/ShippingMethod",
+    "@id": "\/new-api\/shipping-methods\/UPS",
+    "@type": "ShippingMethod",
+    "zone": "\/new-api\/zones\/EU",
+    "channels": [],
+    "id": @integer@,
+    "code": "UPS",
+    "position": 0,
+    "calculator": "flat_rate",
+    "configuration": [],
+    "createdAt": @string@,
+    "updatedAt": @string@,
+    "enabled": true,
+    "translations": []
+}

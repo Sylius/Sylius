@@ -23,7 +23,7 @@ final class ShippingMethodsNewApiTest extends JsonApiTestCase
     static private $authorizedHeaderWithDenied = [
         'HTTP_Authorization' => 'Bearer ' . 'wrong_token',
         'HTTP_ACCEPT' => 'application/ld+json',
-        'CONTENT_TYPE' => 'application/ld+json'
+        'CONTENT_TYPE' => 'application/ld+json',
     ];
 
     /**
@@ -33,8 +33,11 @@ final class ShippingMethodsNewApiTest extends JsonApiTestCase
     {
         $this->client->request('GET', $this->getShippingMethodUrl(), [], [], self::$authorizedHeaderWithDenied);
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/authentication/access_denied_response',
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 
     /**
@@ -53,8 +56,11 @@ final class ShippingMethodsNewApiTest extends JsonApiTestCase
             $this->getAuthorizedHeaderWithAccept($token)
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/shipping_method/index_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/shipping_method/index_response',
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -70,8 +76,11 @@ final class ShippingMethodsNewApiTest extends JsonApiTestCase
             self::$authorizedHeaderWithDenied
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/authentication/access_denied_response',
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 
     /**
@@ -90,8 +99,11 @@ final class ShippingMethodsNewApiTest extends JsonApiTestCase
             $this->getAuthorizedHeaderWithAccept($token)
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/shipping_method/show_response', Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/shipping_method/show_response',
+            Response::HTTP_OK
+        );
     }
 
     /**
@@ -119,8 +131,11 @@ EOT;
             self::$authorizedHeaderWithDenied, $data
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/authentication/access_denied_response',
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 
     /**
@@ -128,7 +143,7 @@ EOT;
      */
     public function it_accepts_to_post_shipping_method_for_authenticated_users(): void
     {
-        $this->loadFixturesFromFiles(['resources/zones.yml',]);
+        $this->loadFixturesFromFiles(['resources/zones.yml']);
         $token = $this->logInAsAdminAndGetToken();
 
         $data =
@@ -152,8 +167,11 @@ EOT;
             $data
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/shipping_method/create_item_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/shipping_method/create_item_response',
+            Response::HTTP_CREATED
+        );
     }
 
     /**
@@ -173,11 +191,15 @@ EOT;
             $this->getShippingMethodUrl($this->loadFixturesAndGetShippingMethod('ups')),
             [],
             [],
-            self::$authorizedHeaderWithDenied, $data
+            self::$authorizedHeaderWithDenied,
+            $data
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/authentication/access_denied_response',
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 
     /**
@@ -203,8 +225,7 @@ EOT;
             $data
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_OK);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
     }
 
     /**
@@ -220,8 +241,11 @@ EOT;
             self::$authorizedHeaderWithDenied
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'api/authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'api/authentication/access_denied_response',
+            Response::HTTP_UNAUTHORIZED
+        );
     }
 
     /**
@@ -239,8 +263,7 @@ EOT;
             $this->getAuthorizedHeaderWithAccept($token)
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     private function getAuthorizedHeaderWithAccept(string $token): array
@@ -248,7 +271,7 @@ EOT;
         return [
             'HTTP_Authorization' => 'Bearer ' . $token,
             'HTTP_ACCEPT' => 'application/ld+json',
-            'CONTENT_TYPE' => 'application/ld+json'
+            'CONTENT_TYPE' => 'application/ld+json',
         ];
     }
 
@@ -259,14 +282,14 @@ EOT;
         return $shippingMethod !== null ? sprintf('%s/%s', $url, $shippingMethod->getCode()) : $url;
     }
 
-    private function loadFixturesAndGetShippingMethod(string $ShippingMethodName): ShippingMethodInterface
+    private function loadFixturesAndGetShippingMethod(string $shippingMethodName): ShippingMethodInterface
     {
         $shippingMethods = $this->loadFixturesFromFiles([
             'resources/zones.yml',
             'resources/shipping_methods.yml',
         ]);
 
-        return $shippingMethods[$ShippingMethodName];
+        return $shippingMethods[$shippingMethodName];
     }
 
     private function logInAsAdminAndGetToken(): string
@@ -279,7 +302,7 @@ EOT;
             '/new-api/admin-user-authentication-token',
             [],
             [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/json'],
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'],
             json_encode(['email' => $admin->getEmail(), 'password' => 'sylius-api'])
         );
 

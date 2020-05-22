@@ -1,6 +1,6 @@
 Sylius\Component\Core\Model\AdminUser:
     admin:
-        plainPassword: sylius
+        plainPassword: sylius-api
         roles: [ROLE_API_ACCESS]
         enabled: true
         email: api@sylius.com

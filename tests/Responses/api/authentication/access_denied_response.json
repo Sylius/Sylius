@@ -1,0 +1,4 @@
+{
+    "code": 401,
+    "message": "Invalid JWT Token"
+}
