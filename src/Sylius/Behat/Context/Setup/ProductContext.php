@@ -954,6 +954,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^the ("[^"]*" \w+ \/ "[^"]*" \w+ variant of product "[^"]*") is disabled$/
+     * @Given /^(this variant) has been disabled$/
      */
     public function theSizeColorVariantOfThisProductIsDisabled(ProductVariantInterface $productVariant): void
     {
