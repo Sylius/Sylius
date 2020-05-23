@@ -1,6 +1,6 @@
 <div class="ui stackable grid">
     <div class="four wide column">
-        {% if not product.variants.empty() %}
+        {% if not product.enabledVariants.empty() %}
             {% include '@SyliusShop/Product/Show/_price.html.twig' %}
         {% endif %}
     </div>

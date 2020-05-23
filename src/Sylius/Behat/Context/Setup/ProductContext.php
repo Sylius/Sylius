@@ -962,6 +962,18 @@ final class ProductContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^all variants of (this product) are disabled$/
+     */
+    public function allVariantsOfThisProductAreDisabled(ProductInterface $product): void
+    {
+        foreach ($product->getVariants() as $variant) {
+            $variant->setEnabled(false);
+        }
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
