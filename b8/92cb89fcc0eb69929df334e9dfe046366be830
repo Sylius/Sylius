@@ -1,0 +1,130 @@
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-03-25T06:45:40Z
+
+Hi guys, this PR is ready for review. Let us know if you prefer to have it squashed into a single commit.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-08T07:36:30Z
+
+Rebase needed as well
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-04-12T13:56:23Z
+
+Hi @lchrusciel, I integrated all your change requests. Let me know if it's ok now.
+Happy easter to you and all the awesome Sylius team! 😉
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-13T18:03:09Z
+
+Hey Manuele, thanks for your effort. I would really like to put it to the core. For now, I've requested my colleagues to have a second check.
+
+What is more, we need to rebase this PR to the newest master. Can you do it?
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-04-13T18:22:36Z
+
+Sure. Do you want rebase and squash into a single commit or just a rebase?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-13T18:37:48Z
+
+Just a rebase will be fine ;)
+
+And of course, happy easter to you as well!  🥚 🐇 🎉
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-04-14T06:55:42Z
+
+Rebased @lchrusciel! 😉
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-01T08:21:09Z
+
+Hi guys, what about this PR? Did you have chance to review it?
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-10T07:11:10Z
+
+Hi @pamil, @Zales0123, @lchrusciel, @CoderMaggie I just rebased this PR again on top of master.
+It should miss only a review because @lchrusciel already reviewed it. I hope you can find time. I really like to see this merged soon.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-14T13:34:55Z
+
+https://github.com/Sylius/Sylius/pull/11241#discussion_r425077562
+
+@pamil I agree indeed the `DefaultProductVariantResolver` has been modified in this PR to return the first **enabled** variant.
+
+---------------------------------------------------------------------------
+
+by keeper7 at 2020-05-15T22:55:24Z
+
+Assume that I have enabled product with two variants. What will happend if I disable both variants?
+I think there should be listener to either
+1. disable product when no enabled variants exists
+2. or prevent disabling last variant.
+Also when you want to enable product with zero enabled variants it should prevent it.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-16T10:04:52Z
+
+It could make sense but I think it could be done even in a separate PR. @pamil and @lchrusciel what do you think?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-16T17:46:56Z
+
+Hey folks!
+
+In default Sylius installation you are able to list products without any variant configured. It is a non-buyable product(where there is out-of-stock information displayed) and I would expect the same behavior after all variants were toggled off.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-16T18:59:25Z
+
+Ok so no listener to disable product when all variants are disabled.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-20T14:33:15Z
+
+Same bug when accessing the enabled, configurable product page with all variants disabled.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-20T14:35:55Z
+
+Thank you @pamil I'll cover all those cases with Behat scenarios to make sure to not introduce regressions in the future.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-20T15:08:11Z
+
+Ok I'll add a Behat scenario for that also.
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-23T18:52:19Z
+
+Hi @pamil I added the Behat scenarios and fixed the code for:
+* Viewing enabled product with all variants disabled from taxon page (https://github.com/Sylius/Sylius/pull/11241/commits/3d26a01ffc27f03954c516ef1830eb63d18758bf)
+* Viewing enabled product with all variants disabled from product show page (https://github.com/Sylius/Sylius/pull/11241/commits/3d26a01ffc27f03954c516ef1830eb63d18758bf)
+* Checking out with a disabled product variant (https://github.com/Sylius/Sylius/pull/11241/commits/0140e81b52814afbe8631e95f8f922019b34a465)
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-24T18:34:58Z
+
+Thank you, Manuele! :1st_place_medal:
