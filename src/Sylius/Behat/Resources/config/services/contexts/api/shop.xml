@@ -26,7 +26,6 @@
             <argument type="service" id="sylius.behat.api_platform_client.product" />
             <argument type="service" id="sylius.behat.api_platform_client.taxon" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.api.shop.login" class="Sylius\Behat\Context\Api\Shop\LoginContext">

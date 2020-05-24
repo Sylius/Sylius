@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
@@ -31,19 +30,14 @@ final class HomepageContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
     public function __construct(
         ApiClientInterface $productsClient,
         ApiClientInterface $taxonsClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        ResponseCheckerInterface $responseChecker
     ) {
         $this->productsClient = $productsClient;
         $this->taxonsClient = $taxonsClient;
         $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
