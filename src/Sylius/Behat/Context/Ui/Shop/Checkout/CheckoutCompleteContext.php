@@ -21,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
@@ -343,5 +344,19 @@ final class CheckoutCompleteContext implements Context
     public function thisPromotionShouldGiveDiscountOnShipping(PromotionInterface $promotion, string $discount): void
     {
         Assert::true($this->completePage->hasShippingPromotionWithDiscount($promotion->getName(), $discount));
+    }
+
+    /**
+     * @Then /^I should be informed that (this variant) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisVariantHasBeenDisabled(ProductVariantInterface $productVariant)
+    {
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'This product %s has been disabled.',
+                $productVariant->getName()
+            )
+        );
     }
 }

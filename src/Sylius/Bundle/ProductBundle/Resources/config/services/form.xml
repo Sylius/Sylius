@@ -213,5 +213,10 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.product_association_type" />
         </service>
+
+        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
+            <argument type="service" id="sylius.available_product_option_values_resolver" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

@@ -568,6 +568,42 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I disable it$/
+     */
+    public function iDisableIt(): void
+    {
+        $this->updatePage->disable();
+    }
+
+    /**
+     * @Then /^(this variant) should be disabled$/
+     */
+    public function thisVariantShouldBeDisabled(ProductVariantInterface $productVariant): void
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::false($this->updatePage->isEnabled());
+    }
+
+    /**
+     * @When /^I enable it$/
+     */
+    public function iEnableIt(): void
+    {
+        $this->updatePage->enable();
+    }
+
+    /**
+     * @Then /^(this variant) should be enabled$/
+     */
+    public function thisVariantShouldBeEnabled(ProductVariantInterface $productVariant): void
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::true($this->updatePage->isEnabled());
+    }
+
+    /**
      * @param string $element
      * @param string $message
      */

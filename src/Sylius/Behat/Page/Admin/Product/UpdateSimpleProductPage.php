@@ -369,6 +369,21 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('show_product_single_button')->click();
     }
 
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getElement('enabled')->isChecked();
+    }
+
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -409,6 +424,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',
             'toggle_slug_modification_button' => '[data-locale="%locale%"] .toggle-product-slug-modification',
+            'enabled' => '#sylius_product_enabled',
         ]);
     }
 

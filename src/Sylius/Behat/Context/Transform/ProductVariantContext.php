@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -84,5 +85,49 @@ final class ProductVariantContext implements Context
         Assert::notNull($productVariant, sprintf('Cannot find product variant with code %s', $code));
 
         return $productVariant;
+    }
+
+    /**
+     * @Transform /^"([^"]*)" (\w+) \/ "([^"]*)" (\w+) variant of product "([^"]+)"$/
+     */
+    public function getVariantByOptionValuesAndProduct(
+        string $value1,
+        string $option1,
+        string $value2,
+        string $option2,
+        string $productName
+    ) {
+        $products = $this->productRepository->findByName($productName, 'en_US');
+
+        Assert::eq(
+            count($products),
+            1,
+            sprintf('%d products has been found with name "%s".', count($products), $productName)
+        );
+        $product = $products[0];
+
+        $option1 = StringInflector::nameToUppercaseCode($option1);
+        $option2 = StringInflector::nameToUppercaseCode($option2);
+        foreach ($product->getVariants() as $variant) {
+            $options = [];
+            foreach ($variant->getOptionValues() as $optionValue) {
+                $options[$optionValue->getOption()->getCode()] = $optionValue->getValue();
+            }
+            if (array_key_exists($option1, $options) && $options[$option1] === $value1 &&
+                array_key_exists($option2, $options) && $options[$option2] === $value2) {
+                return $variant;
+            }
+        }
+
+        throw new \InvalidArgumentException(
+            sprintf(
+                'Cannot find variant "%s" %s / "%s" %s within product "%s"',
+                $value1,
+                $option1,
+                $value2,
+                $option2,
+                $product->getCode()
+            )
+        );
     }
 }

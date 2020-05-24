@@ -272,6 +272,12 @@ final class CartContext implements Context
         $this->productShowPage->addToCartWithVariant($variantName);
 
         $this->sharedStorage->set('product', $product);
+        foreach ($product->getVariants() as $variant) {
+            if ($variant->getName() === $variantName) {
+                $this->sharedStorage->set('variant', $variant);
+                break;
+            }
+        }
     }
 
     /**

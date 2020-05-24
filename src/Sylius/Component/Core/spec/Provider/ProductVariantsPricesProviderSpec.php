@@ -47,7 +47,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $whiteSmallTShirt,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ): void {
-        $tShirt->getVariants()->willReturn(new ArrayCollection([
+        $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
             $whiteSmallTShirt->getWrappedObject(),
             $blackLargeTShirt->getWrappedObject(),

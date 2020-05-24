@@ -50,4 +50,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function specifyCurrentStock(int $amount): void;
 
     public function specifyPrice(int $price): void;
+
+    public function disable(): void;
+
+    public function isEnabled(): bool;
+
+    public function enable(): void;
 }

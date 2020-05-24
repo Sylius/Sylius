@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -294,6 +295,7 @@ final class ProductContext implements Context
     /**
      * @Then the product price should be :price
      * @Then I should see the product price :price
+     * @Then I should see that the combination is :price
      */
     public function iShouldSeeTheProductPrice($price)
     {
@@ -532,6 +534,42 @@ final class ProductContext implements Context
     public function iShouldBeInformedThatTheProductDoesNotExist()
     {
         Assert::eq($this->errorPage->getTitle(), 'The "product" has not been found');
+    }
+
+    /**
+     * @Then /^I should be able to select between (\d+) variants$/
+     */
+    public function iShouldBeAbleToSelectBetweenVariants(int $count)
+    {
+        Assert::count($this->showPage->getVariantsNames(), $count);
+    }
+
+    /**
+     * @Then /^I should not be able to select the ("([^"]*)" variant)$/
+     */
+    public function iShouldNotBeAbleToSelectTheVariant(ProductVariantInterface $productVariant)
+    {
+        Assert::true(!in_array($productVariant->getName(), $this->showPage->getVariantsNames(), true));
+    }
+
+    /**
+     * @Then /^I should not be able to select the "([^"]*)" ([^\s]+) option value$/
+     */
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName)
+    {
+        Assert::false(in_array($optionValue, $this->showPage->getOptionValues($optionName), true));
+    }
+
+    /**
+     * @Then /^I should be able to select the "([^"]*)" and "([^"]*)" ([^\s]+) option values$/
+     */
+    public function iShouldBeAbleToSelectTheAndColorOptionValues(
+        string $optionValue1,
+        string $optionValue2,
+        string $optionName
+    ) {
+        Assert::true(in_array($optionValue1, $this->showPage->getOptionValues($optionName), true));
+        Assert::true(in_array($optionValue2, $this->showPage->getOptionValues($optionName), true));
     }
 
     /**

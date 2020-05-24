@@ -23,10 +23,10 @@ final class DefaultProductVariantResolver implements ProductVariantResolverInter
      */
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
     {
-        if ($subject->getVariants()->isEmpty()) {
+        if ($subject->getEnabledVariants()->isEmpty()) {
             return null;
         }
 
-        return $subject->getVariants()->first();
+        return $subject->getEnabledVariants()->first();
     }
 }
