@@ -2,8 +2,30 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/account/customer_registration.yml
+    - suites/api/account/login.yml
+    - suites/api/addressing/managing_countries.yml
+    - suites/api/addressing/managing_zones.yml
+    - suites/api/admin/login.yml
+    - suites/api/channel/managing_channels.yml
+    - suites/api/currency/managing_currencies.yml
+    - suites/api/currency/managing_exchange_rates.yml
+    - suites/api/homepage/viewing_products.yml
+    - suites/api/locale/managing_locales.yml
+    - suites/api/order/managing_orders.yml
+    - suites/api/payment/managing_payments.yml
+    - suites/api/product/managing_product_association_types.yml
+    - suites/api/product/managing_product_options.yml
+    - suites/api/product/managing_product_reviews.yml
     - suites/api/product/managing_product_variants.yml
+    - suites/api/product/managing_products.yml
+    - suites/api/shipping/managing_shipments.yml
+    - suites/api/shipping/managing_shipping_categories.yml
+    - suites/api/shipping/managing_shipping_methods.yml
+    - suites/api/taxation/managing_tax_categories.yml
     - suites/api/taxon/managing_taxons.yml
+    - suites/api/user/managing_administrators.yml
+    - suites/api/user/managing_customer_groups.yml
 
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
@@ -18,9 +40,9 @@ imports:
 
     - suites/ui/account/address_book.yml
     - suites/ui/account/customer.yml
+    - suites/ui/account/customer_registration.yml
     - suites/ui/account/email_verification.yml
     - suites/ui/account/login.yml
-    - suites/ui/account/registration.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml

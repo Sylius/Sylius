@@ -13,26 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_address_book_index';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAddressesCount()
+    public function getAddressesCount(): int
     {
-        $addressesCount = count($this->getElement('addresses')->findAll('css', 'address'));
+        $addressesCount = count($this->getElement('addresses')->findAll('css', '[data-test-address]'));
 
         if (!$this->hasNoDefaultAddress()) {
             ++$addressesCount;
@@ -41,97 +34,61 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $addressesCount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAddressOf($fullName)
+    public function hasAddressOf(string $fullName): bool
     {
-        return null !== $this->getAddressOf($fullName);
+        return $this->hasElement('address', ['%full_name%' => $fullName]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoAddresses()
+    public function hasNoAddresses(): bool
     {
-        return $this->getDocument()->hasContent('You have no addresses defined');
+        return $this->hasElement('content', ['%message%' => 'You have no addresses defined']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addressOfContains($fullName, $value)
+    public function addressOfContains(string $fullName, string $value): bool
     {
-        $address = $this->getAddressOf($fullName);
-
-        return $address->has('css', sprintf('address:contains("%s")', $value));
+        return $this->hasElement('address', ['%full_name%' => $fullName, '%value%' => $value]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function editAddress($fullName)
+    public function editAddress(string $fullName): void
     {
-        $addressToEdit = $this->getAddressOf($fullName);
-        $addressToEdit->findLink('Edit')->press();
+        $this->getElement('edit_address', ['%full_name%' => $fullName])->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteAddress($fullName)
+    public function deleteAddress(string $fullName): void
     {
-        $addressToDelete = $this->getAddressOf($fullName);
-        $addressToDelete->pressButton('Delete');
+        $this->getElement('delete_button', ['%full_name%' => $fullName])->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setAsDefault($fullName)
+    public function setAsDefault(string $fullName): void
     {
-        $addressToSetAsDefault = $this->getAddressOf($fullName);
-        $addressToSetAsDefault->pressButton('Set as default');
+        $this->getElement('set_as_default_button', ['%full_name%' => $fullName])->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoDefaultAddress()
+    public function hasNoDefaultAddress(): bool
     {
         return !$this->hasElement('default_address');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullNameOfDefaultAddress()
+    public function getFullNameOfDefaultAddress(): string
     {
-        $fullNameElement = $this->getElement('default_address')->find('css', 'address > strong');
+        $fullNameElement = $this->getElement('default_address');
 
         Assert::notNull($fullNameElement, 'There should be a default address\'s full name.');
 
         return $fullNameElement->getText();
     }
 
-    /**
-     * @param string $fullName
-     *
-     * @return NodeElement|null
-     */
-    private function getAddressOf($fullName)
-    {
-        return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'addresses' => '#sylius-addresses',
-            'default_address' => '#sylius-default-address',
+            'address' => '[data-test-address-context="%full_name%"]',
+            'address_contains' => '[data-test-address-context="%full_name%"]:contains("%value%")',
+            'addresses' => '[data-test-addresses]',
+            'content' => '[data-test-flash-message="info"]:contains("%message%")',
+            'default_address' => '[data-test-default-address] [data-test-full-name]',
+            'delete_button' => '[data-test-address="%full_name%"] [data-test-delete-button]',
+            'edit_address' => '[data-test-address="%full_name%"] [data-test-edit-button] [data-test-button]',
+            'set_as_default_button' => '[data-test-address="%full_name%"] [data-test-set-as-default-button]',
         ]);
     }
 }

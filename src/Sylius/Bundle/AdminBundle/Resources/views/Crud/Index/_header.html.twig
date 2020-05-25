@@ -3,7 +3,7 @@
         {% include configuration.vars.templates.header_title|default('@SyliusAdmin/Crud/Index/_headerTitle.html.twig') %}
         {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Crud/Index/_breadcrumb.html.twig') %}
 
-        {{ sonata_block_render_event(event_prefix ~ '.header', {'resources': resources}) }}
+        {{ sylius_template_event([event_prefix ~ '.header', 'sylius.admin.index.header'], _context) }}
     </div>
 
     {% include '@SyliusAdmin/Crud/Index/_actions.html.twig' %}

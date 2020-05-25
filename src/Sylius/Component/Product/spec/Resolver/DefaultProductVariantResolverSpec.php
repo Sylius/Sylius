@@ -31,7 +31,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         Collection $variants
     ): void {
-        $product->getVariants()->willReturn($variants);
+        $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(false);
         $variants->first()->willReturn($variant);
 
@@ -40,7 +40,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
 
     function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
     {
-        $product->getVariants()->willReturn($variants);
+        $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);
 
         $this->getVariant($product)->shouldReturn(null);

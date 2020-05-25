@@ -72,6 +72,19 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $this->getPossibleGenerationAmount($instruction)->shouldReturn(7);
     }
 
+    function it_returns_php_int_max_value_as_possible_generation_amount_when_code_length_is_too_large(
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        PromotionCouponRepositoryInterface $couponRepository
+    ): void {
+        $instruction->getAmount()->willReturn(1000);
+        $instruction->getCodeLength()->willReturn(40);
+        $instruction->getPrefix()->willReturn(null);
+        $instruction->getSuffix()->willReturn(null);
+        $couponRepository->countByCodeLength(40, null, null)->willReturn(0);
+
+        $this->getPossibleGenerationAmount($instruction)->shouldReturn(\PHP_INT_MAX);
+    }
+
     function it_returns_possible_generation_amount_with_prefix_and_suffix(
         PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository

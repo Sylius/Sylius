@@ -1,7 +1,7 @@
-$sylius-brand-color: #1abb9c;
-$segment-spacing: 1.8em;
-$segment-title-spacing: 1.2em 1.8em;
-$accordion-title-spacing: 1.2em 1.8em;
+$sylius-brand-color: #1abb9c !default;
+$segment-spacing: 1.8em !default;
+$segment-title-spacing: 1.2em 1.8em !default;
+$accordion-title-spacing: 1.2em 1.8em !default;
 
 // ----------------------------------
 // ------------ Globals
@@ -219,7 +219,6 @@ a {
         }
     }
 }
-
 // ----------------------------------
 // ------------ Toggle
 // ----------------------------------
@@ -227,4 +226,12 @@ a {
 .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before,
 .ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
     background-color: $sylius-brand-color !important;
+}
+
+// ----------------------------------
+// ------------ Tabs
+// ----------------------------------
+
+.ui.top.attached.tabular.menu {
+    flex-wrap: wrap;
 }

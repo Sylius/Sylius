@@ -5,17 +5,21 @@
     {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
-                {% if prototype is defined and allow_add %}
-                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-                {%- endif -%}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
+            {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
                 {% endfor %}
             {% endif %}
 
@@ -32,11 +36,11 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-collection="item" data-form-collection-index="{{ index }}" class="column">
             <div class="ui box segment">
                 {{ form_widget(form) }}
@@ -48,11 +52,11 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 {% block sylius_product_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ form_row(form.type) }}
         <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
         {% if form.vars.value.path|default(null) is not null %}
@@ -67,11 +71,11 @@
         {% if product.id is not null and 0 != product.variants|length and not product.simple %}
             {{ form_row(form.productVariants) }}
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block sylius_taxon_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ form_row(form.type) }}
         {% if form.vars.value.path|default(null) is null %}
             <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
@@ -85,11 +89,11 @@
         <div class="ui element">
             {{- form_errors(form.file) -}}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block sylius_avatar_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if form.vars.value.path|default(null) is not null %}
             <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.type }}" />
         {% endif %}
@@ -102,5 +106,5 @@
         <div class="ui element">
             {{- form_errors(form.file) -}}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

@@ -9,21 +9,76 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                locale: ~
+                locale:
+                    options:
+                        locales:
+                            - 'en_US'
+                            - 'de_DE'
+                            - 'fr_FR'
+                            - 'pl_PL'
+                            - 'es_ES'
+                            - 'es_MX'
+                            - 'pt_PT'
+                            - 'zh_CN'
                 currency:
                     options:
                         currencies:
+                            - 'EUR'
                             - 'USD'
+                            - 'PLN'
+                            - 'CAD'
+                            - 'CNY'
+                            - 'NZD'
+                            - 'GBP'
+                            - 'AUD'
+                            - 'MXN'
 
                 geographical:
                     options:
                         countries:
                             - 'US'
+                            - 'FR'
+                            - 'DE'
+                            - 'AU'
+                            - 'CA'
+                            - 'MX'
+                            - 'NZ'
+                            - 'PT'
+                            - 'ES'
+                            - 'CN'
+                            - 'GB'
                         zones:
                             US:
                                 name: 'United States of America'
                                 countries:
                                     - 'US'
+                            WORLD:
+                                name: 'World'
+                                countries:
+                                    - 'US'
+                                    - 'FR'
+                                    - 'DE'
+                                    - 'AU'
+                                    - 'CA'
+                                    - 'MX'
+                                    - 'NZ'
+                                    - 'PT'
+                                    - 'ES'
+                                    - 'CN'
+                                    - 'GB'
+
+                menu_taxon:
+                    name: taxon
+                    options:
+                        custom:
+                            category:
+                                code: 'MENU_CATEGORY'
+                                name: 'Category'
+                                translations:
+                                    en_US:
+                                        name: 'Category'
+                                    fr_FR:
+                                        name: 'Catégorie'
 
                 channel:
                     options:
@@ -44,6 +99,7 @@ sylius_fixtures:
                                     street: 'Test St. 15'
                                     city: 'eCommerce Town'
                                     postcode: '00 33 22'
+                                menu_taxon: 'MENU_CATEGORY'
 
                 payment_method:
                     options:
@@ -158,6 +214,12 @@ sylius_fixtures:
                                 name: 'Christmas'
                                 channels:
                                     - 'FASHION_WEB'
+                                coupon_based: true
+                                coupons:
+                                    - code: 'CHRISTMAS_SALE'
+                                      expires_at: 'December 24'
+                                      usage_limit: 10
+                                      per_customer_usage_limit: 1
                             new_year:
                                 code: 'new_year'
                                 name: 'New Year'

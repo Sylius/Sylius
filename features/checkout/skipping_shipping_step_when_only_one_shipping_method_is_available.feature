@@ -16,7 +16,7 @@ Feature: Skipping shipping step when only one shipping method is available
         Given the store has "DHL" shipping method with "$5.00" fee
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step
@@ -29,7 +29,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And the store has "FedEx" shipping method with "$15.00" fee not assigned to any channel
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step
@@ -42,7 +42,7 @@ Feature: Skipping shipping step when only one shipping method is available
         And the store has disabled "FedEx" shipping method with "$15.00" fee
         And I have product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I select "Paypal Express Checkout" payment method
         And I complete the payment step

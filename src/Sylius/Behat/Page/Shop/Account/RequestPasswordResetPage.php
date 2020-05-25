@@ -18,50 +18,40 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordResetPageInterface
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor(string $element, string $message): bool
-    {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
-
-        if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
-        }
-
-        return $message === $errorLabel->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_request_password_reset_token';
     }
 
-    public function reset()
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $this->getDocument()->pressButton('Reset');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+        }
+
+        return $message === $errorLabel->getText();
     }
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email)
+    public function reset(): void
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getElement('reset_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function specifyEmail(?string $email): void
+    {
+        $this->getElement('email')->setValue($email);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_user_request_password_reset_email',
+            'email' => '[data-test-reset-email]',
+            'reset_button' => '[data-test-request-password-reset-button]',
         ]);
     }
 }

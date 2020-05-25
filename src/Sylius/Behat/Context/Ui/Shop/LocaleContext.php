@@ -30,13 +30,22 @@ final class LocaleContext implements Context
 
     /**
      * @Given I switched the shop's locale to :locale
+     * @Given I have switched to the :locale locale
      * @When I switch to the :locale locale
      * @When I change my locale to :locale
      */
-    public function iSwitchTheLocaleToTheLocale($locale)
+    public function iSwitchTheLocaleToTheLocale(string $locale): void
     {
         $this->homePage->open();
         $this->homePage->switchLocale($locale);
+    }
+
+    /**
+     * @When I show homepage with the locale :localeCode
+     */
+    public function iShowHomepageWithTheLocale(string $localeCode): void
+    {
+        $this->homePage->tryToOpen(['_locale' => $localeCode]);
     }
 
     /**

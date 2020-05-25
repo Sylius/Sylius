@@ -350,6 +350,15 @@ class Product implements ProductInterface
         return $this->variants->contains($variant);
     }
 
+    public function getEnabledVariants(): Collection
+    {
+        return $this->variants->filter(
+            function (ProductVariantInterface $productVariant) {
+                return $productVariant->isEnabled();
+            }
+        );
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -459,15 +468,12 @@ class Product implements ProductInterface
         return $translation;
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
     }
 
-    private function getAttributeInDifferentLocale(
+    protected function getAttributeInDifferentLocale(
         ProductAttributeValueInterface $attributeValue,
         string $localeCode,
         ?string $fallbackLocaleCode = null
@@ -486,7 +492,7 @@ class Product implements ProductInterface
         return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
     }
 
-    private function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
+    protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
     {
         $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
         if (null === $attributeValue) {

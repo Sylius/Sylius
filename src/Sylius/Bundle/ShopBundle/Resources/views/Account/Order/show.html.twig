@@ -1,15 +1,11 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} | {{ parent() }}{% endblock %}
+
 {% block breadcrumb %}
     {% include '@SyliusShop/Account/Order/Show/_breadcrumb.html.twig' %}
 {% endblock %}
 
 {% block subcontent %}
-    {% include '@SyliusShop/Account/Order/Show/_header.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.shop.account.order.show.after_content_header', {'order': order}) }}
-
-    {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
-
-    {{ sonata_block_render_event('sylius.shop.account.order.show.after_summary', {'order': order}) }}
+    {{ sylius_template_event('sylius.shop.account.order.show.subcontent', _context) }}
 {% endblock %}

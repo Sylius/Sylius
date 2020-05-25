@@ -185,6 +185,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should not see price for channel :channelName
+     */
+    public function iShouldNotSeePriceForChannel(string $channelName): void
+    {
+        Assert::same($this->pricingElement->getPriceForChannel($channelName), '');
+    }
+
+    /**
      * @Then I should see original price :price for channel :channelName
      */
     public function iShouldSeeOrginalPriceForChannel(string $orginalPrice, string $channelName): void
@@ -206,6 +214,14 @@ final class ProductShowPageContext implements Context
     public function iShouldSeeProductIsEnabledForChannels(string $channel): void
     {
         Assert::true($this->detailsElement->hasChannel($channel));
+    }
+
+    /**
+     * @Then I should see the product in neither channel
+     */
+    public function iShouldSeeTheProductInNeitherChannel(): void
+    {
+        Assert::same($this->detailsElement->countChannels(), 0);
     }
 
     /**

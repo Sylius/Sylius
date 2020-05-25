@@ -17,7 +17,6 @@ use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
@@ -26,13 +25,9 @@ final class SimpleProductLockingListener
     /** @var EntityManagerInterface */
     private $manager;
 
-    /** @var ProductVariantResolverInterface */
-    private $variantResolver;
-
-    public function __construct(EntityManagerInterface $manager, ProductVariantResolverInterface $variantResolver)
+    public function __construct(EntityManagerInterface $manager)
     {
         $this->manager = $manager;
-        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -46,7 +41,7 @@ final class SimpleProductLockingListener
 
         if ($product->isSimple()) {
             /** @var ProductVariantInterface $productVariant */
-            $productVariant = $this->variantResolver->getVariant($product);
+            $productVariant = $product->getVariants()->first();
             $this->manager->lock($productVariant, LockMode::OPTIMISTIC, $productVariant->getVersion());
         }
     }

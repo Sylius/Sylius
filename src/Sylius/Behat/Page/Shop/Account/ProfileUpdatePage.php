@@ -18,82 +18,60 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_account_profile_update';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkValidationMessageFor($element, $message)
+    public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyFirstName($firstName)
+    public function specifyFirstName(?string $firstName): void
     {
-        $this->getDocument()->fillField('First name', $firstName);
+        $this->getElement('first_name')->setValue($firstName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyLastName($lastName)
+    public function specifyLastName(?string $lastName): void
     {
-        $this->getDocument()->fillField('Last name', $lastName);
+        $this->getElement('last_name')->setValue($lastName);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyEmail($email)
+    public function specifyEmail(?string $email): void
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getElement('email')->setValue($email);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function saveChanges()
+    public function saveChanges(): void
     {
-        $this->getDocument()->pressButton('Save changes');
+        $this->getElement('save_changes_button')->press();
     }
 
-    public function subscribeToTheNewsletter()
+    public function subscribeToTheNewsletter(): void
     {
-        $this->getDocument()->checkField('Subscribe to the newsletter');
+        $this->getElement('subscribe_newsletter')->check();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSubscribedToTheNewsletter()
+    public function isSubscribedToTheNewsletter(): bool
     {
-        return $this->getDocument()->hasCheckedField('Subscribe to the newsletter');
+        return $this->getElement('subscribe_newsletter')->isChecked();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_customer_profile_email',
-            'first_name' => '#sylius_customer_profile_firstName',
-            'last_name' => '#sylius_customer_profile_lastName',
+            'email' => '[data-test-email]',
+            'first_name' => '[data-test-first-name]',
+            'last_name' => '[data-test-last-name]',
+            'save_changes_button' => '[data-test-save-changes]',
+            'subscribe_newsletter' => '[data-test-subscribe-newsletter]',
         ]);
     }
 }

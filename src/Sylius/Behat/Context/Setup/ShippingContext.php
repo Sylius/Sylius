@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope as CoreScope;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
@@ -162,18 +163,28 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^(this shipping method) is named "([^"]+)" in the "([^"]+)" locale$/
+     * @Given /^(this shipping method) is named "([^"]+)" in the ("[^"]+" locale)$/
      */
-    public function thisShippingMethodIsNamedInLocale(ShippingMethodInterface $shippingMethod, $name, $locale)
-    {
+    public function thisShippingMethodIsNamedInLocale(
+        ShippingMethodInterface $shippingMethod,
+        string $name,
+        string $locale
+    ): void {
+        $translations = $shippingMethod->getTranslations();
+        /** @var ShippingMethodTranslationInterface $translation */
+        foreach ($translations as $translation) {
+            if ($translation->getLocale() === $locale) {
+                $translation->setName($name);
+
+                return;
+            }
+        }
         /** @var ShippingMethodTranslationInterface $translation */
         $translation = $this->shippingMethodTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);
 
         $shippingMethod->addTranslation($translation);
-
-        $this->shippingMethodManager->flush();
     }
 
     /**

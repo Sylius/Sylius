@@ -21,6 +21,7 @@
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.customer" />
+            <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.email_manager.contact" />
         </service>
 

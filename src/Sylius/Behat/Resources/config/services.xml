@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/elements.xml" />
         <import resource="services/pages.xml" />
@@ -34,6 +35,11 @@
             <argument type="service" id="session" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">admin</argument>
+        </service>
+
+        <service id="sylius.behat.admin_api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
@@ -74,5 +80,9 @@
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
+
+        <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
+            <argument>%kernel.project_dir%</argument>
+        </service>
     </services>
 </container>

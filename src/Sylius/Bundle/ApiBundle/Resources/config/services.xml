@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <imports>
+        <import resource="services/applicators.xml" />
+        <import resource="services/command_handlers.xml" />
+        <import resource="services/context_builders.xml" />
+        <import resource="services/data_persisters.xml" />
+        <import resource="services/data_providers.xml" />
+        <import resource="services/event_subscribers.xml" />
+        <import resource="services/extensions.xml" />
+        <import resource="services/filters.xml" />
+        <import resource="services/providers.xml" />
+        <import resource="services/validator.xml" />
+    </imports>
+
+    <services>
+        <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="sylius.repository.avatar_image" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
+        <service
+            id="sylius.api.swagger_admin_authentication_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
+        </service>
+
+        <service
+            id="sylius.api.swagger_shop_authentication_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="10"
+        >
+            <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+        </service>
+
+        <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
+            <argument type="service" id="sylius.api.api_platform.metadata.property.metadata_factory.xml.inner" />
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+</container>

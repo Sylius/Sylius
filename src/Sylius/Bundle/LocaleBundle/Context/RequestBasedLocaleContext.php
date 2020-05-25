@@ -16,6 +16,7 @@ namespace Sylius\Bundle\LocaleBundle\Context;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\NewLocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestBasedLocaleContext implements LocaleContextInterface
@@ -30,6 +31,12 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
     {
         $this->requestStack = $requestStack;
         $this->localeProvider = $localeProvider;
+        if ($localeProvider instanceof NewLocaleProviderInterface) {
+            @trigger_error(
+                sprintf('Not passing in an instance of %s is deprecated and will be removed in Sylius 2.0', NewLocaleProviderInterface::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -47,8 +54,15 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
             throw new LocaleNotFoundException('No locale attribute is set on the master request.');
         }
 
-        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+        if ($this->localeProvider instanceof NewLocaleProviderInterface) {
+            $isLocaleCodeAvailable = $this->localeProvider->isLocaleCodeAvailable($localeCode);
+        } else {
+            $isLocaleCodeAvailable = in_array($localeCode, $this->localeProvider->getAvailableLocalesCodes(), true);
+        }
+
+        if (!$isLocaleCodeAvailable) {
             $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
+
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

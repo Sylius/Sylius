@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_managing_administrators:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.admin
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.channel
+
+                - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.admin.managing_administrators
+
+            filters:
+                tags: "@managing_administrators && @api"
+            javascript: false

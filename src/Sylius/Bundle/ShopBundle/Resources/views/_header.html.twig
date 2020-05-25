@@ -1,13 +1,5 @@
 <div class="ui basic segment">
     <div class="ui three column stackable grid">
-        <div class="column">
-            <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" /></a>
-        </div>
-        <div class="column">
-            {{ sonata_block_render_event('sylius.shop.layout.header') }}
-        </div>
-        <div class="right aligned column">
-            {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
-        </div>
+        {{ sylius_template_event('sylius.shop.layout.header.grid') }}
     </div>
 </div>

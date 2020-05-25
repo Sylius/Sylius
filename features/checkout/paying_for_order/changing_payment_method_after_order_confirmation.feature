@@ -14,7 +14,7 @@ Feature: Changing the method after order confirmation
     @ui
     Scenario: Retrying the payment with offline payment
         Given I added product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based shipping address
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
         When I go to the change payment method page
@@ -26,7 +26,7 @@ Feature: Changing the method after order confirmation
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
         And I added product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based shipping address
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
         When I go to the change payment method page

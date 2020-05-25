@@ -102,9 +102,9 @@ final class ManagingPaymentsContext implements Context
     }
 
     /**
-     * @Then the payments of the :orderNumber order should be :paymentState for :customer
+     * @Then the payment of the :orderNumber order should be :paymentState for :customer
      */
-    public function thePaymentsOfTheOrderShouldBeFor(
+    public function thePaymentOfTheOrderShouldBeFor(
         string $orderNumber,
         string $paymentState,
         CustomerInterface $customer
@@ -152,6 +152,7 @@ final class ManagingPaymentsContext implements Context
 
     /**
      * @Then I should not see a payment of order :orderNumber
+     * @Then I should not see the payment of the :orderNumber order
      */
     public function iShouldNotSeeAPaymentOfOrder(string $orderNumber): void
     {

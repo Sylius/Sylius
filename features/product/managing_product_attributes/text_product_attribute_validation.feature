@@ -30,7 +30,6 @@ Feature: Text product attribute validation
     Scenario: Trying to remove name for existing text product attribute
         Given the store has a text product attribute "T-shirt cotton brand"
         When I want to edit this product attribute
-        And I specify its code as "t_shirt_with_cotton"
         And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required

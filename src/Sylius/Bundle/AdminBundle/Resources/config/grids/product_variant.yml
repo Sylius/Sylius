@@ -20,6 +20,11 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
                 inventory:
                     type: twig
                     path: .

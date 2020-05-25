@@ -6,7 +6,7 @@ Events
 
 .. tip::
 
-    You can learn more about events in general in `the Symfony documentation <http://symfony.com/doc/current/event_dispatcher.html>`_.
+    You can learn more about events in general in `the Symfony documentation <https://symfony.com/doc/current/event_dispatcher.html>`_.
 
 What is the naming convention of Sylius events?
 -----------------------------------------------
@@ -19,7 +19,7 @@ The examples of such events are: ``sylius.product.pre_update``, ``sylius.shop_us
 Events reference
 ~~~~~~~~~~~~~~~~
 
-All Sylius bundles are using :doc:`SyliusResourceBundle </components_and_bundles/bundles/SyliusResourceBundle/index>`, which has some built-in events.
+All Sylius bundles are using `SyliusResourceBundle <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_, which has some built-in events.
 
 +-------------------------------------+----------------------+
 | Event                               | Description          |
@@ -68,7 +68,7 @@ The events already used in Sylius are described in the Book alongside the concep
 
     .. code-block:: bash
 
-        $ php bin/console debug:event-dispatcher | grep sylius
+        php bin/console debug:event-dispatcher | grep sylius
 
 Customizations
 --------------

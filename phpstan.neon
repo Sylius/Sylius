@@ -10,13 +10,22 @@ parameters:
         - '**/DependencyInjection/Configuration.php'
 
         # Test dependencies
+        - '**/Bundle/*/spec/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'
+        - '**/Bundle/*/Tests/Functional/var/**.php'
+
+        # Vendor files in subpackages
+        - '**/Bundle/*/vendor/**.php'
+        - '**/Component/*/vendor/**.php'
 
         # These packages aren't in require-dev of the global package
         - '**MongoDB**'
         - '**ODM**'
+
+        # Deprecated classes
+        - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
 
     ignoreErrors:
         # Magic calls
@@ -41,3 +50,5 @@ parameters:
         - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheInterface/'
         - '/Symfony\\Component\\ExpressionLanguage\\ParserCache\\ParserCacheAdapter/'
         - '/Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters/'
+
+        - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'

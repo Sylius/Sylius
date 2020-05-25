@@ -3,17 +3,13 @@
 {% block title %}Sylius | {{ 'sylius.ui.administration_panel_login'|trans }}{% endblock %}
 
 {% block stylesheets %}
-    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+    {{ sylius_template_event('sylius.admin.layout.stylesheets') }}
 {% endblock %}
 
 {% block content %}
-{{ sonata_block_render_event('sylius.admin.login.before_content', {'form': form}) }}
-
-{% include '@SyliusUi/Security/_login.html.twig' with {'action': path('sylius_admin_login_check'), 'paths': {'logo': 'assets/admin/img/logo.png'}} %}
-
-{{ sonata_block_render_event('sylius.admin.login.after_content', {'form': form}) }}
+    {{ sylius_template_event('sylius.admin.login.content', _context) }}
 {% endblock %}
 
 {% block javascripts %}
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+    {{ sylius_template_event('sylius.admin.layout.javascripts') }}
 {% endblock %}

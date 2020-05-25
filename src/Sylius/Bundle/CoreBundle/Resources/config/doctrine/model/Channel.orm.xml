@@ -33,6 +33,9 @@
         <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
+        <many-to-one field="menuTaxon" target-entity="Sylius\Component\Core\Model\TaxonInterface">
+            <join-column name="menu_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </many-to-one>
         <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
             <join-table name="sylius_channel_currencies">
                 <join-columns>
@@ -50,6 +53,16 @@
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="locale_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+        <many-to-many field="countries" target-entity="Sylius\Component\Addressing\Model\CountryInterface" fetch="EAGER">
+            <join-table name="sylius_channel_countries">
+                <join-columns>
+                    <join-column name="channel_id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="country_id" nullable="false" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>

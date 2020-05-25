@@ -32,6 +32,7 @@ sylius:
                 postcode: PSČ
                 street: Ulica
             contact_email: Kontaktný e-mail
+            countries: Krajiny
             currencies: Meny
             currency_base: Základná mena
             account_verification_required: Je požadované overenie účtu?
@@ -100,7 +101,6 @@ sylius:
             file: Vybrať obrázok
         user:
             billing_address: Fakturačná adresa
-            different_billing_address: Použiť inú fakturačnú adresu?
             enabled: Zapnuté
             first_name: Meno
             groups: Zákaznícke skupiny

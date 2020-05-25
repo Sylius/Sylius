@@ -1,0 +1,109 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block">
+        <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+            <div class="sf-toolbar-icon">
+                {{ include('@SyliusUi/DataCollector/icon.svg') }}
+                <span class="sf-toolbar-value">{{ collector.numberOfRenderedEvents }}</span>
+            </div>
+        </a>
+
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Rendered events</b>
+                <span class="sf-toolbar-status">{{ collector.numberOfRenderedEvents }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Rendered blocks</b>
+                <span class="sf-toolbar-status">{{ collector.numberOfRenderedBlocks }}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon">
+            {{ include('@SyliusUi/DataCollector/icon.svg') }}
+        </span>
+        <strong>Template events</strong>
+        <span class="count">
+            <span>{{ collector.numberOfRenderedEvents }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Template events metrics</h2>
+
+    <div class="metrics">
+        <div class="metric">
+            <span class="value">{{ '%.0f'|format(collector.totalDuration * 1000) }} <span class="unit">ms</span></span>
+            <span class="label">Total execution time</span>
+        </div>
+
+        <div class="metric">
+            <span class="value">{{ '%.0f'|format(collector.numberOfRenderedEvents) }}</span>
+            <span class="label">Rendered events</span>
+        </div>
+
+        <div class="metric">
+            <span class="value">{{ '%.0f'|format(collector.numberOfRenderedBlocks) }}</span>
+            <span class="label">Rendered blocks</span>
+        </div>
+    </div>
+
+    <h2>Rendered template events</h2>
+
+    {% if collector.renderedEvents|length > 0 %}
+        <table>
+            <tr>
+                <th>Event</th>
+                <th>Duration</th>
+                <th>Blocks</th>
+            </tr>
+
+            {% for event in collector.renderedEvents %}
+                <tr>
+                    <td>
+                        {% for name in event.names %}
+                            {% if loop.first %}<strong>{% endif %}
+                            {{ name }}{% if not loop.last %}, {% endif %}
+                            {% if loop.first %}</strong>{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ '%.0f'|format(event.time * 1000) }}ms</td>
+                    <td>
+                        {% if event.blocks|length > 0 %}
+                            <table>
+                                <tr>
+                                    {% if event.names|length > 1 %}<th>Origin event</th>{% endif %}
+                                    <th>Name</th>
+                                    <th>Template</th>
+                                    <th>Duration</th>
+                                    <th>Priority</th>
+                                </tr>
+                                {% for block in event.blocks %}
+                                    <tr>
+                                        {% if event.names|length > 1 %}<td>{{ block.definition.eventName }}</td>{% endif %}
+                                        <td>{{ block.definition.name }}</td>
+                                        <td>{{ block.definition.template }}</td>
+                                        <td>{{ '%.0f'|format(block.time * 1000) }}ms</td>
+                                        <td>{{ block.definition.priority }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% else %}
+                            <i>no blocks rendered</i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <div class="empty">
+            No template events have been rendered.
+        </div>
+    {% endif %}
+{% endblock %}

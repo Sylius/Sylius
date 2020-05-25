@@ -40,7 +40,7 @@ Give it a new, custom validation group - ``[app_product]``.
 
 .. tip::
 
-    When using custom validation messages see `here how to add them <http://symfony.com/doc/current/validation/translations.html>`_.
+    When using custom validation messages see `here how to add them <https://symfony.com/doc/current/validation/translations.html>`_.
 
 **2.** Configure the new validation group in the ``config/services.yaml``.
 
@@ -49,7 +49,7 @@ Give it a new, custom validation group - ``[app_product]``.
     # config/services.yaml
     parameters:
         sylius.form.type.product_translation.validation_groups: [app_product]
-        sylius.form.type.product.validation_groups: [app_product] # the product class also needs to be aware of the translation'a validation
+        sylius.form.type.product.validation_groups: [app_product] # the product class also needs to be aware of the translation's validation
 
 Done. Now in all forms where the Product ``name`` is being used, your new validation group will be applied,
 not letting users add products with name shorter than 10 characters.

@@ -67,6 +67,7 @@ final class UserDeleteListener
             return false;
         }
 
+        /** @var UserInterface $loggedUser */
         return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
     }
 }

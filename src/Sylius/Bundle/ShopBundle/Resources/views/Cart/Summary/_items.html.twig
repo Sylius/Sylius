@@ -1,13 +1,13 @@
 <div class="ui segment">
     {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-        {{ form_errors(form) }}
-        <input type="hidden" name="_method" value="PATCH"/>
-        {{ form_row(form._token) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PATCH"/>
+    {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 
-    {{ sonata_block_render_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
+    {{ sylius_template_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
 
-    <table id="sylius-cart-items" class="ui very basic celled table">
+    <table id="sylius-cart-items" {{ sylius_test_html_attribute('cart-items') }} class="ui very basic celled table">
         <thead>
         <tr>
             <th>{{ 'sylius.ui.item'|trans }}</th>
@@ -18,19 +18,16 @@
         </tr>
         </thead>
         <tbody>
-            {% for key, item in cart.items %}
-                {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id} %}
-            {% endfor %}
+        {% for key, item in cart.items %}
+            {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id, 'loop_index': loop.index} %}
+        {% endfor %}
         </tbody>
     </table>
     {% if form.promotionCoupon is defined %}
         <div class="ui hidden divider"></div>
 
-        {{ sonata_block_render_event('sylius.shop.cart.summary.before_coupon', {'cart': cart, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.cart.coupon', {'cart': cart, 'form': form, 'main_form': form.vars.id}) }}
 
-        {% include '@SyliusShop/Cart/Summary/_coupon.html.twig' with {'form': form.promotionCoupon, 'main_form': form.vars.id} %}
-
-        {{ sonata_block_render_event('sylius.shop.cart.summary.after_coupon', {'cart': cart, 'form': form}) }}
     {% endif %}
     <div class="ui hidden divider"></div>
     {% include '@SyliusShop/Cart/Summary/_update.html.twig' with {'main_form': form.vars.id} %}

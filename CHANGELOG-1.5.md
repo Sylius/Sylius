@@ -1,8 +1,89 @@
 # CHANGELOG FOR `1.5.X`
 
+## v1.5.9 (2020-01-27)
+
+#### CVE-2020-5218: Ability to switch channels via GET parameter enabled in production environments
+
+*Please refer to [the original security advisory](https://github.com/Sylius/Sylius/security/advisories/GHSA-prg5-hg25-8grq) for the most updated information.*  
+
+**Impact:**
+
+This vulnerability gives the ability to switch channels via the `_channel_code` GET parameter in production environments. This was meant to be enabled only when `%kernel.debug%` is set to true. 
+
+However, if no `sylius_channel.debug` is set explicitly in the configuration, the default value which is `%kernel.debug%` will be not resolved and cast to boolean, enabling this debug feature even if that parameter is set to false.
+
+**Patches:**
+
+Patch has been provided for Sylius 1.3.x and newer - **1.3.16, 1.4.12, 1.5.9, 1.6.5**. Versions older than 1.3 are not covered by our security support anymore.
+
+**Workarounds:**
+
+Unsupported versions could be patched by adding the following configuration to run in production:
+
+```yaml
+sylius_channel:
+    debug: false
+```
+
+#### Details
+
+- [#9050](https://github.com/Sylius/Sylius/issues/9050) Added LazyCustomerLoader for OrderType of SyliusAdminApiBundle ([@jdeveloper](https://github.com/jdeveloper), [@lchrusciel](https://github.com/lchrusciel))
+- [#9844](https://github.com/Sylius/Sylius/issues/9844) Fix ShippingPercentageDiscountPromotionActionCommand.php ([@cosyz2010](https://github.com/cosyz2010), [@Zales0123](https://github.com/Zales0123))
+- [#10863](https://github.com/Sylius/Sylius/issues/10863) [SyliusUserBundle] Improve output of Promote/DemoteUserCommand ([@markbeazley](https://github.com/markbeazley))
+- [#10901](https://github.com/Sylius/Sylius/issues/10901) Fix missing colon ([@reyostallenberg](https://github.com/reyostallenberg))
+- [#10909](https://github.com/Sylius/Sylius/issues/10909) [Taxation] [Shipping] Fixed issue with shipping zones available to select in tax rate form (and the other way) ([@plewandowski](https://github.com/plewandowski))
+- [#10916](https://github.com/Sylius/Sylius/issues/10916) [Docs] Improve platform.sh documentation for deployment ([@Tomanhez](https://github.com/Tomanhez))
+- [#10922](https://github.com/Sylius/Sylius/issues/10922) fix: api URI for getting single product detail ([@hsharghi](https://github.com/hsharghi))
+- [#10923](https://github.com/Sylius/Sylius/issues/10923) [Maintenance] Update PR template with supported versions ([@lchrusciel](https://github.com/lchrusciel))
+- [#10926](https://github.com/Sylius/Sylius/issues/10926) Add lint:container command to the build & fix errors reported by it ([@pamil](https://github.com/pamil))
+- [#10935](https://github.com/Sylius/Sylius/issues/10935) [Docs] Platform.sh cookbook refinement ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#10938](https://github.com/Sylius/Sylius/issues/10938) [Payum][Paypal] Use full price instead of discounted one ([@Prometee](https://github.com/Prometee))
+- [#10943](https://github.com/Sylius/Sylius/issues/10943) Yaml standards ([@sspooky13](https://github.com/sspooky13), [@pamil](https://github.com/pamil))
+- [#10947](https://github.com/Sylius/Sylius/issues/10947) [Channel] Prevent from adding default tax zone of a channel in a different scope than tax or all ([@GSadee](https://github.com/GSadee))
+- [#10961](https://github.com/Sylius/Sylius/issues/10961) [Maintenance] Remove shipping bundle from spec namespace config ([@lchrusciel](https://github.com/lchrusciel))
+- [#10963](https://github.com/Sylius/Sylius/issues/10963) Fix phpspec also on 1.5 ([@Zales0123](https://github.com/Zales0123), [@pamil](https://github.com/pamil))
+- [#10964](https://github.com/Sylius/Sylius/issues/10964) [Behat] Disallow w3c in Behat Selenium session ([@Zales0123](https://github.com/Zales0123))
+- [#10979](https://github.com/Sylius/Sylius/issues/10979) [Installation] Inform about BitBagCommerce/SyliusCmsPlugin after installing Sylius ([@AdamKasp](https://github.com/AdamKasp))
+- [#10995](https://github.com/Sylius/Sylius/issues/10995) Move Taxation core service from TaxationBundle to CoreBundle ([@hmonglee](https://github.com/hmonglee))
+- [#11005](https://github.com/Sylius/Sylius/issues/11005) SyliusGridBundle downgrade lock ([@Tomanhez](https://github.com/Tomanhez), [@lchrusciel](https://github.com/lchrusciel))
+- [#11006](https://github.com/Sylius/Sylius/issues/11006) [API] Fixed OrderController save action issue in not html requests ([@pfazzi](https://github.com/pfazzi))
+- [#11013](https://github.com/Sylius/Sylius/issues/11013) Fix typo in PromotionCouponFactoryInterface ([@pamil](https://github.com/pamil))
+- [#11019](https://github.com/Sylius/Sylius/issues/11019) [Documentation] Add hint about disabling autowire when extending a controller  ([@adrianmarte](https://github.com/adrianmarte))
+- [#11022](https://github.com/Sylius/Sylius/issues/11022) Clarify release process regarding PHP versions + update the table ([@pamil](https://github.com/pamil))
+- [#11024](https://github.com/Sylius/Sylius/issues/11024) Replace unbound behat/mink dependency with tagged friends-of-behat/mink fork ([@pamil](https://github.com/pamil))
+
+## v1.5.7, v1.5.8 (2019-12-03, 2019-12-05)
+
+#### CVE-2019-16768: Internal exception message exposure in login action.
+
+**Details:**
+
+Exception messages from internal exceptions (like database exception) are wrapped by 
+`\Symfony\Component\Security\Core\Exception\AuthenticationServiceException` and propagated through the system to UI. 
+Therefore, some internal system information may leak and be visible to the customer.
+
+A validation message with the exception details will be presented to the user when one will try to log into the shop.
+
+**Solution:**
+
+This release patches the reported vulnerability. The `src/Sylius/Bundle/UiBundle/Resources/views/Security/_login.html.twig` 
+file from Sylius should be overridden and `{{ messages.error(last_error.message) }}` changed to `{{ messages.error(last_error.messageKey) }}`.
+
+#### Details
+
+- [#10835](https://github.com/Sylius/Sylius/issues/10835) Improve deprecation message for "Sylius\Bundle\CoreBundle\Application\Kernel" ([@pamil](https://github.com/pamil))
+- [#10841](https://github.com/Sylius/Sylius/issues/10841) [Docs] Include link to ShopApi docs to REST API Reference ([@Zales0123](https://github.com/Zales0123))
+- [#10846](https://github.com/Sylius/Sylius/issues/10846) [Order] Include order unit promotion adjustments and order item promotion adjustments in order promotion total ([@Tomanhez](https://github.com/Tomanhez))
+- [#10849](https://github.com/Sylius/Sylius/issues/10849) Move ShopApi reference to main menu ([@Zales0123](https://github.com/Zales0123))
+- [#10855](https://github.com/Sylius/Sylius/issues/10855) [Docs] Open external links in a new tab ([@Zales0123](https://github.com/Zales0123))
+- [#10857](https://github.com/Sylius/Sylius/issues/10857) Change readme banner ([@kulczy](https://github.com/kulczy))
+- [#10880](https://github.com/Sylius/Sylius/issues/10880) [Promotion] Improve coupon generation validation message ([@GSadee](https://github.com/GSadee))
+- [#10881](https://github.com/Sylius/Sylius/issues/10881) Add docs banner ([@kulczy](https://github.com/kulczy))
+- [#10891](https://github.com/Sylius/Sylius/issues/10891) Update release process docs for 1.2 ([@pamil](https://github.com/pamil))
+
 ## v1.5.6 (2019-11-11)
 
-### Details
+#### Details
 
 - [#9931](https://github.com/Sylius/Sylius/issues/9931) [Payum] infinite loop on state machine exception fixed ([@tautelis](https://github.com/tautelis))
 - [#10734](https://github.com/Sylius/Sylius/issues/10734) Added: TimestampableInterface to core TaxonInterface (fixes #10728) ([@igormukhingmailcom](https://github.com/igormukhingmailcom))

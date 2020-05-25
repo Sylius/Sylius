@@ -30,6 +30,7 @@ final class ProvinceContext implements Context
     /**
      * @Transform /^province "([^"]+)"$/
      * @Transform /^"([^"]+)" province$/
+     * @Transform :province
      */
     public function getProvinceByName($provinceName)
     {

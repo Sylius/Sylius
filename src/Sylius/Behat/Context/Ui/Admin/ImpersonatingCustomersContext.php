@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Administrator\ImpersonateUserPageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -31,14 +32,19 @@ final class ImpersonatingCustomersContext implements Context
     /** @var HomePageInterface */
     private $homePage;
 
+    /** @var ImpersonateUserPageInterface */
+    private $impersonateUserPage;
+
     public function __construct(
         ShowPageInterface $customerShowPage,
         DashboardPageInterface $dashboardPage,
-        HomePageInterface $homePage
+        HomePageInterface $homePage,
+        ImpersonateUserPageInterface $impersonateUserPage
     ) {
         $this->customerShowPage = $customerShowPage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
+        $this->impersonateUserPage = $impersonateUserPage;
     }
 
     /**
@@ -82,6 +88,14 @@ final class ImpersonatingCustomersContext implements Context
     public function iTryToImpersonateThem()
     {
         $this->customerShowPage->impersonate();
+    }
+
+    /**
+     * @When I impersonate the customer :customer
+     */
+    public function iImpersonateCustomer(CustomerInterface $customer)
+    {
+        $this->impersonateUserPage->tryToOpen(['username' => $customer->getEmail()]);
     }
 
     /**

@@ -89,13 +89,19 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     {
         $resolver
             ->setDefault('title', function (Options $options): string {
-                return $this->faker->words(3, true);
+                /** @var string $words */
+                $words = $this->faker->words(3, true);
+
+                return $words;
             })
             ->setDefault('rating', function (Options $options): int {
                 return $this->faker->numberBetween(1, 5);
             })
             ->setDefault('comment', function (Options $options): string {
-                return $this->faker->sentences(3, true);
+                /** @var string $sentences */
+                $sentences = $this->faker->sentences(3, true);
+
+                return $sentences;
             })
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))

@@ -19,18 +19,12 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_checkout_select_payment';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function selectPaymentMethod($paymentMethod)
+    public function selectPaymentMethod(string $paymentMethod): void
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
@@ -42,10 +36,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         $paymentMethodOptionElement->selectOption($paymentMethodOptionElement->getAttribute('value'));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPaymentMethod($paymentMethodName)
+    public function hasPaymentMethod(string $paymentMethodName): bool
     {
         try {
             $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethodName]);
@@ -56,60 +47,48 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemSubtotal($itemName)
+    public function getItemSubtotal(string $itemName): string
     {
         $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('[data-test-item-subtotal="%s"]', $itemSlug))->getText();
     }
 
-    public function nextStep()
+    public function nextStep(): void
     {
         $this->getElement('next_step')->press();
     }
 
-    public function changeShippingMethod()
+    public function changeShippingMethod(): void
     {
         $this->getDocument()->clickLink('Change shipping method');
     }
 
-    public function changeShippingMethodByStepLabel()
+    public function changeShippingMethodByStepLabel(): void
     {
         $this->getElement('shipping_step_label')->click();
     }
 
-    public function changeAddressByStepLabel()
+    public function changeAddressByStepLabel(): void
     {
-        $this->getElement('address_step_label')->click();
+        $this->getElement('address')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasNoAvailablePaymentMethodsWarning()
+    public function hasNoAvailablePaymentMethodsWarning(): bool
     {
         return $this->hasElement('warning_no_payment_methods');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isNextStepButtonUnavailable()
+    public function isNextStepButtonUnavailable(): bool
     {
         return $this->getElement('next_step')->hasClass('disabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '#sylius-payment-methods .item .content label');
+        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-payment-method-label]');
 
         $paymentMethods = [];
         foreach ($inputs as $input) {
@@ -119,20 +98,17 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return $paymentMethods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'address_step_label' => '.steps a:contains("Address")',
-            'checkout_subtotal' => '#sylius-checkout-subtotal',
-            'next_step' => '#next-step',
-            'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
-            'payment_method_option' => '.item:contains("%payment_method%") input',
-            'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
-            'shipping_step_label' => '.steps a:contains("Shipping")',
-            'warning_no_payment_methods' => '#sylius-order-cannot-be-paid',
+            'address' => '[data-test-step-address]',
+            'checkout_subtotal' => '[data-test-checkout-subtotal]',
+            'next_step' => '[data-test-next-step]',
+            'order_cannot_be_paid_message' => '[data-test-order-cannot-be-paid]',
+            'payment_method_option' => '[data-test-payment-item]:contains("%payment_method%") [data-test-payment-method-select]',
+            'payment_method_select' => '[data-test-payment-item]:contains("%payment_method%") [data-test-payment-method-checkbox]',
+            'shipping_step_label' => '[data-test-step-shipping]',
+            'warning_no_payment_methods' => '[data-test-order-cannot-be-paid]',
         ]);
     }
 }

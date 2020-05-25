@@ -361,6 +361,8 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface
@@ -371,7 +373,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * @return ProductTranslationInterface
      */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): BaseProductTranslationInterface
     {
         return new ProductTranslation();
     }

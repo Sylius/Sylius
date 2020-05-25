@@ -1,2 +1,7 @@
 imports:
     - { resource: "../src/Sylius/Behat/Resources/config/services.xml" }
+
+# workaround needed for strange "test.client.history" problem
+# see https://github.com/FriendsOfBehat/SymfonyExtension/issues/88
+services:
+    Symfony\Component\BrowserKit\AbstractBrowser: '@test.client'

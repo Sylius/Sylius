@@ -11,7 +11,7 @@ Creating OAuth client:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:oauth-server:create-client --grant-type="password" --grant-type="refresh_token" --grant-type="token"
+    php bin/console sylius:oauth-server:create-client --grant-type="password" --grant-type="refresh_token" --grant-type="token"
 
 It will give you such a response:
 
@@ -23,11 +23,11 @@ Run your application on a built-in server:
 
 .. code-block:: bash
 
-    $ php bin/console server:start localhost:8000
+    php bin/console server:start localhost:8000
 
 .. tip::
 
-    Some test fixtures are provided with a default Sylius fixture suite(which can be obtain by executing: ``$ php bin/console sylius:fixtures:load``). By default Sylius will provide following data:
+    Some test fixtures are provided with a default Sylius fixture suite(which can be obtain by executing: ``php bin/console sylius:fixtures:load``). By default Sylius will provide following data:
      * Sample user: api@example.com
      * Sample password: sylius-api
      * Sample random client: demo_client
@@ -38,7 +38,7 @@ To obtain authorization token for the default user run:
 
 .. code-block:: bash
 
-    $ curl http://localhost/api/oauth/v2/token -d "client_id"=demo_client -d "client_secret"=secret_demo_client -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
+    curl http://localhost/api/oauth/v2/token -d "client_id"=demo_client -d "client_secret"=secret_demo_client -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
 
 This will give you such a response:
 
@@ -52,7 +52,7 @@ Use the ``access_token`` in the request to authorize yourself.
 
 .. code-block:: bash
 
-    $ curl -i -X GET -H "Content-Type: application/json" -H "Authorization: Bearer DEF" http://localhost/api/v1/orders/
+    curl -i -X GET -H "Content-Type: application/json" -H "Authorization: Bearer DEF" http://localhost/api/v1/orders/
 
 Creating a new resource instance via API
 ----------------------------------------
@@ -61,11 +61,11 @@ In order to execute this request that will create a new Supplier (:doc:`you have
 
 .. code-block:: bash
 
-    $ curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost/api/v1/suppliers/
+    curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost/api/v1/suppliers/
 
 .. tip::
 
-    Read more about authorizing in API :doc:`here </api/authorization>`.
+    Read more about authorizing in API :doc:`here </api/admin_api/authorization>`.
 
 Viewing a single resource instance via API
 ------------------------------------------
@@ -77,7 +77,7 @@ Assuming that you have created a supplier in the previous step, it will have id 
 
 .. code-block:: bash
 
-    $ curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/{id}
+    curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/{id}
 
 Viewing an index of resource via API
 ------------------------------------
@@ -86,7 +86,7 @@ If you would like to see a list of all instances of your resource use such a com
 
 .. code-block:: bash
 
-    $ curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/
+    curl -i -H "Authorization: Bearer DEF" http://localhost/api/v1/suppliers/
 
 Updating a single resource instance via API
 -------------------------------------------
@@ -95,7 +95,7 @@ If you would like to modify the whole existing resource use such a command (with
 
 .. code-block:: bash
 
-    $ curl -i -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Modified Name", "description": "Modified description", "enabled": false}' http://localhost/api/v1/suppliers/1
+    curl -i -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Modified Name", "description": "Modified description", "enabled": false}' http://localhost/api/v1/suppliers/1
 
 Partially updating a single resource instance via API
 -----------------------------------------------------
@@ -104,7 +104,7 @@ If you would like to update just one field of a resource use the PATCH method wi
 
 .. code-block:: bash
 
-    $ curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost/api/v1/suppliers/1
+    curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost/api/v1/suppliers/1
 
 Deleting a single resource instance via API
 -------------------------------------------
@@ -113,12 +113,12 @@ To delete a resource instance you need to call such a command (with an authoriza
 
 .. code-block:: bash
 
-    $ curl -i -X DELETE -H "Authorization: Bearer DEF" http://localhost/api/v1/artists/1
+    curl -i -X DELETE -H "Authorization: Bearer DEF" http://localhost/api/v1/artists/1
 
 Learn more
 ----------
 
 * :doc:`API Guide </api/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`
 * `The Lionframe docs <http://lakion.com/lionframe>`_

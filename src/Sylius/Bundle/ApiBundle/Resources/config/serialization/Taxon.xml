@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\Taxon">
+        <attribute name="id">
+            <group>taxon:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>taxon:read</group>
+            <group>taxon:create</group>
+            <group>taxon:update</group>
+        </attribute>
+        <attribute name="translations">
+            <group>taxon:read</group>
+        </attribute>
+    </class>
+</serializer>

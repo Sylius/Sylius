@@ -282,3 +282,38 @@ div[class^='highlight'] {
   font-size: 11px;
   letter-spacing: 2px;
 }
+
+/* Plus docs */
+.plus-doc {
+  padding: 30px;
+  border: 2px dashed #404662;
+  border-radius: 6px;
+}
+
+.plus-doc::before {
+  content: 'SYLIUS PLUS DOCUMENTATION';
+  position: relative;
+  bottom: 42px;
+  right: 2px;
+  background: #404662;
+  color: #fdf2f1;
+  padding: 4px 10px;
+  border-radius: 60px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.plus-feature::after {
+  content: 'PLUS';
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  background: #404662;
+  color: #fff;
+  padding: 0 7px;
+  border-radius: 99px;
+  transform: translateY(-1px);
+  display: inline-block;
+  line-height: 1.7;
+  margin-left: 5px;
+}

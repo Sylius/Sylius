@@ -9,16 +9,16 @@ Feature: Deleting an administrator
         And there is also an administrator "ted@example.com"
         And I am logged in as "ted@example.com" administrator
 
-    @ui
+    @ui @api
     Scenario: Deleting an administrator
-        Given I want to browse administrators
-        When I delete administrator with email "mr.banana@example.com"
+        When I want to browse administrators
+        And I delete administrator with email "mr.banana@example.com"
         Then I should be notified that it has been successfully deleted
         And there should not be "mr.banana@example.com" administrator anymore
 
-    @ui
+    @ui @api
     Scenario: The administrator account of currently logged in user cannot be deleted
-        Given I want to browse administrators
-        When I delete administrator with email "ted@example.com"
+        When I want to browse administrators
+        And I delete administrator with email "ted@example.com"
         Then I should be notified that it cannot be deleted
         And there should still be only one administrator with an email "ted@example.com"

@@ -18,22 +18,13 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 interface CreatePageInterface extends SymfonyPageInterface
 {
-    public function fillAddressData(AddressInterface $address);
+    public function fillAddressData(AddressInterface $address): void;
 
-    /**
-     * @param string $name
-     */
-    public function selectCountry($name);
+    public function selectCountry(string $name): void;
 
-    public function addAddress();
+    public function addAddress(): void;
 
-    /**
-     * @return bool
-     */
-    public function hasProvinceValidationMessage();
+    public function hasProvinceValidationMessage(): bool;
 
-    /**
-     * @return int
-     */
-    public function countValidationMessages();
+    public function countValidationMessages(): int;
 }

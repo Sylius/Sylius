@@ -1,49 +1,5 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
 <div class="eight wide column" id="info">
     <div class="ui fluid card">
-        {{ sonata_block_render_event('sylius.admin.customer.show.before_information', {'resource': resource}) }}
-
-        <div class="content">
-            <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
-                {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
-            </a>
-            <div class="meta">
-                <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
-                <br />
-                {% if customer.group is not null %}
-                    <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
-                {% endif %}
-            </div>
-        </div>
-        <div class="content">
-            <div id="subscribed-to-newsletter">
-                <i class="{{ customer.subscribedToNewsletter ? 'green checkmark' : 'red remove' }} icon"></i>
-                {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
-            </div>
-            {% if customer.user is not null %}
-                {% set user = customer.user %}
-                <div id="verified-email">
-                    <i class="{{ user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
-                    {{ 'sylius.ui.email_verified'|trans }}
-                </div>
-                <br />
-                {% if is_shop_enabled() %}
-                    {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
-                {% endif %}
-            {% endif %}
-        </div>
-        <div class="extra content">
-            <a href="mailto:{{ customer.email }}">
-                <i class="envelope icon"></i> {{ customer.email }}
-            </a>
-            {% if customer.phoneNumber is not null %}
-                <div id="phone-number">
-                    <i class="phone icon"></i> {{ customer.phoneNumber }}
-                </div>
-            {% endif %}
-        </div>
-
-        {{ sonata_block_render_event('sylius.admin.customer.show.after_information', {'resource': resource}) }}
+        {{ sylius_template_event('sylius.admin.customer.show.information', _context) }}
     </div>
 </div>

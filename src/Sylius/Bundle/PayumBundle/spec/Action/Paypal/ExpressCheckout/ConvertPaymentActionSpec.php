@@ -65,7 +65,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $order->getShippingTotal()->willReturn(8000);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $orderItem->getDiscountedUnitPrice()->willReturn(80000);
+        $orderItem->getUnitPrice()->willReturn(80000);
         $orderItem->getQuantity()->willReturn(1);
 
         $productVariant->getProduct()->willReturn($product);

@@ -7,7 +7,7 @@ Installation
 The Sylius main application can serve as an end-user app, as well as a foundation
 for your custom e-commerce application.
 
-To create your Sylius-based application, first make sure you use PHP 7.2 or higher
+To create your Sylius-based application, first make sure you use PHP 7.3 or higher
 and have `Composer`_ installed.
 
 .. note::
@@ -26,17 +26,17 @@ To begin creating your new project, run this command:
 
 .. code-block:: bash
 
-    $ composer create-project sylius/sylius-standard acme
+    composer create-project sylius/sylius-standard acme
 
 .. note::
 
-    Make sure to use PHP ^7.2. Using an older PHP version will result in installing an older version of Sylius.
+    Make sure to use PHP ^7.3. Using an older PHP version will result in installing an older version of Sylius.
 
 This will create a new Symfony project in the ``acme`` directory. Next, move to the project directory:
 
 .. code-block:: bash
 
-    $ cd acme
+    cd acme
 
 Sylius uses environment variables to configure the connection with database and mailer services.
 You can look up the default values in ``.env`` file and customise them by creating ``.env.local`` with variables you want to override.
@@ -51,7 +51,7 @@ After everything is in place, run the following command to install Sylius:
 
 .. code-block:: bash
 
-    $ php bin/console sylius:install
+    php bin/console sylius:install
 
 .. warning::
 
@@ -72,13 +72,13 @@ Having Yarn installed, go to your project directory to install the dependencies:
 
 .. code-block:: bash
 
-    $ yarn install
+    yarn install
 
 Then build the frontend assets by running:
 
 .. code-block:: bash
 
-    $ yarn build
+    yarn build
 
 Accessing the Shop
 ------------------
@@ -88,7 +88,7 @@ command and then accessing ``http://127.0.0.1:8000`` in your web browser to see 
 
 .. note::
     Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
-    If you are using a built-in server check `here <http://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
+    If you are using a built-in server check `here <https://symfony.com/doc/current/cookbook/web_server/built_in.html>`_.
 
 You can log to the administrator panel located at ``/admin`` with the credentials you have provided during the installation process.
 
@@ -107,13 +107,13 @@ In the root directory of your project you will find these important subdirectori
 
 .. tip::
 
-    As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <http://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
-    Read also about the `best practices while structuring your project <http://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
+    As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <https://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
+    Read also about the `best practices while structuring your project <https://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
 
 Contributing
 ------------
 
-If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </contributing/index>`
+If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
 .. _Yarn: https://yarnpkg.com/lang/en/

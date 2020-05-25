@@ -5,52 +5,5 @@
 {% set customer = order.customer %}
 
 {% block content %}
-{{ sonata_block_render_event('sylius.admin.order.show.before_header', {'resource': resource}) }}
-
-<div class="ui stackable two column grid">
-    <div class="ten wide column">
-        {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
-    </div>
-
-    {% set menu = knp_menu_get('sylius.admin.order.show', [], {'order': order}) %}
-    {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
-</div>
-
-{{ sonata_block_render_event('sylius.admin.order.show.after_header', {'resource': resource}) }}
-
-{% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.order.show.after_breadcrumb', {'resource': resource}) }}
-
-<div class="ui stackable grid">
-    <div class="twelve wide column">
-        {{ sonata_block_render_event('sylius.admin.order.show.before_summary', {'resource': resource}) }}
-
-        <div class="ui segment">
-            {% include '@SyliusAdmin/Order/Show/_summary.html.twig' %}
-        </div>
-
-        {{ sonata_block_render_event('sylius.admin.order.show.after_summary', {'resource': resource}) }}
-
-        {% include '@SyliusAdmin/Order/Show/_notes.html.twig' %}
-    </div>
-    <div class="four wide column">
-        {{ sonata_block_render_event('sylius.admin.order.show.before_customer_information', {'resource': resource}) }}
-
-        {% include '@SyliusAdmin/Order/Show/_customer.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.admin.order.show.before_addresses', {'resource': resource}) }}
-
-        {% include '@SyliusAdmin/Order/Show/_addresses.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.admin.order.show.before_payments', {'resource': resource}) }}
-
-        {% include '@SyliusAdmin/Order/Show/_payments.html.twig' %}
-        {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.admin.order.show.after_shipments', {'resource': resource}) }}
-    </div>
-</div>
-
-{{ sonata_block_render_event('sylius.admin.order.show.after_content', {'resource': resource}) }}
+    {{ sylius_template_event('sylius.admin.order.show.content', _context) }}
 {% endblock %}

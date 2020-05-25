@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle;
 
-final class UserEvents
+interface UserEvents
 {
     public const REQUEST_RESET_PASSWORD_TOKEN = 'sylius.user.password_reset.request.token';
 

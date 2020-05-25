@@ -16,11 +16,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Channel\Model\ChannelTypes;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -58,7 +57,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Given I want to create a new channel
+     * @When I want to create a new channel
      */
     public function iWantToCreateANewChannel()
     {
@@ -101,6 +100,30 @@ final class ManagingChannelsContext implements Context
     public function iChooseAsADefaultLocale($locale = null)
     {
         $this->createPage->chooseDefaultLocale($locale);
+    }
+
+    /**
+     * @When I choose :firstCountry and :secondCountry as operating countries
+     */
+    public function iChooseOperatingCountries(string ...$countries): void
+    {
+        $this->createPage->chooseOperatingCountries($countries);
+    }
+
+    /**
+     * @When I specify menu taxon as :menuTaxon
+     */
+    public function iSpecifyMenuTaxonAs(string $menuTaxon): void
+    {
+        $this->createPage->specifyMenuTaxon($menuTaxon);
+    }
+
+    /**
+     * @When I change its menu taxon to :menuTaxon
+     */
+    public function iChangeItsMenuTaxonTo(string $menuTaxon): void
+    {
+        $this->updatePage->changeMenuTaxon($menuTaxon);
     }
 
     /**
@@ -265,14 +288,6 @@ final class ManagingChannelsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When /^I define its type as (mobile|website|pos)$/
-     */
-    public function iDefineItsTypeAs(string $type): void
-    {
-        $this->createPage->setType($type);
     }
 
     /**
@@ -463,14 +478,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I change its type to (mobile|website|pos)$/
-     */
-    public function iChangeItsTypeTo(string $type): void
-    {
-        $this->updatePage->changeType($type);
-    }
-
-    /**
      * @Given channel :channel should not have default tax zone
      */
     public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel)
@@ -510,11 +517,16 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then /^this channel type should be (mobile|website|pos)$/
+     * @Given /^(this channel) menu taxon should be "([^"]+)"$/
+     * @Given the channel :channel should have :menuTaxon as a menu taxon
      */
-    public function thisChannelTypeShouldBe(string $type): void
+    public function thisChannelMenuTaxonShouldBe(ChannelInterface $channel, string $menuTaxon): void
     {
-        Assert::same($this->updatePage->getType(), $type);
+        if (!$this->updatePage->isOpen(['id' => $channel->getId()])) {
+            $this->updatePage->open(['id' => $channel->getId()]);
+        }
+
+        Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
     }
 
     /**

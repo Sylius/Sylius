@@ -6,6 +6,7 @@ Feature: Resetting a password
 
     Background:
         Given the store operates on a single channel in "United States"
+        And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And there is a user "goodman@example.com" identified by "heisenberg"
 
     @ui @email
@@ -14,7 +15,12 @@ Feature: Resetting a password
         And I specify the email as "goodman@example.com"
         And I reset it
         Then I should be notified that email with reset instruction has been sent
-        And the email with reset token should be sent to "goodman@example.com"
+        And an email with reset token should be sent to "goodman@example.com"
+
+    @ui @email
+    Scenario: Resetting an account password in different locale than the default one
+        When I reset password for email "goodman@example.com" in "Polish (Poland)" locale
+        Then an email with reset token should be sent to "goodman@example.com" in "Polish (Poland)" locale
 
     @ui @email
     Scenario: Changing my account password with token I received

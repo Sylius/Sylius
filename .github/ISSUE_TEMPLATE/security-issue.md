@@ -1,6 +1,9 @@
 ---
-name: "Security Issue 🔐"
+name: "Security Issue \U0001F510"
 about: Please contact us at security@sylius.com
+title: ''
+labels: ''
+assignees: ''
 
 ---
 

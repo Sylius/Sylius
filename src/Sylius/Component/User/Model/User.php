@@ -96,7 +96,10 @@ class User implements UserInterface
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
     /**
-     * @var Collection<array-key, UserOAuthInterface> */
+     * @var Collection|UserOAuthInterface[]
+     *
+     * @psalm-var Collection<array-key, UserOAuthInterface>
+     */
     protected $oauthAccounts;
 
     /** @var string|null */
@@ -302,9 +305,6 @@ class User implements UserInterface
         $this->emailVerificationToken = $verificationToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPasswordResetToken(): ?string
     {
         return $this->passwordResetToken;

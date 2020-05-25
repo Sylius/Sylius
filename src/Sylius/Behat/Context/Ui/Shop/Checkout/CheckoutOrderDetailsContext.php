@@ -66,6 +66,6 @@ final class CheckoutOrderDetailsContext implements Context
      */
     public function iShouldSeeAsNumberOfItems(int $quantity): void
     {
-        Assert::same($this->orderDetails->getNumberOfItems(), $quantity);
+        Assert::same($this->orderDetails->getAmountOfItems(), $quantity);
     }
 }

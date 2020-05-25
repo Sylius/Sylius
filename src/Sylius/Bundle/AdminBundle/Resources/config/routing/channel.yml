@@ -8,10 +8,10 @@ sylius_admin_channel:
         grid: sylius_admin_channel
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.configure_channels_available_in_your_store
-              templates:
-                  form: "@SyliusAdmin/Channel/_form.html.twig"
-          index:
-              icon: share alternate
+            all:
+                subheader: sylius.ui.configure_channels_available_in_your_store
+                templates:
+                    form: "@SyliusAdmin/Channel/_form.html.twig"
+            index:
+                icon: share alternate
     type: sylius.resource

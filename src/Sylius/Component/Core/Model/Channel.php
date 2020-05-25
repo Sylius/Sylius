@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -48,6 +49,13 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $locales;
 
+    /**
+     * @var Collection|CountryInterface[]
+     *
+     * @psalm-var Collection<array-key, CountryInterface>
+     */
+    protected $countries;
+
     /** @var string */
     protected $themeName;
 
@@ -66,6 +74,9 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var ShopBillingDataInterface|null */
     protected $shopBillingData;
 
+    /** @var TaxonInterface|null */
+    protected $menuTaxon;
+
     public function __construct()
     {
         parent::__construct();
@@ -74,6 +85,8 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->currencies = new ArrayCollection();
         /** @var ArrayCollection<array-key, LocaleInterface> $this->locales */
         $this->locales = new ArrayCollection();
+        /** @var ArrayCollection<array-key, CountryInterface> $this->countries */
+        $this->countries = new ArrayCollection();
     }
 
     /**
@@ -212,6 +225,30 @@ class Channel extends BaseChannel implements ChannelInterface
         return $this->locales->contains($locale);
     }
 
+    public function getCountries(): Collection
+    {
+        return $this->countries;
+    }
+
+    public function addCountry(CountryInterface $country): void
+    {
+        if (!$this->hasCountry($country)) {
+            $this->countries->add($country);
+        }
+    }
+
+    public function removeCountry(CountryInterface $country): void
+    {
+        if ($this->hasCountry($country)) {
+            $this->countries->removeElement($country);
+        }
+    }
+
+    public function hasCountry(CountryInterface $country): bool
+    {
+        return $this->countries->contains($country);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -300,5 +337,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void
     {
         $this->shopBillingData = $shopBillingData;
+    }
+
+    public function getMenuTaxon(): ?TaxonInterface
+    {
+        return $this->menuTaxon;
+    }
+
+    public function setMenuTaxon(?TaxonInterface $menuTaxon): void
+    {
+        $this->menuTaxon = $menuTaxon;
     }
 }

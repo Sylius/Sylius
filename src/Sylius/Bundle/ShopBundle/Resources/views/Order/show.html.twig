@@ -2,6 +2,10 @@
 
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     <div class="ui segment">
         {% include '@SyliusShop/Order/_summary.html.twig' %}
@@ -12,7 +16,7 @@
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <div class="ui hidden divider"></div>
-            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link">
+            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
                 <i class="check icon"></i> {{ 'sylius.ui.pay'|trans }}
             </button>
 

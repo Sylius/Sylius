@@ -11,7 +11,7 @@ In the following example, a new gateway will be configured, which will send paym
 
     .. code-block:: bash
 
-        $ composer create-project sylius/plugin-skeleton ProjectName
+        composer create-project sylius/plugin-skeleton ProjectName
 
 **2.** The first step in the newly created repository would be to create a new Gateway Factory.
 

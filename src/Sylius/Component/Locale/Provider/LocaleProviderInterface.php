@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Locale\Provider;
 
+/**
+ * @deprecated use the NewLocaleProviderInterface
+ */
 interface LocaleProviderInterface
 {
     /**
      * @return string[]
      */
     public function getAvailableLocalesCodes(): array;
-
-    public function isLocaleCodeAvailable(string $locale): bool;
 
     public function getDefaultLocaleCode(): string;
 }

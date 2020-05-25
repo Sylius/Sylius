@@ -11,12 +11,12 @@ Feature: Shipping method unique code validation
         And the store allows shipping with "UPS Ground" identified by "UPS"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @api @javascript
     Scenario: Trying to add shipping method with taken code
         Given I want to create a new shipping method
         When I specify its code as "UPS"
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web" channel
         And I try to add it

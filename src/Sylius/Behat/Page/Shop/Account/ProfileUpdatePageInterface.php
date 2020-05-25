@@ -18,37 +18,20 @@ use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface ProfileUpdatePageInterface extends PageInterface
 {
-    /**
-     * @param string $firstName
-     */
-    public function specifyFirstName($firstName);
+    public function specifyFirstName(?string $firstName): void;
+
+    public function specifyLastName(?string $lastName): void;
+
+    public function specifyEmail(?string $email): void;
+
+    public function saveChanges(): void;
 
     /**
-     * @param string $lastName
-     */
-    public function specifyLastName($lastName);
-
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
-
-    public function saveChanges();
-
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
-    public function subscribeToTheNewsletter();
+    public function subscribeToTheNewsletter(): void;
 
-    /**
-     * @return bool
-     */
-    public function isSubscribedToTheNewsletter();
+    public function isSubscribedToTheNewsletter(): bool;
 }

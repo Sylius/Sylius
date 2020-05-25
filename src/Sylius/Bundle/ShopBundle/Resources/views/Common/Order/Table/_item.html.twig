@@ -2,15 +2,15 @@
 
 {% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
 {% set unitPromotions = item.units.first.adjustments(unitPromotionAdjustment) %}
-<tr>
+<tr {{ sylius_test_html_attribute('product-row', item.productName) }}>
     <td>
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
     </td>
     <td>
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <span class="old-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
+            <span class="old-price" {{ sylius_test_html_attribute('product-old-price', item.productName) }}>{{ money.convertAndFormat(item.unitPrice) }}</span>
         {% endif %}
-        <span class="sylius-unit-price">{{ money.convertAndFormat(item.discountedUnitPrice) }}
+        <span class="sylius-unit-price" {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}
             {% if item.unitPrice != item.discountedUnitPrice %}
             <i id="item-promotion-details" class="question circle icon unit-promotions popup-js"
                data-html="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}">

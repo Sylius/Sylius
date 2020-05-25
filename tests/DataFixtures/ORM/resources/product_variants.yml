@@ -31,33 +31,33 @@ Sylius\Component\Core\Model\Product:
         code: STICKER
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
-     productVariantTranslation{1..20}:
-         name: "Mug <current()>"
-         locale: en_US
-         translatable: "@productVariant<current()>"
-     productVariantTranslation21:
-          name: "Small sticker"
-          locale: en_US
-          translatable: "@productVariant21"
+    productVariantTranslation{1..20}:
+        name: "Mug <current()>"
+        locale: en_US
+        translatable: "@productVariant<current()>"
+    productVariantTranslation21:
+        name: "Small sticker"
+        locale: en_US
+        translatable: "@productVariant21"
 
 Sylius\Component\Core\Model\ProductVariant:
-     productVariant{1..20}:
-         code: MUG_<current()>
-         version: 1
-         product: "@product1"
-         fallbackLocale: en_US
-         currentLocale: de
-         position: <current()>
-         translations:
+    productVariant{1..20}:
+        code: MUG_<current()>
+        version: 1
+        product: "@product1"
+        fallbackLocale: en_US
+        currentLocale: de
+        position: <current()>
+        translations:
             - "@productVariantTranslation<current()>"
-     productVariant21:
-             code: SMALL_STICKER
-             version: 1
-             product: "@product2"
-             fallbackLocale: en_US
-             currentLocale: de
-             tracked: true
-             onHand: 8
-             position: 0
-             translations:
-                - "@productVariantTranslation21"
+    productVariant21:
+        code: SMALL_STICKER
+        version: 1
+        product: "@product2"
+        fallbackLocale: en_US
+        currentLocale: de
+        tracked: true
+        onHand: 8
+        position: 0
+        translations:
+            - "@productVariantTranslation21"

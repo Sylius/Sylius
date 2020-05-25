@@ -9,7 +9,7 @@ Feature: Editing product options
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Renaming the product option
         Given this product option has the "S" option value with code "t_shirt_size_s"
         And this product option has also the "M" option value with code "t_shirt_size_m"
@@ -19,7 +19,7 @@ Feature: Editing product options
         Then I should be notified that it has been successfully edited
         And this product option name should be "T-Shirt color"
 
-    @ui
-    Scenario: Seeing disabled code field while editing product option
-        Given I want to modify the "T-Shirt size" product option
-        Then the code field should be disabled
+    @ui @api
+    Scenario: Not being able to edit code of an existing product option
+        When I want to modify the "T-Shirt size" product option
+        Then I should not be able to edit its code

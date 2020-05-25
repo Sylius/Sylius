@@ -18,15 +18,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface SummaryPageInterface extends PageInterface
 {
-    /**
-     * @return string
-     */
-    public function getGrandTotal();
+    public function getGrandTotal(): string;
 
-    /**
-     * @return string
-     */
-    public function getBaseGrandTotal();
+    public function getBaseGrandTotal(): string;
 
     public function getIncludedTaxTotal(): string;
 
@@ -34,132 +28,51 @@ interface SummaryPageInterface extends PageInterface
 
     public function areTaxesCharged(): bool;
 
-    /**
-     * @return string
-     */
-    public function getShippingTotal();
+    public function getShippingTotal(): string;
 
     public function hasShippingTotal(): bool;
 
-    /**
-     * @return string
-     */
-    public function getPromotionTotal();
+    public function getPromotionTotal(): string;
 
-    /**
-     * @param string $productName
-     *
-     * @return string
-     */
-    public function getItemTotal($productName);
+    public function getItemTotal(string $productName): string;
 
-    /**
-     * @param string $productName
-     *
-     * @return string
-     */
-    public function getItemUnitRegularPrice($productName);
+    public function getItemUnitRegularPrice(string $productName): int;
 
-    /**
-     * @param string $productName
-     *
-     * @return string
-     */
-    public function getItemUnitPrice($productName);
+    public function getItemUnitPrice(string $productName): int;
 
     public function getItemImage(int $itemNumber): string;
 
-    /**
-     * @param string $productName
-     *
-     * @return bool
-     */
-    public function isItemDiscounted($productName);
+    public function isItemDiscounted(string $productName): bool;
 
-    /**
-     * @param string $productName
-     */
-    public function removeProduct($productName);
+    public function removeProduct(string $productName): void;
 
-    /**
-     * @param string $productName
-     * @param int $quantity
-     */
-    public function changeQuantity($productName, $quantity);
+    public function changeQuantity(string $productName, string $quantity): void;
 
-    /**
-     * @param string $couponCode
-     */
-    public function applyCoupon($couponCode);
+    public function applyCoupon(string $couponCode): void;
 
-    /**
-     * @return bool
-     */
-    public function isSingleItemOnPage();
+    public function isSingleItemOnPage(): bool;
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasItemNamed($name);
+    public function hasItemNamed(string $name): bool;
 
-    /**
-     * @param string $code
-     *
-     * @return bool
-     */
-    public function hasItemWithCode($code);
+    public function hasItemWithCode(string $code): bool;
 
-    /**
-     * @param string $variantName
-     *
-     * @return bool
-     */
-    public function hasItemWithVariantNamed($variantName);
+    public function hasItemWithVariantNamed(string $variantName): bool;
 
-    /**
-     * @param string $productName
-     * @param string $optionName
-     * @param string $optionValue
-     *
-     * @return string
-     */
-    public function hasItemWithOptionValue($productName, $optionName, $optionValue);
+    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
-    /**
-     * @return bool
-     */
-    public function isEmpty();
+    public function isEmpty(): bool;
 
-    /**
-     * @param string $productName
-     *
-     * @return int
-     */
-    public function getQuantity($productName);
+    public function getQuantity(string $productName): int;
 
-    /**
-     * @return string
-     */
-    public function getCartTotal();
+    public function getCartTotal(): string;
 
-    public function clearCart();
+    public function clearCart(): void;
 
-    public function updateCart();
+    public function updateCart(): void;
 
-    /**
-     * @param int $timeout
-     */
-    public function waitForRedirect($timeout);
+    public function waitForRedirect(int $timeout): void;
 
-    /**
-     * @return string
-     */
-    public function getPromotionCouponValidationMessage();
+    public function getPromotionCouponValidationMessage(): string;
 }

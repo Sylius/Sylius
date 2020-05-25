@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Product\Model\ProductTranslation">
+        <attribute name="id">
+            <group>product:read</group>
+        </attribute>
+        <attribute name="name">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+        <attribute name="locale">
+            <group>product:create</group>
+        </attribute>
+        <attribute name="slug">
+            <group>product:create</group>
+            <group>product:read</group>
+            <group>product:update</group>
+        </attribute>
+    </class>
+</serializer>

@@ -2,15 +2,15 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
-{% block content %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_shipping', 'orderTotal': order.total} %}
+{% block title %}{{ 'sylius.ui.shipping'|trans }} | {{ parent() }}{% endblock %}
 
-    {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.after_steps', {'order': order}) }}
+{% block content %}
+    {{ sylius_template_event(['sylius.shop.checkout.select_shipping.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_shipping', 'orderTotal': order.total})) }}
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui padded segment" id="sylius-shipping-methods">
-                {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_form', {'order': order}) }}
+                {{ sylius_template_event('sylius.shop.checkout.select_shipping.before_form', {'order': order}) }}
 
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_shipping'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     {{ form_errors(form) }}
@@ -19,7 +19,7 @@
                     {% include '@SyliusShop/Checkout/SelectShipping/_form.html.twig' %}
                     <div class="ui hidden divider"></div>
 
-                    {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_navigation', {'order': order}) }}
+                    {{ sylius_template_event('sylius.shop.checkout.select_shipping.before_navigation', {'order': order}) }}
 
                     {% include '@SyliusShop/Checkout/SelectShipping/_navigation.html.twig' %}
 
@@ -28,15 +28,7 @@
             </div>
         </div>
         <div class="five wide column">
-            {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_summary', {'order': order}) }}
-
-            {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_support', {'order': order}) }}
-
-            {% include '@SyliusShop/Checkout/_support.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.after_support', {'order': order}) }}
+            {{ sylius_template_event(['sylius.shop.checkout.select_shipping.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>
 {% endblock %}

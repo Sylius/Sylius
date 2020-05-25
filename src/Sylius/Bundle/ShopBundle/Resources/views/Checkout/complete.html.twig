@@ -2,15 +2,15 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
-{% block content %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete', 'orderTotal': order.total} %}
+{% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
 
-    {{ sonata_block_render_event('sylius.shop.checkout.complete.after_steps', {'order': order}) }}
+{% block content %}
+    {{ sylius_template_event(['sylius.shop.checkout.complete.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'complete', 'orderTotal': order.total})) }}
 
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
 
-        {{ sonata_block_render_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
+        {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
 
         {% include '@SyliusShop/_flashes.html.twig' %}
 
@@ -18,16 +18,12 @@
             {{ form_errors(form) }}
             <input type="hidden" name="_method" value="PUT" />
 
-            {{ sonata_block_render_event('sylius.shop.checkout.complete.before_summary', {'order': order, 'form': form}) }}
-
-            {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.checkout.complete.after_summary', {'order': order}) }}
+            {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
 
             <div class="ui hidden divider"></div>
             {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
 
-            {{ sonata_block_render_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
+            {{ sylius_template_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
 
             {% include '@SyliusShop/Checkout/Complete/_navigation.html.twig' %}
 

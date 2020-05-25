@@ -1,38 +1,9 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
-
 {% set header = 'sylius.ui.generate_coupons' %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
-{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
-
 {% block content %}
-{{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.before_header', {'resource': promotion}) }}
-
-{{ headers.default(promotion.name, 'random', configuration.vars.subheader|default(header)|trans) }}
-
-{{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.after_header', {'resource': promotion}) }}
-
-{% include '@SyliusAdmin/PromotionCoupon/Generate/_breadcrumb.html.twig' %}
-
-{{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.after_breadcrumb', {'resource': promotion}) }}
-
-{{ form_start(form, {'action': path('sylius_admin_promotion_coupon_generate', {'promotionId': promotion.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-<div class="ui segment">
-    {% include '@SyliusAdmin/PromotionCoupon/Generate/_form.html.twig' %}
-    <div class="ui basic segment">
-        <div class="ui buttons">
-            <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
-            {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': path(configuration.getRouteName('index'), {'promotionId': promotion.id})} %}
-        </div>
-    </div>
-
-    {{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.form', {'resource': promotion}) }}
-</div>
-{{ form_row(form._token) }}
-{{ form_end(form, {'render_rest': false}) }}
-
-{{ sonata_block_render_event('sylius.admin.promotion_coupon.generate.after_content', {'resource': promotion}) }}
+    {{ sylius_template_event('sylius.admin.promotion_coupon.generate.content', _context) }}
 {% endblock %}

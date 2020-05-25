@@ -2,6 +2,8 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
+
 {% block breadcrumb %}
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
@@ -20,25 +22,25 @@
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
         </h1>
 
-        {{ sonata_block_render_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
 
         <input type="hidden" name="_method" value="PUT" />
 
         <div class="two fields">
-            <div class="field">{{ form_row(form.firstName) }}</div>
-            <div class="field">{{ form_row(form.lastName) }}</div>
+            <div class="field">{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}</div>
+            <div class="field">{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}</div>
         </div>
-        {{ form_row(form.email) }}
+        {{ form_row(form.email, sylius_test_form_attribute('email')) }}
         <div class="two fields">
             <div class="field">{{ form_row(form.birthday) }}</div>
             <div class="field">{{ form_row(form.gender) }}</div>
         </div>
         {{ form_row(form.phoneNumber) }}
-        {{ form_row(form.subscribedToNewsletter) }}
+        {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
 
-        {{ sonata_block_render_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
-        <button type="submit" class="ui large primary button">{{ 'sylius.ui.save_changes'|trans }}</button>
+        <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>

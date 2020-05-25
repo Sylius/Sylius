@@ -21,21 +21,21 @@ Feature: Browsing shipments
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Browsing shipments and their states in one channel
         When I browse shipments
         Then I should see 2 shipments in the list
-        And the shipment of the "#00000001" order should be "Shipped" for "donald@duck.com"
-        And the shipment of the "#00000002" order should be "Ready" for "iron@man.com"
+        And I should see the shipment of order "#00000001" as "Shipped"
+        And I should see the shipment of order "#00000002" as "Ready"
 
-    @ui
+    @ui @api
     Scenario: Shipments are sorted by newest as default
         When I browse shipments
         Then I should see shipment for the "#00000002" order as 1st in the list
         And I should see shipment for the "#00000001" order as 2nd in the list
 
-    @ui
+    @ui @api
     Scenario: Not seeing shipments in cart state
-        Given the customer added "Banana" product to the cart
+        Given the customer "customer@example.com" added "Banana" product to the cart
         When I browse shipments
         Then I should see only 2 shipments in the list

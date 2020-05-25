@@ -49,7 +49,7 @@ How to customize templates by overriding?
 
 * **Shop** templates: customizing Login Page template:
 
-The default login template is: ``SyliusShopBundle:login.html.twig``.
+The default login template is: ``@SyliusShopBundle/login.html.twig``.
 In order to override it you need to create your own: ``templates/bundles/SyliusShopBundle/login.html.twig``.
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
@@ -90,7 +90,7 @@ Done! If you do not see any changes on the ``/shop/login`` url, clear your cache
 
 .. code-block:: bash
 
-    $ php bin/console cache:clear
+    php bin/console cache:clear
 
 * **Admin** templates: Customization of the Country form view.
 
@@ -119,7 +119,7 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 
 .. code-block:: bash
 
-    $ php bin/console cache:clear
+    php bin/console cache:clear
 
 How to customize templates via events?
 --------------------------------------
@@ -164,12 +164,12 @@ How to use template events for customizations?
 When you have found an event in the place where you want to add some content, here's what you have to do.
 
 Let's assume that you would like to add some content after the header in the Sylius shop views.
-You will need to look at the ``/SyliusShopBundle/Resources/views/layout.html.twig`` template,
+You will need to look at the ``SyliusShopBundle/Resources/views/layout.html.twig`` template,
 which is the basic layout of Sylius shop, and then in it find the appropriate event.
 
 For the space below the header it will be ``sylius.shop.layout.after_header``.
 
-* Create an ``.html.twig`` file that will contain what you want to add.
+* Create a Twig template file that will contain what you want to add.
 
 .. code-block:: twig
 
@@ -177,21 +177,17 @@ For the space below the header it will be ``sylius.shop.layout.after_header``.
 
     <h1> Test Block Title </h1>
 
-* And register a listener for the chosen event:
-
-.. warning::
-
-    The name of the event should be preceded by the ``sonata.block.event.`` string.
+* And configure Sylius UI to display it for the chosen event:
 
 .. code-block:: yaml
 
-    services:
-        app.block_event_listener.homepage.layout.after_header:
-            class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-            arguments:
-                - 'block.html.twig'
-            tags:
-                - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_header, method: onBlockEvent }
+    # config/packages/sylius_ui.yaml
+
+    sylius_ui:
+        events:
+            sylius.shop.layout.after_header:
+                blocks:
+                    my_block_name: 'block.html.twig'
 
 That's it. Your new block should appear in the view.
 
@@ -204,7 +200,7 @@ How to use themes for customizations?
 
 You can refer to the theme documentation available here:
 - :doc:`Themes (The book) </book/themes/themes>`
-- :doc:`SyliusThemeBundle (Bundle documentation) </components_and_bundles/bundles/SyliusThemeBundle/index>`
+- `SyliusThemeBundle (Bundle documentation) <https://github.com/Sylius/SyliusThemeBundle/blob/master/docs/index.md>`_
 
 Global Twig variables
 ---------------------

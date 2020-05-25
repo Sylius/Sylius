@@ -9,7 +9,7 @@ Sylius is an Open Source eCommerce platform on top of [**Symfony**](https://symf
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
 Powerful REST API allows for easy integrations and creating unique customer experience on any device.
 
-We're using full-stack Behavior-Driven-Development, with [phpspec](http://phpspec.net) and [Behat](http://behat.org).
+We're using full-stack Behavior-Driven-Development, with [phpspec](https://phpspec.net) and [Behat](http://behat.org).
 
 Enjoy being an eCommerce Developer again!
 
@@ -74,7 +74,7 @@ Sylius Plus gives you all the power of Open Source and much more. It comes with 
 - Returns Management
 - Multi-source Inventory
 - Advanced Users Permissions
-- Enhanced security & monitoring
+- Partial Shipment
 
 What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
 

@@ -1,10 +1,10 @@
 {% import "@SyliusUi/Macro/flags.html.twig" as flags %}
 
-<address>
+<address {{ sylius_test_html_attribute('address-context', "%s %s"|format(address.firstName, address.lastName)) }}>
     {% if address.company is not null %}
         <strong>{{ address.company }}</strong><br>
     {% endif %}
-    <strong>{{ address.firstName }} {{ address.lastName }}</strong><br>
+    <strong {{ sylius_test_html_attribute('full-name ', "%s %s"|format(address.firstName, address.lastName)) }}>{{ address.firstName }} {{ address.lastName }}</strong><br>
     {% if address.phoneNumber is not null %}
         {{ address.phoneNumber }}<br/>
     {% endif %}

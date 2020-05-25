@@ -3,28 +3,28 @@
     "type": "library",
     "description": "Product catalog system with support for product options and variants.",
     "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
-    "homepage": "http://sylius.com",
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "behat/transliterator": "^1.1",
-        "sylius/attribute": "^1.2",
-        "sylius/resource": "^1.2",
+        "sylius/attribute": "^1.6",
+        "sylius/resource": "^1.6",
         "symfony/polyfill-iconv": "^1.6",
         "webmozart/assert": "^1.0"
     },

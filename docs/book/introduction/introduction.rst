@@ -21,6 +21,19 @@ What are our core values and what makes us different from other solutions?
 
 And much more, but we will let you discover it yourself.
 
+.. rst-class:: plus-doc
+
+Sylius Plus
+^^^^^^^^^^^
+
+There exists a commercial edition of Sylius, which is called `Sylius Plus <https://sylius.com/plus/>`_.
+
+Sylius Plus gives you all the power of Open Source and much more. It comes with a set of enterprise-grade features
+and technical support from its creators. As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
+
+In this documentation you will find also chapters dedicated to features introduced by the Sylius Plus edition, they will
+be marked with a frame just like this section.
+
 The Three Natures of Sylius
 ---------------------------
 
@@ -48,8 +61,8 @@ They provide you with default models, services and logic for all aspects of e-co
 Roadmap
 -------
 
-Are you wondering about Sylius plans for the next releases? If so then you should follow our `Roadmap <https://sylius.com/roadmap>`_ on Github.
-There you can contribute by conversation and votes on the most desired features and improvements.
+Are you wondering about Sylius plans for the next releases? If so then you should follow our `Roadmap <https://sylius.com/roadmap>`_.
+Through our :doc:`Slack and Forum </book/support/index>` you can contribute by conversation and votes on the most desired features and improvements.
 
 Final Thoughts
 --------------

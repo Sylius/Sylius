@@ -13,6 +13,7 @@ default:
                 - sylius.behat.context.transform.currency
                 - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.channel
@@ -22,6 +23,7 @@ default:
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.admin.managing_channels

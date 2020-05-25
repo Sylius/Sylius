@@ -7,7 +7,7 @@ Feature: Editing country
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Disabling country
         Given the store has country "United States"
         When I want to edit this country
@@ -16,7 +16,7 @@ Feature: Editing country
         Then I should be notified that it has been successfully edited
         And this country should be disabled
 
-    @ui
+    @ui @api
     Scenario: Enabling country
         Given the store has disabled country "United States"
         When I want to edit this country
@@ -25,8 +25,8 @@ Feature: Editing country
         Then I should be notified that it has been successfully edited
         And this country should be enabled
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled code field while editing country
         Given the store has country "United States"
         When I want to edit this country
-        Then the code field should be disabled
+        Then I should not be able to edit its code

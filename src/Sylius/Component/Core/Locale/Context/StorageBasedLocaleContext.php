@@ -19,6 +19,7 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\NewLocaleProviderInterface;
 
 final class StorageBasedLocaleContext implements LocaleContextInterface
 {
@@ -39,6 +40,12 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
         $this->channelContext = $channelContext;
         $this->localeStorage = $localeStorage;
         $this->localeProvider = $localeProvider;
+        if ($localeProvider instanceof NewLocaleProviderInterface) {
+            @trigger_error(
+                sprintf('Not passing in an instance of %s is deprecated and will be removed in Sylius 2.0', NewLocaleProviderInterface::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -46,15 +53,21 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
      */
     public function getLocaleCode(): string
     {
-
         try {
             $localeCode = $this->localeStorage->get($this->channelContext->getChannel());
         } catch (ChannelNotFoundException $exception) {
             throw new LocaleNotFoundException(null, $exception);
         }
 
-        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+        if ($this->localeProvider instanceof NewLocaleProviderInterface) {
+            $isLocaleCodeAvailable = $this->localeProvider->isLocaleCodeAvailable($localeCode);
+        } else {
+            $isLocaleCodeAvailable = in_array($localeCode, $this->localeProvider->getAvailableLocalesCodes(), true);
+        }
+
+        if (!$isLocaleCodeAvailable) {
             $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
+
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

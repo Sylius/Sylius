@@ -22,7 +22,7 @@ Feature: Coupon generate instruction validation
         And there should be 0 coupon related to this promotion
 
     @ui
-    Scenario: Trying to generate a new coupons without specifying their code length
+    Scenario: Trying to generate new coupons without specifying their code length
         When I want to generate new coupons for this promotion
         And I do not specify their code length
         And I choose the amount of 4 coupons to be generated

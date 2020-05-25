@@ -2,7 +2,7 @@
 
 {{ form_start(form, {'action': path('sylius_shop_account_address_book_set_as_default', {'id': id}), 'method': 'PATCH'}) }}
     <input hidden name="{{ form.defaultAddress.vars['full_name'] }}" value="{{ id }}" />
-    <button type="submit" class="ui labeled icon teal button">
+    <button type="submit" class="ui labeled icon teal button" {{ sylius_test_html_attribute('set-as-default-button') }}>
         <i class="save icon"></i>{{ 'sylius.ui.set_as_default'|trans }}
     </button>
 {{ form_row(form._token) }}

@@ -174,10 +174,7 @@ class Attribute implements AttributeInterface
         return $translation;
     }
 
-    /**
-     * @return AttributeTranslationInterface
-     */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): AttributeTranslationInterface
     {
         return new AttributeTranslation();
     }

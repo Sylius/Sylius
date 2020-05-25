@@ -1,17 +1,23 @@
+{% if type is defined %}
+    {% set type = type ~ '-' %}
+{% else %}
+    {% set type = null %}
+{% endif %}
+
 <div class="two fields">
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
+    {{ form_row(form.firstName, sylius_test_form_attribute(type ~ 'first-name')) }}
+    {{ form_row(form.lastName, sylius_test_form_attribute(type ~ 'last-name')) }}
 </div>
-{{ form_row(form.company) }}
-{{ form_row(form.street) }}
+{{ form_row(form.company, sylius_test_form_attribute(type ~ 'company')) }}
+{{ form_row(form.street, sylius_test_form_attribute(type ~ 'street')) }}
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
 <div class="province-container field" data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
     {% if form.provinceCode is defined %}
-        {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
+        {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')|sylius_merge_recursive( {'attr': {'class': 'ui dropdown'}})) }}
     {% elseif form.provinceName is defined %}
-        {{ form_row(form.provinceName) }}
+        {{ form_row(form.provinceName, sylius_test_form_attribute('province-name')) }}
     {% endif %}
 </div>
 
@@ -20,7 +26,7 @@
 {% endif %}
 
 <div class="two fields">
-    {{ form_row(form.city) }}
-    {{ form_row(form.postcode) }}
+    {{ form_row(form.city, sylius_test_form_attribute(type ~ 'city')) }}
+    {{ form_row(form.postcode, sylius_test_form_attribute(type ~ 'postcode')) }}
 </div>
 {{ form_row(form.phoneNumber) }}

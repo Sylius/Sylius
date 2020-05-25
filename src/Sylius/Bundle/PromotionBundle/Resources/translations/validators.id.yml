@@ -16,10 +16,6 @@ sylius:
             max_length: Nama promosi tidak boleh lebih dari 1 karakter. Nama promosi tidak boleh lebih dari karakter {{ limit }}.
             min_length: Nama promosi minimal harus berumur 1 karakter. Nama promosi minimal harus {{ limit }} karakter.
             not_blank: Masukkan nama promosi.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Nilai diskon persentase harus minimal 0%.
-            max: Nilai maksimum diskon persentase adalah 100%.
     promotion_coupon:
         code:
             max_length: Kode kupon tidak boleh lebih dari 1 karakter. Kode kupon tidak boleh lebih panjang dari {{ limit }} karakter.
@@ -38,6 +34,5 @@ sylius:
             min: Kode kupon harus paling sedikit {{ limit }} karakternya panjang.
             max: Kode kupon tidak boleh lebih dari karakter {{ limit }}.
             not_blank: Harap masukkan panjang kode kupon.
-        possible_generation_amount: Kupon tidak valid kode panjang atau jumlah kupon. Tidak mungkin menghasilkan %expectedAmount% kupon unik dengan panjang kode sama dengan %codeLength%. Kemungkinan menghasilkan jumlah adalah %possibleAmount%.
         usage_limit:
             min: Batas penggunaan kupon yang dihasilkan minimal harus {{ limit }}.

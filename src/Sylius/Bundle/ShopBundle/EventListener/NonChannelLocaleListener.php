@@ -14,14 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\NewLocaleProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 final class NonChannelLocaleListener
 {
+    /** @var RouterInterface */
+    private $router;
+
     /** @var LocaleProviderInterface */
     private $channelBasedLocaleProvider;
 
@@ -35,6 +41,7 @@ final class NonChannelLocaleListener
      * @param string[] $firewallNames
      */
     public function __construct(
+        RouterInterface $router,
         LocaleProviderInterface $channelBasedLocaleProvider,
         FirewallMap $firewallMap,
         array $firewallNames
@@ -45,6 +52,13 @@ final class NonChannelLocaleListener
         $this->channelBasedLocaleProvider = $channelBasedLocaleProvider;
         $this->firewallMap = $firewallMap;
         $this->firewallNames = $firewallNames;
+        $this->router = $router;
+        if ($channelBasedLocaleProvider instanceof NewLocaleProviderInterface) {
+            @trigger_error(
+                sprintf('Not passing in an instance of %s is deprecated and will be removed in Sylius 2.0', NewLocaleProviderInterface::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -57,7 +71,8 @@ final class NonChannelLocaleListener
         }
 
         $request = $event->getRequest();
-        if (in_array($request->attributes->get('_route'), ['_wdt', '_profiler'])) {
+        /** @psalm-suppress RedundantConditionGivenDocblockType Symfony docblock is not always true */
+        if ($request->attributes && in_array($request->attributes->get('_route'), ['_wdt', '_profiler', '_profiler_search', '_profiler_search_results'])) {
             return;
         }
 
@@ -67,9 +82,19 @@ final class NonChannelLocaleListener
         }
 
         $requestLocale = $request->getLocale();
-        if (!$this->channelBasedLocaleProvider->isLocaleCodeAvailable($requestLocale)) {
-            throw new NotFoundHttpException(
-                sprintf('The "%s" locale is unavailable in this channel.', $requestLocale)
+        if ($this->channelBasedLocaleProvider instanceof NewLocaleProviderInterface) {
+            $isLocaleCodeAvailable = $this->channelBasedLocaleProvider->isLocaleCodeAvailable($requestLocale);
+        } else {
+            $isLocaleCodeAvailable = in_array($requestLocale, $this->channelBasedLocaleProvider->getAvailableLocalesCodes(), true);
+        }
+        if (!$isLocaleCodeAvailable) {
+            $event->setResponse(
+                new RedirectResponse(
+                    $this->router->generate(
+                        'sylius_shop_homepage',
+                        ['_locale' => $this->channelBasedLocaleProvider->getDefaultLocaleCode()]
+                    )
+                )
             );
         }
     }

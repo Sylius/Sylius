@@ -10,13 +10,13 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'dresses'
                                         translations:
@@ -65,7 +65,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Circle-skirt Dress'
+                            -   name: 'Beige strappy summer dress'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -74,7 +74,7 @@ sylius_fixtures:
                                     - 'dresses'
                                 product_attributes:
                                     dress_brand: 'You are breathtaking'
-                                    dress_collection: 'Sylius Winter 2019'
+                                    dress_collection: 'Sylius Summer 2019'
                                     dress_material: '100% polyester'
                                 product_options:
                                     - 'dress_size'
@@ -82,7 +82,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_01.jpg', type: 'main' }
 
-                            -   name: 'Sleeveless Dress'
+                            -   name: 'Off shoulder boho dress'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -99,7 +99,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/dresses/dress_02.jpg', type: 'main' }
 
-                            -   name: 'Summer tunic'
+                            -   name: 'Ruffle wrap festival dress'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -108,8 +108,8 @@ sylius_fixtures:
                                     - 'dresses'
                                 product_attributes:
                                     dress_brand: 'You are breathtaking'
-                                    dress_collection: 'Sylius Winter 2019'
-                                    dress_material: '100% '
+                                    dress_collection: 'Sylius Summer 2019'
+                                    dress_material: '100% polyester'
                                 product_options:
                                     - 'dress_size'
                                     - 'dress_height'

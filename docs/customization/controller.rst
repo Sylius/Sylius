@@ -45,7 +45,7 @@ For the ``ProductController`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.controller.product
+    php bin/console debug:container sylius.controller.product
 
 As a result you will get the ``Sylius\Bundle\ResourceBundle\Controller\ResourceController`` - this is the class that you need to extend.
 
@@ -122,25 +122,26 @@ getting a list of recommended products from your external api.
             arguments: ['@sylius.repository.product']
             public: true
 
+**4.** Disable autowire for your controller in ``config/services.yaml``
+
+.. code-block:: yaml
+
+    App\Controller\ProductController:
+        autowire: false
+
 .. tip::
 
-    Run ``$ php bin/console debug:container sylius.repository.product`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
 
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
-    app_shop_custom_index:
-        path: /custom/index
+    app_product_show_index:
+        path: /product/show
         methods: [GET]
         defaults:
-            _controller: app.controller.shop.homepage:indexAction
-
-    app_shop_custom_custom:
-        path: /custom/custom
-        methods: [GET]
-        defaults:
-            _controller: app.controller.shop.homepage:customAction
+            _controller: app.controller.product:showAction
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -196,13 +197,13 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
 .. tip::
 
-    Run ``$ php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
 
 **3.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
-    app_shop_custom_procuct:
+    app_shop_custom_product:
         path: /custom/product
         methods: [GET]
         defaults:

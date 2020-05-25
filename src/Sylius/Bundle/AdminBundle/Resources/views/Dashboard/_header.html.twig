@@ -4,7 +4,7 @@
     <div class="twelve wide column">
         {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
 
-        {{ sonata_block_render_event('sylius.admin.dashboard.header', {'channel': channel, 'statistics': statistics}) }}
+        {{ sylius_template_event('sylius.admin.dashboard.header.content', {'channel': channel, 'statistics': statistics}) }}
     </div>
     <div class="four wide middle aligned column">
         {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/Dashboard/_channelSwitch.html.twig', 'channel': channel.code})) }}

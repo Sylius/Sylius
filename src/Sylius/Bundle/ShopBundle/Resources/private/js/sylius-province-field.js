@@ -96,12 +96,12 @@ $.fn.extend({
       $('select.country-select').trigger('change');
     }
 
-    const billingAddressCheckbox = $('input[type="checkbox"][name$="[differentBillingAddress]"]');
-    const billingAddressContainer = $('#sylius-billing-address-container');
-    const toggleBillingAddress = function toggleBillingAddress() {
-      billingAddressContainer.toggle(billingAddressCheckbox.prop('checked'));
+    const shippingAddressCheckbox = $('input[type="checkbox"][name$="[differentShippingAddress]"]');
+    const shippingAddressContainer = $('#sylius-shipping-address-container');
+    const toggleShippingAddress = function toggleShippingAddress() {
+      shippingAddressContainer.toggle(shippingAddressCheckbox.prop('checked'));
     };
-    toggleBillingAddress();
-    billingAddressCheckbox.on('change', toggleBillingAddress);
+    toggleShippingAddress();
+    shippingAddressCheckbox.on('change', toggleShippingAddress);
   },
 });

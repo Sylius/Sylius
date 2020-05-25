@@ -11,7 +11,7 @@ Set up the HWIOAuthBundle
 
 .. code-block:: bash
 
-    $ composer require hwi/oauth-bundle
+    composer require hwi/oauth-bundle
 
 * Enable the bundle:
 
@@ -92,9 +92,9 @@ Under the ``security: firewalls: shop:`` keys in the ``security.yaml`` configure
                 oauth:
                     resource_owners:
                         facebook: "/login/check-facebook"
-                    login_path: /login
+                    login_path: sylius_shop_login
                     use_forward: false
-                    failure_path: /login
+                    failure_path: sylius_shop_login
 
                     oauth_user_provider:
                         service: sylius.oauth.user_provider

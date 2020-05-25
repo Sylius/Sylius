@@ -17,7 +17,7 @@ Feature: Ability to confirm an order with a promotion on shipping
   Scenario: Successfully placing an order
     Given I have product "PHP T-Shirt" in the cart
     And I am at the checkout addressing step
-    When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+    When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
     And I proceed with "DHL" shipping method and "Offline" payment
     Then I should be on the checkout summary step
     And "Holiday promotion" should be applied to my order shipping

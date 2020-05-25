@@ -18,104 +18,57 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 interface AddressPageInterface extends SymfonyPageInterface
 {
-    /**
-     * @throws \RuntimeException
-     */
-    public function chooseDifferentBillingAddress();
+    public function chooseDifferentShippingAddress(): void;
 
-    /**
-     * @return bool
-     */
-    public function checkInvalidCredentialsValidation();
+    public function checkInvalidCredentialsValidation(): bool;
 
-    /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function checkValidationMessageFor($element, $message);
+    public function checkValidationMessageFor(string $element, string $message): bool;
 
-    public function specifyBillingAddress(AddressInterface $billingAddress);
+    public function specifyShippingAddress(AddressInterface $shippingAddress): void;
 
-    /**
-     * @param string $province
-     */
-    public function selectBillingAddressProvince($province);
+    public function selectShippingAddressProvince(string $province): void;
 
-    public function specifyShippingAddress(AddressInterface $shippingAddress);
+    public function specifyBillingAddress(AddressInterface $billingAddress): void;
 
-    /**
-     * @param string $province
-     */
-    public function selectShippingAddressProvince($province);
+    public function selectBillingAddressProvince(string $province): void;
 
-    /**
-     * @return bool
-     */
-    public function canSignIn();
+    public function specifyEmail(?string $email): void;
 
-    public function signIn();
+    public function specifyBillingAddressFullName(string $fullName): void;
 
-    /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
+    public function canSignIn(): bool;
 
-    public function specifyShippingAddressFullName(string $fullName);
+    public function signIn(): void;
 
-    /**
-     * @param string $password
-     */
-    public function specifyPassword($password);
+    public function specifyPassword(string $password): void;
 
-    /**
-     * @param string $itemName
-     *
-     * @return string
-     */
-    public function getItemSubtotal($itemName);
+    public function getItemSubtotal(string $itemName): string;
 
-    /**
-     * @return string
-     */
-    public function getShippingAddressCountry();
+    public function getShippingAddressCountry(): string;
 
-    public function nextStep();
+    public function nextStep(): void;
 
-    public function backToStore();
+    public function backToStore(): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function specifyBillingAddressProvince($provinceName);
+    public function specifyBillingAddressProvince(string $provinceName): void;
 
-    /**
-     * @param string $provinceName
-     */
-    public function specifyShippingAddressProvince($provinceName);
+    public function specifyShippingAddressProvince(string $provinceName): void;
 
-    /**
-     * @return bool
-     */
-    public function hasShippingAddressInput();
+    public function hasShippingAddressInput(): bool;
 
-    /**
-     * @return bool
-     */
-    public function hasBillingAddressInput();
+    public function hasBillingAddressInput(): bool;
 
-    public function selectShippingAddressFromAddressBook(AddressInterface $address);
+    public function selectShippingAddressFromAddressBook(AddressInterface $address): void;
 
-    public function selectBillingAddressFromAddressBook(AddressInterface $address);
+    public function selectBillingAddressFromAddressBook(AddressInterface $address): void;
 
-    /**
-     * @return AddressInterface
-     */
-    public function getPreFilledShippingAddress();
+    public function getPreFilledShippingAddress(): AddressInterface;
 
-    /**
-     * @return AddressInterface
-     */
-    public function getPreFilledBillingAddress();
+    public function getPreFilledBillingAddress(): AddressInterface;
+
+    /** @return string[] */
+    public function getAvailableShippingCountries(): array;
+
+    /** @return string[] */
+    public function getAvailableBillingCountries(): array;
 }

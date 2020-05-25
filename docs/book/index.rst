@@ -108,6 +108,34 @@ Here you will learn basics about the Theming concept of Sylius. How to change th
 
 .. include:: /book/themes/map.rst.inc
 
+.. rst-class:: plus-doc
+
+Sylius Plus
+-----------
+
+`Sylius Plus <https://sylius.com/plus/>`_, which is a licensed edition of Sylius, gives you all the power of Open Source and much more.
+It comes with a set of enterprise-grade features and technical support from its creators.
+As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
+
+Documentation sections of The Book referring to Sylius Plus features are:
+
+.. toctree::
+    :maxdepth: 1
+
+    installation/sylius_plus_installation
+    architecture/emails
+    configuration/channels
+    customers/admin_user
+    customers/customer_pools
+    orders/shipments
+    orders/returns
+    products/multi_source_inventory
+
+
+.. image:: ../_images/sylius_plus/banner.png
+    :align: center
+    :target: https://sylius.com/plus/?utm_source=docs
+
 Sylius Plugins
 --------------
 
@@ -119,3 +147,39 @@ The collection of Sylius Plugins and basic introduction to the concept of plugin
     plugins/index
 
 .. include:: /book/plugins/map.rst.inc
+
+Organization
+------------
+
+This chapter describes the rules and processes we use to organize our work.
+
+.. toctree::
+    :hidden:
+
+    organization/index
+
+.. include:: /book/organization/map.rst.inc
+
+Support
+-------
+
+How to get support for Sylius?
+
+.. toctree::
+   :hidden:
+
+   support/index
+
+.. include:: /book/support/map.rst.inc
+
+Contributing
+------------
+
+Guides you how to contribute to Sylius.
+
+.. toctree::
+   :hidden:
+
+   contributing/index
+
+.. include:: /book/contributing/map.rst.inc

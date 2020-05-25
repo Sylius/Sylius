@@ -8,6 +8,7 @@
         <div class="ui hidden divider"></div>
         <div class="ui segment">
             {{ form_row(form.code) }}
+            {{ form_row(form.enabled) }}
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
@@ -37,5 +38,5 @@
         </div>
     </div>
 
-    {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.tab_details', {'form': form}) }}
+    {{ sylius_template_event(['sylius.admin.product_variant.' ~ action ~ '.tab_details', 'sylius.admin.product_variant.tab_details'], {'form': form}) }}
 </div>

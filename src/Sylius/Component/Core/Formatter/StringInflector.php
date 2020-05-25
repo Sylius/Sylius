@@ -17,7 +17,12 @@ final class StringInflector
 {
     public static function nameToCode(string $value): string
     {
-        return str_replace([' ', '-'], '_', $value);
+        return str_replace([' ', '-', '\''], '_', $value);
+    }
+
+    public static function nameToSlug(string $value): string
+    {
+        return str_replace(['_'], '-', self::nameToLowercaseCode($value));
     }
 
     public static function nameToLowercaseCode(string $value): string

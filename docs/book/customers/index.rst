@@ -8,7 +8,8 @@ There is also a subchapter dedicated to addresses of your customers.
     :hidden:
 
     customer_and_shopuser
-    adminuser
+    customer_pools
+    admin_user
     addresses/index
 
 .. include:: /book/customers/map.rst.inc

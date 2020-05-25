@@ -89,7 +89,7 @@ final class CheckoutContext implements Context
      */
     public function iWasAtTheCheckoutSummaryStep()
     {
-        $this->addressingContext->iSpecifiedTheShippingAddress();
+        $this->addressingContext->iSpecifiedTheBillingAddress();
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
     }
 
@@ -99,7 +99,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingShippingMethod($shippingMethodName)
     {
-        $this->iProceedSelectingShippingCountryAndShippingMethod(null, $shippingMethodName);
+        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethodName);
     }
 
     /**
@@ -108,7 +108,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingPaymentMethod($paymentMethodName)
     {
-        $this->iProceedSelectingShippingCountryAndShippingMethod();
+        $this->iProceedSelectingBillingCountryAndShippingMethod();
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
@@ -123,22 +123,24 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      * @When I proceed through checkout process
      * @When I proceed through checkout process in the :localeCode locale
+     * @When I proceed through checkout process in the :localeCode locale with email :email
      */
-    public function iProceedThroughCheckoutProcess($localeCode = 'en_US')
+    public function iProceedThroughCheckoutProcess(string $localeCode = 'en_US', ?string $email = null): void
     {
-        $this->addressingContext->iProceedSelectingShippingCountry(null, $localeCode);
+        $this->addressingContext->iProceedSelectingBillingCountry(null, $localeCode, $email);
         $this->shippingContext->iCompleteTheShippingStep();
         $this->paymentContext->iCompleteThePaymentStep();
     }
 
     /**
-     * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
+     * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
      */
-    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
+    public function iProceedSelectingBillingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
     {
-        $this->addressingContext->iProceedSelectingShippingCountry($shippingCountry);
+        $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
     }
 

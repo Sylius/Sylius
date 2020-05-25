@@ -38,6 +38,7 @@
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.form.type.api_order.validation_groups%</argument>
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.form.choice_list.loader.lazy_customer_loader" />
             <tag name="form.type" />
         </service>
 
@@ -72,6 +73,10 @@
         <service id="sylius.form.type.api_order_item" class="Sylius\Bundle\AdminApiBundle\Form\Type\OrderItemType">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.choice_list.loader.lazy_customer_loader" class="Sylius\Bundle\AdminApiBundle\Form\ChoiceList\Loader\LazyCustomerLoader">
+            <argument id="sylius.repository.customer" type="service"/>
         </service>
     </services>
 </container>

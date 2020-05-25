@@ -26,16 +26,16 @@ Feature: Apply correct taxes for products with different tax rates for different
         And there should be no taxes charged
 
     @ui
-    Scenario: Displaying correct tax after specifying shipping address
+    Scenario: Displaying correct tax after specifying billing address
         Given I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as shipping country
+        When I proceed selecting "Germany" as billing country
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
     @ui
-    Scenario: Displaying correct taxes for multiple products after specifying shipping address
+    Scenario: Displaying correct taxes for multiple products after specifying billing address
         Given I have 3 products "PHP T-Shirt" in the cart
-        When I proceed selecting "Germany" as shipping country
+        When I proceed selecting "Germany" as billing country
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
@@ -47,9 +47,9 @@ Feature: Apply correct taxes for products with different tax rates for different
         And my cart taxes should be "$5.00"
 
     @ui
-    Scenario: Displaying correct taxes for multiple products from different zones after specifying shipping address
+    Scenario: Displaying correct taxes for multiple products from different zones after specifying billing address
         Given I have product "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Mug" in the cart
-        When I proceed selecting "Germany" as shipping country
+        When I proceed selecting "Germany" as billing country
         Then my cart total should be "$223.00"
         And my cart taxes should be "$23.00"

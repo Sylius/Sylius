@@ -17,55 +17,25 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface HomePageInterface extends SymfonyPageInterface
 {
-    /**
-     * @return string
-     */
-    public function getContents();
+    public function getContent(): string;
 
-    /**
-     * @return bool
-     */
-    public function hasLogoutButton();
+    public function hasLogoutButton(): bool;
 
     public function logOut();
 
-    /**
-     * @return string
-     */
-    public function getFullName();
+    public function getFullName(): string;
 
-    /**
-     * @return string
-     */
-    public function getActiveCurrency();
+    public function getActiveCurrency(): string;
 
-    /**
-     * @return array
-     */
-    public function getAvailableCurrencies();
+    public function getAvailableCurrencies(): array;
 
-    /**
-     * @param string $currencyCode
-     */
-    public function switchCurrency($currencyCode);
+    public function switchCurrency(string $currencyCode): void;
 
-    /**
-     * @return string
-     */
-    public function getActiveLocale();
+    public function getActiveLocale(): string;
 
-    /**
-     * @return array
-     */
-    public function getAvailableLocales();
+    public function getAvailableLocales(): array;
 
-    /**
-     * @param string $localeCode
-     */
-    public function switchLocale($localeCode);
+    public function switchLocale(string $localeCode): void;
 
-    /**
-     * @return array
-     */
-    public function getLatestProductsNames();
+    public function getLatestProductsNames(): array;
 }

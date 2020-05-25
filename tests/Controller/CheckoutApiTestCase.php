@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+use ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutApiTestCase extends JsonApiTestCase
@@ -89,7 +89,7 @@ EOT;
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "differentShippingAddress": true
         }
 EOT;
 

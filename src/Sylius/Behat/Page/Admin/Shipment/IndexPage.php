@@ -48,19 +48,23 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $this->getField($orderNumber, 'state')->getText();
     }
 
-    private function getField(string $orderNumber, string $fieldName): NodeElement
-    {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
-
-        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
-
-        return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
-    }
-
     public function showOrderPageForNthShipment(int $position): void
     {
         $this->getOrderLinkForRow($position)->clickLink('#');
+    }
+
+    public function shipShipmentOfOrderWithTrackingCode(string $orderNumber, string $trackingCode): void
+    {
+        /** @var NodeElement $actions */
+        $actions = $this->getField($orderNumber, 'actions');
+
+        $actions->fillField('sylius_shipment_ship_tracking', $trackingCode);
+        $actions->pressButton('Ship');
+    }
+
+    public function getShippedAtDate(string $orderNumber): string
+    {
+        return $this->getField($orderNumber, 'shippedAt')->getText();
     }
 
     protected function getDefinedElements(): array
@@ -72,6 +76,16 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         ]);
     }
 
+    private function getField(string $orderNumber, string $fieldName): NodeElement
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $row = $tableAccessor->getRowWithFields($table, ['number' => $orderNumber]);
+
+        return $tableAccessor->getFieldFromRow($table, $row, $fieldName);
+    }
+
     private function getOrderLinkForRow(int $shipmentNumber): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
@@ -79,6 +93,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $row = $tableAccessor->getRowsWithFields($table, [])[$shipmentNumber];
 
-        return $row->find('css', 'td:nth-child(2)');
+        return $row->find('css', 'td:nth-child(3)');
     }
 }

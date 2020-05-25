@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\NewLocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +46,12 @@ final class LocaleSwitchController
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
         $this->localeSwitcher = $localeSwitcher;
+        if ($localeProvider instanceof NewLocaleProviderInterface) {
+            @trigger_error(
+                sprintf('Not passing in an instance of %s is deprecated and will be removed in Sylius 2.0', NewLocaleProviderInterface::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     public function renderAction(): Response
@@ -61,7 +68,13 @@ final class LocaleSwitchController
             $code = $this->localeProvider->getDefaultLocaleCode();
         }
 
-        if (!$this->localeProvider->isLocaleCodeAvailable($code)) {
+        if ($this->localeProvider instanceof NewLocaleProviderInterface) {
+            $isLocaleCodeAvailable = $this->localeProvider->isLocaleCodeAvailable($code);
+        } else {
+            $isLocaleCodeAvailable = in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true);
+        }
+
+        if (!$isLocaleCodeAvailable) {
             throw new HttpException(
                 Response::HTTP_NOT_ACCEPTABLE,
                 sprintf('The locale code "%s" is invalid.', $code)

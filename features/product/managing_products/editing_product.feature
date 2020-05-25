@@ -9,12 +9,12 @@ Feature: Editing a product
         And the store has a product "Dice Brewing"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Seeing disabled code field when editing product
         When I want to modify the "Dice Brewing" product
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui
+    @ui @api
     Scenario: Renaming a simple product
         Given I want to modify the "Dice Brewing" product
         When I rename it to "7 Wonders" in "English (United States)"
@@ -49,7 +49,7 @@ Feature: Editing a product
         And it should be priced at $7.50 for channel "United States"
         And its original price should be "$15.00" for channel "United States"
 
-    @ui
+    @ui @api
     Scenario: Renaming a configurable product
         Given the store has a "Wyborowa Vodka" configurable product
         And I want to modify this product
@@ -69,7 +69,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @ui
+    @ui @api
     Scenario: Changing options of configurable product without any variant defined
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"

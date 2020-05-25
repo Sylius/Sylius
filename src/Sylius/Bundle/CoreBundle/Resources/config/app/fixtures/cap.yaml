@@ -10,13 +10,13 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'caps'
                                         name: 'Caps'
@@ -25,7 +25,7 @@ sylius_fixtures:
                                             en_US:
                                                 name: 'Caps'
                                             fr_FR:
-                                                name: 'Casquestte'
+                                                name: 'Bonnets'
                                         children:
                                             -   code: 'simple_caps'
                                                 translations:
@@ -33,8 +33,8 @@ sylius_fixtures:
                                                         name: 'Simple'
                                                         slug: 'caps/simple'
                                                     fr_FR:
-                                                        name: 'simple'
-                                                        slug: 'casquette/simple'
+                                                        name: 'Simple'
+                                                        slug: 'bonnets/simple'
 
                                             -   code: 'caps_with_pompons'
                                                 translations:
@@ -42,8 +42,8 @@ sylius_fixtures:
                                                         name: 'With pompons'
                                                         slug: 'caps/with-pompons'
                                                     fr_FR:
-                                                        name: 'A pompon'
-                                                        slug: 'casquette/a-pompon'
+                                                        name: 'À pompon'
+                                                        slug: 'bonnets/a-pompon'
 
                 cap_attribute:
                     name: product_attribute
@@ -65,7 +65,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Basic winter hot cap'
+                            -   name: 'Knitted burgundy winter cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -80,7 +80,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
 
-                            -   name: 'Beautiful cap for woman'
+                            -   name: 'Knitted wool-blend green cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -95,7 +95,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
 
-                            -   name: 'Regular cap with big pompon'
+                            -   name: 'Knitted white pompom cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -110,7 +110,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
 
-                            -   name: 'Simple cap'
+                            -   name: 'Cashmere-blend violet beanie'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -121,6 +121,6 @@ sylius_fixtures:
                                 product_attributes:
                                     cap_brand: 'Date & Banana'
                                     cap_collection: 'Sylius Winter 2019'
-                                    cap_material: '100% wool'
+                                    cap_material: '100% cashmere'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_04.jpg', type: 'main' }

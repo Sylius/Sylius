@@ -62,4 +62,9 @@ $(document).ready(() => {
   });
 
   $('[data-form-type="collection"]').CollectionForm();
+
+  $('[data-js-disable]').on('click', (e) => {
+    const $current = $(e.currentTarget);
+    $(document).find($current.attr('data-js-disable')).addClass('disabled');
+  });
 });

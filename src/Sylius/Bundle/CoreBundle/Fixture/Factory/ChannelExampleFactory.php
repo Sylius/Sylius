@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShopBillingData;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,16 +49,25 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var OptionsResolver */
     private $optionsResolver;
 
+    /** @var TaxonRepositoryInterface|null */
+    private $taxonRepository;
+
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $zoneRepository
+        RepositoryInterface $zoneRepository,
+        ?TaxonRepositoryInterface $taxonRepository = null
     ) {
+        if (null === $taxonRepository) {
+            @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+        }
+
         $this->channelFactory = $channelFactory;
         $this->localeRepository = $localeRepository;
         $this->currencyRepository = $currencyRepository;
         $this->zoneRepository = $zoneRepository;
+        $this->taxonRepository = $taxonRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -82,6 +95,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
         $channel->setAccountVerificationRequired($options['account_verification_required']);
+
+        if (null !== $this->taxonRepository) {
+            $channel->setMenuTaxon($options['menu_taxon']);
+        }
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -115,7 +132,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $resolver
             ->setDefault('name', function (Options $options): string {
-                return $this->faker->words(3, true);
+                /** @var string $words */
+                $words = $this->faker->words(3, true);
+
+                return $words;
             })
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
@@ -124,10 +144,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $options['code'] . '.localhost';
             })
             ->setDefault('color', function (Options $options): string {
-                return $this->faker->colorName;
+                return (string) $this->faker->colorName;
             })
             ->setDefault('enabled', function (Options $options): bool {
-                return $this->faker->boolean(90);
+                return (bool) $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)
@@ -136,9 +156,15 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('skipping_payment_step_allowed', 'bool')
             ->setDefault('account_verification_required', true)
             ->setAllowedTypes('account_verification_required', 'bool')
-            ->setDefault('default_tax_zone', LazyOption::randomOneOrNull($this->zoneRepository))
+            ->setDefault(
+                'default_tax_zone',
+                LazyOption::randomOneOrNull($this->zoneRepository, 100, ['scope' => [Scope::TAX, AddressingScope::ALL]])
+            )
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
-            ->setNormalizer('default_tax_zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setNormalizer(
+                'default_tax_zone',
+                LazyOption::findOneBy($this->zoneRepository, 'code', ['scope' => [Scope::TAX, AddressingScope::ALL]])
+            )
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')
             ->setDefault('default_locale', function (Options $options): LocaleInterface {
@@ -161,5 +187,13 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('contact_email', null)
             ->setDefault('shop_billing_data', null)
         ;
+
+        if (null !== $this->taxonRepository) {
+            $resolver
+                ->setDefault('menu_taxon', LazyOption::randomOne($this->taxonRepository))
+                ->setAllowedTypes('menu_taxon', ['null', 'string', TaxonInterface::class])
+                ->setNormalizer('menu_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
+            ;
+        }
     }
 }

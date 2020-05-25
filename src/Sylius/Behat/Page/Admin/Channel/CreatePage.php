@@ -19,6 +19,7 @@ use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -64,6 +65,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
     }
 
+    public function chooseOperatingCountries(array $countries): void
+    {
+        foreach ($countries as $country) {
+            $this->getElement('countries')->selectOption($country, true);
+        }
+    }
+
     public function chooseBaseCurrency(?string $currency): void
     {
         if (null !== $currency) {
@@ -87,9 +95,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->checkField('Skip payment step if only one payment method is available?');
     }
 
-    public function setType(string $type): void
+    public function specifyMenuTaxon(string $menuTaxon): void
     {
-        $this->getElement('type')->selectOption($type);
+        $menuTaxonElement = $this->getElement('menu_taxon')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $menuTaxonElement, $menuTaxon);
     }
 
     protected function getToggleableElement(): NodeElement
@@ -100,14 +110,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
+            'countries' => '#sylius_channel_countries',
             'currencies' => '#sylius_channel_currencies',
+            'base_currency' => '#sylius_channel_baseCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
+            'menu_taxon' => '#sylius_channel_menuTaxon',
             'name' => '#sylius_channel_name',
-            'type' => '#sylius_channel_type',
         ]);
     }
 }

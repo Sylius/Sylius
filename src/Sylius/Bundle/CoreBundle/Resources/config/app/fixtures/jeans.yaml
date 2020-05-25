@@ -10,13 +10,13 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 'jeans'
                                         name: 'Jeans'
@@ -42,8 +42,8 @@ sylius_fixtures:
                                                         name: 'Women'
                                                         slug: 'jeans/women'
                                                     fr_FR:
-                                                        name: 'Femme'
-                                                        slug: 'jeans/femme'
+                                                        name: 'Femmes'
+                                                        slug: 'jeans/femmes'
 
                 jeans_attribute:
                     name: product_attribute
@@ -78,7 +78,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Basic regular'
+                            -   name: '911M regular fit jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -95,7 +95,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_01.jpg', type: 'main' }
 
-                            -   name: 'Slim fit classic'
+                            -   name: '330M slim fit jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -112,7 +112,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_02.jpg', type: 'main' }
 
-                            -   name: 'Regular Fit casual'
+                            -   name: '990M regular fit jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -129,7 +129,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_03.jpg', type: 'main' }
 
-                            -   name: 'Slim fit elegant'
+                            -   name: '007M black elegance jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -146,7 +146,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/man/jeans_04.jpg', type: 'main' }
 
-                            -   name: 'Ultra slim'
+                            -   name: '727F patched cropped jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -163,7 +163,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_01.jpg', type: 'main' }
 
-                            -   name: 'Slim fit'
+                            -   name: '111F patched jeans with fancy badges'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -180,7 +180,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_02.jpg', type: 'main' }
 
-                            -   name: 'New age regular'
+                            -   name: '000F office grey jeans'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -197,7 +197,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/jeans/woman/jeans_03.jpg', type: 'main' }
 
-                            -   name: 'Whole holes classic'
+                            -   name: '666F boyfriend jeans with rips'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'

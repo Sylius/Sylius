@@ -23,3 +23,11 @@ Feature: Deleting a taxon
         And the taxon named "Men" should no longer exist in the registry
         And the taxon named "Women" should no longer exist in the registry
         But the "Shovels" taxon should appear in the registry
+
+    @ui @javascript
+    Scenario: Being unable to delete a menu taxon of a channel
+        Given the store classifies its products as "T-Shirts" and "Caps"
+        And the store operates on a channel named "Web Store"
+        And channel "Web Store" has menu taxon "Caps"
+        When I try to delete taxon named "Caps"
+        Then I should be notified that I cannot delete a menu taxon of any channel

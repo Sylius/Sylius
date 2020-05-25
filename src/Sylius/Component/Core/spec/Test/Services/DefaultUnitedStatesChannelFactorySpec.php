@@ -101,6 +101,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $channel->addCurrency($currency)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();
+        $channel->setHostname('us.store.com')->shouldBeCalled();
 
         $currencyRepository->findOneBy(['code' => 'USD'])->willReturn(null);
         $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);

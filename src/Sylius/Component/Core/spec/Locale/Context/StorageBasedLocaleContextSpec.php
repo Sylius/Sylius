@@ -62,7 +62,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         $localeStorage->get($channel)->willReturn('pl_PL');
 
         $localeProvider->isLocaleCodeAvailable('pl_PL')->willReturn(false);
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['en_US', 'en_UK']);
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['en_US', 'en_GB']);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }

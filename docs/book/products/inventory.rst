@@ -57,6 +57,7 @@ How does Inventory work on examples?
 Learn more
 ----------
 
+* :doc:`[Plus] Multi-Source Inventory </book/products/multi_source_inventory>`
 * :doc:`Order concept documentation </book/orders/orders>`
 * :doc:`Inventory Bundle documentation </components_and_bundles/bundles/SyliusInventoryBundle/index>`
 * :doc:`Inventory Component documentation </components_and_bundles/components/Inventory/index>`

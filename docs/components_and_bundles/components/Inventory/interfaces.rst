@@ -22,7 +22,7 @@ This interface should be implemented by model representing a single InventoryUni
     It also contains the default :doc:`/components_and_bundles/components/Inventory/state_machine`.
 
 .. note::
-    This interface extends :ref:`component_resource_model_timestampable-interface`.
+    This interface extends `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
     For more detailed information go to `Sylius API InventoryUnitInterface`_.
 

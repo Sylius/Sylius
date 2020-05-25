@@ -21,28 +21,25 @@ The transitions on the order checkout state machine are:
 
 .. code-block:: yaml
 
-   transitions:
-      address:
-          from: [cart]
-          to: addressed
-      readdress:
-          from: [payment_selected, shipping_selected, addressed]
-          to: cart
-      select_shipping:
-          from: [addressed]
-          to: shipping_selected
-      reselect_shipping:
-          from: [payment_selected, shipping_selected]
-          to: addressed
-      select_payment:
-          from: [shipping_selected]
-          to: payment_selected
-      reselect_payment:
-          from: [payment_selected]
-          to: shipping_selected
-      complete:
-          from: [payment_selected]
-          to: completed
+    transitions:
+        address:
+            from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]
+            to: addressed
+        skip_shipping:
+            from: [addressed]
+            to: shipping_skipped
+        select_shipping:
+            from: [addressed, shipping_selected, payment_selected, payment_skipped]
+            to: shipping_selected
+        skip_payment:
+            from: [shipping_selected, shipping_skipped]
+            to: payment_skipped
+        select_payment:
+            from: [payment_selected, shipping_skipped, shipping_selected]
+            to: payment_selected
+        complete:
+            from: [payment_selected, payment_skipped]
+            to: completed
 
 .. image:: ../../_images/sylius_order_checkout.png
     :align: center
@@ -52,7 +49,7 @@ Steps of Checkout
 -----------------
 
 Checkout in Sylius is divided into 4 steps. Each of these steps occurs when the Order goes into a certain state.
-See the Checkout state machine in the `state_machine.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine.yml>`_
+See the Checkout state machine in the `state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
 together with the routing file for checkout: `checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_.
 
 .. note::
@@ -76,9 +73,25 @@ How to perform the Addressing Step programmatically?
 Firstly if the **Customer** is not yet set on the Order it will be assigned depending on the case:
 
 * An already logged in **User** - the Customer is set for the Order using the `CartBlamerListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EventListener/CartBlamerListener.php>`_, that determines the user basing on the event.
-* An existent **User** that is not logged in - If there is an account in the system registered under the e-mail that has been provided - they are asked for a password to log in before continuing inside the addressing form.
-* A **Customer** that was present in the system before (we've got their e-mail) - the Customer instance is updated via cascade, the order is assigned to it.
+* A **Customer** or **User** that was present in the system before (we've got their e-mail) - the Customer instance is updated via cascade, the order is assigned to it.
 * A new **Customer** with unknown e-mail - a new Customer instance is created and assigned to the order.
+
+.. note::
+
+    Before Sylius ``v1.7`` a **User** (i.e. we have their e-mail and they are registered) had to login before they could complete the checkout process. If you want this constraint on your checkout, you can add this to your application:
+
+    .. code-block:: xml
+
+         <?xml version="1.0" encoding="UTF-8"?>
+
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+            <class name="Sylius\Component\Core\Model\Customer">
+                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUser">
+                    <option name="message">sylius.customer.email.registered</option>
+                    <option name="groups">sylius_customer_checkout_guest</option>
+                </constraint>
+            </class>
+        </constraint-mapping>
 
 .. hint::
 

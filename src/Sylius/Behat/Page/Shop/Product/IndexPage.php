@@ -13,113 +13,87 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_product_index';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function countProductsItems()
+    public function countProductsItems(): int
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        $products = $productsList->findAll('css', '.card');
+        $products = $productsList->findAll('css', '[data-test-product]');
 
         return count($products);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstProductNameFromList()
+    public function getFirstProductNameFromList(): string
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '.card:first-child .content > a')->getText();
+        return $productsList->find('css', '[data-test-product]:first-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastProductNameFromList()
+    public function getLastProductNameFromList(): string
     {
-        $productsList = $this->getDocument()->find('css', '#products');
+        $productsList = $this->getElement('products');
 
-        return $productsList->find('css', '.card:last-child .content > a')->getText();
+        return $productsList->find('css', '[data-test-product]:last-child [data-test-product-content] [data-test-product-name]')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function search($name)
+    public function search(string $name): void
     {
         $this->getDocument()->fillField('criteria_search_value', $name);
-        $this->getDocument()->pressButton('Search');
+        $this->getElement('search_button')->submit();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function sort($order)
+    public function sort(string $orderNumber): void
     {
-        $this->getDocument()->clickLink($order);
+        $this->getDocument()->clickLink($orderNumber);
     }
 
-    public function clearFilter()
+    public function clearFilter(): void
     {
-        $this->getDocument()->clickLink('Clear');
+        $this->getElement('clear')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isProductOnList($productName)
+    public function isProductOnList(string $productName): bool
     {
-        return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+        try {
+            $this->getElement('product_name', ['%productName%' => $productName]);
+        } catch (ElementNotFoundException $e) {
+            return false;
+        }
+
+        return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
-        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no results to display');
+        return false !== strpos($this->getElement('validation_message')->getText(), 'There are no results to display');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getProductPrice($productName)
+    public function getProductPrice(string $productName): string
     {
-        $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
+        $element = $this->getElement('product_name', ['%productName%' => $productName]);
 
-        return $container->find('css', '.sylius-product-price')->getText();
+        return $element->getParent()->find('css', '[data-test-product-price]')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isProductOnPageWithName($name)
+    public function isProductOnPageWithName(string $productName): bool
     {
-        return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
+        return $this->hasElement('product_name', ['%productName%' => $productName]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductsInOrder(array $productNames)
+    public function hasProductsInOrder(array $productNames): bool
     {
-        $productsList = $this->getDocument()->find('css', '#products');
-        $products = $productsList->findAll('css', '.card  .content > .sylius-product-name');
+        $productsList = $this->getElement('products');
+        $products = $productsList->findAll('css', '[data-test-product-content] > [data-test-product-name]');
 
         foreach ($productNames as $key => $value) {
             if ($products[$key]->getText() !== $value) {
@@ -128,5 +102,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
 
         return true;
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'clear' => '[data-test-clear]',
+            'product_name' => '[data-test-product-name="%productName%"]',
+            'products' => '[data-test-products]',
+            'search_button' => '[data-test-search]',
+            'validation_message' => '[data-test-flash-message]',
+        ]);
     }
 }

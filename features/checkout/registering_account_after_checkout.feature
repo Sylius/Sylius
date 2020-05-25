@@ -13,7 +13,7 @@ Feature: Registering a new account after checkout
     @ui
     Scenario: Registering a new account after checkout
         Given I have product "PHP T-Shirt" in the cart
-        And I have completed addressing step with email "john@example.com" and "United States" based shipping address
+        And I have completed addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I have confirmed order
         When I proceed to the registration

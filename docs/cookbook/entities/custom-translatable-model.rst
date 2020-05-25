@@ -15,7 +15,7 @@ The **name and description** fields need to be translatable.
 2. Generate the SupplierTranslation entity
 ------------------------------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <http://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
 that simplifies the process of adding a model.
 
 .. warning::
@@ -26,7 +26,7 @@ You need to use such a command in your project directory.
 
 .. code-block:: bash
 
-    $ php bin/console generate:doctrine:entity
+    php bin/console generate:doctrine:entity
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
@@ -242,7 +242,7 @@ To check if the process was run correctly run such a command:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container | grep supplier
+    php bin/console debug:container | grep supplier
 
 The output should be:
 
@@ -256,14 +256,14 @@ Assuming that your database was up-to-date before adding the new entity, run:
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:migrations:diff
+    php bin/console doctrine:migrations:diff
 
 This will generate a new migration file which adds the Supplier entity to your database.
 Then update the database using the generated migration:
 
 .. code-block:: bash
 
-    $ php bin/console doctrine:migrations:migrate
+    php bin/console doctrine:migrations:migrate
 
 6. Prepare new forms for your entity, that will be aware of its translation
 ---------------------------------------------------------------------------
@@ -480,6 +480,6 @@ Having a grid prepared we can configure routing for the entity administration:
 Learn more
 ----------
 
-* :doc:`GridBundle documentation </components_and_bundles/bundles/SyliusGridBundle/index>`
-* :doc:`ResourceBundle documentation </components_and_bundles/bundles/SyliusResourceBundle/index>`
+* `GridBundle documentation <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_
 * :doc:`Customization Guide </customization/index>`

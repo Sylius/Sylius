@@ -13,7 +13,7 @@ Feature: Editing a zone
         And the store has a zone "South America" with code "SA"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Removing a country from a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member
@@ -24,7 +24,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "France" country member
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Removing a province from a zone
         Given the store has a zone "United States" with code "USA"
         And it has the "Alabama" province member
@@ -35,7 +35,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "Alabama" province member
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Removing a zone from a zone
         Given the store has a zone "America" with code "AM"
         And it has the zone named "North America"
@@ -46,7 +46,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "South America" zone member
 
-    @ui
+    @ui @api
     Scenario: Renaming a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member
@@ -55,15 +55,3 @@ Feature: Editing a zone
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this zone name should be "EU"
-
-    @ui
-    Scenario: Seeing a disabled code field when editing a zone
-        Given the store has a zone "European Union" with code "EU"
-        When I want to modify the zone named "European Union"
-        Then the code field should be disabled
-
-    @ui
-    Scenario: Not seeing zone itself in member select when editing a zone of type zone
-        Given the store has a zone "European Union" with code "EU"
-        When I want to modify the zone named "European Union"
-        Then I can not add a zone "European Union"

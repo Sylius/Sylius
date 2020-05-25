@@ -1,5 +1,47 @@
 # CHANGELOG FOR `1.4.X`
 
+## v1.4.12 (2020-01-27)
+
+#### CVE-2020-5218: Ability to switch channels via GET parameter enabled in production environments
+
+*Please refer to [the original security advisory](https://github.com/Sylius/Sylius/security/advisories/GHSA-prg5-hg25-8grq) for the most updated information.*  
+
+**Impact:**
+
+This vulnerability gives the ability to switch channels via the `_channel_code` GET parameter in production environments. This was meant to be enabled only when `%kernel.debug%` is set to true. 
+
+However, if no `sylius_channel.debug` is set explicitly in the configuration, the default value which is `%kernel.debug%` will be not resolved and cast to boolean, enabling this debug feature even if that parameter is set to false.
+
+**Patches:**
+
+Patch has been provided for Sylius 1.3.x and newer - **1.3.16, 1.4.12, 1.5.9, 1.6.5**. Versions older than 1.3 are not covered by our security support anymore.
+
+**Workarounds:**
+
+Unsupported versions could be patched by adding the following configuration to run in production:
+
+```yaml
+sylius_channel:
+    debug: false
+```
+
+## v1.4.10, v1.4.11 (2019-12-03, 2019-12-05)
+
+#### CVE-2019-16768: Internal exception message exposure in login action.
+
+**Details:**
+
+Exception messages from internal exceptions (like database exception) are wrapped by 
+`\Symfony\Component\Security\Core\Exception\AuthenticationServiceException` and propagated through the system to UI. 
+Therefore, some internal system information may leak and be visible to the customer.
+
+A validation message with the exception details will be presented to the user when one will try to log into the shop.
+
+**Solution:**
+
+This release patches the reported vulnerability. The `src/Sylius/Bundle/UiBundle/Resources/views/Security/_login.html.twig` 
+file from Sylius should be overridden and `{{ messages.error(last_error.message) }}` changed to `{{ messages.error(last_error.messageKey) }}`.
+
 ## v1.4.9 (2019-10-09)
 
 The last bugfix release for v1.4.x.

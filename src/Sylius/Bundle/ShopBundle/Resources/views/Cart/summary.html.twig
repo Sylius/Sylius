@@ -6,36 +6,20 @@
 
 {% set header = 'sylius.ui.your_shopping_cart' %}
 
-{% block title %}{{ parent() }} | {{ header|trans }}{% endblock %}
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
     {% if not cart.empty %}
-        {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
-
-        {{ sonata_block_render_event('sylius.shop.cart.summary.after_content_header', {'cart': cart}) }}
-
+        {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
         <div class="ui stackable grid">
             <div class="eleven wide column">
-                {{ sonata_block_render_event('sylius.shop.cart.summary.before_items', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}
-
-                {{ sonata_block_render_event('sylius.shop.cart.summary.after_items', {'cart': cart}) }}
+                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
             </div>
             <div class="five wide column">
-                {{ sonata_block_render_event('sylius.shop.cart.summary.before_totals', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_totals.html.twig' %}
-
-                {{ sonata_block_render_event('sylius.shop.cart.summary.after_totals', {'cart': cart}) }}
-
-                {% include '@SyliusShop/Cart/Summary/_checkout.html.twig' %}
+                {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
             </div>
         </div>
-
-        {{ sonata_block_render_event('sylius.shop.cart.summary.before_suggestions', {'cart': cart}) }}
-
-        {% include '@SyliusShop/Cart/Summary/_suggestions.html.twig' %}
+        {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
     {% else %}
         {{ messages.info('sylius.ui.your_cart_is_empty') }}
     {% endif %}

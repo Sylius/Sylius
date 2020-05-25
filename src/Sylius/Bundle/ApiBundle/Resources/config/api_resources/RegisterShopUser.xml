@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.5.xsd"
+>
+    <resource class="Sylius\Bundle\ApiBundle\Command\RegisterShopUser" shortName="RegisterShopUser">
+        <attribute name="messenger">true</attribute>
+        <attribute name="output">false</attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="post">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="path">/register</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Register a shop user</attribute>
+                </attribute>
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations />
+
+        <property name="firstName" required="true" />
+        <property name="lastName" required="true" />
+        <property name="email" required="true" />
+        <property name="password" required="true" />
+    </resource>
+</resources>

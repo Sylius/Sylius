@@ -56,6 +56,7 @@ sylius:
             min_length: Zone name must be at least {{ limit }} characters long|Zone name must be at least {{ limit }} characters long.
             not_blank: Please enter zone name.
     zone_member:
+        cannot_be_the_same_as_zone: Zone member cannot be the same as a zone.
         code:
             not_blank: Please choose a zone member.
             regex: Zone member code can only be comprised of letters, numbers, dashes and underscores.

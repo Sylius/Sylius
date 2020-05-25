@@ -5,22 +5,30 @@
             {% set setLocales = [] %}
             {% for attributeValue in product.attributes %}
                 {% if attributeValue.localeCode not in setLocales %}
-                    <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ attributeValue.localeCode|sylius_locale_name }}">{{ attributeValue.localeCode|sylius_locale_name }}</a>
+                    <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ attributeValue.localeCode|sylius_locale_name }}" {{ sylius_test_html_attribute('tab', attributeValue.localeCode|sylius_locale_name) }}>{{ attributeValue.localeCode|sylius_locale_name }}</a>
                     {%  set setLocales = setLocales|merge([attributeValue.localeCode]) %}
                 {% endif %}
             {% endfor %}
         </div>
         {% for locale in setLocales %}
-            <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}">
+            <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ locale|sylius_locale_name }}" {{ sylius_test_html_attribute('tab', locale|sylius_locale_name) }}>
                 <table class="ui very basic celled table">
                     <tbody>
-                    {% for attributeValue in product.attributes if attributeValue.localeCode == locale %}
+                    {% for attributeValue in product.attributes|filter(attributeValue => attributeValue.localeCode == locale) %}
                         <tr>
                             <td class="five wide">
                                 <strong class="gray text">{{ attributeValue.name }}</strong>
                             </td>
                             <td>
-                                {% include [('@SyliusAdmin/Product/Show/Types/'~attributeValue.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attributeValue, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+                                {% include [
+                                    '@SyliusAdmin/Product/Show/Types/'~attributeValue.type~'.html.twig',
+                                    '@SyliusAttribute/Types/'~attributeValue.type~'.html.twig',
+                                    '@SyliusAdmin/Product/Show/Types/default.html.twig'
+                                ] with {
+                                    'attribute': attributeValue,
+                                    'locale': configuration.request.locale,
+                                    'fallbackLocale': configuration.request.defaultLocale
+                                } %}
                             </td>
                         </tr>
                     {% endfor %}

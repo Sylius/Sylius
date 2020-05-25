@@ -16,7 +16,7 @@ namespace Sylius\Component\Locale\Provider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class LocaleProvider implements LocaleProviderInterface
+final class LocaleProvider implements LocaleProviderInterface, NewLocaleProviderInterface
 {
     /** @var RepositoryInterface */
     private $localeRepository;

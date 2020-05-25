@@ -16,7 +16,7 @@ Feature: Returning from order summary page to one of previous steps
     @ui
     Scenario: Going back to payment step
         Given I have product "Stark Robe" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         When I decide to change the payment method
         Then I should be redirected to the payment step
@@ -25,7 +25,7 @@ Feature: Returning from order summary page to one of previous steps
     @ui
     Scenario: Going back to shipping step with steps panel
         Given I have product "Stark Robe" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         When I go to the shipping step
         Then I should be redirected to the shipping step
@@ -34,7 +34,7 @@ Feature: Returning from order summary page to one of previous steps
     @ui
     Scenario: Going back to addressing step with steps panel
         Given I have product "Stark Robe" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         When I go to the addressing step
         Then I should be redirected to the addressing step
@@ -45,7 +45,7 @@ Feature: Returning from order summary page to one of previous steps
         Given the store has customer "jon@snow.wall"
         And this customer has a "United States" based address in their address book
         And I have product "Stark Robe" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         When I go to the addressing step
         Then I should be redirected to the addressing step
@@ -55,7 +55,7 @@ Feature: Returning from order summary page to one of previous steps
     Scenario: Going back to shipping step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
         And I have product "Paganini T-shirt" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method
         When I go to the shipping step
         Then I should be redirected to the shipping step
@@ -65,7 +65,7 @@ Feature: Returning from order summary page to one of previous steps
     Scenario: Going back to addressing step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
         And I have product "Paganini T-shirt" in the cart
-        And I complete addressing step with email "jon@snow.wall" and "United States" based shipping address
+        And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method
         When I go to the addressing step
         Then I should be redirected to the addressing step

@@ -8,4 +8,5 @@
 * :doc:`/book/orders/invoices`
 * :doc:`/book/orders/shipments`
 * :doc:`/book/orders/checkout`
+* :doc:`/book/orders/returns`
 * :doc:`/book/orders/refunds`

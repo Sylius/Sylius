@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
+        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>product_taxon:read</attribute>
+            </attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="product" required="true" />
+        <property name="taxon" writable="true" />
+        <property name="position" writable="true" />
+    </resource>
+</resources>

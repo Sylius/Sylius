@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+api_platform:
+    patch_formats:
+        json: ['application/merge-patch+json']
+    path_segment_name_generator: api_platform.path_segment_name_generator.dash
+    swagger:
+        versions: [3]
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
+    exception_to_status:
+        SM\SMException: 422
+        Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
+        Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+    collection:
+        pagination:
+            client_items_per_page: true
+framework:
+    messenger:
+        buses:
+            sylius_default.bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'

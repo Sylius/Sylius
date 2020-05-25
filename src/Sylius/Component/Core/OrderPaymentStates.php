@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core;
 
-final class OrderPaymentStates
+interface OrderPaymentStates
 {
     public const STATE_CART = 'cart';
 
@@ -32,8 +32,4 @@ final class OrderPaymentStates
     public const STATE_PARTIALLY_REFUNDED = 'partially_refunded';
 
     public const STATE_REFUNDED = 'refunded';
-
-    private function __construct()
-    {
-    }
 }

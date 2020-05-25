@@ -90,4 +90,4 @@ narrow the search only to zones with same corresponding property.
 .. caution::
    Throws `\\InvalidArgumentException`_.
 
-.. _\\InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
+.. _\\InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php

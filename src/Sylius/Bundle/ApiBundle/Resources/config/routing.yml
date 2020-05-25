@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api:
+    resource: .
+    type: api_platform
+    prefix: /
+
+sylius_api_admin_user_authentication_token:
+    path: /admin-user-authentication-token
+    methods: ['POST']
+
+sylius_api_shop_user_authentication_token:
+    path: /shop-user-authentication-token
+    methods: ['POST']

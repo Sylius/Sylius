@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["%locale%", $taxonId]
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()", $taxonId]
             sorting:
                 code: asc
             fields:
@@ -44,6 +44,13 @@ sylius_grid:
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: "channels.id"
             actions:
                 main:
                     create:

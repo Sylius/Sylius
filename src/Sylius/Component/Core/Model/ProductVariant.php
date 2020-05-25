@@ -51,8 +51,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /** @var ShippingCategoryInterface */
     protected $shippingCategory;
 
-    /**
-     * @var Collection */
+    /** @var Collection */
     protected $channelPricings;
 
     /** @var bool */

@@ -10,13 +10,13 @@ sylius_fixtures:
                     options:
                         custom:
                             category:
-                                code: 'category'
+                                code: 'MENU_CATEGORY'
                                 name: 'Category'
                                 translations:
                                     en_US:
                                         name: 'Category'
                                     fr_FR:
-                                        name: 'Categorie'
+                                        name: 'Catégorie'
                                 children:
                                     -   code: 't_shirts'
                                         name: 'T-shirts'
@@ -42,7 +42,7 @@ sylius_fixtures:
                                                         name: 'Women'
                                                         slug: 't-shirts/women'
                                                     fr_FR:
-                                                        name: 'Femme'
+                                                        name: 'Femmes'
                                                         slug: 't-shirts/femmes'
 
                 tshirt_attribute:
@@ -78,7 +78,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Basic regular woman'
+                            -   name: 'Everyday white basic T-Shirt'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -89,13 +89,13 @@ sylius_fixtures:
                                 product_attributes:
                                     t_shirt_brand: 'You are breathtaking'
                                     t_shirt_collection: 'Sylius Summer 2019'
-                                    t_shirt_material: '100% viscose'
+                                    t_shirt_material: '100% cotton'
                                 product_options:
                                     - 't_shirt_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_01.jpg', type: 'main' }
 
-                            -   name: 'Slim fit woman'
+                            -   name: 'Loose white designer T-Shirt'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -112,7 +112,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_02.jpg', type: 'main' }
 
-                            -   name: 'Regular Fit V-neck woman'
+                            -   name: 'Ribbed copper slim fit Tee'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -129,7 +129,7 @@ sylius_fixtures:
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/woman/t-shirt_03.jpg', type: 'main' }
 
-                            -   name: 'Slim fit men'
+                            -   name: 'Sport basic white T-Shirt'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -140,13 +140,13 @@ sylius_fixtures:
                                 product_attributes:
                                     t_shirt_brand: 'You are breathtaking'
                                     t_shirt_collection: 'Sylius Winter 2019'
-                                    t_shirt_material: '100% nylon'
+                                    t_shirt_material: '100% viscose'
                                 product_options:
                                     - 't_shirt_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_01.jpg', type: 'main' }
 
-                            -   name: 'Regular fit men'
+                            -   name: 'Raglan grey & black Tee'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -157,13 +157,13 @@ sylius_fixtures:
                                 product_attributes:
                                     t_shirt_brand: 'You are breathtaking'
                                     t_shirt_collection: 'Sylius Winter 2019'
-                                    t_shirt_material: '100% linen'
+                                    t_shirt_material: '100% cotton'
                                 product_options:
                                     - 't_shirt_size'
                                 images:
                                     - { path: '@SyliusCoreBundle/Resources/fixtures/t-shirts/man/t-shirt_02.jpg', type: 'main' }
 
-                            -   name: 'Slim fit V-neck men'
+                            -   name: 'Oversize white cotton T-Shirt'
                                 tax_category: 'clothing'
                                 channels:
                                     - 'FASHION_WEB'
@@ -174,7 +174,7 @@ sylius_fixtures:
                                 product_attributes:
                                     t_shirt_brand: 'Modern Wear'
                                     t_shirt_collection: 'Sylius Summer 2019'
-                                    t_shirt_material: '100% polyester'
+                                    t_shirt_material: '100% cotton'
                                 product_options:
                                     - 't_shirt_size'
                                 images:

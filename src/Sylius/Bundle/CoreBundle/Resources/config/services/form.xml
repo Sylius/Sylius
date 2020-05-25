@@ -30,6 +30,9 @@
         <parameter key="sylius.form.type.customer_guest.validation_groups" type="collection">
             <parameter>sylius_customer_guest</parameter>
         </parameter>
+        <parameter key="sylius.form.type.customer_checkout_guest.validation_groups" type="collection">
+            <parameter>sylius_customer_checkout_guest</parameter>
+        </parameter>
         <parameter key="sylius.form.type.customer_simple_registration.validation_groups" type="collection">
             <parameter>sylius</parameter>
             <parameter>sylius_user_registration</parameter>
@@ -54,6 +57,9 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" />
+        </service>
         <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
             <argument type="service" id="sylius.repository.country" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" />
@@ -177,16 +183,6 @@
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.event_subscriber.build_promotion_action" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionActionFormSubscriber">
-            <argument type="service" id="sylius.registry_promotion_action" />
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="sylius.repository.channel" />
-        </service>
-        <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionRuleFormSubscriber">
-            <argument type="service" id="sylius.registry_promotion_rule_checker" />
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="sylius.repository.channel" />
-        </service>
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
@@ -194,13 +190,17 @@
         <service id="sylius.form.type.data_transformer.products_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductsToCodesTransformer">
             <argument type="service" id="sylius.repository.product" />
         </service>
-        <service id="sylius.form.type.data_transformer.product_variants_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductVariantsToCodesTransformer">
-            <argument type="service" id="sylius.repository.product_variant" />
-        </service>
 
         <service id="sylius.form.type.customer_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.form.type.customer_guest.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.factory.customer" />
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.customer_checkout_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_checkout_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.customer" />
             <tag name="form.type" />

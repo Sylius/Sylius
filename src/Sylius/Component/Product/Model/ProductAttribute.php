@@ -15,14 +15,13 @@ namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\Attribute as BaseAttribute;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 class ProductAttribute extends BaseAttribute implements ProductAttributeInterface
 {
     /**
-     * @return ProductAttributeTranslation
+     * {@inheritdoc}
      */
-    protected function createTranslation(): TranslationInterface
+    protected function createTranslation(): AttributeTranslationInterface
     {
         return new ProductAttributeTranslation();
     }

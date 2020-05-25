@@ -18,6 +18,7 @@
         <import resource="services/commands.xml" />
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
+        <import resource="services/emails.xml" />
         <import resource="services/fixtures.xml" />
         <import resource="services/fixtures_factories.xml" />
         <import resource="services/form.xml" />
@@ -69,6 +70,11 @@
             <argument>%kernel.bundles%</argument>
             <argument>%locale%</argument>
             <tag name="data_collector" template="@SyliusCore/Collector/sylius.html.twig" id="sylius_core" priority="-512" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Collector\CartCollector" public="false">
+            <argument type="service" id="sylius.context.cart" />
+            <tag name="data_collector" template="@SyliusCore/Collector/cart.html.twig" id="sylius_cart" priority="-512" />
         </service>
 
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
@@ -208,5 +214,9 @@
 
         <service id="sylius.order_item_names_setter" class="Sylius\Component\Core\Order\OrderItemNamesSetter" />
         <service id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" alias="sylius.order_item_names_setter" />
+
+        <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
+            <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
+        </service>
     </services>
 </container>

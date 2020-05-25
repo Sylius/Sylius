@@ -2,20 +2,22 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     {% include '@SyliusShop/Register/_header.html.twig' %}
 
-    {{ sonata_block_render_event('sylius.shop.register.after_content_header') }}
+    {{ sylius_template_event('sylius.shop.register.after_content_header') }}
 
     <div class="ui padded segment">
-        {{ sonata_block_render_event('sylius.shop.register.before_form') }}
+        {{ sylius_template_event('sylius.shop.register.before_form') }}
 
         {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {% include '@SyliusShop/Register/_form.html.twig' %}
 
-            {{ sonata_block_render_event('sylius.shop.register.form', {'form': form}) }}
+            {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 
-            <button type="submit" class="ui large primary button">
+            <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('register-button') }}>
                 {{ 'sylius.ui.create_an_account'|trans }}
             </button>
         {{ form_row(form._token) }}

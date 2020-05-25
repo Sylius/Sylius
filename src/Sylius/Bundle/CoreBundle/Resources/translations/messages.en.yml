@@ -9,6 +9,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Use different address for billing?
+                different_shipping_address: Use different address for shipping?
             payment_method: Payment Method
             shipping_method: Shipping Method
         promotion:
@@ -31,12 +32,14 @@ sylius:
                 street: Street
                 tax_id: Tax ID
             contact_email: Contact email
+            countries: Countries
             currencies: Currencies
             currency_base: Base currency
             account_verification_required: Is account verification required?
             hostname: Hostname
             locale_default: Default locale
             locales: Locales
+            menu_taxon: Menu taxon
             payment_methods: Payment Methods
             shipping_methods: Shipping Methods
             shop_billing_data: Shop billing data
@@ -100,7 +103,7 @@ sylius:
             file: Select image
         user:
             billing_address: Billing address
-            different_billing_address: Use different address for billing?
+            different_shipping_address: Use different address for shipping?
             enabled: Enabled
             first_name: First name
             groups: Groups
@@ -197,6 +200,7 @@ sylius:
             header: PHP version and settings
             any: any
             detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: non deprecated
             off: off
@@ -204,13 +208,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
             short_open_tag: short_open_tag
             timezone: timezone
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Deprecated timezone
                 help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
             version: PHP version
             version_recommended: Recommended PHP version
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
 
     payum_gateway:
         cash_on_delivery: Cash on delivery

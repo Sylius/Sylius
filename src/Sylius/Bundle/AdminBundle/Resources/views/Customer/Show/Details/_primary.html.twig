@@ -1,0 +1,12 @@
+<div class="content">
+    <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
+        {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
+    </a>
+    <div class="meta">
+        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
+        <br />
+        {% if customer.group is not null %}
+            <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
+        {% endif %}
+    </div>
+</div>

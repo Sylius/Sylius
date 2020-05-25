@@ -3,29 +3,29 @@
     "type": "symfony-bundle",
     "description": "Currencies and money formatting engine bundle for Symfony.",
     "keywords": ["cash", "currency", "money", "currencies"],
-    "homepage": "http://sylius.com",
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
-        "sylius/resource-bundle": "^1.2",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/intl": "^4.3",
-        "symfony/templating": "^4.3",
+        "sylius/resource-bundle": "^1.6",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/intl": "^4.4",
+        "symfony/templating": "^4.4",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
@@ -33,10 +33,10 @@
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "twig/twig": "^2.0",
-        "sylius/currency-bundle": "^1.2",
-        "symfony/form": "^4.3",
-        "symfony/browser-kit": "^4.3",
-        "symfony/dependency-injection": "^4.3",
+        "sylius/currency-bundle": "^1.6",
+        "symfony/form": "^4.4",
+        "symfony/browser-kit": "^4.4",
+        "symfony/dependency-injection": "^4.4",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "conflict": {

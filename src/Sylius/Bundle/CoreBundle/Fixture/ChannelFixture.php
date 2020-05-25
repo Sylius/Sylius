@@ -58,6 +58,7 @@ class ChannelFixture extends AbstractResourceFixture
                         ->scalarNode('postcode')->end()
                     ->end()
                 ->end()
+                ->scalarNode('menu_taxon')->end()
         ;
     }
 }

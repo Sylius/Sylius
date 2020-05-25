@@ -8,10 +8,10 @@ sylius_admin_product_option:
         grid: sylius_admin_product_option
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.manage_configuration_options_of_your_products
-              templates:
-                  form: "@SyliusAdmin/ProductOption/_form.html.twig"
-          index:
-              icon: options
+            all:
+                subheader: sylius.ui.manage_configuration_options_of_your_products
+                templates:
+                    form: "@SyliusAdmin/ProductOption/_form.html.twig"
+            index:
+                icon: options
     type: sylius.resource

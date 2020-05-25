@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.shipment.class%" shortName="Shipment">
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>shipment:read</attribute>
+            </attribute>
+        </attribute>
+
+        <attribute name="denormalization_context">
+            <attribute name="groups">
+                <attribute>shipment:update</attribute>
+            </attribute>
+        </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <attribute name="order">
+            <attribute name="createdAt">DESC</attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.search_shipment_filter</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+            <itemOperation name="ship">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Ships Shipment</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipments/{id}/ship</attribute>
+                <attribute name="controller">sylius.api.shipment_state_machine_transition_applicator::ship</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" />
+        <property name="createdAt"  />
+        <property name="updatedAt" />
+        <property name="state" />
+        <property name="method" />
+        <property name="units" />
+        <property name="tracking" />
+        <property name="shippedAt" />
+        <property name="order" />
+    </resource>
+</resources>

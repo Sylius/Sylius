@@ -1,5 +1,3 @@
-{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
-
 {% if app.request.attributes.get('taxonId') is not null %}
     {{ render(url('sylius_admin_partial_taxon_show', {
         'id': app.request.attributes.get('taxonId'),
@@ -8,11 +6,6 @@
     })) }}
 {% else %}
     <div class="column">
-        {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
-        {{ headers.default(header|trans, configuration.vars.icon|default('cube'), configuration.vars.subheader|default('sylius.ui.manage_your_product_catalog')|trans) }}
-
-        {{ sonata_block_render_event('sylius.admin.product.index.header', {'resources': resources}) }}
-
-        {% include configuration.vars.templates.breadcrumb|default('@SyliusAdmin/Product/Index/_breadcrumb.html.twig') %}
+        {{ sylius_template_event('sylius.admin.product.index.header', _context) }}
     </div>
 {% endif %}

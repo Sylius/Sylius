@@ -49,8 +49,12 @@ class ExchangeRate implements ExchangeRateInterface
      */
     public function getRatio(): ?float
     {
-        // It looks like Doctrine is hydrating decimal field as string, force casting to float.
-        /** @psalm-suppress DocblockTypeContradiction */
+        /**
+         * It looks like Doctrine is hydrating decimal field as string, force casting to float.
+         *
+         * @psalm-suppress DocblockTypeContradiction
+         * @psalm-suppress RedundantConditionGivenDocblockType
+         */
         return is_string($this->ratio) ? (float) $this->ratio : $this->ratio;
     }
 

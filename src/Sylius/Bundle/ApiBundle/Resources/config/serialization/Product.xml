@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\Product">
+        <attribute name="id">
+            <group>product:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>product:read</group>
+            <group>product:create</group>
+        </attribute>
+        <attribute name="createdAt">
+            <group>product:read</group>
+        </attribute>
+        <attribute name="updatedAt">
+            <group>product:read</group>
+        </attribute>
+        <attribute name="translations">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+        <attribute name="mainTaxon">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+        <attribute name="productTaxons">
+            <group>product:read</group>
+            <group>product:update</group>
+            <group>product:create</group>
+        </attribute>
+        <attribute name="reviews">
+            <group>product:read</group>
+            <group>product:create</group>
+        </attribute>
+        <attribute name="options">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+        <attribute name="images">
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+    </class>
+</serializer>

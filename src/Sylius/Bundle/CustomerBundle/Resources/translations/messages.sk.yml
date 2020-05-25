@@ -12,7 +12,6 @@ sylius:
             gender: Pohlavie
             birthday: Dátum narodenia
             billing_address: Fakturačná adresa
-            different_billing_address: Použiť inú fakturačnú adresu?
             only_customer_registration: Vytvoriť účet?
             subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
         customer_group:

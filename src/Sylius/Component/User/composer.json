@@ -3,12 +3,12 @@
     "type": "library",
     "description": "User handling for PHP applications.",
     "keywords": ["user", "registration", "login", "groups"],
-    "homepage": "http://sylius.com",
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Michał Marcinkowski",
@@ -20,20 +20,20 @@
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "doctrine/collections": "^1.1",
-        "sylius/resource": "^1.2",
+        "sylius/resource": "^1.6",
         "symfony/polyfill-mbstring": "^1.6",
-        "symfony/security": "^4.3"
+        "symfony/security": "^4.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0"

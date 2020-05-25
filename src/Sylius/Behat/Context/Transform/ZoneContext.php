@@ -31,25 +31,30 @@ final class ZoneContext implements Context
     /**
      * @Transform /^"([^"]+)" zone$/
      * @Transform /^zone "([^"]+)"$/
-     * @Transform :zone
-     */
-    public function getZoneByCode($code)
-    {
-        return $this->getZoneBy(['code' => $code]);
-    }
-
-    /**
      * @Transform /^zone named "([^"]+)"$/
+     * @Transform :zone
+     * @Transform :otherZone
      */
-    public function getZoneByName($name)
+    public function getZone(string $codeOrName): ZoneInterface
     {
-        return $this->getZoneBy(['name' => $name]);
+        $zone = $this->zoneRepository->findOneBy(['code' => $codeOrName]);
+        if (null !== $zone) {
+            return $zone;
+        }
+
+        $zone = $this->zoneRepository->findOneBy(['name' => $codeOrName]);
+        Assert::notNull(
+            $zone,
+            'Zone does not exist.'
+        );
+
+        return $zone;
     }
 
     /**
      * @Transform /^rest of the world$/
      */
-    public function getRestOfTheWorldZone()
+    public function getRestOfTheWorldZone(): ZoneInterface
     {
         $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
         Assert::notNull(
@@ -58,19 +63,5 @@ final class ZoneContext implements Context
         );
 
         return $zone;
-    }
-
-    /**
-     * @return ZoneInterface
-     */
-    private function getZoneBy(array $parameters)
-    {
-        $existingZone = $this->zoneRepository->findOneBy($parameters);
-        Assert::notNull(
-            $existingZone,
-            'Zone does not exist.'
-        );
-
-        return $existingZone;
     }
 }

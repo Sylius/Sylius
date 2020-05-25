@@ -11,6 +11,9 @@ sylius:
             not_blank: Proszę podać kod atrybutu.
             regex: Kod atrybutu może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Ten kod jest już w użyciu.
+        configuration:
+            max_entries: Maksymalna długość musi być większa bądź równa minimalnej długości.
+            max_length: Maksymalna długość musi być większa bądź równa minimalnej długości.
         presentation:
             not_blank: Proszę wprowadzić opis atrybutu.
             min_length: Opis atrybutu musi zawierać co najmniej 1 znak.|Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.

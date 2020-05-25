@@ -25,6 +25,7 @@ import './sylius-notification';
 import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
+import './sylius-chart';
 
 import SyliusTaxonomyTree from './sylius-taxon-tree';
 import formsList from './sylius-forms-list';
@@ -104,6 +105,8 @@ $(document).ready(() => {
   const taxonomyTree = new SyliusTaxonomyTree();
 
   $(`${formsList}, .check-unsaved`).dirtyForms();
+
+  $('#more-details').accordion({ exclusive: false });
 
   $('.variants-accordion__title').on('click', '.icon.button', function(e) {
     $(e.delegateTarget).next('.variants-accordion__content').toggle();

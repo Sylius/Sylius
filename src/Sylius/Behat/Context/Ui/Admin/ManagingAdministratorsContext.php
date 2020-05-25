@@ -292,16 +292,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then this administrator should not be added
-     */
-    public function thisAdministratorShouldNotBeAdded()
-    {
-        $this->indexPage->open();
-
-        Assert::same($this->indexPage->countItems(), 1);
-    }
-
-    /**
      * @Then there should not be :email administrator anymore
      */
     public function thereShouldBeNoAnymore($email)

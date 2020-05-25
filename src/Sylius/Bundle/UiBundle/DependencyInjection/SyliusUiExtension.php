@@ -13,19 +13,64 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\DependencyInjection;
 
+use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Zend\Stdlib\SplPriorityQueue;
 
 final class SyliusUiExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
         $loader->load('services.xml');
+
+        if ($container->getParameter('kernel.debug')) {
+            $loader->load('services/debug/template_event.xml');
+        }
+
+        $this->loadEvents($config['events'], $container);
+    }
+
+    /**
+     * @experimental
+     *
+     * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
+     */
+    private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
+    {
+        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
+
+        $blocksForEvents = [];
+        foreach ($eventsConfig as $eventName => $eventConfiguration) {
+            $blocksPriorityQueue = new SplPriorityQueue();
+
+            foreach ($eventConfiguration['blocks'] as $blockName => $details) {
+                $details['name'] = $blockName;
+                $details['eventName'] = $eventName;
+
+                $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
+            }
+
+            foreach ($blocksPriorityQueue->toArray() as $details) {
+                /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
+                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
+                    $details['name'],
+                    $details['eventName'],
+                    $details['template'],
+                    $details['context'],
+                    $details['priority'],
+                    $details['enabled'],
+                ]);
+            }
+        }
+
+        $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
     }
 }

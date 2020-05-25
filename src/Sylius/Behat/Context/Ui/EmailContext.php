@@ -18,6 +18,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
@@ -28,20 +29,38 @@ final class EmailContext implements Context
     /** @var EmailCheckerInterface */
     private $emailChecker;
 
-    public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
-    {
+    /** @var TranslatorInterface */
+    private $translator;
+
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        EmailCheckerInterface $emailChecker,
+        TranslatorInterface $translator
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
+        $this->translator = $translator;
     }
 
     /**
      * @Then it should be sent to :recipient
-     * @Then the email with reset token should be sent to :recipient
      * @Then the email with contact request should be sent to :recipient
      */
     public function anEmailShouldBeSentTo(string $recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
+    }
+
+    /**
+     * @Then an email with reset token should be sent to :recipient
+     * @Then an email with reset token should be sent to :recipient in :localeCode locale
+     */
+    public function anEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
+            $recipient
+        );
     }
 
     /**
@@ -69,36 +88,78 @@ final class EmailContext implements Context
 
     /**
      * @Then a welcoming email should have been sent to :recipient
+     * @Then a welcoming email should have been sent to :recipient in :localeCode locale
      */
-    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient): void
-    {
-        $this->assertEmailContainsMessageTo('Welcome to our store', $recipient);
-    }
-
-    /**
-     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
-     */
-    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order): void
+    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
-            sprintf(
-                'Your order no. %s has been successfully placed.',
-                $order->getNumber()
-            ),
-            $order->getCustomer()->getEmailCanonical()
+            $this->translator->trans('sylius.email.user_registration.welcome_to_our_store', [], null, $localeCode),
+            $recipient
         );
     }
 
     /**
-     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
+     * @Then an email with the confirmation of the order :order should be sent to :email
+     * @Then an email with the confirmation of the order :order should be sent to :email in :localeCode locale
      */
-    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, string $recipient): void
-    {
-        $this->assertEmailContainsMessageTo($order->getNumber(), $recipient);
-        $this->assertEmailContainsMessageTo($this->getShippingMethodName($order), $recipient);
+    public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode)
+            ),
+            $recipient
+        );
+    }
 
-        $tracking = $this->sharedStorage->get('tracking_code');
-        $this->assertEmailContainsMessageTo($tracking, $recipient);
+    /**
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
+     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
+     */
+    public function anEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
+    {
+        $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
+    }
+
+    /**
+     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
+     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
+     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient
+     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient in :localeCode locale
+     */
+    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US'
+    ): void {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s %s.',
+                $this->translator->trans('sylius.email.shipment_confirmation.your_order_with_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.shipment_confirmation.has_been_sent_using', [], null, $localeCode),
+                $this->getShippingMethodName($order)
+            ),
+            $recipient
+        );
+
+        if ($this->sharedStorage->has('tracking_code')) {
+            $this->assertEmailContainsMessageTo(
+                sprintf(
+                    '%s %s %s',
+                    $this->sharedStorage->get('tracking_code'),
+                    $this->translator->trans('sylius.email.shipment_confirmation.tracking_code', [], null, $localeCode),
+                    $this->translator->trans('sylius.email.shipment_confirmation.thank_you_for_transaction', [], null, $localeCode)
+                ),
+                $recipient
+            );
+        }
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void

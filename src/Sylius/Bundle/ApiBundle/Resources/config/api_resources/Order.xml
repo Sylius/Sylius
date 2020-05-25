@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.order.class%" shortName="Order">
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>order:read</attribute>
+            </attribute>
+        </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+
+            <itemOperation name="cancel">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Cancels Order</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="path">/orders/{id}/cancel</attribute>
+                <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">order:update</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="number" identifier="true" writable="false" />
+        <property name="channel" writable="false" />
+        <property name="customer" writable="false" />
+        <property name="payments" writable="false" />
+        <property name="shipments" writable="false" />
+        <property name="state" writable="false" />
+        <property name="paymentState" writable="false" />
+        <property name="total" writable="false" />
+        <property name="orderPromotionTotal" writable="false" />
+    </resource>
+</resources>

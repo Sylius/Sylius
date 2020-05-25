@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface;
 use Sylius\Bundle\UserBundle\Provider\UserProviderInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,13 +65,19 @@ final class ImpersonateUserController
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
+        /** @var UserInterface $user */
         $user = $this->userProvider->loadUserByUsername($username);
 
         $this->impersonator->impersonate($user);
 
         $this->addFlash($request, $username);
 
-        return new RedirectResponse($request->headers->get('referer'));
+        $redirectUrl = $request->headers->get(
+            'referer',
+            $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()])
+        );
+
+        return new RedirectResponse($redirectUrl);
     }
 
     private function addFlash(Request $request, string $username): void

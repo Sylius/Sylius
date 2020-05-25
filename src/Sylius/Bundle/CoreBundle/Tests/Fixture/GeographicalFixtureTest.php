@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Countries;
 
 final class GeographicalFixtureTest extends TestCase
 {
@@ -40,7 +40,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['countries' => array_keys(Intl::getRegionBundle()->getCountryNames())],
+            ['countries' => array_keys(Countries::getNames())],
             'countries'
         );
     }

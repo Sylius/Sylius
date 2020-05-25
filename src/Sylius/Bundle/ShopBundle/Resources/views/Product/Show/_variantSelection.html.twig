@@ -1,0 +1,7 @@
+{% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.enabledVariants.empty() %}
+    {% include '@SyliusShop/Product/Show/_variantsPricing.html.twig' with {'pricing': sylius_product_variant_prices(product, sylius.channel)} %}
+{% endif %}
+
+{% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
+
+<div class="ui hidden divider"></div>

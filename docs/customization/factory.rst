@@ -35,7 +35,7 @@ For the ``ProductFactory`` run:
 
 .. code-block:: bash
 
-    $ php bin/console debug:container sylius.factory.product
+    php bin/console debug:container sylius.factory.product
 
 As a result you will get the ``Sylius\Component\Product\Factory\ProductFactory`` - this is the class that you need to decorate.
 Take its interface (``Sylius\Component\Product\Factory\ProductFactoryInterface``) and implement it.
@@ -125,4 +125,4 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
 Learn more
 ----------
 
-* :doc:`SyliusResourceBundle creating resources </components_and_bundles/bundles/SyliusResourceBundle/create_resource>`
+* `ResourceBundle documentation <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_

@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_managing_tax_categories:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.tax_category
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.taxation
+
+                - sylius.behat.context.api.admin.managing_tax_categories
+
+            filters:
+                tags: "@managing_tax_categories && @api"
+            javascript: false

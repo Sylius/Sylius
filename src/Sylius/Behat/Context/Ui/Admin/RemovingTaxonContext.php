@@ -36,6 +36,7 @@ final class RemovingTaxonContext implements Context
     /**
      * @When I remove taxon named :name
      * @When I delete taxon named :name
+     * @When I try to delete taxon named :name
      */
     public function iRemoveTaxonNamed(string $name): void
     {

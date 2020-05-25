@@ -136,7 +136,7 @@ class AddressExampleFactory extends AbstractExampleFactory
     private function assertCountryCodeIsValid(string $code): void
     {
         $country = $this->countryRepository->findOneBy(['code' => $code]);
-        Assert::notNull($country);
+        Assert::notNull($country, sprintf('Trying to create address with invalid country code: "%s"', $code));
     }
 
     /**

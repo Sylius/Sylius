@@ -32,6 +32,7 @@ sylius:
                 postcode: PSČ
                 street: Ulice
             contact_email: Kontaktní e-mail
+            countries: Země
             currencies: Měny
             currency_base: Základní měna
             account_verification_required: Je požadováno ověření účtu?
@@ -100,7 +101,6 @@ sylius:
             file: Vybrat obrázek
         user:
             billing_address: Fakturační adresa
-            different_billing_address: Použít jinou adresu pro fakturaci?
             enabled: Povoleno
             first_name: Křestní Jméno
             groups: Skupiny

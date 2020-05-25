@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Locale\Context;
 
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\NewLocaleProviderInterface;
 
 final class ProviderBasedLocaleContext implements LocaleContextInterface
 {
@@ -23,6 +24,12 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
     public function __construct(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;
+        if ($localeProvider instanceof NewLocaleProviderInterface) {
+            @trigger_error(
+                sprintf('Not passing in an instance of %s is deprecated and will be removed in Sylius 2.0', NewLocaleProviderInterface::class),
+                \E_USER_DEPRECATED
+            );
+        }
     }
 
     /**
@@ -31,9 +38,15 @@ final class ProviderBasedLocaleContext implements LocaleContextInterface
     public function getLocaleCode(): string
     {
         $localeCode = $this->localeProvider->getDefaultLocaleCode();
+        if ($this->localeProvider instanceof NewLocaleProviderInterface) {
+            $isLocaleCodeAvailable = $this->localeProvider->isLocaleCodeAvailable($localeCode);
+        } else {
+            $isLocaleCodeAvailable = in_array($localeCode, $this->localeProvider->getAvailableLocalesCodes(), true);
+        }
 
-        if (!$this->localeProvider->isLocaleCodeAvailable($localeCode)) {
+        if (!$isLocaleCodeAvailable) {
             $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
+
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);
         }
 

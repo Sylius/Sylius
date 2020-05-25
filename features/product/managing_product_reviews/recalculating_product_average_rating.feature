@@ -3,7 +3,7 @@ Feature: Recalculating product average rating
     In order to have my product's average rating properly calculated
     As an Administrator
     I want to have product's average rating recalculated after review rate change
-    
+
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Lamborghini Gallardo Model"

@@ -8,16 +8,16 @@ Feature: Viewing a latest product list
         Given the store operates on a single channel in "United States"
         And this channel has "Belvedere Vodka", "Coconaut Liqeur", "Chopin Chocolate Liquer" and "Capitan Morgan White Rum" products
 
-    @ui
+    @ui @api
     Scenario: Viewing latest products
         When I check latest products
-        Then I should see 4 products in the list
+        Then I should see 3 products in the list
 
-    @ui
+    @ui @api
     Scenario: Viewing latest products with translation
         Given the product "Belvedere Vodka" is named "Wódka Belveder" in the "Polish (Poland)" locale
         And the product "Coconaut Liqeur" is named "Likier kokosowy" in the "Polish (Poland)" locale
         And the product "Chopin Chocolate Liquer" is named "Chopin Likier Czekoladowy" in the "Polish (Poland)" locale
         And the product "Capitan Morgan White Rum" is named "Capitan Morgan Biały Rum" in the "Polish (Poland)" locale
         When I check latest products
-        Then I should see 4 products in the list
+        Then I should see 3 products in the list

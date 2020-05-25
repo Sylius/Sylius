@@ -19,28 +19,19 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'sylius_shop_cart_summary';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getGrandTotal()
+    public function getGrandTotal(): string
     {
         $totalElement = $this->getElement('grand_total');
 
         return $totalElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBaseGrandTotal()
+    public function getBaseGrandTotal(): string
     {
         $totalElement = $this->getElement('base_grand_total');
 
@@ -72,10 +63,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingTotal()
+    public function getShippingTotal(): string
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
@@ -87,40 +75,28 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $this->hasElement('shipping_total');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionTotal()
+    public function getPromotionTotal(): string
     {
         $shippingTotalElement = $this->getElement('promotion_total');
 
         return $shippingTotalElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemTotal($productName)
+    public function getItemTotal(string $productName): string
     {
         $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
         return $itemTotalElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemUnitRegularPrice($productName)
+    public function getItemUnitRegularPrice(string $productName): int
     {
         $regularUnitPrice = $this->getElement('product_unit_regular_price', ['%name%' => $productName]);
 
         return $this->getPriceFromString(trim($regularUnitPrice->getText()));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getItemUnitPrice($productName)
+    public function getItemUnitPrice(string $productName): int
     {
         $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
 
@@ -134,77 +110,50 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $itemImage->getAttribute('src');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isItemDiscounted($productName)
+    public function isItemDiscounted(string $productName): bool
     {
         return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function removeProduct($productName)
+    public function removeProduct(string $productName): void
     {
-        $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'button.sylius-cart-remove-button')->press();
+        $this->getElement('delete_button', ['%name%' => $productName])->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function applyCoupon($couponCode)
+    public function applyCoupon(string $couponCode): void
     {
         $this->getElement('coupon_field')->setValue($couponCode);
         $this->getElement('apply_coupon_button')->press();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function changeQuantity($productName, $quantity)
+    public function changeQuantity(string $productName, string $quantity): void
     {
-        $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'input[type=number]')->setValue($quantity);
-
+        $this->getElement('item_quantity_input', ['%name%' => $productName])->setValue($quantity);
         $this->getElement('save_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isSingleItemOnPage()
+    public function isSingleItemOnPage(): bool
     {
-        $items = $this->getElement('cart_items')->findAll('css', 'tbody > tr');
+        $items = $this->getElement('cart_items')->findAll('css', '[data-test-cart-product-row]');
 
         return 1 === count($items);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItemNamed($name)
+    public function hasItemNamed(string $name): bool
     {
-        return $this->hasItemWith($name, '.sylius-product-name');
+        return $this->hasItemWith($name, '[data-test-product-name]');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItemWithVariantNamed($variantName)
+    public function hasItemWithVariantNamed(string $variantName): bool
     {
-        return $this->hasItemWith($variantName, '.sylius-product-variant-name');
+        return $this->hasItemWith($variantName, '[data-test-product-variant-name]');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItemWithOptionValue($productName, $optionName, $optionValue)
+    public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
 
-        $selector = sprintf('.sylius-product-options > .item[data-sylius-option-name="%s"]', $optionName);
+        $selector = sprintf('[data-test-product-options] [data-test-option-name="%s"]', $optionName);
         $optionValueElement = $itemElement->find('css', $selector);
 
         if (null === $optionValueElement) {
@@ -214,18 +163,12 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $optionValue === $optionValueElement->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasItemWithCode($code)
+    public function hasItemWithCode(string $code): bool
     {
-        return $this->hasItemWith($code, '.sylius-product-variant-code');
+        return $this->hasItemWith($code, '[data-test-product-variant-code]');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
@@ -236,28 +179,17 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
-        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
+        return false !== strpos($this->getElement('flash_message')->getText(), 'Your cart is empty');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuantity($productName)
+    public function getQuantity(string $productName): int
     {
-        $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-
-        return (int) $itemElement->find('css', 'input[type=number]')->getValue();
+        return (int) $this->getElement('item_quantity_input', ['%name%' => $productName])->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCartTotal()
+    public function getCartTotal(): string
     {
         $cartTotalText = $this->getElement('cart_total')->getText();
 
@@ -268,74 +200,64 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return trim($cartTotalText);
     }
 
-    public function clearCart()
+    public function clearCart(): void
     {
         $this->getElement('clear_button')->click();
     }
 
-    public function updateCart()
+    public function updateCart(): void
     {
         $this->getElement('update_button')->click();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function waitForRedirect($timeout)
+    public function waitForRedirect(int $timeout): void
     {
         $this->getDocument()->waitFor($timeout, function () {
             return $this->isOpen();
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionCouponValidationMessage()
+    public function getPromotionCouponValidationMessage(): string
     {
         return $this->getElement('promotion_coupon_validation_message')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'apply_coupon_button' => 'button:contains("Apply coupon")',
-            'base_grand_total' => '#sylius-cart-base-grand-total',
-            'cart_items' => '#sylius-cart-items',
-            'cart_total' => '#sylius-cart-total',
-            'clear_button' => '#sylius-cart-clear',
-            'coupon_field' => '#sylius_cart_promotionCoupon',
-            'grand_total' => '#sylius-cart-grand-total',
-            'item_image' => '#sylius-cart-items tbody tr:nth-child(%number%) img',
-            'no_taxes' => '#sylius-cart-tax-none',
-            'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
-            'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
-            'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
-            'product_unit_price' => '#sylius-cart-items tr:contains("%name%") .sylius-unit-price',
-            'product_unit_regular_price' => '#sylius-cart-items tr:contains("%name%") .sylius-regular-unit-price',
-            'promotion_coupon_validation_message' => '#sylius-coupon .sylius-validation-error',
-            'promotion_total' => '#sylius-cart-promotion-total',
-            'save_button' => '#sylius-save',
-            'shipping_total' => '#sylius-cart-shipping-total',
-            'tax_excluded' => '#sylius-cart-tax-excluded',
-            'tax_included' => '#sylius-cart-tax-included',
-            'update_button' => '#sylius-cart-update',
-            'validation_errors' => '.sylius-validation-error',
+            'apply_coupon_button' => '[data-test-apply-coupon-button]',
+            'base_grand_total' => '[data-test-cart-base-grand-total]',
+            'cart_items' => '[data-test-cart-items]',
+            'cart_total' => '[data-test-cart-total]',
+            'clear_button' => '[data-test-cart-clear-button]',
+            'coupon_field' => '[data-test-cart-promotion-coupon-input]',
+            'delete_button' => '[data-test-cart-remove-button="%name%"]',
+            'flash_message' => '[data-test-flash-message]',
+            'grand_total' => '[data-test-cart-grand-total]',
+            'item_image' => '[data-test-cart-item="%number%"] [data-test-main-image]',
+            'item_quantity_input' => '[data-test-cart-item-quantity-input="%name%"]',
+            'no_taxes' => '[data-test-cart-no-tax]',
+            'product_row' => '[data-test-cart-product-row="%name%"]',
+            'product_total' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-subtotal]',
+            'product_unit_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-unit-price]',
+            'product_unit_regular_price' => '[data-test-cart-product-row="%name%"] [data-test-cart-product-regular-unit-price]',
+            'promotion_coupon_validation_message' => '[data-test-cart-promotion-coupon] [data-test-validation-error]',
+            'promotion_total' => '[data-test-cart-promotion-total]',
+            'save_button' => '[data-test-apply-coupon-button]',
+            'shipping_total' => '[data-test-cart-shipping-total]',
+            'tax_excluded' => '[data-test-cart-tax-exluded]',
+            'tax_included' => '[data-test-cart-tax-included]',
+            'update_button' => '[data-test-cart-update-button]',
+            'validation_errors' => '[data-test-validation-error]',
         ]);
     }
 
     /**
-     * @param string $attributeName
      * @param string|array $selector
-     *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
-    private function hasItemWith($attributeName, $selector)
+    private function hasItemWith(string $attributeName, $selector): bool
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 

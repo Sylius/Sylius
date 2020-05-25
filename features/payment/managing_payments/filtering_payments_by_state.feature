@@ -17,7 +17,7 @@ Feature: Filtering payments by state
         And there is a "Failed" "#00000006" order with "Apple" product
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "New"
         When I browse payments
         And I choose "New" as a payment state
@@ -26,49 +26,49 @@ Feature: Filtering payments by state
         And I should see the payment of the "#00000001" order
         And I should see also the payment of the "#00000005" order
         And I should see also the payment of the "#00000006" order
-        But I should not see a payment of order "#00000002"
+        But I should not see the payment of the "#00000002" order
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Completed"
         When I browse payments
         And I choose "Completed" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000002" order
-        But I should not see a payment of order "#00000003"
+        But I should not see the payment of the "#00000003" order
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Processing"
         When I browse payments
         And I choose "Processing" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000003" order
-        But I should not see a payment of order "#00000004"
+        But I should not see the payment of the "#00000004" order
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Refunded"
         When I browse payments
         And I choose "Refunded" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000004" order
-        But I should not see a payment of order "#00000005"
+        But I should not see the payment of the "#00000005" order
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Cancelled"
         When I browse payments
         And I choose "Cancelled" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000005" order
-        But I should not see a payment of order "#00000006"
+        But I should not see the payment of the "#00000006" order
 
-    @ui
+    @ui @api
     Scenario: Filtering payments in state "Failed"
         When I browse payments
         And I choose "Failed" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000006" order
-        But I should not see a payment of order "#00000001"
+        But I should not see the payment of the "#00000001" order
