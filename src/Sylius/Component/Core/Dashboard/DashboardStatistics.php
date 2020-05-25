@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
+use Sylius\Component\Core\Model\Channel;
+use Sylius\Component\Core\Model\ChannelInterface;
+
 class DashboardStatistics
 {
     /** @var int */
@@ -24,14 +27,23 @@ class DashboardStatistics
     /** @var int */
     private $numberOfNewCustomers;
 
+    /** @var ChannelInterface */
+    private $channel;
+
     /**
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers)
+    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers, ChannelInterface $channel = null)
     {
         $this->totalSales = $totalSales;
         $this->numberOfNewOrders = $numberOfNewOrders;
         $this->numberOfNewCustomers = $numberOfNewCustomers;
+        $this->channel = $channel;
+    }
+
+    public function getChannel(): ?ChannelInterface
+    {
+        return $this->channel;
     }
 
     public function getTotalSales(): int

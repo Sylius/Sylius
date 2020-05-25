@@ -36,9 +36,9 @@ class StatisticsComponent {
         dataType: 'json',
         accept: 'application/json'
       }).done((response) => {
-        this.updateSummaryValues(response.summary);
+        this.updateSummaryValues(response.statistics);
         this.updateButtonsState(e.target);
-        this.updateGraph(response.chart);
+        this.updateGraph(response.sales_summary);
       }).always(() => {
         this.toggleLoadingState(false);
       });
@@ -55,8 +55,8 @@ class StatisticsComponent {
   }
 
   updateGraph(data) {
-    this.chart.data.labels = data.labels;
-    this.chart.data.datasets[0].data = data.values;
+    this.chart.data.labels = data.months;
+    this.chart.data.datasets[0].data = data.sales;
     this.chart.update();
   }
 
