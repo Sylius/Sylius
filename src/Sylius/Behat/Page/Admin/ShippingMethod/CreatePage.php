@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -57,7 +58,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function checkChannel($channelName): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver  || $this->getDriver() instanceof ChromeDriver) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
 
             return;
