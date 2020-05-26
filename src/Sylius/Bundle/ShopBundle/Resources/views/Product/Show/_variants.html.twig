@@ -23,7 +23,9 @@
                     </div>
                 {% endif %}
             </td>
-            <td class="sylius-product-variant-price">{{ money.calculatePrice(variant) }}</td>
+            <td class="sylius-product-variant-price" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>
+                {{ money.calculatePrice(variant) }}
+            </td>
             <td class="right aligned">
                 {{ form_widget(form.cartItem.variant[key], {'label': false}) }}
             </td>

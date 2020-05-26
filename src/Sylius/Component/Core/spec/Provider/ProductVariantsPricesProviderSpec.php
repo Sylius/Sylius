@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Core\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 {
-    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator): void
+    function let(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator): void
     {
         $this->beConstructedWith($productVariantPriceCalculator);
     }
@@ -45,7 +45,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
         ProductVariantInterface $whiteSmallTShirt,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
     ): void {
         $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
@@ -68,9 +68,13 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         );
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculateOriginal($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
         $productVariantPriceCalculator->calculate($whiteSmallTShirt, ['channel' => $channel])->willReturn(1500);
+        $productVariantPriceCalculator->calculateOriginal($whiteSmallTShirt, ['channel' => $channel])->willReturn(2000);
         $productVariantPriceCalculator->calculate($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateOriginal($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
         $productVariantPriceCalculator->calculate($whiteLargeTShirt, ['channel' => $channel])->willReturn(2500);
+        $productVariantPriceCalculator->calculateOriginal($whiteLargeTShirt, ['channel' => $channel])->willReturn(3000);
 
         $black->getOptionCode()->willReturn('t_shirt_color');
         $white->getOptionCode()->willReturn('t_shirt_color');
@@ -92,6 +96,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'small',
                 'value' => 1500,
+                'original-price' => 2000,
             ],
             [
                 't_shirt_color' => 'black',
@@ -102,6 +107,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'large',
                 'value' => 2500,
+                'original-price' => 3000,
             ],
         ]);
     }

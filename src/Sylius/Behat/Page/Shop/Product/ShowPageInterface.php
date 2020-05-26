@@ -56,6 +56,8 @@ interface ShowPageInterface extends PageInterface
 
     public function getOriginalPrice(): string;
 
+    public function isOriginalPriceVisible(): bool;
+
     public function hasAddToCartButton(): bool;
 
     public function hasAssociation(string $productAssociationName): bool;

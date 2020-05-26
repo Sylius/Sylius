@@ -3,11 +3,11 @@
 {% set variant = product|sylius_resolve_variant %}
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 
-{% if hasDiscount %}
-    <span class="ui small header" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
+<span class="ui small header" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
+    {% if hasDiscount %}
         <del>{{ money.calculateOriginalPrice(variant) }}</del>
-    </span>
-{% endif %}
+    {% endif %}
+</span>
 
 <span class="ui huge header" id="product-price" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
     {{ money.calculatePrice(variant) }}
