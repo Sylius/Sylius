@@ -71,6 +71,13 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      */
     public function removeChild(self $taxon): void;
 
+    /**
+     * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
+     */
+    public function getEnabledChildren(): Collection;
+
     public function getName(): ?string;
 
     public function setName(?string $name): void;

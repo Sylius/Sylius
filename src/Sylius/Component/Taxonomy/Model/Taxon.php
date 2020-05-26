@@ -155,6 +155,18 @@ class Taxon implements TaxonInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabledChildren(): Collection
+    {
+        return $this->children->filter(
+            function (TaxonInterface $childTaxon) {
+                return $childTaxon->isEnabled();
+            }
+        );
+    }
+
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
