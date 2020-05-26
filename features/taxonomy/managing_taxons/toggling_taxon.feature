@@ -1,5 +1,5 @@
 @managing_taxons
-Feature: Toggle the taxon
+Feature: Toggling the taxon
     In order to associate products to a taxon while it isn't published to customers
     As an Administrator
     I want to create a disabled taxon and toggle the taxon later
@@ -19,7 +19,7 @@ Feature: Toggle the taxon
         And I add it
         Then I should be notified that it has been successfully created
         And the "Jeans" taxon should appear in the registry
-        And it should be marked as disabled
+        And it should be disabled
 
     @ui
     Scenario: Enabling a Taxon
@@ -28,7 +28,7 @@ Feature: Toggle the taxon
         When I enable it
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should be marked as enabled
+        And it should be enabled
 
     @ui
     Scenario: Disabling a Taxon
@@ -37,4 +37,4 @@ Feature: Toggle the taxon
         When I disable it
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should be marked as disabled
+        And it should be disabled

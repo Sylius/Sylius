@@ -17,5 +17,5 @@ interface VerticalMenuElementInterface
 {
     public function getMenuItems(): array;
 
-    public function hasGoLevelUpLink(): bool;
+    public function canNavigateToParentTaxon(): bool;
 }

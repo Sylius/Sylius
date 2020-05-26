@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Element\Shop\MenuElementInterface;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
@@ -626,11 +625,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^I should not see go level up link in the vertical menu$/
+     * @Then I should not be able to navigate to parent taxon
      */
-    public function iShouldNotSeeGoLevelUpLinkInTheVerticalMenu()
+    public function iShouldNotBeAbleToNavigateToParentTaxon()
     {
-        Assert::false($this->verticalMenuElement->hasGoLevelUpLink());
+        Assert::false($this->verticalMenuElement->canNavigateToParentTaxon());
     }
 
     /**

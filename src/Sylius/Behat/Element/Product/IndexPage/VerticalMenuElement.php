@@ -27,9 +27,10 @@ final class VerticalMenuElement extends Element implements VerticalMenuElementIn
         }, $menu->findAll('css', '[data-test-vertical-menu-item]'));
     }
 
-    public function hasGoLevelUpLink(): bool
+    public function canNavigateToParentTaxon(): bool
     {
         $menu = $this->getElement('vertical-menu');
+
         return $menu->find('css', '[data-test-vertical-menu-go-level-up]') !== null;
     }
 

@@ -1,8 +1,8 @@
 @viewing_products
 Feature: Accessing a disabled taxon
     In order to have a good navigation
-    As a visitor
-    I want to be able to be informed that a taxon is disabled
+    As a Visitor
+    I want to be informed that a taxon is not available
 
     Background:
         Given the store operates on a single channel in "United States"

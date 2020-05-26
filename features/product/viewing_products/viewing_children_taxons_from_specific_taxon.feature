@@ -1,8 +1,8 @@
 @viewing_products
-Feature: Viewving children taxons of current taxon on the sidebar
-    In order to be able to easily browse children taxons
+Feature: Viewing children taxons of current taxon
+    In order to easily browse children taxons
     As a Visitor
-    I want to see the children taxon list of current taxon on the sidebar
+    I want to see the children taxon list of current taxon
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -19,7 +19,7 @@ Feature: Viewving children taxons of current taxon on the sidebar
         And I should see "T-Shirts" and "Trousers" in the vertical menu
 
     @ui
-    Scenario: Cannot go to parent disabled taxon from the vertical menu
+    Scenario: Cannot navigate to disabled parent taxon
         Given the "Clothes" taxon is disabled
         When I try to browse products from taxon "T-Shirts"
-        Then I should not see go level up link in the vertical menu
+        Then I should not be able to navigate to parent taxon

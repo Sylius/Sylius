@@ -1,6 +1,6 @@
 @homepage
 Feature: Viewing only enabled taxons in taxon menu
-    In order to not access disabled taxons
+    In order to browse only available categories
     As a Visitor
     I want to see only enabled taxons in taxon menu
 
