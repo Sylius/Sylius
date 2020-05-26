@@ -590,7 +590,7 @@ final class ProductContext implements Context
     /**
      * @When /^I try to browse products from (taxon "([^"]+)")$/
      */
-    public function iTryToBrowseProductsFrom(TaxonInterface $taxon)
+    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
     {
         $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
     }
@@ -598,7 +598,7 @@ final class ProductContext implements Context
     /**
      * @Then I should be informed that the taxon does not exist
      */
-    public function iShouldBeInformedThatTheTaxonDoesNotExist()
+    public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
     {
         Assert::eq($this->errorPage->getTitle(), 'Requested page is invalid.');
     }
@@ -606,7 +606,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see :firstMenuItem and :secondMenuItem in the vertical menu
      */
-    public function iShouldSeeInTheVerticalMenu(string ...$menuItems)
+    public function iShouldSeeInTheVerticalMenu(string ...$menuItems): void
     {
         Assert::allOneOf($menuItems, $this->verticalMenuElement->getMenuItems());
     }
@@ -614,7 +614,7 @@ final class ProductContext implements Context
     /**
      * @Then I should not see :firstMenuItem in the vertical menu
      */
-    public function iShouldNotSeeInTheVerticalMenu(string ...$menuItems)
+    public function iShouldNotSeeInTheVerticalMenu(string ...$menuItems): void
     {
         $actualMenuItems = $this->verticalMenuElement->getMenuItems();
         foreach ($menuItems as $menuItem) {
@@ -627,7 +627,7 @@ final class ProductContext implements Context
     /**
      * @Then I should not be able to navigate to parent taxon
      */
-    public function iShouldNotBeAbleToNavigateToParentTaxon()
+    public function iShouldNotBeAbleToNavigateToParentTaxon(): void
     {
         Assert::false($this->verticalMenuElement->canNavigateToParentTaxon());
     }

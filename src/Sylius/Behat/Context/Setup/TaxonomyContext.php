@@ -132,7 +132,7 @@ final class TaxonomyContext implements Context
      * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/
      * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames)
+    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames): void
     {
         foreach ($taxonsNames as $taxonName) {
             $taxon->addChild($this->createTaxon($taxonName));
@@ -145,7 +145,7 @@ final class TaxonomyContext implements Context
     /**
      * @Given /^the ("[^"]+" taxon)(?:| also) is enabled/
      */
-    public function theTaxonIsEnabled(TaxonInterface $taxon)
+    public function theTaxonIsEnabled(TaxonInterface $taxon): void
     {
         $taxon->setEnabled(true);
 
@@ -156,7 +156,7 @@ final class TaxonomyContext implements Context
     /**
      * @Given /^the ("[^"]+" taxon)(?:| also) is disabled$/
      */
-    public function theTaxonIsDisabled(TaxonInterface $taxon)
+    public function theTaxonIsDisabled(TaxonInterface $taxon): void
     {
         $taxon->setEnabled(false);
 
