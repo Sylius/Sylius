@@ -91,7 +91,7 @@ You can also change **maximum order item quantity** parameter in ``config/servic
 
     # config/services.xml
     <parameters>
-        <parameter key="sylius.order_item_quantity_modifier.limit">int</parameter> # by default it is 9999
+        <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter> # by default it is 9999
     </parameters>
 
 Add the item to the order. And then call the **CompositeOrderProcessor** on the order to have
