@@ -1,4 +1,7 @@
 {
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "ocramius/package-versions": {
         "version": "1.5.1"
     },
@@ -6,7 +9,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -349,5 +352,8 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.15.0"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     }
 }

@@ -36,7 +36,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "phpspec/phpspec": "^5.0",
+        "phpspec/phpspec": "^6.1",
         "phpunit/phpunit": "^7.0",
         "symfony/dependency-injection": "^4.4",
         "symfony/form": "^4.4",
