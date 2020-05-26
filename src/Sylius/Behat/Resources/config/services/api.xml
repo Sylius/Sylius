@@ -13,129 +13,92 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.behat.api_platform_client.administrator" class="Sylius\Behat\Client\ApiPlatformClient">
+        <service id="sylius.behat.api_platform_client" class="Sylius\Behat\Client\ApiPlatformClient" abstract="true">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.api_platform_client.administrator" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>administrators</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.avatar_image" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.avatar_image" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>avatar-images</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.channel" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.channel" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>channels</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.country" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.country" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>countries</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.currency" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.currency" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>currencies</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.customer_group" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.customer_group" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>customer-groups</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.exchange_rate" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.exchange_rate" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>exchange-rates</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.locale" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.locale" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>locales</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.payment" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.payment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>payments</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.product_association_type" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.product_association_type" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-association-types</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.product_option" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.product_option" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-options</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.product_review" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.product_review" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-reviews</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.product" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.product" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>products</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.province" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.province" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>provinces</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.shipping_category" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.shipping_category" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>shipping-categories</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.shipping_method" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.shipping_method" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>shipping-methods</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.tax_category" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.tax_category" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>tax-categories</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.shipment" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.shipment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>shipments</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.order" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.order" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>orders</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.taxon" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.taxon" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>taxons</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.zone" class="Sylius\Behat\Client\ApiPlatformClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+        <service id="sylius.behat.api_platform_client.zone" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>zones</argument>
         </service>
 
