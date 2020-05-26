@@ -17,6 +17,8 @@ matrix:
             env:
                 - SYLIUS_SUITE="application"
                 - SYMFONY_VERSION="4.4.*"
+            services:
+                - mysql
             addons:
                 apt:
                     sources:
@@ -24,8 +26,6 @@ matrix:
                     packages:
                         - google-chrome-stable
                 chrome: stable
-            services:
-                - mysql
         -   
             php: 7.3
             env:
@@ -33,6 +33,7 @@ matrix:
                 - SYMFONY_VERSION="4.4.*"
             services:
                 - docker
+                - mysql
             addons:
                 apt:
                     packages:
@@ -42,6 +43,8 @@ matrix:
             env:
                 - SYLIUS_SUITE="application"
                 - SYMFONY_VERSION="4.4.*"
+            services:
+                - mysql
             addons:
                 apt:
                     sources:
@@ -49,13 +52,13 @@ matrix:
                     packages:
                         - google-chrome-stable
                 chrome: stable
-            services:
-                - mysql
         -   
             php: 7.4
             env:
                 - SYLIUS_SUITE="packages"
                 - SYMFONY_VERSION="4.4.*"
+            services:
+                - mysql
             addons:
                 apt:
                     packages:
