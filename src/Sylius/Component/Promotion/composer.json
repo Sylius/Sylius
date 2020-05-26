@@ -2,7 +2,12 @@
     "name": "sylius/promotion",
     "type": "library",
     "description": "Flexible promotion management for PHP applications.",
-    "keywords": ["shop", "ecommerce", "promotion", "sylius"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "promotion",
+        "sylius"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,10 +26,9 @@
     ],
     "require": {
         "php": "^7.3",
-
         "doctrine/orm": "^2.5",
-        "sylius/registry": "^1.4",
-        "sylius/resource": "^1.0"
+        "sylius/registry": "^1.5",
+        "sylius/resource": "^1.6"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1"
@@ -32,23 +36,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Promotion\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Promotion\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Promotion\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Promotion\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

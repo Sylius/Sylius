@@ -2,7 +2,17 @@
     "name": "sylius/admin-bundle",
     "type": "symfony-bundle",
     "description": "Sylius eCommerce administration panel component.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "ui", "admin interface", "admin", "backend"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "store",
+        "webshop",
+        "sylius",
+        "ui",
+        "admin interface",
+        "admin",
+        "backend"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,7 +31,6 @@
     ],
     "require": {
         "php": "^7.3",
-
         "sylius/core-bundle": "^1.6",
         "sylius/ui-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
@@ -30,26 +39,28 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
     },
-    "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AdminBundle\\": "" }
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\AdminBundle\\": ""
+        }
+    },
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
