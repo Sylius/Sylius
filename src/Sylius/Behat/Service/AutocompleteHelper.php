@@ -25,8 +25,6 @@ abstract class AutocompleteHelper
      */
     public static function chooseValue(Session $session, NodeElement $element, $value)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
-
         static::activateAutocompleteDropdown($session, $element);
 
         $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
@@ -39,8 +37,6 @@ abstract class AutocompleteHelper
      */
     public static function chooseValues(Session $session, NodeElement $element, array $values)
     {
-        Assert::isInstanceOf($session->getDriver(), Selenium2Driver::class);
-
         static::activateAutocompleteDropdown($session, $element);
 
         foreach ($values as $value) {
@@ -66,7 +62,7 @@ abstract class AutocompleteHelper
     {
         $session->wait(5000, sprintf(
             '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            $element->getXpath()
+            str_replace('"', '\"', $element->getXpath())
         ));
     }
 }
