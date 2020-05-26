@@ -239,13 +239,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
+            'enabled' => '#sylius_taxon_enabled',
             'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
             'slug' => '#sylius_taxon_translations_%language%_slug',
             'toggle_taxon_slug_modification_button' => '[data-locale="%locale%"] .toggle-taxon-slug-modification',
-            'enabled' => '#sylius_taxon_enabled',
         ]);
     }
 
