@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Service\JQueryHelper;
@@ -34,7 +35,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -44,7 +45,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('quantity')->setValue($quantity);
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -55,7 +56,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         }
     }
@@ -73,7 +74,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $attributesTable = $this->getElement('attributes');
 
         $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
+        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
             try {
                 $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
                 if (!$attributesTab->hasAttribute('[data-test-active]')) {
@@ -229,7 +230,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
 
         $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
+        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
             $variantRadio->click();
 
             return;

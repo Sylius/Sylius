@@ -382,6 +382,12 @@ final class ManagingExchangeRatesContext implements Context
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency
     ): bool {
-        return $this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency)['ratio'] === $ratio;
+        $exchangeRateResponse = $this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency);
+
+        if (null === $exchangeRateResponse) {
+            return false;
+        }
+
+        return $exchangeRateResponse['ratio'] === $ratio;
     }
 }

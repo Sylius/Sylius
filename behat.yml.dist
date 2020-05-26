@@ -14,6 +14,8 @@ default:
             snippets: false
 
     extensions:
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
         Lakion\Behat\MinkDebugExtension:
             directory: etc/build
             clean_start: false
@@ -21,12 +23,16 @@ default:
 
         Behat\MinkExtension:
             files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
-            base_url: "https://localhost:8080/"
+            base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: chrome
+            javascript_session: chrome_headless
             sessions:
                 symfony:
                     symfony: ~
+                chrome_headless:
+                    chrome:
+                        api_url: http://127.0.0.1:9222
+                        validate_certificate: false
                 chrome:
                     selenium2:
                         browser: chrome
@@ -41,6 +47,8 @@ default:
                                     - "start-maximized"
                                     - "no-sandbox"
                             extra_capabilities:
+                                acceptSslCerts: true
+                                acceptInsecureCerts: true
                                 unexpectedAlertBehaviour: accept
                                 goog:chromeOptions:
                                     w3c: false # https://github.com/Sylius/Sylius/issues/10561
