@@ -34,15 +34,17 @@ final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterfac
         $strategies = [];
 
         foreach ($container->findTaggedServiceIds('sylius.taxation.calculation_strategy') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged tax calculation strategies need to have `type` and `label` attributes.');
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'], $attribute['label'])) {
+                    throw new \InvalidArgumentException('Tagged tax calculation strategies need to have `type` and `label` attributes.');
+                }
+
+                $priority = (int)($attribute['priority'] ?? 0);
+
+                $strategies[$attribute['type']] = $attribute['label'];
+
+                $registry->addMethodCall('register', [new Reference($id), $priority]);
             }
-
-            $priority = (int) ($attributes[0]['priority'] ?? 0);
-
-            $strategies[$attributes[0]['type']] = $attributes[0]['label'];
-
-            $registry->addMethodCall('register', [new Reference($id), $priority]);
         }
 
         $container->setParameter('sylius.tax_calculation_strategies', $strategies);

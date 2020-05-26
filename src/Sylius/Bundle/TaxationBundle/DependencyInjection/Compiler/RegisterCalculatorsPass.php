@@ -32,14 +32,16 @@ final class RegisterCalculatorsPass implements CompilerPassInterface
         $calculators = [];
 
         foreach ($container->findTaggedServiceIds('sylius.tax_calculator') as $id => $attributes) {
-            if (!isset($attributes[0]['calculator'])) {
-                throw new \InvalidArgumentException('Tagged taxation calculators needs to have `calculator` attribute.');
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['calculator'])) {
+                    throw new \InvalidArgumentException('Tagged taxation calculators needs to have `calculator` attribute.');
+                }
+
+                $name = $attribute['calculator'];
+                $calculators[$name] = $name;
+
+                $calculatorRegistry->addMethodCall('register', [$name, new Reference($id)]);
             }
-
-            $name = $attributes[0]['calculator'];
-            $calculators[$name] = $name;
-
-            $calculatorRegistry->addMethodCall('register', [$name, new Reference($id)]);
         }
 
         $container->setParameter('sylius.tax_calculators', $calculators);

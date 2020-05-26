@@ -33,13 +33,15 @@ final class RegisterRuleCheckersPass implements CompilerPassInterface
 
         $promotionRuleCheckerTypeToLabelMap = [];
         foreach ($container->findTaggedServiceIds('sylius.promotion_rule_checker') as $id => $attributes) {
-            if (!isset($attributes[0]['type'], $attributes[0]['label'], $attributes[0]['form_type'])) {
-                throw new \InvalidArgumentException('Tagged rule checker `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
-            }
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'], $attribute['label'], $attribute['form_type'])) {
+                    throw new \InvalidArgumentException('Tagged rule checker `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
+                }
 
-            $promotionRuleCheckerTypeToLabelMap[$attributes[0]['type']] = $attributes[0]['label'];
-            $promotionRuleCheckerRegistry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
-            $promotionRuleCheckerFormTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form_type']]);
+                $promotionRuleCheckerTypeToLabelMap[$attribute['type']] = $attribute['label'];
+                $promotionRuleCheckerRegistry->addMethodCall('register', [$attribute['type'], new Reference($id)]);
+                $promotionRuleCheckerFormTypeRegistry->addMethodCall('add', [$attribute['type'], 'default', $attribute['form_type']]);
+            }
         }
 
         $container->setParameter('sylius.promotion_rules', $promotionRuleCheckerTypeToLabelMap);

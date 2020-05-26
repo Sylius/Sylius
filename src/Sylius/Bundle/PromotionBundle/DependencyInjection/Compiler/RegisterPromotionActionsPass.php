@@ -33,13 +33,15 @@ final class RegisterPromotionActionsPass implements CompilerPassInterface
 
         $promotionActionTypeToLabelMap = [];
         foreach ($container->findTaggedServiceIds('sylius.promotion_action') as $id => $attributes) {
-            if (!isset($attributes[0]['type'], $attributes[0]['label'], $attributes[0]['form_type'])) {
-                throw new \InvalidArgumentException('Tagged promotion action `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
-            }
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'], $attribute['label'], $attribute['form_type'])) {
+                    throw new \InvalidArgumentException('Tagged promotion action `' . $id . '` needs to have `type`, `form_type` and `label` attributes.');
+                }
 
-            $promotionActionTypeToLabelMap[$attributes[0]['type']] = $attributes[0]['label'];
-            $promotionActionRegistry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
-            $promotionActionFormTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form_type']]);
+                $promotionActionTypeToLabelMap[$attribute['type']] = $attribute['label'];
+                $promotionActionRegistry->addMethodCall('register', [$attribute['type'], new Reference($id)]);
+                $promotionActionFormTypeRegistry->addMethodCall('add', [$attribute['type'], 'default', $attribute['form_type']]);
+            }
         }
 
         $container->setParameter('sylius.promotion_actions', $promotionActionTypeToLabelMap);

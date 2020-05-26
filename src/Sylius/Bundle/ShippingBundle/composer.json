@@ -29,6 +29,7 @@
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
         "doctrine/orm": "^2.5",

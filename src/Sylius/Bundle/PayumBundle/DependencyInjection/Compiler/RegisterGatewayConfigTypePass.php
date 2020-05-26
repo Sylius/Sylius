@@ -33,16 +33,18 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
 
         foreach ($gatewayConfigurationTypes as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
+            foreach ($attributes as $attribute) {
+                if (!isset($attribute['type'], $attribute['label'])) {
+                    throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
+                }
+
+                $gatewayFactories[$attribute['type']] = $attribute['label'];
+
+                $formRegistry->addMethodCall(
+                    'add',
+                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()]
+                );
             }
-
-            $gatewayFactories[$attributes[0]['type']] = $attributes[0]['label'];
-
-            $formRegistry->addMethodCall(
-                'add',
-                ['gateway_config', $attributes[0]['type'], $container->getDefinition($id)->getClass()]
-            );
         }
 
         $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.payum_gateway_factory.offline']);
