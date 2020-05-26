@@ -6,4 +6,4 @@ parameters:
     database_name: sylius_taxation_test
     database_user: root
     database_password: null
-    database_version: 5.5
+    database_version: 5.7
