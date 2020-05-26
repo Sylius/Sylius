@@ -149,7 +149,6 @@ final class TaxonomyContext implements Context
     {
         $taxon->setEnabled(true);
 
-        $this->objectManager->persist($taxon);
         $this->objectManager->flush();
     }
 
@@ -160,7 +159,6 @@ final class TaxonomyContext implements Context
     {
         $taxon->setEnabled(false);
 
-        $this->objectManager->persist($taxon);
         $this->objectManager->flush();
     }
 
