@@ -600,7 +600,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
     {
-        Assert::eq($this->errorPage->getTitle(), 'Requested page is invalid.');
+        Assert::same($this->errorPage->getTitle(), 'Requested page is invalid.');
     }
 
     /**
