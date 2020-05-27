@@ -9,6 +9,7 @@
     <testsuites>
         <testsuite name="Sylius Test Suite">
             <directory>tests</directory>
+            <directory>src/Sylius/Bundle/AdminApiBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
