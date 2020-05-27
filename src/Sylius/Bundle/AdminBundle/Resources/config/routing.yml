@@ -12,7 +12,7 @@ sylius_admin_dashboard:
         _controller: sylius.controller.admin.dashboard:indexAction
 
 sylius_admin_dashboard_statistics:
-    path: /stats
+    path: /statistics
     defaults:
         _controller: sylius.controller.admin.dashboard:getRawData
         

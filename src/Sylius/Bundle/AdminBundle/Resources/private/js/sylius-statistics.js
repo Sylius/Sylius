@@ -25,7 +25,33 @@ class StatisticsComponent {
   }
 
   fetchData(e) {
-    const url = e.target.getAttribute('data-stats-url');
+    const date = new Date();
+    let interval = e.target.getAttribute('data-stats-button');
+    let startDate;
+    let endDate;
+
+    switch (interval) {
+      case 'year':
+        startDate = new Date(date.getFullYear(), 0, 1);
+        endDate = new Date(date.getFullYear() + 1, 0, 0);
+        interval = 'month';
+        break;
+      case 'month':
+        startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        endDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        interval = 'day';
+        break;
+      case 'week':
+        startDate = new Date(date.getTime() - 604800000);
+        endDate = new Date(date.getTime() + 604800000);
+        interval = 'day';
+        break;
+    }
+
+    var url = e.target.getAttribute('data-stats-url') +
+      '?interval=' + interval +
+      '&startDate=' + this.formatDate(startDate) +
+      '&endDate=' + this.formatDate(endDate);
 
     if (url) {
       this.toggleLoadingState(true);
@@ -71,6 +97,17 @@ class StatisticsComponent {
     } else {
       this.loader.classList.remove('active');
     }
+  }
+
+  formatDate(date) {
+    let month = `${(date.getMonth() + 1)}`;
+    let day = `${date.getDate()}`;
+    const year = `${date.getFullYear()}`;
+
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0${day}`;
+
+    return [year, month, day].join('-');
   }
 }
 

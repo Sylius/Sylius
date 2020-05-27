@@ -71,7 +71,12 @@ final class DashboardController
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return $this->statisticsController->getJsonData($channel, $request->query->get('interval'));
+        return $this->statisticsController->getJsonData(
+            $channel,
+            $request->query->get('interval'),
+            $request->query->get('startDate'),
+            $request->query->get('endDate')
+        );
     }
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface

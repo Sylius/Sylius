@@ -10,26 +10,20 @@
                 <div class="ui buttons">
                     <button
                         class="ui basic button"
-                        data-stats-button="day"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {'interval':'day'}) }}">
-                        {{ 'sylius.ui.statistics.day'|trans }}
+                        data-stats-button="week"
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
+                        {{ 'sylius.ui.statistics.2week'|trans }}
                     </button>
                     <button
                         class="ui basic button"
-                        data-stats-button="week"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {'interval':'week'}) }}">
-                        {{ 'sylius.ui.statistics.week'|trans }}
-                    </button>
-                    <button
-                        class="ui basic active button"
                         data-stats-button="month"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {'interval':'month'}) }}">
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
                         {{ 'sylius.ui.statistics.month'|trans }}
                     </button>
                     <button
-                        class="ui basic button"
+                        class="ui basic active button"
                         data-stats-button="year"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {'interval':'year'}) }}">
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
                         {{ 'sylius.ui.statistics.year'|trans }}
                     </button>
                 </div>
@@ -38,8 +32,8 @@
                 <div class="stats-grid">
                     <div class="stats-column">
                         <div class="ui tiny statistic">
-                            <div id="total-sales" data-stats-summary="sales" class="value" style="padding-bottom: 10px;">
-                                {{ money.format(statistics.total_sales, channel.base_currency_code) }}
+                            <div id="total-sales" data-stats-summary="total_sales" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.total_sales }}
                             </div>
                             <div class="label">
                                 {{ 'sylius.ui.sales'|trans }}
@@ -48,7 +42,7 @@
                     </div>
                     <div class="stats-column">
                         <div class="ui tiny statistic">
-                            <div id="new-orders" data-stats-summary="paidOrders" class="value" style="padding-bottom: 10px;">
+                            <div id="new-orders" data-stats-summary="number_of_new_orders" class="value" style="padding-bottom: 10px;">
                                 {{ statistics.number_of_new_orders }}
                             </div>
                             <div class="label">
@@ -58,7 +52,7 @@
                     </div>
                     <div class="stats-column">
                         <div class="ui tiny statistic">
-                            <div id="new-customers" data-stats-summary="customers" class="value" style="padding-bottom: 10px;">
+                            <div id="new-customers" data-stats-summary="number_of_new_customers" class="value" style="padding-bottom: 10px;">
                                 {{ statistics.number_of_new_customers }}
                             </div>
                             <div class="label">
@@ -68,8 +62,8 @@
                     </div>
                     <div class="stats-column">
                         <div class="ui tiny statistic">
-                            <div id="average-order-value" data-stats-summary="averageOrderValue" class="value" style="padding-bottom: 10px;">
-                                {{ money.format(statistics.average_order_value, channel.base_currency_code) }}
+                            <div id="average-order-value" data-stats-summary="average_order_value" class="value" style="padding-bottom: 10px;">
+                                {{ statistics.average_order_value }}
                             </div>
                             <div class="label">
                                 {{ 'sylius.ui.average_order_value'|trans }}

@@ -52,4 +52,5 @@ sylius:
             lifetime: Lifetime
             month: Month
             week: Week
+            2weeks: 2 Weeks
             year: Year

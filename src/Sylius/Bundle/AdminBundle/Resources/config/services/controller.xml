@@ -50,6 +50,7 @@
             <argument type="service" id="templating" />
             <argument type="service" id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface" />
             <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface" />
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
