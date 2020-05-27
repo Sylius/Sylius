@@ -811,7 +811,7 @@ sylius:
         there_are_no_products_to_display: 'Aucun produit'
         there_are_no_promotions_configured: 'Aucune promotion configurée'
         there_are_no_reports_created: 'Il n''y a aucun rapport créé'
-        there_are_no_reviews: 'Il n''y a aucun d''avis'
+        there_are_no_reviews: 'Il n''y a aucun avis'
         there_are_no_roles_defined: 'Il n''y a pas de rôles définis'
         there_are_no_shipments_to_display: 'Aucune méthode expédition'
         there_are_no_shipping_categories_configured: 'Aucune catégorie d''expédition définie'
