@@ -7,7 +7,7 @@ Feature: Adding a simple product to the cart
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Adding a simple product to the cart
         Given the store has a product "T-shirt banana" priced at "$12.54"
         When I add this product to the cart

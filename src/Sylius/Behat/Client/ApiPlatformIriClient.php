@@ -15,6 +15,7 @@ namespace Sylius\Behat\Client;
 
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformIriClient implements ApiIriClientInterface
@@ -33,7 +34,10 @@ final class ApiPlatformIriClient implements ApiIriClientInterface
 
     public function showByIri(string $iri): Response
     {
-        return $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
+        $request = Request::custom($iri, HttpRequest::METHOD_GET);
+        $request->authorize($this->sharedStorage->get('token'));
+
+        return $this->request($request);
     }
 
     private function request(RequestInterface $request): Response

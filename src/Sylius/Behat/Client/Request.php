@@ -49,12 +49,11 @@ final class Request implements RequestInterface
         return new self('/new-api/' . $resource, HttpRequest::METHOD_GET, $headers);
     }
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): RequestInterface
+    public static function subResourceIndex(string $resource, string $id, string $subResource): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource),
-            HttpRequest::METHOD_GET,
-            ['HTTP_Authorization' => 'Bearer ' . $token]
+            HttpRequest::METHOD_GET
         );
     }
 
@@ -94,17 +93,17 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function transition(string $resource, string $id, string $transition, string $token): RequestInterface
+    public static function transition(string $resource, string $id, string $transition): RequestInterface
     {
-        return self::customItemAction($resource, $id, HttpRequest::METHOD_PATCH, $transition, $token);
+        return self::customItemAction($resource, $id, HttpRequest::METHOD_PATCH, $transition);
     }
 
-    public static function customItemAction(string $resource, string $id, string $type, string $action, string $token): RequestInterface
+    public static function customItemAction(string $resource, string $id, string $type, string $action): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s/%s/%s', $resource, $id, $action),
             $type,
-            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
+            ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
     }
 
@@ -117,12 +116,12 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function custom(string $url, string $method, ?string $token): RequestInterface
+    public static function custom(string $url, string $method): RequestInterface
     {
         return new self(
             $url,
             $method,
-            ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_Authorization' => 'Bearer ' . $token]
+            ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
     }
 

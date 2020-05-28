@@ -44,6 +44,8 @@ interface ApiClientInterface
 
     public function upload(): Response;
 
+    public function executeCustomRequest(RequestInterface $request): Response;
+
     public function buildCreateRequest(): void;
 
     public function buildUpdateRequest(string $id): void;
