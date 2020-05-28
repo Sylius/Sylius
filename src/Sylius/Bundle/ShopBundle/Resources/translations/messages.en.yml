@@ -30,10 +30,10 @@ sylius:
             verify_your_email_address: 'Verify your email address'
     homepage:
         about_us: 'About Us'
-        about_us_content: 'Welcome to our store, your number one online shop that gives you the very best products. You can choose from the very best clothes and shoes from our offer. (You can change this by overwriting sylius.homepage.about_us_content key in your translation file)'
+        about_us_content: 'Welcome to our store, your number one online shop that gives you the very best products. You can choose from the very best clothes and shoes from our offer. (<i>You can modify this content by overriding "sylius.homepage.about_us_content" key in your translation file</i>)'
         carousel_header: 'Brace yourself! Winter is coming'
         newsletter: 'Newsletter'
-        newsletter_description: 'Subscribe to your newsletter to see new offers that are waiting for you! (You can change this by overwriting sylius.homepage.newsletter_description key in your translation file)'
+        newsletter_description: 'Subscribe to our newsletter to see new offers that are waiting for you! (<i>You can modify this content by overriding "sylius.homepage.newsletter_description" key in your translation file</i>)'
         subscribe: 'Subscribe'
     lightbox:
         image_album_label: 'Image %1 of %2'
