@@ -203,6 +203,61 @@ When you get connected please run:
     By default platform.sh creates only one instance of the database with the ``main`` name.
     Platform.sh works with the concept of an environment per branch if activated. The idea is to mimic production settings per each branch.
 
+.. rst-class:: plus-doc
+
+How to deploy Sylius Plus to Platform.sh?
+-----------------------------------------
+
+`Sylius Plus <https://sylius.com/plus/>`_ is installed to Sylius like a plugin, but it needs some changes to the Platform.sh configuration presented above to deploy it properly.
+First of all, make sure you have your project configured following the `Sylius Plus installation guide </book/installation/sylius_plus_installation>`_.
+After that, you should modify your ``.platform.app.yaml``. Configuration from step 2 should be extended by the following lines.
+
+.. code-block:: yaml
+
+    # ...
+
+    hooks:
+        build: |
+            set -e
+            yarn install --ignore-engines # without this flag you will get error related with node version conflict
+            GULP_ENV=prod yarn build
+            wkhtmltopdf -V # Sylius Plus is installed with InvoicingPlugin, so we need wkhtmltopdf to generate PDF
+
+        deploy: |
+            set -e
+            rm -rf var/cache/*
+            mkdir -p public/media/image
+            bin/console sylius:install -n
+            bin/console sylius:fixtures:load plus -n # Updating fixtures with new Sylius Plus features
+            bin/console assets:install --symlink --relative public
+            bin/console cache:clear
+
+    dependencies:
+        nodejs:
+            yarn: "*"
+            gulp-cli: "*"
+        ruby:
+            "wkhtmltopdf-binary": "> 0.12.5.1" # adding wkhtmltopdf as a one of dependencies
+
+    # ...
+
+In order to use the wkhtmltopdf (needed for Invoicing and Refunds) on server properly, you also need to add it to the ``config\packages'knp_snappy.yaml``:
+
+.. code-block:: yaml
+
+    knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     wkhtmltopdf # for local purpose was '%env(WKHTMLTOPDF_PATH)%'
+        options:    []
+    image:
+        enabled:    true
+        binary:     wkhtmltoimage # for local purpose was '%env(WKHTMLTOIMAGE_PATH)%'
+        options:    []
+
+
+All the other steps from the Sylius deployment on Platform.sh remain unchanged.
+
 7. Dive deeper
 --------------
 
