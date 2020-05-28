@@ -81,7 +81,7 @@ class StatisticsComponent {
   }
 
   updateGraph(data) {
-    this.chart.data.labels = data.months;
+    this.chart.data.labels = data.intervals;
     this.chart.data.datasets[0].data = data.sales;
     this.chart.update();
   }

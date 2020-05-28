@@ -55,7 +55,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
 
         return [
             'sales_summary' => [
-                'months' => $salesSummary->getIntervals(),
+                'intervals' => $salesSummary->getIntervals(),
                 'sales' => $salesSummary->getSales()
             ],
             'channel' => [
