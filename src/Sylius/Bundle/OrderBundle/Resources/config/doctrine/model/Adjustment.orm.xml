@@ -18,13 +18,13 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Order\Model\Adjustment" table="sylius_adjustment">
-        <id name="id" column="id" type="integer">
+        <id name="id" column="id" type="bigint">
             <generator strategy="AUTO" />
         </id>
 
         <field name="type" column="type" type="string" />
         <field name="label" column="label" type="string" nullable="true" />
-        <field name="amount" column="amount" type="integer" />
+        <field name="amount" column="amount" type="bigint" />
         <field name="neutral" column="is_neutral" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />
 
