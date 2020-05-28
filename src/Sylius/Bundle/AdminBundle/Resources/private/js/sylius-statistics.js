@@ -49,7 +49,7 @@ class StatisticsComponent {
     }
 
     var url = e.target.getAttribute('data-stats-url') +
-      '?interval=' + interval +
+      '&interval=' + interval +
       '&startDate=' + this.formatDate(startDate) +
       '&endDate=' + this.formatDate(endDate);
 

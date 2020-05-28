@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController;
+use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,19 +36,24 @@ final class DashboardController
     /** @var RouterInterface */
     private $router;
 
-    /** @var StatisticsController|null */
-    private $statisticsController;
+    /** @var SalesDataProviderInterface|null */
+    private $salesDataProvider;
+
+    /** @var StatisticsDataProviderInterface */
+    private $statisticsDataProvider;
 
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
         EngineInterface $templatingEngine,
         RouterInterface $router,
-        ?StatisticsController $statisticsController
+        ?SalesDataProviderInterface $salesDataProvider = null,
+        ?StatisticsDataProviderInterface $statisticsDataProvider = null
     ) {
         $this->channelRepository = $channelRepository;
         $this->templatingEngine = $templatingEngine;
         $this->router = $router;
-        $this->statisticsController = $statisticsController;
+        $this->salesDataProvider = $salesDataProvider;
+        $this->statisticsDataProvider = $statisticsDataProvider;
     }
 
     public function indexAction(Request $request): Response
@@ -71,11 +79,13 @@ final class DashboardController
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return $this->statisticsController->getJsonData(
-            $channel,
-            $request->query->get('interval'),
-            $request->query->get('startDate'),
-            $request->query->get('endDate')
+        return new JsonResponse(
+            $this->statisticsDataProvider->getRawData(
+                $channel,
+                (new \DateTime($request->query->get('startDate'))),
+                (new \DateTime($request->query->get('endDate'))),
+                $request->query->get('interval')
+            )
         );
     }
 

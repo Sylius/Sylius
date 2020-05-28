@@ -11,19 +11,19 @@
                     <button
                         class="ui basic button"
                         data-stats-button="week"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
-                        {{ 'sylius.ui.statistics.2week'|trans }}
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        {{ 'sylius.ui.statistics.2weeks'|trans }}
                     </button>
                     <button
                         class="ui basic button"
                         data-stats-button="month"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
                         {{ 'sylius.ui.statistics.month'|trans }}
                     </button>
                     <button
                         class="ui basic active button"
                         data-stats-button="year"
-                        data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
+                        data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
                         {{ 'sylius.ui.statistics.year'|trans }}
                     </button>
                 </div>
