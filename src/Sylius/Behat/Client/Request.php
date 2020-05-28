@@ -67,12 +67,12 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function create(string $resource, string $token): RequestInterface
+    public static function create(string $resource): RequestInterface
     {
         return new self(
             sprintf('/new-api/%s', $resource),
             HttpRequest::METHOD_POST,
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_Authorization' => 'Bearer ' . $token]
+            ['CONTENT_TYPE' => 'application/ld+json']
         );
     }
 
@@ -188,6 +188,11 @@ final class Request implements RequestInterface
                 unset($this->content[$subResource][$key]);
             }
         }
+    }
+
+    public function authorize(string $token): void
+    {
+        $this->headers['HTTP_Authorization'] = 'Bearer ' . $token;
     }
 
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array

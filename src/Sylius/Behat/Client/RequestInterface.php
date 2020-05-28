@@ -21,7 +21,7 @@ interface RequestInterface
 
     public static function show(string $resource, string $id, string $token): self;
 
-    public static function create(string $resource, string $token): self;
+    public static function create(string $resource): self;
 
     public static function update(string $resource, string $id, string $token): self;
 
@@ -56,4 +56,6 @@ interface RequestInterface
     public function addSubResource(string $key, array $subResource): void;
 
     public function removeSubResource(string $subResource, string $id): void;
+
+    public function authorize(string $token): void;
 }
