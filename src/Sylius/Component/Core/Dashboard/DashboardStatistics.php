@@ -33,7 +33,7 @@ class DashboardStatistics
     /**
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers, ChannelInterface $channel = null)
+    public function __construct(int $totalSales, int $numberOfNewOrders, int $numberOfNewCustomers, ?ChannelInterface $channel = null)
     {
         $this->totalSales = $totalSales;
         $this->numberOfNewOrders = $numberOfNewOrders;

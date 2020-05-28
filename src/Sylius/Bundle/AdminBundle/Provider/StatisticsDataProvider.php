@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\AdminBundle\Provider;
 
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
@@ -19,7 +28,6 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
     /** @var MoneyFormatterInterface */
     private $moneyFormatter;
 
-
     public function __construct(
         DashboardStatisticsProviderInterface $statisticsProvider,
         SalesDataProviderInterface $salesDataProvider,
@@ -30,8 +38,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
         $this->moneyFormatter = $moneyFormatter;
     }
 
-
-    public function getRawData(ChannelInterface $channel, \DateTime $startDate, \DateTime $endDate, string $interval): array
+    public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array
     {
         /** @var DashboardStatisticsProviderInterface */
         $statistics = $this->statisticsProvider->getStatisticsForChannelInPeriod($channel, $startDate, $endDate);
@@ -55,7 +62,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
                 'base_currency_code' => $currencyCode,
                 'channel_code' => $channel->getCode(),
             ],
-            'statistics'=>[
+            'statistics' => [
                 'total_sales' => $this->moneyFormatter->format($statistics->getTotalSales(), $currencyCode),
                 'number_of_new_orders' => $statistics->getNumberOfNewOrders(),
                 'number_of_new_customers' => $statistics->getNumberOfNewCustomers(),

@@ -49,9 +49,6 @@
 
         <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
             <argument type="service" id="templating" />
-            <argument type="service" id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface" />
-            <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface" />
-            <argument type="service" id="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
 

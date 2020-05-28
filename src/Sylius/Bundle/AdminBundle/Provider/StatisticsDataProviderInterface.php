@@ -8,5 +8,5 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface StatisticsDataProviderInterface
 {
-    public function getRawData(ChannelInterface $channel, \DateTime $startDate, \DateTime $endDate, string $interval): array;
+    public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array;
 }
