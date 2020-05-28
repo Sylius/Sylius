@@ -62,5 +62,9 @@
             <argument type="service" id="sylius.api.api_platform.metadata.property.metadata_factory.xml.inner" />
             <argument type="service" id="service_container" />
         </service>
+
+        <service id="sylius.api.property_info.extractor.empty_list_extractor" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
+            <tag name="property_info.list_extractor" priority="-2000" />
+        </service>
     </services>
 </container>

@@ -7,7 +7,7 @@ Feature: Viewing a cart summary
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Viewing information about empty cart
         When I see the summary of my cart
         Then my cart should be empty

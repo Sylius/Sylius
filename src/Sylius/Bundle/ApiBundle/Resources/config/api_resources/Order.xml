@@ -28,6 +28,14 @@
             <collectionOperation name="get">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
             </collectionOperation>
+            <collectionOperation name="post">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Pickup a new cart</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\PickupCart</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
@@ -51,7 +59,8 @@
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
-        <property name="number" identifier="true" writable="false" />
+        <property name="number" identifier="false" writable="false" />
+        <property name="tokenValue" identifier="true" writable="false" />
         <property name="channel" writable="false" />
         <property name="customer" writable="false" />
         <property name="payments" writable="false" />

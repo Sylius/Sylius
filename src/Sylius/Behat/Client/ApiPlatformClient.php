@@ -61,9 +61,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request(Request::show($this->resource, $id, $this->sharedStorage->get('token')));
     }
 
-    public function create(): Response
+    public function create(?RequestInterface $request = null): Response
     {
-        return $this->request($this->request);
+        return $this->request($request ?? $this->request);
     }
 
     public function update(): Response
@@ -118,7 +118,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildCreateRequest(): void
     {
-        $this->request = Request::create($this->resource, $this->sharedStorage->get('token'));
+        $this->request = Request::create($this->resource);
+        $this->request->authorize($this->sharedStorage->get('token'));
     }
 
     public function buildUpdateRequest(string $id): void

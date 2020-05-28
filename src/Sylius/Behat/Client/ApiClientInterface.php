@@ -26,7 +26,7 @@ interface ApiClientInterface
 
     public function show(string $id): Response;
 
-    public function create(): Response;
+    public function create(?RequestInterface $request = null): Response;
 
     public function update(): Response;
 

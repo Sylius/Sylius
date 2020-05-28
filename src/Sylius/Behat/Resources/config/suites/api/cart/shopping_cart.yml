@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        api_shopping_cart:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.channel
+
+                - sylius.behat.context.api.shop.cart
+
+            filters:
+                tags: "@shopping_cart && @api"

@@ -55,5 +55,9 @@
         <attribute name="orderPromotionTotal">
             <group>order:read</group>
         </attribute>
+
+        <attribute name="tokenValue">
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>
