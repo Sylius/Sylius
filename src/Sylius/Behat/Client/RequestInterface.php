@@ -17,7 +17,7 @@ interface RequestInterface
 {
     public static function index(string $resource, string $token): self;
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource, string $token): self;
+    public static function subResourceIndex(string $resource, string $id, string $subResource): self;
 
     public static function show(string $resource, string $id, string $token): self;
 
@@ -27,11 +27,11 @@ interface RequestInterface
 
     public static function delete(string $resource, string $id, string $token): self;
 
-    public static function transition(string $resource, string $id, string $transition, string $token): self;
+    public static function transition(string $resource, string $id, string $transition): self;
 
     public static function upload(string $resource, string $token): self;
 
-    public static function custom(string $url, string $method, ?string $token): self;
+    public static function custom(string $url, string $method): self;
 
     public function url(): string;
 

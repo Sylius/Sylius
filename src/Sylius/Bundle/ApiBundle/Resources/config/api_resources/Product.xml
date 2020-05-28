@@ -46,7 +46,6 @@
 
         <itemOperations>
             <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="path">products/{id}</attribute>
             </itemOperation>
             <itemOperation name="put">

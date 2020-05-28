@@ -59,5 +59,8 @@
         <attribute name="tokenValue">
             <group>order:read</group>
         </attribute>
+        <attribute name="items">
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>
