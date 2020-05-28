@@ -206,13 +206,11 @@
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
-        },
-        "exclude-from-classmap": [
-            "src/Sylius/*/*/Tests/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
+            "Sylius\\Bundle\\AdminApiBundle\\Tests\\": "src/Sylius/Bundle/AdminApiBundle/Tests/",
             "Sylius\\Tests\\": "tests/",
             "spec\\Sylius\\Behat\\": "src/Sylius/Behat/spec/",
             "spec\\Sylius\\Component\\Addressing\\": "src/Sylius/Component/Addressing/spec/",

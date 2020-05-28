@@ -26,35 +26,6 @@ final class ShippingMethodTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    /** @var array  */
-    static private $authorizedHeaderWithDenied = [
-        'HTTP_Authorization' => 'Bearer wrong_token',
-        'HTTP_ACCEPT' => 'application/json',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
-    /**
-     * @test
-     */
-    public function it_denies_to_show_shipping_method_for_not_authenticated_users(): void
-    {
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $this->loadFixturesFromFiles([
-            'resources/zones.yml',
-            'resources/shipping_methods.yml',
-        ])['ups'];
-
-        $this->client->request(
-            Request::METHOD_GET,
-            $this->getShippingMethodUrl($shippingMethod),
-            [],
-            [],
-            static::$authorizedHeaderWithDenied
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
-    }
-
     /**
      * @test
      */
@@ -98,6 +69,9 @@ final class ShippingMethodTest extends JsonApiTestCase
         $this->assertResponse($response, 'shipping_method/show_response', Response::HTTP_OK);
     }
 
+    /**
+     * @return string
+     */
     private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod): string
     {
         return '/api/v1/shipping-methods/' . $shippingMethod->getCode();
