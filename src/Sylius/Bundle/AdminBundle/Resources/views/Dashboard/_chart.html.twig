@@ -1,0 +1,13 @@
+{% deprecated "This template is deprecated since Sylius 1.8" %}
+{% set labels, values = sales_summary.months, sales_summary.sales %}
+
+{% if labels and values %}
+    <div class="ui grid">
+        <div class="column">
+            <h3 class="ui top attached header">{{ 'sylius.ui.sales_summary'|trans }}</h3>
+            <div class="ui attached segment" style="height: 400px;">
+                <canvas id="dashboard-chart" data-labels="{{ labels|json_encode() }}" data-values="{{ values|json_encode() }}" data-currency="{{ currency|sylius_currency_symbol }}"></canvas>
+            </div>
+        </div>
+    </div>
+{% endif %}
