@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AdminBundle\Provider;
 
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
@@ -40,7 +41,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
 
     public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array
     {
-        /** @var DashboardStatisticsProviderInterface */
+        /** @var DashboardStatistics */
         $statistics = $this->statisticsProvider->getStatisticsForChannelInPeriod($channel, $startDate, $endDate);
 
         $salesSummary = $this->salesDataProvider->getSalesSummary(
