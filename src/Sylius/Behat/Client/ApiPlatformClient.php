@@ -16,6 +16,7 @@ namespace Sylius\Behat\Client;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformClient implements ApiClientInterface
@@ -48,12 +49,18 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function showByIri(string $iri): Response
     {
-        return $this->request(Request::custom($iri, 'GET', $this->sharedStorage->get('token')));
+        $request = Request::custom($iri, HttpRequest::METHOD_GET);
+        $request->authorize($this->sharedStorage->get('token'));
+
+        return $this->request($request);
     }
 
     public function subResourceIndex(string $subResource, string $id): Response
     {
-        return $this->request(Request::subResourceIndex($this->resource, $id, $subResource, $this->sharedStorage->get('token')));
+        $request = Request::subResourceIndex($this->resource, $id, $subResource);
+        $request->authorize($this->sharedStorage->get('token'));
+
+        return $this->request($request);
     }
 
     public function show(string $id): Response
@@ -90,7 +97,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response
     {
-        $request = Request::transition($this->resource, $id, $transition, $this->sharedStorage->get('token'));
+        $request = Request::transition($this->resource, $id, $transition);
+        $request->authorize($this->sharedStorage->get('token'));
         $request->setContent($content);
 
         return $this->request($request);
@@ -98,15 +106,19 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customItemAction(string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->resource, $id, $type, $action, $this->sharedStorage->get('token'));
+        $request = Request::customItemAction($this->resource, $id, $type, $action);
+        $request->authorize($this->sharedStorage->get('token'));
 
         return $this->request($request);
     }
 
     public function customAction(string $url, string $method): Response
     {
-        $token = $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
-        $request = Request::custom($url, $method, $token);
+        $request = Request::custom($url, $method);
+
+        if ($this->sharedStorage->has('token')) {
+            $request->authorize($this->sharedStorage->get('token'));
+        }
 
         return $this->request($request);
     }
@@ -114,6 +126,11 @@ final class ApiPlatformClient implements ApiClientInterface
     public function upload(): Response
     {
         return $this->request($this->request);
+    }
+
+    public function executeCustomRequest(RequestInterface $request): Response
+    {
+        return $this->request($request);
     }
 
     public function buildCreateRequest(): void

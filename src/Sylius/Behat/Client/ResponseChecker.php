@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Sylius\Behat\Service\SprintfResponseEscaper;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -146,6 +147,14 @@ final class ResponseChecker implements ResponseCheckerInterface
     private function getResponseContentValue(Response $response, string $key)
     {
         $content = json_decode($response->getContent(), true);
+
+        Assert::isArray(
+            $content,
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
+                'Content could not be parsed to array.',
+                $response
+            )
+        );
 
         Assert::keyExists($content, $key);
 

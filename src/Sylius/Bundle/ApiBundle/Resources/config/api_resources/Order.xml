@@ -56,6 +56,20 @@
                     <attribute name="groups">order:update</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="add_item">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Cancels Order</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/items</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:add_item</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
@@ -69,5 +83,6 @@
         <property name="paymentState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
+        <property name="items" readable="true" writable="true" />
     </resource>
 </resources>

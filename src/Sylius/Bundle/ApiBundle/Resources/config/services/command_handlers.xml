@@ -30,5 +30,15 @@
             <argument type="service" id="sylius.random_generator" />
             <tag name="messenger.message_handler" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.order_modifier" />
+            <argument type="service" id="sylius.factory.order_item" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="messenger.message_handler" />
+        </service>
     </services>
 </container>
