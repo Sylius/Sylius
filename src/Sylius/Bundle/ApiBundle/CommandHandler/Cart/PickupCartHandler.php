@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler;
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\ApiBundle\Command\PickupCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;

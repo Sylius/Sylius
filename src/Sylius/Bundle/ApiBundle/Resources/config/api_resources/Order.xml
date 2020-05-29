@@ -34,7 +34,7 @@
                     <attribute name="summary">Pickup a new cart</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\PickupCart</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
             </collectionOperation>
         </collectionOperations>
 

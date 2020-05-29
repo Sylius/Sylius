@@ -23,7 +23,7 @@
             <tag name="messenger.message_handler" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\PickupCartHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler">
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.manager.order" />

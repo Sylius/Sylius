@@ -15,15 +15,10 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\PickupCart;
-use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
