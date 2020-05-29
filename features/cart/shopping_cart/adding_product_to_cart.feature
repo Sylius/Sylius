@@ -16,7 +16,7 @@ Feature: Adding a simple product to the cart
         And there should be one item in my cart
         And this item should have name "T-shirt banana"
 
-    @ui
+    @ui @api
     Scenario: Adding a product to the cart as a logged in customer
         Given I am a logged in customer
         And the store has a product "Oathkeeper" priced at "$99.99"

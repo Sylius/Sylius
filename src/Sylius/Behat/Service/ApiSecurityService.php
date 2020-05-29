@@ -17,6 +17,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserTo
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Webmozart\Assert\Assert;
 
 final class ApiSecurityService implements SecurityServiceInterface
 {
@@ -26,24 +27,38 @@ final class ApiSecurityService implements SecurityServiceInterface
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
+    /** @var string */
+    private $loginEndpoint;
+
+    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $loginEndpoint)
     {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
+        $this->loginEndpoint = $loginEndpoint;
     }
 
     public function logIn(UserInterface $user): void
     {
         $this->client->request(
             'POST',
-            '/new-api/admin-user-authentication-token',
+            '/new-api/' . $this->loginEndpoint,
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
             json_encode(['email' => $user->getEmail(), 'password' => 'sylius'])
         );
 
-        $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
+
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        Assert::keyExists(
+            $content,
+            'token',
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Token not found.', $response)
+        );
+
+        $token = $content['token'];
 
         $this->sharedStorage->set('token', $token);
     }
