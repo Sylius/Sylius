@@ -124,6 +124,13 @@ a {
     }
 }
 
+.ui.action.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 // ----------------------------------
 // ------------ Breadcrumb
 // ----------------------------------
@@ -234,4 +241,48 @@ a {
 
 .ui.top.attached.tabular.menu {
     flex-wrap: wrap;
+}
+
+// ----------------------------------
+// ------------ Statistics
+// ----------------------------------
+
+.stats {
+    .stats-grid {
+        display: flex;
+        flex-wrap: nowrap;
+
+        @media (max-width: 1000px) {
+            flex-wrap: wrap;
+        }
+    }
+
+    .stats-column {
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 25%;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 -1px 0 0 #ebebeb, 1px 0 0 0 #ebebeb;
+
+        @media (max-width: 1000px) {
+            width: 50%;
+        }
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
+    }
+
+    .stats-graph {
+        height: 400px;
+    }
+
+    .stats-loader {
+        background: rgba(249, 249, 249, 0.7) !important;
+    }
+
+    .ui.basic.active.button {
+        color: $sylius-brand-color !important;
+    }
 }

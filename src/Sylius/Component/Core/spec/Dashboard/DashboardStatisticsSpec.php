@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class DashboardStatisticsSpec extends ObjectBehavior
 {
-    function let(): void
+    function let(ChannelInterface $channel): void
     {
-        $this->beConstructedWith(2564, 24, 10);
+        $this->beConstructedWith(2564, 24, 10, $channel);
     }
 
     function it_has_total_sales_stat(): void
@@ -47,5 +48,10 @@ final class DashboardStatisticsSpec extends ObjectBehavior
         $this->beConstructedWith(0, 0, 2);
 
         $this->getAverageOrderValue()->shouldReturn(0);
+    }
+
+    function it_returns_channel(ChannelInterface $channel): void
+    {
+        $this->getChannel()->shouldReturn($channel);
     }
 }
