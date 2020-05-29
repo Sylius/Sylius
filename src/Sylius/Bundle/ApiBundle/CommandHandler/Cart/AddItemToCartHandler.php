@@ -63,9 +63,8 @@ final class AddItemToCartHandler implements MessageHandlerInterface
         Assert::notNull($cart);
 
         $cartItem = $this->cartItemFactory->createForProduct($product);
-        $cartItem->setOrder($cart);
 
-        $this->orderItemQuantityModifier->modify($cartItem, 1);
+        $this->orderItemQuantityModifier->modify($cartItem, $addItemToCart->quantity);
         $this->orderModifier->addToOrder($cart, $cartItem);
 
         $this->orderProcessor->process($cart);

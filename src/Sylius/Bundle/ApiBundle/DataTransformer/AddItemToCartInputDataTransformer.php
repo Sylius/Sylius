@@ -26,6 +26,6 @@ final class AddItemToCartInputDataTransformer implements DataTransformerInterfac
 
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return AddItemToCart::class === $context['input']['class'] ?? false;
+        return AddItemToCart::class === $context['input']['class'];
     }
 }

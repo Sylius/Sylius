@@ -13,23 +13,34 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-/**
- * @psalm-immutable
- */
 class AddItemToCart
 {
-    /** @var string */
+    /** @var string|null */
     public $tokenValue;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $productCode;
 
-    public static function createFromData(string $tokenValue, string $productCode): self
+    /**
+     * @var integer
+     * @psalm-immutable
+     */
+    public $quantity;
+
+    public function __construct(string $productCode, int $quantity)
     {
-        $command = new self();
+        $this->productCode = $productCode;
+        $this->quantity = $quantity;
+    }
+
+    public static function createFromData(string $tokenValue, string $productCode, int $quantity): self
+    {
+        $command = new self($productCode, $quantity);
 
         $command->tokenValue = $tokenValue;
-        $command->productCode = $productCode;
 
         return $command;
     }

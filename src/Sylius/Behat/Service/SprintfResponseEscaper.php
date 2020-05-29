@@ -20,7 +20,7 @@ final class SprintfResponseEscaper
     public static function provideMessageWithEscapedResponseContent(string $message, Response $response): string
     {
         return sprintf(
-            '%s Reason: %s',
+            '%s Received response: %s',
             $message,
             str_replace(
                 '%',

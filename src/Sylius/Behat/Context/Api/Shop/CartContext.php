@@ -21,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
@@ -57,14 +58,15 @@ final class CartContext implements Context
      */
     public function iAddThisProductToTheCart(ProductInterface $product): void
     {
-        $this->cartsClient->create(Request::create('orders'));
-        $response = $this->cartsClient->getLastResponse();
-        $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $this->putProductToCart($product);
+    }
 
-        $request->updateContent(['productCode' => $product->getCode()]);
-
-        $this->cartsClient->executeCustomRequest($request);
+    /**
+     * @When /^I add (\d+) of (them) to (?:the|my) cart$/
+     */
+    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product): void
+    {
+        $this->putProductToCart($product, $quantity);
     }
 
     /**
@@ -117,6 +119,55 @@ final class CartContext implements Context
      */
     public function thisItemShouldHaveName(array $item, string $productName): void
     {
+        $response = $this->getProductForItem($item);
+
+        Assert::true(
+            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $productName),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        );
+    }
+
+    /**
+     * @Then I should see :productName with quantity :quantity in my cart
+     */
+    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
+    {
+        $cartResponse = $this->cartsClient->getLastResponse();
+        $items = $this->responseChecker->getValue($cartResponse, 'items');
+
+        foreach ($items as $item) {
+            $productResponse = $this->getProductForItem($item);
+
+            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
+                Assert::same(
+                    $item['quantity'],
+                    $quantity,
+                    SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
+                        sprintf('Quantity did not match. Expected %s.', $quantity),
+                        $cartResponse
+                    )
+                );
+            }
+        }
+    }
+
+    private function putProductToCart(ProductInterface $product, int $quantity = 1): void
+    {
+        $this->cartsClient->create(Request::create('orders'));
+        $response = $this->cartsClient->getLastResponse();
+        $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
+        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+
+        $request->updateContent([
+            'productCode' => $product->getCode(),
+            'quantity' => $quantity
+        ]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function getProductForItem(array $item): Response
+    {
         if (!isset($item['variant']['product'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
@@ -124,13 +175,11 @@ final class CartContext implements Context
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom($item['variant']['product'], HttpRequest::METHOD_GET));
-
-        $response = $this->cartsClient->getLastResponse();
-
-        Assert::true(
-            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $productName),
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        $this->cartsClient->executeCustomRequest(Request::custom(
+            $item['variant']['product'],
+            HttpRequest::METHOD_GET)
         );
+
+        return $this->cartsClient->getLastResponse();
     }
 }

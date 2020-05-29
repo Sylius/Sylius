@@ -80,13 +80,12 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $cartItemFactory->createForProduct($product)->willReturn($cartItem);
 
-        $cartItem->setOrder($cart)->shouldBeCalled();
-        $orderItemQuantityModifier->modify($cartItem, 1)->shouldBeCalled();
+        $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderModifier->addToOrder($cart, $cartItem)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE'))->shouldReturn($cart);
+        $this(AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 5))->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_product_is_not_found(
@@ -99,7 +98,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE')])
+            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 1)])
         ;
     }
 
@@ -116,7 +115,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE')])
+            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 1)])
         ;
     }
 }

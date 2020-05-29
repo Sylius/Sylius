@@ -22,5 +22,8 @@
         <attribute name="variant">
             <group>order:read</group>
         </attribute>
+        <attribute name="quantity">
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>

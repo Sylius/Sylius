@@ -19,5 +19,8 @@
        <attribute name="productCode">
            <group>cart:add_item</group>
        </attribute>
+       <attribute name="quantity">
+           <group>cart:add_item</group>
+       </attribute>
     </class>
 </serializer>
