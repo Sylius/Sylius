@@ -34,31 +34,8 @@
         {% if product.simple %}
             <div class="ui one column stackable grid">
                 <div class="column">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
-                    <div class="ui top attached tabular menu">
-                        {% for channelCode, channelPricing in form.variant.channelPricings %}
-                            {% if loop.index0 == 0 %} 
-                                <a class="item active" data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>
-                            {% else %}
-                                <a class="item" data-tab="{{ channelCode }}">{{ channelPricing.vars.label }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% for channelCode, channelPricing in form.variant.channelPricings %}
-                        {% if loop.index0 == 0 %}
-                            <div class="ui bottom attached active tab segment" data-tab="{{ channelCode }}">
-                        {% else %}
-                            <div class="ui bottom attached tab segment" data-tab="{{ channelCode }}">
-                        {% endif %}
-
-                        {% if channelCode not in product.channels|map(channel => channel.code) %}
-                        <div class="ui ignored info message">
-                            {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
-                        </div>
-                        {% endif %}
-                            {{ form_row(channelPricing, {'label': false}) }}
-                        </div>
-                    {% endfor %}
+                    <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>                    
+                    {% include "@SyliusAdmin/Product/_channel_pricing.html.twig" with { product: product, variantForm: form.variant } only %}
                 </div>
             </div>
         {% endif %}
