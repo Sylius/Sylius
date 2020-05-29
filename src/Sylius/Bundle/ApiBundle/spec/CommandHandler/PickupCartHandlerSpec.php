@@ -74,6 +74,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldBeCalled();
 
-        $this(new PickupCart());
+        $this(new PickupCart())->shouldReturn($cart);
     }
 }
