@@ -255,6 +255,14 @@ In order to use the wkhtmltopdf (needed for Invoicing and Refunds) on server pro
         binary:     wkhtmltoimage # for local purpose was '%env(WKHTMLTOIMAGE_PATH)%'
         options:    []
 
+Sylius Plus is on Private Packagist, so when you want to download it on server, you need add `authentication token` before deployment.
+You can do it by UI on your project page on platform.sh or if you have platform.sh CLI you can add `authentication_token`:
+
+.. code-block:: bash
+
+    platform variable:create --level project --name env:COMPOSER_AUTH \
+    --json true --visible-runtime false --sensitive true --visible-build true
+    --value '{"http-basic": {"sylius.repo.packagist.com": {"username": "token", "password": "YOUR_AUTHENTICATION_TOKEN"}}}'
 
 All the other steps from the Sylius deployment on Platform.sh remain unchanged.
 
