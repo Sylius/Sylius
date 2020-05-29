@@ -186,7 +186,7 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
-        "api-platform/core": "2.5.5"
+        "api-platform/core": "^2.5.5"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
