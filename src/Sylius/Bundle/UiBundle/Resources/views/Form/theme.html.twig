@@ -4,6 +4,7 @@
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
+        {{- form_help(form) -}}
         {{- form_errors(form) -}}
     </div>
 {%- endblock form_row %}
