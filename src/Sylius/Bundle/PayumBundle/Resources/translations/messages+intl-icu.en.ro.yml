@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    payum_action:
+        payment:
+            description: "{items, plural, one {Plata conţine # element pentru un total de {total}} other {Plata conţine # elemente pentru un total de {total}} other {Plata conţine # elemente pentru un total de {total}}}\n\n{items, plural, one {Plata conţine # element pentru un total de {total}} other {Plata conţine # elemente pentru un total de {total}}}"

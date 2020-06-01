@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
         default_locale:
+            enabled: Standard-Gebietsschema muss aktiviert sein.
             not_blank: Bitte Standard-Gebietsschema für diesen Kanal angeben.
         contact_email:
             invalid: Diese E-Mail Adresse ist ungültig.
@@ -13,7 +18,7 @@ sylius:
             min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
     channel_pricing:
         price:
-            min: Preis muss mindestens {{ limit }} sein.
+            min: Preis darf nicht kleiner als 0 sein.
             not_blank: Bitte Preis eingeben.
     checkout:
         shipping_method:
