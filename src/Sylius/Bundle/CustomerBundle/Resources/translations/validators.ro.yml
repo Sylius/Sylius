@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Codul grupului de clienți poate conține doar litere, numere, - și _.
             unique: Codul grupului de clienți trebuie să fie unic.
+            not_blank: Introdu codul grupului de clienți.
         name:
             max: Numele grupului de clienți nu poate fi mai lung de {{ limit }} caractere.
             min: Numele grupului de clienți poate avea maxim {{ limit }} caractere.

@@ -17,7 +17,4 @@ sylius:
     payum_gateway_factory:
         offline: Hors-ligne
         paypal_express_checkout: Paiement via PayPal Express
-        stripe_checkout: Paiement via Stripe
-    payum_action:
-        payment:
-            description: Paiement pour %items% article pour un total de %total% | Paiement pour %items% articles pour un total de %total%
+        stripe_checkout: Paiement par Stripe (sans support de la SCA)
