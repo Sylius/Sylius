@@ -73,7 +73,7 @@ final class DashboardController
     public function getRawData(Request $request): Response
     {
         /** @var ChannelInterface|null $channel */
-        $channel = $this->findChannelByCodeOrFindFirst($request->query->get('channel'));
+        $channel = $this->findChannelByCodeOrFindFirst($request->query->get('channelCode'));
 
         if (null === $channel) {
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
