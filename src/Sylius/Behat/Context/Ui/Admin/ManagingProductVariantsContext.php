@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -129,17 +130,17 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      * @When I do not set its price
      */
-    public function iSetItsPriceTo(?string $price = null, $channelName = null)
+    public function iSetItsPriceTo(?string $price = null, ?ChannelInterface $channel = null)
     {
-        $this->createPage->specifyPrice($price ?? '', $channelName ?? (string) $this->sharedStorage->get('channel'));
+        $this->createPage->specifyPrice($price ?? '', $channel ?? $this->sharedStorage->get('channel'));
     }
 
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo($originalPrice, ChannelInterface $channel)
     {
-        $this->createPage->specifyOriginalPrice($originalPrice, $channelName);
+        $this->createPage->specifyOriginalPrice($originalPrice, $channel);
     }
 
     /**
