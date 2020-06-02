@@ -184,6 +184,7 @@
     "conflict": {
         "doctrine/inflector": "^1.4",
         "sylius/grid-bundle": "1.7.4",
+        "symfony/form": "4.4.9",
         "symfony/symfony": "3.4.7",
         "twig/twig": "2.6.1"
     },
