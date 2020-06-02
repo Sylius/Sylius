@@ -136,7 +136,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsOriginalPriceTo($originalPrice, ChannelInterface $channel)
     {
