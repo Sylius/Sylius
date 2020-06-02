@@ -127,7 +127,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      * @When I do not set its price
      */
     public function iSetItsPriceTo(?string $price = null, ?ChannelInterface $channel = null)
@@ -216,13 +216,13 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, string $price, $channelName)
+    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
-        Assert::same($this->updatePage->getPriceForChannel($channelName), $price);
+        Assert::same($this->updatePage->getPriceForChannel($channel), $price);
     }
 
     /**
@@ -236,14 +236,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, $channelName)
+    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, ChannelInterface $channel)
     {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same(
-            $this->updatePage->getOriginalPriceForChannel($channelName),
+            $this->updatePage->getOriginalPriceForChannel($channel),
             $originalPrice
         );
     }
@@ -442,12 +442,12 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in (("[^"]+") channel)$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, int $price, $channelName)
+    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, int $price, ChannelInterface $channel)
     {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
     }
 
     /**
@@ -459,11 +459,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in (("[^"]+") channel)$/
      */
-    public function iSpecifyThereAreVariantsWithCost($nthVariant, int $price, $channelName)
+    public function iSpecifyThereAreVariantsWithCost($nthVariant, int $price, ChannelInterface $channel)
     {
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
     }
 
     /**

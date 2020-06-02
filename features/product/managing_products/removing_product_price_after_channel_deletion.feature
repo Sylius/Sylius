@@ -3,7 +3,7 @@ Feature: Removing a product's price after channel deletion
     In order to have product's prices specified only for existing channels
     As an Administrator
     I want to have product's price removed after corresponding channel deletion
-    
+
     Background:
         Given the store has currency "USD"
         And the store operates on a channel named "Web-US" in "USD" currency

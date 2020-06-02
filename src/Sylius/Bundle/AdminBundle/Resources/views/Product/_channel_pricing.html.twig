@@ -1,4 +1,5 @@
 <div id="sylius_product_variant_channelPricings">
+    {{ form_errors(variantForm.channelPricings) }}
     <div class="ui top attached tabular menu">
         {% for channelCode, channelPricing in variantForm.channelPricings %}
             {% if loop.index0 == 0 %}

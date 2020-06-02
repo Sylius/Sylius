@@ -55,14 +55,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $priceElement->find('css', 'input')->getValue();
     }
 
-    public function getPriceForChannel(string $channelName): string
+    public function getPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
-    public function getOriginalPriceForChannel(string $channelName): string
+    public function getOriginalPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function getNameInLanguage(string $language): string
@@ -112,8 +112,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',
-            'original_price' => '#sylius_product_variant_channelPricings .field:contains("%channelName%") input[name$="[originalPrice]"]',
-            'price' => '#sylius_product_variant_channelPricings  .field:contains("%channelName%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'show_product_dropdown' => '.scrolling.menu',
