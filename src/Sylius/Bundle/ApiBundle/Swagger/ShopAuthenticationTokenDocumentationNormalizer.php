@@ -20,9 +20,8 @@ final class ShopAuthenticationTokenDocumentationNormalizer implements Normalizer
 {
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
-    /**
-     * @var string
-     */
+
+    /** @var string */
     private $apiRoute;
 
     public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
