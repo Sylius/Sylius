@@ -20,10 +20,15 @@ final class ShopAuthenticationTokenDocumentationNormalizer implements Normalizer
 {
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
+    /**
+     * @var string
+     */
+    private $apiRoute;
 
-    public function __construct(NormalizerInterface $decoratedNormalizer)
+    public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
     {
         $this->decoratedNormalizer = $decoratedNormalizer;
+        $this->apiRoute = $apiRoute;
     }
 
     public function supportsNormalization($data, string $format = null): bool
@@ -61,7 +66,7 @@ final class ShopAuthenticationTokenDocumentationNormalizer implements Normalizer
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/shop-user-authentication-token' => [
+                $this->apiRoute .'/shop-user-authentication-token' => [
                     'post' => [
                         'tags' => ['ShopUserToken'],
                         'operationId' => 'postCredentialsItem',

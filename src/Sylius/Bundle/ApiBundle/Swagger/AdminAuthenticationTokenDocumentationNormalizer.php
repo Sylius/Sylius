@@ -20,10 +20,15 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 {
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
+    /**
+     * @var string
+     */
+    private $apiRoute;
 
-    public function __construct(NormalizerInterface $decoratedNormalizer)
+    public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
     {
         $this->decoratedNormalizer = $decoratedNormalizer;
+        $this->apiRoute = $apiRoute;
     }
 
     public function supportsNormalization($data, string $format = null): bool
@@ -61,7 +66,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 
         $tokenDocumentation = [
             'paths' => [
-                '/new-api/admin-user-authentication-token' => [
+                $this->apiRoute .'/admin-user-authentication-token' => [
                     'post' => [
                         'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',
