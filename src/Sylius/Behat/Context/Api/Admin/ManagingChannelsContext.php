@@ -266,7 +266,7 @@ final class ManagingChannelsContext implements Context
      * @When I do not name it
      * @When I remove its name
      */
-    public function iNameIt(?string $name): void
+    public function iNameIt(?string $name = null): void
     {
         $this->client->addRequestData('name', $name ?? '');
     }
@@ -318,7 +318,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then the channel :channel should have :name as a menu taxon
+     * @Then the channel :channel should have :taxon as a menu taxon
      * @Then /^(this channel) menu (taxon should be "([^"]+)")$/
      */
     public function theChannelShouldHaveAsAMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
