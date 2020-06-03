@@ -1,8 +1,8 @@
 language: php
 
-dist: bionic
+os: linux
 
-sudo: false
+dist: bionic
 
 env:
     global:
@@ -10,7 +10,7 @@ env:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
-matrix:
+jobs:
     include:
         -   
             php: 7.3
