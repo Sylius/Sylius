@@ -20,9 +20,8 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 {
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
-    /**
-     * @var string
-     */
+
+    /** @var string */
     private $apiRoute;
 
     public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
