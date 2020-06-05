@@ -20,7 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CartContext implements Context
+final class CartTokenContext implements Context
 {
     /** @var ApiClientInterface */
     private $cartsClient;
@@ -44,16 +44,17 @@ final class CartContext implements Context
     /**
      * @Transform /^(cart)$/
      */
-    public function provideCart(string $cart): string
+    public function provideCartToken(): string
     {
         if ($this->sharedStorage->has('cart_token')) {
             $tokenValue = $this->sharedStorage->get('cart_token');
 
             $response = $this->cartsClient->show($tokenValue);
-            if ($response->getStatusCode() === Response::HTTP_OK || $response->getStatusCode() === Response::HTTP_CREATED) {
-                return $this->sharedStorage->get('cart_token');
+            if ($response->getStatusCode() === Response::HTTP_OK) {
+                return $tokenValue;
             }
         }
+
         $response = $this->cartsClient->create(Request::create('orders'));
 
         $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');

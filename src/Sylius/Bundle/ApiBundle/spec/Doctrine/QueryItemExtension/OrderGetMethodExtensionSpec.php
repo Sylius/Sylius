@@ -20,18 +20,20 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-final class OrderExtensionSpec extends ObjectBehavior
+final class OrderGetMethodExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
         $this->beConstructedWith($userContext);
     }
 
-    function it_access_to_get_order_with_null_user_if_present_user_is_null(
+    function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
+        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -44,52 +46,32 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            'get',
+            Request::METHOD_GET,
             []
         );
     }
 
-    function it_access_to_delete_order_with_null_user_if_present_user_is_null(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext
-    ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
-
-        $userContext->getUser()->willReturn(null);
-
-        $queryBuilder->andWhere(sprintf('%s.customer IS NULL', 'o'))->shouldBeCalled();
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            'delete',
-            []
-        );
-    }
-
-    function it_access_to_get_order_for_user_that_is_assign_to_this_order(
+    function it_applies_conditions_to_get_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order(
+        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
+        $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customerId', 'o'))
+            ->andWhere(sprintf('%s.customer = :customer', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
-            ->setParameter('customerId', 1)
+            ->setParameter('customer', 1)
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -99,42 +81,38 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            'get',
+            Request::METHOD_GET,
             []
         );
     }
 
-    function it_access_to_delete_order_for_user_that_is_assign_to_this_order(
+    function it_throws_an_exception_when_unauthorized_shop_user_try_to_get_order_with_state_cart(
+        UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        UserContextInterface $userContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
+        $shopUser->getRoles()->willReturn([]);
 
-        $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customerId', 'o'))
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+        $this
+            ->shouldThrow(AccessDeniedHttpException::class)
+            ->during(
+                'applyToItem',
+                [
+                    $queryBuilder,
+                    $queryNameGenerator,
+                    OrderInterface::class,
+                    ['tokenValue' => 'xaza-tt_fee'],
+                    Request::METHOD_GET,
+                    []
+                ]
+            )
         ;
-        $queryBuilder
-            ->setParameter('customerId', 1)
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-
-        $this->applyToItem(
-            $queryBuilder,
-            $queryNameGenerator,
-            OrderInterface::class,
-            ['tokenValue' => 'xaza-tt_fee'],
-            'delete',
-            []
-        );
     }
 }

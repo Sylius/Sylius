@@ -139,11 +139,10 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function buildUpdateRequest(string $id): void
     {
+        $this->show($id);
+
         $this->request = Request::update($this->resource, $id, $this->getToken());
-        if ($this->sharedStorage->has('token')) {
-            $this->show($id);
-            $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
-        }
+        $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
     public function buildUploadRequest(): void

@@ -33,6 +33,8 @@ interface ResponseCheckerInterface
 
     public function isUpdateSuccessful(Response $response): bool;
 
+    public function isShowSuccessful(Response $response): bool;
+
     public function isDeletionSuccessful(Response $response): bool;
 
     public function hasAccessDenied(Response $response): bool;

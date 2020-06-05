@@ -68,6 +68,7 @@ final class CartContext implements Context
 
     /**
      * @Then my cart should be empty
+     * @Then my cart should be cleared
      * @Then cart should be empty with no value
      */
     public function iShouldBeNotifiedThatMyCartIsEmpty()

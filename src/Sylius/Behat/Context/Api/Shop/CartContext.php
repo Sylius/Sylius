@@ -46,6 +46,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I clear my (cart)$/
+     */
+    public function iClearMyCart(string $tokenValue): void
+    {
+        $this->cartsClient->delete($tokenValue);
+    }
+
+    /**
      * @When /^I see the summary of my (cart)$/
      */
     public function iSeeTheSummaryOfMyCart(string $tokenValue): void
@@ -56,7 +64,7 @@ final class CartContext implements Context
     /**
      * @When /^I (?:add|added) (this product) to the (cart)$/
      */
-    public function iAddThisProductToTheCart(ProductInterface $product, $tokenValue): void
+    public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
     }
@@ -70,6 +78,19 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then my cart should be cleared
+     */
+    public function myCartShouldBeCleared(): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
+        );
+    }
+
+    /**
      * @Then /^my (cart) should be empty$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
@@ -77,17 +98,9 @@ final class CartContext implements Context
         $response = $this->cartsClient->show($tokenValue);
 
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($response),
+            $this->responseChecker->isShowSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
-    }
-
-    /**
-     * @When /^I clear my (cart)$/
-     */
-    public function iClearMyCart(string $tokenValue): void
-    {
-        $this->cartsClient->delete($tokenValue);
     }
 
     /**

@@ -39,13 +39,10 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
             <itemOperation name="delete">
-                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Delete Order</attribute>
+                    <attribute name="summary">Delete cart</attribute>
                 </attribute>
             </itemOperation>
 

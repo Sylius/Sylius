@@ -148,8 +148,8 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartContext">
-            <argument type="service" id="sylius.behat.api_platform_client.product" />
+        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartTokenContext">
+            <argument type="service" id="sylius.behat.api_platform_client.cart" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>

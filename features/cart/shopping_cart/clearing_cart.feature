@@ -13,4 +13,4 @@ Feature: Clearing cart
     Scenario: Clearing cart
         Given I see the summary of my cart
         When I clear my cart
-        Then my cart should be empty
+        Then my cart should be cleared

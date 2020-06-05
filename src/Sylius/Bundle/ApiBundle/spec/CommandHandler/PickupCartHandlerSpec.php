@@ -46,7 +46,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $this->shouldImplement(MessageHandlerInterface::class);
     }
 
-    function it_pick_ups_a_cart_for_logged_shop_user(
+    function it_picks_up_a_cart_for_logged_shop_user(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
@@ -84,7 +84,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $this(new PickupCart());
     }
 
-    function it_pick_ups_a_cart_for_visitor(
+    function it_picks_up_a_cart_for_visitor(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
