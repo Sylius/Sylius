@@ -12,10 +12,13 @@
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\PickupCart;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -30,6 +33,9 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var ChannelContextInterface */
     private $channelContext;
 
+    /** @var UserContextInterface */
+    private $userContext;
+
     /** @var ObjectManager */
     private $orderManager;
 
@@ -39,11 +45,13 @@ final class PickupCartHandler implements MessageHandlerInterface
     public function __construct(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
+        UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
     ) {
         $this->cartFactory = $cartFactory;
         $this->channelContext = $channelContext;
+        $this->userContext = $userContext;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
     }
@@ -59,6 +67,12 @@ final class PickupCartHandler implements MessageHandlerInterface
         $locale = $channel->getDefaultLocale();
         /** @var CurrencyInterface $currency */
         $currency = $channel->getBaseCurrency();
+        /** @var UserInterface|null $user */
+        $user = $this->userContext->getUser();
+        if ($user !== null && $user instanceof ShopUserInterface) {
+            $customer = $user->getCustomer();
+            $cart->setCustomer($customer);
+        }
 
         $cart->setChannel($channel);
         $cart->setLocaleCode($locale->getCode());

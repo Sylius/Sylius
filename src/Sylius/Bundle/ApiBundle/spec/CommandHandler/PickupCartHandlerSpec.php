@@ -15,15 +15,14 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\PickupCart;
-use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -35,10 +34,11 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     function let(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
+        UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
     ): void {
-        $this->beConstructedWith($cartFactory, $channelContext, $orderManager, $generator);
+        $this->beConstructedWith($cartFactory, $channelContext, $userContext, $orderManager, $generator);
     }
 
     function it_is_a_message_handler(): void
@@ -46,9 +46,12 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $this->shouldImplement(MessageHandlerInterface::class);
     }
 
-    function it_pick_ups_a_cart(
+    function it_pick_ups_a_cart_for_logged_shop_user(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
+        UserContextInterface $userContext,
+        ShopUserInterface $user,
+        CustomerInterface $customer,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
@@ -62,6 +65,43 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
+        $userContext->getUser()->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
+
+        $cart->setCustomer($customer)->shouldBeCalled();
+
+        $currency->getCode()->willReturn('USD');
+
+        $locale->getCode()->willReturn('en_US');
+
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('USD')->shouldBeCalled();
+        $cart->setLocaleCode('en_US')->shouldBeCalled();
+        $cart->setTokenValue('urisafestr')->shouldBeCalled();
+
+        $orderManager->persist($cart)->shouldBeCalled();
+
+        $this(new PickupCart());
+    }
+
+    function it_pick_ups_a_cart_for_visitor(
+        FactoryInterface $cartFactory,
+        ChannelContextInterface $channelContext,
+        UserContextInterface $userContext,
+        ObjectManager $orderManager,
+        RandomnessGeneratorInterface $generator,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        LocaleInterface $locale
+    ): void {
+        $cartFactory->createNew()->willReturn($cart);
+        $channelContext->getChannel()->willReturn($channel);
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $channel->getDefaultLocale()->willReturn($locale);
+        $userContext->getUser()->willReturn(null);
 
         $currency->getCode()->willReturn('USD');
 
