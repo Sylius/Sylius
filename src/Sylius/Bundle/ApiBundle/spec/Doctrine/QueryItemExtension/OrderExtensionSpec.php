@@ -81,20 +81,15 @@ final class OrderExtensionSpec extends ObjectBehavior
 
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $queryBuilder->addSelect('customer')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder
-            ->innerJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->andWhere(sprintf('%s.customer = :customerId', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
-            ->setParameter('customer', $customer)
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-        $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customer', 'o'))
+            ->setParameter('customerId', 1)
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -120,20 +115,15 @@ final class OrderExtensionSpec extends ObjectBehavior
 
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $queryBuilder->addSelect('customer')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder
-            ->innerJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->andWhere(sprintf('%s.customer = :customerId', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
         $queryBuilder
-            ->setParameter('customer', $customer)
-            ->shouldBeCalled()
-            ->willReturn($queryBuilder)
-        ;
-        $queryBuilder
-            ->andWhere(sprintf('%s.customer = :customer', 'o'))
+            ->setParameter('customerId', 1)
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;

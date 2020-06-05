@@ -40,7 +40,13 @@
 
         <itemOperations>
             <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+            </itemOperation>
+            <itemOperation name="delete">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Delete Order</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="cancel">

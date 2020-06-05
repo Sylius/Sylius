@@ -76,7 +76,6 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->show($tokenValue);
 
-        $x = $response;
         Assert::true(
             $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)

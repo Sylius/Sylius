@@ -33,5 +33,14 @@
             <argument type="service" id="sylius.api.context.user" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
+
+        <service
+            id="sylius.api.doctrine.query_item_extension.order"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderExtension"
+            public="true"
+        >
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
     </services>
 </container>
