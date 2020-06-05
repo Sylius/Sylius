@@ -116,9 +116,8 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $request = Request::custom($url, $method);
 
-        if ($this->sharedStorage->has('token')) {
-            $request->authorize($this->getToken());
-        }
+        $request->authorize($this->getToken());
+
         return $this->request($request);
     }
 

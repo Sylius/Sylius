@@ -59,7 +59,7 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function isCreationSuccessful(Response $response): bool
     {
-        return $response->getStatusCode() === Response::HTTP_CREATED;
+        return $response->getStatusCode() === Response::HTTP_CREATED || $response->getStatusCode() === Response::HTTP_OK;
     }
 
     public function isDeletionSuccessful(Response $response): bool

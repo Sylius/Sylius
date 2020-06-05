@@ -75,7 +75,7 @@
         </service>
 
         <service id="sylius.behat.api_platform_client.cart" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>carts</argument>
+            <argument>orders</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.shipping_category" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">

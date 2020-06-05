@@ -46,39 +46,49 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I see the summary of my cart
+     * @When /^I see the summary of my (cart)$/
      */
-    public function iSeeTheSummaryOfMyCart(): void
+    public function iSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        $this->cartsClient->create(Request::create('orders'));
+        $this->cartsClient->show($tokenValue);
     }
 
     /**
-     * @When /^I (?:add|added) (this product) to the cart$/
+     * @When /^I (?:add|added) (this product) to the (cart)$/
      */
-    public function iAddThisProductToTheCart(ProductInterface $product): void
+    public function iAddThisProductToTheCart(ProductInterface $product, $tokenValue): void
     {
-        $this->putProductToCart($product);
+        $this->putProductToCart($product, $tokenValue);
     }
 
     /**
-     * @When /^I add (\d+) of (them) to (?:the|my) cart$/
+     * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      */
-    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product): void
+    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
-        $this->putProductToCart($product, $quantity);
+        $this->putProductToCart($product, $tokenValue, $quantity);
     }
 
     /**
-     * @Then my cart should be empty
+     * @Then /^my (cart) should be empty$/
      */
-    public function myCartShouldBeEmpty(): void
+    public function myCartShouldBeEmpty(string $tokenValue): void
     {
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->cartsClient->show($tokenValue);
+
+        $x = $response;
         Assert::true(
             $this->responseChecker->isCreationSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
+    }
+
+    /**
+     * @When /^I clear my (cart)$/
+     */
+    public function iClearMyCart(string $tokenValue): void
+    {
+        $this->cartsClient->delete($tokenValue);
     }
 
     /**
@@ -151,11 +161,8 @@ final class CartContext implements Context
         }
     }
 
-    private function putProductToCart(ProductInterface $product, int $quantity = 1): void
+    private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $this->cartsClient->create(Request::create('orders'));
-        $response = $this->cartsClient->getLastResponse();
-        $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
