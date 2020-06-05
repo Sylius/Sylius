@@ -86,7 +86,11 @@ final class SelectAttributeType extends AbstractType
                             continue;
                         }
 
-                        $choices[$key] = $choice[$this->defaultLocaleCode] ?? '';
+                        if (false === isset($choice[$this->defaultLocaleCode]) || '' === $choice[$this->defaultLocaleCode]) {
+                            continue;
+                        }
+
+                        $choices[$key] = $choice[$this->defaultLocaleCode];
                     }
 
                     $choices = array_flip($choices);

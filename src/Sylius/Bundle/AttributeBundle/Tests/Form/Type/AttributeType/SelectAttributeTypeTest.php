@@ -27,7 +27,7 @@ class SelectAttributeTypeTest extends TypeTestCase
 
     public function test_it_return_all_choices()
     {
-        $this->assertChoicesLabels(['', 'value 1'], [
+        $this->assertChoicesLabels(['value 1'], [
             'configuration' => [
                 'multiple' => false,
                 'min' => null,
