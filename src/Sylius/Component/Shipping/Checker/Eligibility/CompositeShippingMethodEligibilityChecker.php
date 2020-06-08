@@ -27,7 +27,6 @@ final class CompositeShippingMethodEligibilityChecker implements ShippingMethodE
      */
     public function __construct(array $eligibilityCheckers)
     {
-        Assert::notEmpty($eligibilityCheckers);
         Assert::allIsInstanceOf($eligibilityCheckers, ShippingMethodEligibilityCheckerInterface::class);
 
         $this->eligibilityCheckers = $eligibilityCheckers;
