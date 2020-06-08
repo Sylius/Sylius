@@ -22,7 +22,7 @@ Feature: Adding a new tax rate
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
 
-    @ui @javascript
+    @ui
     Scenario: Adding a new tax rate which will be included in product price
         Given I want to create a new tax rate
         When I specify its code as "US_SALES_TAX"
