@@ -23,22 +23,22 @@ use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
 {
-    public function it_implements_rule_checker_interface(): void
+    function it_implements_rule_checker_interface(): void
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    public function it_is_initializable(): void
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(OrderTotalGreaterThanOrEqualRuleChecker::class);
     }
 
-    public function it_denies_subject_if_subject_is_not_a_core_shipment(BaseShipmentInterface $shipment): void
+    function it_denies_subject_if_subject_is_not_a_core_shipment(BaseShipmentInterface $shipment): void
     {
         $this->isEligible($shipment, [])->shouldReturn(false);
     }
 
-    public function it_recognizes_subject_if_order_total_is_greater_than_configured_amount(
+    function it_recognizes_subject_if_order_total_is_greater_than_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
         ChannelInterface $channel
@@ -57,7 +57,7 @@ final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
         ])->shouldReturn(true);
     }
 
-    public function it_recognizes_subject_if_order_total_is_equal_to_configured_amount(
+    function it_recognizes_subject_if_order_total_is_equal_to_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
         ChannelInterface $channel
@@ -76,7 +76,7 @@ final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
         ])->shouldReturn(true);
     }
 
-    public function it_denies_subject_if_order_total_is_less_than_configured_amount(
+    function it_denies_subject_if_order_total_is_less_than_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
         ChannelInterface $channel
