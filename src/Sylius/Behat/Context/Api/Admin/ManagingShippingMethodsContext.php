@@ -110,6 +110,23 @@ final class ManagingShippingMethodsContext implements Context
         $this->client->buildCreateRequest();
     }
 
+    /**
+     * @When I try to create a new shipping method with valid data
+     */
+    public function iTryToCreateANewShippingMethodWithValidData(): void
+    {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('code', 'FED_EX_CARRIER');
+        $this->client->addRequestData('position', 0);
+        $this->client->updateRequestData(
+            ['translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']]]
+        );
+        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')));
+        $this->client->addRequestData('calculator', 'Flat rate per shipment');
+        $this->client->addRequestData(
+            'configuration', [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]]
+        );
+    }
 
     /**
      * @When I try to show :shippingMethod shipping method

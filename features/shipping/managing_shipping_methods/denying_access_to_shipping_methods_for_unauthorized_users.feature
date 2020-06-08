@@ -12,13 +12,7 @@ Feature: Denying access to shipping methods for unauthorized users
 
     @api
     Scenario: Trying to add a new shipping method as a unauthorized user
-        When I try to create a new shipping method
-        And I specify its code as "FED_EX_CARRIER"
-        And I specify its position as 0
-        And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the zone named "United States"
-        And I choose "Flat rate per shipment" calculator
-        And I specify its amount as 50 for "Web-US" channel
+        When I try to create a new shipping method with valid data
         And I try to add it
         Then I should be notified that my access has been denied
 
