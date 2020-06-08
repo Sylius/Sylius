@@ -40,17 +40,6 @@ final class SelectAttributeTypeTest extends TypeTestCase
         ]);
     }
 
-    private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
-    {
-        $form = $this->factory->create(\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType::class,
-            null, $formConfiguration);
-        $view = $form->createView();
-
-        Assert::assertSame($expectedLabels, array_map(function (ChoiceView $choiceView): string {
-            return $choiceView->label;
-        }, $view->vars['choices']));
-    }
-
     protected function setUp(): void
     {
         $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
@@ -66,5 +55,16 @@ final class SelectAttributeTypeTest extends TypeTestCase
         return [
             new PreloadedExtension([$type], []),
         ];
+    }
+
+    private function assertChoicesLabels(array $expectedLabels, array $formConfiguration = []): void
+    {
+        $form = $this->factory->create(\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType::class,
+            null, $formConfiguration);
+        $view = $form->createView();
+
+        Assert::assertSame($expectedLabels, array_map(function (ChoiceView $choiceView): string {
+            return $choiceView->label;
+        }, $view->vars['choices']));
     }
 }
