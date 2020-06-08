@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
-Feature: Viewing available shipping methods based on order total greater than or equal
+Feature: Viewing available shipping methods based on order total
     In order to only see applicable shipping methods
-    As an Customer
+    As a Customer
     I want to see the shipping methods that are available to my order
 
     Background:
