@@ -20,12 +20,15 @@ use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class SelectAttributeTypeTest extends TypeTestCase
+final class SelectAttributeTypeTest extends TypeTestCase
 {
     /** @var ProphecyInterface|TranslationLocaleProviderInterface */
     private $translationProvider;
 
-    public function test_it_return_all_choices()
+    /**
+     * @test
+     */
+    public function it_return_all_choices(): void
     {
         $this->assertChoicesLabels(['value 1'], [
             'configuration' => [
@@ -48,7 +51,7 @@ class SelectAttributeTypeTest extends TypeTestCase
         }, $view->vars['choices']));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
         $this->translationProvider->getDefaultLocaleCode()->willReturn('en_GB');
@@ -56,10 +59,7 @@ class SelectAttributeTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         $type = new \Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType($this->translationProvider->reveal());
 
