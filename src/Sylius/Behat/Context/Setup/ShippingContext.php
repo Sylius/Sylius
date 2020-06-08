@@ -475,7 +475,7 @@ final class ShippingContext implements Context
      */
     public function thisShippingMethodIsOnlyAvailableForOrdersOverOrEqualTo(
         ShippingMethodInterface $shippingMethod,
-        $amount
+        int $amount
     ): void {
         $rule = $this->createShippingMethodRule(OrderTotalGreaterThanOrEqualRuleChecker::TYPE, [
             'total' => $this->getConfigurationByChannels([$this->sharedStorage->get('channel')], $amount)
@@ -489,7 +489,7 @@ final class ShippingContext implements Context
      */
     public function thisShippingMethodIsOnlyAvailableForOrdersUnderOrEqualTo(
         ShippingMethodInterface $shippingMethod,
-        $amount
+        int $amount
     ): void {
         $rule = $this->createShippingMethodRule(OrderTotalLessThanOrEqualRuleChecker::TYPE, [
             'total' => $this->getConfigurationByChannels([$this->sharedStorage->get('channel')], $amount)
@@ -526,10 +526,7 @@ final class ShippingContext implements Context
         $this->addRuleToShippingMethod($rule, $shippingMethod);
     }
 
-    /**
-     * @param int $amount
-     */
-    private function getConfigurationByChannels(array $channels, $amount = 0): array
+    private function getConfigurationByChannels(array $channels, int $amount = 0): array
     {
         $configuration = [];
 
