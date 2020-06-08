@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Imaginea e prea mare - {{ size }} {{ suffix }}. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
+            upload_ini_size: Imaginea e prea mare. Mărimea maximă admisă este {{ limit }} {{ suffix }}.
     channel:
         base_currency:
             not_blank: Vă rugăm să introduceţi moneda de bază a canalului.
         default_locale:
+            enabled: Localizarea regională implicită trebuie activată.
             not_blank: Vă rugăm să introduceţi setări regionale implicite de canal.
         contact_email:
             invalid: Adresa de email nu este validă.
@@ -13,7 +18,7 @@ sylius:
             min: Adresa de email trebuie să aibă minim {{ limit }} caractere.
     channel_pricing:
         price:
-            min: Prețul trebuie să fie cel puțin {{ limit }}.
+            min: Prețul nu poate fi mai mic decât 0.
             not_blank: Introdu un preț.
     checkout:
         shipping_method:
