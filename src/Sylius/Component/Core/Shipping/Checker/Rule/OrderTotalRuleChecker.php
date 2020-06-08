@@ -43,5 +43,5 @@ abstract class OrderTotalRuleChecker implements RuleCheckerInterface
         return $this->compare($order->getTotal(), $amount);
     }
 
-    abstract protected function compare(int $total, $threshold): bool;
+    abstract protected function compare(int $total, int $threshold): bool;
 }

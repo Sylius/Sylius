@@ -17,7 +17,7 @@ final class OrderTotalGreaterThanOrEqualRuleChecker extends OrderTotalRuleChecke
 {
     public const TYPE = 'order_total_greater_than_or_equal';
 
-    protected function compare(int $total, $threshold): bool
+    protected function compare(int $total, int $threshold): bool
     {
         return $total >= $threshold;
     }
