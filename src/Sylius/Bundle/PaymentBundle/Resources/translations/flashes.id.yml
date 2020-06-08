@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Payment has been authorized.'
         cancelled: 'Pembayaran telah dibatalkan.'
         completed: 'Pembayaran telah selesai.'
         failed: 'Pembayaran gagal.'

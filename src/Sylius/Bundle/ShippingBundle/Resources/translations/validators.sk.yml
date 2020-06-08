@@ -13,6 +13,7 @@ sylius:
             unique: 'Kategória doručenia s daným kódom už existuje.'
     shipping_method:
         calculator:
+            min: 'Shipping charge cannot be lower than 0.'
             not_blank: 'Prosím vyberte spôsob výpočtu ceny za dopravu.'
         name:
             max_length: 'Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.'

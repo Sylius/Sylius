@@ -10,6 +10,7 @@ sylius:
         base_currency:
             not_blank: Mohon masukan mata uang utama channel.
         default_locale:
+            enabled: Default locale has to be enabled.
             not_blank: Mohon masukan default bahasa channel.
         contact_email:
             invalid: Email ini tidak valid.
@@ -17,6 +18,7 @@ sylius:
             min: Email setidaknya harus sepanjang {{ limit }} karakter.
     channel_pricing:
         price:
+            min: Price cannot be lower than 0.
             not_blank: Mohon masukan harga.
     checkout:
         shipping_method:

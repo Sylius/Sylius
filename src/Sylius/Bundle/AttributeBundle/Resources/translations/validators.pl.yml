@@ -14,6 +14,8 @@ sylius:
         configuration:
             max_entries: Maksymalna długość musi być większa bądź równa minimalnej długości.
             max_length: Maksymalna długość musi być większa bądź równa minimalnej długości.
+            min_entries: Configuration min entries value must be lower or equal to the number of added choices.
+            multiple: Configuration multiple must be true if min or max entries values are specified.
         presentation:
             not_blank: Proszę wprowadzić opis atrybutu.
             min_length: Opis atrybutu musi zawierać co najmniej 1 znak.|Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.

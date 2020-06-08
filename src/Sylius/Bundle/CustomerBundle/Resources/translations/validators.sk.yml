@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Kód zákazníckej skupiny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
             unique: Kód zákazníckej skupiny musí byť jedinečný.
+            not_blank: Please enter a customer group code.
         name:
             max: Názov zákazníckej skupiny nesmie byť dlhší ako {{ limit }} znakov.
             min: Názov zákazníckej skupiny musí mať minimálne {{ limit }} znakov.

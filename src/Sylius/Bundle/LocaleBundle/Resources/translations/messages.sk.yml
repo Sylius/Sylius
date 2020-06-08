@@ -5,3 +5,4 @@ sylius:
     form:
         locale:
             name: Názov
+            select: Select a locale...

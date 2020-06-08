@@ -4,19 +4,29 @@
 sylius:
     address:
         city:
+            max_length: City must not be longer than {{ limit }} characters|City must not be longer than {{ limit }} characters.
+            min_length: City must be at least {{ limit }} characters long|City must be at least {{ limit }} characters long.
             not_blank: Proszę podać miejscowość.
         country:
             not_blank: Proszę wybrać kraj.
             disabled: Wybrany kraj nie jest dostępny. Proszę wybrać inny.
         first_name:
+            max_length: First name must not be longer than {{ limit }} characters|First name must not be longer than {{ limit }} characters.
+            min_length: First name must be at least {{ limit }} characters long|First name must be at least {{ limit }} characters long.
             not_blank: Proszę podać swoje imię.
         last_name:
+            max_length: Last name must not be longer than {{ limit }} characters|Last name must not be longer than {{ limit }} characters.
+            min_length: Last name must be at least {{ limit }} characters long|Last name must be at least {{ limit }} characters long.
             not_blank: Proszę podać swoje nazwisko.
         postcode:
+            max_length: Postcode must not be longer than {{ limit }} characters|Postcode must not be longer than {{ limit }} characters.
+            min_length: Postcode must be at least {{ limit }} characters long|Postcode must be at least {{ limit }} characters long.
             not_blank: Proszę podać kod pocztowy.
         province:
             valid: Proszę wybrać prawidłowe województwo.
         street:
+            max_length: Street must not be longer than {{ limit }} characters|Street must not be longer than {{ limit }} characters.
+            min_length: Street must be at least {{ limit }} characters long|Street must be at least {{ limit }} characters long.
             not_blank: Proszę podać ulicę.
         not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
     country:
@@ -31,6 +41,8 @@ sylius:
             regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
             unique: Kod województwa musi być unikalny.
         name:
+            max_length: Province name must not be longer than {{ limit }} characters|Province name must not be longer than {{ limit }} characters.
+            min_length: Province name must be at least {{ limit }} characters long|Province name must be at least {{ limit }} characters long.
             not_blank: Proszę podać nazwę województwa.
             unique: Nazwa województwa musi być unikalna.
     zone:
@@ -43,8 +55,11 @@ sylius:
         members:
             min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
         name:
+            max_length: Zone name must not be longer than {{ limit }} characters|Zone name must not be longer than {{ limit }} characters.
+            min_length: Zone name must be at least {{ limit }} characters long|Zone name must be at least {{ limit }} characters long.
             not_blank: Proszę podać nazwę strefy.
     zone_member:
+        cannot_be_the_same_as_zone: Zone member cannot be the same as a zone.
         code:
             not_blank: Proszę wybrać członka strefy.
             regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.

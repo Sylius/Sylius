@@ -12,6 +12,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Menggunakan alamat berbeda untuk penagihan?
+                different_shipping_address: Use different address for shipping?
             payment_method: Metode pembayaran
             shipping_method: Metode pengiriman
         promotion:
@@ -21,6 +22,7 @@ sylius:
                 product: Produk
         promotion_coupon:
             per_customer_usage_limit: Batas penggunaan per pelanggan
+            reusable_from_cancelled_orders: Reusable from cancelled orders
         group:
             name: Nama
             roles: Peran
@@ -31,6 +33,7 @@ sylius:
                 country: Negara
                 postcode: Kode pos
                 street: Alamat
+                tax_id: Tax ID
             contact_email: Kontak email
             countries: Negara
             currencies: Mata Uang
@@ -39,8 +42,10 @@ sylius:
             hostname: Nama host
             locale_default: Default Bahasa
             locales: Pilihan Bahasa
+            menu_taxon: Menu taxon
             payment_methods: Metode Pembayaran
             shipping_methods: Metode pengiriman
+            shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Lewati langkah pengiriman jika hanya salah satu metode pengiriman tersedia?
             skipping_payment_step_allowed: Lewati langkah pembayaran jika hanya salah satu metode pembayaran tersedia?
             tax_calculation_strategy: Metode perhitungan pajak
@@ -101,6 +106,7 @@ sylius:
             file: Pilih Gambar
         user:
             billing_address: Alamat Penagihan
+            different_shipping_address: Use different address for shipping?
             enabled: Diaktifkan
             first_name: Nama Depan
             groups: Kelompok
@@ -196,6 +202,7 @@ sylius:
             header: Versi PHP dan pengaturan
             any: semuanya
             detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: tidak ketergantungan
             off: false
@@ -203,13 +210,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
             short_open_tag: short_open_tag
             timezone: zona waktu
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Zona waktu kadaluarsa
                 help: Zona waktu %timezone% kadaluwarsa. Perbaiki php.ini anda (daftar zona waktu yang kadaluwarsa http://php.net/manual/en/timezones.others.php).
             version: Versi PHP
             version_recommended: Versi PHP yang direkomendasikan
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
     payum_gateway:
         cash_on_delivery: Bayar Ditempat
         offline: Tidak aktif

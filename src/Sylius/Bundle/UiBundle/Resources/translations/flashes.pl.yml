@@ -24,3 +24,7 @@ sylius:
         out_of_stock: 'W sklepie dostępne jest tylko %quantity% sztuk produktu.'
     product_variant:
         update_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji wariantu produktu. Spróbuj uaktualnić go ponownie.'
+    promotion:
+        update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

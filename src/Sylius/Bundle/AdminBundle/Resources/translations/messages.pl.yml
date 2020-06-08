@@ -4,6 +4,7 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'has been sent using'
             subject: 'Potwierdzenie dostawy'
             thank_you_for_transaction: 'Dziękujemy za udaną transakcję.'
             tracking_code: 'kod śledzenia.'
@@ -49,3 +50,10 @@ sylius:
         gateway:
             no_sca_support_notice: Wybrana bramka płatności nie obsługuje SCA.
         sales_summary: Podsumowanie sprzedaży
+        statistics:
+            day: Day
+            lifetime: Lifetime
+            month: Month
+            week: Week
+            2weeks: 2 Weeks
+            year: Year

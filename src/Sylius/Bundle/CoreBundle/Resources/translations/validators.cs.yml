@@ -10,6 +10,7 @@ sylius:
         base_currency:
             not_blank: Zadejt základní měnu kanálu.
         default_locale:
+            enabled: Výchozí locale musí být povoleno.
             not_blank: Zadejte výchozí národní prostředí kanálu.
         contact_email:
             invalid: Tento email je neplatný.
@@ -17,6 +18,7 @@ sylius:
             min: E-mail musí být alespoň {{ limit }} znaků.
     channel_pricing:
         price:
+            min: Cena nemůže být nižší než 0.
             not_blank: Prosím vložte cenu.
     checkout:
         shipping_method:

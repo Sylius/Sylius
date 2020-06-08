@@ -24,3 +24,7 @@ sylius:
         out_of_stock: 'Hanya ada %quantity% dari produk ini di saham.'
     product_variant:
         update_error: 'Ada masalah tak terduga dengan mengupdate varian produk. Tolong, coba perbarui varian produk lagi.'
+    promotion:
+        update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

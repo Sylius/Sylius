@@ -34,6 +34,8 @@ sylius:
             amount: Jumlah
             code_length: Panjang kode
             expires_at: Berakhir pada
+            prefix: Prefix
+            suffix: Suffix
             usage_limit: Batas penggunaan
         promotion_filter:
             price_range: Filter rentang harga

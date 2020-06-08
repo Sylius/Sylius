@@ -34,6 +34,8 @@ sylius:
             amount: Suma
             code_length: Dĺžka kódu
             expires_at: Platnosť uplynie
+            prefix: Prefix
+            suffix: Suffix
             usage_limit: Limit použitia
         promotion_filter:
             price_range: Filter cenového rozsahu

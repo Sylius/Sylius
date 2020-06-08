@@ -12,6 +12,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Použiť inú fakturačnú adresu?
+                different_shipping_address: Use different address for shipping?
             payment_method: Spôsob platby
             shipping_method: Spôsob dobpravy
         promotion:
@@ -21,6 +22,7 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Limit pre použitie jedným zákazníkom
+            reusable_from_cancelled_orders: Reusable from cancelled orders
         group:
             name: Názov
             roles: Role
@@ -31,6 +33,7 @@ sylius:
                 country: Krajina
                 postcode: PSČ
                 street: Ulica
+                tax_id: Tax ID
             contact_email: Kontaktný e-mail
             countries: Krajiny
             currencies: Meny
@@ -39,8 +42,10 @@ sylius:
             hostname: Hostname
             locale_default: Predvolený jazyk
             locales: Jazyky
+            menu_taxon: Menu taxon
             payment_methods: Spôsoby platby
             shipping_methods: Spôsoby doručenia
+            shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Preskočiť výber dopravy, ak je dostupný iba jeden spôsob dopravy?
             skipping_payment_step_allowed: Preskočiť krok platby ak je dostupná len jedna platobná metóda?
             tax_calculation_strategy: Spôsob výpočtu dane
@@ -101,6 +106,7 @@ sylius:
             file: Vybrať obrázok
         user:
             billing_address: Fakturačná adresa
+            different_shipping_address: Use different address for shipping?
             enabled: Zapnuté
             first_name: Meno
             groups: Zákaznícke skupiny
@@ -196,6 +202,7 @@ sylius:
             header: Verzia PHP a nastavenia
             any: akékoľvek
             detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nie sú zastarelé
             off: false
@@ -203,13 +210,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
             short_open_tag: short_open_tag
             timezone: časové pásmo
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Zastaralé časové pásmo
                 help: Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).
             version: Verzia PHP
             version_recommended: Odporúčaná verzia PHP
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
     payum_gateway:
         cash_on_delivery: Dobierka
         offline: Offline

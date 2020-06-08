@@ -4,19 +4,29 @@
 sylius:
     address:
         city:
+            max_length: City must not be longer than {{ limit }} characters|City must not be longer than {{ limit }} characters.
+            min_length: City must be at least {{ limit }} characters long|City must be at least {{ limit }} characters long.
             not_blank: Silahkan masukkan nama kota.
         country:
             not_blank: Silahkan pilih negara.
             disabled: Negara yang dipilih telah dinonaktifkan. Silakan pilih satu yang lain.
         first_name:
+            max_length: First name must not be longer than {{ limit }} characters|First name must not be longer than {{ limit }} characters.
+            min_length: First name must be at least {{ limit }} characters long|First name must be at least {{ limit }} characters long.
             not_blank: Masukkan nama depan.
         last_name:
+            max_length: Last name must not be longer than {{ limit }} characters|Last name must not be longer than {{ limit }} characters.
+            min_length: Last name must be at least {{ limit }} characters long|Last name must be at least {{ limit }} characters long.
             not_blank: Silahkan masukkan nama belakang.
         postcode:
+            max_length: Postcode must not be longer than {{ limit }} characters|Postcode must not be longer than {{ limit }} characters.
+            min_length: Postcode must be at least {{ limit }} characters long|Postcode must be at least {{ limit }} characters long.
             not_blank: Harap masukkan kode pos.
         province:
             valid: Silahkan pilih provinsi yang tepat.
         street:
+            max_length: Street must not be longer than {{ limit }} characters|Street must not be longer than {{ limit }} characters.
+            min_length: Street must be at least {{ limit }} characters long|Street must be at least {{ limit }} characters long.
             not_blank: Silahkan masukkan jalan.
         not_shippable: Alamat ini bukanlah tujuan pengiriman yang sah.
     country:
@@ -31,6 +41,8 @@ sylius:
             regex: Kode provinsi harus memiliki format XX-XX (mis. ID-JT).
             unique: Kode provinsi harus unik.
         name:
+            max_length: Province name must not be longer than {{ limit }} characters|Province name must not be longer than {{ limit }} characters.
+            min_length: Province name must be at least {{ limit }} characters long|Province name must be at least {{ limit }} characters long.
             not_blank: Masukkan nama provinsi.
             unique: Nama provinsi harus unik.
     zone:
@@ -43,8 +55,11 @@ sylius:
         members:
             min_count: Harap tambahkan setidaknya {{ limit }} anggota zona.
         name:
+            max_length: Zone name must not be longer than {{ limit }} characters|Zone name must not be longer than {{ limit }} characters.
+            min_length: Zone name must be at least {{ limit }} characters long|Zone name must be at least {{ limit }} characters long.
             not_blank: Masukkan nama zona.
     zone_member:
+        cannot_be_the_same_as_zone: Zone member cannot be the same as a zone.
         code:
             not_blank: Silahkan pilih anggota zona.
             regex: Kode zona member hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.

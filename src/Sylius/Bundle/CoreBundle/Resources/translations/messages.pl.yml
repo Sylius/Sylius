@@ -12,6 +12,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Użyć innego adresu do rozliczeń?
+                different_shipping_address: Use different address for shipping?
             payment_method: Metoda płatności
             shipping_method: Metoda wysyłki
         promotion:
@@ -21,6 +22,7 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Limit użycia na 1 klienta
+            reusable_from_cancelled_orders: Reusable from cancelled orders
         group:
             name: Nazwa
             roles: Role
@@ -31,6 +33,7 @@ sylius:
                 country: Kraj
                 postcode: Kod pocztowy
                 street: Adres
+                tax_id: Tax ID
             contact_email: E-mail do kontaktu
             countries: Kraje
             currencies: Waluty
@@ -39,8 +42,10 @@ sylius:
             hostname: Nazwa hosta
             locale_default: Domyślne ustawienia regionalne
             locales: Ustawienia regionalne
+            menu_taxon: Menu taxon
             payment_methods: Metody płatności
             shipping_methods: Metody wysyłki
+            shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Czy pomijać krok wysyłki, jeżeli dostępna jest tylko jedna metoda wysyłki?
             skipping_payment_step_allowed: Pominąć krok wyboru płatności, jeżeli tylko jedna metoda płatności jest dostępna?
             tax_calculation_strategy: Strategia obliczania podatku
@@ -101,6 +106,7 @@ sylius:
             file: Wybierz zdjęcie
         user:
             billing_address: Adres do rachunku
+            different_shipping_address: Use different address for shipping?
             enabled: Dostępny
             first_name: Imię
             groups: Grupy
@@ -196,6 +202,7 @@ sylius:
             header: Wersja PHP i ustawienia
             any: którekolwiek
             detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nieprzestarzałe
             off: false
@@ -203,13 +210,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
             short_open_tag: short_open_tag
             timezone: strefa czasowa
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Przestarzała strefa czasowa
                 help: 'Strefa czasowa %timezone% jest przestarzała. Popraw wpis w pliku php.ini (lista przestarzałych stref czasowych: http://php.net/manual/en/timezones.others.php).'
             version: Wersja PHP
             version_recommended: Rekomendowana wersja PHP
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
     payum_gateway:
         cash_on_delivery: Opłata za pobraniem
         offline: Tryb offline

@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Kode kelompok pelanggan hanya boleh terdiri dari huruf, angka, tanda strip, dan garis bawah.
             unique: Kode kelompok pelanggan harus unik.
+            not_blank: Please enter a customer group code.
         name:
             max: Nama kelompok pelanggan tidak boleh melebihi {{ limit }} karakter.
             min: Nama kelompok pelanggan setidaknya terdiri dari {{ limit }} karakter.

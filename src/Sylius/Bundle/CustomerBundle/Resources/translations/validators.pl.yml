@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Kod grupy klientów może być złożony tylko z liter, cyfr, myślników i podkreśleń.
             unique: Kod grupy klientów musi być unikatowy.
+            not_blank: Please enter a customer group code.
         name:
             max: Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.
             min: Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.

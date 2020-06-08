@@ -12,6 +12,9 @@ sylius:
             regex: 'Kode kategori pengiriman hanya bisa terdiri dari huruf, angka, tanda hubung dan garis bawah.'
             unique: 'Kategori pengiriman dengan kode yang diberikan sudah ada.'
     shipping_method:
+        calculator:
+            min: 'Shipping charge cannot be lower than 0.'
+            not_blank: 'Please select shipping method calculator.'
         name:
             max_length: 'Nama metode pengiriman tidak boleh lebih dari karakter {{ limit }}.'
             min_length: 'Nama metode pengiriman harus paling sedikit {{ limit }} karakternya panjang.'

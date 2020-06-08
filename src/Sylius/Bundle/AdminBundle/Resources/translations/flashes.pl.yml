@@ -2,5 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation_resent: 'Order confirmation has been successfully resent to the customer.'
+        shipment_confirmation_resent: 'Shipment confirmation has been successfully resent to the customer.'
     product_variant:
         cannot_generate_variants: 'Nie można wygenerować wariantów produktu bez wartości opcji.'

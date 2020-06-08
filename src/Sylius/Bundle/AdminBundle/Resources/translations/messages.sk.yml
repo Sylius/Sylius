@@ -4,7 +4,12 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'has been sent using'
             subject: 'Potvrdenie odoslania zásielky'
+            thank_you_for_transaction: 'Thank you for a successful transaction.'
+            tracking_code: 'tracking code.'
+            you_can_check_its_location: 'You can check it''s location with the'
+            your_order_with_number: 'Your order with number'
     menu:
         admin:
             main:
@@ -41,3 +46,14 @@ sylius:
                 sales:
                     header: Predaj
                     orders: Objednávky
+    ui:
+        gateway:
+            no_sca_support_notice: The chosen payment gateway does not support SCA.
+        sales_summary: Sales summary
+        statistics:
+            day: Day
+            lifetime: Lifetime
+            month: Month
+            week: Week
+            2weeks: 2 Weeks
+            year: Year

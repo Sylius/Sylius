@@ -4,19 +4,29 @@
 sylius:
     address:
         city:
+            max_length: City must not be longer than {{ limit }} characters|City must not be longer than {{ limit }} characters.
+            min_length: City must be at least {{ limit }} characters long|City must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte mesto.
         country:
             not_blank: Prosím vyberte krajinu.
             disabled: Vybraná krajina nie aktivovaná. Prosím vyberte inú.
         first_name:
+            max_length: First name must not be longer than {{ limit }} characters|First name must not be longer than {{ limit }} characters.
+            min_length: First name must be at least {{ limit }} characters long|First name must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte Vaše meno.
         last_name:
+            max_length: Last name must not be longer than {{ limit }} characters|Last name must not be longer than {{ limit }} characters.
+            min_length: Last name must be at least {{ limit }} characters long|Last name must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte Vaše priezvisko.
         postcode:
+            max_length: Postcode must not be longer than {{ limit }} characters|Postcode must not be longer than {{ limit }} characters.
+            min_length: Postcode must be at least {{ limit }} characters long|Postcode must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte Vaše PSČ.
         province:
             valid: Prosím vyberte správnu provinciu.
         street:
+            max_length: Street must not be longer than {{ limit }} characters|Street must not be longer than {{ limit }} characters.
+            min_length: Street must be at least {{ limit }} characters long|Street must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte ulicu.
         not_shippable: Adresa nie je platná pre doručenie.
     country:
@@ -31,6 +41,8 @@ sylius:
             regex: Kód provincie musí mať nasledujúci formát XX-XX (napr USA-FL).
             unique: Kód provincie musí byť jedinečný.
         name:
+            max_length: Province name must not be longer than {{ limit }} characters|Province name must not be longer than {{ limit }} characters.
+            min_length: Province name must be at least {{ limit }} characters long|Province name must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte názov provincie.
             unique: Názov provincie musí byť jedinečný.
     zone:
@@ -43,8 +55,11 @@ sylius:
         members:
             min_count: Prosím pridajte zóne aspoň {{ limit }} členov.
         name:
+            max_length: Zone name must not be longer than {{ limit }} characters|Zone name must not be longer than {{ limit }} characters.
+            min_length: Zone name must be at least {{ limit }} characters long|Zone name must be at least {{ limit }} characters long.
             not_blank: Prosím zadajte názov zóny.
     zone_member:
+        cannot_be_the_same_as_zone: Zone member cannot be the same as a zone.
         code:
             not_blank: Prosím zvolte členom zóny.
             regex: Kód člena zóny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.

@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Silahkan masukkan slug produk.
             unique: Slug produk harus unik.
+            max_length: Product slug must not be longer than 1 character.|Product slug must not be longer than {{ limit }} characters.
         code:
             not_blank: Silahkan masukkan kode produk.
             regex: Kode produk hanya bisa berupa huruf, angka, tanda pisah dan  garis bawah.

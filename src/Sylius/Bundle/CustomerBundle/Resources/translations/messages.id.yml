@@ -12,6 +12,7 @@ sylius:
             gender: Jenis kelamin
             birthday: Ulang tahun
             billing_address: Alamat Penagihan
+            different_shipping_address: Use different address for shipping?
             only_customer_registration: Buat akun?
             subscribed_to_newsletter: Berlangganan info melalui email
         customer_group:

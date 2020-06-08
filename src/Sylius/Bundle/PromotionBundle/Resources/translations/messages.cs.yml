@@ -34,6 +34,8 @@ sylius:
             amount: Částka
             code_length: Délka kódu
             expires_at: Vyprší za
+            prefix: Prefix
+            suffix: Sufix
             usage_limit: Omezení použití
         promotion_filter:
             price_range: Cenový rozsah

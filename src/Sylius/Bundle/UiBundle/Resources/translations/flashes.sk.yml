@@ -24,3 +24,7 @@ sylius:
         out_of_stock: 'Na sklade je už iba %quantity% produktov.'
     product_variant:
         update_error: 'Tam bol neočakávaný problém s aktualizáciou produkt variant. Prosím, skúste znova aktualizovať produkt variant.'
+    promotion:
+        update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

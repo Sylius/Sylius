@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Prosím, zadajte "slug" produktu.
             unique: URL slug produktu musí byť unikátny.
+            max_length: Product slug must not be longer than 1 character.|Product slug must not be longer than {{ limit }} characters.
         code:
             not_blank: Prosím, zadajte kód produktu.
             regex: Kód produktu môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.

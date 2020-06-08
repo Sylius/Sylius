@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Bitte eine Produkt SEO-URL angeben.
             unique: Der Produktcode muss eindeutig sein.
+            max_length: Product slug must not be longer than 1 character.|Product slug must not be longer than {{ limit }} characters.
         code:
             not_blank: Bitte geben Sie einen Produktcode ein.
             regex: Produktkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
