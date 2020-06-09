@@ -399,6 +399,30 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I move up :taxonName taxon
+     */
+    public function iMoveUpTaxon(string $taxonName)
+    {
+        $this->createPage->moveUpTaxon($taxonName);
+    }
+
+    /**
+     * @When I move down :taxonName taxon
+     */
+    public function iMoveDownTaxon(string $taxonName)
+    {
+        $this->createPage->moveDownTaxon($taxonName);
+    }
+
+    /**
+     * @Then the first taxon on the list should be :taxonName
+     */
+    public function theFirstTaxonOnTheListShouldBe(string $taxonName)
+    {
+        Assert::same($this->createPage->getFirstTaxonOnTheList(), $taxonName);
+    }
+
+    /**
      * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
     private function resolveCurrentPage()

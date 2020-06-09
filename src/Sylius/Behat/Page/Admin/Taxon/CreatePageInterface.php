@@ -49,4 +49,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function getLeaves(TaxonInterface $parentTaxon = null): array;
 
     public function activateLanguageTab(string $locale): void;
+
+    public function moveUpTaxon(string $name): void;
+
+    public function moveDownTaxon(string $name): void;
+
+    public function getFirstTaxonOnTheList(): string;
 }
