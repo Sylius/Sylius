@@ -286,3 +286,45 @@ a {
         color: $sylius-brand-color !important;
     }
 }
+
+// ----------------------------------
+// ------------ Navigation
+// ----------------------------------
+
+.navigation {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    margin: 5px;
+    width: 40px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 40px;
+    color: grey;
+    background-color: transparent;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover{
+        color: black;
+    }
+
+    i {
+        pointer-events: none;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.navigation-prev {
+    left: 0;
+}
+
+.navigation-next {
+    right: 0;
+}
