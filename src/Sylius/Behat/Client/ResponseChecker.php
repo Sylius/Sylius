@@ -50,6 +50,10 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function getError(Response $response): string
     {
+        if ($this->hasKey($response, 'message')) {
+            return $this->getValue($response, 'message');
+        }
+
         return $this->getResponseContentValue($response, 'hydra:description');
     }
 
@@ -119,6 +123,13 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return false;
+    }
+
+    public function hasKey(Response $response, string $key): bool
+    {
+        $content = json_decode($response->getContent(), true);
+
+        return array_key_exists($key, $content);
     }
 
     public function hasTranslation(Response $response, string $locale, string $key, string $translation): bool
