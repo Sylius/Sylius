@@ -35,6 +35,8 @@ interface ResponseCheckerInterface
 
     public function isDeletionSuccessful(Response $response): bool;
 
+    public function hasAccessDenied(Response $response): bool;
+
     /** @param string|int $value */
     public function hasValue(Response $response, string $key, $value): bool;
 

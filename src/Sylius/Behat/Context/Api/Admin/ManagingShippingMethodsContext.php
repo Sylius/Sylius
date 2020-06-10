@@ -85,6 +85,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I am browsing shipping methods
      * @When I want to browse shipping methods
+     * @When I try to browse shipping methods
      * @When I browse shipping methods
      */
     public function iBrowseShippingMethods(): void
@@ -102,10 +103,37 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I want to create a new shipping method
+     * @When I try to create a new shipping method
      */
     public function iWantToCreateANewShippingMethod(): void
     {
         $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I try to create a new shipping method with valid data
+     */
+    public function iTryToCreateANewShippingMethodWithValidData(): void
+    {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('code', 'FED_EX_CARRIER');
+        $this->client->addRequestData('position', 0);
+        $this->client->updateRequestData(
+            ['translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']]]
+        );
+        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')));
+        $this->client->addRequestData('calculator', 'Flat rate per shipment');
+        $this->client->addRequestData(
+            'configuration', [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]]
+        );
+    }
+
+    /**
+     * @When I try to show :shippingMethod shipping method
+     */
+    public function iTryToShowShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->show($shippingMethod->getCode());
     }
 
     /**
@@ -209,6 +237,22 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I try to archive the :shippingMethod shipping method
+     */
+    public function iTryToArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+    }
+
+    /**
+     * @When I try to restore the :shippingMethod shipping method
+     */
+    public function iTryToRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
+    }
+
+    /**
      * @When I restore the :shippingMethod shipping method
      */
     public function iRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -227,6 +271,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @When I want to modify a shipping method :shippingMethod
+     * @When I try to modify a shipping method :shippingMethod
      * @When /^I want to modify (this shipping method)$/
      */
     public function iWantToModifyShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -356,6 +401,14 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Shipping method could not be created'
         );
+    }
+
+    /**
+     * @Then I should be notified that my access has been denied
+     */
+    public function iShouldBeNotifiedThatMyAccessHasBeenDenied(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->client->getLastResponse()));
     }
 
     /**
