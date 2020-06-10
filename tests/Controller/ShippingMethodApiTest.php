@@ -15,6 +15,7 @@ namespace Sylius\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ShippingMethodApiTest extends JsonApiTestCase
@@ -25,14 +26,49 @@ final class ShippingMethodApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
+    /** @var array  */
+    static private $authorizedHeaderWithDenied = [
+        'HTTP_Authorization' => 'Bearer wrong_token',
+        'HTTP_ACCEPT' => 'application/json',
+        'CONTENT_TYPE' => 'application/json',
+    ];
+
     /**
      * @test
      */
-    public function it_does_not_allow_to_show_shipping_method_when_it_does_not_exist()
+    public function it_denies_to_show_shipping_method_for_not_authenticated_users(): void
+    {
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $this->loadFixturesFromFiles([
+            'resources/zones.yml',
+            'resources/shipping_methods.yml',
+        ])['ups'];
+
+        $this->client->request(
+            Request::METHOD_GET,
+            $this->getShippingMethodUrl($shippingMethod),
+            [],
+            [],
+            static::$authorizedHeaderWithDenied
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_show_shipping_method_when_it_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/v1/shipping-methods/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request(
+            Request::METHOD_GET,
+            '/api/v1/shipping-methods/-1',
+            [],
+            [],
+            static::$authorizedHeaderWithAccept
+        );
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -41,7 +77,7 @@ final class ShippingMethodApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_showing_shipping_method()
+    public function it_allows_showing_shipping_method(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $shippingMethods = $this->loadFixturesFromFiles([
@@ -50,16 +86,19 @@ final class ShippingMethodApiTest extends JsonApiTestCase
         ]);
         $shippingMethod = $shippingMethods['ups'];
 
-        $this->client->request('GET', $this->getShippingMethodUrl($shippingMethod), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request(
+            Request::METHOD_GET,
+            $this->getShippingMethodUrl($shippingMethod),
+            [],
+            [],
+            static::$authorizedHeaderWithAccept
+        );
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'shipping_method/show_response', Response::HTTP_OK);
     }
 
-    /**
-     * @return string
-     */
-    private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod)
+    private function getShippingMethodUrl(ShippingMethodInterface $shippingMethod): string
     {
         return '/api/v1/shipping-methods/' . $shippingMethod->getCode();
     }
