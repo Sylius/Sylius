@@ -108,6 +108,8 @@
         </DeprecatedInterface>
         <DeprecatedMethod>
             <errorLevel type="info">
+                <referencedMethod name="FOS\RestBundle\View\View::setTemplate" />
+                <referencedMethod name="FOS\RestBundle\View\View::setTemplateVar" />
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
                 <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Kernel::getRootDir" />

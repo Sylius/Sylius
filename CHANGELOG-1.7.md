@@ -1,5 +1,28 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.5 (2020-06-02)
+
+#### TL;DR
+
+- Support for PHP 7.4 ([#11509](https://github.com/Sylius/Sylius/issues/11509), [#11510](https://github.com/Sylius/Sylius/issues/11510))
+- Brought back backwards compatibility with attribute templates broken with v1.7.0 ([#11473](https://github.com/Sylius/Sylius/issues/11473))
+
+#### Details
+
+- [#11468](https://github.com/Sylius/Sylius/issues/11468) Fix for product translation tabs to be folded by default ([@arti0090](https://github.com/arti0090))
+- [#11473](https://github.com/Sylius/Sylius/issues/11473) [Attribute] Bring back attribute types templates after BC break in 1.7 ([@GSadee](https://github.com/GSadee))
+- [#11476](https://github.com/Sylius/Sylius/issues/11476) change product translation tab opening behavior ([@arti0090](https://github.com/arti0090))
+- [#11489](https://github.com/Sylius/Sylius/issues/11489) Fix route id typo ([@antiseptikk](https://github.com/antiseptikk))
+- [#11492](https://github.com/Sylius/Sylius/issues/11492) Making error messages in example factories more descriptive ([@mamazu](https://github.com/mamazu))
+- [#11509](https://github.com/Sylius/Sylius/issues/11509) [1.7] Travis Bionic + Chrome Headless + PHP 7.4 support ([@pamil](https://github.com/pamil))
+- [#11510](https://github.com/Sylius/Sylius/issues/11510) Make packages installable with PHP 7.4 ([@pamil](https://github.com/pamil))
+- [#11511](https://github.com/Sylius/Sylius/issues/11511) Change function that orders grid fields ([@arti0090](https://github.com/arti0090))
+- [#11523](https://github.com/Sylius/Sylius/issues/11523) Fix Psalm errors ([@pamil](https://github.com/pamil))
+- [#11525](https://github.com/Sylius/Sylius/issues/11525) [Docs][Plus] Add Docs with Sylius Plus deployment ([@AdamKasp](https://github.com/AdamKasp))
+- [#11527](https://github.com/Sylius/Sylius/issues/11527) [Docs][Plus] Missing information about authentication ([@AdamKasp](https://github.com/AdamKasp))
+- [#11540](https://github.com/Sylius/Sylius/issues/11540) [Docs] Update order processor documentation ([@arti0090](https://github.com/arti0090))
+- [#11542](https://github.com/Sylius/Sylius/issues/11542) [Maintenance] Add conflict to the 4.4.9 version of symfony/form ([@GSadee](https://github.com/GSadee))
+
 ## v1.7.4 (2020-05-14)
 
 #### Details

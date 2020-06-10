@@ -120,6 +120,31 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
     }
 
+    public function moveUpTaxon(string $name): void
+    {
+        $taxonElement = $this->getElement('tree_item', ['%taxon%' => $name]);
+        $treeAction = $taxonElement->getParent()->getParent()->find('css', '.sylius-tree__action');
+        $treeAction->click();
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+        $treeAction->find('css', '.sylius-taxon-move-up .up')->click();
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+    }
+
+    public function moveDownTaxon(string $name): void
+    {
+        $taxonElement = $this->getElement('tree_item', ['%taxon%' => $name]);
+        $treeAction = $taxonElement->getParent()->getParent()->find('css', '.sylius-tree__action');
+        $treeAction->click();
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+        $treeAction->find('css', '.sylius-taxon-move-down .down')->click();
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+    }
+
+    public function getFirstTaxonOnTheList(): string
+    {
+        return $this->getLeaves()[0]->getText();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%language%'])) {
@@ -140,6 +165,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'name' => '#sylius_taxon_translations_%language%_name',
             'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.sylius-tree',
+            'tree_item' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }
 
