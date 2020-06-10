@@ -5,7 +5,7 @@ class StatisticsComponent {
   constructor(wrapper) {
     if (!wrapper) return;
 
-    this.weekInMiliSeconds = 604800000;
+    this.weekInMilliseconds = 604800000;
     this.wrapper = wrapper;
     this.chart = null;
     this.chartCanvas = this.wrapper.querySelector('#stats-graph');
@@ -46,8 +46,9 @@ class StatisticsComponent {
 
     this.updateNavButtons(
       defaultInterval,
-      new Date(date.getFullYear(), 0, 1),
-      new Date(date.getFullYear() + 1, 0, 0)
+      new Date(date.getFullYear(), 1, 1),
+      new Date(date.getFullYear() + 1, 1, 0),
+      new Date()
     );
   }
 
@@ -62,30 +63,35 @@ class StatisticsComponent {
     let endDate;
     let prevDate;
     let nextDate;
+    let dateNow = new Date();
+    let maxGraphDate;
 
     switch (interval) {
       case 'year':
         startDate = new Date(date.getFullYear(), 0, 1);
         endDate = new Date(date.getFullYear() + 1, 0, 0);
-        prevDate = this.formatDate(new Date(date.getFullYear() - 1, date.getMonth(), 1));
-        nextDate = this.formatDate(new Date(date.getFullYear() + 1, date.getMonth(), 1));
-        this.updateNavButtons(interval, prevDate, nextDate);
+        prevDate = new Date(date.getFullYear() - 1, 1, 1);
+        nextDate = new Date(date.getFullYear() + 1, 1, 1);
+        maxGraphDate = new Date(dateNow.getFullYear() + 1, 0, 1);
+        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
         interval = 'month';
         break;
       case 'month':
         startDate = new Date(date.getFullYear(), date.getMonth(), 1);
         endDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-        prevDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
-        nextDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
-        this.updateNavButtons(interval, prevDate, nextDate);
+        prevDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        nextDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        maxGraphDate = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, 0);
+        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
         interval = 'day';
         break;
       case 'week':
-        startDate = new Date(date.getTime() - this.weekInMiliSeconds);
-        endDate = new Date(date.getTime() + this.weekInMiliSeconds);
-        prevDate = this.formatDate(new Date(date.getTime() - (2 * this.weekInMiliSeconds)));
-        nextDate = this.formatDate(new Date(date.getTime() + (3 * this.weekInMiliSeconds)));
-        this.updateNavButtons(interval, prevDate, nextDate);
+        startDate = new Date(date.getTime() - this.weekInMilliseconds);
+        endDate = new Date(date.getTime() + this.weekInMilliseconds);
+        prevDate = new Date(date.getTime() - (2 * this.weekInMilliseconds));
+        nextDate = new Date(date.getTime() + (3 * this.weekInMilliseconds));
+        maxGraphDate = new Date(dateNow.getTime() + (2 * this.weekInMilliseconds));
+        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
         interval = 'day';
         break;
     }
@@ -163,12 +169,20 @@ class StatisticsComponent {
     element.setAttribute('interval', interval);
   }
 
-  updateNavButtons(interval, prevDate, nextDate) {
+  updateNavButtons(interval, prevDate, nextDate, maxGraphDate) {
+    this.nextButton.disabled = false;
+    this.nextButton.style.visibility = 'visible';
+
+    if( nextDate > maxGraphDate ){
+      this.nextButton.disabled = true;
+      this.nextButton.style.visibility = 'hidden';
+    }
+
     this.prevButton.setAttribute('interval', interval);
     this.nextButton.setAttribute('interval', interval);
 
-    this.prevButton.setAttribute('date', prevDate);
-    this.nextButton.setAttribute('date', nextDate);
+    this.prevButton.setAttribute('date', this.formatDate(prevDate));
+    this.nextButton.setAttribute('date', this.formatDate(nextDate));
   }
 }
 
