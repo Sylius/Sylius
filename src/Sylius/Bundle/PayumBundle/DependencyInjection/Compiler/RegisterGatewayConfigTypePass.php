@@ -56,11 +56,11 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
             return $secondGateway['priority'] - $firstGateway['priority'];
         });
 
+        $sortedGatewayFactories = [];
         foreach ($gatewayFactories as $key => $factory) {
-            $gatewayFactories[$factory['type']] = $factory['label'];
-            unset($gatewayFactories[$key]);
+            $sortedGatewayFactories[$factory['type']] = $factory['label'];
         }
 
-        $container->setParameter('sylius.gateway_factories', $gatewayFactories);
+        $container->setParameter('sylius.gateway_factories', $sortedGatewayFactories);
     }
 }
