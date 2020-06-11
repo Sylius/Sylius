@@ -19,6 +19,8 @@
 
     ```diff
         parameters:
+    -       sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
+    +       sylius.security.shop_regex: "^/(?!admin|new-api|api/.*|api$|media/.*)[^/]++"
     +       sylius.security.new_api_route: "/new-api"
     +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
         
