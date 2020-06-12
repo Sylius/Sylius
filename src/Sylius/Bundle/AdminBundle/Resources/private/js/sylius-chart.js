@@ -33,6 +33,12 @@ const drawChart = function drawChart(canvas, labels = [], values = [], currency)
           },
         }],
       },
+      layout: {
+        padding: {
+          left: 20,
+          right: 20,
+        },
+      },
       responsive: true,
       maintainAspectRatio: false,
       legend: {

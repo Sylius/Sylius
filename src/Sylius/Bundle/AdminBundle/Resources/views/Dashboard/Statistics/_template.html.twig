@@ -21,7 +21,7 @@
                         {{ 'sylius.ui.statistics.month'|trans }}
                     </button>
                     <button
-                        class="ui basic active button"
+                        class="ui basic button"
                         data-stats-button="year"
                         data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
                         {{ 'sylius.ui.statistics.year'|trans }}
@@ -74,12 +74,24 @@
             </div>
             {% if labels and values %}
                 <div class="ui bottom attached segment stats-graph">
+                    <button id="navigation-prev"
+                            class="navigation navigation-prev"
+                            interval="year"
+                            data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        <i class="angle left icon"></i>
+                    </button>
                     <canvas
                         id="stats-graph"
                         data-labels="{{ labels|json_encode() }}"
                         data-values="{{ values|json_encode() }}"
                         data-currency="{{ channel.base_currency_code|sylius_currency_symbol }}">
                     </canvas>
+                    <button id="navigation-next"
+                            class="navigation navigation-next"
+                            interval="year"
+                            data-stats-url="{{ url('sylius_admin_dashboard_statistics', {channelCode: channel.channel_code}) }}">
+                        <i class="angle right icon"></i>
+                    </button>
                 </div>
             {% endif %}
             <div class="ui inverted dimmer stats-loader">
