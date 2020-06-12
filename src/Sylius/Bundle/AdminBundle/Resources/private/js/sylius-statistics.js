@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import drawChart from './sylius-chart';
+import DateObjectFactory from './date-object-factory';
 
 class StatisticsComponent {
   constructor(wrapper) {
@@ -12,6 +13,7 @@ class StatisticsComponent {
     this.summaryBoxes = this.wrapper.querySelectorAll('[data-stats-summary]');
     this.buttons = this.wrapper.querySelectorAll('[data-stats-button]');
     this.loader = this.wrapper.querySelector('.stats-loader');
+    this.DateObjectFactory = new DateObjectFactory();
 
     this.init();
   }
@@ -48,7 +50,7 @@ class StatisticsComponent {
       defaultInterval,
       new Date(date.getFullYear(), 1, 1),
       new Date(date.getFullYear() + 1, 1, 0),
-      new Date()
+      new Date(),
     );
   }
 
@@ -58,48 +60,18 @@ class StatisticsComponent {
       date = new Date(e.target.getAttribute('date'));
     }
 
-    let interval = e.target.getAttribute('data-stats-button') || e.target.getAttribute('interval');
-    let startDate;
-    let endDate;
-    let prevDate;
-    let nextDate;
-    let dateNow = new Date();
-    let maxGraphDate;
+    const interval = e.target.getAttribute('data-stats-button') || e.target.getAttribute('interval');
 
-    switch (interval) {
-      case 'year':
-        startDate = new Date(date.getFullYear(), 0, 1);
-        endDate = new Date(date.getFullYear() + 1, 0, 0);
-        prevDate = new Date(date.getFullYear() - 1, 1, 1);
-        nextDate = new Date(date.getFullYear() + 1, 1, 1);
-        maxGraphDate = new Date(dateNow.getFullYear() + 1, 0, 1);
-        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
-        interval = 'month';
-        break;
-      case 'month':
-        startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-        endDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-        prevDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-        nextDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-        maxGraphDate = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, 0);
-        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
-        interval = 'day';
-        break;
-      case 'week':
-        startDate = new Date(date.getTime() - this.weekInMilliseconds);
-        endDate = new Date(date.getTime() + this.weekInMilliseconds);
-        prevDate = new Date(date.getTime() - (2 * this.weekInMilliseconds));
-        nextDate = new Date(date.getTime() + (3 * this.weekInMilliseconds));
-        maxGraphDate = new Date(dateNow.getTime() + (2 * this.weekInMilliseconds));
-        this.updateNavButtons(interval, prevDate, nextDate, maxGraphDate);
-        interval = 'day';
-        break;
-    }
+    const DateObject = this.DateObjectFactory.createDateObject(interval, date);
+    this.updateNavButtons(interval,
+      DateObject.prevDate,
+      DateObject.nextDate,
+      DateObject.maxGraphDate);
 
     const url = `${e.target.getAttribute('data-stats-url')
-    }&interval=${interval
-    }&startDate=${this.formatDate(startDate)
-    }&endDate=${this.formatDate(endDate)}`;
+    }&interval=${DateObject.interval
+    }&startDate=${this.formatDate(DateObject.startDate)
+    }&endDate=${this.formatDate(DateObject.endDate)}`;
 
     if (url) {
       this.toggleLoadingState(true);
@@ -173,7 +145,7 @@ class StatisticsComponent {
     this.nextButton.disabled = false;
     this.nextButton.style.visibility = 'visible';
 
-    if( nextDate > maxGraphDate ){
+    if (nextDate > maxGraphDate) {
       this.nextButton.disabled = true;
       this.nextButton.style.visibility = 'hidden';
     }
