@@ -46,37 +46,59 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I see the summary of my cart
+     * @When /^I clear my (cart)$/
      */
-    public function iSeeTheSummaryOfMyCart(): void
+    public function iClearMyCart(string $tokenValue): void
     {
-        $this->cartsClient->create(Request::create('orders'));
+        $this->cartsClient->delete($tokenValue);
     }
 
     /**
-     * @When /^I (?:add|added) (this product) to the cart$/
+     * @When /^I see the summary of my (cart)$/
      */
-    public function iAddThisProductToTheCart(ProductInterface $product): void
+    public function iSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        $this->putProductToCart($product);
+        $this->cartsClient->show($tokenValue);
     }
 
     /**
-     * @When /^I add (\d+) of (them) to (?:the|my) cart$/
+     * @When /^I (?:add|added) (this product) to the (cart)$/
      */
-    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product): void
+    public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $this->putProductToCart($product, $quantity);
+        $this->putProductToCart($product, $tokenValue);
     }
 
     /**
-     * @Then my cart should be empty
+     * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      */
-    public function myCartShouldBeEmpty(): void
+    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
+    {
+        $this->putProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @Then my cart should be cleared
+     */
+    public function myCartShouldBeCleared(): void
     {
         $response = $this->cartsClient->getLastResponse();
+
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($response),
+            $this->responseChecker->isDeletionSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
+        );
+    }
+
+    /**
+     * @Then /^my (cart) should be empty$/
+     */
+    public function myCartShouldBeEmpty(string $tokenValue): void
+    {
+        $response = $this->cartsClient->show($tokenValue);
+
+        Assert::true(
+            $this->responseChecker->isShowSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
     }
@@ -151,11 +173,8 @@ final class CartContext implements Context
         }
     }
 
-    private function putProductToCart(ProductInterface $product, int $quantity = 1): void
+    private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $this->cartsClient->create(Request::create('orders'));
-        $response = $this->cartsClient->getLastResponse();
-        $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([

@@ -67,12 +67,17 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
+
     public function hasAccessDenied(Response $response): bool
     {
         return
             $response->getMessage() === 'JWT Token not found' &&
-            $response->getStatusCode() === Response::HTTP_UNAUTHORIZED
-        ;
+            $response->getStatusCode() === Response::HTTP_UNAUTHORIZED;
+    }
+
+    public function isShowSuccessful(Response $response): bool
+    {
+        return $response->getStatusCode() === Response::HTTP_OK;
     }
 
     public function isUpdateSuccessful(Response $response): bool
