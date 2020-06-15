@@ -28,7 +28,7 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
         }
 
         $formRegistry = $container->findDefinition('sylius.form_registry.payum_gateway_config');
-        $gatewayFactories = [];
+        $gatewayFactories = [['priority' => 0, 'label' => 'sylius.payum_gateway_factory.offline', 'type' => 'offline']];
 
         $gatewayConfigurationTypes = $container->findTaggedServiceIds('sylius.gateway_configuration_type');
 
@@ -38,7 +38,11 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
                     throw new \InvalidArgumentException('Tagged gateway configuration type needs to have `type` and `label` attributes.');
                 }
 
-                $gatewayFactories[$attribute['type']] = $attribute['label'];
+                $gatewayFactories[] = [
+                    'label' => $attribute['label'],
+                    'priority' => $attribute['priority'] ?? 0,
+                    'type' => $attribute['type'],
+                ];
 
                 $formRegistry->addMethodCall(
                     'add',
@@ -47,9 +51,16 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
             }
         }
 
-        $gatewayFactories = array_merge($gatewayFactories, ['offline' => 'sylius.payum_gateway_factory.offline']);
-        ksort($gatewayFactories);
 
-        $container->setParameter('sylius.gateway_factories', $gatewayFactories);
+        usort($gatewayFactories, function (array $firstGateway, array $secondGateway): int {
+            return $secondGateway['priority'] - $firstGateway['priority'];
+        });
+
+        $sortedGatewayFactories = [];
+        foreach ($gatewayFactories as $key => $factory) {
+            $sortedGatewayFactories[$factory['type']] = $factory['label'];
+        }
+
+        $container->setParameter('sylius.gateway_factories', $sortedGatewayFactories);
     }
 }
