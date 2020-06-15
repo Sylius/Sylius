@@ -1,7 +1,7 @@
 @managing_shipping_methods
 Feature: Denying access to shipping methods for unauthorized users
     In order to denies access for unauthorized users
-    As an Visitor
+    As a Visitor
     I don't want to access to manage shipping methods
 
     Background:
