@@ -2,8 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Contenu'
+            message_from: 'Message de'
+            subject: 'Demande de contact'
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Afficher une commande ou changer le mode de paiement'
+            thank_you: 'Merci d''avoir acheté dans notre boutique !'
+            your_order_number: 'Votre commande n°'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+        user_registration:
+            start_shopping: 'Commencer le shopping'
+            subject: 'Enregistrement de l''utilisateur'
+            welcome_to_our_store: 'Bienvenue dans notre boutique !'
+            you_have_just_been_registered: 'Vous venez d''être enregistré. Merci'
+        verification_token:
+            hello: 'Bonjour'
+            subject: 'Vérification de l''adresse e-mail'
+            to_verify_your_email_address: 'Pour confirmer votre adresse e-mail, cliquez sur le lien ci-dessous'
+            verify_your_email_address: 'Vérifiez votre adresse email'
+    homepage:
+        about_us: 'À propos de nous'
+        about_us_content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad adipisci aperiam consectetur cum dicta dolores ducimus, eveniet ex exercitationem harum in iure labore libero magnam minima neque, numquam officiis possimus quasi reiciendis rem repellat repellendus rerum ut vel veniam vitae? Beatae consectetur culpa debitis ex laudantium porro unde? Modi.'
+        brace_yoursel_winter_is_coming: 'Préparez-vous ! L''hiver arrive'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi assumenda atque dolorum iusto labore, minima minus quas quidem ratione recusandae?'
+        subscribe: 'S''abonner'
     lightbox:
-        image_album_label: 'Page %1 de %2'
+        image_album_label: 'Page %1 sur %2'
     menu:
         shop:
             account:
