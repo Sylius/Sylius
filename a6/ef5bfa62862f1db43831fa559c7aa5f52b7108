@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+
+by tavy315 at 2020-06-05T13:20:58Z
+
+Can this be merged?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-08T09:22:39Z
+
+Hey @tavy315,
+
+thanks a lot for your contribution and your patience. It can be merged to the master, however we have a red build there. Once it is fixed I will ping you back
+
+---------------------------------------------------------------------------
+
+by tavy315 at 2020-06-08T09:50:51Z
+
+Ok, no problem. Not sure if I can help there.
+By the way, targeted branch was 1.7 since all the changes were also merged into that branch, see https://github.com/Sylius/Sylius/commit/186c13c25009904d00e322a2fb2259065099340b
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-08T10:25:47Z
+
+My mistake should be merged to 1.7
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-10T06:54:34Z
+
+Hey Octav, could you rebase your work to branch 1.7?
+
+---------------------------------------------------------------------------
+
+by tavy315 at 2020-06-10T09:28:08Z
+
+@lchrusciel, sorry, I think I merged it instead. I'm still not used to sync and rebase a fork.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-06-15T08:10:07Z
+
+Thank you, Octav! :1st_place_medal:
