@@ -15,11 +15,12 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Comparable;
 use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-class ProductVariant extends BaseVariant implements ProductVariantInterface
+class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable
 {
     /** @var int */
     protected $version = 1;
@@ -322,5 +323,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         if ($this->hasImage($image)) {
             $this->images->removeElement($image);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function compareTo($other): int
+    {
+        return $this->code === $other->getCode() ? 0 : 1;
     }
 }
