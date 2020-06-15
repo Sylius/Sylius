@@ -34,6 +34,8 @@ sylius:
             amount: Valoare
             code_length: Lungimea codului
             expires_at: Expiră la
+            prefix: Prefix
+            suffix: Sufix
             usage_limit: Limita de utilizare
         promotion_filter:
             price_range: Filtru de preț

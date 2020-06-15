@@ -12,7 +12,7 @@ sylius:
             gender: Geschlecht
             birthday: Geburtstag
             billing_address: Rechnungsadresse
-            different_billing_address: Eine andere Rechnungsadresse benutzen?
+            different_shipping_address: Eine abweichende Lieferadresse benutzen?
             only_customer_registration: Account erstellen?
             subscribed_to_newsletter: Newsletter abonnieren
         customer_group:
