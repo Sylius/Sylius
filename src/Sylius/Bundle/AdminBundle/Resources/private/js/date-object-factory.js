@@ -8,9 +8,11 @@ DateObjectFactory.prototype.createDateObject = function (interval, date) {
   if (interval === 'month') {
     return new MonthDateObject(date);
   }
+
   if (interval === 'week') {
     return new WeekDateObject(date);
   }
+  
   return new YearDateObject(date);
 };
 
