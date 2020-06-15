@@ -3,7 +3,11 @@
     <div class="ui attached segment">
         {% if product.simple %}
             {{ form_row(form.variant.onHand) }}
+            <br />
+
             {{ form_row(form.variant.tracked) }}
+            <div style="color: rgba(0, 0, 0, .6)">{{ form_help(form.variant.tracked) }}</div>
+
             {{ form_row(form.variant.version) }}
         {% endif %}
     </div>

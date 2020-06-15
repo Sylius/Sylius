@@ -122,6 +122,7 @@ sylius:
             shipping_required: Is shipping required?
             weight: Weight
             width: Width
+            tracked_help: If this option is enabled Sylius will keep track of the stock and will stop selling the product once stock reaches 0.
         attribute:
             product_attribute_value:
                 attribute: Attribute
