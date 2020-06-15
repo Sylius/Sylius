@@ -12,6 +12,7 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Utiliser une adresse différente pour la facturation ?
+                different_shipping_address: Utiliser une adresse différente pour la livraison ?
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
         promotion:
@@ -21,6 +22,7 @@ sylius:
                 product: Produit
         promotion_coupon:
             per_customer_usage_limit: Limite d'utilisation par client
+            reusable_from_cancelled_orders: Réutilisable suite à commandes annulées
         group:
             name: Nom
             roles: Rôles
@@ -31,15 +33,19 @@ sylius:
                 country: Pays
                 postcode: Code postal
                 street: Adresse
+                tax_id: N° de TVA
             contact_email: Email de contact
+            countries: Pays
             currencies: Devises
             currency_base: Devise de référence
             account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
             locales: Locales
+            menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
+            shop_billing_data: Données de facturation du magasin
             skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
             skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
@@ -58,7 +64,7 @@ sylius:
             number: Numéro
             total_from: De
             total_to: À
-            payment_state: Etat du paiement
+            payment_state: État du paiement
             channel: Tous les canaux
         page:
             body: Corps
@@ -100,7 +106,7 @@ sylius:
             file: Sélectionnez une image
         user:
             billing_address: Adresse de facturation
-            different_billing_address: Utiliser une adresse différente pour la facturation ?
+            different_shipping_address: Utiliser une adresse différente pour la livraison ?
             enabled: Activé
             first_name: Prénom
             groups: Groupes
@@ -196,6 +202,7 @@ sylius:
             header: Paramètres et version de PHP
             any: N'importe quel
             detect_unicode: detect_unicode
+            detect_unicode_help: Définir 'detect_unicode = Off' dans votre fichier php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
             off: false
@@ -203,13 +210,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: Définir 'session.auto_start = Off' dans votre fichier php.ini
             short_open_tag: short_open_tag
             timezone: fuseau horaire
+            timezone_help: Définissez 'date.timezone' dans votre fichier php.ini (par exemple date.timezone = "Europe/Amsterdam")
             timezone_deprecated:
                 header: Fuseau horaire obsolète
                 help: Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).
             version: Version de PHP
             version_recommended: Version de PHP recommandée
+            version_help: Sylius recommande la version %recommended% de PHP, votre version actuelle est la %current%. Veuillez la mettre à jour.
     payum_gateway:
         cash_on_delivery: Paiement à la livraison
         offline: Hors-ligne
