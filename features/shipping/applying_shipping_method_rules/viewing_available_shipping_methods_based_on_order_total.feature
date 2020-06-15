@@ -36,7 +36,7 @@ Feature: Viewing available shipping methods based on order total
     @ui
     Scenario: Seeing shipping methods that handle all goods
         Given I have product "Cheap Jacket" in the cart
-        And I add 3 of them to my cart
+        And I add 2 of them to my cart
         When I specified the billing address
         Then I should be on the checkout shipping step
         And I should see "DHL" shipping method
