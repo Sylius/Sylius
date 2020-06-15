@@ -12,6 +12,9 @@ sylius:
             regex: 'Codul categoriei de livrare poate să conțină doar litere, numere, - și _.'
             unique: 'Codul categoriei de livrare există deja.'
     shipping_method:
+        calculator:
+            min: 'Taxa de livrare nu poate fi mai mică decât 0.'
+            not_blank: 'Vă rugăm să selectaţi metoda de calculare a costului de transport.'
         name:
             max_length: 'Numele metodei de livrare nu poate depăși {{ limit }} caractere.'
             min_length: 'Numele metodei de livrare trebuie să conţină cel puţin {{ limit }} caractere.'

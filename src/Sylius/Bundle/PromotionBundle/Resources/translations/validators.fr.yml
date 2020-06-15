@@ -18,8 +18,7 @@ sylius:
             not_blank: Veuillez saisir le nom de la promotion.
     promotion_action:
         percentage_discount_configuration:
-            min: La valeur du pourcentage de remise doit être au moins de 0 %.
-            max: La valeur maximale du pourcentage de réduction est de 100 %.
+            not_in_range: Le pourcentage de remise doit être compris entre 0% et 100%.
     promotion_coupon:
         code:
             max_length: Le code promo ne doit pas contenir plus d'un caractère.|Le code promo ne doit pas dépasser les {{ limit }} caractères.
@@ -38,6 +37,6 @@ sylius:
             min: Le code du code promo doit être au moins de {{ limit }} caractères.
             max: Le code du code promo ne doit pas faire plus de {{ limit }} caractères.
             not_blank: Veuillez saisir la longueur du code pour le code promo.
-        possible_generation_amount: La longueur du code pour le code promo ou la quantité de codes promos est invalide. Il est impossible de générer %expectedAmount% codes promos uniques avec une longueur de code égale à %codeLength%. La quantité possible de code promo à générer est de %possibleAmount%.
+        possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:
             min: La limite d'utilisation du code promo généré doit être au moins de {{ limit }}.

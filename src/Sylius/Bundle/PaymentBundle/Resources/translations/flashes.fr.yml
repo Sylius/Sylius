@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'Le paiement a été autorisé.'
         cancelled: 'Le paiement a été annulé.'
         completed: 'Le paiement a été effectué.'
         failed: 'Le paiement a échoué.'
