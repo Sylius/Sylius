@@ -7,4 +7,6 @@
             {{ form_row(form.variant.version) }}
         {% endif %}
     </div>
+    
+    {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_inventory', 'sylius.admin.product.tab_inventory'], {'form': form}) }}
 </div>
