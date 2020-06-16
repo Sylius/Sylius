@@ -44,13 +44,13 @@ class StatisticsComponent {
     this.prevButton.addEventListener('click', this.fetchData.bind(this));
     this.nextButton.addEventListener('click', this.fetchData.bind(this));
 
-    const date = new Date();
+    const DateObject = this.DateObjectFactory.createDateObject(defaultInterval, new Date());
 
     this.updateNavButtons(
       defaultInterval,
-      new Date(date.getFullYear(), 1, 1),
-      new Date(date.getFullYear() + 1, 1, 0),
-      new Date(),
+      DateObject.prevDate,
+      DateObject.nextDate,
+      DateObject.maxGraphDate,
     );
   }
 
