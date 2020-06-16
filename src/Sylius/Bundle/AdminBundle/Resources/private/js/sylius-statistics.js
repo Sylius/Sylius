@@ -1,17 +1,19 @@
 import $ from 'jquery';
 import drawChart from './sylius-chart';
+import DateObjectFactory from './date-object-factory';
 
 class StatisticsComponent {
   constructor(wrapper) {
     if (!wrapper) return;
 
-    this.weekInMiliSeconds = 604800000;
+    this.weekInMilliseconds = 604800000;
     this.wrapper = wrapper;
     this.chart = null;
     this.chartCanvas = this.wrapper.querySelector('#stats-graph');
     this.summaryBoxes = this.wrapper.querySelectorAll('[data-stats-summary]');
     this.buttons = this.wrapper.querySelectorAll('[data-stats-button]');
     this.loader = this.wrapper.querySelector('.stats-loader');
+    this.DateObjectFactory = new DateObjectFactory();
 
     this.init();
   }
@@ -46,8 +48,9 @@ class StatisticsComponent {
 
     this.updateNavButtons(
       defaultInterval,
-      new Date(date.getFullYear(), 0, 1),
-      new Date(date.getFullYear() + 1, 0, 0)
+      new Date(date.getFullYear(), 1, 1),
+      new Date(date.getFullYear() + 1, 1, 0),
+      new Date(),
     );
   }
 
@@ -57,43 +60,18 @@ class StatisticsComponent {
       date = new Date(e.target.getAttribute('date'));
     }
 
-    let interval = e.target.getAttribute('data-stats-button') || e.target.getAttribute('interval');
-    let startDate;
-    let endDate;
-    let prevDate;
-    let nextDate;
+    const interval = e.target.getAttribute('data-stats-button') || e.target.getAttribute('interval');
 
-    switch (interval) {
-      case 'year':
-        startDate = new Date(date.getFullYear(), 0, 1);
-        endDate = new Date(date.getFullYear() + 1, 0, 0);
-        prevDate = this.formatDate(new Date(date.getFullYear() - 1, date.getMonth(), 1));
-        nextDate = this.formatDate(new Date(date.getFullYear() + 1, date.getMonth(), 1));
-        this.updateNavButtons(interval, prevDate, nextDate);
-        interval = 'month';
-        break;
-      case 'month':
-        startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-        endDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-        prevDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
-        nextDate = this.formatDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
-        this.updateNavButtons(interval, prevDate, nextDate);
-        interval = 'day';
-        break;
-      case 'week':
-        startDate = new Date(date.getTime() - this.weekInMiliSeconds);
-        endDate = new Date(date.getTime() + this.weekInMiliSeconds);
-        prevDate = this.formatDate(new Date(date.getTime() - (2 * this.weekInMiliSeconds)));
-        nextDate = this.formatDate(new Date(date.getTime() + (3 * this.weekInMiliSeconds)));
-        this.updateNavButtons(interval, prevDate, nextDate);
-        interval = 'day';
-        break;
-    }
+    const DateObject = this.DateObjectFactory.createDateObject(interval, date);
+    this.updateNavButtons(interval,
+      DateObject.prevDate,
+      DateObject.nextDate,
+      DateObject.maxGraphDate);
 
     const url = `${e.target.getAttribute('data-stats-url')
-    }&interval=${interval
-    }&startDate=${this.formatDate(startDate)
-    }&endDate=${this.formatDate(endDate)}`;
+    }&interval=${DateObject.interval
+    }&startDate=${this.formatDate(DateObject.startDate)
+    }&endDate=${this.formatDate(DateObject.endDate)}`;
 
     if (url) {
       this.toggleLoadingState(true);
@@ -163,12 +141,20 @@ class StatisticsComponent {
     element.setAttribute('interval', interval);
   }
 
-  updateNavButtons(interval, prevDate, nextDate) {
+  updateNavButtons(interval, prevDate, nextDate, maxGraphDate) {
+    this.nextButton.disabled = false;
+    this.nextButton.style.visibility = 'visible';
+
+    if (nextDate > maxGraphDate) {
+      this.nextButton.disabled = true;
+      this.nextButton.style.visibility = 'hidden';
+    }
+
     this.prevButton.setAttribute('interval', interval);
     this.nextButton.setAttribute('interval', interval);
 
-    this.prevButton.setAttribute('date', prevDate);
-    this.nextButton.setAttribute('date', nextDate);
+    this.prevButton.setAttribute('date', this.formatDate(prevDate));
+    this.nextButton.setAttribute('date', this.formatDate(nextDate));
   }
 }
 
