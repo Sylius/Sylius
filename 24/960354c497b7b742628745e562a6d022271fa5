@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by pamil at 2020-06-15T13:07:43Z
+
+Is this bug reported to Symfony?
+
+---------------------------------------------------------------------------
+
+by Tomanhez at 2020-06-15T14:07:30Z
+
+@pamil Nope. I didn't do that yet, I try to investigate what exactly is broken.
+Maybe you suspect why it's not work properly?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-06-15T15:32:33Z
+
+And I guess that it should be opened on 1.7 branch
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-06-16T05:19:37Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "fix-broken-build"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-16T06:39:20Z
+
+Thank you, Tomasz! :1st_place_medal:
