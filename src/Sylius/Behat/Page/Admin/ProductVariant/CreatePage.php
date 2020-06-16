@@ -16,19 +16,20 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
 
-    public function specifyPrice(string $price, string $channelName): void
+    public function specifyPrice(string $price, ChannelInterface $channel): void
     {
-        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function specifyOriginalPrice(string $originalPrice, string $channelName): void
+    public function specifyOriginalPrice(string $originalPrice, ChannelInterface $channel): void
     {
-        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function specifyCurrentStock(string $currentStock): void
@@ -110,8 +111,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
-            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',

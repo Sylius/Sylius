@@ -46,14 +46,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
-    public function specifyPrice(string $channelName, string $price): void
+    public function specifyPrice(ChannelInterface $channel, string $price): void
     {
-        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function specifyOriginalPrice(string $channelName, string $originalPrice): void
+    public function specifyOriginalPrice(ChannelInterface $channel, string $originalPrice): void
     {
-        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function addSelectedAttributes(): void
@@ -318,14 +318,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
-    public function getPriceForChannel(string $channelName): string
+    public function getPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
-    public function getOriginalPriceForChannel(string $channelName): string
+    public function getOriginalPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
+        return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function isShippingRequired(): bool
@@ -383,6 +383,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('enabled')->check();
     }
 
+    public function hasNoPriceForChannel(string $channelName): bool
+    {
+        return strpos($this->getElement('prices')->getHtml(), $channelName) === false;
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -411,8 +416,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
-            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
-            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
+            'prices' => '#sylius_product_variant_channelPricings',
+            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
             'shipping_required' => '#sylius_product_variant_shippingRequired',

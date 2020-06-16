@@ -20,6 +20,7 @@ use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use WebDriver\Exception;
@@ -55,14 +56,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
     }
 
-    public function specifyPrice(string $channelName, string $price): void
+    public function specifyPrice(ChannelInterface $channel, string $price): void
     {
-        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function specifyOriginalPrice(string $channelName, int $originalPrice): void
+    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
     {
-        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function addAttribute(string $attributeName, string $value, string $localeCode): void
@@ -208,6 +209,11 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('shipping_required')->uncheck();
     }
 
+    public function getChannelPricingValidationMessage(): string
+    {
+        return $this->getElement('prices_validation_message')->getText();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -228,7 +234,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
-            'channel_pricings' => '#sylius_product_variant_channelPricings',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
@@ -236,8 +241,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[price]"]',
-            'original_price' => '#sylius_product_variant_channelPricings > .field:contains("%channelName%") input[name$="[originalPrice]"]',
+            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
+            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
+            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',

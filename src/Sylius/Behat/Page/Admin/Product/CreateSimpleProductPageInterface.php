@@ -14,14 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
-    public function specifyPrice(string $channelName, string $price): void;
+    public function specifyPrice(ChannelInterface $channel, string $price): void;
 
-    public function specifyOriginalPrice(string $channelName, int $originalPrice): void;
+    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void;
 
     public function choosePricingCalculator(string $name): void;
 
@@ -57,4 +58,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function selectShippingCategory(string $shippingCategoryName): void;
 
     public function setShippingRequired(bool $isShippingRequired): void;
+
+    public function getChannelPricingValidationMessage(): string;
 }

@@ -33,9 +33,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 
-    public function getPriceForChannel(string $channelName): string;
+    public function getPriceForChannel(ChannelInterface $channel): string;
 
-    public function getOriginalPriceForChannel(string $channelName): string;
+    public function getOriginalPriceForChannel(ChannelInterface $channel): string;
 
     public function getNameInLanguage(string $language): string;
 

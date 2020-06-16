@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -178,19 +177,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsPriceTo(string $price, string $channelName)
+    public function iSetItsPriceTo(string $price, ChannelInterface $channel)
     {
-        $this->createSimpleProductPage->specifyPrice($channelName, $price);
+        $this->createSimpleProductPage->specifyPrice($channel, $price);
     }
 
     /**
-     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsOriginalPriceTo(int $originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel)
     {
-        $this->createSimpleProductPage->specifyOriginalPrice($channelName, $originalPrice);
+        $this->createSimpleProductPage->specifyOriginalPrice($channel, $originalPrice);
     }
 
     /**
@@ -487,19 +486,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I change its price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I change its price to (?:€|£|\$)([^"]+) for ("([^"]+)" channel)$/
      */
-    public function iChangeItsPriceTo(string $price, $channelName)
+    public function iChangeItsPriceTo(string $price, ChannelInterface $channel)
     {
-        $this->updateSimpleProductPage->specifyPrice($channelName, $price);
+        $this->updateSimpleProductPage->specifyPrice($channel, $price);
     }
 
     /**
-     * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iChangeItsOriginalPriceTo(string $price, $channelName)
+    public function iChangeItsOriginalPriceTo(string $price, ChannelInterface $channel)
     {
-        $this->updateSimpleProductPage->specifyOriginalPrice($channelName, $price);
+        $this->updateSimpleProductPage->specifyOriginalPrice($channel, $price);
     }
 
     /**
@@ -885,7 +884,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel()
     {
-        $this->assertValidationMessage('channel_pricings', 'You must define price for every channel.');
+        Assert::same(
+            $this->createSimpleProductPage->getChannelPricingValidationMessage(),
+            'You must define price for every channel.'
+        );
     }
 
     /**
@@ -929,25 +931,25 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
-     * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, $channelName)
+    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, ChannelInterface $channel)
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channelName), $price);
+        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), $price);
     }
 
     /**
-     * @Then /^(its|this products) original price should be "(?:€|£|\$)([^"]+)" for channel "([^"]+)"$/
+     * @Then /^(its|this products) original price should be "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
-    public function itsOriginalPriceForChannel(ProductInterface $product, $originalPrice, $channelName)
+    public function itsOriginalPriceForChannel(ProductInterface $product, string $originalPrice, ChannelInterface $channel)
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same(
-            $this->updateSimpleProductPage->getOriginalPriceForChannel($channelName),
+            $this->updateSimpleProductPage->getOriginalPriceForChannel($channel),
             $originalPrice
         );
     }
@@ -959,13 +961,8 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        try {
-            $this->updateSimpleProductPage->getPriceForChannel($channelName);
-        } catch (ElementNotFoundException $exception) {
-            return;
-        }
-
-        throw new \Exception(
+        Assert::true(
+            $this->updateSimpleProductPage->hasNoPriceForChannel($channelName),
             sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
         );
     }
