@@ -32,13 +32,6 @@ final class CompositeShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(ShippingMethodEligibilityCheckerInterface::class);
     }
 
-    public function it_throws_an_exception_if_no_eligibility_checkers_are_passed(): void
-    {
-        $this->beConstructedWith([]);
-
-        $this->shouldThrow(InvalidArgumentException::class)->duringInstantiation();
-    }
-
     public function it_throws_an_exception_if_passed_array_has_not_only_eligibility_checkers(): void
     {
         $this->beConstructedWith([new stdClass()]);
