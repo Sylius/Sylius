@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-02T12:20:43Z
+
+Hey Max,
+
+can you rebase once again? Tests are probably failing due to bc break at Symfony end (see #11542)
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-11T18:27:21Z
+
+I rebased the feature on a working master. So if it breaks now this should be my fault.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-15T17:37:54Z
+
+One thing I am not sure about is the message about the product being not active in this channel. Which would in turn also solve the issue #11559 .
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-16T08:34:34Z
+
+Thanks, @mamazu! :tada:
