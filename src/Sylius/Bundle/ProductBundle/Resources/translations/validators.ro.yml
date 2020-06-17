@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Introdu o valoare în câmpul "slug".
             unique: Valoarea din câmpul "slug" trebuie să fie unică.
+            max_length: Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} caractere.
         code:
             not_blank: Introdu un cod de produs.
             regex: Codul de produs poate să conțină litere, numere, - și _.
