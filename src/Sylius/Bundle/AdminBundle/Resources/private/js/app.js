@@ -19,6 +19,7 @@ import 'sylius/ui/sylius-prototype-handler';
 
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
+import './sylius-menu-search';
 import './sylius-move-product-variant';
 import './sylius-move-taxon';
 import './sylius-notification';
@@ -114,6 +115,8 @@ $(document).ready(() => {
   });
 
   const dashboardStatistics = new StatisticsComponent(document.querySelector('.stats'));
+
+  $('.sylius-admin-menu').searchable('.sylius-admin-menu-search-input');
 });
 
 window.$ = $;
