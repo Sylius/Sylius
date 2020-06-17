@@ -18,8 +18,7 @@ sylius:
             not_blank: Bitte geben Sie einen Namen an.
     promotion_action:
         percentage_discount_configuration:
-            min: Der Wert eines prozentualen Rabattes muss mindestens 0% sein.
-            max: Der maximale prozentuale Rabatt beträgt 100%.
+            not_in_range: Prozentualer Rabatt sollte zwischen 0% und 100% sein.
     promotion_coupon:
         code:
             max_length: Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.

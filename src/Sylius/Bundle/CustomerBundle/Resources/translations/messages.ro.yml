@@ -12,7 +12,7 @@ sylius:
             gender: Gen
             birthday: Data naşterii
             billing_address: Adresa de facturare
-            different_billing_address: Folosiți o adresă de facturare diferită?
+            different_shipping_address: Folosiți o adresă diferită pentru livrare?
             only_customer_registration: Creez cont?
             subscribed_to_newsletter: Abonează-te la newsletter
         customer_group:
