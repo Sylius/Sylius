@@ -237,7 +237,7 @@ After that, you should modify your ``.platform.app.yaml``. Configuration from st
             yarn: "*"
             gulp-cli: "*"
         ruby:
-            "wkhtmltopdf-binary": "> 0.12.5.1" # adding wkhtmltopdf as a one of dependencies
+            "wkhtmltopdf-binary": "0.12.5.1" # adding wkhtmltopdf as a one of dependencies
 
     # ...
 
