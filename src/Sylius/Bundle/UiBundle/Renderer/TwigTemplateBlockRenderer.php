@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
+use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Twig\Environment;
 
 /**
@@ -24,16 +26,29 @@ final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
     /** @var Environment */
     private $twig;
 
-    public function __construct(Environment $twig)
-    {
+    /** @var ExpressionLanguage */
+    private $expressionLanguage;
+
+    public function __construct(
+        Environment $twig,
+        ExpressionLanguage $expressionLanguage
+    ) {
         $this->twig = $twig;
+        $this->expressionLanguage = $expressionLanguage;
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string
     {
+        $context = array_replace($templateBlock->getContext(), $context);
+        foreach ($context as $key => &$value) {
+            if ($value instanceof Expression) {
+                $value = $this->expressionLanguage->evaluate($value);
+            }
+        }
+
         return $this->twig->render(
             $templateBlock->getTemplate(),
-            array_replace($templateBlock->getContext(), $context)
+            $context
         );
     }
 }

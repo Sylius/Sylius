@@ -17,8 +17,17 @@
             <argument type="collection" />
         </service>
 
+        <service id="sylius.expression_language_provider" class="Symfony\Component\DependencyInjection\ExpressionLanguageProvider" />
+
+        <service id="sylius.expression_language_template_event" class="Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage">
+            <argument key="$providers" type="collection">
+                <argument>@sylius.expression_language_provider</argument>
+            </argument>
+        </service>
+
         <service id="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\TwigTemplateBlockRenderer">
             <argument type="service" id="twig" />
+            <argument type="service" id="sylius.expression_language" />
         </service>
 
         <service id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\DelegatingTemplateEventRenderer">
