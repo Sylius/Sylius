@@ -2,7 +2,11 @@
     "name": "sylius/payum-bundle",
     "type": "symfony-bundle",
     "description": "Payum integration for Symfony e-commerce applications.",
-    "keywords": ["payments", "payment", "payum"],
+    "keywords": [
+        "payments",
+        "payment",
+        "payum"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -25,9 +29,8 @@
     ],
     "require": {
         "php": "^7.3",
-
-        "payum/payum": "^1.4",
-        "payum/payum-bundle": "^2.2",
+        "payum/payum": "^1.6",
+        "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
         "sylius/core": "^1.6",
         "sylius/currency": "^1.6",
@@ -42,23 +45,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\PayumBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\PayumBundle\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

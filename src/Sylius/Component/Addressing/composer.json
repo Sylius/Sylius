@@ -2,7 +2,13 @@
     "name": "sylius/addressing",
     "type": "library",
     "description": "Addressing and zone management for PHP applications.",
-    "keywords": ["shop", "ecommerce", "address", "addressing", "zones"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "address",
+        "addressing",
+        "zones"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,8 +27,7 @@
     ],
     "require": {
         "php": "^7.3",
-
-        "sylius/registry": "^1.4",
+        "sylius/registry": "^1.5",
         "sylius/resource": "^1.6",
         "symfony/intl": "^4.4"
     },
@@ -32,23 +37,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Addressing\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Addressing\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Addressing\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Addressing\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

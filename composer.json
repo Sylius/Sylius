@@ -111,6 +111,7 @@
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
         "doctrine/data-fixtures": "^1.4",
+        "ergebnis/composer-normalize": "^2.5",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "friends-of-behat/mink-extension": "^2.4",

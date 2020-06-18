@@ -2,7 +2,13 @@
     "name": "sylius/locale",
     "type": "library",
     "description": "Locale handling for PHP applications.",
-    "keywords": ["language", "localization", "locale", "i18n", "internationalization"],
+    "keywords": [
+        "language",
+        "localization",
+        "locale",
+        "i18n",
+        "internationalization"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,10 +27,9 @@
     ],
     "require": {
         "php": "^7.3",
-
         "sylius/resource": "^1.6",
         "symfony/intl": "^4.4",
-        "zendframework/zend-stdlib": "^3.1"
+        "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1"
@@ -32,23 +37,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Locale\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Locale\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Locale\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Locale\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

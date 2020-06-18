@@ -2,7 +2,12 @@
     "name": "sylius/attribute",
     "type": "library",
     "description": "Component for handling object attributes in PHP projects.",
-    "keywords": ["shop", "ecommerce", "attribute", "feature"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "attribute",
+        "feature"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,9 +26,8 @@
     ],
     "require": {
         "php": "^7.3",
-
-        "doctrine/collections": "^1.3",
-        "sylius/registry": "^1.4",
+        "doctrine/collections": "^1.6",
+        "sylius/registry": "^1.5",
         "sylius/resource": "^1.6",
         "symfony/validator": "^4.4"
     },
@@ -33,23 +37,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Attribute\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Attribute\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Attribute\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Attribute\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

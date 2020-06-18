@@ -2,7 +2,13 @@
     "name": "sylius/taxonomy",
     "type": "library",
     "description": "Taxonomies - categorization of domain models in PHP projects.",
-    "keywords": ["taxonomy", "ecommerce", "categorization", "taxon", "classification"],
+    "keywords": [
+        "taxonomy",
+        "ecommerce",
+        "categorization",
+        "taxon",
+        "classification"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,10 +27,9 @@
     ],
     "require": {
         "php": "^7.3",
-
-        "behat/transliterator": "^1.1",
+        "behat/transliterator": "^1.3",
         "sylius/resource": "^1.6",
-        "webmozart/assert": "^1.0"
+        "webmozart/assert": "^1.8"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1"
@@ -32,23 +37,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Taxonomy\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Taxonomy\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Taxonomy\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Taxonomy\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

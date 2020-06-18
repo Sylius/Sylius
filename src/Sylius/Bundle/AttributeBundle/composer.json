@@ -2,7 +2,13 @@
     "name": "sylius/attribute-bundle",
     "type": "symfony-bundle",
     "description": "Managing object attributes for Symfony applications.",
-    "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "products",
+        "product",
+        "assortment"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,44 +27,47 @@
     ],
     "require": {
         "php": "^7.3",
-
-        "ramsey/uuid": "^3.7",
-        "stof/doctrine-extensions-bundle": "^1.2",
+        "ramsey/uuid": "^3.9",
+        "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/attribute": "^1.6",
         "sylius/resource-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "^2.7",
         "phpspec/phpspec": "^6.1",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/browser-kit": "^4.4",
         "symfony/dependency-injection": "^4.4",
-        "symfony/form": "^4.4",
-        "symfony/browser-kit": "^4.4"
+        "symfony/form": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AttributeBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\AttributeBundle\\": ""
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\AttributeBundle\\spec\\": "spec/"
         },
-        "classmap": ["test/app/AppKernel.php"]
+        "classmap": [
+            "test/app/AppKernel.php"
+        ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

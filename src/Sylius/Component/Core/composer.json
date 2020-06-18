@@ -2,7 +2,13 @@
     "name": "sylius/core",
     "type": "library",
     "description": "Sylius e-commerce core. It integrates all components.",
-    "keywords": ["shop", "ecommerce", "core", "store", "sylius"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "core",
+        "store",
+        "sylius"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,9 +27,8 @@
     ],
     "require": {
         "php": "^7.3",
-
         "knplabs/gaufrette": "^0.8",
-        "payum/payum": "^1.3",
+        "payum/payum": "^1.6",
         "php-http/guzzle6-adapter": "^2.0",
         "sylius/addressing": "^1.6",
         "sylius/attribute": "^1.6",
@@ -36,7 +41,7 @@
         "sylius/payment": "^1.6",
         "sylius/product": "^1.6",
         "sylius/promotion": "^1.6",
-        "sylius/registry": "^1.4",
+        "sylius/registry": "^1.5",
         "sylius/resource": "^1.6",
         "sylius/review": "^1.6",
         "sylius/shipping": "^1.6",
@@ -44,8 +49,8 @@
         "sylius/taxonomy": "^1.6",
         "sylius/user": "^1.6",
         "symfony/http-foundation": "^4.4",
-        "webmozart/assert": "^1.0",
-        "zendframework/zend-stdlib": "^3.1"
+        "webmozart/assert": "^1.8",
+        "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1",
@@ -54,23 +59,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Core\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Core\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Core\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Core\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
