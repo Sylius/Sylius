@@ -97,7 +97,7 @@
         "symfony/yaml": "^4.4",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12",
-        "webmozart/assert": "^1.8",
+        "webmozart/assert": "^1.9",
         "white-october/pagerfanta-bundle": "^1.3",
         "willdurand/hateoas": "^2.12",
         "willdurand/hateoas-bundle": "^1.4",
@@ -127,9 +127,8 @@
         "mockery/mockery": "^1.4",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^6.1",
-        "phpstan/phpstan": "0.12.3",
-        "phpstan/phpstan-doctrine": "0.12.3",
-        "phpstan/phpstan-webmozart-assert": "0.12.0",
+        "phpstan/phpstan": "0.12.29",
+        "phpstan/phpstan-doctrine": "0.12.16",
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "^0.3",
         "psr/event-dispatcher": "^1.0",
@@ -141,7 +140,7 @@
         "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4",
-        "vimeo/psalm": "3.11.4"
+        "vimeo/psalm": "3.11.6"
     },
     "replace": {
         "sylius/addressing": "self.version",

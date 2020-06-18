@@ -1,6 +1,5 @@
 includes:
 	- vendor/phpstan/phpstan-doctrine/extension.neon
-	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
 
 parameters:
     reportUnmatchedIgnoredErrors: false
@@ -29,8 +28,6 @@ parameters:
 
     ignoreErrors:
         # Magic calls
-        - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'
-        - '/Call to an undefined static method Webmozart\\Assert\\Assert::nullOr/'
         - '/Call to an undefined method Faker\\Generator::/'
         - '/Access to an undefined property Faker\\Generator::/'
         - '/Method Mockery\\MockInterface::shouldReceive\(\) invoked with 1 parameter, 0 required/'

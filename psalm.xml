@@ -62,6 +62,7 @@
             <directory name="src/Sylius/Component/Channel/spec" />
             <directory name="src/Sylius/Component/Core/spec" />
             <directory name="src/Sylius/Component/Currency/spec" />
+            <directory name="src/Sylius/Component/Customer/spec" />
             <directory name="src/Sylius/Component/Inventory/spec" />
             <directory name="src/Sylius/Component/Locale/spec" />
             <directory name="src/Sylius/Component/Order/spec" />
