@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Resolver;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
@@ -27,25 +27,45 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
     /** @var PaymentMethodRepositoryInterface */
     protected $paymentMethodRepository;
 
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
-    {
+    /** @var PaymentMethodsResolverInterface|null */
+    private $paymentMethodsResolver;
+
+    public function __construct(
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ?PaymentMethodsResolverInterface $paymentMethodsResolver = null
+    ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
+
+        if (null === $paymentMethodsResolver) {
+            @trigger_error(
+                sprintf(
+                    'Not passing an $paymentMethodsResolver to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
+                    self::class
+                ),
+                \E_USER_DEPRECATED
+            );
+        }
+
+        $this->paymentMethodsResolver = $paymentMethodsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @param BasePaymentInterface|PaymentInterface $payment
      *
      * @throws UnresolvedDefaultPaymentMethodException
      */
-    public function getDefaultPaymentMethod(BasePaymentInterface $subject): PaymentMethodInterface
+    public function getDefaultPaymentMethod(BasePaymentInterface $payment): PaymentMethodInterface
     {
-        /** @var PaymentInterface $subject */
-        Assert::isInstanceOf($subject, PaymentInterface::class);
+        Assert::isInstanceOf($payment, PaymentInterface::class);
 
-        /** @var ChannelInterface $channel */
-        $channel = $subject->getOrder()->getChannel();
+        $channel = $payment->getOrder()->getChannel();
 
-        $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
+        if (null !== $this->paymentMethodsResolver) {
+            $paymentMethods = $this->paymentMethodsResolver->getSupportedMethods($payment);
+        } else {
+            $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
+        }
+
         if (empty($paymentMethods)) {
             throw new UnresolvedDefaultPaymentMethodException();
         }
