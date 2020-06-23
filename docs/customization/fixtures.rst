@@ -238,6 +238,8 @@ just like in the example mentioned above.
             resource: '../src/*'
             exclude: '../src/{Entity,Fixture,Migrations,Tests,Kernel.php}'
 
+    If you leave autowiring on, errors like `Fixture with name ""your_cusom_fixture"" is already registered.` will most probably appear. Your fixture service will register twice (as `app.fixture.bla` by you and as `App\Fixture\BlaFixture` by DI autoconfigure).
+
 **4.** Add new Shipping Methods with delivery conditions in ``config/packages/fixtures.yaml``:
 
 .. code-block:: yaml
