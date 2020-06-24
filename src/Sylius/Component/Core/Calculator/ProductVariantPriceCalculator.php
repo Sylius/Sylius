@@ -41,8 +41,6 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException|MissingChannelConfigurationException
      */
     public function calculateOriginal(ProductVariantInterface $productVariant, array $context): int
