@@ -58,7 +58,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function checkChannel($channelName): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver  || $this->getDriver() instanceof ChromeDriver) {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
 
             return;

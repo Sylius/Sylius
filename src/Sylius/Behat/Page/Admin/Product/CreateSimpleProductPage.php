@@ -22,7 +22,6 @@ use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use WebDriver\Exception;
 use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
