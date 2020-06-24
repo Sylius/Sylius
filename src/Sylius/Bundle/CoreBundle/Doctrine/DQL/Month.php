@@ -41,7 +41,6 @@ final class Month extends FunctionNode
         switch ($platformName) {
             case 'mysql':
                 return sprintf('MONTH(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
-
             case 'postgresql':
                 return sprintf('EXTRACT(MONTH FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }

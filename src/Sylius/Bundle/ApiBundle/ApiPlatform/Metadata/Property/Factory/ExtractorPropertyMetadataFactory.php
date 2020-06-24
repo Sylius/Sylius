@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory;
@@ -17,8 +26,10 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
 {
     /** @var PropertyMetadataFactoryInterface */
     private $decoratedPropertyMetadataFactory;
+
     /** @var ContainerInterface */
     private $container;
+
     /** @var array */
     private $collectedParameters = [];
 
@@ -50,8 +61,6 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
      *
      * @see https://github.com/symfony/symfony/blob/6fec32c/src/Symfony/Bundle/FrameworkBundle/Routing/Router.php
      *
-     * @copyright (c) Fabien Potencier <fabien@symfony.com>
-     *
      * @param mixed $value The source which might contain "%placeholders%"
      *
      * @throws \RuntimeException When a container value is not a string or a numeric value
@@ -60,7 +69,7 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
      *               parameters. Arrays are resolved recursively.
      * @psalm-suppress all
      */
-    protected function resolve($value)
+    private function resolve($value)
     {
         if (null === $this->container) {
             return $value;

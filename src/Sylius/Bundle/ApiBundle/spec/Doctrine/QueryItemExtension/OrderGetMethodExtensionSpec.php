@@ -110,7 +110,7 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_GET,
-                    []
+                    [],
                 ]
             )
         ;

@@ -48,7 +48,6 @@ final class ApiSecurityService implements SecurityServiceInterface
             json_encode(['email' => $user->getEmail(), 'password' => 'sylius'])
         );
 
-
         $response = $this->client->getResponse();
         $content = json_decode($response->getContent(), true);
 

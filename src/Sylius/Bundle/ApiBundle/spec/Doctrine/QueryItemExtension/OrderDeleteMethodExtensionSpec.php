@@ -139,7 +139,7 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_DELETE,
-                    []
+                    [],
                 ]
             )
         ;
@@ -199,7 +199,7 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_DELETE,
-                    []
+                    [],
                 ]
             )
         ;

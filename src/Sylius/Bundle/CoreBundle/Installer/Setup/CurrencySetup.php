@@ -90,7 +90,7 @@ final class CurrencySetup implements CurrencySetupInterface
     {
         try {
             return Currencies::getName($code);
-        } catch(MissingResourceException $exception) {
+        } catch (MissingResourceException $exception) {
             return null;
         }
     }

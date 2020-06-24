@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\AdminBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
@@ -78,18 +80,18 @@ class StatisticsDataProviderSpec extends ObjectBehavior
         $this->getRawData($channel, $startDate, $endDate, 'month')->shouldReturn([
             'sales_summary' => [
                 'intervals' => ['1.2020', '2.2020', '3.2020', '4.2020', '5.2020', '6.2020', '7.2020', '8.2020', '9.2020', '10.2020', '11.2020', '12.2020'],
-                'sales' => ['0', '168.82', '0', '203.92', '0', '0', '0', '0', '0', '0', '0', '0']
+                'sales' => ['0', '168.82', '0', '203.92', '0', '0', '0', '0', '0', '0', '0', '0'],
             ],
             'channel' => [
                 'base_currency_code' => 'USD',
                 'channel_code' => 'FASHION_WEB',
             ],
-            'statistics'=>[
+            'statistics' => [
                 'total_sales' => '$372.74',
                 'number_of_new_orders' => 2,
                 'number_of_new_customers' => 21,
                 'average_order_value' => '$186.37',
-            ]
+            ],
         ]);
     }
 
@@ -122,7 +124,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
                 '16.5.2020', '17.5.2020', '18.5.2020', '19.5.2020', '20.5.2020',
                 '21.5.2020', '22.5.2020', '23.5.2020', '24.5.2020', '25.5.2020',
                 '26.5.2020', '27.5.2020', '28.5.2020', '29.5.2020', '30.5.2020',
-                '31.5.2020'
+                '31.5.2020',
             ]
         );
         $salesSummary->getSales()->willReturn(
@@ -152,7 +154,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
                     '16.5.2020', '17.5.2020', '18.5.2020', '19.5.2020', '20.5.2020',
                     '21.5.2020', '22.5.2020', '23.5.2020', '24.5.2020', '25.5.2020',
                     '26.5.2020', '27.5.2020', '28.5.2020', '29.5.2020', '30.5.2020',
-                    '31.5.2020'
+                    '31.5.2020',
                 ],
                 'sales' => [
                     '0', '168.82', '0', '203.92', '0',
@@ -160,18 +162,18 @@ class StatisticsDataProviderSpec extends ObjectBehavior
                     '0', '0', '0', '0', '0', '0', '0',
                     '0', '0', '0', '81.0', '0', '0', '0',
                     '0', '0', '0', '0', '0', '4.50', '0',
-                ]
+                ],
             ],
             'channel' => [
                 'base_currency_code' => 'USD',
                 'channel_code' => 'FASHION_WEB',
             ],
-            'statistics'=>[
+            'statistics' => [
                 'total_sales' => '$519.74',
                 'number_of_new_orders' => 2,
                 'number_of_new_customers' => 9,
                 'average_order_value' => '$259.87',
-            ]
+            ],
         ]);
     }
 
@@ -205,7 +207,7 @@ class StatisticsDataProviderSpec extends ObjectBehavior
         $salesSummary->getSales()->willReturn(
             [
                 '0', '168.82', '0', '203.92', '0', '0', '10.0',
-                '0', '0', '40.50', '0', '0', '23.0', '0', '7.0', '11.0'
+                '0', '0', '40.50', '0', '0', '23.0', '0', '7.0', '11.0',
             ]
         );
         $channel->getBaseCurrency()->willReturn($currency);
@@ -225,19 +227,19 @@ class StatisticsDataProviderSpec extends ObjectBehavior
                 ],
                 'sales' => [
                     '0', '168.82', '0', '203.92', '0', '0', '10.0',
-                    '0', '0', '40.50', '0', '0', '23.0', '0', '7.0', '11.0'
-                ]
+                    '0', '0', '40.50', '0', '0', '23.0', '0', '7.0', '11.0',
+                ],
             ],
             'channel' => [
                 'base_currency_code' => 'USD',
                 'channel_code' => 'FASHION_WEB',
             ],
-            'statistics'=>[
+            'statistics' => [
                 'total_sales' => '$464.24',
                 'number_of_new_orders' => 4,
                 'number_of_new_customers' => 11,
                 'average_order_value' => '$116.06',
-            ]
+            ],
         ]);
     }
 }

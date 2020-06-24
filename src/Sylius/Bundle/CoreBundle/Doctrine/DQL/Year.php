@@ -41,7 +41,6 @@ final class Year extends FunctionNode
         switch ($platformName) {
             case 'mysql':
                 return sprintf('YEAR(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
-
             case 'postgresql':
                 return sprintf('EXTRACT(YEAR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }

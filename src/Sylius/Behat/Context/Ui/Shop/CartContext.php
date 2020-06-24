@@ -276,6 +276,7 @@ final class CartContext implements Context
         foreach ($product->getVariants() as $variant) {
             if ($variant->getName() === $variantName) {
                 $this->sharedStorage->set('variant', $variant);
+
                 break;
             }
         }

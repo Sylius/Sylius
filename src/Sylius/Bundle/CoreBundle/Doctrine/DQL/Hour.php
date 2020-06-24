@@ -41,7 +41,6 @@ final class Hour extends FunctionNode
         switch ($platformName) {
             case 'mysql':
                 return sprintf('HOUR(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
-
             case 'postgresql':
                 return sprintf('EXTRACT(HOUR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }

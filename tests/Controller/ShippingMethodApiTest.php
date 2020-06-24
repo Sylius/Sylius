@@ -26,8 +26,8 @@ final class ShippingMethodApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    /** @var array  */
-    static private $authorizedHeaderWithDenied = [
+    /** @var array */
+    private static $authorizedHeaderWithDenied = [
         'HTTP_Authorization' => 'Bearer wrong_token',
         'HTTP_ACCEPT' => 'application/json',
         'CONTENT_TYPE' => 'application/json',

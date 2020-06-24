@@ -179,7 +179,7 @@ final class CartContext implements Context
 
         $request->updateContent([
             'productCode' => $product->getCode(),
-            'quantity' => $quantity
+            'quantity' => $quantity,
         ]);
 
         $this->cartsClient->executeCustomRequest($request);

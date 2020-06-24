@@ -103,7 +103,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
         try {
             return Languages::getName($language, $region);
-        } catch(MissingResourceException $exception) {
+        } catch (MissingResourceException $exception) {
             return null;
         }
     }

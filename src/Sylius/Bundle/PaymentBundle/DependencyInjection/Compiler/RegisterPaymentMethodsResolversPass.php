@@ -34,7 +34,7 @@ final class RegisterPaymentMethodsResolversPass implements CompilerPassInterface
                     throw new \InvalidArgumentException('Tagged payment methods resolvers need to have `type` and `label` attributes.');
                 }
 
-                $priority = (int)($attribute['priority'] ?? 0);
+                $priority = (int) ($attribute['priority'] ?? 0);
 
                 $resolvers[$attribute['type']] = $attribute['label'];
 

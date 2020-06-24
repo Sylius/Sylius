@@ -51,7 +51,7 @@ final class ExchangeRateContext implements Context
         $sourceCurrencyCode = $this->currencyNameConverter->convertToCode($sourceCurrencyName);
         $targetCurrencyCode = $this->currencyNameConverter->convertToCode($targetCurrencyName);
 
-        /** @var ExchangeRateInterface|null */
+        /** @var ExchangeRateInterface|null $exchangeRate */
         $exchangeRate = $this
             ->exchangeRateRepository
             ->findOneWithCurrencyPair($sourceCurrencyCode, $targetCurrencyCode)
