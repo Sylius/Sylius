@@ -37,8 +37,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function cancel(OrderInterface $order): void
@@ -49,8 +47,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function hold(OrderInterface $order): void
@@ -61,8 +57,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws OptimisticLockException
      */
     public function sell(OrderInterface $order): void

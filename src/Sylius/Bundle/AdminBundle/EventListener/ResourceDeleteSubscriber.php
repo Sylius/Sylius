@@ -38,9 +38,6 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

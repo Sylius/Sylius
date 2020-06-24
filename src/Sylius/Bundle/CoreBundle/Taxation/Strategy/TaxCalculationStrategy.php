@@ -39,9 +39,6 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
         $this->applicators = $applicators;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($this->applicators as $applicator) {
@@ -50,8 +47,6 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function supports(OrderInterface $order, ZoneInterface $zone): bool
@@ -64,9 +59,6 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
         return $channel->getTaxCalculationStrategy() === $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return $this->type;

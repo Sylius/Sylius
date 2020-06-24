@@ -31,9 +31,6 @@ final class OrderStateResolver implements StateResolverInterface
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(BaseOrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);

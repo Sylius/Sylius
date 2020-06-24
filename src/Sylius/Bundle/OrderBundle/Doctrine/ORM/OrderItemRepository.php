@@ -20,9 +20,6 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 
 class OrderItemRepository extends EntityRepository implements OrderItemRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface
     {
         return $this->createQueryBuilder('o')

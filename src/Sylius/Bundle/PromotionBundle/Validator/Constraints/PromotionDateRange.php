@@ -20,17 +20,11 @@ final class PromotionDateRange extends Constraint
     /** @var string */
     public $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_promotion_date_range_validator';

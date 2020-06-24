@@ -23,9 +23,6 @@ final class ImmutableLocaleContext implements LocaleContextInterface
         $this->localeCode = $localeCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         return $this->localeCode;

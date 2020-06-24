@@ -34,25 +34,16 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShipment(): ?BaseShipmentInterface
     {
         return $this->shipment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShipment(?BaseShipmentInterface $shipment): void
     {
         $this->shipment = $shipment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStockable(): ?StockableInterface
     {
         Assert::isInstanceOf($this->orderItem, OrderItemInterface::class);
@@ -60,9 +51,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         return $this->orderItem->getVariant();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippable(): ?ShippableInterface
     {
         Assert::isInstanceOf($this->orderItem, OrderItemInterface::class);
@@ -70,9 +58,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         return $this->orderItem->getVariant();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxTotal(): int
     {
         $taxTotal = 0;

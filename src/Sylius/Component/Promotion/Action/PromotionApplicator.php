@@ -27,9 +27,6 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion): void
     {
         $applyPromotion = false;
@@ -43,9 +40,6 @@ final class PromotionApplicator implements PromotionApplicatorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion): void
     {
         foreach ($promotion->getActions() as $action) {

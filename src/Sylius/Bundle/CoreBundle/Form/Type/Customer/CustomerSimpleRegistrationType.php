@@ -34,9 +34,6 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options = []): void
     {
         $builder
@@ -52,9 +49,6 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -63,9 +57,6 @@ final class CustomerSimpleRegistrationType extends AbstractResourceType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_customer_simple_registration';

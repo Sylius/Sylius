@@ -78,9 +78,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ShippingMethodInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -117,9 +114,6 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         return $shippingMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

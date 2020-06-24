@@ -24,9 +24,6 @@ use Symfony\Component\Console\Question\Question;
 
 abstract class AbstractRoleCommand extends ContainerAwareCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
         // User types configured in the Bundle
@@ -77,9 +74,6 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');

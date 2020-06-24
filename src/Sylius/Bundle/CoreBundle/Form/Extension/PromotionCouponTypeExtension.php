@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class PromotionCouponTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -38,9 +35,6 @@ final class PromotionCouponTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return PromotionCouponType::class;

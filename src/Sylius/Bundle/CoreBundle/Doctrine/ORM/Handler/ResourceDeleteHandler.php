@@ -30,8 +30,6 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws DeleteHandlingException
      */
     public function handle(ResourceInterface $resource, RepositoryInterface $repository): void

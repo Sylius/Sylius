@@ -45,9 +45,6 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function provideOrderPayment(OrderInterface $order, string $targetState): ?PaymentInterface
     {
         /** @var PaymentInterface $payment */

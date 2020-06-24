@@ -37,9 +37,6 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 final class SyliusUserExtension extends AbstractResourceExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);

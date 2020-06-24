@@ -20,9 +20,6 @@ class DifferentSourceTargetCurrency extends Constraint
     /** @var string */
     public $message = 'sylius.exchange_rate.different_source_target_currency';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

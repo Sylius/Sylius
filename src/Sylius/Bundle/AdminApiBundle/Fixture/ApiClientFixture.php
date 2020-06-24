@@ -18,17 +18,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ApiClientFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'api_client';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode

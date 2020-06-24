@@ -17,9 +17,6 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    /**
-     * {@inheritdoc}
-     */
     public function registerBundles(): array
     {
         return [
@@ -40,17 +37,11 @@ class AppKernel extends Kernel
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/config/config.yml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerBaseClass(): string
     {
         if (0 === strpos($this->environment, 'test')) {

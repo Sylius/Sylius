@@ -17,9 +17,6 @@ use Symfony\Component\Intl\Countries;
 
 final class CountryNameConverter implements CountryNameConverterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertToCode(string $name, string $locale = 'en'): string
     {
         $names = Countries::getNames($locale);

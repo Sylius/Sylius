@@ -20,33 +20,21 @@ class Mocker implements MockerInterface
     /** @var MockerContainer */
     private $container;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(MockerContainer $container)
     {
         $this->container = $container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mockCollaborator($className)
     {
         return \Mockery::mock($className);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mockService($serviceId, $className)
     {
         return $this->container->mock($serviceId, $className);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unmockService($serviceId)
     {
         $this->container->unmock($serviceId);

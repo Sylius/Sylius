@@ -21,9 +21,6 @@ use Symfony\Component\Intl\Countries;
 
 class CountryNameExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

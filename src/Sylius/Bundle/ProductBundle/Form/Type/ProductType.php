@@ -54,9 +54,6 @@ final class ProductType extends AbstractResourceType
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -87,9 +84,6 @@ final class ProductType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product';

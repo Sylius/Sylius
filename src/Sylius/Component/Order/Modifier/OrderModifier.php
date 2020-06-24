@@ -33,9 +33,6 @@ final class OrderModifier implements OrderModifierInterface
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addToOrder(OrderInterface $order, OrderItemInterface $item): void
     {
         $this->resolveOrderItem($order, $item);
@@ -43,9 +40,6 @@ final class OrderModifier implements OrderModifierInterface
         $this->orderProcessor->process($order);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeFromOrder(OrderInterface $order, OrderItemInterface $item): void
     {
         $order->removeItem($item);

@@ -42,9 +42,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
         $this->product = $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($productTaxon): ?TaxonInterface
     {
         if (null === $productTaxon) {
@@ -56,9 +53,6 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
         return $productTaxon->getTaxon();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($taxon): ?ProductTaxonInterface
     {
         if (null === $taxon) {

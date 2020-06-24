@@ -33,9 +33,6 @@ class CurrencyFixture extends AbstractFixture
         $this->currencyManager = $currencyManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         foreach ($options['currencies'] as $currencyCode) {
@@ -50,17 +47,11 @@ class CurrencyFixture extends AbstractFixture
         $this->currencyManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'currency';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode

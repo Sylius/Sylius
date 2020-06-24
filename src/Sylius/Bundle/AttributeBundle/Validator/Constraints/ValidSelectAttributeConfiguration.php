@@ -26,17 +26,11 @@ final class ValidSelectAttributeConfiguration extends Constraint
     /** @var string */
     public $messageMaxEntries = 'sylius.attribute.configuration.max_entries';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_valid_select_attribute_validator';

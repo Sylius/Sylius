@@ -35,9 +35,6 @@ final class AddressType extends AbstractResourceType
         $this->buildAddressFormSubscriber = $buildAddressFormSubscriber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -72,9 +69,6 @@ final class AddressType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -94,9 +88,6 @@ final class AddressType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_address';

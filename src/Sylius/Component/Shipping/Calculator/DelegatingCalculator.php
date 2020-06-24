@@ -26,9 +26,6 @@ final class DelegatingCalculator implements DelegatingCalculatorInterface
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(ShipmentInterface $subject): int
     {
         if (null === $method = $subject->getMethod()) {

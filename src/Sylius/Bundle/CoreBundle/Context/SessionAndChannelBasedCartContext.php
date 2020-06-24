@@ -34,9 +34,6 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
         $this->channelContext = $channelContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCart(): OrderInterface
     {
         try {

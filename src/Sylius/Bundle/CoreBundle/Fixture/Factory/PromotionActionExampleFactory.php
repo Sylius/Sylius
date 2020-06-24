@@ -40,9 +40,6 @@ class PromotionActionExampleFactory extends AbstractExampleFactory implements Ex
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): PromotionActionInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -55,9 +52,6 @@ class PromotionActionExampleFactory extends AbstractExampleFactory implements Ex
         return $promotionAction;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

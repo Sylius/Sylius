@@ -30,9 +30,6 @@ final class ProvinceChoiceType extends AbstractType
         $this->provinceRepository = $provinceRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -53,17 +50,11 @@ final class ProvinceChoiceType extends AbstractType
         $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_province_choice';

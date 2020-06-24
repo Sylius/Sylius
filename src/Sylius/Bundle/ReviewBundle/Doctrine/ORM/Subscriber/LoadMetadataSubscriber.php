@@ -27,9 +27,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $this->subjects = $subjects;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents(): array
     {
         return [

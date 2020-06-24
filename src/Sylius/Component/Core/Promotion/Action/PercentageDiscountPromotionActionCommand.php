@@ -39,9 +39,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
@@ -73,9 +70,6 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function isConfigurationValid(array $configuration): void
     {
         Assert::keyExists($configuration, 'percentage');

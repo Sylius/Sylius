@@ -35,9 +35,6 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
         $this->adjustmentFactory = $adjustmentFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
@@ -71,8 +68,6 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnexpectedTypeException
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void

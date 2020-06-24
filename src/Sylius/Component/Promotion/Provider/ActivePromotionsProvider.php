@@ -26,9 +26,6 @@ final class ActivePromotionsProvider implements PreQualifiedPromotionsProviderIn
         $this->promotionRepository = $promotionRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPromotions(PromotionSubjectInterface $subject): array
     {
         return $this->promotionRepository->findActive();

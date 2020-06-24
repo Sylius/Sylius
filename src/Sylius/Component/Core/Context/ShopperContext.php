@@ -49,33 +49,21 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
         $this->customerContext = $customerContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         return $this->channelContext->getChannel();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCode(): string
     {
         return $this->currencyContext->getCurrencyCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         return $this->localeContext->getLocaleCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?CustomerInterface
     {
         return $this->customerContext->getCustomer();

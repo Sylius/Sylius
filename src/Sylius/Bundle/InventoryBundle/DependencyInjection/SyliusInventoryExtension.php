@@ -21,9 +21,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusInventoryExtension extends AbstractResourceExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);

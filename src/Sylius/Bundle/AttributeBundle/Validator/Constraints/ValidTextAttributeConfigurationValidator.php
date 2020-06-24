@@ -21,9 +21,6 @@ use Webmozart\Assert\Assert;
 
 final class ValidTextAttributeConfigurationValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function validate($attribute, Constraint $constraint): void
     {
         /** @var AttributeInterface $attribute */

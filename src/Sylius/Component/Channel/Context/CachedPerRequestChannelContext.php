@@ -40,9 +40,6 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
         $this->requestToExceptionMap = new \SplObjectStorage();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         $objectIdentifier = $this->requestStack->getMasterRequest();

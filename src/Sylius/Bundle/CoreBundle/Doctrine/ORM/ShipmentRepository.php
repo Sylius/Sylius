@@ -28,9 +28,6 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByOrderId($shipmentId, $orderId): ?ShipmentInterface
     {
         return $this->createQueryBuilder('o')
@@ -43,9 +40,6 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')

@@ -33,9 +33,6 @@ final class ProductGenerateVariantsType extends AbstractResourceType
         $this->generateProductVariantsSubscriber = $generateProductVariants;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -48,9 +45,6 @@ final class ProductGenerateVariantsType extends AbstractResourceType
             ->addEventSubscriber($this->generateProductVariantsSubscriber);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_generate_variants';

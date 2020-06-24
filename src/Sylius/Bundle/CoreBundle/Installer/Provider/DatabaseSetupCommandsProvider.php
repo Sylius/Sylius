@@ -32,9 +32,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         $this->doctrineRegistry = $doctrineRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if (!$this->isDatabasePresent()) {

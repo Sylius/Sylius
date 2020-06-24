@@ -18,9 +18,6 @@ use Twig\TwigFilter;
 
 class PercentageExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

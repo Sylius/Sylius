@@ -44,9 +44,6 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
         $this->taxRateResolver = $taxRateResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         $shippingTotal = $order->getShippingTotal();

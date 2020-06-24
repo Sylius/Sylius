@@ -50,8 +50,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function apply(OrderInterface $order, ZoneInterface $zone): void

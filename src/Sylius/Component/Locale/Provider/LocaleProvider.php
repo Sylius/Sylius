@@ -30,9 +30,6 @@ final class LocaleProvider implements LocaleProviderInterface
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableLocalesCodes(): array
     {
         $locales = $this->localeRepository->findAll();
@@ -45,9 +42,6 @@ final class LocaleProvider implements LocaleProviderInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLocaleCode(): string
     {
         return $this->defaultLocaleCode;

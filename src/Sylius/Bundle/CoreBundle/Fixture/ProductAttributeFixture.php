@@ -29,17 +29,11 @@ class ProductAttributeFixture extends AbstractResourceFixture
         $this->attributeTypes = array_keys($attributeTypes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'product_attribute';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode

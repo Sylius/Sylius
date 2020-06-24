@@ -28,17 +28,11 @@ final class PromotionCouponFactory implements PromotionCouponFactoryInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): PromotionCouponInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForPromotion(PromotionInterface $promotion): PromotionCouponInterface
     {
         Assert::true(

@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ChannelFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

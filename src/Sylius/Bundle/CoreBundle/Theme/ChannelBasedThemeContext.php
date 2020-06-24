@@ -34,9 +34,6 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         $this->themeRepository = $themeRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTheme(): ?ThemeInterface
     {
         try {

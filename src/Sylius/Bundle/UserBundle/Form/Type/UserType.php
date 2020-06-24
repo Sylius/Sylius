@@ -24,9 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class UserType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -45,9 +42,6 @@ abstract class UserType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

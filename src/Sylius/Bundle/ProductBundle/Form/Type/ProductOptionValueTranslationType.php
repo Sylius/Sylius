@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductOptionValueTranslationType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -31,9 +28,6 @@ final class ProductOptionValueTranslationType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_option_value_translation';

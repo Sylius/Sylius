@@ -30,9 +30,6 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array
     {
         $variantsPrices = [];

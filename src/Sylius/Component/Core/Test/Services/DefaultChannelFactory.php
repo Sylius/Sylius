@@ -67,9 +67,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
     {
         $currency = $this->provideCurrency($currencyCode);

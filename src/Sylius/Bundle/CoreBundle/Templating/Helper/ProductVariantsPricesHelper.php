@@ -33,9 +33,6 @@ class ProductVariantsPricesHelper extends Helper
         return $this->productVariantsPricesProvider->provideVariantsPrices($product, $channel);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_product_variants_prices';

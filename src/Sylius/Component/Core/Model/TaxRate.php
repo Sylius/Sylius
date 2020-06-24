@@ -21,17 +21,11 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     /** @var ZoneInterface */
     protected $zone;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getZone(): ?ZoneInterface
     {
         return $this->zone;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setZone(?ZoneInterface $zone): void
     {
         $this->zone = $zone;

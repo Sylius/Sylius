@@ -28,9 +28,6 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         $this->provinceRepository = $provinceRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {
@@ -48,9 +45,6 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         return $province->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAbbreviation(AddressInterface $address): string
     {
         if (null !== $address->getProvinceName()) {

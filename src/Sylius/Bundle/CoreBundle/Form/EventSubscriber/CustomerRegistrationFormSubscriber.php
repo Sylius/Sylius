@@ -30,9 +30,6 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -41,8 +38,6 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function preSubmit(FormEvent $event): void

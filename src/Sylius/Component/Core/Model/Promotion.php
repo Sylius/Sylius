@@ -36,8 +36,6 @@ class Promotion extends BasePromotion implements PromotionInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
      * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
@@ -46,9 +44,6 @@ class Promotion extends BasePromotion implements PromotionInterface
         return $this->channels;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
@@ -56,9 +51,6 @@ class Promotion extends BasePromotion implements PromotionInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
@@ -66,9 +58,6 @@ class Promotion extends BasePromotion implements PromotionInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);

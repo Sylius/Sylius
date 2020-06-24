@@ -21,17 +21,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class CustomerTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventSubscriber(new AddUserFormSubscriber(ShopUserType::class));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return CustomerType::class;

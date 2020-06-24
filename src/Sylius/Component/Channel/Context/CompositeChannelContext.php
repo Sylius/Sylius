@@ -35,9 +35,6 @@ final class CompositeChannelContext implements ChannelContextInterface
         $this->channelContexts->insert($channelContext, $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         foreach ($this->channelContexts as $channelContext) {

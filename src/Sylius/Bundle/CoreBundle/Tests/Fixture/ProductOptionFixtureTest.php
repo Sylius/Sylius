@@ -56,9 +56,6 @@ final class ProductOptionFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['values' => ['code' => 'value']]]]], 'custom.*.values');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductOptionFixture
     {
         return new ProductOptionFixture(

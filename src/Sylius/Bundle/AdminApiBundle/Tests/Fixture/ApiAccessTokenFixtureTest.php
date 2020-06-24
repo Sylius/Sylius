@@ -71,9 +71,6 @@ final class ApiAccessTokenFixtureTest extends TestCase
         ]]]], 'custom.*.expires_at');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ApiAccessTokenFixture
     {
         return new ApiAccessTokenFixture(

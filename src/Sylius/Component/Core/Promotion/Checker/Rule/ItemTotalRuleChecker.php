@@ -29,8 +29,6 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

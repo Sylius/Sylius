@@ -50,57 +50,36 @@ class AttributeValue implements AttributeValueInterface
     /** @var array|null */
     private $json;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubject(): ?AttributeSubjectInterface
     {
         return $this->subject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSubject(?AttributeSubjectInterface $subject): void
     {
         $this->subject = $subject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAttribute(): ?AttributeInterface
     {
         return $this->attribute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAttribute(?AttributeInterface $attribute): void
     {
         $this->attribute = $attribute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): ?string
     {
         return $this->localeCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLocaleCode(?string $localeCode): void
     {
         Assert::string($localeCode);
@@ -108,9 +87,6 @@ class AttributeValue implements AttributeValueInterface
         $this->localeCode = $localeCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValue()
     {
         if (null === $this->attribute) {
@@ -122,9 +98,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->$getter();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setValue($value): void
     {
         $this->assertAttributeIsSet();
@@ -134,9 +107,6 @@ class AttributeValue implements AttributeValueInterface
         $this->$setter($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         $this->assertAttributeIsSet();
@@ -144,9 +114,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->attribute->getCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         $this->assertAttributeIsSet();
@@ -154,9 +121,6 @@ class AttributeValue implements AttributeValueInterface
         return $this->attribute->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): ?string
     {
         $this->assertAttributeIsSet();

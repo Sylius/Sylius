@@ -27,9 +27,6 @@ final class CheckoutStepsExtension extends AbstractExtension
         $this->checkoutStepsHelper = $checkoutStepsHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

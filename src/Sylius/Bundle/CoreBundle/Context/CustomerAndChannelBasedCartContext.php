@@ -42,9 +42,6 @@ final class CustomerAndChannelBasedCartContext implements CartContextInterface
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCart(): OrderInterface
     {
         try {

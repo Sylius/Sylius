@@ -32,9 +32,6 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         $request = $this->requestStack->getMasterRequest();

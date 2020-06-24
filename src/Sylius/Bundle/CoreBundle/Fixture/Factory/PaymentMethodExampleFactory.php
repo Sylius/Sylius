@@ -57,9 +57,6 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): PaymentMethodInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -88,9 +85,6 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
         return $paymentMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

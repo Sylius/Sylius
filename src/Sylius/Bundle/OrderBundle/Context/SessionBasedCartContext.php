@@ -37,9 +37,6 @@ final class SessionBasedCartContext implements CartContextInterface
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCart(): OrderInterface
     {
         if (!$this->session->has($this->sessionKeyName)) {

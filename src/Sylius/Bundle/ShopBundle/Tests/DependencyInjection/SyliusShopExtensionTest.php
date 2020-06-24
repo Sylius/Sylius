@@ -134,9 +134,6 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius_shop.firewall_context_name', 'myshopfirewall');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerExtensions(): array
     {
         return [

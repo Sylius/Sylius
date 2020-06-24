@@ -29,9 +29,6 @@ final class TokenUniquenessChecker implements UniquenessCheckerInterface
         $this->tokenFieldName = $tokenFieldName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isUnique(string $token): bool
     {
         return null === $this->repository->findOneBy([$this->tokenFieldName => $token]);

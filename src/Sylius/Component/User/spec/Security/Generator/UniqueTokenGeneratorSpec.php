@@ -62,9 +62,6 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
         $this->generate()->shouldBeString();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMatchers(): array
     {
         return [

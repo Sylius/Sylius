@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductTranslationTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -33,9 +30,6 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return ProductTranslationType::class;

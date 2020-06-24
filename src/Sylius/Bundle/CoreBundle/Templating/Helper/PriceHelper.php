@@ -30,8 +30,6 @@ class PriceHelper extends Helper
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function getPrice(ProductVariantInterface $productVariant, array $context): int
@@ -45,8 +43,6 @@ class PriceHelper extends Helper
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function getOriginalPrice(ProductVariantInterface $productVariant, array $context): int
@@ -60,8 +56,6 @@ class PriceHelper extends Helper
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function hasDiscount(ProductVariantInterface $productVariant, array $context): bool
@@ -72,9 +66,6 @@ class PriceHelper extends Helper
         return $this->getOriginalPrice($productVariant, $context) > $this->getPrice($productVariant, $context);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_calculate_price';

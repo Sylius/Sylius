@@ -58,9 +58,6 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerExtensions(): array
     {
         return [new SyliusOrderExtension()];

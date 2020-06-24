@@ -40,9 +40,6 @@ class LocaleFixture extends AbstractFixture
         $this->baseLocaleCode = $baseLocaleCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         $localesCodes = $options['locales'];
@@ -65,17 +62,11 @@ class LocaleFixture extends AbstractFixture
         $this->localeManager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'locale';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode

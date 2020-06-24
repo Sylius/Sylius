@@ -24,8 +24,6 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
     public const TYPE = 'customer_group';
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

@@ -21,9 +21,6 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 
 class ProductVariantRepository extends EntityRepository implements ProductVariantRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -35,9 +32,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -50,9 +44,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
@@ -66,9 +57,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByNameAndProduct(string $name, string $locale, ProductInterface $product): array
     {
         return $this->createQueryBuilder('o')
@@ -84,9 +72,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByCodeAndProductCode(string $code, string $productCode): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
@@ -100,9 +85,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByCodesAndProductCode(array $codes, string $productCode): array
     {
         return $this->createQueryBuilder('o')
@@ -116,9 +98,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface
     {
         return $this->createQueryBuilder('o')
@@ -131,9 +110,6 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByPhraseAndProductCode(string $phrase, string $locale, string $productCode): array
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();

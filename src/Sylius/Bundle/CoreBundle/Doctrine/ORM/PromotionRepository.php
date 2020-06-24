@@ -25,9 +25,6 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
     /** @var AssociationHydrator */
     private $associationHydrator;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
@@ -35,9 +32,6 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findActiveByChannel(ChannelInterface $channel): array
     {
         $promotions = $this->filterByActive($this->createQueryBuilder('o'))

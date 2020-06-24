@@ -27,17 +27,11 @@ final class LocaleStorage implements LocaleStorageInterface
         $this->storage = $storage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function set(ChannelInterface $channel, string $localeCode): void
     {
         $this->storage->set($this->provideKey($channel), $localeCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(ChannelInterface $channel): string
     {
         $localeCode = $this->storage->get($this->provideKey($channel));
@@ -48,9 +42,6 @@ final class LocaleStorage implements LocaleStorageInterface
         return $localeCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     private function provideKey(ChannelInterface $channel): string
     {
         return '_locale_' . $channel->getCode();

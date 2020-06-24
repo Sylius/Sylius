@@ -27,9 +27,6 @@ final class LocaleExtension extends AbstractExtension
         $this->localeHelper = $localeHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

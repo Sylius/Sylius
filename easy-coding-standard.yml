@@ -13,5 +13,8 @@ services:
         location: 'after_open'
 
 parameters:
+    skip:
+        SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff.NoAssignment: ~
+        SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff.MissingVariable: ~
     exclude_files:
         - '**/var/*'

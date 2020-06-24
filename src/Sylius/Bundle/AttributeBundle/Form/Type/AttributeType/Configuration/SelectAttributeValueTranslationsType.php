@@ -32,9 +32,6 @@ final class SelectAttributeValueTranslationsType extends AbstractType
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -50,17 +47,11 @@ final class SelectAttributeValueTranslationsType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return FixedCollectionType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_select_attribute_value_translations';

@@ -30,9 +30,6 @@ final class CalculatorChoiceType extends AbstractType
         $this->calculators = $calculators;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -42,17 +39,11 @@ final class CalculatorChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_calculator_choice';

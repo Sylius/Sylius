@@ -32,9 +32,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         $this->localeRepository = $localeRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -57,9 +54,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return LocaleType::class;

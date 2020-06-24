@@ -47,9 +47,6 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         $this->strategyRegistry = $strategyRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

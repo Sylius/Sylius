@@ -18,9 +18,6 @@ use Webmozart\Assert\Assert;
 
 class ProductAttributeValue extends BaseAttributeValue implements ProductAttributeValueInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getProduct(): ?ProductInterface
     {
         $subject = parent::getSubject();
@@ -31,9 +28,6 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
         return $subject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct(?ProductInterface $product): void
     {
         parent::setSubject($product);

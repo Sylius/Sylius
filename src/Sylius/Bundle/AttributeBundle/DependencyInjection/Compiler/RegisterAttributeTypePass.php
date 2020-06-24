@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterAttributeTypePass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.attribute_type') || !$container->hasDefinition('sylius.form_registry.attribute_type')) {

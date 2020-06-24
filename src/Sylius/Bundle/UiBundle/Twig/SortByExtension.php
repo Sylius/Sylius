@@ -20,9 +20,6 @@ use Twig\TwigFilter;
 
 class SortByExtension extends AbstractExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

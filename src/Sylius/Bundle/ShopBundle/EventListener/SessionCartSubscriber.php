@@ -36,9 +36,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         $this->cartStorage = $cartStorage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

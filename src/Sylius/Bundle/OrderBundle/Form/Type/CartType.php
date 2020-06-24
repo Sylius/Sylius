@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CartType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,9 +32,6 @@ class CartType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_cart';

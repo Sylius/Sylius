@@ -17,17 +17,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class PromotionFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'promotion';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode

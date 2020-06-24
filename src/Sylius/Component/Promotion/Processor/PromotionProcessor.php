@@ -39,9 +39,6 @@ final class PromotionProcessor implements PromotionProcessorInterface
         $this->promotionApplicator = $promotionApplicator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(PromotionSubjectInterface $subject): void
     {
         foreach ($subject->getPromotions() as $promotion) {

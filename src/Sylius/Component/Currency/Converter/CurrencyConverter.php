@@ -29,9 +29,6 @@ final class CurrencyConverter implements CurrencyConverterInterface
         $this->exchangeRateRepository = $exchangeRateRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convert(int $amount, string $sourceCurrencyCode, string $targetCurrencyCode): int
     {
         if ($sourceCurrencyCode === $targetCurrencyCode) {

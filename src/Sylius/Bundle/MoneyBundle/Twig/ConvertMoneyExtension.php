@@ -27,9 +27,6 @@ final class ConvertMoneyExtension extends AbstractExtension
         $this->helper = $helper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

@@ -50,9 +50,6 @@ class Kernel extends HttpKernel
         parent::__construct($environment, $debug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerBundles(): array
     {
         $bundles = [
@@ -118,9 +115,6 @@ class Kernel extends HttpKernel
         return $bundles;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerBaseClass(): string
     {
         if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
@@ -130,9 +124,6 @@ class Kernel extends HttpKernel
         return parent::getContainerBaseClass();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
         /** @var ContainerBuilder $container */
@@ -151,9 +142,6 @@ class Kernel extends HttpKernel
         return new DelegatingLoader($resolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
@@ -164,9 +152,6 @@ class Kernel extends HttpKernel
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheDir(): string
     {
         if ($this->isVagrantEnvironment()) {
@@ -176,9 +161,6 @@ class Kernel extends HttpKernel
         return dirname($this->getRootDir()) . '/var/cache/' . $this->getEnvironment();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLogDir(): string
     {
         if ($this->isVagrantEnvironment()) {

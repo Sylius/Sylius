@@ -39,9 +39,6 @@ final class CurrencyFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['currencies' => ['EUR', 'USD', 'PLN']]], 'currencies');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): CurrencyFixture
     {
         return new CurrencyFixture(

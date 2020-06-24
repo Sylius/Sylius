@@ -107,9 +107,6 @@ final class ChannelFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['account_verification_required' => false]]]], 'custom.*.account_verification_required');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ChannelFixture
     {
         return new ChannelFixture(

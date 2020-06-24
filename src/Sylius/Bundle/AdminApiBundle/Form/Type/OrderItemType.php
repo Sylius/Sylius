@@ -34,9 +34,6 @@ final class OrderItemType extends AbstractType
         $this->variantRepository = $variantRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('variant', TextType::class, [
@@ -60,17 +57,11 @@ final class OrderItemType extends AbstractType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return BaseOrderItemType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_admin_api_order_item';

@@ -61,17 +61,11 @@ class BookProductFixture extends AbstractFixture
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'book_product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -147,9 +141,6 @@ class BookProductFixture extends AbstractFixture
         $this->productFixture->load(['custom' => $products]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode

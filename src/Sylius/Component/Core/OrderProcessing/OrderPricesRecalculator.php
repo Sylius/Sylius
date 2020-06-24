@@ -29,9 +29,6 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

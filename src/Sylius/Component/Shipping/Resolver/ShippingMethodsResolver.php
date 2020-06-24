@@ -33,9 +33,6 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
         $this->eligibilityChecker = $eligibilityChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array
     {
         $methods = [];
@@ -49,9 +46,6 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
         return $methods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(ShippingSubjectInterface $subject): bool
     {
         return true;

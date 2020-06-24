@@ -34,9 +34,6 @@ final class InStockValidator extends ConstraintValidator
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var InStock $constraint */

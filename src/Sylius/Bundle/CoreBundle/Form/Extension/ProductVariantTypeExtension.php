@@ -30,9 +30,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -95,9 +92,6 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return ProductVariantType::class;

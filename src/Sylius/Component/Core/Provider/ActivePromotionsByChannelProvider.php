@@ -29,9 +29,6 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
         $this->promotionRepository = $promotionRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPromotions(PromotionSubjectInterface $subject): array
     {
         if (!$subject instanceof OrderInterface) {

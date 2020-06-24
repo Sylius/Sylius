@@ -18,9 +18,6 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 class TaxCategoryRepository extends EntityRepository implements TaxCategoryRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name): array
     {
         return $this->findBy(['name' => $name]);

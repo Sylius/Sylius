@@ -31,9 +31,6 @@ final class ProductVariantCombinationValidator extends ConstraintValidator
         $this->variantsParityChecker = $variantsParityChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var ProductVariantCombination $constraint */

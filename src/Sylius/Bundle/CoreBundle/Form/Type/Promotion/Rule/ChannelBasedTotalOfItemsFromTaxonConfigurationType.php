@@ -20,9 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelBasedTotalOfItemsFromTaxonConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -36,9 +33,6 @@ final class ChannelBasedTotalOfItemsFromTaxonConfigurationType extends AbstractT
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChannelCollectionType::class;

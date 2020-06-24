@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function process(ContainerBuilder $container): void

@@ -27,9 +27,6 @@ class ProvinceNamingExtension extends AbstractExtension
         $this->provinceNamingProvider = $provinceNamingProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

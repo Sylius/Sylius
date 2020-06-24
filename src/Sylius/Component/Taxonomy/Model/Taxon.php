@@ -69,57 +69,36 @@ class Taxon implements TaxonInterface
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRoot(): bool
     {
         return null === $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoot(): ?TaxonInterface
     {
         return $this->root;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): ?TaxonInterface
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setParent(?TaxonInterface $parent): void
     {
         $this->parent = $parent;
@@ -128,9 +107,6 @@ class Taxon implements TaxonInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAncestors(): Collection
     {
         $ancestors = [];
@@ -142,33 +118,21 @@ class Taxon implements TaxonInterface
         return new ArrayCollection($ancestors);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChild(TaxonInterface $taxon): bool
     {
         return $this->children->contains($taxon);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChildren(): bool
     {
         return !$this->children->isEmpty();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChild(TaxonInterface $taxon): void
     {
         if (!$this->hasChild($taxon)) {
@@ -180,9 +144,6 @@ class Taxon implements TaxonInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChild(TaxonInterface $taxon): void
     {
         if ($this->hasChild($taxon)) {
@@ -192,25 +153,16 @@ class Taxon implements TaxonInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFullname(string $pathDelimiter = ' / '): ?string
     {
         if ($this->isRoot()) {
@@ -225,97 +177,61 @@ class Taxon implements TaxonInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug(): ?string
     {
         return $this->getTranslation()->getSlug();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug(?string $slug): void
     {
         $this->getTranslation()->setSlug($slug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->getTranslation()->getDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->getTranslation()->setDescription($description);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLeft(): ?int
     {
         return $this->left;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLeft(?int $left): void
     {
         $this->left = $left;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRight(): ?int
     {
         return $this->right;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRight(?int $right): void
     {
         $this->right = $right;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLevel(): ?int
     {
         return $this->level;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLevel(?int $level): void
     {
         $this->level = $level;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
@@ -332,9 +248,6 @@ class Taxon implements TaxonInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): TaxonTranslationInterface
     {
         return new TaxonTranslation();

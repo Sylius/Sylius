@@ -60,137 +60,86 @@ class ShippingMethod implements ShippingMethodInterface
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategory(): ?ShippingCategoryInterface
     {
         return $this->category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCategory(?ShippingCategoryInterface $category): void
     {
         $this->category = $category;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategoryRequirement(): ?int
     {
         return $this->categoryRequirement;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCategoryRequirement(?int $categoryRequirement): void
     {
         $this->categoryRequirement = $categoryRequirement;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->getTranslation()->getDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->getTranslation()->setDescription($description);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCalculator(): ?string
     {
         return $this->calculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCalculator(?string $calculator): void
     {
         $this->calculator = $calculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfiguration(): array
     {
         return $this->configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
@@ -207,9 +156,6 @@ class ShippingMethod implements ShippingMethodInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): ShippingMethodTranslationInterface
     {
         return new ShippingMethodTranslation();

@@ -28,9 +28,6 @@ final class NotificationChecker implements NotificationCheckerInterface
         $this->notificationAccessor = $notificationAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function checkNotification(string $message, NotificationType $type): void
     {
         foreach ($this->notificationAccessor->getMessageElements() as $messageElement) {

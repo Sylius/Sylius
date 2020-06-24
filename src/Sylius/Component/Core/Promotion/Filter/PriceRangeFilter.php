@@ -27,9 +27,6 @@ final class PriceRangeFilter implements FilterInterface
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function filter(array $items, array $configuration): array
     {
         if (!$this->isConfigured($configuration)) {

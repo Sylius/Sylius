@@ -27,9 +27,6 @@ final class OrderShippingMethodSelectionRequirementChecker implements OrderShipp
         $this->shippingMethodsResolver = $shippingMethodsResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isShippingMethodSelectionRequired(OrderInterface $order): bool
     {
         if (!$order->isShippingRequired()) {

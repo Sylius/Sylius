@@ -44,9 +44,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
         $this->canonicalizer = $canonicalizer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadUserByUsername($username): UserInterface
     {
         $username = $this->canonicalizer->canonicalize($username);
@@ -61,9 +58,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
         return $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof SyliusUserInterface) {
@@ -91,9 +85,6 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     abstract protected function findUser(string $uniqueIdentifier): ?UserInterface;
 
-    /**
-     * {@inheritdoc}
-     */
     public function supportsClass($class): bool
     {
         return $this->supportedUserClass === $class || is_subclass_of($class, $this->supportedUserClass);

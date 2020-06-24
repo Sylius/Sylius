@@ -20,17 +20,11 @@ class ProductTranslation extends BaseProductTranslation implements ProductTransl
     /** @var string|null */
     protected $shortDescription;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;

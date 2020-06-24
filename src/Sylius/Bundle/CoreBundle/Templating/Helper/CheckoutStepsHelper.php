@@ -44,9 +44,6 @@ class CheckoutStepsHelper extends Helper
         return $this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_checkout_steps';

@@ -71,9 +71,6 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): PromotionInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -119,9 +116,6 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         return $promotion;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

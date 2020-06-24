@@ -51,113 +51,71 @@ class Attribute implements AttributeInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setType(?string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfiguration(): array
     {
         return $this->configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStorageType(): ?string
     {
         return $this->storageType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStorageType(?string $storageType): void
     {
         $this->storageType = $storageType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;

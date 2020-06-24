@@ -57,49 +57,31 @@ class ProductVariant implements ProductVariantInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescriptor(): string
     {
         $name = empty($this->getName()) ? $this->getProduct()->getName() : $this->getName();
@@ -107,17 +89,11 @@ class ProductVariant implements ProductVariantInterface
         return trim(sprintf('%s (%s)', $name, $this->code));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOptionValues(): Collection
     {
         return $this->optionValues;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addOptionValue(ProductOptionValueInterface $optionValue): void
     {
         if (!$this->hasOptionValue($optionValue)) {
@@ -125,9 +101,6 @@ class ProductVariant implements ProductVariantInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeOptionValue(ProductOptionValueInterface $optionValue): void
     {
         if ($this->hasOptionValue($optionValue)) {
@@ -135,41 +108,26 @@ class ProductVariant implements ProductVariantInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOptionValue(ProductOptionValueInterface $optionValue): bool
     {
         return $this->optionValues->contains($optionValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
@@ -186,9 +144,6 @@ class ProductVariant implements ProductVariantInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): ProductVariantTranslationInterface
     {
         return new ProductVariantTranslation();

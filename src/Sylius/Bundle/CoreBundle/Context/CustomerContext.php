@@ -33,9 +33,6 @@ final class CustomerContext implements CustomerContextInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?BaseCustomerInterface
     {
         if (null === $token = $this->tokenStorage->getToken()) {

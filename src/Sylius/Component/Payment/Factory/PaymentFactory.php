@@ -26,17 +26,11 @@ final class PaymentFactory implements PaymentFactoryInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): PaymentInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createWithAmountAndCurrencyCode(int $amount, string $currencyCode): PaymentInterface
     {
         /** @var PaymentInterface $payment */

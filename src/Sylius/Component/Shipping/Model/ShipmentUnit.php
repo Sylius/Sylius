@@ -41,33 +41,21 @@ class ShipmentUnit implements ShipmentUnitInterface
         return (string) $this->getId();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShipment(): ?ShipmentInterface
     {
         return $this->shipment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShipment(?ShipmentInterface $shipment): void
     {
         $this->shipment = $shipment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShippable(): ?ShippableInterface
     {
         return $this->shippable;

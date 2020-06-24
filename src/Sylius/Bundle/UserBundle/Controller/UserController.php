@@ -255,9 +255,6 @@ class UserController extends ResourceController
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');

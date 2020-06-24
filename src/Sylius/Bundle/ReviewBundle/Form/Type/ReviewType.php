@@ -23,9 +23,6 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 abstract class ReviewType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -45,9 +42,6 @@ abstract class ReviewType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

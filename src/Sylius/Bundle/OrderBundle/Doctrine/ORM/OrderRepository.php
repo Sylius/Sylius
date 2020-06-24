@@ -20,9 +20,6 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function countPlacedOrders(): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -34,9 +31,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createCartQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -49,9 +43,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findLatest(int $count): array
     {
         return $this->createQueryBuilder('o')
@@ -64,9 +55,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByNumber(string $number): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -79,9 +67,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -94,9 +79,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartById($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -109,9 +91,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array
     {
         return $this->createQueryBuilder('o')

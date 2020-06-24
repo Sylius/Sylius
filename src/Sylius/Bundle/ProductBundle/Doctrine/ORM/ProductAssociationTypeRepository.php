@@ -19,9 +19,6 @@ use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterfac
 
 class ProductAssociationTypeRepository extends EntityRepository implements ProductAssociationTypeRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -31,9 +28,6 @@ class ProductAssociationTypeRepository extends EntityRepository implements Produ
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')

@@ -26,17 +26,11 @@ class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
         $this->moneyFormatter = $moneyFormatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function formatAmount(int $amount, string $currencyCode, string $localeCode): string
     {
         return $this->moneyFormatter->format($amount, $currencyCode, $localeCode);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_format_money';

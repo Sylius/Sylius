@@ -26,9 +26,6 @@ final class SingleChannelContext implements ChannelContextInterface
         $this->channelRepository = $channelRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         $channels = $this->channelRepository->findAll();

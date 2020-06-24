@@ -32,17 +32,11 @@ final class AttributeFactory implements AttributeFactoryInterface
         $this->attributeTypesRegistry = $attributeTypesRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): AttributeInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createTyped(string $type): AttributeInterface
     {
         /** @var AttributeTypeInterface $attributeType */

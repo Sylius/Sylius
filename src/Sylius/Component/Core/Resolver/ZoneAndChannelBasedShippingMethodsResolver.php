@@ -45,8 +45,6 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject): array
@@ -75,9 +73,6 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
         return $methods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(ShippingSubjectInterface $subject): bool
     {
         return $subject instanceof ShipmentInterface &&

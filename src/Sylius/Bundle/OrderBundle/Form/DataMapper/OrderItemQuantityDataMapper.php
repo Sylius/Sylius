@@ -35,17 +35,11 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
         $this->propertyPathDataMapper = $propertyPathDataMapper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapDataToForms($data, $forms): void
     {
         $this->propertyPathDataMapper->mapDataToForms($data, $forms);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function mapFormsToData($forms, &$data): void
     {
         $formsOtherThanQuantity = [];
