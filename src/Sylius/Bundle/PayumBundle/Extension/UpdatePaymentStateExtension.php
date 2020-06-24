@@ -35,23 +35,14 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onPreExecute(Context $context): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onExecute(Context $context): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onPostExecute(Context $context): void
     {
         $previousStack = $context->getPrevious();

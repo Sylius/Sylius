@@ -20,9 +20,6 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -55,9 +52,6 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface
     {
         return $this->createQueryBuilder('o')
@@ -71,9 +65,6 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createPaginatorForPromotion(string $promotionCode): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')

@@ -21,9 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DemoteUserCommand extends AbstractRoleCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -43,9 +40,6 @@ EOT
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void
     {
         $error = false;

@@ -18,9 +18,6 @@ use Webmozart\Assert\Assert;
 
 final class LocaleConverter implements LocaleConverterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertNameToCode(string $name, ?string $locale = null): string
     {
         $names = Intl::getLocaleBundle()->getLocaleNames($locale ?? 'en');
@@ -31,9 +28,6 @@ final class LocaleConverter implements LocaleConverterInterface
         return $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertCodeToName(string $code, ?string $locale = null): string
     {
         $name = Intl::getLocaleBundle()->getLocaleName($code, $locale ?? 'en');

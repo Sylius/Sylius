@@ -41,9 +41,6 @@ final class FakeChannelContext implements ChannelContextInterface
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         $fakeChannelCode = $this->fakeChannelCodeProvider->getCode($this->getMasterRequest());

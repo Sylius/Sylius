@@ -41,9 +41,6 @@ final class CheckoutStateResolver implements StateResolverInterface
         $this->orderShippingMethodSelectionRequirementChecker = $orderShippingMethodSelectionRequirementChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(OrderInterface $order): void
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);

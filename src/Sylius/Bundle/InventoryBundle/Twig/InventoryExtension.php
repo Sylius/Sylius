@@ -27,9 +27,6 @@ final class InventoryExtension extends AbstractExtension
         $this->helper = $helper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

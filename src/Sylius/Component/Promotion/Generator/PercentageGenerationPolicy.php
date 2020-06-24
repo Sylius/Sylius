@@ -30,9 +30,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
         $this->ratio = $ratio;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGenerationPossible(PromotionCouponGeneratorInstructionInterface $instruction): bool
     {
         $expectedGenerationAmount = $instruction->getAmount();
@@ -41,9 +38,6 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
         return $possibleGenerationAmount >= $expectedGenerationAmount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionInterface $instruction): int
     {
         return $this->calculatePossibleGenerationAmount($instruction);

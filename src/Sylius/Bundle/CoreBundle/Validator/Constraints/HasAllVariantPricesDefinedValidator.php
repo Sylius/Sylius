@@ -23,9 +23,6 @@ use Webmozart\Assert\Assert;
 
 final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function validate($product, Constraint $constraint): void
     {
         /** @var ProductInterface $product */

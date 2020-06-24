@@ -41,9 +41,6 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocaleCode(): string
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();

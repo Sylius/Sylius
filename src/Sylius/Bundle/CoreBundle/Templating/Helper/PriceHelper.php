@@ -29,8 +29,6 @@ class PriceHelper extends Helper
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function getPrice(ProductVariantInterface $productVariant, array $context): int
@@ -43,9 +41,6 @@ class PriceHelper extends Helper
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_calculate_price';

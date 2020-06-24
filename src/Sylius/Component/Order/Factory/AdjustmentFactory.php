@@ -26,17 +26,11 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
         $this->adjustmentFactory = $adjustmentFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): AdjustmentInterface
     {
         return $this->adjustmentFactory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface
     {
         $adjustment = $this->createNew();

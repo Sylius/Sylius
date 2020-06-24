@@ -40,9 +40,6 @@ final class CurrencySetup implements CurrencySetupInterface
         $this->currency = trim($currency);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface
     {
         $code = $this->getCurrencyCodeFromUser($input, $output, $questionHelper);

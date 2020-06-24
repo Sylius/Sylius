@@ -15,9 +15,6 @@ namespace Sylius\Component\Currency\Context;
 
 final class CurrencyNotFoundException extends \RuntimeException
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(?string $message = null, ?\Exception $previousException = null)
     {
         parent::__construct($message ?: 'Currency could not be found!', 0, $previousException);

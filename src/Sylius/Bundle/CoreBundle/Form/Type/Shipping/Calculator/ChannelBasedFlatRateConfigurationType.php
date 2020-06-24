@@ -21,9 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelBasedFlatRateConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -37,17 +34,11 @@ final class ChannelBasedFlatRateConfigurationType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChannelCollectionType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_channel_based_shipping_calculator_flat_rate';

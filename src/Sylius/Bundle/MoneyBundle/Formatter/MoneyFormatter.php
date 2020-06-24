@@ -17,9 +17,6 @@ use Webmozart\Assert\Assert;
 
 final class MoneyFormatter implements MoneyFormatterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function format(int $amount, string $currency, ?string $locale = null): string
     {
         $formatter = new \NumberFormatter($locale ?? 'en', \NumberFormatter::CURRENCY);

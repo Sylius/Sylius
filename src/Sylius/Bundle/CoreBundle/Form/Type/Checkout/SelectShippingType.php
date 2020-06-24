@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class SelectShippingType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('shipments', CollectionType::class, [
@@ -30,9 +27,6 @@ final class SelectShippingType extends AbstractResourceType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_checkout_select_shipping';

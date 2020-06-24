@@ -40,9 +40,6 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         $this->localeProvider = $localeProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

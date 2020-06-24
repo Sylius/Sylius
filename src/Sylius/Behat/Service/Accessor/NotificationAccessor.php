@@ -26,9 +26,6 @@ final class NotificationAccessor implements NotificationAccessorInterface
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMessageElements(): array
     {
         $messageElements = $this->session->getPage()->findAll('css', '.sylius-flash-message');

@@ -45,9 +45,6 @@ final class InstallCommand extends AbstractInstallCommand
         ],
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -61,9 +58,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $suite = $input->getOption('fixture-suite');

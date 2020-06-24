@@ -27,9 +27,6 @@ final class EmailChecker implements EmailCheckerInterface
         $this->spoolDirectory = $spoolDirectory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRecipient(string $recipient): bool
     {
         $this->assertRecipientIsValid($recipient);
@@ -44,9 +41,6 @@ final class EmailChecker implements EmailCheckerInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasMessageTo(string $message, string $recipient): bool
     {
         $this->assertRecipientIsValid($recipient);
@@ -67,9 +61,6 @@ final class EmailChecker implements EmailCheckerInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function countMessagesTo(string $recipient): int
     {
         $this->assertRecipientIsValid($recipient);
@@ -86,9 +77,6 @@ final class EmailChecker implements EmailCheckerInterface
         return $messagesCount;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSpoolDirectory(): string
     {
         return $this->spoolDirectory;

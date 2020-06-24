@@ -22,8 +22,6 @@ use Webmozart\Assert\Assert;
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function validate($order, Constraint $constraint): void

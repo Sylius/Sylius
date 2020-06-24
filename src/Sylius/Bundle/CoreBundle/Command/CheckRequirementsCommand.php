@@ -19,9 +19,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CheckRequirementsCommand extends AbstractInstallCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -34,9 +31,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $fulfilled = $this->getContainer()->get('sylius.installer.checker.sylius_requirements')->check($input, $output);

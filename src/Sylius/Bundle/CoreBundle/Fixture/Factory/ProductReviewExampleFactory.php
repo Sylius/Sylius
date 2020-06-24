@@ -60,9 +60,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ReviewInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -82,9 +79,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         return $productReview;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

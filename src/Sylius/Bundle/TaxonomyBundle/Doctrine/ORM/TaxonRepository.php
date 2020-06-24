@@ -20,9 +20,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findChildren(string $parentCode, ?string $locale = null): array
     {
         return $this->createTranslationBasedQueryBuilder($locale)
@@ -51,9 +48,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneBySlug(string $slug, string $locale): ?TaxonInterface
     {
         return $this->createQueryBuilder('o')
@@ -68,9 +62,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name, string $locale): array
     {
         return $this->createQueryBuilder('o')
@@ -85,9 +76,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findRootNodes(): array
     {
         return $this->createQueryBuilder('o')
@@ -98,9 +86,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
     {
         return $this->createTranslationBasedQueryBuilder($locale)
@@ -112,9 +97,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');

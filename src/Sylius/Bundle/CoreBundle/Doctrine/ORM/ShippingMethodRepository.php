@@ -20,9 +20,6 @@ use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 
 class ShippingMethodRepository extends BaseShippingMethodRepository implements ShippingMethodRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -31,9 +28,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
@@ -42,9 +36,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)

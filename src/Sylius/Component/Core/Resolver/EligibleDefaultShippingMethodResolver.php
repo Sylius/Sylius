@@ -48,9 +48,6 @@ final class EligibleDefaultShippingMethodResolver implements DefaultShippingMeth
         $this->zoneMatcher = $zoneMatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         /** @var CoreShipmentInterface $shipment */

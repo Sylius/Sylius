@@ -24,9 +24,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class SyliusReviewExtension extends AbstractResourceExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);

@@ -30,9 +30,6 @@ final class PromotionSubjectCouponValidator extends ConstraintValidator
         $this->promotionEligibilityChecker = $promotionEligibilityChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var PromotionSubjectCoupon $constraint */

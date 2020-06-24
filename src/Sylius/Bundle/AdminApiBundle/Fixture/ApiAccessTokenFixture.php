@@ -18,17 +18,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ApiAccessTokenFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'access_token';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode

@@ -33,9 +33,6 @@ final class OrderItemType extends AbstractResourceType
         $this->dataMapper = $dataMapper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -47,9 +44,6 @@ final class OrderItemType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_order_item';

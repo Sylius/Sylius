@@ -34,9 +34,6 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         /** @var CoreShipmentInterface $shipment */

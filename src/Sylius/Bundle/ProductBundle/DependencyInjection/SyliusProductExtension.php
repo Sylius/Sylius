@@ -32,9 +32,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusProductExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -47,9 +44,6 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $loader->load('services.xml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));

@@ -40,17 +40,11 @@ final class CartSessionStorage implements CartStorageInterface
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasForChannel(ChannelInterface $channel): bool
     {
         return $this->session->has($this->getCartKeyName($channel));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
@@ -62,17 +56,11 @@ final class CartSessionStorage implements CartStorageInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
         $this->session->set($this->getCartKeyName($channel), $cart->getId());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeForChannel(ChannelInterface $channel): void
     {
         $this->session->remove($this->getCartKeyName($channel));

@@ -27,17 +27,11 @@ class ProductVariantFactory implements ProductVariantFactoryInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): ProductVariantInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForProduct(ProductInterface $product): ProductVariantInterface
     {
         /** @var ProductVariantInterface $variant */

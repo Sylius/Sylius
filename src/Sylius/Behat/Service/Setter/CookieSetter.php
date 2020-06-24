@@ -41,9 +41,6 @@ final class CookieSetter implements CookieSetterInterface
         $this->minkParameters = $minkParameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCookie($name, $value)
     {
         $driver = $this->minkSession->getDriver();

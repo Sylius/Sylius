@@ -18,9 +18,6 @@ use FOS\OAuthServerBundle\Model\ClientInterface;
 
 class ClientManager extends BaseClientManager
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findClientByPublicId($publicId): ?ClientInterface
     {
         return $this->findClientBy(['randomId' => $publicId]);

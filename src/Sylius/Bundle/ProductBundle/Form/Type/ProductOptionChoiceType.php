@@ -31,9 +31,6 @@ final class ProductOptionChoiceType extends AbstractType
         $this->productOptionRepository = $productOptionRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -41,9 +38,6 @@ final class ProductOptionChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -56,17 +50,11 @@ final class ProductOptionChoiceType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_option_choice';

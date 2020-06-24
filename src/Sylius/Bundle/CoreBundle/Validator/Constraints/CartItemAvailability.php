@@ -20,17 +20,11 @@ final class CartItemAvailability extends Constraint
     /** @var string */
     public $message;
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_cart_item_availability';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

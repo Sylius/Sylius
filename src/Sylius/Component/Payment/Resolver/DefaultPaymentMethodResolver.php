@@ -29,8 +29,6 @@ final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolver
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnresolvedDefaultPaymentMethodException
      */
     public function getDefaultPaymentMethod(PaymentInterface $payment): PaymentMethodInterface

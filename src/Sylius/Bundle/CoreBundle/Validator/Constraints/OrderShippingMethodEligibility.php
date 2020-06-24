@@ -20,17 +20,11 @@ final class OrderShippingMethodEligibility extends Constraint
     /** @var string */
     public $message = 'sylius.order.shipping_method_eligibility';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_order_shipping_method_eligibility_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

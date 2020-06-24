@@ -165,9 +165,6 @@ final class GeographicalFixtureTest extends TestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): GeographicalFixture
     {
         return new GeographicalFixture(

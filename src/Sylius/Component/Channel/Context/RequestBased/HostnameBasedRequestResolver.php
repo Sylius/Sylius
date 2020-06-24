@@ -27,9 +27,6 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
         $this->channelRepository = $channelRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findChannel(Request $request): ?ChannelInterface
     {
         return $this->channelRepository->findOneByHostname($request->getHost());

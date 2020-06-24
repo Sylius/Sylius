@@ -21,9 +21,6 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 
 final class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         if ($request->isXmlHttpRequest()) {

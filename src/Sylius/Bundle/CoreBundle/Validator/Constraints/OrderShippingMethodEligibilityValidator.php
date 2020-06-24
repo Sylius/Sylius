@@ -30,8 +30,6 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function validate($order, Constraint $constraint): void

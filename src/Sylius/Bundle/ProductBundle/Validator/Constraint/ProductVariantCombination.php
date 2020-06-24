@@ -20,17 +20,11 @@ final class ProductVariantCombination extends Constraint
     /** @var string */
     public $message = 'sylius.product_variant.combination';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius.validator.product_variant_combination';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

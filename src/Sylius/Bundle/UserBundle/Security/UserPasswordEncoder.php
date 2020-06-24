@@ -27,9 +27,6 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
         $this->encoderFactory = $encoderFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function encode(CredentialsHolderInterface $user): string
     {
         /** @psalm-suppress InvalidArgument */

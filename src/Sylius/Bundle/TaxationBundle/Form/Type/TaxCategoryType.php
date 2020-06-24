@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class TaxCategoryType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -38,9 +35,6 @@ final class TaxCategoryType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_tax_category';

@@ -21,9 +21,6 @@ use Symfony\Component\Validator\Constraints\Type;
 
 final class PriceRangeFilterConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -44,9 +41,6 @@ final class PriceRangeFilterConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -55,9 +49,6 @@ final class PriceRangeFilterConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_filter_price_range_configuration';

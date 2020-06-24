@@ -40,8 +40,6 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts): void

@@ -27,9 +27,6 @@ final class ProductVariantsPricesExtension extends AbstractExtension
         $this->productVariantsPricesHelper = $productVariantsPricesHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

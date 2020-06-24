@@ -22,9 +22,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class CustomerProfileType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -38,9 +35,6 @@ final class CustomerProfileType extends AbstractResourceType
         $builder->addEventSubscriber(new AddUserFormSubscriber(ShopUserType::class));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return BaseCustomerProfileType::class;

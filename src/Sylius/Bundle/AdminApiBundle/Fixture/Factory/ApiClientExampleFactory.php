@@ -40,9 +40,6 @@ class ApiClientExampleFactory extends AbstractExampleFactory
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ClientInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -58,9 +55,6 @@ class ApiClientExampleFactory extends AbstractExampleFactory
         return $client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

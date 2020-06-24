@@ -25,25 +25,16 @@ final class SelectAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'select';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_JSON;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return self::TYPE;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(
         AttributeValueInterface $attributeValue,
         ExecutionContextInterface $context,

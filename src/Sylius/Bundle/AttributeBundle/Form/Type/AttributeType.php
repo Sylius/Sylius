@@ -30,9 +30,6 @@ abstract class AttributeType extends AbstractResourceType
     /** @var FormTypeRegistryInterface */
     protected $formTypeRegistry;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -45,9 +42,6 @@ abstract class AttributeType extends AbstractResourceType
         $this->formTypeRegistry = $formTypeRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

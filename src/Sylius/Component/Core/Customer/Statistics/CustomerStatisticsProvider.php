@@ -33,9 +33,6 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
         $this->channelRepository = $channelRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomerStatistics(CustomerInterface $customer): CustomerStatistics
     {
         $orders = $this->orderRepository->findForCustomerStatistics($customer);

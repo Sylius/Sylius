@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ShippingCountryConfigurationType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -32,9 +29,6 @@ final class ShippingCountryConfigurationType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_shipping_country_configuration';

@@ -31,17 +31,11 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         $this->decoratedFactory = $decoratedFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): PromotionActionInterface
     {
         return $this->decoratedFactory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createFixedDiscount(int $amount, string $channelCode): PromotionActionInterface
     {
         return $this->createAction(
@@ -50,9 +44,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createUnitFixedDiscount(int $amount, string $channelCode): PromotionActionInterface
     {
         return $this->createAction(
@@ -61,9 +52,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createPercentageDiscount(float $percentage): PromotionActionInterface
     {
         return $this->createAction(
@@ -72,9 +60,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createUnitPercentageDiscount(float $percentage, string $channelCode): PromotionActionInterface
     {
         return $this->createAction(
@@ -83,9 +68,6 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createShippingPercentageDiscount(float $percentage): PromotionActionInterface
     {
         return $this->createAction(

@@ -31,17 +31,11 @@ final class SelectAttributeType extends AbstractType
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (is_array($options['configuration'])
@@ -72,9 +66,6 @@ final class SelectAttributeType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -116,9 +107,6 @@ final class SelectAttributeType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_attribute_type_select';

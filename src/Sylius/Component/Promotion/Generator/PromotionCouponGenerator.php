@@ -47,9 +47,6 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         $this->generationPolicy = $generationPolicy;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array
     {
         $generatedCoupons = [];

@@ -43,17 +43,11 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->adjustments = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotal(): int
     {
         $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
@@ -65,17 +59,11 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $total;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderItem(): OrderItemInterface
     {
         return $this->orderItem;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAdjustments(?string $type = null): Collection
     {
         if (null === $type) {
@@ -87,9 +75,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAdjustment(AdjustmentInterface $adjustment): void
     {
         if ($this->hasAdjustment($adjustment)) {
@@ -102,9 +87,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         $adjustment->setAdjustable($this);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeAdjustment(AdjustmentInterface $adjustment): void
     {
         if ($adjustment->isLocked() || !$this->hasAdjustment($adjustment)) {
@@ -117,17 +99,11 @@ class OrderItemUnit implements OrderItemUnitInterface
         $adjustment->setAdjustable(null);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasAdjustment(AdjustmentInterface $adjustment): bool
     {
         return $this->adjustments->contains($adjustment);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAdjustmentsTotal(?string $type = null): int
     {
         if (null === $type) {
@@ -144,9 +120,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $total;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeAdjustments(?string $type = null): void
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
@@ -154,9 +127,6 @@ class OrderItemUnit implements OrderItemUnitInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function recalculateAdjustmentsTotal(): void
     {
         $this->adjustmentsTotal = 0;

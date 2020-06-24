@@ -19,9 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class OrderPromotionCouponType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -33,9 +30,6 @@ final class OrderPromotionCouponType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_admin_api_order_promotion_coupon';

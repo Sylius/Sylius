@@ -28,9 +28,6 @@ final class HasTaxonConfigurationType extends AbstractType
         $this->taxonsToCodesTransformer = $taxonsToCodesTransformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -43,9 +40,6 @@ final class HasTaxonConfigurationType extends AbstractType
         $builder->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_rule_has_taxon_configuration';

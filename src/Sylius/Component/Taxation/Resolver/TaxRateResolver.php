@@ -30,9 +30,6 @@ class TaxRateResolver implements TaxRateResolverInterface
         $this->taxRateRepository = $taxRateRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface
     {
         if (null === $category = $taxable->getTaxCategory()) {

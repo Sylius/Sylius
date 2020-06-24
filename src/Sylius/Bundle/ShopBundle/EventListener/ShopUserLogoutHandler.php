@@ -28,9 +28,6 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
     /** @var CartStorageInterface */
     private $cartStorage;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(
         HttpUtils $httpUtils,
         string $targetUrl,
@@ -43,9 +40,6 @@ final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
         $this->cartStorage = $cartStorage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function onLogoutSuccess(Request $request): Response
     {
         $channel = $this->channelContext->getChannel();

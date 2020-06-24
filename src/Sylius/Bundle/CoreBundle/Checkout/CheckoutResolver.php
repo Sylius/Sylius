@@ -76,9 +76,6 @@ final class CheckoutResolver implements EventSubscriberInterface
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

@@ -79,17 +79,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariantSelectionMethod(): string
     {
         return $this->variantSelectionMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVariantSelectionMethod(?string $variantSelectionMethod): void
     {
         Assert::oneOf(
@@ -101,17 +95,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         $this->variantSelectionMethod = $variantSelectionMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isVariantSelectionMethodChoice(): bool
     {
         return self::VARIANT_SELECTION_CHOICE === $this->variantSelectionMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariantSelectionMethodLabel(): string
     {
         $labels = self::getVariantSelectionMethodLabels();
@@ -119,17 +107,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $labels[$this->variantSelectionMethod];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductTaxons(): Collection
     {
         return $this->productTaxons;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProductTaxon(ProductTaxonInterface $productTaxon): void
     {
         if (!$this->hasProductTaxon($productTaxon)) {
@@ -138,9 +120,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProductTaxon(ProductTaxonInterface $productTaxon): void
     {
         if ($this->hasProductTaxon($productTaxon)) {
@@ -148,17 +127,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasProductTaxon(ProductTaxonInterface $productTaxon): bool
     {
         return $this->productTaxons->contains($productTaxon);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxons(): Collection
     {
         return $this->productTaxons->map(function (ProductTaxonInterface $productTaxon): TaxonInterface {
@@ -166,17 +139,12 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasTaxon(TaxonInterface $taxon): bool
     {
         return $this->getTaxons()->contains($taxon);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
      * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
      */
@@ -185,9 +153,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $this->channels;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChannel(BaseChannelInterface $channel): void
     {
         if (!$this->hasChannel($channel)) {
@@ -195,9 +160,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChannel(BaseChannelInterface $channel): void
     {
         if ($this->hasChannel($channel)) {
@@ -205,57 +167,36 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShortDescription(): ?string
     {
         return $this->getTranslation()->getShortDescription();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShortDescription(?string $shortDescription): void
     {
         $this->getTranslation()->setShortDescription($shortDescription);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReviews(): Collection
     {
         return $this->reviews;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAcceptedReviews(): Collection
     {
         return $this->reviews->filter(function (ReviewInterface $review): bool {
@@ -263,49 +204,31 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addReview(ReviewInterface $review): void
     {
         $this->reviews->add($review);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->removeElement($review);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAverageRating(): ?float
     {
         return $this->averageRating;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getImagesByType(string $type): Collection
     {
         return $this->images->filter(function (ImageInterface $image) use ($type): bool {
@@ -313,34 +236,22 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasImages(): bool
     {
         return !$this->images->isEmpty();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasImage(ImageInterface $image): bool
     {
         return $this->images->contains($image);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addImage(ImageInterface $image): void
     {
         $image->setOwner($this);
         $this->images->add($image);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeImage(ImageInterface $image): void
     {
         if ($this->hasImage($image)) {
@@ -349,9 +260,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getVariantSelectionMethodLabels(): array
     {
         return [
@@ -361,8 +269,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return ProductTranslationInterface
      */
     public function getTranslation(?string $locale = null): TranslationInterface

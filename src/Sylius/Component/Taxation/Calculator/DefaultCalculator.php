@@ -17,9 +17,6 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class DefaultCalculator implements CalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(float $base, TaxRateInterface $rate): float
     {
         if ($rate->isIncludedInPrice()) {

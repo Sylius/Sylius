@@ -26,9 +26,6 @@ final class UserReloader implements UserReloaderInterface
         $this->objectManager = $objectManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reloadUser(UserInterface $user): void
     {
         $this->objectManager->refresh($user);

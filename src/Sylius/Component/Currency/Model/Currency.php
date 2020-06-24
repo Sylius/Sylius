@@ -36,33 +36,21 @@ class Currency implements CurrencyInterface
         return (string) $this->getCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return Intl::getCurrencyBundle()->getCurrencyName($this->getCode());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;

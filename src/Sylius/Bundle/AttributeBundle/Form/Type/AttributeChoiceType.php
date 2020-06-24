@@ -31,9 +31,6 @@ abstract class AttributeChoiceType extends AbstractType
         $this->attributeRepository = $attributeRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
@@ -41,9 +38,6 @@ abstract class AttributeChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -58,17 +52,11 @@ abstract class AttributeChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_attribute_choice';

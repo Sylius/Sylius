@@ -21,9 +21,6 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessH
 
 final class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
         if ($request->isXmlHttpRequest()) {

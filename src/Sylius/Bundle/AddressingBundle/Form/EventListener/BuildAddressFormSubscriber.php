@@ -41,9 +41,6 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         $this->formFactory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

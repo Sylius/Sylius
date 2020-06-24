@@ -52,25 +52,16 @@ class Customer extends BaseCustomer implements CustomerInterface
         $this->addresses = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultAddress(): ?AddressInterface
     {
         return $this->defaultAddress;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultAddress(?AddressInterface $defaultAddress): void
     {
         $this->defaultAddress = $defaultAddress;
@@ -80,9 +71,6 @@ class Customer extends BaseCustomer implements CustomerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAddress(AddressInterface $address): void
     {
         if (!$this->hasAddress($address)) {
@@ -91,42 +79,27 @@ class Customer extends BaseCustomer implements CustomerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeAddress(AddressInterface $address): void
     {
         $this->addresses->removeElement($address);
         $address->setCustomer(null);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasAddress(AddressInterface $address): bool
     {
         return $this->addresses->contains($address);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAddresses(): Collection
     {
         return $this->addresses;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUser(): ?BaseUserInterface
     {
         return $this->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUser(?BaseUserInterface $user): void
     {
         if ($this->user === $user) {
@@ -149,9 +122,6 @@ class Customer extends BaseCustomer implements CustomerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasUser(): bool
     {
         return null !== $this->user;

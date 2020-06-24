@@ -20,9 +20,6 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'cart_quantity';
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
         if (!$subject instanceof CountablePromotionSubjectInterface) {

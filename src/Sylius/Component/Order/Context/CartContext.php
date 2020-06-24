@@ -26,9 +26,6 @@ final class CartContext implements CartContextInterface
         $this->cartFactory = $cartFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCart(): OrderInterface
     {
         return $this->cartFactory->createNew();

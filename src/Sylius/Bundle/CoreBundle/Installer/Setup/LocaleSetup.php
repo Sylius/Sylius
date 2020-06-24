@@ -40,9 +40,6 @@ final class LocaleSetup implements LocaleSetupInterface
         $this->locale = trim($locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
     {
         $code = $this->getLanguageCodeFromUser($input, $output, $questionHelper);

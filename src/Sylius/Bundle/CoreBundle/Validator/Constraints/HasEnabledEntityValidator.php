@@ -38,8 +38,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      * @throws ConstraintDefinitionException
      */

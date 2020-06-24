@@ -24,9 +24,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
@@ -45,9 +42,6 @@ final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return ProductVariantGenerationType::class;

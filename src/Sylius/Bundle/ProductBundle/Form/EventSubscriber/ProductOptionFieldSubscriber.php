@@ -31,9 +31,6 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         $this->variantResolver = $variantResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

@@ -26,9 +26,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelPricingType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -58,9 +55,6 @@ final class ChannelPricingType extends AbstractResourceType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -80,9 +74,6 @@ final class ChannelPricingType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_channel_pricing';

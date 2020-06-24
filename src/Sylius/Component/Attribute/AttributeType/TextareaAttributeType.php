@@ -22,25 +22,16 @@ final class TextareaAttributeType implements AttributeTypeInterface
 {
     public const TYPE = 'textarea';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStorageType(): string
     {
         return AttributeValueInterface::STORAGE_TEXT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return self::TYPE;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(
         AttributeValueInterface $attributeValue,
         ExecutionContextInterface $context,

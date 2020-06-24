@@ -83,9 +83,6 @@ final class RegisterPromotionActionsPassTest extends AbstractCompilerPassTestCas
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterPromotionActionsPass());

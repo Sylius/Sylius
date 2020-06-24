@@ -47,9 +47,6 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         $this->productFilter = $productFilter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {

@@ -36,9 +36,6 @@ final class OrderType extends AbstractResourceType
     /** @var ?ChoiceLoaderInterface */
     private $customerChoiceLoader;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(
         string $dataClass,
         array $validationGroups = [],
@@ -56,9 +53,6 @@ final class OrderType extends AbstractResourceType
         $this->customerChoiceLoader = $customerChoiceLoader;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -97,9 +91,6 @@ final class OrderType extends AbstractResourceType
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_admin_api_order';

@@ -35,9 +35,6 @@ final class CreateClientCommand extends ContainerAwareCommand
         $this->clientManager = $clientManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -62,9 +59,6 @@ EOT
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (null === $this->clientManager) {

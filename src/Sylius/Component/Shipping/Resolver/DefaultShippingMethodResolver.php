@@ -28,9 +28,6 @@ final class DefaultShippingMethodResolver implements DefaultShippingMethodResolv
         $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
     {
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);

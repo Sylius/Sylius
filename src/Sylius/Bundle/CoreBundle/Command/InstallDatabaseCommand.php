@@ -20,9 +20,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallDatabaseCommand extends AbstractInstallCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -36,9 +33,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $suite = $input->getOption('fixture-suite');

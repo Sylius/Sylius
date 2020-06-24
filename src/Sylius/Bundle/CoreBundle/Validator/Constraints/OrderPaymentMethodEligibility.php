@@ -20,17 +20,11 @@ final class OrderPaymentMethodEligibility extends Constraint
     /** @var string */
     public $message = 'sylius.order.payment_method_eligibility';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_order_payment_method_eligibility_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

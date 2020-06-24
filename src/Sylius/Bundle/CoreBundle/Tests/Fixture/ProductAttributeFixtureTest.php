@@ -65,9 +65,6 @@ final class ProductAttributeFixtureTest extends TestCase
         $this->assertPartialConfigurationIsInvalid([['custom' => [['type' => 'not_defined']]]], 'custom.*.type');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductAttributeFixture
     {
         return new ProductAttributeFixture(

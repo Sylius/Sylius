@@ -19,9 +19,6 @@ use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
 
 class ProductTaxonRepository extends EntityRepository implements ProductTaxonRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface
     {
         return $this->createQueryBuilder('o')

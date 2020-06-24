@@ -33,9 +33,6 @@ final class StorageBasedCurrencyContext implements CurrencyContextInterface
         $this->currencyStorage = $currencyStorage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCode(): string
     {
         /** @var ChannelInterface $channel */

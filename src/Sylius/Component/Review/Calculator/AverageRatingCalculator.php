@@ -18,9 +18,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 class AverageRatingCalculator implements ReviewableRatingCalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(ReviewableInterface $reviewable): float
     {
         $sum = 0;

@@ -18,9 +18,6 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 
 class ProductAttributeValueRepository extends EntityRepository implements ProductAttributeValueRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findByJsonChoiceKey(string $choiceKey): array
     {
         return $this->createQueryBuilder('o')

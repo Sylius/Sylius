@@ -41,9 +41,6 @@ final class CompositePromotionEligibilityCheckerPassTest extends AbstractCompile
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CompositePromotionEligibilityCheckerPass());

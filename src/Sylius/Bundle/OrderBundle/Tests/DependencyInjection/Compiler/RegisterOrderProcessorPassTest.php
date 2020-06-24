@@ -97,9 +97,6 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterProcessorsPass());

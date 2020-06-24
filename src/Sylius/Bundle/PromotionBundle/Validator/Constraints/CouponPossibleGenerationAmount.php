@@ -20,17 +20,11 @@ final class CouponPossibleGenerationAmount extends Constraint
     /** @var string */
     public $message = 'sylius.promotion_coupon_generator_instruction.possible_generation_amount';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_coupon_generation_amount_validator';

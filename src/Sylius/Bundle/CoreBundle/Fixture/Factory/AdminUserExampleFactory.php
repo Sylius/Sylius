@@ -63,9 +63,6 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): AdminUserInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -97,9 +94,6 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         return $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

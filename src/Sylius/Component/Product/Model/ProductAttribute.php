@@ -18,9 +18,6 @@ use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 
 class ProductAttribute extends BaseAttribute implements ProductAttributeInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): AttributeTranslationInterface
     {
         return new ProductAttributeTranslation();

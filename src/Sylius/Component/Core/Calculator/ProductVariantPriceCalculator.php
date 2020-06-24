@@ -19,9 +19,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');

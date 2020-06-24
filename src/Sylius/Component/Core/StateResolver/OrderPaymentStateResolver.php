@@ -33,9 +33,6 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

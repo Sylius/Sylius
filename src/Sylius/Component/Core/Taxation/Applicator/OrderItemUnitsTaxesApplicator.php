@@ -42,9 +42,6 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         $this->taxRateResolver = $taxRateResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($order->getItems() as $item) {

@@ -38,9 +38,6 @@ final class ZoneChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -63,17 +60,11 @@ final class ZoneChoiceType extends AbstractType
         $resolver->setAllowedValues('zone_scope', array_keys($this->scopeTypes));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_zone_choice';

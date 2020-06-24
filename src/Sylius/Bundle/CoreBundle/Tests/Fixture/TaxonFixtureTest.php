@@ -96,9 +96,6 @@ final class TaxonFixtureTest extends TestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): TaxonFixture
     {
         return new TaxonFixture(

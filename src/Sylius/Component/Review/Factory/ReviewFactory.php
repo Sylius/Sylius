@@ -28,17 +28,11 @@ final class ReviewFactory implements ReviewFactoryInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): ReviewInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForSubject(ReviewableInterface $subject): ReviewInterface
     {
         /** @var ReviewInterface $review */
@@ -48,9 +42,6 @@ final class ReviewFactory implements ReviewFactoryInterface
         return $review;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForSubjectWithReviewer(ReviewableInterface $subject, ?ReviewerInterface $reviewer): ReviewInterface
     {
         /** @var ReviewInterface $review */

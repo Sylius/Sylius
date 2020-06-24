@@ -28,9 +28,6 @@ final class TaxonFilterConfigurationType extends AbstractType
         $this->taxonsToCodesTransformer = $taxonsToCodesTransformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -44,9 +41,6 @@ final class TaxonFilterConfigurationType extends AbstractType
         $builder->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_action_filter_taxon_configuration';

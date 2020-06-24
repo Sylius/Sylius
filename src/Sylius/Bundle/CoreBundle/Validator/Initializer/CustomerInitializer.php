@@ -27,9 +27,6 @@ final class CustomerInitializer implements ObjectInitializerInterface
         $this->canonicalizer = $canonicalizer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function initialize($object): void
     {
         if ($object instanceof CustomerInterface) {

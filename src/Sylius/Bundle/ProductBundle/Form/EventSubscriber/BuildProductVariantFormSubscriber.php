@@ -34,9 +34,6 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
         $this->disabled = $disabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

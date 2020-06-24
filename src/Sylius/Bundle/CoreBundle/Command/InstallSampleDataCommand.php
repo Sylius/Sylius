@@ -22,9 +22,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallSampleDataCommand extends AbstractInstallCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -38,9 +35,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         /** @var QuestionHelper $questionHelper */

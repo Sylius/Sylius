@@ -31,8 +31,6 @@ use Webmozart\Assert\Assert;
 final class ProductOptionValueCollectionType extends AbstractType
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      * @throws InvalidConfigurationException
      */
@@ -57,9 +55,6 @@ final class ProductOptionValueCollectionType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -69,9 +64,6 @@ final class ProductOptionValueCollectionType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_option_value_collection';

@@ -17,9 +17,6 @@ use Webmozart\Assert\Assert;
 
 final class IntegerDistributor implements IntegerDistributorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function distribute(float $amount, int $numberOfTargets): array
     {
         Assert::true((1 <= $numberOfTargets), 'Number of targets must be bigger than 0.');

@@ -34,9 +34,6 @@ final class CompositeCurrencyContext implements CurrencyContextInterface
         $this->currencyContexts->insert($currencyContext, $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCode(): string
     {
         $lastException = null;

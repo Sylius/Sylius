@@ -35,9 +35,6 @@ final class CompositeOrderProcessor implements OrderProcessorInterface
         $this->orderProcessors->insert($orderProcessor, $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(OrderInterface $order): void
     {
         foreach ($this->orderProcessors as $orderProcessor) {

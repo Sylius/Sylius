@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 final class TaxonFilter implements FilterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function filter(array $items, array $configuration): array
     {
         if (empty($configuration['filters']['taxons_filter']['taxons'])) {

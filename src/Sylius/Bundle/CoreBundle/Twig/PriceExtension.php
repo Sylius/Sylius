@@ -27,9 +27,6 @@ final class PriceExtension extends AbstractExtension
         $this->helper = $helper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [

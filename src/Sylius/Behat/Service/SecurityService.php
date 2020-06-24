@@ -45,9 +45,6 @@ final class SecurityService implements SecurityServiceInterface
         $this->firewallContextName = $firewallContextName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function logIn(UserInterface $user)
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
@@ -62,9 +59,6 @@ final class SecurityService implements SecurityServiceInterface
         $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentToken()
     {
         $serializedToken = $this->session->get($this->sessionTokenVariable);
@@ -76,9 +70,6 @@ final class SecurityService implements SecurityServiceInterface
         return unserialize($serializedToken);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function restoreToken(TokenInterface $token)
     {
         $this->setToken($token);

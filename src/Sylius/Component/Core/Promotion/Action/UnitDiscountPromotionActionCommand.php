@@ -35,8 +35,6 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnexpectedTypeException
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void

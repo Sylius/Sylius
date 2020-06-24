@@ -33,9 +33,6 @@ final class CountryChoiceTypeTest extends TypeTestCase
     /** @var ProphecyInterface|CountryInterface */
     private $poland;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
         $this->countryRepository = $this->prophesize(RepositoryInterface::class);
@@ -55,9 +52,6 @@ final class CountryChoiceTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getExtensions()
     {
         $type = new CountryChoiceType($this->countryRepository->reveal());

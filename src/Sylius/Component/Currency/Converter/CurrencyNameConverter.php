@@ -17,9 +17,6 @@ use Symfony\Component\Intl\Intl;
 
 class CurrencyNameConverter implements CurrencyNameConverterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertToCode(string $name, ?string $locale = null): string
     {
         $names = Intl::getCurrencyBundle()->getCurrencyNames($locale ?? 'en');

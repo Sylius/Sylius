@@ -20,17 +20,11 @@ class OrderSequence extends BaseOrderSequence implements OrderSequenceInterface
     /** @var int */
     protected $version = 1;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVersion(): ?int
     {
         return $this->version;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVersion(?int $version): void
     {
         $this->version = $version;

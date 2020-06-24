@@ -41,9 +41,6 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CompositePromotionCouponEligibilityCheckerPass());

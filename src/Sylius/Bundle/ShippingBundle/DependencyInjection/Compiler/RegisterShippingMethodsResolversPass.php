@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterShippingMethodsResolversPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.shipping_methods_resolver')) {

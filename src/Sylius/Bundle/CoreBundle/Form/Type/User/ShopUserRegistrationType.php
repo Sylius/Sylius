@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ShopUserRegistrationType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,9 +32,6 @@ final class ShopUserRegistrationType extends AbstractResourceType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_shop_user_registration';

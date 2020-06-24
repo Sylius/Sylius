@@ -48,9 +48,6 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ProductAssociationTypeInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -69,9 +66,6 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
         return $productAssociationType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

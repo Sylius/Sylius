@@ -17,17 +17,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ShopUserFixture extends AbstractResourceFixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'shop_user';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         $resourceNode

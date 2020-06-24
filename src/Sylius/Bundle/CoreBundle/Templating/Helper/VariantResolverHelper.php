@@ -33,9 +33,6 @@ class VariantResolverHelper extends Helper
         return $this->productVariantResolver->getVariant($product);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_resolve_variant';

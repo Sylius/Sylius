@@ -21,17 +21,11 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /** @var BaseOrderInterface|null */
     protected $order;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrder(): ?BaseOrderInterface
     {
         return $this->order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOrder(?BaseOrderInterface $order): void
     {
         $this->order = $order;

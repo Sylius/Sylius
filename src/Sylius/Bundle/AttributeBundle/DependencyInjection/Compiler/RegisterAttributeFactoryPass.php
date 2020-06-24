@@ -20,9 +20,6 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class RegisterAttributeFactoryPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('sylius.registry.attribute_type')) {

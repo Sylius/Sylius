@@ -37,9 +37,6 @@ final class ZoneChoiceTypeTest extends TypeTestCase
     /** @var ProphecyInterface|ZoneInterface */
     private $zoneShippingScope;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp()
     {
         $this->zoneRepository = $this->prophesize(RepositoryInterface::class);
@@ -65,9 +62,6 @@ final class ZoneChoiceTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getExtensions()
     {
         $scopeTypes = [

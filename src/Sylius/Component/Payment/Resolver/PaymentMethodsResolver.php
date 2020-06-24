@@ -26,17 +26,11 @@ final class PaymentMethodsResolver implements PaymentMethodsResolverInterface
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(PaymentInterface $payment): array
     {
         return $this->paymentMethodRepository->findBy(['enabled' => true]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(PaymentInterface $payment): bool
     {
         return true;

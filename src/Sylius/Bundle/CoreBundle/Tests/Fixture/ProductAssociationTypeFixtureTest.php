@@ -56,9 +56,6 @@ final class ProductAssociationTypeFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['code' => 'code']]]], 'custom.*.code');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductAssociationTypeFixture
     {
         return new ProductAssociationTypeFixture(

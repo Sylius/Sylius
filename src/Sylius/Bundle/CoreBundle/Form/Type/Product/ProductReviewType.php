@@ -24,9 +24,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewType extends ReviewType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -43,9 +40,6 @@ final class ProductReviewType extends ReviewType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_review';

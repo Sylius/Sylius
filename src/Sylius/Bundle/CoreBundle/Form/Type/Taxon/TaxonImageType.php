@@ -17,9 +17,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 
 final class TaxonImageType extends ImageType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_taxon_image';

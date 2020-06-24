@@ -25,8 +25,6 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
     public const TYPE = 'has_taxon';
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

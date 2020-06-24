@@ -57,9 +57,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -101,9 +98,6 @@ class AddressExampleFactory extends AbstractExampleFactory
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): AddressInterface
     {
         $options = $this->optionsResolver->resolve($options);

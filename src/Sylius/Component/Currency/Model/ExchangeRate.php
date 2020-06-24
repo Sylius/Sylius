@@ -36,17 +36,11 @@ class ExchangeRate implements ExchangeRateInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatio(): ?float
     {
         /**
@@ -59,8 +53,6 @@ class ExchangeRate implements ExchangeRateInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function setRatio(?float $ratio): void
@@ -68,33 +60,21 @@ class ExchangeRate implements ExchangeRateInterface
         $this->ratio = $ratio;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSourceCurrency(): ?CurrencyInterface
     {
         return $this->sourceCurrency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSourceCurrency(CurrencyInterface $currency): void
     {
         $this->sourceCurrency = $currency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargetCurrency(): ?CurrencyInterface
     {
         return $this->targetCurrency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTargetCurrency(CurrencyInterface $currency): void
     {
         $this->targetCurrency = $currency;

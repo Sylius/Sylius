@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Taxation\Exception;
 
 final class UnsupportedTaxCalculationStrategyException extends \RuntimeException
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __construct()
     {
         parent::__construct('Unsupported tax calculation strategy!');

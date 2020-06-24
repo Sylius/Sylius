@@ -35,9 +35,6 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         $this->userClass = $userClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

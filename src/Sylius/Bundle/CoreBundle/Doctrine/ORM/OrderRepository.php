@@ -31,9 +31,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /** @var AssociationHydrator */
     protected $associationHydrator;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
@@ -41,9 +38,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -56,9 +50,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
         return $this->createListQueryBuilder()
@@ -67,9 +58,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -82,9 +70,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByCustomer(CustomerInterface $customer): array
     {
         return $this->createByCustomerIdQueryBuilder($customer->getId())
@@ -93,9 +78,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findForCustomerStatistics(CustomerInterface $customer): array
     {
         return $this->createQueryBuilder('o')
@@ -108,9 +90,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneForPayment($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -148,9 +127,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function countByCustomer(CustomerInterface $customer): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -164,9 +140,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByNumberAndCustomer(string $number, CustomerInterface $customer): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -179,9 +152,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -196,9 +166,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findLatestCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
@@ -215,9 +182,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalSalesForChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -244,9 +208,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function countFulfilledByChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -273,9 +234,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findLatestInChannel(int $count, ChannelInterface $channel): array
     {
         return $this->createQueryBuilder('o')
@@ -290,9 +248,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate): array
     {
         return $this->createQueryBuilder('o')
@@ -309,9 +264,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartForSummary($id): ?OrderInterface
     {
         /** @var OrderInterface $order */
@@ -343,9 +295,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartForAddressing($id): ?OrderInterface
     {
         /** @var OrderInterface $order */
@@ -368,9 +317,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartForSelectingShipping($id): ?OrderInterface
     {
         /** @var OrderInterface $order */
@@ -393,9 +339,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findCartForSelectingPayment($id): ?OrderInterface
     {
         /** @var OrderInterface $order */

@@ -146,9 +146,6 @@ final class PromotionFixtureTest extends TestCase
         ]]]]]], 'custom.*.actions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): PromotionFixture
     {
         return new PromotionFixture(

@@ -38,9 +38,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         $this->zoneRepository = $zoneRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
         $zones = [];
@@ -61,9 +58,6 @@ final class ZoneMatcher implements ZoneMatcherInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function matchAll(AddressInterface $address, ?string $scope = null): array
     {
         $zones = [];

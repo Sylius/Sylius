@@ -89,81 +89,51 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->countries = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBaseCurrency(): ?CurrencyInterface
     {
         return $this->baseCurrency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBaseCurrency(?CurrencyInterface $baseCurrency): void
     {
         $this->baseCurrency = $baseCurrency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLocale(): ?LocaleInterface
     {
         return $this->defaultLocale;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultLocale(?LocaleInterface $defaultLocale): void
     {
         $this->defaultLocale = $defaultLocale;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultTaxZone(): ?ZoneInterface
     {
         return $this->defaultTaxZone;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultTaxZone(?ZoneInterface $defaultTaxZone): void
     {
         $this->defaultTaxZone = $defaultTaxZone;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxCalculationStrategy(): ?string
     {
         return $this->taxCalculationStrategy;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTaxCalculationStrategy(?string $taxCalculationStrategy): void
     {
         $this->taxCalculationStrategy = $taxCalculationStrategy;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencies(): Collection
     {
         return $this->currencies;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addCurrency(CurrencyInterface $currency): void
     {
         if (!$this->hasCurrency($currency)) {
@@ -171,9 +141,6 @@ class Channel extends BaseChannel implements ChannelInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeCurrency(CurrencyInterface $currency): void
     {
         if ($this->hasCurrency($currency)) {
@@ -181,25 +148,16 @@ class Channel extends BaseChannel implements ChannelInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasCurrency(CurrencyInterface $currency): bool
     {
         return $this->currencies->contains($currency);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocales(): Collection
     {
         return $this->locales;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addLocale(LocaleInterface $locale): void
     {
         if (!$this->hasLocale($locale)) {
@@ -207,9 +165,6 @@ class Channel extends BaseChannel implements ChannelInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeLocale(LocaleInterface $locale): void
     {
         if ($this->hasLocale($locale)) {
@@ -217,9 +172,6 @@ class Channel extends BaseChannel implements ChannelInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasLocale(LocaleInterface $locale): bool
     {
         return $this->locales->contains($locale);
@@ -249,81 +201,51 @@ class Channel extends BaseChannel implements ChannelInterface
         return $this->countries->contains($country);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getThemeName(): ?string
     {
         return $this->themeName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setThemeName(?string $themeName): void
     {
         $this->themeName = $themeName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContactEmail(?string $contactEmail): void
     {
         $this->contactEmail = $contactEmail;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isSkippingShippingStepAllowed(): bool
     {
         return $this->skippingShippingStepAllowed;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSkippingShippingStepAllowed(bool $skippingShippingStepAllowed): void
     {
         $this->skippingShippingStepAllowed = $skippingShippingStepAllowed;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isSkippingPaymentStepAllowed(): bool
     {
         return $this->skippingPaymentStepAllowed;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSkippingPaymentStepAllowed(bool $skippingPaymentStepAllowed): void
     {
         $this->skippingPaymentStepAllowed = $skippingPaymentStepAllowed;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAccountVerificationRequired(): bool
     {
         return $this->accountVerificationRequired;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;

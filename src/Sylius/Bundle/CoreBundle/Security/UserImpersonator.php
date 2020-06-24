@@ -42,9 +42,6 @@ final class UserImpersonator implements UserImpersonatorInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function impersonate(UserInterface $user): void
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());

@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Exception;
 
 final class MissingChannelConfigurationException extends \RuntimeException
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(string $message, ?\Exception $previousException = null)
     {
         parent::__construct($message, 0, $previousException);

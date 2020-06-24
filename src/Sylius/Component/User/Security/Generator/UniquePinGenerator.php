@@ -43,9 +43,6 @@ final class UniquePinGenerator implements GeneratorInterface
         $this->uniquenessChecker = $uniquenessChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(): string
     {
         do {

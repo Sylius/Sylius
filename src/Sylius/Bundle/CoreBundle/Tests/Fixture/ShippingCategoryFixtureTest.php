@@ -56,9 +56,6 @@ final class ShippingCategoryFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Lorem ipsum']]]], 'custom.*.description');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ShippingCategoryFixture
     {
         return new ShippingCategoryFixture(
