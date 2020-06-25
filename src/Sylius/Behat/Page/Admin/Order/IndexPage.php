@@ -38,6 +38,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('filter_channel')->selectOption($channelName);
     }
 
+    public function chooseShippingMethodFilter(string $methodName): void
+    {
+        $this->getElement('filter_shipping_method')->selectOption($methodName);
+    }
+
     public function chooseCurrencyFilter(string $currencyName): void
     {
         $this->getElement('filter_currency')->selectOption($currencyName);
@@ -57,6 +62,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',
+            'filter_shipping_method' => '#criteria_shipping_method',
             'filter_currency' => '#criteria_total_currency',
         ]);
     }
