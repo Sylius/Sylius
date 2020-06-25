@@ -63,7 +63,7 @@
             <itemOperation name="add_item">
                 <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Cancels Order</attribute>
+                    <attribute name="summary">Add Item to cart</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/orders/{id}/items</attribute>
