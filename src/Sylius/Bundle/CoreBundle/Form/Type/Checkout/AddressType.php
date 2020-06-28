@@ -69,11 +69,11 @@ final class AddressType extends AbstractResourceType
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, static function (FormEvent $event): void {
                 $form = $event->getForm();
+
+                Assert::isInstanceOf($event->getData(), OrderInterface::class);
+
                 /** @var OrderInterface $order */
                 $order = $event->getData();
-
-                Assert::isInstanceOf($order, OrderInterface::class);
-
                 $channel = $order->getChannel();
 
                 $form
@@ -90,11 +90,11 @@ final class AddressType extends AbstractResourceType
             })
             ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event): void {
                 $form = $event->getForm();
+
+                Assert::isInstanceOf($event->getData(), OrderInterface::class);
+
                 /** @var OrderInterface $order */
                 $order = $event->getData();
-
-                Assert::isInstanceOf($order, OrderInterface::class);
-
                 $areAddressesDifferent = $this->areAddressesDifferent($order->getBillingAddress(), $order->getShippingAddress());
 
                 $form->get('differentBillingAddress')->setData($areAddressesDifferent);
