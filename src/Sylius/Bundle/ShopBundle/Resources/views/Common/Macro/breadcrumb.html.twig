@@ -1,0 +1,31 @@
+{% macro breadcrumb(crumbs = {}, prependHome = true) %}
+    {% from _self import breadcrumb_current_crumb, breadcrumb_crumb %}
+    {% if prependHome %}
+        {% set crumbs = [
+            {
+                url: path('sylius_shop_homepage'),
+                name: 'sylius.ui.home'|trans
+            }
+        ]|merge(crumbs) %}
+    {% endif %}
+    {% if crumbs|length %}
+    <div class="ui breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {% for crumb in crumbs %}
+            {% if loop.last %}
+                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <strong class="active section" itemprop="name">{{ crumb.name }}</strong>
+                    <meta itemprop="position" content="{{ loop.index }}">
+                </span>
+            {% else %}
+                <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a class="section" href="{{ crumb.url }}" itemprop="item">
+                        <span itemprop="name">{{ crumb.name }}</span>
+                    </a>
+                    <meta itemprop="position" content="{{ loop.index }}">
+                </span>
+                <div class="divider"> / </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endmacro %}
