@@ -3,11 +3,10 @@
 {% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
-    </div>
+    {% from '@SyliusShop/Common/Macro/breadcrumb.html.twig' import breadcrumb %}
+    {{ breadcrumb([{
+        name: 'sylius.ui.my_account'|trans
+    }]) }}
 {% endblock %}
 
 {% block subcontent %}

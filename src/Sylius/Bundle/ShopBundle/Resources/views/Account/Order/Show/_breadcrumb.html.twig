@@ -1,11 +1,11 @@
-<div class="ui breadcrumb">
-    <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-    <div class="divider"> / </div>
-    <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-    <div class="divider"> / </div>
-    <a href="{{ path('sylius_shop_account_order_index') }}" class="section">{{ 'sylius.ui.order_history'|trans }}</a>
-    <div class="divider"> / </div>
-    <div class="active section">
-        {{ 'sylius.ui.order'|trans }} <span id="number" {{ sylius_test_html_attribute('order-number') }}>#{{ order.number }}</span>
-    </div>
-</div>
+{% from '@SyliusShop/Common/Macro/breadcrumb.html.twig' import breadcrumb %}
+{% set current_crumb_name %}{{ 'sylius.ui.order'|trans }} <span id="number" {{ sylius_test_html_attribute('order-number') }}>#{{ order.number }}</span>{% endset %}
+{{ breadcrumb([{
+    url: path('sylius_shop_account_dashboard'),
+    name: 'sylius.ui.my_account'|trans
+}, {
+    url: path('sylius_shop_account_order_index'),
+    name: 'sylius.ui.order_history'|trans
+}, {
+    name: current_crumb_name
+}]) }}
