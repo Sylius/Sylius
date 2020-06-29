@@ -62,6 +62,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I added (product "[^"]+") to the (cart)$/
      * @When /^I (?:add|added) (this product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
@@ -78,6 +79,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I remove (product "[^"]+") from the (cart)$/
+     */
+    public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    {
+        $this->removeProductFromCart($product, $tokenValue);
+    }
+
+    /**
      * @Then my cart should be cleared
      */
     public function myCartShouldBeCleared(): void
@@ -88,6 +97,18 @@ final class CartContext implements Context
             $this->responseChecker->isDeletionSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
+    }
+
+    /**
+     * @Then /^my (cart)'s total should be ("[^"]+")$/
+     */
+    public function myCartSTotalShouldBe(string $tokenValue, int $total): void
+    {
+        $response = $this->cartsClient->show($tokenValue);
+
+        $responseTotal = $this->responseChecker->getValue($response, 'total');
+
+        Assert::same($total, (int) $responseTotal);
     }
 
     /**
@@ -176,6 +197,18 @@ final class CartContext implements Context
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+
+        $request->updateContent([
+            'productCode' => $product->getCode(),
+            'quantity' => $quantity,
+        ]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function removeProductFromCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
+    {
+        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
         $request->updateContent([
             'productCode' => $product->getCode(),
