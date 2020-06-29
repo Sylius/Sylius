@@ -71,5 +71,9 @@
             <tag name="api_platform.data_transformer"/>
         </service>
 
+        <service class="Sylius\Bundle\ApiBundle\DataTransformer\RemoveItemFromCartDataTransformer" id="sylius_bundle_api.data_transformer.remove_item_from_cart_data_transformer">
+            <tag name="api_platform.data_transformer"/>
+        </service>
+
     </services>
 </container>
