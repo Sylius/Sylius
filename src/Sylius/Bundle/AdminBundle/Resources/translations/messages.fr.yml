@@ -47,6 +47,8 @@ sylius:
                     header: Ventes
                     orders: Commandes
     ui:
+        product:
+            product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
         gateway:
             no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
         sales_summary: Récapitulatif des ventes
