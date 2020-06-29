@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
@@ -54,23 +55,26 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         $this->variantResolver = $variantResolver;
     }
 
-    public function __invoke(RemoveItemFromCart $addItemToCart): OrderInterface
+    public function __invoke(RemoveItemFromCart $removeItemFromCart): OrderInterface
     {
-        $product = $this->productRepository->findOneByCode($addItemToCart->productCode);
+        $product = $this->productRepository->findOneByCode($removeItemFromCart->productCode);
 
         Assert::notNull($product);
 
-        /** @var OrderInterface $cart */
+        /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findOneBy([
             'state' => OrderInterface::STATE_CART,
-            'tokenValue' => $addItemToCart->tokenValue,
+            'tokenValue' => $removeItemFromCart->tokenValue,
         ]);
 
         Assert::notNull($cart);
 
         $orderItemUnits = $cart->getItemUnitsByVariant($this->variantResolver->getVariant($product));
 
-        $this->orderModifier->removeFromOrder($cart, $orderItemUnits->first()->getOrderItem());
+        /** @var OrderItemUnitInterface $orderItemUnit */
+        $orderItemUnit = $orderItemUnits->first();
+
+        $this->orderModifier->removeFromOrder($cart, $orderItemUnit->getOrderItem());
 
         $this->orderProcessor->process($cart);
 

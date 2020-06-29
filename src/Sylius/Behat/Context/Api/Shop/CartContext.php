@@ -62,7 +62,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I added (product "[^"]+") to the (cart)$/
+     * @Given /^I add ("[^"]+" product) to the (cart)$/
      * @When /^I (?:add|added) (this product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
@@ -107,7 +107,6 @@ final class CartContext implements Context
         $response = $this->cartsClient->show($tokenValue);
 
         $responseTotal = $this->responseChecker->getValue($response, 'total');
-
         Assert::same($total, (int) $responseTotal);
     }
 
@@ -206,14 +205,11 @@ final class CartContext implements Context
         $this->cartsClient->executeCustomRequest($request);
     }
 
-    private function removeProductFromCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
+    private function removeProductFromCart(ProductInterface $product, string $tokenValue): void
     {
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
-        $request->updateContent([
-            'productCode' => $product->getCode(),
-            'quantity' => $quantity,
-        ]);
+        $request->updateContent(['productCode' => $product->getCode()]);
 
         $this->cartsClient->executeCustomRequest($request);
     }

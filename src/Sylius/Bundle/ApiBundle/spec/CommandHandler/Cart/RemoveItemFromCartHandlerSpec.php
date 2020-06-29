@@ -82,7 +82,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         $this(RemoveItemFromCart::removeFromData('TOKEN', 'PRODUCT_CODE'))->shouldReturn($cart);
     }
 
-    function it_throws_an_exception_if_product_is_not_found(
+    function it_throws_an_exception_if_product_was_not_found(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository
     ): void {
@@ -99,7 +99,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_cart_is_not_found(
+    function it_throws_an_exception_if_cart_was_not_found(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository,
         ProductInterface $product,

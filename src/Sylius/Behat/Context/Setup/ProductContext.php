@@ -128,7 +128,6 @@ final class ProductContext implements Context
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->productImageFactory = $productImageFactory;
         $this->objectManager = $objectManager;
-        $this->productManager = $productManager;
         $this->productVariantGenerator = $productVariantGenerator;
         $this->defaultVariantResolver = $defaultVariantResolver;
         $this->imageUploader = $imageUploader;

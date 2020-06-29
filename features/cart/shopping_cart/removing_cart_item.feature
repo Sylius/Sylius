@@ -26,6 +26,6 @@ Feature: Removing cart item from cart
     @ui @api
     Scenario: Checking cart's total after removing one item
         Given the store has a product "T-shirt strawberry" priced at "$17.22"
-        And I add this product to the cart
+        And I added product "T-shirt strawberry" to the cart
         When I remove product "T-shirt banana" from the cart
         Then my cart's total should be "$17.22"
