@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-04-17T13:07:54Z
+
+I started it from master, but then I noticed the issue has the "bug" label, so I switched to 1.7.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-25T08:17:15Z
+
+Hey Victor :wave:
+
+Could you rebase your fix to the newest master? Also, there is a small issue with the psalm checks.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-06-28T12:20:01Z
+
+@lchrusciel done!
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-30T08:08:30Z
+
+Thanks, Victor! :tada:
