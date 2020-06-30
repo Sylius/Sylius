@@ -9,6 +9,7 @@
         <directory name="src" />
         <ignoreFiles>
             <file name="src/Sylius/Bundle/CoreBundle/Application/Kernel.php" />
+            <file name="src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Doctrine/ORM/SubresourceDataProvider.php" />
 
             <directory name="src/Sylius/Behat" />
 
