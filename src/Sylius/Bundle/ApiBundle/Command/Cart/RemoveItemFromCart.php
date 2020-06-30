@@ -22,16 +22,16 @@ final class RemoveItemFromCart
      * @var string
      * @psalm-immutable
      */
-    public $productCode;
+    public $orderItemId;
 
-    public function __construct(string $productCode)
+    public function __construct(string $orderItemId)
     {
-        $this->productCode = $productCode;
+        $this->orderItemId = $orderItemId;
     }
 
-    public static function removeFromData(string $tokenValue, string $productCode): self
+    public static function removeFromData(string $tokenValue, string $orderItemId): self
     {
-        $command = new self($productCode);
+        $command = new self($orderItemId);
 
         $command->tokenValue = $tokenValue;
 

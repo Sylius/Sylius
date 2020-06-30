@@ -63,7 +63,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->addOrderBy('o.checkoutCompletedAt', 'DESC')
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function findOneByNumber(string $number): ?OrderInterface

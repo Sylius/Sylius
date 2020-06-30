@@ -13,17 +13,11 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -32,15 +26,13 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 {
     function let(
-        OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
+        OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderProcessorInterface $orderProcessor,
         ProductVariantResolverInterface $variantResolver
     ): void {
         $this->beConstructedWith(
-            $orderRepository,
-            $productRepository,
+            $orderItemRepository,
             $orderModifier,
             $orderProcessor,
             $variantResolver
@@ -52,68 +44,72 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         $this->shouldImplement(MessageHandlerInterface::class);
     }
 
-    function it_removes_simple_product_from_cart(
-        OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
+    function it_removes_order_item_from_cart(
+        OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderProcessorInterface $orderProcessor,
-        ProductVariantResolverInterface $variantResolver,
-        ProductInterface $product,
         OrderInterface $cart,
-        ProductVariantInterface $productVariant,
-        OrderItemUnitInterface $cartItemUnit,
         OrderItemInterface $cartItem
     ): void {
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn($product);
-        $orderRepository->findOneBy(['state' => OrderInterface::STATE_CART, 'tokenValue' => 'TOKEN'])->willReturn($cart);
+        $orderItemRepository->findOneByIdAndCartTokenValue(
+            'ORDER_ITEM_ID',
+            'TOKEN_VALUE'
+        )->willReturn($cartItem);
 
-        $variantResolver->getVariant($product)->willReturn($productVariant);
+        $cartItem->getOrder()->willReturn($cart);
 
-        $orderItemUnits = new ArrayCollection([$cartItemUnit->getWrappedObject()]);
-
-        $cartItemUnit->getOrderItem()->willReturn($cartItem);
-
-        $cart->getItemUnitsByVariant($productVariant)->willReturn($orderItemUnits);
+        $cart->getTokenValue()->willReturn('TOKEN_VALUE');
 
         $orderModifier->removeFromOrder($cart, $cartItem)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(RemoveItemFromCart::removeFromData('TOKEN', 'PRODUCT_CODE'))->shouldReturn($cart);
+        $this(RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID'))->shouldReturn($cart);
     }
 
-    function it_throws_an_exception_if_product_was_not_found(
-        OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository
+    function it_throws_an_exception_if_order_item_was_not_found(
+        OrderItemRepository $orderItemRepository,
+        OrderItemInterface $cartItem
     ): void {
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn(null);
+        $orderItemRepository->findOneByIdAndCartTokenValue(
+            'ORDER_ITEM_ID',
+            'TOKEN_VALUE'
+        )->willReturn(null);
 
-        $orderRepository->findOneBy([
-            'state' => OrderInterface::STATE_CART,
-            'tokenValue' => 'TOKEN',
-        ])->shouldNotBeCalled();
+        $cartItem->getOrder()->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [RemoveItemFromCart::removeFromData('TOKEN', 'PRODUCT_CODE')])
+            ->during(
+                '__invoke',
+                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')]
+            )
         ;
     }
 
-    function it_throws_an_exception_if_cart_was_not_found(
-        OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
-        ProductInterface $product,
-        ProductVariantInterface $productVariant,
+    function it_throws_an_exception_if_cart_token_value_was_not_properly(
+        OrderItemRepository $orderItemRepository,
+        OrderModifierInterface $orderModifier,
+        OrderItemInterface $cartItem,
         OrderInterface $cart
     ): void {
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn($product);
-        $orderRepository->findOneBy(['state' => OrderInterface::STATE_CART, 'tokenValue' => 'TOKEN'])->willReturn(null);
+        $orderItemRepository->findOneByIdAndCartTokenValue(
+            'ORDER_ITEM_ID',
+            'TOKEN_VALUE'
+        )->willReturn($cartItem);
 
-        $cart->getItemUnitsByVariant($productVariant)->shouldNotBeCalled();
+        $cartItem->getOrder()->willReturn($cart);
+
+        $cart->getTokenValue()->willReturn('WRONG_TOKEN_VALUE_');
+
+        $orderModifier->removeFromOrder(null, $cartItem)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [RemoveItemFromCart::removeFromData('TOKEN', 'PRODUCT_CODE')])
+            ->during(
+                '__invoke',
+                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')]
+            )
         ;
     }
 }

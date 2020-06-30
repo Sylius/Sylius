@@ -34,4 +34,19 @@ class OrderItemRepository extends EntityRepository implements OrderItemRepositor
             ->getOneOrNullResult()
         ;
     }
+
+    public function findOneByIdAndCartTokenValue($id, $tokenValue): ?OrderItemInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'cart')
+            ->andWhere('cart.state = :state')
+            ->andWhere('o.id = :id')
+            ->andWhere('cart.tokenValue = :tokenValue')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('id', $id)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

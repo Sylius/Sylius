@@ -16,7 +16,7 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart">
-        <attribute name="productCode">
+        <attribute name="orderItemId">
             <group>cart:remove_item</group>
         </attribute>
     </class>

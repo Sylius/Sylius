@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -83,7 +84,17 @@ final class CartContext implements Context
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $this->removeProductFromCart($product, $tokenValue);
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        foreach ($items as $item) {
+            $pathElements = explode('/', $item['variant']['product']);
+
+            $productCode = $pathElements[array_key_last($pathElements)];
+
+            if ($product->getCode() === $productCode) {
+                $this->removeOrderItemFromCart((string) $item['id'], $tokenValue);
+            }
+        }
     }
 
     /**
@@ -205,11 +216,11 @@ final class CartContext implements Context
         $this->cartsClient->executeCustomRequest($request);
     }
 
-    private function removeProductFromCart(ProductInterface $product, string $tokenValue): void
+    private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
-        $request->updateContent(['productCode' => $product->getCode()]);
+        $request->updateContent(['orderItemId' => $orderItemId]);
 
         $this->cartsClient->executeCustomRequest($request);
     }
