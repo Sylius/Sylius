@@ -41,6 +41,12 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_countries_provinces_get_subresource">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
