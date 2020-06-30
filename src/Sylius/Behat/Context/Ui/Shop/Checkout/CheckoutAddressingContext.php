@@ -378,6 +378,38 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Then different shipping address should be checked
+     */
+    public function differentShippingAddressShouldBeChecked(): void
+    {
+        Assert::true($this->addressPage->isDifferentShippingAddressChecked());
+    }
+
+    /**
+     * @Then different shipping address should not be checked
+     */
+    public function differentShippingAddressShouldNotBeChecked(): void
+    {
+        Assert::false($this->addressPage->isDifferentShippingAddressChecked());
+    }
+
+    /**
+     * @Then shipping address should be visible
+     */
+    public function shippingAddressShouldBeVisible(): void
+    {
+        Assert::true($this->addressPage->isShippingAddressVisible());
+    }
+
+    /**
+     * @Then shipping address should not be visible
+     */
+    public function shippingAddressShouldNotBeVisible(): void
+    {
+        Assert::false($this->addressPage->isShippingAddressVisible());
+    }
+
+    /**
      * @Then /^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
      */
     public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $type)
