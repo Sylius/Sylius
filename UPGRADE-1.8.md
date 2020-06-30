@@ -90,3 +90,14 @@ The later is being decorated by `sylius.context.channel.cached` which caches the
 
 1. A serialization group has been added to the route `sylius_admin_ajax_product_index` to avoid an infinite loop, or a
 time out during this ajax request (previously no serialization group was defined on this route).
+
+## Special attention
+
+### Translations
+
+Some translations have changed, you may want to search for them in your project:
+
+- `sylius.email.shipment_confirmation.tracking_code` has been removed.
+- `sylius.email.shipment_confirmation.you_can_check_its_location` has been removed.
+- `sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code` has been added instead of the two above.
+
