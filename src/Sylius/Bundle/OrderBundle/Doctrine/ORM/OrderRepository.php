@@ -55,6 +55,17 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
+    public function findLatestCart(): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->addOrderBy('o.checkoutCompletedAt', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findOneByNumber(string $number): ?OrderInterface
     {
         return $this->createQueryBuilder('o')

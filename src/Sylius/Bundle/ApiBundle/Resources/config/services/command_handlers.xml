@@ -41,5 +41,12 @@
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="messenger.message_handler" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
+            <argument type="service" id="sylius.repository.order_item"/>
+            <argument type="service" id="sylius.order_modifier" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="messenger.message_handler" />
+        </service>
     </services>
 </container>

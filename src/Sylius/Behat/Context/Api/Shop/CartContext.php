@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -62,6 +63,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I add ("[^"]+" product) to the (cart)$/
      * @When /^I (?:add|added) (this product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
@@ -78,6 +80,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I remove (product "[^"]+") from the (cart)$/
+     */
+    public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        foreach ($items as $item) {
+            $pathElements = explode('/', $item['variant']['product']);
+
+            $productCode = $pathElements[array_key_last($pathElements)];
+
+            if ($product->getCode() === $productCode) {
+                $this->removeOrderItemFromCart((string) $item['id'], $tokenValue);
+            }
+        }
+    }
+
+    /**
      * @Then my cart should be cleared
      */
     public function myCartShouldBeCleared(): void
@@ -88,6 +108,17 @@ final class CartContext implements Context
             $this->responseChecker->isDeletionSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
+    }
+
+    /**
+     * @Then /^my (cart)'s total should be ("[^"]+")$/
+     */
+    public function myCartSTotalShouldBe(string $tokenValue, int $total): void
+    {
+        $response = $this->cartsClient->show($tokenValue);
+
+        $responseTotal = $this->responseChecker->getValue($response, 'total');
+        Assert::same($total, (int) $responseTotal);
     }
 
     /**
@@ -181,6 +212,15 @@ final class CartContext implements Context
             'productCode' => $product->getCode(),
             'quantity' => $quantity,
         ]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
+    {
+        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
+
+        $request->updateContent(['orderItemId' => $orderItemId]);
 
         $this->cartsClient->executeCustomRequest($request);
     }
