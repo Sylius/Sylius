@@ -23,7 +23,7 @@ Resolving rate and using calculator
 
     <?php
 
-    namespace Acme\ShopBundle\Taxation
+    namespace Acme\ShopBundle\Taxation;
 
     use Acme\ShopBundle\Entity\Order;
     use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
@@ -36,7 +36,7 @@ Resolving rate and using calculator
 
         public function __construct(
             CalculatorInterface $calculator,
-            TaxRateResolverInterface $taxRateResolver,
+            TaxRateResolverInterface $taxRateResolver
         )
         {
             $this->calculator = $calculator;

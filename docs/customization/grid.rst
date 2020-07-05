@@ -174,7 +174,7 @@ Every grid configuration dispatches an event when its definition is being conver
 
 For example, **sylius_admin_product** grid dispatches such an event:
 
-.. code-block:: php
+.. code-block:: yaml
 
     sylius.grid.admin_product # For the grid of products in admin
 

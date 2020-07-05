@@ -89,7 +89,7 @@ The sellable object can be retrieved and set, using the following setter and get
 
     In most cases you'll use the **OrderBuilder** service to create your orders.
 
-Just like for the order, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()`` 
+Just like for the order, the total is available via the same method, but the unit price is accessible using the ``->getUnitPrice()``
 Each item also can calculate its total, using the quantity (``->getQuantity()``) and the unit price.
 
 .. warning::
@@ -103,7 +103,7 @@ Each item also can calculate its total, using the quantity (``->getQuantity()``)
 
     $item = $itemRepository->createNew();
     $item->setVariant($book);
-    $item->setUnitPrice(2000)
+    $item->setUnitPrice(2000);
 
     $orderItemQuantityModifier->modify($item, 4); //modifies item's quantity to 4
 

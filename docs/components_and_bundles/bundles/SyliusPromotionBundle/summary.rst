@@ -31,7 +31,6 @@ Summary
                     interface: Sylius\Component\Promotion\Model\PromotionRuleInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
             promotion_coupon:
                 classes:

@@ -10,7 +10,7 @@ of the modern e-commerce systems.
 The Taxons system in Sylius works in a hierarchical way.
 Let's see exemplary categories trees:
 
-.. code-block:: php
+.. code-block:: text
 
     Category
      |

@@ -45,7 +45,7 @@ Read more about Products and Variants :doc:`here </book/products/products>`.
    $taxCategory = $this->container->get('sylius.repository.tax_category')->findOneBy(['code' => 'taxable_goods']);
 
    /** @var ProductVariantInterface $variant */
-   $variant = $this>container->get('sylius.repository.product_variant')->findOneBy(['code' => 'mug']);
+   $variant = $this->container->get('sylius.repository.product_variant')->findOneBy(['code' => 'mug']);
 
    $variant->setTaxCategory($taxCategory);
 

@@ -34,14 +34,17 @@ To get a collection of child taxons under taxon, use the ``findChildren`` method
 
     <?php
 
-    public function myAction(Request $request)
+    class MyActionController
     {
-        // Find the parent taxon
-        $taxonRepository = $this->container->get('sylius.repository.taxon');
-        $taxon = $taxonRepository->findOneByName('Categories');
+        public function myAction(Request $request)
+        {
+            // Find the parent taxon
+            $taxonRepository = $this->container->get('sylius.repository.taxon');
+            $taxon = $taxonRepository->findOneByName('Categories');
 
-        $taxonRepository = $this->container->get('sylius.repository.taxon');
-        $taxons = $taxonRepository->findChildren($taxon);
+            $taxonRepository = $this->container->get('sylius.repository.taxon');
+            $taxons = $taxonRepository->findChildren($taxon);
+        }
     }
 
 ``$taxons`` variable will now contain a list (ArrayCollection) of taxons in following order: T-Shirts, Men, Women, Stickers, Mugs, Books.
