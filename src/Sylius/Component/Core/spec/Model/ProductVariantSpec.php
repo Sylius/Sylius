@@ -15,12 +15,14 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Comparable;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductImagesAwareInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 use Sylius\Component\Resource\Model\VersionedInterface;
@@ -39,6 +41,11 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_implements_a_taxable_interface(): void
     {
         $this->shouldImplement(TaxableInterface::class);
+    }
+
+    function it_implements_doctrine_comparable(): void
+    {
+        $this->shouldImplement(Comparable::class);
     }
 
     function it_extends_a_product_variant_model(): void
@@ -272,5 +279,17 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->setProduct($product);
         $this->addImage($image);
         $this->getImagesByType('thumbnail')->shouldBeLike(new ArrayCollection([$image->getWrappedObject()]));
+    }
+
+    function it_is_comparable(): void
+    {
+        $this->setCode('test');
+
+        $otherTaxon = new ProductVariant();
+        $otherTaxon->setCode('test');
+        $this->compareTo($otherTaxon)->shouldReturn(0);
+
+        $otherTaxon->setCode('other');
+        $this->compareTo($otherTaxon)->shouldReturn(1);
     }
 }
