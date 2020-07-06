@@ -50,7 +50,7 @@ In a controller:
     $order = $this->container->get('sylius.repository.order')->find('$id');
 
     // Get the processor from the container or inject the service
-    $orderProcessor = $this->container->get('sylius.order_processing.shipping_charges_processor');
+    $orderProcessor = $this->container->get('sylius.order_processing.order_processor');
 
     $orderProcessor->process($order);
 
