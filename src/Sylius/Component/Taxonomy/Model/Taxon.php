@@ -155,9 +155,6 @@ class Taxon implements TaxonInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabledChildren(): Collection
     {
         return $this->children->filter(
