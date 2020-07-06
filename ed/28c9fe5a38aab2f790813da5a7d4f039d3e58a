@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-16T10:43:47Z
+
+Hey Olivier,
+
+can you rebase to newest 1.7? It may fix the build.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-18T07:24:36Z
+
+Hi @lchrusciel ,
+
+Rebase is done, and "application" is green on Travis, but "doc" still red :disappointed:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-19T11:20:18Z
+
+Our 1.7 branch is red again, we will try to fix it in the nearest days
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-25T08:46:52Z
+
+Can you rebase again to 1.7? We could fix it there, I assume.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-30T08:06:34Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "product-variant-comparable"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-06T10:31:51Z
+
+Thank you, @oallain! :tada:
