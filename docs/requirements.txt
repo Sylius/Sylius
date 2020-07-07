@@ -1,4 +1,4 @@
-sphinx
+sphinx==1.8.5
 pyOpenSSL
 requests[security]
 sphinx-copybutton
