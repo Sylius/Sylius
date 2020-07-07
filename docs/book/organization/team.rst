@@ -38,6 +38,15 @@ This role is currently held by:
 
 * **Adam Kasperczak** (`AdamKasp`_)
 
+Community Proofreaders
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Maintains translations directly on `Crowdin`_.
+
+This role is currently held by:
+
+* **Jacques Bodin-Hullin** (`jacquesbh`_): French (fr)
+
 Demon
 -----
 
@@ -123,3 +132,4 @@ This role is currently held by:
 .. _`the Sylius Roadmap`: https://sylius.com/roadmap/
 .. _`Tomanhez`: https://github.com/Tomanhez/
 .. _`Zales0123`: https://github.com/Zales0123/
+.. _`jacquesbh`: https://github.com/jacquesbh/
