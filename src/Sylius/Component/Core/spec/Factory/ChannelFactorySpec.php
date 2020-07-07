@@ -38,7 +38,6 @@ final class ChannelFactorySpec extends ObjectBehavior
     function it_creates_a_new_channel(FactoryInterface $decoratedFactory, ChannelInterface $channel): void
     {
         $decoratedFactory->createNew()->willReturn($channel);
-
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
         $this->createNew()->shouldReturn($channel);

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class ChannelFactory implements ChannelFactoryInterface
@@ -35,7 +35,7 @@ class ChannelFactory implements ChannelFactoryInterface
      */
     public function createNew(): ChannelInterface
     {
-        /** @var ChannelInterface $channel */
+        /** @var \Sylius\Component\Core\Model\ChannelInterface $channel */
         $channel = $this->decoratedFactory->createNew();
         $channel->setTaxCalculationStrategy($this->defaultCalculationStrategy);
 
