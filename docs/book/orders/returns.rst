@@ -169,7 +169,9 @@ The ``id`` is an id of return request that we want to accept. Content of the req
       "response": "We are not able to replace this item."
   }
 
-  // The response can also be empty:
+The response can also be empty:
+
+.. code-block:: json
 
   {}
 
