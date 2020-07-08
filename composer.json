@@ -101,7 +101,8 @@
         "white-october/pagerfanta-bundle": "^1.3",
         "willdurand/hateoas": "^2.12",
         "willdurand/hateoas-bundle": "^1.4",
-        "winzou/state-machine-bundle": "^0.3",
+        "winzou/state-machine": "^0.3 | ^0.4",
+        "winzou/state-machine-bundle": "^0.4 | ^0.5",
         "zendframework/zend-hydrator": "^2.4",
         "zendframework/zend-stdlib": "^3.2"
     },

@@ -58,7 +58,8 @@
         "sylius/user-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
         "symfony/intl": "^4.4",
-        "winzou/state-machine-bundle": "^0.3"
+        "winzou/state-machine": "^0.3 | ^0.4",
+        "winzou/state-machine-bundle": "^0.4 | ^0.5"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^1.1",
