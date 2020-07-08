@@ -186,7 +186,8 @@
         "sylius/grid-bundle": "1.7.4",
         "symfony/form": "4.4.9|4.4.10",
         "symfony/symfony": "3.4.7",
-        "twig/twig": "2.6.1"
+        "twig/twig": "2.6.1",
+        "phpspec/prophecy": "1.11.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
