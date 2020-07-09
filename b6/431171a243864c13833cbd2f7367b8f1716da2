@@ -1,0 +1,52 @@
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-05-05T06:50:25Z
+
+Hi @pamil and @lchrusciel, I don't know why but this PR won't trigger the Travis CI build. Do you know why? Anyway it's ready for review.
+
+---------------------------------------------------------------------------
+
+by LucaGallinari at 2020-05-15T08:07:08Z
+
+Hi @pamil  and @lchrusciel this PR is ready for review
+
+---------------------------------------------------------------------------
+
+by LucaGallinari at 2020-05-27T07:41:16Z
+
+Hi @lchrusciel the build does not trigger continuous-integration/travis-ci/pr. It happened even few weeks ago and you resolved by closing and reopening, can you do the same?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-27T09:17:59Z
+
+of course ;)
+
+---------------------------------------------------------------------------
+
+by LucaGallinari at 2020-06-08T08:46:54Z
+
+I made the requested changes and commented others. Ready to be reviewed again
+
+---------------------------------------------------------------------------
+
+by LucaGallinari at 2020-06-18T10:17:55Z
+
+Hi guys @lchrusciel @pamil @Zales0123 , I made the requested changes and commented others. This PR is ready to be reviewed again.
+The build is failing on some features but it doesn't seem to be related to my changes. It's strange that it's green for 7.4 and not for 7.3
+
+---------------------------------------------------------------------------
+
+by mmenozzi at 2020-07-06T09:43:00Z
+
+Hi @lchrusciel @pamil @Zales0123, I resolved a conflict in this PR related to the inheritdoc removal.
+I think that this PR is ready to merge.
+It would be great if we could have this feature in Sylius 1.8.
+
+Let me know if there's something I can do to help.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-09T13:24:23Z
+
+Thanks, Manuele! :tada:
