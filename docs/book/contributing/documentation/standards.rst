@@ -108,13 +108,13 @@ Example
         public function foo($bar)
         {
             // set foo with a value of bar
-            $foo = ...;
+            $foo = $bar;
 
             $cat = new Cat($foo);
 
             // ... check if $bar has the correct value
 
-            return $cat->baz($bar, ...);
+            return $cat->baz($bar, /*...*/);
         }
     }
 

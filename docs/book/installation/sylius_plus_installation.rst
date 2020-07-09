@@ -50,7 +50,7 @@ Installing Sylius Plus as a plugin to a Sylius application
     // config/bundles.php
 
     return [
-       ...
+       //...
        Sylius\Plus\SyliusPlusPlugin::class => ['all' => true],
     ];
 
@@ -86,7 +86,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     // config/routes/sylius_admin.yaml:
-    ...
+    #...
 
     sylius_plus_admin:
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
@@ -95,7 +95,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: yaml
 
     // config/routes/sylius_admin_api.yaml:
-    ...
+    #...
 
     sylius_plus_admin_api:
         resource: "@SyliusPlusPlugin/Resources/config/api_routing.yaml"

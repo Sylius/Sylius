@@ -154,13 +154,13 @@ as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
 
     <?php
 
-    ...
+    // ...
 
     final class ProductVariantTypeExtension extends AbstractTypeExtension
     {
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            // ...
 
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $productVariant = $event->getData();
@@ -179,7 +179,7 @@ as is done in the ``ProductVariantTypeExtension`` by the ``CoreBundle``:
             });
         }
 
-        ...
+        // ...
 
     }
 
@@ -190,15 +190,15 @@ you will also have to set up an event listener and then remove the field:
 
     <?php
 
-    ...
+    //...
 
     final class ProductVariantTypeMyExtension extends AbstractTypeExtension
     {
-        ...
+        // ...
 
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            //...
 
             $builder
                 ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -207,7 +207,8 @@ you will also have to set up an event listener and then remove the field:
                 ->addEventSubscriber(new AddCodeFormSubscriber(NULL, ['label' => 'app.form.my_other_code_label']))
             ;
 
-            ...
+            // ...
+
 
         }
     }
@@ -232,16 +233,17 @@ has been added. The example below shows how to add the default `sylius` group to
 
     <?php
 
-    ...
+    // ...
 
     final class CustomerProfileTypeExtension extends AbstractTypeExtension
     {
-        ...
+        // ...
 
         public function buildForm(FormBuilderInterface $builder, array $options): void
         {
-            ...
+            //...
 
+            $builder
             // Adding new fields works just like in the parent form type.
             ->add('secondaryPhoneNumber', TextType::class, [
                 'required' => false,
@@ -255,11 +257,11 @@ has been added. The example below shows how to add the default `sylius` group to
                 ],
             ]);
 
-            ...
+            // ...
 
         }
 
-        ...
+        // ...
 
     }
 

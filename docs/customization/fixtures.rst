@@ -137,7 +137,7 @@ just like in the example mentioned above.
 
     final class ShippingMethodExampleFactory extends BaseShippingMethodExampleFactory
     {
-        ...
+        //...
 
         public function create(array $options = []): ShippingMethodInterface
         {

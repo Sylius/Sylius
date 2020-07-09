@@ -47,10 +47,10 @@ In a controller:
     <?php
 
     // Fetch order from DB
-    $order = ...;
+    $order = $this->container->get('sylius.repository.order')->find('$id');
 
     // Get the processor from the container or inject the service
-    $orderProcessor = ...;
+    $orderProcessor = $this->container->get('sylius.order_processing.order_processor');
 
     $orderProcessor->process($order);
 

@@ -33,7 +33,7 @@ This is a simple guide on how to start using webpack in Sylius apps. Webpack fin
 
 **4.** Overwrite template files and add new assets paths for admin and shop:
 
-.. code-block:: php
+.. code-block:: twig
 
     // templates/bundles/SyliusAdminBundle/_scripts.html.twig
     {{ encore_entry_script_tags('admin-entry', null, 'admin') }}

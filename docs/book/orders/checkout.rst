@@ -169,7 +169,7 @@ and apply a proper transition and flush the order via the manager.
 
     $stateMachineFactory = $this->container->get('sm.factory');
 
-    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
     $this->container->get('sylius.manager.order')->flush();
@@ -229,7 +229,7 @@ and apply a proper transition and flush the order via the manager.
 
     $stateMachineFactory = $this->container->get('sm.factory');
 
-    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
     $this->container->get('sylius.manager.order')->flush();
@@ -258,7 +258,7 @@ Before executing the completing transition you can set some notes to your order.
 
 .. code-block:: php
 
-    $order->setNotes('Thank you dear shop owners! I am allergic to tape so please use something else for packaging.')
+    $order->setNotes('Thank you dear shop owners! I am allergic to tape so please use something else for packaging.');
 
 After that get the StateMachine for the Order via the StateMachineFactory with a proper schema,
 and apply a proper transition and flush the order via the manager.
