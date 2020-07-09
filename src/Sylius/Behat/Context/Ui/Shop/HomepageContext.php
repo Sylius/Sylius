@@ -58,6 +58,7 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should see :firstMenuItem in the menu
      * @Then I should see :firstMenuItem and :secondMenuItem in the menu
      */
     public function iShouldSeeAndInTheMenu(string ...$menuItems): void
@@ -67,6 +68,8 @@ final class HomepageContext implements Context
 
     /**
      * @Then I should not see :firstMenuItem and :secondMenuItem in the menu
+     * @Then I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu
+     * @Then I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu
      */
     public function iShouldNotSeeAndInTheMenu(string ...$menuItems): void
     {

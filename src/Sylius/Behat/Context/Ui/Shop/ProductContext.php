@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
@@ -38,16 +39,21 @@ final class ProductContext implements Context
     /** @var ErrorPageInterface */
     private $errorPage;
 
+    /** @var VerticalMenuElementInterface */
+    private $verticalMenuElement;
+
     public function __construct(
         ShowPageInterface $showPage,
         IndexPageInterface $indexPage,
         ProductReviewIndexPageInterface $productReviewsIndexPage,
-        ErrorPageInterface $errorPage
+        ErrorPageInterface $errorPage,
+        VerticalMenuElementInterface $verticalMenuElement
     ) {
         $this->showPage = $showPage;
         $this->indexPage = $indexPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
         $this->errorPage = $errorPage;
+        $this->verticalMenuElement = $verticalMenuElement;
     }
 
     /**
@@ -579,6 +585,51 @@ final class ProductContext implements Context
     ) {
         Assert::true(in_array($optionValue1, $this->showPage->getOptionValues($optionName), true));
         Assert::true(in_array($optionValue2, $this->showPage->getOptionValues($optionName), true));
+    }
+
+    /**
+     * @When /^I try to browse products from (taxon "([^"]+)")$/
+     */
+    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
+    {
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
+    }
+
+    /**
+     * @Then I should be informed that the taxon does not exist
+     */
+    public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
+    {
+        Assert::same($this->errorPage->getTitle(), 'Requested page is invalid.');
+    }
+
+    /**
+     * @Then I should see :firstMenuItem and :secondMenuItem in the vertical menu
+     */
+    public function iShouldSeeInTheVerticalMenu(string ...$menuItems): void
+    {
+        Assert::allOneOf($menuItems, $this->verticalMenuElement->getMenuItems());
+    }
+
+    /**
+     * @Then I should not see :firstMenuItem in the vertical menu
+     */
+    public function iShouldNotSeeInTheVerticalMenu(string ...$menuItems): void
+    {
+        $actualMenuItems = $this->verticalMenuElement->getMenuItems();
+        foreach ($menuItems as $menuItem) {
+            if (in_array($menuItem, $actualMenuItems)) {
+                throw new \InvalidArgumentException(sprintf('Vertical menu should not contain %s element', $menuItem));
+            }
+        }
+    }
+
+    /**
+     * @Then I should not be able to navigate to parent taxon
+     */
+    public function iShouldNotBeAbleToNavigateToParentTaxon(): void
+    {
+        Assert::false($this->verticalMenuElement->canNavigateToParentTaxon());
     }
 
     /**

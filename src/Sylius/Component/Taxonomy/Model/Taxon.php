@@ -15,6 +15,7 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
@@ -24,6 +25,7 @@ class Taxon implements TaxonInterface
         __construct as private initializeTranslationsCollection;
         getTranslation as private doGetTranslation;
     }
+    use ToggleableTrait;
 
     /** @var mixed */
     protected $id;
@@ -151,6 +153,15 @@ class Taxon implements TaxonInterface
 
             $this->children->removeElement($taxon);
         }
+    }
+
+    public function getEnabledChildren(): Collection
+    {
+        return $this->children->filter(
+            function (TaxonInterface $childTaxon) {
+                return $childTaxon->isEnabled();
+            }
+        );
     }
 
     public function getName(): ?string

@@ -423,6 +423,38 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I enable it
+     */
+    public function iEnableIt(): void
+    {
+        $this->updatePage->enable();
+    }
+
+    /**
+     * @When I disable it
+     */
+    public function iDisableIt(): void
+    {
+        $this->updatePage->disable();
+    }
+
+    /**
+     * @Then /^(?:this taxon|it) should be enabled$/
+     */
+    public function itShouldBeEnabled(): void
+    {
+        Assert::true($this->updatePage->isEnabled());
+    }
+
+    /**
+     * @Then /^(?:this taxon|it) should be disabled$/
+     */
+    public function itShouldBeDisabled(): void
+    {
+        Assert::false($this->updatePage->isEnabled());
+    }
+
+    /**
      * @return CreatePageInterface|CreateForParentPageInterface|UpdatePageInterface
      */
     private function resolveCurrentPage()

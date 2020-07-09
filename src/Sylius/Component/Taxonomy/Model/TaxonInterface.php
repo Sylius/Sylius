@@ -17,10 +17,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface, SlugAwareInterface
+interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, ResourceInterface, SlugAwareInterface, ToggleableInterface
 {
     public function isRoot(): bool;
 
@@ -69,6 +70,13 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
      * @param TaxonInterface $taxon
      */
     public function removeChild(self $taxon): void;
+
+    /**
+     * @return Collection|TaxonInterface[]
+     *
+     * @psalm-return Collection<array-key, TaxonInterface>
+     */
+    public function getEnabledChildren(): Collection;
 
     public function getName(): ?string;
 

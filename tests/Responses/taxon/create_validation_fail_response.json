@@ -4,6 +4,7 @@
     "errors": {
         "children": {
             "translations": {},
+            "enabled": {},
             "images": {},
             "code": {
                 "errors": [

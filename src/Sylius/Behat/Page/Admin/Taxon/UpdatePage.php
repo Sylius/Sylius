@@ -205,6 +205,21 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         });
     }
 
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
+    }
+
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getElement('enabled')->isChecked();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%language%'])) {
@@ -224,6 +239,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
+            'enabled' => '#sylius_taxon_enabled',
             'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_en_US_name',

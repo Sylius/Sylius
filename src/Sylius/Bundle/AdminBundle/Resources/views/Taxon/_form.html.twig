@@ -10,6 +10,9 @@
             {{ form_widget(form.parent, {'attr': {'style': 'display: none;'}}) }}
         {% endif %}
     </div>
+    <div class="fields">
+        {{ form_row(form.enabled) }}
+    </div>
 </div>
 {{ translationFormWithSlug(form.translations, '@SyliusAdmin/Taxon/_slugField.html.twig', taxon) }}
 
