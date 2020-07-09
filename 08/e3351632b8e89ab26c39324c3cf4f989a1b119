@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by mamazu at 2020-07-06T11:27:49Z
+
+Agreed. You usually want the composite one so I guess this is the best way to document it.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-07T14:25:23Z
+
+@mamazu can you rebase to the master, please?
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-07-07T20:32:20Z
+
+Should be done now. I have also fixed on error that emerged from it. (Apparently sphinx checks if JSON data is parsable but not PHP.)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-09T13:12:41Z
+
+Thanks, @mamazu! :tada:
