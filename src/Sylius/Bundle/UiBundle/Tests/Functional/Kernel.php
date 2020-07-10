@@ -103,6 +103,17 @@ final class Kernel extends HttpKernel
                     ],
                 ],
             ],
+            'block_context_expression_event' => [
+                'blocks' => [
+                    'expression_block' => [
+                        'template' => 'blocks/contextExpression.txt.twig',
+                        'context' => [
+                            'value' => '@=service("kernel").getLogDir()'
+                        ],
+                        'priority' => 0
+                    ]
+                ]
+            ],
         ]]);
     }
 
