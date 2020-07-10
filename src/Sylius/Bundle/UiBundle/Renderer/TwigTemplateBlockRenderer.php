@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Symfony\Component\DependencyInjection\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Twig\Environment;
 

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
+use Symfony\Component\DependencyInjection\ExpressionLanguage;
 use Twig\Environment;
 
 final class TwigTemplateBlockRendererSpec extends ObjectBehavior
