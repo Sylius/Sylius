@@ -26,9 +26,6 @@ final class DelegatingCalculator implements CalculatorInterface
         $this->calculatorsRegistry = $serviceRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function calculate(float $base, TaxRateInterface $rate): float
     {
         /** @var CalculatorInterface $calculator */

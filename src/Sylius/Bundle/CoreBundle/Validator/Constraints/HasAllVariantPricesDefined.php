@@ -20,17 +20,11 @@ final class HasAllVariantPricesDefined extends Constraint
     /** @var string */
     public $message = 'sylius.product.variants.all_prices_defined';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_has_all_variant_prices_defined';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return Constraint::CLASS_CONSTRAINT;

@@ -41,9 +41,6 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
         $this->averageRatingUpdater = $averageRatingUpdater;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeReviewerReviews(ReviewerInterface $author): void
     {
         $reviewSubjectsToRecalculate = [];

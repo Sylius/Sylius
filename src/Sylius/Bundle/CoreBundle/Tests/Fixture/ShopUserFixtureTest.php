@@ -96,9 +96,6 @@ final class ShopUserFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['birthday' => '01-01-2001']]]], 'custom.*.birthday');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ShopUserFixture
     {
         return new ShopUserFixture(

@@ -35,8 +35,6 @@ final class CapturePaymentAction extends GatewayAwareAction
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Capture $request
      */
     public function execute($request): void
@@ -79,9 +77,6 @@ final class CapturePaymentAction extends GatewayAwareAction
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

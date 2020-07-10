@@ -21,9 +21,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusPayumExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -37,9 +34,6 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('sylius_payment')) {

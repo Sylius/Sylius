@@ -20,9 +20,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusAdminExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);

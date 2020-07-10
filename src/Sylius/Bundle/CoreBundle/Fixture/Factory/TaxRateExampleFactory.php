@@ -55,9 +55,6 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): TaxRateInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -76,9 +73,6 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $taxRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

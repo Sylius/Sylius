@@ -92,6 +92,7 @@ sylius_fixtures:
                                     - 'USD'
                                 enabled: true
                                 hostname: '%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%'
+                                theme_name: '%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%'
                                 shop_billing_data:
                                     company: 'Sylius'
                                     tax_id: '0001112222'

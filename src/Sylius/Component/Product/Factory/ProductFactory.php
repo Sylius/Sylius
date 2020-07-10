@@ -32,17 +32,11 @@ class ProductFactory implements ProductFactoryInterface
         $this->variantFactory = $variantFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): ProductInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createWithVariant(): ProductInterface
     {
         $variant = $this->variantFactory->createNew();

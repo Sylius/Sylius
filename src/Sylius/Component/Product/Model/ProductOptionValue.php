@@ -37,73 +37,47 @@ class ProductOptionValue implements ProductOptionValueInterface
         $this->initializeTranslationCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return (string) $this->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOption(): ?ProductOptionInterface
     {
         return $this->option;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOption(?ProductOptionInterface $option): void
     {
         $this->option = $option;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValue(): ?string
     {
         return $this->getTranslation()->getValue();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setValue(?string $value): void
     {
         $this->getTranslation()->setValue($value);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \BadMethodCallException
      */
     public function getOptionCode(): ?string
@@ -118,8 +92,6 @@ class ProductOptionValue implements ProductOptionValueInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \BadMethodCallException
      */
     public function getName(): ?string
@@ -144,9 +116,6 @@ class ProductOptionValue implements ProductOptionValueInterface
         return $translation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createTranslation(): ProductOptionValueTranslationInterface
     {
         return new ProductOptionValueTranslation();

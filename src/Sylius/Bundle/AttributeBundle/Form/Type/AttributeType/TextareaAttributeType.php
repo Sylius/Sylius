@@ -19,17 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class TextareaAttributeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return TextareaType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -41,9 +35,6 @@ final class TextareaAttributeType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_attribute_type_textarea';

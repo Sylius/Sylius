@@ -25,7 +25,7 @@ class AddItemToCart
     public $productCode;
 
     /**
-     * @var integer
+     * @var int
      * @psalm-immutable
      */
     public $quantity;

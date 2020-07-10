@@ -29,9 +29,6 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(BasePaymentInterface $payment): array
     {
         /** @var PaymentInterface $payment */
@@ -41,9 +38,6 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
         return $this->paymentMethodRepository->findEnabledForChannel($payment->getOrder()->getChannel());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(BasePaymentInterface $payment): bool
     {
         return $payment instanceof PaymentInterface &&

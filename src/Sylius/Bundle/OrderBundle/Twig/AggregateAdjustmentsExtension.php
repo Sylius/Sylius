@@ -27,9 +27,6 @@ final class AggregateAdjustmentsExtension extends AbstractExtension
         $this->adjustmentsHelper = $adjustmentsHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

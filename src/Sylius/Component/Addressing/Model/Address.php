@@ -57,97 +57,61 @@ class Address implements AddressInterface
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFullName(): string
     {
         return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCompany(): ?string
     {
         return $this->company;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCountryCode(): ?string
     {
         return $this->countryCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCountryCode(?string $countryCode): void
     {
         if (null === $countryCode) {
@@ -157,17 +121,11 @@ class Address implements AddressInterface
         $this->countryCode = $countryCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProvinceCode(): ?string
     {
         return $this->provinceCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProvinceCode(?string $provinceCode): void
     {
         if (null === $this->countryCode) {
@@ -177,65 +135,41 @@ class Address implements AddressInterface
         $this->provinceCode = $provinceCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProvinceName(): ?string
     {
         return $this->provinceName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProvinceName(?string $provinceName): void
     {
         $this->provinceName = $provinceName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStreet(): ?string
     {
         return $this->street;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCity(?string $city): void
     {
         $this->city = $city;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPostcode(): ?string
     {
         return $this->postcode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPostcode(?string $postcode): void
     {
         $this->postcode = $postcode;

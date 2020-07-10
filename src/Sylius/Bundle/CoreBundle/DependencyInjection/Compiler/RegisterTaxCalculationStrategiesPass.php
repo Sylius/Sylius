@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\Reference;
 final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function process(ContainerBuilder $container): void
@@ -39,7 +37,7 @@ final class RegisterTaxCalculationStrategiesPass implements CompilerPassInterfac
                     throw new \InvalidArgumentException('Tagged tax calculation strategies need to have `type` and `label` attributes.');
                 }
 
-                $priority = (int)($attribute['priority'] ?? 0);
+                $priority = (int) ($attribute['priority'] ?? 0);
 
                 $strategies[$attribute['type']] = $attribute['label'];
 

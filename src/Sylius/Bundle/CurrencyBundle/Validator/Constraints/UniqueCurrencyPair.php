@@ -20,9 +20,6 @@ class UniqueCurrencyPair extends Constraint
     /** @var string */
     public $message = 'sylius.exchange_rate.unique_currency_pair';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

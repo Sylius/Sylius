@@ -52,73 +52,46 @@ class TaxCategory implements TaxCategoryInterface
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRates(): Collection
     {
         return $this->rates;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addRate(TaxRateInterface $rate): void
     {
         if (!$this->hasRate($rate)) {
@@ -127,9 +100,6 @@ class TaxCategory implements TaxCategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeRate(TaxRateInterface $rate): void
     {
         if ($this->hasRate($rate)) {
@@ -138,9 +108,6 @@ class TaxCategory implements TaxCategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRate(TaxRateInterface $rate): bool
     {
         return $this->rates->contains($rate);

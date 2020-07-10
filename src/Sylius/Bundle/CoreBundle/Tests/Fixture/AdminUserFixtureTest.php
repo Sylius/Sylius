@@ -64,9 +64,6 @@ final class AdminUserFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['password' => 'I.<3.Krzysztof.Krawczyk']]]], 'custom.*.password');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): AdminUserFixture
     {
         return new AdminUserFixture(

@@ -56,9 +56,6 @@ final class TaxCategoryFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['description' => 'Lorem ipsum']]]], 'custom.*.description');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): TaxCategoryFixture
     {
         return new TaxCategoryFixture(

@@ -33,9 +33,6 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
         $this->syliusRequirements = $syliusRequirements;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function check(InputInterface $input, OutputInterface $output): bool
     {
         $helpTable = new TableRenderer($output);

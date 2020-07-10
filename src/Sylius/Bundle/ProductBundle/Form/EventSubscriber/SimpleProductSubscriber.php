@@ -23,9 +23,6 @@ use Webmozart\Assert\Assert;
 
 final class SimpleProductSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

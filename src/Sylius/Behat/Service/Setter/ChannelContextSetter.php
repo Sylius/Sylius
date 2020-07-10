@@ -25,9 +25,6 @@ final class ChannelContextSetter implements ChannelContextSetterInterface
         $this->cookieSetter = $cookieSetter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setChannel(ChannelInterface $channel)
     {
         $this->cookieSetter->setCookie('_channel_code', $channel->getCode());

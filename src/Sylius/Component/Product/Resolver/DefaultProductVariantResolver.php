@@ -18,9 +18,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class DefaultProductVariantResolver implements ProductVariantResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
     {
         if ($subject->getEnabledVariants()->isEmpty()) {

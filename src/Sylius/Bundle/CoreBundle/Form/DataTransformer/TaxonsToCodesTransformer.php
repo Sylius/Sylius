@@ -31,8 +31,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function transform($value): Collection
@@ -47,8 +45,6 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function reverseTransform($taxons): array

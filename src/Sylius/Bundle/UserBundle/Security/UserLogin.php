@@ -43,9 +43,6 @@ class UserLogin implements UserLoginInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function login(UserInterface $user, ?string $firewallName = null): void
     {
         $firewallName = $firewallName ?? 'main';

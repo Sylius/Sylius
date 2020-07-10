@@ -2,7 +2,12 @@
     "name": "sylius/money-bundle",
     "type": "symfony-bundle",
     "description": "Currencies and money formatting engine bundle for Symfony.",
-    "keywords": ["cash", "currency", "money", "currencies"],
+    "keywords": [
+        "cash",
+        "currency",
+        "money",
+        "currencies"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,50 +26,53 @@
     ],
     "require": {
         "php": "^7.3",
-
         "sylius/resource-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
         "symfony/intl": "^4.4",
         "symfony/templating": "^4.4",
-        "webmozart/assert": "^1.0"
-    },
-    "require-dev": {
-        "doctrine/orm": "^2.5",
-        "phpspec/phpspec": "^6.1",
-        "phpunit/phpunit": "^7.0",
-        "twig/twig": "^2.0",
-        "sylius/currency-bundle": "^1.6",
-        "symfony/form": "^4.4",
-        "symfony/browser-kit": "^4.4",
-        "symfony/dependency-injection": "^4.4",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "webmozart/assert": "^1.8"
     },
     "conflict": {
         "twig/twig": "^1.0"
     },
+    "require-dev": {
+        "doctrine/orm": "^2.7",
+        "phpspec/phpspec": "^6.1",
+        "phpunit/phpunit": "^8.5",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "sylius/currency-bundle": "^1.6",
+        "symfony/browser-kit": "^4.4",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/form": "^4.4",
+        "twig/twig": "^2.12"
+    },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\MoneyBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\MoneyBundle\\": ""
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\MoneyBundle\\spec\\": "spec/"
         },
-        "classmap": ["test/app/AppKernel.php"]
+        "classmap": [
+            "test/app/AppKernel.php"
+        ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

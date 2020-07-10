@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.6 (2020-06-25)
+
+#### Details
+
+- [#11522](https://github.com/Sylius/Sylius/issues/11522) [Homepage] Change lorem ipsum description and fix carousel header ([@arti0090](https://github.com/arti0090))
+- [#11534](https://github.com/Sylius/Sylius/issues/11534) Add Sylius template event ([@tavy315](https://github.com/tavy315))
+- [#11549](https://github.com/Sylius/Sylius/issues/11549) Behat for reordering taxon feature ([@titomtd](https://github.com/titomtd))
+- [#11553](https://github.com/Sylius/Sylius/issues/11553) Fix Psalm errors ([@Tomanhez](https://github.com/Tomanhez))
+- [#11578](https://github.com/Sylius/Sylius/issues/11578) [HotFix]Add symfony/form conflict ([@Tomanhez](https://github.com/Tomanhez))
+- [#11581](https://github.com/Sylius/Sylius/issues/11581) [Doc] Sylius 1.4 end of security support ([@oallain](https://github.com/oallain))
+- [#11582](https://github.com/Sylius/Sylius/issues/11582) [Maintenance] Update github PR template ([@oallain](https://github.com/oallain))
+- [#11584](https://github.com/Sylius/Sylius/issues/11584) [Fix] Less strict symfony form conflict ([@lchrusciel](https://github.com/lchrusciel))
+- [#11589](https://github.com/Sylius/Sylius/issues/11589) [Docs] fix sylius plus deployment ([@AdamKasp](https://github.com/AdamKasp))
+
 ## v1.7.5 (2020-06-02)
 
 #### TL;DR

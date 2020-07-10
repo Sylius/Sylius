@@ -89,9 +89,6 @@ final class TaxRateFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['calculator' => 'custom']]]], 'custom.*.calculator');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): TaxRateFixture
     {
         return new TaxRateFixture(

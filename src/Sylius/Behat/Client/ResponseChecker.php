@@ -67,7 +67,6 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_NO_CONTENT;
     }
 
-
     public function hasAccessDenied(Response $response): bool
     {
         return

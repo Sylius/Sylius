@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 final class LazyCacheWarmupPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $this->markServiceAsLazy($container, 'cmf_core.templating.helper');

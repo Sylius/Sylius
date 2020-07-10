@@ -36,8 +36,6 @@ final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \InvalidArgumentException
      */
     public function validate($value, Constraint $constraint): void

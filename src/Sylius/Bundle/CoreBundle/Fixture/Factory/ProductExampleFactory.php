@@ -140,9 +140,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ProductInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -164,9 +161,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

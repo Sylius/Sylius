@@ -15,9 +15,6 @@ namespace Sylius\Component\Core\Promotion\Filter;
 
 final class ProductFilter implements FilterInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function filter(array $items, array $configuration): array
     {
         if (empty($configuration['filters']['products_filter']['products'])) {

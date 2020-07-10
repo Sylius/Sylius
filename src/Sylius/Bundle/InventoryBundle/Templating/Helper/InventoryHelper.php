@@ -37,9 +37,6 @@ final class InventoryHelper extends Helper
         return $this->checker->isStockSufficient($stockable, $quantity);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_inventory';

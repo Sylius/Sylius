@@ -44,9 +44,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_variation',
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -62,9 +59,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         $config = $container->getExtensionConfig($this->getAlias());

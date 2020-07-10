@@ -30,9 +30,6 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
         $this->generationPolicy = $generationPolicy;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($instruction, Constraint $constraint): void
     {
         if (null === $instruction->getCodeLength() || null === $instruction->getAmount()) {

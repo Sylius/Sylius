@@ -21,17 +21,11 @@ class Payment extends BasePayment implements PaymentInterface
     /** @var BaseOrderInterface */
     protected $order;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrder(): ?BaseOrderInterface
     {
         return $this->order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOrder(?BaseOrderInterface $order): void
     {
         $this->order = $order;

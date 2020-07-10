@@ -32,17 +32,11 @@ final class HasEnabledEntity extends Constraint
     /** @var string */
     public $enabledPath = 'enabled';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_has_enabled_entity';

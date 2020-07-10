@@ -23,9 +23,6 @@ class AttributeRepository extends EntityRepository
     /** @var AssociationHydrator */
     protected $associationHydrator;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
@@ -33,9 +30,6 @@ class AttributeRepository extends EntityRepository
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findAll(): array
     {
         $attributes = parent::findAll();

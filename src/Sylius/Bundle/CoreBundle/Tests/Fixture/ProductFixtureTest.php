@@ -137,9 +137,6 @@ final class ProductFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['shipping_required' => false]]]], 'custom.*.shipping_required');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductFixture
     {
         return new ProductFixture(

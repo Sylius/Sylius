@@ -15,9 +15,6 @@ namespace Sylius\Component\Channel\Context;
 
 class ChannelNotFoundException extends \RuntimeException
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __construct($messageOrPreviousException = null, ?\Throwable $previousException = null)
     {
         $message = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';

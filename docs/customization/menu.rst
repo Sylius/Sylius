@@ -7,7 +7,7 @@ You have got the ``Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent`` with ``F
 
 You've got eight events that you should be subscribing to:
 
-.. code-block:: php
+.. code-block:: yaml
 
     sylius.menu.shop.account # For the menu of the MyAccount section in shop
     sylius.menu.admin.main # For the Admin Panel menu

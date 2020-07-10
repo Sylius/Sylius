@@ -19,9 +19,6 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findActive(): array
     {
         return $this->filterByActive($this->createQueryBuilder('o'))
@@ -31,9 +28,6 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(string $name): array
     {
         return $this->findBy(['name' => $name]);

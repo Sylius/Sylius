@@ -18,9 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.form_registry.payum_gateway_config')) {
@@ -50,7 +47,6 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
                 );
             }
         }
-
 
         usort($gatewayFactories, function (array $firstGateway, array $secondGateway): int {
             return $secondGateway['priority'] - $firstGateway['priority'];

@@ -54,9 +54,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ProductOptionInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -90,9 +87,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
         return $productOption;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

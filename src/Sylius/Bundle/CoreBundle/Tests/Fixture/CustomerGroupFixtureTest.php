@@ -56,9 +56,6 @@ final class CustomerGroupFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['name' => 'name']]]], 'custom.*.name');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): CustomerGroupFixture
     {
         return new CustomerGroupFixture(

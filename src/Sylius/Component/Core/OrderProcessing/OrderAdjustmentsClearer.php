@@ -42,9 +42,6 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
         $this->adjustmentsToRemove = $adjustmentsToRemove;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(OrderInterface $order): void
     {
         foreach ($this->adjustmentsToRemove as $type) {

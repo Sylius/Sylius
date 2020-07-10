@@ -19,17 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PercentAttributeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return PercentType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -41,9 +35,6 @@ final class PercentAttributeType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_attribute_type_percent';

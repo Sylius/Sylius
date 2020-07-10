@@ -21,9 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAutocompleteChoiceType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -42,17 +39,11 @@ final class ProductAutocompleteChoiceType extends AbstractType
         $view->vars['remote_criteria_name'] = 'phrase';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_autocomplete_choice';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return ResourceAutocompleteChoiceType::class;

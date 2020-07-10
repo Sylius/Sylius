@@ -26,17 +26,11 @@ final class TaxonFactory implements TaxonFactoryInterface
         $this->factory = $factory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): TaxonInterface
     {
         return $this->factory->createNew();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createForParent(TaxonInterface $parent): TaxonInterface
     {
         $taxon = $this->createNew();

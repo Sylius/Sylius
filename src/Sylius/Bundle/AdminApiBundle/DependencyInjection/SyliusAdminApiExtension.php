@@ -22,9 +22,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusAdminApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -36,8 +33,6 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws ServiceNotFoundException
      */
     public function prepend(ContainerBuilder $container): void

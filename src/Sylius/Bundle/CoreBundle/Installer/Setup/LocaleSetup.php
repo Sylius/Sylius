@@ -41,9 +41,6 @@ final class LocaleSetup implements LocaleSetupInterface
         $this->locale = trim($locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
     {
         $code = $this->getLanguageCodeFromUser($input, $output, $questionHelper);
@@ -106,7 +103,7 @@ final class LocaleSetup implements LocaleSetupInterface
 
         try {
             return Languages::getName($language, $region);
-        } catch(MissingResourceException $exception) {
+        } catch (MissingResourceException $exception) {
             return null;
         }
     }

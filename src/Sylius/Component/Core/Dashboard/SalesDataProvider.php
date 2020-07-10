@@ -30,7 +30,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
         $this->orderRepository = $orderRepository;
     }
 
-    function getSalesSummary(
+    public function getSalesSummary(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
@@ -59,8 +59,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $resultFormatter = static function (array $data): string {
                     return $data['year'];
                 };
-                break;
 
+                break;
             case 'month':
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
@@ -84,8 +84,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $resultFormatter = static function (array $data): string {
                     return $data['month'] . '.' . $data['year'];
                 };
-                break;
 
+                break;
             case 'week':
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
@@ -109,8 +109,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $resultFormatter = static function (array $data): string {
                     return $data['week'] . ' ' . $data['year'];
                 };
-                break;
 
+                break;
             case 'day':
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
@@ -143,8 +143,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
                 $resultFormatter = static function (array $data): string {
                     return $data['day'] . '.' . $data['month'] . '.' . $data['year'];
                 };
-                break;
 
+                break;
             default:
                 throw new \RuntimeException(sprintf('Interval "%s" not supported.', $interval->asString()));
         }

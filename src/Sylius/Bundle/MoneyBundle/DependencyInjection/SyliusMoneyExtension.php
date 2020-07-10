@@ -21,9 +21,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusMoneyExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
@@ -34,9 +31,6 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
         $loader->load('services.xml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('sylius_currency')) {

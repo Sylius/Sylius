@@ -32,9 +32,6 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
         $this->productVariantRepository = $productVariantRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var UniqueSimpleProductCode $constraint */

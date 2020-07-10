@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormEvents;
 
 final class ProductType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
@@ -36,9 +33,6 @@ final class ProductType extends AbstractType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return BaseProductType::class;

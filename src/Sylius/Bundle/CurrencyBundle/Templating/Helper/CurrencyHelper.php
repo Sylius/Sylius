@@ -18,17 +18,11 @@ use Symfony\Component\Templating\Helper\Helper;
 
 class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertCurrencyCodeToSymbol(string $code): string
     {
         return Currencies::getSymbol($code);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_currency';

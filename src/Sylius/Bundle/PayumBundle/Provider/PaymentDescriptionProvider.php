@@ -27,9 +27,6 @@ final class PaymentDescriptionProvider implements PaymentDescriptionProviderInte
         $this->translator = $translator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentDescription(PaymentInterface $payment): string
     {
         /** @var OrderInterface $order */

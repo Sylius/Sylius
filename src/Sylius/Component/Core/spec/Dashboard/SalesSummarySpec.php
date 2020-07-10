@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Dashboard\Interval;
 
 final class SalesSummarySpec extends ObjectBehavior
 {
@@ -28,7 +27,7 @@ final class SalesSummarySpec extends ObjectBehavior
     function it_has_intervals_list(): void
     {
         $this->getIntervals()->shouldReturn(
-            [9, 10 ,11]
+            [9, 10, 11]
         );
     }
 

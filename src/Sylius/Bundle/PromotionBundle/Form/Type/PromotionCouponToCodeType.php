@@ -32,17 +32,11 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         $this->promotionCouponRepository = $promotionCouponRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer($this);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($coupon): string
     {
         if (null === $coupon) {
@@ -56,9 +50,6 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         return $coupon->getCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($code): ?PromotionCouponInterface
     {
         if (null === $code || '' === $code) {
@@ -68,9 +59,6 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         return $this->promotionCouponRepository->findOneBy(['code' => $code]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -81,17 +69,11 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return TextType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_promotion_coupon_to_code';

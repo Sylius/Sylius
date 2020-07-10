@@ -29,9 +29,6 @@ final class OrderPromotionProcessor implements OrderProcessorInterface
         $this->promotionProcessor = $promotionProcessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

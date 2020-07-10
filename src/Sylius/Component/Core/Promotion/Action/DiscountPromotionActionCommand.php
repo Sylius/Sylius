@@ -28,9 +28,6 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      */
     abstract protected function isConfigurationValid(array $configuration): void;
 
-    /**
-     * {@inheritdoc}
-     */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         /** @var OrderInterface $subject */

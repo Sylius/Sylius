@@ -26,9 +26,6 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
         $this->resolversRegistry = $resolversRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedMethods(PaymentInterface $payment): array
     {
         /** @var PaymentMethodsResolverInterface $resolver */
@@ -41,9 +38,6 @@ final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(PaymentInterface $payment): bool
     {
         /** @var PaymentMethodsResolverInterface $resolver */

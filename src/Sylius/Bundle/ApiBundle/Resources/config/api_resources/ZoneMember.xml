@@ -38,6 +38,12 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_zones_members_get_subresource">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="belongsTo" readable="true" writable="true" />

@@ -63,9 +63,6 @@ final class ApiClientFixtureTest extends TestCase
         ]]]], 'custom.*.allowed_grant_types');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ApiClientFixture
     {
         return new ApiClientFixture(

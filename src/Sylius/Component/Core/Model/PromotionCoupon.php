@@ -23,17 +23,11 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
     /** @var bool */
     protected $reusableFromCancelledOrders = true;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPerCustomerUsageLimit(): ?int
     {
         return $this->perCustomerUsageLimit;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPerCustomerUsageLimit(?int $perCustomerUsageLimit): void
     {
         $this->perCustomerUsageLimit = $perCustomerUsageLimit;

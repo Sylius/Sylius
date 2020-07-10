@@ -35,9 +35,6 @@ class AdjustmentsHelper extends Helper
         return $this->adjustmentsAggregator->aggregate($adjustments);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'sylius_adjustments';

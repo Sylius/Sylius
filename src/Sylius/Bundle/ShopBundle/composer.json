@@ -27,7 +27,6 @@
     ],
     "require": {
         "php": "^7.3",
-
         "sylius/core-bundle": "^1.6",
         "sylius/ui-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
@@ -36,32 +35,32 @@
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "mockery/mockery": "^1.3",
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^6.1",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4"
     },
     "config": {
         "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
     },
     "autoload": {
         "psr-4": {
             "Sylius\\Bundle\\ShopBundle\\": ""
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

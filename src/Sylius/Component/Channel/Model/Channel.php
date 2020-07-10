@@ -48,89 +48,56 @@ class Channel implements ChannelInterface
         return (string) $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getHostname(): ?string
     {
         return $this->hostname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setHostname(?string $hostname): void
     {
         $this->hostname = $hostname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setColor(?string $color): void
     {
         $this->color = $color;

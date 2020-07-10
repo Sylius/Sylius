@@ -23,9 +23,6 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 final class ProductVariantGenerationType extends AbstractResourceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -39,9 +36,6 @@ final class ProductVariantGenerationType extends AbstractResourceType
         $builder->addEventSubscriber(new BuildProductVariantFormSubscriber($builder->getFormFactory(), true));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -49,9 +43,6 @@ final class ProductVariantGenerationType extends AbstractResourceType
         $resolver->setDefault('constraints', [new Valid()]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_variant_generation';

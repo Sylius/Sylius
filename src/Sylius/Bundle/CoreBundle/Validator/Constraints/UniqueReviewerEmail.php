@@ -20,17 +20,11 @@ class UniqueReviewerEmail extends Constraint
     /** @var string */
     public $message = 'sylius.review.author.already_exists';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy(): string
     {
         return 'sylius_unique_reviewer_email_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

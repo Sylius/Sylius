@@ -2,7 +2,10 @@
     "name": "sylius/admin-api-bundle",
     "type": "symfony-bundle",
     "description": "APIs management for Symfony projects.",
-    "keywords": ["api", "rest"],
+    "keywords": [
+        "api",
+        "rest"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,7 +24,6 @@
     ],
     "require": {
         "php": "^7.3",
-
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "sylius/core-bundle": "^1.6",
         "symfony/form": "^4.4",
@@ -29,33 +31,37 @@
         "symfony/validator": "^4.4"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
-        "matthiasnoback/symfony-config-test": "^4.0",
+        "doctrine/orm": "^2.7",
+        "matthiasnoback/symfony-config-test": "^4.2",
         "phpspec/phpspec": "^6.1",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.12"
     },
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\AdminApiBundle\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\AdminApiBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\AdminApiBundle\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

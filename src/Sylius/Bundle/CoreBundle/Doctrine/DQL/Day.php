@@ -41,7 +41,6 @@ final class Day extends FunctionNode
         switch ($platformName) {
             case 'mysql':
                 return sprintf('DAY(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
-
             case 'postgresql':
                 return sprintf('EXTRACT(DAY FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }

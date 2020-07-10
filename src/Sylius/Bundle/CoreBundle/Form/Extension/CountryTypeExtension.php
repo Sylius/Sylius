@@ -30,17 +30,11 @@ final class CountryTypeExtension extends AbstractTypeExtension
     /** @var RepositoryInterface */
     private $countryRepository;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
@@ -75,9 +69,6 @@ final class CountryTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return CountryType::class;

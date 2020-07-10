@@ -33,9 +33,6 @@ final class CompositePromotionEligibilityChecker implements PromotionEligibility
         $this->promotionEligibilityCheckers = $promotionEligibilityCheckers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
         foreach ($this->promotionEligibilityCheckers as $promotionEligibilityChecker) {

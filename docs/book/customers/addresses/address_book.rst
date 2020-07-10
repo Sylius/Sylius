@@ -16,10 +16,12 @@ On the Customer entity we are holding a collection of addresses:
 
 .. code-block:: php
 
-    /**
-     * @var Collection|AddressInterface[]
-     */
-    protected $addresses;
+    class Customer {
+        /**
+         * @var Collection|AddressInterface[]
+         */
+        protected $addresses;
+    }
 
 We can operate on it as usual - by adding and removing objects.
 

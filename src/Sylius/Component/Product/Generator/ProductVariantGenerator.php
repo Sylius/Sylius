@@ -40,9 +40,6 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
         $this->variantsParityChecker = $variantsParityChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(ProductInterface $product): void
     {
         Assert::true($product->hasOptions(), 'Cannot generate variants for an object without options.');

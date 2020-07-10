@@ -126,9 +126,6 @@ final class PaymentMethodFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): PaymentMethodFixture
     {
         return new PaymentMethodFixture(

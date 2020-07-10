@@ -127,15 +127,38 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" taxon) has child taxon "([^"]+)"$/
      * @Given /^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/
      * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/
+     * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, $firstTaxonName, $secondTaxonName)
+    public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames): void
     {
-        $taxon->addChild($this->createTaxon($firstTaxonName));
-        $taxon->addChild($this->createTaxon($secondTaxonName));
+        foreach ($taxonsNames as $taxonName) {
+            $taxon->addChild($this->createTaxon($taxonName));
+        }
 
         $this->objectManager->persist($taxon);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is enabled/
+     */
+    public function theTaxonIsEnabled(TaxonInterface $taxon): void
+    {
+        $taxon->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" taxon)(?:| also) is disabled$/
+     */
+    public function theTaxonIsDisabled(TaxonInterface $taxon): void
+    {
+        $taxon->setEnabled(false);
+
         $this->objectManager->flush();
     }
 

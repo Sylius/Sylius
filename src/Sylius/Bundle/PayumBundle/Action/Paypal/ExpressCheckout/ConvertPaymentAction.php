@@ -32,8 +32,6 @@ final class ConvertPaymentAction implements ActionInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Convert $request
      */
     public function execute($request): void
@@ -87,9 +85,6 @@ final class ConvertPaymentAction implements ActionInterface
         $request->setResult($details);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

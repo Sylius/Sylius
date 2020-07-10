@@ -33,9 +33,6 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
         $this->channelContext = $channelContext;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCode(): string
     {
         /** @var ChannelInterface $channel */

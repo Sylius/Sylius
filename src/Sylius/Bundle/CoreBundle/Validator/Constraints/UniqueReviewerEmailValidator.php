@@ -45,9 +45,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($review, Constraint $constraint): void
     {
         /** @var UniqueReviewerEmail $constraint */

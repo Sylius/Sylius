@@ -22,9 +22,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -34,9 +31,6 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');

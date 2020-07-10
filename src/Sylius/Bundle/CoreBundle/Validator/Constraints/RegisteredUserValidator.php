@@ -29,9 +29,6 @@ final class RegisteredUserValidator extends ConstraintValidator
         $this->customerRepository = $customerRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($customer, Constraint $constraint): void
     {
         /** @var CustomerInterface $customer */

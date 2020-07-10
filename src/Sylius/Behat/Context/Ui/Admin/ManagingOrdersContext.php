@@ -161,6 +161,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I choose :methodName as a shipping method filter
+     */
+    public function iChooseMethodAsAShippingMethodFilter($methodName)
+    {
+        $this->indexPage->chooseShippingMethodFilter($methodName);
+    }
+
+    /**
      * @When I choose :currencyName as the filter currency
      */
     public function iChooseCurrencyAsTheFilterCurrency($currencyName)

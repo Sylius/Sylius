@@ -31,9 +31,6 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
         $this->cypher = $cypher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (null === $this->cypher) {
@@ -66,9 +63,6 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtendedType(): string
     {
         return GatewayConfigType::class;

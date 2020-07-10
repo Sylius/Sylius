@@ -83,5 +83,5 @@ final class OrderGetMethodExtension implements QueryItemExtensionInterface
         }
 
         throw new AccessDeniedHttpException('Requested method is not allowed.');
-        }
+    }
 }

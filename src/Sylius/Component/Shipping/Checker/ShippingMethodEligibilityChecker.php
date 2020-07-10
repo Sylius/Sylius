@@ -18,9 +18,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
     {
         if (!$category = $method->getCategory()) {

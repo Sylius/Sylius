@@ -34,17 +34,11 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
         $this->reviewSubjectManager = $reviewSubjectManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function update(ReviewableInterface $reviewSubject): void
     {
         $this->modifyReviewSubjectAverageRating($reviewSubject);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateFromReview(ReviewInterface $review): void
     {
         $this->modifyReviewSubjectAverageRating($review->getReviewSubject());

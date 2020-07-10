@@ -53,9 +53,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ProductAttributeInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -76,9 +73,6 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         return $productAttribute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

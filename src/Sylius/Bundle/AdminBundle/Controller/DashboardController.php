@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Controller;
 
-use Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;

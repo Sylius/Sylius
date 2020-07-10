@@ -131,9 +131,6 @@ final class AddressFixtureTest extends TestCase
         $this->assertPartialConfigurationIsInvalid([['custom' => [['customer' => '']]]], 'custom.*.customer');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): AddressFixture
     {
         return new AddressFixture(

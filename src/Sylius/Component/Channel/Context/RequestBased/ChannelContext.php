@@ -33,9 +33,6 @@ final class ChannelContext implements ChannelContextInterface
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChannel(): ChannelInterface
     {
         try {

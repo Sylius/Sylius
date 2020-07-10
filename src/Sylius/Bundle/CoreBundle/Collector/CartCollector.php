@@ -115,7 +115,7 @@ final class CartCollector extends DataCollector
                     'checkout' => $cart->getCheckoutState(),
                     'shipping' => $cart->getShippingState(),
                     'payment' => $cart->getPaymentState(),
-                ]
+                ],
             ];
         } catch (CartNotFoundException $exception) {
             $this->data = [];

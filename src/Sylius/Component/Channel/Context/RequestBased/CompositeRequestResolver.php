@@ -36,9 +36,6 @@ final class CompositeRequestResolver implements RequestResolverInterface
         $this->requestResolvers->insert($requestResolver, $priority);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findChannel(Request $request): ?ChannelInterface
     {
         foreach ($this->requestResolvers as $requestResolver) {

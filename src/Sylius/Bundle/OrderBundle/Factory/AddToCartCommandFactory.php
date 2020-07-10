@@ -20,9 +20,6 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 final class AddToCartCommandFactory implements AddToCartCommandFactoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem): AddToCartCommandInterface
     {
         return new AddToCartCommand($cart, $cartItem);

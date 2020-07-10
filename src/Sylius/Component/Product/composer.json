@@ -2,7 +2,15 @@
     "name": "sylius/product",
     "type": "library",
     "description": "Product catalog system with support for product options and variants.",
-    "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
+    "keywords": [
+        "shop",
+        "ecommerce",
+        "products",
+        "product",
+        "assortment",
+        "options",
+        "variants"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,12 +29,11 @@
     ],
     "require": {
         "php": "^7.3",
-
         "behat/transliterator": "^1.1",
         "sylius/attribute": "^1.6",
         "sylius/resource": "^1.6",
         "symfony/polyfill-iconv": "^1.6",
-        "webmozart/assert": "^1.0"
+        "webmozart/assert": "^1.8"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1"
@@ -37,23 +44,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Product\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Product\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Product\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Product\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

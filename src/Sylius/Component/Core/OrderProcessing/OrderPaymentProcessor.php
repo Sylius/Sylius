@@ -38,9 +38,6 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         $this->targetState = $targetState;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

@@ -38,9 +38,6 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
         $this->shippingChargesCalculator = $shippingChargesCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */

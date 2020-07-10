@@ -50,57 +50,36 @@ class Country implements CountryInterface
         return (string) ($this->getName() ?? $this->getCode());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(?string $locale = null): ?string
     {
         return Countries::getName($this->code, $locale);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProvinces(): Collection
     {
         return $this->provinces;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasProvinces(): bool
     {
         return !$this->provinces->isEmpty();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProvince(ProvinceInterface $province): void
     {
         if (!$this->hasProvince($province)) {
@@ -109,9 +88,6 @@ class Country implements CountryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProvince(ProvinceInterface $province): void
     {
         if ($this->hasProvince($province)) {
@@ -120,9 +96,6 @@ class Country implements CountryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasProvince(ProvinceInterface $province): bool
     {
         return $this->provinces->contains($province);

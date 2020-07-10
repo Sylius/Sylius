@@ -96,7 +96,7 @@ final class SalesDataProviderTest extends WebTestCase
         $this->assertInstanceOf(SalesSummary::class, $salesSummary);
         $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
         $this->assertSame(
-            ['70.00', '40.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00'],
+            ['70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'],
             $salesSummary->getSales()
         );
     }
@@ -114,8 +114,8 @@ final class SalesDataProviderTest extends WebTestCase
         $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
         $this->assertSame(
             [
-                '0.00', '0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'20.00',
-                '70.00', '40.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00' ,'0.00'
+                '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '20.00',
+                '70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00',
             ],
             $salesSummary->getSales()
         );

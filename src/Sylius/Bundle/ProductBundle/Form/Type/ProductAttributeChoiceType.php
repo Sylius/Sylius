@@ -17,9 +17,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 
 final class ProductAttributeChoiceType extends AttributeChoiceType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'sylius_product_attribute_choice';

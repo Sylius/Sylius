@@ -41,17 +41,11 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getImagesByType(string $type): Collection
     {
         return $this->images->filter(function (ImageInterface $image) use ($type): bool {
@@ -59,34 +53,22 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasImages(): bool
     {
         return !$this->images->isEmpty();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasImage(ImageInterface $image): bool
     {
         return $this->images->contains($image);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addImage(ImageInterface $image): void
     {
         $image->setOwner($this);
         $this->images->add($image);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeImage(ImageInterface $image): void
     {
         if ($this->hasImage($image)) {
@@ -95,17 +77,11 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getTranslationClass(): string
     {
         return TaxonTranslation::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function compareTo($other): int
     {
         return $this->code === $other->getCode() ? 0 : 1;

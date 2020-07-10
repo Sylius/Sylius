@@ -2,7 +2,14 @@
     "name": "sylius/channel",
     "type": "library",
     "description": "E-Commerce PHP component for managing different sales channels.",
-    "keywords": ["channel", "multichannel", "multistore", "stores", "ecommerce", "sylius"],
+    "keywords": [
+        "channel",
+        "multichannel",
+        "multistore",
+        "stores",
+        "ecommerce",
+        "sylius"
+    ],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -21,11 +28,10 @@
     ],
     "require": {
         "php": "^7.3",
-
         "sylius/resource": "^1.6",
         "symfony/form": "^4.4",
         "symfony/http-foundation": "^4.4",
-        "zendframework/zend-stdlib": "^3.1"
+        "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
         "pamil/prophecy-common": "^0.1",
@@ -34,23 +40,27 @@
     "config": {
         "bin-dir": "bin"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Channel\\": "" }
+        "psr-4": {
+            "Sylius\\Component\\Channel\\": ""
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Channel\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Component\\Channel\\spec\\": "spec/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "path",
             "url": "../../*/*"
         }
     ],
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.6-dev"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

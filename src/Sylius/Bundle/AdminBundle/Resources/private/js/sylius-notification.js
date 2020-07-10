@@ -33,6 +33,11 @@ const getDismissedSyliusVersion = function getDismissedSyliusVersion() {
 $.fn.extend({
   notification() {
     const notificationMenu = $('#sylius-version-notification');
+
+    if (0 === notificationMenu.length) {
+      return;
+    }
+
     const askFrequency = notificationMenu.attr('data-frequency') * MILISECONDS_MULTIPLIER;
 
     const getCurrentSyliusVersion = function getCurrentSyliusVersion() {

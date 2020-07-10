@@ -35,8 +35,6 @@ final class AuthorizePaymentAction extends GatewayAwareAction
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param Authorize $request
      */
     public function execute($request): void
@@ -74,9 +72,6 @@ final class AuthorizePaymentAction extends GatewayAwareAction
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($request): bool
     {
         return

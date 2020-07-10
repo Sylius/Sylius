@@ -17,9 +17,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function findUser(string $usernameOrEmail): ?UserInterface
     {
         if (filter_var($usernameOrEmail, \FILTER_VALIDATE_EMAIL)) {

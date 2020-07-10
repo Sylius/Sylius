@@ -31,9 +31,6 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
         $this->exchangeRateRepository = $exchangeRateRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint)
     {
         /** @var UniqueCurrencyPair $constraint */

@@ -88,9 +88,6 @@ final class ProductReviewFixtureTest extends TestCase
         $this->assertConfigurationIsValid([['custom' => [['status' => 'new']]]], 'custom.*.status');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductReviewFixture
     {
         return new ProductReviewFixture(

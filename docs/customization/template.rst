@@ -54,7 +54,7 @@ In order to override it you need to create your own: ``templates/bundles/SyliusS
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     {% extends '@SyliusShop/layout.html.twig' %}
 
@@ -99,7 +99,7 @@ In order to override it you need to create your own: ``templates/bundles/SyliusA
 
 Copy the contents of the original template to make your work easier. And then modify it to your needs.
 
-.. code-block:: php
+.. code-block:: twig
 
     <div class="ui segment">
         {{ form_errors(form) }}

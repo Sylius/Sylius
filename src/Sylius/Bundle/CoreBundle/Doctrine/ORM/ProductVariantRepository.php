@@ -19,9 +19,6 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 class ProductVariantRepository extends BaseProductVariantRepository implements ProductVariantRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')

@@ -40,9 +40,6 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): CustomerGroupInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -55,9 +52,6 @@ class CustomerGroupExampleFactory extends AbstractExampleFactory implements Exam
         return $customerGroup;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

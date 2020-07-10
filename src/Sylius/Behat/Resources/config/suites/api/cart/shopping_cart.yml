@@ -7,8 +7,10 @@ default:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shop_api_security
 
                 - sylius.behat.context.transform.cart

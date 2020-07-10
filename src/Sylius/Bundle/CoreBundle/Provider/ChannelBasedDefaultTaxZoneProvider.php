@@ -19,9 +19,6 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 final class ChannelBasedDefaultTaxZoneProvider implements ZoneProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getZone(OrderInterface $order): ?ZoneInterface
     {
         return $order->getChannel()->getDefaultTaxZone();

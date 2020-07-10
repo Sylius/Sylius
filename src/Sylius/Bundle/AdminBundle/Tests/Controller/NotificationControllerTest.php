@@ -84,9 +84,6 @@ final class NotificationControllerTest extends TestCase
         $this->assertEquals($content, $response->getContent());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->client = $this->prophesize(ClientInterface::class);

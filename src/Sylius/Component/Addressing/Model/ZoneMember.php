@@ -24,41 +24,26 @@ class ZoneMember implements ZoneMemberInterface
     /** @var ZoneInterface|null */
     protected $belongsTo;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBelongsTo(): ?ZoneInterface
     {
         return $this->belongsTo;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBelongsTo(?ZoneInterface $belongsTo): void
     {
         $this->belongsTo = $belongsTo;

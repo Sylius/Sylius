@@ -18,9 +18,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 final class SyliusAddressingBundle extends AbstractResourceBundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedDrivers(): array
     {
         return [

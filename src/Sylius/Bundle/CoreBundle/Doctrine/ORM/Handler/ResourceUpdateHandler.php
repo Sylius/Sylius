@@ -31,8 +31,6 @@ final class ResourceUpdateHandler implements ResourceUpdateHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws RaceConditionException
      */
     public function handle(

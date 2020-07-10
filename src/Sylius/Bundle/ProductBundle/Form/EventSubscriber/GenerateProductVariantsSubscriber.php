@@ -36,9 +36,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

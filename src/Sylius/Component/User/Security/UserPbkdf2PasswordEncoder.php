@@ -57,8 +57,6 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \LogicException when the algorithm is not supported
      */
     public function encode(CredentialsHolderInterface $user): string

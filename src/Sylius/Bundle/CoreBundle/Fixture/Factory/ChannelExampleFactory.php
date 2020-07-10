@@ -75,9 +75,6 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->configureOptions($this->optionsResolver);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(array $options = []): ChannelInterface
     {
         $options = $this->optionsResolver->resolve($options);
@@ -125,9 +122,6 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $channel;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver

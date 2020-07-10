@@ -30,7 +30,6 @@ sylius:
             verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
     homepage:
         about_us: 'Über uns'
-        about_us_content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad adipisci aperiam consectetur cum dicta dolores ducimus, eveniet ex exercitationem harum in iure labore libero magnam minima neque, numquam officiis possimus quasi reiciendis rem repellat repellendus rerum ut vel veniam vitae? Beatae consectetur culpa debitis ex laudantium porro unde? Modi.'
         newsletter: 'Newsletter'
         subscribe: 'Abonnieren'
     lightbox:

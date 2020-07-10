@@ -26,9 +26,6 @@ final class OrderNumberAssigner implements OrderNumberAssignerInterface
         $this->numberGenerator = $numberGenerator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function assignNumber(OrderInterface $order): void
     {
         if (null !== $order->getNumber()) {

@@ -69,9 +69,6 @@ final class ProductAssociationFixtureTest extends TestCase
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): ProductAssociationFixture
     {
         return new ProductAssociationFixture(

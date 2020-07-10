@@ -161,9 +161,6 @@ final class ConfigurationTest extends TestCase
         ]]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

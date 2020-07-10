@@ -41,7 +41,6 @@ final class Week extends FunctionNode
         switch ($platformName) {
             case 'mysql':
                 return sprintf('WEEK(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
-
             case 'postgresql':
                 return sprintf('EXTRACT(WEEK FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }

@@ -20,9 +20,6 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class AvailableProductOptionValuesResolver implements AvailableProductOptionValuesResolverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(ProductInterface $product, ProductOptionInterface $productOption): Collection
     {
         if (!$product->hasOption($productOption)) {

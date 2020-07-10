@@ -63,9 +63,6 @@ final class LocaleFixtureTest extends TestCase
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getConfiguration(): LocaleFixture
     {
         return new LocaleFixture(

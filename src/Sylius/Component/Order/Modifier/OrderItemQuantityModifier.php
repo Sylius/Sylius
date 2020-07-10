@@ -26,9 +26,6 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
         $this->orderItemUnitFactory = $orderItemUnitFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
         $currentQuantity = $orderItem->getQuantity();
