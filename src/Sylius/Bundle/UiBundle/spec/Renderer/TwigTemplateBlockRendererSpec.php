@@ -14,15 +14,16 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 use Twig\Environment;
 
 final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 {
-    function let(Environment $twig): void
+    function let(Environment $twig, ExpressionLanguage $expressionLanguage): void
     {
-        $this->beConstructedWith($twig);
+        $this->beConstructedWith($twig, $expressionLanguage);
     }
 
     function it_is_a_template_block_renderer(): void
