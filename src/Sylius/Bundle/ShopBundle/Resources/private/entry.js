@@ -14,3 +14,6 @@ import './scss/style.scss';
 
 import 'sylius/ui-resources/img/logo.png';
 import 'sylius/ui-resources/img/avatar.png';
+
+import './img/homepage-banner.jpg';
+import './img/sylius-plus-banner.png';
