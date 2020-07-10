@@ -18,6 +18,7 @@ use Sylius\Bundle\UiBundle\DependencyInjection\SyliusUiExtension;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\ExpressionLanguage\Expression;
 
 final class SyliusUiExtensionTest extends AbstractExtensionTestCase
 {
@@ -75,6 +76,38 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
                 'fourth_block' => new Definition(TemplateBlock::class, ['fourth_block', 'event_name', 'fourth.html.twig', [], -5, true]),
             ]]
         );
+    }
+
+    /** @test */
+    public function it_converts_expressions_to_expression_objects(): void
+    {
+        $this->container->setParameter('kernel.debug', true);
+
+        $this->load(['events' => [
+            'event_name' => ['blocks' => [
+                'first_block' => ['template' => 'first.html.twig', 'context' => ['expression' => '@=service("kernel").getLogDir()'], 'enabled' => true, 'priority' => 0]
+            ]],
+        ]]);
+
+        $this->assertContainerBuilderHasService(TemplateBlockRegistryInterface::class);
+
+        $registryDefinition = $this->container->getDefinition(TemplateBlockRegistryInterface::class);
+        $argument = $registryDefinition->getArgument(0);
+        $this->assertArrayHasKey('event_name', $argument);
+        $this->assertArrayHasKey('first_block', $argument['event_name']);
+
+        /** @var Definition $definition */
+        $definition = $argument['event_name']['first_block'];
+        $this->assertInstanceOf(Definition::class, $definition);
+
+        $context = $definition->getArgument(3);
+
+        $this->assertArrayHasKey('expression', $context);
+
+        /** @var Expression $expression */
+        $expression = $context['expression'];
+        $this->assertInstanceOf(Expression::class, $expression);
+        $this->assertEquals('service("kernel").getLogDir()', (string) $expression);
     }
 
     protected function getContainerExtensions(): array
