@@ -27,9 +27,9 @@
     ],
     "require": {
         "php": "^7.3",
+        "laminas/laminas-stdlib": "^3.2",
         "sylius/resource": "^1.6",
-        "symfony/intl": "^4.4",
-        "zendframework/zend-stdlib": "^3.2"
+        "symfony/intl": "^4.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1"

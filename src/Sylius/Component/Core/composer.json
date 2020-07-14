@@ -28,6 +28,7 @@
     "require": {
         "php": "^7.3",
         "knplabs/gaufrette": "^0.8",
+        "laminas/laminas-stdlib": "^3.2",
         "payum/payum": "^1.6",
         "php-http/guzzle6-adapter": "^2.0",
         "sylius/addressing": "^1.6",
@@ -49,8 +50,7 @@
         "sylius/taxonomy": "^1.6",
         "sylius/user": "^1.6",
         "symfony/http-foundation": "^4.4",
-        "webmozart/assert": "^1.8",
-        "zendframework/zend-stdlib": "^3.2"
+        "webmozart/assert": "^1.8"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1",
