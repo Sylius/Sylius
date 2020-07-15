@@ -15,10 +15,13 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -38,8 +41,29 @@ abstract class UserType extends AbstractResourceType
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.user.enabled',
+                'required' => false,
+            ])
+            ->add('verifiedAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'label' => 'sylius.form.user.verified_date',
+                'required' => false,
             ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
+            $data = $event->getData();
+            if(null !== $data) {
+                if($data->isVerified()) {
+                    $form = $event->getForm();
+                    $form->add('verifiedAt', DateTimeType::class, [
+                        'widget' => 'single_text',
+                        'label' => 'sylius.form.user.verified_date',
+                        'required' => false,
+                        'disabled' => true,
+                    ]);
+                }
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
