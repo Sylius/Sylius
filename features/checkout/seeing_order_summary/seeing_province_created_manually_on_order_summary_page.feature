@@ -17,7 +17,7 @@ Feature: Seeing province created manually on order summary page
     @ui @javascript
     Scenario: Seeing manually defined province on order summary page
         Given I added product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the billing address for "Jon Snow" from "Ankh Morpork", "90210", "London", "United Kingdom", "East of England"
         And I specify the shipping address for "Jon Snow" from "Ankh Morpork", "90210", "London", "United Kingdom", "East of England"
         And I complete the addressing step

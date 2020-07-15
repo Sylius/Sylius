@@ -33,7 +33,7 @@ Feature: Prevent skipping checkout steps
     @ui
     Scenario: Skipping addressing checkout step
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I want to complete checkout
         Then I should be on the checkout addressing step
 
@@ -41,7 +41,7 @@ Feature: Prevent skipping checkout steps
     Scenario: Skipping addressing checkout step when order total is zero
         Given I have product "PHP T-Shirt" in the cart
         And I have product "Paganini T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I want to complete checkout
         Then I should be on the checkout addressing step
 

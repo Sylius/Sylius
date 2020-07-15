@@ -17,12 +17,12 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
     @ui
     Scenario: Prices get updated on checkout's start
         When the exchange rate of "US Dollar" to "British Pound" is 2.0
-        And I am at the checkout addressing step
+        And I am addressing my order
         Then the subtotal of "The Pug Mug" item should be "£20.00"
 
     @ui
     Scenario: Prices get updated after the addressing step
-        Given I am at the checkout addressing step
+        Given I am addressing my order
         When the exchange rate of "US Dollar" to "British Pound" is 5.0
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         Then the subtotal of "The Pug Mug" item should be "£50.00"

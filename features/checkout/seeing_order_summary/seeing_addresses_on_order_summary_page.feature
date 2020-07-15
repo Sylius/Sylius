@@ -22,7 +22,7 @@ Feature: Seeing order addresses on order summary page
     @ui
     Scenario: Seeing different shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

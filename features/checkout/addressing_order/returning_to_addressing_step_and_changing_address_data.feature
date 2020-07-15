@@ -12,7 +12,7 @@ Feature: Returning to the addressing step and changing address data
     @ui
     Scenario: Going back to addressing step with and changing email
         Given I have product "Apollo 11 T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

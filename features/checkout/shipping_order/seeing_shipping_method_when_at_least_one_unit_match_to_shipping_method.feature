@@ -25,7 +25,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
     Scenario: Seeing shipping methods which match to my units categories
         Given I have product "Star Trek Ship" in the cart
         And I have product "Picasso T-Shirt" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
@@ -35,7 +35,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
     @ui
     Scenario: Not seeing shipping method which not match to my units category
         Given I have product "Star Trek Ship" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
@@ -46,7 +46,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
     Scenario: Seeing no shipping methods if any of them match to my units categories
         Given the store has a product "Rocket T-shirt" priced at "$20.00"
         And I have product "Rocket T-shirt" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then there should be information about no available shipping methods
@@ -55,7 +55,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
     Scenario: Seeing no shipping methods if any of my unit has variant with shipping category matching to the shipping category of shipping method
         Given I have "T-shirt banana" with Size "S" in the cart
         And I have "T-shirt banana" with Size "M" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then there should be information about no available shipping methods
@@ -66,7 +66,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And the "T-shirt banana" product's "S" size belongs to "Over-sized" shipping category
         And I have "T-shirt banana" with Size "S" in the cart
         And I have "T-shirt banana" with Size "M" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step

@@ -16,7 +16,7 @@ Feature: Ability to confirm an order with a promotion on shipping
   @ui
   Scenario: Successfully placing an order
     Given I have product "PHP T-Shirt" in the cart
-    And I am at the checkout addressing step
+    And I am addressing my order
     When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
     And I proceed with "DHL" shipping method and "Offline" payment
     Then I should be on the checkout summary step

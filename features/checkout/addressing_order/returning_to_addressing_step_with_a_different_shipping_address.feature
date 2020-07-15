@@ -12,7 +12,7 @@ Feature: Returning to addressing step with a different shipping address
     @ui
     Scenario: Going back to addressing step after submitting a different shipping address
         Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
@@ -23,7 +23,7 @@ Feature: Returning to addressing step with a different shipping address
     @ui
     Scenario: Going back to addressing step after not submitting a different shipping address
         Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I complete the addressing step
@@ -33,7 +33,7 @@ Feature: Returning to addressing step with a different shipping address
     @ui @javascript
     Scenario: Going back to addressing step after submitting a different shipping address
         Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I specify the shipping address as "Brooklyn", "70 Joy Ridge St", "11225", "United States" for "Jane Doe"
@@ -44,7 +44,7 @@ Feature: Returning to addressing step with a different shipping address
     @ui @javascript
     Scenario: Going back to addressing step after not submitting a different shipping address
         Given I have product "Summer T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I complete the addressing step

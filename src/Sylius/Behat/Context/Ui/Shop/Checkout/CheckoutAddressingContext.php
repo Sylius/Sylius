@@ -55,7 +55,7 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Given I am at the checkout addressing step
+     * @Given I am addressing my order
      * @When I go to the checkout addressing step
      * @When I go back to addressing step of the checkout
      */

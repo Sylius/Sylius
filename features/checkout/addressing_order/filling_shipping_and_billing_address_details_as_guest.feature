@@ -12,7 +12,7 @@ Feature: Addressing an order
     @ui
     Scenario: Address an order without different shipping address
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -21,7 +21,7 @@ Feature: Addressing an order
     @ui
     Scenario: Address an order with different shipping address
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "eddard.stark@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -32,7 +32,7 @@ Feature: Addressing an order
     Scenario: Address an order using existing email
         Given the store has customer "eddard.stark@example.com"
         And I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the email as "eddard.stark@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

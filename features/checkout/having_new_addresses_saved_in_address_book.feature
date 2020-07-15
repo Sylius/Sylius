@@ -14,7 +14,7 @@ Feature: Having new addresses saved in the address book after checkout
 
     @ui
     Scenario: Having the shipping address saved in my address book
-        Given I am at the checkout addressing step
+        Given I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
@@ -23,7 +23,7 @@ Feature: Having new addresses saved in the address book after checkout
 
     @ui
     Scenario: Having the shipping and billing addresses saved in my address book
-        Given I am at the checkout addressing step
+        Given I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I specify the shipping address as "Pseudopolis", "Haggard", "00-007", "United States" for "Sarah Connor"
         And I complete the addressing step
@@ -35,7 +35,7 @@ Feature: Having new addresses saved in the address book after checkout
     Scenario: Addresses already existent in my book don't get saved
         Given I have an address "Jon Snow", "Frost Alley", "90210", "Ankh Morpork", "United States" in my address book
         And I have an address "Sarah Connor", "Haggard", "00-007", "Pseudopolis", "United States" in my address book
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I specify the shipping address as "Pseudopolis", "Haggard", "00-007", "United States" for "Sarah Connor"
         And I complete the addressing step

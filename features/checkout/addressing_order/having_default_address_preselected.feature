@@ -15,7 +15,7 @@ Feature: Having a default address preselected
     @ui
     Scenario: Having a default address preselected on checkout addressing step
         When I add product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
     @ui

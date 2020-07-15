@@ -13,6 +13,6 @@ Feature: Returning from addressing step to shop homepage
     @ui
     Scenario: Returning to shop from addressing step
         Given I have product "The Stick of Truth" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I go back to store
         Then I should be redirected to the homepage

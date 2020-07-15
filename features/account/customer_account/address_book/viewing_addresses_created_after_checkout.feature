@@ -16,7 +16,7 @@ Feature: Viewing addresses created after checkout
     @ui
     Scenario: Viewing address created after placing an order
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the first and last name as "Mike Ross" for billing address
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment

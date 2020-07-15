@@ -27,7 +27,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
     Scenario: Seeing only shipping method which category is same as categories of all my units
         Given I have product "Rocket T-shirt" in the cart
         And I have product "Picasso T-shirt" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
@@ -37,7 +37,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
     @ui
     Scenario: Seeing shipping method which category is same as category of my unit
         Given I have product "Star Trek Ship" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step
@@ -48,7 +48,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
     Scenario: Seeing no shipping methods if my units matches to different shipping categories
         And I have product "Rocket T-shirt" in the cart
         And I have product "Star Trek Ship" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then there should be information about no available shipping methods
@@ -59,7 +59,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And the "T-shirt banana" product's "M" size belongs to "Over-sized" shipping category
         And I have "T-shirt banana" with Size "S" in the cart
         And I have "T-shirt banana" with Size "M" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then there should be information about no available shipping methods
@@ -70,7 +70,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And the "T-shirt banana" product's "S" size belongs to "Standard" shipping category
         And I have "T-shirt banana" with Size "S" in the cart
         And I have "T-shirt banana" with Size "M" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step

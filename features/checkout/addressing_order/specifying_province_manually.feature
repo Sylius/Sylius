@@ -16,7 +16,7 @@ Feature: Specifying province for a country manually
     @ui @javascript
     Scenario: Specifying province name manually for country without provinces defined
         Given I added product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the shipping address as "Cavendish", "Green Gables", "91-242", "Poland" for "Anne Shirley"
         And I specify the province name manually as "Lubelskie" for shipping address
         And I specify the billing address as "Warsaw", "Obarowska", "91-242", "Poland" for "Frog Monica"
@@ -28,7 +28,7 @@ Feature: Specifying province for a country manually
     Scenario: Being unable to specify province name manually for country with defined provinces
         Given the country "United States" has the "Utah" province with "UT" code
         And I added product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the shipping address as "Cavendish", "Green Gables", "91-242", "United States" for "Anne Shirley"
         And I specify the billing address as "Frogpolis", "Leaf", "91-242", "United States" for "Frog Monica"
         Then I should not be able to specify province name manually for shipping address

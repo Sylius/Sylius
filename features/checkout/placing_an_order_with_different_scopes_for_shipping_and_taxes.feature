@@ -23,7 +23,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And the store ships everything for free within the "GLOBAL-SHIPPING" zone
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "Germany" for "Patrick Jane"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
@@ -39,7 +39,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And the store ships everything for free within the "US" zone
         And this product belongs to "Clothes" tax category
         And I have product "Jane's Vest" in the cart
-        Given I am at the checkout addressing step
+        Given I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
@@ -53,7 +53,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And it has the "United States" country member
         And the store ships everything for free within the "US" zone
         And I have product "Jane's Vest" in the cart
-        Given I am at the checkout addressing step
+        Given I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Patrick Jane"
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment

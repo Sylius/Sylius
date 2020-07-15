@@ -13,7 +13,7 @@ Feature: Order addressing validation
     @ui
     Scenario: Address an order without name, city and street
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I do not specify any shipping address information
         And I try to complete the addressing step
         Then I should be notified that the "first name" and the "last name" in shipping details are required
@@ -22,7 +22,7 @@ Feature: Order addressing validation
     @ui
     Scenario: Address an order's billing address without name, city and street
         Given I have product "PHP T-Shirt" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I do not specify any billing address information
         And I try to complete the addressing step

@@ -15,7 +15,7 @@ Feature: Skipping shipping step when order does not require any shipping
     @ui
     Scenario: Seeing checkout payment page after addressing if none of order items require shipping
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout payment step
@@ -24,7 +24,7 @@ Feature: Skipping shipping step when order does not require any shipping
     Scenario: Seeing checkout shipping page after addressing if at least one of order items require shipping
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         And I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should be on the checkout shipping step

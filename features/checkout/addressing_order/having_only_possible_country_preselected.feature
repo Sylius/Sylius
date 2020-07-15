@@ -13,12 +13,12 @@ Feature: Having only possible country preselected
     @ui
     Scenario: Having the only country preselected on addressing form
         When I add product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         Then I should have "United States" selected as country
 
     @ui
     Scenario: Having no country selected if there is more than one country available
         Given the store operates in "United Kingdom"
         When I add product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        And I am addressing my order
         Then I should have no country selected

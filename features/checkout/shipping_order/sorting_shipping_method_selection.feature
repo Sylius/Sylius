@@ -15,7 +15,7 @@ Feature: Sorting shipping method selection
     @ui
     Scenario: Seeing shipping methods sorted
         Given I have product "Targaryen T-Shirt" in the cart
-        When I am at the checkout addressing step
+        When I am addressing my order
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then I should have "Narwhal Submarine" shipping method available as the first choice
