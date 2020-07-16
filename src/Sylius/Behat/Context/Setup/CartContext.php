@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -32,8 +33,8 @@ final class CartContext implements Context
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I have (product "[^"]+") in the (cart)$/
      */
-    public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
+    public function iAddedProductToTheCart(ProductInterface $product, OrderInterface $cart): void
     {
-        $this->commandBus->dispatch(AddItemToCart::createFromData($tokenValue, $product->getCode(), 1));
+        $this->commandBus->dispatch(AddItemToCart::createFromData($cart->getTokenValue(), $product->getCode(), 1));
     }
 }

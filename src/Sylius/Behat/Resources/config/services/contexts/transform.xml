@@ -148,10 +148,10 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartTokenContext">
-            <argument type="service" id="sylius.behat.api_platform_client.cart" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartContext">
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius_default.bus" />
         </service>
 
         <service id="sylius.behat.context.transform.zone" class="Sylius\Behat\Context\Transform\ZoneContext">

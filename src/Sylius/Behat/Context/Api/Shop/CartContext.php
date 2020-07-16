@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,40 +55,43 @@ final class CartContext implements Context
     /**
      * @When /^I clear my (cart)$/
      */
-    public function iClearMyCart(string $tokenValue): void
+    public function iClearMyCart(OrderInterface $cart): void
     {
-        $this->cartsClient->delete($tokenValue);
+        $this->cartsClient->delete($cart->getTokenValue());
     }
 
     /**
      * @When /^I see the summary of my (cart)$/
      */
-    public function iSeeTheSummaryOfMyCart(string $tokenValue): void
+    public function iSeeTheSummaryOfMyCart(OrderInterface $cart): void
     {
-        $this->cartsClient->show($tokenValue);
+        $this->cartsClient->show($cart->getTokenValue());
     }
 
     /**
      * @When /^I (?:add|added) (this product) to the (cart)$/
      */
-    public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
+    public function iAddThisProductToTheCart(ProductInterface $product, OrderInterface $cart): void
     {
-        $this->putProductToCart($product, $tokenValue);
+        $this->putProductToCart($product, $cart->getTokenValue());
     }
 
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      */
-    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
+    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, OrderInterface $cart): void
     {
-        $this->putProductToCart($product, $tokenValue, $quantity);
+        $this->putProductToCart($product, $cart->getTokenValue(), $quantity);
     }
 
     /**
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
-    public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    public function iRemoveProductFromTheCart(ProductInterface $product, OrderInterface $cart): void
     {
+        /** @var string $tokenValue */
+        $tokenValue = $cart->getTokenValue();
+
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         foreach ($items as $item) {
@@ -117,9 +121,9 @@ final class CartContext implements Context
     /**
      * @Then /^my (cart)'s total should be ("[^"]+")$/
      */
-    public function myCartSTotalShouldBe(string $tokenValue, int $total): void
+    public function myCartSTotalShouldBe(OrderInterface $cart, int $total): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $response = $this->cartsClient->show($cart->getTokenValue());
 
         $responseTotal = $this->responseChecker->getValue($response, 'total');
         Assert::same($total, (int) $responseTotal);
@@ -128,9 +132,9 @@ final class CartContext implements Context
     /**
      * @Then /^my (cart) should be empty$/
      */
-    public function myCartShouldBeEmpty(string $tokenValue): void
+    public function myCartShouldBeEmpty(OrderInterface $order): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $response = $this->cartsClient->show($order->getTokenValue());
 
         Assert::true(
             $this->responseChecker->isShowSuccessful($response),
