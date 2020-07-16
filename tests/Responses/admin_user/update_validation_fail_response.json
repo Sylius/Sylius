@@ -15,6 +15,7 @@
             },
             "plainPassword": {},
             "enabled": {},
+            "verifiedAt": {},
             "firstName": {},
             "lastName": {},
             "localeCode": {

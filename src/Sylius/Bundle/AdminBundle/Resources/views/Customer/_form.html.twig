@@ -32,6 +32,7 @@
                 <div id="user-form" {% if form.user.vars.data.id is not defined %} style="display: none" {% endif %}>
                     {{ form_row(form.user.plainPassword) }}
                     {{ form_row(form.user.enabled) }}
+                    {{ form_row(form.user.verifiedAt) }}
                 </div>
             {% endif %}
         </div>
