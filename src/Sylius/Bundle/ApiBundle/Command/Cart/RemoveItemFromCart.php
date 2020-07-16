@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-final class RemoveItemFromCart
+class RemoveItemFromCart
 {
     /** @var string|null */
     public $tokenValue;
