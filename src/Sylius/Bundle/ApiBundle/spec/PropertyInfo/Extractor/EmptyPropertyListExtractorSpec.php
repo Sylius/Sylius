@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\PropertyInfo\Extractor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\PickupCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Symfony\Component\PropertyInfo\PropertyListExtractorInterface;
 
 final class EmptyPropertyListExtractorSpec extends ObjectBehavior
