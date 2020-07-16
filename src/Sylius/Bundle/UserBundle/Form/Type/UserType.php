@@ -52,16 +52,14 @@ abstract class UserType extends AbstractResourceType
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
             $data = $event->getData();
-            if(null !== $data) {
-                if($data->isVerified()) {
-                    $form = $event->getForm();
-                    $form->add('verifiedAt', DateTimeType::class, [
-                        'widget' => 'single_text',
-                        'label' => 'sylius.form.user.verified_date',
-                        'required' => false,
-                        'disabled' => true,
-                    ]);
-                }
+            if((null !== $data) && $data->isVerified()) {
+                $form = $event->getForm();
+                $form->add('verifiedAt', DateTimeType::class, [
+                    'widget' => 'single_text',
+                    'label' => 'sylius.form.user.verified_date',
+                    'required' => false,
+                    'disabled' => true,
+                ]);
             }
         });
     }
