@@ -21,10 +21,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PromoteUserCommand extends AbstractRoleCommand
 {
+    protected static $defaultName = 'sylius:user:promote';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:user:promote')
             ->setDescription('Promotes a user by adding roles.')
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),

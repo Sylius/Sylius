@@ -22,10 +22,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'sylius:cancel-unpaid-orders';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:cancel-unpaid-orders')
             ->setDescription(
                 'Removes order that have been unpaid for a configured period. Configuration parameter - sylius_order.order_expiration_period.'
             );

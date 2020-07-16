@@ -21,6 +21,8 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 final class InstallCommand extends AbstractInstallCommand
 {
+    protected static $defaultName = 'sylius:install';
+
     /**
      * @var array
      *
@@ -48,7 +50,6 @@ final class InstallCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install')
             ->setDescription('Installs Sylius in your preferred environment.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command installs Sylius.
