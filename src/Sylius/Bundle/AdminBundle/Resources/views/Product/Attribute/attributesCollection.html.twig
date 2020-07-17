@@ -6,14 +6,14 @@
 
     <div class="ui top attached tabular menu">
         {% for localeCode, translationForm in attr.translations %}
-            <a class="item{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
+            <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
                 {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
             </a>
         {% endfor %}
     </div>
 
     {% for localeCode, translationForm in attr.translations %}
-        <div class="ui bottom attached tab segment{% if 0 == loop.index0 %} active{% endif %}" data-tab="{{ localeCode }}">
+        <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
             {% apply spaceless %}
                 {% for child in form %}
                     {% if localeCode == child.localeCode.vars.value %}

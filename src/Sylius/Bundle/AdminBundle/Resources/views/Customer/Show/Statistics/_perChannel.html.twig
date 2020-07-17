@@ -1,10 +1,10 @@
 {% import '@SyliusAdmin/Common/Macro/money.html.twig' as money %}
 
-<div class="title{% if 0 == loop.index0 %} active{% endif %}">
+<div class="title{% if loop.first %} active{% endif %}">
     <i class="dropdown icon"></i>
     {{ statistic.channel.name }}
 </div>
-<div class="content{% if 0 == loop.index0 %} active{% endif %}">
+<div class="content{% if loop.first %} active{% endif %}">
     <div class="ui center aligned stackable divided grid">
         <div class="four column row">
             <div class="column middle aligned">
