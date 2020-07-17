@@ -22,7 +22,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class SelectAttributeTypeTest extends TypeTestCase
 {
-    /** @var ProphecyInterface|TranslationLocaleProviderInterface */
+    /** @var ProphecyInterface */
     private $translationProvider;
 
     /**
@@ -43,6 +43,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
     protected function setUp(): void
     {
         $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
+        /** @psalm-suppress TooManyArguments */
         $this->translationProvider->getDefaultLocaleCode()->willReturn('en_GB');
 
         parent::setUp();
