@@ -20,9 +20,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InformAboutGUSCommand extends Command
 {
+    protected static $defaultName = 'sylius:inform-about-gus';
+
     protected function configure(): void
     {
-        $this->setName('sylius:inform-about-gus');
         $this->setDescription('Informs about Sylius internal statistical service');
     }
 
