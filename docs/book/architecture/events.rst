@@ -55,6 +55,25 @@ And after the data storage is updated, ``sylius.<resource_name>.post_create`` is
 The same set of events is available for the ``update`` and ``delete`` operations.
 All the dispatches are using the ``GenericEvent`` class and return the resource object by the ``getSubject`` method.
 
+
+Checkout events rules
+~~~~~~~~~~~~~~~~~
+
+To dispatch checkout steps the events names are overloaded.
+See _sylius.event in src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml
+
++--------------------------------------------+-------------------------------+
+| Event                                      | Description                   |
++============================================+===============================+
+| sylius.order.initialize_address            | Before creating address view  |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_select_shipping    | Before creating shipping view |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_payment            | Before creating payment view  |
++--------------------------------------------+-------------------------------+
+| sylius.order.initialize_complete           | Before creating complete view |
++--------------------------------------------+-------------------------------+
+
 What events are already used in Sylius?
 ---------------------------------------
 
