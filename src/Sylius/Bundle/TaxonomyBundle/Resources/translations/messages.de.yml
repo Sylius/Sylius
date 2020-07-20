@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Beschreibung
+            enabled: Aktiviert
             name: Name
             parent: Übergeordnet
             slug: Produkt SEO-URL

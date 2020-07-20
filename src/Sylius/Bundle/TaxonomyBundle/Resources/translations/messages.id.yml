@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Keterangan
+            enabled: Diaktifkan
             name: Nama
             parent: Induk
             slug: Slug

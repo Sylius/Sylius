@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Descriere
+            enabled: Activat
             name: Nume produs
             parent: Părinte
             slug: Slug

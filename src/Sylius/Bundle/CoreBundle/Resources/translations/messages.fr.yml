@@ -75,7 +75,7 @@ sylius:
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
-            main_taxon: Taxinomie principale
+            main_taxon: Taxonomie principale
             channels: Canaux
             enabled: Activé
         product_filter:
@@ -125,6 +125,7 @@ sylius:
             shipping_required: Expédition requise ?
             weight: Poids
             width: Largeur
+            tracked_help: Si cette option est activée, Sylius gardera une trace du stock et cessera de vendre le produit une fois que le stock aura atteint 0.
         attribute:
             product_attribute_value:
                 attribute: Attribut 
