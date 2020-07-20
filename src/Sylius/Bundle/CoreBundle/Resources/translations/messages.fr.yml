@@ -75,7 +75,7 @@ sylius:
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
-            main_taxon: Taxinomie principale
+            main_taxon: Taxonomie principale
             channels: Canaux
             enabled: Activé
         product_filter:
