@@ -48,6 +48,13 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $this->getResponseContentValue($response, $key);
     }
 
+    public function getTranslationValue(Response $response, string $key): string
+    {
+        $translations = $this->getResponseContentValue($response, 'translations');
+
+        return $translations['en_US'][$key];
+    }
+
     public function getError(Response $response): string
     {
         if ($this->hasKey($response, 'message')) {
@@ -72,6 +79,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         return
             $response->getMessage() === 'JWT Token not found' &&
             $response->getStatusCode() === Response::HTTP_UNAUTHORIZED;
+    }
+
+    public function hasCollection(Response $response): bool
+    {
+        return $this->hasKey($response, 'hydra:member');
     }
 
     public function isShowSuccessful(Response $response): bool
@@ -128,6 +140,14 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool
     {
+        if (!$this->hasCollection($response)) {
+            $resource = $this->getResponseContent($response);
+
+            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
+                return true;
+            }
+        }
+
         foreach ($this->getCollection($response) as $resource) {
             if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
                 return true;
