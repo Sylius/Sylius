@@ -28,10 +28,17 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
     /** @var ThemeRepositoryInterface */
     private $themeRepository;
 
-    public function __construct(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
-    {
+    /** @var string|null */
+    private $defaultThemeName;
+
+    public function __construct(
+        ChannelContextInterface $channelContext,
+        ThemeRepositoryInterface $themeRepository,
+        ?string $defaultThemeName = null
+    ) {
         $this->channelContext = $channelContext;
         $this->themeRepository = $themeRepository;
+        $this->defaultThemeName = $defaultThemeName;
     }
 
     public function getTheme(): ?ThemeInterface
@@ -39,17 +46,30 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         try {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
-            $themeName = $channel->getThemeName();
+            $channelThemeName = $channel->getThemeName();
 
-            if (null === $themeName) {
-                return null;
+            if (null !== $channelThemeName) {
+                $theme = $this->themeRepository->findOneByName($channelThemeName);
+
+                if (null !== $theme) {
+                    return $theme;
+                }
             }
 
-            return $this->themeRepository->findOneByName($themeName);
+            return $this->getDefaultTheme();
         } catch (ChannelNotFoundException $exception) {
-            return null;
+            return $this->getDefaultTheme();
         } catch (\Exception $exception) {
-            return null;
+            return $this->getDefaultTheme();
         }
+    }
+
+    public function getDefaultTheme(): ?ThemeInterface
+    {
+        if (null !== $this->defaultThemeName) {
+            return $this->themeRepository->findOneByName($this->defaultThemeName);
+        }
+
+        return null;
     }
 }

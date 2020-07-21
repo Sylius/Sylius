@@ -23,6 +23,7 @@
         <service id="sylius.theme.context.channel_based" class="Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext" public="false">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.repository.theme" />
+            <argument>%default_theme%</argument>
         </service>
 
         <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext" lazy="true">
