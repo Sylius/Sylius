@@ -36,7 +36,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $customerFactory, $manager, $stateMachineFactory);
     }
 
-    function it_handles_order_shipment_addressing(
+    function it_handles_addressing_an_order(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,

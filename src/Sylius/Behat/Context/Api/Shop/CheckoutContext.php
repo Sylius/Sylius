@@ -62,7 +62,6 @@ final class CheckoutContext implements Context
         $this->content['email'] = $email;
     }
 
-
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
