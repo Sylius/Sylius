@@ -20,6 +20,7 @@
 
         <service id="sylius.behat.context.api.shop.cart" class="Sylius\Behat\Context\Api\Shop\CartContext">
             <argument type="service" id="sylius.behat.api_platform_client.cart" />
+            <argument type="service" id="sylius.behat.api_platform_client.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>

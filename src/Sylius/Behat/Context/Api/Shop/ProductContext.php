@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -47,12 +46,14 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductName(string $name): void
     {
-        Assert::true($this->responseChecker->hasItemWithTranslation(
-            $this->client->getLastResponse(),
-            'en_US',
-            'name',
-            $name))
-        ;
+        Assert::true(
+            $this->responseChecker->hasItemWithTranslation(
+                $this->client->getLastResponse(),
+                'en_US',
+                'name',
+                $name
+            )
+        );
 
         Assert::same($this->responseChecker->getTranslationValue($this->client->getLastResponse(), 'name'), $name);
     }

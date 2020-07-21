@@ -37,7 +37,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $this->supports(TaxonInterface::class, Request::METHOD_GET)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_context_has_not_channel(): void
+    function it_throws_an_exception_if_context_has_no_channel(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -50,7 +50,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_context_has_not_locale_code(ChannelInterface $channel): void
+    function it_throws_an_exception_if_context_has_no_locale_code(ChannelInterface $channel): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -63,7 +63,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_provides_product_from_product_id_for_logged_admin(
+    function it_provides_product_by_code_for_a_logged_in_admin_user(
         ProductRepositoryInterface $productRepository,
         UserContextInterface $userContext,
         AdminUserInterface $user,
@@ -85,7 +85,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_provides_product_from_product_slug_for_logged_user(
+    function it_provides_product_by_slug_for_a_logged_in_shop_user(
         ProductRepositoryInterface $productRepository,
         UserContextInterface $userContext,
         UserInterface $user,
@@ -104,14 +104,14 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                    ContextKeys::LOCALE_CODE => 'en_US'
+                    ContextKeys::LOCALE_CODE => 'en_US',
                 ]
             )
             ->shouldReturn($product)
         ;
     }
 
-    function it_provides_product_from_product_slug_for_null_user(
+    function it_provides_product_by_slug_if_there_is_no_logged_in_user(
         ProductRepositoryInterface $productRepository,
         UserContextInterface $userContext,
         ChannelInterface $channel,

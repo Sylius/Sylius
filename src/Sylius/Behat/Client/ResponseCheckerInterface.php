@@ -27,7 +27,7 @@ interface ResponseCheckerInterface
 
     public function getValue(Response $response, string $key);
 
-    public function getTranslationValue(Response $response, string $key): string;
+    public function getTranslationValue(Response $response, string $key, ?string $localeCode): string;
 
     public function getError(Response $response): string;
 

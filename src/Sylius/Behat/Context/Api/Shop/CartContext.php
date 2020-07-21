@@ -19,8 +19,8 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -30,6 +30,9 @@ final class CartContext implements Context
     /** @var ApiClientInterface */
     private $cartsClient;
 
+    /** @var ApiClientInterface */
+    private $productsClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -38,10 +41,12 @@ final class CartContext implements Context
 
     public function __construct(
         ApiClientInterface $cartsClient,
+        ApiClientInterface $productsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->cartsClient = $cartsClient;
+        $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -233,11 +238,10 @@ final class CartContext implements Context
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom(
-            $item['variant']['product'],
-            HttpRequest::METHOD_GET)
-        );
+        $pathElements = explode('/', $item['variant']['product']);
 
-        return $this->cartsClient->getLastResponse();
+        $productCode = $pathElements[array_key_last($pathElements)];
+
+        return $this->productsClient->show(StringInflector::nameToSlug($productCode));
     }
 }
