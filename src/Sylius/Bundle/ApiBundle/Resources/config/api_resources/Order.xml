@@ -88,6 +88,48 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="select-shipping-methods">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Selects shipping methods for particular shipment</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/select-shipping-methods</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:select-shipping-method</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="select-payment-methods">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Selects payment methods for particular payment</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/select-payment-methods</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:select-payment-method</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="complete">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Completes checkout</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/complete</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:address</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="remove_item">
                 <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">
