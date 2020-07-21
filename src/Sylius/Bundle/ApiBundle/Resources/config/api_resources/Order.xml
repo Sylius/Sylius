@@ -74,6 +74,20 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="address">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Address cart to given location</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/address</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:address</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="remove_item">
                 <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">

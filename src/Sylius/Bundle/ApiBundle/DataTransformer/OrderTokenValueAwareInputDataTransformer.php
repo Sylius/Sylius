@@ -14,27 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-final class RemoveItemFromCartDataTransformer implements DataTransformerInterface
+final class OrderTokenValueAwareInputDataTransformer implements DataTransformerInterface
 {
     public function transform($object, string $to, array $context = [])
     {
-        /** @var RemoveItemFromCart|mixed $object */
-        Assert::isInstanceOf($object, RemoveItemFromCart::class);
+        /** @var OrderTokenValueAwareInterface|mixed $object */
+        Assert::isInstanceOf($object, OrderTokenValueAwareInterface::class);
 
         /** @var OrderInterface $cart */
         $cart = $context['object_to_populate'];
 
-        $object->tokenValue = $cart->getTokenValue();
+        $object->setOrderTokenValue($cart->getTokenValue());
 
         return $object;
     }
 
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return RemoveItemFromCart::class === $context['input']['class'];
+        return is_a($context['input']['class'], OrderTokenValueAwareInterface::class, true);
     }
 }

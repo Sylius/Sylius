@@ -40,6 +40,10 @@
             <group>order:read</group>
         </attribute>
 
+        <attribute name="checkoutState">
+            <group>order:read</group>
+        </attribute>
+
         <attribute name="state">
             <group>order:read</group>
         </attribute>

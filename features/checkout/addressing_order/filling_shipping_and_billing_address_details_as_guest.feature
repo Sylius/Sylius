@@ -9,7 +9,7 @@ Feature: Addressing an order
         And the store ships everywhere for free
         And the store has a product "PHP T-Shirt" priced at "$19.99"
 
-    @ui
+    @ui @api
     Scenario: Address an order without different shipping address
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

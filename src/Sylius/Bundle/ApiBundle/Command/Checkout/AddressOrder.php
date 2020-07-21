@@ -11,40 +11,33 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Cart;
+namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Component\Core\Model\Address;
+use Sylius\Component\Core\Model\AddressInterface;
 
-class AddItemToCart implements OrderTokenValueAwareInterface
+class AddressOrder implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
+    /** @var string */
     public $orderTokenValue;
 
     /**
      * @var string
      * @psalm-immutable
      */
-    public $productCode;
+    public $email;
 
     /**
-     * @var int
+     * @var Address
      * @psalm-immutable
      */
-    public $quantity;
+    public $billingAddress;
 
-    public function __construct(string $productCode, int $quantity)
+    public function __construct(string $email, AddressInterface $billingAddress)
     {
-        $this->productCode = $productCode;
-        $this->quantity = $quantity;
-    }
-
-    public static function createFromData(string $tokenValue, string $productCode, int $quantity): self
-    {
-        $command = new self($productCode, $quantity);
-
-        $command->orderTokenValue = $tokenValue;
-
-        return $command;
+        $this->email = $email;
+        $this->billingAddress = $billingAddress;
     }
 
     public function getOrderTokenValue(): ?string
