@@ -1,0 +1,134 @@
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-03-03T14:20:50Z
+
+Hello @lchrusciel,
+
+I have tested on my Sylius project before send this PR. I dont know how you want test a Symfony FormType : Behat, PHPSpec, PHP Unit ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-03-03T14:40:40Z
+
+We already have a few form type tests, like this one: https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/AddressingBundle/Tests/Form/Type/ZoneChoiceTypeTest.php
+
+Could you try to reproduce and perhaps cover this issue, so we will not have a regression in the future?
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-03-03T17:24:30Z
+
+@lchrusciel I have added the test.
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-03-04T20:22:05Z
+
+> I would need to ask you to rebase this PR to the newest changes on branch 1.6
+
+I have rebase on branch 1.6
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-03-05T14:11:10Z
+
+It's something wrong with the branch. We need to wait for #11179 to merge this PR
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-03-06T08:48:42Z
+
+Can you rebase again? Build should be green now
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-03-20T08:37:33Z
+
+@lchrusciel Sorry, after many rebase, the tests does not pass
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-05-31T21:58:26Z
+
+Hi @lchrusciel,
+
+I have rebase to Sylius 1.7. But tests fail. Why ?
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-05-31T21:59:00Z
+
+Related #11149
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-10T08:22:45Z
+
+Hey Jean-Baptiste 👋
+
+could you rebase your PR to the newest master? The build should be green then.
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-06-10T09:39:45Z
+
+> Hey Jean-Baptiste
+>
+> could you rebase your PR to the newest master? The build should be green then.
+
+I need rebase to merge in 1.7 branch or master ? Actually the origin branch is 1.7 to merge into 1.7 branch.
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-06-10T13:20:37Z
+
+ping @lchrusciel
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-16T10:02:58Z
+
+My mistake, of course, it should be rebased to 1.7.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-13T18:35:09Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "fix/issue_11149"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-07-15T19:15:48Z
+
+@lchrusciel I have rebase my branch... The test error is not caused by this PR changes. How to relaunch to attempt to pass the test ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-16T07:41:26Z
+
+Tests at the bottom are rerun and passes. The problem is with static analysis: https://travis-ci.org/github/Sylius/Sylius/jobs/707744459#L2451
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-07-17T20:16:13Z
+
+I have fix the Psalm error (locally checked). I'm horrified by the need to add specific comment in code to pass static analysis.
+
+---------------------------------------------------------------------------
+
+by macintoshplus at 2020-07-21T14:53:23Z
+
+Enjoy! All check is done and no conflict! My PR can be merged @lchrusciel!
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-21T21:05:13Z
+
+Thanks, Jean-Baptiste! :tada:
