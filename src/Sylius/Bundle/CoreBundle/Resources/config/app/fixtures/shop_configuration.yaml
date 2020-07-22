@@ -47,6 +47,7 @@ sylius_fixtures:
                             - 'ES'
                             - 'CN'
                             - 'GB'
+                            - 'PL'
                         zones:
                             US:
                                 name: 'United States of America'
@@ -66,6 +67,7 @@ sylius_fixtures:
                                     - 'ES'
                                     - 'CN'
                                     - 'GB'
+                                    - 'PL'
 
                 menu_taxon:
                     name: taxon
