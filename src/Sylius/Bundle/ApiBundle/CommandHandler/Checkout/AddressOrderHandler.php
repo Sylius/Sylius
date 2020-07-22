@@ -51,16 +51,18 @@ final class AddressOrderHandler
 
     public function __invoke(AddressOrder $addressOrder): OrderInterface
     {
-        /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $addressOrder->orderTokenValue]);
+        $tokenValue = $addressOrder->orderTokenValue;
 
-        Assert::notNull($order, sprintf('Order with %s token has not been found.', $addressOrder->orderTokenValue));
+        /** @var OrderInterface|null $order */
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $tokenValue]);
+
+        Assert::notNull($order, sprintf('Order with %s token has not been found.', $tokenValue));
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
-            sprintf('Order with %s token cannot be addressed.', $addressOrder->orderTokenValue)
+            sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
         /** @var CustomerInterface $customer */

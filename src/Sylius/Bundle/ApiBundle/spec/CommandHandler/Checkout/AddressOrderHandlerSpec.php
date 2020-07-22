@@ -66,8 +66,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_order_does_not_exist(
-        AddressInterface $billingAddress,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        AddressInterface $billingAddress
     ): void {
         $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
@@ -78,10 +78,10 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_order_cannot_be_addressed(
-        AddressInterface $billingAddress,
-        StateMachineFactoryInterface $stateMachineFactory,
-        OrderInterface $order,
         OrderRepositoryInterface $orderRepository,
+        StateMachineFactoryInterface $stateMachineFactory,
+        AddressInterface $billingAddress,
+        OrderInterface $order,
         StateMachineInterface $stateMachine
     ): void {
         $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
