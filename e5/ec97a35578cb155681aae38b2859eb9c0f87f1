@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-22T08:09:35Z
+
+However, can you rebase to the newest master and check how will it behave together with #11571?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-22T08:12:02Z
+
+Also, will it remember which cards have been collapsed and which not? It could be annoying for users to always toggle them.
+
+---------------------------------------------------------------------------
+
+by TefDesign at 2020-07-22T08:36:43Z
+
+Hi @lchrusciel
+Thanks :)
+For #11571 , it's already present in my pull request :smiley:  :
+![image](https://user-images.githubusercontent.com/3847429/88153839-3e945500-cc06-11ea-8a07-cb0144d83d89.png)
+
+The first screenshot was not up to date sorry :P
+
+I created my pull request from the master so the task is there :)
+For your question, I am using the "current_ancestor" class already present and I have not touched the html structure. With this class, if an item is active, the entire block remains open.
+In the JavaScript function, I have provided a parameter that allows opening a menu to close the others if a user prefers this system. All JavaScript script is documented in JSDoc standards !
+
+---------------------------------------------------------------------------
+
+by TefDesign at 2020-07-22T09:15:18Z
+
+@lchrusciel I will still check something and I tell you :)
+
+---------------------------------------------------------------------------
+
+by TefDesign at 2020-07-22T09:44:49Z
+
+@lchrusciel Rebase ok and check ok :+1:  :
+![image](https://user-images.githubusercontent.com/3847429/88161762-b10a3280-cc10-11ea-8fa0-469556086612.png)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-22T12:12:44Z
+
+Thanks, Stéphane! :tada:
