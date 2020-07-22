@@ -45,6 +45,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
@@ -56,6 +57,7 @@
             decoration-priority="10"
         >
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
