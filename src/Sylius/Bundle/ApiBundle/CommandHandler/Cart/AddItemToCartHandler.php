@@ -68,7 +68,7 @@ final class AddItemToCartHandler implements MessageHandlerInterface
 
         $cart = $this->orderRepository->findOneBy([
             'state' => OrderInterface::STATE_CART,
-            'tokenValue' => $addItemToCart->tokenValue,
+            'tokenValue' => $addItemToCart->orderTokenValue,
         ]);
 
         Assert::notNull($cart);
