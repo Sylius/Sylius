@@ -7,7 +7,7 @@ Feature: Viewing a product details
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's name
         Given the store has a product "T-shirt banana"
         When I check this product's details

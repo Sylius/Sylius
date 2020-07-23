@@ -20,6 +20,7 @@
 
         <service id="sylius.behat.context.api.shop.cart" class="Sylius\Behat\Context\Api\Shop\CartContext">
             <argument type="service" id="sylius.behat.api_platform_client.cart" />
+            <argument type="service" id="sylius.behat.api_platform_client.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
@@ -36,6 +37,11 @@
 
         <service id="sylius.behat.context.api.shop.login" class="Sylius\Behat\Context\Api\Shop\LoginContext">
             <argument type="service" id="sylius.behat.client.shop_api_platform_security_client" />
+        </service>
+
+        <service id="sylius.behat.context.api.shop.product" class="Sylius\Behat\Context\Api\Shop\ProductContext">
+            <argument type="service" id="sylius.behat.api_platform_client.product" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">

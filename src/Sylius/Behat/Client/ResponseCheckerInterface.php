@@ -27,6 +27,8 @@ interface ResponseCheckerInterface
 
     public function getValue(Response $response, string $key);
 
+    public function getTranslationValue(Response $response, string $key, ?string $localeCode): string;
+
     public function getError(Response $response): string;
 
     public function isCreationSuccessful(Response $response): bool;
@@ -38,6 +40,8 @@ interface ResponseCheckerInterface
     public function isDeletionSuccessful(Response $response): bool;
 
     public function hasAccessDenied(Response $response): bool;
+
+    public function hasCollection(Response $response): bool;
 
     /** @param string|int $value */
     public function hasValue(Response $response, string $key, $value): bool;
