@@ -79,6 +79,7 @@ a {
     .item > .header {
         text-transform: uppercase;
         font-size: 11px;
+        margin-bottom: 16px;
     }
 
     .item > i.icon {
@@ -95,51 +96,6 @@ a {
         font-weight: inherit !important;
         background: $sylius-brand-color !important;
         border-radius: 0 99px 99px 0 !important;
-    }
-    .item {
-        padding-bottom: 5px;
-        .menu {
-            visibility: hidden;
-            overflow: hidden;
-            max-height: 0;
-            transition: all .5s ease-in-out;
-        }
-        .header {
-            margin-bottom: 0;
-            transition: .7s ease-in-out;
-            cursor: pointer;
-            position: relative;
-            &:before, &:after {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                right: 0;
-                width: 10px;
-                height: 2px;
-                margin-top: -1px;
-                background: white;
-            }
-            &:after {
-                transform: rotate(90deg);
-                transition: .3s;
-            }
-        }
-        &.open,
-        &.current_ancestor {
-            .menu{
-                max-height: 120vh;
-                overflow: visible;
-                visibility: visible;
-                border-bottom-color: #f0f0f0;
-            }
-            .header {
-                margin-bottom: 15px;
-                &:after {
-                    transform: rotate(0deg);
-                }
-            }
-        }
     }
 }
 
