@@ -29,10 +29,10 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     }
 
     function it_handles_order_completion(
-        OrderInterface $order,
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        FactoryInterface $stateMachineFactory
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -63,10 +63,10 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_order_cannot_be_completed(
-        FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        FactoryInterface $stateMachineFactory
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');

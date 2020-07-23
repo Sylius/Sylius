@@ -63,16 +63,18 @@ final class ChooseShippingMethodHandler
             'Order cannot have shipment method assigned.'
         );
 
-        /** @var ShippingMethodInterface $shippingMethod */
+        /** @var ShippingMethodInterface|null $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $chooseShippingMethod->shippingMethod]);
+
+        $shipmentIdentifier = $chooseShippingMethod->shipmentIdentifier;
 
         Assert::notNull($shippingMethod, 'Shipping method has not been found');
         Assert::true(
-            isset($cart->getShipments()[$chooseShippingMethod->shipmentIdentifier]),
+            isset($cart->getShipments()[$shipmentIdentifier]),
             'Can not find shipment with given identifier.'
         );
 
-        $shipment = $cart->getShipments()[$chooseShippingMethod->shipmentIdentifier];
+        $shipment = $cart->getShipments()[$shipmentIdentifier];
 
         Assert::true(
             $this->eligibilityChecker->isEligible($shipment, $shippingMethod),

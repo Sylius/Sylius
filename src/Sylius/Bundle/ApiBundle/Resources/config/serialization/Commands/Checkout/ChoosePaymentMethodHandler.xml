@@ -17,10 +17,10 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">
        <attribute name="paymentMethod">
-           <group>cart:select-payment-method</group>
+           <group>cart:select_payment_method</group>
        </attribute>
        <attribute name="paymentIdentifier">
-           <group>cart:select-payment-method</group>
+           <group>cart:select_payment_method</group>
        </attribute>
     </class>
 </serializer>

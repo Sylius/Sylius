@@ -17,10 +17,10 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">
        <attribute name="shippingMethod">
-           <group>cart:select-shipping-method</group>
+           <group>cart:select_shipping_method</group>
        </attribute>
        <attribute name="shipmentIdentifier">
-           <group>cart:select-shipping-method</group>
+           <group>cart:select_shipping_method</group>
        </attribute>
     </class>
 </serializer>

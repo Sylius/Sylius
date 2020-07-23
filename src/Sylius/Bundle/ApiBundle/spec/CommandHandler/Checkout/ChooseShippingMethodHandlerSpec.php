@@ -38,14 +38,14 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $shippingMethodRepository, $eligibilityChecker, $stateMachineFactory);
     }
 
-    function it_assignes_choosen_shipping_method_to_specified_shipment(
+    function it_assigns_choosen_shipping_method_to_specified_shipment(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodInterface $shippingMethod,
-        ShipmentInterface $shipment,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        ShippingMethodInterface $shippingMethod,
+        ShipmentInterface $shipment,
         StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
@@ -68,12 +68,12 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_shipping_method_is_not_eligible(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodInterface $shippingMethod,
-        ShipmentInterface $shipment,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        ShippingMethodInterface $shippingMethod,
+        ShipmentInterface $shipment,
         StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
@@ -115,11 +115,11 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_cannot_have_shipping_selected(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        StateMachineInterface $stateMachine,
+        ShipmentInterface $shipment
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -140,11 +140,11 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_shipping_method_with_given_code_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        StateMachineInterface $stateMachine,
+        ShipmentInterface $shipment
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -165,12 +165,12 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_ordered_shipment_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodInterface $shippingMethod,
-        ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        ShippingMethodInterface $shippingMethod,
+        StateMachineInterface $stateMachine,
+        ShipmentInterface $shipment
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');

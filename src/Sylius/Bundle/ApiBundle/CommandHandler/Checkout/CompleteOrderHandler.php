@@ -38,16 +38,18 @@ final class CompleteOrderHandler
 
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
     {
-        /** @var OrderInterface $cart */
-        $cart = $this->orderRepository->findOneBy(['tokenValue' => $completeOrder->orderTokenValue]);
+        $orderTokenValue = $completeOrder->orderTokenValue;
 
-        Assert::notNull($cart, sprintf('Order with %s token has not been found.', $completeOrder->orderTokenValue));
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findOneBy(['tokenValue' => $orderTokenValue]);
+
+        Assert::notNull($cart, sprintf('Order with %s token has not been found.', $orderTokenValue));
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE),
-            sprintf('Order with %s token cannot be completed.', $completeOrder->orderTokenValue)
+            sprintf('Order with %s token cannot be completed.', $orderTokenValue)
         );
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);

@@ -45,22 +45,30 @@ final class ChoosePaymentMethodHandler
 
     public function __invoke(ChoosePaymentMethod $choosePaymentMethod): OrderInterface
     {
-        /** @var OrderInterface $cart */
+        /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findOneBy(['tokenValue' => $choosePaymentMethod->orderTokenValue]);
 
         Assert::notNull($cart, 'Cart has not been found.');
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 
-        Assert::true($stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT), 'Order cannot have payment method assigned.');
+        Assert::true($stateMachine->can(
+            OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
+            'Order cannot have payment method assigned.'
+        );
 
-        /** @var PaymentMethodInterface $paymentMethod */
+        /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $choosePaymentMethod->paymentMethod]);
 
-        Assert::notNull($paymentMethod, 'Payment method has not been found');
-        Assert::true(isset($cart->getPayments()[$choosePaymentMethod->paymentIdentifier]), 'Can not find payment with given identifier.');
+        $paymentIdentifier = $choosePaymentMethod->paymentIdentifier;
 
-        $payment = $cart->getPayments()[$choosePaymentMethod->paymentIdentifier];
+        Assert::notNull($paymentMethod, 'Payment method has not been found');
+        Assert::true(isset(
+            $cart->getPayments()[$paymentIdentifier]),
+            'Can not find payment with given identifier.'
+        );
+
+        $payment = $cart->getPayments()[$paymentIdentifier];
 
         $payment->setMethod($paymentMethod);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);

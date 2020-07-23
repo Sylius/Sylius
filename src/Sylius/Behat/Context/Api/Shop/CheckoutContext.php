@@ -23,7 +23,6 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\VarDumper\VarDumper;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -101,7 +100,7 @@ final class CheckoutContext implements Context
     /**
      * @When I proceed with :shippingMethod shipping method
      */
-    public function iHaveProceededSelectingShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
@@ -158,6 +157,7 @@ final class CheckoutContext implements Context
             json_encode([], \JSON_THROW_ON_ERROR)
         );
     }
+
     /**
      * @When I complete the addressing step
      */

@@ -36,13 +36,13 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $paymentMethodRepository, $stateMachineFactory);
     }
 
-    function it_assignes_choosen_payment_method_to_specified_payment(
+    function it_assigns_chosen_payment_method_to_specified_payment(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentMethodInterface $paymentMethod,
-        PaymentInterface $payment,
         FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod,
         StateMachineInterface $stateMachine
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
@@ -80,11 +80,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_cannot_have_payment_selected(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentInterface $payment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -105,11 +105,11 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_payment_method_with_given_code_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentInterface $payment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -130,12 +130,12 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_ordered_payment_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentMethodInterface $paymentMethod,
-        PaymentInterface $payment,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        OrderInterface $order,
+        PaymentMethodInterface $paymentMethod,
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
