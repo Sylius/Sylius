@@ -34,7 +34,7 @@ class AddressOrder implements OrderTokenValueAwareInterface
      */
     public $billingAddress;
 
-    public function __construct(string $email, AddressInterface $billingAddress)
+    public function __construct(string $email, Address $billingAddress)
     {
         $this->email = $email;
         $this->billingAddress = $billingAddress;
