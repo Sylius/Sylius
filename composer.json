@@ -62,7 +62,7 @@
         "sylius/registry": "^1.5",
         "sylius/resource": "1.6.*",
         "sylius/resource-bundle": "1.6.*",
-        "sylius/theme-bundle": "^2.0-alpha2",
+        "sylius/theme-bundle": "^2.0",
         "symfony/asset": "^4.4",
         "symfony/config": "^4.4",
         "symfony/console": "^4.4",
