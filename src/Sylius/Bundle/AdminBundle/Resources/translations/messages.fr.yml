@@ -7,8 +7,7 @@ sylius:
             has_been_sent_using: 'a été envoyé en utilisant'
             subject: 'Confirmation d''expédition'
             thank_you_for_transaction: 'Merci pour votre transaction réussie.'
-            tracking_code: 'code de suivi.'
-            you_can_check_its_location: 'Vous pouvez vérifier sa position avec'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
             your_order_with_number: 'Votre commande numéro'
     menu:
         admin:
