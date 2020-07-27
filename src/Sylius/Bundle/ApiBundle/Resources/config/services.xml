@@ -80,7 +80,7 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Helper\UserContextHelper">
+        <service class="Sylius\Bundle\ApiBundle\Helper\UserContextHelper" id="sylius_bundle_api.user_context_helper">
             <argument type="service" id="sylius.behat.context.setup.user" />
         </service>
     </services>

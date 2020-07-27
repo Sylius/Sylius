@@ -35,11 +35,6 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
         $this->userContext = $userContext;
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
-    {
-        return is_a($resourceClass, TaxonInterface::class, true);
-    }
-
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
         Assert::keyExists($context, ContextKeys::CHANNEL);
@@ -51,5 +46,10 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
         }
 
         return $this->taxonRepository->findChildrenByChannelMenuTaxon($channelMenuTaxon);
+    }
+
+    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    {
+        return is_a($resourceClass, TaxonInterface::class, true);
     }
 }

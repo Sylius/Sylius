@@ -24,7 +24,7 @@
 
         <service id="sylius.api.collection_data_provider.product" class="Sylius\Bundle\ApiBundle\DataProvider\ProductItemDataProvider">
             <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="sylius_bundle_api.user_context_helper" />
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 

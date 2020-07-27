@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,19 +26,20 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(UserContextHelperInterface $userContextHelper): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($userContextHelper);
     }
 
     function it_applies_conditions_to_delete_order_with_state_cart_and_with_null_user_if_present_user_is_null(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn(null);
+        $userContextHelper->getUser()->willReturn(null);
+        $userContextHelper->isVisitor()->willReturn(true);
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer IS NULL', 'o'))
@@ -69,7 +70,7 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_to_delete_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
@@ -77,7 +78,10 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($shopUser);
+        $userContextHelper->getUser()->willReturn($shopUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(true);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
         $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -116,7 +120,7 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_when_unauthorized_shop_user_try_to_delete_order_with_state_cart(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
@@ -124,7 +128,11 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($shopUser);
+        $userContextHelper->getUser()->willReturn($shopUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
         $shopUser->getRoles()->willReturn([]);
@@ -146,14 +154,18 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_to_delete_order_with_state_cart_by_authorized_admin_user(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         AdminUserInterface $adminUser,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($adminUser);
+        $userContextHelper->getUser()->willReturn($adminUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
+
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder
@@ -179,14 +191,18 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_when_unauthorized_admin_user_try_to_delete_order_with_state_cart(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         AdminUserInterface $adminUser,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($adminUser);
+        $userContextHelper->getUser()->willReturn($adminUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $adminUser->getRoles()->willReturn([]);
 
         $this
