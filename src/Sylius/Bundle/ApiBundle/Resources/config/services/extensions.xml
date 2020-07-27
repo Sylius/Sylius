@@ -39,7 +39,7 @@
             class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodExtension"
             public="true"
         >
-            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="sylius_bundle_api.user_context_helper" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 

@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -25,19 +25,20 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class OrderGetMethodExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(UserContextHelperInterface $userContextHelper): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($userContextHelper);
     }
 
     function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn(null);
+        $userContextHelper->getUser()->willReturn(null);
+        $userContextHelper->isVisitor()->willReturn(true);
 
         $queryBuilder->andWhere(sprintf('%s.customer IS NULL', 'o'))->shouldBeCalled();
 
@@ -52,7 +53,7 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_to_get_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
@@ -60,7 +61,10 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($shopUser);
+        $userContextHelper->getUser()->willReturn($shopUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(true);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
         $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -87,7 +91,7 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_when_unauthorized_shop_user_try_to_get_order_with_state_cart(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
@@ -95,7 +99,11 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($shopUser);
+        $userContextHelper->getUser()->willReturn($shopUser);
+        $userContextHelper->isVisitor()->willReturn(false);
+        $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
         $shopUser->getRoles()->willReturn([]);
