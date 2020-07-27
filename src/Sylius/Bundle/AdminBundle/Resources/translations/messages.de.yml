@@ -2,6 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'wurde gesendet mit'
+            subject: 'Versandbestätigung'
+            thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
+            tracking_code: 'Tracking-Code.'
+            you_can_check_its_location: 'Sie können den Standort mit dem'
+            your_order_with_number: 'Ihre Bestellung mit Nummer'
     menu:
         admin:
             main:
@@ -38,3 +46,6 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Bestellungen
+    ui:
+        gateway:
+            no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
