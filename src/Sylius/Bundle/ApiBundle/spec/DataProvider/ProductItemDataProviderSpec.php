@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,9 +27,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ProductItemDataProviderSpec extends ObjectBehavior
 {
-    function let(ProductRepositoryInterface $productRepository, UserContextInterface $userContext): void
+    function let(ProductRepositoryInterface $productRepository, UserContextHelperInterface $userContextHelper): void
     {
-        $this->beConstructedWith($productRepository, $userContext);
+        $this->beConstructedWith($productRepository, $userContextHelper);
     }
 
     function it_supports_only_product(): void
@@ -37,8 +38,10 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $this->supports(TaxonInterface::class, Request::METHOD_GET)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_context_has_no_channel(): void
+    function it_throws_an_exception_if_context_has_no_channel(UserContextHelperInterface $userContextHelper): void
     {
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('getItem', [
@@ -50,8 +53,12 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_context_has_no_locale_code(ChannelInterface $channel): void
-    {
+    function it_throws_an_exception_if_context_has_no_locale_code(
+        ChannelInterface $channel,
+        UserContextHelperInterface $userContextHelper
+    ): void {
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('getItem', [
@@ -65,11 +72,12 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
 
     function it_provides_product_by_code_for_a_logged_in_admin_user(
         ProductRepositoryInterface $productRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         AdminUserInterface $user,
         ProductInterface $product
     ): void {
-        $userContext->getUser()->willReturn($user);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
+
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $productRepository->findOneByCode('FORD_FOCUS')->willReturn($product);
@@ -87,12 +95,12 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
 
     function it_provides_product_by_slug_for_a_logged_in_shop_user(
         ProductRepositoryInterface $productRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         UserInterface $user,
         ChannelInterface $channel,
         ProductInterface $product
     ): void {
-        $userContext->getUser()->willReturn($user);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
         $user->getRoles()->willReturn([]);
 
         $productRepository->findOneByChannelAndSlug($channel, 'en_US','FORD_FOCUS')->willReturn($product);
@@ -113,11 +121,11 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
 
     function it_provides_product_by_slug_if_there_is_no_logged_in_user(
         ProductRepositoryInterface $productRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         ChannelInterface $channel,
         ProductInterface $product
     ): void {
-        $userContext->getUser()->willReturn(null);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
 
         $productRepository->findOneByChannelAndSlug($channel, 'en_US','FORD_FOCUS')->willReturn($product);
 
