@@ -81,12 +81,12 @@ final class ManagingChannelsContext implements Context
      */
     public function iCheckTheChannel(ChannelInterface $channel): void
     {
-        $channelToDelete = [];
-        if ($this->sharedStorage->has('channel_to_delete')) {
-            $channelToDelete = $this->sharedStorage->get('channel_to_delete');
+        $channelsToDelete = [];
+        if ($this->sharedStorage->has('channels_to_delete')) {
+            $channelsToDelete = $this->sharedStorage->get('channels_to_delete');
         }
-        $channelToDelete[] = $channel->getCode();
-        $this->sharedStorage->set('channel_to_delete', $channelToDelete);
+        $channelsToDelete[] = $channel->getCode();
+        $this->sharedStorage->set('channels_to_delete', $channelsToDelete);
     }
 
     /**
@@ -234,7 +234,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I delete channel :channel
+     * @When I (try to )delete channel :channel
      */
     public function iDeleteChannel(ChannelInterface $channel): void
     {
@@ -246,7 +246,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iDeleteThem(): void
     {
-        foreach ($this->sharedStorage->get('channel_to_delete') as $code) {
+        foreach ($this->sharedStorage->get('channels_to_delete') as $code) {
             $this->client->delete($code);
         }
     }
@@ -272,7 +272,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I save my changes
+     * @When I (try to )save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -468,5 +468,13 @@ final class ManagingChannelsContext implements Context
             $this->responseChecker->hasValue($this->client->update(), 'baseCurrency', 'NEW_CURRENCY'),
             'The base currency field with value NEW_CODE exist'
         );
+    }
+
+    /**
+     * @Then I should be notified that my access has been denied
+     */
+    public function iShouldBeNotifiedThatMyAccessHasBeenDenied(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->client->getLastResponse()));
     }
 }
