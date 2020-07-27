@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -26,13 +26,15 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
     /** @var TaxonRepositoryInterface */
     private $taxonRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    /** @var UserContextHelperInterface */
+    private $userContextHelper;
 
-    public function __construct(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext)
-    {
+    public function __construct(
+        TaxonRepositoryInterface $taxonRepository,
+        UserContextHelperInterface $userContextHelper
+    ) {
         $this->taxonRepository = $taxonRepository;
-        $this->userContext = $userContext;
+        $this->userContextHelper = $userContextHelper;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
@@ -40,8 +42,7 @@ final class TaxonCollectionDataProvider implements CollectionDataProviderInterfa
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles())) {
+        if ($this->userContextHelper->hasAdminRoleApiAccess()) {
             return $this->taxonRepository->findAll();
         }
 

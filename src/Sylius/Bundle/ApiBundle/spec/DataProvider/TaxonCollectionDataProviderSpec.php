@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,9 +24,9 @@ use Sylius\Component\User\Model\UserInterface;
 
 final class TaxonCollectionDataProviderSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository, UserContextInterface $userContext): void
+    function let(TaxonRepositoryInterface $taxonRepository, UserContextHelperInterface $userContextHelper): void
     {
-        $this->beConstructedWith($taxonRepository, $userContext);
+        $this->beConstructedWith($taxonRepository, $userContextHelper);
     }
 
     function it_supports_only_taxons(): void
@@ -45,15 +45,14 @@ final class TaxonCollectionDataProviderSpec extends ObjectBehavior
 
     function it_provides_taxon_from_channel_menu_taxon_if_logged_in_user_is_not_admin(
         TaxonRepositoryInterface $taxonRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         TaxonInterface $menuTaxon,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
         ChannelInterface $channel,
         UserInterface $user
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_USER']);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
 
         $channel->getMenuTaxon()->willReturn($menuTaxon);
         $taxonRepository->findChildrenByChannelMenuTaxon($menuTaxon)->willReturn([$firstTaxon, $secondTaxon]);
@@ -66,13 +65,13 @@ final class TaxonCollectionDataProviderSpec extends ObjectBehavior
 
     function it_provides_taxon_from_channel_menu_taxon_if_there_is_no_logged_in_user(
         TaxonRepositoryInterface $taxonRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         TaxonInterface $menuTaxon,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
         ChannelInterface $channel
     ): void {
-        $userContext->getUser()->willReturn(null);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
 
         $channel->getMenuTaxon()->willReturn($menuTaxon);
         $taxonRepository->findChildrenByChannelMenuTaxon($menuTaxon)->willReturn([$firstTaxon, $secondTaxon]);
@@ -85,7 +84,7 @@ final class TaxonCollectionDataProviderSpec extends ObjectBehavior
 
     function it_provides_all_taxons_if_logged_in_user_is_admin(
         TaxonRepositoryInterface $taxonRepository,
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         TaxonInterface $menuTaxon,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
@@ -93,8 +92,7 @@ final class TaxonCollectionDataProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         UserInterface $user
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
 
         $channel->getMenuTaxon()->willReturn($menuTaxon);
         $taxonRepository->findAll()->willReturn([$firstTaxon, $secondTaxon, $thirdTaxon]);
