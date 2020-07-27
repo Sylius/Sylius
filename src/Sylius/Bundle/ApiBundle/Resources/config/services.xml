@@ -79,5 +79,9 @@
             <argument type="string">%sylius.model.address.interface.api.denormalize%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Helper\UserContextHelper">
+            <argument type="service" id="sylius.behat.context.setup.user" />
+        </service>
     </services>
 </container>
