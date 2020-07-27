@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -25,17 +25,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(UserContextHelperInterface $userContextHelper): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($userContextHelper);
     }
 
     function it_does_nothing_if_current_resource_is_not_a_product(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $userContext->getUser()->shouldNotBeCalled();
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('translation')->shouldNotBeCalled();
 
@@ -43,13 +43,11 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_context_has_no_channel_for_shop_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -58,14 +56,13 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_context_has_no_locale_for_shop_user(
-        UserContextInterface $userContext,
-        UserInterface $user,
+        UserContextHelperInterface $userContextHelper,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -74,13 +71,12 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_current_user_is_an_admin_user(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('translation')->shouldNotBeCalled();
@@ -89,14 +85,13 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
     }
 
     function it_filters_products_by_channel_and_locale_code_for_shop_user(
-        UserContextInterface $userContext,
+        UserContextHelperInterface $userContextHelper,
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel
     ): void {
-        $userContext->getUser()->willReturn($user);
-        $user->getRoles()->willReturn([]);
+        $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('translation')->shouldBeCalled()->willReturn($queryBuilder);

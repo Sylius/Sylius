@@ -17,18 +17,19 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
+    /** @var UserContextHelperInterface */
+    private $userContextHelper;
 
-    public function __construct(UserContextInterface $userContext)
+    public function __construct(UserContextHelperInterface $userContextHelper)
     {
-        $this->userContext = $userContext;
+        $this->userContextHelper = $userContextHelper;
     }
 
     public function applyToCollection(
@@ -42,8 +43,7 @@ final class ProductsByChannelAndLocaleCodeExtension implements ContextAwareQuery
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($this->userContextHelper->hasAdminRoleApiAccess()) {
             return;
         }
 
