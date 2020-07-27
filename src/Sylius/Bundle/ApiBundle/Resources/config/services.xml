@@ -81,7 +81,7 @@
         </service>
 
         <service class="Sylius\Bundle\ApiBundle\Helper\UserContextHelper" id="sylius_bundle_api.user_context_helper">
-            <argument type="service" id="sylius.behat.context.setup.user" />
+            <argument type="service" id="sylius.api.context.user" />
         </service>
     </services>
 </container>

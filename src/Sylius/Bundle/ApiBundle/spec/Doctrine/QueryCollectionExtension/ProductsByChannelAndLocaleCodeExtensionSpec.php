@@ -36,6 +36,7 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
+
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('translation')->shouldNotBeCalled();
 
@@ -62,7 +63,6 @@ class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         ChannelInterface $channel
     ): void {
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
-
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

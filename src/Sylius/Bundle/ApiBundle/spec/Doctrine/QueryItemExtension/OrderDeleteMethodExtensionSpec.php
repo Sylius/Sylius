@@ -84,7 +84,6 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :customer', 'o'))
@@ -135,7 +134,6 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn([]);
 
         $this
             ->shouldThrow(AccessDeniedHttpException::class)
@@ -165,8 +163,6 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
         $userContextHelper->isVisitor()->willReturn(false);
         $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
-
-        $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder
             ->andWhere(sprintf('%s.state = :state', 'o'))
@@ -202,8 +198,6 @@ final class OrderDeleteMethodExtensionSpec extends ObjectBehavior
         $userContextHelper->isVisitor()->willReturn(false);
         $userContextHelper->hasShopUserRoleApiAccess()->willReturn(false);
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
-
-        $adminUser->getRoles()->willReturn([]);
 
         $this
             ->shouldThrow(AccessDeniedHttpException::class)

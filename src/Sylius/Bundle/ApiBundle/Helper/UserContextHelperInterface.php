@@ -21,8 +21,6 @@ interface UserContextHelperInterface
 
     public function hasShopUserRoleApiAccess(): bool;
 
-    public function hasRoleApiAccess(): bool;
-
     public function isVisitor(): bool;
 
     public function getUser(): ?UserInterface;

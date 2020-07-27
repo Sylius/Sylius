@@ -50,17 +50,6 @@ final class UserContextHelper implements UserContextHelperInterface
         return false;
     }
 
-    public function hasRoleApiAccess(): bool
-    {
-        $user = $this->getUser();
-
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function isVisitor(): bool
     {
         $user = $this->getUser();

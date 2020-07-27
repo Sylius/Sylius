@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -66,9 +67,12 @@ final class OrderGetMethodExtension implements QueryItemExtensionInterface
         }
 
         if ($this->userContextHelper->hasShopUserRoleApiAccess()) {
+            /** @var CustomerInterface $customer */
+            $customer = $user->getCustomer();
+
             $queryBuilder
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $user->getCustomer()->getId())
+                ->setParameter('customer', $customer->getId())
             ;
 
             return;

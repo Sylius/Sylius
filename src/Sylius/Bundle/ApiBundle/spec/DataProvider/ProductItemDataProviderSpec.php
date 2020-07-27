@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Helper\UserContextHelperInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -78,8 +77,6 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     ): void {
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(true);
 
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
-
         $productRepository->findOneByCode('FORD_FOCUS')->willReturn($product);
 
         $this
@@ -101,7 +98,6 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ProductInterface $product
     ): void {
         $userContextHelper->hasAdminRoleApiAccess()->willReturn(false);
-        $user->getRoles()->willReturn([]);
 
         $productRepository->findOneByChannelAndSlug($channel, 'en_US','FORD_FOCUS')->willReturn($product);
 

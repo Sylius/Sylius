@@ -76,28 +76,6 @@ final class UserContextHelperSpec extends ObjectBehavior
         $this->hasShopUserRoleApiAccess()->shouldReturn(false);
     }
 
-    function it_returns_true_if_user_has_api_role_access(
-        UserContextInterface $userContext,
-        UserInterface $user
-    ): void {
-        $userContext->getUser()->willReturn($user);
-
-        $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
-
-        $this->hasRoleApiAccess()->shouldReturn(true);
-    }
-
-    function it_returns_false_if_user_has_not_api_role_access(
-        UserContextInterface $userContext,
-        UserInterface $user
-    ): void {
-        $userContext->getUser()->willReturn($user);
-
-        $user->getRoles()->willReturn([]);
-
-        $this->hasRoleApiAccess()->shouldReturn(false);
-    }
-
     function it_returns_true_if_is_visitor(UserContextInterface $userContext): void
     {
         $userContext->getUser()->willReturn(null);

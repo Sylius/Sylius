@@ -67,7 +67,6 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :customer', 'o'))
@@ -106,7 +105,6 @@ final class OrderGetMethodExtensionSpec extends ObjectBehavior
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn([]);
 
         $this
             ->shouldThrow(AccessDeniedHttpException::class)
