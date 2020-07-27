@@ -6,8 +6,6 @@ sylius:
         shipment_confirmation:
             subject: 'Potwierdzenie dostawy'
             thank_you_for_transaction: 'Dziękujemy za udaną transakcję.'
-            tracking_code: 'kod śledzenia.'
-            you_can_check_its_location: 'Możesz sprawdzić swoją lokalizację z'
             your_order_with_number: 'Twój numer zamówienia'
     menu:
         admin:
