@@ -28,6 +28,11 @@
         <import resource="services/validator.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.model.address.class.api.denormalize">%sylius.model.address.class%</parameter>
+        <parameter key="sylius.model.address.interface.api.denormalize">Sylius\Component\Core\Model\AddressInterface</parameter>
+    </parameters>
+
     <services>
         <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
             <argument type="service" id="sylius.factory.avatar_image" />
@@ -75,6 +80,19 @@
 
         <service class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputDataTransformer" id="sylius_bundle_api.data_transformer.add_item_to_cart_input_data_transformer">
             <tag name="api_platform.data_transformer"/>
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
+            <argument type="service" id="serializer.mapping.class_metadata_factory" />
+            <argument type="service" id="serializer.name_converter.metadata_aware" />
+            <argument type="service" id="serializer.property_accessor" />
+            <argument type="service" id="property_info" on-invalid="ignore" />
+            <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore" />
+            <argument>null</argument>
+            <argument type="collection" />
+            <argument type="string">%sylius.model.address.class.api.denormalize%</argument>
+            <argument type="string">%sylius.model.address.interface.api.denormalize%</argument>
+            <tag name="serializer.normalizer" priority="64" />
         </service>
     </services>
 </container>
