@@ -13,22 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
-use Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class AddressDenormalizer extends ObjectNormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface, ContextAwareNormalizerInterface
+final class AddressDenormalizer implements ContextAwareDenormalizerInterface
 {
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
+    /** @var DenormalizerInterface */
+    private $objectNormalizer;
 
     /** @var string */
     private $classType;
@@ -37,33 +30,18 @@ final class AddressDenormalizer extends ObjectNormalizer implements ContextAware
     private $interfaceType;
 
     public function __construct(
-        ClassMetadataFactoryInterface $classMetadataFactory = null,
-        NameConverterInterface $nameConverter = null,
-        PropertyAccessorInterface $propertyAccessor = null,
-        PropertyTypeExtractorInterface $propertyTypeExtractor = null,
-        ClassDiscriminatorResolverInterface $classDiscriminatorResolver = null,
-        callable $objectClassResolver = null,
-        array $defaultContext = [],
-        string $classType = null,
-        string $interfaceType = null
+        DenormalizerInterface $objectNormalizer,
+        string $classType,
+        string $interfaceType
     ) {
-        parent::__construct(
-            $classMetadataFactory,
-            $nameConverter,
-            $propertyAccessor,
-            $propertyTypeExtractor,
-            $classDiscriminatorResolver,
-            $objectClassResolver,
-            $defaultContext
-        );
-
+        $this->objectNormalizer = $objectNormalizer;
         $this->classType = $classType;
         $this->interfaceType = $interfaceType;
     }
 
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
-        return parent::denormalize(
+        return $this->objectNormalizer->denormalize(
             $data,
             $this->classType,
             $format,
@@ -74,10 +52,5 @@ final class AddressDenormalizer extends ObjectNormalizer implements ContextAware
     public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
     {
         return $type === $this->interfaceType;
-    }
-
-    public function supportsNormalization($data, string $format = null, array $context = [])
-    {
-        return false;
     }
 }
