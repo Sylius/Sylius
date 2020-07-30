@@ -84,21 +84,21 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
+     */
+    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
+    {
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
+    }
+
+    /**
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
-
-        foreach ($items as $item) {
-            $pathElements = explode('/', $item['variant']['product']);
-
-            $productCode = $pathElements[array_key_last($pathElements)];
-
-            if ($product->getCode() === $productCode) {
-                $this->removeOrderItemFromCart((string) $item['id'], $tokenValue);
-            }
-        }
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->removeOrderItemFromCart($itemId, $tokenValue);
     }
 
     /**
@@ -243,5 +243,34 @@ final class CartContext implements Context
         $productCode = $pathElements[array_key_last($pathElements)];
 
         return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+    }
+
+    private function getOrderItemProductCode(array $item): string
+    {
+        $pathElements = explode('/', $item['variant']['product']);
+
+        return $pathElements[array_key_last($pathElements)];
+    }
+
+    private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        foreach ($items as $item) {
+            if ($product->getCode() === $this->getOrderItemProductCode($item)) {
+                return  (string) $item['id'];
+            }
+        }
+
+        return null;
+    }
+
+    private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
+    {
+        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
+
+        $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
+
+        $this->cartsClient->executeCustomRequest($request);
     }
 }

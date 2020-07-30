@@ -143,6 +143,20 @@
                     <attribute name="groups">cart:remove_item</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="change_quantity">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Change quantity of order item</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/change-quantity</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:change_quantity</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
