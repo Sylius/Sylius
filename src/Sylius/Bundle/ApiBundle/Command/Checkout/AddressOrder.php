@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 
 class AddressOrder implements OrderTokenValueAwareInterface
@@ -29,7 +28,7 @@ class AddressOrder implements OrderTokenValueAwareInterface
     public $email;
 
     /**
-     * @var Address
+     * @var AddressInterface
      * @psalm-immutable
      */
     public $billingAddress;
