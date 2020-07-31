@@ -18,6 +18,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -60,14 +61,26 @@ final class AddressOrderHandler
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
+        /** @var ShopUserInterface|null $user */
+        $user = $order->getUser();
+
+        /** @var CustomerInterface|null $customer */
+        $customer = $user !== null ? $user->getCustomer() : null;
+
+        if ($customer === null) {
+            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
+        }
+
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
-        $customer->setEmail($addressOrder->email);
+        if ($customer === null) {
+            /** @var CustomerInterface $customer */
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail($addressOrder->email);
+        }
 
         $this->manager->persist($customer);
 
