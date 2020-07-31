@@ -18,7 +18,6 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -61,15 +60,8 @@ final class AddressOrderHandler
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
-        /** @var ShopUserInterface|null $user */
-        $user = $order->getUser();
-
         /** @var CustomerInterface|null $customer */
-        $customer = $user !== null ? $user->getCustomer() : null;
-
-        if ($customer === null) {
-            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
-        }
+        $customer =  $order->getCustomer();
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
@@ -77,15 +69,18 @@ final class AddressOrderHandler
         );
 
         if ($customer === null) {
+            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
+
             /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($addressOrder->email);
+
+            $this->manager->persist($customer);
+
+            $order->setCustomer($customer);
         }
 
-        $this->manager->persist($customer);
-
         $order->setBillingAddress($addressOrder->billingAddress);
-        $order->setCustomer($customer);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
