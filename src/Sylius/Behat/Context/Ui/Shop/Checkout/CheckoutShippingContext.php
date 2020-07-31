@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutShippingContext implements Context
@@ -41,22 +42,22 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @Given I have proceeded selecting :shippingMethodName shipping method
+     * @Given I have proceeded selecting :shippingMetho shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
-    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
+    public function iHaveProceededSelectingShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->iSelectShippingMethod($shippingMethodName);
+        $this->iSelectShippingMethod($shippingMethod);
         $this->selectShippingPage->nextStep();
     }
 
     /**
-     * @Given I have selected :shippingMethodName shipping method
-     * @When I select :shippingMethodName shipping method
+     * @Given I have selected :shippingMethod shipping method
+     * @When I select :shippingMethod shipping method
      */
-    public function iSelectShippingMethod(string $shippingMethodName): void
+    public function iSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
+        $this->selectShippingPage->selectShippingMethod($shippingMethod->getName());
     }
 
     /**
@@ -69,6 +70,7 @@ final class CheckoutShippingContext implements Context
 
     /**
      * @When /^I(?:| try to) complete the shipping step$/
+     * @When /^I complete the shipping step with first shipping method$/
      */
     public function iCompleteTheShippingStep()
     {

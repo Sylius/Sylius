@@ -31,5 +31,6 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
+        <property name="name" writable="true" />
     </resource>
 </resources>

@@ -20,8 +20,10 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -35,21 +37,27 @@ final class CheckoutContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var RepositoryInterface */
+    private $shippingMethodRepository;
+
     /** @var string[] */
     private $content = [];
 
     public function __construct(
         AbstractBrowser $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        RepositoryInterface $shippingMethodRepository
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->shippingMethodRepository = $shippingMethodRepository;
     }
 
     /**
      * @Given I am at the checkout addressing step
+     * @When I complete the shipping step
      */
     public function iAmAtTheCheckoutAddressingStep(): void
     {
@@ -120,6 +128,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I proceed with :shippingMethod shipping method
+     * @When I select :shippingMethod shipping method
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -199,9 +208,23 @@ final class CheckoutContext implements Context
      */
     public function iCompleteTheAddressingStep(): void
     {
+        if (!array_key_exists('email', $this->content)) {
+             $this->iSpecifyTheEmailAs('customer@example.com');
+        }
         $this->addressOrder($this->content);
 
         $this->content = [];
+    }
+
+    /**
+     * @When I complete the shipping step with first shipping method
+     */
+    public function iCompleteTheShippingStepWithFirstShippingMethod(): void
+    {
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
+
+        $this->iProceededWithShippingMethod($shippingMethod);
     }
 
     /**
@@ -209,9 +232,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage(): void
     {
-        $value = $this->responseChecker->getValue($this->client->getResponse(), 'checkoutState');
-
-        Assert::same($value, OrderCheckoutStates::STATE_COMPLETED);
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
     }
 
     /**
@@ -219,9 +240,40 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        $value = $this->responseChecker->getValue($this->client->getResponse(), 'checkoutState');
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
+    }
 
-        Assert::same($value, OrderCheckoutStates::STATE_ADDRESSED);
+    /**
+     * @Then I should be on the checkout complete step
+     * @Then I should be on the checkout summary step
+     */
+    public function iShouldBeOnTheCheckoutCompleteStep(): void
+    {
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_PAYMENT_SKIPPED);
+    }
+
+    /**
+     * @Then my order's payment method should be :paymentMethod
+     */
+    public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['payments'][0]['method']['name'],
+            $paymentMethod->getName()
+        );
+    }
+
+    /**
+     * @Then I should not see any information about payment method
+     */
+    public function iShouldNotSeeAnyInformationAboutPaymentMethod()
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
     }
 
     private function addressOrder(array $content): void
@@ -251,5 +303,12 @@ final class CheckoutContext implements Context
         }
 
         return $headers;
+    }
+    private function getCheckoutState(): string
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        return $this->responseChecker->getValue($response, 'checkoutState');
     }
 }

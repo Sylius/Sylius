@@ -86,6 +86,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">cart:address</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="select_shipping_method">
@@ -99,6 +102,9 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">cart:select_shipping_method</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -114,6 +120,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">cart:select_payment_method</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="complete">
@@ -127,6 +136,9 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">cart:complete</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
                 </attribute>
             </itemOperation>
 
