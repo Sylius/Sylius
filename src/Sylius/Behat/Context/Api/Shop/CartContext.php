@@ -69,6 +69,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I (?:add|added) (this product) to the (cart)$/
+     * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {

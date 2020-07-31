@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,16 +22,20 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     /** @var AbstractBrowser */
     private $client;
 
-    /** @var array */
-    private $request = [];
-
     /** @var string */
     private $section;
 
-    public function __construct(AbstractBrowser $client, string $section)
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    /** @var array */
+    private $request = [];
+
+    public function __construct(AbstractBrowser $client, string $section, SharedStorageInterface $sharedStorage)
     {
         $this->client = $client;
         $this->section = $section;
+        $this->sharedStorage = $sharedStorage;
     }
 
     public function prepareLoginRequest(): void
@@ -59,6 +64,13 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
             json_encode($this->request['body'])
         );
+
+        $response = $this->client->getResponse();
+        $content = json_decode($response->getContent(), true);
+
+        if (isset($content['token'])) {
+            $this->sharedStorage->set('token', $content['token']);
+        }
     }
 
     public function isLoggedIn(): bool
@@ -74,5 +86,10 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     public function getErrorMessage(): string
     {
         return json_decode($this->client->getResponse()->getContent(), true)['message'];
+    }
+
+    public function logOut(): void
+    {
+        $this->sharedStorage->set('token', null);
     }
 }

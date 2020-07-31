@@ -113,11 +113,13 @@
         <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
             <argument>admin</argument>
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
             <argument>shop</argument>
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.api_platform_client.iri" class="Sylius\Behat\Client\ApiPlatformIriClient">
