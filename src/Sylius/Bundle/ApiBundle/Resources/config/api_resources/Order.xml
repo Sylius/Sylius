@@ -77,7 +77,7 @@
             <itemOperation name="address">
                 <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Address cart to given location</attribute>
+                    <attribute name="summary">Address cart to given location, Logged Customer does not have to provide an email</attribute>
                 </attribute>
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/orders/{id}/address</attribute>
@@ -171,5 +171,6 @@
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true" />
+        <property name="notes" writable="true" />
     </resource>
 </resources>
