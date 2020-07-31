@@ -21,7 +21,7 @@ interface RequestInterface
 
     public static function show(string $resource, string $id, string $token): self;
 
-    public static function create(string $resource): self;
+    public static function create(string $resource, ?string $token = null): self;
 
     public static function update(string $resource, string $id, string $token): self;
 
