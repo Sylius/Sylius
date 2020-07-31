@@ -14,9 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -30,23 +35,38 @@ final class CheckoutContext implements Context
     /** @var AbstractBrowser */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $orderClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
-
-    /** @var string[] */
-    private $content = [];
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var SecurityServiceInterface */
+    private $shopSecurityService;
+
+    /** @var SecurityServiceInterface */
+    private $adminSecurityService;
+
+    /** @var string[] */
+    private $content = [];
+
     public function __construct(
         AbstractBrowser $client,
+        ApiClientInterface $orderClient,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        SecurityServiceInterface $shopSecurityService,
+        SecurityServiceInterface $adminSecurityService
     ) {
         $this->client = $client;
+        $this->orderClient = $orderClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->shopSecurityService = $shopSecurityService;
+        $this->adminSecurityService = $adminSecurityService;
     }
 
     /**
@@ -60,7 +80,7 @@ final class CheckoutContext implements Context
     /**
      * @When I specify the email as :email
      */
-    public function iSpecifyTheEmailAs(string $email): void
+    public function iSpecifyTheEmailAs(?string $email): void
     {
         $this->content['email'] = $email;
     }
@@ -78,6 +98,15 @@ final class CheckoutContext implements Context
         $this->content['billingAddress']['lastName'] = $address->getLastName();
     }
 
+    /**
+     * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
+    {
+        $this->iSpecifyTheEmailAs(null);
+        $this->iSpecifyTheBillingAddressAs($address);
+        $this->iCompleteTheAddressingStep();
+    }
 
     /**
      * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
@@ -109,7 +138,7 @@ final class CheckoutContext implements Context
             \sprintf('/new-api/orders/%s/select-shipping-methods', $cartToken),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode([
                 'shipmentIdentifier' => 0,
                 'shippingMethod' => $shippingMethod->getCode(),
@@ -117,6 +146,27 @@ final class CheckoutContext implements Context
         );
 
         $response = $this->client->getResponse();
+    }
+
+    /**
+     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iProceedOrderWithShippingMethodAndPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ): void {
+        $this->iProceededWithShippingMethod($shippingMethod);
+        $this->iChoosePaymentMethod($paymentMethod);
+    }
+
+    /**
+     * @When I provide additional note like :notes
+     */
+    public function iProvideAdditionalNotesLike(string $notes): void
+    {
+        $this->content['additionalNote'] = $notes;
+
+        $this->sharedStorage->set('additional_note', $notes);
     }
 
     /**
@@ -131,7 +181,7 @@ final class CheckoutContext implements Context
             \sprintf('/new-api/orders/%s/select-payment-methods', $cartToken),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode([
                 'paymentIdentifier' => 0,
                 'paymentMethod' => $paymentMethod->getCode(),
@@ -148,13 +198,17 @@ final class CheckoutContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
+        $notes = isset($this->content['additionalNote']) ? $this->content['additionalNote'] : null;
+
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf('/new-api/orders/%s/complete', $cartToken),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
-            json_encode([], \JSON_THROW_ON_ERROR)
+            $this->getHeaders(),
+            json_encode([
+                'notes' => $notes,
+            ], \JSON_THROW_ON_ERROR)
         );
     }
 
@@ -193,6 +247,22 @@ final class CheckoutContext implements Context
         Assert::same($value, OrderCheckoutStates::STATE_ADDRESSED);
     }
 
+    /**
+     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
+     */
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
+        AdminUserInterface $user,
+        $note,
+        OrderInterface $order
+    ):void {
+        $this->shopSecurityService->logOut();
+        $this->adminSecurityService->logIn($user);
+
+        $orderNotes = $this->responseChecker->getValue($this->orderClient->show($order->getTokenValue()), 'notes');
+
+        Assert::same($note, $orderNotes);
+    }
+
     private function addressOrder(array $content): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
@@ -202,8 +272,21 @@ final class CheckoutContext implements Context
             \sprintf('/new-api/orders/%s/address', $cartToken),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode($content, \JSON_THROW_ON_ERROR)
         );
+    }
+
+    private function getHeaders(array $headers = []): array
+    {
+        if (empty($headers)) {
+            $headers = ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'];
+        }
+
+        if ($this->sharedStorage->has('token')) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
+        }
+
+        return $headers;
     }
 }

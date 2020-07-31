@@ -55,7 +55,9 @@ final class CartTokenContext implements Context
             }
         }
 
-        $response = $this->cartsClient->create(Request::create('orders'));
+        $accessToken = $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+
+        $response = $this->cartsClient->create(Request::create('orders', $accessToken));
 
         $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
         $this->sharedStorage->set('cart_token', $tokenValue);

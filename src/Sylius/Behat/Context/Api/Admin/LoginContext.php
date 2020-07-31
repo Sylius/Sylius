@@ -101,7 +101,7 @@ final class LoginContext implements Context
         $this->iShouldNotBeLoggedIn();
     }
 
-    private function logIn(string $username, string $password): void
+    private function logIn(string $username = 'sylius', string $password = 'sylius'): void
     {
         $this->iWantToLogIn();
         $this->iSpecifyTheUsername($username);
