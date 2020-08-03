@@ -57,7 +57,7 @@ All the dispatches are using the ``GenericEvent`` class and return the resource 
 
 
 Checkout events rules
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 To dispatch checkout steps the events names are overloaded.
 See _sylius.event in src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml
