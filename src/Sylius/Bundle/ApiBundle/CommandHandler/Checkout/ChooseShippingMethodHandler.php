@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class ChooseShippingMethodHandler
