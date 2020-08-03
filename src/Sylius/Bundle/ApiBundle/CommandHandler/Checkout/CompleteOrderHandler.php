@@ -45,6 +45,10 @@ final class CompleteOrderHandler
 
         Assert::notNull($cart, sprintf('Order with %s token has not been found.', $orderTokenValue));
 
+        if ($completeOrder->notes !== null) {
+            $cart->setNotes($completeOrder->notes);
+        }
+
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 
         Assert::true(

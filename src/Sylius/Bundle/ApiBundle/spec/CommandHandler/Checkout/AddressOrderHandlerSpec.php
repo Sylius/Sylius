@@ -36,7 +36,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $customerFactory, $manager, $stateMachineFactory);
     }
 
-    function it_handles_addressing_an_order(
+    function it_handles_addressing_an_order_for_visitor(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
@@ -49,20 +49,73 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
-        $customerFactory->createNew()->willReturn($customer);
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
+        $order->getCustomer()->willReturn(null);
+
+        $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
-        $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $manager->persist($customer)->shouldBeCalled();
         $order->setCustomer($customer)->shouldBeCalled();
 
-        $manager->persist($customer)->shouldBeCalled();
+        $order->setBillingAddress($billingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('address')->willReturn(true);
         $stateMachine->apply('address')->shouldBeCalled();
 
         $this($addressOrder);
+    }
+
+    function it_handles_addressing_an_order_for_logged_in_shop_user(
+        OrderRepositoryInterface $orderRepository,
+        FactoryInterface $customerFactory,
+        ObjectManager $manager,
+        StateMachineFactoryInterface $stateMachineFactory,
+        CustomerInterface $customer,
+        AddressInterface $billingAddress,
+        OrderInterface $order,
+        StateMachineInterface $stateMachine
+    ): void {
+        $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
+        $addressOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn($customer);
+
+        $customerFactory->createNew()->shouldNotBeCalled();
+        $customer->setEmail('r2d2@droid.com')->shouldNotBeCalled();
+        $manager->persist($customer)->shouldNotBeCalled();
+        $order->setCustomer($customer)->shouldNotBeCalled();
+
+        $order->setBillingAddress($billingAddress)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('address')->willReturn(true);
+        $stateMachine->apply('address')->shouldBeCalled();
+
+        $this($addressOrder);
+    }
+
+    function it_throws_an_exception_if_visitor_does_not_provide_an_email(
+        OrderRepositoryInterface $orderRepository,
+        AddressInterface $billingAddress,
+        StateMachineFactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        StateMachineInterface $stateMachine
+    ): void {
+        $addressOrder = new AddressOrder(null, $billingAddress->getWrappedObject());
+        $addressOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn(null);
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('address')->willReturn(true);
+
+        $this->shouldThrow(\LogicException::class)->during('__invoke', [$addressOrder]);
     }
 
     function it_throws_an_exception_if_order_does_not_exist(

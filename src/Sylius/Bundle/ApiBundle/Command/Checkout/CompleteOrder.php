@@ -20,6 +20,14 @@ class CompleteOrder implements OrderTokenValueAwareInterface
     /** @var string|null */
     public $orderTokenValue;
 
+    /** @var string|null */
+    public $notes;
+
+    public function __construct(?string $notes = null)
+    {
+        $this->notes = $notes;
+    }
+
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;

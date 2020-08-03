@@ -22,7 +22,7 @@ class AddressOrder implements OrderTokenValueAwareInterface
     public $orderTokenValue;
 
     /**
-     * @var string
+     * @var string|null
      * @psalm-immutable
      */
     public $email;
@@ -33,7 +33,7 @@ class AddressOrder implements OrderTokenValueAwareInterface
      */
     public $billingAddress;
 
-    public function __construct(string $email, AddressInterface $billingAddress)
+    public function __construct(?string $email, AddressInterface $billingAddress)
     {
         $this->email = $email;
         $this->billingAddress = $billingAddress;

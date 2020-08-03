@@ -28,7 +28,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $stateMachineFactory);
     }
 
-    function it_handles_order_completion(
+    function it_handles_order_completion_without_notes(
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -38,6 +38,30 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->setNotes(null)->shouldNotBeCalled();
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('complete')->willReturn(true);
+        $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
+
+        $stateMachine->apply('complete')->shouldBeCalled();
+
+        $this($completeOrder)->shouldReturn($order);
+    }
+
+    function it_handles_order_completion_with_notes(
+        OrderRepositoryInterface $orderRepository,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        FactoryInterface $stateMachineFactory
+    ): void {
+        $completeOrder = new CompleteOrder('ThankYou');
+        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->setNotes('ThankYou')->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);

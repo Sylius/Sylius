@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -33,11 +32,11 @@ final class CheckoutContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var string[] */
-    private $content = [];
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
+
+    /** @var string[] */
+    private $content = [];
 
     public function __construct(
         AbstractBrowser $client,
@@ -60,7 +59,7 @@ final class CheckoutContext implements Context
     /**
      * @When I specify the email as :email
      */
-    public function iSpecifyTheEmailAs(string $email): void
+    public function iSpecifyTheEmailAs(?string $email): void
     {
         $this->content['email'] = $email;
     }
@@ -78,6 +77,15 @@ final class CheckoutContext implements Context
         $this->content['billingAddress']['lastName'] = $address->getLastName();
     }
 
+    /**
+     * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
+    {
+        $this->iSpecifyTheEmailAs(null);
+        $this->iSpecifyTheBillingAddressAs($address);
+        $this->iCompleteTheAddressingStep();
+    }
 
     /**
      * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
@@ -102,21 +110,38 @@ final class CheckoutContext implements Context
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-shipping-methods', $cartToken),
+            \sprintf('/new-api/orders/%s/select-shipping-methods', $this->sharedStorage->get('cart_token')),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode([
                 'shipmentIdentifier' => 0,
                 'shippingMethod' => $shippingMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );
+    }
 
-        $response = $this->client->getResponse();
+    /**
+     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iProceedOrderWithShippingMethodAndPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ): void {
+        $this->iProceededWithShippingMethod($shippingMethod);
+        $this->iChoosePaymentMethod($paymentMethod);
+    }
+
+    /**
+     * @When I provide additional note like :notes
+     */
+    public function iProvideAdditionalNotesLike(string $notes): void
+    {
+        $this->content['additionalNote'] = $notes;
+
+        $this->sharedStorage->set('additional_note', $notes);
     }
 
     /**
@@ -124,21 +149,17 @@ final class CheckoutContext implements Context
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-payment-methods', $cartToken),
+            \sprintf('/new-api/orders/%s/select-payment-methods', $this->sharedStorage->get('cart_token')),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode([
                 'paymentIdentifier' => 0,
                 'paymentMethod' => $paymentMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );
-
-        $response = $this->client->getResponse();
     }
 
     /**
@@ -146,15 +167,17 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder(): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
+        $notes = isset($this->content['additionalNote']) ? $this->content['additionalNote'] : null;
 
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/complete', $cartToken),
+            \sprintf('/new-api/orders/%s/complete', $this->sharedStorage->get('cart_token')),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
-            json_encode([], \JSON_THROW_ON_ERROR)
+            $this->getHeaders(),
+            json_encode([
+                'notes' => $notes,
+            ], \JSON_THROW_ON_ERROR)
         );
     }
 
@@ -173,10 +196,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage(): void
     {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-
-        $value = $this->responseChecker->getValue($response, 'checkoutState');
+        $value = $this->responseChecker->getValue($this->client->getResponse(), 'checkoutState');
 
         Assert::same($value, OrderCheckoutStates::STATE_COMPLETED);
     }
@@ -186,24 +206,33 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        $response = $this->client->getResponse();
-
-        $value = $this->responseChecker->getValue($response, 'checkoutState');
+        $value = $this->responseChecker->getValue($this->client->getResponse(), 'checkoutState');
 
         Assert::same($value, OrderCheckoutStates::STATE_ADDRESSED);
     }
 
     private function addressOrder(array $content): void
     {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/address', $cartToken),
+            \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),
             [],
             [],
-            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            $this->getHeaders(),
             json_encode($content, \JSON_THROW_ON_ERROR)
         );
+    }
+
+    private function getHeaders(array $headers = []): array
+    {
+        if (empty($headers)) {
+            $headers = ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'];
+        }
+
+        if ($this->sharedStorage->has('token')) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
+        }
+
+        return $headers;
     }
 }

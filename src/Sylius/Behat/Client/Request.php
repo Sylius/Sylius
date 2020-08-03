@@ -66,12 +66,18 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function create(string $resource): RequestInterface
+    public static function create(string $resource, ?string $token = null): RequestInterface
     {
+        $headers = ['CONTENT_TYPE' => 'application/ld+json'];
+
+        if ($token !== null) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+        }
+
         return new self(
             sprintf('/new-api/%s', $resource),
             HttpRequest::METHOD_POST,
-            ['CONTENT_TYPE' => 'application/ld+json']
+            $headers
         );
     }
 

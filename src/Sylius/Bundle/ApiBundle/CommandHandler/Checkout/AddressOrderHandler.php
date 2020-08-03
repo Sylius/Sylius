@@ -60,19 +60,27 @@ final class AddressOrderHandler
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
+        /** @var CustomerInterface|null $customer */
+        $customer =  $order->getCustomer();
+
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
-        $customer->setEmail($addressOrder->email);
+        if ($customer === null) {
+            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
 
-        $this->manager->persist($customer);
+            /** @var CustomerInterface $customer */
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail($addressOrder->email);
+
+            $this->manager->persist($customer);
+
+            $order->setCustomer($customer);
+        }
 
         $order->setBillingAddress($addressOrder->billingAddress);
-        $order->setCustomer($customer);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
