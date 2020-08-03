@@ -21,6 +21,8 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
  * @deprecated since Sylius 1.7. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
+ *
+ * @psalm-suppress DeprecatedInterface
  */
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
