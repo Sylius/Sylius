@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Shipping\Checker;
 
 use const E_USER_DEPRECATED;
-use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface as NewShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
@@ -23,7 +22,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @deprecated since Sylius 1.7. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
  */
-final class ShippingMethodEligibilityChecker implements NewShippingMethodEligibilityCheckerInterface
+final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
     {
