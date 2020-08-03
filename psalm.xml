@@ -78,7 +78,7 @@
     </projectFiles>
 
     <issueHandlers>
-        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+        <!-- level 3 issues - slightly lazy code writing, but probably low false-negatives -->
 
         <DeprecatedClass>
             <errorLevel type="info">
@@ -137,6 +137,8 @@
             </errorLevel>
         </MissingConstructor>
         <MissingParamType errorLevel="info" />
+
+        <RedundantConditionGivenDocblockType errorLevel="info" />
 
         <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
 

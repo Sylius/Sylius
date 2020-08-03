@@ -34,7 +34,6 @@ final class SelectProductAttributeChoiceRemoveListener
     {
         $productAttribute = $event->getEntity();
 
-        /** @var ProductAttributeInterface $productAttribute */
         if (!$productAttribute instanceof ProductAttributeInterface) {
             return;
         }
