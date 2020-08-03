@@ -58,6 +58,7 @@ final class AddressOrderHandler
         Assert::notNull($order, sprintf('Order with %s token has not been found.', $tokenValue));
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $tokenValue)

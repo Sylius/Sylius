@@ -91,16 +91,16 @@ final class CheckoutContext implements Context
     public function iWasAtTheCheckoutSummaryStep()
     {
         $this->addressingContext->iSpecifiedTheBillingAddress();
-        $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
+        $this->iProceedOrderWithShippingMethodAndPayment(null, 'Offline');
     }
 
     /**
-     * @Given I chose :shippingMethodName shipping method
-     * @When I proceed selecting :shippingMethodName shipping method
+     * @Given I chose :shippingMethod shipping method
+     * @When I proceed selecting :shippingMethod shipping method
      */
-    public function iProceedSelectingShippingMethod($shippingMethodName)
+    public function iProceedSelectingShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethodName);
+        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethod);
     }
 
     /**
@@ -117,7 +117,7 @@ final class CheckoutContext implements Context
      * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethodName payment
      * @When I proceed with :shippingMethod shipping method and :paymentMethodName payment
      */
-    public function iProceedOrderWithShippingMethodAndPayment(ShippingMethodInterface $shippingMethod, $paymentMethodName)
+    public function iProceedOrderWithShippingMethodAndPayment(?ShippingMethodInterface $shippingMethod, $paymentMethodName)
     {
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
@@ -138,20 +138,23 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
+     * @When /^I proceed selecting ("[^"]+" as billing country) with ("[^"]+" shipping method)$/
      */
-    public function iProceedSelectingBillingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
-    {
+    public function iProceedSelectingBillingCountryAndShippingMethod(
+        CountryInterface $shippingCountry = null,
+        ?ShippingMethodInterface $shippingMethod = null
+    ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
     }
 
     /**
-     * @When /^I change shipping method to "([^"]*)"$/
+     * @When I change shipping method to :shippingMethod
      */
-    public function iChangeShippingMethod($shippingMethodName)
+    public function iChangeShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->paymentContext->iDecideToChangeMyShippingMethod();
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
     }
 
     /**

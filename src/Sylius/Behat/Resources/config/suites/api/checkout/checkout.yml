@@ -29,7 +29,6 @@ default:
                 - sylius.behat.context.setup.shop_api_security
 
                 - sylius.behat.context.api.admin.managing_orders
-                - sylius.behat.context.setup.shop_security
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout

@@ -42,10 +42,10 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @Given I have proceeded selecting :shippingMetho shipping method
-     * @When I proceed with :shippingMethodName shipping method
+     * @Given I have proceeded selecting :shippingMethod shipping method
+     * @When I proceed with :shippingMethod shipping method
      */
-    public function iHaveProceededSelectingShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iHaveProceededSelectingShippingMethod(?ShippingMethodInterface $shippingMethod): void
     {
         $this->iSelectShippingMethod($shippingMethod);
         $this->selectShippingPage->nextStep();
@@ -55,9 +55,13 @@ final class CheckoutShippingContext implements Context
      * @Given I have selected :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      */
-    public function iSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iSelectShippingMethod(?ShippingMethodInterface $shippingMethod): void
     {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod->getName());
+        $shippingMethodName = 'Free';
+        if ($shippingMethod !== null) {
+            $shippingMethodName = $shippingMethod->getName();
+        }
+        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
     }
 
     /**
@@ -70,9 +74,9 @@ final class CheckoutShippingContext implements Context
 
     /**
      * @When /^I(?:| try to) complete the shipping step$/
-     * @When /^I complete the shipping step with first shipping method$/
+     * @When I complete the shipping step with first shipping method
      */
-    public function iCompleteTheShippingStep()
+    public function iCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->nextStep();
     }

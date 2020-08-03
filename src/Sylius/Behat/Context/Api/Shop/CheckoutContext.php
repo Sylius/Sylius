@@ -57,7 +57,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I am at the checkout addressing step
-     * @When I complete the shipping step
+     * @When And I complete the shipping step
      */
     public function iAmAtTheCheckoutAddressingStep(): void
     {
@@ -208,9 +208,6 @@ final class CheckoutContext implements Context
      */
     public function iCompleteTheAddressingStep(): void
     {
-        if (!array_key_exists('email', $this->content)) {
-             $this->iSpecifyTheEmailAs('customer@example.com');
-        }
         $this->addressOrder($this->content);
 
         $this->content = [];
@@ -244,12 +241,26 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be on the checkout payment step
+     */
+    public function iShouldBeOnTheCheckoutPaymentStep(): void
+    {
+        Assert::inArray(
+            $this->getCheckoutState(),
+            [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
+        );
+    }
+
+    /**
      * @Then I should be on the checkout complete step
      * @Then I should be on the checkout summary step
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
-        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_PAYMENT_SKIPPED);
+        Assert::inArray(
+            $this->getCheckoutState(),
+            [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
+        );
     }
 
     /**
@@ -304,6 +315,7 @@ final class CheckoutContext implements Context
 
         return $headers;
     }
+
     private function getCheckoutState(): string
     {
         /** @var Response $response */
