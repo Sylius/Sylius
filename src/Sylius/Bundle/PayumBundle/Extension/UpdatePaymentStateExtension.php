@@ -71,7 +71,6 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
         $payment = $request->getFirstModel();
 
-        /** @var PaymentInterface $payment */
         if (!$payment instanceof PaymentInterface) {
             return;
         }
