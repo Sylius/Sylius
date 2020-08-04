@@ -26,7 +26,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
 {
     function let(RequestStack $requestStack, OrderRepositoryInterface $orderRepository): void
     {
-        $this->beConstructedWith($requestStack, $orderRepository);
+        $this->beConstructedWith($requestStack, $orderRepository, '/new-api');
     }
 
     function it_implements_cart_context_interface(): void
@@ -41,6 +41,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         OrderInterface $cart
     ): void {
         $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
+        $request->getRequestUri()->willReturn('/new-api/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn($cart);
@@ -53,7 +54,22 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $requestStack->getMasterRequest()->willReturn(null);
 
         $this
-            ->shouldThrow(new \UnexpectedValueException('There is no master request on request stack'))
+            ->shouldThrow(new \UnexpectedValueException('There is no master request on request stack.'))
+            ->during('getCart')
+        ;
+    }
+
+    function it_throws_an_exception_if_the_request_is_not_an_api_request(
+        RequestStack $requestStack,
+        Request $request
+    ): void {
+        $request->attributes = new ParameterBag([]);
+        $request->getRequestUri()->willReturn('/orders');
+
+        $requestStack->getMasterRequest()->willReturn($request);
+
+        $this
+            ->shouldThrow(new CartNotFoundException('The master request is not an API request.'))
             ->during('getCart')
         ;
     }
@@ -63,6 +79,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         Request $request
     ): void {
         $request->attributes = new ParameterBag([]);
+        $request->getRequestUri()->willReturn('/new-api/orders');
 
         $requestStack->getMasterRequest()->willReturn($request);
 
@@ -78,6 +95,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         Request $request
     ): void {
         $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
+        $request->getRequestUri()->willReturn('/new-api/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn(null);

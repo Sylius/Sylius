@@ -28,15 +28,24 @@ final class TokenValueBasedCartContext implements CartContextInterface
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    public function __construct(RequestStack $requestStack, OrderRepositoryInterface $orderRepository)
-    {
+    /** @var string */
+    private $newApiRoute;
+
+    public function __construct(
+        RequestStack $requestStack,
+        OrderRepositoryInterface $orderRepository,
+        string $newApiRoute
+    ) {
         $this->requestStack = $requestStack;
         $this->orderRepository = $orderRepository;
+        $this->newApiRoute = $newApiRoute;
     }
 
     public function getCart(): OrderInterface
     {
         $request = $this->getMasterRequest();
+        $this->checkApiRequest($request);
+
         $tokenValue = $request->attributes->get('id');
         if ($tokenValue === null) {
             throw new CartNotFoundException('Sylius was not able to find the cart, as there is no passed token value.');
@@ -54,9 +63,16 @@ final class TokenValueBasedCartContext implements CartContextInterface
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if (null === $masterRequest) {
-            throw new \UnexpectedValueException('There is no master request on request stack');
+            throw new \UnexpectedValueException('There is no master request on request stack.');
         }
 
         return $masterRequest;
+    }
+
+    private function checkApiRequest(Request $request): void
+    {
+        if (strpos($request->getRequestUri(), $this->newApiRoute) === false) {
+            throw new CartNotFoundException('The master request is not an API request.');
+        }
     }
 }
