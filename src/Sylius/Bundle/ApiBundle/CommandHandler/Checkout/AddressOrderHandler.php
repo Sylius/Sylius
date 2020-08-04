@@ -77,13 +77,8 @@ final class AddressOrderHandler
             $order->setCustomer($customer);
         }
 
-        $shippingAddress = $addressOrder->shippingAddress;
-        if ($shippingAddress === null) {
-            $shippingAddress = clone $addressOrder->billingAddress;
-        }
-
-        $order->setShippingAddress($shippingAddress);
         $order->setBillingAddress($addressOrder->billingAddress);
+        $order->setShippingAddress($addressOrder->shippingAddress ?? clone $addressOrder->billingAddress);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
