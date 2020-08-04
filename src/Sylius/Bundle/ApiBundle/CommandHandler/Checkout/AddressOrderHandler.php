@@ -55,19 +55,16 @@ final class AddressOrderHandler
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $tokenValue]);
-
         Assert::notNull($order, sprintf('Order with %s token has not been found.', $tokenValue));
 
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
-
-        /** @var CustomerInterface|null $customer */
-        $customer =  $order->getCustomer();
-
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
+        /** @var CustomerInterface|null $customer */
+        $customer =  $order->getCustomer();
         if ($customer === null) {
             Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
 
@@ -80,6 +77,12 @@ final class AddressOrderHandler
             $order->setCustomer($customer);
         }
 
+        $shippingAddress = $addressOrder->shippingAddress;
+        if ($shippingAddress === null) {
+            $shippingAddress = clone $addressOrder->billingAddress;
+        }
+
+        $order->setShippingAddress($shippingAddress);
         $order->setBillingAddress($addressOrder->billingAddress);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
