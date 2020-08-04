@@ -138,6 +138,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
+     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
      */
     public function iProceedOrderWithShippingMethodAndPayment(
         ShippingMethodInterface $shippingMethod,
@@ -191,6 +192,11 @@ final class CheckoutContext implements Context
             json_encode([
                 'notes' => $notes,
             ], \JSON_THROW_ON_ERROR)
+        );
+
+        $this->sharedStorage->set(
+            'order_number',
+            $this->responseChecker->getValue($this->client->getResponse(), 'number')
         );
     }
 
