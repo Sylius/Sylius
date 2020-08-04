@@ -226,7 +226,7 @@ final class CheckoutContext implements Context
 
     private function addressOrder(array $content): void
     {
-        if (!array_key_exists('email', $content)) {
+        if (!isset($content['email'])) {
             $content['email'] = null;
         }
 
