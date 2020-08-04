@@ -78,6 +78,19 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
+    {
+        $this->content['shippingAddress']['city'] = $address->getCity();
+        $this->content['shippingAddress']['street'] = $address->getStreet();
+        $this->content['shippingAddress']['postcode'] = $address->getPostcode();
+        $this->content['shippingAddress']['countryCode'] = $address->getCountryCode();
+        $this->content['shippingAddress']['firstName'] = $address->getFirstName();
+        $this->content['shippingAddress']['lastName'] = $address->getLastName();
+    }
+
+    /**
      * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
@@ -213,6 +226,10 @@ final class CheckoutContext implements Context
 
     private function addressOrder(array $content): void
     {
+        if (!array_key_exists('email', $content)) {
+            $content['email'] = null;
+        }
+
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),

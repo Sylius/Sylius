@@ -19,6 +19,9 @@
         <attribute name="billingAddress">
            <group>cart:address</group>
         </attribute>
+        <attribute name="shippingAddress">
+           <group>cart:address</group>
+        </attribute>
         <attribute name="email">
            <group>cart:address</group>
         </attribute>

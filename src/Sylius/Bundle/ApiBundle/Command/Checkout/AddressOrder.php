@@ -33,10 +33,17 @@ class AddressOrder implements OrderTokenValueAwareInterface
      */
     public $billingAddress;
 
-    public function __construct(?string $email, AddressInterface $billingAddress)
+    /**
+     * @var AddressInterface|null
+     * @psalm-immutable
+     */
+    public $shippingAddress;
+
+    public function __construct(?string $email, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null)
     {
         $this->email = $email;
         $this->billingAddress = $billingAddress;
+        $this->shippingAddress = $shippingAddress;
     }
 
     public function getOrderTokenValue(): ?string

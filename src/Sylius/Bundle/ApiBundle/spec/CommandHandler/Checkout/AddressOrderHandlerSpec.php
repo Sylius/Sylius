@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
@@ -36,10 +37,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $customerFactory, $manager, $stateMachineFactory);
     }
 
-    function it_handles_addressing_an_order_for_visitor(
+    function it_handles_addressing_an_order_without_provided_shipping_address(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $customerFactory,
-        ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
         AddressInterface $billingAddress,
@@ -47,6 +46,38 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine
     ): void {
         $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
+        $addressOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn($customer);
+
+        $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $order->setShippingAddress(Argument::type(AddressInterface::class))->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('address')->willReturn(true);
+        $stateMachine->apply('address')->shouldBeCalled();
+
+        $this($addressOrder);
+    }
+
+    function it_handles_addressing_an_order_for_visitor(
+        OrderRepositoryInterface $orderRepository,
+        FactoryInterface $customerFactory,
+        ObjectManager $manager,
+        StateMachineFactoryInterface $stateMachineFactory,
+        CustomerInterface $customer,
+        AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
+        OrderInterface $order,
+        StateMachineInterface $stateMachine
+    ): void {
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
@@ -59,6 +90,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setCustomer($customer)->shouldBeCalled();
 
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('address')->willReturn(true);
@@ -74,10 +106,15 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         StateMachineFactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
         AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
         OrderInterface $order,
         StateMachineInterface $stateMachine
     ): void {
-        $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
@@ -90,6 +127,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setCustomer($customer)->shouldNotBeCalled();
 
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('address')->willReturn(true);
@@ -101,11 +139,16 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_visitor_does_not_provide_an_email(
         OrderRepositoryInterface $orderRepository,
         AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
         StateMachineFactoryInterface $stateMachineFactory,
         OrderInterface $order,
         StateMachineInterface $stateMachine
     ): void {
-        $addressOrder = new AddressOrder(null, $billingAddress->getWrappedObject());
+        $addressOrder = new AddressOrder(
+            null,
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
@@ -120,9 +163,14 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_does_not_exist(
         OrderRepositoryInterface $orderRepository,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
+        AddressInterface $shippingAddress
     ): void {
-        $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
@@ -134,10 +182,15 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         StateMachineFactoryInterface $stateMachineFactory,
         AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
         OrderInterface $order,
         StateMachineInterface $stateMachine
     ): void {
-        $addressOrder = new AddressOrder('r2d2@droid.com', $billingAddress->getWrappedObject());
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
         $addressOrder->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
