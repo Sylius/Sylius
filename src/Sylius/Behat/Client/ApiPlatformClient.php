@@ -128,6 +128,8 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function executeCustomRequest(RequestInterface $request): Response
     {
+        $request->authorize($this->getToken());
+
         return $this->request($request);
     }
 

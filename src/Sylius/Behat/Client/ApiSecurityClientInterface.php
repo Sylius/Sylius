@@ -26,4 +26,6 @@ interface ApiSecurityClientInterface
     public function isLoggedIn(): bool;
 
     public function getErrorMessage(): string;
+
+    public function logOut(): void;
 }

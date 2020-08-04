@@ -61,6 +61,25 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->client->prepareLoginRequest();
+        $this->client->setEmail($email);
+        $this->client->setPassword($password);
+        $this->client->call();
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut()
+    {
+        $this->client->logOut();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn(): void
