@@ -295,6 +295,14 @@ final class CheckoutContext implements Context
         Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
     }
 
+    /**
+     * @Given I complete the shipping step
+     */
+    public function iCompleteTheShippingStep(): void
+    {
+        // Intentionally left blank
+    }
+
     private function addressOrder(array $content): void
     {
         if (!isset($content['email'])) {

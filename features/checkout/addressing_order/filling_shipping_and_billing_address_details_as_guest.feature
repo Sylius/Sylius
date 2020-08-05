@@ -28,7 +28,7 @@ Feature: Addressing an order
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui
+    @ui @api
     Scenario: Address an order using existing email
         Given the store has customer "eddard.stark@example.com"
         And I have product "PHP T-Shirt" in the cart

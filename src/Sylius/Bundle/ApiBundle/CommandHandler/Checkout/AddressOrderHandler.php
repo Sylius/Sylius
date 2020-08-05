@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -27,6 +28,9 @@ final class AddressOrderHandler
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
+
+    /** @var CustomerRepositoryInterface */
+    private $customerRepository;
 
     /** @var FactoryInterface */
     private $customerFactory;
@@ -39,11 +43,13 @@ final class AddressOrderHandler
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
+        $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->manager = $manager;
         $this->stateMachineFactory = $stateMachineFactory;
@@ -65,23 +71,23 @@ final class AddressOrderHandler
         );
 
         /** @var CustomerInterface|null $customer */
-        $customer =  $order->getCustomer();
+        $customer = $this->customerRepository->findOneBy(['email' => $addressOrder->email]);
         if ($customer === null) {
             Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
 
             /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($addressOrder->email);
-
             $this->manager->persist($customer);
-
-            $order->setCustomer($customer);
         }
+        $order->setCustomer($customer);
 
         $order->setBillingAddress($addressOrder->billingAddress);
         $order->setShippingAddress($addressOrder->shippingAddress ?? clone $addressOrder->billingAddress);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+
+        $this->manager->persist($order);
 
         return $order;
     }

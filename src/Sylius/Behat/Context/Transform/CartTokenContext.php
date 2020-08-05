@@ -43,6 +43,7 @@ final class CartTokenContext implements Context
 
     /**
      * @Transform /^(cart)$/
+     * @Transform :cart
      */
     public function provideCartToken(): string
     {
