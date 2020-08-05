@@ -91,16 +91,16 @@ final class CheckoutContext implements Context
     public function iWasAtTheCheckoutSummaryStep()
     {
         $this->addressingContext->iSpecifiedTheBillingAddress();
-        $this->iProceedOrderWithShippingMethodAndPayment(null, 'Offline');
+        $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
     }
 
     /**
-     * @Given I chose :shippingMethod shipping method
-     * @When I proceed selecting :shippingMethod shipping method
+     * @Given I chose :shippingMethodname shipping method
+     * @When I proceed selecting :shippingMethodName shipping method
      */
-    public function iProceedSelectingShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iProceedSelectingShippingMethod(string $shippingMethodName): void
     {
-        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethod);
+        $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethodName);
     }
 
     /**
@@ -114,12 +114,12 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethodName payment
-     * @When I proceed with :shippingMethod shipping method and :paymentMethodName payment
+     * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
+     * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
-    public function iProceedOrderWithShippingMethodAndPayment(?ShippingMethodInterface $shippingMethod, $paymentMethodName)
+    public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, $paymentMethodName)
     {
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
@@ -138,23 +138,22 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
-     * @When /^I proceed selecting ("[^"]+" as billing country) with ("[^"]+" shipping method)$/
      */
     public function iProceedSelectingBillingCountryAndShippingMethod(
         CountryInterface $shippingCountry = null,
-        ?ShippingMethodInterface $shippingMethod = null
+        ?string $shippingMethodName = null
     ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
     }
 
     /**
-     * @When I change shipping method to :shippingMethod
+     * @When /^I change shipping method to "([^"]*)"$/
      */
-    public function iChangeShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iChangeShippingMethod(string $shippingMethodName): void
     {
         $this->paymentContext->iDecideToChangeMyShippingMethod();
-        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod);
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
     }
 
     /**

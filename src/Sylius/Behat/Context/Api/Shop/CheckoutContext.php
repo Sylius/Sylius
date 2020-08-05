@@ -57,6 +57,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I am at the checkout addressing step
+     * @When I complete the shipping step
      * @When And I complete the shipping step
      */
     public function iAmAtTheCheckoutAddressingStep(): void
