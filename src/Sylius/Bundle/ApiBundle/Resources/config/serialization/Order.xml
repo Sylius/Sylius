@@ -23,6 +23,7 @@
 
         <attribute name="number">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="channel">
