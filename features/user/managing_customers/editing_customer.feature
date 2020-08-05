@@ -46,12 +46,3 @@ Feature: Editing a customer
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this customer should have "Retail" as their group
-
-    @ui
-    Scenario: Verifying customer account
-        Given the store has customer "Luke Skywalker" with email "l.skywalker@gmail.com"
-        And I want to verify this customer
-        When I add verified at date
-        And I save my changes
-        Then I should be notified that it has been successfully edited
-        And this customer should be verified

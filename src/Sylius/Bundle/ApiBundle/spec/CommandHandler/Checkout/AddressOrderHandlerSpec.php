@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -30,11 +31,12 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($orderRepository, $customerFactory, $manager, $stateMachineFactory);
+        $this->beConstructedWith($orderRepository,$customerRepository, $customerFactory, $manager, $stateMachineFactory);
     }
 
     function it_handles_addressing_an_order_without_provided_shipping_address(
@@ -50,6 +52,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
+        $order->setCustomer($customer);
         $order->getCustomer()->willReturn($customer);
 
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
@@ -96,6 +99,9 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $stateMachine->can('address')->willReturn(true);
         $stateMachine->apply('address')->shouldBeCalled();
 
+        $manager->persist($order)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
+
         $this($addressOrder);
     }
 
@@ -132,6 +138,49 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('address')->willReturn(true);
         $stateMachine->apply('address')->shouldBeCalled();
+
+        $manager->persist($order)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
+
+        $this($addressOrder);
+    }
+
+    function it_handles_addressing_an_order_for_not_logged_in_shop_user(
+        OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository,
+        FactoryInterface $customerFactory,
+        ObjectManager $manager,
+        StateMachineFactoryInterface $stateMachineFactory,
+        CustomerInterface $customer,
+        AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
+        OrderInterface $order,
+        StateMachineInterface $stateMachine
+    ): void {
+        $addressOrder = new AddressOrder(
+            'r2d2@droid.com',
+            $billingAddress->getWrappedObject(),
+            $shippingAddress->getWrappedObject()
+        );
+        $addressOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn(null);
+
+        $customerRepository->findOneBy(['email' => 'r2d2@droid.com'])->willReturn($customer);
+
+        $order->getCustomer()->shouldBeCalled();
+        $order->setCustomer($customer)->shouldBeCalled();
+        $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $order->setShippingAddress($shippingAddress)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('address')->willReturn(true);
+        $stateMachine->apply('address')->shouldBeCalled();
+
+        $manager->persist($order)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
 
         $this($addressOrder);
     }

@@ -58,7 +58,6 @@ final class CheckoutContext implements Context
     /**
      * @Given I am at the checkout addressing step
      * @When I complete the shipping step
-     * @When I complete the payment step
      */
     public function intentionallyLeftBlank(): void
     {
@@ -293,14 +292,6 @@ final class CheckoutContext implements Context
         $response = $this->client->getResponse();
 
         Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
-    }
-
-    /**
-     * @Given I complete the shipping step
-     */
-    public function iCompleteTheShippingStep(): void
-    {
-        // Intentionally left blank
     }
 
     private function addressOrder(array $content): void
