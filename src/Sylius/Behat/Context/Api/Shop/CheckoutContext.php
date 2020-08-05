@@ -58,9 +58,9 @@ final class CheckoutContext implements Context
     /**
      * @Given I am at the checkout addressing step
      * @When I complete the shipping step
-     * @When And I complete the shipping step
+     * @When I complete the payment step
      */
-    public function iAmAtTheCheckoutAddressingStep(): void
+    public function intentionallyLeftBlank(): void
     {
         // Intentionally left blank
     }
@@ -170,6 +170,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I choose :paymentMethod payment method
+     * @When I select :paymentMethod payment method
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
