@@ -19,5 +19,8 @@
         <attribute name="id">
             <group>payment_method:read</group>
         </attribute>
+        <attribute name="name">
+            <group>checkout:read</group>
+        </attribute>
     </class>
 </serializer>

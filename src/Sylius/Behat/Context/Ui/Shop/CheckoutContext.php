@@ -26,6 +26,7 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -94,10 +95,10 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I chose :shippingMethodName shipping method
+     * @Given I chose :shippingMethodname shipping method
      * @When I proceed selecting :shippingMethodName shipping method
      */
-    public function iProceedSelectingShippingMethod($shippingMethodName)
+    public function iProceedSelectingShippingMethod(string $shippingMethodName): void
     {
         $this->iProceedSelectingBillingCountryAndShippingMethod(null, $shippingMethodName);
     }
@@ -117,7 +118,7 @@ final class CheckoutContext implements Context
      * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment
      * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
-    public function iProceedOrderWithShippingMethodAndPayment($shippingMethodName, $paymentMethodName)
+    public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, $paymentMethodName)
     {
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
@@ -139,8 +140,10 @@ final class CheckoutContext implements Context
     /**
      * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
      */
-    public function iProceedSelectingBillingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName = null)
-    {
+    public function iProceedSelectingBillingCountryAndShippingMethod(
+        CountryInterface $shippingCountry = null,
+        ?string $shippingMethodName = null
+    ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');
     }
@@ -148,7 +151,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I change shipping method to "([^"]*)"$/
      */
-    public function iChangeShippingMethod($shippingMethodName)
+    public function iChangeShippingMethod(string $shippingMethodName): void
     {
         $this->paymentContext->iDecideToChangeMyShippingMethod();
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
