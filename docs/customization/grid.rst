@@ -206,7 +206,7 @@ In the example below we are removing the ``image`` field and adding the ``code``
             // Add
             $codeField = Field::fromNameAndType('code', 'string');
             $codeField->setLabel('Code');
-            ...
+            // ...
             $grid->addField($codeField);
         }
     }
