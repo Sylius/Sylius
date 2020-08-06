@@ -58,6 +58,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I am at the checkout addressing step
      * @When I complete the shipping step
+     * @When I complete the payment step
      */
     public function intentionallyLeftBlank(): void
     {

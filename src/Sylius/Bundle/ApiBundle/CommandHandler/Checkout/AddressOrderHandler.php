@@ -70,11 +70,8 @@ final class AddressOrderHandler
             sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->provideCustomer($order, $addressOrder->email);
-
         if (null === $order->getCustomer()) {
-            $order->setCustomer($customer);
+            $order->setCustomer($this->provideCustomerByEmail($addressOrder->email));
         }
 
         $order->setBillingAddress($addressOrder->billingAddress);
@@ -83,20 +80,16 @@ final class AddressOrderHandler
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->manager->persist($order);
-        $this->manager->flush();
 
         return $order;
     }
 
-    private function provideCustomer(OrderInterface $order, ?string $email): CustomerInterface
+    private function provideCustomerByEmail(?string $email): CustomerInterface
     {
-        $customer = $order->getCustomer();
-        if (null === $customer) {
-            $customer = $this->customerRepository->findOneBy(['email' => $email]);
-        }
-        if (null === $customer) {
-            Assert::notNull($email, sprintf('Visitor should provide an email.'));
+        Assert::notNull($email, sprintf('Visitor should provide an email.'));
 
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+        if (null === $customer) {
             /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);
