@@ -178,10 +178,10 @@ For example, **sylius_admin_product** grid dispatches such an event:
 
     sylius.grid.admin_product # For the grid of products in admin
 
-To show you an example of a grid customization using events, we will remove a field from a grid using that method.
+To show you an example of a grid customization using events, we will modify fields from a grid using that method.
 Here are the steps, that you need to take:
 
-**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
+**1.** In order to modify fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
 
 In the example below we are removing the ``image`` field and adding the ``code`` field to the ``sylius_admin_product`` grid.
 
