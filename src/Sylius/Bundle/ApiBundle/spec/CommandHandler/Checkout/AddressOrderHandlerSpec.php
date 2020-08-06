@@ -59,8 +59,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setShippingAddress(Argument::type(AddressInterface::class))->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(true);
-        $stateMachine->apply('address')->shouldBeCalled();
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
         $this($addressOrder);
     }
@@ -96,8 +96,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(true);
-        $stateMachine->apply('address')->shouldBeCalled();
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
         $manager->persist($order)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
@@ -136,8 +136,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(true);
-        $stateMachine->apply('address')->shouldBeCalled();
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
         $manager->persist($order)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
@@ -176,8 +176,8 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(true);
-        $stateMachine->apply('address')->shouldBeCalled();
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
 
         $manager->persist($order)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
@@ -205,7 +205,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $order->getCustomer()->willReturn(null);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(true);
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
 
         $this->shouldThrow(\LogicException::class)->during('__invoke', [$addressOrder]);
     }
@@ -245,7 +245,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('address')->willReturn(false);
+        $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(false);
 
         $this->shouldThrow(\LogicException::class)->during('__invoke', [$addressOrder]);
     }

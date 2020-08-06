@@ -71,7 +71,11 @@ final class AddressOrderHandler
         );
 
         /** @var CustomerInterface|null $customer */
-        $this->provideCustomer($order, $addressOrder->email);
+        $customer = $this->provideCustomer($order, $addressOrder->email);
+
+        if (null === $order->getCustomer()) {
+            $order->setCustomer($customer);
+        }
 
         $order->setBillingAddress($addressOrder->billingAddress);
         $order->setShippingAddress($addressOrder->shippingAddress ?? clone $addressOrder->billingAddress);
@@ -98,9 +102,7 @@ final class AddressOrderHandler
             $customer->setEmail($email);
             $this->manager->persist($customer);
         }
-        if(null === $order->getCustomer()){
-            $order->setCustomer($customer);
-        }
+
         return $customer;
     }
 }
