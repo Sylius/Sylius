@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
@@ -27,6 +28,9 @@ final class AddressOrderHandler
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
+
+    /** @var CustomerRepositoryInterface */
+    private $customerRepository;
 
     /** @var FactoryInterface */
     private $customerFactory;
@@ -39,11 +43,13 @@ final class AddressOrderHandler
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
+        $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->manager = $manager;
         $this->stateMachineFactory = $stateMachineFactory;
@@ -64,18 +70,8 @@ final class AddressOrderHandler
             sprintf('Order with %s token cannot be addressed.', $tokenValue)
         );
 
-        /** @var CustomerInterface|null $customer */
-        $customer =  $order->getCustomer();
-        if ($customer === null) {
-            Assert::notNull($addressOrder->email, sprintf('Visitor should provide an email.'));
-
-            /** @var CustomerInterface $customer */
-            $customer = $this->customerFactory->createNew();
-            $customer->setEmail($addressOrder->email);
-
-            $this->manager->persist($customer);
-
-            $order->setCustomer($customer);
+        if (null === $order->getCustomer()) {
+            $order->setCustomer($this->provideCustomerByEmail($addressOrder->email));
         }
 
         $order->setBillingAddress($addressOrder->billingAddress);
@@ -83,6 +79,23 @@ final class AddressOrderHandler
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
+        $this->manager->persist($order);
+
         return $order;
+    }
+
+    private function provideCustomerByEmail(?string $email): CustomerInterface
+    {
+        Assert::notNull($email, sprintf('Visitor should provide an email.'));
+
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+        if (null === $customer) {
+            /** @var CustomerInterface $customer */
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail($email);
+            $this->manager->persist($customer);
+        }
+
+        return $customer;
     }
 }
