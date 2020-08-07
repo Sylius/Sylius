@@ -21,3 +21,4 @@ default:
 
             filters:
                 tags: "@homepage && @api"
+            javascript: false

@@ -38,3 +38,4 @@ default:
 
             filters:
                 tags: "@checkout && @api"
+            javascript: false

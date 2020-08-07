@@ -21,3 +21,4 @@ default:
 
             filters:
                 tags: "@customer_registration && @api"
+            javascript: false
