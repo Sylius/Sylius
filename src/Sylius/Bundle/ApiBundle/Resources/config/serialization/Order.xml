@@ -41,6 +41,7 @@
 
         <attribute name="shipments">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="checkoutState">
@@ -73,6 +74,7 @@
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
+
         <attribute name="notes">
             <group>order:read</group>
         </attribute>

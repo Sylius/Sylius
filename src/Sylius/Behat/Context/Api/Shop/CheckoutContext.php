@@ -34,11 +34,11 @@ final class CheckoutContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
     /** @var RepositoryInterface */
     private $shippingMethodRepository;
+
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
 
     /** @var string[] */
     private $content = [];
@@ -46,21 +46,33 @@ final class CheckoutContext implements Context
     public function __construct(
         AbstractBrowser $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $shippingMethodRepository
+        RepositoryInterface $shippingMethodRepository,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
         $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
+     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iProceedOrderWithShippingMethodAndPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ): void {
+        $this->iProceededWithShippingMethod($shippingMethod);
+        $this->iChoosePaymentMethod($paymentMethod);
     }
 
     /**
      * @Given I am at the checkout addressing step
-     * @When I complete the shipping step
      * @When I complete the payment step
+     * @When I complete the shipping step
      */
-    public function intentionallyLeftBlank(): void
+    public function iAmAtTheCheckoutAddressingStep(): void
     {
         // Intentionally left blank
     }
@@ -128,34 +140,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed with :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
+     * @When I complete the addressing step
      */
-    public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iCompleteTheAddressingStep(): void
     {
-        $this->client->request(
-            Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-shipping-methods', $this->sharedStorage->get('cart_token')),
-            [],
-            [],
-            $this->getHeaders(),
-            json_encode([
-                'shipmentIdentifier' => 0,
-                'shippingMethod' => $shippingMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR)
-        );
-    }
+        $this->addressOrder($this->content);
 
-    /**
-     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
-     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
-     */
-    public function iProceedOrderWithShippingMethodAndPayment(
-        ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
-    ): void {
-        $this->iProceededWithShippingMethod($shippingMethod);
-        $this->iChoosePaymentMethod($paymentMethod);
+        $this->content = [];
     }
 
     /**
@@ -166,25 +157,6 @@ final class CheckoutContext implements Context
         $this->content['additionalNote'] = $notes;
 
         $this->sharedStorage->set('additional_note', $notes);
-    }
-
-    /**
-     * @When I choose :paymentMethod payment method
-     * @When I select :paymentMethod payment method
-     */
-    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
-    {
-        $this->client->request(
-            Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-payment-methods', $this->sharedStorage->get('cart_token')),
-            [],
-            [],
-            $this->getHeaders(),
-            json_encode([
-                'paymentIdentifier' => 0,
-                'paymentMethod' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR)
-        );
     }
 
     /**
@@ -212,13 +184,22 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I complete the addressing step
+     * @When I proceed with :shippingMethod shipping method
+     * @When I select :shippingMethod shipping method
      */
-    public function iCompleteTheAddressingStep(): void
+    public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->addressOrder($this->content);
-
-        $this->content = [];
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf('/new-api/orders/%s/select-shipping-methods', $this->sharedStorage->get('cart_token')),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'shipmentIdentifier' => 0,
+                'shippingMethod' => $shippingMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
+        );
     }
 
     /**
@@ -233,29 +214,21 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see the thank you page
+     * @When I choose :paymentMethod payment method
+     * @When I select :paymentMethod payment method
      */
-    public function iShouldSeeTheThankYouPage(): void
+    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
-        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
-    }
-
-    /**
-     * @Then I should be on the checkout shipping step
-     */
-    public function iShouldBeOnTheCheckoutShippingStep(): void
-    {
-        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
-    }
-
-    /**
-     * @Then I should be on the checkout payment step
-     */
-    public function iShouldBeOnTheCheckoutPaymentStep(): void
-    {
-        Assert::inArray(
-            $this->getCheckoutState(),
-            [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf('/new-api/orders/%s/select-payment-methods', $this->sharedStorage->get('cart_token')),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'paymentIdentifier' => 0,
+                'paymentMethod' => $paymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
         );
     }
 
@@ -272,6 +245,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be on the checkout payment step
+     */
+    public function iShouldBeOnTheCheckoutPaymentStep(): void
+    {
+        Assert::inArray(
+            $this->getCheckoutState(),
+            [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED]
+        );
+    }
+
+    /**
+     * @Then I should not see any information about payment method
+     */
+    public function iShouldNotSeeAnyInformationAboutPaymentMethod(): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
+    }
+
+    /**
      * @Then my order's payment method should be :paymentMethod
      */
     public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
@@ -284,31 +279,34 @@ final class CheckoutContext implements Context
         );
     }
 
+
     /**
-     * @Then I should not see any information about payment method
+     * @Then my order's shipping method should be :shippingMethod
      */
-    public function iShouldNotSeeAnyInformationAboutPaymentMethod()
+    public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod): void
     {
         /** @var Response $response */
         $response = $this->client->getResponse();
-
-        Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['shipments'][0]['method']['translations']['en_US']['name'],
+            $shippingMethod->getName()
+        );
     }
 
-    private function addressOrder(array $content): void
+    /**
+     * @Then I should be on the checkout shipping step
+     */
+    public function iShouldBeOnTheCheckoutShippingStep(): void
     {
-        if (!isset($content['email'])) {
-            $content['email'] = null;
-        }
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
+    }
 
-        $this->client->request(
-            Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),
-            [],
-            [],
-            $this->getHeaders(),
-            json_encode($content, \JSON_THROW_ON_ERROR)
-        );
+    /**
+     * @Then I should see the thank you page
+     */
+    public function iShouldSeeTheThankYouPage(): void
+    {
+        Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
     }
 
     private function getHeaders(array $headers = []): array
@@ -322,6 +320,22 @@ final class CheckoutContext implements Context
         }
 
         return $headers;
+    }
+
+    private function addressOrder(array $content): void
+    {
+        if (!array_key_exists('email', $content)) {
+            $content['email'] = null;
+        }
+
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode($content, \JSON_THROW_ON_ERROR)
+        );
     }
 
     private function getCheckoutState(): string

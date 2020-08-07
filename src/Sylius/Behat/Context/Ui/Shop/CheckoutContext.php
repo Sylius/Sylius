@@ -26,7 +26,6 @@ use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -118,7 +117,7 @@ final class CheckoutContext implements Context
      * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment
      * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
-    public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, $paymentMethodName)
+    public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName);
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
