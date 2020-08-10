@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
-use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\AddTotalFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddTotalFormSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

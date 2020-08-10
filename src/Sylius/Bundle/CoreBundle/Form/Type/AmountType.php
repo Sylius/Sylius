@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShippingBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Core\Model\ChannelInterface;

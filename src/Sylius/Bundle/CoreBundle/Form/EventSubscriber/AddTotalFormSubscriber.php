@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShippingBundle\Form\EventSubscriber;
+namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
-use Sylius\Bundle\ShippingBundle\Form\Type\AmountType;
+use Sylius\Bundle\CoreBundle\Form\Type\AmountType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
