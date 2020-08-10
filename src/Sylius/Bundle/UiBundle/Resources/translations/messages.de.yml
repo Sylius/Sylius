@@ -251,6 +251,7 @@ sylius:
         discount: 'Nachlass'
         discounted_unit_price: 'Reduzierter Stückpreis'
         display: 'Darstellung'
+        distributed_order_discount: 'Aufgeteilter Bestellrabatt.'
         documentation: 'Dokumentation'
         edit: 'Bearbeiten'
         edit_addresses: 'Adressen bearbeiten'
