@@ -59,6 +59,7 @@ sylius:
             min_length: Der Zonenname muss mindestens {{ limit }} Zeichen lang sein|Der Zonenname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie den Namen des Versandgebietes an.
     zone_member:
+        cannot_be_the_same_as_zone: Bereichsmitglied und Beriech müssen unterschiedlich sein.
         code:
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
             regex: Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
