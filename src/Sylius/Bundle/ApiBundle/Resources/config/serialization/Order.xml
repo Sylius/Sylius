@@ -78,5 +78,9 @@
         <attribute name="notes">
             <group>order:read</group>
         </attribute>
+
+        <attribute name="taxTotal">
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>

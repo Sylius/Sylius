@@ -59,4 +59,15 @@ final class OrderContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'number')
         );
     }
+
+    /**
+     * @Then /^my tax total should be ("[^"]+")$/
+     */
+    public function myTaxTotalShouldBe(int $taxTotal): void
+    {
+        $response = $this->client->show($this->sharedStorage->get('cart_token'));
+
+        $responseTaxTotal = $this->responseChecker->getValue($response, 'taxTotal');
+        Assert::same($taxTotal, (int) $responseTaxTotal);
+    }
 }

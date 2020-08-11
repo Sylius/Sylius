@@ -184,5 +184,6 @@
         <property name="orderPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true" />
         <property name="notes" writable="true" />
+        <property name="taxTotal" readable="true"/>
     </resource>
 </resources>
