@@ -21,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -39,16 +40,21 @@ final class CartContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var ProductVariantResolverInterface */
+    private $productVariantResolver;
+
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $productsClient,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
         $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->productVariantResolver = $productVariantResolver;
     }
 
     /**
@@ -216,6 +222,7 @@ final class CartContext implements Context
 
         $request->updateContent([
             'productCode' => $product->getCode(),
+            'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
             'quantity' => $quantity,
         ]);
 
