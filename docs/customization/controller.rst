@@ -141,7 +141,7 @@ getting a list of recommended products from your external api.
         path: /product/show
         methods: [GET]
         defaults:
-            _controller: app.controller.product:showAction
+            _controller: sylius.controller.product:showAction
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
