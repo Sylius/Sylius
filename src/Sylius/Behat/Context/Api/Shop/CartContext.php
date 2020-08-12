@@ -21,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,6 +90,14 @@ final class CartContext implements Context
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
+     */
+    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, string $tokenValue): void
+    {
+        $this->putProductVariantToCart($productVariant, $tokenValue, 1);
     }
 
     /**
@@ -193,6 +202,32 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^(this item) should have variant "([^"]+)"$/
+     */
+    public function thisItemShouldHaveVariant(array $item, string $variantName): void
+    {
+        $response = $this->getProductVariantForItem($item);
+
+        Assert::true(
+            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $variantName),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        );
+    }
+
+    /**
+     * @Then /^(this item) should have code "([^"]+)"$/
+     */
+    public function thisItemShouldHaveCode(array $item, string $variantCode): void
+    {
+        $response = $this->getProductVariantForItem($item);
+
+        Assert::true(
+            $this->responseChecker->hasValue($response, 'code', $variantCode),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        );
+    }
+
+    /**
      * @Then I should see :productName with quantity :quantity in my cart
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
@@ -229,6 +264,19 @@ final class CartContext implements Context
         $this->cartsClient->executeCustomRequest($request);
     }
 
+    private function putProductVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    {
+        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+
+        $request->updateContent([
+            'productCode' => $productVariant->getProduct()->getCode(),
+            'productVariantCode' => $productVariant->getCode(),
+            'quantity' => $quantity,
+        ]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
         $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
@@ -240,18 +288,38 @@ final class CartContext implements Context
 
     private function getProductForItem(array $item): Response
     {
-        if (!isset($item['variant']['product'])) {
+        if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
                 json_encode($item)
             );
         }
 
-        $pathElements = explode('/', $item['variant']['product']);
+        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+
+        $response = $this->cartsClient->getLastResponse();
+
+        $product = $this->responseChecker->getValue($response, 'product');
+
+        $pathElements = explode('/', $product);
 
         $productCode = $pathElements[array_key_last($pathElements)];
 
         return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+    }
+
+    private function getProductVariantForItem(array $item): Response
+    {
+        if (!isset($item['variant'])) {
+            throw new \InvalidArgumentException(
+                'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
+                json_encode($item)
+            );
+        }
+
+        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+
+        return $this->cartsClient->getLastResponse();
     }
 
     private function getOrderItemProductCode(array $item): string

@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -27,18 +30,23 @@ final class ProductVariantContext implements Context
     /** @var ProductVariantRepositoryInterface */
     private $productVariantRepository;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        ProductVariantRepositoryInterface $productVariantRepository
+        ProductVariantRepositoryInterface $productVariantRepository,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
      */
-    public function getProductVariantByNameAndProduct($variantName, $productName)
+    public function getProductVariantByNameAndProduct(string $variantName, string $productName): ProductVariantInterface
     {
         $products = $this->productRepository->findByName($productName, 'en_US');
 
@@ -52,6 +60,22 @@ final class ProductVariantContext implements Context
         Assert::notEmpty(
             $productVariants,
             sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName)
+        );
+
+        return $productVariants[0];
+    }
+
+    /**
+     * @Transform /^"([^"]+)" variant of this product$/
+     */
+    public function getProductVariantByNameAndThisProduct(string $variantName): ProductVariantInterface
+    {
+        $product = $this->sharedStorage->get('product');
+
+        $productVariants = $this->productVariantRepository->findByNameAndProduct($variantName, 'en_US', $product);
+        Assert::notEmpty(
+            $productVariants,
+            sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $product->getName())
         );
 
         return $productVariants[0];
