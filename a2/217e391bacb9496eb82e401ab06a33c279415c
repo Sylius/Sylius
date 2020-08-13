@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by foxou33 at 2020-08-13T11:43:13Z
+
+I made the changes on the 1.5 branch, but it looks like the tests are running on master...
+I changed the base branch afterwards.
+How can I re-run the tests against the correct branch ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-13T15:22:26Z
+
+Hey @foxou33,
+
+thanks for your contribution. You could reopen the PR to trigger another build, or rebase and force push your commit.
+
+However, version 1.5 is not supported since [10th of January](https://docs.sylius.com/en/latest/book/organization/release-cycle.html?highlight=release#past-releases). It should be opened to the 1.7 branch.
+
+---------------------------------------------------------------------------
+
+by foxou33 at 2020-08-13T15:44:20Z
+
+Hi @lchrusciel ,
+Ok I didn't know that I could close and re-open by myself, thanks for the info :smile:
+Also, I made the changes on the 1.5 branch because the docs said so (here: https://docs.sylius.com/en/latest/book/contributing/code/patches.html#choose-the-right-base-branch), but it seemed weird, so maybe we should update this page ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-13T19:38:11Z
+
+That's a mistake as well. Could you open another PR with the fix? :) Anyway, thanks for this change.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-13T19:38:39Z
+
+Thank you, @foxou33! :1st_place_medal:
