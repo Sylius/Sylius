@@ -199,7 +199,7 @@ final class ResponseChecker implements ResponseCheckerInterface
             )
         );
 
-        Assert::keyExists($content, $key);
+        Assert::keyExists($content, $key, sprintf('Expected key "%s" not found. Received response: %s', $key, $response->getContent()));
 
         return $content[$key];
     }

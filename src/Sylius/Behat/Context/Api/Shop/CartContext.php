@@ -334,8 +334,9 @@ final class CartContext implements Context
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         foreach ($items as $item) {
-            if ($product->getCode() === $this->getOrderItemProductCode($item)) {
-                return  (string) $item['id'];
+            $response = $this->getProductForItem($item);
+            if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
+                return (string) $item['id'];
             }
         }
 
