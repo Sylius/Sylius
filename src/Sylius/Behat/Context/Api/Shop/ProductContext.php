@@ -15,8 +15,10 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -35,6 +37,7 @@ final class ProductContext implements Context
 
     /**
      * @When /^I check (this product)'s details$/
+     * @When I view product :product
      */
     public function iOpenProductPage(ProductInterface $product): void
     {
@@ -56,5 +59,25 @@ final class ProductContext implements Context
         );
 
         Assert::same($this->responseChecker->getTranslationValue($this->client->getLastResponse(), 'name'), $name);
+    }
+
+    /**
+     * @Then its current variant should be named :variantName
+     */
+    public function itsCurrentVariantShouldBeNamed(string $variantName): void
+    {
+        $response = $this->client->getLastResponse();
+
+        $productVariant = $this->responseChecker->getValue($response, 'variants');
+        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
+
+        Assert::true(
+            $this->responseChecker->hasTranslation(
+                $this->client->getLastResponse(),
+                'en_US',
+                'name',
+                $variantName
+            )
+        );
     }
 }
