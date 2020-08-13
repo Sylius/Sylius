@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartContext implements Context
@@ -23,9 +24,13 @@ final class CartContext implements Context
     /** @var MessageBusInterface */
     private $commandBus;
 
-    public function __construct(MessageBusInterface $commandBus)
+    /** @var ProductVariantResolverInterface */
+    private $productVariantResolver;
+
+    public function __construct(MessageBusInterface $commandBus, ProductVariantResolverInterface $productVariantResolver)
     {
         $this->commandBus = $commandBus;
+        $this->productVariantResolver = $productVariantResolver;
     }
 
     /**
@@ -34,6 +39,11 @@ final class CartContext implements Context
      */
     public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $this->commandBus->dispatch(AddItemToCart::createFromData($tokenValue, $product->getCode(), 1));
+        $this->commandBus->dispatch(AddItemToCart::createFromData(
+            $tokenValue,
+            $product->getCode(),
+            $this->productVariantResolver->getVariant($product)->getCode(),
+            1
+        ));
     }
 }

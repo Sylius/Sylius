@@ -20,8 +20,9 @@ use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -31,7 +32,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
@@ -39,7 +40,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith(
             $orderRepository,
-            $productRepository,
+            $productVariantRepository,
             $orderModifier,
             $cartItemFactory,
             $orderItemQuantityModifier,
@@ -54,56 +55,80 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
     function it_adds_simple_product_to_cart(
         OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor,
         OrderInterface $cart,
         OrderItemInterface $cartItem,
-        ProductInterface $product
+        ProductVariantInterface $productVariant
     ): void {
-        $orderRepository->findOneBy(['state' => OrderInterface::STATE_CART, 'tokenValue' => 'TOKEN'])->willReturn($cart);
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn($product);
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+        $productVariantRepository
+            ->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')
+            ->willReturn($productVariant)
+        ;
 
-        $cartItemFactory->createForProduct($product)->willReturn($cartItem);
+        $cartItemFactory->createNew()->willReturn($cartItem);
+
+        $cartItem->setVariant($productVariant)->shouldBeCalled();
 
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderModifier->addToOrder($cart, $cartItem)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 5))->shouldReturn($cart);
+        $this(AddItemToCart::createFromData(
+            'TOKEN',
+            'PRODUCT_CODE',
+            'PRODUCT_VARIANT_CODE',
+            5
+        ))->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_product_is_not_found(
-        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         CartItemFactoryInterface $cartItemFactory
     ): void {
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn(null);
+        $productVariantRepository->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')->willReturn(null);
 
-        $cartItemFactory->createForProduct(Argument::any())->shouldNotBeCalled();
+        $cartItemFactory->createNew()->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 1)])
+            ->during('__invoke', [AddItemToCart::createFromData(
+                'TOKEN',
+                'PRODUCT_CODE',
+                'PRODUCT_VARIANT_CODE',
+                1
+            )])
         ;
     }
 
     function it_throws_an_exception_if_cart_is_not_found(
         OrderRepositoryInterface $orderRepository,
-        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         CartItemFactoryInterface $cartItemFactory,
-        ProductInterface $product
+        ProductVariantInterface $productVariant
     ): void {
-        $productRepository->findOneByCode('PRODUCT_CODE')->willReturn($product);
-        $orderRepository->findOneBy(['state' => OrderInterface::STATE_CART, 'tokenValue' => 'TOKEN'])->willReturn(null);
+        $productVariantRepository
+            ->findOneByCodeAndProductCode('PRODUCT_VARIANT_CODE', 'PRODUCT_CODE')
+            ->willReturn($productVariant)
+        ;
 
-        $cartItemFactory->createForProduct(Argument::any())->shouldNotBeCalled();
+        $orderRepository->findCartByTokenValue('TOKEN')->willReturn(null);
+
+        $cartItemFactory->createNew()->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [AddItemToCart::createFromData('TOKEN', 'PRODUCT_CODE', 1)])
+            ->during('__invoke', [AddItemToCart::createFromData(
+                'TOKEN',
+                'PRODUCT_CODE',
+                'PRODUCT_VARIANT_CODE',
+                1
+            )])
         ;
     }
 }
