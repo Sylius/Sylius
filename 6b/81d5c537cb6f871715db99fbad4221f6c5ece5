@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2020-07-31T09:29:52Z
+
+I don't think that behat scenario are failing because of my change. Or are they ?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-08-04T06:18:24Z
+
+Should be fixed after https://github.com/Sylius/Sylius/pull/11710, just need to be rebased :)
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2020-08-13T05:42:56Z
+
+@Zales0123 could you check it now ? :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-13T10:02:39Z
+
+Thanks, Stephane! :1st_place_medal:
