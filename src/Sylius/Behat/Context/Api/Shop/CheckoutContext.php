@@ -290,6 +290,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not see :shippingMethod shipping method
+     */
+    public function iShouldNotSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::false($this->hasShippingMethod($shippingMethod));
+    }
+
+    /**
      * @Then /^I should see (shipping method "[^"]+") with fee ("[^"]+")/
      */
     public function iShouldSeeShippingFee(ShippingMethodInterface $shippingMethod, int $fee): void
