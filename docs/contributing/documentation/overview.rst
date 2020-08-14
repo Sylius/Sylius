@@ -39,7 +39,7 @@ Choose the right Base Branch
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
 * ``1.7``, if you are fixing or adding docs for features that exist in one of those versions,
-* ``master``, if you are documenting a new feature, that was not in ``1.6`` nor in ``1.7``
+* ``master``, if you are documenting a new feature, that was not in ``1.7``
 
 .. note::
 
