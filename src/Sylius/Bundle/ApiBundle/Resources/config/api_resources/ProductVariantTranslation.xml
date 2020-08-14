@@ -4,20 +4,17 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
+    <resource class="%sylius.model.product_variant_translation.class%" shortName="ProductVariantTranslation">
         <attribute name="validation_groups">sylius</attribute>
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>product_variant:read</attribute>
-            </attribute>
-        </attribute>
+
+        <collectionOperations />
 
         <itemOperations>
             <itemOperation name="get" />
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
-        <property name="product" />
+        <property name="id" identifier="true" writable="false" />
+        <property name="name" required="true" />
+        <property name="locale" required="true" />
     </resource>
 </resources>

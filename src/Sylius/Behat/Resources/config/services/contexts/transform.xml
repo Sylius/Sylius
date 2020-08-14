@@ -96,6 +96,7 @@
         <service id="sylius.behat.context.transform.product_variant" class="Sylius\Behat\Context\Transform\ProductVariantContext">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.transform.promotion" class="Sylius\Behat\Context\Transform\PromotionContext">

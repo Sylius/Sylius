@@ -75,5 +75,6 @@
         <property name="channels" required="false" />
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
+        <property name="variants" readable="true"/>
     </resource>
 </resources>
