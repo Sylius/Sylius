@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by foxou33 at 2020-08-14T04:50:33Z
+
+I tried to squash the last 4 commits but I think I messed up ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-14T06:38:05Z
+
+Hey @foxou33,
+
+another rebase with 1.7 branch was needed. I've done it for you. Also updated a few other branches' names in the meantime. I hope you don't mind. Once the PR will be green it is good to go :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-14T09:55:47Z
+
+Thanks, @foxou33! :tada:
