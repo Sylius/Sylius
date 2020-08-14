@@ -34,7 +34,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And I should see "Raven Post" shipping method
         And I should not see "Invisible Post" shipping method
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping method which category is same as category of my unit
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step

@@ -32,7 +32,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And I should see "Raven Post" shipping method
         And I should see "Invisible Post" shipping method
 
-    @ui
+    @ui @api
     Scenario: Not seeing shipping method which not match to my units category
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
@@ -42,7 +42,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And I should see "Invisible Post" shipping method
         And I should not see "Raven Post" shipping method
 
-    @ui
+    @ui @api
     Scenario: Seeing no shipping methods if any of them match to my units categories
         Given the store has a product "Rocket T-shirt" priced at "$20.00"
         And I have product "Rocket T-shirt" in the cart

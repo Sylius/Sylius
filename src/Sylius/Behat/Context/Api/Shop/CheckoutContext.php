@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -30,6 +33,12 @@ final class CheckoutContext implements Context
 {
     /** @var AbstractBrowser */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $orderClient;
+
+    /** @var IriConverterInterface */
+    private $iriConverter;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -45,11 +54,15 @@ final class CheckoutContext implements Context
 
     public function __construct(
         AbstractBrowser $client,
+        ApiClientInterface $orderClient,
+        IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
+        $this->orderClient = $orderClient;
+        $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->sharedStorage = $sharedStorage;
@@ -71,6 +84,8 @@ final class CheckoutContext implements Context
      * @Given I am at the checkout addressing step
      * @When I complete the payment step
      * @When I complete the shipping step
+     * @Then there should be information about no available shipping methods
+     * @Then I should be informed that my order cannot be shipped to this address
      */
     public function iAmAtTheCheckoutAddressingStep(): void
     {
@@ -267,6 +282,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should see :shippingMethod shipping method
+     */
+    public function iShouldSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::true($this->hasShippingMethod($shippingMethod));
+    }
+
+    /**
+     * @Then /^I should see (shipping method "[^"]+") with fee ("[^"]+")/
+     */
+    public function iShouldSeeShippingFee(ShippingMethodInterface $shippingMethod, int $fee): void
+    {
+        Assert::true($this->hasShippingMethodWithFee($shippingMethod, $fee));
+    }
+
+    /**
      * @Then my order's payment method should be :paymentMethod
      */
     public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
@@ -309,6 +340,35 @@ final class CheckoutContext implements Context
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
     }
 
+    /**
+     * @Then I should not see :shippingMethod shipping method
+     * @Then I should not be able to select :shippingMethod shipping method
+     */
+    public function iShouldNotBeAbleToSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::false($this->hasShippingMethod($shippingMethod));
+    }
+
+    /**
+     * @Then I should have :shippingMethod shipping method available as the first choice
+     */
+    public function iShouldHaveShippingMethodAvailableAsFirstChoice(ShippingMethodInterface $shippingMethod): void
+    {
+        $shippingMethods = $this->getCartShippingMethods($this->getCart());
+
+        Assert::true($shippingMethods[0]['shippingMethod']['code'] === $shippingMethod->getCode());
+    }
+
+    /**
+     * @Then I should have :shippingMethod shipping method available as the last choice
+     */
+    public function iShouldHaveShippingMethodAvailableAsLastChoice(ShippingMethodInterface $shippingMethod): void
+    {
+        $shippingMethods = $this->getCartShippingMethods($this->getCart());
+
+        Assert::true(end($shippingMethods)['shippingMethod']['code'] === $shippingMethod->getCode());
+    }
+
     private function getHeaders(array $headers = []): array
     {
         if (empty($headers)) {
@@ -338,11 +398,62 @@ final class CheckoutContext implements Context
         );
     }
 
+    private function getCart(): array
+    {
+        $response = $this->orderClient->show($this->sharedStorage->get('cart_token'));
+
+        return $this->responseChecker->getResponseContent($response);
+    }
+
     private function getCheckoutState(): string
     {
         /** @var Response $response */
         $response = $this->client->getResponse();
 
         return $this->responseChecker->getValue($response, 'checkoutState');
+    }
+
+    private function getCartShippingMethods(array $cart): array
+    {
+        $shipmentIri = $cart['shipments'][0];
+
+        /** @var ShipmentInterface $shipment */
+        $shipment = $this->iriConverter->getItemFromIri($shipmentIri);
+
+        $this->client->request(
+            Request::METHOD_GET,
+            \sprintf('/new-api/orders/%s/shipments/%s/methods', $cart['tokenValue'], $shipment->getId()),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([], \JSON_THROW_ON_ERROR)
+        );
+
+        return $this->responseChecker->getCollection($this->client->getResponse());
+    }
+
+    private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
+    {
+        foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
+            if($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasShippingMethodWithFee(ShippingMethodInterface $shippingMethod, int $fee): bool
+    {
+        foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
+            if(
+                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode() &&
+                $cartShippingMethod['cost'] === $fee
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

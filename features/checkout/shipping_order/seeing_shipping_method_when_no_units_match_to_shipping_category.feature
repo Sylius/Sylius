@@ -18,7 +18,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And this shipping method requires that no units match to "Over-sized" shipping category
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping method which category is not same as category of all my units
         Given I have product "Picasso T-shirt" in the cart
         When I am at the checkout addressing step
@@ -27,7 +27,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         Then I should be on the checkout shipping step
         And I should see "Invisible Post" shipping method
 
-    @ui
+    @ui @api
     Scenario: Seeing no shipping methods if its category is same as category of all my units
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step

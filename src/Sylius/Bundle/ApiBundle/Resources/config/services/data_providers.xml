@@ -28,6 +28,18 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service
+            id="sylius.api.collection_data_provider.shipping_methods_available_for_order"
+            class="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.shipment"/>
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="sylius.api.factory.cart_shipping_method" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
         <service id="sylius.api.context.user" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
             <argument type="service" id="security.token_storage" />
         </service>

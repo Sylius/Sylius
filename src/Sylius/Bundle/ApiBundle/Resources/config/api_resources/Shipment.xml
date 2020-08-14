@@ -62,7 +62,9 @@
         <property name="createdAt"  />
         <property name="updatedAt" />
         <property name="state" />
-        <property name="method" />
+        <property name="method">
+            <subresource resourceClass="%sylius.model.shipping_method.class%" />
+        </property>
         <property name="units" />
         <property name="tracking" />
         <property name="shippedAt" />
