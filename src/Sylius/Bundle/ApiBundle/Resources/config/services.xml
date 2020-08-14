@@ -80,6 +80,6 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\DTO\Factory\CartShippingMethodFactory" />
+        <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
     </services>
 </container>

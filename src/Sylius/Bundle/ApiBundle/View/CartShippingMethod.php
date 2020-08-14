@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DTO;
+namespace Sylius\Bundle\ApiBundle\View;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 

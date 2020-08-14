@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataProvider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\DTO\CartShippingMethodInterface;
-use Sylius\Bundle\ApiBundle\DTO\Factory\CartShippingMethodFactoryInterface;
+use Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface;
+use Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -27,7 +27,7 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
+final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
@@ -94,7 +94,7 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
         $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
-        $shipmentRepository->findOneBy(['id' => '999'])->willReturn(null);
+        $shipmentRepository->find('999')->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -116,7 +116,7 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
         $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
-        $shipmentRepository->findOneBy(['id' => '999'])->willReturn($shipment);
+        $shipmentRepository->find('999')->willReturn($shipment);
 
         $cart->hasShipment($shipment)->willReturn(false);
 
@@ -136,11 +136,11 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $cart,
         ShipmentInterface $shipment
-    ) : void {
+    ): void {
         $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
-        $shipmentRepository->findOneBy(['id' => '999'])->willReturn($shipment);
+        $shipmentRepository->find('999')->willReturn($shipment);
 
         $cart->hasShipment($shipment)->willReturn(true);
         $cart->hasShipments()->willReturn(false);
@@ -152,7 +152,8 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
                 $context,
                 Request::METHOD_GET
             )
-            ->shouldReturn([]);
+            ->shouldReturn([])
+        ;
     }
 
     function it_returns_cart_shipping_methods(
@@ -166,11 +167,11 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         CalculatorInterface $calculator,
         CartShippingMethodInterface $cartShippingMethod
-    ) : void {
+    ): void {
         $context['subresource_identifiers'] = ['id' => '666', 'shipments' => '999'];
 
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
-        $shipmentRepository->findOneBy(['id' => '999'])->willReturn($shipment);
+        $shipmentRepository->find('999')->willReturn($shipment);
 
         $cart->hasShipment($shipment)->willReturn(true);
         $cart->hasShipments()->willReturn(true);
@@ -197,6 +198,7 @@ class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavior
                 $context,
                 Request::METHOD_GET
             )
-            ->shouldReturn([$cartShippingMethod]);
+            ->shouldReturn([$cartShippingMethod])
+        ;
     }
 }

@@ -21,7 +21,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And this shipping method requires at least one unit matches to "Over-sized" shipping category
         And I am a logged in customer
 
-    @ui @api
+    @ui
     Scenario: Seeing shipping methods which match to my units categories
         Given I have product "Star Trek Ship" in the cart
         And I have product "Picasso T-Shirt" in the cart
@@ -51,7 +51,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @ui
     Scenario: Seeing no shipping methods if any of my unit has variant with shipping category matching to the shipping category of shipping method
         Given I have "T-shirt banana" with Size "S" in the cart
         And I have "T-shirt banana" with Size "M" in the cart
@@ -60,7 +60,7 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @ui
     Scenario: Seeing shipping methods if some of my unit has variant with shipping category matching to the shipping category of shipping method
         Given the "T-shirt banana" product's "M" size belongs to "Standard" shipping category
         And the "T-shirt banana" product's "S" size belongs to "Over-sized" shipping category

@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DTO\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\DTO\Factory\CartShippingMethodFactoryInterface;
+use Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-class CartShippingMethodFactorySpec extends ObjectBehavior
+final class CartShippingMethodFactorySpec extends ObjectBehavior
 {
     function it_is_a_cart_shipping_method_factory(): void
     {

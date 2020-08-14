@@ -84,6 +84,8 @@ final class CheckoutContext implements Context
      * @Given I am at the checkout addressing step
      * @When I complete the payment step
      * @When I complete the shipping step
+     * @Then there should be information about no available shipping methods
+     * @Then I should be informed that my order cannot be shipped to this address
      */
     public function iAmAtTheCheckoutAddressingStep(): void
     {
@@ -288,14 +290,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not see :shippingMethod shipping method
-     */
-    public function iShouldNotSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        Assert::true($this->hasShippingMethod($shippingMethod));
-    }
-
-    /**
      * @Then /^I should see (shipping method "[^"]+") with fee ("[^"]+")/
      */
     public function iShouldSeeShippingFee(ShippingMethodInterface $shippingMethod, int $fee): void
@@ -331,14 +325,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be informed that my order cannot be shipped to this address
-     */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @Then I should be on the checkout shipping step
      */
     public function iShouldBeOnTheCheckoutShippingStep(): void
@@ -355,19 +341,12 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not see :shippingMethod shipping method
      * @Then I should not be able to select :shippingMethod shipping method
      */
     public function iShouldNotBeAbleToSelectShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::false($this->hasShippingMethod($shippingMethod));
-    }
-
-    /**
-     * @Then there should be information about no available shipping methods
-     */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress(): void
-    {
-        // Intentionally left blank
     }
 
     /**
@@ -467,8 +446,10 @@ final class CheckoutContext implements Context
     private function hasShippingMethodWithFee(ShippingMethodInterface $shippingMethod, int $fee): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode() &&
-                $cartShippingMethod['calculatedAmount'] === $fee) {
+            if(
+                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode() &&
+                $cartShippingMethod['cost'] === $fee
+            ) {
                 return true;
             }
         }

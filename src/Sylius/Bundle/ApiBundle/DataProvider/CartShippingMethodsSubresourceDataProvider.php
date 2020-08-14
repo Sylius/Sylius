@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
-use Sylius\Bundle\ApiBundle\DTO\Factory\CartShippingMethodFactoryInterface;
+use Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -65,7 +65,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
         Assert::notNull($cart);
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->findOneBy(['id' => $subresourceIdentifiers['shipments']]);
+        $shipment = $this->shipmentRepository->find($subresourceIdentifiers['shipments']);
         Assert::notNull($shipment);
 
         Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
@@ -75,12 +75,11 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        $subresourceIdentifiers = isset($context['subresource_identifiers']) ? $context['subresource_identifiers'] : null;
+        $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
         return
             is_a($resourceClass, ShippingMethodInterface::class, true) &&
-            isset($subresourceIdentifiers['id']) &&
-            isset($subresourceIdentifiers['shipments'])
+            isset($subresourceIdentifiers['id'], $subresourceIdentifiers['shipments'])
         ;
     }
 

@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DTO\Factory;
+namespace Sylius\Bundle\ApiBundle\View\Factory;
 
-use Sylius\Bundle\ApiBundle\DTO\CartShippingMethod;
-use Sylius\Bundle\ApiBundle\DTO\CartShippingMethodInterface;
+use Sylius\Bundle\ApiBundle\View\CartShippingMethod;
+use Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class CartShippingMethodFactory implements CartShippingMethodFactoryInterface
