@@ -1,0 +1,12 @@
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.5.xsd"
+>
+    <resource class="Sylius\Bundle\ApiBundle\DTO\CartShippingMethod" shortName="CartShippingMethod">
+        <attribute name="validation_groups">sylius</attribute>
+
+        <property name="code" identifier="true" />
+        <property name="shippingMethod" writable="false" />
+        <property name="cost" writable="false" />
+    </resource>
+</resources>
