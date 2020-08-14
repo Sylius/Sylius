@@ -18,4 +18,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
  */
 class PickupCart
 {
+    /** @var string|null */
+    public $tokenValue;
+
+    public function __construct(?string $tokenValue = null)
+    {
+        $this->tokenValue = $tokenValue;
+    }
 }

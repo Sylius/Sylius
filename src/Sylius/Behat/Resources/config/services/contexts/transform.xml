@@ -150,8 +150,8 @@
         </service>
 
         <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartTokenContext">
-            <argument type="service" id="sylius.behat.api_platform_client.cart" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

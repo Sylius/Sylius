@@ -14,30 +14,29 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
-use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartTokenContext implements Context
 {
-    /** @var ApiClientInterface */
-    private $cartsClient;
+    /** @var MessageBusInterface */
+    private $commandBus;
 
-    /** @var ResponseCheckerInterface */
-    private $responseChecker;
+    /** @var RandomnessGeneratorInterface */
+    private $generator;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $cartsClient,
-        ResponseCheckerInterface $responseChecker,
+        MessageBusInterface $commandBus,
+        RandomnessGeneratorInterface $generator,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->cartsClient = $cartsClient;
-        $this->responseChecker = $responseChecker;
+        $this->commandBus = $commandBus;
+        $this->generator = $generator;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -47,19 +46,13 @@ final class CartTokenContext implements Context
     public function provideCartToken(): string
     {
         if ($this->sharedStorage->has('cart_token')) {
-            $tokenValue = $this->sharedStorage->get('cart_token');
-
-            $response = $this->cartsClient->show($tokenValue);
-            if ($response->getStatusCode() === Response::HTTP_OK) {
-                return $tokenValue;
-            }
+            return $this->sharedStorage->get('cart_token');
         }
 
-        $accessToken = $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+        $tokenValue = $this->generator->generateUriSafeString(10);
 
-        $response = $this->cartsClient->create(Request::create('orders', $accessToken));
+        $this->commandBus->dispatch(new PickupCart($tokenValue));
 
-        $tokenValue = $this->responseChecker->getValue($response, 'tokenValue');
         $this->sharedStorage->set('cart_token', $tokenValue);
 
         return $tokenValue;
