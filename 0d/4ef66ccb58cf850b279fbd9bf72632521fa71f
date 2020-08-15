@@ -1,0 +1,39 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-11T10:46:45Z
+
+Hey Luca!
+
+thank a lot for this revert. I would like to merge it and publish it with the nearest release. However, the build is red and it seems to not be a random one. What I think you could do, is to rebase your PR with the newest master and check if the build is still red. I assume it may still be red due to missing part of your revert https://github.com/Sylius/Sylius/commit/4013e51dfdd3ff7d5bd00f2751308eac2bb3149a#diff-a3ee22317b316e28312b526441fee27fR140-R142.
+
+Nonetheless, let me welcome you to our community. Even if you are reverting part of work :)
+
+---------------------------------------------------------------------------
+
+by GalloisLuca at 2020-08-14T08:23:47Z
+
+@lchrusciel Hey i updated the PR on the new master and add the missing modification (don't know why it didn't there before) but it still red ... i think you made some test on this specific case, so if we wants the custom bulkAction works again, we maybe have to dev something for it ? What do you think about that ?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-14T10:12:18Z
+
+Ok, I know what is wrong with your PR. You should add two `@javascript` tags to `features/addressing/managing_zones/deleting_multiple_zones.feature` and `features/product/managing_product_association_types/deleting_multiple_product_association_types.feature`. I hope that will make build green again.
+
+---------------------------------------------------------------------------
+
+by GalloisLuca at 2020-08-14T21:20:00Z
+
+@lchrusciel The build is now green, you were right ! :smile:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-15T12:01:20Z
+
+Great! I had to mess a little bit with your commits, as it should be opened from 1.7 branch(so you will not have to wait for 1.8 to take benefit from this fix ;)). If you would like to add something on a top of it, please remember to fetch data from the remote first.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-15T14:25:25Z
+
+Thank you, Luca! :1st_place_medal:
