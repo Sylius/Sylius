@@ -18,10 +18,10 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-@trigger_error(sprintf('The "%s" interface is deprecated since Sylius 1.7, use "%s" instead.', ShippingMethodEligibilityCheckerInterface::class, NewShippingMethodEligibilityCheckerInterface::class), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" interface is deprecated since Sylius 1.8, use "%s" instead.', ShippingMethodEligibilityCheckerInterface::class, NewShippingMethodEligibilityCheckerInterface::class), E_USER_DEPRECATED);
 
 /**
- * @deprecated since Sylius 1.7. Use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface instead
+ * @deprecated since Sylius 1.8. Use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface instead
  *
  * We extend the new interface to adhere to backwards compatibility
  */

@@ -17,10 +17,10 @@ use const E_USER_DEPRECATED;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.7, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'), E_USER_DEPRECATED);
+@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.8, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'), E_USER_DEPRECATED);
 
 /**
- * @deprecated since Sylius 1.7. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
+ * @deprecated since Sylius 1.8. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
  *
  * @psalm-suppress DeprecatedInterface
  */
