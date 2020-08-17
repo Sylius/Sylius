@@ -419,7 +419,15 @@ final class CheckoutContext implements Context
     public function myOrderTotalShouldBe(int $total): void
     {
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
-        Assert::same($total, (int) $responseTotal);
+        Assert::same($total, (int)$responseTotal);
+    }
+    
+    /**
+     * @Then I should have :quantity :productName products in the cart
+     */
+    public function iShouldHaveProductsInTheCart(int $quantity, string $productName): void
+    {
+        Assert::true($this->hasProductWithNameAndQuantityInCart($productName, $quantity), sprintf('There is no product %s with quantity %d.', $productName, $quantity));
     }
 
     private function getHeaders(array $headers = []): array
@@ -533,5 +541,19 @@ final class CheckoutContext implements Context
         $response = $this->client->getResponse();
 
         return json_decode($response->getContent(), true)['hydra:member'];
+    }
+
+    private function hasProductWithNameAndQuantityInCart(string $productName, int $quantity): bool
+    {
+        /** @var array $items */
+        $items = $this->responseChecker->getValue($this->client->getResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['variant']['translations']['en_US']['name'] === $productName && $item['quantity'] === $quantity) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
