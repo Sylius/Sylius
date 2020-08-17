@@ -16,14 +16,13 @@ Feature: Adding a new shipping method with rule
         And I specify its code as "FED_EX_CARRIER"
         And I specify its position as 0
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Total weight greater than or equal" rule configured with "20"
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
-        And the shipping method "FedEx Carrier" should should be limited with the "Total weight greater than or equal" rule
 
     @ui @javascript
     Scenario: Adding a new shipping method with total weight less than or equal rule
@@ -31,14 +30,13 @@ Feature: Adding a new shipping method with rule
         And I specify its code as "FED_EX_CARRIER"
         And I specify its position as 0
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Total weight less than or equal" rule configured with "20"
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
-        And the shipping method "FedEx Carrier" should should be limited with the "Total weight less than or equal" rule
 
     @ui @javascript
     Scenario: Adding a new shipping method with order total greater than or equal rule
@@ -46,14 +44,13 @@ Feature: Adding a new shipping method with rule
         And I specify its code as "FED_EX_CARRIER"
         And I specify its position as 0
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
-        And I add the "Order total greater than or equal" rule configured with "$200"
+        And I add the "Order total greater than or equal" rule configured with $200 for "Web-US" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
-        And the shipping method "FedEx Carrier" should should be limited with the "Order total greater than or equal" rule
 
     @ui @javascript
     Scenario: Adding a new shipping method with order total less than or equal rule
@@ -61,11 +58,10 @@ Feature: Adding a new shipping method with rule
         And I specify its code as "FED_EX_CARRIER"
         And I specify its position as 0
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "United States" zone
+        And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
-        And I add the "Order total less than or equal" rule configured with "$200"
+        And I add the "Order total less than or equal" rule configured with $200 for "Web-US" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
-        And the shipping method "FedEx Carrier" should should be limited with the "Order total less than or equal" rule

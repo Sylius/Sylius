@@ -86,20 +86,6 @@
             <argument type="service" id="sylius.calendar"/>
         </service>
 
-        <service id="sylius.shipping_method_rule_checker.order_total_greater_than_or_equal"
-                 class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker">
-            <tag name="sylius.shipping_method_rule_checker" type="order_total_greater_than_or_equal"
-                 label="sylius.form.shipping_method_rule.order_total_greater_than_or_equal"
-                 form-type="Sylius\Bundle\ShippingBundle\Form\Type\Rule\OrderTotalGreaterThanOrEqualConfigurationType"/>
-        </service>
-
-        <service id="sylius.shipping_method_rule_checker.order_total_less_than_or_equal"
-                 class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker">
-            <tag name="sylius.shipping_method_rule_checker" type="order_total_less_than_or_equal"
-                 label="sylius.form.shipping_method_rule.order_total_less_than_or_equal"
-                 form-type="Sylius\Bundle\ShippingBundle\Form\Type\Rule\OrderTotalLessThanOrEqualConfigurationType"/>
-        </service>
-
         <service id="sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal"
                  class="Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker">
             <tag name="sylius.shipping_method_rule_checker" type="total_weight_greater_than_or_equal"

@@ -11,17 +11,31 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping\Rule;
 
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddTotalFormSubscriber;
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class OrderTotalGreaterThanOrEqualConfigurationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventSubscriber(new AddTotalFormSubscriber());
+        $builder
+            ->add('amount', MoneyType::class, [
+                'label' => 'sylius.form.shipping_method_rule.amount',
+                'currency' => $options['currency'],
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver
+            ->setRequired('currency')
+            ->setAllowedTypes('currency', 'string')
+        ;
     }
 
     public function getBlockPrefix(): string
