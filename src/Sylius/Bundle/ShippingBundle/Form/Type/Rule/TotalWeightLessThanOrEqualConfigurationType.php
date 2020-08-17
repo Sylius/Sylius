@@ -13,15 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Rule;
 
-use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\AddWeightFormSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 final class TotalWeightLessThanOrEqualConfigurationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventSubscriber(new AddWeightFormSubscriber());
+        $builder->add('weight', NumberType::class, [
+                'label' => 'sylius.form.shipping_method_rule.weight',
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                    new GreaterThan(['value' => 0, 'groups' => ['sylius']]),
+                ],
+            ]
+        );
     }
 
     public function getBlockPrefix(): string
