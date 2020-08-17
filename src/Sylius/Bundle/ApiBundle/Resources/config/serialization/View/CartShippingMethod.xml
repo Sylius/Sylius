@@ -16,9 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\View\CartShippingMethod">
-        <attribute name="code">
-            <group>shipping_method:read</group>
-        </attribute>
         <attribute name="shippingMethod">
             <group>shipping_method:read</group>
         </attribute>

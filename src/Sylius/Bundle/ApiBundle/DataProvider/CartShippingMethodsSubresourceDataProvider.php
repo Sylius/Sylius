@@ -101,7 +101,6 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
             $cost = $calculator->calculate($shipment, $shippingMethod->getConfiguration());
 
             $cartShippingMethods[] = $this->cartShippingMethodFactory->create(
-                $shippingMethod->getCode(),
                 $shippingMethod,
                 $cost
             );

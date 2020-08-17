@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface CartShippingMethodInterface
 {
-    public function getCode(): string;
-
     public function getShippingMethod(): ShippingMethodInterface;
 
     public function getCost(): int;
