@@ -32,14 +32,24 @@ final class CategoryRequirementEligibilityCheckerSpec extends ObjectBehavior
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
+        ShippingCategoryInterface $shippingCategory2,
         ShippableInterface $shippable
     ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
-        $shippingMethod->getCategoryRequirement()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
+        $shippingMethod->getCategoryRequirement()->willReturn(
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE
+        );
+        $shippable->getShippingCategory()->willReturn(
+            $shippingCategory,
+            $shippingCategory,
+            $shippingCategory2
+        ); // first two times we will return the same shippingCategory. But we need different for the third test to pass
 
-        $shippable->getShippingCategory()->willReturn($shippingCategory);
         $subject->getShippables()->willReturn(new ArrayCollection([$shippable->getWrappedObject()]));
-
+        $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
+        $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
         $this->isEligible($subject, $shippingMethod)->shouldReturn(true);
     }
 
