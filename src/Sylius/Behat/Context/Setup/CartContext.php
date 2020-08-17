@@ -16,6 +16,9 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -45,5 +48,48 @@ final class CartContext implements Context
             $this->productVariantResolver->getVariant($product)->getCode(),
             1
         ));
+    }
+
+    /**
+     * @Given /^I have (product "[^"]+") with (product option "[^"]+") ([^"]+) in the (cart)$/
+     */
+    public function iAddThisProductWithToTheCart(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue,
+        string $tokenValue
+    ): void {
+        $this->commandBus->dispatch(AddItemToCart::createFromData(
+            $tokenValue,
+            $product->getCode(),
+            $this
+                ->getProductVariantWithProductOptionAndProductOptionValue(
+                    $product,
+                    $productOption,
+                    $productOptionValue
+                )
+                ->getCode(),
+            1
+        ));
+    }
+
+    private function getProductVariantWithProductOptionAndProductOptionValue(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue
+    ): ?ProductVariantInterface {
+        foreach ($product->getVariants() as $productVariant) {
+            /** @var ProductOptionValueInterface $variantProductOptionValue */
+            foreach ($productVariant->getOptionValues() as $variantProductOptionValue) {
+                if (
+                    $variantProductOptionValue->getValue() === $productOptionValue &&
+                    $variantProductOptionValue->getOption() === $productOption
+                ) {
+                    return $productVariant;
+                }
+            }
+        }
+
+        return null;
     }
 }

@@ -79,7 +79,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart->setChannel($channel);
         $cart->setLocaleCode($locale->getCode());
         $cart->setCurrencyCode($currency->getCode());
-        $cart->setTokenValue($this->generator->generateUriSafeString(10));
+        $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
 
         $this->orderManager->persist($cart);
 
