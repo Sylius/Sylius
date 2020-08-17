@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use const E_USER_DEPRECATED;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Factory\ShippingMethodRuleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -24,11 +26,12 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodRuleInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class ShippingMethodExampleFactory extends AbstractExampleFactory
 {
     /** @var FactoryInterface */
     private $shippingMethodFactory;
@@ -48,6 +51,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     /** @var RepositoryInterface|null */
     private $taxCategoryRepository;
 
+    /** @var ShippingMethodRuleFactoryInterface|null */
+    private $shippingMethodRuleExampleFactory;
+
     /** @var \Faker\Generator */
     private $faker;
 
@@ -60,7 +66,8 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         RepositoryInterface $shippingCategoryRepository,
         RepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository,
-        ?RepositoryInterface $taxCategoryRepository = null
+        ?RepositoryInterface $taxCategoryRepository = null,
+        ?ExampleFactoryInterface $shippingMethodRuleExampleFactory = null
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
         $this->zoneRepository = $zoneRepository;
@@ -69,7 +76,11 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $this->channelRepository = $channelRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
         if ($this->taxCategoryRepository === null) {
-            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), E_USER_DEPRECATED);
+        }
+        $this->shippingMethodRuleExampleFactory = $shippingMethodRuleExampleFactory;
+        if ($this->shippingMethodRuleExampleFactory === null) {
+            @trigger_error(sprintf('Not passing a $shippingMethodRuleExampleFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class), E_USER_DEPRECATED);
         }
 
         $this->faker = \Faker\Factory::create();
@@ -109,6 +120,12 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
 
         foreach ($options['channels'] as $channel) {
             $shippingMethod->addChannel($channel);
+        }
+
+        foreach ($options['rules'] as $rule) {
+            /** @var ShippingMethodRuleInterface $shippingMethodRule */
+            $shippingMethodRule = $this->shippingMethodRuleExampleFactory->create($rule);
+            $shippingMethod->addRule($shippingMethodRule);
         }
 
         return $shippingMethod;
@@ -156,6 +173,14 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+            ->setDefined('rules')
+            ->setNormalizer('rules', static function (Options $options, array $rules): array {
+                if (empty($rules)) {
+                    return [[]];
+                }
+
+                return $rules;
+            })
             ->setDefault('archived_at', null)
             ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;

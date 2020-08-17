@@ -129,6 +129,17 @@ sylius_fixtures:
                                 enabled: true
                                 channels:
                                     - 'FASHION_WEB'
+                            ups_insured:
+                                code: 'ups_insured'
+                                name: 'UPS Insured'
+                                enabled: true
+                                channels:
+                                    - 'FASHION_WEB'
+                                rules:
+                                    -   type: 'order_total_greater_than_or_equal'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 500.00
                             dhl_express:
                                 code: 'dhl_express'
                                 name: 'DHL Express'
