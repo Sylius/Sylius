@@ -52,6 +52,9 @@ final class CheckoutContext implements Context
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
+    /** @var RepositoryInterface */
+    private $paymentMethodRepository;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -65,6 +68,7 @@ final class CheckoutContext implements Context
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
+        RepositoryInterface $paymentMethodRepository,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
@@ -73,6 +77,7 @@ final class CheckoutContext implements Context
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -256,6 +261,30 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I proceed through checkout process
+     */
+    public function iProceedThroughCheckoutProcess(): void
+    {
+        $this->addressOrder([
+            'email' => 'rich@sylius.com',
+            'billingAddress' => [
+                'city' => 'New York',
+                'street' => 'Wall Street',
+                'postcode' => '00-001',
+                'countryCode' => 'US',
+                'firstName' => 'Richy',
+                'lastName' => 'Rich',
+            ],
+        ]);
+
+        $this->iCompleteTheShippingStepWithFirstShippingMethod();
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        $this->iChoosePaymentMethod($paymentMethod);
+    }
+
+    /**
      * @Then I should be on the checkout complete step
      * @Then I should be on the checkout summary step
      */
@@ -421,13 +450,37 @@ final class CheckoutContext implements Context
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
         Assert::same($total, (int)$responseTotal);
     }
-    
+
     /**
      * @Then I should have :quantity :productName products in the cart
      */
     public function iShouldHaveProductsInTheCart(int $quantity, string $productName): void
     {
         Assert::true($this->hasProductWithNameAndQuantityInCart($productName, $quantity), sprintf('There is no product %s with quantity %d.', $productName, $quantity));
+    }
+
+    /**
+     * @Then there should be no discount
+     */
+    public function thereShouldBeNoDiscount(): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'orderPromotionTotal'), 0);
+    }
+
+    /**
+     * @Then there should be no taxes charged
+     */
+    public function thereShouldBeNoTaxesCharged(): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'taxTotal'), 0);
+    }
+
+    /**
+     * @Then my order's locale should be :localeCode
+     */
+    public function myOrderLocaleShouldBe(string $localeCode): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'localeCode'), $localeCode);
     }
 
     private function getHeaders(array $headers = []): array

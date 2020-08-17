@@ -64,6 +64,7 @@
 
         <attribute name="orderPromotionTotal">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="tokenValue">
@@ -82,6 +83,12 @@
 
         <attribute name="taxTotal">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
+
+        <attribute name="localeCode">
+            <group>checkout:read</group>
+        </attribute>
+
     </class>
 </serializer>
