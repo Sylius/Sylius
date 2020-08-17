@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 interface CartShippingMethodFactoryInterface
 {
     public function create(
-        string $code,
         ShippingMethodInterface $shippingMethod,
         int $cost
     ): CartShippingMethodInterface;

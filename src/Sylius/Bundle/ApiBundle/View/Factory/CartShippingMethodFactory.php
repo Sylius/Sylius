@@ -20,10 +20,9 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 final class CartShippingMethodFactory implements CartShippingMethodFactoryInterface
 {
     public function create(
-        string $code,
         ShippingMethodInterface $shippingMethod,
         int $cost
     ): CartShippingMethodInterface {
-        return new CartShippingMethod($code, $shippingMethod, $cost);
+        return new CartShippingMethod($shippingMethod, $cost);
     }
 }

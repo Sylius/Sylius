@@ -17,25 +17,16 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 class CartShippingMethod implements CartShippingMethodInterface
 {
-    /** @var string */
-    private $code;
-
     /** @var ShippingMethodInterface */
     private $shippingMethod;
 
     /** @var int */
     private $cost;
 
-    public function __construct(string $code, ShippingMethodInterface $shippingMethod, int $cost)
+    public function __construct(ShippingMethodInterface $shippingMethod, int $cost)
     {
-        $this->code = $code;
         $this->shippingMethod = $shippingMethod;
         $this->cost = $cost;
-    }
-
-    public function getCode(): string
-    {
-        return $this->code;
     }
 
     public function getShippingMethod(): ShippingMethodInterface

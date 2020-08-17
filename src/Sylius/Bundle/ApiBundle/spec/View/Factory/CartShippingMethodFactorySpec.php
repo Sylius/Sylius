@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\DTO\Factory;
+namespace spec\Sylius\Bundle\ApiBundle\View\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\View\CartShippingMethod;
 use Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactoryInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
@@ -26,12 +27,9 @@ final class CartShippingMethodFactorySpec extends ObjectBehavior
 
     function it_creates_a_cart_shipping_method(ShippingMethodInterface $shippingMethod): void
     {
-        $shippingMethod->getCode()->willReturn('inpost');
-
-        $cartShippingMethod = $this->create('inpost', $shippingMethod->getWrappedObject(), 10);
-
-        $cartShippingMethod->getCode()->shouldReturn('inpost');
-        $cartShippingMethod->getShippingMethod()->shouldReturn($shippingMethod);
-        $cartShippingMethod->getCost()->shouldReturn(10);
+        $this->create($shippingMethod->getWrappedObject(), 10)->shouldBeLike(new CartShippingMethod(
+            $shippingMethod->getWrappedObject(),
+            10
+        ));
     }
 }

@@ -187,7 +187,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         $shippingMethod->getCode()->willReturn('inpost_pl');
 
         $cartShippingMethodFactory
-            ->create('inpost_pl', $shippingMethod, 10)
+            ->create($shippingMethod, 10)
             ->willReturn($cartShippingMethod)
         ;
 
