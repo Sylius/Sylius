@@ -97,6 +97,7 @@ final class CheckoutContext implements Context
      * @Given I am at the checkout addressing step
      * @When I complete the payment step
      * @When I complete the shipping step
+     * @When I go to the checkout addressing step
      * @Then there should be information about no available shipping methods
      * @Then I should be informed that my order cannot be shipped to this address
      */
@@ -141,6 +142,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I define the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
@@ -448,7 +450,7 @@ final class CheckoutContext implements Context
     public function myOrderTotalShouldBe(int $total): void
     {
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
-        Assert::same($total, (int)$responseTotal);
+        Assert::same($total, (int) $responseTotal);
     }
 
     /**
@@ -481,6 +483,22 @@ final class CheckoutContext implements Context
     public function myOrderLocaleShouldBe(string $localeCode): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'localeCode'), $localeCode);
+    }
+
+    /**
+     * @Then /^my order shipping should be ("(?:\£|\$)\d+(?:\.\d+)?")$/
+     */
+    public function myOrderShippingShouldBe(int $price): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'shippingTotal'), $price);
+    }
+
+    /**
+     * @Then I should not see shipping total
+     */
+    public function iShouldNotSeeShippingTotal(): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'shippingTotal'), 0);
     }
 
     private function getHeaders(array $headers = []): array

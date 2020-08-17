@@ -90,5 +90,8 @@
             <group>checkout:read</group>
         </attribute>
 
+        <attribute name="shippingTotal">
+            <group>checkout:read</group>
+        </attribute>
     </class>
 </serializer>

@@ -14,7 +14,7 @@ Feature: Seeing order locale on order summary page
 
     @ui @api
     Scenario: Seeing order locale on the order summary page
-        When I added "Stark T-Shirt" product to the cart
+        When I add "Stark T-Shirt" product to the cart
         And I proceed through checkout process
         Then I should be on the checkout summary step
         And my order's locale should be "English (United States)"

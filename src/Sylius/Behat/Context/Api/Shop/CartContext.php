@@ -262,8 +262,6 @@ final class CartContext implements Context
             'quantity' => $quantity,
         ]);
 
-        $this->sharedStorage->set('cart_token', $tokenValue);
-
         $this->cartsClient->executeCustomRequest($request);
     }
 

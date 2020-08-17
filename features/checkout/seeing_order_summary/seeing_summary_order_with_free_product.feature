@@ -19,8 +19,8 @@ Feature: Seeing a summary of the order with free product
 
     @ui @api
     Scenario: Seeing free order
-        When I added "Greyjoy Coat" product to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I add "Greyjoy Coat" product to the cart
+        And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method
         Then I should be on the checkout summary step
         And my order total should be "$0.00"
