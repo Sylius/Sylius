@@ -11,20 +11,37 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="true"/>
 
-        <service id="sylius.shipping_calculator.flat_rate" class="Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator">
+        <service id="sylius.shipping_calculator.flat_rate"
+                 class="Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="flat_rate"
                  form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedFlatRateConfigurationType"
-                 label="sylius.form.shipping_calculator.flat_rate_configuration.label" />
+                 label="sylius.form.shipping_calculator.flat_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.shipping_calculator.per_unit_rate" class="Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator">
+        <service id="sylius.shipping_calculator.per_unit_rate"
+                 class="Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="per_unit_rate"
                  form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedPerUnitRateConfigurationType"
-                 label="sylius.form.shipping_calculator.per_unit_rate_configuration.label" />
+                 label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
+        </service>
+
+        <service id="sylius.shipping_method_rule_checker.order_total_greater_than_or_equal"
+                 class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker">
+            <tag name="sylius.shipping_method_rule_checker" type="order_total_greater_than_or_equal"
+                 label="sylius.form.shipping_method_rule.order_total_greater_than_or_equal"
+                 form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Rule\ChannelBasedOrderTotalGreaterThanOrEqualConfigurationType"/>
+        </service>
+
+        <service id="sylius.shipping_method_rule_checker.order_total_less_than_or_equal"
+                 class="Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker">
+            <tag name="sylius.shipping_method_rule_checker" type="order_total_less_than_or_equal"
+                 label="sylius.form.shipping_method_rule.order_total_less_than_or_equal"
+                 form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Rule\ChannelBasedOrderTotalLessThanOrEqualConfigurationType"/>
         </service>
     </services>
 </container>

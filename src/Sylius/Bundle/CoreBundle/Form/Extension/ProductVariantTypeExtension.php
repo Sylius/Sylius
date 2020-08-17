@@ -36,7 +36,7 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
             ->add('version', HiddenType::class)
             ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
-                'help' => 'sylius.form.variant.tracked_help'
+                'help' => 'sylius.form.variant.tracked_help',
             ])
             ->add('shippingRequired', CheckboxType::class, [
                 'label' => 'sylius.form.variant.shipping_required',

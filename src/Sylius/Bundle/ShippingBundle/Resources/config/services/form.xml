@@ -19,6 +19,9 @@
         <parameter key="sylius.form.type.shipping_method_translation.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.shipping_method_rule.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.shipping_category.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
@@ -54,6 +57,23 @@
             <argument type="service" id="sylius.shipping_methods_resolver" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.repository.shipping_method" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.shipping_method_rule" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleType">
+            <argument>%sylius.model.shipping_method_rule.class%</argument>
+            <argument>%sylius.form.type.shipping_method_rule.validation_groups%</argument>
+            <argument type="service" id="sylius.form_registry.shipping_method_rule_checker" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.shipping_method_rule.collection" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleCollectionType">
+            <argument type="service" id="sylius.registry.shipping_method_rule_checker" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.shipping_method_rule_choice" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleChoiceType">
+            <argument>%sylius.shipping_method_rules%</argument>
             <tag name="form.type" />
         </service>
 

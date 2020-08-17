@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.registry.shipping_calculator" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>Sylius\Component\Shipping\Calculator\CalculatorInterface</argument>
+            <argument>shipping calculator</argument>
+        </service>
+
+        <service id="sylius.registry.shipping_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
+            <argument>%sylius.shipping_methods_resolver.interface%</argument>
+            <argument>Shipping methods resolver</argument>
+        </service>
+
+        <service id="sylius.registry.shipping_method_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>Sylius\Component\Shipping\Checker\Rule\RuleCheckerInterface</argument>
+            <argument>shipping method rule checker</argument>
+        </service>
+
+        <service id="sylius.form_registry.shipping_method_rule_checker" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
+    </services>
+</container>
