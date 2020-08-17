@@ -23,25 +23,21 @@ class ChooseShippingMethod implements OrderTokenValueAwareInterface
 
     /**
      * @psalm-immutable
-     *
-     * @var string|int
+     * @var string
      */
-    public $shipmentIdentifier;
+    public $shipmentId;
 
     /**
      * @psalm-immutable
      *
      * @var string
      */
-    public $shippingMethod;
+    public $shippingMethodCode;
 
-    /**
-     * @param string|int $shipmentIdentifier
-     */
-    public function __construct($shipmentIdentifier, string $shippingMethod)
+    public function __construct(string $shipmentId, string $shippingMethodCode)
     {
-        $this->shipmentIdentifier = $shipmentIdentifier;
-        $this->shippingMethod = $shippingMethod;
+        $this->shipmentId = $shipmentId;
+        $this->shippingMethodCode = $shippingMethodCode;
     }
 
     public function getOrderTokenValue(): ?string
