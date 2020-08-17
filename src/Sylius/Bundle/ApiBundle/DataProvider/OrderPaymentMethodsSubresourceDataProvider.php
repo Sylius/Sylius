@@ -51,7 +51,7 @@ final class OrderPaymentMethodsSubresourceDataProvider implements RestrictedData
         return
             is_a($resourceClass, PaymentMethodInterface::class, true) &&
             isset($subresourceIdentifiers['id'], $subresourceIdentifiers['payments'])
-            ;
+        ;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)

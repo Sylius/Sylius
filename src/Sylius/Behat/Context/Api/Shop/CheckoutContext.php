@@ -276,29 +276,28 @@ final class CheckoutContext implements Context
     /**
      * @Then I should not be able to select :paymentMethodName payment method
      */
-    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
 
-        Assert::false(array_search($paymentMethodName, array_column($paymentMethods,'name')));
+        Assert::false(array_search($paymentMethodName, array_column($paymentMethods, 'name')));
     }
 
     /**
      * @Then I should be able to select :paymentMethodName payment method
      */
-    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
+    public function iShouldBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
 
-        Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods,'name')));
+        Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name')));
     }
 
     /**
      * @Then I should have :paymentMethodName payment method available as the :choice choice
      */
-    public function iShouldHavePaymentMethodAvailableAsTheFirstChoice($paymentMethodName, $choice):  void
+    public function iShouldHavePaymentMethodAvailableAsTheChoice(string $paymentMethodName, string $choice): void
     {
-
         $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
         Assert::notEmpty($paymentMethods);
 
@@ -360,7 +359,6 @@ final class CheckoutContext implements Context
             $paymentMethod->getName()
         );
     }
-
 
     /**
      * @Then my order's shipping method should be :shippingMethod

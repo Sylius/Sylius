@@ -44,6 +44,7 @@ final class OrderPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavio
             ->supports(ProductInterface::class, Request::METHOD_GET)
             ->shouldReturn(false)
         ;
+        
         $this
             ->supports(PaymentMethodInterface::class, Request::METHOD_GET)
             ->shouldReturn(false)
