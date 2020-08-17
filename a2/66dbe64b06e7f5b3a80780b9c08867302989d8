@@ -1,0 +1,47 @@
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-10-24T12:30:55Z
+
+@CoderMaggie, @Zales0123: Is it possible to get a code review before writing the Behat tests. I am still a Behat newb, so I would like to know that the functionality is what you expect and everything else is okay before I dive into that :D
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-10-24T13:00:49Z
+
+Ping @lchrusciel, @pamil
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-01-22T13:14:08Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-01-22T19:53:10Z
+
+Do not stale
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-05-11T10:06:28Z
+
+@Zales0123: I have answered/fixed your comments :)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-05-22T10:40:47Z
+
+@loevgaard some more comment, rebase is also needed, but generally, it's close to be merged, in my opinion 🖖
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-12T11:25:49Z
+
+I've added a few mostly minor comments (with update of 1.7 to 1.8 version in deprecation). We are getting close to merging it ;)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-08-17T12:58:05Z
+
+Thank you, Joachim! :1st_place_medal:
