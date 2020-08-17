@@ -357,10 +357,14 @@ final class CartContext implements Context
 
     /**
      * @Given I have :product with :productOption :productOptionValue in the cart
+     * @Given I have product :product with product option :productOption :productOptionValue in the cart
      * @When I add :product with :productOption :productOptionValue to the cart
      */
-    public function iAddThisProductWithToTheCart(ProductInterface $product, ProductOptionInterface $productOption, $productOptionValue)
-    {
+    public function iAddThisProductWithToTheCart(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue
+    ): void {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 
         $this->productShowPage->addToCartWithOption($productOption, $productOptionValue);
