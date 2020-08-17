@@ -145,13 +145,6 @@ final class ShippingMethodType extends AbstractResourceType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefault('rules_help', 'sylius.form.shipping_method.rules_help');
-    }
-
     public function getBlockPrefix(): string
     {
         return 'sylius_shipping_method';
