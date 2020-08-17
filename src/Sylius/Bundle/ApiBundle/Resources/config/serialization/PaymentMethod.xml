@@ -20,6 +20,7 @@
             <group>payment_method:read</group>
         </attribute>
         <attribute name="name">
+            <group>payment_method:read</group>
             <group>checkout:read</group>
         </attribute>
     </class>

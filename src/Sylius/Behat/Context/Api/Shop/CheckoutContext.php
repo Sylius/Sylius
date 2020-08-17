@@ -19,10 +19,13 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +52,12 @@ final class CheckoutContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    /** @var PaymentMethodRepositoryInterface  */
+    private $paymentMethodRepository;
+
     /** @var string[] */
     private $content = [];
 
@@ -58,7 +67,9 @@ final class CheckoutContext implements Context
         IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository
     ) {
         $this->client = $client;
         $this->orderClient = $orderClient;
@@ -66,6 +77,8 @@ final class CheckoutContext implements Context
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->sharedStorage = $sharedStorage;
+        $this->orderRepository = $orderRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     /**
@@ -259,6 +272,44 @@ final class CheckoutContext implements Context
         );
     }
 
+
+    /**
+     * @Then I should not be able to select :paymentMethodName payment method
+     */
+    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+
+        Assert::false(array_search($paymentMethodName, array_column($paymentMethods,'name')));
+    }
+
+    /**
+     * @Then I should be able to select :paymentMethodName payment method
+     */
+    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
+    {
+        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+
+        Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods,'name')));
+    }
+
+    /**
+     * @Then I should have :paymentMethodName payment method available as the :choice choice
+     */
+    public function iShouldHavePaymentMethodAvailableAsTheFirstChoice($paymentMethodName, $choice):  void
+    {
+
+        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+        Assert::notEmpty($paymentMethods);
+
+        if ($choice === 'first') {
+            Assert::same(reset($paymentMethods)['name'], $paymentMethodName);
+        }
+        if ($choice === 'last') {
+            Assert::same(end($paymentMethods)['name'], $paymentMethodName);
+        }
+    }
+
     /**
      * @Then I should be on the checkout payment step
      */
@@ -446,7 +497,7 @@ final class CheckoutContext implements Context
     private function hasShippingMethodWithFee(ShippingMethodInterface $shippingMethod, int $fee): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if(
+            if (
                 $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode() &&
                 $cartShippingMethod['cost'] === $fee
             ) {
@@ -455,5 +506,29 @@ final class CheckoutContext implements Context
         }
 
         return false;
+    }
+
+    private function getPossiblePaymentMethods($paymentMethodName): array
+    {
+        /** @var OrderInterface|null $order */
+        $order = $this->orderRepository->findCartByTokenValue($this->sharedStorage->get('cart_token'));
+
+        if(!$order->getLastPayment()) {
+            return $this->paymentMethodRepository->findByName($paymentMethodName, 'US');
+        }
+
+        $this->client->request(
+            Request::METHOD_GET,
+            \sprintf('/new-api/orders/%s/payments/%s/methods',
+                $this->sharedStorage->get('cart_token'),
+                $order->getLastPayment()->getId()),
+            [],
+            [],
+            $this->getHeaders()
+        );
+
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        return json_decode($response->getContent(), true)['hydra:member'];
     }
 }
