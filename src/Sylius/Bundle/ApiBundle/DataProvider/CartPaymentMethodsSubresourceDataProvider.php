@@ -68,10 +68,6 @@ final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataP
 
         Assert::true($order->hasPayment($payment), 'Payment doesn\'t match for order');
 
-        if (!$order->hasPayments()) {
-            return [];
-        }
-
         return $this->paymentMethodsResolver->getSupportedMethods($payment);
     }
 }

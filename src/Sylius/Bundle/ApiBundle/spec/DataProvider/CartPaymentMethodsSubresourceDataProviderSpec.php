@@ -124,31 +124,6 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_cart_does_not_have_payments(
-        OrderRepositoryInterface $orderRepository,
-        PaymentRepositoryInterface $paymentRepository,
-        OrderInterface $order,
-        PaymentInterface $payment
-    ): void {
-        $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
-
-        $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn($order);
-        $paymentRepository->find($context['subresource_identifiers']['payments'])->willReturn($payment);
-
-        $order->hasPayment($payment)->willReturn(true);
-        $order->hasPayments()->willReturn(false);
-
-        $this
-            ->getSubresource(
-                PaymentMethodInterface::class,
-                [],
-                $context,
-                Request::METHOD_GET
-            )
-            ->shouldReturn([])
-        ;
-    }
-
     function it_returns_order_payment_methods(
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
