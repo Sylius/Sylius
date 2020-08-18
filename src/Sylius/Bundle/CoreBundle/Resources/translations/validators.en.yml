@@ -1,4 +1,6 @@
 sylius:
+    addressing:
+        not_blank: Address is empty
     avatar_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
