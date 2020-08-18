@@ -51,7 +51,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory
     /** @var RepositoryInterface|null */
     private $taxCategoryRepository;
 
-    /** @var ShippingMethodRuleFactoryInterface|null */
+    /** @var ExampleFactoryInterface|null */
     private $shippingMethodRuleExampleFactory;
 
     /** @var \Faker\Generator */
