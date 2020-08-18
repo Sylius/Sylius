@@ -23,7 +23,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderPaymentMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
+final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -37,8 +37,8 @@ final class OrderPaymentMethodsSubresourceDataProvider implements RestrictedData
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodsResolverInterface $paymentMethodsResolver)
-    {
+        PaymentMethodsResolverInterface $paymentMethodsResolver
+    ) {
         $this->orderRepository = $orderRepository;
         $this->paymentRepository = $paymentRepository;
         $this->paymentMethodsResolver = $paymentMethodsResolver;

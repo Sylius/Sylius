@@ -49,14 +49,11 @@ final class CheckoutContext implements Context
     /** @var RepositoryInterface */
     private $shippingMethodRepository;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var PaymentMethodRepositoryInterface  */
-    private $paymentMethodRepository;
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
 
     /** @var string[] */
     private $content = [];
@@ -67,18 +64,16 @@ final class CheckoutContext implements Context
         IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
-        SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->orderClient = $orderClient;
         $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
-        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -506,13 +501,13 @@ final class CheckoutContext implements Context
         return false;
     }
 
-    private function getPossiblePaymentMethods($paymentMethodName): array
+    private function getPossiblePaymentMethods(string $paymentMethodName): array
     {
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findCartByTokenValue($this->sharedStorage->get('cart_token'));
 
-        if(!$order->getLastPayment()) {
-            return $this->paymentMethodRepository->findByName($paymentMethodName, 'US');
+        if (!$order->getLastPayment()) {
+            return [];
         }
 
         $this->client->request(
@@ -527,6 +522,7 @@ final class CheckoutContext implements Context
 
         /** @var Response $response */
         $response = $this->client->getResponse();
+
         return json_decode($response->getContent(), true)['hydra:member'];
     }
 }

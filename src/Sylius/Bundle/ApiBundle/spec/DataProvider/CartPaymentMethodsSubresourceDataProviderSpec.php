@@ -24,18 +24,14 @@ use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class OrderPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
+final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
         PaymentMethodsResolverInterface $paymentMethodsResolver
     ): void {
-        $this->beConstructedWith(
-            $orderRepository,
-            $paymentRepository,
-            $paymentMethodsResolver
-        );
+        $this->beConstructedWith($orderRepository, $paymentRepository, $paymentMethodsResolver);
     }
 
     function it_supports_only_order_payment_methods_subresource_data_provider_with_id_and_payments_subresource_identifiers(): void
@@ -44,7 +40,7 @@ final class OrderPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavio
             ->supports(ProductInterface::class, Request::METHOD_GET)
             ->shouldReturn(false)
         ;
-        
+
         $this
             ->supports(PaymentMethodInterface::class, Request::METHOD_GET)
             ->shouldReturn(false)
@@ -62,9 +58,9 @@ final class OrderPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavio
         ;
     }
 
-    function it_throws_exception_if_cart_does_not_exist(
-        OrderRepositoryInterface $orderRepository
-    ): void {
+    function it_throws_an_exception_if_cart_does_not_exist(
+        OrderRepositoryInterface $orderRepository): void
+    {
         $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
 
         $orderRepository->findCartByTokenValue($context['subresource_identifiers']['id'])->willReturn(null);
@@ -156,9 +152,9 @@ final class OrderPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavio
     function it_returns_order_payment_methods(
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
         OrderInterface $order,
         PaymentInterface $payment,
-        PaymentMethodsResolverInterface $paymentMethodsResolver,
         PaymentMethodInterface $paymentMethod
     ): void {
         $context['subresource_identifiers'] = ['id' => '69', 'payments' => '420'];
