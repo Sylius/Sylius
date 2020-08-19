@@ -186,8 +186,13 @@
         <property name="paymentState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
-        <property name="items" readable="true" writable="true" />
+        <property name="items" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.order_item.class%" />
+        </property>
         <property name="notes" writable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="adjustments" writable="false">
+            <subresource resourceClass="%sylius.model.adjustment.class%" />
+        </property>
     </resource>
 </resources>

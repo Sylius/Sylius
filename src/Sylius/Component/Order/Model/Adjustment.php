@@ -167,6 +167,21 @@ class Adjustment implements AdjustmentInterface
         $this->originCode = $originCode;
     }
 
+    public function getOrder(): ?OrderInterface
+    {
+        return $this->order;
+    }
+
+    public function getOrderItem(): ?OrderItemInterface
+    {
+        return $this->orderItem;
+    }
+
+    public function getOrderItemUnit(): ?OrderItemUnitInterface
+    {
+        return $this->orderItemUnit;
+    }
+
     private function recalculateAdjustable(): void
     {
         $adjustable = $this->getAdjustable();

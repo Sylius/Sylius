@@ -48,6 +48,22 @@
             <tag name="api_platform.subresource_data_provider" priority="10" />
         </service>
 
+        <service
+            id="sylius.api.collection_data_provider.adjustments_for_order"
+            class="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
+        <service
+            id="sylius.api.collection_data_provider.adjustments_for_order_item"
+            class="Sylius\Bundle\ApiBundle\DataProvider\OrderItemAdjustmentsSubresourceDataProvider"
+        >
+            <argument type="service" id="sylius.repository.order_item" />
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
         <service id="sylius.api.context.user" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
             <argument type="service" id="security.token_storage" />
         </service>

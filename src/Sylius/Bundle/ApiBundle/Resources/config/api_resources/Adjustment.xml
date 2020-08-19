@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.adjustment.class%" shortName="Adjustment">
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>adjustment:read</attribute>
+            </attribute>
+        </attribute>
+
+        <collectionOperations />
+
+        <itemOperations>
+            <itemOperation name="get">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_order_items_adjustments_get_subresource">
+                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            </subresourceOperation>
+            <subresourceOperation name="api_orders_items_adjustments_get_subresource">
+                <attribute name="path">/new-api/orders/{token}/items/{itemId}/adjustments</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="type" writable="false" />
+        <property name="label" writable="false" />
+        <property name="amount" writable="false" />
+        <property name="order" writable="false" />
+        <property name="order_item" writable="false" />
+        <property name="order_item_unit" writable="false" />
+        <property name="neutral" writable="false" />
+        <property name="locked" writable="false" />
+    </resource>
+</resources>

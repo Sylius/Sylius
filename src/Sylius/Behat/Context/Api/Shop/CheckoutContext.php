@@ -450,7 +450,19 @@ final class CheckoutContext implements Context
     public function myOrderTotalShouldBe(int $total): void
     {
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
-        Assert::same($total, (int) $responseTotal);
+        Assert::same($total, (int)$responseTotal);
+    }
+
+    /**
+     * @Then /^my order promotion total should be ("[^"]+")$/
+     */
+    public function myOrderPromotionTotalShouldBe(int $promotionTotal): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $responsePromotionTotal = $this->responseChecker->getValue($response, 'orderPromotionTotal');
+
+        Assert::same($promotionTotal, $responsePromotionTotal);
     }
 
     /**

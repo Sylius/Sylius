@@ -13,11 +13,11 @@ Feature: Seeing a order item discount
         And the store allows paying offline
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing a discounted price on order item
-        Given I had product "Lannister Coat" in the cart
+        Given I have product "Lannister Coat" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        When I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And the "Lannister Coat" product should have unit price discounted by "$10"
         And my order total should be "$90"
