@@ -42,12 +42,14 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     public function __construct(
         FactoryInterface $userFactory,
+        FactoryInterface $avatarImageFactory,
         string $localeCode,
         ?FileLocatorInterface $fileLocator = null,
         ?ImageUploaderInterface $imageUploader = null,
         ?FactoryInterface $avatarImageFactory = null
     ) {
         $this->userFactory = $userFactory;
+        $this->avatarImageFactory = $avatarImageFactory;
         $this->localeCode = $localeCode;
         $this->fileLocator = $fileLocator;
         $this->imageUploader = $imageUploader;
