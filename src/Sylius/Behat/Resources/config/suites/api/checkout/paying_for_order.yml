@@ -21,8 +21,10 @@ default:
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_api_security
 
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.cart
 
             filters:
                 tags: "@paying_for_order && @api"

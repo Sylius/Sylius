@@ -15,13 +15,17 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
+use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -30,6 +34,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 
@@ -56,11 +61,17 @@ final class CheckoutContext implements Context
     /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
+    /** @var MessageBusInterface */
+    private $commandBus;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     /** @var string[] */
     private $content = [];
+
+    /** @var ObjectManager */
+    private $objectManager;
 
     public function __construct(
         AbstractBrowser $client,
@@ -70,7 +81,9 @@ final class CheckoutContext implements Context
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        MessageBusInterface $commandBus,
+        ObjectManager $objectManager
     ) {
         $this->client = $client;
         $this->orderClient = $orderClient;
@@ -79,7 +92,46 @@ final class CheckoutContext implements Context
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->commandBus = $commandBus;
         $this->sharedStorage = $sharedStorage;
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * @Given /^(this product) has been disabled by administrator$/
+     */
+    public function thisProductHasBeenDisabled(ProductInterface $product): void
+    {
+        $product->disable();
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given I have proceeded through checkout process
+     */
+    public function iHaveProceededThroughCheckoutProcess(): void
+    {
+        $this->addressOrder([
+            'email' => 'rich@sylius.com',
+            'billingAddress' => [
+                'city' => 'New York',
+                'street' => 'Wall Street',
+                'postcode' => '00-001',
+                'countryCode' => 'US',
+                'firstName' => 'Richy',
+                'lastName' => 'Rich',
+            ],
+        ]);
+
+        $command = new ChooseShippingMethod(0, $this->shippingMethodRepository->findOneBy([])->getCode());
+        $command->setOrderTokenValue($this->sharedStorage->get('cart_token'));
+
+        $this->commandBus->dispatch($command);
+
+        $command = new ChoosePaymentMethod(0, $this->paymentMethodRepository->findOneBy([])->getCode());
+        $command->setOrderTokenValue($this->sharedStorage->get('cart_token'));
+
+        $this->commandBus->dispatch($command);
     }
 
     /**
@@ -544,12 +596,20 @@ final class CheckoutContext implements Context
 
         $detailType .= 'Address';
 
-        foreach([$firstElement,$secondElement] as $element) {
+        foreach ([$firstElement, $secondElement] as $element) {
             $violation = $this->getViolation(
                 $violations,
                 $detailType . '.' . StringInflector::nameToCamelCase($element));
             Assert::same($violation['message'], sprintf('Please enter %s.', $element));
         }
+    }
+
+    /**
+     * @Then /^I should be informed that (this product) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
+    {
+        $test = 'test';
     }
 
     private function getHeaders(array $headers = []): array

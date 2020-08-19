@@ -14,11 +14,11 @@ Feature: Order products integrity
         And the store allows paying offline
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Preventing customer from completing checkout with no longer available products
         Given I have product "PHP T-Shirt" in the cart
-        And I have proceeded selecting "Offline" payment method
-        But this product has been disabled
+        And I have proceeded through checkout process
+        But this product has been disabled by administrator
         When I confirm my order
         Then I should be informed that this product has been disabled
         And I should not see the thank you page

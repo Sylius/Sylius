@@ -22,6 +22,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.cart" />
             <argument type="service" id="sylius.behat.api_platform_client.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius_default.bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
@@ -38,7 +39,9 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius_default.bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">

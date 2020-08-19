@@ -19,12 +19,14 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
@@ -38,6 +40,9 @@ final class CartContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var MessageBusInterface */
+    private $commandBus;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -48,14 +53,31 @@ final class CartContext implements Context
         ApiClientInterface $cartsClient,
         ApiClientInterface $productsClient,
         ResponseCheckerInterface $responseChecker,
+        MessageBusInterface $commandBus,
         SharedStorageInterface $sharedStorage,
         ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
         $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
+        $this->commandBus = $commandBus;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
+    }
+
+    /**
+     * @Given /^I have (product "[^"]+") in the (cart)$/
+     */
+    public function iHaveProductInTheCart(ProductInterface $product, string $tokenValue): void
+    {
+        $this->commandBus->dispatch(AddItemToCart::createFromData(
+            $tokenValue,
+            $product->getCode(),
+            $this->productVariantResolver->getVariant($product)->getCode(),
+            1
+        ));
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
