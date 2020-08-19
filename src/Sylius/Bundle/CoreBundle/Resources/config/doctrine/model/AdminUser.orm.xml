@@ -21,7 +21,7 @@
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="localeCode" column="locale_code" type="string" length="12" />
 
-        <one-to-one field="avatar" target-entity="Sylius\Component\Core\Model\AvatarImage" mapped-by="owner" orphan-removal="true">
+        <one-to-one field="avatar" target-entity="Sylius\Component\Core\Model\AvatarImageInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
