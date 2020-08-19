@@ -413,6 +413,15 @@ final class CheckoutContext implements Context
         Assert::true(end($shippingMethods)['shippingMethod']['code'] === $shippingMethod->getCode());
     }
 
+    /**
+     * @Then /^my order total should be ("[^"]+")$/
+     */
+    public function myOrderTotalShouldBe(int $total): void
+    {
+        $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
+        Assert::same($total, (int) $responseTotal);
+    }
+
     private function getHeaders(array $headers = []): array
     {
         if (empty($headers)) {

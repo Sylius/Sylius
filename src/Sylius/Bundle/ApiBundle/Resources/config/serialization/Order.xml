@@ -59,6 +59,7 @@
 
         <attribute name="total">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="orderPromotionTotal">
