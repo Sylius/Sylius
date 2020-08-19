@@ -71,28 +71,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^my tax total should be ("[^"]+")$/
-     */
-    public function myTaxTotalShouldBe(int $taxTotal): void
-    {
-        $response = $this->client->show($this->sharedStorage->get('cart_token'));
-
-        $responseTaxTotal = $this->responseChecker->getValue($response, 'taxTotal');
-        Assert::same($taxTotal, (int) $responseTaxTotal);
-    }
-
-    /**
-     * @Then /^my order total should be ("[^"]+")$/
-     */
-    public function myOrderTotalShouldBe(int $total): void
-    {
-        $response = $this->client->show($this->sharedStorage->get('cart_token'));
-
-        $responseTotal = $this->responseChecker->getValue($response, 'total');
-        Assert::same($total, (int) $responseTotal);
-    }
-
-    /**
      * @Then :promotionName should be applied to my order
      */
     public function shouldBeAppliedToMyOrder(string $promotionName): void
@@ -169,7 +147,7 @@ final class OrderContext implements Context
     {
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
-                'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
+                'Expected array to have variant key, but this key is missing. Current array: ' .
                 json_encode($item)
             );
         }
