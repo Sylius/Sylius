@@ -14,23 +14,36 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 final class AddressingNotEmptyValidator extends ConstraintValidator
 {
-    /**
-     * @var AddressInterface|null $address
-     */
-    private $address;
-
-    public function __construct(AddressInterface $address) {
-        $this->address = $address;
-    }
 
     public function validate($value, Constraint $constraint): void
     {
-        $this->context->buildViolation($constraint->message)->addViolation();
+        if($value->getFirstName() === '') {
+            $this->context
+                ->buildViolation("First Name cannot be empty.")
+                ->addViolation();
+        }
+        if($value->getLastName() === '') {
+            $this->context
+                ->buildViolation("Last Name cannot be empty.")
+                ->addViolation();
+        }
+        if($value->getCity() === '') {
+            $this->context
+                ->buildViolation("City cannot be empty.")
+                ->addViolation();
+        }
+        if($value->getStreet() === '') {
+            $this->context
+                ->buildViolation("Street cannot be empty.")
+                ->addViolation();
+        }
+
     }
 
 }
