@@ -35,6 +35,12 @@ final class OrderAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
             ->shouldReturn(false)
         ;
 
+        $context['subresource_identifiers'] = ['id' => 'TOKEN', 'items' => 11];
+        $this
+            ->supports(AdjustmentInterface::class, Request::METHOD_GET, $context)
+            ->shouldReturn(false)
+        ;
+
         $context['subresource_identifiers'] = ['id' => 'TOKEN'];
         $this
             ->supports(AdjustmentInterface::class, Request::METHOD_GET, $context)
