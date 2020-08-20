@@ -109,10 +109,6 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\EmailManager\OrderEmailManager" id="sylius_bundle_api.email_manager.order_email_manager">
-            <argument type="service" id="sylius.email_sender" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
             <argument type="string">%sylius.model.address.class%</argument>
