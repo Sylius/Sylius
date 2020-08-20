@@ -36,8 +36,7 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
 
         return
             is_a($resourceClass, AdjustmentInterface::class, true) &&
-            isset($subresourceIdentifiers['id']) &&
-            isset($subresourceIdentifiers['items'])
+            isset($subresourceIdentifiers['id'], $subresourceIdentifiers['items'])
         ;
     }
 

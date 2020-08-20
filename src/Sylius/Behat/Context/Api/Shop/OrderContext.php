@@ -72,18 +72,11 @@ final class OrderContext implements Context
 
     /**
      * @Then :promotionName should be applied to my order
+     * @Then :promotionName should be applied to my order shipping
      */
     public function shouldBeAppliedToMyOrder(string $promotionName): void
     {
-        Assert::notFalse(array_search($promotionName, array_column($this->getAdjustmentsForOrder(), 'label')));
-    }
-
-    /**
-     * @Then :promotionName should be applied to my order shipping
-     */
-    public function shouldBeAppliedToMyOrderShipping(string $promotionName): void
-    {
-        Assert::notFalse(array_search($promotionName, array_column($this->getAdjustmentsForOrder(), 'label')));
+        Assert::true($this->hasAdjustmentWithLabel($promotionName));
     }
 
     /**
@@ -91,15 +84,13 @@ final class OrderContext implements Context
      */
     public function thisPromotionShouldGiveDiscountOnShipping(PromotionInterface $promotion, int $discount): void
     {
-        $adjustments = $this->getAdjustmentsForOrder();
-        Assert::same(
-            $discount,
-            $adjustments[array_search($promotion->getName(), array_column($adjustments, 'label'))]['amount']
-        );
+        $adjustment = $this->getAdjustmentWithLabel($promotion->getName());
+        Assert::notNull($adjustment);
+        Assert::same($discount, $adjustment['amount']);
     }
 
     /**
-     * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
+     * @Then /^the ("[^"]+" product) should have unit price discounted by ("[^"]+")$/
      */
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, int $amount): void
     {
@@ -124,7 +115,8 @@ final class OrderContext implements Context
     {
         $response = $this->client->customAction(
             sprintf('/new-api/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
-            HttpRequest::METHOD_GET);
+            HttpRequest::METHOD_GET
+        );
 
         return $this->responseChecker->getCollection($response);
     }
@@ -160,5 +152,21 @@ final class OrderContext implements Context
         $productCode = $pathElements[array_key_last($pathElements)];
 
         return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+    }
+
+    private function getAdjustmentWithLabel(string $label): ?array
+    {
+        $adjustments = $this->getAdjustmentsForOrder();
+        $index = array_search($label, array_column($adjustments, 'label'));
+        if ($index) {
+            return $adjustments[$index];
+        }
+
+        return null;
+    }
+
+    private function hasAdjustmentWithLabel(string $label): bool
+    {
+        return $this->getAdjustmentWithLabel($label) !== null;
     }
 }
