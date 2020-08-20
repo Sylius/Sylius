@@ -14,7 +14,7 @@ Feature: Order products integrity
         And the store allows paying offline
         And I am a logged in customer
 
-    @api
+    @ui @api
     Scenario: Preventing customer from completing checkout with no longer available products
         Given I have product "PHP T-Shirt" added to the cart
         And I have proceeded through checkout process

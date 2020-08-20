@@ -605,7 +605,7 @@ final class CheckoutContext implements Context
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getResponse(),
             sprintf("This product %s has been disabled.", $product->getName())
-            ));
+        ));
     }
 
     /**
