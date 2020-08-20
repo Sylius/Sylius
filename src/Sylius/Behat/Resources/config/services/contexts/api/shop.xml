@@ -41,7 +41,6 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius_default.bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">

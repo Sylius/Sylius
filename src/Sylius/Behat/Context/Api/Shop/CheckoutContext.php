@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -70,9 +69,6 @@ final class CheckoutContext implements Context
     /** @var string[] */
     private $content = [];
 
-    /** @var ObjectManager */
-    private $objectManager;
-
     public function __construct(
         AbstractBrowser $client,
         ApiClientInterface $orderClient,
@@ -81,9 +77,8 @@ final class CheckoutContext implements Context
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
-        SharedStorageInterface $sharedStorage,
         MessageBusInterface $commandBus,
-        ObjectManager $objectManager
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->orderClient = $orderClient;
@@ -94,16 +89,6 @@ final class CheckoutContext implements Context
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->commandBus = $commandBus;
         $this->sharedStorage = $sharedStorage;
-        $this->objectManager = $objectManager;
-    }
-
-    /**
-     * @Given /^(this product) has been disabled by administrator$/
-     */
-    public function thisProductHasBeenDisabled(ProductInterface $product): void
-    {
-        $product->disable();
-        $this->objectManager->flush();
     }
 
     /**
@@ -609,7 +594,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
-        $test = 'test';
+        Assert::true(false, 'TODO this step is WIP');
     }
 
     private function getHeaders(array $headers = []): array

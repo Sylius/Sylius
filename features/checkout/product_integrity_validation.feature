@@ -16,9 +16,9 @@ Feature: Order products integrity
 
     @ui @api
     Scenario: Preventing customer from completing checkout with no longer available products
-        Given I have product "PHP T-Shirt" in the cart
+        Given I have product "PHP T-Shirt" added to the cart
         And I have proceeded through checkout process
-        But this product has been disabled by administrator
+        But product "PHP T-Shirt" has been disabled
         When I confirm my order
         Then I should be informed that this product has been disabled
         And I should not see the thank you page

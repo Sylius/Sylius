@@ -66,7 +66,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I have (product "[^"]+") in the (cart)$/
+     * @Given /^I have (product "[^"]+") added to the (cart)$/
      */
     public function iHaveProductInTheCart(ProductInterface $product, string $tokenValue): void
     {

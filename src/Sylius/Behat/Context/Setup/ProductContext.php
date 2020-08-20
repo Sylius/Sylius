@@ -748,8 +748,9 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has been disabled$/
+     * @Given product :product has been disabled
      */
-    public function thisProductHasBeenDisabled(ProductInterface $product)
+    public function thisProductHasBeenDisabled(ProductInterface $product): void
     {
         $product->disable();
         $this->objectManager->flush();
