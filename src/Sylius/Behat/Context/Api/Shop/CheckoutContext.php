@@ -238,12 +238,15 @@ final class CheckoutContext implements Context
     {
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/shipments/{shipmentId}', $this->sharedStorage->get('cart_token')),
+            \sprintf(
+                '/new-api/orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                (string) $this->iriConverter->getItemFromIri($this->getCart()['shipments'][0])->getId()
+            ),
             [],
             [],
             $this->getHeaders(),
             json_encode([
-                'shipmentId' => (string) $this->iriConverter->getItemFromIri($this->getCart()['shipments'][0])->getId(),
                 'shippingMethodCode' => $shippingMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );

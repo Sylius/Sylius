@@ -19,8 +19,5 @@
        <attribute name="shippingMethodCode">
            <group>cart:select_shipping_method</group>
        </attribute>
-       <attribute name="shipmentId">
-           <group>cart:select_shipping_method</group>
-       </attribute>
     </class>
 </serializer>
