@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

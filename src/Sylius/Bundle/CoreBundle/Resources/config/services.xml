@@ -233,5 +233,9 @@
         <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
             <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
         </service>
+
+        <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
+            <argument type="service" id="sylius.email_sender" />
+        </service>
     </services>
 </container>
