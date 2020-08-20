@@ -26,7 +26,6 @@ sylius:
             min_length: Street must be at least {{ limit }} characters long|Street must be at least {{ limit }} characters long.
             not_blank: Please enter street.
         not_shippable: This address is not a valid shipping destination.
-        not_null: This address is incorrect.
     country:
         code:
             not_blank: Please enter country ISO code.

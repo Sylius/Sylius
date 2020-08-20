@@ -30,6 +30,8 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
+use function Symfony\Component\String\u;
+
 
 final class CheckoutContext implements Context
 {
@@ -118,12 +120,7 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
-        $this->content['billingAddress']['city'] = $address->getCity();
-        $this->content['billingAddress']['street'] = $address->getStreet();
-        $this->content['billingAddress']['postcode'] = $address->getPostcode();
-        $this->content['billingAddress']['countryCode'] = $address->getCountryCode();
-        $this->content['billingAddress']['firstName'] = $address->getFirstName();
-        $this->content['billingAddress']['lastName'] = $address->getLastName();
+        $this->fillAddress('billingAddress', $address);
     }
 
     /**
@@ -131,12 +128,24 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
     {
-        $this->content['shippingAddress']['city'] = $address->getCity();
-        $this->content['shippingAddress']['street'] = $address->getStreet();
-        $this->content['shippingAddress']['postcode'] = $address->getPostcode();
-        $this->content['shippingAddress']['countryCode'] = $address->getCountryCode();
-        $this->content['shippingAddress']['firstName'] = $address->getFirstName();
-        $this->content['shippingAddress']['lastName'] = $address->getLastName();
+        $this->fillAddress('shippingAddress', $address);
+    }
+
+    /**
+     * @When /^I (do not specify any shipping address) information$/
+     */
+    public function iDoNotSpecifyAnyShippingAddressInformation(AddressInterface $address): void
+    {
+        $this->fillAddress('billingAddress', $address);
+        $this->fillAddress('shippingAddress', $address);
+    }
+
+    /**
+     * @When /^I (do not specify any billing address) information$/
+     */
+    public function iDoNotSpecifyAnyBillingAddressInformation(AddressInterface $address): void
+    {
+        $this->fillAddress('billingAddress', $address);
     }
 
     /**
@@ -170,6 +179,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I complete the addressing step
+     * @When I try to complete the addressing step
      */
     public function iCompleteTheAddressingStep(): void
     {
@@ -296,7 +306,6 @@ final class CheckoutContext implements Context
             [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
         );
     }
-
 
     /**
      * @Then I should not be able to select :paymentMethodName payment method
@@ -520,6 +529,45 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'shippingTotal'), 0);
     }
 
+    /**
+     * @Then /^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
+     */
+    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $detailType)
+    {
+
+        /** @var Response|null $response */
+        $response = $this->client->getResponse();
+
+        Assert::true($response->getStatusCode() === 400);
+
+        /** @var array|null $violations */
+        $violations = $this->responseChecker->getResponseContent($response)['violations'];
+
+        $detailType .= 'Address';
+
+        $hasFirstElement = false;
+        $hasSecondElement = false;
+
+        $firstElement = $detailType . '.' . u($firstElement)->camel();
+        $secondElement = $detailType . '.' . u($secondElement)->camel();
+
+        foreach($violations as $violation) {
+
+            if($hasFirstElement === false && str_contains($firstElement, $violation['propertyPath'])) {
+                $hasFirstElement = true;
+            }
+            if($hasSecondElement === false && str_contains($secondElement, $violation['propertyPath'])) {
+                $hasSecondElement = true;
+            }
+            if ($hasFirstElement === true && $hasSecondElement === true) {
+                break;
+            }
+        }
+
+        Assert::true($hasFirstElement);
+        Assert::true($hasSecondElement);
+    }
+
     private function getHeaders(array $headers = []): array
     {
         if (empty($headers)) {
@@ -645,5 +693,15 @@ final class CheckoutContext implements Context
         }
 
         return false;
+    }
+
+    private function fillAddress(string $addressType, AddressInterface $address): void
+    {
+        $this->content[$addressType]['city'] = $address->getCity() ?? '';
+        $this->content[$addressType]['street'] = $address->getStreet() ?? '';
+        $this->content[$addressType]['postcode'] = $address->getPostcode() ?? '';
+        $this->content[$addressType]['countryCode'] = $address->getCountryCode() ?? '';
+        $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
+        $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
     }
 }

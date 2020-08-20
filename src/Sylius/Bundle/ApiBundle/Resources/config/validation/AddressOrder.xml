@@ -17,26 +17,11 @@
 
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder">
         <property name="billingAddress">
-            <constraint name="NotNull">
-                <option name="message">sylius.address.not_null</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
-            <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\AddressingNotEmpty">
-                <option name="message">sylius.address.first_name.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
+            <constraint name="NotNull" />
+            <constraint name="Valid" />
         </property>
         <property name="shippingAddress">
-            <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\AddressingNotEmpty">
-                <option name="message">sylius.address.first_name.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
+            <constraint name="Valid" />
         </property>
     </class>
 </constraint-mapping>
