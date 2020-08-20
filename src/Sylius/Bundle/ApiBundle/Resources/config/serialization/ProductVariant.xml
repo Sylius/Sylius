@@ -27,6 +27,7 @@
         </attribute>
         <attribute name="translations">
             <group>product_variant:read</group>
+            <group>checkout:read</group>
         </attribute>
     </class>
 </serializer>

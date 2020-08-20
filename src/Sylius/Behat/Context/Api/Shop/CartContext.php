@@ -86,6 +86,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
+     * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
      */
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {

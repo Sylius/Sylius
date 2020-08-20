@@ -8,14 +8,17 @@
         <attribute name="id">
             <group>order:read</group>
             <group>product_variant:read</group>
+            <group>checkout:read</group>
         </attribute>
         <attribute name="name">
             <group>order:read</group>
             <group>product_variant:read</group>
+            <group>checkout:read</group>
         </attribute>
         <attribute name="locale">
             <group>order:read</group>
             <group>product_variant:read</group>
+            <group>checkout:read</group>
         </attribute>
     </class>
 </serializer>

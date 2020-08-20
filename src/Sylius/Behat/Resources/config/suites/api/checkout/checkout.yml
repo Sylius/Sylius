@@ -12,10 +12,12 @@ default:
                 - sylius.behat.context.transform.cart
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_category
                 - sylius.behat.context.transform.shipping_method
@@ -25,9 +27,10 @@ default:
 
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.cart
-                - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.promotion
