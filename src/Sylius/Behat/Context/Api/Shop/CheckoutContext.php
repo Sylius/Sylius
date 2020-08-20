@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
@@ -450,7 +449,27 @@ final class CheckoutContext implements Context
     public function myOrderTotalShouldBe(int $total): void
     {
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
-        Assert::same($total, (int) $responseTotal);
+        Assert::same($total, (int)$responseTotal);
+    }
+
+    /**
+     * @Then /^my order promotion total should be ("[^"]+")$/
+     */
+    public function myOrderPromotionTotalShouldBe(int $promotionTotal): void
+    {
+        $responsePromotionTotal = $this->responseChecker->getValue($response = $this->client->getResponse(), 'orderPromotionTotal');
+
+        Assert::same($promotionTotal, $responsePromotionTotal);
+    }
+
+    /**
+     * @Then /^my tax total should be ("[^"]+")$/
+     */
+    public function myTaxTotalShouldBe(int $taxTotal): void
+    {
+        $responseTaxTotal = $this->responseChecker->getValue($this->client->getResponse(), 'taxTotal');
+
+        Assert::same($taxTotal, $responseTaxTotal);
     }
 
     /**

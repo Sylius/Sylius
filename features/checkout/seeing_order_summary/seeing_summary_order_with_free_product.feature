@@ -27,7 +27,7 @@ Feature: Seeing a summary of the order with free product
         And there should be no discount
         And there should be no taxes charged
 
-    @ui
+    @ui @api
     Scenario: Seeing order with both free and paid products
         Given I have product "Greyjoy Coat" in the cart
         And I have product "Lannister Coat" in the cart
