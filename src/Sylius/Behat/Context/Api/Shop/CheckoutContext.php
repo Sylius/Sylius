@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -30,7 +31,6 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
-use function Symfony\Component\String\u;
 
 
 final class CheckoutContext implements Context
@@ -532,9 +532,8 @@ final class CheckoutContext implements Context
     /**
      * @Then /^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
      */
-    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $detailType)
+    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired(string $firstElement, string $secondElement, string $detailType): void
     {
-
         /** @var Response|null $response */
         $response = $this->client->getResponse();
 
@@ -545,27 +544,12 @@ final class CheckoutContext implements Context
 
         $detailType .= 'Address';
 
-        $hasFirstElement = false;
-        $hasSecondElement = false;
-
-        $firstElement = $detailType . '.' . u($firstElement)->camel();
-        $secondElement = $detailType . '.' . u($secondElement)->camel();
-
-        foreach($violations as $violation) {
-
-            if($hasFirstElement === false && str_contains($firstElement, $violation['propertyPath'])) {
-                $hasFirstElement = true;
-            }
-            if($hasSecondElement === false && str_contains($secondElement, $violation['propertyPath'])) {
-                $hasSecondElement = true;
-            }
-            if ($hasFirstElement === true && $hasSecondElement === true) {
-                break;
-            }
+        foreach([$firstElement,$secondElement] as $element) {
+            $violation = $this->getViolation(
+                $violations,
+                $detailType . '.' . StringInflector::nameToCamelCase($element));
+            Assert::same($violation['message'], sprintf('Please enter %s.', $element));
         }
-
-        Assert::true($hasFirstElement);
-        Assert::true($hasSecondElement);
     }
 
     private function getHeaders(array $headers = []): array
@@ -703,5 +687,10 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['countryCode'] = $address->getCountryCode() ?? '';
         $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
         $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
+    }
+
+    private function getViolation(array $violations, string $element): array
+    {
+        return $violations[array_search($element, array_column($violations, 'propertyPath'))];
     }
 }
