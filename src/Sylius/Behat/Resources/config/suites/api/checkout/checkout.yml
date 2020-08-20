@@ -28,8 +28,8 @@ default:
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
