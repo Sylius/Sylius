@@ -237,6 +237,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I confirm my order
+     * @When I try to confirm my order
      */
     public function iConfirmMyOrder(): void
     {
@@ -253,9 +254,16 @@ final class CheckoutContext implements Context
             ], \JSON_THROW_ON_ERROR)
         );
 
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        if ($response->getStatusCode() === 400) {
+            return;
+        }
+
         $this->sharedStorage->set(
             'order_number',
-            $this->responseChecker->getValue($this->client->getResponse(), 'number')
+            $this->responseChecker->getValue($response, 'number')
         );
     }
 
@@ -594,7 +602,30 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
-        Assert::true(false, 'TODO this step is WIP');
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->client->getResponse(),
+            sprintf("This product %s has been disabled.", $product->getName())
+            ));
+    }
+
+    /**
+     * @Then I should not see the thank you page
+     */
+    public function iShouldNotSeeTheThankYouPage(): void
+    {
+        Assert::Same($this->client->getResponse()->getStatusCode(), 400);
+    }
+
+    private function isViolationWithMessageInResponse(Response $response, string $message): bool
+    {
+        $violations = $this->responseChecker->getResponseContent($response)['violations'];
+        foreach ($violations as $violation) {
+            if ($violation['message'] === $message){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function getHeaders(array $headers = []): array

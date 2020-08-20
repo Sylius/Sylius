@@ -21,5 +21,10 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_shop_user_email" />
         </service>
+
+        <service id="sylius.validator.api.sylius.validator.product_integrity" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator">
+            <argument type="service" id="sylius.repository.order"/>
+            <tag name="validator.constraint_validator" alias="sylius_validator_api_product_integrity" />
+        </service>
     </services>
 </container>
