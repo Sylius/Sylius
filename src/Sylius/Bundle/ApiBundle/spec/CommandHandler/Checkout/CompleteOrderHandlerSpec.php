@@ -17,22 +17,27 @@ use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class CompleteOrderHandlerSpec extends ObjectBehavior
 {
-    function let(OrderRepositoryInterface $orderRepository, FactoryInterface $stateMachineFactory): void
-    {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory);
+    function let(
+        OrderRepositoryInterface $orderRepository,
+        FactoryInterface $stateMachineFactory,
+        OrderEmailManagerInterface $emailManager
+    ): void {
+        $this->beConstructedWith($orderRepository, $stateMachineFactory, $emailManager);
     }
 
     function it_handles_order_completion_without_notes(
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        OrderEmailManagerInterface $emailManager
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -47,6 +52,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $stateMachine->apply('complete')->shouldBeCalled();
 
+        $emailManager->sendConfirmationEmail($order)->shouldBeCalled();
+
         $this($completeOrder)->shouldReturn($order);
     }
 
@@ -54,7 +61,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        OrderEmailManagerInterface $emailManager
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -68,6 +76,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
 
         $stateMachine->apply('complete')->shouldBeCalled();
+
+        $emailManager->sendConfirmationEmail($order)->shouldBeCalled();
 
         $this($completeOrder)->shouldReturn($order);
     }

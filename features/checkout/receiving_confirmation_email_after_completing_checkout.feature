@@ -11,7 +11,7 @@ Feature: Receiving confirmation email after finalizing checkout
         And the store ships everywhere for free
         And the store allows paying offline
 
-    @ui @email
+    @ui @email @api
     Scenario: Receiving confirmation email after finalizing checkout
         Given I have product "Sig Sauer P226" in the cart
         And I have completed addressing step with email "john@example.com" and "United States" based billing address

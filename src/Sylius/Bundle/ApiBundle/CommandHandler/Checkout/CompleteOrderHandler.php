@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -30,12 +31,17 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     /** @var FactoryInterface */
     private $stateMachineFactory;
 
+    /** @var OrderEmailManagerInterface */
+    private $emailManager;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        OrderEmailManagerInterface $emailManager
     ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->emailManager = $emailManager;
     }
 
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
@@ -59,6 +65,8 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         );
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+
+        $this->emailManager->sendConfirmationEmail($cart);
 
         return $cart;
     }

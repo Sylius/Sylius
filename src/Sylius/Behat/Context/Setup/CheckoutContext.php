@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\AddressInterface;
+<<<<<<< HEAD
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -61,10 +62,28 @@ final class CheckoutContext implements Context
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->commandBus = $commandBus;
         $this->addressFactory = $addressFactory;
+=======
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+
+final class CheckoutContext implements Context
+{
+    /** @var MessageBusInterface */
+    private $commandBus;
+
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    public function __construct(MessageBusInterface $commandBus, SharedStorageInterface  $sharedStorage)
+    {
+        $this->commandBus = $commandBus;
+>>>>>>> 7f2cb5abed... [API] Order confirmation email sending
         $this->sharedStorage = $sharedStorage;
     }
 
     /**
+<<<<<<< HEAD
      * @Given I have proceeded through checkout process
      */
     public function iHaveProceededThroughCheckoutProcess(): void
@@ -105,5 +124,32 @@ final class CheckoutContext implements Context
         $command->setSubresourceId((string) $payment->getId());
 
         $this->commandBus->dispatch($command);
+=======
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
+     */
+    public function iHaveCompletedAddressingStepWithEmail(string $email, AddressInterface $address): void
+    {
+        $addressOrder = new AddressOrder($email, $address);
+
+        $addressOrder->setOrderTokenValue($this->sharedStorage->get('cart_token'));
+
+        $this->commandBus->dispatch($addressOrder);
+    }
+
+    /**
+     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iProceedOrderWithShippingMethodAndPayment(ShippingMethodInterface $shippingMethod, PaymentMethodInterface $paymentMethod): void
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+        $chooseShippingMethod = new ChooseShippingMethod(0, $shippingMethod->getCode());
+        $choosePaymentMethod = new ChoosePaymentMethod(0, $paymentMethod->getCode());
+
+        $chooseShippingMethod->setOrderTokenValue($cartToken);
+        $choosePaymentMethod->setOrderTokenValue($cartToken);
+
+        $this->commandBus->dispatch($chooseShippingMethod);
+        $this->commandBus->dispatch($choosePaymentMethod);
+>>>>>>> 7f2cb5abed... [API] Order confirmation email sending
     }
 }
