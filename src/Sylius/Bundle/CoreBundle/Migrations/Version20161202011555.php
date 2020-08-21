@@ -86,10 +86,6 @@ class Version20161202011555 extends AbstractMigration
         $this->addSql('CREATE TABLE sylius_tax_rate (id INT AUTO_INCREMENT NOT NULL, category_id INT NOT NULL, zone_id INT NOT NULL, code VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, amount NUMERIC(10, 5) NOT NULL, included_in_price TINYINT(1) NOT NULL, calculator VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_3CD86B2E77153098 (code), INDEX IDX_3CD86B2E12469DE2 (category_id), INDEX IDX_3CD86B2E9F2C3FAB (zone_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE sylius_gateway_config (id INT AUTO_INCREMENT NOT NULL, config LONGTEXT NOT NULL COMMENT \'(DC2Type:json_array)\', gateway_name VARCHAR(255) NOT NULL, factory_name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE sylius_payment_security_token (hash VARCHAR(255) NOT NULL, details LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:object)\', after_url LONGTEXT DEFAULT NULL, target_url LONGTEXT NOT NULL, gateway_name VARCHAR(255) NOT NULL, PRIMARY KEY(hash)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE sylius_api_access_token (id INT AUTO_INCREMENT NOT NULL, client_id INT DEFAULT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_7D83AA7F5F37A13B (token), INDEX IDX_7D83AA7F19EB6921 (client_id), INDEX IDX_7D83AA7FA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE sylius_api_auth_code (id INT AUTO_INCREMENT NOT NULL, client_id INT DEFAULT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, redirect_uri LONGTEXT NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_C84041795F37A13B (token), INDEX IDX_C840417919EB6921 (client_id), INDEX IDX_C8404179A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE sylius_api_client (id INT AUTO_INCREMENT NOT NULL, random_id VARCHAR(255) NOT NULL, redirect_uris LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', secret VARCHAR(255) NOT NULL, allowed_grant_types LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE sylius_api_refresh_token (id INT AUTO_INCREMENT NOT NULL, client_id INT DEFAULT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_445785255F37A13B (token), INDEX IDX_4457852519EB6921 (client_id), INDEX IDX_44578525A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F28D9F6D38 FOREIGN KEY (order_id) REFERENCES sylius_order (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F2E415FB15 FOREIGN KEY (order_item_id) REFERENCES sylius_order_item (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F2F720C233 FOREIGN KEY (order_item_unit_id) REFERENCES sylius_order_item_unit (id) ON DELETE CASCADE');
@@ -173,12 +169,6 @@ class Version20161202011555 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_taxon_image ADD CONSTRAINT FK_DBE52B287E3C61F9 FOREIGN KEY (owner_id) REFERENCES sylius_taxon (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE sylius_tax_rate ADD CONSTRAINT FK_3CD86B2E12469DE2 FOREIGN KEY (category_id) REFERENCES sylius_tax_category (id)');
         $this->addSql('ALTER TABLE sylius_tax_rate ADD CONSTRAINT FK_3CD86B2E9F2C3FAB FOREIGN KEY (zone_id) REFERENCES sylius_zone (id)');
-        $this->addSql('ALTER TABLE sylius_api_access_token ADD CONSTRAINT FK_7D83AA7F19EB6921 FOREIGN KEY (client_id) REFERENCES sylius_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_api_access_token ADD CONSTRAINT FK_7D83AA7FA76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
-        $this->addSql('ALTER TABLE sylius_api_auth_code ADD CONSTRAINT FK_C840417919EB6921 FOREIGN KEY (client_id) REFERENCES sylius_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_api_auth_code ADD CONSTRAINT FK_C8404179A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
-        $this->addSql('ALTER TABLE sylius_api_refresh_token ADD CONSTRAINT FK_4457852519EB6921 FOREIGN KEY (client_id) REFERENCES sylius_api_client (id)');
-        $this->addSql('ALTER TABLE sylius_api_refresh_token ADD CONSTRAINT FK_44578525A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_admin_user (id)');
     }
 
     public function down(Schema $schema): void
@@ -215,9 +205,6 @@ class Version20161202011555 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_customer DROP FOREIGN KEY FK_7E82D5E6BD94FB16');
         $this->addSql('ALTER TABLE sylius_order DROP FOREIGN KEY FK_6196A1F94D4CFF2B');
         $this->addSql('ALTER TABLE sylius_order DROP FOREIGN KEY FK_6196A1F979D0C0E4');
-        $this->addSql('ALTER TABLE sylius_api_access_token DROP FOREIGN KEY FK_7D83AA7FA76ED395');
-        $this->addSql('ALTER TABLE sylius_api_auth_code DROP FOREIGN KEY FK_C8404179A76ED395');
-        $this->addSql('ALTER TABLE sylius_api_refresh_token DROP FOREIGN KEY FK_44578525A76ED395');
         $this->addSql('ALTER TABLE sylius_channel_currencies DROP FOREIGN KEY FK_AE491F9372F5A1AA');
         $this->addSql('ALTER TABLE sylius_channel_locales DROP FOREIGN KEY FK_786B7A8472F5A1AA');
         $this->addSql('ALTER TABLE sylius_channel_pricing DROP FOREIGN KEY FK_7801820C72F5A1AA');
@@ -271,9 +258,6 @@ class Version20161202011555 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_taxon DROP FOREIGN KEY FK_CFD811CAA977936C');
         $this->addSql('ALTER TABLE sylius_taxon DROP FOREIGN KEY FK_CFD811CA727ACA70');
         $this->addSql('ALTER TABLE sylius_taxon_image DROP FOREIGN KEY FK_DBE52B287E3C61F9');
-        $this->addSql('ALTER TABLE sylius_api_access_token DROP FOREIGN KEY FK_7D83AA7F19EB6921');
-        $this->addSql('ALTER TABLE sylius_api_auth_code DROP FOREIGN KEY FK_C840417919EB6921');
-        $this->addSql('ALTER TABLE sylius_api_refresh_token DROP FOREIGN KEY FK_4457852519EB6921');
         $this->addSql('DROP TABLE sylius_adjustment');
         $this->addSql('DROP TABLE sylius_order_sequence');
         $this->addSql('DROP TABLE sylius_currency');
@@ -338,9 +322,5 @@ class Version20161202011555 extends AbstractMigration
         $this->addSql('DROP TABLE sylius_tax_rate');
         $this->addSql('DROP TABLE sylius_gateway_config');
         $this->addSql('DROP TABLE sylius_payment_security_token');
-        $this->addSql('DROP TABLE sylius_api_access_token');
-        $this->addSql('DROP TABLE sylius_api_auth_code');
-        $this->addSql('DROP TABLE sylius_api_client');
-        $this->addSql('DROP TABLE sylius_api_refresh_token');
     }
 }
