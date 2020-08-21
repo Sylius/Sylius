@@ -19,8 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
-use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -33,9 +31,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
-
 
 final class CheckoutContext implements Context
 {
@@ -60,9 +56,6 @@ final class CheckoutContext implements Context
     /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -77,7 +70,6 @@ final class CheckoutContext implements Context
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
-        MessageBusInterface $commandBus,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
@@ -87,36 +79,7 @@ final class CheckoutContext implements Context
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->commandBus = $commandBus;
         $this->sharedStorage = $sharedStorage;
-    }
-
-    /**
-     * @Given I have proceeded through checkout process
-     */
-    public function iHaveProceededThroughCheckoutProcess(): void
-    {
-        $this->addressOrder([
-            'email' => 'rich@sylius.com',
-            'billingAddress' => [
-                'city' => 'New York',
-                'street' => 'Wall Street',
-                'postcode' => '00-001',
-                'countryCode' => 'US',
-                'firstName' => 'Richy',
-                'lastName' => 'Rich',
-            ],
-        ]);
-
-        $command = new ChooseShippingMethod(0, $this->shippingMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($this->sharedStorage->get('cart_token'));
-
-        $this->commandBus->dispatch($command);
-
-        $command = new ChoosePaymentMethod(0, $this->paymentMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($this->sharedStorage->get('cart_token'));
-
-        $this->commandBus->dispatch($command);
     }
 
     /**
@@ -604,7 +567,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getResponse(),
-            sprintf("This product %s has been disabled.", $product->getName())
+            sprintf('This product %s has been disabled.', $product->getName())
         ));
     }
 
@@ -613,7 +576,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::Same($this->client->getResponse()->getStatusCode(), 400);
+        Assert::same($this->client->getResponse()->getStatusCode(), 400);
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool

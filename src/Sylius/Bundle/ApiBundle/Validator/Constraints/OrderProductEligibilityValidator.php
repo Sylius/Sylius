@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -35,13 +36,15 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
      */
     public function validate($command, Constraint $constraint): void
     {
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $command->orderTokenValue]);
-
-        /** @var OrderInterface $order */
-        Assert::isInstanceOf($order, OrderInterface::class);
+        Assert::isInstanceOf($command, OrderTokenValueAwareInterface::class);
 
         /** @var OrderProductEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderProductEligibility::class);
+
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $command->getOrderTokenValue()]);
+
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         /** @var OrderItemInterface[] $orderItems */
         $orderItems = $order->getItems();

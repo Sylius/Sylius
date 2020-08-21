@@ -22,7 +22,7 @@ final class OrderProductEligibility extends Constraint
 
     public function validatedBy(): string
     {
-        return 'sylius_validator_api_product_integrity';
+        return 'sylius_api_validator_order_product_eligibility';
     }
 
     public function getTargets(): string

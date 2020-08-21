@@ -22,9 +22,9 @@
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_shop_user_email" />
         </service>
 
-        <service id="sylius.validator.api.sylius.validator.product_integrity" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator">
+        <service id="sylius.api.validator.order_product_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <argument type="service" id="sylius.repository.order" />
-            <tag name="validator.constraint_validator" alias="sylius_validator_api_product_integrity" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_order_product_eligibility" />
         </service>
     </services>
 </container>

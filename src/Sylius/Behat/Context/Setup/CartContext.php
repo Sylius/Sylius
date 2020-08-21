@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -30,15 +31,23 @@ final class CartContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
-    public function __construct(MessageBusInterface $commandBus, ProductVariantResolverInterface $productVariantResolver)
-    {
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    public function __construct(
+        MessageBusInterface $commandBus,
+        ProductVariantResolverInterface $productVariantResolver,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->commandBus = $commandBus;
         $this->productVariantResolver = $productVariantResolver;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I have (product "[^"]+") in the (cart)$/
+     * @Given /^I have (product "[^"]+") added to the (cart)$/
      */
     public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -48,6 +57,8 @@ final class CartContext implements Context
             $this->productVariantResolver->getVariant($product)->getCode(),
             1
         ));
+
+        $this->sharedStorage->set('product', $product);
     }
 
     /**
