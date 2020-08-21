@@ -239,6 +239,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I (?:add|added) (this product) to the cart$/
+     * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given the customer added :product product to the cart
