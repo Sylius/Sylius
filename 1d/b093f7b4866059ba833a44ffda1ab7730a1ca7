@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-29T11:49:55Z
+
+Anyway, that it looks really promising 👍 Can we proceed with the migration movement right now, to start preparation?
+
+BTW. Huge kudos to doctrine team 🎉
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-04-30T13:28:47Z
+
+I guess we first need to figure out if we can move migrations to another directory (+ change their namespace) safely and make sure that we don't reference the moved migrations in some upgrade instructions.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-08-02T16:51:45Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-08-06T10:36:32Z
+
+There's a new library on the market: https://github.com/SyliusLabs/DoctrineMigrationsExtraBundle
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-08-21T19:22:21Z
+
+I split the migrations into CoreBundle and AdminApiBundle, tested the upgrade path manually (run migrations on master branch, switched to this PR branch, run migrations again) and it works fine.
+
+Had to add one extra migration to split AdminApiBundle parts from the initial migration (added a thorough comment there). Removed `skipIf` calls as they cause Migrations v3 to fail, replaced them with empty returns.
+
+I'm not sure whether we should keep the old migrations, but we can think it through while creating an upgrade guide for Sylius applications.
+
+I'd say it's good to merge and afterwards I'll update the remaining repositories to comply with the new migrations architecture.
