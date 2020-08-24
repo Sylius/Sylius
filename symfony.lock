@@ -52,6 +52,9 @@
     "localheinz/diff": {
         "version": "1.0.1"
     },
+    "marcj/topsort": {
+        "version": "1.1.0"
+    },
     "namshi/jose": {
         "version": "7.2.3"
     },
@@ -268,6 +271,9 @@
     "sylius-labs/coding-standard": {
         "version": "v2.0.0"
     },
+    "sylius-labs/doctrine-migrations-extra-bundle": {
+        "version": "v0.1.3"
+    },
     "sylius-labs/polyfill-symfony-event-dispatcher": {
         "version": "v1.0.0"
     },
@@ -450,6 +456,21 @@
     },
     "symfony/web-link": {
         "version": "v5.0.7"
+    },
+    "symplify/auto-bind-parameter": {
+        "version": "v8.2.9"
+    },
+    "symplify/autowire-array-parameter": {
+        "version": "v8.2.9"
+    },
+    "symplify/console-color-diff": {
+        "version": "v8.2.9"
+    },
+    "symplify/parameter-name-guard": {
+        "version": "v8.2.1"
+    },
+    "symplify/phpstan-extensions": {
+        "version": "v8.1.19"
     },
     "textalk/websocket": {
         "version": "1.2.0"

@@ -37,6 +37,8 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
      */
     public function prepend(ContainerBuilder $container): void
     {
+        $this->prependDoctrineMigrations($container);
+
         if (!$container->hasExtension('fos_oauth_server')) {
             throw new ServiceNotFoundException('FOSOAuthServerBundle must be registered in kernel.');
         }
@@ -53,6 +55,25 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
             'service' => [
                 'user_provider' => 'sylius.admin_user_provider.email_or_name_based',
                 'client_manager' => 'sylius.oauth_server.client_manager',
+            ],
+        ]);
+    }
+
+    private function prependDoctrineMigrations(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('doctrine_migrations', [
+            'migrations_paths' => [
+                'Sylius\Bundle\AdminApiBundle\Migrations' => '@SyliusAdminApiBundle/Migrations',
+            ],
+        ]);
+
+        $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
+            'migrations' => [
+                'Sylius\Bundle\AdminApiBundle\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
             ],
         ]);
     }
