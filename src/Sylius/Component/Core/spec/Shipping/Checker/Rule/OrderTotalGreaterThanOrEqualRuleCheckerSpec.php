@@ -49,10 +49,8 @@ final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [
-            'total' => [
-                'CHANNEL' => [
-                    'amount' => 100,
-                ],
+            'CHANNEL' => [
+                'amount' => 100,
             ],
         ])->shouldReturn(true);
     }
@@ -68,10 +66,8 @@ final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [
-            'total' => [
-                'CHANNEL' => [
-                    'amount' => 100,
-                ],
+            'CHANNEL' => [
+                'amount' => 100,
             ],
         ])->shouldReturn(true);
     }
@@ -87,10 +83,8 @@ final class OrderTotalGreaterThanOrEqualRuleCheckerSpec extends ObjectBehavior
         $channel->getCode()->willReturn('CHANNEL');
 
         $this->isEligible($subject, [
-            'total' => [
-                'CHANNEL' => [
-                    'amount' => 100,
-                ],
+            'CHANNEL' => [
+                'amount' => 100,
             ],
         ])->shouldReturn(false);
     }
