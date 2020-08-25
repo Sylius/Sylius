@@ -24,3 +24,13 @@ Feature: Toggling a customer account
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this customer should be disabled
+
+    @ui
+    Scenario: Verifying customer account
+        Given there is enabled customer account "f.baggins@example.com" with password "psw"
+        When I want to verify "f.baggins@example.com"
+        And I try to verify it
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this customer should be verified
+

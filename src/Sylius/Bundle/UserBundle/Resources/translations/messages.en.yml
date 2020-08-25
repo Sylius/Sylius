@@ -9,6 +9,7 @@ sylius:
             remember_me: Remember me
             shipping_address: Shipping address
             username: Username
+            verified: Verified
         user_filter:
             query: Search
         user_change_password:

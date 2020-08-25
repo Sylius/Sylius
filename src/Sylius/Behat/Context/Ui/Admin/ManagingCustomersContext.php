@@ -158,6 +158,24 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Given /^I try to verify it$/
+     */
+    public function iTryToVerifyIt()
+    {
+        $this->updatePage->verifyUser();
+    }
+
+    /**
+     * @Given /^(this customer) should be verified$/
+     */
+    public function thisCustomerShouldBeVerified(CustomerInterface $customer)
+    {
+        $this->indexPage->open();
+
+        Assert::eq($this->indexPage->getCustomerVerifyStatus($customer), 'Yes');
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -299,6 +317,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Given I want to enable :customer
      * @Given I want to disable :customer
+     * @Given I want to verify :customer
      */
     public function iWantToChangeStatusOf(CustomerInterface $customer)
     {

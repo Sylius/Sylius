@@ -22,7 +22,8 @@
                             "Please enter your password."
                         ]
                     },
-                    "enabled": {}
+                    "enabled": {},
+                    "verifiedAt": {}
                 }
             }
         }
