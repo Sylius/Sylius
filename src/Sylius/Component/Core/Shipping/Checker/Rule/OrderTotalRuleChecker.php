@@ -35,7 +35,7 @@ abstract class OrderTotalRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        $amount = $configuration['total'][$channel->getCode()]['amount'] ?? null;
+        $amount = $configuration[$channel->getCode()]['amount'] ?? null;
         if (null === $amount) {
             return false;
         }
