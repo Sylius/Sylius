@@ -29,13 +29,13 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $row, 'enabled')->getText();
     }
 
-    public function getCustomerVerifyStatus(CustomerInterface $customer): string
+    public function isCustomerVerified(CustomerInterface $customer): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowWithFields($table, ['email' => $customer->getEmail()]);
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'verified')->getText();
+        return $tableAccessor->getFieldFromRow($table, $row, 'verified')->getText() === 'Yes';
     }
 }

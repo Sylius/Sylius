@@ -17,7 +17,7 @@ class UserVerificationTransformer implements DataTransformerInterface
 
     public function reverseTransform($data)
     {
-        if ($data){
+        if ($data) {
             return new \DateTime();
         }
     }

@@ -158,7 +158,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I try to verify it
+     * @When I verify it
      */
     public function iTryToVerifyIt(): void
     {
@@ -166,13 +166,13 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given /^(this customer) should be verified$/
+     * @Then /^(this customer) should be verified$/
      */
     public function thisCustomerShouldBeVerified(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
-        Assert::eq($this->indexPage->getCustomerVerifyStatus($customer), 'Yes');
+        Assert::true($this->indexPage->isCustomerVerified($customer));
     }
 
     /**

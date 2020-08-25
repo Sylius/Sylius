@@ -20,5 +20,5 @@ interface IndexPageInterface extends BaseIndexPageInterface
 {
     public function getCustomerAccountStatus(CustomerInterface $customer): string;
 
-    public function getCustomerVerifyStatus(CustomerInterface $customer): string;
+    public function isCustomerVerified(CustomerInterface $customer): bool;
 }
