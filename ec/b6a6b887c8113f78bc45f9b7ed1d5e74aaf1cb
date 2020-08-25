@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by AdamKasp at 2020-08-25T08:14:53Z
+
+Hello @loevgaard, yesterday we changed branches on Sylius, and old `master` is now `1.8`, could you rebase your fix with `1.8`? :)
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-08-25T08:27:17Z
+
+@AdamKasp: Not sure I did it right. Can you confirm?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-08-25T12:00:24Z
+
+Thanks, Joachim! :1st_place_medal:
