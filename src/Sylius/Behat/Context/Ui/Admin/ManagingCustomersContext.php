@@ -158,9 +158,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given /^I try to verify it$/
+     * @Given I try to verify it
      */
-    public function iTryToVerifyIt()
+    public function iTryToVerifyIt(): void
     {
         $this->updatePage->verifyUser();
     }
@@ -168,7 +168,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Given /^(this customer) should be verified$/
      */
-    public function thisCustomerShouldBeVerified(CustomerInterface $customer)
+    public function thisCustomerShouldBeVerified(CustomerInterface $customer): void
     {
         $this->indexPage->open();
 
@@ -319,7 +319,7 @@ final class ManagingCustomersContext implements Context
      * @Given I want to disable :customer
      * @Given I want to verify :customer
      */
-    public function iWantToChangeStatusOf(CustomerInterface $customer)
+    public function iWantToChangeStatusOf(CustomerInterface $customer): void
     {
         $this->updatePage->open(['id' => $customer->getId()]);
     }

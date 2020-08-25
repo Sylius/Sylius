@@ -21,5 +21,4 @@ class UserVerificationTransformer implements DataTransformerInterface
             return new \DateTime();
         }
     }
-
 }
