@@ -1,12 +1,12 @@
 # Handling Non-CRUD operations in API
 
-* Status: proposed
-* Date: 2020-05-13
+* Status: accepted
+* Date: 2020-08-31
 
 ## Context and Problem Statement
 
-Handling non-CRUD operation over REST API is not trivial. Once operations are beyond Create, Read, Update, Delete, 
-which can be mapped directly to `POST`/`PUT`, `GET`, `PUT`/`PATCH`, `DELETE` HTTP methods there is no clear recommendation 
+Handling non-CRUD operation over REST API is not trivial. Once operations are beyond Create(`POST`/`PUT` HTTP methods), 
+Read(`GET` HTTP method), Update(`PUT`/`PATCH` HTTP methods), Delete(`DELETE` HTTP method) there is no clear recommendation 
 how to map others actions. These actions include, but are not limited to, changes of states (described in the form of 
 workflow in a state machine) or command execution.
 
@@ -41,7 +41,7 @@ PUT `/api/orders/1/shipment/1`
 
 This solution works for all standards supported by ApiPlatform(JSON-LD, JSON HAL, GraphQL).
 
-* Good, because it does not introduce any new `verbs` (which may be considered as a bad practice for REST API)
+* Good, because it does not introduce verbs into URL (which may be considered as a bad practice for REST API)
 * Good, because it does not introduce any new endpoints.
 * Bad, because calling `ship` on `status` may be misleading, as a result, may be different(In presented example command 
 `"status": "ship"` results with `"status": "shipped"`).
@@ -64,7 +64,7 @@ POST `/api/orders/1/shipment/1/ship-attempts`
 }
 ```
 
-* Good, because it does not introduce any new `verbs` (which may be considered as a bad practice for REST API)
+* Good, because it does not introduce verbs into URL (which may be considered as a bad practice for REST API)
 * Good, because there may be a straight forward way to expose possible transitions (GET `/api/orders/1/shipment/1/ship-attempts`)
 * Good, because it provides a clear solution for all custom endpoints. 
 * Good, because it uses `POST` operation for action, which is not idempotent. 
