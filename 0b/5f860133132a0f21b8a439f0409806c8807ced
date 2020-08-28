@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-28T13:40:02Z
+
+That's true since 1.7 we are calculating taxes based on the billing address zone (which was introduced [here](https://github.com/Sylius/Sylius/pull/11033/files#diff-bc1d365fc83626e016f81921a53f2e10R83). I hope, you recovered from this change.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-28T13:41:28Z
+
+Thank you, Jacques! :1st_place_medal:
