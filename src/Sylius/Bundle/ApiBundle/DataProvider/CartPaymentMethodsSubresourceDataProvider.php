@@ -23,6 +23,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @var OrderRepositoryInterface */

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\View;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
+/** @experimental */
 class CartShippingMethod implements CartShippingMethodInterface
 {
     /** @var ShippingMethodInterface */

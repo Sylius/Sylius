@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+/** @experimental */
 final class AdminAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
 {
     /** @var NormalizerInterface */

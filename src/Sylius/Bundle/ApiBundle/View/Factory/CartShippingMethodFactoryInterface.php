@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\View\Factory;
 use Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
+/** @experimental */
 interface CartShippingMethodFactoryInterface
 {
     public function create(

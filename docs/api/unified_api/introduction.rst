@@ -3,7 +3,8 @@ Introduction
 
 .. warning::
 
-    The new, unified Sylius API is still under development.
+    The new, unified Sylius API is still under development, that's why the whole ``ApiBundle`` is tagged with ``@experimental``.
+    This means that all code from ``ApiBundle`` is excluded from :doc:`Backward Compatibility Promise </book/organization/backward-compatibility-promise>`.
 
 We have decided that we should rebuild our API and use API Platform to build a truly mature, multi-purpose API
 which can define a new standard for headless e-commerce backends.

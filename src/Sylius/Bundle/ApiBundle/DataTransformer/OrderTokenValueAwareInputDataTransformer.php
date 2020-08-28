@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class OrderTokenValueAwareInputDataTransformer implements DataTransformerInterface
 {
     public function transform($object, string $to, array $context = [])

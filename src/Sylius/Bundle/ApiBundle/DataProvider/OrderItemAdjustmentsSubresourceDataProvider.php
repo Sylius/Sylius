@@ -20,6 +20,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @var OrderItemRepositoryInterface */

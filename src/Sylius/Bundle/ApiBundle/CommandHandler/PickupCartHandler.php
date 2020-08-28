@@ -27,6 +27,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
+/** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
     /** @var FactoryInterface */

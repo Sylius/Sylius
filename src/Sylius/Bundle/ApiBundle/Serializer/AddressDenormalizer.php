@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+/** @experimental */
 final class AddressDenormalizer implements ContextAwareDenormalizerInterface
 {
     /** @var DenormalizerInterface */

@@ -18,6 +18,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
+/** @experimental */
 final class CustomerProvider implements CustomerProviderInterface
 {
     /** @var CanonicalizerInterface */

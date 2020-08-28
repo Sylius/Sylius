@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
+/** @experimental */
 class AddressOrder implements OrderTokenValueAwareInterface
 {
     /** @var string */
