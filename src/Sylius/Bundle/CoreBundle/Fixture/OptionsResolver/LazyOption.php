@@ -45,7 +45,7 @@ final class LazyOption
                 $objects = $objects->toArray();
             }
 
-            Assert::notEmpty($objects);
+            Assert::notEmpty($objects, 'No entities found of type ' . $repository->getClassName());
 
             return $objects[array_rand($objects)];
         };
