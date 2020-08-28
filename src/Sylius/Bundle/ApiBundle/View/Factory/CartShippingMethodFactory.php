@@ -17,6 +17,7 @@ use Sylius\Bundle\ApiBundle\View\CartShippingMethod;
 use Sylius\Bundle\ApiBundle\View\CartShippingMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
+/** @experimental */
 final class CartShippingMethodFactory implements CartShippingMethodFactoryInterface
 {
     public function create(

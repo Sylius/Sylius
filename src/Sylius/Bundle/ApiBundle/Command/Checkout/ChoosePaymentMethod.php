@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
+/** @experimental */
 class ChoosePaymentMethod implements OrderTokenValueAwareInterface
 {
     /** @var string|null */

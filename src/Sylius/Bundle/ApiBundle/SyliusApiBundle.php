@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/** @experimental */
 final class SyliusApiBundle extends Bundle
 {
 }

@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
+/** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
 {
     /** @var FactoryInterface */

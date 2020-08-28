@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
+/** @experimental */
 final class ShippingMethodCannotBeRemoved extends \RuntimeException
 {
     public function __construct()

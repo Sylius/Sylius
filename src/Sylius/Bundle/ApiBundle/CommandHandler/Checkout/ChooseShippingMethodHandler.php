@@ -23,6 +23,7 @@ use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class ChooseShippingMethodHandler
 {
     /** @var OrderRepositoryInterface */

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Provider;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 
+/** @experimental */
 interface CustomerProviderInterface
 {
     public function provide(string $email): CustomerInterface;

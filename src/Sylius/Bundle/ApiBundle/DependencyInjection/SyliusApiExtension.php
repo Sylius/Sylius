@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
+/** @experimental */
 final class SyliusApiExtension extends Extension
 {
     public function load(array $config, ContainerBuilder $container): void
