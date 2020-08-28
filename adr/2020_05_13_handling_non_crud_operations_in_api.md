@@ -5,7 +5,7 @@
 
 ## Context and Problem Statement
 
-Handling Non-CRUD operation over REST API is not trivial. Once operations are beyond Create, Read, Update, Delete, 
+Handling non-CRUD operation over REST API is not trivial. Once operations are beyond Create, Read, Update, Delete, 
 which can be mapped directly to `POST`/`PUT`, `GET`, `PUT`/`PATCH`, `DELETE` HTTP methods there is no clear recommendation 
 how to map others actions. These actions include, but are not limited to, changes of states (described in the form of 
 workflow in a state machine) or command execution.
@@ -13,17 +13,17 @@ workflow in a state machine) or command execution.
 ## Decision Drivers
 
 * Solution should not be limited by its convention. We may need to support two different actions of the same name, 
-but with different business logic. E.g., One object may have two transitions with the same name but described by 
+but with different business logic. E.g., one object may have two transitions with the same name but described by 
 two different state machines.
 * Solution should allow for an easy understanding of what is expected behavior of its execution.
-* Solution should provide easy to implement a way of exposing the next possible actions. (according to HATEOAS paradigm).
+* Solution should provide easy to implement a way of exposing the next possible actions, according to HATEOAS paradigm.
 * Solution should provide a clean way of adding additional fields during the execution of requested operations.
 
 ## Considered Options
 
-All options are presented on the example of making a ship's operations over the shipment, that is ready to be shipped.
+All options are presented on the example of making a `ship` operation over the shipment, that is ready to be shipped.
  
-Expectations: be able to call `ship` transition on the `Shipment` with the XYZ tracking code. 
+Expectations: being able to call `ship` transition on the `Shipment` with the XYZ tracking code. 
 
 ### Enrich resource data with possible operations
 
@@ -39,10 +39,10 @@ PUT `/api/orders/1/shipment/1`
 }
 ```
 
-This solution works for all standards supported by ApiPlatform(JSON-LD, Json HAL, GraphQL)
+This solution works for all standards supported by ApiPlatform(JSON-LD, JSON HAL, GraphQL).
 
 * Good, because it does not introduce any new `verbs` (which may be considered as a bad practice for REST API)
-* Good, because it does not introduce any new `endpoints`.
+* Good, because it does not introduce any new endpoints.
 * Bad, because calling `ship` on `status` may be misleading, as a result, may be different(In presented example command 
 `"status": "ship"` results with `"status": "shipped"`).
 * Bad, because it is not clear how to expose possible transitions. Should a separate endpoint be created, or data should
@@ -67,16 +67,16 @@ POST `/api/orders/1/shipment/1/ship-attempts`
 * Good, because it does not introduce any new `verbs` (which may be considered as a bad practice for REST API)
 * Good, because there may be a straight forward way to expose possible transitions (GET `/api/orders/1/shipment/1/ship-attempts`)
 * Good, because it provides a clear solution for all custom endpoints. 
-* Good, because it uses `POST` operation for action, which is nonidempotent. 
+* Good, because it uses `POST` operation for action, which is not idempotent. 
 * Bad, because state changes are not traceable resources in Sylius. They do not have unique identifiers to check their 
 status, nor are they possible for retries.
-* Bad, because there is no clear solution on how to declare links in Json-LD format.
+* Bad, because there is no clear solution on how to declare links in JSON-LD format.
 
 ### Taking advantage of the `Controller` REST archetype
 
-This approach was described in the REST API Design Rulebook, which states 4 Archetypes: `Document`, `Collection`, `Store`,
- and `Controller`.`Controller` archetype allows for custom operations over the resource with the custom verb as the last 
- part of the URL. However, these custom actions cannot duplicate the logic of any HTTP Verbs.
+This approach was described in the REST API Design Rulebook, which states 4 archetypes: `Document`, `Collection`, `Store`,
+and `Controller`. `Controller` archetype allows for custom operations over the resource with the custom verb as the last 
+part of the URL. However, these custom actions cannot duplicate the logic of any HTTP verbs.
 
 POST `/api/orders/1/shipment/1/ship`
 
@@ -90,8 +90,8 @@ POST `/api/orders/1/shipment/1/ship`
 migration.
 * Good, because it is straight-forward and easy to comprehend.
 * Good, because it provides a clear solution for all custom solutions. 
-* Good, because it uses `POST` operation for action, which is nonidempotent. 
-* Bad, because there is no clear solution on how to declare links in Json-LD format.
+* Good, because it uses `POST` operation for action, which is not idempotent. 
+* Bad, because there is no clear solution on how to declare links in JSON-LD format.
 * Bad, because usage of verbs in URL may be considered as a bad practice. 
 
 ### Google recommendation for custom operations
@@ -110,7 +110,7 @@ POST `/api/orders/1/shipment/1:ship`
 * Good, because it provides a clear solution for all custom solutions. 
 * Good, because it uses `POST` operation for action, which is nonidempotent. 
 * Bad, because it seems to be unnatural for standard REST endpoints.
-* Bad, because it can be hard to achieve with the Api Platform.
+* Bad, because it can be hard to achieve with the API Platform.
 
 ## Decision Outcome
 
