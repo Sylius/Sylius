@@ -60,5 +60,9 @@ class PasswordUpdaterListener
         if (null !== $user->getPlainPassword()) {
             $this->passwordUpdater->updatePassword($user);
         }
+        
+        if (null !== $user->getCredentialsExpireAt()) {
+            $user->setCredentialsExpireAt(null);
+        }
     }
 }
