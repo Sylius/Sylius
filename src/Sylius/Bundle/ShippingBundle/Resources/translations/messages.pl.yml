@@ -29,6 +29,7 @@ sylius:
             description: Opis
             name: Nazwa
         shipping_method:
+            add_rule: Dodaj regułę
             calculator: Kalkulator
             category: Kategoria
             category_requirement: Wymagania kategorii
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Żaden przedmiot nie musi pochodzić z kategorii wysyłki
             name: Nazwa
             position: Położenie
+            rules: Reguły
             tax_category: Kategoria podatkowa
             translations: Tłumaczenia
+        shipping_method_rule:
+            type: Typ
+            total: Łącznie
+            weight: Waga
+            amount: Wartość
