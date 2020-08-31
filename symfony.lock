@@ -13,6 +13,9 @@
             "src/Entity/.gitignore"
         ]
     },
+    "babdev/pagerfanta-bundle": {
+        "version": "v2.5.2"
+    },
     "dmore/behat-chrome-extension": {
         "version": "1.3.0"
     },
@@ -91,9 +94,6 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
-    "phpcollection/phpcollection": {
-        "version": "0.5.0"
-    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -102,9 +102,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
-    },
-    "phpoption/phpoption": {
-        "version": "1.5.0"
     },
     "phpspec/php-diff": {
         "version": "v1.1.0"
