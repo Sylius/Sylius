@@ -41,24 +41,24 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      * @throws \InvalidArgumentException
      * @throws ConstraintDefinitionException
      */
-    public function validate($entity, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
 
-        $enabled = $this->accessor->getValue($entity, $constraint->enabledPath);
+        $enabled = $this->accessor->getValue($value, $constraint->enabledPath);
 
         if ($enabled === true) {
             return;
         }
 
-        $objectManager = $this->getProperObjectManager($constraint->objectManager, $entity);
+        $objectManager = $this->getProperObjectManager($constraint->objectManager, $value);
 
-        $this->ensureEntityHasProvidedEnabledField($objectManager, $entity, $constraint->enabledPath);
+        $this->ensureEntityHasProvidedEnabledField($objectManager, $value, $constraint->enabledPath);
 
         $criteria = [$constraint->enabledPath => true];
 
-        $repository = $objectManager->getRepository(get_class($entity));
+        $repository = $objectManager->getRepository(get_class($value));
         $results = $repository->{$constraint->repositoryMethod}($criteria);
 
         /* If the result is a MongoCursor, it must be advanced to the first
@@ -71,7 +71,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
             reset($results);
         }
 
-        if ($this->isLastEnabledEntity($results, $entity)) {
+        if ($this->isLastEnabledEntity($results, $value)) {
             $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
 
             $this->context->buildViolation($constraint->message)->atPath($errorPath)->addViolation();

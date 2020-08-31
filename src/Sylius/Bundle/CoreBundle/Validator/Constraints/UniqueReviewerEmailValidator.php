@@ -45,13 +45,13 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    public function validate($review, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
         /** @var UniqueReviewerEmail $constraint */
         Assert::isInstanceOf($constraint, UniqueReviewerEmail::class);
 
         /** @var ReviewerInterface|null $customer */
-        $customer = $review->getAuthor();
+        $customer = $value->getAuthor();
 
         $token = $this->tokenStorage->getToken();
         if (null !== $customer) {

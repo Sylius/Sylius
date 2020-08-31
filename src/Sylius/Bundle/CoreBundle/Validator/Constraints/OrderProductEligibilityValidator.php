@@ -24,16 +24,16 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
     /**
      * @throws \InvalidArgumentException
      */
-    public function validate($order, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        /** @var OrderInterface $order */
-        Assert::isInstanceOf($order, OrderInterface::class);
+        /** @var OrderInterface $value */
+        Assert::isInstanceOf($value, OrderInterface::class);
 
         /** @var OrderProductEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderProductEligibility::class);
 
         /** @var OrderItemInterface[] $orderItems */
-        $orderItems = $order->getItems();
+        $orderItems = $value->getItems();
 
         foreach ($orderItems as $orderItem) {
             if (!$orderItem->getProduct()->isEnabled()) {
