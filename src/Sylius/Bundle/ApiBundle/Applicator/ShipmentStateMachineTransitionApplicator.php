@@ -19,6 +19,7 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+/** @experimental */
 final class ShipmentStateMachineTransitionApplicator implements ShipmentStateMachineTransitionApplicatorInterface
 {
     /** @var StateMachineFactoryInterface */

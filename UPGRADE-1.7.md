@@ -87,6 +87,8 @@ We've moved the following templates:
 Until now shipping address used to be the default address of an Order. We have changed that, so now the billing address 
 became the default address during checkout. It is an important change in our checkout process, please have that in mind.
 
+⚠️ This change also implies that the Tax calculation is now done on the billing address and not on the shipping address anymore.
+
 ## Postgres support
 
 In case when you are using Postgres in your project, function `DATE_FORMAT` should be overridden.

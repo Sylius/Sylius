@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
+/** @experimental */
 final class HideArchivedShippingMethodExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     /** @var string */

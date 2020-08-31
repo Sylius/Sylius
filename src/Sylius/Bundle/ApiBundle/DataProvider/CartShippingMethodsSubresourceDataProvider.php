@@ -25,6 +25,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class CartShippingMethodsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @var OrderRepositoryInterface */

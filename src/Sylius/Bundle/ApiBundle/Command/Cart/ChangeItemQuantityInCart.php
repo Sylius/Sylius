@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
+/** @experimental */
 final class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface
 {
     /** @var string|null */

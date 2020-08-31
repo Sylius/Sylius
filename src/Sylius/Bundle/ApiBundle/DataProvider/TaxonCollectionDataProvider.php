@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class TaxonCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var TaxonRepositoryInterface */

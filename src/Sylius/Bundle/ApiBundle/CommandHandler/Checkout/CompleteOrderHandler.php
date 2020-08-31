@@ -20,6 +20,7 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class CompleteOrderHandler
 {
     /** @var OrderRepositoryInterface */

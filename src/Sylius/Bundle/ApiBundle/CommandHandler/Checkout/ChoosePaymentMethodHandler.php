@@ -22,6 +22,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class ChoosePaymentMethodHandler
 {
     /** @var OrderRepositoryInterface */

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\PropertyInfo\Extractor;
 
 use Symfony\Component\PropertyInfo\PropertyListExtractorInterface;
 
+/** @experimental */
 final class EmptyPropertyListExtractor implements PropertyListExtractorInterface
 {
     public function getProperties(string $class, array $context = []): ?array

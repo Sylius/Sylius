@@ -24,6 +24,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class AddressOrderHandler
 {
     /** @var OrderRepositoryInterface */

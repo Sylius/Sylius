@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class ProductItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     /** @var ProductRepositoryInterface */

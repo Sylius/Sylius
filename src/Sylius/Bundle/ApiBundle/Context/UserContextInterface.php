@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Context;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/** @experimental */
 interface UserContextInterface
 {
     public function getUser(): ?UserInterface;

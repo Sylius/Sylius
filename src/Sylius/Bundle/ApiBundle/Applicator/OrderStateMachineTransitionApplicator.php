@@ -17,6 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
+/** @experimental */
 final class OrderStateMachineTransitionApplicator implements OrderStateMachineTransitionApplicatorInterface
 {
     /** @var StateMachineFactoryInterface */

@@ -19,9 +19,7 @@ use ApiPlatform\Core\Metadata\Property\SubresourceMetadata;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface as SymfonyContainerInterface;
 
-/**
- * @internal
- */
+/** @internal */
 final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryInterface
 {
     /** @var PropertyMetadataFactoryInterface */
