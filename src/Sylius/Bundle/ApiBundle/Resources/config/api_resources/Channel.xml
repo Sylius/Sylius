@@ -16,6 +16,7 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.channel.class%" shortName="Channel">
+        <attribute name="route_prefix">admin</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>channel:read</attribute>
@@ -23,11 +24,8 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </collectionOperation>
+            <collectionOperation name="get" />
             <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">channel:create</attribute>
                 </attribute>
@@ -36,7 +34,6 @@
 
         <itemOperations>
             <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="groups">
                     <attribute>channel:read</attribute>
                 </attribute>

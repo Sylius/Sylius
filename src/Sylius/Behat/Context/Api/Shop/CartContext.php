@@ -254,7 +254,7 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $product->getCode(),
@@ -267,7 +267,7 @@ final class CartContext implements Context
 
     private function putProductVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $productVariant->getProduct()->getCode(),
@@ -280,7 +280,7 @@ final class CartContext implements Context
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
         $request->updateContent(['orderItemId' => $orderItemId]);
 
@@ -346,7 +346,7 @@ final class CartContext implements Context
 
     private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
 
         $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
 
