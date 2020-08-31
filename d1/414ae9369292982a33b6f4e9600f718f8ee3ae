@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2020-08-31T14:21:18Z
+
+@lchrusciel What was the issue? Cause it's now kinda lost in the history of commits :(
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-08-31T15:19:42Z
+
+I don't remember, what was a bug for the previous 3 versions, I can describe the current behavior only.
+
+At the moment bug can be spotted on https://travis-ci.org/github/Sylius/Sylius/jobs/722721300#L1758 (two scenarios are failing).
+
+The problem is as follows: if you try to review product without any data, then validation will work as expected:
+![image](https://user-images.githubusercontent.com/6213903/91736085-769b9a00-ebad-11ea-9c79-f7438ad8fce0.png)
+with following validation calls:
+![image](https://user-images.githubusercontent.com/6213903/91736194-9a5ee000-ebad-11ea-902a-77ebe120a881.png)
+If you, however, fill review related data (but omit email address) and submit form:
+![image](https://user-images.githubusercontent.com/6213903/91736306-c11d1680-ebad-11ea-847b-3589add2d3e4.png)
+you will stay on the same page, but without any errors displayed. Probably due to different validation calls:
+![image](https://user-images.githubusercontent.com/6213903/91736389-de51e500-ebad-11ea-8c67-75adbc505062.png)
+
+There is a clear difference in the validated field resolution(`[author]` vs `children[author]`), where we could clearly expect exactly the same behavior.
+
+The issue is probably related to changes introduced somewhere here: https://github.com/symfony/form/compare/v4.4.8...v4.4.9 or https://github.com/symfony/form/commit/fa833d8726c11ced06b51e0d4350f5192cb92270#diff-d14286dfb8590b9989ecc626176b2759
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2020-08-31T15:43:19Z
+
+Thank you, Łukasz! :tada:
