@@ -16,6 +16,7 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.avatar_image.class%" shortName="AvatarImage">
+        <attribute name="route_prefix">admin</attribute>
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>avatar_image:read</attribute>
@@ -24,7 +25,6 @@
 
         <collectionOperations>
             <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="controller">sylius.api.upload_avatar_image_action</attribute>
                 <attribute name="deserialize">false</attribute>
                 <attribute name="openapi_context">
@@ -52,12 +52,8 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
-            <itemOperation name="delete">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
