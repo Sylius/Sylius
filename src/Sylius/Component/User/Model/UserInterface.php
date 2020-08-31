@@ -18,10 +18,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 interface UserInterface extends
-    AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
     \Serializable,
@@ -111,4 +109,12 @@ interface UserInterface extends
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
 
     public function setEncoderName(?string $encoderName): void;
+
+    public function isAccountNonExpired(): bool;
+
+    public function isAccountNonLocked(): bool;
+
+    public function isCredentialsNonExpired(): bool;
+
+    public function isEnabled(): bool;
 }

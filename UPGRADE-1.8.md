@@ -274,6 +274,8 @@ time out during this ajax request (previously no serialization group was defined
 in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_name%`.  
 Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
 
+1. Due to its deprecation, we removed the usage of `Symfony\Component\Security\Core\User\AdvancedUserInterface` in `Sylius\Component\User\Model\UserInterface` (the missing methods were added to the latter). If you target the `AdvancedUserInterface` anywhere in your code, extend it again in your interface or switch the type hint.
+
 ## Special attention
 
 ### Migrations
