@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\UserVerificationTransformer;
+use Sylius\Bundle\UserBundle\Form\UserVerifiedAtToBooleanTransformer;
 use Sylius\Component\Core\Model\ShopUser;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -54,14 +54,15 @@ abstract class UserType extends AbstractResourceType
             ])
         ;
 
-        $builder->get('verifiedAt')->addModelTransformer(new UserVerificationTransformer(), true);
+        $builder->get('verifiedAt')->addModelTransformer(new UserVerifiedAtToBooleanTransformer(), true);
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function(FormEvent $event) {
             /** @var ShopUser|null $data */
             $data = $event->getData();
-            if (!$data) {
+            if (null === $data) {
                 return;
             }
+
             if ($data->isVerified()) {
                 $event->getForm()->add('verifiedAt', CheckboxType::class, [
                     'label' => 'sylius.form.user.verified',
