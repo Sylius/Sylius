@@ -19,13 +19,13 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 use Webmozart\Assert\Assert;
 
 final class ContactController
@@ -36,7 +36,7 @@ final class ContactController
     /** @var FormFactoryInterface */
     private $formFactory;
 
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
     /** @var ChannelContextInterface */
@@ -54,7 +54,7 @@ final class ContactController
     public function __construct(
         RouterInterface $router,
         FormFactoryInterface $formFactory,
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         ChannelContextInterface $channelContext,
         CustomerContextInterface $customerContext,
         LocaleContextInterface $localeContext,
@@ -118,7 +118,7 @@ final class ContactController
 
         $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/Contact/request.html.twig');
 
-        return $this->templatingEngine->renderResponse($template, ['form' => $form->createView()]);
+        return new Response($this->templatingEngine->render($template, ['form' => $form->createView()]));
     }
 
     private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string

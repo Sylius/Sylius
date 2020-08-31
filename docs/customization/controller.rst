@@ -160,27 +160,27 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
     namespace App\Controller\Shop;
 
-    use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
     use Symfony\Component\HttpFoundation\Response;
+    use Twig\Environment;
 
     final class HomepageController
     {
-        /** @var EngineInterface */
+        /** @var Environment */
         private $templatingEngine;
 
-        public function __construct(EngineInterface $templatingEngine)
+        public function __construct(Environment $templatingEngine)
         {
             $this->templatingEngine = $templatingEngine;
         }
 
         public function indexAction(): Response
         {
-            return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
+            return new Response($this->templatingEngine->render('@SyliusShop/Homepage/index.html.twig'));
         }
 
         public function customAction(): Response
         {
-            return $this->templatingEngine->renderResponse('custom.html.twig');
+            return new Response($this->templatingEngine->renderResponse('custom.html.twig'));
         }
     }
 

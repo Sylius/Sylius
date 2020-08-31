@@ -95,7 +95,6 @@
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Controller\Controller" />
-                <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\CurrencyBundleInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\LanguageBundleInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\LocaleBundleInterface" />

@@ -15,19 +15,19 @@ namespace Sylius\Bundle\AdminBundle\Controller\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 final class StatisticsController
 {
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
     /** @var StatisticsDataProviderInterface */
     private $statisticsDataProvider;
 
     public function __construct(
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         StatisticsDataProviderInterface $statisticsDataProvider
     ) {
         $this->templatingEngine = $templatingEngine;
@@ -36,7 +36,7 @@ final class StatisticsController
 
     public function renderStatistics(ChannelInterface $channel): Response
     {
-        return $this->templatingEngine->renderResponse(
+        return new Response($this->templatingEngine->render(
             '@SyliusAdmin/Dashboard/Statistics/_template.html.twig',
             $this->statisticsDataProvider->getRawData(
                 $channel,
@@ -44,6 +44,6 @@ final class StatisticsController
                 (new \DateTime('first day of january next year')),
                 'month'
             )
-        );
+        ));
     }
 }

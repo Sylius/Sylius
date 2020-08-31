@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\Controller;
 
 use Sylius\Bundle\UiBundle\Form\Type\SecurityLoginType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 final class SecurityController
 {
@@ -31,7 +31,7 @@ final class SecurityController
     /** @var FormFactoryInterface */
     private $formFactory;
 
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
     /** @var AuthorizationCheckerInterface */
@@ -43,7 +43,7 @@ final class SecurityController
     public function __construct(
         AuthenticationUtils $authenticationUtils,
         FormFactoryInterface $formFactory,
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
         RouterInterface $router
     ) {
@@ -71,11 +71,11 @@ final class SecurityController
         $formType = $options['form'] ?? SecurityLoginType::class;
         $form = $this->formFactory->createNamed('', $formType);
 
-        return $this->templatingEngine->renderResponse($template, [
+        return new Response($this->templatingEngine->render($template, [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'last_error' => $lastError,
-        ]);
+        ]));
     }
 
     public function checkAction(Request $request): void

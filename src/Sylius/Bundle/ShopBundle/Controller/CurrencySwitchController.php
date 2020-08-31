@@ -18,14 +18,14 @@ use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 final class CurrencySwitchController
 {
-    /** @var EngineInterface */
+    /** @var Environment */
     private $templatingEngine;
 
     /** @var CurrencyContextInterface */
@@ -38,7 +38,7 @@ final class CurrencySwitchController
     private $channelContext;
 
     public function __construct(
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyStorageInterface $currencyStorage,
         ChannelContextInterface $channelContext
@@ -61,10 +61,10 @@ final class CurrencySwitchController
             $channel->getCurrencies()->toArray()
         );
 
-        return $this->templatingEngine->renderResponse('@SyliusShop/Menu/_currencySwitch.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusShop/Menu/_currencySwitch.html.twig', [
             'active' => $this->currencyContext->getCurrencyCode(),
             'currencies' => $availableCurrencies,
-        ]);
+        ]));
     }
 
     public function switchAction(Request $request, string $code): Response
