@@ -46,4 +46,9 @@ final class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
     {
         return ProductVariantGenerationType::class;
     }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [ProductVariantGenerationType::class];
+    }
 }

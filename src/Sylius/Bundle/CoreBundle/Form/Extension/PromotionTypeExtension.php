@@ -35,4 +35,9 @@ final class PromotionTypeExtension extends AbstractTypeExtension
     {
         return PromotionType::class;
     }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [PromotionType::class];
+    }
 }
