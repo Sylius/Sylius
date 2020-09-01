@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shop_billing_data.class%" shortName="ShopBillingData">
+        <attribute name="route_prefix">admin</attribute>
+        
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shop_billing_data:read</attribute>
@@ -27,14 +29,12 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
         </itemOperations>
 
         <subresourceOperations>
             <subresourceOperation name="api_channels_shop_billing_data_get_subresource">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+                <attribute name="method">GET</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

@@ -49,10 +49,10 @@ final class Request implements RequestInterface
         return new self(sprintf('/new-api/%s%s', self::prepareSection($section), $resource), HttpRequest::METHOD_GET, $headers);
     }
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource): RequestInterface
+    public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource),
+            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $subResource),
             HttpRequest::METHOD_GET
         );
     }
@@ -99,15 +99,15 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function transition(string $resource, string $id, string $transition): RequestInterface
+    public static function transition(?string $section, string $resource, string $id, string $transition): RequestInterface
     {
-        return self::customItemAction($resource, $id, HttpRequest::METHOD_PATCH, $transition);
+        return self::customItemAction($section, $resource, $id, HttpRequest::METHOD_PATCH, $transition);
     }
 
-    public static function customItemAction(string $resource, string $id, string $type, string $action): RequestInterface
+    public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $action),
+            sprintf('/new-api/%s%s/%s/%s',$section, $resource, $id, $action),
             $type,
             ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
@@ -214,7 +214,7 @@ final class Request implements RequestInterface
 
     private static function prepareSection(?string $section): string
     {
-        if($section === null) {
+        if ($section === null) {
             return '';
         }
 

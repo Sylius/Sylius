@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.exchange_rate.class%" shortName="ExchangeRate">
+        <attribute name="route_prefix">admin</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>exchange_rate:read</attribute>
@@ -26,13 +28,11 @@
 
         <collectionOperations>
             <collectionOperation name="get" >
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.exchange_rate_filter</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">exchange_rate:create</attribute>
                 </attribute>
@@ -40,18 +40,13 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
             <itemOperation name="put">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">exchange_rate:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="delete" />
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

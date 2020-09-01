@@ -40,7 +40,7 @@ final class ApiPlatformClient implements ApiClientInterface
         AbstractBrowser $client,
         SharedStorageInterface $sharedStorage,
         string $resource,
-        string $section = null
+        ?string $section = null
     ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
@@ -65,7 +65,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function subResourceIndex(string $subResource, string $id): Response
     {
-        $request = Request::subResourceIndex($this->resource, $id, $subResource);
+        $request = Request::subResourceIndex($this->section, $this->resource, $id, $subResource);
         $request->authorize($this->getToken());
 
         return $this->request($request);
@@ -105,7 +105,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response
     {
-        $request = Request::transition($this->resource, $id, $transition);
+        $request = Request::transition($this->section, $this->resource, $id, $transition);
         $request->authorize($this->getToken());
         $request->setContent($content);
 
@@ -114,7 +114,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customItemAction(string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->resource, $id, $type, $action);
+        $request = Request::customItemAction($this->section, $this->resource, $id, $type, $action);
         $request->authorize($this->getToken());
 
         return $this->request($request);
