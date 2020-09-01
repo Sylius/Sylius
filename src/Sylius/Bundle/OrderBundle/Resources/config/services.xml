@@ -22,6 +22,8 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand">
+            <argument>%sylius_order.cart_expiration_period%</argument>
+            <argument type="service" id="sylius.expired_carts_remover" />
             <tag name="console.command" />
         </service>
 

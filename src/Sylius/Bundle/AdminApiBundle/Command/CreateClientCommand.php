@@ -15,24 +15,21 @@ namespace Sylius\Bundle\AdminApiBundle\Command;
 
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use Sylius\Bundle\AdminApiBundle\Model\Client;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @deprecated Fetching dependencies directly from container is not recommended from Symfony 3.4. Extending `ContainerAwareCommand` will be removed in 2.0
- */
-final class CreateClientCommand extends ContainerAwareCommand
+final class CreateClientCommand extends Command
 {
-    /** @var ClientManagerInterface|null */
+    /** @var ClientManagerInterface */
     private $clientManager;
 
     protected static $defaultName = 'sylius:oauth-server:create-client';
 
-    public function __construct(?string $name = null, ClientManagerInterface $clientManager = null)
+    public function __construct(ClientManagerInterface $clientManager)
     {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->clientManager = $clientManager;
     }
@@ -62,11 +59,6 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (null === $this->clientManager) {
-            @trigger_error('Fetching services directly from the container is deprecated since Sylius 1.2 and will be removed in 2.0.', \E_USER_DEPRECATED);
-            $this->clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
-        }
-
         /** @var Client $client */
         $client = $this->clientManager->createClient();
         $client->setRedirectUris($input->getOption('redirect-uri'));

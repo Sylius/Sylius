@@ -31,7 +31,7 @@ EOT
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf(
             'Installing Sylius assets for environment <info>%s</info>.',
@@ -39,7 +39,7 @@ EOT
         ));
 
         try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
+            $publicDir = $this->container->getParameter('sylius_core.public_dir');
 
             $this->ensureDirectoryExistsAndIsWritable($publicDir . '/assets/', $output);
             $this->ensureDirectoryExistsAndIsWritable($publicDir . '/bundles/', $output);
@@ -55,6 +55,6 @@ EOT
 
         $this->runCommands($commands, $output);
 
-        return null;
+        return 0;
     }
 }

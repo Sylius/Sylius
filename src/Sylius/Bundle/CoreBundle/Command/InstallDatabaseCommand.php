@@ -45,7 +45,6 @@ EOT
         ));
 
         $commands = $this
-            ->getContainer()
             ->get('sylius.commands_provider.database_setup')
             ->getCommands($input, $output, $this->getHelper('question'))
         ;
