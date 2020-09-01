@@ -29,23 +29,23 @@ final class CurrencyConverter implements CurrencyConverterInterface
         $this->exchangeRateRepository = $exchangeRateRepository;
     }
 
-    public function convert(int $amount, string $sourceCurrencyCode, string $targetCurrencyCode): int
+    public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int
     {
         if ($sourceCurrencyCode === $targetCurrencyCode) {
-            return $amount;
+            return $value;
         }
 
         $exchangeRate = $this->findExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
         if (null === $exchangeRate) {
-            return $amount;
+            return $value;
         }
 
         if ($exchangeRate->getSourceCurrency()->getCode() === $sourceCurrencyCode) {
-            return (int) round($amount * $exchangeRate->getRatio());
+            return (int) round($value * $exchangeRate->getRatio());
         }
 
-        return (int) round($amount / $exchangeRate->getRatio());
+        return (int) round($value / $exchangeRate->getRatio());
     }
 
     private function findExchangeRate(string $sourceCode, string $targetCode): ?ExchangeRateInterface
