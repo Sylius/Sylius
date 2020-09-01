@@ -107,7 +107,7 @@ final class Request implements RequestInterface
     public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s%s/%s/%s',$section, $resource, $id, $action),
+            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $action),
             $type,
             ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
