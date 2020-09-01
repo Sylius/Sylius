@@ -70,14 +70,17 @@
 
         <service id="sylius.behat.api_platform_client.product_option" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-options</argument>
+            <argument>admin</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.product_review" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-reviews</argument>
+            <argument>admin</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.product" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>products</argument>
+            <argument>admin</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.province" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
@@ -115,6 +118,7 @@
 
         <service id="sylius.behat.api_platform_client.taxon" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>taxons</argument>
+            <argument>admin</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.zone" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">

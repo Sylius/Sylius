@@ -10,7 +10,14 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="get_variant_translation_in_admin">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">admin/product-variant-translation/{id}</attribute>
+            </itemOperation>
+            <itemOperation name="get_variant_translation_in_shop">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">shop/product-variant-translation/{id}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
