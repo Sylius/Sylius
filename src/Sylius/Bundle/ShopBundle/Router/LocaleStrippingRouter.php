@@ -39,9 +39,9 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
         return $this->router->match($pathinfo);
     }
 
-    public function generate($name, $parameters = [], $absolute = UrlGeneratorInterface::ABSOLUTE_PATH): string
+    public function generate($name, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
     {
-        $url = $this->router->generate($name, $parameters, $absolute);
+        $url = $this->router->generate($name, $parameters, $referenceType);
 
         if (false === strpos($url, '_locale')) {
             return $url;

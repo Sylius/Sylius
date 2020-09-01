@@ -31,12 +31,12 @@ final class PaymentFactory implements PaymentFactoryInterface
         return $this->factory->createNew();
     }
 
-    public function createWithAmountAndCurrencyCode(int $amount, string $currencyCode): PaymentInterface
+    public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface
     {
         /** @var PaymentInterface $payment */
         $payment = $this->factory->createNew();
         $payment->setAmount($amount);
-        $payment->setCurrencyCode($currencyCode);
+        $payment->setCurrencyCode($currency);
 
         return $payment;
     }
