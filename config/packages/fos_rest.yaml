@@ -5,6 +5,8 @@ fos_rest:
             json: true
             xml:  true
         empty_content: 204
+    body_listener:
+        enabled: true
     format_listener:
         rules:
             - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
