@@ -79,6 +79,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('group')->getText();
     }
 
+    public function verifyUser(): void
+    {
+        $this->getDocument()->checkField('Verified');
+    }
+
     protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
@@ -93,6 +98,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'group' => '#sylius_customer_group',
             'last_name' => '#sylius_customer_lastName',
             'password' => '#sylius_customer_user_password',
+            'verified_at' => '#sylius_customer_user_verifiedAt',
         ]);
     }
 }
