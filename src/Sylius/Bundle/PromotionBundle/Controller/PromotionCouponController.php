@@ -52,17 +52,12 @@ class PromotionCouponController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form));
         }
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('generate.html'))
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'promotion' => $promotion,
-                'form' => $form->createView(),
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render($configuration->getTemplate('generate.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'promotion' => $promotion,
+            'form' => $form->createView(),
+        ]);
     }
 
     protected function getGenerator(): PromotionCouponGeneratorInterface
