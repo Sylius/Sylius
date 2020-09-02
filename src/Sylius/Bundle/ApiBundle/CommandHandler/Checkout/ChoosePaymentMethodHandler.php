@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
@@ -31,16 +32,21 @@ final class ChoosePaymentMethodHandler
     /** @var PaymentMethodRepositoryInterface */
     private $paymentMethodRepository;
 
+    /** @var PaymentRepositoryInterface */
+    private $paymentRepository;
+
     /** @var FactoryInterface */
     private $stateMachineFactory;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
         FactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->paymentRepository = $paymentRepository;
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
@@ -59,17 +65,13 @@ final class ChoosePaymentMethodHandler
         );
 
         /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $choosePaymentMethod->paymentMethod]);
-
-        $paymentIdentifier = $choosePaymentMethod->paymentIdentifier;
-
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([
+            'code' => $choosePaymentMethod->paymentMethodCode
+        ]);
         Assert::notNull($paymentMethod, 'Payment method has not been found');
-        Assert::true(isset(
-            $cart->getPayments()[$paymentIdentifier]),
-            'Can not find payment with given identifier.'
-        );
 
-        $payment = $cart->getPayments()[$paymentIdentifier];
+        $payment = $this->paymentRepository->findOneByOrderId($choosePaymentMethod->paymentId, $cart->getId());
+        Assert::notNull($payment, 'Can not find payment with given identifier.');
 
         $payment->setMethod($paymentMethod);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);

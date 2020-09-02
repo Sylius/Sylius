@@ -16,10 +16,10 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Webmozart\Assert\Assert;
@@ -33,6 +33,9 @@ final class ChooseShippingMethodHandler
     /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
+    /** @var ShipmentRepositoryInterface */
+    private $shipmentRepository;
+
     /** @var ShippingMethodEligibilityCheckerInterface */
     private $eligibilityChecker;
 
@@ -42,11 +45,13 @@ final class ChooseShippingMethodHandler
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
         $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->shipmentRepository = $shipmentRepository;
         $this->eligibilityChecker = $eligibilityChecker;
         $this->stateMachineFactory = $stateMachineFactory;
     }
@@ -71,7 +76,7 @@ final class ChooseShippingMethodHandler
         ]);
         Assert::notNull($shippingMethod, 'Shipping method has not been found');
 
-        $shipment = $this->getShipmentById($cart, $chooseShippingMethod->shipmentId);
+        $shipment = $this->shipmentRepository->findOneByOrderId($chooseShippingMethod->shipmentId, $cart->getId());
         Assert::notNull($shipment, 'Can not find shipment with given identifier.');
 
         Assert::true(
@@ -83,16 +88,5 @@ final class ChooseShippingMethodHandler
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         return $cart;
-    }
-
-    private function getShipmentById(OrderInterface $cart, string $shipmentId): ?ShipmentInterface
-    {
-        foreach ($cart->getShipments() as $shipment) {
-            if ((string) $shipment->getId() === $shipmentId) {
-                return $shipment;
-            }
-        }
-
-        return null;
     }
 }

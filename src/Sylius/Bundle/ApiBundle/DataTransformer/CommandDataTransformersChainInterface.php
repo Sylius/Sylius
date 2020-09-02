@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
+/** @experimental */
 interface CommandDataTransformersChainInterface
 {
     public function getCommandDataTransformers(): array;

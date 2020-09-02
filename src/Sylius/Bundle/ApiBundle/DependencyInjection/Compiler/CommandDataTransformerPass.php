@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+/** @experimental */
 final class CommandDataTransformerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
@@ -32,7 +33,7 @@ final class CommandDataTransformerPass implements CompilerPassInterface
         }
 
         $container->setDefinition(
-            'sylius_bundle_api.data_transformer.data_transformers_chain',
+            'sylius_bundle_api.command_data_transformers_chain',
             $commandDataTransformersChainDefinition
         );
     }

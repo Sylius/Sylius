@@ -14,34 +14,30 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
 /** @experimental */
-class ChoosePaymentMethod implements OrderTokenValueAwareInterface
+class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
 
     /**
      * @psalm-immutable
-     *
-     * @var string|int
+     * @var string
      */
-    public $paymentIdentifier;
+    public $paymentId;
 
     /**
      * @psalm-immutable
      *
      * @var string
      */
-    public $paymentMethod;
+    public $paymentMethodCode;
 
-    /**
-     * @param int|string $paymentIdentifier
-     */
-    public function __construct($paymentIdentifier, string $paymentMethod)
+    public function __construct(string $paymentMethodCode)
     {
-        $this->paymentIdentifier = $paymentIdentifier;
-        $this->paymentMethod = $paymentMethod;
+        $this->paymentMethodCode = $paymentMethodCode;
     }
 
     public function getOrderTokenValue(): ?string
@@ -52,5 +48,20 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface
     public function setOrderTokenValue(?string $orderTokenValue): void
     {
         $this->orderTokenValue = $orderTokenValue;
+    }
+
+    public function getSubresourceId(): ?string
+    {
+        return $this->paymentId;
+    }
+
+    public function setSubresourceId(?string $subresourceId): void
+    {
+        $this->paymentId = $subresourceId;
+    }
+
+    public function getSubresourceIdAttributeKey(): string
+    {
+        return 'paymentId';
     }
 }

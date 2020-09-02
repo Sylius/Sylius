@@ -20,6 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -70,6 +71,10 @@ final class CheckoutContext implements Context
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
+        Assert::notNull($cart);
+
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
         $address->setCity('New York');
@@ -86,17 +91,19 @@ final class CheckoutContext implements Context
         $command = new ChooseShippingMethod($this->shippingMethodRepository->findOneBy([])->getCode());
         $command->setOrderTokenValue($cartToken);
 
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
-        Assert::notNull($cart);
         /** @var ShipmentInterface $shipment */
         $shipment = $cart->getShipments()->first();
 
         $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
-        $command = new ChoosePaymentMethod(0, $this->paymentMethodRepository->findOneBy([])->getCode());
+        $command = new ChoosePaymentMethod($this->paymentMethodRepository->findOneBy([])->getCode());
         $command->setOrderTokenValue($cartToken);
+
+        /** @var PaymentInterface $payment */
+        $payment = $cart->getPayments()->first();
+        $command->setSubresourceId((string) $payment->getId());
+
         $this->commandBus->dispatch($command);
     }
 }

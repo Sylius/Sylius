@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 
@@ -32,15 +33,23 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($orderRepository, $shippingMethodRepository, $eligibilityChecker, $stateMachineFactory);
+        $this->beConstructedWith(
+            $orderRepository,
+            $shippingMethodRepository,
+            $shipmentRepository,
+            $eligibilityChecker,
+            $stateMachineFactory
+        );
     }
 
     function it_assigns_choosen_shipping_method_to_specified_shipment(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
@@ -61,7 +70,9 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
         $cart->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
-        $shipment->getId()->willReturn('123');
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn($shipment);
 
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
 
@@ -74,6 +85,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_shipping_method_is_not_eligible(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
@@ -94,7 +106,9 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
         $cart->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
-        $shipment->getId()->willReturn('123');
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn($shipment);
 
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(false);
 
@@ -180,11 +194,11 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_ordered_shipment_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
-        StateMachineInterface $stateMachine,
-        ShipmentInterface $shipment
+        StateMachineInterface $stateMachine
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -197,9 +211,10 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
-        $cart->getShipments()->willReturn(new ArrayCollection([]));
+        $cart->getId()->willReturn('111');
 
-        $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn(null);
+
         $stateMachine->apply('select_shipping')->shouldNotBeCalled();
 
         $this

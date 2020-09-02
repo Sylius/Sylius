@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
+/** @experimental */
 final class CommandDataTransformersChain implements CommandDataTransformersChainInterface
 {
     /** @var array */
@@ -20,10 +21,7 @@ final class CommandDataTransformersChain implements CommandDataTransformersChain
 
     public function __construct(... $commandDataTransformers)
     {
-        $this->commandDataTransformers = [];
-        foreach ($commandDataTransformers as $commandDataTransformer) {
-            $this->commandDataTransformers[] = $commandDataTransformer;
-        }
+        $this->commandDataTransformers = $commandDataTransformers;
     }
 
     public function getCommandDataTransformers(): array

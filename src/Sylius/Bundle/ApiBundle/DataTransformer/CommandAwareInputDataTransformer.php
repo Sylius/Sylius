@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
+/** @experimental */
 final class CommandAwareInputDataTransformer implements DataTransformerInterface
 {
     /** @var CommandDataTransformersChainInterface */
