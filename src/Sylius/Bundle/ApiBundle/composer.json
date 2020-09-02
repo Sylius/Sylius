@@ -29,6 +29,8 @@
         "symfony/messenger": "^4.4"
     },
     "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/phpspec": "^6.1",
         "phpunit/phpunit": "^8.5"
     },
