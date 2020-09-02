@@ -31,7 +31,6 @@ abstract class ReviewType extends AbstractResourceType
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
-                'constraints' => [new Valid()],
             ])
             ->add('title', TextType::class, [
                 'label' => 'sylius.form.review.title',
