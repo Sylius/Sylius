@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method.class%" shortName="ShippingMethod">
+        <attribute name="route_prefix">admin</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipping_method:read</attribute>
@@ -29,21 +31,15 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
             <itemOperation name="put">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="delete" />
 
             <itemOperation name="archive">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
@@ -54,7 +50,6 @@
             </itemOperation>
 
             <itemOperation name="restore">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
@@ -67,7 +62,6 @@
 
         <collectionOperations>
             <collectionOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.filter_archived_shipping_methods</attribute>
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
@@ -75,7 +69,6 @@
                 </attribute>
             </collectionOperation>
             <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:create</attribute>
                 </attribute>
