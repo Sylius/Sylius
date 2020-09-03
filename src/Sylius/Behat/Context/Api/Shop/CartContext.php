@@ -316,10 +316,31 @@ final class CartContext implements Context
         ProductInterface $product,
         string $tokenValue,
         int $quantity = 1
-    ): void {
+    ): void
+    {
         $this->cartsClient->show($tokenValue);
 
         $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
+    }
+
+    /**
+     * @When /^I check items in my (cart)$/
+     */
+    public function iCheckItemsOfMyCart(string $tokenValue): void
+    {
+        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
+     */
+    public function myCartShouldHaveItems(int $quantity, ProductInterface $product): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
@@ -393,31 +414,6 @@ final class CartContext implements Context
         return $this->cartsClient->getLastResponse();
     }
 
-    /**
-     * @When /^I check items in my (cart)$/
-     */
-    public function iCheckItemsOfMyCart(string $tokenValue)
-    {
-        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
-        $this->cartsClient->executeCustomRequest($request);
-    }
-
-    /**
-     * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
-     */
-    public function myCartShouldHaveItems(int $quantity, ProductInterface $product)
-    {
-        $response = $this->cartsClient->getLastResponse();
-
-        $items = json_decode($response->getContent(), true)['hydra:member'];
-
-        foreach ($items as $item) {
-            if ($item['productName'] === $product->getName()){
-                Assert::same($item['quantity'], $quantity);
-            }
-        }
-    }
-
     private function getOrderItemProductCode(array $item): string
     {
         $pathElements = explode('/', $item['variant']['product']);
@@ -446,5 +442,15 @@ final class CartContext implements Context
         $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
 
         $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function hasItemWithNameAndQuantity(Response $response, string $productName, int $quantity): bool
+    {
+        $items = json_decode($response->getContent(), true)['hydra:member'];
+
+        foreach ($items as $item) {
+            return ($item['productName'] === $productName) && $item['quantity'] === $quantity;
+        }
+        return false;
     }
 }
