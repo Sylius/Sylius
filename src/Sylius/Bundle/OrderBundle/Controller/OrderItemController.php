@@ -97,16 +97,11 @@ class OrderItemController extends ResourceController
             return $this->handleBadAjaxRequestView($configuration, $form);
         }
 
-        $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                $this->metadata->getName() => $orderItem,
-                'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(CartActions::ADD . '.html'))
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render($configuration->getTemplate(CartActions::ADD . '.html'), [
+            'configuration' => $configuration,
+            $this->metadata->getName() => $orderItem,
+            'form' => $form->createView(),
+        ]);
     }
 
     public function removeAction(Request $request): Response

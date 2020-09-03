@@ -24,14 +24,14 @@ class PaymentMethodController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $view = View::create()
-            ->setTemplate($template)
-            ->setTemplateVar($this->metadata->getPluralName())
-            ->setData([
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($template, [
                 'gatewayFactories' => $this->getParameter('sylius.gateway_factories'),
                 'metadata' => $this->metadata,
-            ])
-        ;
+            ]);
+        }
+
+        $view = View::create(['gatewayFactories' => $this->getParameter('sylius.gateway_factories')]);
 
         return $this->viewHandler->handle($configuration, $view);
     }

@@ -28,14 +28,14 @@ class ProductAttributeController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $view = View::create()
-            ->setTemplate($template)
-            ->setTemplateVar($this->metadata->getPluralName())
-            ->setData([
+        if ($configuration->isHtmlRequest()) {
+            return $this->render($template, [
                 'types' => $this->get('sylius.registry.attribute_type')->all(),
                 'metadata' => $this->metadata,
-            ])
-        ;
+            ]);
+        }
+
+        $view = View::create($this->get('sylius.registry.attribute_type')->all());
 
         return $this->viewHandler->handle($configuration, $view);
     }

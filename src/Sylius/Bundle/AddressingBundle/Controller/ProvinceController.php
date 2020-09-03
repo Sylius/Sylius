@@ -47,31 +47,17 @@ class ProvinceController extends ResourceController
         if (!$country->hasProvinces()) {
             $form = $this->createProvinceTextForm();
 
-            $view = View::create()
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'form' => $form->createView(),
-                ])
-                ->setTemplate($configuration->getTemplate('_provinceText.html'))
-            ;
-
-            return new JsonResponse([
-                'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+            return $this->render($configuration->getTemplate('_provinceText.html'), [
+                'metadata' => $this->metadata,
+                'form' => $form->createView(),
             ]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
 
-        $view = View::create()
-            ->setData([
-                'metadata' => $this->metadata,
-                'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate('_provinceChoice.html'))
-        ;
-
-        return new JsonResponse([
-            'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+        return $this->render($configuration->getTemplate('_provinceChoice.html'), [
+            'metadata' => $this->metadata,
+            'form' => $form->createView(),
         ]);
     }
 

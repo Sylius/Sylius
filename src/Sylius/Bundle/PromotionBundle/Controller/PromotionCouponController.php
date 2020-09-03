@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Controller;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Order\CartActions;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,17 +53,12 @@ class PromotionCouponController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form));
         }
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('generate.html'))
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'promotion' => $promotion,
-                'form' => $form->createView(),
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render($configuration->getTemplate('generate.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'promotion' => $promotion,
+            'form' => $form->createView(),
+        ]);
     }
 
     protected function getGenerator(): PromotionCouponGeneratorInterface
