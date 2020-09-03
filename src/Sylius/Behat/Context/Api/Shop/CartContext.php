@@ -449,8 +449,11 @@ final class CartContext implements Context
         $items = json_decode($response->getContent(), true)['hydra:member'];
 
         foreach ($items as $item) {
-            return ($item['productName'] === $productName) && $item['quantity'] === $quantity;
+            if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+                return true;
+            }
         }
+
         return false;
     }
 }
