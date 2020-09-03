@@ -201,7 +201,7 @@ class OrderItem implements OrderItemInterface
             return $this->adjustments;
         }
 
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
+        return $this->adjustments->filter(static function (AdjustmentInterface $adjustment) use ($type) {
             return $type === $adjustment->getType();
         });
     }
