@@ -32,13 +32,13 @@
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
+        "laminas/laminas-stdlib": "^3.2",
         "sonata-project/block-bundle": "^4.0",
         "sylius/grid-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",
         "symfony/security": "^4.4",
         "symfony/security-bundle": "^4.4",
-        "symfony/templating": "^4.4",
-        "zendframework/zend-stdlib": "^3.2"
+        "symfony/templating": "^4.4"
     },
     "conflict": {
         "twig/twig": "^1.0"

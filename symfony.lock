@@ -34,6 +34,9 @@
     "justinrainbow/json-schema": {
         "version": "5.2.10"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "lcobucci/jwt": {
         "version": "3.3.1"
     },

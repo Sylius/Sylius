@@ -28,10 +28,10 @@
     ],
     "require": {
         "php": "^7.3",
+        "laminas/laminas-stdlib": "^3.2",
         "sylius/resource": "^1.6",
         "symfony/form": "^4.4",
-        "symfony/http-foundation": "^4.4",
-        "zendframework/zend-stdlib": "^3.2"
+        "symfony/http-foundation": "^4.4"
     },
     "require-dev": {
         "pamil/prophecy-common": "^0.1",
