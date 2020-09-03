@@ -59,7 +59,7 @@
         </itemOperations>
 
         <property name="id" identifier="true" />
-        <property name="createdAt"  />
+        <property name="createdAt" />
         <property name="updatedAt" />
         <property name="state" />
         <property name="method">

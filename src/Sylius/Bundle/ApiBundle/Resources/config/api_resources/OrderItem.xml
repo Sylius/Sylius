@@ -16,6 +16,12 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order_item.class%" shortName="OrderItem">
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>order_item:read</attribute>
+            </attribute>
+        </attribute>
+
         <collectionOperations />
 
         <itemOperations>
@@ -25,7 +31,12 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="adjustments" writable="false">
+        <property name="order" readable="true" />
+        <property name="productName" readable="true" />
+        <property name="product" readable="true">
+            <subresource resourceClass="%sylius.model.product.class%" />
+        </property>
+        <property name="adjustments" readable="true">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>
     </resource>

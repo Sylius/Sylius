@@ -323,6 +323,31 @@ final class CartContext implements Context
         return $this->cartsClient->getLastResponse();
     }
 
+    /**
+     * @When /^I check items in my (cart)$/
+     */
+    public function iCheckItemsOfMyCart(string $tokenValue)
+    {
+        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
+     */
+    public function myCartShouldHaveItems(int $quantity, ProductInterface $product)
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        $items = json_decode($response->getContent(), true)['hydra:member'];
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $product->getName()){
+                Assert::same($item['quantity'], $quantity);
+            }
+        }
+    }
+
     private function getOrderItemProductCode(array $item): string
     {
         $pathElements = explode('/', $item['variant']['product']);
