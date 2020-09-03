@@ -29,16 +29,11 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">admin/adjustments</attribute>
             </itemOperation>
-        </itemOperations>
-
-        <subresourceOperations>
-            <subresourceOperation name="api_order_items_adjustments_get_subresource">
+            <itemOperation name="get_adjustments_in_shop">
                 <attribute name="method">GET</attribute>
-            </subresourceOperation>
-            <subresourceOperation name="api_orders_items_adjustments_get_subresource">
-                <attribute name="path">/new-api/admin/orders/{token}/items/{itemId}/adjustments</attribute>
-            </subresourceOperation>
-        </subresourceOperations>
+                <attribute name="path">shop/adjustments</attribute>
+            </itemOperation>
+        </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="type" writable="false" />

@@ -221,10 +221,39 @@
         </itemOperations>
 
         <subresourceOperations>
-
-            <subresourceOperation name="api_order_items_get_subresource">
+            <subresourceOperation name="items_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/new-api/admin/orders/{id}/items</attribute>
+                <attribute name="path">/admin/orders/{id}/items</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="shipments_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/orders/{id}/shipments</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="payments_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/orders/{id}/payments</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="adjustments_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders/{id}/adjustments</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="payments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders/{id}/payments/{payments}/methods</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="shipments_methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders/{id}/shipments/{shipments}/methods</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="items_adjustments_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders/{id}/items/{items}/adjustments</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

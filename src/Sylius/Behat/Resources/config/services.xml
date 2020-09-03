@@ -91,5 +91,7 @@
         <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
             <argument>%kernel.project_dir%</argument>
         </service>
+
+        <service id="sylius.iri_to_shop_path_converter" class="Sylius\Behat\Service\Converter\IriToShopPathConverter" public="false" />
     </services>
 </container>

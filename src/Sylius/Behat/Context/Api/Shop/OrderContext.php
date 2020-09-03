@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -34,8 +35,14 @@ final class OrderContext implements Context
     /** @var ApiClientInterface */
     private $productsClient;
 
+    /** @var ApiClientInterface */
+    private $productsShopClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
+
+    /** @var IriConverterInterface */
+    private $iriToShopPathConverter;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
@@ -43,12 +50,16 @@ final class OrderContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ApiClientInterface $productsClient,
+        ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriToShopPathConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->productsClient = $productsClient;
+        $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
+        $this->iriToShopPathConverter = $iriToShopPathConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -114,7 +125,7 @@ final class OrderContext implements Context
     private function getAdjustmentsForOrderItem(string $itemId): array
     {
         $response = $this->client->customAction(
-            sprintf('/new-api/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
+            sprintf('/new-api/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
             HttpRequest::METHOD_GET
         );
 
@@ -144,14 +155,16 @@ final class OrderContext implements Context
             );
         }
 
-        $this->client->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $this->client->executeCustomRequest(
+            Request::custom( $this->iriToShopPathConverter->convert($item['variant']), HttpRequest::METHOD_GET)
+        );
 
         $product = $this->responseChecker->getValue($this->client->getLastResponse(), 'product');
 
         $pathElements = explode('/', $product);
         $productCode = $pathElements[array_key_last($pathElements)];
 
-        return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+        return $this->productsShopClient->show(StringInflector::nameToSlug($productCode));
     }
 
     private function getAdjustmentWithLabel(string $label): ?array

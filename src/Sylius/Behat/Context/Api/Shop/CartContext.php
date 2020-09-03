@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -33,10 +34,16 @@ final class CartContext implements Context
     private $cartsClient;
 
     /** @var ApiClientInterface */
-    private $productsClient;
+    private $productsAdminClient;
+
+    /** @var ApiClientInterface */
+    private $productsShopClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
+
+    /** @var IriConverterInterface */
+    private $iriToShopPathConverter;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
@@ -46,14 +53,18 @@ final class CartContext implements Context
 
     public function __construct(
         ApiClientInterface $cartsClient,
-        ApiClientInterface $productsClient,
+        ApiClientInterface $productsAdminClient,
+        ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
+        IriConverterInterface $iriToShopPathConverter,
         SharedStorageInterface $sharedStorage,
         ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
-        $this->productsClient = $productsClient;
+        $this->productsAdminClient = $productsAdminClient;
+        $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
+        $this->iriToShopPathConverter = $iriToShopPathConverter;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
     }
@@ -345,7 +356,7 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction('shop','orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $product->getCode(),
@@ -358,7 +369,7 @@ final class CartContext implements Context
 
     private function putProductVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $productVariant->getProduct()->getCode(),
@@ -371,7 +382,7 @@ final class CartContext implements Context
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
         $request->updateContent(['orderItemId' => $orderItemId]);
 
@@ -387,9 +398,9 @@ final class CartContext implements Context
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
-
-        $response = $this->cartsClient->getLastResponse();
+        $response = $this->cartsClient->executeCustomRequest(
+            Request::custom($this->iriToShopPathConverter->convert($item['variant']), HttpRequest::METHOD_GET)
+        );
 
         $product = $this->responseChecker->getValue($response, 'product');
 
@@ -397,7 +408,7 @@ final class CartContext implements Context
 
         $productCode = $pathElements[array_key_last($pathElements)];
 
-        return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+        return $this->productsShopClient->show(StringInflector::nameToSlug($productCode));
     }
 
     private function getProductVariantForItem(array $item): Response
@@ -409,7 +420,9 @@ final class CartContext implements Context
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+        $this->cartsClient->executeCustomRequest(
+            Request::custom($this->iriToShopPathConverter->convert($item['variant']), HttpRequest::METHOD_GET)
+        );
 
         return $this->cartsClient->getLastResponse();
     }
@@ -437,7 +450,7 @@ final class CartContext implements Context
 
     private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
     {
-        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
 
         $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
 

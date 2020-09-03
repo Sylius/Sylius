@@ -135,7 +135,7 @@
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_orders" class="Sylius\Behat\Context\Api\Admin\ManagingOrdersContext">
-            <argument type="service" id="sylius.behat.api_platform_client.order" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin.order" />
             <argument type="service" id="sylius.behat.api_platform_client.shipment" />
             <argument type="service" id="sylius.behat.api_platform_client.payment" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
