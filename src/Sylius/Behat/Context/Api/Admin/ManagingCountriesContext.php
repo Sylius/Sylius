@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use phpDocumentor\Reflection\Types\Collection;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -301,6 +302,43 @@ final class ManagingCountriesContext implements Context
                 $province->getCode() === $provinceCode,
                 sprintf('The country "%s" should not have the "%s" province', $country->getName(), $province->getName())
             );
+        }
+    }
+
+    /**
+     * @Given /^I change ("[^"]*" province) code to ("[^"]*")$/
+     */
+    public function iChangeProvinceCodeTo(ProvinceInterface $province, string $code): void
+    {
+        $this->provincesClient->buildUpdateRequest($province->getCode());
+        $this->provincesClient->addRequestData('code', $code);
+        $this->provincesClient->update();
+    }
+
+    /**
+     * @Then /^I should be notified that the code of the province cannot be changed$/
+     */
+    public function iShouldBeNotifiedThatCodeOfTheProvinceCannotBeChanged(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            \sprintf('Editing province code is forbidden.')
+        );
+    }
+
+    /**
+     * @Given /^the province with name ("[^"]*") should still has code ("[^"]*")$/
+     */
+    public function theProvinceShouldStillHasCode(string $provinceName, string $code)
+    {
+        /** @var CountryInterface $country */
+        $country = $this->sharedStorage->get('country');
+        /** @var ProvinceInterface $province */
+        foreach ($this->getProvincesOfCountry($country) as $province) {
+            if ($province->getName() === $provinceName) {
+                Assert::true($province->getCode() === $code);
+                break;
+            }
         }
     }
 
