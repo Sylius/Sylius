@@ -617,11 +617,11 @@ final class CheckoutContext implements Context
         }
 
         $this->client->request(
-            Request::METHOD_PUT,
-            \sprintf('/new-api/orders/%s', $this->sharedStorage->get('cart_token')),
+            Request::METHOD_PATCH,
+            \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),
             [],
             [],
-            $this->getHeaders(['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/ld+json']),
+            $this->getHeaders(),
             json_encode($content, \JSON_THROW_ON_ERROR)
         );
     }

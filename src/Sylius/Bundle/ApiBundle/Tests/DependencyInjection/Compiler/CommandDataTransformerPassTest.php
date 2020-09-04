@@ -55,7 +55,7 @@ final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
     {
         $this->compile();
 
-        $this->assertContainerBuilderHasService('sylius_bundle_api.command_data_transformers_chain');
+        $this->assertContainerBuilderHasService('sylius_api.command_data_transformers_chain');
     }
 
     protected function registerCompilerPass(ContainerBuilder $container): void
