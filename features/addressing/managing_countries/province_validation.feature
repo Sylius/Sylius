@@ -38,6 +38,4 @@ Feature: Province validation
     Scenario: Trying to change code of existing province
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         When I want to edit this country
-        And I change "Northern Ireland" province code to "GB-NRL"
-        Then I should be notified that the code of the province cannot be changed
-        And the province with name "Northern Ireland" should still has code "GB-NIR"
+        Then I should not be able to edit its code

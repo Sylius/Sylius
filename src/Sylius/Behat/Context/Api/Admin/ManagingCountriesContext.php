@@ -306,43 +306,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given /^I change ("[^"]*" province) code to ("[^"]*")$/
-     */
-    public function iChangeProvinceCodeTo(ProvinceInterface $province, string $code): void
-    {
-        $this->provincesClient->buildUpdateRequest($province->getCode());
-        $this->provincesClient->addRequestData('code', $code);
-        $this->provincesClient->update();
-    }
-
-    /**
-     * @Then /^I should be notified that the code of the province cannot be changed$/
-     */
-    public function iShouldBeNotifiedThatCodeOfTheProvinceCannotBeChanged(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            \sprintf('Editing province code is forbidden.')
-        );
-    }
-
-    /**
-     * @Given /^the province with name ("[^"]*") should still has code ("[^"]*")$/
-     */
-    public function theProvinceShouldStillHasCode(string $provinceName, string $code)
-    {
-        /** @var CountryInterface $country */
-        $country = $this->sharedStorage->get('country');
-        /** @var ProvinceInterface $province */
-        foreach ($this->getProvincesOfCountry($country) as $province) {
-            if ($province->getName() === $provinceName) {
-                Assert::true($province->getCode() === $code);
-                break;
-            }
-        }
-    }
-
-    /**
      * @Then this country should not have the :provinceName province
      * @Then province with name :provinceName should not be added in this country
      */
