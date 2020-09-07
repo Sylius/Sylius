@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Webmozart\Assert\Assert;
@@ -32,6 +33,9 @@ final class ChooseShippingMethodHandler
     /** @var ShippingMethodRepositoryInterface */
     private $shippingMethodRepository;
 
+    /** @var ShipmentRepositoryInterface */
+    private $shipmentRepository;
+
     /** @var ShippingMethodEligibilityCheckerInterface */
     private $eligibilityChecker;
 
@@ -41,11 +45,13 @@ final class ChooseShippingMethodHandler
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
         $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->shipmentRepository = $shipmentRepository;
         $this->eligibilityChecker = $eligibilityChecker;
         $this->stateMachineFactory = $stateMachineFactory;
     }
@@ -65,17 +71,13 @@ final class ChooseShippingMethodHandler
         );
 
         /** @var ShippingMethodInterface|null $shippingMethod */
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $chooseShippingMethod->shippingMethod]);
-
-        $shipmentIdentifier = $chooseShippingMethod->shipmentIdentifier;
-
+        $shippingMethod = $this->shippingMethodRepository->findOneBy([
+            'code' => $chooseShippingMethod->shippingMethodCode,
+        ]);
         Assert::notNull($shippingMethod, 'Shipping method has not been found');
-        Assert::true(
-            isset($cart->getShipments()[$shipmentIdentifier]),
-            'Can not find shipment with given identifier.'
-        );
 
-        $shipment = $cart->getShipments()[$shipmentIdentifier];
+        $shipment = $this->shipmentRepository->findOneByOrderId($chooseShippingMethod->shipmentId, $cart->getId());
+        Assert::notNull($shipment, 'Can not find shipment with given identifier.');
 
         Assert::true(
             $this->eligibilityChecker->isEligible($shipment, $shippingMethod),

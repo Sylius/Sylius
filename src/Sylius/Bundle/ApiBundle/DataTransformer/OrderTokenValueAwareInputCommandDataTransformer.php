@@ -13,19 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OrderTokenValueAwareInputDataTransformer implements DataTransformerInterface
+final class OrderTokenValueAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function transform($object, string $to, array $context = [])
     {
-        /** @var OrderTokenValueAwareInterface|mixed $object */
-        Assert::isInstanceOf($object, OrderTokenValueAwareInterface::class);
-
         /** @var OrderInterface $cart */
         $cart = $context['object_to_populate'];
 
@@ -34,8 +29,8 @@ final class OrderTokenValueAwareInputDataTransformer implements DataTransformerI
         return $object;
     }
 
-    public function supportsTransformation($data, string $to, array $context = []): bool
+    public function supportsTransformation($object): bool
     {
-        return is_a($context['input']['class'], OrderTokenValueAwareInterface::class, true);
+        return $object instanceof OrderTokenValueAwareInterface;
     }
 }

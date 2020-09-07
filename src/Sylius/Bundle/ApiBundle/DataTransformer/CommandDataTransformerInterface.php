@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 /** @experimental */
-interface OrderTokenValueAwareInterface extends CommandAwareDataTransformerInterface
+interface CommandDataTransformerInterface
 {
-    public function getOrderTokenValue(): ?string;
+    public function transform($object, string $to, array $context = []);
 
-    public function setOrderTokenValue(?string $orderTokenValue): void;
+    public function supportsTransformation($object): bool;
 }

@@ -13,9 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle;
 
+use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\CommandDataTransformerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /** @experimental */
 final class SyliusApiBundle extends Bundle
 {
+    public function build(ContainerBuilder $builder)
+    {
+        $builder->addCompilerPass(new CommandDataTransformerPass());
+    }
 }
