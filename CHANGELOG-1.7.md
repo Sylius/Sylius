@@ -1,5 +1,39 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.7 (2020-09-07)
+
+#### Details
+
+- [#11612](https://github.com/Sylius/Sylius/issues/11612) Don't call the backend if the notification bar is disabled ([@mikemix](https://github.com/mikemix))
+- [#11580](https://github.com/Sylius/Sylius/issues/11580) make product variant comparable ([@oallain](https://github.com/oallain))
+- [#11626](https://github.com/Sylius/Sylius/issues/11626) [Docs] Fix build - Downgrade sphinx to v1.8.5 ([@Tomanhez](https://github.com/Tomanhez))
+- [#11633](https://github.com/Sylius/Sylius/issues/11633) Add slick-carousel to ShopBundle entry.js ([@MatthieuCutin](https://github.com/MatthieuCutin))
+- [#11631](https://github.com/Sylius/Sylius/issues/11631) Add missing images in entry.js ([@jacquesbh](https://github.com/jacquesbh))
+- [#11624](https://github.com/Sylius/Sylius/issues/11624) Fix migration ([@jacquesbh](https://github.com/jacquesbh))
+- [#11643](https://github.com/Sylius/Sylius/issues/11643) Update custom-redirect-after-cart-add-action.rst ([@danakil](https://github.com/danakil))
+- [#11654](https://github.com/Sylius/Sylius/issues/11654) [Fixtures] Add Poland to fixtures ([@Zales0123](https://github.com/Zales0123))
+- [#11150](https://github.com/Sylius/Sylius/issues/11150) Add default value on default local ([@macintoshplus](https://github.com/macintoshplus))
+- [#11637](https://github.com/Sylius/Sylius/issues/11637) [DOC] Fix webpack usage with appropriate _logo.html.twig template ([@MatthieuCutin](https://github.com/MatthieuCutin))
+- [#11694](https://github.com/Sylius/Sylius/issues/11694) [Hot-Fix] Add conflict to symfonyą/form 4.11 and nikic/php-parser 4.7 ([@Tomanhez](https://github.com/Tomanhez))
+- [#11691](https://github.com/Sylius/Sylius/issues/11691) Update dates for 1.7 and 1.8 release cycle ([@pamil](https://github.com/pamil))
+- [#11710](https://github.com/Sylius/Sylius/issues/11710) [Hot-fix] Handle extra docblocks in Psalm ([@Zales0123](https://github.com/Zales0123))
+- [#11048](https://github.com/Sylius/Sylius/issues/11048) Bug #10951 [Account] fix sync username with customer email ([@hatem20](https://github.com/hatem20))
+- [#11722](https://github.com/Sylius/Sylius/issues/11722) [Documentation] fix typo in fixture docs ([@foxou33](https://github.com/foxou33))
+- [#11730](https://github.com/Sylius/Sylius/issues/11730) Fix docs for custom resource controllers ([@ivaskad](https://github.com/ivaskad))
+- [#11731](https://github.com/Sylius/Sylius/issues/11731) [Account] Add spec to sync username with customer email ([@hatem20](https://github.com/hatem20))
+- [#11696](https://github.com/Sylius/Sylius/issues/11696) [Shop] Add form in add to cart template event args ([@SebLours](https://github.com/SebLours))
+- [#11681](https://github.com/Sylius/Sylius/issues/11681) [Admin] Convert newlines in product description to breaklines  ([@adamwojs](https://github.com/adamwojs))
+- [#11704](https://github.com/Sylius/Sylius/issues/11704) [BEHAT] Injecting locale parameter instead of having it harcdoded ([@Roshyo](https://github.com/Roshyo))
+- [#11713](https://github.com/Sylius/Sylius/issues/11713) [Behat] Unfinalize some Behat pages ([@Zales0123](https://github.com/Zales0123))
+- [#11732](https://github.com/Sylius/Sylius/issues/11732) [Admin] removed duplicated id attribute ([@foxou33](https://github.com/foxou33))
+- [#11736](https://github.com/Sylius/Sylius/issues/11736) [Documentation] bumped maintenance branches in docs ([@foxou33](https://github.com/foxou33), [@lchrusciel](https://github.com/lchrusciel))
+- [#11708](https://github.com/Sylius/Sylius/issues/11708) Revert "[Behat] Remove js requirement for bulk delete scenarios" ([@GalloisLuca](https://github.com/GalloisLuca))
+- [#11739](https://github.com/Sylius/Sylius/issues/11739) Fix Customer form_errors display ([@s4iya](https://github.com/s4iya))
+- [#11767](https://github.com/Sylius/Sylius/issues/11767) Add warning on tax calculation in 1.7's upgrade ([@jacquesbh](https://github.com/jacquesbh))
+- [#11780](https://github.com/Sylius/Sylius/issues/11780) [Maintenance] Adjust variable names to interfaces ([@lchrusciel](https://github.com/lchrusciel))
+- [#11801](https://github.com/Sylius/Sylius/issues/11801) [Maintenance] [Travis] Use composer 2.0 ([@lchrusciel](https://github.com/lchrusciel))
+- [#11802](https://github.com/Sylius/Sylius/issues/11802) [Maintenance] Remove redundant conflict ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.7.6 (2020-06-25)
 
 #### Details
