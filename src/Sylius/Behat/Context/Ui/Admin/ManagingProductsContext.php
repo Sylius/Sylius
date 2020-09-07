@@ -915,6 +915,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I remove its price for ("[^"]+" channel)$/
+     */
+    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceTo( '',  $channel);
+    }
+
+    /**
      * @Then this product should( still) have slug :value in :language
      */
     public function thisProductElementShouldHaveSlugIn($slug, $language)
@@ -1107,6 +1115,14 @@ final class ManagingProductsContext implements Context
             ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()]
         );
         Assert::true($this->variantUpdatePage->isEnabled());
+    }
+
+    /**
+     * @Then /^I should not have configured price for ("[^"]+" channel)$/
+     */
+    public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
+    {
+        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), '');
     }
 
     /**
