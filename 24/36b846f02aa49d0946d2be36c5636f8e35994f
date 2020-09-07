@@ -1,0 +1,189 @@
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-06T08:13:48Z
+
+Oh, I've just seen #11414. I'm not feeling comfortable with hardcoding the strategy, we should find some way to at least rely on some constraint or just use the first strategy that is available.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-05-06T11:03:56Z
+
+Neither do I, the current solution is a no-go right now.
+
+Maybe we should provide such config through our factory service? This is the default method of creating new objects in Sylius.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-05-15T12:42:11Z
+
+Hi @lchrusciel @pamil ,
+
+I create a ChannelFactory in Core, tell me if this is what you expected?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-02T12:11:06Z
+
+Sorry for pushing it back and forth, but not spotting the current factory implementation was my mistake from the early beginning
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-15T20:18:40Z
+
+Hi @lchrusciel
+
+All looks good, but Travis failed.
+Can you (or anyone) can help me ?
+
+Thanks
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-15T21:39:35Z
+
+The reason some of your tests may fail is because currently the master is broken. So just wait for them to fix it and then rebase again. (Or fix it yourself and make a separate pull request)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-06-16T10:47:58Z
+
+We can try to rebase now, it should work ;)
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-18T07:25:17Z
+
+Hi @lchrusciel ,
+
+Rebase is done, and "application" is green on Travis, but "doc" still red :disappointed:
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-18T09:57:59Z
+
+Can you rebase again now?
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-18T11:46:52Z
+
+@mamazu ,
+
+It's worse :wink:
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-18T12:15:04Z
+
+Hm, but the master is green. Very odd.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-18T14:38:56Z
+
+My target is Sylius:1.7, should i change the target?
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-18T16:34:52Z
+
+As this is a new feature the master branch would be great.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-19T11:46:31Z
+
+@mamazu
+
+I changed target to master and it's green now :)
+
+Thanks !
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-06-27T16:13:29Z
+
+Hello @lchrusciel @mamazu
+
+I rebase (again) and now Travis is green :smile: (But Symfony/Insight is Pending :joy: )
+
+Regards
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-06-29T08:39:06Z
+
+Hm, someone from Sylius needs to restart this job.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-01T08:48:14Z
+
+Hey Olivier 👋
+
+I didn't find time to take over this PR, however, I won't merge it without change to https://github.com/Sylius/Sylius/pull/11418#discussion_r441566110. Right now this PR contains BC Break.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-07-07T19:44:43Z
+
+Hello,
+
+I am facing a dilemma and I don't know what/how to do :
+
+1) Either the new `Sylius\Component\Core\Factory\ChannelFactoryInterface` extends `Sylius\Component\Channel\Factory\ChannelFactoryInterface` and in this case, the return types should be different but this is only possible with the covariance provided by PHP 7.4 - so BC with PHP < 7.4
+2) Either the new `Sylius\Component\Core\Factory\ChannelFactoryInterface` return `Sylius\Component\Channel\Model\ChannelInterface` and not `Sylius\Component\Core\Model\ChannelInterface`.
+2) Either keep this PR like this, however, all of the current implementations, that are based on the previous interface cannot be changed, like say Lukasz in https://github.com/Sylius/Sylius/pull/11418#discussion_r441566110 - so BC with older implementations
+
+What is the best solution ?
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-07-07T20:03:35Z
+
+I just pushed with solution 2) :wink:
+
+Looking forward to your feedback.
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-07-07T20:24:13Z
+
+**I would suggest option 1** with the return type not being type-hinted but just annotated in the doc type. Then psalm or phpstan or any other static code analysis tool can pick it up and it doesn't break things. (And this is also the best way to go in my opinion)
+
+Option 2 is not great. Because the interface of the component is smaller than the interface of the core bundle (as far as I know) so this would also be sub-optimal.
+
+Option 3: I don't know if there is already a branch in Sylius that is for 2.0 where those BC breaks will probably be bundled into. I also made a breaking change as a PR which also still has no place to go really.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-07-10T09:01:06Z
+
+Option 3 is a no-go for us. Option 2 is what we are doing for the last few years and this is what I would recommend. However, as @mamazu stated, probably improved option 1 (with docblock) is the best solution right now.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-09-01T12:00:44Z
+
+Hello, @mamazu
+
+This rebase is :green_heart: (green) :tada:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-07T09:37:11Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "tax-calculation-strategy"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-07T12:15:09Z
+
+Thanks, @oallain! :1st_place_medal:
