@@ -36,7 +36,7 @@
 
         <service
             id="sylius.api.doctrine.query_item_extension.get_order"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodExtension"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderGetMethodItemExtension"
             public="true"
         >
             <argument type="service" id="sylius.api.context.user" />
@@ -45,7 +45,16 @@
 
         <service
             id="sylius.api.doctrine.query_item_extension.delete_order"
-            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderDeleteMethodExtension"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderDeleteMethodItemExtension"
+            public="true"
+        >
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service
+            id="sylius.api.doctrine.query_item_extension.patch_order"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderPatchMethodItemExtension"
             public="true"
         >
             <argument type="service" id="sylius.api.context.user" />

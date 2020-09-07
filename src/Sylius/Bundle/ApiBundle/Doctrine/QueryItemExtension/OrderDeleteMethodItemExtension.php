@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
-final class OrderGetMethodExtension implements QueryItemExtensionInterface
+final class OrderDeleteMethodItemExtension implements QueryItemExtensionInterface
 {
     /** @var UserContextInterface */
     private $userContext;
@@ -43,28 +43,34 @@ final class OrderGetMethodExtension implements QueryItemExtensionInterface
         string $operationName = null,
         array $context = []
     ) {
+        $operationName = strtoupper($operationName);
+
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
 
-        if ($operationName !== Request::METHOD_GET) {
+        if ($operationName !== Request::METHOD_DELETE) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForGetMethod($user, $queryBuilder, $operationName, $rootAlias);
+        $this->applyToItemForDeleteMethod($user, $queryBuilder, $operationName, $rootAlias);
     }
 
-    private function applyToItemForGetMethod(
+    private function applyToItemForDeleteMethod(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
         string $operationName,
         string $rootAlias
     ): void {
         if ($user === null) {
-            $queryBuilder->andWhere(sprintf('%s.customer IS NULL', $rootAlias));
+            $queryBuilder
+                ->andWhere(sprintf('%s.customer IS NULL', $rootAlias))
+                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+                ->setParameter('state', OrderInterface::STATE_CART)
+            ;
 
             return;
         }
@@ -73,13 +79,19 @@ final class OrderGetMethodExtension implements QueryItemExtensionInterface
             $queryBuilder
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $user->getCustomer()->getId())
+                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+                ->setParameter('state', OrderInterface::STATE_CART)
             ;
 
             return;
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            //admin has access to get all orders
+            $queryBuilder
+                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+                ->setParameter('state', OrderInterface::STATE_CART)
+            ;
+
             return;
         }
 
