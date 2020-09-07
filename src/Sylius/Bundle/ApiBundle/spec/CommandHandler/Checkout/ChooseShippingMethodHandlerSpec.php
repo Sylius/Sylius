@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 
@@ -32,60 +33,84 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($orderRepository, $shippingMethodRepository, $eligibilityChecker, $stateMachineFactory);
+        $this->beConstructedWith(
+            $orderRepository,
+            $shippingMethodRepository,
+            $shipmentRepository,
+            $eligibilityChecker,
+            $stateMachineFactory
+        );
     }
 
     function it_assigns_choosen_shipping_method_to_specified_shipment(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
         StateMachineInterface $stateMachine
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('select_shipping')->willReturn(true);
+
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
-        $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
+        $cart->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('select_shipping')->willReturn(true);
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn($shipment);
+
+        $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
 
         $shipment->setMethod($shippingMethod)->shouldBeCalled();
         $stateMachine->apply('select_shipping')->shouldBeCalled();
 
-        $this($chooseShippingMethod)->shouldReturn($order);
+        $this($chooseShippingMethod)->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_shipping_method_is_not_eligible(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
         StateMachineInterface $stateMachine
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can('select_shipping')->willReturn(true);
+
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
 
+        $cart->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn($shipment);
+
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(false);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can('select_shipping')->willReturn(true);
 
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
         $stateMachine->apply('select_shipping')->shouldNotBeCalled();
@@ -100,7 +125,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ShipmentInterface $shipment
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
@@ -117,16 +142,16 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         StateMachineInterface $stateMachine,
         ShipmentInterface $shipment
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_shipping')->willReturn(false);
 
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
@@ -142,17 +167,20 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         StateMachineInterface $stateMachine,
         ShipmentInterface $shipment
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_shipping')->willReturn(true);
+
+        $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn(null);
 
         $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
         $stateMachine->apply('select_shipping')->shouldNotBeCalled();
@@ -166,22 +194,27 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_ordered_shipment_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
-        StateMachineInterface $stateMachine,
-        ShipmentInterface $shipment
+        StateMachineInterface $stateMachine
     ): void {
-        $chooseShippingMethod = new ChooseShippingMethod(0, 'DHL_SHIPPING_METHOD');
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
-        $order->getShipments()->willReturn(new ArrayCollection([]));
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_shipping')->willReturn(true);
 
-        $shipment->setMethod(Argument::type(ShippingMethodInterface::class))->shouldNotBeCalled();
+        $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
+
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn(null);
+
         $stateMachine->apply('select_shipping')->shouldNotBeCalled();
 
         $this

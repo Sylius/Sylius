@@ -238,13 +238,16 @@ final class CheckoutContext implements Context
     {
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-shipping-methods', $this->sharedStorage->get('cart_token')),
+            \sprintf(
+                '/new-api/orders/%s/shipments/%s',
+                $this->sharedStorage->get('cart_token'),
+                (string) $this->iriConverter->getItemFromIri($this->getCart()['shipments'][0])->getId()
+            ),
             [],
             [],
             $this->getHeaders(),
             json_encode([
-                'shipmentIdentifier' => 0,
-                'shippingMethod' => $shippingMethod->getCode(),
+                'shippingMethodCode' => $shippingMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );
     }
@@ -268,13 +271,16 @@ final class CheckoutContext implements Context
     {
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/select-payment-methods', $this->sharedStorage->get('cart_token')),
+            \sprintf(
+                '/new-api/orders/%s/payments/%s',
+                $this->sharedStorage->get('cart_token'),
+                (string) $this->iriConverter->getItemFromIri($this->getCart()['payments'][0])->getId()
+            ),
             [],
             [],
             $this->getHeaders(),
             json_encode([
-                'paymentIdentifier' => 0,
-                'paymentMethod' => $paymentMethod->getCode(),
+                'paymentMethodCode' => $paymentMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );
     }

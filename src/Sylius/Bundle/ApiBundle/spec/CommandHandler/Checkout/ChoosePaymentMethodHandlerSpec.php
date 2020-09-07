@@ -25,48 +25,57 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
 final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
         FactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($orderRepository, $paymentMethodRepository, $stateMachineFactory);
+        $this->beConstructedWith($orderRepository, $paymentMethodRepository, $paymentRepository, $stateMachineFactory);
     }
 
     function it_assigns_chosen_payment_method_to_specified_payment(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
         StateMachineInterface $stateMachine
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
-        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
 
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
 
+        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
+
+        $cart->getId()->willReturn('111');
+
+        $paymentRepository->findOneByOrderId( '123', '111')->willReturn($payment);
         $payment->setMethod($paymentMethod)->shouldBeCalled();
+
         $stateMachine->apply('select_payment')->shouldBeCalled();
 
-        $this($choosePaymentMethod)->shouldReturn($order);
+        $this($choosePaymentMethod)->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         PaymentInterface $payment
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -82,16 +91,17 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         StateMachineInterface $stateMachine,
         PaymentInterface $payment
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(false);
 
         $payment->setMethod(Argument::type(PaymentMethodInterface::class))->shouldNotBeCalled();
@@ -107,16 +117,17 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         StateMachineInterface $stateMachine,
         PaymentInterface $payment
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
 
         $payment->setMethod(Argument::type(PaymentMethodInterface::class))->shouldNotBeCalled();
@@ -131,22 +142,27 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_ordered_payment_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
         FactoryInterface $stateMachineFactory,
-        OrderInterface $order,
+        OrderInterface $cart,
         PaymentMethodInterface $paymentMethod,
-        StateMachineInterface $stateMachine,
-        PaymentInterface $payment
+        StateMachineInterface $stateMachine
     ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod(0, 'CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
 
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
-        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
-        $order->getPayments()->willReturn(new ArrayCollection([]));
-        $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
 
-        $payment->setMethod(Argument::type(PaymentMethodInterface::class))->shouldNotBeCalled();
+        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
+
+        $cart->getId()->willReturn('111');
+
+        $paymentRepository->findOneByOrderId( '123', '111')->willReturn(null);
+
         $stateMachine->apply('select_payment')->shouldNotBeCalled();
 
         $this

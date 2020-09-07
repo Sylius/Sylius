@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-/** @experimental */
-interface OrderTokenValueAwareInterface extends CommandAwareDataTransformerInterface
+interface SubresourceIdAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function getOrderTokenValue(): ?string;
+    public function getSubresourceId(): ?string;
 
-    public function setOrderTokenValue(?string $orderTokenValue): void;
+    public function setSubresourceId(?string $subresourceId): void;
+
+    public function getSubresourceIdAttributeKey(): string;
 }
