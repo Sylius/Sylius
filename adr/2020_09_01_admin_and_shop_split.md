@@ -14,7 +14,7 @@ and simplify the relations between resources. However, this change rose a lot of
  * Different serialization for different users is not trivial. Some relations between objects are also contextual, so 
 admin can see many more links than the regular visitor or shop user. 
  * Endpoints like "Product Show" are resolved differently depending on the context as well. The shop products are determined 
-based on the slug(taking into account the current channel), while the administrator is browsing products by code. This
+based on the slug (taking into account the current channel), while the administrator is browsing products by code. This
 separation blurs the product identifier, and it is not clear which route should be considered as IRI. 
  * the split was not complete. Two separate log in endpoints have to be preserved, due to our user architecture and the
 decision that we want to be explicit, which user is trying to log in.
@@ -42,12 +42,12 @@ Every option will be described considering products example fetched by shop user
 `{"id": 1, "slug": 2, "prices": {}, "admin_related_information" : "" }`
 
 * Good, because there is only one endpoint for the products.
-* Bad, because depending on the currently logged in user, the IRIs between related products (or on product list) has be
+* Bad, because depending on the currently logged in user, the IRIs between related products (or on the product list) have been
 changed (between slug and code).
 * Bad, because it is not clear how to operate on endpoint before jumping into documentation. (For example tax rates 
 endpoint is not exposed for shop users).
 * Bad, because we have to declare authorization rules on endpoint basis, while some of them will have really complicated 
-rules (different strategies for admin, shop user and guest)
+rules (different strategies for admin, shop user and guest).
 
 ### Adding additional suffix for path
 
