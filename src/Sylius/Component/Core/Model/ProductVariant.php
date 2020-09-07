@@ -326,7 +326,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function compareTo($other): int
     {
