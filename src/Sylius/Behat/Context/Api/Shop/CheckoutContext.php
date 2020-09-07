@@ -35,6 +35,12 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
+    const CHECKOUT_STATE_TYPES = [
+        'address' => OrderCheckoutStates::STATE_ADDRESSED,
+        'shipping method' => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
+        'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,
+    ];
+
     /** @var AbstractBrowser */
     private $client;
 
@@ -116,11 +122,29 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^the (customer|visitor) specify the email as "([^"]+)"$/
+     * @Given /^the (customer|visitor) has specified the email as "([^"]+)"$/
+     */
+    public function specifyTheEmailAs(string $userType, ?string $email): void
+    {
+        $this->iSpecifyTheEmailAs($email);
+    }
+
+    /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
+    }
+
+    /**
+     * @When /^the (customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @Given /^the (visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function specifyTheBillingAddressAs(string $userType, AddressInterface $address): void
+    {
+        $this->iSpecifyTheBillingAddressAs($address);
     }
 
     /**
@@ -180,8 +204,11 @@ final class CheckoutContext implements Context
     /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
+     * @When /^the (customer|visitor) complete the addressing step$/
+     * @Given /^the (customer|visitor) has completed the addressing step$/
+     * @When the visitor try to complete the addressing step in the customer cart
      */
-    public function iCompleteTheAddressingStep(): void
+    public function iCompleteTheAddressingStep(?string $userType = null): void
     {
         $this->addressOrder($this->content);
 
@@ -201,8 +228,10 @@ final class CheckoutContext implements Context
     /**
      * @When I confirm my order
      * @When I try to confirm my order
+     * @When /^the (visitor|customer) confirm his order$/
+     * @When /^the visitor try to confirm the customer order$/
      */
-    public function iConfirmMyOrder(): void
+    public function iConfirmMyOrder(?string $userType = null): void
     {
         $notes = isset($this->content['additionalNote']) ? $this->content['additionalNote'] : null;
 
@@ -247,6 +276,27 @@ final class CheckoutContext implements Context
                 'shippingMethod' => $shippingMethod->getCode(),
             ], \JSON_THROW_ON_ERROR)
         );
+    }
+
+    /**
+     * @When /^the (visitor|customer) proceed with ("[^"]+" shipping method)$/
+     * @Given /^the (visitor|customer) has proceeded ("[^"]+" shipping method)$/
+     * @When /^the (visitor) try to proceed with ("[^"]+" shipping method) in the customer cart$/
+     */
+    public function theVisitorProceedWithShippingMethod(string $userType, ShippingMethodInterface $shippingMethod): void
+    {
+        $this->iProceededWithShippingMethod($shippingMethod);
+    }
+
+    /**
+     * @When /^the (customer|visitor) proceed with ("[^"]+" payment)$/
+     * @Given /^the (customer|visitor) has proceeded ("[^"]+" payment)$/
+     * @Given /^the (visitor) try to proceed with ("[^"]+" payment) in the customer cart$/
+    $/
+     */
+    public function theVisitorProceedWithPaymentMethod(string $userType, PaymentMethodInterface $paymentMethod): void
+    {
+        $this->iChoosePaymentMethod($paymentMethod);
     }
 
     /**
@@ -424,9 +474,18 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see the thank you page
+     * @Then /^the (visitor|customer) should have checkout (address|shipping method|payment) step completed$/
      */
-    public function iShouldSeeTheThankYouPage(): void
+    public function theVisitorShouldHaveCheckoutAddressStepCompleted(string $userType, string $stepType): void
+    {
+        Assert::same($this->getCheckoutState(), $this::CHECKOUT_STATE_TYPES[$stepType]);
+    }
+
+    /**
+     * @Then I should see the thank you page
+     * @Then /^the (visitor|customer) should see the thank you page$/
+     */
+    public function iShouldSeeTheThankYouPage(?string $userType = null): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
     }

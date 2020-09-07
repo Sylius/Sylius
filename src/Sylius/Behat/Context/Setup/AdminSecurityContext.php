@@ -48,6 +48,7 @@ final class AdminSecurityContext implements Context
 
     /**
      * @Given I am logged in as an administrator
+     * @Given there is logged in the administrator
      */
     public function iAmLoggedInAsAnAdministrator()
     {
