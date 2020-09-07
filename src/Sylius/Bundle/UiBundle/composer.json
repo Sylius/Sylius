@@ -34,6 +34,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^4.0",
         "sylius/grid-bundle": "^1.6",
+        "symfony/config": "^4.4",
         "symfony/framework-bundle": "^4.4",
         "symfony/security": "^4.4",
         "symfony/security-bundle": "^4.4",
@@ -57,7 +58,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.6-dev"
+            "dev-master": "1.9-dev"
         }
     },
     "autoload": {
