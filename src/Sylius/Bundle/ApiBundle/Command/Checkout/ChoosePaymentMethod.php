@@ -23,12 +23,14 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface
 
     /**
      * @psalm-immutable
+     *
      * @var string|int
      */
     public $paymentIdentifier;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $paymentMethod;

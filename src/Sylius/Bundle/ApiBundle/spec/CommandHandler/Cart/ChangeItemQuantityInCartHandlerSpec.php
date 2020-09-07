@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
-use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -57,6 +56,6 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderProcessor->process($cart)->shouldBeCalled();
 
-        $this(ChangeItemQuantityInCart::createFromData( 'TOKEN_VALUE', 'ORDER_ITEM_ID', 5));
+        $this(ChangeItemQuantityInCart::createFromData('TOKEN_VALUE', 'ORDER_ITEM_ID', 5));
     }
 }

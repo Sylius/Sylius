@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the API Platform project.
+ * This file is part of the Sylius package.
  *
- * (c) Kévin Dunglas <dunglas@gmail.com>
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,7 +34,6 @@ use Doctrine\ORM\QueryBuilder;
 /**
  * Subresource data provider for the Doctrine ORM.
  *
- * @author Antoine Bluchet <soyuka@gmail.com>
  * @internal
  */
 final class SubresourceDataProvider implements SubresourceDataProviderInterface
@@ -42,7 +41,9 @@ final class SubresourceDataProvider implements SubresourceDataProviderInterface
     use IdentifierManagerTrait;
 
     private $managerRegistry;
+
     private $collectionExtensions;
+
     private $itemExtensions;
 
     /**
@@ -169,6 +170,7 @@ final class SubresourceDataProvider implements SubresourceDataProviderInterface
                     $qb->select($joinAlias)
                         ->from($identifierResourceClass, $alias)
                         ->innerJoin("$alias.$previousAssociationProperty", $joinAlias);
+
                     break;
                 case ClassMetadataInfo::ONE_TO_MANY:
                     $mappedBy = $classMetadata->getAssociationMapping($previousAssociationProperty)['mappedBy'];
@@ -176,12 +178,14 @@ final class SubresourceDataProvider implements SubresourceDataProviderInterface
 
                     $qb->select($alias)
                         ->from($identifierResourceClass, $alias);
+
                     break;
                 case ClassMetadataInfo::ONE_TO_ONE:
                     $association = $classMetadata->getAssociationMapping($previousAssociationProperty);
                     if (!isset($association['mappedBy'])) {
                         $qb->select("IDENTITY($alias.$previousAssociationProperty)")
                             ->from($identifierResourceClass, $alias);
+
                         break;
                     }
                     $mappedBy = $association['mappedBy'];
@@ -189,6 +193,7 @@ final class SubresourceDataProvider implements SubresourceDataProviderInterface
 
                     $qb->select($alias)
                         ->from($identifierResourceClass, $alias);
+
                     break;
                 default:
                     $qb->select("IDENTITY($alias.$previousAssociationProperty)")

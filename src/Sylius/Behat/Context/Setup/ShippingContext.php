@@ -508,7 +508,7 @@ final class ShippingContext implements Context
         float $weight
     ): void {
         $rule = $this->createShippingMethodRule(TotalWeightGreaterThanOrEqualRuleChecker::TYPE, [
-            'weight' => $weight
+            'weight' => $weight,
         ]);
 
         $this->addRuleToShippingMethod($rule, $shippingMethod);
@@ -522,7 +522,7 @@ final class ShippingContext implements Context
         float $weight
     ): void {
         $rule = $this->createShippingMethodRule(TotalWeightLessThanOrEqualRuleChecker::TYPE, [
-            'weight' => $weight
+            'weight' => $weight,
         ]);
 
         $this->addRuleToShippingMethod($rule, $shippingMethod);
@@ -555,7 +555,8 @@ final class ShippingContext implements Context
         return $this->sharedStorage->get('zone');
     }
 
-    private function addRuleToShippingMethod(ShippingMethodRuleInterface $rule, ShippingMethodInterface $shippingMethod): void {
+    private function addRuleToShippingMethod(ShippingMethodRuleInterface $rule, ShippingMethodInterface $shippingMethod): void
+    {
         $shippingMethod->addRule($rule);
         $this->shippingMethodManager->flush();
     }

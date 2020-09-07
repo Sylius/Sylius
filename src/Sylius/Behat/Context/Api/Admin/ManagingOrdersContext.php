@@ -251,7 +251,7 @@ final class ManagingOrdersContext implements Context
         AdminUserInterface $user,
         string $notes,
         OrderInterface $order
-    ):void {
+    ): void {
         $this->adminSecurityService->logIn($user);
 
         $orderNotes = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'notes');

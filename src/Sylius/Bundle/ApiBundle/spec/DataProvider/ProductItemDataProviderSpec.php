@@ -95,7 +95,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
-        $productRepository->findOneByChannelAndSlug($channel, 'en_US','FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndSlug($channel, 'en_US', 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -119,7 +119,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn(null);
 
-        $productRepository->findOneByChannelAndSlug($channel, 'en_US','FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndSlug($channel, 'en_US', 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -128,7 +128,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                    ContextKeys::LOCALE_CODE => 'en_US'
+                    ContextKeys::LOCALE_CODE => 'en_US',
                 ]
             )
             ->shouldReturn($product)

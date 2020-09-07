@@ -254,7 +254,7 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $product->getCode(),

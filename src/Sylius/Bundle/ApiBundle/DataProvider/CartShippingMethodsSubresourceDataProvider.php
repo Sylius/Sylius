@@ -95,8 +95,7 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
         $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);
 
         /** @var ShippingMethodInterface $shippingMethod */
-        foreach ($shippingMethods as $shippingMethod)
-        {
+        foreach ($shippingMethods as $shippingMethod) {
             $calculator = $this->calculators->get($shippingMethod->getCalculator());
             /** @var int $cost */
             $cost = $calculator->calculate($shipment, $shippingMethod->getConfiguration());

@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -143,7 +142,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
                 PaymentMethodInterface::class,
                 [],
                 $context,
-                Request::METHOD_GET
+                Request::METHOD_GET,
             ])
         ;
     }

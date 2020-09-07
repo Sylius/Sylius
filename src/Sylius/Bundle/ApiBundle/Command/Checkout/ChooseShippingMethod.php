@@ -23,12 +23,14 @@ class ChooseShippingMethod implements OrderTokenValueAwareInterface
 
     /**
      * @psalm-immutable
+     *
      * @var string|int
      */
     public $shipmentIdentifier;
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $shippingMethod;
