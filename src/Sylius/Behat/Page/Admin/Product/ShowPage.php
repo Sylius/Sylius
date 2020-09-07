@@ -72,7 +72,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => '.ui.labeled.icon.button',
             'variants' => '#variants',
-            'breadcrumb' => '.breadcrumb > div'
+            'breadcrumb' => '.breadcrumb > div',
         ]);
     }
 }

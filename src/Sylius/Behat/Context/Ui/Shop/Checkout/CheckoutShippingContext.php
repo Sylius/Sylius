@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutShippingContext implements Context

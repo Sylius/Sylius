@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;

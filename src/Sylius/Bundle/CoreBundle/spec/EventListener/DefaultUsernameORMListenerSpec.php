@@ -75,7 +75,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
         $user->setUsername('customer+extra@email.com')->shouldBeCalled();
         $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
-        
+
         $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
 

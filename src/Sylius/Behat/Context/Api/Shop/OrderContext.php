@@ -15,8 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;

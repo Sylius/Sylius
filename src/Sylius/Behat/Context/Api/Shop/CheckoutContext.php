@@ -466,7 +466,7 @@ final class CheckoutContext implements Context
     public function myOrderTotalShouldBe(int $total): void
     {
         $responseTotal = $this->responseChecker->getValue($this->client->getResponse(), 'total');
-        Assert::same($total, (int)$responseTotal);
+        Assert::same($total, (int) $responseTotal);
     }
 
     /**
@@ -583,7 +583,7 @@ final class CheckoutContext implements Context
     {
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
         foreach ($violations as $violation) {
-            if ($violation['message'] === $message){
+            if ($violation['message'] === $message) {
                 return true;
             }
         }
@@ -657,7 +657,7 @@ final class CheckoutContext implements Context
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()) {
+            if ($cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()) {
                 return true;
             }
         }
