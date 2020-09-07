@@ -887,6 +887,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I remove its price for ("[^"]+" channel)$/
+     */
+    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceTo( '',  $channel);
+    }
+
+    /**
      * @Then this product should( still) have slug :value in :language
      */
     public function thisProductElementShouldHaveSlugIn($slug, $language)
@@ -1036,6 +1044,14 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then /^I should not have configured price for ("[^"]+" channel)$/
+     */
+    public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
+    {
+        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), '');
     }
 
     /**

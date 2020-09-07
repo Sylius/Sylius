@@ -878,6 +878,16 @@ final class ProductContext implements Context
         $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
     }
 
+    /**
+     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
+     */
+    public function thisProductIsDisabledInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $product->removeChannel($channel);
+
+        $this->objectManager->flush();
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
