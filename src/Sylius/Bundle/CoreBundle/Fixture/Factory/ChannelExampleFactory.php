@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Factory\ChannelFactoryInterface;
+use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope;
