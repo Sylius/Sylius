@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
+use Sylius\Component\Core\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;

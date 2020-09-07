@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Test\Services;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
+use Sylius\Component\Core\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
