@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2020-09-08T10:17:57Z
+
+@lchrusciel Hey, as in description, there is no more such option like `strict` in Symfony 5, it was replaced with added `mode` option:
+https://symfony.com/doc/5.0/reference/constraints/Email.html#mode
+https://github.com/symfony/symfony/blob/4.4/UPGRADE-5.0.md#validator
+> The `Email::__construct()` 'strict' property has been removed. Use `'mode'=>"strict"` instead.
+
+https://github.com/symfony/symfony/blob/4.4/src/Symfony/Component/Validator/Constraints/Email.php#L82
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-08T10:45:29Z
+
+What I meant was this line: `The egulias/email-validator component is now required for using the Email constraint in strict mode`. I wasn't sure if it is already in composer.json, but it is.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-08T10:45:55Z
+
+Thanks, Joseph! :1st_place_medal:
