@@ -10,7 +10,7 @@ Feature: Clearing cart after logging out
         And I am a logged in customer
         And I have product "Stark T-Shirt" in the cart
 
-    @ui
+    @ui @api
     Scenario: Clearing cart after logging out
         When I log out
         And I see the summary of my cart

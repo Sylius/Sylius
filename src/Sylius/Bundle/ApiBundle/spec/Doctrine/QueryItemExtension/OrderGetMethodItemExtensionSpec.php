@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-final class OrderGetMethodExtensionSpec extends ObjectBehavior
+final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {

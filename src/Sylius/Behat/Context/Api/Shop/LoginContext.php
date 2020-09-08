@@ -28,6 +28,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Given there is the visitor
+     */
+    public function iAmAVisitor(): void
+    {
+        // Intentionally left blank;
+    }
+
+    /**
      * @When I want to log in
      */
     public function iWantToLogIn(): void
@@ -73,6 +81,7 @@ final class LoginContext implements Context
 
     /**
      * @When I log out
+     * @When the customer logged out
      */
     public function iLogOut()
     {

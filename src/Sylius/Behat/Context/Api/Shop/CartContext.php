@@ -75,6 +75,15 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^the (visitor|administrator) try to see the summary of (customers|visitor) (cart)$/
+     * @When /^the (visitor|customer) see the summary of (his) (cart)$/
+     */
+    public function theSeeTheSummaryOfCart(string $userType, string $userType2, string $tokenValue): void
+    {
+        $this->cartsClient->show($tokenValue);
+    }
+
+    /**
      * @When /^I (?:add|added) (this product) to the (cart)$/
      * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When /^I add (product "[^"]+") to the (cart)$/
@@ -108,6 +117,19 @@ final class CartContext implements Context
     {
         $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
         $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
+    }
+
+    /**
+     * @When /^the (visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
+     * @When /^the (visitor) try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
+     */
+    public function theVisitorChangeProductQuantityToInHisCart(
+        string $userType,
+        ProductInterface $product,
+        int $quantity,
+        string $tokenValue
+    ): void {
+        $this->iChangeQuantityToInMyCart($product, $quantity, $tokenValue);
     }
 
     /**
@@ -145,6 +167,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
+     * @Then /^the visitor has no access to customers (cart)$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
@@ -229,10 +252,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (customer|visitor) cart$/
+     */
+    public function theAdministratorShouldSeeProductWithQuantityInTheCart(
+        string $productName,
+        int $quantity,
+        string $userType
+    ): void {
+        $this->iShouldSeeWithQuantityInMyCart($productName, $quantity);
+    }
+
+    /**
      * @Then I should see :productName with quantity :quantity in my cart
      */
-    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
-    {
+    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void {
         $cartResponse = $this->cartsClient->getLastResponse();
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
@@ -250,6 +283,43 @@ final class CartContext implements Context
                 );
             }
         }
+    }
+
+    /**
+     * @Then /^the (customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
+     */
+    public function theVisitorShouldSeeWithQuantityInHisCart(
+        string $userType1,
+        string $productName,
+        int $quantity
+    ): void {
+        $this->iShouldSeeWithQuantityInMyCart($productName, $quantity);
+    }
+
+    /**
+     * @When /^the (visitor|customer) adds ("[^"]+" product) to the (cart)$/
+     */
+    public function theVisitorAddsProductToTheCart(
+        string $userType,
+        ProductInterface $product,
+        string $tokenValue,
+        int $quantity = 1
+    ): void {
+        $this->putProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @Then /^the (visitor|customer) can see ("[^"]+" product) in the (cart)$/
+     */
+    public function theVisitorCanSeeProductInTheCart(
+        string $userType,
+        ProductInterface $product,
+        string $tokenValue,
+        int $quantity = 1
+    ): void {
+        $this->cartsClient->show($tokenValue);
+
+        $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
     }
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
