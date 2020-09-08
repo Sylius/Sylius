@@ -27,7 +27,6 @@
        </attribute>
        <attribute name="code">
            <group>country:create</group>
-           <group>country:update</group>
            <group>province:read</group>
        </attribute>
        <attribute name="name">
