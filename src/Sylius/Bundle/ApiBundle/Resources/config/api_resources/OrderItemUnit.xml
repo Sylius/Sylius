@@ -22,12 +22,6 @@
             </attribute>
         </attribute>
 
-        <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
-        </itemOperations>
-
         <collectionOperations />
 
         <itemOperations>

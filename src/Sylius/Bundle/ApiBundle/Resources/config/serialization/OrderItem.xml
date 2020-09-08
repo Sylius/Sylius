@@ -17,15 +17,52 @@
 >
     <class name="Sylius\Component\Core\Model\OrderItem">
         <attribute name="id">
+            <group>order_item:read</group>
+            <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>order_item:read</group>
             <group>order:read</group>
         </attribute>
+        <attribute name="order">
+            <group>order_item:read</group>
+        </attribute>
         <attribute name="variant">
+            <group>order_item:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="quantity">
+            <group>order_item:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
+        <attribute name="unitPrice">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="units">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="adjustments">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="adjustmentsRecursively">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="adjustmentsTotal">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="adjustmentsTotalRecursively">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>order_item:read</group>
+        </attribute>
+        <attribute name="productName">
+            <group>order_item:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
     </class>
 </serializer>
