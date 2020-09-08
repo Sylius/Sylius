@@ -37,4 +37,9 @@ final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
     {
         return PromotionFilterCollectionType::class;
     }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [PromotionFilterCollectionType::class];
+    }
 }
