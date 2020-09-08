@@ -16,14 +16,17 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 /** @experimental */
 final class CommandDataTransformersChain implements CommandDataTransformersChainInterface
 {
-    /** @var array */
+    /** @var CommandDataTransformerInterface[] */
     private $commandDataTransformers;
 
-    public function __construct(... $commandDataTransformers)
+    public function __construct(CommandDataTransformerInterface ...$commandDataTransformers)
     {
         $this->commandDataTransformers = $commandDataTransformers;
     }
 
+    /**
+     * @return CommandDataTransformerInterface[]
+     */
     public function getCommandDataTransformers(): array
     {
         return $this->commandDataTransformers;

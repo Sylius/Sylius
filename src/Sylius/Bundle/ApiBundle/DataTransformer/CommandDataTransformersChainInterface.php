@@ -16,5 +16,8 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 /** @experimental */
 interface CommandDataTransformersChainInterface
 {
+    /**
+     * @return CommandDataTransformerInterface[]
+     */
     public function getCommandDataTransformers(): array;
 }
