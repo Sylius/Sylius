@@ -57,6 +57,8 @@ final class CartContext implements Context
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I have (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
+     * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
+     * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
      */
     public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -68,19 +70,6 @@ final class CartContext implements Context
         ));
 
         $this->sharedStorage->set('product', $product);
-    }
-
-    /**
-     * @Given /^the (customer|visitor) has (product "[^"]+") in the (cart)$/
-     * @When /^the (customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
-     */
-    public function theHasProductInTheCart(
-        string $userType,
-        ProductInterface $product,
-        string $tokenValue
-    ): void
-    {
-        $this->iAddedProductToTheCart($product, $tokenValue);
     }
 
     /**

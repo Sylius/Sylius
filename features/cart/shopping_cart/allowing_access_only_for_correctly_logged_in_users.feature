@@ -116,8 +116,8 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer logged out
         And there is the visitor
-        When the visitor try to see the summary of customers cart
-        Then the visitor has no access to customers cart
+        When the visitor try to see the summary of customer's cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying access to add product to the customer cart by the visitor
@@ -125,7 +125,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has created empty cart
         And the customer logged out
         When the visitor try to add product "Stark T-Shirt" in the customer cart
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying access to add address to the customer cart by the visitor
@@ -134,7 +134,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer logged out
         When the visitor specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the visitor try to complete the addressing step in the customer cart
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying access to add shipping method to the customer cart by the visitor
@@ -144,7 +144,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has completed the addressing step
         And the customer logged out
         When the visitor try to proceed with "UPS" shipping method in the customer cart
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying access to add payment method to the customer cart by the visitor
@@ -155,7 +155,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has proceeded "UPS" shipping method
         And the customer logged out
         When the visitor try to proceed with "offline" payment in the customer cart
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying access to complete the customer cart by the visitor
@@ -167,7 +167,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has proceeded "offline" payment
         And the customer logged out
         When the visitor try to confirm the customer order
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Denying to increase quantity of an item in the customer cart by the visitor
@@ -175,7 +175,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer logged out
         When the visitor try to change product "Stark T-Shirt" quantity to 2 in the customer cart
-        Then the visitor has no access to customers cart
+        Then the visitor has no access to customer's cart
 
     @api
     Scenario: Accessing to the customers cart by the admin
@@ -183,7 +183,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer logged out
         And there is logged in the administrator
-        When the administrator try to see the summary of customers cart
+        When the administrator try to see the summary of customer's cart
         Then the administrator should see "Stark T-shirt" product with quantity 1 in the customer cart
 
     @api
@@ -191,5 +191,5 @@ Feature: Allowing access only for correctly logged in users
         Given there is the visitor
         And the visitor has product "Stark T-Shirt" in the cart
         And there is logged in the administrator
-        When the administrator try to see the summary of customers cart
+        When the administrator try to see the summary of customer's cart
         Then the administrator should see "Stark T-shirt" product with quantity 1 in the visitor cart
