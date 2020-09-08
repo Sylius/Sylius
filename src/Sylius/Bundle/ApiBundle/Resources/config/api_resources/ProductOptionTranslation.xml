@@ -23,7 +23,9 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

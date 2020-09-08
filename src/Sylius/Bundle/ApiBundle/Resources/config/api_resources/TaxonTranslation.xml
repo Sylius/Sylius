@@ -8,6 +8,7 @@
         <attribute name="route_prefix">admin</attribute>
 
         <attribute name="validation_groups">sylius</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>taxon:read</attribute>
@@ -16,11 +17,15 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

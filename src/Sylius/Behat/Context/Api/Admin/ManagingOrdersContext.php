@@ -30,7 +30,7 @@ use Webmozart\Assert\Assert;
 final class ManagingOrdersContext implements Context
 {
     /** @var ApiClientInterface */
-    private $adminClient;
+    private $client;
 
     /** @var ApiClientInterface */
     private $shipmentsClient;
@@ -51,7 +51,7 @@ final class ManagingOrdersContext implements Context
     private $sharedStorage;
 
     public function __construct(
-        ApiClientInterface $adminClient,
+        ApiClientInterface $client,
         ApiClientInterface $shipmentsClient,
         ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
@@ -59,7 +59,7 @@ final class ManagingOrdersContext implements Context
         SecurityServiceInterface $adminSecurityService,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->adminClient = $adminClient;
+        $this->client = $client;
         $this->shipmentsClient = $shipmentsClient;
         $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
@@ -73,7 +73,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iBrowseOrders(): void
     {
-        $this->adminClient->index();
+        $this->client->index();
     }
 
     /**
@@ -82,7 +82,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
-        $this->adminClient->show($order->getTokenValue());
+        $this->client->show($order->getTokenValue());
     }
 
     /**
@@ -90,8 +90,8 @@ final class ManagingOrdersContext implements Context
      */
     public function iCancelThisOrder(OrderInterface $order): void
     {
-        $this->adminClient->applyTransition(
-            $this->responseChecker->getValue($this->adminClient->show($order->getTokenValue()), 'tokenValue'),
+        $this->client->applyTransition(
+            $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'tokenValue'),
             OrderTransitions::TRANSITION_CANCEL
         );
     }
@@ -124,7 +124,7 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->adminClient->getLastResponse(),
+            $this->client->getLastResponse(),
             'customer',
             $this->iriConverter->getIriFromItem($customer)),
             sprintf('There is no order for customer %s', $customer->getEmail())
@@ -136,7 +136,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedAboutItHasBeenSuccessfullyCanceled(): void
     {
-        $response = $this->adminClient->getLastResponse();
+        $response = $this->client->getLastResponse();
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($response),
             'Resource could not be completed. Reason: ' . $response->getContent()
@@ -151,7 +151,7 @@ final class ManagingOrdersContext implements Context
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-        $orderState = $this->responseChecker->getValue($this->adminClient->show($order->getTokenValue()), 'state');
+        $orderState = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'state');
 
         Assert::same($orderState, strtolower($state));
     }
@@ -162,12 +162,12 @@ final class ManagingOrdersContext implements Context
     public function itShouldHaveShipmentState(string $state): void
     {
         $shipmentsIri = $this->responseChecker->getValue(
-            $this->adminClient->show($this->sharedStorage->get('order')->getTokenValue()),
+            $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'shipments'
         );
 
         Assert::true(
-            $this->responseChecker->hasValue($this->adminClient->showByIri($shipmentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($shipmentsIri[0]), 'state', strtolower($state)),
             sprintf('Shipment for this order is not %s', $state)
         );
     }
@@ -178,12 +178,12 @@ final class ManagingOrdersContext implements Context
     public function itShouldHavePaymentState($state): void
     {
         $paymentsIri = $this->responseChecker->getValue(
-            $this->adminClient->show($this->sharedStorage->get('order')->getTokenValue()),
+            $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'payments'
         );
 
         Assert::true(
-            $this->responseChecker->hasValue($this->adminClient->showByIri($paymentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($paymentsIri[0]), 'state', strtolower($state)),
             sprintf('payment for this order is not %s', $state)
         );
     }
@@ -194,7 +194,7 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHaveNumberOfPayments(int $number): void
     {
         Assert::count(
-            $this->responseChecker->getValue($this->adminClient->show($this->sharedStorage->get('order')->getTokenValue()), 'payments'),
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getTokenValue()), 'payments'),
             $number
         );
     }
@@ -205,7 +205,7 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $paymentState): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->adminClient->show($order->getTokenValue()), 'paymentState', strtolower($paymentState)),
+            $this->responseChecker->hasValue($this->client->show($order->getTokenValue()), 'paymentState', strtolower($paymentState)),
             sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState)
         );
     }
@@ -217,7 +217,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->iCancelThisOrder($order);
         Assert::contains(
-            $this->responseChecker->getError($this->adminClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'Transition "cancel" cannot be applied'
         );
     }
@@ -228,7 +228,7 @@ final class ManagingOrdersContext implements Context
     public function theOrdersTotalShouldBe(int $total): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->adminClient->getLastResponse(), 'total'),
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
             $total
         );
     }
@@ -239,7 +239,7 @@ final class ManagingOrdersContext implements Context
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->adminClient->getLastResponse(), 'orderPromotionTotal'),
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal
         );
     }
@@ -254,7 +254,7 @@ final class ManagingOrdersContext implements Context
     ): void {
         $this->adminSecurityService->logIn($user);
 
-        $orderNotes = $this->responseChecker->getValue($this->adminClient->show($order->getTokenValue()), 'notes');
+        $orderNotes = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'notes');
 
         Assert::same($notes, $orderNotes);
     }

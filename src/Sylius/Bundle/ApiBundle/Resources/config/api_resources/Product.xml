@@ -21,7 +21,7 @@
                 <attribute>product:read</attribute>
             </attribute>
         </attribute>
-        
+
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -29,9 +29,9 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get_products_in_admin">
+            <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/products</attribute>
+                <attribute name="path">/admin/products</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
@@ -39,9 +39,9 @@
                 </attribute>
             </collectionOperation>
 
-            <collectionOperation name="get_products_in_shop">
+            <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/products</attribute>
+                <attribute name="path">/shop/products</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
@@ -49,9 +49,9 @@
                 </attribute>
             </collectionOperation>
 
-            <collectionOperation name="post_product_in_admin">
+            <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">admin/products</attribute>
+                <attribute name="path">/admin/products</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product:create</attribute>
                 </attribute>
@@ -59,33 +59,33 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get_product_in_admin">
+            <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use $code to retrieve a product resource.</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="get_product_in_shop">
+            <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/products/{id}</attribute>
+                <attribute name="path">/shop/products/{id}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use $slug to retrieve a product resource.</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="put_product_in_admin">
+            <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product:update</attribute>
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="delete_product_in_admin">
+            <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

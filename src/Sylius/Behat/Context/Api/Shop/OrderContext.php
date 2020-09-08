@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\IriConverterInterface;
+use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -33,7 +33,7 @@ final class OrderContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $productsClient;
+    private $productsAdminClient;
 
     /** @var ApiClientInterface */
     private $productsShopClient;
@@ -41,25 +41,25 @@ final class OrderContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriToShopPathConverter;
+    /** @var AdminToShopIriConverterInterface */
+    private $adminToShopIriConverter;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productsClient,
+        ApiClientInterface $productsAdminClient,
         ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriToShopPathConverter,
+        AdminToShopIriConverterInterface $adminToShopIriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->productsClient = $productsClient;
+        $this->productsAdminClient = $productsAdminClient;
         $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
-        $this->iriToShopPathConverter = $iriToShopPathConverter;
+        $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -156,7 +156,7 @@ final class OrderContext implements Context
         }
 
         $this->client->executeCustomRequest(
-            Request::custom( $this->iriToShopPathConverter->convert($item['variant']), HttpRequest::METHOD_GET)
+            Request::custom($this->adminToShopIriConverter->convert($item['variant']), HttpRequest::METHOD_GET)
         );
 
         $product = $this->responseChecker->getValue($this->client->getLastResponse(), 'product');

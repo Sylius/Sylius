@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\IriConverterInterface;
+use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
@@ -30,17 +30,17 @@ final class ProductContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var IriConverterInterface */
-    private $iriToShopPathConverter;
+    /** @var AdminToShopIriConverterInterface */
+    private $adminToShopIriConverter;
 
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriToShopPathConverter
+        AdminToShopIriConverterInterface $adminToShopIriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
-        $this->iriToShopPathConverter = $iriToShopPathConverter;
+        $this->adminToShopIriConverter = $adminToShopIriConverter;
     }
 
     /**
@@ -78,7 +78,7 @@ final class ProductContext implements Context
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
         $this->client->executeCustomRequest(
-            Request::custom($this->iriToShopPathConverter->convert($productVariant[0]), HttpRequest::METHOD_GET)
+            Request::custom($this->adminToShopIriConverter->convert($productVariant[0]), HttpRequest::METHOD_GET)
         );
 
         Assert::true(

@@ -25,13 +25,14 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get_adjustments_in_admin">
+            <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/adjustments</attribute>
+                <attribute name="path">/admin/adjustments</attribute>
             </itemOperation>
-            <itemOperation name="get_adjustments_in_shop">
+
+            <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/adjustments</attribute>
+                <attribute name="path">/shop/adjustments</attribute>
             </itemOperation>
         </itemOperations>
 

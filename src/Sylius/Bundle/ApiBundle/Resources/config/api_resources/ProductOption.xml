@@ -31,8 +31,12 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
-            <collectionOperation name="post">
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_option:create</attribute>
                 </attribute>
@@ -40,8 +44,12 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="put">
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_option:update</attribute>
                 </attribute>

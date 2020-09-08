@@ -27,12 +27,15 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" >
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.exchange_rate_filter</attribute>
                 </attribute>
             </collectionOperation>
-            <collectionOperation name="post">
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">exchange_rate:create</attribute>
                 </attribute>
@@ -40,13 +43,20 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="put">
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">exchange_rate:update</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="delete" />
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

@@ -35,8 +35,13 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="put" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />

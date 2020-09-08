@@ -5,7 +5,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="normalization_context">
@@ -15,25 +14,27 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get_variant_in_admin">
+            <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/product-variants/{id}</attribute>
+                <attribute name="path">/admin/product-variants/{id}</attribute>
             </itemOperation>
-            <itemOperation name="post_variant_in_admin">
+
+            <itemOperation name="admin_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">admin/product-variants</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
                 <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute>
             </itemOperation>
-            <itemOperation name="get_variant_in_shop">
+
+            <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/product-variants/{id}</attribute>
+                <attribute name="path">/shop/product-variants/{id}</attribute>
             </itemOperation>
         </itemOperations>
 
         <collectionOperations>
-            <collectionOperation name="get_variant_in_admin">
+            <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/product-variants</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
         </collectionOperations>
 

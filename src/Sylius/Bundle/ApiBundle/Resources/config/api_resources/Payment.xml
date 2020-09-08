@@ -29,7 +29,7 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get_payments_in_admin">
+            <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payments</attribute>
                 <attribute name="filters">
@@ -39,19 +39,19 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get_payment_in_admin">
+            <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payments/{id}</attribute>
             </itemOperation>
 
-            <itemOperation name="complete_in_admin">
+            <itemOperation name="admin_complete">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="path">/admin/payments/{id}/complete</attribute>
+                <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes Payment</attribute>
                 </attribute>
-                <attribute name="method">PATCH</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="path">admin/payments/{id}/complete</attribute>
-                <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
             </itemOperation>
         </itemOperations>
 

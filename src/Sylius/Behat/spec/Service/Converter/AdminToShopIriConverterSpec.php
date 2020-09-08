@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace spec\Sylius\Behat\Service\Converter;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Service\Converter\IriConverterInterface;
+use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 
-final class IriToShopPathConverterSpec extends ObjectBehavior
+final class AdminToShopIriConverterSpec extends ObjectBehavior
 {
-    function it_is_a_iri_converter(): void
+    function it_is_an_admin_to_shop_iri_converter(): void
     {
-        $this->shouldImplement(IriConverterInterface::class);
+        $this->shouldImplement(AdminToShopIriConverterInterface::class);
     }
 
-    function it_convert_iri_to_shop_path(): void
+    function it_converts_admin_iri_to_shop_iri(): void
     {
         $this->convert('new-api/admin/order/products/TEST')->shouldReturn('new-api/shop/order/products/TEST');
     }

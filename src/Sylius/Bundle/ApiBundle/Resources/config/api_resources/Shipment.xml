@@ -37,7 +37,8 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
@@ -45,14 +46,17 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="ship">
-                <attribute name="openapi_context">
-                    <attribute name="summary">Ships Shipment</attribute>
-                </attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_ship">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shipments/{id}/ship</attribute>
                 <attribute name="controller">sylius.api.shipment_state_machine_transition_applicator::ship</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Ships Shipment</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Converter;
 
-interface IriConverterInterface
+final class AdminToShopIriConverter implements AdminToShopIriConverterInterface
 {
-    public function convert(string $iri): string;
+    public function convert(string $iri): string
+    {
+        return str_replace('/admin/', '/shop/', $iri);
+    }
 }
