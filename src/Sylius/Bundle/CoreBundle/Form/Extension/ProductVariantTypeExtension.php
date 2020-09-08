@@ -97,4 +97,9 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
     {
         return ProductVariantType::class;
     }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [ProductVariantType::class];
+    }
 }
