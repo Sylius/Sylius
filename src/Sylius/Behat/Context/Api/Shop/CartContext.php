@@ -68,17 +68,10 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (cart)$/
+     * @When /^the (?:visitor|administrator) try to see the summary of (?:customer|visitor)'s (cart)$/
+     * @When /^the (?:visitor|customer) see the summary of (?:their) (cart)$/
      */
     public function iSeeTheSummaryOfMyCart(string $tokenValue): void
-    {
-        $this->cartsClient->show($tokenValue);
-    }
-
-    /**
-     * @When /^the (visitor|administrator) try to see the summary of (customers|visitor) (cart)$/
-     * @When /^the (visitor|customer) see the summary of (his) (cart)$/
-     */
-    public function theSeeTheSummaryOfCart(string $userType, string $userType2, string $tokenValue): void
     {
         $this->cartsClient->show($tokenValue);
     }
@@ -87,6 +80,7 @@ final class CartContext implements Context
      * @When /^I (?:add|added) (this product) to the (cart)$/
      * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When /^I add (product "[^"]+") to the (cart)$/
+     * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -112,24 +106,13 @@ final class CartContext implements Context
 
     /**
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
+     * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
+     * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
      */
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
         $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
         $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
-    }
-
-    /**
-     * @When /^the (visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
-     * @When /^the (visitor) try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
-     */
-    public function theVisitorChangeProductQuantityToInHisCart(
-        string $userType,
-        ProductInterface $product,
-        int $quantity,
-        string $tokenValue
-    ): void {
-        $this->iChangeQuantityToInMyCart($product, $quantity, $tokenValue);
     }
 
     /**
@@ -167,7 +150,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
-     * @Then /^the visitor has no access to customers (cart)$/
+     * @Then /^the visitor has no access to customer's (cart)$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
@@ -252,18 +235,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (customer|visitor) cart$/
-     */
-    public function theAdministratorShouldSeeProductWithQuantityInTheCart(
-        string $productName,
-        int $quantity,
-        string $userType
-    ): void {
-        $this->iShouldSeeWithQuantityInMyCart($productName, $quantity);
-    }
-
-    /**
      * @Then I should see :productName with quantity :quantity in my cart
+     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (?:customer|visitor) cart$/
+     * @Then /^the (?:customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void {
         $cartResponse = $this->cartsClient->getLastResponse();
@@ -286,33 +260,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the (customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
-     */
-    public function theVisitorShouldSeeWithQuantityInHisCart(
-        string $userType1,
-        string $productName,
-        int $quantity
-    ): void {
-        $this->iShouldSeeWithQuantityInMyCart($productName, $quantity);
-    }
-
-    /**
-     * @When /^the (visitor|customer) adds ("[^"]+" product) to the (cart)$/
-     */
-    public function theVisitorAddsProductToTheCart(
-        string $userType,
-        ProductInterface $product,
-        string $tokenValue,
-        int $quantity = 1
-    ): void {
-        $this->putProductToCart($product, $tokenValue, $quantity);
-    }
-
-    /**
-     * @Then /^the (visitor|customer) can see ("[^"]+" product) in the (cart)$/
+     * @Then /^the (?:visitor|customer) can see ("[^"]+" product) in the (cart)$/
      */
     public function theVisitorCanSeeProductInTheCart(
-        string $userType,
         ProductInterface $product,
         string $tokenValue,
         int $quantity = 1
