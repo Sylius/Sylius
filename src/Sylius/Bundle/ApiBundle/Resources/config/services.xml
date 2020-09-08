@@ -96,11 +96,6 @@
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
 
-        <service id="sylius.api.data_transformer.add_item_to_cart_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer">
-            <argument type="service" id="sylius.api.command_data_transformers_chain" />
-            <tag name="api_platform.data_transformer" />
-        </service>
-
         <service id="sylius.api.data_transformer.order_token_value_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
             <tag name="sylius.api.command_data_transformer" />
         </service>
