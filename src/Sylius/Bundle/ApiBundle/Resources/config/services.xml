@@ -96,16 +96,16 @@
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer" id="sylius_bundle_api.data_transformer.add_item_to_cart_input_data_transformer">
-            <argument type="service" id="sylius_api.command_data_transformers_chain" />
+        <service id="sylius.api.data_transformer.add_item_to_cart_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer">
+            <argument type="service" id="sylius.api.command_data_transformers_chain" />
             <tag name="api_platform.data_transformer" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer" id="sylius_bundle_api.data_transformer.order_token_value_aware_input_data_transformer">
+        <service id="sylius.api.data_transformer.order_token_value_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer" id="sylius_bundle_api.data_transformer.subresource_id_aware_data_transformer">
+        <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
             <argument type="service" id="request_stack" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
