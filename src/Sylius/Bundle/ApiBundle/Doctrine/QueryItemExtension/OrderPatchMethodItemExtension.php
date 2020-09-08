@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
-final class OrderDeleteMethodExtension implements QueryItemExtensionInterface
+final class OrderPatchMethodItemExtension implements QueryItemExtensionInterface
 {
     /** @var UserContextInterface */
     private $userContext;
@@ -49,17 +49,17 @@ final class OrderDeleteMethodExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($operationName !== Request::METHOD_DELETE) {
+        if ($operationName !== Request::METHOD_PATCH) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForDeleteMethod($user, $queryBuilder, $operationName, $rootAlias);
+        $this->applyToItemForPatchMethod($user, $queryBuilder, $operationName, $rootAlias);
     }
 
-    private function applyToItemForDeleteMethod(
+    private function applyToItemForPatchMethod(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
         string $operationName,

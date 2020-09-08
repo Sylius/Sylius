@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
-final class OrderGetMethodExtension implements QueryItemExtensionInterface
+final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
 {
     /** @var UserContextInterface */
     private $userContext;

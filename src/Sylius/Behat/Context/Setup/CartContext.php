@@ -22,6 +22,7 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
@@ -45,6 +46,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^the customer has created empty (cart)$/
+     */
+    public function theCustomerHasTheCart(string $cartToken): void
+    {
+        //intentionally blank line
+    }
+
+    /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I have (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
@@ -59,6 +68,19 @@ final class CartContext implements Context
         ));
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given /^the (customer|visitor) has (product "[^"]+") in the (cart)$/
+     * @When /^the (customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
+     */
+    public function theHasProductInTheCart(
+        string $userType,
+        ProductInterface $product,
+        string $tokenValue
+    ): void
+    {
+        $this->iAddedProductToTheCart($product, $tokenValue);
     }
 
     /**
