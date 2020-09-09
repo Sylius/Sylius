@@ -19,9 +19,10 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.api.shop.cart" class="Sylius\Behat\Context\Api\Shop\CartContext">
-            <argument type="service" id="sylius.behat.api_platform_client.cart" />
-            <argument type="service" id="sylius.behat.api_platform_client.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.cart" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.admin_to_shop_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
@@ -32,7 +33,7 @@
 
         <service id="sylius.behat.context.api.shop.checkout" class="Sylius\Behat\Context\Api\Shop\CheckoutContext">
             <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.api_platform_client.order" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.repository.shipping_method" />
@@ -42,8 +43,8 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
-            <argument type="service" id="sylius.behat.api_platform_client.product" />
-            <argument type="service" id="sylius.behat.api_platform_client.taxon" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin.taxon" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 
@@ -52,8 +53,9 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.product" class="Sylius\Behat\Context\Api\Shop\ProductContext">
-            <argument type="service" id="sylius.behat.api_platform_client.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.admin_to_shop_iri_converter" />
         </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
@@ -61,9 +63,11 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.order" class="Sylius\Behat\Context\Api\Shop\OrderContext">
-            <argument type="service" id="sylius.behat.api_platform_client.order" />
-            <argument type="service" id="sylius.behat.api_platform_client.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin.product" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.admin_to_shop_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>

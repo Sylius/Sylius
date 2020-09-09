@@ -46,7 +46,7 @@ final class HomepageContext implements Context
     public function iCheckLatestProducts(): void
     {
         $this->productsClient->customAction(
-            'new-api/products?itemsPerPage=3&order[createdAt]=desc',
+            'new-api/shop/products?itemsPerPage=3&order[createdAt]=desc',
             HttpRequest::METHOD_GET
         );
     }
@@ -56,7 +56,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('new-api/taxons', HttpRequest::METHOD_GET);
+        $this->taxonsClient->customAction('new-api/shop/taxons', HttpRequest::METHOD_GET);
     }
 
     /**

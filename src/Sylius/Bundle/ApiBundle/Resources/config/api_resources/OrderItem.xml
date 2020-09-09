@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order_item.class%" shortName="OrderItem">
+        <attribute name="route_prefix">admin</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>order_item:read</attribute>
@@ -25,8 +27,8 @@
         <collectionOperations />
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
             </itemOperation>
         </itemOperations>
 
