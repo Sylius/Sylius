@@ -35,16 +35,10 @@ final class TaxonType extends AbstractResourceType
                 'label' => 'sylius.form.taxon.enabled',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-                if (null === $event->getData()) {
-                    return;
-                }
-
-                $event->getForm()->add('parent', TaxonAutocompleteChoiceType::class, [
-                    'label' => 'sylius.form.taxon.parent',
-                    'required' => false,
-                ]);
-            })
+            ->add('parent', TaxonAutocompleteChoiceType::class, [
+                'label' => 'sylius.form.taxon.parent',
+                'required' => false,
+            ])
         ;
     }
 
