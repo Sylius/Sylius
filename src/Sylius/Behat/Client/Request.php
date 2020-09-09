@@ -42,75 +42,81 @@ final class Request implements RequestInterface
         $this->headers = array_merge($this->headers, $headers);
     }
 
-    public static function index(string $resource, ?string $token = null): RequestInterface
+    public static function index(?string $section, string $resource, ?string $token = null): RequestInterface
     {
         $headers = $token ? ['HTTP_Authorization' => 'Bearer ' . $token] : [];
 
-        return new self('/new-api/' . $resource, HttpRequest::METHOD_GET, $headers);
+        return new self(sprintf('/new-api/%s%s', self::prepareSection($section), $resource), HttpRequest::METHOD_GET, $headers);
     }
 
-    public static function subResourceIndex(string $resource, string $id, string $subResource): RequestInterface
+    public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $subResource),
+            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $subResource),
             HttpRequest::METHOD_GET
         );
     }
 
-    public static function show(string $resource, string $id, string $token): RequestInterface
+    public static function show(?string $section, string $resource, string $id, string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s', $resource, $id),
+            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_GET,
             ['HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
-    public static function create(string $resource): RequestInterface
+    public static function create(?string $section, string $resource, ?string $token = null): RequestInterface
     {
+        $headers = ['CONTENT_TYPE' => 'application/ld+json'];
+
+        if ($token !== null) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+        }
+
         return new self(
-            sprintf('/new-api/%s', $resource),
+            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
             HttpRequest::METHOD_POST,
-            ['CONTENT_TYPE' => 'application/ld+json']
+            $headers
         );
     }
 
-    public static function update(string $resource, string $id, string $token): RequestInterface
+    public static function update(?string $section, string $resource, string $id, string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s', $resource, $id),
+            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_PUT,
             ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
-    public static function delete(string $resource, string $id, string $token): RequestInterface
+    public static function delete(?string $section, string $resource, string $id, string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s', $resource, $id),
+            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_DELETE,
             ['HTTP_Authorization' => 'Bearer ' . $token]
         );
     }
 
-    public static function transition(string $resource, string $id, string $transition): RequestInterface
+    public static function transition(?string $section, string $resource, string $id, string $transition): RequestInterface
     {
-        return self::customItemAction($resource, $id, HttpRequest::METHOD_PATCH, $transition);
+        return self::customItemAction($section, $resource, $id, HttpRequest::METHOD_PATCH, $transition);
     }
 
-    public static function customItemAction(string $resource, string $id, string $type, string $action): RequestInterface
+    public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s/%s/%s', $resource, $id, $action),
+            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $action),
             $type,
             ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
     }
 
-    public static function upload(string $resource, string $token): RequestInterface
+    public static function upload(?string $section, string $resource, string $token): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s', $resource),
+            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
             HttpRequest::METHOD_POST,
             ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_Authorization' => 'Bearer ' . $token]
         );
@@ -204,5 +210,14 @@ final class Request implements RequestInterface
         }
 
         return $firstArray;
+    }
+
+    private static function prepareSection(?string $section): string
+    {
+        if ($section === null) {
+            return '';
+        }
+
+        return $section . '/';
     }
 }

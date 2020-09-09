@@ -22,6 +22,7 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
     /** @var OrderItemRepositoryInterface */
@@ -48,7 +49,7 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
             $removeItemFromCart->orderItemId,
-            $removeItemFromCart->tokenValue
+            $removeItemFromCart->orderTokenValue
         );
 
         Assert::notNull($orderItem);
@@ -56,7 +57,7 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         /** @var OrderInterface $cart */
         $cart = $orderItem->getOrder();
 
-        Assert::same($cart->getTokenValue(), $removeItemFromCart->tokenValue);
+        Assert::same($cart->getTokenValue(), $removeItemFromCart->orderTokenValue);
 
         $this->orderModifier->removeFromOrder($cart, $orderItem);
 

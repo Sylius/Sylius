@@ -80,7 +80,7 @@
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
-            <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
 
@@ -96,7 +96,7 @@
 
         <service id="sylius.shipping_method_resolver.default" class="Sylius\Component\Core\Resolver\EligibleDefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
         <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default" />
@@ -122,6 +122,11 @@
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.address.inner" />
+        </service>
+
+        <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
+            <argument type="service" id="sylius.custom_factory.channel.inner" />
+            <argument>order_items_based</argument>
         </service>
 
         <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">

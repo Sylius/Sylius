@@ -22,6 +22,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ShowAvailablePluginsCommand extends Command
 {
+    protected static $defaultName = 'sylius:show-available-plugins';
+
     /**
      * @var iterable<PluginInfo>
      *
@@ -32,7 +34,6 @@ final class ShowAvailablePluginsCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('sylius:show-available-plugins');
         $this->setDescription('Shows official Sylius Plugins');
         $this->configurePlugins();
     }

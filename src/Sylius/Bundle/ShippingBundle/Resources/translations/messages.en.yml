@@ -29,6 +29,7 @@ sylius:
             description: Description
             name: Name
         shipping_method:
+            add_rule: Add rule
             calculator: Calculator
             category: Category
             category_requirement: Category requirement
@@ -41,5 +42,18 @@ sylius:
             match_none_category_requirement: None of the units have to match the method category
             name: Name
             position: Position
+            rules: Rules
+            rules_help: Use rules to decide whether this shipping method can be applied to a given order.
+                If a rule is true this shipping method can be applied. Notice that if you add multiple rules,
+                all rules has to be true.
             tax_category: Tax category
             translations: Translations
+        shipping_method_rule:
+            order_total_greater_than_or_equal: Order total greater than or equal
+            order_total_less_than_or_equal: Order total less than or equal
+            type: Type
+            total: Total
+            total_weight_greater_than_or_equal: Total weight greater than or equal
+            total_weight_less_than_or_equal: Total weight less than or equal
+            weight: Weight
+            amount: Amount

@@ -90,6 +90,18 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
+    public function findCartByTokenValue(string $tokenValue): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findCartById($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')

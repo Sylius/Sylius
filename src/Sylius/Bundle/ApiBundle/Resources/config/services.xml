@@ -16,17 +16,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
-        <import resource="services/applicators.xml" />
-        <import resource="services/command_handlers.xml" />
-        <import resource="services/context_builders.xml" />
-        <import resource="services/data_persisters.xml" />
-        <import resource="services/data_providers.xml" />
-        <import resource="services/event_subscribers.xml" />
-        <import resource="services/extensions.xml" />
-        <import resource="services/filters.xml" />
-        <import resource="services/providers.xml" />
-        <import resource="services/validator.xml" />
+        <import resource="services/**/*.xml" />
     </imports>
+
+    <parameters>
+        <parameter key="sylius.model.address.class.api.denormalize">%sylius.model.address.class%</parameter>
+        <parameter key="sylius.model.address.interface.api.denormalize">Sylius\Component\Core\Model\AddressInterface</parameter>
+    </parameters>
 
     <services>
         <service id="sylius.api.upload_avatar_image_action" class="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
@@ -45,6 +41,7 @@
             decoration-priority="20"
         >
             <argument type="service" id="sylius.api.swagger_admin_authentication_documentation_normalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service
@@ -56,6 +53,7 @@
             decoration-priority="10"
         >
             <argument type="service" id="sylius.api.swagger_shop_authentication_documentation_normalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
@@ -67,17 +65,53 @@
             <tag name="api_platform.subresource_data_provider" />
         </service>
 
+        <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction" public="true">
+            <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+            <argument type="service" id="api_platform.serializer" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="router" />
+            <argument>%api_platform.title%</argument>
+            <argument>%api_platform.description%</argument>
+            <argument>%api_platform.version%</argument>
+            <argument>%api_platform.formats%</argument>
+            <argument>%api_platform.oauth.enabled%</argument>
+            <argument>%api_platform.oauth.clientId%</argument>
+            <argument>%api_platform.oauth.clientSecret%</argument>
+            <argument>%api_platform.oauth.type%</argument>
+            <argument>%api_platform.oauth.flow%</argument>
+            <argument>%api_platform.oauth.tokenUrl%</argument>
+            <argument>%api_platform.oauth.authorizationUrl%</argument>
+            <argument>%api_platform.oauth.scopes%</argument>
+            <argument>%api_platform.show_webby%</argument>
+            <argument>%api_platform.enable_swagger_ui%</argument>
+            <argument>%api_platform.enable_re_doc%</argument>
+            <argument>%api_platform.graphql.enabled%</argument>
+            <argument>%api_platform.graphql.graphiql.enabled%</argument>
+            <argument>%api_platform.graphql.graphql_playground.enabled%</argument>
+            <argument>%api_platform.swagger.versions%</argument>
+        </service>
+
         <service id="sylius.api.property_info.extractor.empty_list_extractor" class="Sylius\Bundle\ApiBundle\PropertyInfo\Extractor\EmptyPropertyListExtractor">
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\DataTransformer\AddItemToCartInputDataTransformer" id="sylius_bundle_api.data_transformer.add_item_to_cart_input_data_transformer">
-            <tag name="api_platform.data_transformer"/>
+        <service id="sylius.api.data_transformer.order_token_value_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
+            <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service class="Sylius\Bundle\ApiBundle\DataTransformer\RemoveItemFromCartDataTransformer" id="sylius_bundle_api.data_transformer.remove_item_from_cart_data_transformer">
-            <tag name="api_platform.data_transformer"/>
+        <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
+            <argument type="service" id="request_stack" />
+            <tag name="sylius.api.command_data_transformer" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="string">%sylius.model.address.class.api.denormalize%</argument>
+            <argument type="string">%sylius.model.address.interface.api.denormalize%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
     </services>
 </container>

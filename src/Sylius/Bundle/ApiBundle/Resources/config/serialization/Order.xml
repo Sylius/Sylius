@@ -18,10 +18,12 @@
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="number">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="channel">
@@ -34,10 +36,17 @@
 
         <attribute name="payments">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="shipments">
             <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
+        <attribute name="checkoutState">
+            <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="state">
@@ -50,17 +59,39 @@
 
         <attribute name="total">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="orderPromotionTotal">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
 
         <attribute name="tokenValue">
             <group>order:read</group>
+            <group>checkout:read</group>
         </attribute>
+
         <attribute name="items">
             <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
+        <attribute name="notes">
+            <group>order:read</group>
+        </attribute>
+
+        <attribute name="taxTotal">
+            <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
+        <attribute name="localeCode">
+            <group>checkout:read</group>
+        </attribute>
+
+        <attribute name="shippingTotal">
+            <group>checkout:read</group>
         </attribute>
     </class>
 </serializer>

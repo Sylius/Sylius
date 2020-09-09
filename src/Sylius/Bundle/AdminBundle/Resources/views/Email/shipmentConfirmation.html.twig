@@ -14,9 +14,10 @@
         </div>
         {% if shipment.tracking is not null %}
             <div style="margin-bottom: 20px;">
-                {{ 'sylius.email.shipment_confirmation.you_can_check_its_location'|trans({}, null, localeCode) }}
-                <span style="color: #1abb9c;">{{ shipment.tracking }}</span>
-                {{ 'sylius.email.shipment_confirmation.tracking_code'|trans({}, null, localeCode) }}
+                {% set tracking_code %}<span style="color: #1abb9c;">{{ shipment.tracking }}</span>{% endset %}
+                {{ 'sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code'|trans({
+                    '%tracking_code%': tracking_code
+                }, null, localeCode)|raw }}
             </div>
         {% endif %}
         <div>

@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Opis
+            enabled: Dostępny
             name: Nazwa
             parent: Rodzic
             slug: Fragment URL

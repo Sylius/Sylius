@@ -9,10 +9,10 @@ Feature: Maintaining cart after authorization
         And the store has a product "Stark T-shirt" priced at "$12.00"
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
-    @ui
+    @ui @api
     Scenario: Having cart maintained after logging in
-        Given I have product "Stark T-Shirt" in the cart
-        When I log in as "robb@stark.com" with "KingInTheNorth" password
+        When I add "Stark T-Shirt" product to the cart
+        And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
         And this item should have name "Stark T-shirt"

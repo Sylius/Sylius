@@ -1,9 +1,11 @@
 parameters:
-    sylius.security.admin_regex: "^/admin"
+    sylius.security.admin_regex: "^/%sylius_admin.path_name%"
     sylius.security.api_regex: "^/api"
-    sylius.security.shop_regex: "^/(?!admin|new-api|api/.*|api$|media/.*)[^/]++"
+    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
     sylius.security.new_api_route: "/new-api"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
+    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
+    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
 
 security:
     always_authenticate_before_granting: true
@@ -41,7 +43,7 @@ security:
                 csrf_token_id: admin_authenticate
             remember_me:
                 secret: "%env(APP_SECRET)%"
-                path: /admin
+                path: "/%sylius_admin.path_name%"
                 name: APP_ADMIN_REMEMBER_ME
                 lifetime: 31536000
                 remember_me_parameter: _remember_me
@@ -150,3 +152,5 @@ security:
         - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
         - { path: "%sylius.security.api_regex%/.*", role: ROLE_API_ACCESS }
         - { path: "%sylius.security.shop_regex%/account", role: ROLE_USER }
+
+        - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }

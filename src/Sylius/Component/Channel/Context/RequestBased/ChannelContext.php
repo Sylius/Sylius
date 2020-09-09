@@ -38,7 +38,7 @@ final class ChannelContext implements ChannelContextInterface
         try {
             return $this->getChannelForRequest($this->getMasterRequest());
         } catch (\UnexpectedValueException $exception) {
-            throw new ChannelNotFoundException($exception);
+            throw new ChannelNotFoundException(null, $exception);
         }
     }
 

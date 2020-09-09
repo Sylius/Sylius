@@ -20,6 +20,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 {
     public function getName(): string;
 
+    public function getBreadcrumb(): string;
+
     public function isSimpleProductPage(): bool;
 
     public function isShowInShopButtonDisabled(): bool;

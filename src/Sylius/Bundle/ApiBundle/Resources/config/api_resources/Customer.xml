@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.customer.class%" shortName="Customer">
+        <attribute name="route_name">admin</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>customer:read</attribute>
@@ -26,7 +28,6 @@
 
         <itemOperations>
             <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
                 <attribute name="groups">
                     <attribute>customer:read</attribute>
                 </attribute>

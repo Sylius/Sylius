@@ -178,12 +178,12 @@ For example, **sylius_admin_product** grid dispatches such an event:
 
     sylius.grid.admin_product # For the grid of products in admin
 
-To show you an example of a grid customization using events, we will remove a field from a grid using that method.
+To show you an example of a grid customization using events, we will modify fields from a grid using that method.
 Here are the steps, that you need to take:
 
-**1.** In order to remove fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
+**1.** In order to modify fields from the product grid in **Sylius** you have to create a ``App\Grid\AdminProductsGridListener`` class.
 
-In the example below we are removing the ``images`` field from the ``sylius_admin_product`` grid.
+In the example below we are removing the ``image`` field and adding the ``code`` field to the ``sylius_admin_product`` grid.
 
 .. code-block:: php
 
@@ -192,14 +192,22 @@ In the example below we are removing the ``images`` field from the ``sylius_admi
     namespace App\Grid;
 
     use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
+    use Sylius\Component\Grid\Definition\Field;
 
     final class AdminProductsGridListener
     {
-        public function removeImageField(GridDefinitionConverterEvent $event): void
+        public function editFields(GridDefinitionConverterEvent $event): void
         {
             $grid = $event->getGrid();
 
+            // Remove
             $grid->removeField('image');
+
+            // Add
+            $codeField = Field::fromNameAndType('code', 'string');
+            $codeField->setLabel('Code');
+            // ...
+            $grid->addField($codeField);
         }
     }
 
@@ -212,7 +220,7 @@ listener to the ``sylius.grid.admin_product`` event in the ``config/services.yam
     services:
         App\Grid\AdminProductsGridListener:
             tags:
-                - { name: kernel.event_listener, event: sylius.grid.admin_product, method: removeImageField }
+                - { name: kernel.event_listener, event: sylius.grid.admin_product, method: editFields }
 
 **3.** Result:
 

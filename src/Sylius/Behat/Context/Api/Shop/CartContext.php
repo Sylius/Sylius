@@ -19,8 +19,10 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -30,20 +32,30 @@ final class CartContext implements Context
     /** @var ApiClientInterface */
     private $cartsClient;
 
+    /** @var ApiClientInterface */
+    private $productsClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var ProductVariantResolverInterface */
+    private $productVariantResolver;
+
     public function __construct(
         ApiClientInterface $cartsClient,
+        ApiClientInterface $productsClient,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
+        $this->productsClient = $productsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->productVariantResolver = $productVariantResolver;
     }
 
     /**
@@ -56,6 +68,8 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (cart)$/
+     * @When /^the (?:visitor|administrator) try to see the summary of (?:customer|visitor)'s (cart)$/
+     * @When /^the (?:visitor|customer) see the summary of (?:their) (cart)$/
      */
     public function iSeeTheSummaryOfMyCart(string $tokenValue): void
     {
@@ -63,8 +77,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I add ("[^"]+" product) to the (cart)$/
      * @When /^I (?:add|added) (this product) to the (cart)$/
+     * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
+     * @When /^I add (product "[^"]+") to the (cart)$/
+     * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -73,6 +89,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
+     * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
      */
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
@@ -80,21 +97,31 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
+     */
+    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, string $tokenValue): void
+    {
+        $this->putProductVariantToCart($productVariant, $tokenValue, 1);
+    }
+
+    /**
+     * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
+     * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
+     * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
+     */
+    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
+    {
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->changeQuantityOfOrderItem($itemId, $quantity, $tokenValue);
+    }
+
+    /**
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
-        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
-
-        foreach ($items as $item) {
-            $pathElements = explode('/', $item['variant']['product']);
-
-            $productCode = $pathElements[array_key_last($pathElements)];
-
-            if ($product->getCode() === $productCode) {
-                $this->removeOrderItemFromCart((string) $item['id'], $tokenValue);
-            }
-        }
+        $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
+        $this->removeOrderItemFromCart($itemId, $tokenValue);
     }
 
     /**
@@ -123,6 +150,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
+     * @Then /^the visitor has no access to customer's (cart)$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
@@ -181,10 +209,37 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should see :productName with quantity :quantity in my cart
+     * @Then /^(this item) should have variant "([^"]+)"$/
      */
-    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
+    public function thisItemShouldHaveVariant(array $item, string $variantName): void
     {
+        $response = $this->getProductVariantForItem($item);
+
+        Assert::true(
+            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $variantName),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        );
+    }
+
+    /**
+     * @Then /^(this item) should have code "([^"]+)"$/
+     */
+    public function thisItemShouldHaveCode(array $item, string $variantCode): void
+    {
+        $response = $this->getProductVariantForItem($item);
+
+        Assert::true(
+            $this->responseChecker->hasValue($response, 'code', $variantCode),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Name not found.', $response)
+        );
+    }
+
+    /**
+     * @Then I should see :productName with quantity :quantity in my cart
+     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (?:customer|visitor) cart$/
+     * @Then /^the (?:customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
+     */
+    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void {
         $cartResponse = $this->cartsClient->getLastResponse();
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
@@ -204,12 +259,60 @@ final class CartContext implements Context
         }
     }
 
+    /**
+     * @Then /^the (?:visitor|customer) can see ("[^"]+" product) in the (cart)$/
+     */
+    public function theVisitorCanSeeProductInTheCart(
+        ProductInterface $product,
+        string $tokenValue,
+        int $quantity = 1
+    ): void
+    {
+        $this->cartsClient->show($tokenValue);
+
+        $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
+    }
+
+    /**
+     * @When /^I check items in my (cart)$/
+     */
+    public function iCheckItemsOfMyCart(string $tokenValue): void
+    {
+        $request = Request::customItemAction(null,'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
+     */
+    public function myCartShouldHaveItems(int $quantity, ProductInterface $product): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
+    }
+
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
             'productCode' => $product->getCode(),
+            'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
+            'quantity' => $quantity,
+        ]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function putProductVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    {
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+
+        $request->updateContent([
+            'productCode' => $productVariant->getProduct()->getCode(),
+            'productVariantCode' => $productVariant->getCode(),
             'quantity' => $quantity,
         ]);
 
@@ -218,7 +321,7 @@ final class CartContext implements Context
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction('orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
 
         $request->updateContent(['orderItemId' => $orderItemId]);
 
@@ -227,18 +330,80 @@ final class CartContext implements Context
 
     private function getProductForItem(array $item): Response
     {
-        if (!isset($item['variant']['product'])) {
+        if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
                 json_encode($item)
             );
         }
 
-        $this->cartsClient->executeCustomRequest(Request::custom(
-            $item['variant']['product'],
-            HttpRequest::METHOD_GET)
-        );
+        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
+
+        $response = $this->cartsClient->getLastResponse();
+
+        $product = $this->responseChecker->getValue($response, 'product');
+
+        $pathElements = explode('/', $product);
+
+        $productCode = $pathElements[array_key_last($pathElements)];
+
+        return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+    }
+
+    private function getProductVariantForItem(array $item): Response
+    {
+        if (!isset($item['variant'])) {
+            throw new \InvalidArgumentException(
+                'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
+                json_encode($item)
+            );
+        }
+
+        $this->cartsClient->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
 
         return $this->cartsClient->getLastResponse();
+    }
+
+    private function getOrderItemProductCode(array $item): string
+    {
+        $pathElements = explode('/', $item['variant']['product']);
+
+        return $pathElements[array_key_last($pathElements)];
+    }
+
+    private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        foreach ($items as $item) {
+            $response = $this->getProductForItem($item);
+            if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
+                return (string) $item['id'];
+            }
+        }
+
+        return null;
+    }
+
+    private function changeQuantityOfOrderItem(string $orderItemId, int $quantity, string $tokenValue): void
+    {
+        $request = Request::customItemAction(null, 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'change-quantity');
+
+        $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
+
+        $this->cartsClient->executeCustomRequest($request);
+    }
+
+    private function hasItemWithNameAndQuantity(Response $response, string $productName, int $quantity): bool
+    {
+        $items = json_decode($response->getContent(), true)['hydra:member'];
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

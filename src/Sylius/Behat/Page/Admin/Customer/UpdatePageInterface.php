@@ -42,4 +42,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isSubscribedToTheNewsletter(): bool;
 
     public function getGroupName(): string;
+
+    public function verifyUser(): void;
 }

@@ -38,4 +38,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @throws ElementNotFoundException
      */
     public function getValidationMessageForAmount(string $channelCode): string;
+
+    public function addRule(string $ruleName): void;
+
+    public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
+
+    public function fillRuleOption(string $option, string $value): void;
+
+    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void;
 }

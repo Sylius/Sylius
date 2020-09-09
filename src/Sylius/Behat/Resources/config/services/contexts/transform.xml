@@ -96,6 +96,7 @@
         <service id="sylius.behat.context.transform.product_variant" class="Sylius\Behat\Context\Transform\ProductVariantContext">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.transform.promotion" class="Sylius\Behat\Context\Transform\PromotionContext">
@@ -133,6 +134,7 @@
 
         <service id="sylius.behat.context.transform.taxon" class="Sylius\Behat\Context\Transform\TaxonContext">
             <argument type="service" id="sylius.repository.taxon" />
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.behat.context.transform.theme" class="Sylius\Behat\Context\Transform\ThemeContext">
@@ -149,8 +151,8 @@
         </service>
 
         <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartTokenContext">
-            <argument type="service" id="sylius.behat.api_platform_client.cart" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

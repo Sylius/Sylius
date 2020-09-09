@@ -438,6 +438,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.register" />
             <argument type="service" id="sylius.behat.page.shop.account.request_password_reset" />
             <argument type="service" id="sylius.behat.page.shop.account.reset_password" />
+            <argument type="service" id="sylius.behat.page.shop.account.well_known_password_change" />
             <argument type="service" id="sylius.behat.element.shop.account.register" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.current_page_resolver" />

@@ -34,7 +34,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.order_modifier" />
             <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
@@ -45,6 +45,45 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
             <argument type="service" id="sylius.repository.order_item"/>
             <argument type="service" id="sylius.order_modifier" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\AddressOrderHandler">
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.repository.customer"/>
+            <argument type="service" id="sylius.factory.customer"/>
+            <argument type="service" id="sylius.manager.customer"/>
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChooseShippingMethodHandler">
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.repository.shipping_method"/>
+            <argument type="service" id="sylius.repository.shipment"/>
+            <argument type="service" id="sylius.shipping_eligibility_checker"/>
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChoosePaymentMethodHandler">
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.repository.payment_method"/>
+            <argument type="service" id="sylius.repository.payment"/>
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler">
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sm.factory" />
+            <tag name="messenger.message_handler" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="messenger.message_handler" />
         </service>

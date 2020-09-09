@@ -10,6 +10,7 @@
         <ignoreFiles>
             <file name="src/Sylius/Bundle/CoreBundle/Application/Kernel.php" />
             <file name="src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Doctrine/ORM/SubresourceDataProvider.php" />
+            <file name="src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php" />
 
             <directory name="src/Sylius/Behat" />
 
@@ -81,7 +82,7 @@
     </projectFiles>
 
     <issueHandlers>
-        <!-- level 3 issues - slightly lazy code writing, but provably low false-negatives -->
+        <!-- level 3 issues - slightly lazy code writing, but probably low false-negatives -->
 
         <DeprecatedClass>
             <errorLevel type="info">
@@ -143,6 +144,8 @@
             </errorLevel>
         </MissingConstructor>
         <MissingParamType errorLevel="info" />
+
+        <RedundantConditionGivenDocblockType errorLevel="info" />
 
         <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
 

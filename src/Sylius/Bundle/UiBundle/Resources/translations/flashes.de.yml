@@ -24,5 +24,7 @@ sylius:
         out_of_stock: 'Es sind nur %quantity% dieses Produktes verfügbar.'
     product_variant:
         update_error: 'Es trat ein unerwartetes Problem bei der Aktualisierung einer Produktvariante auf. Bitte versuchen Sie es noch einmal.'
+    promotion:
+        update_rules: 'Einige Regeln der Werbeaktion mit dem Code %codes% wurden aktualisiert.'
     taxon:
         menu_taxon_delete: 'Sie können keine Produktklassifikation eines Kanals löschen.'

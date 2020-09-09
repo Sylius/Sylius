@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 
+/** @experimental */
 interface ShipmentStateMachineTransitionApplicatorInterface
 {
     public function ship(ShipmentInterface $data): ShipmentInterface;

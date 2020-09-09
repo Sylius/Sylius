@@ -12,13 +12,16 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
 
                 - sylius.behat.context.transform.cart
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.api.shop.cart
+                - sylius.behat.context.api.shop.login
 
             filters:
                 tags: "@shopping_cart && @api"

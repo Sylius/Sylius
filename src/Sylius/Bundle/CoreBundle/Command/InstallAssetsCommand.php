@@ -18,10 +18,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class InstallAssetsCommand extends AbstractInstallCommand
 {
+    protected static $defaultName = 'sylius:install:assets';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install:assets')
             ->setDescription('Installs all Sylius assets.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command downloads and installs all Sylius media assets.

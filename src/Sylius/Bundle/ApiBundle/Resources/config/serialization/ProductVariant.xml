@@ -17,12 +17,17 @@
 >
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <attribute name="id">
-            <group>order:read</group>
+            <group>product_variant:read</group>
+        </attribute>
+        <attribute name="code">
             <group>product_variant:read</group>
         </attribute>
         <attribute name="product">
-            <group>order:read</group>
             <group>product_variant:read</group>
+        </attribute>
+        <attribute name="translations">
+            <group>product_variant:read</group>
+            <group>checkout:read</group>
         </attribute>
     </class>
 </serializer>

@@ -19,6 +19,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
+/** @experimental */
 final class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
     /** @var SerializerContextBuilderInterface */

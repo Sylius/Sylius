@@ -34,7 +34,10 @@
                     <attribute name="summary">Pickup a new cart</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\PickupCart</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">order:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -74,6 +77,114 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="address">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Address cart to given location, logged in Customer does not have to provide an email</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/address</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:address</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="select_shipping_method">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Select shipping methods for particular shipment</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">id</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">shipmentId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/shipments/{shipmentId}</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:select_shipping_method</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="select_payment_method">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Select payment methods for particular payment</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">id</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">paymentId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/payments/{paymentId}</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:select_payment_method</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="complete">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Complete checkout</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                    <attribute>sylius_checkout_complete</attribute>
+                </attribute>
+                <attribute name="path">/orders/{id}/complete</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:complete</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">checkout:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="remove_item">
                 <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
                 <attribute name="openapi_context">
@@ -87,6 +198,20 @@
                     <attribute name="groups">cart:remove_item</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="change_quantity">
+                <attribute name="security">is_granted('IS_AUTHENTICATED_ANONYMOUSLY')</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Change quantity of order item</attribute>
+                </attribute>
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/orders/{id}/change-quantity</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:change_quantity</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
@@ -94,12 +219,23 @@
         <property name="tokenValue" identifier="true" writable="false" />
         <property name="channel" writable="false" />
         <property name="customer" writable="false" />
-        <property name="payments" writable="false" />
-        <property name="shipments" writable="false" />
+        <property name="shipments" writable="false">
+            <subresource resourceClass="%sylius.model.shipment.class%" />
+        </property>
+        <property name="payments" writable="false">
+            <subresource resourceClass="%sylius.model.payment.class%" />
+        </property>
         <property name="state" writable="false" />
         <property name="paymentState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
-        <property name="items" readable="true" writable="true" />
+        <property name="items" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.order_item.class%" />
+        </property>
+        <property name="notes" writable="true" />
+        <property name="taxTotal" readable="true"/>
+        <property name="adjustments" writable="false">
+            <subresource resourceClass="%sylius.model.adjustment.class%" />
+        </property>
     </resource>
 </resources>

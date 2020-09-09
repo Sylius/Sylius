@@ -47,6 +47,9 @@
         <itemOperations>
             <itemOperation name="get">
                 <attribute name="path">products/{id}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">As a logged administrator use $code to retrieve a product resource. As a Visitor or logged in Customer use $slug to retrieve a product resource.</attribute>
+                </attribute>
             </itemOperation>
             <itemOperation name="put">
                 <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
@@ -72,5 +75,6 @@
         <property name="channels" required="false" />
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
+        <property name="variants" readable="true"/>
     </resource>
 </resources>

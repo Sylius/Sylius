@@ -16,6 +16,7 @@ Feature: Viewing details of a simple product
         When I access "Iron shield" product page
         Then I should see product show page without variants
         And I should see product name "Iron shield"
+        And I should see product breadcrumb "Iron shield"
 
     @ui
     Scenario: Viewing pricing block

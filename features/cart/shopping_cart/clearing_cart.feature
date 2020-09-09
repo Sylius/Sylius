@@ -7,7 +7,7 @@ Feature: Clearing cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-shirt banana" priced at "$12.54"
-        And I add this product to the cart
+        And I added this product to the cart
 
     @ui @api
     Scenario: Clearing cart

@@ -23,6 +23,7 @@
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
+            <group>checkout:read</group>
         </attribute>
         <attribute name="description">
             <group>shipping_method:read</group>

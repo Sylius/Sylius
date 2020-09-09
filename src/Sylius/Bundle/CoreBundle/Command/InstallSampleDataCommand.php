@@ -22,10 +22,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class InstallSampleDataCommand extends AbstractInstallCommand
 {
+    protected static $defaultName = 'sylius:install:sample-data';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install:sample-data')
             ->setDescription('Install sample data into Sylius.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command loads the sample data for Sylius.

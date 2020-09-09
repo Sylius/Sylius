@@ -19,8 +19,8 @@
 
     ```diff
         parameters:
-    -       sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
-    +       sylius.security.shop_regex: "^/(?!admin|new-api|api/.*|api$|media/.*)[^/]++"
+    -       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
     +       sylius.security.new_api_route: "/new-api"
     +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
         
@@ -90,3 +90,18 @@ The later is being decorated by `sylius.context.channel.cached` which caches the
 
 1. A serialization group has been added to the route `sylius_admin_ajax_product_index` to avoid an infinite loop, or a
 time out during this ajax request (previously no serialization group was defined on this route).
+
+1. We now use the parameter `sylius_admin.path_name` to retrieve the admin routes prefix. If you used the `/admin` prefix
+in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_prefix%`.  
+Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL. 
+
+## Special attention
+
+### Translations
+
+Some translations have changed, you may want to search for them in your project:
+
+- `sylius.email.shipment_confirmation.tracking_code` has been removed.
+- `sylius.email.shipment_confirmation.you_can_check_its_location` has been removed.
+- `sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code` has been added instead of the two above.
+

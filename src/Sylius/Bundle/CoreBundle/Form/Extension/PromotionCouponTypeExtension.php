@@ -39,4 +39,9 @@ final class PromotionCouponTypeExtension extends AbstractTypeExtension
     {
         return PromotionCouponType::class;
     }
+
+    public static function getExtendedTypes(): iterable
+    {
+        return [PromotionCouponType::class];
+    }
 }

@@ -13,12 +13,11 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
-            </itemOperation>
+            <itemOperation name="get" />
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
         <property name="product" />
     </resource>
 </resources>

@@ -84,7 +84,7 @@ final class CheckoutPaymentContext implements Context
     /**
      * @When I select :name payment method
      */
-    public function iSelectPaymentMethod($name)
+    public function iSelectPaymentMethod($name): void
     {
         $this->selectPaymentPage->selectPaymentMethod($name);
     }

@@ -21,10 +21,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DemoteUserCommand extends AbstractRoleCommand
 {
+    protected static $defaultName = 'sylius:user:demote';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:user:demote')
             ->setDescription('Demotes a user by removing a role.')
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),

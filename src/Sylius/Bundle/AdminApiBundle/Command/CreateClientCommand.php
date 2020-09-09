@@ -28,6 +28,8 @@ final class CreateClientCommand extends ContainerAwareCommand
     /** @var ClientManagerInterface|null */
     private $clientManager;
 
+    protected static $defaultName = 'sylius:oauth-server:create-client';
+
     public function __construct(?string $name = null, ClientManagerInterface $clientManager = null)
     {
         parent::__construct($name);
@@ -38,7 +40,6 @@ final class CreateClientCommand extends ContainerAwareCommand
     protected function configure(): void
     {
         $this
-            ->setName('sylius:oauth-server:create-client')
             ->setDescription('Creates a new client')
             ->addOption(
                 'redirect-uri',

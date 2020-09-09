@@ -28,6 +28,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Given there is the visitor
+     */
+    public function iAmAVisitor(): void
+    {
+        // Intentionally left blank;
+    }
+
+    /**
      * @When I want to log in
      */
     public function iWantToLogIn(): void
@@ -58,6 +66,26 @@ final class LoginContext implements Context
     public function iLogIn(): void
     {
         $this->client->call();
+    }
+
+    /**
+     * @When I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->client->prepareLoginRequest();
+        $this->client->setEmail($email);
+        $this->client->setPassword($password);
+        $this->client->call();
+    }
+
+    /**
+     * @When I log out
+     * @When the customer logged out
+     */
+    public function iLogOut()
+    {
+        $this->client->logOut();
     }
 
     /**

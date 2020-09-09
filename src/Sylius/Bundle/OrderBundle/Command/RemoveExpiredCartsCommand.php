@@ -22,10 +22,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RemoveExpiredCartsCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'sylius:remove-expired-carts';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:remove-expired-carts')
             ->setDescription('Removes carts that have been idle for a period set in `sylius_order.expiration.cart` configuration key.')
         ;
     }

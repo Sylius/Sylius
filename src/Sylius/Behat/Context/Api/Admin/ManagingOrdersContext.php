@@ -17,7 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -42,6 +44,9 @@ final class ManagingOrdersContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var SecurityServiceInterface */
+    private $adminSecurityService;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -51,6 +56,7 @@ final class ManagingOrdersContext implements Context
         ApiClientInterface $paymentsClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
+        SecurityServiceInterface $adminSecurityService,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
@@ -58,6 +64,7 @@ final class ManagingOrdersContext implements Context
         $this->paymentsClient = $paymentsClient;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->adminSecurityService = $adminSecurityService;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -235,5 +242,20 @@ final class ManagingOrdersContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal
         );
+    }
+
+    /**
+     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
+     */
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
+        AdminUserInterface $user,
+        string $notes,
+        OrderInterface $order
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        $orderNotes = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'notes');
+
+        Assert::same($notes, $orderNotes);
     }
 }

@@ -58,5 +58,8 @@
             <group>product:create</group>
             <group>product:update</group>
         </attribute>
+        <attribute name="variants">
+            <group>product:read</group>
+        </attribute>
     </class>
 </serializer>

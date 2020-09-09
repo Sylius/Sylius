@@ -27,10 +27,11 @@ use Webmozart\Assert\Assert;
 
 final class SetupCommand extends AbstractInstallCommand
 {
+    protected static $defaultName = 'sylius:install:setup';
+
     protected function configure(): void
     {
         $this
-            ->setName('sylius:install:setup')
             ->setDescription('Sylius configuration setup.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic Sylius data.

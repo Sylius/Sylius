@@ -1,3 +1,5 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
 <div id="attributes">
     <h4 class="ui top attached large header">{{ 'sylius.ui.attributes'|trans }}</h4>
     <div class="ui attached segment">
@@ -5,8 +7,9 @@
             {% set setLocales = [] %}
             {% for attributeValue in product.attributes %}
                 {% if attributeValue.localeCode not in setLocales %}
-                    <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ attributeValue.localeCode|sylius_locale_name }}" {{ sylius_test_html_attribute('tab', attributeValue.localeCode|sylius_locale_name) }}>{{ attributeValue.localeCode|sylius_locale_name }}</a>
-                    {%  set setLocales = setLocales|merge([attributeValue.localeCode]) %}
+                    {% set localeCode = attributeValue.localeCode %}
+                    <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ localeCode|sylius_locale_name }}" {{ sylius_test_html_attribute('tab', localeCode|sylius_locale_name) }}>{{ flags.fromLocaleCode(localeCode)}} {{ localeCode|sylius_locale_name }}</a>
+                    {%  set setLocales = setLocales|merge([localeCode]) %}
                 {% endif %}
             {% endfor %}
         </div>

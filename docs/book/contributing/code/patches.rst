@@ -100,12 +100,12 @@ Choose the right Base Branch
 
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
-* ``1.4`` or ``1.5``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
+* ``1.7``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
 * ``master``, if you are adding a new feature.
 
 .. note::
 
-    All bug fixes merged into the ``1.4`` and ``1.5`` maintenance branches are also merged into ``master`` on a regular basis.
+    All bug fixes merged into the ``1.7`` maintenance branch are also merged into ``master`` on a regular basis.
 
 Create a Topic Branch
 ~~~~~~~~~~~~~~~~~~~~~
@@ -194,15 +194,15 @@ If you are basing on the ``master`` branch:
     git checkout BRANCH_NAME
     git rebase master
 
-If you are basing on the ``1.0`` branch:
+If you are basing on the ``1.7`` branch:
 
 .. code-block:: bash
 
-    git checkout 1.0
+    git checkout 1.7
     git fetch upstream
-    git merge upstream/1.0
+    git merge upstream/1.7
     git checkout BRANCH_NAME
-    git rebase 1.0
+    git rebase 1.7
 
 When doing the ``rebase`` command, you might have to fix merge conflicts.
 ``git status`` will show you the *unmerged* files. Resolve all the conflicts,
@@ -224,7 +224,7 @@ Make a Pull Request
 
 .. warning::
 
-    Please remember that bug fixes must be submitted against the ``1.0`` branch,
+    Please remember that bug fixes must be submitted against the ``1.7`` branch,
     but features and deprecations against the ``master`` branch. Just accordingly to which branch you chose as the base branch before.
 
 You can now make a pull request on the ``Sylius/Sylius`` GitHub repository.
@@ -246,7 +246,7 @@ possible:
 
     | Q               | A
     | --------------- | -----
-    | Branch?         | 1.4, 1.5 or master
+    | Branch?         | 1.7 or master
     | Bug fix?        | no/yes
     | New feature?    | no/yes
     | BC breaks?      | no/yes
@@ -260,7 +260,7 @@ An example submission could now look as follows:
 
     | Q               | A
     | --------------- | -----
-    | Branch?         | 1.4
+    | Branch?         | 1.7
     | Bug fix?        | yes
     | New feature?    | no
     | BC breaks?      | no
@@ -315,7 +315,7 @@ Rework your Patch
 ~~~~~~~~~~~~~~~~~
 
 Based on the feedback on the pull request, you might need to rework your
-patch. Before re-submitting the patch, rebase with your base branch (``master`` or ``1.0``), don't merge; and force the push to the origin:
+patch. Before re-submitting the patch, rebase with your base branch (``master`` or ``1.7``), don't merge; and force the push to the origin:
 
 .. code-block:: bash
 
@@ -326,7 +326,7 @@ or
 
 .. code-block:: bash
 
-    git rebase -f upstream/1.0
+    git rebase -f upstream/1.7
     git push --force-with-lease origin BRANCH_NAME
 
 .. note::
@@ -347,7 +347,7 @@ or
 
 .. code-block:: bash
 
-    git rebase -i upstream/1.0
+    git rebase -i upstream/1.7
     git push --force-with-lease origin BRANCH_NAME
 
 After you type this command, an editor will popup showing a list of commits:

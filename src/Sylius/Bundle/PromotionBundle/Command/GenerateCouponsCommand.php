@@ -26,6 +26,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class GenerateCouponsCommand extends Command
 {
+    protected static $defaultName = 'sylius:promotion:generate-coupons';
+
     /** @var PromotionRepositoryInterface */
     private $promotionRepository;
 
@@ -45,7 +47,6 @@ final class GenerateCouponsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('sylius:promotion:generate-coupons')
             ->setDescription('Generates coupons for a given promotion')
             ->addArgument('promotion-code', InputArgument::REQUIRED, 'Code of the promotion')
             ->addArgument('count', InputArgument::REQUIRED, 'Amount of coupons to generate')

@@ -177,6 +177,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see product breadcrumb :breadcrumb
+     */
+    public function iShouldSeeBreadcrumb(string $breadcrumb): void
+    {
+        Assert::same($breadcrumb, $this->productShowPage->getBreadcrumb());
+    }
+
+    /**
      * @Then I should see price :price for channel :channelName
      */
     public function iShouldSeePriceForChannel(string $price, string $channelName): void

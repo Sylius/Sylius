@@ -41,11 +41,11 @@
 
 <div class="ui styled fluid accordion">
     {% for locale, translationForm in form.translations %}
-        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+        <div class="title{% if loop.first %} active{% endif %}">
             <i class="dropdown icon"></i>
             {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
         </div>
-        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+        <div class="content{% if loop.first %} active{% endif %}">
             {{ form_row(translationForm.name) }}
             {{ form_row(translationForm.description) }}
             <div class="ui compact message">

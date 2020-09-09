@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Formatter;
 
+use function Symfony\Component\String\u;
+
 final class StringInflector
 {
     public static function nameToCode(string $value): string
@@ -33,6 +35,11 @@ final class StringInflector
     public static function nameToUppercaseCode(string $value): string
     {
         return strtoupper(self::nameToCode($value));
+    }
+
+    public static function nameToCamelCase(string $value): string
+    {
+        return (string) u($value)->camel();
     }
 
     private function __construct()

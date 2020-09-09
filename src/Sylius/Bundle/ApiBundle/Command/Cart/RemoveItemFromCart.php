@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-final class RemoveItemFromCart
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+
+/** @experimental */
+class RemoveItemFromCart implements OrderTokenValueAwareInterface
 {
     /** @var string|null */
-    public $tokenValue;
+    public $orderTokenValue;
 
     /**
      * @var string
@@ -33,8 +36,18 @@ final class RemoveItemFromCart
     {
         $command = new self($orderItemId);
 
-        $command->tokenValue = $tokenValue;
+        $command->orderTokenValue = $tokenValue;
 
         return $command;
+    }
+
+    public function getOrderTokenValue(): ?string
+    {
+        return $this->orderTokenValue;
+    }
+
+    public function setOrderTokenValue(?string $orderTokenValue): void
+    {
+        $this->orderTokenValue = $orderTokenValue;
     }
 }

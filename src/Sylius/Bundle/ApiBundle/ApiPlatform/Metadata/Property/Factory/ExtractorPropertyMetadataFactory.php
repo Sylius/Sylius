@@ -19,9 +19,7 @@ use ApiPlatform\Core\Metadata\Property\SubresourceMetadata;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface as SymfonyContainerInterface;
 
-/**
- * @internal
- */
+/** @internal */
 final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryInterface
 {
     /** @var PropertyMetadataFactoryInterface */
@@ -115,7 +113,7 @@ final class ExtractorPropertyMetadataFactory implements PropertyMetadataFactoryI
                 return (string) $resolved;
             }
 
-            throw new\ RuntimeException(sprintf('The container parameter "%s", used in the resource configuration value "%s", must be a string or numeric, but it is of type %s.', $parameter, $value, \gettype($resolved)));
+            throw new \RuntimeException(sprintf('The container parameter "%s", used in the resource configuration value "%s", must be a string or numeric, but it is of type %s.', $parameter, $value, \gettype($resolved)));
         }, $value);
 
         return str_replace('%%', '%', $escapedValue);

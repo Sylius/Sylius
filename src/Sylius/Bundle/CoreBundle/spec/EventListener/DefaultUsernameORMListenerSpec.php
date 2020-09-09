@@ -53,6 +53,35 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->onFlush($onFlushEventArgs);
     }
 
+    function it_sets_usernames_on_customer_update_when_user_is_associated(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customer,
+        ShopUserInterface $user,
+        ClassMetadata $userMetadata
+    ): void {
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([$user]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
+
+        $user->getUsername()->willReturn(null);
+        $user->getUsernameCanonical()->willReturn(null);
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
+
+        $user->getCustomer()->willReturn($customer);
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
     function it_updates_usernames_on_customer_email_change(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,

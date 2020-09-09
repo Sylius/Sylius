@@ -59,6 +59,7 @@ final class ShopSecurityContext implements Context
 
     /**
      * @Given I am a logged in customer
+     * @Given the customer logged in
      */
     public function iAmLoggedInCustomer()
     {

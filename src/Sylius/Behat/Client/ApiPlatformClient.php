@@ -30,19 +30,27 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @var string */
     private $resource;
 
+    /** @var string|null */
+    private $section;
+
     /** @var RequestInterface */
     private $request;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage, string $resource)
-    {
+    public function __construct(
+        AbstractBrowser $client,
+        SharedStorageInterface $sharedStorage,
+        string $resource,
+        ?string $section = null
+    ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
         $this->resource = $resource;
+        $this->section = $section;
     }
 
     public function index(): Response
     {
-        $this->request = Request::index($this->resource, $this->getToken());
+        $this->request = Request::index($this->section, $this->resource, $this->getToken());
 
         return $this->request($this->request);
     }
@@ -57,7 +65,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function subResourceIndex(string $subResource, string $id): Response
     {
-        $request = Request::subResourceIndex($this->resource, $id, $subResource);
+        $request = Request::subResourceIndex($this->section, $this->resource, $id, $subResource);
         $request->authorize($this->getToken());
 
         return $this->request($request);
@@ -65,7 +73,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function show(string $id): Response
     {
-        return $this->request(Request::show($this->resource, $id, $this->getToken()));
+        return $this->request(Request::show($this->section, $this->resource, $id, $this->getToken()));
     }
 
     public function create(?RequestInterface $request = null): Response
@@ -80,7 +88,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function delete(string $id): Response
     {
-        return $this->request(Request::delete($this->resource, $id, $this->getToken()));
+        return $this->request(Request::delete($this->section, $this->resource, $id, $this->getToken()));
     }
 
     public function filter(): Response
@@ -97,7 +105,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function applyTransition(string $id, string $transition, array $content = []): Response
     {
-        $request = Request::transition($this->resource, $id, $transition);
+        $request = Request::transition($this->section, $this->resource, $id, $transition);
         $request->authorize($this->getToken());
         $request->setContent($content);
 
@@ -106,7 +114,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function customItemAction(string $id, string $type, string $action): Response
     {
-        $request = Request::customItemAction($this->resource, $id, $type, $action);
+        $request = Request::customItemAction($this->section, $this->resource, $id, $type, $action);
         $request->authorize($this->getToken());
 
         return $this->request($request);
@@ -128,12 +136,14 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function executeCustomRequest(RequestInterface $request): Response
     {
+        $request->authorize($this->getToken());
+
         return $this->request($request);
     }
 
     public function buildCreateRequest(): void
     {
-        $this->request = Request::create($this->resource);
+        $this->request = Request::create($this->section, $this->resource);
         $this->request->authorize($this->getToken());
     }
 
@@ -141,13 +151,13 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $this->show($id);
 
-        $this->request = Request::update($this->resource, $id, $this->getToken());
+        $this->request = Request::update($this->section, $this->resource, $id, $this->getToken());
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
     public function buildUploadRequest(): void
     {
-        $this->request = Request::upload($this->resource, $this->getToken());
+        $this->request = Request::upload($this->section, $this->resource, $this->getToken());
     }
 
     /** @param string|int $value */

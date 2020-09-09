@@ -90,7 +90,7 @@ Let's assume that you would like such a feature in your system:
         {
             if (!$event->getSubject() instanceof OrderItemInterface) {
                 throw new \LogicException(
-                    sprintf('This listener operates only on order item, got "$s"', get_class($event->getSubject()))
+                    sprintf('This listener operates only on order item, got "%s"', get_class($event->getSubject()))
                 );
             }
 

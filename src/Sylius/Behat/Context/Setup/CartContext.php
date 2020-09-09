@@ -16,10 +16,11 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
-use Sylius\Bundle\ApiBundle\Command\PickupCart;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -28,47 +29,89 @@ final class CartContext implements Context
     /** @var MessageBusInterface */
     private $commandBus;
 
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    /** @var ProductVariantResolverInterface */
+    private $productVariantResolver;
 
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         MessageBusInterface $commandBus,
-        OrderRepositoryInterface $orderRepository,
+        ProductVariantResolverInterface $productVariantResolver,
         SharedStorageInterface $sharedStorage
     ) {
         $this->commandBus = $commandBus;
-        $this->orderRepository = $orderRepository;
+        $this->productVariantResolver = $productVariantResolver;
         $this->sharedStorage = $sharedStorage;
     }
 
     /**
-     * @Given I added product :product to the cart
+     * @Given /^the customer has created empty (cart)$/
      */
-    public function iAddedProductToTheCart(ProductInterface $product): void
+    public function theCustomerHasTheCart(string $cartToken): void
     {
-        /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findLatestCart();
+        //intentionally blank line
+    }
 
-        if ($order === null) {
-            $this->commandBus->dispatch(new PickupCart());
-
-            /** @var OrderInterface|null $order */
-            $order = $this->orderRepository->findLatestCart();
-        }
-
-        Assert::notNull($order);
-
-        $cartToken = $order->getTokenValue();
-
+    /**
+     * @Given /^I added (product "[^"]+") to the (cart)$/
+     * @Given /^I have (product "[^"]+") in the (cart)$/
+     * @Given /^I have (product "[^"]+") added to the (cart)$/
+     * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
+     * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
+     */
+    public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
+    {
         $this->commandBus->dispatch(AddItemToCart::createFromData(
-            $cartToken,
+            $tokenValue,
             $product->getCode(),
+            $this->productVariantResolver->getVariant($product)->getCode(),
             1
         ));
 
-        $this->sharedStorage->set('cart_token', $cartToken);
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given /^I have (product "[^"]+") with (product option "[^"]+") ([^"]+) in the (cart)$/
+     */
+    public function iAddThisProductWithToTheCart(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue,
+        string $tokenValue
+    ): void {
+        $this->commandBus->dispatch(AddItemToCart::createFromData(
+            $tokenValue,
+            $product->getCode(),
+            $this
+                ->getProductVariantWithProductOptionAndProductOptionValue(
+                    $product,
+                    $productOption,
+                    $productOptionValue
+                )
+                ->getCode(),
+            1
+        ));
+    }
+
+    private function getProductVariantWithProductOptionAndProductOptionValue(
+        ProductInterface $product,
+        ProductOptionInterface $productOption,
+        string $productOptionValue
+    ): ?ProductVariantInterface {
+        foreach ($product->getVariants() as $productVariant) {
+            /** @var ProductOptionValueInterface $variantProductOptionValue */
+            foreach ($productVariant->getOptionValues() as $variantProductOptionValue) {
+                if (
+                    $variantProductOptionValue->getValue() === $productOptionValue &&
+                    $variantProductOptionValue->getOption() === $productOption
+                ) {
+                    return $productVariant;
+                }
+            }
+        }
+
+        return null;
     }
 }
