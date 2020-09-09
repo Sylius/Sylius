@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-02T09:55:21Z
+
+Hey Igor, thanks for the contribution. Despite red build (which is probably nor related to PR, but I've restarted build), can you add one scenario to our behat tests that will cover this feature? Let's make it land in 1.7 as well
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-09-02T10:43:21Z
+
+A scenario where you select a parent on creation I guess? :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-02T10:54:04Z
+
+yes
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2020-09-09T07:20:08Z
+
+Rebased to 1.7 and added behat test, @lchrusciel
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-09T11:50:04Z
+
+Thanks, Igor! :tada:
