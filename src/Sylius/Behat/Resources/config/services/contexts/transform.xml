@@ -81,6 +81,11 @@
             <argument>%locale%</argument>
         </service>
 
+        <service id="sylius.behat.context.transform.product_association" class="Sylius\Behat\Context\Transform\ProductAssociationContext">
+            <argument type="service" id="sylius.repository.product_association" />
+            <argument>%locale%</argument>
+        </service>
+
         <service id="sylius.behat.context.transform.product_association_type" class="Sylius\Behat\Context\Transform\ProductAssociationTypeContext">
             <argument type="service" id="sylius.repository.product_association_type" />
         </service>

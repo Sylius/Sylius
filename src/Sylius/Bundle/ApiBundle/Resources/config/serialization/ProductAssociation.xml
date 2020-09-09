@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Product\Model\ProductAssociation">
+        <attribute name="id">
+            <group>product_association:read</group>
+        </attribute>
+        <attribute name="type">
+            <group>product_association:read</group>
+            <group>product_association:create</group>
+            <group>product_association_type:read</group>
+            <group>product_association_type:create</group>
+            <group>product_association_type:update</group>
+        </attribute>
+        <attribute name="owner">
+            <group>product_association:read</group>
+            <group>product_association:create</group>
+            <group>product_association:update</group>
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+        <attribute name="associatedProducts">
+            <group>product_association:read</group>
+            <group>product_association:create</group>
+            <group>product_association:update</group>
+            <group>product:read</group>
+            <group>product:create</group>
+            <group>product:update</group>
+        </attribute>
+    </class>
+</serializer>

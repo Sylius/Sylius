@@ -68,6 +68,11 @@
             <argument>admin</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.admin.product_associations" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>product-associations</argument>
+            <argument>admin</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.admin.product_option" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>product-options</argument>
             <argument>admin</argument>
