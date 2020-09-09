@@ -37,25 +37,27 @@ final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.api.command_data_transformer.service.first',
-            'sylius.api.command_data_transformer'
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.api.data_transformer.command_aware_input_data_transformer',
+            0,
+            'sylius.api.command_data_transformer.service.first'
         );
 
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'sylius.api.command_data_transformer.service.second',
-            'sylius.api.command_data_transformer'
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.api.data_transformer.command_aware_input_data_transformer',
+            1,
+            'sylius.api.command_data_transformer.service.second'
         );
     }
 
     /**
      * @test
      */
-    public function it_adds_command_data_transformer_chain_services(): void
+    public function it_creates_definition_without_any_transformers(): void
     {
         $this->compile();
 
-        $this->assertContainerBuilderHasService('sylius_api.command_data_transformers_chain');
+        $this->assertContainerBuilderHasService('sylius.api.data_transformer.command_aware_input_data_transformer');
     }
 
     protected function registerCompilerPass(ContainerBuilder $container): void

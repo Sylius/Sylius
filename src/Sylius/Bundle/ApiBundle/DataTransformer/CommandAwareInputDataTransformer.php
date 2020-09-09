@@ -19,18 +19,17 @@ use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 /** @experimental */
 final class CommandAwareInputDataTransformer implements DataTransformerInterface
 {
-    /** @var CommandDataTransformersChainInterface */
-    private $commandDataTransformersChain;
+    /** @var CommandDataTransformerInterface[] */
+    private $commandDataTransformers;
 
-    public function __construct(CommandDataTransformersChainInterface $commandDataTransformersChain)
+    public function __construct(CommandDataTransformerInterface ...$commandDataTransformers)
     {
-        $this->commandDataTransformersChain = $commandDataTransformersChain;
+        $this->commandDataTransformers = $commandDataTransformers;
     }
 
     public function transform($object, string $to, array $context = [])
     {
-        /** @var CommandDataTransformerInterface $transformer */
-        foreach ($this->commandDataTransformersChain->getCommandDataTransformers() as $transformer) {
+        foreach ($this->commandDataTransformers as $transformer) {
             if ($transformer->supportsTransformation($object)) {
                 $object = $transformer->transform($object, $to, $context);
             }
