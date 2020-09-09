@@ -112,5 +112,29 @@
         </service>
 
         <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
+
+        <service id="api_platform.listener.request.read" class="Sylius\Bundle\ApiBundle\ApiPlatform\EventListener\ReadListener">
+            <argument type="service" id="api_platform.collection_data_provider" />
+            <argument type="service" id="api_platform.item_data_provider" />
+            <argument type="service" id="api_platform.subresource_data_provider" />
+            <argument type="service" id="api_platform.serializer.context_builder" />
+            <argument type="service" id="api_platform.identifier.converter" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="4" />
+        </service>
+
+        <service id="api_platform.iri_converter" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\IriConverter" public="false">
+            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
+            <argument type="service" id="api_platform.item_data_provider" />
+            <argument type="service" id="api_platform.route_name_resolver" />
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.property_accessor" />
+            <argument type="service" id="api_platform.identifiers_extractor.cached" />
+            <argument type="service" id="api_platform.subresource_data_provider" on-invalid="ignore" />
+            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
+            <argument type="service" id="api_platform.resource_class_resolver" />
+        </service>
     </services>
 </container>

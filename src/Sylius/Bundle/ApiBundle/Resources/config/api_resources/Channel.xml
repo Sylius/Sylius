@@ -40,11 +40,43 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/channels/{code}</attribute>
                 <attribute name="groups">
                     <attribute>channel:read</attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="shop_billing_data_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

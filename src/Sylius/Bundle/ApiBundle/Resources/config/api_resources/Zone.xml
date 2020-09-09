@@ -42,6 +42,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zones/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
