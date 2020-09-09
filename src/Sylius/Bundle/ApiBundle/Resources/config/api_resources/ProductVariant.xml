@@ -6,6 +6,7 @@
 >
     <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
         <attribute name="validation_groups">sylius</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_variant:read</attribute>
@@ -13,8 +14,29 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-variants/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
+                <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-variants/{id}</attribute>
+            </itemOperation>
         </itemOperations>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

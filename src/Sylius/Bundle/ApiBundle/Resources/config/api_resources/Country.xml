@@ -27,8 +27,12 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="get" />
-            <collectionOperation name="post">
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">country:create</attribute>
                 </attribute>
@@ -36,8 +40,12 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+            </itemOperation>
+
             <itemOperation name="put">
+                <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">country:update</attribute>
                 </attribute>

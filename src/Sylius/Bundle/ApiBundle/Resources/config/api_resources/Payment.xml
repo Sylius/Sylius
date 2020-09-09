@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment.class%" shortName="Payment">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>payment:read</attribute>
@@ -31,7 +29,9 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payments</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_payment_filter</attribute>
                 </attribute>
@@ -39,15 +39,19 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get" />
-            <itemOperation name="complete">
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payments/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_complete">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="path">/admin/payments/{id}/complete</attribute>
+                <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes Payment</attribute>
                 </attribute>
-                <attribute name="method">PATCH</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="path">/payments/{id}/complete</attribute>
-                <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:complete</attribute>
             </itemOperation>
         </itemOperations>
 

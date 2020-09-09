@@ -46,7 +46,6 @@
         </attribute>
         <attribute name="reviews">
             <group>product:read</group>
-            <group>product:create</group>
         </attribute>
         <attribute name="options">
             <group>product:read</group>

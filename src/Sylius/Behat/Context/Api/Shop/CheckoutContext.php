@@ -223,7 +223,7 @@ final class CheckoutContext implements Context
 
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/complete', $this->sharedStorage->get('cart_token')),
+            \sprintf('/new-api/shop/orders/%s/complete', $this->sharedStorage->get('cart_token')),
             [],
             [],
             $this->getHeaders(),
@@ -257,7 +257,7 @@ final class CheckoutContext implements Context
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf(
-                '/new-api/orders/%s/shipments/%s',
+                '/new-api/shop/orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
                 (string) $this->iriConverter->getItemFromIri($this->getCart()['shipments'][0])->getId()
             ),
@@ -293,7 +293,7 @@ final class CheckoutContext implements Context
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf(
-                '/new-api/orders/%s/payments/%s',
+                '/new-api/shop/orders/%s/payments/%s',
                 $this->sharedStorage->get('cart_token'),
                 (string) $this->iriConverter->getItemFromIri($this->getCart()['payments'][0])->getId()
             ),
@@ -648,7 +648,7 @@ final class CheckoutContext implements Context
 
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/orders/%s/address', $this->sharedStorage->get('cart_token')),
+            \sprintf('/new-api/shop/orders/%s/address', $this->sharedStorage->get('cart_token')),
             [],
             [],
             $this->getHeaders(),
@@ -680,7 +680,7 @@ final class CheckoutContext implements Context
 
         $this->client->request(
             Request::METHOD_GET,
-            \sprintf('/new-api/orders/%s/shipments/%s/methods', $cart['tokenValue'], $shipment->getId()),
+            \sprintf('/new-api/shop/orders/%s/shipments/%s/methods', $cart['tokenValue'], $shipment->getId()),
             [],
             [],
             $this->getHeaders(),
@@ -726,7 +726,7 @@ final class CheckoutContext implements Context
 
         $this->client->request(
             Request::METHOD_GET,
-            \sprintf('/new-api/orders/%s/payments/%s/methods',
+            \sprintf('/new-api/shop/orders/%s/payments/%s/methods',
                 $this->sharedStorage->get('cart_token'),
                 $order->getLastPayment()->getId()),
             [],

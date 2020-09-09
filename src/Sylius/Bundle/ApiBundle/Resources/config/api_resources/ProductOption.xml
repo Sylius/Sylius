@@ -16,6 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_option.class%" shortName="ProductOption">
+        <attribute name="route_prefix">admin</attribute>
+
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_option:read</attribute>
@@ -29,11 +31,12 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
             </collectionOperation>
-            <collectionOperation name="post">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_option:create</attribute>
                 </attribute>
@@ -41,11 +44,12 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="get">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
             </itemOperation>
-            <itemOperation name="put">
-                <attribute name="security">is_granted('ROLE_API_ACCESS')</attribute>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_option:update</attribute>
                 </attribute>
