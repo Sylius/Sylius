@@ -97,6 +97,17 @@
         <property name="channels" writable="true" />
         <property name="calculator" writable="true" />
         <property name="configuration" writable="true" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>
