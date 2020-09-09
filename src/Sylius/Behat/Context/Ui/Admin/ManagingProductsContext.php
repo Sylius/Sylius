@@ -831,6 +831,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that original price can not be defined without price
+     */
+    public function iShouldBeNotifiedThatOriginalPriceCanNotBeDefinedWithoutPrice(): void
+    {
+        Assert::same(
+            $this->createSimpleProductPage->getChannelPricingValidationMessage(),
+            'Original price can not be defined without price'
+        );
+    }
+
+    /**
      * @Then I should be notified that simple product code has to be unique
      */
     public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique()
@@ -891,7 +902,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
-        $this->iSetItsPriceTo( '',  $channel);
+        $this->iSetItsPriceTo('',  $channel);
     }
 
     /**

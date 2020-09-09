@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
@@ -33,7 +34,7 @@ final class ChannelPricingType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        RepositoryInterface $channelPricingRepository
+        ?RepositoryInterface $channelPricingRepository = null
     ) {
         parent::__construct($dataClass, $validationGroups);
 
@@ -66,7 +67,11 @@ final class ChannelPricingType extends AbstractResourceType
             $channel = $options['channel'];
 
             if (!$channel->isEnabled() && $channelPricing->getPrice() === null) {
-                $this->channelPricingRepository->remove($channelPricing);
+                $event->setData(null);
+
+                if ($channelPricing->getId() !== null) {
+                    $this->channelPricingRepository->remove($channelPricing);
+                }
 
                 return;
             }

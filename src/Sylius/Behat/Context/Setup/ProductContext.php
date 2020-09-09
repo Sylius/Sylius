@@ -315,6 +315,19 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^("[^"]+" variant) priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function variantPricedAtInChannel(
+        ProductVariantInterface $productVariant,
+        int $price,
+        ChannelInterface $channel
+    ): void {
+        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+
+        $this->sharedStorage->set('variant', $productVariant);
+    }
+
+    /**
      * @Given /^the (product "[^"]+") has(?:| a| an) "([^"]+)" variant$/
      * @Given /^(this product) has(?:| a| an) "([^"]+)" variant$/
      * @Given /^(this product) has "([^"]+)", "([^"]+)" and "([^"]+)" variants$/
@@ -876,6 +889,16 @@ final class ProductContext implements Context
 
         $priceValue = $this->getPriceFromString($price);
         $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
+    }
+
+    /**
+     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
+     */
+    public function thisProductIsDisabledInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $product->removeChannel($channel);
+
+        $this->objectManager->flush();
     }
 
     /**
