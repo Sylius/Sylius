@@ -26,6 +26,7 @@
         <parameter key="sylius.behat.page.shop.account.request_password_reset.class">Sylius\Behat\Page\Shop\Account\RequestPasswordResetPage</parameter>
         <parameter key="sylius.behat.page.shop.account.reset_password.class">Sylius\Behat\Page\Shop\Account\ResetPasswordPage</parameter>
         <parameter key="sylius.behat.page.shop.account.verify.class">Sylius\Behat\Page\Shop\Account\VerificationPage</parameter>
+        <parameter key="sylius.behat.page.shop.account.well_known_password_change.class">Sylius\Behat\Page\Shop\Account\WellKnownPasswordChangePage</parameter>
     </parameters>
 
     <services>
@@ -48,5 +49,6 @@
         <service id="sylius.behat.page.shop.account.request_password_reset" class="%sylius.behat.page.shop.account.request_password_reset.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.shop.account.verify" class="%sylius.behat.page.shop.account.verify.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.well_known_password_change" class="%sylius.behat.page.shop.account.well_known_password_change.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

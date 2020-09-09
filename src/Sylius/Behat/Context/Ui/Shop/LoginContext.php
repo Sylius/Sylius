@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\RequestPasswordResetPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
+use Sylius\Behat\Page\Shop\Account\WellKnownPasswordChangePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -43,6 +44,9 @@ final class LoginContext implements Context
     /** @var ResetPasswordPageInterface */
     private $resetPasswordPage;
 
+    /** @var WellKnownPasswordChangePageInterface */
+    private $wellKnownPasswordChangePage;
+
     /** @var RegisterElementInterface */
     private $registerElement;
 
@@ -58,6 +62,7 @@ final class LoginContext implements Context
         RegisterPageInterface $registerPage,
         RequestPasswordResetPageInterface $requestPasswordResetPage,
         ResetPasswordPageInterface $resetPasswordPage,
+        WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
         RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker,
         CurrentPageResolverInterface $currentPageResolver
@@ -67,6 +72,7 @@ final class LoginContext implements Context
         $this->registerPage = $registerPage;
         $this->requestPasswordResetPage = $requestPasswordResetPage;
         $this->resetPasswordPage = $resetPasswordPage;
+        $this->wellKnownPasswordChangePage = $wellKnownPasswordChangePage;
         $this->registerElement = $registerElement;
         $this->notificationChecker = $notificationChecker;
         $this->currentPageResolver = $currentPageResolver;
@@ -86,6 +92,14 @@ final class LoginContext implements Context
     public function iWantToResetPassword(): void
     {
         $this->requestPasswordResetPage->open();
+    }
+
+    /**
+     * @When I want to reset password from my password manager
+     */
+    public function iWantToResetPasswordFromMyPasswordManager(): void
+    {
+        $this->wellKnownPasswordChangePage->tryToOpen();
     }
 
     /**
@@ -290,5 +304,13 @@ final class LoginContext implements Context
             'password',
             'Password must be at least 4 characters long.'
         ));
+    }
+
+    /**
+     * @Then I should be redirected to the forgotten password page
+     */
+    public function iShouldBeRedirectedToTheForgottenPasswordPage()
+    {
+        Assert::true($this->requestPasswordResetPage->isOpen(), 'User should be on the forgotten password page but they are not.');
     }
 }
