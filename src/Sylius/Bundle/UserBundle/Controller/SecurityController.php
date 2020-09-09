@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Controller;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserLoginType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
     /**
      * Login form action.
