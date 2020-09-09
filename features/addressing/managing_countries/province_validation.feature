@@ -33,3 +33,9 @@ Feature: Province validation
         And I remove "Northern Ireland" province name
         Then I should be notified that name of the province is required
         And the province should still be named "Northern Ireland" in this country
+
+    @api
+    Scenario: Trying to change code of existing province
+        Given this country has the "Northern Ireland" province with "GB-NIR" code
+        When I want to edit this country
+        Then I should not be able to edit its code

@@ -43,6 +43,8 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         string $operationName = null,
         array $context = []
     ) {
+        $operationName = strtoupper($operationName);
+
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
