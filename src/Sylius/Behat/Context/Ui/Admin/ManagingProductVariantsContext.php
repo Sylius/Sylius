@@ -136,6 +136,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I remove its price for :channel channel
+     */
+    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceTo('',  $channel);
+    }
+
+    /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsOriginalPriceTo($originalPrice, ChannelInterface $channel)
@@ -541,6 +549,19 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatVariantsCannotBeGeneratedFromOptionsWithoutAnyValues(): void
     {
         $this->notificationChecker->checkNotification('Cannot generate variants for a product without options values', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should not have configured price for :channel channel
+     */
+    public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
+    {
+        /** @var ProductVariantInterface $product */
+        $productVariant = $this->sharedStorage->get('variant');
+
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
+
+        Assert::same($this->updatePage->getPriceForChannel($channel), '');
     }
 
     /**
