@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Doctrine\ApiShopRequestTypes;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -25,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
-final class OrderPatchMethodItemExtension implements QueryItemExtensionInterface
+final class OrderMethodsItemExtension implements QueryItemExtensionInterface
 {
     /** @var UserContextInterface */
     private $userContext;
@@ -49,17 +50,27 @@ final class OrderPatchMethodItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($operationName !== Request::METHOD_PATCH) {
+        if (
+            $operationName === Request::METHOD_GET ||
+            $operationName === ApiShopRequestTypes::SHOP_GET ||
+            $operationName === ApiShopRequestTypes::ADJUSTMENTS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::ITEMS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::ITEMS_ADJUSTMENTS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::SHIPMENTS_METHODS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::PAYMENTS_METHODS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::SHIPMENTS_GET_SUBRESOURCE ||
+            $operationName === ApiShopRequestTypes::PAYMENTS_GET_SUBRESOURCE
+        ) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForPatchMethod($user, $queryBuilder, $operationName, $rootAlias);
+        $this->applyToItemForDeleteMethod($user, $queryBuilder, $operationName, $rootAlias);
     }
 
-    private function applyToItemForPatchMethod(
+    private function applyToItemForDeleteMethod(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
         string $operationName,

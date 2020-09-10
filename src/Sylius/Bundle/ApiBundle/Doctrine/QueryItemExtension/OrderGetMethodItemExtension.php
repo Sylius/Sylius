@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Doctrine\ApiShopRequestTypes;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -49,7 +50,17 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($operationName !== Request::METHOD_GET) {
+        if (
+            $operationName !== Request::METHOD_GET &&
+            $operationName !== ApiShopRequestTypes::SHOP_GET &&
+            $operationName !== ApiShopRequestTypes::ADJUSTMENTS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::ITEMS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::ITEMS_ADJUSTMENTS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::SHIPMENTS_METHODS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::PAYMENTS_METHODS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::SHIPMENTS_GET_SUBRESOURCE &&
+            $operationName !== ApiShopRequestTypes::PAYMENTS_GET_SUBRESOURCE
+        ) {
             return;
         }
 
