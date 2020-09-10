@@ -289,7 +289,7 @@ final class ProductAttributeContext implements Context
      *
      * @return ProductAttributeInterface
      */
-    private function createProductAttribute($type, $name, $code = null)
+    private function createProductAttribute($type, $name, $code = null, bool $translatable = true)
     {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
 
@@ -297,6 +297,7 @@ final class ProductAttributeContext implements Context
 
         $productAttribute->setCode($code);
         $productAttribute->setName($name);
+        $productAttribute->setTranslatable($translatable);
 
         return $productAttribute;
     }
