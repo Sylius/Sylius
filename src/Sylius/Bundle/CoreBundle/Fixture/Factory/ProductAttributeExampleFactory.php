@@ -92,9 +92,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
             ->setDefault('configuration', function (Options $options): array {
                 return [];
             })
-            ->setDefault('translatable', function (Options $options): bool {
-                return $this->faker->boolean;
-            })
+            ->setDefault('translatable', true)
             ->setAllowedValues('type', array_keys($this->attributeTypes))
         ;
     }
