@@ -49,9 +49,6 @@ interface AttributeValueInterface extends ResourceInterface
 
     public function getType(): ?string;
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function getLocaleCode(): ?string;
 
     public function setLocaleCode(?string $localeCode): void;

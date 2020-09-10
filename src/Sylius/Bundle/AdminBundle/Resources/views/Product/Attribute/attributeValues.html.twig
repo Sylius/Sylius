@@ -3,7 +3,7 @@
 {% set subject = metadata.name|replace({'_attribute': ''}) %}
 {% for code, localeCodes in forms %}
     {% for localeCode, form in localeCodes %}
-        <div class="attribute" data-id="{{ code }}">
+        <div class="attribute" data-id="{{ code }}" data-localecode="{{ localeCode }}">
             {% set id = form.vars.label|replace({' ': '_'})|lower %}
             {% if 'type_checkbox' in form.vars.cache_key %}
                 {{ self.checkboxField(form, count, id, subject, metadata.applicationName) }}
@@ -14,10 +14,12 @@
                    name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][attribute]"
                    id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_attribute"
                    value="{{ code }}"/>
-            <input type="hidden"
-                   name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][localeCode]"
-                   id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_localeCode"
-                   value="{{ localeCode }}"/>
+            {% if localeCode != '__not_translatable__' %}
+                <input type="hidden"
+                       name="{{ metadata.applicationName }}_{{ subject }}[attributes][{{ count }}][localeCode]"
+                       id="{{ metadata.applicationName }}_{{ subject }}_attributes_{{ count }}_localeCode"
+                       value="{{ localeCode }}"/>
+            {% endif %}
             {% set count = count + 1 %}
         </div>
     {% endfor %}

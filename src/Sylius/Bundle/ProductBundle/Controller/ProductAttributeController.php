@@ -89,12 +89,15 @@ class ProductAttributeController extends ResourceController
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 
         $forms = [];
+        if (!$attribute->isTranslatable()) {
+            $localeCodes = ['__not_translatable__'];
+        }
+
         foreach ($localeCodes as $localeCode) {
             $forms[$localeCode] = $this
                 ->get('form.factory')
                 ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
-                ->createView()
-            ;
+                ->createView();
         }
 
         return $forms;

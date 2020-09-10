@@ -176,7 +176,7 @@ class Product implements ProductInterface
 
         $attributes = $this->attributes->filter(
             function (ProductAttributeValueInterface $attribute) use ($baseLocaleCode) {
-                return $attribute->getLocaleCode() === $baseLocaleCode;
+                return $attribute->getLocaleCode() === $baseLocaleCode || null === $attribute->getLocaleCode();
             }
         );
 
@@ -229,7 +229,7 @@ class Product implements ProductInterface
 
         foreach ($this->attributes as $attribute) {
             if ($attribute->getAttribute()->getCode() === $attributeCode
-                && $attribute->getLocaleCode() === $localeCode) {
+                && ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
                 return true;
             }
         }
@@ -245,7 +245,7 @@ class Product implements ProductInterface
 
         foreach ($this->attributes as $attribute) {
             if ($attribute->getAttribute()->getCode() === $attributeCode &&
-                $attribute->getLocaleCode() === $localeCode) {
+                ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
                 return $attribute;
             }
         }

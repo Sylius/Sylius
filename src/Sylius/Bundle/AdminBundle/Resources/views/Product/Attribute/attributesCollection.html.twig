@@ -5,22 +5,34 @@
     {% import _self as self %}
 
     <div class="ui top attached tabular menu">
+
+        <a class="item active" data-tab="__not_translatable__">Not translatable</a>
         {% for localeCode, translationForm in attr.translations %}
-            <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
+            <a class="item" data-tab="{{ localeCode }}">
                 {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
             </a>
         {% endfor %}
     </div>
 
-    {% for localeCode, translationForm in attr.translations %}
-        <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
-            {% apply spaceless %}
-                {% for child in form %}
-                    {% if localeCode == child.localeCode.vars.value %}
-                        {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
-                    {% endif %}
-                {% endfor %}
-            {% endapply %}
+    <div class="ui bottom attached tab segment active" data-tab="__not_translatable__">
+        {% apply spaceless %}
+            {% for child in form %}
+                {% if child.localeCode.vars.value is empty %}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endif %}
+            {% endfor %}
+        {% endapply %}
+    </div>
+
+    {% for localeCode, translationForm in attr.translations if localeCode is not empty %}
+        <div class="ui bottom attached tab segment" data-tab="{{ localeCode }}">
+        {% apply spaceless %}
+            {% for child in form %}
+                {% if localeCode == child.localeCode.vars.value %}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endif %}
+            {% endfor %}
+        {% endapply %}
         </div>
     {% endfor %}
 {%- endblock collection_widget %}
@@ -46,6 +58,9 @@
             {{ form_errors(form.value) }}
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
-        <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
+
+        {% if form.localeCode.vars.value is not empty %}
+            <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
+        {% endif %}
     </div>
 {% endmacro %}

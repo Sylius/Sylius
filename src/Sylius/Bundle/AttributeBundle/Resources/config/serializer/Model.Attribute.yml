@@ -35,3 +35,7 @@ Sylius\Component\Attribute\Model\Attribute:
             expose: true
             type: array
             groups: [Detailed]
+        translatable:
+            expose: true
+            type: boolean
+            groups: [Default, Detailed]
