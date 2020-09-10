@@ -25,10 +25,19 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/label.html.twig"
+                translatable:
+                    type: twig
+                    label: sylius.ui.translatable
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:
                 code:
                     type: string
                     label: sylius.ui.code
+                translatable:
+                    type: boolean
+                    label: sylius.ui.translatable
             actions:
                 main:
                     create:

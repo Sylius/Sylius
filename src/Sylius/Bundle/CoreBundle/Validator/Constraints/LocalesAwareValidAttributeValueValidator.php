@@ -45,7 +45,7 @@ final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
         $defaultLocale = $this->localeProvider->getDefaultLocaleCode();
         $configuration = $value->getAttribute()->getConfiguration();
 
-        if ($defaultLocale === $value->getLocaleCode()) {
+        if ($defaultLocale === $value->getLocaleCode() || null === $value->getLocaleCode()) {
             $configuration = array_merge($configuration, ['required' => true]);
         }
 

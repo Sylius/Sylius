@@ -21,7 +21,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field type="string" name="localeCode" column="locale_code" />
+        <field type="string" name="localeCode" column="locale_code" nullable="true" />
 
         <field name="text" column="text_value" type="text" nullable="true" />
         <field name="boolean" column="boolean_value" type="boolean" nullable="true" />

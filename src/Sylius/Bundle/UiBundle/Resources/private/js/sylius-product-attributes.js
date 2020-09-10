@@ -93,7 +93,7 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
         const attributeFormElements = modifyAttributeFormElements($(response));
 
         attributeFormElements.each((index, element) => {
-          const localeCode = $(element).find('input[type="hidden"]').last().val();
+          const localeCode = $(element).data('localecode');
           $(`#attributesContainer > div[data-tab="${localeCode}"]`).append(element);
         });
 

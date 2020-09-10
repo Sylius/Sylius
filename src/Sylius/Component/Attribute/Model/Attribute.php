@@ -44,6 +44,9 @@ class Attribute implements AttributeInterface
     /** @var int */
     protected $position;
 
+    /** @var bool */
+    protected $translatable = false;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -119,6 +122,16 @@ class Attribute implements AttributeInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    public function isTranslatable(): bool
+    {
+        return $this->translatable;
+    }
+
+    public function setTranslatable(bool $translatable): void
+    {
+        $this->translatable = $translatable;
     }
 
     /**

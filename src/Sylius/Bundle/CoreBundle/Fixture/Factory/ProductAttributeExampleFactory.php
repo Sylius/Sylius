@@ -69,6 +69,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         }
 
         $productAttribute->setConfiguration($options['configuration']);
+        $productAttribute->setTranslatable($options['translatable']);
 
         return $productAttribute;
     }
@@ -90,6 +91,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
             })
             ->setDefault('configuration', function (Options $options): array {
                 return [];
+            })
+            ->setDefault('translatable', function (Options $options): bool {
+                return $this->faker->boolean;
             })
             ->setAllowedValues('type', array_keys($this->attributeTypes))
         ;

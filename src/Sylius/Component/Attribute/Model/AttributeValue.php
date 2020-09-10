@@ -82,8 +82,6 @@ class AttributeValue implements AttributeValueInterface
 
     public function setLocaleCode(?string $localeCode): void
     {
-        Assert::string($localeCode);
-
         $this->localeCode = $localeCode;
     }
 

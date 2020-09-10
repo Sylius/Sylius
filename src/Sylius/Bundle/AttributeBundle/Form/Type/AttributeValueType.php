@@ -19,6 +19,7 @@ use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -59,7 +60,7 @@ abstract class AttributeValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('localeCode', LocaleChoiceType::class)
+            ->add('localeCode', LocaleChoiceType::class, ['required' => false])
             ->add('attribute', $this->attributeChoiceType)
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $attributeValue = $event->getData();
