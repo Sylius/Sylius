@@ -30,43 +30,6 @@
             <attribute name="position">ASC</attribute>
         </attribute>
 
-        <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shipping_method:update</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_archive">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shipping-methods/{id}/archive</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Archives Shipping Method</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_restore">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shipping-methods/{id}/restore</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Restores archived Shipping Method</attribute>
-                </attribute>
-            </itemOperation>
-        </itemOperations>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -84,6 +47,106 @@
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shipping-methods/{code}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shipping-methods/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shipping_method:update</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shipping-methods/{code}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipping-methods/{code}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Archives Shipping Method</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_restore">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shipping-methods/{code}/restore</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Restores archived Shipping Method</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

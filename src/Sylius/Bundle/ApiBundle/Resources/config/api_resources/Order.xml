@@ -47,25 +47,59 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{id}</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Deletes cart</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_cancel">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/orders/{id}/cancel</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>
                 <attribute name="denormalization_context">
@@ -73,12 +107,22 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_add_item">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/items</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/items</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="denormalization_context">
@@ -86,12 +130,22 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Adds Item to cart</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_address">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/address</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/address</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder</attribute>
                 <attribute name="denormalization_context">
@@ -102,12 +156,22 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_select_shipping_method">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/shipments/{shipmentId}</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipmentId}</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod</attribute>
                 <attribute name="denormalization_context">
@@ -120,7 +184,7 @@
                     <attribute name="summary">Selects shipping methods for particular shipment</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -141,7 +205,7 @@
 
             <itemOperation name="shop_select_payment_method">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/payments/{paymentId}</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod</attribute>
                 <attribute name="denormalization_context">
@@ -154,7 +218,7 @@
                     <attribute name="summary">Selects payment methods for particular payment</attribute>
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">id</attribute>
+                            <attribute name="name">tokenValue</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
@@ -175,7 +239,7 @@
 
             <itemOperation name="shop_complete">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/complete</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/complete</attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
                     <attribute>sylius_checkout_complete</attribute>
@@ -190,12 +254,22 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes checkout</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_remove_item">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/remove</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/remove</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart</attribute>
                 <attribute name="denormalization_context">
@@ -203,12 +277,22 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Removes Item</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_change_quantity">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/change-quantity</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/change-quantity</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart</attribute>
                 <attribute name="denormalization_context">
@@ -216,6 +300,16 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Changes quantity of order item</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">tokenValue</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -223,37 +317,37 @@
         <subresourceOperations>
             <subresourceOperation name="items_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}/items</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/items</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="shipments_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{id}/shipments</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/shipments</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="payments_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{id}/payments</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/payments</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}/adjustments</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/adjustments</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="payments_methods_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}/payments/{payments}/methods</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/payments/{payments}/methods</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="shipments_methods_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}/shipments/{shipments}/methods</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipments}/methods</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="items_adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{id}/items/{items}/adjustments</attribute>
+                <attribute name="path">/shop/orders/{tokenValue}/items/{items}/adjustments</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

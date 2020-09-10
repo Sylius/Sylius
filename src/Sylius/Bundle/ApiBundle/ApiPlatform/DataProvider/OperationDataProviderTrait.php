@@ -144,6 +144,10 @@ trait OperationDataProviderTrait
                 return $parameters['tokenValue'];
             }
 
+            if (isset($parameters['slug'])) {
+                return $parameters['slug'];
+            }
+
             return null;
         }
 }
