@@ -55,6 +55,13 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/payments/{id}/methods</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
