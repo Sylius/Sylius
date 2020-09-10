@@ -132,6 +132,7 @@ final class ProductAttributeApiTest extends JsonApiTestCase
 <<<EOT
         {
             "code": "mug_material",
+            "translatable": true,
             "translations": {
                 "de_CH": {
                     "name": "Becher Material"
@@ -189,6 +190,7 @@ EOT;
 <<<EOT
         {
             "position": 2,
+            "translatable": true,
             "translations": {
                 "de_CH": {
                     "name": "Becher Material"
@@ -286,6 +288,7 @@ EOT;
 <<<EOT
         {
             "code": "mug_color",
+            "translatable": true,
             "configuration": {
                 "choices": [
                     {"en_US": "yellow", "fr_FR": "jaune"},
@@ -311,6 +314,53 @@ EOT;
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'product_attribute/create_select_response', Response::HTTP_CREATED);
+
+        $expectedChoiceValues = [
+            ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
+            ['en_US' => 'green'],
+            ['en_US' => 'black'],
+        ];
+        $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_create_non_translatable_product_attribute()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/locales.yml');
+
+        $data =
+<<<EOT
+        {
+            "code": "mug_color",
+            "translatable": false,
+            "configuration": {
+                "choices": [
+                    {"en_US": "yellow", "fr_FR": "jaune"},
+                    {"en_US": "green"},
+                    {"en_US": "black"}
+                ],
+                "multiple": true,
+                "min": 1,
+                "max": 2
+            },
+            "translations": {
+                "de_CH": {
+                    "name": "Becher Farbe"
+                },
+                "en_US": {
+                    "name": "Mug color"
+                }
+            }
+        }
+EOT;
+
+        $this->client->request('POST', '/api/v1/product-attributes/select', [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'product_attribute/create_non_translatable_response', Response::HTTP_CREATED);
 
         $expectedChoiceValues = [
             ['en_US' => 'yellow', 'fr_FR' => 'jaune'],

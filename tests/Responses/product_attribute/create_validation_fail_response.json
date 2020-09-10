@@ -6,6 +6,7 @@
             "type": {},
             "position": {},
             "translations": {},
+            "translatable": {},
             "code": {
                 "errors": [
                     "Please enter attribute code."
