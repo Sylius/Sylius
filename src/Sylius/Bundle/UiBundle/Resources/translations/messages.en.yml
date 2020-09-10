@@ -569,6 +569,7 @@ sylius:
         not_equal: 'Not equal'
         not_in: 'Not in'
         not_tracked: 'Not tracked'
+        not_translatable: 'Not translatable'
         not_verified: 'Not verified'
         notes: 'Notes'
         notify_customer: 'Notify Customer'

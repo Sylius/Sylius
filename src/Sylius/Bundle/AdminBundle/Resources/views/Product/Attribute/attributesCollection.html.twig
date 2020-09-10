@@ -6,7 +6,7 @@
 
     <div class="ui top attached tabular menu">
 
-        <a class="item active" data-tab="__not_translatable__">Not translatable</a>
+        <a class="item active" data-tab="__not_translatable__">{{ 'sylius.ui.not_translatable'|trans }}</a>
         {% for localeCode, translationForm in attr.translations %}
             <a class="item" data-tab="{{ localeCode }}">
                 {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
