@@ -32,7 +32,7 @@
 
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/orders</attribute>
+                <attribute name="path">/shop/orders</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
                 <attribute name="denormalization_context">
