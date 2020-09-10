@@ -18,6 +18,13 @@
             "value": "make life harder",
             "type": "text",
             "localeCode": "en_US"
+        },
+        {
+            "id": @integer@,
+            "code": "mug_size",
+            "name": "Mug size",
+            "value": "L",
+            "type": "text"
         }
     ],
     "options": [],

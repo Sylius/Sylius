@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 3,
+    "total": 4,
     "_links": {
         "self": {
             "href": "\/api\/v1\/product-attributes\/?page=1&limit=10"
@@ -21,6 +21,7 @@
                 "code": "mug_material",
                 "type": "text",
                 "position": 0,
+                "translatable": true,
                 "translations": {
                     "de": {
                         "id": @integer@,
@@ -44,6 +45,7 @@
                 "code": "mug_collection",
                 "type": "text",
                 "position": 1,
+                "translatable": true,
                 "translations": {
                     "de": {
                         "id": @integer@,
@@ -67,6 +69,7 @@
                 "code": "mug_color",
                 "type": "select",
                 "position": 2,
+                "translatable": true,
                 "translations": {
                     "en_US": {
                         "id": @integer@,
@@ -77,6 +80,25 @@
                 "_links": {
                     "self": {
                         "href": "\/api\/v1\/product-attributes\/mug_color"
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "mug_size",
+                "type": "text",
+                "position": 3,
+                "translatable": false,
+                "translations": {
+                    "en_US": {
+                        "id": @integer@,
+                        "locale": "en_US",
+                        "name": "Mug size"
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "\/api\/v1\/product-attributes\/mug_size"
                     }
                 }
             }
