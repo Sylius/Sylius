@@ -174,6 +174,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) is(?:| also) unavailable in ("[^"]+" channel)$/
+     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoUnavailableInChannel(ProductInterface $product, ChannelInterface $channel): void
     {
@@ -312,6 +313,19 @@ final class ProductContext implements Context
             StringInflector::nameToUppercaseCode($productVariantName),
             $channel ?? $this->sharedStorage->get('channel')
         );
+    }
+
+    /**
+     * @Given /^("[^"]+" variant) priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function variantPricedAtInChannel(
+        ProductVariantInterface $productVariant,
+        int $price,
+        ChannelInterface $channel
+    ): void {
+        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+
+        $this->sharedStorage->set('variant', $productVariant);
     }
 
     /**
