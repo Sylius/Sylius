@@ -12,6 +12,7 @@ sylius:
             remember_me: Ingat saya
             shipping_address: Alamat pengiriman
             username: Username
+            verified: Diverifikasi
         user_filter:
             query: Cari
         user_change_password:
