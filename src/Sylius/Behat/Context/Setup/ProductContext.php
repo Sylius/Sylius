@@ -174,6 +174,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) is(?:| also) unavailable in ("[^"]+" channel)$/
+     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoUnavailableInChannel(ProductInterface $product, ChannelInterface $channel): void
     {
@@ -889,26 +890,6 @@ final class ProductContext implements Context
 
         $priceValue = $this->getPriceFromString($price);
         $this->createProductVariant($product, $productVariantName, $priceValue, $code, $channel, null, true, $currentStock);
-    }
-
-    /**
-     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
-     */
-    public function thisProductIsDisabledInChannel(ProductInterface $product, ChannelInterface $channel): void
-    {
-        $product->removeChannel($channel);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^(this product) is disabled in ("[^"]+" channel)$/
-     */
-    public function thisProductIsDisabledInChannel(ProductInterface $product, ChannelInterface $channel): void
-    {
-        $product->removeChannel($channel);
-
-        $this->objectManager->flush();
     }
 
     private function getPriceFromString(string $price): int

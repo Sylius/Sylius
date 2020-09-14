@@ -6,9 +6,9 @@ Feature: Removing a product's price from the channel where it is not available i
 
     Background:
         Given the store operates on a channel named "Web-US" in "USD" currency
-        And the store operates on another channel named "Web-GB" in "USD" currency
+        And the store operates on another channel named "Web-GB" in "GBP" currency
         And the store has a product "Dice Brewing" priced at "$10.00" in "Web-US" channel
-        And this product is also priced at "$5.00" in "Web-GB" channel
+        And this product is also priced at "£5.00" in "Web-GB" channel
         And this product is disabled in "Web-GB" channel
         And I am logged in as an administrator
 

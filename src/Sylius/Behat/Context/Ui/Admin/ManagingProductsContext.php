@@ -831,17 +831,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that original price can not be defined without price
-     */
-    public function iShouldBeNotifiedThatOriginalPriceCanNotBeDefinedWithoutPrice(): void
-    {
-        Assert::same(
-            $this->createSimpleProductPage->getChannelPricingValidationMessage(),
-            'Original price can not be defined without price'
-        );
-    }
-
-    /**
      * @Then I should be notified that simple product code has to be unique
      */
     public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique()
@@ -898,11 +887,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I remove its price for ("[^"]+" channel)$/
+     * @When I remove its price for :channelName channel
      */
-    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    public function iRemoveItsPriceForChannel(string $channelName): void
     {
-        $this->iSetItsPriceTo('',  $channel);
+        $this->iSetItsPriceTo('',  $channelName);
     }
 
     /**
@@ -1058,11 +1047,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^I should not have configured price for ("[^"]+" channel)$/
+     * @Then I should not have configured price for :channelName channel
      */
-    public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
+    public function iShouldNotHaveConfiguredPriceForChannel(string $channelName): void
     {
-        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), '');
+        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channelName), '');
     }
 
     /**

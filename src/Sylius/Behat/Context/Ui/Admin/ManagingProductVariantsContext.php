@@ -137,15 +137,15 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I remove its price for :channel channel
      */
-    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    public function iRemoveItsPriceForChannel(string $channelName): void
     {
-        $this->iSetItsPriceTo('',  $channel);
+        $this->iSetItsPriceTo('',  $channelName);
     }
 
     /**
-     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
+    public function iSetItsOriginalPriceTo(string $originalPrice, string $channelName): void
     {
         $this->createPage->specifyOriginalPrice($originalPrice, $channelName);
     }
@@ -551,16 +551,16 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should not have configured price for :channel channel
+     * @Then I should not have configured price for :channelName channel
      */
-    public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
+    public function iShouldNotHaveConfiguredPriceForChannel(string $channelName): void
     {
         /** @var ProductVariantInterface $product */
         $productVariant = $this->sharedStorage->get('variant');
 
         $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
 
-        Assert::same($this->updatePage->getPriceForChannel($channel), '');
+        Assert::same($this->updatePage->getPriceForChannel($channelName), '');
     }
 
     /**
