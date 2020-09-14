@@ -140,7 +140,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
-        $this->iSetItsPriceTo('',  $channel);
+        $this->iSetItsPriceTo('', $channel);
     }
 
     /**

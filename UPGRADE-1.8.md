@@ -6,6 +6,7 @@
     +   ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     +   Sylius\Bundle\ApiBundle\SyliusApiBundle::class => ['all' => true],
     +   Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
+    +   SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     ```
 
 1. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
@@ -93,7 +94,20 @@ time out during this ajax request (previously no serialization group was defined
 
 1. We now use the parameter `sylius_admin.path_name` to retrieve the admin routes prefix. If you used the `/admin` prefix
 in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_prefix%`.  
-Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL. 
+Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
+
+1. Replace the DoctrineMigrationsBundle configuration in `config/packages/doctrine_migrations.yaml`:
+
+   ```
+   doctrine_migrations:
+   -    dir_name: "%kernel.project_dir%/src/Migrations"
+   -
+   -    # Namespace is arbitrary but should be different from App\Migrations as migrations classes should NOT be autoloaded
+   -    namespace: DoctrineMigrations
+   +    storage:
+   +        table_storage:
+   +            table_name: sylius_migrations
+   ``` 
 
 ## Special attention
 

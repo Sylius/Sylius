@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the API Platform project.
+ * This file is part of the Sylius package.
  *
- * (c) Kévin Dunglas <dunglas@gmail.com>
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,7 +28,6 @@ use Twig\Environment as TwigEnvironment;
 /**
  * Displays the documentation.
  *
- * @author Kévin Dunglas <dunglas@gmail.com>
  * @internal
  *
  * This class will be probably removed in Sylius 1.9
@@ -36,29 +35,53 @@ use Twig\Environment as TwigEnvironment;
 final class SwaggerUiAction
 {
     private $resourceNameCollectionFactory;
+
     private $resourceMetadataFactory;
+
     private $normalizer;
+
     private $twig;
+
     private $urlGenerator;
+
     private $title;
+
     private $description;
+
     private $version;
+
     private $showWebby;
+
     private $formats;
+
     private $oauthEnabled;
+
     private $oauthClientId;
+
     private $oauthClientSecret;
+
     private $oauthType;
+
     private $oauthFlow;
+
     private $oauthTokenUrl;
+
     private $oauthAuthorizationUrl;
+
     private $oauthScopes;
+
     private $formatsProvider;
+
     private $swaggerUiEnabled;
+
     private $reDocEnabled;
+
     private $graphqlEnabled;
+
     private $graphiQlEnabled;
+
     private $graphQlPlaygroundEnabled;
+
     private $swaggerVersions;
 
     /**
@@ -96,7 +119,7 @@ final class SwaggerUiAction
             return;
         }
 
-        @trigger_error(sprintf('Passing an array or an instance of "%s" as 5th parameter of the constructor of "%s" is deprecated since API Platform 2.5, pass an array instead', FormatsProviderInterface::class, __CLASS__), E_USER_DEPRECATED);
+        @trigger_error(sprintf('Passing an array or an instance of "%s" as 5th parameter of the constructor of "%s" is deprecated since API Platform 2.5, pass an array instead', FormatsProviderInterface::class, __CLASS__), \E_USER_DEPRECATED);
         $this->formatsProvider = $formats;
     }
 

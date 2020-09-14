@@ -24,6 +24,7 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceI
 
     /**
      * @psalm-immutable
+     *
      * @var string
      */
     public $paymentId;

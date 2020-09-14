@@ -22,7 +22,6 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
