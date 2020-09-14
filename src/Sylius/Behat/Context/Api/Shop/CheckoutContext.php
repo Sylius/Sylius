@@ -35,7 +35,7 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    const CHECKOUT_STATE_TYPES = [
+    public const CHECKOUT_STATE_TYPES = [
         'address' => OrderCheckoutStates::STATE_ADDRESSED,
         'shipping method' => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
         'payment' => OrderCheckoutStates::STATE_PAYMENT_SELECTED,

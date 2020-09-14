@@ -930,7 +930,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
-        $this->iSetItsPriceTo('',  $channel);
+        $this->iSetItsPriceTo('', $channel);
     }
 
     /**

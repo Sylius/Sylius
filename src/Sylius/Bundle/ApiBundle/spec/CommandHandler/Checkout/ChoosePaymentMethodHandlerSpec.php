@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
@@ -61,7 +60,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
         $cart->getId()->willReturn('111');
 
-        $paymentRepository->findOneByOrderId( '123', '111')->willReturn($payment);
+        $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
         $payment->setMethod($paymentMethod)->shouldBeCalled();
 
         $stateMachine->apply('select_payment')->shouldBeCalled();
@@ -161,7 +160,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
         $cart->getId()->willReturn('111');
 
-        $paymentRepository->findOneByOrderId( '123', '111')->willReturn(null);
+        $paymentRepository->findOneByOrderId('123', '111')->willReturn(null);
 
         $stateMachine->apply('select_payment')->shouldNotBeCalled();
 

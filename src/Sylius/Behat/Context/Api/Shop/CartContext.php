@@ -245,7 +245,8 @@ final class CartContext implements Context
      * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (?:customer|visitor) cart$/
      * @Then /^the (?:customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
      */
-    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void {
+    public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
+    {
         $cartResponse = $this->cartsClient->getLastResponse();
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
@@ -272,8 +273,7 @@ final class CartContext implements Context
         ProductInterface $product,
         string $tokenValue,
         int $quantity = 1
-    ): void
-    {
+    ): void {
         $this->cartsClient->show($tokenValue);
 
         $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
@@ -284,7 +284,7 @@ final class CartContext implements Context
      */
     public function iCheckItemsOfMyCart(string $tokenValue): void
     {
-        $request = Request::customItemAction('shop','orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_GET, 'items');
 
         $this->cartsClient->executeCustomRequest($request);
     }

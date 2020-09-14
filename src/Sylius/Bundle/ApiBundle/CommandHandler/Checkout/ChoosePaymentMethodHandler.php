@@ -66,7 +66,7 @@ final class ChoosePaymentMethodHandler
 
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
-            'code' => $choosePaymentMethod->paymentMethodCode
+            'code' => $choosePaymentMethod->paymentMethodCode,
         ]);
         Assert::notNull($paymentMethod, 'Payment method has not been found');
 
