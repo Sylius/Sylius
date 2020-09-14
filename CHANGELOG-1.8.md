@@ -1,5 +1,36 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.0 (2019-09-14)
+
+#### Details
+
+- [#11418](https://github.com/Sylius/Sylius/issues/11418) set default value for Channel taxCalculationStrategy ([@oallain](https://github.com/oallain))
+- [#11745](https://github.com/Sylius/Sylius/issues/11745) [Api][Checkout] Modify ShippingMethod and PaymentMethod paths on Checkout ([@Tomanhez](https://github.com/Tomanhez))
+- [#11781](https://github.com/Sylius/Sylius/issues/11781) Add missing new method into form extensions ([@stloyd](https://github.com/stloyd))
+- [#11786](https://github.com/Sylius/Sylius/issues/11786) Fixed deprecated option usage on Email validator ([@stloyd](https://github.com/stloyd))
+- [#11790](https://github.com/Sylius/Sylius/issues/11790) [Api] Add experimental warning to swagger ([@lchrusciel](https://github.com/lchrusciel))
+- [#11792](https://github.com/Sylius/Sylius/issues/11792) Fixed: Parent taxon selection on taxon creation ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#11795](https://github.com/Sylius/Sylius/issues/11795) Api refactor product and order related endpoints ([@AdamKasp](https://github.com/AdamKasp))
+- [#11797](https://github.com/Sylius/Sylius/issues/11797) Fixed Twig translate extension not working with `null` values ([@stloyd](https://github.com/stloyd))
+- [#11799](https://github.com/Sylius/Sylius/issues/11799) [API]Fixed endpoints related to order-items that returns 500 error ([@arti0090](https://github.com/arti0090))
+- [#11806](https://github.com/Sylius/Sylius/issues/11806) [Api][Checkout] Allowing access only for correctly logged in ([@Tomanhez](https://github.com/Tomanhez))
+- [#11807](https://github.com/Sylius/Sylius/issues/11807) [API] Disable province code change in PUT endpoint ([@arti0090](https://github.com/arti0090))
+- [#11808](https://github.com/Sylius/Sylius/issues/11808) allow sonata block bundle v3 ([@esserj](https://github.com/esserj))
+- [#11813](https://github.com/Sylius/Sylius/issues/11813) [ADR] Minor text adjustments ([@lchrusciel](https://github.com/lchrusciel))
+- [#11814](https://github.com/Sylius/Sylius/issues/11814) [Channel] Fix bc-breaking changes in ChannelFactory and minor improvements ([@lchrusciel](https://github.com/lchrusciel))
+- [#11818](https://github.com/Sylius/Sylius/issues/11818) [Api] Hide token value in create cart endpoint's body ([@AdamKasp](https://github.com/AdamKasp))
+- [#11819](https://github.com/Sylius/Sylius/issues/11819) [API] Refactored data transformers ([@lchrusciel](https://github.com/lchrusciel))
+- [#11820](https://github.com/Sylius/Sylius/issues/11820) [ChannelPricing] Ability to remove price on channel pricing when channel is disabled ([@AdamKasp](https://github.com/AdamKasp), [@Tomanhez](https://github.com/Tomanhez))
+- [#11821](https://github.com/Sylius/Sylius/issues/11821) [API] Hide product review in product create endpoint ([@AdamKasp](https://github.com/AdamKasp))
+- [#11822](https://github.com/Sylius/Sylius/issues/11822) Bugfix | Fixed wrong Symfony controller class usage ([@stloyd](https://github.com/stloyd))
+- [#11823](https://github.com/Sylius/Sylius/issues/11823) [API] Unify interface parameters ([@lchrusciel](https://github.com/lchrusciel))
+- [#11824](https://github.com/Sylius/Sylius/issues/11824) [API]add to swagger documentation missing locale code in translations ([@arti0090](https://github.com/arti0090))
+- [#11825](https://github.com/Sylius/Sylius/issues/11825) [Api][Cart] Fix for OrderGetMethodItemExtension ([@Tomanhez](https://github.com/Tomanhez))
+- [#11831](https://github.com/Sylius/Sylius/issues/11831) [API] fix route for pickup cart ([@AdamKasp](https://github.com/AdamKasp))
+- [#11832](https://github.com/Sylius/Sylius/issues/11832) [Api][Checkout] Allowing access only for correctly logged in - minor fixes(1.8) ([@Tomanhez](https://github.com/Tomanhez))
+- [#11833](https://github.com/Sylius/Sylius/issues/11833) [Admin] Channel pricing removal for channels where the product is not available ([@lchrusciel](https://github.com/lchrusciel))
+- [#11837](https://github.com/Sylius/Sylius/issues/11837) Update README.md ([@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.8.0-RC.1 (2019-09-07)
 
 #### Details
