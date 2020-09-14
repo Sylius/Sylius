@@ -284,6 +284,15 @@
     "lakion/mink-debug-extension": {
         "version": "v1.2.3"
     },
+    "laminas/laminas-code": {
+        "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.0"
+    },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
     },
@@ -1074,6 +1083,9 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"
