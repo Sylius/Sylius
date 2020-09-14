@@ -14,14 +14,14 @@ Feature: Removing a product variant's price from obsolete channel
         And I am logged in as an administrator
 
     @ui
-    Scenario: Removing a product variant 's price from disabled channel
+    Scenario: Removing a product variant's price from disabled channel
         When I want to modify the "Medium PHP Mug" product variant
         And I remove its price for "Web-GB" channel
         And I save my changes
         Then I should not have configured price for "Web-GB" channel
 
     @ui
-    Scenario: Removing a product variant 's price from disabled channel
+    Scenario: Removing a product variant's price from disabled channel
         Given the channel "Web-GB" has been disabled
         When I want to modify the "Medium PHP Mug" product variant
         And I remove its price for "Web-GB" channel
