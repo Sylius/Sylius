@@ -16,8 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\ApiBundle\Doctrine\ApiShopRequestTypes;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -31,9 +32,15 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
     /** @var UserContextInterface */
     private $userContext;
 
-    public function __construct(UserContextInterface $userContext)
-    {
+    /** @var CartVisitorsCustomerContextInterface */
+    private $cartVisitorsCustomerContext;
+
+    public function __construct(
+        UserContextInterface $userContext,
+        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+    ) {
         $this->userContext = $userContext;
+        $this->cartVisitorsCustomerContext = $cartVisitorsCustomerContext;
     }
 
     public function applyToItem(
@@ -44,39 +51,29 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         string $operationName = null,
         array $context = []
     ) {
-        $operationName = strtoupper($operationName);
-
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
 
-        if (
-            $operationName === Request::METHOD_GET ||
-            $operationName === ApiShopRequestTypes::SHOP_GET ||
-            $operationName === ApiShopRequestTypes::ADJUSTMENTS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::ITEMS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::ITEMS_ADJUSTMENTS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::SHIPMENTS_METHODS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::PAYMENTS_METHODS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::SHIPMENTS_GET_SUBRESOURCE ||
-            $operationName === ApiShopRequestTypes::PAYMENTS_GET_SUBRESOURCE
-        ) {
+        if ($context[ContextKeys::HTTP_REQUEST_METHOD_TYPE] === Request::METHOD_GET) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForDeleteMethod($user, $queryBuilder, $operationName, $rootAlias);
+        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias);
     }
 
-    private function applyToItemForDeleteMethod(
+    private function applyUserRulesToItem(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
-        string $operationName,
         string $rootAlias
     ): void {
-        if ($user === null) {
+        /** @var string|null $cartCustomerId */
+        $cartCustomerId = $this->cartVisitorsCustomerContext->getCartCustomerId();
+
+        if ($user === null && $cartCustomerId === null) {
             $queryBuilder
                 ->andWhere(sprintf('%s.customer IS NULL', $rootAlias))
                 ->andWhere(sprintf('%s.state = :state', $rootAlias))
@@ -86,7 +83,18 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($user instanceof ShopUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user === null && $cartCustomerId !== null) {
+            $queryBuilder
+                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
+                ->setParameter('customer', $cartCustomerId)
+                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+                ->setParameter('state', OrderInterface::STATE_CART)
+            ;
+
+            return;
+        }
+
+        if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $queryBuilder
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $user->getCustomer()->getId())
