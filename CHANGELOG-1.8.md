@@ -1,6 +1,6 @@
 # CHANGELOG FOR `1.8.X`
 
-## v1.8.0 (2019-09-14)
+## v1.8.0 (2020-09-14)
 
 #### Details
 
@@ -31,7 +31,7 @@
 - [#11833](https://github.com/Sylius/Sylius/issues/11833) [Admin] Channel pricing removal for channels where the product is not available ([@lchrusciel](https://github.com/lchrusciel))
 - [#11837](https://github.com/Sylius/Sylius/issues/11837) Update README.md ([@CoderMaggie](https://github.com/CoderMaggie))
 
-## v1.8.0-RC.1 (2019-09-07)
+## v1.8.0-RC.1 (2020-09-07)
 
 #### Details
 
