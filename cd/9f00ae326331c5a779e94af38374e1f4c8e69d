@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2020-09-01T09:05:28Z
+
+@lchrusciel But `master` means it's `1.9-dev` not `1.8`, do we want to not make `1.8` more compatible with Symfony 5?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-01T09:38:53Z
+
+My bad, of course to 1.8
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-15T07:55:30Z
+
+Thanks, Joseph! :1st_place_medal:
