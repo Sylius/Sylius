@@ -63,9 +63,6 @@ final class ChannelPricingType extends AbstractResourceType
                 return;
             }
 
-            /** @var ChannelInterface $channel */
-            $channel = $options['channel'];
-
             if ($channelPricing->getPrice() === null) {
                 $event->setData(null);
 
