@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Context;
 
+/** @experimental */
 interface CartVisitorsCustomerContextInterface
 {
     public function getCartCustomerId(): ?string;

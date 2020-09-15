@@ -16,7 +16,9 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -25,19 +27,24 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
-    {
-        $this->beConstructedWith($userContext);
+    function let(
+        UserContextInterface $userContext,
+        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+    ): void {
+        $this->beConstructedWith($userContext, $cartVisitorsCustomerContext);
     }
 
     function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
+
+        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $queryBuilder->andWhere(sprintf('%s.customer IS NULL', 'o'))->shouldBeCalled();
 
@@ -47,7 +54,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
             Request::METHOD_GET,
-            []
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
 
@@ -56,14 +63,18 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
+
+        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :customer', 'o'))
@@ -82,7 +93,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
             Request::METHOD_GET,
-            []
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
 
@@ -110,7 +121,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_GET,
-                    [],
+                    [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET]
                 ]
             )
         ;

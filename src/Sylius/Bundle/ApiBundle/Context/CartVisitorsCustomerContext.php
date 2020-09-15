@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Context;
 
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/** @experimental */
 final class CartVisitorsCustomerContext implements CartVisitorsCustomerContextInterface
 {
-    /** @var Session */
+    /** @var SessionInterface */
     private $session;
 
-    public function __construct(Session $session)
+    public function __construct(SessionInterface $session)
     {
         $this->session = $session;
     }

@@ -55,20 +55,23 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($context[ContextKeys::HTTP_REQUEST_METHOD_TYPE] === Request::METHOD_GET) {
+        $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
+
+        if ($httpRequestMethodType === Request::METHOD_GET) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias);
+        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias, $httpRequestMethodType);
     }
 
     private function applyUserRulesToItem(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
-        string $rootAlias
+        string $rootAlias,
+        string $httpRequestMethodType
     ): void {
         /** @var string|null $cartCustomerId */
         $cartCustomerId = $this->cartVisitorsCustomerContext->getCartCustomerId();
@@ -105,11 +108,21 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user instanceof AdminUserInterface &&
+            in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
+            $httpRequestMethodType === Request::METHOD_DELETE) {
             $queryBuilder
                 ->andWhere(sprintf('%s.state = :state', $rootAlias))
                 ->setParameter('state', OrderInterface::STATE_CART)
             ;
+
+            return;
+        }
+
+        if ($user instanceof AdminUserInterface &&
+            in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
+            $httpRequestMethodType !== Request::METHOD_DELETE) {
+            //admin has also access to modified orders in states other than cart
 
             return;
         }

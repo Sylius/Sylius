@@ -37,7 +37,7 @@ final class CartContext implements Context
     private $productsClient;
 
     /** @var ApiClientInterface */
-    private $orderClient;
+    private $ordersAdminClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -54,7 +54,7 @@ final class CartContext implements Context
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $productsClient,
-        ApiClientInterface $orderClient,
+        ApiClientInterface $ordersAdminClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
         SharedStorageInterface $sharedStorage,
@@ -62,7 +62,7 @@ final class CartContext implements Context
     ) {
         $this->cartsClient = $cartsClient;
         $this->productsClient = $productsClient;
-        $this->orderClient = $orderClient;
+        $this->ordersAdminClient = $ordersAdminClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -92,7 +92,7 @@ final class CartContext implements Context
      */
     public function theAdministratorTryToSeeTheSummaryOfCart(string $tokenValue): void
     {
-        $this->orderClient->show($tokenValue);
+        $this->ordersAdminClient->show($tokenValue);
     }
 
     /**
@@ -141,6 +141,14 @@ final class CartContext implements Context
     {
         $itemId = $this->geOrderItemIdForProductInCart($product, $tokenValue);
         $this->removeOrderItemFromCart($itemId, $tokenValue);
+    }
+
+    /**
+     * @Then I don't have access to see the summary of my cart
+     */
+    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
+    {
+        Assert::true($this->getCart()['code'] === 404);
     }
 
     /**
@@ -271,9 +279,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $cartResponse = $this->cartsClient->getLastResponse();
-
-        $this->checkProductQuantity($cartResponse, $productName, $quantity);
+        $this->checkProductQuantity($this->cartsClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -281,9 +287,7 @@ final class CartContext implements Context
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {
-        $cartResponse = $this->orderClient->getLastResponse();
-
-        $this->checkProductQuantity($cartResponse, $productName, $quantity);
+        $this->checkProductQuantity($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -453,5 +457,12 @@ final class CartContext implements Context
                 );
             }
         }
+    }
+
+    private function getCart(): array
+    {
+        $response = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
+
+        return $this->responseChecker->getResponseContent($response);
     }
 }

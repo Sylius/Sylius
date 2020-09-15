@@ -252,8 +252,6 @@ final class CheckoutContext implements Context
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $x = $this->getCart();
-
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf(
@@ -271,12 +269,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then the visitor can not proceed with :shippingMethod shipping method in the customer cart
-     * @Then the visitor can not proceed with :paymentMethod payment in the customer cart
-     * @Then the visitor can not confirm the customer order
-     * @Then the visitor can not change product :product quantity to 2 in the customer cart
+     * @Then the visitor has no access to proceed with :shippingMethod shipping method in the customer cart
+     * @Then the visitor has no access to proceed with :paymentMethod payment in the customer cart
+     * @Then the visitor has no access to confirm the customer order
+     * @Then the visitor has no access to change product :product quantity to :quantity in the customer cart
      */
-    public function theVisitorCanNotProceedWithShippingMethodInTheCustomerCart(): void {
+    public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
+    {
         Assert::true($this->getCart()['code'] === 404);
     }
 
