@@ -80,7 +80,7 @@ final class CartCollector extends DataCollector
         return $this->data['states'];
     }
 
-    public function collect(Request $request, Response $response, \Exception $exception = null): void
+    public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
         try {
             /** @var OrderInterface $cart */

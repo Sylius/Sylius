@@ -32,7 +32,7 @@ final class TemplateBlockDataCollector extends DataCollector
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response): void
+    public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
         $this->data['renderedEvents'] = $this->templateBlockRenderingHistory->getRenderedEvents();
     }
