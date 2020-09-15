@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -45,18 +46,23 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var RandomnessGeneratorInterface */
     private $generator;
 
+    /** @var CartVisitorsCustomerContextInterface */
+    private $cartVisitorsCustomerContext;
+
     public function __construct(
         FactoryInterface $cartFactory,
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator
+        RandomnessGeneratorInterface $generator,
+        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
     ) {
         $this->cartFactory = $cartFactory;
         $this->channelContext = $channelContext;
         $this->userContext = $userContext;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
+        $this->cartVisitorsCustomerContext = $cartVisitorsCustomerContext;
     }
 
     public function __invoke(PickupCart $pickupCart)
@@ -76,6 +82,8 @@ final class PickupCartHandler implements MessageHandlerInterface
             $customer = $user->getCustomer();
             $cart->setCustomer($customer);
         }
+
+        $this->cartVisitorsCustomerContext->setCartCustomerId(null);
 
         $cart->setChannel($channel);
         $cart->setLocaleCode($locale->getCode());
