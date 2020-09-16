@@ -150,9 +150,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is original priced at ("[^"]+") in ("[^"]+" channel)$/
+     * @Given /^(this product) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function thisProductHasOriginalPriceInChannel(
+    public function thisProductHasOriginallyPriceInChannel(
         ProductInterface $product,
         int $originalPrice,
         ChannelInterface $channel
@@ -347,7 +347,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^("[^"]+" variant) is original priced at ("[^"]+") in ("[^"]+" channel)$/
+     * @Given /^("[^"]+" variant) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function variantIsOriginalPricedAtInChannel(
         ProductVariantInterface $productVariant,

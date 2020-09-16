@@ -7,12 +7,11 @@ namespace Sylius\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-
 final class Version20200916093101 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'make a price on channel pricing nullable';
+        return 'Make a price on channel pricing nullable';
     }
 
     public function up(Schema $schema): void

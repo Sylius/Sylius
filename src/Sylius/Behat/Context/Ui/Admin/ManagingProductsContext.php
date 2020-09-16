@@ -1055,7 +1055,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should have original price equal :price in :channelName channel
+     * @Then I should have original price equal to :price in :channelName channel
      */
     public function iShouldHaveOriginalPriceEqualInChannel(string $price, string $channelName): void
     {

@@ -10,7 +10,7 @@ Feature: Removing a product variant's price from obsolete channel
         And the store has a "PHP Mug" configurable product
         And this product has "Medium PHP Mug" variant priced at "$20" in "Web-US" channel
         And "Medium PHP Mug" variant priced at "£25" in "Web-GB" channel
-        And "Medium PHP Mug" variant is original priced at "£50.00" in "Web-GB" channel
+        And "Medium PHP Mug" variant is originally priced at "£50.00" in "Web-GB" channel
         And this product is disabled in "Web-GB" channel
         And I am logged in as an administrator
 
@@ -20,7 +20,7 @@ Feature: Removing a product variant's price from obsolete channel
         And I remove its price for "Web-GB" channel
         And I save my changes
         Then I should not have configured price for "Web-GB" channel
-        But I should have original price equal "£50.00" in "Web-GB" channel
+        But I should have original price equal to "£50.00" in "Web-GB" channel
 
     @ui
     Scenario: Removing a product variant's price from disabled channel
@@ -29,4 +29,4 @@ Feature: Removing a product variant's price from obsolete channel
         And I remove its price for "Web-GB" channel
         And I save my changes
         Then I should not have configured price for "Web-GB" channel
-        But I should have original price equal "£50.00" in "Web-GB" channel
+        But I should have original price equal to "£50.00" in "Web-GB" channel
