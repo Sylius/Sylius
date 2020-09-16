@@ -9,7 +9,7 @@
     +   SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle::class => ['all' => true],
     ```
 
-1. Add configuration of ApiBundle in your `config/packages/_sylius.yaml` file:
+1. Add configuration of new ApiBundle in your `config/packages/_sylius.yaml` file:
 
     ```diff
         imports:
@@ -20,10 +20,16 @@
 
     ```diff
         parameters:
+    -       sylius.security.admin_regex: "^/admin"
     -       sylius.security.shop_regex: "^/(?!admin|api/.*|api$|media/.*)[^/]++"
-    +       sylius.security.shop_regex: "^/(?!admin|new-api|api/.*|api$|media/.*)[^/]++"
+    +       sylius.security.admin_regex: "^/%sylius_admin.path_name%"
+    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
     +       sylius.security.new_api_route: "/new-api"
     +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
+    +       sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
+    +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
+    +       sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
+    +       sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
         
         security:
             providers:
@@ -36,6 +42,10 @@
     +                   providers: [sylius_api_shop_user_provider, sylius_api_admin_user_provider]
             
             firewalls:
+                admin:
+                    remember_me:
+    -                   path: /admin
+    +                   path: "/%sylius_admin.path_name%"
     +           new_api_admin_user:
     +               pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
     +               provider: sylius_admin_user_provider
@@ -74,8 +84,11 @@
     +               guard:
     +                   authenticators:
     +                       - lexik_jwt_authentication.jwt_token_authenticator
+    + 
+            access_control:
+    +            - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
+    +            - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
     ```
-
 1. Add `sylius_api.yaml` file to `config/routes/` directory:
 
     ```yaml
@@ -84,6 +97,44 @@
            prefix: "%sylius.security.new_api_route%"
     ```
 
+1. Add `lexik_jwt_authentication.yaml` file to `config/packages/` directory:
+
+    ```yaml
+       lexik_jwt_authentication:
+         secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+         public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
+         pass_phrase: '%env(JWT_PASSPHRASE)%'
+    ```
+
+1. Add configuration in your `.env` file:
+
+    ```diff
+    +       ###> lexik/jwt-authentication-bundle ###
+    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+    +       JWT_PASSPHRASE=YOUR_SECRET_PASSPHRASE
+    +       ###< lexik/jwt-authentication-bundle ###
+   
+1. Add configuration in your `.env.test` file:
+
+    ```diff
+    +       ###> lexik/jwt-authentication-bundle ###
+    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private-test.pem
+    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public-test.pem
+    +       JWT_PASSPHRASE=ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST
+    +       ###< lexik/jwt-authentication-bundle ###
+   
+1. Add configuration in your `.env.test_cached` file:
+
+    ```diff
+    +       ###> lexik/jwt-authentication-bundle ###
+    +       JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private-test.pem
+    +       JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public-test.pem
+    +       JWT_PASSPHRASE=ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST
+    +       ###< lexik/jwt-authentication-bundle ###
+
+1. Sample JWT token generation is available [here](https://api-platform.com/docs/core/jwt/)
+   
 1. All consts classes has been changed from final classes to interfaces. As a result initialization of `\Sylius\Bundle\UserBundle\UserEvents` is not longer possible. The whole list of changed classes can be found [here](https://github.com/Sylius/Sylius/pull/11347).
 
 1. Service alias `Sylius\Component\Channel\Context\ChannelContextInterface` was changed from `sylius.context.channel.composite` to `sylius.context.channel`.
