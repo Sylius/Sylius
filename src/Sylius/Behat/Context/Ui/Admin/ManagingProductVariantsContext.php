@@ -564,6 +564,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should have original price equal :price in :channelName channel
+     */
+    public function iShouldHaveOriginalPriceEqualInChannel(string $price, string $channelName): void
+    {
+        /** @var ProductVariantInterface $product */
+        $productVariant = $this->sharedStorage->get('variant');
+
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
+
+        Assert::contains($price, $this->updatePage->getOriginalPriceForChannel($channelName));
+    }
+
+    /**
      * @Then I should see the :optionName option as :valueName
      */
     public function iShouldSeeTheOptionAs(string $optionName, string $valueName): void
