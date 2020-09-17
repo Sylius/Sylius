@@ -629,7 +629,7 @@ final class CheckoutContext implements Context
     /**
      * @Then my order's shipping address should be to :fullName
      */
-    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName): void
+    public function iShouldSeeThisShippingAddressAsShippingAddress(string $fullName): void
     {
         /** @var Response $response */
         $response = $this->client->getResponse();
@@ -647,7 +647,7 @@ final class CheckoutContext implements Context
     /**
      * @Then my order's billing address should be to :fullName
      */
-    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName): void
+    public function iShouldSeeThisBillingAddressAsBillingAddress(string $fullName): void
     {
         /** @var Response $response */
         $response = $this->client->getResponse();
