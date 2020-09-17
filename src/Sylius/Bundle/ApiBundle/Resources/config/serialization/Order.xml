@@ -93,5 +93,13 @@
         <attribute name="shippingTotal">
             <group>checkout:read</group>
         </attribute>
+
+        <attribute name="shippingAddress">
+            <group>checkout:read</group>
+        </attribute>
+
+        <attribute name="billingAddress">
+            <group>checkout:read</group>
+        </attribute>
     </class>
 </serializer>

@@ -126,6 +126,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
@@ -135,6 +136,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
     {
@@ -615,6 +617,25 @@ final class CheckoutContext implements Context
         Assert::same($this->client->getResponse()->getStatusCode(), 400);
     }
 
+    /**
+     * @Then address to :fullName should be used for both :addressType1 and :addressType2 of my order
+     * @Then my order's :addressType address should be to :fullName
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(string $fullName, string ...$addressTypes): void
+    {
+        foreach($addressTypes as $addressType){
+            $this->hasFullNameInAddress($fullName, $addressType);
+        }
+    }
+
+    /**
+     * @Then I should see :provinceName in the :addressType address
+     */
+    public function iShouldSeeInTheBillingAddress(string $provinceName, string $addressType): void
+    {
+        $this->hasProvinceNameInAddress($provinceName, $addressType);
+    }
+
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
     {
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -762,10 +783,41 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['countryCode'] = $address->getCountryCode() ?? '';
         $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
         $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
+        $this->content[$addressType]['provinceName'] = $address->getProvinceName() ?? '';
     }
 
     private function getViolation(array $violations, string $element): array
     {
         return $violations[array_search($element, array_column($violations, 'propertyPath'))];
+    }
+
+    private function hasFullNameInAddress(string $fullName, string $addressType): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $name = explode(' ', $fullName);
+        $addressType .= 'Address';
+
+        Assert::same($this->responseChecker->getResponseContent($response)[$addressType]
+        ['firstName'],
+            $name[0]
+        );
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)[$addressType]
+            ['lastName'],
+            $name[1]
+        );
+    }
+
+    private function hasProvinceNameInAddress(string $provinceName, string $addressType): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $addressType .= 'Address';
+
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)[$addressType]['provinceName'],
+            $provinceName
+        );
     }
 }
