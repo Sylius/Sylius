@@ -93,7 +93,7 @@ The later is being decorated by `sylius.context.channel.cached` which caches the
 time out during this ajax request (previously no serialization group was defined on this route).
 
 1. We now use the parameter `sylius_admin.path_name` to retrieve the admin routes prefix. If you used the `/admin` prefix
-in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_prefix%`.  
+in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_name%`.  
 Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
 
 1. Replace the DoctrineMigrationsBundle configuration in `config/packages/doctrine_migrations.yaml`:
