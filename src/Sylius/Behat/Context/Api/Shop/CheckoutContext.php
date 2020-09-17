@@ -618,74 +618,22 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then address to :fullName should be used for both shipping and billing of my order
+     * @Then address to :fullName should be used for both :addressType1 and :addressType2 of my order
+     * @Then my order's :addressType address should be to :fullName
      */
-    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName): void
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(string $fullName, string ...$addressTypes): void
     {
-        $this->iShouldSeeThisShippingAddressAsShippingAddress($fullName);
-        $this->iShouldSeeThisBillingAddressAsBillingAddress($fullName);
+        foreach($addressTypes as $addressType){
+            $this->hasFullNameInAddress($fullName, $addressType);
+        }
     }
 
     /**
-     * @Then my order's shipping address should be to :fullName
+     * @Then I should see :provinceName in the :addressType address
      */
-    public function iShouldSeeThisShippingAddressAsShippingAddress(string $fullName): void
+    public function iShouldSeeInTheBillingAddress(string $provinceName, string $addressType): void
     {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-        $name = explode(" ",$fullName);
-
-        Assert::same($this->responseChecker->getResponseContent($response)['shippingAddress']['firstName'],
-            $name[0]
-        );
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['shippingAddress']['lastName'],
-            $name[1]
-        );
-    }
-
-    /**
-     * @Then my order's billing address should be to :fullName
-     */
-    public function iShouldSeeThisBillingAddressAsBillingAddress(string $fullName): void
-    {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-        $name = explode(" ",$fullName);
-
-        Assert::same($this->responseChecker->getResponseContent($response)['billingAddress']['firstName'],
-            $name[0]
-        );
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['billingAddress']['lastName'],
-            $name[1]
-        );
-    }
-
-    /**
-     * @Then I should see :provinceName in the shipping address
-     */
-    public function iShouldSeeInTheShippingAddress(string $provinceName): void
-    {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['shippingAddress']['provinceName'],
-            $provinceName
-        );
-    }
-
-    /**
-     * @Then I should see :provinceName in the billing address
-     */
-    public function iShouldSeeInTheBillingAddress(string $provinceName): void
-    {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['billingAddress']['provinceName'],
-            $provinceName
-        );
+        $this->hasProvinceNameInAddress($provinceName, $addressType);
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
@@ -841,5 +789,35 @@ final class CheckoutContext implements Context
     private function getViolation(array $violations, string $element): array
     {
         return $violations[array_search($element, array_column($violations, 'propertyPath'))];
+    }
+
+    private function hasFullNameInAddress(string $fullName, string $addressType): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $name = explode(' ', $fullName);
+        $addressType .= 'Address';
+
+        Assert::same($this->responseChecker->getResponseContent($response)[$addressType]
+        ['firstName'],
+            $name[0]
+        );
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)[$addressType]
+            ['lastName'],
+            $name[1]
+        );
+    }
+
+    private function hasProvinceNameInAddress(string $provinceName, string $addressType): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $addressType .= 'Address';
+
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)[$addressType]['provinceName'],
+            $provinceName
+        );
     }
 }
