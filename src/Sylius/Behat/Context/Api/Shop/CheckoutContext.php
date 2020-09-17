@@ -126,6 +126,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
@@ -135,6 +136,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
     {
@@ -615,6 +617,77 @@ final class CheckoutContext implements Context
         Assert::same($this->client->getResponse()->getStatusCode(), 400);
     }
 
+    /**
+     * @Then address to :fullName should be used for both shipping and billing of my order
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName): void
+    {
+        $this->iShouldSeeThisShippingAddressAsShippingAddress($fullName);
+        $this->iShouldSeeThisBillingAddressAsBillingAddress($fullName);
+    }
+
+    /**
+     * @Then my order's shipping address should be to :fullName
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $name = explode(" ",$fullName);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['shippingAddress']['firstName'],
+            $name[0]
+        );
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['shippingAddress']['lastName'],
+            $name[1]
+        );
+    }
+
+    /**
+     * @Then my order's billing address should be to :fullName
+     */
+    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        $name = explode(" ",$fullName);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['billingAddress']['firstName'],
+            $name[0]
+        );
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['billingAddress']['lastName'],
+            $name[1]
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName in the shipping address
+     */
+    public function iShouldSeeInTheShippingAddress(string $provinceName): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['shippingAddress']['provinceName'],
+            $provinceName
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName in the billing address
+     */
+    public function iShouldSeeInTheBillingAddress(string $provinceName): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)['billingAddress']['provinceName'],
+            $provinceName
+        );
+    }
+
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
     {
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -762,6 +835,7 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['countryCode'] = $address->getCountryCode() ?? '';
         $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
         $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
+        $this->content[$addressType]['provinceName'] = $address->getProvinceName() ?? '';
     }
 
     private function getViolation(array $violations, string $element): array
