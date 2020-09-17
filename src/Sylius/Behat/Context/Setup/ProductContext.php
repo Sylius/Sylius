@@ -150,6 +150,24 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function thisProductHasOriginallyPriceInChannel(
+        ProductInterface $product,
+        int $originalPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setOriginalPrice($originalPrice);
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^(this product) is(?:| also) priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, int $price, ChannelInterface $channel)
@@ -326,6 +344,19 @@ final class ProductContext implements Context
         $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
 
         $this->sharedStorage->set('variant', $productVariant);
+    }
+
+    /**
+     * @Given /^("[^"]+" variant) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function variantIsOriginalPricedAtInChannel(
+        ProductVariantInterface $productVariant,
+        int $originalPrice,
+        ChannelInterface $channel
+    ): void {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setOriginalPrice($originalPrice);
     }
 
     /**
