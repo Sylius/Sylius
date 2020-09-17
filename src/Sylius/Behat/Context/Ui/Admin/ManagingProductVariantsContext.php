@@ -234,6 +234,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^the (variant with code "[^"]+") should be originally priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     */
+    public function theVariantWithCodeShouldBeOriginalPricedAtForChannel(
+        ProductVariantInterface $productVariant,
+        string $price,
+        string $channelName
+    ): void {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same($this->updatePage->getOriginalPriceForChannel($channelName), $price);
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
      */
     public function theVariantWithCodeShouldBeNamedIn(ProductVariantInterface $productVariant, $name, $language)
@@ -562,6 +575,19 @@ final class ManagingProductVariantsContext implements Context
         $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
 
         Assert::same($this->updatePage->getPriceForChannel($channel), '');
+    }
+
+    /**
+     * @Then I should have original price equal to :price in :channelName channel
+     */
+    public function iShouldHaveOriginalPriceEqualInChannel(string $price, string $channelName): void
+    {
+        /** @var ProductVariantInterface $product */
+        $productVariant = $this->sharedStorage->get('variant');
+
+        $this->updatePage->open(['productId' => $productVariant->getProduct()->getId(), 'id' => $productVariant->getId()]);
+
+        Assert::contains($price, $this->updatePage->getOriginalPriceForChannel($channelName));
     }
 
     /**
