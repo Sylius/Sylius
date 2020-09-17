@@ -1137,6 +1137,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should have original price equal to :price in :channelName channel
+     */
+    public function iShouldHaveOriginalPriceEqualInChannel(string $price, string $channelName): void
+    {
+        Assert::contains($price, $this->updateSimpleProductPage->getOriginalPriceForChannel($channelName));
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
