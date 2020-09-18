@@ -1,0 +1,15 @@
+<div class="event">
+    <div class="label">
+        {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': item} %}
+    </div>
+    <div class="content">
+        <div class="summary">
+            <a href="{{ path('sylius_admin_product_update', {id: item.id}) }}" class="user">
+                {{ item.name }}
+            </a>
+        </div>
+        <div class="extra text">
+            {{ item.description }}
+        </div>
+    </div>
+</div>

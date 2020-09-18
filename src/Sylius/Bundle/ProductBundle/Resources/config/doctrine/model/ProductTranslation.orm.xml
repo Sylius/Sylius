@@ -27,6 +27,10 @@
         <unique-constraints>
             <unique-constraint columns="locale,slug" />
         </unique-constraints>
+
+        <indexes>
+            <index columns="name,description" flags="fulltext"/>
+        </indexes>
     </mapped-superclass>
 
 </doctrine-mapping>

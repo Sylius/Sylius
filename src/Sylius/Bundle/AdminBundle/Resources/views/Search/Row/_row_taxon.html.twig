@@ -1,0 +1,30 @@
+{% macro tree(taxon, isLeef = false) %}
+    {% if taxon.parent is not null %}
+        {{ _self.tree(taxon.parent) }}
+        <i class="right angle icon divider"></i>
+    {% endif %}
+
+    {% if isLeef %}
+        <div class="active section">{{ taxon.name }}</div>
+    {% else %}
+        <a href="{{ path('sylius_admin_taxon_update', {id: taxon.id}) }}" class="section">{{ taxon.name }}</a>
+    {% endif %}
+{% endmacro %}
+
+<div class="event">
+    <div class="content">
+        <div class="summary">
+            <a href="{{ path('sylius_admin_taxon_update', {id: item.id}) }}" class="user">
+                {{ item.name }}
+            </a>
+            <div class="date">
+                <div class="ui breadcrumb">
+                    {{ _self.tree(item, true) }}
+                </div>
+            </div>
+        </div>
+        <div class="extra text">
+            {{ item.description }}
+        </div>
+    </div>
+</div>

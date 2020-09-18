@@ -48,6 +48,9 @@
         <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
         <field name="subscribedToNewsletter" column="subscribed_to_newsletter" type="boolean" />
 
+        <indexes>
+            <index columns="email,first_name,last_name" flags="fulltext"/>
+        </indexes>
     </mapped-superclass>
 
 </doctrine-mapping>

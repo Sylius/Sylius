@@ -16,8 +16,9 @@ namespace Sylius\Component\Product\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Search\Repository\SearchableRepositoryInterface;
 
-interface ProductOptionRepositoryInterface extends RepositoryInterface
+interface ProductOptionRepositoryInterface extends RepositoryInterface, SearchableRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
