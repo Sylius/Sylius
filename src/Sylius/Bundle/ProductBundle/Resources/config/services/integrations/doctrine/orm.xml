@@ -15,7 +15,7 @@
     <parameters>
         <parameter key="sylius.repository.product.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository</parameter>
         <parameter key="sylius.repository.product_variant.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository</parameter>
-        <parameter key="sylius.repository.product_attribute.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.repository.product_attribute.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeRepository</parameter>
         <parameter key="sylius.repository.product_option.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository</parameter>
     </parameters>
 </container>

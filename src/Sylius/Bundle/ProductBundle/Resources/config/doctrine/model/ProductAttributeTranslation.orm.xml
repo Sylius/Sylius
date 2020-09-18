@@ -13,6 +13,10 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Product\Model\ProductAttributeTranslation" table="sylius_product_attribute_translation" />
+    <mapped-superclass name="Sylius\Component\Product\Model\ProductAttributeTranslation" table="sylius_product_attribute_translation">
+        <indexes>
+            <index columns="name" flags="fulltext"/>
+        </indexes>
+    </mapped-superclass>
 
 </doctrine-mapping>

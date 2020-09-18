@@ -1,0 +1,54 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% block title %}{{ 'sylius.ui.search'|trans }}: {{ terms}} {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="ui segment">
+        <form method="get" action="{{ path('sylius_admin_search') }}">
+            <div class="ui fluid left icon action input">
+                <input type="text" name="terms" autocomplete="off" placeholder="{{ 'sylius.ui.search'|trans }}..." value="{{ terms }}">
+                <i class="search link icon"></i>
+                <button class="ui button">{{ 'sylius.ui.search'|trans }}</button>
+                <a href="{{ path('sylius_admin_search') }}" class="ui icon grey button"><i class="icon remove"></i></a>
+            </div>
+        </form>
+    </div>
+
+    {% set results = results|sort((a, b) => b.pager.nbResults <=> a.pager.nbResults) %}
+
+    <div class="tabular-historized-container">
+        <div class="ui top attached tabular tabular-historized menu">
+            {% for resultSet in results %}
+                <a class="{{ loop.first ? 'active' }} item" data-tab="search-tab-{{ resultSet.type }}">
+                    {{ include(['@SyliusAdmin/Search/Title/_title_'~resultSet.type~'.html.twig', '@SyliusAdmin/Search/Title/_title.html.twig'], {resultSet: resultSet})}}
+                </a>
+            {% endfor %}
+        </div>
+
+        {% for resultSet in results %}
+            <div class="ui bottom attached {{ loop.first ? 'active' }} tab segment" data-tab="search-tab-{{ resultSet.type }}">
+                {{ block('pagination') }}
+
+                {% if resultSet.pager.currentPageResults|length > 0 %}
+                        <div class="ui feed">
+                            {% for item in resultSet.pager.currentPageResults %}
+                                {{ include(['@SyliusAdmin/Search/Row/_row_'~resultSet.type~'.html.twig', '@SyliusAdmin/Search/Row/_row.html.twig'], { item: item }) }}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ messages.info('sylius.ui.no_results_to_display') }}
+                {% endif %}
+
+                {% block pagination %}
+                    {{ pagination.simple(resultSet.pager, {
+                        'pageParameter': '[page_'~resultSet.type~']',
+                        'template': '@BabDevPagerfanta/semantic_ui.html.twig',
+                    }) }}
+                {% endblock %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

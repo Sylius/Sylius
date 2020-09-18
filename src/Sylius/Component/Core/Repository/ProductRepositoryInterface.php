@@ -18,8 +18,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
+use Sylius\Component\Search\Repository\SearchableRepositoryInterface;
 
-interface ProductRepositoryInterface extends BaseProductRepositoryInterface
+interface ProductRepositoryInterface extends BaseProductRepositoryInterface, SearchableRepositoryInterface
 {
     /** @param mixed|null $taxonId */
     public function createListQueryBuilder(string $locale, $taxonId = null): QueryBuilder;

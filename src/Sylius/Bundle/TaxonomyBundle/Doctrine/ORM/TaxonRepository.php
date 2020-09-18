@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Search\Model\SearchQueryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
@@ -121,5 +123,30 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         }
 
         return $queryBuilder;
+    }
+
+    public function searchWithoutTerms(): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function searchByTerms(SearchQueryInterface $query): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->where('MATCH_AGAINST(translation.name, translation.description, :terms) > 0.2')
+            ->orWhere('CONCAT(translation.name, translation.description) LIKE :likeTerms')
+            ->setParameters([
+                'locale' => $query->getLocaleCode(),
+                'terms' => $query->getTerms(),
+                'likeTerms' => sprintf('%%%s%%', str_replace(' ', '%', $query->getTerms())),
+            ])
+            ->orderBy('MATCH_AGAINST(translation.name, translation.description, :terms \'IN BOOLEAN MODE\')', 'DESC')
+        ;
+
+        return $this->getPaginator($queryBuilder);
     }
 }

@@ -15,6 +15,11 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\AdminBundle\Provider\SearchEngineInterface" class="Sylius\Bundle\AdminBundle\Provider\SearchEngine">
+            <argument key="$localeContext" type="service" id="sylius.context.locale"/>
+            <argument key="$resultSetProviders" type="tagged_iterator" tag="sylius.search.result_set_provider"/>
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" class="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProvider" >
             <argument type="service" id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface"/>
             <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface"/>

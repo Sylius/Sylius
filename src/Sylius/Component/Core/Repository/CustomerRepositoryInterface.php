@@ -15,8 +15,9 @@ namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Search\Repository\SearchableRepositoryInterface;
 
-interface CustomerRepositoryInterface extends RepositoryInterface
+interface CustomerRepositoryInterface extends RepositoryInterface, SearchableRepositoryInterface
 {
     public function countCustomers(): int;
 

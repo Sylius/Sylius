@@ -1,0 +1,5 @@
+sylius_admin_search:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.admin.search:search

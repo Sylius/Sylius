@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="sylius.search.result_set_provider.product" class="Sylius\Component\Search\Provider\ResultSetProvider">
+            <argument key="$type" type="string">product</argument>
+            <argument key="$searchableRepository" type="service" id="sylius.repository.product"/>
+            <tag name="sylius.search.result_set_provider" priority="100"/>
+        </service>
+
+        <service id="sylius.search.result_set_provider.taxon" class="Sylius\Component\Search\Provider\ResultSetProvider">
+            <argument key="$type" type="string">taxon</argument>
+            <argument key="$searchableRepository" type="service" id="sylius.repository.taxon"/>
+            <tag name="sylius.search.result_set_provider" priority="200"/>
+        </service>
+
+        <service id="sylius.search.result_set_provider.product_attribute" class="Sylius\Component\Search\Provider\ResultSetProvider">
+            <argument key="$type" type="string">product_attribute</argument>
+            <argument key="$searchableRepository" type="service" id="sylius.repository.product_attribute"/>
+            <tag name="sylius.search.result_set_provider" priority="300"/>
+        </service>
+
+        <service id="sylius.search.result_set_provider.product_option" class="Sylius\Component\Search\Provider\ResultSetProvider">
+            <argument key="$type" type="string">product_option</argument>
+            <argument key="$searchableRepository" type="service" id="sylius.repository.product_option"/>
+            <tag name="sylius.search.result_set_provider" priority="400"/>
+        </service>
+
+        <service id="sylius.search.result_set_provider.customer" class="Sylius\Component\Search\Provider\ResultSetProvider">
+            <argument key="$type" type="string">customer</argument>
+            <argument key="$searchableRepository" type="service" id="sylius.repository.customer"/>
+            <tag name="sylius.search.result_set_provider" priority="500"/>
+        </service>
+    </services>
+</container>

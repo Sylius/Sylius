@@ -92,6 +92,9 @@ sylius_admin_promotion_coupon:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion_coupon.yml"
     prefix: /promotions/{promotionId}/coupons/
 
+sylius_admin_search:
+    resource: "@SyliusAdminBundle/Resources/config/routing/search.yml"
+
 sylius_admin_security:
     resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
 

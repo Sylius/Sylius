@@ -19,6 +19,7 @@
         <import resource="services/menu.xml" />
         <import resource="services/form.xml" />
         <import resource="services/provider.xml" />
+        <import resource="services/resultSetProvider.xml" />
     </imports>
 
     <parameters>

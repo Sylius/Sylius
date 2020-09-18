@@ -17,11 +17,13 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Search\Model\SearchQueryInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
@@ -217,5 +219,30 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function searchWithoutTerms(): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    public function searchByTerms(SearchQueryInterface $query): Pagerfanta
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->where('MATCH_AGAINST(translation.name, translation.description, :terms) > 0.2')
+            ->orWhere('CONCAT(translation.name, translation.description) LIKE :likeTerms')
+            ->setParameters([
+                'locale' => $query->getLocaleCode(),
+                'terms' => $query->getTerms(),
+                'likeTerms' => sprintf('%%%s%%', str_replace(' ', '%', $query->getTerms())),
+            ])
+            ->orderBy('MATCH_AGAINST(translation.name, translation.description, :terms \'IN BOOLEAN MODE\')', 'DESC')
+        ;
+
+        return $this->getPaginator($queryBuilder);
     }
 }
