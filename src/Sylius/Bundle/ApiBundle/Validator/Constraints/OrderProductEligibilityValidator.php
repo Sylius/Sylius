@@ -35,14 +35,14 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
     /**
      * @throws \InvalidArgumentException
      */
-    public function validate($command, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($command, OrderTokenValueAwareInterface::class);
+        Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 
         /** @var OrderProductEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderProductEligibility::class);
 
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $command->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
 
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);

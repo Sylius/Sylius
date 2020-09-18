@@ -356,14 +356,14 @@ final class CheckoutContext implements Context
         /** @var Response $response */
         $response = $this->client->getResponse();
 
+        Assert::same($response->getStatusCode(), 400);
+
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
             sprintf('Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
                 $shippingMethod->getName()
             )
         ));
-
-        Assert::same($response->getStatusCode(), 400);
     }
 
     /**
@@ -636,9 +636,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        $responseStatusCode = $this->client->getResponse()->getStatusCode();
-
-        Assert::true($responseStatusCode === 400);
+        Assert::same($this->client->getResponse()->getStatusCode(), 400);
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
