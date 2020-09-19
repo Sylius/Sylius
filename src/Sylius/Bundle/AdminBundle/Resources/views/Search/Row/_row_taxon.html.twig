@@ -1,30 +1,45 @@
-{% macro tree(taxon, isLeef = false) %}
+{% macro tree(taxon) %}
     {% if taxon.parent is not null %}
         {{ _self.tree(taxon.parent) }}
         <i class="right angle icon divider"></i>
     {% endif %}
 
-    {% if isLeef %}
-        <div class="active section">{{ taxon.name }}</div>
-    {% else %}
-        <a href="{{ path('sylius_admin_taxon_update', {id: taxon.id}) }}" class="section">{{ taxon.name }}</a>
-    {% endif %}
+    <a href="{{ path('sylius_admin_taxon_update', {id: taxon.id}) }}" class="section">{{ taxon.name }}</a>
 {% endmacro %}
 
-<div class="event">
+<div class="item">
+    <div class="ui tiny image">
+        {% if item.images.first %}
+            {% set path = item.images.first.path|imagine_filter(filter|default('sylius_small')) %}
+        {% else %}
+            {% set path = '//placehold.it/120x90' %}
+        {% endif %}
+
+        <img src="{{ path }}" alt="" class="ui bordered image" />
+    </div>
     <div class="content">
-        <div class="summary">
-            <a href="{{ path('sylius_admin_taxon_update', {id: item.id}) }}" class="user">
-                {{ item.name }}
-            </a>
-            <div class="date">
-                <div class="ui breadcrumb">
-                    {{ _self.tree(item, true) }}
-                </div>
-            </div>
+        <a href="{{ path('sylius_admin_taxon_update', {id: item.id}) }}" class="header">
+            {{ item.name }}
+        </a>
+        <div class="meta">
+            <span class="taxon-tree">
+                {{ _self.tree(item) }}
+            </span>
         </div>
-        <div class="extra text">
-            {{ item.description }}
+        <div class="description">
+            <p>{{ item.description }}</p>
+        </div>
+        <div class="extra">
+            <div class="ui right floated buttons">
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_product_per_taxon_index', {taxonId: item.id}) }}">
+                    <i class="icon search"></i>
+                    {{ 'sylius.ui.details'|trans }}
+                </a>
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_taxon_update', {id: item.id}) }}">
+                    <i class="icon pencil"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            </div>
         </div>
     </div>
 </div>

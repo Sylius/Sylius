@@ -1,11 +1,41 @@
-<div class="event">
+<div class="item">
     <div class="content">
-        <div class="summary">
-            <a  href="{{ path('sylius_admin_customer_show', {id: item.id}) }}" class="user">
-                {{ item.fullName }}
+        <a href="{{ path('sylius_admin_customer_show', {id: item.id}) }}" class="header">
+            {{ item.fullName }}
+        </a>
+
+        <div class="description">
+            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ item.createdAt|date }}</span>
+            <br />
+            {% if item.group is not null %}
+                <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ item.group }}</span>
+                <br />
+            {% endif %}
+            <a href="mailto:{{ item.email }}">
+                <i class="envelope icon"></i> {{ item.email }}
             </a>
-            <div class="date">
-                {{ item.email }}
+            {% if item.phoneNumber is not null %}
+                <br />
+                <div id="phone-number">
+                    <i class="phone icon"></i> {{ item.phoneNumber }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="extra">
+            <div class="ui right floated buttons">
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_customer_order_index', {id: item.id}) }}">
+                    <i class="icon search"></i>
+                    {{ 'sylius.ui.show_orders'|trans }}
+                </a>
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_customer_show', {id: item.id}) }}">
+                    <i class="icon search"></i>
+                    {{ 'sylius.ui.show'|trans }}
+                </a>
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_customer_update', {id: item.id}) }}">
+                    <i class="icon pencil"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
             </div>
         </div>
     </div>

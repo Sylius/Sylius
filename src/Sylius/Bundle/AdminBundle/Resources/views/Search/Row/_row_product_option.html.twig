@@ -1,9 +1,15 @@
-<div class="event">
+<div class="item">
     <div class="content">
-        <div class="summary">
-            <a  href="{{ path('sylius_admin_product_option_update', {id: item.id}) }}" class="user">
-                {{ item.name }}
-            </a>
+        <a href="{{ path('sylius_admin_product_option_update', {id: item.id}) }}" class="header">
+            {{ item.name }}
+        </a>
+        <div class="extra">
+            <div class="ui right floated buttons">
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_product_option_update', {id: item.id}) }}">
+                    <i class="icon pencil"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            </div>
         </div>
     </div>
 </div>

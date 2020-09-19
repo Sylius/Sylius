@@ -11,7 +11,13 @@
             <div class="ui fluid left icon action input">
                 <input type="text" name="terms" autocomplete="off" placeholder="{{ 'sylius.ui.search'|trans }}..." value="{{ terms }}">
                 <i class="search link icon"></i>
-                <button class="ui button">{{ 'sylius.ui.search'|trans }}</button>
+                <button class="ui animated primary button">
+                    <div class="visible content">{{ 'sylius.ui.search'|trans }}</div>
+                    <div class="hidden content">
+                        <i class="search icon"></i>
+                    </div>
+
+                </button>
                 <a href="{{ path('sylius_admin_search') }}" class="ui icon grey button"><i class="icon remove"></i></a>
             </div>
         </form>
@@ -33,7 +39,7 @@
                 {{ block('pagination') }}
 
                 {% if resultSet.pager.currentPageResults|length > 0 %}
-                        <div class="ui feed">
+                        <div class="ui divided items">
                             {% for item in resultSet.pager.currentPageResults %}
                                 {{ include(['@SyliusAdmin/Search/Row/_row_'~resultSet.type~'.html.twig', '@SyliusAdmin/Search/Row/_row.html.twig'], { item: item }) }}
                             {% endfor %}
