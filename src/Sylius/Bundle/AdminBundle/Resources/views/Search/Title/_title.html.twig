@@ -1,1 +1,7 @@
-{{ ('sylius.ui.'~resultSet.type~'s')|trans }} ({{ resultSet.pager.nbResults }})
+{{ ('sylius.ui.'~resultSet.type~'s')|trans }}
+
+{% if resultSet.pager.nbResults >= 99 %}
+    <div class="ui label">99 +</div>
+{% elseif resultSet.pager.nbResults > 0 %}
+    <div class="ui label">{{ resultSet.pager.nbResults }}</div>
+{% endif %}

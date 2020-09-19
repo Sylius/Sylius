@@ -1,15 +1,49 @@
-<div class="event">
-    <div class="label">
-        {% include '@SyliusAdmin/Product/_mainImage.html.twig' with {'product': item} %}
+<div class="item">
+    <div class="ui tiny image">
+        {% if item.imagesByType('thumbnail') is not empty %}
+            {% set path = item.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_small')) %}
+        {% elseif item.images.first %}
+            {% set path = item.images.first.path|imagine_filter(filter|default('sylius_small')) %}
+        {% else %}
+            {% set path = '//placehold.it/120x90' %}
+        {% endif %}
+
+        <img src="{{ path }}" alt="" class="ui bordered image" />
+
     </div>
     <div class="content">
-        <div class="summary">
-            <a href="{{ path('sylius_admin_product_update', {id: item.id}) }}" class="user">
-                {{ item.name }}
-            </a>
+        <a href="{{ path('sylius_admin_product_show', {id: item.id}) }}" class="header">
+            {{ item.name }}
+        </a>
+        <div class="meta">
+            <span class="main-taxon">
+                <a href="{{ path('sylius_admin_taxon_update', {id: item.mainTaxon.id}) }}"><i class="folder icon"></i> {{ item.mainTaxon.name }}</a>
+            </span>
         </div>
-        <div class="extra text">
-            {{ item.description }}
+        <div class="description">
+            <p>{{ item.description }}</p>
+        </div>
+        <div class="extra">
+            <div class="ui right floated buttons">
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_product_show', {id: item.id}) }}">
+                    <i class="icon search"></i>
+                    {{ 'sylius.ui.details'|trans }}
+                </a>
+                <a class="ui labeled icon button" href="{{ path('sylius_admin_product_update', {id: item.id}) }}">
+                    <i class="icon pencil"></i>
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            </div>
+            <div class="ui right floated buttons">
+                <div class="ui labeled icon floating dropdown link button" tabindex="0">
+                    <i class="cubes icon"></i> <span class="text">{{ 'sylius.ui.manage_variants'|trans }}</span>
+                    <div class="menu" tabindex="-1">
+                        <a class="item" href="{{ path('sylius_admin_product_variant_index', {productId: item.id}) }}"><i class="list icon"></i> {{ 'sylius.ui.list_variants'|trans }}</a>
+                        <a class="item" href="{{ path('sylius_admin_product_variant_create', {productId: item.id}) }}"><i class="plus icon"></i> {{ 'sylius.ui.create'|trans }}</a>
+                        <a class="item" href="{{ path('sylius_admin_product_variant_generate', {productId: item.id}) }}"><i class="random icon"></i> {{ 'sylius.ui.generate'|trans }}</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
