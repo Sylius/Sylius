@@ -36,8 +36,11 @@ final class PaymentMethodEligibilityValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($command, OrderTokenValueAwareInterface::class);
 
+        /** @var PaymentMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, PaymentMethodEligibility::class);
+
         /** @var OrderInterface $order */
-        Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $command->orderTokenValue]));
+        Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $command->getOrderTokenValue()]));
 
         /** @var PaymentInterface $orderPayment */
         Assert::notNull($orderPayments = $order->getPayments());

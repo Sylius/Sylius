@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
 final class PaymentMethodEligibility extends Constraint
 {
     /** @var string */
-    public $message = 'sylius.order.payment_method.eligibility';
+    public $message = 'sylius.order.payment_method_eligibility';
 
     public function validatedBy(): string
     {
