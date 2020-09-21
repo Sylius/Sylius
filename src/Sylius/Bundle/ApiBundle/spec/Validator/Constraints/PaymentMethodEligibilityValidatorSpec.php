@@ -17,8 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\PaymentMethodEligibilityValidator;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\PaymentMethodEligibility;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibility;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -94,7 +93,7 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new OrderPaymentMethodEligibility();
+        $constraint = new PaymentMethodEligibility();
 
         $value = new CompleteOrder();
         $value->setOrderTokenValue('token');
@@ -129,7 +128,7 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new OrderPaymentMethodEligibility();
+        $constraint = new PaymentMethodEligibility();
 
         $value = new CompleteOrder();
         $value->setOrderTokenValue('token');
