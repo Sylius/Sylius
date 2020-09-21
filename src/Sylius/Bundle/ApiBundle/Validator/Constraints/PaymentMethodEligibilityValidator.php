@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -31,21 +32,23 @@ final class PaymentMethodEligibilityValidator extends ConstraintValidator
         $this->orderRepository = $orderRepository;
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate($command, Constraint $constraint): void
     {
-        Assert::notNull($value);
+        Assert::isInstanceOf($command, OrderTokenValueAwareInterface::class);
 
         /** @var OrderInterface $order */
-        Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $value]));
+        Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $command->orderTokenValue]));
 
         /** @var PaymentInterface $orderPayment */
-        Assert::notNull($orderPayment = $order->getPayments()[0]);
+        Assert::notNull($orderPayments = $order->getPayments());
 
-        if (!$orderPayment->getMethod()->isEnabled()) {
-            $this->context->addViolation(
-                $constraint->message,
-                ['%paymentMethodName%' => $orderPayment->getMethod()->getName()]
-            );
+        foreach($orderPayments as $orderPayment) {
+            if (!$orderPayment->getMethod()->isEnabled()) {
+                $this->context->addViolation(
+                    $constraint->message,
+                    ['%paymentMethodName%' => $orderPayment->getMethod()->getName()]
+                );
+            }
         }
     }
 }

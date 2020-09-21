@@ -23,6 +23,11 @@ final class PaymentMethodEligibility extends Constraint
 
     public function validatedBy(): string
     {
-        return 'sylius.validator.payment_method_eligibility';
+        return 'sylius_api_order_payment_method_eligibility';
+    }
+
+    public function getTargets(): string
+    {
+        return self::CLASS_CONSTRAINT;
     }
 }
