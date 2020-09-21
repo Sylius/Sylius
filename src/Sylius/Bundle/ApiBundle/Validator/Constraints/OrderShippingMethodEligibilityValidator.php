@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -26,22 +26,17 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
-    /** @var ShipmentRepositoryInterface */
-    private $shipmentRepository;
-
-    /** @var ShippingMethodRepositoryInterface */
-    private $shippingMethodRepository;
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
 
     /** @var ShippingMethodEligibilityCheckerInterface */
     private $eligibilityChecker;
 
     public function __construct(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
-        $this->shipmentRepository = $shipmentRepository;
-        $this->shippingMethodRepository = $shippingMethodRepository;
+        $this->orderRepository = $orderRepository;
         $this->eligibilityChecker = $eligibilityChecker;
     }
 
@@ -52,21 +47,22 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
         /** @var OrderShippingMethodEligibility $constraint */
         Assert::isInstanceOf($constraint, OrderShippingMethodEligibility::class);
 
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
+
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->findOneBy(['id' => $value->shipmentId]);
+        foreach ($order->getShipments() as $shipment) {
+            /** @var ShippingMethodInterface $shippingMethod */
+            $shippingMethod = $shipment->getMethod();
 
-        Assert::notNull($shipment);
-
-        /** @var ShippingMethodInterface $shippingMethod */
-        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $value->shippingMethodCode]);
-
-        Assert::notNull($shippingMethod);
-
-        if (!$this->eligibilityChecker->isEligible($shipment, $shippingMethod)) {
-            $this->context->addViolation(
-                $constraint->message,
-                ['%shippingMethodName%' => $shippingMethod->getName()]
-            );
+            if (!$this->eligibilityChecker->isEligible($shipment, $shippingMethod)) {
+                $this->context->addViolation(
+                    $constraint->message,
+                    ['%shippingMethodName%' => $shippingMethod->getName()]
+                );
+            }
         }
     }
 }

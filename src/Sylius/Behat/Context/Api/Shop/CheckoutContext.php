@@ -346,12 +346,12 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to confirm order because products does not fit :shippingMethod requirements
+     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
      */
-    public function iShouldNotBeAbleToConfirmOrderBecauseDoesNotBelongsToShippingCategory(
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(
         ShippingMethodInterface $shippingMethod
     ): void {
-        $this->iProceededWithShippingMethod($shippingMethod);
+        $this->iConfirmMyOrder();
 
         /** @var Response $response */
         $response = $this->client->getResponse();

@@ -31,17 +31,12 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
     /** @var OrderModifierInterface */
     private $orderModifier;
 
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
-
     public function __construct(
         OrderItemRepositoryInterface $orderItemRepository,
-        OrderModifierInterface $orderModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderModifierInterface $orderModifier
     ) {
         $this->orderItemRepository = $orderItemRepository;
         $this->orderModifier = $orderModifier;
-        $this->orderProcessor = $orderProcessor;
     }
 
     public function __invoke(RemoveItemFromCart $removeItemFromCart): OrderInterface
@@ -60,8 +55,6 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         Assert::same($cart->getTokenValue(), $removeItemFromCart->orderTokenValue);
 
         $this->orderModifier->removeFromOrder($cart, $orderItem);
-
-        $this->orderProcessor->process($cart);
 
         return $cart;
     }

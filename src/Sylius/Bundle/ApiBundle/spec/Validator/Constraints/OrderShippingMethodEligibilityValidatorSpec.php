@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibility;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -29,15 +30,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 {
     function let(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ): void {
-        $this->beConstructedWith(
-            $shipmentRepository,
-            $shippingMethodRepository,
-            $eligibilityChecker
-        );
+        $this->beConstructedWith($orderRepository, $eligibilityChecker);
     }
 
     function it_is_a_constraint_validator(): void
@@ -54,7 +50,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void {
-        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface{
+        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
             private $orderTokenValue;
 
             public function getOrderTokenValue(): ?string
@@ -74,17 +70,14 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_shipment_is_null(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
-    ): void {
+    function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
+    {
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new ChooseShippingMethod('xxx');
-        $value->shipmentId = '20';
+        $value = new CompleteOrder();
+        $value->setOrderTokenValue('token');
 
-        $shipmentRepository->findOneBy(['id' => '20'])->willReturn(null);
-        $shippingMethodRepository->findOneBy(['code' => 'xxx'])->shouldNotBeCalled();
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -92,31 +85,10 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_shipping_method_is_null(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+    function it_adds_violation_if_shipment_does_not_match_with_shipping_method(
+        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        ShipmentInterface $shipment
-    ): void {
-        $constraint = new OrderShippingMethodEligibility();
-
-        $value = new ChooseShippingMethod('xxx');
-        $value->shipmentId = '20';
-
-        $shipmentRepository->findOneBy(['id' => '20'])->willReturn($shipment);
-        $shippingMethodRepository->findOneBy(['code' => 'xxx'])->willReturn(null);
-        $eligibilityChecker->isEligible($shipment, null)->shouldNotBeCalled();
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$value, $constraint])
-        ;
-    }
-
-    function it_add_violation_if_shipment_does_not_match_with_shipping_method(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
+        OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         ExecutionContextInterface $executionContext
@@ -125,11 +97,15 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new ChooseShippingMethod('xxx');
-        $value->shipmentId = '20';
+        $value = new CompleteOrder();
+        $value->setOrderTokenValue('token');
 
-        $shipmentRepository->findOneBy(['id' => '20'])->willReturn($shipment);
-        $shippingMethodRepository->findOneBy(['code' => 'xxx'])->willReturn($shippingMethod);
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+
+        $shipment->getMethod()->willReturn($shippingMethod);
+
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(false);
 
         $shippingMethod->getName()->willReturn('InPost');
@@ -145,10 +121,10 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->validate($value, $constraint);
     }
 
-    function it_does_not_add_a_violation_if_shipment_match_with_shipping_method(
-        ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
+    function it_does_not_add_a_violation_if_shipment_matches_with_shipping_method(
+        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
+        OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         ExecutionContextInterface $executionContext
@@ -157,12 +133,18 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new ChooseShippingMethod('xxx');
-        $value->shipmentId = '20';
+        $value = new CompleteOrder();
+        $value->setOrderTokenValue('token');
 
-        $shipmentRepository->findOneBy(['id' => '20'])->willReturn($shipment);
-        $shippingMethodRepository->findOneBy(['code' => 'xxx'])->willReturn($shippingMethod);
+        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
+
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+
+        $shipment->getMethod()->willReturn($shippingMethod);
+
         $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
+
+        $shippingMethod->getName()->willReturn('InPost');
 
         $executionContext
             ->addViolation(

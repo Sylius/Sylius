@@ -109,7 +109,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
-                    <attribute>sylius_checkout_select_shipping_method</attribute>
+                    <attribute>sylius_checkout_complete</attribute>
                 </attribute>
                 <attribute name="path">/shop/orders/{id}/shipments/{shipmentId}</attribute>
                 <attribute name="messenger">input</attribute>
