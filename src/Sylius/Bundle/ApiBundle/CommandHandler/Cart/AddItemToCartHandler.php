@@ -20,7 +20,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,23 +41,18 @@ final class AddItemToCartHandler implements MessageHandlerInterface
     /** @var OrderItemQuantityModifierInterface */
     private $orderItemQuantityModifier;
 
-    /** @var OrderProcessorInterface */
-    private $orderProcessor;
-
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
         $this->orderRepository = $orderRepository;
         $this->productVariantRepository = $productVariantRepository;
         $this->orderModifier = $orderModifier;
         $this->cartItemFactory = $cartItemFactory;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
-        $this->orderProcessor = $orderProcessor;
     }
 
     public function __invoke(AddItemToCart $addItemToCart): OrderInterface
@@ -79,8 +73,6 @@ final class AddItemToCartHandler implements MessageHandlerInterface
 
         $this->orderItemQuantityModifier->modify($cartItem, $addItemToCart->quantity);
         $this->orderModifier->addToOrder($cart, $cartItem);
-
-        $this->orderProcessor->process($cart);
 
         return $cart;
     }

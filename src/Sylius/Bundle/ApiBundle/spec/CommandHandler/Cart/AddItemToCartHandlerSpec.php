@@ -23,7 +23,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class AddItemToCartHandlerSpec extends ObjectBehavior
@@ -33,8 +32,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ): void {
         $this->beConstructedWith(
             $orderRepository,
@@ -42,7 +40,6 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             $orderModifier,
             $cartItemFactory,
             $orderItemQuantityModifier,
-            $orderProcessor
         );
     }
 
@@ -57,7 +54,6 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor,
         OrderInterface $cart,
         OrderItemInterface $cartItem,
         ProductVariantInterface $productVariant
@@ -74,8 +70,6 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
 
         $orderItemQuantityModifier->modify($cartItem, 5)->shouldBeCalled();
         $orderModifier->addToOrder($cart, $cartItem)->shouldBeCalled();
-
-        $orderProcessor->process($cart)->shouldBeCalled();
 
         $this(AddItemToCart::createFromData(
             'TOKEN',

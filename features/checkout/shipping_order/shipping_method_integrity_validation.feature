@@ -18,17 +18,17 @@ Feature: Order shipping method integrity
         And the store has a product "T-shirt Breaking Bad" priced at "$12.54"
         And this product belongs to "Small stuff" shipping category
 
-    @ui
+    @ui @api
     Scenario: Validate shipping method after adding item which does not fit shipping method requirements
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address
         And I have proceeded order with "DHL" shipping method and "Offline" payment
         When I add product "T-shirt Breaking Bad" to the cart
         And I want to complete checkout
-        Then I should not be able to confirm order because products does not fit "DHL" requirements
+        Then I should not be able to confirm order because products do not fit "DHL" requirements
         And I should not see the thank you page
 
-    @ui
+    @ui @api
     Scenario: Validate shipping method after removing item which fits shipping method requirements
         Given I added product "T-shirt Breaking Bad" to the cart
         And I added product "Westworld host" to the cart
@@ -36,15 +36,15 @@ Feature: Order shipping method integrity
         And I have proceeded order with "FedEx" shipping method and "Offline" payment
         When I remove product "T-shirt Breaking Bad" from the cart
         And I want to complete checkout
-        Then I should not be able to confirm order because products does not fit "FedEx" requirements
+        Then I should not be able to confirm order because products do not fit "FedEx" requirements
         And I should not see the thank you page
 
-    @ui
+    @ui @api
     Scenario: Validate shipping method after administrator changes shipping method requirements
         Given I added product "Westworld host" to the cart
         And I have completed addressing step with email "guest@example.com" and "United States" based billing address
         And I have proceeded order with "DHL" shipping method and "Offline" payment
         And product "Westworld host" shipping category has been changed to "Small stuff"
         When I want to complete checkout
-        Then I should not be able to confirm order because products does not fit "DHL" requirements
+        Then I should not be able to confirm order because products do not fit "DHL" requirements
         And I should not see the thank you page

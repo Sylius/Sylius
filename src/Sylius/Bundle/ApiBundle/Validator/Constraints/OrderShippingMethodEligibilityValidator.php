@@ -15,51 +15,52 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OrderProductEligibilityValidator extends ConstraintValidator
+final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository)
-    {
+    /** @var ShippingMethodEligibilityCheckerInterface */
+    private $eligibilityChecker;
+
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+    ) {
         $this->orderRepository = $orderRepository;
+        $this->eligibilityChecker = $eligibilityChecker;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
-    public function validate($value, Constraint $constraint): void
+    public function validate($value, Constraint $constraint)
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 
-        /** @var OrderProductEligibility $constraint */
-        Assert::isInstanceOf($constraint, OrderProductEligibility::class);
+        /** @var OrderShippingMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderShippingMethodEligibility::class);
 
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
 
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        /** @var OrderItemInterface[] $orderItems */
-        $orderItems = $order->getItems();
+        /** @var ShipmentInterface $shipment */
+        foreach ($order->getShipments() as $shipment) {
+            /** @var ShippingMethodInterface $shippingMethod */
+            $shippingMethod = $shipment->getMethod();
 
-        foreach ($orderItems as $orderItem) {
-            if (!$orderItem->getVariant()->isEnabled()) {
+            if (!$this->eligibilityChecker->isEligible($shipment, $shippingMethod)) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%productName%' => $orderItem->getVariant()->getName()]
-                );
-            } elseif (!$orderItem->getProduct()->isEnabled()) {
-                $this->context->addViolation(
-                    $constraint->message,
-                    ['%productName%' => $orderItem->getProduct()->getName()]
+                    ['%shippingMethodName%' => $shippingMethod->getName()]
                 );
             }
         }

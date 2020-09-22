@@ -89,6 +89,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
      * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
      * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
      */
@@ -101,6 +102,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I want to complete checkout
      * @Given I am at the checkout addressing step
      * @When I complete the payment step
      * @When I complete the shipping step
@@ -172,6 +174,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      */
     public function iCompleteAddressingStepWithEmail(string $email, AddressInterface $address): void
@@ -342,6 +345,27 @@ final class CheckoutContext implements Context
             $this->getCheckoutState(),
             [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED]
         );
+    }
+
+    /**
+     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(
+        ShippingMethodInterface $shippingMethod
+    ): void {
+        $this->iConfirmMyOrder();
+
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::same($response->getStatusCode(), 400);
+
+        Assert::true($this->isViolationWithMessageInResponse(
+            $response,
+            sprintf('Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
+                $shippingMethod->getName()
+            )
+        ));
     }
 
     /**
