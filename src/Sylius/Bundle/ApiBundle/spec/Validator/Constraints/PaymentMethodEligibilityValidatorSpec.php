@@ -29,9 +29,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 {
-    function let(
-        OrderRepositoryInterface $orderRepository
-    ): void {
+    function let(OrderRepositoryInterface $orderRepository): void
+    {
         $this->beConstructedWith($orderRepository);
     }
 
@@ -140,7 +139,6 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $payment->getMethod()->willReturn($paymentMethod);
 
         $paymentMethod->getName()->willReturn('bank transfer');
-
         $paymentMethod->isEnabled()->willReturn(true);
 
         $executionContext
