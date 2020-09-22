@@ -22,8 +22,14 @@
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\PaymentMethodEligibility">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility">
             <option name="message">sylius.order.payment_method_eligibility</option>
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+            </option>
+        </constraint>
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibility">
+            <option name="message">sylius.order.shipping_method_eligibility</option>
             <option name="groups">
                 <value>sylius_checkout_complete</value>
             </option>

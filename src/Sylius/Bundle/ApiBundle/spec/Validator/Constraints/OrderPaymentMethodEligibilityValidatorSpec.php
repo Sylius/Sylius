@@ -17,8 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\PaymentMethodEligibility;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -27,7 +26,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
+final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 {
     function let(OrderRepositoryInterface $orderRepository): void
     {
@@ -70,7 +69,7 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
     {
-        $constraint = new OrderShippingMethodEligibility();
+        $constraint = new OrderPaymentMethodEligibility();
 
         $value = new CompleteOrder();
         $value->setOrderTokenValue('token');
@@ -92,7 +91,7 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new PaymentMethodEligibility();
+        $constraint = new OrderPaymentMethodEligibility();
 
         $value = new CompleteOrder();
         $value->setOrderTokenValue('token');
@@ -127,7 +126,7 @@ final class PaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $constraint = new PaymentMethodEligibility();
+        $constraint = new OrderPaymentMethodEligibility();
 
         $value = new CompleteOrder();
         $value->setOrderTokenValue('token');

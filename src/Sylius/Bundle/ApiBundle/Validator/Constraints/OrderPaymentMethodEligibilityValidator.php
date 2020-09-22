@@ -22,7 +22,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class PaymentMethodEligibilityValidator extends ConstraintValidator
+final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -36,8 +36,8 @@ final class PaymentMethodEligibilityValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($command, OrderTokenValueAwareInterface::class);
 
-        /** @var PaymentMethodEligibility $constraint */
-        Assert::isInstanceOf($constraint, PaymentMethodEligibility::class);
+        /** @var OrderPaymentMethodEligibility $constraint */
+        Assert::isInstanceOf($constraint, OrderPaymentMethodEligibility::class);
 
         /** @var OrderInterface $order */
         Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $command->getOrderTokenValue()]));
