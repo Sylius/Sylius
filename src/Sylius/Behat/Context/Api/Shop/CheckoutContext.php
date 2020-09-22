@@ -224,7 +224,7 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder(): void
     {
-        $notes = isset($this->content['additionalNote']) ? $this->content['additionalNote'] : null;
+        $notes = $this->content['additionalNote'] ?? null;
 
         $this->client->request(
             Request::METHOD_PATCH,
@@ -289,6 +289,7 @@ final class CheckoutContext implements Context
     /**
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
+     * @When I have proceeded selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
      * @Given /^the visitor try to proceed with ("[^"]+" payment) in the customer cart$/
@@ -658,6 +659,25 @@ final class CheckoutContext implements Context
     public function iShouldSeeInTheBillingAddress(string $provinceName, string $addressType): void
     {
         $this->hasProvinceNameInAddress($provinceName, $addressType);
+    }
+
+    /**
+     * @Then /^I should be informed that (this payment method) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::same($response->getStatusCode(), 400);
+
+        Assert::true($this->isViolationWithMessageInResponse(
+            $response,
+            sprintf(
+                'This payment method %s has been disabled. Please reselect your payment method.',
+                $paymentMethod->getName()
+            )
+        ));
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
