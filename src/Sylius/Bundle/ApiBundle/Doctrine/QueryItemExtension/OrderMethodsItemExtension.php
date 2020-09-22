@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -32,15 +31,9 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
     /** @var UserContextInterface */
     private $userContext;
 
-    /** @var CartVisitorsCustomerContextInterface */
-    private $cartVisitorsCustomerContext;
-
-    public function __construct(
-        UserContextInterface $userContext,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
-    ) {
+    public function __construct(UserContextInterface $userContext)
+    {
         $this->userContext = $userContext;
-        $this->cartVisitorsCustomerContext = $cartVisitorsCustomerContext;
     }
 
     public function applyToItem(
@@ -73,23 +66,12 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         string $rootAlias,
         string $httpRequestMethodType
     ): void {
-        /** @var string|null $cartCustomerId */
-        $cartCustomerId = $this->cartVisitorsCustomerContext->getCartCustomerId();
-
-        if ($user === null && $cartCustomerId === null) {
+        if ($user === null) {
             $queryBuilder
-                ->andWhere(sprintf('%s.customer IS NULL', $rootAlias))
-                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
-            ;
-
-            return;
-        }
-
-        if ($user === null && $cartCustomerId !== null) {
-            $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $cartCustomerId)
+                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+                ->leftJoin('customer.user', 'user')
+                ->andWhere('user IS NULL')
+                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
                 ->andWhere(sprintf('%s.state = :state', $rootAlias))
                 ->setParameter('state', OrderInterface::STATE_CART)
             ;
@@ -108,9 +90,11 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($user instanceof AdminUserInterface &&
+        if (
+            $user instanceof AdminUserInterface &&
             in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
-            $httpRequestMethodType === Request::METHOD_DELETE) {
+            $httpRequestMethodType === Request::METHOD_DELETE
+        ) {
             $queryBuilder
                 ->andWhere(sprintf('%s.state = :state', $rootAlias))
                 ->setParameter('state', OrderInterface::STATE_CART)
@@ -119,9 +103,11 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        if ($user instanceof AdminUserInterface &&
+        if (
+            $user instanceof AdminUserInterface &&
             in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
-            $httpRequestMethodType !== Request::METHOD_DELETE) {
+            $httpRequestMethodType !== Request::METHOD_DELETE
+        ) {
             //admin has also access to modified orders in states other than cart
 
             return;

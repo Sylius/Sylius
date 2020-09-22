@@ -29,7 +29,6 @@
             <argument type="service" id="sylius.api.context.user" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.random_generator" />
-            <argument type="service" id="sylius.api.context.cart.visitors.customer" />
             <tag name="messenger.message_handler" />
         </service>
 
@@ -56,7 +55,6 @@
             <argument type="service" id="sylius.factory.customer"/>
             <argument type="service" id="sylius.manager.customer"/>
             <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.api.context.cart.visitors.customer" />
             <tag name="messenger.message_handler" />
         </service>
 

@@ -67,9 +67,5 @@
         <service id="sylius.api.context.user" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
             <argument type="service" id="security.token_storage" />
         </service>
-
-        <service id="sylius.api.context.cart.visitors.customer" class="Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContext">
-            <argument type="service" id="session"/>
-        </service>
     </services>
 </container>

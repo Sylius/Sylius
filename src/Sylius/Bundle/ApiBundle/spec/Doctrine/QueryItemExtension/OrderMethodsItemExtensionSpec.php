@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -28,25 +27,40 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class OrderMethodsItemExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext, CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext): void
+    function let(UserContextInterface $userContext): void
     {
-        $this->beConstructedWith($userContext, $cartVisitorsCustomerContext);
+        $this->beConstructedWith($userContext);
     }
 
     function it_applies_conditions_to_delete_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
 
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
         $queryBuilder
-            ->andWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -76,17 +90,32 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_patch_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
 
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
         $queryBuilder
-            ->andWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -116,17 +145,32 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_put_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
 
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
         $queryBuilder
-            ->andWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -158,14 +202,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn('111');
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -209,14 +250,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn('111');
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -260,14 +298,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn('111');
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -311,14 +346,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -362,14 +394,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -413,14 +442,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -464,14 +490,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -497,14 +520,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         AdminUserInterface $adminUser,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($adminUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
@@ -534,14 +554,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         AdminUserInterface $adminUser,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($adminUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
@@ -559,14 +576,11 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         AdminUserInterface $adminUser,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($adminUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 

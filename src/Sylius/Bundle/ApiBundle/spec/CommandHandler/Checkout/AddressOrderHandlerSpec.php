@@ -19,7 +19,6 @@ use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -35,16 +34,14 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
-        StateMachineFactoryInterface $stateMachineFactory,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        StateMachineFactoryInterface $stateMachineFactory
     ): void {
         $this->beConstructedWith(
             $orderRepository,
             $customerRepository,
             $customerFactory,
             $manager,
-            $stateMachineFactory,
-            $cartVisitorsCustomerContext
+            $stateMachineFactory
         );
     }
 
@@ -79,7 +76,6 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $customerFactory,
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext,
         CustomerInterface $customer,
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
@@ -100,10 +96,7 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
         $manager->persist($customer)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-        $customer->getId()->willReturn('999');
         $order->setCustomer($customer)->shouldBeCalled();
-        $cartVisitorsCustomerContext->setCartCustomerId('999')->shouldBeCalled();
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 

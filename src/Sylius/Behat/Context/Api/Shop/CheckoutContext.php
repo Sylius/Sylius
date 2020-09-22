@@ -276,7 +276,7 @@ final class CheckoutContext implements Context
      */
     public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
     {
-        Assert::true($this->getCart()['code'] === 404);
+        Assert::same($this->getCart()['code'], 404);
     }
 
     /**

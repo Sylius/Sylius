@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -36,8 +35,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        RandomnessGeneratorInterface $generator
 
     ): void {
         $this->beConstructedWith(
@@ -45,8 +43,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $channelContext,
             $userContext,
             $orderManager,
-            $generator,
-            $cartVisitorsCustomerContext
+            $generator
         );
     }
 
@@ -63,7 +60,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -79,8 +75,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $user->getCustomer()->willReturn($customer);
 
         $cart->setCustomer($customer)->shouldBeCalled();
-
-        $cartVisitorsCustomerContext->setCartCustomerId(null)->shouldBeCalled();
 
         $currency->getCode()->willReturn('USD');
 
@@ -102,7 +96,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -115,8 +108,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
         $userContext->getUser()->willReturn(null);
-
-        $cartVisitorsCustomerContext->setCartCustomerId(null)->shouldBeCalled();
 
         $currency->getCode()->willReturn('USD');
 

@@ -16,16 +16,12 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\ApiBundle\Doctrine\ApiShopRequestMethodsTypes;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -35,15 +31,9 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
     /** @var UserContextInterface */
     private $userContext;
 
-    /** @var CartVisitorsCustomerContextInterface */
-    private $cartVisitorsCustomerContext;
-
-    public function __construct(
-        UserContextInterface $userContext,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
-    ) {
+    public function __construct(UserContextInterface $userContext)
+    {
         $this->userContext = $userContext;
-        $this->cartVisitorsCustomerContext = $cartVisitorsCustomerContext;
     }
 
     public function applyToItem(
@@ -73,19 +63,12 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         QueryBuilder $queryBuilder,
         string $rootAlias
     ): void {
-        /** @var string|null $cartCustomerId */
-        $cartCustomerId = $this->cartVisitorsCustomerContext->getCartCustomerId();
-
-        if ($user === null && $cartCustomerId === null) {
-            $queryBuilder->andWhere(sprintf('%s.customer IS NULL', $rootAlias));
-
-            return;
-        }
-
-        if ($user === null && $cartCustomerId !== null) {
+        if ($user === null) {
             $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $cartCustomerId)
+                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+                ->leftJoin('customer.user', 'user')
+                ->andWhere('user IS NULL')
+                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
             ;
 
             return;

@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -27,26 +26,43 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
 {
-    function let(
-        UserContextInterface $userContext,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
-    ): void {
-        $this->beConstructedWith($userContext, $cartVisitorsCustomerContext);
+    function let(UserContextInterface $userContext): void
+    {
+        $this->beConstructedWith($userContext);
     }
 
     function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
 
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
-        $queryBuilder->andWhere(sprintf('%s.customer IS NULL', 'o'))->shouldBeCalled();
+        $queryBuilder
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
         $this->applyToItem(
             $queryBuilder,
@@ -63,14 +79,11 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        QueryNameGeneratorInterface $queryNameGenerator
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
-
-        $cartVisitorsCustomerContext->getCartCustomerId()->willReturn(null);
 
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);

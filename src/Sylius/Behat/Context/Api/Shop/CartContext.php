@@ -148,7 +148,7 @@ final class CartContext implements Context
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
     {
-        Assert::true($this->getCart()['code'] === 404);
+        Assert::same($this->getCart()['code'], 404);
     }
 
     /**
@@ -195,8 +195,8 @@ final class CartContext implements Context
     {
         $response = $this->cartsClient->show($tokenValue);
 
-        Assert::true(
-            !$this->responseChecker->isShowSuccessful($response),
+        Assert::false(
+            $this->responseChecker->isShowSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
     }
@@ -275,7 +275,7 @@ final class CartContext implements Context
 
     /**
      * @Then I should see :productName with quantity :quantity in my cart
-     * @Then /^the (?:customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
+     * @Then /^the (?:customer|visitor) should see product "([^"]+)" with quantity (\d+) in his cart$/
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
@@ -283,7 +283,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (?:customer|visitor) cart$/
+     * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {

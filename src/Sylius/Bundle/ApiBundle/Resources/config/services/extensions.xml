@@ -40,7 +40,6 @@
             public="true"
         >
             <argument type="service" id="sylius.api.context.user" />
-            <argument type="service" id="sylius.api.context.cart.visitors.customer" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
@@ -50,7 +49,6 @@
             public="true"
         >
             <argument type="service" id="sylius.api.context.user" />
-            <argument type="service" id="sylius.api.context.cart.visitors.customer" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
     </services>

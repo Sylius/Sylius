@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
-use Sylius\Bundle\ApiBundle\Context\CartVisitorsCustomerContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -43,23 +42,18 @@ final class AddressOrderHandler
     /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
-    /** @var CartVisitorsCustomerContextInterface */
-    private $cartVisitorsCustomerContext;
-
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         ObjectManager $manager,
-        StateMachineFactoryInterface $stateMachineFactory,
-        CartVisitorsCustomerContextInterface $cartVisitorsCustomerContext
+        StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->orderRepository = $orderRepository;
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->manager = $manager;
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->cartVisitorsCustomerContext = $cartVisitorsCustomerContext;
     }
 
     public function __invoke(AddressOrder $addressOrder): OrderInterface
@@ -78,12 +72,7 @@ final class AddressOrderHandler
         );
 
         if (null === $order->getCustomer()) {
-            /** @var CustomerInterface $customer */
-            $customer = $this->provideCustomerByEmail($addressOrder->email);
-
-            $order->setCustomer($customer);
-
-            $this->cartVisitorsCustomerContext->setCartCustomerId((string) $customer->getId());
+            $order->setCustomer($this->provideCustomerByEmail($addressOrder->email));
         }
 
         $order->setBillingAddress($addressOrder->billingAddress);
@@ -106,7 +95,6 @@ final class AddressOrderHandler
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);
             $this->manager->persist($customer);
-            $this->manager->flush();
         }
 
         return $customer;
