@@ -101,5 +101,8 @@
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
         <property name="variants" readable="true"/>
+        <property name="associations" readable="true">
+            <subresource resourceClass="%sylius.model.product_association.class%" collection="true" />
+        </property>
     </resource>
 </resources>

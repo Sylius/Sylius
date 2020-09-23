@@ -440,6 +440,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I want to modify an association for the (.*)$/
+     */
+    public function iWantToCreateOrModifyAnAssociationForTheProduct(ProductInterface $product): void
+    {
+        $this->iWantToModifyAProduct($product);
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void

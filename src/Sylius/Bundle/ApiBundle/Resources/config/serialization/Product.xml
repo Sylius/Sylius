@@ -60,5 +60,10 @@
         <attribute name="variants">
             <group>product:read</group>
         </attribute>
+        <attribute name="associations">
+            <group>product:read</group>
+            <group>product:update</group>
+            <group>product:created</group>
+        </attribute>
     </class>
 </serializer>

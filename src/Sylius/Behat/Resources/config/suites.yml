@@ -80,6 +80,7 @@ imports:
     - suites/ui/product/adding_product_review.yml
     - suites/ui/product/accessing_edit_page_from_product_show_page.yml
     - suites/ui/product/managing_product_association_types.yml
+    - suites/ui/product/managing_product_associations.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
     - suites/ui/product/managing_product_reviews.yml

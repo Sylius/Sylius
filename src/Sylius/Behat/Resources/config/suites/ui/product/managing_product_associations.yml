@@ -3,20 +3,21 @@
 
 default:
     suites:
-        api_managing_product_associations:
+        ui_managing_product_associations:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.product
-                - sylius.behat.context.transform.product_association
                 - sylius.behat.context.transform.product_association_type
+                - sylius.behat.context.transform.shared_storage
 
-                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_association
+                - sylius.behat.context.setup.admin_security
 
-                - sylius.behat.context.api.admin.managing_product_associations
+                - sylius.behat.context.ui.admin.managing_products
+                - sylius.behat.context.ui.admin.notification
 
             filters:
-                tags: "@managing_product_associations && @api"
-            javascript: false
+                tags: "@managing_product_associations && @ui"

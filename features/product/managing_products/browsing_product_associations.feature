@@ -15,7 +15,7 @@ Feature: Browsing product associations
         And the product "Grey jean" has an association "Blue" with product "Blue jean"
         And I am logged in as an administrator
 
-    @ui @api
+    @api
     Scenario: Browsing product associations in the store
         When I browse product associations
         Then I should see 2 product associations in the list

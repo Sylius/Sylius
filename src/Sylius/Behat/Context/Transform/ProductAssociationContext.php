@@ -27,24 +27,44 @@ final class ProductAssociationContext implements Context
     /** @var EntityRepository */
     private $productAssociationRepository;
 
+    /** @var ProductAssociationTypeRepositoryInterface */
+    private $productAssociationTypeRepository;
+
+    /** @var ProductRepositoryInterface */
+    private $productRepository;
+
     public function __construct(
-        EntityRepository $productAssociationRepository
+        EntityRepository $productAssociationRepository,
+        ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
+        ProductRepositoryInterface $productRepository
     ) {
         $this->productAssociationRepository = $productAssociationRepository;
+        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
      * @Transform /(?:product owner) "([^"]+)" .*. (?:association type) "([^"]+)"$/
      */
-    public function getProductAssociationByProductOwnerAndType(string $productOwnerCode, string $associationTypeCode): ProductAssociationInterface
+    public function getProductAssociationByProductOwnerAndType(string $productOwnerName, string $associationTypeName): ProductAssociationInterface
     {
+        $productAssociationType = $this->productAssociationTypeRepository->findByName(
+            $associationTypeName,
+            'en_US'
+        );
+
+        $productOwner = $this->productRepository->findByName(
+            $productOwnerName,
+            'en_US'
+        );
+
         $productAssociation = $this->productAssociationRepository->createQueryBuilder('p')
             ->leftJoin('p.owner', 'o')
             ->leftJoin('p.type', 't')
-            ->where('o.code = :productOwnerCode')
-            ->setParameter('productOwnerCode', $productOwnerCode)
-            ->andWhere('t.code = :associationTypeCode')
-            ->setParameter('associationTypeCode', $associationTypeCode)
+            ->where('o = :productOwner')
+            ->setParameter('productOwner', $productOwner)
+            ->andWhere('t = :associationType')
+            ->setParameter('associationType', $productAssociationType)
             ->getQuery()
             ->getSingleResult()
         ;
