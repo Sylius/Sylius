@@ -9,7 +9,7 @@ Feature: Editing a customer profile
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
         And I am logged in as "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Changing my first name and last name
         When I want to modify my profile
         And I specify the first name as "Will"
@@ -18,7 +18,7 @@ Feature: Editing a customer profile
         Then I should be notified that it has been successfully edited
         And my name should be "Will Conway"
 
-    @ui
+    @ui @api
     Scenario: Changing my email
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"

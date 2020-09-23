@@ -16,7 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.customer.class%" shortName="Customer">
-        <attribute name="route_prefix">admin</attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="normalization_context">
             <attribute name="groups">
@@ -29,13 +30,33 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers/{id}</attribute>
                 <attribute name="groups">
                     <attribute>customer:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="groups">
+                    <attribute>customer:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">customer:update</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="email" writable="false" />
+        <property name="email" writable="true" />
+        <property name="firstName" writable="true" />
+        <property name="lastName" writable="true" />
+        <property name="fullName" writable="false" />
     </resource>
 </resources>

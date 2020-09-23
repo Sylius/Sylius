@@ -22,6 +22,21 @@
 
         <attribute name="email">
             <group>customer:read</group>
+            <group>customer:update</group>
+        </attribute>
+
+        <attribute name="firstName">
+            <group>customer:read</group>
+            <group>customer:update</group>
+        </attribute>
+
+        <attribute name="lastName">
+            <group>customer:read</group>
+            <group>customer:update</group>
+        </attribute>
+
+        <attribute name="fullName">
+            <group>customer:read</group>
         </attribute>
     </class>
 </serializer>
