@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -39,7 +40,29 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
 
         $userContext->getUser()->willReturn(null);
 
-        $queryBuilder->andWhere(sprintf('%s.customer IS NULL', 'o'))->shouldBeCalled();
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->andWhere('user IS NULL')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
 
         $this->applyToItem(
             $queryBuilder,
@@ -47,7 +70,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
             Request::METHOD_GET,
-            []
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
 
@@ -61,9 +84,10 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn($shopUser);
+
         $shopUser->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
-        $shopUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :customer', 'o'))
@@ -82,7 +106,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
             Request::METHOD_GET,
-            []
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
 
@@ -110,7 +134,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_GET,
-                    [],
+                    [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET]
                 ]
             )
         ;

@@ -36,6 +36,9 @@ final class CartContext implements Context
     /** @var ApiClientInterface */
     private $productsClient;
 
+    /** @var ApiClientInterface */
+    private $ordersAdminClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -51,6 +54,7 @@ final class CartContext implements Context
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $productsClient,
+        ApiClientInterface $ordersAdminClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
         SharedStorageInterface $sharedStorage,
@@ -58,6 +62,7 @@ final class CartContext implements Context
     ) {
         $this->cartsClient = $cartsClient;
         $this->productsClient = $productsClient;
+        $this->ordersAdminClient = $ordersAdminClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -74,12 +79,20 @@ final class CartContext implements Context
 
     /**
      * @When /^I see the summary of my (cart)$/
-     * @When /^the (?:visitor|administrator) try to see the summary of (?:customer|visitor)'s (cart)$/
+     * @When /^the visitor try to see the summary of (?:customer|visitor)'s (cart)$/
      * @When /^the (?:visitor|customer) see the summary of (?:their) (cart)$/
      */
     public function iSeeTheSummaryOfMyCart(string $tokenValue): void
     {
         $this->cartsClient->show($tokenValue);
+    }
+
+    /**
+     * @When /^the administrator try to see the summary of (?:customer|visitor)'s (cart)$/
+     */
+    public function theAdministratorTryToSeeTheSummaryOfCart(string $tokenValue): void
+    {
+        $this->ordersAdminClient->show($tokenValue);
     }
 
     /**
@@ -131,6 +144,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I don't have access to see the summary of my cart
+     */
+    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
+    {
+        Assert::same($this->getCart()['code'], 404);
+    }
+
+    /**
      * @Then my cart should be cleared
      */
     public function myCartShouldBeCleared(): void
@@ -156,13 +177,25 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
-     * @Then /^the visitor has no access to customer's (cart)$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
         $response = $this->cartsClient->show($tokenValue);
 
         Assert::true(
+            $this->responseChecker->isShowSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
+        );
+    }
+
+    /**
+     * @Then /^the visitor has no access to customer's (cart)$/
+     */
+    public function theVisitorHasNoAccessToCustomer(string $tokenValue): void
+    {
+        $response = $this->cartsClient->show($tokenValue);
+
+        Assert::false(
             $this->responseChecker->isShowSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response)
         );
@@ -242,28 +275,19 @@ final class CartContext implements Context
 
     /**
      * @Then I should see :productName with quantity :quantity in my cart
-     * @Then /^the administrator should see ("[^"]+" product) with quantity ([^"]+) in the (?:customer|visitor) cart$/
-     * @Then /^the (?:customer|visitor) should see (product "[^"]+") with quantity (\d+) in his cart$/
+     * @Then /^the (?:customer|visitor) should see product "([^"]+)" with quantity (\d+) in his cart$/
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $cartResponse = $this->cartsClient->getLastResponse();
-        $items = $this->responseChecker->getValue($cartResponse, 'items');
+        $this->checkProductQuantity($this->cartsClient->getLastResponse(), $productName, $quantity);
+    }
 
-        foreach ($items as $item) {
-            $productResponse = $this->getProductForItem($item);
-
-            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
-                Assert::same(
-                    $item['quantity'],
-                    $quantity,
-                    SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
-                        sprintf('Quantity did not match. Expected %s.', $quantity),
-                        $cartResponse
-                    )
-                );
-            }
-        }
+    /**
+     * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
+     */
+    public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
+    {
+        $this->checkProductQuantity($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
@@ -413,5 +437,32 @@ final class CartContext implements Context
         }
 
         return false;
+    }
+
+    private function checkProductQuantity(Response $cartResponse, string $productName, int $quantity): void
+    {
+        $items = $this->responseChecker->getValue($cartResponse, 'items');
+
+        foreach ($items as $item) {
+            $productResponse = $this->getProductForItem($item);
+
+            if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
+                Assert::same(
+                    $item['quantity'],
+                    $quantity,
+                    SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
+                        sprintf('Quantity did not match. Expected %s.', $quantity),
+                        $cartResponse
+                    )
+                );
+            }
+        }
+    }
+
+    private function getCart(): array
+    {
+        $response = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
+
+        return $this->responseChecker->getResponseContent($response);
     }
 }

@@ -36,8 +36,15 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
+
     ): void {
-        $this->beConstructedWith($cartFactory, $channelContext, $userContext, $orderManager, $generator);
+        $this->beConstructedWith(
+            $cartFactory,
+            $channelContext,
+            $userContext,
+            $orderManager,
+            $generator
+        );
     }
 
     function it_is_a_message_handler(): void
