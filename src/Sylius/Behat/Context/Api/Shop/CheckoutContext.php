@@ -220,7 +220,6 @@ final class CheckoutContext implements Context
      * @When I confirm my order
      * @When I try to confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
-     * @When /^the visitor try to confirm the customer order$/
      */
     public function iConfirmMyOrder(): void
     {
@@ -255,7 +254,6 @@ final class CheckoutContext implements Context
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
      * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
-     * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -276,6 +274,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then the visitor has no access to proceed with :shippingMethod shipping method in the customer cart
+     * @Then the visitor has no access to proceed with :paymentMethod payment in the customer cart
+     * @Then the visitor has no access to confirm the customer order
+     * @Then the visitor has no access to change product :product quantity to :quantity in the customer cart
+     */
+    public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
+    {
+        Assert::same($this->getCart()['code'], 404);
+    }
+
+    /**
      * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStepWithFirstShippingMethod(): void
@@ -292,7 +301,6 @@ final class CheckoutContext implements Context
      * @When I have proceeded selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
-     * @Given /^the visitor try to proceed with ("[^"]+" payment) in the customer cart$/
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {

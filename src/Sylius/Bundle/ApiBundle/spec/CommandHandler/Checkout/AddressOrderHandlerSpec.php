@@ -36,7 +36,13 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         ObjectManager $manager,
         StateMachineFactoryInterface $stateMachineFactory
     ): void {
-        $this->beConstructedWith($orderRepository, $customerRepository, $customerFactory, $manager, $stateMachineFactory);
+        $this->beConstructedWith(
+            $orderRepository,
+            $customerRepository,
+            $customerFactory,
+            $manager,
+            $stateMachineFactory
+        );
     }
 
     function it_handles_addressing_an_order_without_provided_shipping_address(
@@ -91,7 +97,6 @@ final class AddressOrderHandlerSpec extends ObjectBehavior
         $customer->setEmail('r2d2@droid.com')->shouldBeCalled();
         $manager->persist($customer)->shouldBeCalled();
         $order->setCustomer($customer)->shouldBeCalled();
-
         $order->setBillingAddress($billingAddress)->shouldBeCalled();
         $order->setShippingAddress($shippingAddress)->shouldBeCalled();
 

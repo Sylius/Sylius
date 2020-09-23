@@ -17,6 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -43,35 +44,37 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         string $operationName = null,
         array $context = []
     ) {
-        $operationName = strtoupper($operationName);
-
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
 
-        if ($operationName !== Request::METHOD_GET) {
+        if ($context[ContextKeys::HTTP_REQUEST_METHOD_TYPE] !== Request::METHOD_GET) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyToItemForGetMethod($user, $queryBuilder, $operationName, $rootAlias);
+        $this->applyToItemForGetMethod($user, $queryBuilder, $rootAlias);
     }
 
     private function applyToItemForGetMethod(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
-        string $operationName,
         string $rootAlias
     ): void {
         if ($user === null) {
-            $queryBuilder->andWhere(sprintf('%s.customer IS NULL', $rootAlias));
+            $queryBuilder
+                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+                ->leftJoin('customer.user', 'user')
+                ->andWhere('user IS NULL')
+                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+            ;
 
             return;
         }
 
-        if ($user instanceof ShopUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
             $queryBuilder
                 ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
                 ->setParameter('customer', $user->getCustomer()->getId())
