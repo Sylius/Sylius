@@ -59,3 +59,13 @@ Feature: Preventing cart to be modified after checkout by Customer
         And I confirm my order
         When I try to remove product "AK-47" from the cart
         Then I should be informed that cart is no longer available
+
+    @api
+    Scenario: Changing quantity of product after completing checkout
+        Given I have product "Sig Sauer P226" in the cart
+        And I have product "AK-47" in the cart
+        Then I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I proceed with "Free" shipping method and "Cash on Delivery" payment
+        And I confirm my order
+        When I try to change quantity to 2 of product "AK-47" from the cart
+        Then I should be informed that cart is no longer available

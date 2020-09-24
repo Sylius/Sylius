@@ -100,7 +100,6 @@ final class CartContext implements Context
      * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When /^I add (product "[^"]+") to the (cart)$/
      * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
-     * @When /^I try to add (product "[^"]+") to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -137,7 +136,6 @@ final class CartContext implements Context
 
     /**
      * @When /^I remove (product "[^"]+") from the (cart)$/
-     * @When /^I try to remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {

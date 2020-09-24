@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -27,9 +28,11 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -62,6 +65,12 @@ final class CheckoutContext implements Context
     /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
+    /** @var AdminToShopIriConverterInterface */
+    private $adminToShopIriConverter;
+
+    /** @var ProductVariantResolverInterface */
+    private $productVariantResolver;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -76,6 +85,8 @@ final class CheckoutContext implements Context
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
+        AdminToShopIriConverterInterface $adminToShopIriConverter,
+        ProductVariantResolverInterface $productVariantResolver,
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
@@ -85,6 +96,8 @@ final class CheckoutContext implements Context
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->adminToShopIriConverter = $adminToShopIriConverter;
+        $this->productVariantResolver = $productVariantResolver;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -692,6 +705,43 @@ final class CheckoutContext implements Context
         ));
     }
 
+    /**
+     * @When /^I try to add (product "[^"]+") to the (cart)$/
+     */
+    public function iTryToAddProductToCart(ProductInterface $product, string $tokenValue): void
+    {
+        $this->putProductToCart($product, $tokenValue);
+    }
+
+    /**
+    * @When /^I try to remove (product "[^"]+") from the (cart)$/
+     */
+    public function iTryToRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    {
+        $this->removeOrderItemFromCart($product->getId(), $tokenValue);
+    }
+
+    /**
+     * @When /^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/
+     */
+    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue)
+    {
+        $this->putProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @Then /^I should be informed that cart is no longer available$/
+     */
+    public function iShouldBeInformedThatCartIsNoLongerAvailable(): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::same($response->getStatusCode(), 404);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+    }
+
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
     {
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -877,25 +927,39 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be informed that cart is no longer available$/
-     */
-    public function iShouldBeInformedThatCartIsNoLongerAvailable(): void
+    private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
-        /** @var Response $response */
-        $response = $this->client->getResponse();
-
-        Assert::same($response->getStatusCode(), 404);
-
-        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
-
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/orders/%s/items',
+                $tokenValue,
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'productCode' => $product->getCode(),
+                'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
+                'quantity' => $quantity,
+            ], \JSON_THROW_ON_ERROR)
+        );
     }
 
-    /**
-     * @Given /^I am not able to modify it$/
-     */
-    public function iAmNotAbleToModifyIt()
+    private function removeOrderItemFromCart(int $orderItemId, string $tokenValue): void
     {
-        throw new PendingException();
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/orders/%s/remove',
+                $tokenValue,
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'orderItemId' => $orderItemId,
+            ], \JSON_THROW_ON_ERROR)
+        );
     }
 }
