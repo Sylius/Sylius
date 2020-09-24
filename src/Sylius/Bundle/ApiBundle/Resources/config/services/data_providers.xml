@@ -28,6 +28,12 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.collection_data_provider.customer" class="Sylius\Bundle\ApiBundle\DataProvider\CustomerItemDataProvider">
+            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
         <service
             id="sylius.api.collection_data_provider.shipping_methods_available_for_order"
             class="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider"

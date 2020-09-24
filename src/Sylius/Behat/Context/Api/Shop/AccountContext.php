@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,14 +33,19 @@ final class AccountContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var ShopSecurityContext */
+    private $shopApiSecurityContext;
+
     public function __construct(
         ApiClientInterface $accountClient,
         SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
+        ShopSecurityContext $shopApiSecurityContext
     ) {
         $this->accountClient = $accountClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
+        $this->shopApiSecurityContext = $shopApiSecurityContext;
     }
 
     /**
@@ -106,6 +112,8 @@ final class AccountContext implements Context
     {
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
+
+        $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
         $response = $this->accountClient->show((string) $shopUser->getCustomer()->getId());
 

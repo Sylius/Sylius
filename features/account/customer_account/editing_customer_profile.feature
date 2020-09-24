@@ -6,7 +6,7 @@ Feature: Editing a customer profile
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
+        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
     @ui @api

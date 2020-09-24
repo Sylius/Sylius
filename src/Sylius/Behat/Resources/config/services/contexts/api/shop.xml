@@ -75,6 +75,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.account" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.context.setup.shop_api_security" />
         </service>
     </services>
 </container>
