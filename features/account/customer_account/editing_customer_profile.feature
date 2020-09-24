@@ -6,10 +6,10 @@ Feature: Editing a customer profile
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
+        And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui
+    @ui @api
     Scenario: Changing my first name and last name
         When I want to modify my profile
         And I specify the first name as "Will"
@@ -18,7 +18,7 @@ Feature: Editing a customer profile
         Then I should be notified that it has been successfully edited
         And my name should be "Will Conway"
 
-    @ui
+    @ui @api
     Scenario: Changing my email
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"

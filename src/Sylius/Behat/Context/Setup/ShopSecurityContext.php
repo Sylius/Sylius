@@ -49,19 +49,21 @@ final class ShopSecurityContext implements Context
     /**
      * @Given I am logged in as :email
      */
-    public function iAmLoggedInAs($email)
+    public function iAmLoggedInAs(string $email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
         Assert::notNull($user);
 
         $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('user', $user);
     }
 
     /**
      * @Given I am a logged in customer
      * @Given the customer logged in
      */
-    public function iAmLoggedInCustomer()
+    public function iAmLoggedInCustomer(): void
     {
         $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true]);
         $this->userRepository->add($user);
