@@ -15,13 +15,9 @@
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Core\Model\OrderItem">
-        <property name="variant">
-            <constraint name="NotNull" />
-        </property>
-        <property name="quantity">
-            <constraint name="NotNull" />
-            <constraint name="PositiveOrZero" />
-        </property>
+    <class name="Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderImmutabilityChecker">
+            <option name="message">sylius.order.immutability_check</option>
+        </constraint>
     </class>
 </constraint-mapping>

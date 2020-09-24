@@ -165,6 +165,7 @@ final class CheckoutContext implements Context
     /**
      * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I define the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I try to change the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
@@ -254,6 +255,8 @@ final class CheckoutContext implements Context
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
      * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
+     * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
+     * @When I try to change shipping method to :shippingMethod
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -301,6 +304,7 @@ final class CheckoutContext implements Context
      * @When I have proceeded selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
+     * @When /^I try to change payment method to ("[^"]+" payment)$/
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
@@ -871,5 +875,27 @@ final class CheckoutContext implements Context
             $this->responseChecker->getResponseContent($response)[$addressType]['provinceName'],
             $provinceName
         );
+    }
+
+    /**
+     * @Then /^I should be informed that cart is no longer available$/
+     */
+    public function iShouldBeInformedThatCartIsNoLongerAvailable(): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        Assert::same($response->getStatusCode(), 404);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+
+    }
+
+    /**
+     * @Given /^I am not able to modify it$/
+     */
+    public function iAmNotAbleToModifyIt()
+    {
+        throw new PendingException();
     }
 }

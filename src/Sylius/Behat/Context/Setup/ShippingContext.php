@@ -50,9 +50,6 @@ final class ShippingContext implements Context
     private $shippingMethodExampleFactory;
 
     /** @var FactoryInterface */
-    private $shippingMethodTranslationFactory;
-
-    /** @var FactoryInterface */
     private $shippingMethodRuleFactory;
 
     /** @var ObjectManager */
@@ -63,7 +60,6 @@ final class ShippingContext implements Context
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         RepositoryInterface $zoneRepository,
         ShippingMethodExampleFactory $shippingMethodExampleFactory,
-        FactoryInterface $shippingMethodTranslationFactory,
         FactoryInterface $shippingMethodRuleFactory,
         ObjectManager $shippingMethodManager
     ) {
@@ -71,7 +67,6 @@ final class ShippingContext implements Context
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->zoneRepository = $zoneRepository;
         $this->shippingMethodExampleFactory = $shippingMethodExampleFactory;
-        $this->shippingMethodTranslationFactory = $shippingMethodTranslationFactory;
         $this->shippingMethodRuleFactory = $shippingMethodRuleFactory;
         $this->shippingMethodManager = $shippingMethodManager;
     }
@@ -93,15 +88,16 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given the store ships everywhere for free
+     * @Given the store ships everywhere for :shippingName
+     * @Given the store ships everywhere with :shippingName
      */
-    public function theStoreShipsEverywhereForFree(): void
+    public function theStoreShipsEverywhereWith(string $shippingName): void
     {
         /** @var ZoneInterface $zone */
         foreach ($this->zoneRepository->findBy(['scope' => [CoreScope::SHIPPING, Scope::ALL]]) as $zone) {
             $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
-                'name' => 'Free',
-                'code' => 'FREE-' . $zone->getCode(),
+                'name' => $shippingName,
+                'code' => strtoupper($shippingName) . '-' . $zone->getCode(),
                 'enabled' => true,
                 'zone' => $zone,
                 'calculator' => [
