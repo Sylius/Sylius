@@ -708,11 +708,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I try to change quantity of first product to (\d+) in (cart)$/
+     * @When /^I try to change quantity to (\d+) of (product "[^"]+") in (cart)$/
      */
-    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, string $tokenValue): void
+    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
-        $this->changeQuantityOfFirstProductInCart($tokenValue, $quantity);
+        $this->changeQuantityOfProductInCart($product,$tokenValue, $quantity);
     }
 
     /**
@@ -820,7 +820,6 @@ final class CheckoutContext implements Context
             if (
                 $cartShippingMethod['cost'] === $fee &&
                 $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
-
             ) {
                 return true;
             }
@@ -933,9 +932,19 @@ final class CheckoutContext implements Context
         );
     }
 
-    private function changeQuantityOfFirstProductInCart(string $tokenValue, int $quantity = 1): void
+    private function changeQuantityOfProductInCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
     {
+        /** @var string */
+        $orderItemId = '';
+
         $cart = $this->getCart();
+
+        foreach($cart['items'] as $item) {
+            if (strpos($item['variant'], $product->getCode())){
+                $orderItemId = $item['id'];
+                break;
+            }
+        }
 
         $this->client->request(
             Request::METHOD_PATCH,
@@ -946,7 +955,7 @@ final class CheckoutContext implements Context
             [],
             [],
             $this->getHeaders(),
-            json_encode(['orderItemId' => $cart['items'][0]['id'], 'newQuantity' => $quantity], \JSON_THROW_ON_ERROR)
+            json_encode(['orderItemId' => $orderItemId, 'newQuantity' => $quantity], \JSON_THROW_ON_ERROR)
         );
     }
 
@@ -961,9 +970,7 @@ final class CheckoutContext implements Context
             [],
             [],
             $this->getHeaders(),
-            json_encode([
-                'orderItemId' => $orderItemId,
-            ], \JSON_THROW_ON_ERROR)
+            json_encode(['orderItemId' => $orderItemId,], \JSON_THROW_ON_ERROR)
         );
     }
 }

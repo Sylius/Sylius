@@ -66,5 +66,5 @@ Feature: Preventing cart from being modified after checkout
         Then I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
-        When I try to change quantity of first product to 2 in cart
+        When I try to change quantity to 2 of product "Sig Sauer P226" in cart
         Then I should be informed that cart is no longer available
