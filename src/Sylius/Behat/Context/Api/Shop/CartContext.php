@@ -100,6 +100,7 @@ final class CartContext implements Context
      * @When /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When /^I add (product "[^"]+") to the (cart)$/
      * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
+     * @When /^I try to add (product "[^"]+") to the (cart)$/
      */
     public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -127,6 +128,7 @@ final class CartContext implements Context
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
+     * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/
      */
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
@@ -136,6 +138,7 @@ final class CartContext implements Context
 
     /**
      * @When /^I remove (product "[^"]+") from the (cart)$/
+     * @When /^I try to remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -321,6 +324,18 @@ final class CartContext implements Context
         $response = $this->cartsClient->getLastResponse();
 
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
+    }
+
+    /**
+     * @Then I should be informed that cart items are no longer available
+     */
+    public function iShouldBeInformedThatCartItemsAreNoLongerAvailable(): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 404);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
     }
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
