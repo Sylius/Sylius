@@ -232,7 +232,6 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.fixture.example_factory.shipping_method" />
-            <argument type="service" id="sylius.factory.shipping_method_translation" />
             <argument type="service" id="sylius.factory.shipping_method_rule" />
             <argument type="service" id="sylius.manager.shipping_method" />
         </service>

@@ -21,7 +21,7 @@
         </property>
         <property name="quantity">
             <constraint name="NotNull" />
-            <constraint name="PositiveOrZero"></constraint>
+            <constraint name="PositiveOrZero" />
         </property>
     </class>
 </constraint-mapping>
