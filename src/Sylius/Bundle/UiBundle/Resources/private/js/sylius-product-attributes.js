@@ -32,10 +32,12 @@ const modifyAttributesListOnSelectorElementDelete = function modifyAttributesLis
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
   $('.attribute button').off('click').on('click', (event) => {
-    const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
+    if ($(event.originalEvent.explicitOriginalTarget.id).is(':empty')) {
+      const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
 
-    $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
-    modifyAttributesListOnSelectorElementDelete(attributeId);
+      $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
+      modifyAttributesListOnSelectorElementDelete(attributeId);
+    }
   });
 };
 
