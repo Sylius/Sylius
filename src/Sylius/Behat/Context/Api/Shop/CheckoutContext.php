@@ -17,7 +17,6 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -137,6 +136,7 @@ final class CheckoutContext implements Context
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I (do not specify any billing address) information$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
@@ -159,14 +159,6 @@ final class CheckoutContext implements Context
     {
         $this->fillAddress('billingAddress', $address);
         $this->fillAddress('shippingAddress', $address);
-    }
-
-    /**
-     * @When /^I (do not specify any billing address) information$/
-     */
-    public function iDoNotSpecifyAnyBillingAddressInformation(AddressInterface $address): void
-    {
-        $this->fillAddress('billingAddress', $address);
     }
 
     /**
@@ -357,8 +349,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout complete step
-     * @Then I should be on the checkout summary step
+     * @Then /^I should be on the checkout (?:complete|summary) step$/
      */
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
@@ -394,7 +385,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
-        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+        $paymentMethods = $this->getPossiblePaymentMethods();
 
         Assert::false(array_search($paymentMethodName, array_column($paymentMethods, 'name')));
     }
@@ -404,7 +395,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
-        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+        $paymentMethods = $this->getPossiblePaymentMethods();
 
         Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name')));
     }
@@ -414,7 +405,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldHavePaymentMethodAvailableAsTheChoice(string $paymentMethodName, string $choice): void
     {
-        $paymentMethods = $this->getPossiblePaymentMethods($paymentMethodName);
+        $paymentMethods = $this->getPossiblePaymentMethods();
         Assert::notEmpty($paymentMethods);
 
         if ($choice === 'first') {
@@ -717,11 +708,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/
+     * @When /^I try to change quantity of first product to (\d+) in (cart)$/
      */
-    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue): void
+    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, string $tokenValue): void
     {
-        $this->putProductToCart($product, $tokenValue, $quantity);
+        $this->changeQuantityOfFirstProductInCart($tokenValue, $quantity);
     }
 
     /**
@@ -827,8 +818,9 @@ final class CheckoutContext implements Context
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
-                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode() &&
-                $cartShippingMethod['cost'] === $fee
+                $cartShippingMethod['cost'] === $fee &&
+                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
+
             ) {
                 return true;
             }
@@ -837,10 +829,10 @@ final class CheckoutContext implements Context
         return false;
     }
 
-    private function getPossiblePaymentMethods(string $paymentMethodName): array
+    private function getPossiblePaymentMethods(): array
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findCartByTokenValue($this->sharedStorage->get('cart_token'));
+        Assert::notNull($order = $this->orderRepository->findCartByTokenValue($this->sharedStorage->get('cart_token')));
 
         if (!$order->getLastPayment()) {
             return [];
@@ -938,6 +930,23 @@ final class CheckoutContext implements Context
                 'productVariantCode' => $this->productVariantResolver->getVariant($product)->getCode(),
                 'quantity' => $quantity,
             ], \JSON_THROW_ON_ERROR)
+        );
+    }
+
+    private function changeQuantityOfFirstProductInCart(string $tokenValue, int $quantity = 1): void
+    {
+        $cart = $this->getCart();
+
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/orders/%s/change-quantity',
+                $tokenValue,
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode(['orderItemId' => $cart['items'][0]['id'], 'newQuantity' => $quantity], \JSON_THROW_ON_ERROR)
         );
     }
 

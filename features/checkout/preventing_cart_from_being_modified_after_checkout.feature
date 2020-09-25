@@ -63,9 +63,8 @@ Feature: Preventing cart from being modified after checkout
     @api
     Scenario: Preventing from changing quantity of product after checkout
         Given I added product "Sig Sauer P226" to the cart
-        And I added product "AK-47" to the cart
         Then I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceeded with "Free" shipping method and "Cash on Delivery" payment
         And I confirmed my order
-        When I try to change quantity to 2 of product "AK-47" from the cart
+        When I try to change quantity of first product to 2 in cart
         Then I should be informed that cart is no longer available
