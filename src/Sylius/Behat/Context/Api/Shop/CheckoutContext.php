@@ -32,7 +32,6 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -65,9 +64,6 @@ final class CheckoutContext implements Context
     /** @var RepositoryInterface */
     private $paymentMethodRepository;
 
-    /** @var AdminToShopIriConverterInterface */
-    private $adminToShopIriConverter;
-
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
@@ -85,7 +81,6 @@ final class CheckoutContext implements Context
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
-        AdminToShopIriConverterInterface $adminToShopIriConverter,
         ProductVariantResolverInterface $productVariantResolver,
         SharedStorageInterface $sharedStorage
     ) {
@@ -96,7 +91,6 @@ final class CheckoutContext implements Context
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->productVariantResolver = $productVariantResolver;
         $this->sharedStorage = $sharedStorage;
     }
@@ -231,6 +225,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I confirmed my order
      * @When I confirm my order
      * @When I try to confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
@@ -317,7 +312,7 @@ final class CheckoutContext implements Context
      * @When I have proceeded selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
-     * @When /^I try to change payment method to ("[^"]+" payment)$/
+     * @When I try to change payment method to :paymentMethod payment
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
@@ -724,13 +719,13 @@ final class CheckoutContext implements Context
     /**
      * @When /^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/
      */
-    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue)
+    public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
     }
 
     /**
-     * @Then /^I should be informed that cart is no longer available$/
+     * @Then I should be informed that cart is no longer available
      */
     public function iShouldBeInformedThatCartIsNoLongerAvailable(): void
     {

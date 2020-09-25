@@ -40,7 +40,6 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="sylius.admin_to_shop_iri_converter" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>

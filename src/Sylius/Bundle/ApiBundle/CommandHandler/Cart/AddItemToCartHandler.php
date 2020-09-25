@@ -59,7 +59,7 @@ final class AddItemToCartHandler implements MessageHandlerInterface
 
     public function __invoke(AddItemToCart $addItemToCart): OrderInterface
     {
-        /** @var ProductVariantInterface $productVariant */
+        /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneByCodeAndProductCode(
             $addItemToCart->productVariantCode,
             $addItemToCart->productCode

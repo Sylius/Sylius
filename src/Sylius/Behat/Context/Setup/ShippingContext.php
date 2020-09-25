@@ -88,16 +88,16 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given the store ships everywhere for :shippingName
-     * @Given the store ships everywhere with :shippingName
+     * @Given the store ships everywhere for :shippingMethodName
+     * @Given the store ships everywhere with :shippingMethodName
      */
-    public function theStoreShipsEverywhereWith(string $shippingName): void
+    public function theStoreShipsEverywhereWith(string $shippingMethodName): void
     {
         /** @var ZoneInterface $zone */
         foreach ($this->zoneRepository->findBy(['scope' => [CoreScope::SHIPPING, Scope::ALL]]) as $zone) {
             $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
-                'name' => $shippingName,
-                'code' => strtoupper($shippingName) . '-' . $zone->getCode(),
+                'name' => ucfirst($shippingMethodName),
+                'code' => strtoupper($shippingMethodName) . '-' . $zone->getCode(),
                 'enabled' => true,
                 'zone' => $zone,
                 'calculator' => [
