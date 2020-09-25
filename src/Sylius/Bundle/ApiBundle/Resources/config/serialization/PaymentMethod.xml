@@ -23,5 +23,8 @@
             <group>payment_method:read</group>
             <group>checkout:read</group>
         </attribute>
+        <attribute name="code">
+            <group>payment_method:read</group>
+        </attribute>
     </class>
 </serializer>
