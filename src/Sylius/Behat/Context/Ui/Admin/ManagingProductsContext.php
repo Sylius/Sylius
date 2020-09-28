@@ -520,12 +520,28 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its non translatable :attribute attribute to :value
+     */
+    public function iSetItsNonTranslatableAttributeTo($attribute, $value = null)
+    {
+        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', '__not_translatable__');
+    }
+
+    /**
      * @When I remove its :attribute attribute
      * @When I remove its :attribute attribute from :language
      */
     public function iRemoveItsAttribute($attribute, $language = 'en_US')
     {
         $this->createSimpleProductPage->removeAttribute($attribute, $language);
+    }
+
+    /**
+     * @When I remove its non translatable :attribute attribute
+     */
+    public function iRemoveItsNonTranslatableAttribute($attribute)
+    {
+        $this->createSimpleProductPage->removeAttribute($attribute, '__not_translatable__');
     }
 
     /**
@@ -553,6 +569,16 @@ final class ManagingProductsContext implements Context
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $language), $value);
+    }
+
+    /**
+     * @Then non translatable attribute :attributeName of product :product should be :value
+     */
+    public function itsNonTranslatableAttributeShouldBe($attributeName, ProductInterface $product, $value)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, '__not_translatable__'), $value);
     }
 
     /**
