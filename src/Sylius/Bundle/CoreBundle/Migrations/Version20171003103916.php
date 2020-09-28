@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -32,12 +34,11 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $defaultLocale = $this->container->getParameter('locale');
-        $productAttributeRepository = $this->container->get('sylius.repository.product_attribute');
+        $productAttributes = $this->getProductAttributes();
 
-        $productAttributes = $productAttributeRepository->findBy(['type' => SelectAttributeType::TYPE]);
         /** @var ProductAttributeInterface $productAttribute */
         foreach ($productAttributes as $productAttribute) {
             $configuration = $productAttribute->getConfiguration();
@@ -64,12 +65,11 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $defaultLocale = $this->container->getParameter('locale');
-        $productAttributeRepository = $this->container->get('sylius.repository.product_attribute');
+        $productAttributes = $this->getProductAttributes();
 
-        $productAttributes = $productAttributeRepository->findBy(['type' => SelectAttributeType::TYPE]);
         /** @var ProductAttributeInterface $productAttribute */
         foreach ($productAttributes as $productAttribute) {
             $configuration = $productAttribute->getConfiguration();
@@ -94,5 +94,32 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
                 'configuration' => serialize($downgradedConfiguration),
             ]);
         }
+    }
+
+    private function getProductAttributes(): array
+    {
+        $productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
+
+        $entityManager = $this->getEntityManager($productAttributeClass);
+
+        return $entityManager->createQueryBuilder()
+            ->select('o.id, o.configuration')
+            ->from($productAttributeClass, 'o')
+            ->andWhere('o.type = :type')
+            ->setParameter('type', SelectAttributeType::TYPE)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    private function getEntityManager(string $class): EntityManagerInterface
+    {
+        /** @var ManagerRegistry $managerRegistry */
+        $managerRegistry = $this->container->get('doctrine');
+
+        /** @var EntityManagerInterface $manager */
+        $manager = $managerRegistry->getManagerForClass($class);
+
+        return $manager;
     }
 }
