@@ -93,6 +93,16 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @Given /^the store has(?:| also)(?:| a) non translatable (text|textarea|integer|percent) product attribute "([^"]+)"$/
+     */
+    public function theStoreHasANonTranslatableProductAttribute(string $type, string $name): void
+    {
+        $productAttribute = $this->createProductAttribute($type, $name, null, false);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
      * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductAttributeHasAValueInLocale(
