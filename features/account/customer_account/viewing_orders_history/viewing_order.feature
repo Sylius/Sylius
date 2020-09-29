@@ -18,8 +18,8 @@ Feature: Viewing details of an order
 
     @ui @api
     Scenario: Viewing basic information about an order
-        When I view the summary of the order "#00000666"
-        Then it should has number "#00000666"
+        When I view the summary of my order "#00000666"
+        Then it should have the number "#00000666"
         And I should see "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as shipping address
         And I should see "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" as billing address
         And I should see "$39.00" as order's total

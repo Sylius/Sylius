@@ -21,7 +21,6 @@ use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -67,9 +66,9 @@ final class OrderContext implements Context
     }
 
     /**
-     * @When I view the summary of the order :order
+     * @When I view the summary of my order :order
      */
-    public function iSeeTheOrder(OrderInterface $order): void
+    public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
         $this->client->show($order->getTokenValue());
     }
@@ -93,9 +92,9 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then it should has number :orderNumber
+     * @Then it should have the number :orderNumber
      */
-    public function itShouldHasNumber(string $orderNumber): void
+    public function itShouldHaveTheNumber(string $orderNumber): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'number'), $orderNumber);
     }
