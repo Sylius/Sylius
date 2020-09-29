@@ -19,7 +19,10 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -64,6 +67,14 @@ final class OrderContext implements Context
     }
 
     /**
+     * @When I view the summary of the order :order
+     */
+    public function iSeeTheOrder(OrderInterface $order): void
+    {
+        $this->client->show($order->getTokenValue());
+    }
+
+    /**
      * @Then I should be able to access this order's details
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void
@@ -79,6 +90,45 @@ final class OrderContext implements Context
             $this->sharedStorage->get('order_number'),
             $this->responseChecker->getValue($this->client->getLastResponse(), 'number')
         );
+    }
+
+    /**
+     * @Then it should has number :orderNumber
+     */
+    public function itShouldHasNumber(string $orderNumber): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'number'), $orderNumber);
+    }
+
+    /**
+     * @Then I should see :customerName, :street, :postcode, :city, :country as :addressType address
+     */
+    public function iShouldSeeAsShippingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        CountryInterface $country,
+        string $addressType
+    ): void {
+        $address = $this->responseChecker->getValue($this->client->getLastResponse(), ($addressType . 'Address'));
+
+        $names = explode(' ', $customerName);
+
+        Assert::same($address['firstName'], $names[0]);
+        Assert::same($address['lastName'], $names[1]);
+        Assert::same($address['street'], $street);
+        Assert::same($address['postcode'], $postcode);
+        Assert::same($address['city'], $city);
+        Assert::same($address['countryCode'], $country->getCode());
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+") as order's total$/
+     */
+    public function iShouldSeeAsOrderSTotal(int $total): void
+    {
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'total'), $total);
     }
 
     /**
