@@ -39,9 +39,8 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         $defaultLocale = $this->container->getParameter('locale');
         $productAttributes = $this->getProductAttributes();
 
-        /** @var ProductAttributeInterface $productAttribute */
         foreach ($productAttributes as $productAttribute) {
-            $configuration = $productAttribute->getConfiguration();
+            $configuration = $productAttribute['configuration'];
             $upgradedConfiguration = [];
 
             foreach ($configuration as $configurationKey => $value) {
@@ -57,7 +56,7 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
             }
 
             $this->addSql('UPDATE sylius_product_attribute SET configuration = :configuration WHERE id = :id', [
-                'id' => $productAttribute->getId(),
+                'id' => $productAttribute['id'],
                 'configuration' => serialize($upgradedConfiguration),
             ]);
         }
@@ -70,9 +69,8 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         $defaultLocale = $this->container->getParameter('locale');
         $productAttributes = $this->getProductAttributes();
 
-        /** @var ProductAttributeInterface $productAttribute */
         foreach ($productAttributes as $productAttribute) {
-            $configuration = $productAttribute->getConfiguration();
+            $configuration = $productAttribute['configuration'];
             $downgradedConfiguration = [];
 
             foreach ($configuration as $configurationKey => $value) {
@@ -90,7 +88,7 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
             }
 
             $this->addSql('UPDATE sylius_product_attribute SET configuration = :configuration WHERE id = :id', [
-                'id' => $productAttribute->getId(),
+                'id' => $productAttribute['id'],
                 'configuration' => serialize($downgradedConfiguration),
             ]);
         }
@@ -108,7 +106,7 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
             ->andWhere('o.type = :type')
             ->setParameter('type', SelectAttributeType::TYPE)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
 
