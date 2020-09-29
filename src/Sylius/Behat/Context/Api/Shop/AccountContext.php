@@ -27,6 +27,9 @@ final class AccountContext implements Context
     /** @var ApiClientInterface */
     private $accountClient;
 
+    /** @var ApiClientInterface */
+    private $orderShopClient;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -38,11 +41,13 @@ final class AccountContext implements Context
 
     public function __construct(
         ApiClientInterface $accountClient,
+        ApiClientInterface $orderShopClient,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker,
         ShopSecurityContext $shopApiSecurityContext
     ) {
         $this->accountClient = $accountClient;
+        $this->orderShopClient = $orderShopClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
         $this->shopApiSecurityContext = $shopApiSecurityContext;
@@ -187,6 +192,22 @@ final class AccountContext implements Context
             $this->accountClient->getLastResponse(),
             'This email is invalid.'
         );
+    }
+
+    /**
+     * @When I browse my orders
+     */
+    public function iBrowseMyOrders(): void
+    {
+        $this->orderShopClient->index();
+    }
+
+    /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList()
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->orderShopClient->getLastResponse()), 1);
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool

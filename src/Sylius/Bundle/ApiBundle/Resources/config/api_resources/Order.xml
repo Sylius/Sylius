@@ -42,6 +42,21 @@
                     <attribute name="summary">Pickups a new cart</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="test">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/orders</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/orders</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>order:shop:read</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
