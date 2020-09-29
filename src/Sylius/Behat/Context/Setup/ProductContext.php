@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -1050,6 +1051,16 @@ final class ProductContext implements Context
         foreach ($product->getVariants() as $variant) {
             $variant->setEnabled(false);
         }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the store has :product product with :taxon taxon
+     */
+    public function theStoreHasProductWithMainTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $product->setMainTaxon($taxon);
 
         $this->objectManager->flush();
     }

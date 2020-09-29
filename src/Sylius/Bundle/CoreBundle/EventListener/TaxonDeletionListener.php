@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
+use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -32,13 +33,18 @@ final class TaxonDeletionListener
     /** @var TaxonAwareRuleUpdaterInterface[] */
     private $ruleUpdaters;
 
+    /** @var ProductTaxonRepositoryInterface */
+    private $productTaxonRepository;
+
     public function __construct(
         SessionInterface $session,
         ChannelRepositoryInterface $channelRepository,
+        ProductTaxonRepositoryInterface $productTaxonRepository,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
     ) {
         $this->session = $session;
         $this->channelRepository = $channelRepository;
+        $this->productTaxonRepository = $productTaxonRepository;
         $this->ruleUpdaters = $ruleUpdaters;
     }
 
@@ -55,6 +61,23 @@ final class TaxonDeletionListener
 
             $event->stopPropagation();
         }
+    }
+
+    public function protectFromRemovingUsedTaxon(GenericEvent $event): void
+    {
+        $taxon = $event->getSubject();
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        $product = $this->productTaxonRepository->findBy(['taxon' => $taxon]);
+
+        if($product) {
+            /** @var FlashBagInterface $flashes */
+            $flashes = $this->session->getBag('flashes');
+            $flashes->add('error', 'sylius.taxon.taxon_not_empty');
+
+            $event->stopPropagation();
+        }
+
     }
 
     public function removeTaxonFromPromotionRules(GenericEvent $event): void

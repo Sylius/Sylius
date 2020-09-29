@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -400,6 +401,17 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Then I should be notified that this taxon has products and cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisTaxonHasProductsAndCannotBeDeleted(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'This taxon is used by some products. Remove or edit products and then remove taxon.',
+            NotificationType::failure()
+        );
+    }
+
+    /**
      * @When I move up :taxonName taxon
      */
     public function iMoveUpTaxon(string $taxonName)
@@ -453,6 +465,23 @@ final class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->updatePage->isEnabled());
+    }
+
+
+    /**
+     * @Then /^I choose main (taxon "[^"]+") for "T-Shirt Banana" product$/
+     */
+    public function iWantToModifyAProduct(ProductInterface $product): void
+    {
+        $this->sharedStorage->set('product', $product);
+
+        if ($product->isSimple()) {
+            $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+            return;
+        }
+
+        $this->updateConfigurableProductPage->open(['id' => $product->getId()]);
     }
 
     /**
