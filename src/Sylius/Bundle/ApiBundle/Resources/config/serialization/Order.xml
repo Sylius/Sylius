@@ -96,10 +96,12 @@
 
         <attribute name="shippingAddress">
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
 
         <attribute name="billingAddress">
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
     </class>
 </serializer>
