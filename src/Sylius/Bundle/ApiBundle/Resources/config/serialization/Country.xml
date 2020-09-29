@@ -28,6 +28,7 @@
        <attribute name="code">
            <group>country:read</group>
            <group>country:create</group>
+           <group>shop:country:read</group>
        </attribute>
        <attribute name="enabled">
            <group>country:read</group>
@@ -38,6 +39,7 @@
            <group>country:read</group>
            <group>country:create</group>
            <group>country:update</group>
+           <group>shop:country:read</group>
        </attribute>
     </class>
 </serializer>

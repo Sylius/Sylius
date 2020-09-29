@@ -12,7 +12,7 @@ Feature: Choosing province for country
         And the store ships everywhere for free
         And I am a logged in customer
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Address an order with country and its province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -21,7 +21,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Address an order with country and its province and different billing address for country without province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -31,7 +31,7 @@ Feature: Choosing province for country
         And I complete the addressing step
         Then I should be on the checkout shipping step
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Address an order with country with province and different billing address for country with province
         Given I have product "The Dark Knight T-Shirt" in the cart
         And I am at the checkout addressing step

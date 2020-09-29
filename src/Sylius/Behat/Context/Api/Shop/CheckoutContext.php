@@ -47,7 +47,10 @@ final class CheckoutContext implements Context
     private $client;
 
     /** @var ApiClientInterface */
-    private $orderClient;
+    private $ordersClient;
+
+    /** @var ApiClientInterface */
+    private $countriesClient;
 
     /** @var IriConverterInterface */
     private $iriConverter;
@@ -75,7 +78,8 @@ final class CheckoutContext implements Context
 
     public function __construct(
         AbstractBrowser $client,
-        ApiClientInterface $orderClient,
+        ApiClientInterface $ordersClient,
+        ApiClientInterface $countriesClient,
         IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
@@ -85,7 +89,8 @@ final class CheckoutContext implements Context
         SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
-        $this->orderClient = $orderClient;
+        $this->ordersClient = $ordersClient;
+        $this->countriesClient = $countriesClient;
         $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
@@ -141,6 +146,14 @@ final class CheckoutContext implements Context
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
+    }
+
+    /**
+     * @When /^I specify (billing|shipping) country province as "([^"]+)"$/
+     */
+    public function iSpecifyBillingCountryProvinceAs(string $addressType, string $provinceName): void
+    {
+        $this->fillProvince($addressType . 'Address', $provinceName);
     }
 
     /**
@@ -780,7 +793,7 @@ final class CheckoutContext implements Context
 
     private function getCart(): array
     {
-        $response = $this->orderClient->show($this->sharedStorage->get('cart_token'));
+        $response = $this->ordersClient->show($this->sharedStorage->get('cart_token'));
 
         return $this->responseChecker->getResponseContent($response);
     }
@@ -884,9 +897,27 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['countryCode'] = $address->getCountryCode() ?? '';
         $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
         $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
-        $this->content[$addressType]['provinceName'] = $address->getProvinceName() ?? '';
+        $this->content[$addressType]['provinceName'] = $address->getProvinceName();
     }
 
+    private function fillProvince(string $addressType, string $provinceName): void
+    {
+        $countryResponse = $this->responseChecker->getCollectionItemsWithValue(
+            $this->countriesClient->index(),
+            'code',
+            $this->content[$addressType]['countryCode']
+        );
+
+        foreach ($countryResponse[0]['provinces'] as $province) {
+            if ($province['name'] === $provinceName) {
+                $this->content[$addressType]['provinceCode'] = $province['code'];
+
+                return;
+            }
+        }
+
+        $this->content[$addressType]['provinceName'] = $provinceName;
+    }
     private function getViolation(array $violations, string $element): array
     {
         return $violations[array_search($element, array_column($violations, 'propertyPath'))];

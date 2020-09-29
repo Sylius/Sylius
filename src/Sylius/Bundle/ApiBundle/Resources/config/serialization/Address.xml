@@ -46,6 +46,10 @@
             <group>checkout:read</group>
             <group>order:read</group>
         </attribute>
+        <attribute name="provinceCode">
+            <group>cart:address</group>
+            <group>checkout:read</group>
+        </attribute>
         <attribute name="provinceName">
             <group>cart:address</group>
             <group>checkout:read</group>
