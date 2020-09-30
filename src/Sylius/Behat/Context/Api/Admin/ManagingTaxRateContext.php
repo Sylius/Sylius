@@ -107,6 +107,7 @@ class ManagingTaxRateContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -238,5 +239,33 @@ class ManagingTaxRateContext implements Context
     public function iShouldSeeASingleTaxRateInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
+    }
+
+    /**
+     * @Then I should be notified that tax rate with this code already exists
+     */
+    public function iShouldBeNotifiedThatTaxRateWithThisCodeAlreadyExists(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Tax rate has been created successfully, but it should not'
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'code: The tax rate with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one tax rate with code :code
+     */
+    public function thereShouldStillBeOnlyOneTaxRateWithCode(string $code): void
+    {
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code),
+            1,
+            sprintf('There is more than one tax rate with code %s', $code)
+        );
     }
 }
