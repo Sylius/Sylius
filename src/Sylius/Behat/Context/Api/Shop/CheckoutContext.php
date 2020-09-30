@@ -149,14 +149,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specify (billing|shipping) country province as "([^"]+)"$/
-     */
-    public function iSpecifyBillingCountryProvinceAs(string $addressType, string $provinceName): void
-    {
-        $this->fillProvince($addressType . 'Address', $provinceName);
-    }
-
-    /**
      * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
@@ -192,6 +184,22 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheEmailAs(null);
         $this->iSpecifyTheBillingAddressAs($address);
         $this->iCompleteTheAddressingStep();
+    }
+
+    /**
+     * @When /^I specify (billing|shipping) country province as "([^"]+)"$/
+     */
+    public function iSpecifyCountryProvinceAs(string $addressType, string $provinceName): void
+    {
+        $this->fillProvince($addressType . 'Address', $provinceName);
+    }
+
+    /**
+     * @When /^I specify the province name manually as "([^"]+)" for (billing|shipping) address$/
+     */
+    public function iSpecifyTheProvinceNameManuallyAsForAddress(string $provinceName, string $addressType): void
+    {
+        $this->iSpecifyCountryProvinceAs($addressType, $provinceName);
     }
 
     /**
@@ -750,11 +758,47 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
     }
 
-    private function isViolationWithMessageInResponse(Response $response, string $message): bool
+    /**
+     * @Then I should not be able to specify province name manually for shipping address
+     */
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress(): void
+    {
+        $this->iCompleteTheAddressingStep();
+
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same($response->getStatusCode(), 400);
+        Assert::true($this->isViolationWithMessageInResponse(
+            $response,
+            'Please select proper province.',
+            'shippingAddress'
+        ));
+    }
+
+    /**
+     * @Then I should not be able to specify province name manually for billing address
+     */
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress(): void
+    {
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same($response->getStatusCode(), 400);
+        Assert::true($this->isViolationWithMessageInResponse(
+            $response,
+            'Please select proper province.',
+            'billingAddress'
+        ));
+    }
+
+    private function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool
     {
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
         foreach ($violations as $violation) {
-            if ($violation['message'] === $message) {
+            if ($violation['message'] === $message && $property === null) {
+                return true;
+            }
+
+            if ($violation['message'] === $message && $property !== null && $violation['propertyPath'] === $property) {
                 return true;
             }
         }
@@ -908,7 +952,7 @@ final class CheckoutContext implements Context
             $this->content[$addressType]['countryCode']
         );
 
-        foreach ($countryResponse[0]['provinces'] as $province) {
+        foreach (reset($countryResponse)['provinces'] as $province) {
             if ($province['name'] === $provinceName) {
                 $this->content[$addressType]['provinceCode'] = $province['code'];
 
