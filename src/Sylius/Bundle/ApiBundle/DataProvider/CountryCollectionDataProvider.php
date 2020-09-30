@@ -45,16 +45,14 @@ final class CountryCollectionDataProvider implements CollectionDataProviderInter
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
-        Assert::keyExists($context, ContextKeys::CHANNEL);
-
         $user = $this->userContext->getUser();
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return $this->countryRepository->findAll();
         }
 
-        /** @var ChannelInterface $channel */
-        $channel = $context[ContextKeys::CHANNEL];
-        if ($channel->getCountries()->count() > 0) {
+        /** @var ChannelInterface|null $channel */
+        $channel = $context[ContextKeys::CHANNEL] ?? null;
+        if ($channel !== null && $channel->getCountries()->count() > 0) {
             return $channel->getCountries();
         }
 

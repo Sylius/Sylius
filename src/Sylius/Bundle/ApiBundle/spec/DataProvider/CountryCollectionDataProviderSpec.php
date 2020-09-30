@@ -87,6 +87,21 @@ final class CountryCollectionDataProviderSpec extends ObjectBehavior
         ;
     }
 
+    function it_provides_all_countries_if_there_is_no_channel_in_context(
+        RepositoryInterface $countryRepository,
+        UserContextInterface $userContext,
+        CountryInterface $country
+    ): void {
+        $userContext->getUser()->willReturn(null);
+
+        $countryRepository->findAll()->willReturn([$country]);
+
+        $this
+            ->getCollection(CountryInterface::class, 'get', [])
+            ->shouldReturn([$country])
+        ;
+    }
+
     function it_provides_all_countries_if_logged_in_user_is_an_admin_user(
         RepositoryInterface $countryRepository,
         UserContextInterface $userContext,
