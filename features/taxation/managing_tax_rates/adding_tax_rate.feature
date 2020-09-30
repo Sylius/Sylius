@@ -9,7 +9,7 @@ Feature: Adding a new tax rate
         And the store has a tax category "Food and Beverage"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new tax rate
         Given I want to create a new tax rate
         When I specify its code as "US_SALES_TAX"
@@ -22,7 +22,7 @@ Feature: Adding a new tax rate
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Adding a new tax rate which will be included in product price
         Given I want to create a new tax rate
         When I specify its code as "US_SALES_TAX"

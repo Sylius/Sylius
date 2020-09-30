@@ -205,5 +205,10 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>%sylius.api.authorization_header%</argument>
         </service>
+
+        <service id="sylius.behat.api_platform_client.admin.tax_rate" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>tax-rates</argument>
+            <argument>admin</argument>
+        </service>
     </services>
 </container>
