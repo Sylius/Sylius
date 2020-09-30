@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -49,13 +50,17 @@ final class OrderContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ApiClientInterface $productsAdminClient,
         ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->productsAdminClient = $productsAdminClient;
@@ -63,6 +68,7 @@ final class OrderContext implements Context
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -120,6 +126,94 @@ final class OrderContext implements Context
         Assert::same($address['postcode'], $postcode);
         Assert::same($address['city'], $city);
         Assert::same($address['countryCode'], $country->getCode());
+    }
+
+    /**
+     * @Then I should see :amount items in the list
+     */
+    public function iShouldSeeItemsInTheList(int $amount): void
+    {
+        Assert::same(count($this->responseChecker->getValue($this->client->getLastResponse(), 'items')), $amount);
+    }
+
+    /**
+     * @Then the product named :productName should be in the items list
+     */
+    public function theProductShouldBeInTheItemsList(string $productName): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::true(true);
+
+                return;
+            }
+        }
+
+        Assert::true(false);
+    }
+
+    /**
+     * @Then /^the (shipment) status should be "([^"]+)"$/
+     * @Then /^I should see its (payment) status as "([^"]+)"$/
+     */
+    public function theShipmentStatusShouldBe(
+        string $elementType,
+        string $elementStatus,
+        int $numberOfelement = 0
+    ): void {
+        $shipments = $this->responseChecker->getValue($this->client->getLastResponse(), $elementType . 's');
+
+        $shipment = $this->iriConverter->getItemFromIri($shipments[$numberOfelement]);
+
+        Assert::same(ucfirst($shipment->getState()), $elementStatus);
+    }
+
+    /**
+     * @Then /^the order's (shipment) status should be "([^"]+)"$/
+     * @Then /^I should see its order's (payment) status as "([^"]+)"$/
+     */
+    public function iShouldSeeItsOrderSStatusAs(string $elementType, string $orderElementState): void
+    {
+        if ($elementType === 'shipment') {
+            $elementType = 'shipping';
+        }
+
+        Assert::same(
+            $orderElementState,
+            StringInflector::codeToName(
+                $this->responseChecker->getValue(
+                    $this->client->getLastResponse(), $elementType . 'State'
+                )
+            )
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the :addressType address
+     */
+    public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName, string $addressType): void
+    {
+        $address = $this->responseChecker->getValue($this->client->getLastResponse(), ($addressType . 'Address'));
+
+        Assert::same($address['provinceName'], $provinceName);
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+") as order's subtotal$/
+     */
+    public function iShouldSeeAsOrderSSubtotal(int $subtotal): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        $itemsTotal = 0;
+
+        foreach ($items as $item) {
+            $itemsTotal = $itemsTotal + $item['subtotal'];
+        }
+
+        Assert::same($itemsTotal, $subtotal);
     }
 
     /**
