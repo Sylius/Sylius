@@ -147,6 +147,12 @@ time out during this ajax request (previously no serialization group was defined
 in some admin URLs you can now replace `/admin` by `/%sylius_admin.path_name%`.  
 Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAME` environment variable to custom the admin's URL.
 
+## Special attention
+
+### Migrations
+
+As we switched to the `3.0` version of Doctrine Migrations, there are some things that need to be changed in the application that is upgraded to Sylius 1.8:
+
 1. Replace the DoctrineMigrationsBundle configuration in `config/packages/doctrine_migrations.yaml`:
 
    ```
@@ -158,9 +164,49 @@ Also the route is now dynamic. You can change the `SYLIUS_ADMIN_ROUTING_PATH_NAM
    +    storage:
    +        table_storage:
    +            table_name: sylius_migrations
+   +    migrations_paths:
+   +        'DoctrineMigrations': 'src/Migrations'
    ``` 
 
-## Special attention
+1. Remove all the legacy Sylius-Standard migrations (they're not needed anymore)
+
+   ```bash
+   rm "src/Migrations/Version20170912085504.php"
+   #...
+   ```
+
+1. Mark all migrations from **@SyliusCoreBundle** and **@SyliusAdminApiBundle** as executed
+(they're the same as legacy ones, just not recognized by the doctrine _yet_)
+
+   ```bash
+   bin/console doctrine:migrations:version "Sylius\Bundle\CoreBundle\Migrations\Version20161202011555" --add --no-interaction
+   #...
+   ```
+
+    > BEWARE!
+
+    If you're using some Sylius plugins you'll probably need to handle their migrations as well.
+    You can either leave them in your `src/Migrations/` catalog and treat as _your own_ or use the migrations from the vendors.
+    However, it assumes that plugin provides a proper integration with Doctrine Migrations 3.0 - as, for example,
+    [Invoicing Plugin](https://github.com/Sylius/InvoicingPlugin/blob/master/src/DependencyInjection/SyliusInvoicingExtension.php#L33).
+
+    > TIP
+
+    Take a look at [etc/migrations-1.8.sh](etc/migrations-1.8.sh) script - it would execute points 2) and 3) automatically.
+
+1. Do the same for your own migrations. Assuming your migrations namespace is `DoctrineMigrations` and
+migrations catalog is `src/Migrations`, you can run such a script:
+
+    ```bash
+    #!/bin/bash
+   
+    for file in $(ls -1 src/Migrations/ | sed -e 's/\..*$//')
+    do
+        bin/console doctrine:migrations:version "DoctrineMigrations\\${file}" --add --no-interaction
+    done
+    ```
+   
+1. Run `bin/console doctrine:migrations:migrate` to apply migrations added in Sylius 1.8
 
 ### Translations
 
