@@ -19,30 +19,37 @@
         <attribute name="firstName">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="lastName">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="city">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="street">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="postcode">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="countryCode">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
         <attribute name="provinceName">
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
     </class>
 </serializer>

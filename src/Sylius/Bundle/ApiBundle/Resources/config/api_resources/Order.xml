@@ -284,5 +284,7 @@
         <property name="adjustments" writable="false">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>
+        <property name="billingAddress" writable="false" />
+        <property name="shippingAddress" writable="false" />
     </resource>
 </resources>
