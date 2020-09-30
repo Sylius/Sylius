@@ -27,12 +27,14 @@
        </attribute>
        <attribute name="code">
            <group>country:create</group>
-           <group>province:read</group>
            <group>country:update</group>
+           <group>shop:country:read</group>
+           <group>province:read</group>
        </attribute>
        <attribute name="name">
            <group>country:create</group>
            <group>country:update</group>
+           <group>shop:country:read</group>
            <group>province:read</group>
            <group>province:update</group>
        </attribute>

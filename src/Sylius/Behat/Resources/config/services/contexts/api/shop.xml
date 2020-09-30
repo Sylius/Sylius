@@ -35,6 +35,7 @@
         <service id="sylius.behat.context.api.shop.checkout" class="Sylius\Behat\Context\Api\Shop\CheckoutContext">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.country" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.repository.shipping_method" />
