@@ -15,9 +15,9 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -34,14 +34,19 @@ class ManagingTaxRateContext implements Context
     /** @var IriConverterInterface */
     private $iriConverter;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->iriConverter = $iriConverter;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -121,6 +126,7 @@ class ManagingTaxRateContext implements Context
 
     /**
      * @Then the tax rate :taxRate should appear in the registry
+     * @Then I should see the tax rate :taxRate in the list
      */
     public function theTaxRateShouldAppearInTheRegistry(TaxRateInterface $taxRate): void
     {
@@ -181,5 +187,56 @@ class ManagingTaxRateContext implements Context
             $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
             sprintf('Tax rate with name %s exists', $name)
         );
+    }
+
+    /**
+     * @When I browse tax rates
+     */
+    public function iBrowseTaxRates(): void
+    {
+        $this->client->index();
+    }
+
+    /**
+     * @When I check the :taxRate tax rate
+     * @When I check also the :taxRate tax rate
+     */
+    public function iCheckTheTaxRate(TaxRateInterface $taxRate): void
+    {
+        $taxRateToDelete = [];
+        if ($this->sharedStorage->has('tax_rate_to_delete')) {
+            $taxRateToDelete = $this->sharedStorage->get('tax_rate_to_delete');
+        }
+        $taxRateToDelete[] = $taxRate->getId();
+        $this->sharedStorage->set('tax_rate_to_delete', $taxRateToDelete);
+    }
+
+    /**
+     * @When I delete them
+     */
+    public function iDeleteThem(): void
+    {
+        foreach ($this->sharedStorage->get('tax_rate_to_delete') as $id) {
+            $this->client->delete((string) $id)->getContent();
+        }
+    }
+
+    /**
+     * @Then I should be notified that they have been successfully deleted
+     */
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Tax rate could not be deleted'
+        );
+    }
+
+    /**
+     * @Then I should see a single tax rate in the list
+     */
+    public function iShouldSeeASingleTaxRateInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->index()), 1);
     }
 }
