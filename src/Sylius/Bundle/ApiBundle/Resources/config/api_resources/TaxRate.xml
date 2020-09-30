@@ -36,6 +36,10 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
     </resource>
 </resources>
