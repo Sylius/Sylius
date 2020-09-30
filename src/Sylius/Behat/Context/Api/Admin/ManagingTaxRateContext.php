@@ -150,4 +150,36 @@ class ManagingTaxRateContext implements Context
             sprintf('Tax rate does is not included in price')
         );
     }
+
+    /**
+     * @When I delete tax rate :taxRate
+     */
+    public function iDeleteTaxRate(TaxRateInterface $taxRate): void
+    {
+        $this->client->delete((string) $taxRate->getId());
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Tax rate could not be deleted'
+        );
+    }
+
+    /**
+     * @Then /^(this tax rate) should no longer exist in the registry$/
+     */
+    public function thisTaxRateShouldNoLongerExistInTheRegistry(TaxRateInterface $taxRate): void
+    {
+        $name = $taxRate->getName();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            sprintf('Tax rate with name %s exists', $name)
+        );
+    }
 }
