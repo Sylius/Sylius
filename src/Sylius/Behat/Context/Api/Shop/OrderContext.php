@@ -145,13 +145,12 @@ final class OrderContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-                Assert::true(true);
 
                 return;
             }
         }
 
-        Assert::true(false);
+        throw new \InvalidArgumentException('There is no product with given name.');
     }
 
     /**
@@ -161,13 +160,13 @@ final class OrderContext implements Context
     public function theShipmentStatusShouldBe(
         string $elementType,
         string $elementStatus,
-        int $numberOfelement = 0
+        int $position = 0
     ): void {
-        $shipments = $this->responseChecker->getValue($this->client->getLastResponse(), $elementType . 's');
+        $resources = $this->responseChecker->getValue($this->client->getLastResponse(), $elementType . 's');
 
-        $shipment = $this->iriConverter->getItemFromIri($shipments[$numberOfelement]);
+        $resource = $this->iriConverter->getItemFromIri($resources[$position]);
 
-        Assert::same(ucfirst($shipment->getState()), $elementStatus);
+        Assert::same(ucfirst($resource->getState()), $elementStatus);
     }
 
     /**
@@ -203,17 +202,17 @@ final class OrderContext implements Context
     /**
      * @Then /^I should see ("[^"]+") as order's subtotal$/
      */
-    public function iShouldSeeAsOrderSSubtotal(int $subtotal): void
+    public function iShouldSeeAsOrderSSubtotal(int $expectedSubtotal): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
 
-        $itemsTotal = 0;
+        $subtotal = 0;
 
         foreach ($items as $item) {
-            $itemsTotal = $itemsTotal + $item['subtotal'];
+            $subtotal = $subtotal + $item['subtotal'];
         }
 
-        Assert::same($itemsTotal, $subtotal);
+        Assert::same($subtotal, $expectedSubtotal);
     }
 
     /**

@@ -274,6 +274,7 @@
         </property>
         <property name="state" writable="false" />
         <property name="paymentState" writable="false" />
+        <property name="shippingState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true">
