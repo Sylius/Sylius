@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -36,6 +37,12 @@ final class AccountContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
+    /** @var RegistrationContext */
+    private $registrationContext;
+
+    /** @var LoginContext */
+    private $loginContext;
+
     /** @var ShopSecurityContext */
     private $shopApiSecurityContext;
 
@@ -44,12 +51,16 @@ final class AccountContext implements Context
         ApiClientInterface $orderShopClient,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker,
+        RegistrationContext $registrationContext,
+        LoginContext $loginContext,
         ShopSecurityContext $shopApiSecurityContext
     ) {
         $this->accountClient = $accountClient;
         $this->orderShopClient = $orderShopClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
+        $this->registrationContext = $registrationContext;
+        $this->loginContext = $loginContext;
         $this->shopApiSecurityContext = $shopApiSecurityContext;
     }
 
@@ -203,11 +214,37 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I register with previously used :email email and :password password
+     */
+    public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
+    {
+        $this->registrationContext->iWantToRegisterNewAccount();
+        $this->registrationContext->iSpecifyTheEmailAs($email);
+        $this->registrationContext->iSpecifyThePasswordAs($password);
+        $this->registrationContext->iRegisterThisAccount();
+
+        $this->loginContext->iLogInAsWithPassword($email, $password);
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
-    public function iShouldSeeASingleOrderInTheList()
+    public function iShouldSeeASingleOrderInTheList(): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->orderShopClient->getLastResponse()), 1);
+        Assert::same($this->responseChecker->countCollectionItems($this->orderShopClient->index()), 1);
+    }
+
+    /**
+     * @Then this order should have :order number
+     */
+    public function thisOrderShouldHaveNumber(OrderInterface $order): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->orderShopClient->getLastResponse(),
+                'number',
+                $order->getNumber()
+            )
+        );
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool

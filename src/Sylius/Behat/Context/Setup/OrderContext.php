@@ -165,6 +165,26 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the another guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
+     */
+    public function theAnotherGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
+        ProductInterface $product,
+        string $email,
+        AddressInterface $address,
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ) {
+        $customer = $this->createCustomer($email);
+
+        $this->customerRepository->add($customer);
+
+        $this->sharedStorage->set('customer', $customer);
+
+        $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 2);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given a customer :customer added something to cart
      */
     public function customerStartedCheckout(CustomerInterface $customer)

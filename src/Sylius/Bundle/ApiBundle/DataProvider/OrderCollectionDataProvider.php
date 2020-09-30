@@ -45,9 +45,7 @@ final class OrderCollectionDataProvider implements CollectionDataProviderInterfa
             return $this->orderRepository->findAll();
         }
 
-        if (
-            $user instanceof ShopUserInterface
-        ) {
+        if ($user instanceof ShopUserInterface) {
             /** @var CustomerInterface $customer */
             $customer = $user->getCustomer();
 
