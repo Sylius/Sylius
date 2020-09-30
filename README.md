@@ -37,9 +37,9 @@ If you'd like to contribute, please post your ideas via [Github Issues](https://
 
 Get Sylius support on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
-Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
+Stay updated by following us on [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/book/index.html#contributing)!
+If you'd like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/book/index.html#contributing)!
 
 👮 Security issues
 ------------------
@@ -64,9 +64,10 @@ Sylius Plus gives you all the power of Open Source and much more. It comes with 
 - Multi-source Inventory
 - Advanced Users Permissions
 - Partial Order Fulfillment
+- Security
 - Loyalty
 
-What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
+What's more, Sylius Plus means SLA-backend support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
 
 📃 License
 ----------
