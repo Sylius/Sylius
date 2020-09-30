@@ -90,3 +90,4 @@ Feature: Adding a new tax rate
         And I add it
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
+        And the tax rate "United States Sales Tax" should be included in price
