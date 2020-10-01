@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
+/** @experimental */
 final class OrderCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var UserContextInterface */
@@ -42,7 +43,7 @@ final class OrderCollectionDataProvider implements CollectionDataProviderInterfa
         $user = $this->userContext->getUser();
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->orderRepository->findAll();
+            return  $this->orderRepository->findAllExceptCarts();
         }
 
         if ($user instanceof ShopUserInterface) {
@@ -52,7 +53,7 @@ final class OrderCollectionDataProvider implements CollectionDataProviderInterfa
             return $this->orderRepository->findByCustomer($customer);
         }
 
-        return null;
+        return [];
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

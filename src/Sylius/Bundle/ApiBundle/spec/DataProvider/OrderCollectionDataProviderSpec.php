@@ -44,12 +44,12 @@ final class OrderCollectionDataProviderSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
-        $orderRepository->findAll()->willReturn([$firstOrder, $secondOrder]);
+        $orderRepository->findAllExceptCarts()->willReturn([$firstOrder, $secondOrder]);
 
         $this->getCollection(OrderInterface::class)->shouldReturn([$firstOrder, $secondOrder]);
     }
 
-    function it_provides_orders_created_by_logged_uses(
+    function it_provides_orders_created_by_logged_in_user(
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,

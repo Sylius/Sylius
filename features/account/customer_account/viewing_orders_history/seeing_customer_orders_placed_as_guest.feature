@@ -15,7 +15,7 @@ Feature: Seeing customer's orders placed as guest
 
     @ui @api
     Scenario: Not being able to hijack another customer's orders
-        Given the customer "ned@stark.com" created account with password "lannistersAreDumb"
+        Given I registered with previously used "ned@stark.com" email and "lannistersAreDumb" password
         And I log in as "ned@stark.com" with "lannistersAreDumb" password
         And I browse my orders
         Then I should see a single order in the list

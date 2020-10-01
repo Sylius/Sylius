@@ -235,14 +235,14 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then this order should have :order number
+     * @Then this order should have :orderNumber number
      */
-    public function thisOrderShouldHaveNumber(OrderInterface $order): void
+    public function thisOrderShouldHaveNumber(string $orderNumber): void
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->orderShopClient->getLastResponse(),
                 'number',
-                $order->getNumber()
+                $orderNumber
             )
         );
     }

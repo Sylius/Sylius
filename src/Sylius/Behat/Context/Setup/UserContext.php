@@ -62,9 +62,9 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given the customer :customerEmail created account with password :password
+     * @Given I registered with previously used :email email and :password password
      */
-    public function theCustomerCreatedAccountWithPassword($email, $password = 'sylius')
+    public function theCustomerCreatedAccountWithPassword(string $email, string $password = 'sylius'): void
     {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);

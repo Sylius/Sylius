@@ -48,7 +48,7 @@
                 <attribute name="path">/shop/orders</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>order:shop:read</attribute>
+                        <attribute>shop:order:read</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
