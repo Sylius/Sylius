@@ -1,6 +1,6 @@
 | Q               | A
 | --------------- | -----
-| Branch?         | 1.7 or master <!-- see the comment below -->
+| Branch?         | 1.7, 1.8 or master <!-- see the comment below -->
 | Bug fix?        | no/yes
 | New feature?    | no/yes
 | BC breaks?      | no/yes
