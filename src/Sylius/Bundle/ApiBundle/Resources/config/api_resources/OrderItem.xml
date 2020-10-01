@@ -38,5 +38,6 @@
         <property name="adjustments" readable="true">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>
+        <property name="subtotal" readable="true" />
     </resource>
 </resources>

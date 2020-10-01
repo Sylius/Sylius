@@ -57,6 +57,10 @@
             <group>order:read</group>
         </attribute>
 
+        <attribute name="shippingState">
+            <group>order:read</group>
+        </attribute>
+
         <attribute name="total">
             <group>order:read</group>
             <group>checkout:read</group>

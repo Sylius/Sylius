@@ -62,7 +62,11 @@
         <attribute name="productName">
             <group>order_item:read</group>
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
-
+        <attribute name="subtotal">
+            <group>order_item:read</group>
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>

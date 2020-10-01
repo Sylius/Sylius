@@ -17,6 +17,11 @@ use function Symfony\Component\String\u;
 
 final class StringInflector
 {
+    public static function codeToName(string $value): string
+    {
+        return ucfirst(str_replace('_', ' ', $value));
+    }
+
     public static function nameToCode(string $value): string
     {
         return str_replace([' ', '-', '\''], '_', $value);
