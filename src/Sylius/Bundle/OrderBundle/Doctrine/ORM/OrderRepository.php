@@ -125,4 +125,14 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->getResult()
         ;
     }
+
+    public function findAllExceptCarts(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

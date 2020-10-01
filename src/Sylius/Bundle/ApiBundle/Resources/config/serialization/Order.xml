@@ -19,11 +19,13 @@
         <attribute name="id">
             <group>order:read</group>
             <group>checkout:read</group>
+            <group>shop:order:read</group>
         </attribute>
 
         <attribute name="number">
             <group>order:read</group>
             <group>checkout:read</group>
+            <group>shop:order:read</group>
         </attribute>
 
         <attribute name="channel">
@@ -74,6 +76,7 @@
         <attribute name="tokenValue">
             <group>order:read</group>
             <group>checkout:read</group>
+            <group>shop:order:read</group>
         </attribute>
 
         <attribute name="items">

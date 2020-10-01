@@ -297,6 +297,17 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
+    /**
      * @Then it should has number :orderNumber
      * @Then it should have the number :orderNumber
      */

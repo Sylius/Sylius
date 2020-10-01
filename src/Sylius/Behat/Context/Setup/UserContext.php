@@ -62,6 +62,20 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given I registered with previously used :email email and :password password
+     */
+    public function theCustomerCreatedAccountWithPassword(string $email, string $password = 'sylius'): void
+    {
+        /** @var ShopUserInterface $user */
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
+
+        $user->setCustomer($this->sharedStorage->get('customer'));
+        $this->sharedStorage->set('user', $user);
+
+        $this->userRepository->add($user);
+    }
+
+    /**
      * @Given the account of :email was deleted
      * @Given my account :email was deleted
      */

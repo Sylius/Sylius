@@ -18,7 +18,7 @@ Feature: Viewing orders on my account page
         And the customer bought a single "Green Arrow"
         And the customer "Oliver Queen" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
 
-    @ui
+    @ui @api
     Scenario: Viewing orders
         When I browse my orders
         Then I should see a single order in the list
