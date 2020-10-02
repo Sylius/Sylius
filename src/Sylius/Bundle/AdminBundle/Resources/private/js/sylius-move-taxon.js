@@ -11,40 +11,12 @@ import 'semantic-ui-css/components/api';
 import $ from 'jquery';
 
 $.fn.extend({
-  taxonMoveUp() {
+  taxonMove() {
     const element = this;
 
     element.api({
       method: 'PUT',
       on: 'click',
-      beforeSend(settings) {
-        /* eslint-disable-next-line no-param-reassign */
-        settings.data = {
-          position: $(this).data('position') - 1,
-        };
-
-        return settings;
-      },
-      onSuccess() {
-        window.location.reload();
-      },
-    });
-  },
-
-  taxonMoveDown() {
-    const element = this;
-
-    element.api({
-      method: 'PUT',
-      on: 'click',
-      beforeSend(settings) {
-        /* eslint-disable-next-line no-param-reassign */
-        settings.data = {
-          position: $(this).data('position') + 1,
-        };
-
-        return settings;
-      },
       onSuccess() {
         window.location.reload();
       },
