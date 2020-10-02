@@ -66,7 +66,7 @@ final class ShopAuthenticationTokenDocumentationNormalizer implements Normalizer
 
         $tokenDocumentation = [
             'paths' => [
-                $this->apiRoute . '/shop-user-authentication-token' => [
+                $this->apiRoute . '/shop/authentication-token' => [
                     'post' => [
                         'tags' => ['ShopUserToken'],
                         'operationId' => 'postCredentialsItem',
