@@ -65,10 +65,11 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
             return;
         }
 
+        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
         $container->prependExtensionConfig('doctrine_migrations', [
-            'migrations_paths' => [
+            'migrations_paths' => \array_merge(\array_pop($doctrineConfig)['migrations_paths'] ?? [], [
                 'Sylius\Bundle\AdminApiBundle\Migrations' => '@SyliusAdminApiBundle/Migrations',
-            ],
+            ]),
         ]);
 
         $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
