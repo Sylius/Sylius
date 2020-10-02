@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.1 (2020-10-02)
+
+#### Details
+
+- [#11835](https://github.com/Sylius/Sylius/issues/11835) [ChannelPricing] Remove channel pricing 1.7 ([@AdamKasp](https://github.com/AdamKasp), [@Tomanhez](https://github.com/Tomanhez), [@lchrusciel](https://github.com/lchrusciel))
+- [#11839](https://github.com/Sylius/Sylius/issues/11839) [Behat] Remove duplicated method from ProductContext ([@GSadee](https://github.com/GSadee))
+- [#11778](https://github.com/Sylius/Sylius/issues/11778) Fixed compatibility with newer version of data collectors ([@stloyd](https://github.com/stloyd))
+- [#11845](https://github.com/Sylius/Sylius/issues/11845) It's been only a few days guys! ([@jacquesbh](https://github.com/jacquesbh))
+- [#11844](https://github.com/Sylius/Sylius/issues/11844) [Minor] Dead code removal ([@lchrusciel](https://github.com/lchrusciel))
+- [#11855](https://github.com/Sylius/Sylius/issues/11855) Typo in UPGRADE-1.8.md ([@jacquesbh](https://github.com/jacquesbh))
+- [#11848](https://github.com/Sylius/Sylius/issues/11848) [Product] Add possibility to create product/variant without price in disabled channels ([@AdamKasp](https://github.com/AdamKasp))
+- [#11865](https://github.com/Sylius/Sylius/issues/11865) Fix build and add missing migration ([@Tomanhez](https://github.com/Tomanhez), [@AdamKasp](https://github.com/AdamKasp))
+- [#11852](https://github.com/Sylius/Sylius/issues/11852) [Docs] Add changes in UPGRADE-1.8.md ([@Tomanhez](https://github.com/Tomanhez))
+- [#11830](https://github.com/Sylius/Sylius/issues/11830) [Api][Cart] Fix for Cart access tests ([@Tomanhez](https://github.com/Tomanhez))
+- [#11898](https://github.com/Sylius/Sylius/issues/11898) Improve 1.8 migrations upgrade instructions ([@Zales0123](https://github.com/Zales0123))
+- [#11901](https://github.com/Sylius/Sylius/issues/11901) [1.8] Fix migration generation ([@Jibbarth](https://github.com/Jibbarth))
+- [#11904](https://github.com/Sylius/Sylius/issues/11904) [API] Separate providers for shop and admin users ([@GSadee](https://github.com/GSadee))
+
 ## v1.8.0 (2020-09-14)
 
 #### Details
