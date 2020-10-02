@@ -35,20 +35,25 @@ final class TaxonMoveController
     public function upAction(Request $request): Response
     {
         $id = $request->attributes->get('id');
+        $limit = $request->attributes->get('limit', null);
 
         /** @var TaxonInterface|null $taxon */
         $taxon = $this->taxonRepository->find($id);
         Assert::notNull($taxon);
 
-        $above = $this->taxonRepository->findOneAbove($taxon);
-        if (null !== $above) {
+        do {
+            $above = $this->taxonRepository->findOneAbove($taxon);
+            if (null === $above) {
+                break;
+            }
+
             $position = $taxon->getPosition();
             $taxon->setPosition($above->getPosition());
             $above->setPosition($position);
 
             $this->taxonRepository->add($taxon);
             $this->taxonRepository->add($above);
-        }
+        } while (null === $limit || --$limit <= 0);
 
         return new JsonResponse();
     }
@@ -56,20 +61,25 @@ final class TaxonMoveController
     public function downAction(Request $request): Response
     {
         $id = $request->attributes->get('id');
+        $limit = $request->attributes->get('limit', null);
 
         /** @var TaxonInterface|null $taxon */
         $taxon = $this->taxonRepository->find($id);
         Assert::notNull($taxon);
 
-        $below = $this->taxonRepository->findOneBelow($taxon);
-        if (null !== $below) {
+        do {
+            $below = $this->taxonRepository->findOneBelow($taxon);
+            if (null === $below) {
+                break;
+            }
+
             $position = $taxon->getPosition();
             $taxon->setPosition($below->getPosition());
             $below->setPosition($position);
 
             $this->taxonRepository->add($taxon);
             $this->taxonRepository->add($below);
-        }
+        } while (null === $limit || --$limit <= 0);
 
         return new JsonResponse();
     }
