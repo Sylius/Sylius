@@ -66,7 +66,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
 
         $tokenDocumentation = [
             'paths' => [
-                $this->apiRoute . '/admin-user-authentication-token' => [
+                $this->apiRoute . '/admin/authentication-token' => [
                     'post' => [
                         'tags' => ['AdminUserToken'],
                         'operationId' => 'postCredentialsItem',

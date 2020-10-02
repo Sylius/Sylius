@@ -287,7 +287,7 @@ final class CartContext implements Context
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantity($this->ordersAdminClient->getLastResponse(), $productName, $quantity);
+        $this->checkProductQuantity($this->ordersAdminClient->getLastResponse(), $productName, $quantity, false);
     }
 
     /**
@@ -358,7 +358,7 @@ final class CartContext implements Context
         $this->cartsClient->executeCustomRequest($request);
     }
 
-    private function getProductForItem(array $item): Response
+    private function getProductForItem(array $item, bool $shopSection = true): Response
     {
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
@@ -367,9 +367,8 @@ final class CartContext implements Context
             );
         }
 
-        $response = $this->cartsClient->executeCustomRequest(
-            Request::custom($this->adminToShopIriConverter->convert($item['variant']), HttpRequest::METHOD_GET)
-        );
+        $variantIri = $shopSection ? $this->adminToShopIriConverter->convert($item['variant']) : $item['variant'];
+        $response = $this->cartsClient->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
         $product = $this->responseChecker->getValue($response, 'product');
 
@@ -439,12 +438,16 @@ final class CartContext implements Context
         return false;
     }
 
-    private function checkProductQuantity(Response $cartResponse, string $productName, int $quantity): void
-    {
+    private function checkProductQuantity(
+        Response $cartResponse,
+        string $productName,
+        int $quantity,
+        bool $shopSection = true
+    ): void {
         $items = $this->responseChecker->getValue($cartResponse, 'items');
 
         foreach ($items as $item) {
-            $productResponse = $this->getProductForItem($item);
+            $productResponse = $this->getProductForItem($item, $shopSection);
 
             if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
                 Assert::same(

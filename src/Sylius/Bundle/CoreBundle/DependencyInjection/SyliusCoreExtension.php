@@ -100,10 +100,11 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             return;
         }
 
+        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
         $container->prependExtensionConfig('doctrine_migrations', [
-            'migrations_paths' => [
+            'migrations_paths' => \array_merge(\array_pop($doctrineConfig)['migrations_paths'] ?? [], [
                 'Sylius\Bundle\CoreBundle\Migrations' => '@SyliusCoreBundle/Migrations',
-            ],
+            ]),
         ]);
 
         $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
@@ -111,11 +112,5 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 'Sylius\Bundle\CoreBundle\Migrations' => [],
             ],
         ]);
-
-        // set application "migrations_path" configuration as default to not require `--namespace` option for `doctrine:migrations:diff`
-        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
-        if (count($doctrineConfig) > 2 && isset($doctrineConfig[count($doctrineConfig)-1]['migrations_paths'])) {
-            $container->prependExtensionConfig('doctrine_migrations', \array_pop($doctrineConfig));
-        }
     }
 }
