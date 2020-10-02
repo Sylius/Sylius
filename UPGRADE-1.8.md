@@ -1,3 +1,47 @@
+# UPGRADE FROM `v1.8.0` TO `v1.8.1`
+
+1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
+
+    ```diff
+        security:
+            providers:
+    -           sylius_api_chain_provider:
+    -               chain:
+    -                   providers: [sylius_api_shop_user_provider, sylius_api_admin_user_provider]
+            
+            firewalls:
+                new_api_admin_user:
+    -               pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
+    -               provider: sylius_admin_user_provider
+    +               pattern: "%sylius.security.new_api_admin_regex%/.*"
+    +               provider: sylius_api_admin_user_provider
+                    json_login:
+    -                   check_path: "%sylius.security.new_api_route%/admin-user-authentication-token"
+    +                   check_path: "%sylius.security.new_api_route%/admin/authentication-token"
+
+                new_api_shop_user:
+    -               pattern: "%sylius.security.new_api_route%/shop-user-authentication-token"
+    -               provider: sylius_shop_user_provider
+    +               pattern: "%sylius.security.new_api_shop_regex%/.*"
+    +               provider: sylius_api_shop_user_provider
+                    json_login:
+    -                   check_path: "%sylius.security.new_api_route%/shop-user-authentication-token"
+    +                   check_path: "%sylius.security.new_api_route%/shop/authentication-token"
+
+    -           new_api:
+    -               pattern: "%sylius.security.new_api_regex%/*"
+    -               provider: sylius_api_chain_provider
+    -               stateless: true
+    -               anonymous: lazy
+    -               guard:
+    -                   authenticators:
+    -                       - lexik_jwt_authentication.jwt_token_authenticator
+
+            access_control:
+    +            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +            - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    ```
+
 # UPGRADE FROM `v1.7.X` TO `v1.8.0`
 
 1. Add new bundles to your list of used bundles in `config/bundles.php` if you are not using it apart from Sylius:
