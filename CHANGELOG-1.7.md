@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.8 (2020-10-02)
+
+#### Details
+
+- [#11418](https://github.com/Sylius/Sylius/issues/11418) set default value for Channel taxCalculationStrategy ([@oallain](https://github.com/oallain))
+- [#11814](https://github.com/Sylius/Sylius/issues/11814) [Channel] Fix bc-breaking changes in ChannelFactory and minor improvements ([@lchrusciel](https://github.com/lchrusciel))
+- [#11792](https://github.com/Sylius/Sylius/issues/11792) Fixed: Parent taxon selection on taxon creation ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#11835](https://github.com/Sylius/Sylius/issues/11835) [ChannelPricing] Remove channel pricing 1.7 ([@AdamKasp](https://github.com/AdamKasp), [@Tomanhez](https://github.com/Tomanhez), [@lchrusciel](https://github.com/lchrusciel))
+- [#11844](https://github.com/Sylius/Sylius/issues/11844) [Minor] Dead code removal ([@lchrusciel](https://github.com/lchrusciel))
+- [#11848](https://github.com/Sylius/Sylius/issues/11848) [Product] Add possibility to create product/variant without price in disabled channels ([@AdamKasp](https://github.com/AdamKasp))
+
 ## v1.7.7 (2020-09-07)
 
 #### Details
