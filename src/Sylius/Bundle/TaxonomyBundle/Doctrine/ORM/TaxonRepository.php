@@ -166,4 +166,32 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
 
         return $queryBuilder;
     }
+
+    public function findOneAbove(TaxonInterface $taxon): ?TaxonInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.parent = :parent')
+            ->setParameter('parent', $taxon->getParent())
+            ->andWhere('o.position < :taxonPosition')
+            ->setParameter('taxonPosition', $taxon->getPosition())
+            ->addOrderBy('o.position', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findOneBelow(TaxonInterface $taxon): ?TaxonInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.parent = :parent')
+            ->setParameter('parent', $taxon->getParent())
+            ->andWhere('o.position > :taxonPosition')
+            ->setParameter('taxonPosition', $taxon->getPosition())
+            ->addOrderBy('o.position', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

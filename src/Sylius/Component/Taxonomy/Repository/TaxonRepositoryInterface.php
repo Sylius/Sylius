@@ -46,4 +46,8 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array;
 
     public function createListQueryBuilder(): QueryBuilder;
+
+    public function findOneAbove(TaxonInterface $taxon): ?TaxonInterface;
+
+    public function findOneBelow(TaxonInterface $taxon): ?TaxonInterface;
 }
