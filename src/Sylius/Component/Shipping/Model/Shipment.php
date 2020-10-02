@@ -165,7 +165,7 @@ class Shipment implements ShipmentInterface
 
     public function getShippingUnitTotal(): int
     {
-        return 0;
+        throw new \Exception('You have to override and implement getShippingUnitTotal method');
     }
 
     public function getShippedAt(): ?\DateTimeInterface
