@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Webmozart\Assert\Assert;
 
 class Shipment extends BaseShipment implements ShipmentInterface
@@ -119,5 +120,14 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function recalculateAdjustmentsTotal(): void
     {
         $this->adjustmentsTotal = $this->getAdjustmentsTotal();
+    }
+
+    public function getShippingUnitTotal(): int
+    {
+        return array_sum(array_map(function (ShipmentUnitInterface $shipmentUnit) {
+            Assert::isInstanceOf($shipmentUnit, OrderItemUnitInterface::class);
+
+            return $shipmentUnit->getTotal();
+        }, $this->units->toArray()));
     }
 }
