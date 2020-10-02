@@ -54,8 +54,11 @@ $(document).ready(() => {
   });
 
   $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
+
   $('.sylius-taxon-move-up').taxonMove();
   $('.sylius-taxon-move-down').taxonMove();
+  $('.sylius-taxon-move-top').taxonMove();
+  $('.sylius-taxon-move-end').taxonMove();
 
   $('#sylius_shipping_method_calculator').handlePrototypes({
     prototypePrefix: 'sylius_shipping_method_calculator_calculators',
