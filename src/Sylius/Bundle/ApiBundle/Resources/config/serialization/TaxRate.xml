@@ -32,22 +32,32 @@
         <attribute name="zone">
             <group>tax_rate:read</group>
             <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
         </attribute>
         <attribute name="name">
             <group>tax_rate:read</group>
             <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
         </attribute>
         <attribute name="category">
             <group>tax_rate:read</group>
             <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
         </attribute>
         <attribute name="calculator">
             <group>tax_rate:read</group>
             <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
+        </attribute>
+        <attribute name="amount">
+            <group>tax_rate:read</group>
+            <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
         </attribute>
         <attribute name="includedInPrice">
             <group>tax_rate:read</group>
             <group>tax_rate:create</group>
+            <group>tax_rate:update</group>
         </attribute>
     </class>
 </serializer>

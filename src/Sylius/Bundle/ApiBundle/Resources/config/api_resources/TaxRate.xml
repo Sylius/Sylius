@@ -37,6 +37,13 @@
                 <attribute name="method">GET</attribute>
             </itemOperation>
 
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">tax_rate:update</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
