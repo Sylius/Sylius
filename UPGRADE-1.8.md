@@ -2,7 +2,7 @@
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
-```diff
+    ```diff
         security:
             access_control:
     -            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
