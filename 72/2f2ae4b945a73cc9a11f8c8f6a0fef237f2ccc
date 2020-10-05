@@ -1,0 +1,43 @@
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-09-28T13:57:44Z
+
+I have no idea why the build fails, but since it doesn't fail on PHP7.3 I guess it doesn't have something to do with this PR?
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-09-28T18:33:52Z
+
+I used https://patch-diff.githubusercontent.com/raw/Sylius/Sylius/pull/11882.patch as a patch for the issue mentioned and it fixes that issue, yes. I don't see why we would need to rewrite it to SQL.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-28T19:10:45Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "11843-fix-migration"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-09-29T20:19:24Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "11843-fix-migration"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-05T07:46:07Z
+
+Thanks, Joachim! :1st_place_medal:
