@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -187,11 +188,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specify (billing|shipping) country province as "([^"]+)"$/
+     * @When /^I specify (billing|shipping) country (province as "[^"]+")$/
      */
-    public function iSpecifyCountryProvinceAs(string $addressType, string $provinceName): void
+    public function iSpecifyCountryProvinceAs(string $addressType, ProvinceInterface $province): void
     {
-        $this->fillProvince($addressType . 'Address', $provinceName);
+        $this->content[$addressType . 'Address']['provinceCode'] = $province->getCode();
     }
 
     /**
@@ -199,7 +200,7 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheProvinceNameManuallyAsForAddress(string $provinceName, string $addressType): void
     {
-        $this->iSpecifyCountryProvinceAs($addressType, $provinceName);
+        $this->content[$addressType . 'Address']['provinceName'] = $provinceName;
     }
 
     /**
@@ -444,6 +445,14 @@ final class CheckoutContext implements Context
         if ($choice === 'last') {
             Assert::same(end($paymentMethods)['name'], $paymentMethodName);
         }
+    }
+
+    /**
+     * @Then I should still be on the checkout addressing step
+     */
+    public function iShouldStillBeOnTheCheckoutAddressingStep(): void
+    {
+        Assert::same($this->getCart()['checkoutState'], OrderCheckoutStates::STATE_CART);
     }
 
     /**
@@ -770,6 +779,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Then I should not be able to specify province name manually for billing address
+     * @Then I should be notified that selected province is invalid for billing address
      */
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress(): void
     {
@@ -943,24 +953,6 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['provinceName'] = $address->getProvinceName();
     }
 
-    private function fillProvince(string $addressType, string $provinceName): void
-    {
-        $countryResponse = $this->responseChecker->getCollectionItemsWithValue(
-            $this->countriesClient->index(),
-            'code',
-            $this->content[$addressType]['countryCode']
-        );
-
-        foreach (reset($countryResponse)['provinces'] as $province) {
-            if ($province['name'] === $provinceName) {
-                $this->content[$addressType]['provinceCode'] = $province['code'];
-
-                return;
-            }
-        }
-
-        $this->content[$addressType]['provinceName'] = $provinceName;
-    }
     private function getViolation(array $violations, string $element): array
     {
         return $violations[array_search($element, array_column($violations, 'propertyPath'))];
