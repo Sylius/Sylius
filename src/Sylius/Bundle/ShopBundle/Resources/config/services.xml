@@ -29,6 +29,15 @@
             <argument type="service" id="sylius.storage.cart_session" />
         </service>
 
+        <service id="sylius.listener.email_updater" class="Sylius\Bundle\ShopBundle\EventListener\CustomerEmailUpdaterListener">
+            <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="session" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
+        </service>
+
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
             <argument type="service" id="sylius.storage.cart_session" />
             <argument type="service" id="sylius.context.channel" />
