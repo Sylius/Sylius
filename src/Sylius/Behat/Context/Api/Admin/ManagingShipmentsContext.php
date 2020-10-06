@@ -22,6 +22,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Webmozart\Assert\Assert;
@@ -74,6 +75,14 @@ final class ManagingShipmentsContext implements Context
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('order.channel.code', $channel->getCode());
+    }
+
+    /**
+     * @When I choose :shippingMethod as a shipping method filter
+     */
+    public function iChooseAsAShippingMethodFilter(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->addFilter('method.code', $shippingMethod->getCode());
     }
 
     /**
