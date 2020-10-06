@@ -1,0 +1,41 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2020-10-06T08:48:00Z
+
+This should be merged into `1.8` as bugfix.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-06T08:49:00Z
+
+And we should force this lib to be installed in v4.4, to ensure that it works as expected
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-10-06T09:16:22Z
+
+It also works with 5 as the signature has parameter wider than the interface.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-06T09:20:40Z
+
+I'm aware of that, but we do not test it at all. And still, we do not support Symfony 5.0 anyway
+
+---------------------------------------------------------------------------
+
+by mamazu at 2020-10-06T09:21:45Z
+
+Okay, then should I add this?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-06T09:47:08Z
+
+If you can, yes please.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-06T15:16:42Z
+
+Thank you, @mamazu! :1st_place_medal:
