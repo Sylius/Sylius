@@ -18,7 +18,7 @@ use Symfony\Component\PropertyInfo\PropertyListExtractorInterface;
 /** @experimental */
 final class EmptyPropertyListExtractor implements PropertyListExtractorInterface
 {
-    public function getProperties(string $class, array $context = []): ?array
+    public function getProperties($class, array $context = []): ?array
     {
         if (class_exists($class)) {
             return [];
