@@ -98,6 +98,14 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I choose :shippingMethodName as a shipping method filter
+     */
+    public function iChooseAsAShippingMethodFilter(string $shippingMethodName): void
+    {
+        $this->indexPage->chooseShippingMethodFilter($shippingMethodName);
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void

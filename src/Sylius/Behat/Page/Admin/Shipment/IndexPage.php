@@ -28,6 +28,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('filter_channel')->selectOption($channelName);
     }
 
+    public function chooseShippingMethodFilter(string $shippingMethodName): void
+    {
+        $this->getElement('filter_shipping_method')->selectOption($shippingMethodName);
+    }
+
     public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool
     {
         $result = $this->getElement('shipment_in_given_position', [
@@ -71,6 +76,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',
+            'filter_shipping_method' => '#criteria_method',
             'filter_state' => '#criteria_state',
             'shipment_in_given_position' => 'table tbody tr:nth-child(%position%) td:contains("%orderNumber%")',
         ]);
