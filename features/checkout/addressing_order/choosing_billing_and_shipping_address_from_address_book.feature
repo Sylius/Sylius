@@ -15,31 +15,38 @@ Feature: Choosing an address from address book
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And I have an address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" in my address book
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Choosing billing address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
+        And my billing address is fulfilled automatically after filling field which is matching to field from my address book's address
+        And my addressing section is possible to send
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Choosing shipping address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for shipping address
+        And my shipping address is fulfilled automatically after filling field which is matching to field from my address book's address
+        And my addressing section is possible to send
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as shipping address
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Choosing billing address which contains a country with provinces from my address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Upper Barkly Street" street for billing address
+        And my billing address is fulfilled automatically after filling field which is matching to field from my address book's address
+        And my addressing section is possible to send
         Then address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" should be filled as billing address
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Choosing billing address from address book and proceed to the next step
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
+        And my billing address is fulfilled automatically after filling field which is matching to field from my address book's address
         And I complete the addressing step
         Then I should be on the checkout shipping step
