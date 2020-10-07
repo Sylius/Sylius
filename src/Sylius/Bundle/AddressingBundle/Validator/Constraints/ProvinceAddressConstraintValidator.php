@@ -70,6 +70,10 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             return true;
         }
 
+        if (!$country->hasProvinces() && null !== $address->getProvinceCode()) {
+            return false;
+        }
+
         if (!$country->hasProvinces()) {
             return true;
         }
