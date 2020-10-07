@@ -206,7 +206,7 @@ final class AddressBookContext implements Context
      * @Then this address should be assigned to :fullName
      * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/
      */
-    public function thisAddressShouldBeAssignedTo($fullName)
+    public function thisAddressShouldBeAssignedTo(string $fullName): void
     {
         Assert::true($this->addressBookIndexPage->hasAddressOf($fullName));
     }

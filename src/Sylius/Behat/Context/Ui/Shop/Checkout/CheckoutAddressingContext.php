@@ -56,8 +56,6 @@ final class CheckoutAddressingContext implements Context
 
     /**
      * @Given my billing address is fulfilled automatically through default address
-     * @When my addressing section is possible to send
-     * @When my billing address is fulfilled automatically after filling field which is matching to field from my address book's address
      */
     public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(): void
     {

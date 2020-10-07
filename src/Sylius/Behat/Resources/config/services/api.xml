@@ -19,7 +19,7 @@
         </service>
 
         <service id="sylius.behat.api_platform_client.shop.address" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>address</argument>
+            <argument>addresses</argument>
             <argument>shop</argument>
         </service>
 

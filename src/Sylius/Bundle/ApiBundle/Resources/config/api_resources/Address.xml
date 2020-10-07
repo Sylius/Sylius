@@ -21,14 +21,14 @@
         <collectionOperations>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/address</attribute>
+                <attribute name="path">/shop/addresses</attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/address/{id}</attribute>
+                <attribute name="path">/shop/addresses/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

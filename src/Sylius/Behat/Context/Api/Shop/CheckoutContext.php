@@ -27,11 +27,11 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +55,7 @@ final class CheckoutContext implements Context
     private $countriesClient;
 
     /** @var ApiClientInterface */
-    private $addressClient;
+    private $addressesClient;
 
     /** @var IriConverterInterface */
     private $iriConverter;
@@ -85,7 +85,7 @@ final class CheckoutContext implements Context
         AbstractBrowser $client,
         ApiClientInterface $ordersClient,
         ApiClientInterface $countriesClient,
-        ApiClientInterface $addressClient,
+        ApiClientInterface $addressesClient,
         IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
@@ -97,7 +97,7 @@ final class CheckoutContext implements Context
         $this->client = $client;
         $this->ordersClient = $ordersClient;
         $this->countriesClient = $countriesClient;
-        $this->addressClient = $addressClient;
+        $this->addressesClient = $addressesClient;
         $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
@@ -110,7 +110,7 @@ final class CheckoutContext implements Context
     /**
      * @Given /^(my) billing address is fulfilled automatically through default address$/
      */
-    public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(UserInterface $user): void
+    public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(ShopUserInterface $user): void
     {
         /** @var CustomerInterface|null $customer */
         $customer = $user->getCustomer();
@@ -154,10 +154,19 @@ final class CheckoutContext implements Context
      */
     public function iChooseForBillingAddress(string $street, string $addressType): void
     {
-        $this->sharedStorage->set(
-            'filled_address_field',
-            ['street' => $street, 'addressType' => $addressType . 'Address']
-        );
+        $addressBook = $this->responseChecker->getCollection($this->addressesClient->index());
+
+        $addressType = $addressType . 'Address';
+
+        $address = $this->getAddressByFieldValue($addressBook, 'street', $street);
+
+        if ($addressType === 'shippingAddress') {
+            $this->content['billingAddress'] = $address;
+        }
+
+        $this->content[$addressType] = $address;
+
+        $this->addressOrder($this->content);
     }
 
     /**
@@ -419,36 +428,6 @@ final class CheckoutContext implements Context
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
         $this->iChoosePaymentMethod($paymentMethod);
-    }
-
-    /**
-     * @When /^my (?:billing|shipping) address is fulfilled automatically after filling field which is matching to field from my address book's address$/
-     */
-    public function myBillingAddressIsFulfilledAutomaticallyAfterFillingFieldWhichIsMatchingToFieldFromMyAddressBookSAddress(): void
-    {
-        $addressData = $this->sharedStorage->get('filled_address_field');
-
-        $addressBook = $this->responseChecker->getCollection($this->addressClient->index());
-
-        $addressType = $addressData['addressType'];
-        unset($addressData['addressType']);
-
-        $fieldName = array_key_first($addressData);
-        $address = $this->getAddressByFieldValue($addressBook, $fieldName, $addressData[$fieldName]);
-
-        if ($addressType === 'shippingAddress') {
-            $this->content['billingAddress'] = $address;
-        }
-
-        $this->content[$addressType] = $address;
-    }
-
-    /**
-     * @When my addressing section is possible to send
-     */
-    public function myAddressingSectionIsPossibleToSend(): void
-    {
-        $this->iCompleteTheAddressingStep();
     }
 
     /**

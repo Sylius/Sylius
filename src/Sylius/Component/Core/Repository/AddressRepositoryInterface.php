@@ -19,6 +19,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface AddressRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * @return array|AddressInterface[]
+     */
     public function findByCustomer(CustomerInterface $customer): array;
 
     public function findOneByCustomer(string $id, CustomerInterface $customer): ?AddressInterface;
