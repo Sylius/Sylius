@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
+/** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     /** @var UserContextInterface */
