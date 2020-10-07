@@ -21,6 +21,7 @@
             <argument type="collection">
                 <argument key="state">exact</argument>
                 <argument key="order.channel.code">exact</argument>
+                <argument key="method.code">exact</argument>
             </argument>
             <tag name="api_platform.filter" />
         </service>

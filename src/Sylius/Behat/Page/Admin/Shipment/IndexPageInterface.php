@@ -21,6 +21,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function chooseChannelFilter(string $channelName): void;
 
+    public function chooseShippingMethodFilter(string $shippingMethodName): void;
+
     public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool;
 
     public function shipShipmentOfOrderWithNumber(string $orderNumber): void;
