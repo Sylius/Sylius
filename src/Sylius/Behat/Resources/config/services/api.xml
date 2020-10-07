@@ -18,6 +18,11 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.api_platform_client.shop.address" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>address</argument>
+            <argument>shop</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.administrator" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>administrators</argument>
             <argument>admin</argument>

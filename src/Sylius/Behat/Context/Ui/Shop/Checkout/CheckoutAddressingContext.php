@@ -55,6 +55,16 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Given my billing address is fulfilled automatically through default address
+     * @When my addressing section is possible to send
+     * @When my billing address is fulfilled automatically after filling field which is matching to field from my address book's address
+     */
+    public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(): void
+    {
+        //intentionally blank line for api tests
+    }
+
+    /**
      * @Given I am at the checkout addressing step
      * @When I go to the checkout addressing step
      * @When I go back to addressing step of the checkout
@@ -212,7 +222,7 @@ final class CheckoutAddressingContext implements Context
     /**
      * @When I specify the first and last name as :fullName for billing address
      */
-    public function iSpecifyTheStreetAsForBillingAddress(string $fullName): void
+    public function iSpecifyTheFirstAndLastNameAsForBillingAddress(string $fullName): void
     {
         $this->addressPage->specifyBillingAddressFullName($fullName);
     }
