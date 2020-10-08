@@ -60,12 +60,22 @@ final class ShopSecurityContext implements Context
     }
 
     /**
+     * @Given I am a logged in customer with name :fullName
      * @Given I am a logged in customer
      * @Given the customer logged in
      */
-    public function iAmLoggedInCustomer(): void
+    public function iAmLoggedInCustomer(?string $fullName = null): void
     {
-        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true]);
+        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+
+        if ($fullName !== null) {
+            $names = explode(' ', $fullName);
+
+            $userData['first_name'] = $names[0];
+            $userData['last_name'] = $names[1];
+        }
+
+        $user = $this->userFactory->create($userData);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);

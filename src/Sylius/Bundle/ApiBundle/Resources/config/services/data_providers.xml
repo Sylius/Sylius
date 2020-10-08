@@ -16,6 +16,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="sylius.api.collection_data_provider.address" class="Sylius\Bundle\ApiBundle\DataProvider\AddressCollectionDataProvider">
+            <argument type="service" id="sylius.repository.address" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
+
+        <service id="sylius.api.item_data_provider.address" class="Sylius\Bundle\ApiBundle\DataProvider\AddressItemDataProvider">
+            <argument type="service" id="sylius.repository.address" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
+
         <service id="sylius.api.collection_data_provider.country" class="Sylius\Bundle\ApiBundle\DataProvider\CountryCollectionDataProvider">
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.api.context.user" />

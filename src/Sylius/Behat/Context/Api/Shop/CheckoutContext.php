@@ -17,16 +17,17 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -52,6 +53,9 @@ final class CheckoutContext implements Context
 
     /** @var ApiClientInterface */
     private $countriesClient;
+
+    /** @var ApiClientInterface */
+    private $addressesClient;
 
     /** @var IriConverterInterface */
     private $iriConverter;
@@ -81,6 +85,7 @@ final class CheckoutContext implements Context
         AbstractBrowser $client,
         ApiClientInterface $ordersClient,
         ApiClientInterface $countriesClient,
+        ApiClientInterface $addressesClient,
         IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
@@ -92,6 +97,7 @@ final class CheckoutContext implements Context
         $this->client = $client;
         $this->ordersClient = $ordersClient;
         $this->countriesClient = $countriesClient;
+        $this->addressesClient = $addressesClient;
         $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
@@ -99,6 +105,21 @@ final class CheckoutContext implements Context
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->productVariantResolver = $productVariantResolver;
         $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @Given /^(my) billing address is fulfilled automatically through default address$/
+     */
+    public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(ShopUserInterface $user): void
+    {
+        /** @var CustomerInterface|null $customer */
+        $customer = $user->getCustomer();
+        Assert::notNull($customer);
+
+        $defaultAddress = $customer->getDefaultAddress();
+        Assert::notNull($defaultAddress);
+
+        $this->iSpecifyTheBillingAddressAs($defaultAddress);
     }
 
     /**
@@ -126,6 +147,26 @@ final class CheckoutContext implements Context
     public function iAmAtTheCheckoutAddressingStep(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @When /^I choose "([^"]+)" street for (billing|shipping) address$/
+     */
+    public function iChooseForBillingAddress(string $street, string $addressType): void
+    {
+        $addressBook = $this->responseChecker->getCollection($this->addressesClient->index());
+
+        $addressType = $addressType . 'Address';
+
+        $address = $this->getAddressByFieldValue($addressBook, 'street', $street);
+
+        if ($addressType === 'shippingAddress') {
+            $this->content['billingAddress'] = $address;
+        }
+
+        $this->content[$addressType] = $address;
+
+        $this->addressOrder($this->content);
     }
 
     /**
@@ -201,6 +242,17 @@ final class CheckoutContext implements Context
     public function iSpecifyTheProvinceNameManuallyAsForAddress(string $provinceName, string $addressType): void
     {
         $this->content[$addressType . 'Address']['provinceName'] = $provinceName;
+    }
+
+    /**
+     * @When I specify the first and last name as :fullName for billing address
+     */
+    public function iSpecifyTheFirstAndLastNameAsForBillingAddress(string $fullName): void
+    {
+        $names = explode(' ', $fullName);
+
+        $this->content['billingAddress']['firstName'] = $names[0];
+        $this->content['billingAddress']['lastName'] = $names[1];
     }
 
     /**
@@ -376,6 +428,22 @@ final class CheckoutContext implements Context
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
         $this->iChoosePaymentMethod($paymentMethod);
+    }
+
+    /**
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
+     */
+    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address, string $addressType): void
+    {
+        $this->addressShouldBeFilledAs($address, $addressType);
+    }
+
+    /**
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/
+     */
+    public function addressShouldBeFilledAsShippingAddress(AddressInterface $address, string $addressType): void
+    {
+        $this->addressShouldBeFilledAs($address, $addressType);
     }
 
     /**
@@ -962,17 +1030,16 @@ final class CheckoutContext implements Context
     {
         /** @var Response $response */
         $response = $this->client->getResponse();
-        $name = explode(' ', $fullName);
+        $names = explode(' ', $fullName);
         $addressType .= 'Address';
 
-        Assert::same($this->responseChecker->getResponseContent($response)[$addressType]
-        ['firstName'],
-            $name[0]
+        Assert::same(
+            $this->responseChecker->getResponseContent($response)[$addressType]['firstName'],
+            $names[0]
         );
         Assert::same(
-            $this->responseChecker->getResponseContent($response)[$addressType]
-            ['lastName'],
-            $name[1]
+            $this->responseChecker->getResponseContent($response)[$addressType]['lastName'],
+            $names[1]
         );
     }
 
@@ -1022,5 +1089,43 @@ final class CheckoutContext implements Context
                 'orderItemId' => $orderItemId,
             ], \JSON_THROW_ON_ERROR)
         );
+    }
+
+    private function getAddressByFieldValue(array $addressBook, string $fieldName, string $fieldValue): array
+    {
+        foreach ($addressBook as $address) {
+            if ($address[$fieldName] === $fieldValue) {
+                return $address;
+            }
+        }
+
+        return [];
+    }
+
+    private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
+    {
+        if (
+            $address['firstName'] === $addressToCompare->getFirstName() &&
+            $address['lastName'] === $addressToCompare->getLastName() &&
+            $address['countryCode'] === $addressToCompare->getCountryCode() &&
+            $address['street'] === $addressToCompare->getStreet() &&
+            $address['city'] === $addressToCompare->getCity() &&
+            $address['postcode'] === $addressToCompare->getPostcode() &&
+            ($addressToCompare->getProvinceName() !== null && isset($address['provinceName'])) ?
+                $address['provinceName'] === $addressToCompare->getProvinceName() : true
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function addressShouldBeFilledAs(AddressInterface $address, string $addressType): void
+    {
+        $response = $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+
+        $addressFromResponse = $this->responseChecker->getValue($response, $addressType . 'Address');
+
+        Assert::true($this->addressesAreEqual($addressFromResponse, $address));
     }
 }
