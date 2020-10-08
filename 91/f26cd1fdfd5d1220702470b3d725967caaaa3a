@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by Tomanhez at 2020-10-07T08:32:10Z
+
+> generally I have problem with scenario tagged `@javascript`, it looks like UI feature, and IMO we shouldn't cover it with API especially when you added step `And my billing address is fulfilled automatically after filling field which is matching to field from my address book's address` in API we don't have behaviour like `automatically do sth` it should be call to `addresses/index` and the UI should fill address with data from addressbook, But of course i am open to discussion.
+
+I think that few tests for addressBook like `choosing_billing_and_shipping_address_from_address_book.feature` are wrote not perfect for UI, because lots is happening automatically and is based on autocomplete from web browser, I add few new steps for greater clarity and of course for improve to work with @api tests. I know that many of these behawior is hard to recode on api cases but, IMO its only what i can do. Other way is write new tests for API behawior instead of present tests.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-10-07T08:54:51Z
+
+> > generally I have problem with scenario tagged `@javascript`, it looks like UI feature, and IMO we shouldn't cover it with API especially when you added step `And my billing address is fulfilled automatically after filling field which is matching to field from my address book's address` in API we don't have behaviour like `automatically do sth` it should be call to `addresses/index` and the UI should fill address with data from addressbook, But of course i am open to discussion.
+>
+> I think that few tests for addressBook like `choosing_billing_and_shipping_address_from_address_book.feature` are wrote not perfect for UI, because lots is happening automatically and is based on autocomplete from web browser, I add few new steps for greater clarity and of course for improve to work with @api tests. I know that many of these behawior is hard to recode on api cases but, IMO its only what i can do. Other way is write new tests for API behawior instead of present tests.
+
+I'm not fully convinced but we could implement the existing scenarios without adding these unneeded (unclear for me) new steps. The proper behaviour for getting address from customer's address book could be implemented in the existing steps in API context.
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2020-10-08T11:26:25Z
+
+Thanks, Tomasz! :tada:
