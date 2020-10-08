@@ -14,7 +14,7 @@ Feature: Removing an address from my book
         And my default address is of "Lucifer Morningstar"
 
     @ui
-    Scenario: Viewing address created after placing an order
+    Scenario: Deleting address created after placing an order
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the first and last name as "Mike Ross" for billing address
@@ -24,4 +24,19 @@ Feature: Removing an address from my book
         And I browse my address book
         And I delete the "Mike Ross" address
         Then I should be notified that the address has been successfully deleted
+        And I should have a single address in my address book
+
+    @api
+    Scenario: Deleting address created after placing an order
+        Given I have product "PHP T-Shirt" in the cart
+        And I am at the checkout addressing step
+        And my billing address is fulfilled automatically through default address
+        When I specify the first and last name as "Mike Ross" for billing address
+        And I complete the addressing step
+        And I proceed with "Free" shipping method and "Offline" payment
+        And I confirm my order
+        And I browse my address book
+        And I delete the "Mike Ross" address
+        Then I should be notified that the address has been successfully deleted
+        Then I browse my address book
         And I should have a single address in my address book

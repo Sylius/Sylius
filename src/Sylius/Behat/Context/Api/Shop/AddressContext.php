@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -89,7 +90,27 @@ final class AddressContext implements Context
      */
     public function thereShouldBeNoAddresses(): void
     {
+        $this->client->index();
+
         Assert::same(count($this->responseChecker->getCollection($this->client->getLastResponse())), 0);
+    }
+
+    /**
+     * @Then I delete the :fullName address
+     */
+    public function iDeleteTheAddress(string $fullName): void
+    {
+        $id = $this->getAddressIdFromAddressBookByFullName($fullName);
+
+        $this->client->delete($id);
+    }
+
+    /**
+     * @Then I should be notified that the address has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatAddressHasBeenDeleted(): void
+    {
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
     }
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool
@@ -110,5 +131,20 @@ final class AddressContext implements Context
         }
 
         return false;
+    }
+
+    private function getAddressIdFromAddressBookByFullName(string $fullName): ?string
+    {
+        Assert::notNull($fullName);
+        $fullNameArray = explode(' ',$fullName);
+
+        $addresses = $this->responseChecker->getCollection($this->client->getLastResponse());
+        /** @var AddressInterface $address */
+        foreach ($addresses as $address){
+            if ($fullNameArray[0] === $address['firstName'] && $fullNameArray[1] === $address['lastName']) {
+                $addressIriStringArray = explode('/', $address['@id']);
+                return end($addressIriStringArray);
+            }
+        }
     }
 }

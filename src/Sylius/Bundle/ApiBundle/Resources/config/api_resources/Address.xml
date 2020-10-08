@@ -30,6 +30,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/addresses/{id}</attribute>
             </itemOperation>
+            <itemOperation name="shop_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/addresses/{id}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
