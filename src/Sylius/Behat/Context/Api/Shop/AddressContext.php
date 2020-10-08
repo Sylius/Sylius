@@ -51,11 +51,23 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When I delete the :fullName address
+     */
+    public function iDeleteTheAddress(string $fullName): void
+    {
+        $id = $this->getAddressIdFromAddressBookByFullName($fullName);
+
+        $this->client->delete($id);
+    }
+
+    /**
      * @Then /^I should(?:| still) have a single address in my address book$/
      * @Then /^I should(?:| still) have (\d+) addresses in my address book$/
      */
     public function iShouldHaveAddresses(int $count = 1): void
     {
+        $this->client->index();
+
         Assert::same(count($this->responseChecker->getCollection($this->client->getLastResponse())), $count);
     }
 
@@ -93,16 +105,6 @@ final class AddressContext implements Context
         $this->client->index();
 
         Assert::same(count($this->responseChecker->getCollection($this->client->getLastResponse())), 0);
-    }
-
-    /**
-     * @Then I delete the :fullName address
-     */
-    public function iDeleteTheAddress(string $fullName): void
-    {
-        $id = $this->getAddressIdFromAddressBookByFullName($fullName);
-
-        $this->client->delete($id);
     }
 
     /**
@@ -146,5 +148,7 @@ final class AddressContext implements Context
                 return end($addressIriArray);
             }
         }
+
+        return null;
     }
 }
