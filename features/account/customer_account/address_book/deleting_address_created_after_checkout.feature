@@ -38,5 +38,5 @@ Feature: Removing an address from my book
         And I browse my address book
         And I delete the "Mike Ross" address
         Then I should be notified that the address has been successfully deleted
-        Then I browse my address book
+        And I browse my address book
         And I should have a single address in my address book

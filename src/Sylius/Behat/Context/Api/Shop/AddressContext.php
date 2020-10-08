@@ -142,8 +142,8 @@ final class AddressContext implements Context
         /** @var AddressInterface $address */
         foreach ($addresses as $address){
             if ($fullNameArray[0] === $address['firstName'] && $fullNameArray[1] === $address['lastName']) {
-                $addressIriStringArray = explode('/', $address['@id']);
-                return end($addressIriStringArray);
+                $addressIriArray = explode('/', $address['@id']);
+                return end($addressIriArray);
             }
         }
     }
