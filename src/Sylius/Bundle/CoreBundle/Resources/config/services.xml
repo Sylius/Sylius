@@ -171,11 +171,7 @@
 
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
-            <argument type="collection">
-                <argument type="service" id="sylius.section_resolver.admin_uri_based_section_resolver" />
-                <argument type="service" id="sylius.section_resolver.admin_api_uri_based_section_resolver" />
-                <argument type="service" id="sylius.section_resolver.shop_uri_based_section_resolver" />
-            </argument>
+            <argument type="collection" />
         </service>
 
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">

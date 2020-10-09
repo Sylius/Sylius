@@ -39,7 +39,9 @@
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>
 
-        <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver" />
+        <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
+            <tag name="sylius.uri_based_section_resolver" priority="0" />
+        </service>
 
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
             <argument type="service" id="sylius.storage.cart_session" />
