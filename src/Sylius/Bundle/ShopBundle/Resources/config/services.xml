@@ -40,7 +40,7 @@
         </service>
 
         <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
-            <tag name="sylius.uri_based_section_resolver" priority="0" />
+            <tag name="sylius.uri_based_section_resolver" priority="-10" />
         </service>
 
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext">
