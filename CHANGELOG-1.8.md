@@ -1,5 +1,12 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.2 (2020-10-12)
+
+#### Details
+
+- [#11882](https://github.com/Sylius/Sylius/issues/11882) Use DQL instead of repository to fetch product attributes ([@loevgaard](https://github.com/loevgaard))
+- [#11911](https://github.com/Sylius/Sylius/issues/11911) Removing typehint for Symfony 4.4 compatibility ([@mamazu](https://github.com/mamazu), [@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.8.1 (2020-10-02)
 
 #### Details
