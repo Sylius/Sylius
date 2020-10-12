@@ -1,4 +1,4 @@
-Locale Component [![Build status...](https://secure.travis-ci.org/Sylius/Locale.png?branch=master)](http://travis-ci.org/Sylius/Locale)
+Locale Component [![Build status...](https://secure.travis-ci.org/Sylius/Locale.png?branch=master)](https://travis-ci.org/Sylius/Locale)
 ================
 
 Managing different locales in PHP applications.

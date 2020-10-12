@@ -1,4 +1,4 @@
-SyliusReviewBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusReviewBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusReviewBundle)
+SyliusReviewBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusReviewBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusReviewBundle)
 ====================
 
 Sylius

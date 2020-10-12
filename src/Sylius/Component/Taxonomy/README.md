@@ -1,4 +1,4 @@
-Taxonomy Component [![Build status...](https://secure.travis-ci.org/Sylius/Taxonomy.png?branch=master)](http://travis-ci.org/Sylius/Taxonomy)
+Taxonomy Component [![Build status...](https://secure.travis-ci.org/Sylius/Taxonomy.png?branch=master)](https://travis-ci.org/Sylius/Taxonomy)
 ==================
 
 Categorization is one of the most basic functionality for modern web

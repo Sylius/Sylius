@@ -1,4 +1,4 @@
-User Component [![Build status...](https://secure.travis-ci.org/Sylius/User.png?branch=master)](http://travis-ci.org/Sylius/User)
+User Component [![Build status...](https://secure.travis-ci.org/Sylius/User.png?branch=master)](https://travis-ci.org/Sylius/User)
 ================
 
 Managing users in PHP applications.

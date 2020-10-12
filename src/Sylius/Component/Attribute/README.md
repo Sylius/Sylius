@@ -1,4 +1,4 @@
-Attribute Component [![Build status...](https://secure.travis-ci.org/Sylius/Attribute.png?branch=master)](http://travis-ci.org/Sylius/Attribute)
+Attribute Component [![Build status...](https://secure.travis-ci.org/Sylius/Attribute.png?branch=master)](https://travis-ci.org/Sylius/Attribute)
 ===================
 
 Attributes engine for PHP objects.

@@ -1,4 +1,4 @@
-SyliusPromotionBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPromotionBundle)
+SyliusPromotionBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPromotionBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusPromotionBundle)
 ===================
 
 Promotions engine for [**Symfony2**](https://symfony.com) eCommerce applications.

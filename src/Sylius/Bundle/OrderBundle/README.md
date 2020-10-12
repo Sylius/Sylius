@@ -1,4 +1,4 @@
-SyliusOrderBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusOrderBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusOrderBundle)
+SyliusOrderBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusOrderBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusOrderBundle)
 =================
 
 Sales order bundle for [**Symfony2**](https://symfony.com) ecommerce applications. It allows you to start building you application with sensible and flexible models.

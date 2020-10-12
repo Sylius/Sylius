@@ -1,4 +1,4 @@
-SyliusAdminBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAdminBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAdminBundle)
+SyliusAdminBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAdminBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusAdminBundle)
 =================
 
 This bundle contains the Sylius administration panel.

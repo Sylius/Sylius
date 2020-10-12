@@ -1,4 +1,4 @@
-SyliusCurrencyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCurrencyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCurrencyBundle)
+SyliusCurrencyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCurrencyBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusCurrencyBundle)
 ====================
 
 [**Symfony2**](https://symfony.com) integration of Sylius Currency processing component.

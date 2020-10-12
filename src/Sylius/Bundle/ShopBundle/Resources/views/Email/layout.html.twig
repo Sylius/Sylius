@@ -1,7 +1,7 @@
 {% block body %}
     {% autoescape false %}
-        {% set homepageUrl = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
-        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('assets/shop/img/logo.png') : absolute_url(asset('assets/shop/img/logo.png')) %}
+        {% set homepageUrl = channel.hostname is not null ? 'https://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+        {% set logo = channel.hostname is not null ? 'https://' ~ channel.hostname ~ asset('assets/shop/img/logo.png') : absolute_url(asset('assets/shop/img/logo.png')) %}
 
         <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
             <div style="max-width: 600px; margin: 20px auto;">

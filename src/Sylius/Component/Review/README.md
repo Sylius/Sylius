@@ -1,4 +1,4 @@
-Review Component [![Build status...](https://secure.travis-ci.org/Sylius/Review.png?branch=master)](http://travis-ci.org/Sylius/Review)
+Review Component [![Build status...](https://secure.travis-ci.org/Sylius/Review.png?branch=master)](https://travis-ci.org/Sylius/Review)
 =================
 
 E-Commerce PHP component for managing reviews.

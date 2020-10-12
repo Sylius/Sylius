@@ -1,4 +1,4 @@
-SyliusShippingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShippingBundle)
+SyliusShippingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusShippingBundle)
 ====================
 
 Shipping component integration for [**Symfony2**](https://symfony.com) eCommerce applications.
