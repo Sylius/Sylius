@@ -23,6 +23,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -820,6 +821,27 @@ final class CheckoutContext implements Context
     public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
+     * @When I change payment method to :paymentMethod
+     */
+    public function iChangePaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/orders/%s/change-payments/%s',
+                $this->sharedStorage->get('cart_token'),
+                (string) $this->iriConverter->getItemFromIri($this->getCart()['payments'][0])->getId()
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'paymentMethodCode' => $paymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
+        );
     }
 
     /**

@@ -72,8 +72,8 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
                 ->leftJoin('customer.user', 'user')
                 ->andWhere('user IS NULL')
                 ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
-                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
+//                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+//                ->setParameter('state', OrderInterface::STATE_CART)
             ;
 
             return;
