@@ -44,7 +44,7 @@ Would like to help us and build the most developer-friendly eCommerce platform? 
 👮 Security issues
 ------------------
 
-If you think that you have found a security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
+If you think that you have found any security issue in Sylius, please do not use the issue tracker and do not post it publicly. 
 Instead, all security issues must be sent to `security@sylius.com`.
 
 📦 Plugins and Extensions: Sylius Store
