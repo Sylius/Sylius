@@ -21,6 +21,7 @@ There are a few available types of an Attribute:
 * textarea
 * date
 * datetime
+* select
 
 What these types may be useful for?
 
@@ -31,6 +32,7 @@ What these types may be useful for?
 - textarea - display more detailed information about a product
 - date - release date of a movie
 - datetime - accurate date and time of an event
+- select - genre(s) of a book. one or more of them can be selected
 
 How to create an Attribute?
 ---------------------------
