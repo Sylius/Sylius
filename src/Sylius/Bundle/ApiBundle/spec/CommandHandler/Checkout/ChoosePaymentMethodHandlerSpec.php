@@ -21,6 +21,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -37,7 +38,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($orderRepository, $paymentMethodRepository, $paymentRepository, $stateMachineFactory);
     }
 
-    function it_assigns_chosen_payment_method_to_specified_payment(
+    function it_assigns_chosen_payment_method_to_specified_payment_while_checkout(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentRepositoryInterface $paymentRepository,
@@ -52,6 +53,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+        $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
 
         $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
@@ -64,6 +66,30 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $payment->setMethod($paymentMethod)->shouldBeCalled();
 
         $stateMachine->apply('select_payment')->shouldBeCalled();
+
+        $this($choosePaymentMethod)->shouldReturn($cart);
+    }
+
+    function it_assigns_chosen_payment_method_to_specified_payment_after_checkout(
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
+        OrderInterface $cart,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod
+    ): void {
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
+        $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_COMPLETED);
+        $cart->getId()->willReturn('111');
+
+        $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
+        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
+        $payment->setMethod($paymentMethod)->shouldBeCalled();
 
         $this($choosePaymentMethod)->shouldReturn($cart);
     }
@@ -163,6 +189,33 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $paymentRepository->findOneByOrderId('123', '111')->willReturn(null);
 
         $stateMachine->apply('select_payment')->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [$choosePaymentMethod])
+        ;
+    }
+
+    function it_throws_an_exception_if_payment_is_in_different_state_than_new(
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentRepositoryInterface $paymentRepository,
+        OrderInterface $cart,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod
+    ): void {
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
+
+        $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_COMPLETED);
+        $cart->getId()->willReturn('111');
+
+        $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
+        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

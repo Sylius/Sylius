@@ -34,11 +34,11 @@ Feature: Changing the method after order confirmation
         Then I should see the thank you page
 
     @api
-    Scenario: Changing the payment method after placed order
+    Scenario: Changing the payment method for placed order
         Given I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I select "Free" shipping method
         And I select "Cash on delivery" payment method
         And I confirm my order
         And I change payment method to "Offline"
-        Then I should have chosen "offline" payment method for my order
+        Then I should have chosen "Offline" payment method for my order

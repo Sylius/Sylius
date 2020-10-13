@@ -57,23 +57,35 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
 
-        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias, $httpRequestMethodType);
+        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias, $httpRequestMethodType, $operationName);
     }
 
     private function applyUserRulesToItem(
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
         string $rootAlias,
-        string $httpRequestMethodType
+        string $httpRequestMethodType,
+        string $operationName
     ): void {
+        if ($user === null && $operationName === 'shop_select_payment_method') {
+            $queryBuilder
+                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+                ->leftJoin('customer.user', 'user')
+                ->andWhere('user IS NULL')
+                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+            ;
+
+            return;
+        }
+
         if ($user === null) {
             $queryBuilder
                 ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
                 ->leftJoin('customer.user', 'user')
                 ->andWhere('user IS NULL')
                 ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
-//                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-//                ->setParameter('state', OrderInterface::STATE_CART)
+                ->andWhere(sprintf('%s.state = :state', $rootAlias))
+                ->setParameter('state', OrderInterface::STATE_CART)
             ;
 
             return;

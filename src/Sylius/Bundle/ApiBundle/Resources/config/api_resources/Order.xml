@@ -187,40 +187,6 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="shop_change_payment_method">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/change-payments/{paymentId}</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangePaymentMethod</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">order:change_payment_method</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">order:read</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Selects payment methods for particular payment</attribute>
-                    <attribute name="parameters">
-                        <attribute>
-                            <attribute name="name">id</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="required">true</attribute>
-                            <attribute name="schema">
-                                <attribute name="type">string</attribute>
-                            </attribute>
-                        </attribute>
-                        <attribute>
-                            <attribute name="name">paymentId</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="required">true</attribute>
-                            <attribute name="schema">
-                                <attribute name="type">string</attribute>
-                            </attribute>
-                        </attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_complete">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/orders/{id}/complete</attribute>

@@ -265,8 +265,9 @@ final class OrderContext implements Context
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethod $paymentMethod): void
     {
         $payment = $this->iriConverter->getItemFromIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]
+            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
         );
+
         Assert::same(
             $this->iriConverter->getIriFromItem($paymentMethod),
             $this->iriConverter->getIriFromItem($payment->getMethod())
