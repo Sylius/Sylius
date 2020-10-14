@@ -6,7 +6,7 @@ Feature: Maintaining previous cart after authorization
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Stark T-shirt" priced at "$12.00"
+        And the store has "Stark T-shirt" and "Targaryen T-shirt" products
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
         And I log in as "robb@stark.com" with "KingInTheNorth" password
 
@@ -14,6 +14,7 @@ Feature: Maintaining previous cart after authorization
     Scenario: Having cart maintained after logging out and then logging in
         When I add "Stark T-Shirt" product to the cart
         And I log out
+        And I add "Targaryen T-Shirt" product to the cart
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart

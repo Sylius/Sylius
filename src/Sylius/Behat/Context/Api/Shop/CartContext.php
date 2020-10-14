@@ -75,6 +75,8 @@ final class CartContext implements Context
     public function iClearMyCart(string $tokenValue): void
     {
         $this->cartsClient->delete($tokenValue);
+
+        $this->sharedStorage->set('cart_token', null);
     }
 
     /**
