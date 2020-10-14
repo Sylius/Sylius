@@ -9,7 +9,7 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.7 branch (the lowest possible)
+ - Bug fixes must be submitted against the 1.7 or 1.8 branch (the lowest possible)
  - Features and deprecations must be submitted against the master branch
  - Make sure that the correct base branch is set
 
