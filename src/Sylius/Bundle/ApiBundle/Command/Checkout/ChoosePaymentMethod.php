@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentIdSubresourceAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
 /** @experimental */
-class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
+class ChoosePaymentMethod implements OrderTokenValueAwareInterface, PaymentIdSubresourceAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
@@ -51,18 +52,13 @@ class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceI
         $this->orderTokenValue = $orderTokenValue;
     }
 
-    public function getSubresourceId(): ?string
+    public function getPaymentId(): string
     {
         return $this->paymentId;
     }
 
-    public function setSubresourceId(?string $subresourceId): void
+    public function setPaymentId(string $paymentId): void
     {
-        $this->paymentId = $subresourceId;
-    }
-
-    public function getSubresourceIdAttributeKey(): string
-    {
-        return 'paymentId';
+        $this->paymentId = $paymentId;
     }
 }

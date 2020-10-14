@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentIdSubresourceAwareInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class SubresourceIdAwareCommandDataTransformer implements CommandDataTransformerInterface
+final class PaymentIdSubresourceAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     /** @var RequestStack */
     private $requestStack;
@@ -30,21 +30,21 @@ final class SubresourceIdAwareCommandDataTransformer implements CommandDataTrans
 
     public function transform($object, string $to, array $context = [])
     {
+        /** @var PaymentIdSubresourceAwareInterface $object */
         $attributes = $this->requestStack->getCurrentRequest()->attributes;
 
-        $attributeKey = $object->getSubresourceIdAttributeKey();
-        Assert::true($attributes->has($attributeKey), 'Path does not have subresource id');
+        Assert::true($attributes->has('paymentId'), 'Path does not have payment id');
 
         /** @var string $subresourceId */
-        $subresourceId = $attributes->get($object->getSubresourceIdAttributeKey());
+        $paymentId = $attributes->get('paymentId');
 
-        $object->setSubresourceId($subresourceId);
+        $object->setPaymentId($paymentId);
 
         return $object;
     }
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof SubresourceIdAwareInterface;
+        return $object instanceof PaymentIdSubresourceAwareInterface;
     }
 }
