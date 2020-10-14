@@ -22,10 +22,11 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class AddressOrderHandler
+final class AddressOrderHandler implements MessageHandlerInterface
 {
     /** @var OrderRepositoryInterface */
     private $orderRepository;
