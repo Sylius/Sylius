@@ -10,13 +10,13 @@ Feature: Editing shop billing data on channel
         And channel "Web Store" billing data is "Ragnarok", "Pacific Coast Hwy", "90806" "Los Angeles", "United States" with "1100110011" tax ID
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Editing shop billing data on channel
         When I want to modify a channel "Web Store"
         And I specify company as "Götterdämmerung"
         And I specify tax ID as "666777"
         And I specify shop billing address as "Valhalla", "123" "Asgard", "United States"
-        And I save my changes
+        And I save my change of shop billing data
         Then I should be notified that it has been successfully edited
         And this channel company should be "Götterdämmerung"
         And this channel tax ID should be "666777"

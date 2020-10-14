@@ -24,6 +24,12 @@
             </attribute>
         </attribute>
 
+        <attribute name="denormalization_context">
+            <attribute name="groups">
+                <attribute>shop_billing_data:update</attribute>
+            </attribute>
+        </attribute>
+
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations />
@@ -32,7 +38,16 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
             </itemOperation>
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+            </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_channels_shop_billing_data_get_subresource">
+                <attribute name="method">GET</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="company" writable="true" readable="true" />
