@@ -1,7 +1,7 @@
 Sylius Documentation
 ====================
 
-This directory contains documentation for Sylius - Decoupled eCommerce Platform, available on [**docs.sylius.com**](https://docs.sylius.com). 
+This directory contains documentation for Sylius - Open Source eCommerce platform on top of Symfony, available on [**docs.sylius.com**](https://docs.sylius.com). 
 
 It is hosted by the great [readthedocs.org](http://readthedocs.org).
 
