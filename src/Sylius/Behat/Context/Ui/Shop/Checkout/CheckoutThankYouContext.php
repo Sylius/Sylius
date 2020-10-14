@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface as OrderDetailsPage;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -28,17 +29,22 @@ final class CheckoutThankYouContext implements Context
     /** @var ShowPageInterface */
     private $orderShowPage;
 
+    /** @var OrderDetailsPage */
+    private $orderDetails;
+
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
     public function __construct(
         ThankYouPageInterface $thankYouPage,
         ShowPageInterface $orderShowPage,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        OrderDetailsPage $orderDetails
     ) {
         $this->thankYouPage = $thankYouPage;
         $this->orderShowPage = $orderShowPage;
         $this->orderRepository = $orderRepository;
+        $this->orderDetails = $orderDetails;
     }
 
     /**
@@ -55,6 +61,16 @@ final class CheckoutThankYouContext implements Context
     public function iProceedToTheRegistration(): void
     {
         $this->thankYouPage->createAccount();
+    }
+
+    /**
+     * @When I change payment method to :paymentMethodName
+     */
+    public function iChoosePaymentMethod(string $paymentMethodName): void
+    {
+        $this->iGoToTheChangePaymentMethodPage();
+        $this->orderDetails->choosePaymentMethod($paymentMethodName);
+        $this->orderDetails->pay();
     }
 
     /**

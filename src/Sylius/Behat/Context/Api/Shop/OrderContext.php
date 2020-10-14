@@ -260,17 +260,15 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then I should have chosen :paymentMethod payment method for my order
+     * @Then I should have chosen :paymentMethod payment method
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethod $paymentMethod): void
     {
-        $payment = $this->iriConverter->getItemFromIri(
-            $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
-        );
+        $paymentIri = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
 
         Assert::same(
             $this->iriConverter->getIriFromItem($paymentMethod),
-            $this->iriConverter->getIriFromItem($payment->getMethod())
+            $this->responseChecker->getValue($this->client->showByIri($this->adminToShopIriConverter->convert($paymentIri)),'method')['@id']
         );
     }
 

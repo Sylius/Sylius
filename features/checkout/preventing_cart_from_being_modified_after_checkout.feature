@@ -33,15 +33,6 @@ Feature: Preventing cart from being modified after checkout
         Then I should be informed that cart is no longer available
 
     @api
-    Scenario: Preventing from changing payment method after checkout
-        Given I added product "Sig Sauer P226" to the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceeded with "Free" shipping method and "Cash on Delivery" payment
-        And I confirmed my order
-        When I try to change payment method to "Helicopter Money" payment
-        Then I should be informed that cart is no longer available
-
-    @api
     Scenario: Preventing from adding product after checkout
         Given I added product "Sig Sauer P226" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

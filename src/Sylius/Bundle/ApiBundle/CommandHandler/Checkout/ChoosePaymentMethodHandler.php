@@ -72,7 +72,8 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
         if (in_array(
             $cart->getCheckoutState(),
             [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED],
-            true)) {
+            true)
+        ) {
             $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
 
             Assert::true($stateMachine->can(

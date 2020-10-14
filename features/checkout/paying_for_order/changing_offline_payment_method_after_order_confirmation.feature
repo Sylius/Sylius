@@ -1,5 +1,5 @@
 @paying_for_order
-Feature: Changing the method after order confirmation
+Feature: Changing the offline payment method after order confirmation
     In order to try different payment methods
     As a Guest
     I want to be able to change the method after order confirmation
@@ -12,33 +12,33 @@ Feature: Changing the method after order confirmation
         And the store ships everywhere for free
 
     @ui
-    Scenario: Retrying the payment with offline payment
+    Scenario: Retrying the payment with different offline payment
         Given I added product "PHP T-Shirt" to the cart
         And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I have proceeded selecting "Free" shipping method
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
-        When I go to the change payment method page
-        And I try to pay with "Offline" payment method
-        Then I should see the thank you page
+        When I change payment method to "Offline" after checkout
+        Then I should have chosen "Offline" payment method
 
     @ui
-    Scenario: Retrying the payment with offline payment works correctly together with inventory
+    Scenario: Retrying the payment with different offline payment works correctly together with inventory
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
         And I added product "PHP T-Shirt" to the cart
         And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I have proceeded selecting "Free" shipping method
         And I have proceeded selecting "Cash on delivery" payment method
         And I have confirmed order
-        When I go to the change payment method page
-        And I try to pay with "Offline" payment method
-        Then I should see the thank you page
+        When I change payment method to "Offline" after checkout
+        Then I should have chosen "Offline" payment method
 
     @api
-    Scenario: Changing the payment method for placed order
+    Scenario: Changing chosen offline payment method to another offline payment method after checkout
         Given I added product "PHP T-Shirt" to the cart
-        When I complete addressing step with email "john@example.com" and "United States" based billing address
-        And I select "Free" shipping method
-        And I select "Cash on delivery" payment method
-        And I confirm my order
-        And I change payment method to "Offline"
-        Then I should have chosen "Offline" payment method for my order
+        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I have proceeded selecting "Free" shipping method
+        And I have proceeded selecting "Cash on delivery" payment method
+        And I have confirmed order
+        When I change payment method to "Offline" after checkout
+        Then I should have chosen "Offline" payment method
