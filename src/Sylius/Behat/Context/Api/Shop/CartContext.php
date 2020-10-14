@@ -109,6 +109,7 @@ final class CartContext implements Context
     /**
      * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
      * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
+     * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
      */
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
     {
@@ -222,6 +223,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be notified that quantity of added product cannot be lower that 1
+     */
+    public function iShouldBeNotifiedThatQuantityOfAddedProductCannotBeLowerThan1(): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isUpdateSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Quantity of an order item cannot be lower than 1.', $response)
+        );
+    }
+
+    /**
      * @Then there should be one item in my cart
      */
     public function thereShouldBeOneItemInMyCart(): void
@@ -232,6 +245,17 @@ final class CartContext implements Context
         Assert::count($items, 1);
 
         $this->sharedStorage->set('item', $items[0]);
+    }
+
+    /**
+     * @Then /^there should be (\d+) item in my (cart)$/
+     */
+    public function thereShouldCountItemsInMyCart(int $count, string $cartToken): void
+    {
+        $response = $this->cartsClient->show($cartToken);
+        $items = $this->responseChecker->getValue($response, 'items');
+
+        Assert::count($items, $count);
     }
 
     /**
