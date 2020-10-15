@@ -6,7 +6,7 @@ Feature: Maintaining cart after authorization
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Stark T-shirt" priced at "$12.00"
+        And the store has a product "Stark T-Shirt" priced at "$12.00"
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
     @ui @api
@@ -15,9 +15,9 @@ Feature: Maintaining cart after authorization
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"
 
-    @ui @api @todo
+    @ui
     Scenario: Having cart maintained after logging in when the user has been logged in earlier and has empty cart
         When I log in as "robb@stark.com" with "KingInTheNorth" password
         And I log out
@@ -25,9 +25,9 @@ Feature: Maintaining cart after authorization
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"
 
-    @ui @api @todo
+    @ui
     Scenario: Having cart maintained after logging in when the user has removed all items from the cart earlier
         When I log in as "robb@stark.com" with "KingInTheNorth" password
         And I add "Stark T-Shirt" product to the cart
@@ -37,9 +37,9 @@ Feature: Maintaining cart after authorization
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"
 
-    @ui @api
+    @ui
     Scenario: Having cart maintained after logging in when the user has cleared the cart earlier
         When I log in as "robb@stark.com" with "KingInTheNorth" password
         And I add "Stark T-Shirt" product to the cart
@@ -49,7 +49,7 @@ Feature: Maintaining cart after authorization
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"
 
     @ui
     Scenario: Having cart maintained after registration
@@ -57,4 +57,4 @@ Feature: Maintaining cart after authorization
         When I register with email "eddard@stak.com" and password "handOfTheKing"
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"
