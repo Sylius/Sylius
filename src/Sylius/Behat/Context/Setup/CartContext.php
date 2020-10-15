@@ -16,11 +16,13 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartContext implements Context
@@ -31,25 +33,30 @@ final class CartContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
+    /** @var RandomnessGeneratorInterface */
+    private $generator;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
     public function __construct(
         MessageBusInterface $commandBus,
         ProductVariantResolverInterface $productVariantResolver,
+        RandomnessGeneratorInterface $generator,
         SharedStorageInterface $sharedStorage
     ) {
         $this->commandBus = $commandBus;
         $this->productVariantResolver = $productVariantResolver;
+        $this->generator = $generator;
         $this->sharedStorage = $sharedStorage;
     }
 
     /**
-     * @Given /^the customer has created empty (cart)$/
+     * @Given the customer has created empty cart
      */
-    public function theCustomerHasTheCart(string $cartToken): void
+    public function theCustomerHasTheCart(): void
     {
-        //intentionally blank line
+        $this->pickupCart();
     }
 
     /**
@@ -59,8 +66,12 @@ final class CartContext implements Context
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
      */
-    public function iAddedProductToTheCart(ProductInterface $product, string $tokenValue): void
+    public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
             $product->getCode(),
@@ -78,8 +89,12 @@ final class CartContext implements Context
         ProductInterface $product,
         ProductOptionInterface $productOption,
         string $productOptionValue,
-        string $tokenValue
+        ?string $tokenValue
     ): void {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
             $product->getCode(),
@@ -92,6 +107,17 @@ final class CartContext implements Context
                 ->getCode(),
             1
         ));
+    }
+
+    private function pickupCart(): string
+    {
+        $tokenValue = $this->generator->generateUriSafeString(10);
+
+        $this->commandBus->dispatch(new PickupCart($tokenValue));
+
+        $this->sharedStorage->set('cart_token', $tokenValue);
+
+        return $tokenValue;
     }
 
     private function getProductVariantWithProductOptionAndProductOptionValue(

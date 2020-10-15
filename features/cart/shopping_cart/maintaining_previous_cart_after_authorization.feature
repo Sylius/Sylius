@@ -6,7 +6,7 @@ Feature: Maintaining previous cart after authorization
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "Stark T-shirt" and "Targaryen T-shirt" products
+        And the store has "Stark T-Shirt" and "Targaryen T-Shirt" products
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
         And I log in as "robb@stark.com" with "KingInTheNorth" password
 
@@ -18,4 +18,4 @@ Feature: Maintaining previous cart after authorization
         And I log in as "robb@stark.com" with "KingInTheNorth" password
         And I see the summary of my cart
         Then there should be one item in my cart
-        And this item should have name "Stark T-shirt"
+        And this item should have name "Stark T-Shirt"

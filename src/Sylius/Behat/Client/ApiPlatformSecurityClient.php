@@ -91,5 +91,10 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     public function logOut(): void
     {
         $this->sharedStorage->set('token', null);
+
+        if ($this->sharedStorage->has('cart_token')) {
+            $this->sharedStorage->set('previous_cart_token', $this->sharedStorage->get('cart_token'));
+            $this->sharedStorage->set('cart_token', null);
+        }
     }
 }

@@ -21,40 +21,43 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartTokenContext implements Context
 {
-    /** @var MessageBusInterface */
-    private $commandBus;
-
-    /** @var RandomnessGeneratorInterface */
-    private $generator;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    public function __construct(
-        MessageBusInterface $commandBus,
-        RandomnessGeneratorInterface $generator,
-        SharedStorageInterface $sharedStorage
-    ) {
-        $this->commandBus = $commandBus;
-        $this->generator = $generator;
+    public function __construct(SharedStorageInterface $sharedStorage)
+    {
         $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Transform /^(cart)$/
      */
-    public function provideCartToken(): string
+    public function provideCartToken(): ?string
     {
         if ($this->sharedStorage->has('cart_token')) {
             return $this->sharedStorage->get('cart_token');
         }
 
-        $tokenValue = $this->generator->generateUriSafeString(10);
+        return null;
+    }
 
-        $this->commandBus->dispatch(new PickupCart($tokenValue));
+    /**
+     * @Transform /^(customer cart)$/
+     * @Transform /^(customer's cart)$/
+     * @Transform /^(visitor's cart)$/
+     * @Transform /^(their cart)$/
+     */
+    public function providePreviousCartToken(): ?string
+    {
+        $tokenValue = $this->provideCartToken();
+        if ($tokenValue !== null) {
+            return $tokenValue;
+        }
 
-        $this->sharedStorage->set('cart_token', $tokenValue);
+        if ($this->sharedStorage->has('previous_cart_token')) {
+            return $this->sharedStorage->get('previous_cart_token');
+        }
 
-        return $tokenValue;
+        return null;
     }
 }

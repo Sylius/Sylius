@@ -33,6 +33,7 @@
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
             <argument type="service" id="sylius_default.bus" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

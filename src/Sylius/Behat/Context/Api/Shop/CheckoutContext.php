@@ -904,7 +904,7 @@ final class CheckoutContext implements Context
 
         $this->client->request(
             Request::METHOD_PATCH,
-            \sprintf('/new-api/shop/orders/%s/address', $this->sharedStorage->get('cart_token')),
+            \sprintf('/new-api/shop/orders/%s/address', $this->getCartTokenValue()),
             [],
             [],
             $this->getHeaders(),
@@ -914,9 +914,20 @@ final class CheckoutContext implements Context
 
     private function getCart(): array
     {
-        $response = $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+        return $this->responseChecker->getResponseContent($this->ordersClient->show($this->getCartTokenValue()));
+    }
 
-        return $this->responseChecker->getResponseContent($response);
+    private function getCartTokenValue(): ?string
+    {
+        if ($this->sharedStorage->has('cart_token')) {
+            return $this->sharedStorage->get('cart_token');
+        }
+
+        if ($this->sharedStorage->has('previous_cart_token')) {
+            return $this->sharedStorage->get('previous_cart_token');
+        }
+
+        return null;
     }
 
     private function getCheckoutState(): string
