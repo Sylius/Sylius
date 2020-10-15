@@ -186,8 +186,8 @@ sylius_fixtures:
                     options:
                         custom:
                             clothing:
-                                code: "clothing"
-                                name: "Clothing"
+                                code: 'clothing'
+                                name: 'Clothing'
                             other:
                                 code: 'other'
                                 name: 'Other'
