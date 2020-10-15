@@ -99,7 +99,12 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
+        <service id="sylius.api.data_transformer.shipment_id_subresource_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdSubresourceAwareCommandDataTransformer">
+            <argument type="service" id="request_stack" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+
+        <service id="sylius.api.data_transformer.payment_id_subresource_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\PaymentIdSubresourceAwareCommandDataTransformer">
             <argument type="service" id="request_stack" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
