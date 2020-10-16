@@ -123,6 +123,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
      * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
@@ -353,6 +354,19 @@ final class CartContext implements Context
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
 
+    /**
+     * @Then /^my cart shipping total should be ("[^"]+")$/
+     * @Then I should not see shipping total for my cart
+     */
+    public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
+    {
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::same(
+            $this->responseChecker->getValue($response, 'shippingTotal'),
+            $shippingTotal);
+    }
+
     private function pickupCart(): string
     {
         $this->cartsClient->buildCreateRequest();
@@ -416,15 +430,15 @@ final class CartContext implements Context
         }
 
         $variantIri = $shopSection ? $this->adminToShopIriConverter->convert($item['variant']) : $item['variant'];
-        $response = $this->cartsClient->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+        $response = $this->cartsClient->executeCustomRequest(Request::custom(urldecode($variantIri), HttpRequest::METHOD_GET));
 
         $product = $this->responseChecker->getValue($response, 'product');
 
         $pathElements = explode('/', $product);
 
-        $productCode = $pathElements[array_key_last($pathElements)];
+        $productCode = urldecode($pathElements[array_key_last($pathElements)]);
 
-        return $this->productsClient->show(StringInflector::nameToSlug($productCode));
+        return $this->productsClient->show(StringInflector::nameToSlug(urldecode($productCode)));
     }
 
     private function getProductVariantForItem(array $item): Response
