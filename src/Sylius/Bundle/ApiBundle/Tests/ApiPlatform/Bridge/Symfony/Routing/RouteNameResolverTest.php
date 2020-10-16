@@ -28,27 +28,7 @@ final class RouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testConstruct(): void
-    {
-        $router = $this->prophesize(RouterInterface::class);
-
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
-
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
-        $this->assertInstanceOf(RouteNameResolverInterface::class, $routeNameResolver);
-    }
-
-    /**
-     * @test
-     */
-    public function testGetRouteNameForItemRouteWithNoMatchingRoute(): void
+    public function it_get_route_name_for_item_route_with_no_matching_route(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('No item route associated with the type "AppBundle\\Entity\\User".');
@@ -78,7 +58,7 @@ final class RouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForItemRoute(): void
+    public function it_get_route_name_for_item_route(): void
     {
         $routeCollection = new RouteCollection();
         $routeCollection->add('certain_collection_route', new Route('/certain/collection/path', [
@@ -111,7 +91,7 @@ final class RouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForCollectionRouteWithNoMatchingRoute(): void
+    public function get_route_name_for_collection_route_with_no_matching_route(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('No collection route associated with the type "AppBundle\\Entity\\User".');
@@ -141,7 +121,7 @@ final class RouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForCollectionRoute(): void
+    public function it_get_route_name_for_collection_route(): void
     {
         $routeCollection = new RouteCollection();
         $routeCollection->add('certain_item_route', new Route('/certain/item/path/{id}', [
@@ -174,7 +154,7 @@ final class RouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForSubresourceRoute(): void
+    public function get_route_name_for_subresource_route(): void
     {
         $routeCollection = new RouteCollection();
         $routeCollection->add('a_certain_subresource_route', new Route('/a/certain/item/path/{id}', [

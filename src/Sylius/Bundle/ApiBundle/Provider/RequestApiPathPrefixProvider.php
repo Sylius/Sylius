@@ -41,8 +41,6 @@ final class RequestApiPathPrefixProvider implements RequestApiPathPrefixProvider
             return null;
         }
 
-        $path = $request->getPathInfo();
-
-        return $this->apiPathPrefixProvider->getPathPrefix($path);
+        return $this->apiPathPrefixProvider->getPathPrefix($request->getPathInfo());
     }
 }

@@ -66,6 +66,10 @@
             <argument type="string">%sylius_core.public_dir%</argument>
         </service>
 
+        <service id="sylius.behat.checker.api_prefix_checker" class="Sylius\Behat\Service\Checker\ApiPrefixChecker">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
+        </service>
+
         <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
@@ -92,9 +96,8 @@
             <argument>%kernel.project_dir%</argument>
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface" class="Sylius\Behat\Service\Provider\RequestApiPathPrefixProvider">
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
+        <service id="Sylius\Behat\Service\Provider\RequestApiPathPrefixProvider" decorates="Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface" decoration-priority="10">
+            <argument type="service" id="Sylius\Behat\Service\Provider\RequestApiPathPrefixProvider.inner"/>
             <argument type="service" id="sylius.api.context.user" />
         </service>
 

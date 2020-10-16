@@ -25,30 +25,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /** @experimental */
 final class RequestApiPathPrefixProvider implements RequestApiPathPrefixProviderInterface
 {
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var ApiPathPrefixProviderInterface */
-    private $apiPathPrefixProvider;
+    /** @var RequestApiPathPrefixProviderInterface */
+    private $decoratedRequestApiPathPrefixProvider;
 
     /** @var UserContextInterface */
     private $userContext;
 
     public function __construct(
-        RequestStack $requestStack,
-        ApiPathPrefixProviderInterface $apiPathPrefixProvider,
+        RequestApiPathPrefixProviderInterface $decoratedRequestApiPathPrefixProvider,
         UserContextInterface $userContext
     ) {
-        $this->requestStack = $requestStack;
-        $this->apiPathPrefixProvider = $apiPathPrefixProvider;
+        $this->decoratedRequestApiPathPrefixProvider = $decoratedRequestApiPathPrefixProvider;
         $this->userContext = $userContext;
     }
 
     public function getCurrentRequestPrefix(): ?string
     {
-        $request = $this->requestStack->getCurrentRequest();
-
-        if ($request === null) {
+        if ($this->decoratedRequestApiPathPrefixProvider->getCurrentRequestPrefix() === null) {
             /** @var UserInterface|null $user */
             $user = $this->userContext->getUser();
 
@@ -59,12 +52,8 @@ final class RequestApiPathPrefixProvider implements RequestApiPathPrefixProvider
             if ($user instanceof AdminUserInterface) {
                 return ApiPathPrefixProvider::ADMIN_PREFIX;
             }
-
-            return null;
         }
 
-        $path = $request->getPathInfo();
-
-        return $this->apiPathPrefixProvider->getPathPrefix($path);
+        return $this->decoratedRequestApiPathPrefixProvider->getCurrentRequestPrefix();
     }
 }

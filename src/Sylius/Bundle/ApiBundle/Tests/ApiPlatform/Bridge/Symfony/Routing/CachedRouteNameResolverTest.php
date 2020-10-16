@@ -29,27 +29,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testConstruct(): void
-    {
-        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-
-        $decorated = $this->prophesize(RouteNameResolverInterface::class);
-
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
-
-        $cachedRouteNameResolver = new CachedRouteNameResolver(
-            $cacheItemPool->reveal(),
-            $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
-        );
-
-        $this->assertInstanceOf(RouteNameResolverInterface::class, $cachedRouteNameResolver);
-    }
-
-    /**
-     * @test
-     */
-    public function testGetRouteNameForItemRouteWithNoMatchingRoute(): void
+    public function it_get_route_name_for_item_route_with_no_matching_route(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No item route associated with the type "AppBundle\\Entity\\User".');
@@ -81,7 +61,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForItemRouteOnCacheMiss(): void
+    public function test_get_route_name_forItem_route_on_cache_miss(): void
     {
         $cacheItem = $this->prophesize(CacheItemInterface::class);
         $cacheItem->isHit()->willReturn(false)->shouldBeCalledTimes(1);
@@ -119,7 +99,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForItemRouteOnCacheHit(): void
+    public function it_get_route_name_for_item_route_on_cache_hit(): void
     {
         $cacheItem = $this->prophesize(CacheItemInterface::class);
         $cacheItem->isHit()->shouldBeCalledTimes(1)->willReturn(true);
@@ -160,7 +140,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForCollectionRouteWithNoMatchingRoute(): void
+    public function get_route_name_for_collection_route_with_no_matching_route(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No collection route associated with the type "AppBundle\\Entity\\User".');
@@ -197,7 +177,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForCollectionRouteOnCacheMiss(): void
+    public function get_route_name_for_collection_route_on_cache_miss(): void
     {
         $cacheItem = $this->prophesize(CacheItemInterface::class);
         $cacheItem->isHit()->shouldBeCalledTimes(1)->willReturn(false);
@@ -235,7 +215,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameForCollectionRouteOnCacheHit(): void
+    public function get_route_name_for_collection_route_on_cache_hit(): void
     {
         $cacheItem = $this->prophesize(CacheItemInterface::class);
         $cacheItem->isHit()->willReturn(true)->shouldBeCalledTimes(1);
@@ -276,7 +256,7 @@ final class CachedRouteNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function testGetRouteNameWithCacheItemThrowsCacheException(): void
+    public function get_route_name_with_cache_item_throws_cache_exception(): void
     {
         $cacheException = $this->prophesize(\Exception::class);
         $cacheException->willImplement(CacheException::class);

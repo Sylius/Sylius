@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Checker\ApiPrefixCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -38,16 +39,21 @@ final class ProductContext implements Context
     /** @var ApiPathPrefixProviderInterface */
     private $apiPathPrefixProvider;
 
+    /** @var ApiPrefixCheckerInterface */
+    private $apiPrefixChecker;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
-        ApiPathPrefixProviderInterface $apiPathPrefixProvider
+        ApiPathPrefixProviderInterface $apiPathPrefixProvider,
+        ApiPrefixCheckerInterface $apiPrefixChecker
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->apiPathPrefixProvider = $apiPathPrefixProvider;
+        $this->apiPrefixChecker = $apiPrefixChecker;
     }
 
     /**
@@ -170,6 +176,19 @@ final class ProductContext implements Context
     public function iShouldSeeShopAsProductOptionsIriIdentifiersOnThisProduct(string $prefixType): void
     {
         $this->checkIriPrefixOnArray($this->client->getLastResponse(), 'options', $prefixType);
+    }
+
+    /**
+     * @Then /^this product should have only (shop) iri's identifiers$/
+     */
+    public function thisProductShouldHaveOnlyShopIriSIdentifiers(string $prefixType): void
+    {
+        $response = $this->client->getLastResponse();
+
+        $this->apiPrefixChecker->searchProperPrefixesRecursively(
+            json_decode($response->getContent(), true),
+            $prefixType
+        );
     }
 
     private function checkIriPrefixOnArray(Response $response, string $fieldType, string $prefixType): void
