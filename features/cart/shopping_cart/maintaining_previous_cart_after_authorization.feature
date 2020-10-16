@@ -16,6 +16,6 @@ Feature: Maintaining previous cart after authorization
         And I log out
         And I add "Targaryen T-Shirt" product to the cart
         And I log in as "robb@stark.com" with "KingInTheNorth" password
-        And I see the summary of my cart
+        And I see the summary of my previous cart
         Then there should be one item in my cart
         And this item should have name "Stark T-Shirt"

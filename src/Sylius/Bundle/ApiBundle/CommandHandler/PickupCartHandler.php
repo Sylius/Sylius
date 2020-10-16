@@ -19,8 +19,10 @@ use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -32,6 +34,9 @@ final class PickupCartHandler implements MessageHandlerInterface
 {
     /** @var FactoryInterface */
     private $cartFactory;
+
+    /** @var OrderRepositoryInterface */
+    private $cartRepository;
 
     /** @var ChannelContextInterface */
     private $channelContext;
@@ -47,12 +52,14 @@ final class PickupCartHandler implements MessageHandlerInterface
 
     public function __construct(
         FactoryInterface $cartFactory,
+        OrderRepositoryInterface $cartRepository,
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
     ) {
         $this->cartFactory = $cartFactory;
+        $this->cartRepository = $cartRepository;
         $this->channelContext = $channelContext;
         $this->userContext = $userContext;
         $this->orderManager = $orderManager;
@@ -61,29 +68,47 @@ final class PickupCartHandler implements MessageHandlerInterface
 
     public function __invoke(PickupCart $pickupCart)
     {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        $customer = $this->provideCustomer();
+        if ($customer !== null) {
+            /** @var OrderInterface|null $cart */
+            $cart = $this->cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
+            if ($cart !== null) {
+                return $cart;
+            }
+        }
+
         /** @var OrderInterface $cart */
         $cart = $this->cartFactory->createNew();
 
-        /** @var ChannelInterface $channel */
-        $channel = $this->channelContext->getChannel();
         /** @var LocaleInterface $locale */
         $locale = $channel->getDefaultLocale();
         /** @var CurrencyInterface $currency */
         $currency = $channel->getBaseCurrency();
-        /** @var UserInterface|null $user */
-        $user = $this->userContext->getUser();
-        if ($user !== null && $user instanceof ShopUserInterface) {
-            $customer = $user->getCustomer();
-            $cart->setCustomer($customer);
-        }
 
         $cart->setChannel($channel);
         $cart->setLocaleCode($locale->getCode());
         $cart->setCurrencyCode($currency->getCode());
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
+        if ($customer !== null) {
+            $cart->setCustomer($customer);
+        }
 
         $this->orderManager->persist($cart);
 
         return $cart;
+    }
+
+    private function provideCustomer(): ?CustomerInterface
+    {
+        /** @var UserInterface|null $user */
+        $user = $this->userContext->getUser();
+        if ($user !== null && $user instanceof ShopUserInterface) {
+            return $user->getCustomer();
+        }
+
+        return null;
     }
 }

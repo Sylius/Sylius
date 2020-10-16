@@ -80,7 +80,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I see the summary of my (cart)$/
+     * @When /^I see the summary of my ((?:|previous )cart)$/
      * @When /^the visitor try to see the summary of ((?:visitor|customer)'s cart)$/
      * @When /^the (?:visitor|customer) see the summary of ((?:|their )cart)$/
      */
@@ -151,11 +151,11 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I don't have access to see the summary of my cart
+     * @Then /^I don't have access to see the summary of my (previous cart)$/
      */
-    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
+    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        Assert::same($this->getCart()['code'], 404);
+        Assert::same($this->cartsClient->show($tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -501,12 +501,5 @@ final class CartContext implements Context
                 );
             }
         }
-    }
-
-    private function getCart(): array
-    {
-        $response = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
-
-        return $this->responseChecker->getResponseContent($response);
     }
 }

@@ -54,7 +54,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         $requestStack->getMasterRequest()->willReturn(null);
 
         $this
-            ->shouldThrow(new \UnexpectedValueException('There is no master request on request stack.'))
+            ->shouldThrow(new CartNotFoundException('There is no master request on request stack.'))
             ->during('getCart')
         ;
     }

@@ -64,7 +64,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
     {
         $masterRequest = $this->requestStack->getMasterRequest();
         if (null === $masterRequest) {
-            throw new \UnexpectedValueException('There is no master request on request stack.');
+            throw new CartNotFoundException('There is no master request on request stack.');
         }
 
         return $masterRequest;

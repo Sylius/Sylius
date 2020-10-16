@@ -42,22 +42,14 @@ final class CartTokenContext implements Context
     }
 
     /**
-     * @Transform /^(customer cart)$/
-     * @Transform /^(customer's cart)$/
-     * @Transform /^(visitor's cart)$/
-     * @Transform /^(their cart)$/
+     * @Transform /^((?:previous|customer|customer's|visitor's|their) cart)$/
      */
     public function providePreviousCartToken(): ?string
     {
-        $tokenValue = $this->provideCartToken();
-        if ($tokenValue !== null) {
-            return $tokenValue;
-        }
-
         if ($this->sharedStorage->has('previous_cart_token')) {
             return $this->sharedStorage->get('previous_cart_token');
         }
 
-        return null;
+        return $this->provideCartToken();
     }
 }
