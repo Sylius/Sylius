@@ -66,6 +66,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.product" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.admin_to_shop_iri_converter" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
         </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
