@@ -54,12 +54,12 @@ final class CachedRouteNameResolverTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No item route associated with the type "AppBundle\\Entity\\User".');
 
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalled();
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->willReturn(false)->shouldBeCalled();
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldNotBeCalled();
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName('AppBundle\Entity\User', OperationType::ITEM, [])
@@ -83,13 +83,13 @@ final class CachedRouteNameResolverTest extends TestCase
      */
     public function testGetRouteNameForItemRouteOnCacheMiss(): void
     {
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalledTimes(1);
-        $cacheItemProphecy->set('certain_item_route')->shouldBeCalledTimes(1);
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->willReturn(false)->shouldBeCalledTimes(1);
+        $cacheItem->set('certain_item_route')->shouldBeCalledTimes(1);
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldBeCalledTimes(1)->willReturn(true);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldBeCalledTimes(1)->willReturn(true);
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated
@@ -121,13 +121,13 @@ final class CachedRouteNameResolverTest extends TestCase
      */
     public function testGetRouteNameForItemRouteOnCacheHit(): void
     {
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->shouldBeCalledTimes(1)->willReturn(true);
-        $cacheItemProphecy->get()->shouldBeCalledTimes(1)->willReturn('certain_item_route');
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->shouldBeCalledTimes(1)->willReturn(true);
+        $cacheItem->get()->shouldBeCalledTimes(1)->willReturn('certain_item_route');
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldNotBeCalled();
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();
@@ -165,12 +165,12 @@ final class CachedRouteNameResolverTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No collection route associated with the type "AppBundle\\Entity\\User".');
 
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalled();
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->willReturn(false)->shouldBeCalled();
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldNotBeCalled();
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION, [])
@@ -199,13 +199,13 @@ final class CachedRouteNameResolverTest extends TestCase
      */
     public function testGetRouteNameForCollectionRouteOnCacheMiss(): void
     {
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->shouldBeCalledTimes(1)->willReturn(false);
-        $cacheItemProphecy->set('certain_collection_route')->shouldBeCalledTimes(1);
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->shouldBeCalledTimes(1)->willReturn(false);
+        $cacheItem->set('certain_collection_route')->shouldBeCalledTimes(1);
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldBeCalledTimes(1)->willReturn(true);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldBeCalledTimes(1)->willReturn(true);
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated
@@ -237,13 +237,13 @@ final class CachedRouteNameResolverTest extends TestCase
      */
     public function testGetRouteNameForCollectionRouteOnCacheHit(): void
     {
-        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
-        $cacheItemProphecy->isHit()->willReturn(true)->shouldBeCalledTimes(1);
-        $cacheItemProphecy->get()->willReturn('certain_collection_route')->shouldBeCalledTimes(1);
+        $cacheItem = $this->prophesize(CacheItemInterface::class);
+        $cacheItem->isHit()->willReturn(true)->shouldBeCalledTimes(1);
+        $cacheItem->get()->willReturn('certain_collection_route')->shouldBeCalledTimes(1);
 
         $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
-        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
-        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItem);
+        $cacheItemPool->save($cacheItem)->shouldNotBeCalled();
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();

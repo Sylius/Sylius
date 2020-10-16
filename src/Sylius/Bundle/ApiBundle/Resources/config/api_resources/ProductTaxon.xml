@@ -5,8 +5,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="normalization_context">
@@ -18,12 +16,18 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-taxons</attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-taxons/{id}</attribute>
+            </itemOperation>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-taxons/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

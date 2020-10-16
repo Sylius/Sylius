@@ -21,5 +21,14 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProvider">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProvider">
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
     </services>
 </container>

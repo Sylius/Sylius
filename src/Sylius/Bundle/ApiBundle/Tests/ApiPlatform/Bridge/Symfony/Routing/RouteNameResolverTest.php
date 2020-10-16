@@ -30,14 +30,14 @@ final class RouteNameResolverTest extends TestCase
      */
     public function testConstruct(): void
     {
-        $routerProphecy = $this->prophesize(RouterInterface::class);
+        $router = $this->prophesize(RouterInterface::class);
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
 
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );
@@ -59,15 +59,15 @@ final class RouteNameResolverTest extends TestCase
             '_api_collection_operation_name' => 'certain_collection_op',
         ]));
 
-        $routerProphecy = $this->prophesize(RouterInterface::class);
-        $routerProphecy->getRouteCollection()->willReturn($routeCollection);
+        $router = $this->prophesize(RouterInterface::class);
+        $router->getRouteCollection()->willReturn($routeCollection);
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
 
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );
@@ -90,15 +90,15 @@ final class RouteNameResolverTest extends TestCase
             '_api_item_operation_name' => 'certain_item_op',
         ]));
 
-        $routerProphecy = $this->prophesize(RouterInterface::class);
-        $routerProphecy->getRouteCollection()->willReturn($routeCollection);
+        $router = $this->prophesize(RouterInterface::class);
+        $router->getRouteCollection()->willReturn($routeCollection);
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
 
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );
@@ -122,15 +122,15 @@ final class RouteNameResolverTest extends TestCase
             '_api_item_operation_name' => 'certain_item_op',
         ]));
 
-        $routerProphecy = $this->prophesize(RouterInterface::class);
-        $routerProphecy->getRouteCollection()->willReturn($routeCollection);
+        $router = $this->prophesize(RouterInterface::class);
+        $router->getRouteCollection()->willReturn($routeCollection);
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
 
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );
@@ -153,15 +153,15 @@ final class RouteNameResolverTest extends TestCase
             '_api_collection_operation_name' => 'certain_collection_op',
         ]));
 
-        $routerProphecy = $this->prophesize(RouterInterface::class);
-        $routerProphecy->getRouteCollection()->willReturn($routeCollection);
+        $router = $this->prophesize(RouterInterface::class);
+        $router->getRouteCollection()->willReturn($routeCollection);
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
 
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );
@@ -192,8 +192,8 @@ final class RouteNameResolverTest extends TestCase
             '_api_collection_operation_name' => 'certain_collection_op',
         ]));
 
-        $routerProphecy = $this->prophesize(RouterInterface::class);
-        $routerProphecy->getRouteCollection()->willReturn($routeCollection);
+        $router = $this->prophesize(RouterInterface::class);
+        $router->getRouteCollection()->willReturn($routeCollection);
 
 
         $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
@@ -201,7 +201,7 @@ final class RouteNameResolverTest extends TestCase
         $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
 
         $routeNameResolver = new RouteNameResolver(
-            $routerProphecy->reveal(),
+            $router->reveal(),
             $requestApiPathPrefixProvider->reveal(),
             $apiPathPrefixProvider->reveal()
         );

@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_review.class%" shortName="ProductReview">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>product_review:read</attribute>
@@ -35,20 +33,29 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-reviews</attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-reviews/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-reviews/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-reviews/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-reviews/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">product_review:update</attribute>
                 </attribute>
@@ -56,7 +63,7 @@
 
             <itemOperation name="admin_accept">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/product-reviews/{id}/accept</attribute>
+                <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:accept</attribute>
                 <attribute name="openapi_context">
@@ -66,7 +73,7 @@
 
             <itemOperation name="admin_reject">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/product-reviews/{id}/reject</attribute>
+                <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.product_review_state_machine_transition_applicator:reject</attribute>
                 <attribute name="openapi_context">
