@@ -17,12 +17,17 @@
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>address:read</attribute>
+                <attribute>shop-address:create</attribute>
+                <attribute>shop-address:update</attribute>
             </attribute>
         </attribute>
 
         <collectionOperations>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
+            </collectionOperation>
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -33,15 +38,18 @@
             <itemOperation name="shop_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="firstName" writable="false" />
-        <property name="lastName" writable="false" />
-        <property name="city" writable="false" />
-        <property name="street" writable="false" />
-        <property name="postcode" writable="false" />
-        <property name="countryCode" writable="false" />
-        <property name="provinceName" writable="false" />
+        <property name="firstName" writable="true" />
+        <property name="lastName" writable="true" />
+        <property name="city" writable="true" />
+        <property name="street" writable="true" />
+        <property name="postcode" writable="true" />
+        <property name="countryCode" writable="true" />
+        <property name="provinceName" writable="true" />
     </resource>
 </resources>
