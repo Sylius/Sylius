@@ -92,6 +92,12 @@
             <argument>%kernel.project_dir%</argument>
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface" class="Sylius\Behat\Service\Provider\RequestApiPathPrefixProvider">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
+            <argument type="service" id="sylius.api.context.user" />
+        </service>
+
         <service id="sylius.admin_to_shop_iri_converter" class="Sylius\Behat\Service\Converter\AdminToShopIriConverter" public="false" />
     </services>
 </container>
