@@ -1,0 +1,321 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\ApiBundle\Tests\ApiPlatform\Bridge\Symfony\Routing;
+
+use ApiPlatform\Core\Api\OperationType;
+use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
+use ApiPlatform\Core\Exception\InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Psr\Cache\CacheException;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
+use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\CachedRouteNameResolver;
+use Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface;
+
+final class CachedRouteNameResolverTest extends TestCase
+{
+    /**
+     * @test
+     */
+    public function testConstruct(): void
+    {
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertInstanceOf(RouteNameResolverInterface::class, $cachedRouteNameResolver);
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForItemRouteWithNoMatchingRoute(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('No item route associated with the type "AppBundle\\Entity\\User".');
+
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalled();
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated->getRouteName('AppBundle\Entity\User', OperationType::ITEM, [])
+            ->willThrow(
+                new InvalidArgumentException('No item route associated with the type "AppBundle\Entity\User".')
+            )
+            ->shouldBeCalled();
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+        $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', OperationType::ITEM);
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForItemRouteOnCacheMiss(): void
+    {
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalledTimes(1);
+        $cacheItemProphecy->set('certain_item_route')->shouldBeCalledTimes(1);
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldBeCalledTimes(1)->willReturn(true);
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated
+            ->getRouteName('AppBundle\Entity\User', false, [])
+            ->willReturn('certain_item_route')->shouldBeCalledTimes(1)
+        ;
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', false)
+        );
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', false),
+            'Trigger the local cache'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForItemRouteOnCacheHit(): void
+    {
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->shouldBeCalledTimes(1)->willReturn(true);
+        $cacheItemProphecy->get()->shouldBeCalledTimes(1)->willReturn('certain_item_route');
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::ITEM
+            )
+        );
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::ITEM
+            ),
+            'Trigger the local cache'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForCollectionRouteWithNoMatchingRoute(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('No collection route associated with the type "AppBundle\\Entity\\User".');
+
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->willReturn(false)->shouldBeCalled();
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION, [])
+            ->willThrow(
+                new InvalidArgumentException(
+                    'No collection route associated with the type "AppBundle\Entity\User".'
+                )
+            )
+            ->shouldBeCalled();
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+        $cachedRouteNameResolver->getRouteName(
+            'AppBundle\Entity\User',
+            OperationType::COLLECTION
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForCollectionRouteOnCacheMiss(): void
+    {
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->shouldBeCalledTimes(1)->willReturn(false);
+        $cacheItemProphecy->set('certain_collection_route')->shouldBeCalledTimes(1);
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldBeCalledTimes(1)->willReturn(true);
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated
+            ->getRouteName('AppBundle\Entity\User', true, [])
+            ->willReturn('certain_collection_route')->shouldBeCalledTimes(1)
+        ;
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertSame(
+            'certain_collection_route',
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', true)
+        );
+        $this->assertSame(
+            'certain_collection_route',
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', true),
+            'Trigger the local cache'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameForCollectionRouteOnCacheHit(): void
+    {
+        $cacheItemProphecy = $this->prophesize(CacheItemInterface::class);
+        $cacheItemProphecy->isHit()->willReturn(true)->shouldBeCalledTimes(1);
+        $cacheItemProphecy->get()->willReturn('certain_collection_route')->shouldBeCalledTimes(1);
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool->getItem(Argument::type('string'))->shouldBeCalledTimes(1)->willReturn($cacheItemProphecy);
+        $cacheItemPool->save($cacheItemProphecy)->shouldNotBeCalled();
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertSame(
+            'certain_collection_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::COLLECTION
+            )
+        );
+        $this->assertSame(
+            'certain_collection_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::COLLECTION
+            ),
+            'Trigger the local cache'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRouteNameWithCacheItemThrowsCacheException(): void
+    {
+        $cacheException = $this->prophesize(\Exception::class);
+        $cacheException->willImplement(CacheException::class);
+
+        $cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $cacheItemPool
+            ->getItem(Argument::type('string'))
+            ->shouldBeCalledTimes(1)
+            ->willThrow($cacheException->reveal()
+            );
+
+        $decorated = $this->prophesize(RouteNameResolverInterface::class);
+        $decorated
+            ->getRouteName('AppBundle\Entity\User', OperationType::ITEM, [])
+            ->willReturn('certain_item_route')->shouldBeCalledTimes(1)
+        ;
+
+        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+
+        $cachedRouteNameResolver = new CachedRouteNameResolver(
+            $cacheItemPool->reveal(),
+            $decorated->reveal(),
+            $requestApiPathPrefixProvider->reveal()
+        );
+
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::ITEM
+            )
+        );
+        $this->assertSame(
+            'certain_item_route',
+            $cachedRouteNameResolver->getRouteName(
+                'AppBundle\Entity\User',
+                OperationType::ITEM
+            ),
+            'Trigger the local cache'
+        );
+    }
+}
