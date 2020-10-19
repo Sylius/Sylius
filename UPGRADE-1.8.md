@@ -1,4 +1,4 @@
-# UPGRADE FROM `v1.8.1` TO `v1.8.2`
+# UPGRADE FROM `v1.8.1` TO `v1.8.3`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
