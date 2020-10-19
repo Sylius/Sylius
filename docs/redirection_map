@@ -66,7 +66,7 @@ components_and_bundles/components/Resource/repository.rst https://github.com/Syl
 components_and_bundles/components/Resource/service.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md
 components_and_bundles/components/Resource/summary.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md
 components_and_bundles/components/Resource/translation.rst https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md
-contributing/code/bc.rst book/organization/backward-compatiblity-promise.rst
+contributing/code/bc.rst book/organization/backward-compatibility-promise.rst
 contributing/code/index.rst book/contributing/code/index.rst
 contributing/code/license.rst book/contributing/code/license.rst
 contributing/code/patches.rst book/contributing/code/patches.rst
