@@ -1,5 +1,14 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.3 (2020-10-20)
+
+#### Details
+
+- [#11452](https://github.com/Sylius/Sylius/issues/11452) [Docs] Fix redirection for backwards compatibility promise ([@pamil](https://github.com/pamil))
+- [#11919](https://github.com/Sylius/Sylius/issues/11919) [AUTO] Updated translations from Crowdin (1.7) ([@Sylius](https://github.com/Sylius) [@Bot](https://github.com/Bot))
+- [#11929](https://github.com/Sylius/Sylius/issues/11929) [API] Add missing experimental annotations ([@lchrusciel](https://github.com/lchrusciel))
+- [#11944](https://github.com/Sylius/Sylius/issues/11944) [Shop] Disabling customer when email has been changed ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.8.2 (2020-10-12)
 
 #### Details
