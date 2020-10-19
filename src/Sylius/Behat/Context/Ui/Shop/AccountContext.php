@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -454,5 +455,40 @@ final class AccountContext implements Context
     public function theShipmentStatusShouldBe(string $shipmentStatus): void
     {
         Assert::same($this->orderShowPage->getShipmentStatus(), $shipmentStatus);
+    }
+
+    /**
+     * @Then I should be notified that the verification email has been sent
+     */
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'An email with the verification link has been sent to your email address.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then /^(?:my|his|her) account should not be verified$/
+     */
+    public function myAccountShouldNotBeVerified(): void
+    {
+        $this->dashboardPage->open();
+
+        Assert::false($this->dashboardPage->isVerified());
+    }
+
+    /**
+     * @Then I should not be logged in
+     */
+    public function iShouldNotBeLoggedIn(): void
+    {
+        try {
+            $this->dashboardPage->open();
+        } catch (UnexpectedPageException $exception) {
+            return;
+        }
+
+        throw new \InvalidArgumentException('Dashboard has been openned, but it shouldn\'t as customer should not be logged in');
     }
 }

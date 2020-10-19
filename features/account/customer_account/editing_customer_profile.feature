@@ -18,7 +18,7 @@ Feature: Editing a customer profile
         Then I should be notified that it has been successfully edited
         And my name should be "Will Conway"
 
-    @ui
+    @ui @email
     Scenario: Changing my email if channel requires verification
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"
