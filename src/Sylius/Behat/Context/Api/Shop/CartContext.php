@@ -123,7 +123,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
      * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
@@ -430,7 +429,7 @@ final class CartContext implements Context
         }
 
         $variantIri = $shopSection ? $this->adminToShopIriConverter->convert($item['variant']) : $item['variant'];
-        $response = $this->cartsClient->executeCustomRequest(Request::custom(urldecode($variantIri), HttpRequest::METHOD_GET));
+        $response = $this->cartsClient->showByIri(urldecode($variantIri));
 
         $product = $this->responseChecker->getValue($response, 'product');
 
