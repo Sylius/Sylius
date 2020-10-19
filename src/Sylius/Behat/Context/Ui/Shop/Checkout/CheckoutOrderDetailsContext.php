@@ -52,8 +52,10 @@ final class CheckoutOrderDetailsContext implements Context
 
     /**
      * @When I change payment method to :paymentMethodName after checkout
+     * @When I change payment method to :paymentMethodName
+     * @When I retry the payment with :paymentMethodName payment method
      */
-    public function iChoosePaymentMethod(string $paymentMethodName): void
+    public function iChangePaymentMethodAfterCheckout(string $paymentMethodName): void
     {
         $this->thankYouPage->goToTheChangePaymentMethodPage();
         $this->orderDetails->choosePaymentMethod($paymentMethodName);

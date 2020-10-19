@@ -17,7 +17,6 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -69,24 +68,40 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
         $payment = $this->paymentRepository->findOneByOrderId($choosePaymentMethod->paymentId, $cart->getId());
         Assert::notNull($payment, 'Can not find payment with given identifier.');
 
-        if (in_array(
-            $cart->getCheckoutState(),
-            [OrderCheckoutStates::STATE_SHIPPING_SELECTED, OrderCheckoutStates::STATE_SHIPPING_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED],
-            true)
-        ) {
-            $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
-
-            Assert::true($stateMachine->can(
-                OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
-                'Order cannot have payment method assigned.'
-            );
-
-            $payment->setMethod($paymentMethod);
-            $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-
-            return $cart;
+        if ($cart->getState() === OrderInterface::STATE_CART) {
+            return $this->choosePaymentMethodOnCheckout($cart, $payment, $paymentMethod);
         }
 
+        if ($cart->getState() === OrderInterface::STATE_NEW) {
+            return $this->changePaymentMethod($cart, $payment, $paymentMethod);
+        }
+
+        throw new \InvalidArgumentException('Payment method can not be set');
+    }
+
+    private function choosePaymentMethodOnCheckout(
+        OrderInterface $cart,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod
+    ): OrderInterface {
+        $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
+
+        Assert::true($stateMachine->can(
+            OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT),
+            'Order cannot have payment method assigned.'
+        );
+
+        $payment->setMethod($paymentMethod);
+        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+
+        return $cart;
+    }
+
+    private function changePaymentMethod(
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod
+    ): OrderInterface {
         Assert::same(
             $payment->getState(),
             PaymentInterface::STATE_NEW,
@@ -94,6 +109,6 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
         );
         $payment->setMethod($paymentMethod);
 
-        return $cart;
+        return $order;
     }
 }

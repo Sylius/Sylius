@@ -64,16 +64,6 @@ final class CheckoutThankYouContext implements Context
     }
 
     /**
-     * @When I change payment method to :paymentMethodName
-     */
-    public function iChoosePaymentMethod(string $paymentMethodName): void
-    {
-        $this->iGoToTheChangePaymentMethodPage();
-        $this->orderDetails->choosePaymentMethod($paymentMethodName);
-        $this->orderDetails->pay();
-    }
-
-    /**
      * @Then I should be able to access this order's details
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void

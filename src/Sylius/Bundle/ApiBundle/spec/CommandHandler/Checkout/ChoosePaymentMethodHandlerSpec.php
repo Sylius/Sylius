@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -63,6 +64,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $cart->getId()->willReturn('111');
 
         $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
+
         $payment->setMethod($paymentMethod)->shouldBeCalled();
 
         $stateMachine->apply('select_payment')->shouldBeCalled();
@@ -88,6 +92,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $cart->getId()->willReturn('111');
 
         $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_NEW);
+
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $payment->setMethod($paymentMethod)->shouldBeCalled();
 
@@ -215,6 +222,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $cart->getId()->willReturn('111');
 
         $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_FULFILLED);
+
         $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
         $this

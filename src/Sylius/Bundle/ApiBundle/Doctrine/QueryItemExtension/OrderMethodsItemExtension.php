@@ -67,7 +67,23 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         string $httpRequestMethodType,
         string $operationName
     ): void {
-        if ($operationName === 'shop_select_payment_method') {
+        if ($user instanceof ShopUserInterface && $operationName === 'shop_select_payment_method') {
+            $queryBuilder
+                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
+                ->setParameter('customer', $user->getCustomer()->getId())
+            ;
+
+            return;
+        }
+
+        if ($user === null && $operationName === 'shop_select_payment_method') {
+            $queryBuilder
+                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+                ->leftJoin('customer.user', 'user')
+                ->andWhere('user IS NULL')
+                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+            ;
+
             return;
         }
 
