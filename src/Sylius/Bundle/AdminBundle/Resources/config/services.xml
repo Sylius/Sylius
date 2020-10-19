@@ -29,6 +29,11 @@
             <tag name="sylius.context.locale" priority="128" />
         </service>
 
+        <service id="sylius.section_resolver.admin_uri_based_section_resolver" class="Sylius\Bundle\AdminBundle\SectionResolver\AdminUriBasedSectionResolver">
+            <argument>/admin</argument>
+            <tag name="sylius.uri_based_section_resolver" priority="20" />
+        </service>
+
         <service id="sylius.twig.extension.widget.admin_notification" class="Sylius\Bundle\AdminBundle\Twig\NotificationWidgetExtension">
             <argument>%sylius.admin.notification.enabled%</argument>
             <argument>%sylius.admin.notification.frequency%</argument>
