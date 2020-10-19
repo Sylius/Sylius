@@ -78,6 +78,8 @@ final class AddressBookContext implements Context
                 'city' => $address->getCity(),
                 'postcode' => $address->getPostcode(),
                 'provinceName' => $address->getProvinceName(),
+                'firstName' => $address->getFirstName(),
+                'lastName' => $address->getLastName(),
             ]
         );
     }
@@ -111,8 +113,8 @@ final class AddressBookContext implements Context
      */
     public function iDoNotSpecifyProvince(): void
     {
-        $this->client->addRequestData('provinceName', null);
-        $this->client->addRequestData('provinceCode', null);
+        $this->client->addRequestData('provinceName', '');
+        $this->client->addRequestData('provinceCode', '');
     }
 
     /**
@@ -169,14 +171,13 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then I should be notified about errors
+     *  @Then /^I should be notified about (\d+) errors$/
      */
-    public function iShouldBeNotifiedAboutErrors(): void
+    public function iShouldBeNotifiedAboutErrors(int $expectedCount): void
     {
-
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::true(sizeof($response['violations']) > 0);
+        Assert::same(sizeof($response['violations']), $expectedCount);
     }
 
     /**
@@ -186,7 +187,7 @@ final class AddressBookContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::inArray(['propertyPath' => 'provinceName', 'message' => 'This value should not be null.'], $response['violations']);
+        Assert::inArray(['propertyPath' => '', 'message' => 'Please select proper province.'], $response['violations']);
     }
 
     /**

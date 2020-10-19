@@ -17,8 +17,8 @@
 >
     <class name="Sylius\Component\Core\Model\Address">
         <attribute name="customer">
-            <group>shop-address:create</group>
-            <group>shop-address:update</group>
+            <group>shop:address:create</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="firstName">
             <group>address:read</group>

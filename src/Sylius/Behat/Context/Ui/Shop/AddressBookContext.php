@@ -262,11 +262,11 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then /^I should be notified about errors$/
+     * @Then /^I should be notified about (\d+) errors$/
      */
-    public function iShouldBeNotifiedAboutErrors(): void
+    public function iShouldBeNotifiedAboutErrors(int $expectedCount): void
     {
-        Assert::true($this->addressBookCreatePage->countValidationMessages() > 0);
+        Assert::same($this->addressBookCreatePage->countValidationMessages(), $expectedCount);
     }
 
     /**

@@ -16,7 +16,7 @@ Feature: Seeing validation messages during address addition
         And I leave every field empty
         And I add it
         Then I should still be on the address addition page
-        And I should be notified about errors
+        And I should be notified about 6 errors
 
     @ui @javascript @api
     Scenario: The province needs to be selected when the chosen country has at least one stated
