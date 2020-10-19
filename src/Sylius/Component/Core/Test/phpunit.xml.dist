@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         colors="true"
+>
+    <php>
+        <server name="KERNEL_CLASS" value="AppKernel" />
+    </php>
+
+    <testsuites>
+        <testsuite name="SyliusCoreComponent Test Suite">
+            <directory>./Test/</directory>
+            <directory>./Tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

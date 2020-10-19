@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Formatter;
 
+use Behat\Transliterator\Transliterator;
 use function Symfony\Component\String\u;
 
 final class StringInflector
@@ -24,7 +25,7 @@ final class StringInflector
 
     public static function nameToSlug(string $value): string
     {
-        return str_replace(['_'], '-', self::nameToLowercaseCode($value));
+        return str_replace(['_'], '-', self::nameToLowercaseCode(Transliterator::transliterate($value)));
     }
 
     public static function nameToLowercaseCode(string $value): string
