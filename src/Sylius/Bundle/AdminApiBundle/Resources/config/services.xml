@@ -33,6 +33,11 @@
             <argument>%fos_oauth_server.model.client.class%</argument>
         </service>
 
+        <service id="sylius.section_resolver.admin_api_uri_based_section_resolver" class="Sylius\Bundle\AdminApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">
+            <argument>/api</argument>
+            <tag name="sylius.uri_based_section_resolver" priority="10" />
+        </service>
+
         <service id="sylius.listener.api.add_to_cart" class="Sylius\Bundle\AdminApiBundle\EventListener\CartChangeListener">
             <argument type="service" id="sylius.order_processing.order_processor.composite" />
             <argument type="service" id="sylius.manager.order" />

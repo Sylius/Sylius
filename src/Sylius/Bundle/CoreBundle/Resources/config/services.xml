@@ -169,6 +169,11 @@
             <argument type="string">%locale%</argument>
         </service>
 
+        <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
+            <argument type="service" id="request_stack" />
+            <argument type="collection" />
+        </service>
+
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />

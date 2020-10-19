@@ -18,10 +18,22 @@ Feature: Editing a customer profile
         Then I should be notified that it has been successfully edited
         And my name should be "Will Conway"
 
-    @ui
-    Scenario: Changing my email
+    @ui @email
+    Scenario: Changing my email if channel requires verification
         When I want to modify my profile
         And I specify the customer email as "frank@underwood.com"
         And I save my changes
         Then I should be notified that it has been successfully edited
+        And I should be notified that the verification email has been sent
+        And it should be sent to "frank@underwood.com"
+        And I should not be logged in
+
+    @ui
+    Scenario: Changing my email if channel does not require verification
+        Given "United States" channel has account verification disabled
+        When I want to modify my profile
+        And I specify the customer email as "frank@underwood.com"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And my account should not be verified
         And my email should be "frank@underwood.com"

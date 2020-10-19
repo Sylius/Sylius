@@ -184,6 +184,7 @@
     },
     "conflict": {
         "behat/behat": "3.6.0",
+        "doctrine/inflector": "^1.4",
         "symfony/symfony": "3.4.7",
         "symfony/doctrine-bridge": "3.4.37",
         "sylius/grid-bundle": "1.7.4",
