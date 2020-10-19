@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.6.X`
 
+## v1.6.9 (2020-10-19)
+
+#### Details
+
+- [#11369](https://github.com/Sylius/Sylius/issues/11369) [Docs] Don't use $HOME in SymfonyCloud deployment cookbook ([@tucksaun](https://github.com/tucksaun))
+- [#11387](https://github.com/Sylius/Sylius/issues/11387) Remove the doc reference to a promotion action that no longer exists in Core. ([@gabiudrescu](https://github.com/gabiudrescu))
+- [#11391](https://github.com/Sylius/Sylius/issues/11391) Fallback to the locale code if the associated name isn't found ([@dunglas](https://github.com/dunglas))
+- [#11390](https://github.com/Sylius/Sylius/issues/11390) Bug #9738 Fix nested form collections ([@vic-blt](https://github.com/vic-blt))
+- [#11403](https://github.com/Sylius/Sylius/issues/11403) Fix Autolabeler configuration ([@Zales0123](https://github.com/Zales0123))
+- [#11416](https://github.com/Sylius/Sylius/issues/11416) doc : add the composer dump-autoload instruction ([@davidroberto](https://github.com/davidroberto))
+- [#11450](https://github.com/Sylius/Sylius/issues/11450) [Docs] Enable redirections on ReadTheDocs ([@pamil](https://github.com/pamil))
+- [#11452](https://github.com/Sylius/Sylius/issues/11452) [Docs] Fix redirection for backwards compatibility promise ([@pamil](https://github.com/pamil))
+- [#11944](https://github.com/Sylius/Sylius/issues/11944) [Shop] Disabling customer when email has been changed ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.6.8 (2020-04-21)
 
 #### Details
