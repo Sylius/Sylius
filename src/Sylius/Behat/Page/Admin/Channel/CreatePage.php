@@ -38,6 +38,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Contact email', $contactEmail);
     }
 
+    public function setContactPhoneNumber(string $contactPhoneNumber): void
+    {
+        $this->getDocument()->fillField('Contact phone number', $contactPhoneNumber);
+    }
+
     public function defineColor(string $color): void
     {
         $this->getDocument()->fillField('Color', $color);

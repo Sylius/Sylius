@@ -61,6 +61,7 @@
         <property name="countries" writable="true" readable="true" />
         <property name="themeName" writable="true" readable="true" />
         <property name="contactEmail" writable="true" readable="true" />
+        <property name="contactPhoneNumber" writable="true" readable="true" />
         <property name="skippingShippingStepAllowed" writable="true" readable="true" />
         <property name="skippingPaymentStepAllowed" writable="true" readable="true" />
         <property name="accountVerificationRequired" writable="true" readable="true" />

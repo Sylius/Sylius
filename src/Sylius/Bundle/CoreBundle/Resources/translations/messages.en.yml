@@ -32,6 +32,7 @@ sylius:
                 street: Street
                 tax_id: Tax ID
             contact_email: Contact email
+            contact_phone_number: Contact phone number
             countries: Countries
             currencies: Currencies
             currency_base: Base currency

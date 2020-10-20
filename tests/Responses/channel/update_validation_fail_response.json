@@ -24,6 +24,7 @@
             },
             "themeName": {},
             "contactEmail": {},
+            "contactPhoneNumber": {},
             "skippingShippingStepAllowed": {},
             "skippingPaymentStepAllowed": {},
             "accountVerificationRequired": {},

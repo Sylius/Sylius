@@ -101,6 +101,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I set its contact phone number as :contactPhoneNumber
+     */
+    public function iSetItsContactPhoneNumberAs(string $contactPhoneNumber): void
+    {
+        $this->client->addRequestData('contactPhoneNumber', $contactPhoneNumber);
+    }
+
+    /**
      * @When I choose :country and :otherCountry as operating countries
      */
     public function iChooseAndAsOperatingCountries(CountryInterface $country, CountryInterface $otherCountry): void

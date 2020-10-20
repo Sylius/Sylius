@@ -72,6 +72,10 @@
             <group>channel:read</group>
             <group>channel:create</group>
         </attribute>
+        <attribute name="contactPhoneNumber">
+            <group>channel:read</group>
+            <group>channel:create</group>
+        </attribute>
         <attribute name="skippingShippingStepAllowed">
             <group>channel:read</group>
             <group>channel:create</group>

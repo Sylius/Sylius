@@ -196,6 +196,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I set its contact phone number as :contactPhoneNumber
+     */
+    public function iSetItsContactPhoneNumberAs(string $contactPhoneNumber): void
+    {
+        $this->createPage->setContactPhoneNumber($contactPhoneNumber);
+    }
+
+    /**
      * @When I define its color as :color
      */
     public function iDefineItsColorAs($color)
