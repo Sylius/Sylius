@@ -1,6 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+parameters:
+    sylius_api.authorization_header: AuthorizationTestHeader
+
 api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
@@ -9,7 +12,7 @@ api_platform:
         versions: [3]
         api_keys:
             apiKey:
-                name: Authorization
+                name: "%sylius_api.authorization_header%"
                 type: header
     exception_to_status:
         SM\SMException: 422
@@ -29,3 +32,9 @@ framework:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
+lexik_jwt_authentication:
+    token_extractors:
+        authorization_header:
+            enabled: true
+            prefix: Bearer
+            name: "%sylius_api.authorization_header%"
