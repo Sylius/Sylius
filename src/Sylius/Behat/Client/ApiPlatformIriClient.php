@@ -26,16 +26,23 @@ final class ApiPlatformIriClient implements ApiIriClientInterface
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    public function __construct(AbstractBrowser $client, SharedStorageInterface $sharedStorage)
-    {
+    /** @var string */
+    private $authorizationHeader;
+
+    public function __construct(
+        AbstractBrowser $client,
+        SharedStorageInterface $sharedStorage,
+        string $authorizationHeader
+    ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
+        $this->authorizationHeader = $authorizationHeader;
     }
 
     public function showByIri(string $iri): Response
     {
         $request = Request::custom($iri, HttpRequest::METHOD_GET);
-        $request->authorize($this->sharedStorage->get('token'));
+        $request->authorize($this->sharedStorage->get('token'), $this->authorizationHeader);
 
         return $this->request($request);
     }
