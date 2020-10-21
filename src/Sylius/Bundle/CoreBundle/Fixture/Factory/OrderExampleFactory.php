@@ -145,11 +145,11 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
             ->setDefault('channel', LazyOption::randomOne($this->channelRepository))
             ->setAllowedTypes('channel', ['null', 'string', ChannelInterface::class])
-            ->setNormalizer('channel', LazyOption::findOneBy($this->channelRepository, 'code'))
+            ->setNormalizer('channel', LazyOption::getOneBy($this->channelRepository, 'code'))
 
             ->setDefault('customer', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('customer', ['null', 'string', CustomerInterface::class])
-            ->setNormalizer('customer', LazyOption::findOneBy($this->customerRepository, 'email'))
+            ->setNormalizer('customer', LazyOption::getOneBy($this->customerRepository, 'email'))
 
             ->setDefault('country', LazyOption::randomOne($this->countryRepository))
             ->setAllowedTypes('country', ['null', 'string', CountryInterface::class])

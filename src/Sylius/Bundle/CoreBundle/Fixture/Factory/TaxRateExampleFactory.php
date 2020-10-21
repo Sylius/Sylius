@@ -96,10 +96,10 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('calculator', 'default')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
-            ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setNormalizer('zone', LazyOption::getOneBy($this->zoneRepository, 'code'))
             ->setDefault('category', LazyOption::randomOne($this->taxCategoryRepository))
             ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
-            ->setNormalizer('category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
+            ->setNormalizer('category', LazyOption::getOneBy($this->taxCategoryRepository, 'code'))
         ;
     }
 }

@@ -94,7 +94,7 @@ class AddressExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('province_code', ['null', 'string'])
             ->setDefault('customer', LazyOption::randomOne($this->customerRepository))
             ->setAllowedTypes('customer', ['string', CustomerInterface::class, 'null'])
-            ->setNormalizer('customer', LazyOption::findOneBy($this->customerRepository, 'email'))
+            ->setNormalizer('customer', LazyOption::getOneBy($this->customerRepository, 'email'))
         ;
     }
 

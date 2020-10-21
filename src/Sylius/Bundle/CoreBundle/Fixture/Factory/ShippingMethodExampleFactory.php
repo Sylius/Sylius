@@ -135,7 +135,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
             ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
-            ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setNormalizer('zone', LazyOption::getOneBy($this->zoneRepository, 'code'))
             ->setDefined('tax_category')
             ->setAllowedTypes('tax_category', ['null', 'string', TaxCategoryInterface::class])
             ->setDefined('category')

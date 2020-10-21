@@ -98,9 +98,9 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
                 return $sentences;
             })
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
-            ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
+            ->setNormalizer('author', LazyOption::getOneBy($this->customerRepository, 'email'))
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
-            ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
+            ->setNormalizer('product', LazyOption::getOneBy($this->productRepository, 'code'))
             ->setDefault('status', null)
         ;
     }
