@@ -50,6 +50,8 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function findLatestCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer): ?OrderInterface;
 
+    public function findLatestNotEmptyCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer): ?OrderInterface;
+
     public function getTotalSalesForChannel(ChannelInterface $channel): int;
 
     public function getTotalPaidSalesForChannel(ChannelInterface $channel): int;

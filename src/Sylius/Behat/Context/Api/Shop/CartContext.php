@@ -75,22 +75,28 @@ final class CartContext implements Context
     public function iClearMyCart(string $tokenValue): void
     {
         $this->cartsClient->delete($tokenValue);
+
+        $this->sharedStorage->set('cart_token', null);
     }
 
     /**
-     * @When /^I see the summary of my (cart)$/
-     * @When /^the visitor try to see the summary of (?:customer|visitor)'s (cart)$/
-     * @When /^the (?:visitor|customer) see the summary of (?:their) (cart)$/
+     * @When /^I see the summary of my ((?:|previous )cart)$/
+     * @When /^the visitor try to see the summary of ((?:visitor|customer)'s cart)$/
+     * @When /^the (?:visitor|customer) see the summary of ((?:|their )cart)$/
      */
-    public function iSeeTheSummaryOfMyCart(string $tokenValue): void
+    public function iSeeTheSummaryOfMyCart(?string $tokenValue): void
     {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $this->cartsClient->show($tokenValue);
     }
 
     /**
-     * @When /^the administrator try to see the summary of (?:customer|visitor)'s (cart)$/
+     * @When /^the administrator try to see the summary of ((?:visitor|customer)'s cart)$/
      */
-    public function theAdministratorTryToSeeTheSummaryOfCart(string $tokenValue): void
+    public function theAdministratorTryToSeeTheSummaryOfCart(?string $tokenValue): void
     {
         $this->ordersAdminClient->show($tokenValue);
     }
@@ -101,7 +107,7 @@ final class CartContext implements Context
      * @When /^I add (product "[^"]+") to the (cart)$/
      * @When /^the (?:visitor|customer) adds ("[^"]+" product) to the (cart)$/
      */
-    public function iAddThisProductToTheCart(ProductInterface $product, string $tokenValue): void
+    public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
     }
@@ -111,7 +117,7 @@ final class CartContext implements Context
      * @When /^I add (\d+) (products "[^"]+") to the (cart)$/
      * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
      */
-    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, string $tokenValue): void
+    public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
     }
@@ -119,7 +125,7 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant of this product) to the (cart)$/
      */
-    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, string $tokenValue): void
+    public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
     }
@@ -145,11 +151,11 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I don't have access to see the summary of my cart
+     * @Then /^I don't have access to see the summary of my (previous cart)$/
      */
-    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
+    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
     {
-        Assert::same($this->getCart()['code'], 404);
+        Assert::same($this->cartsClient->show($tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -190,9 +196,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the visitor has no access to customer's (cart)$/
+     * @Then /^the visitor has no access to (customer's cart)$/
      */
-    public function theVisitorHasNoAccessToCustomer(string $tokenValue): void
+    public function theVisitorHasNoAccessToCustomer(?string $tokenValue): void
     {
         $response = $this->cartsClient->show($tokenValue);
 
@@ -347,8 +353,22 @@ final class CartContext implements Context
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
 
-    private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
+    private function pickupCart(): string
     {
+        $this->cartsClient->buildCreateRequest();
+        $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
+
+        $this->sharedStorage->set('cart_token', $tokenValue);
+
+        return $tokenValue;
+    }
+
+    private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
+    {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
@@ -360,8 +380,12 @@ final class CartContext implements Context
         $this->cartsClient->executeCustomRequest($request);
     }
 
-    private function putProductVariantToCart(ProductVariantInterface $productVariant, string $tokenValue, int $quantity = 1): void
+    private function putProductVariantToCart(ProductVariantInterface $productVariant, ?string $tokenValue, int $quantity = 1): void
     {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
         $request->updateContent([
@@ -417,13 +441,6 @@ final class CartContext implements Context
         );
 
         return $this->cartsClient->getLastResponse();
-    }
-
-    private function getOrderItemProductCode(array $item): string
-    {
-        $pathElements = explode('/', $item['variant']['product']);
-
-        return $pathElements[array_key_last($pathElements)];
     }
 
     private function geOrderItemIdForProductInCart(ProductInterface $product, string $tokenValue): ?string
@@ -484,12 +501,5 @@ final class CartContext implements Context
                 );
             }
         }
-    }
-
-    private function getCart(): array
-    {
-        $response = $this->cartsClient->show($this->sharedStorage->get('cart_token'));
-
-        return $this->responseChecker->getResponseContent($response);
     }
 }

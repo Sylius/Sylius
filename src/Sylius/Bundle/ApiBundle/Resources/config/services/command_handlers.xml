@@ -25,6 +25,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\PickupCartHandler">
             <argument type="service" id="sylius.factory.order" />
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.api.context.user" />
             <argument type="service" id="sylius.manager.order" />

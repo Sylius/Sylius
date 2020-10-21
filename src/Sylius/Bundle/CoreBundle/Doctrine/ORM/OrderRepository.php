@@ -182,6 +182,25 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function findLatestNotEmptyCartByChannelAndCustomer(
+        ChannelInterface $channel,
+        CustomerInterface $customer
+    ): ?OrderInterface {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.customer = :customer')
+            ->andWhere('o.items IS NOT EMPTY')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('channel', $channel)
+            ->setParameter('customer', $customer)
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function getTotalSalesForChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
