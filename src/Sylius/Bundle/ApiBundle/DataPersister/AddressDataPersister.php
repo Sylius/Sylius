@@ -16,9 +16,7 @@ namespace Sylius\Bundle\ApiBundle\DataPersister;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /** @experimental */
 final class AddressDataPersister implements ContextAwareDataPersisterInterface
@@ -26,15 +24,15 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
     /** @var ContextAwareDataPersisterInterface */
     private $decoratedDataPersister;
 
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
+    /** @var CustomerContextInterface */
+    private $customerContext;
 
     public function __construct(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        TokenStorageInterface $tokenStorage
+        CustomerContextInterface $customerContext
     ) {
         $this->decoratedDataPersister = $decoratedDataPersister;
-        $this->tokenStorage = $tokenStorage;
+        $this->customerContext = $customerContext;
     }
 
     public function supports($data, array $context = []): bool
@@ -44,10 +42,9 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
-        $loggedUser = $this->getUser();
-        if ($loggedUser instanceof ShopUserInterface) {
-            /** @var CustomerInterface $customer */
-            $customer = $loggedUser->getCustomer();
+        /** @var CustomerInterface|null $customer */
+        $customer = $this->customerContext->getCustomer();
+        if ($customer !== null) {
             /** @var AddressInterface $data */
             $data->setCustomer($customer);
 
@@ -62,18 +59,5 @@ final class AddressDataPersister implements ContextAwareDataPersisterInterface
     public function remove($data, array $context = [])
     {
         return $this->decoratedDataPersister->remove($data, $context);
-    }
-
-    private function getUser(): ?UserInterface
-    {
-        $token = $this->tokenStorage->getToken();
-        if ($token === null) {
-            return null;
-        }
-
-        /** @var UserInterface $loggedUser */
-        $loggedUser = $token->getUser();
-
-        return $loggedUser;
     }
 }

@@ -18,7 +18,7 @@
     <services>
         <service id="sylius.api.data_persister.address" class="Sylius\Bundle\ApiBundle\DataPersister\AddressDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="sylius.context.customer" />
             <tag name="api_platform.data_persister" />
         </service>
 
