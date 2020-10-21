@@ -21,7 +21,7 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameToCode(): void
+    public function it_converts_name_to_code(): void
     {
         self::assertEquals('Test_value', StringInflector::nameToCode('Test value'));
     }
@@ -29,7 +29,15 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameToSlug(): void
+    public function it_converts_name_with_special_characters_to_code(): void
+    {
+        self::assertEquals('Test?_value!', StringInflector::nameToCode('Test? value!'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_converts_name_to_slug(): void
     {
         self::assertEquals('test-value', StringInflector::nameToSlug('Test value'));
     }
@@ -37,7 +45,7 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameWithSpecialCharactersToSlug(): void
+    public function it_converts_name_with_special_characters_to_slug(): void
     {
         self::assertEquals('test-value', StringInflector::nameToSlug('Test!%-value!'));
     }
@@ -45,7 +53,7 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameToLowercaseCode(): void
+    public function it_converts_name_to_lowercase_code(): void
     {
         self::assertEquals('test_value', StringInflector::nameToLowercaseCode('Test value'));
     }
@@ -53,7 +61,15 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameToUppercaseCode(): void
+    public function it_converts_name_with_special_characters_to_lowercase_code(): void
+    {
+        self::assertEquals('test?_value!', StringInflector::nameToLowercaseCode('Test? value!'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_converts_name_to_upper_case_code(): void
     {
         self::assertEquals('TEST_VALUE', StringInflector::nameToUppercaseCode('Test value'));
     }
@@ -61,8 +77,24 @@ final class StringInflectorTest extends TestCase
     /**
      * @test
      */
-    public function nameToCamelCase(): void
+    public function it_converts_name_with_special_characters_to_upper_case_code(): void
+    {
+        self::assertEquals('TEST?_VALUE!', StringInflector::nameToUppercaseCode('Test? value!'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_converts_name_to_camel_case(): void
     {
         self::assertEquals('testValue', StringInflector::nameToCamelCase('Test value'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_converts_name_with_special_characters_to_camel_case(): void
+    {
+        self::assertEquals('testValue', StringInflector::nameToCamelCase('Test? value!'));
     }
 }
