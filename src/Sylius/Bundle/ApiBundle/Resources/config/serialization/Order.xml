@@ -99,6 +99,7 @@
 
         <attribute name="shippingTotal">
             <group>checkout:read</group>
+            <group>order:read</group>
         </attribute>
 
         <attribute name="shippingAddress">

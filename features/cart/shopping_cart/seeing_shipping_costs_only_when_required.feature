@@ -12,23 +12,23 @@ Feature: Seeing shipping costs only when order requires shipping
         And the store has "SHL" shipping method with "$5.00" fee
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Not seeing shipping cost if none of the order items require shipping
-        Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
+        Given I have "Guards! Guards! - ebook" variant of this product in the cart
         When I see the summary of my cart
         Then I should not see shipping total for my cart
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping cost if some of the order items require shipping
-        Given I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart
-        And I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
-        When I see the summary of my cart
+        Given I have "Guards! Guards! - book" variant of this product in the cart
+        When I add "Guards! Guards! - ebook" variant of this product to the cart
+        And I see the summary of my cart
         Then my cart shipping total should be "$5.00"
 
-    @ui
+    @ui @api
     Scenario: Not seeing free cost if the order items that require shipping are removed
-        Given I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart
-        And I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
-        When I remove product "Guards! Guards!" from the cart
-        And I see the summary of my cart
-        Then I should not see shipping total for my cart
+        Given I have "Guards! Guards! - book" variant of this product in the cart
+        When I add "Guards! Guards! - ebook" variant of this product to the cart
+        And I remove product "Guards! Guards!" from the cart
+        Then I see the summary of my cart
+        And I should not see shipping total for my cart
