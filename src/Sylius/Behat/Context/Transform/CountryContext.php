@@ -54,4 +54,12 @@ final class CountryContext implements Context
 
         return $country;
     }
+
+    /**
+     * @Transform :countryCode
+     */
+    public function getCountryCodeByName(string $countryName): string
+    {
+        return $this->countryNameConverter->convertToCode($countryName);
+    }
 }

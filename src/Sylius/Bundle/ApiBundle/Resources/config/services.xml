@@ -106,7 +106,6 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
             <argument type="service" id="serializer.normalizer.object" />
-            <argument type="service" id="security.token_storage" />
             <argument type="string">%sylius.model.address.class%</argument>
             <argument type="string">%sylius.model.address.interface%</argument>
             <tag name="serializer.normalizer" priority="64" />
