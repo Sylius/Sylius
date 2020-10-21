@@ -49,91 +49,77 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         }
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
-
         if ($httpRequestMethodType === Request::METHOD_GET) {
             return;
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
+
         $user = $this->userContext->getUser();
 
-        $this->applyUserRulesToItem($user, $queryBuilder, $rootAlias, $httpRequestMethodType, $operationName);
-    }
-
-    private function applyUserRulesToItem(
-        ?UserInterface $user,
-        QueryBuilder $queryBuilder,
-        string $rootAlias,
-        string $httpRequestMethodType,
-        string $operationName
-    ): void {
-        if ($user instanceof ShopUserInterface && $operationName === 'shop_select_payment_method') {
-            $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $user->getCustomer()->getId())
-            ;
-
-            return;
-        }
-
-        if ($user === null && $operationName === 'shop_select_payment_method') {
-            $queryBuilder
-                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
-                ->leftJoin('customer.user', 'user')
-                ->andWhere('user IS NULL')
-                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
-            ;
-
-            return;
-        }
-
         if ($user === null) {
-            $queryBuilder
-                ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
-                ->leftJoin('customer.user', 'user')
-                ->andWhere('user IS NULL')
-                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
-                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
-            ;
+            $this->applyForVisitor($queryBuilder, $rootAlias, $operationName);
 
             return;
         }
 
         if ($user instanceof ShopUserInterface && in_array('ROLE_USER', $user->getRoles(), true)) {
-            $queryBuilder
-                ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
-                ->setParameter('customer', $user->getCustomer()->getId())
-                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
-            ;
+            $this->applyForShopUser($queryBuilder, $rootAlias, $operationName, $user);
 
             return;
         }
 
         if (
-            $user instanceof AdminUserInterface &&
-            in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
-            $httpRequestMethodType === Request::METHOD_DELETE
-        ) {
-            $queryBuilder
-                ->andWhere(sprintf('%s.state = :state', $rootAlias))
-                ->setParameter('state', OrderInterface::STATE_CART)
-            ;
-
-            return;
-        }
-
-        if (
-            $user instanceof AdminUserInterface &&
-            in_array('ROLE_API_ACCESS', $user->getRoles(), true) &&
-            $httpRequestMethodType !== Request::METHOD_DELETE
-        ) {
-            //admin has also access to modified orders in states other than cart
+            $user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+            $this->applyForAdminUser($queryBuilder, $rootAlias, $httpRequestMethodType);
 
             return;
         }
 
         throw new AccessDeniedHttpException('Requested method is not allowed.');
+    }
+
+    private function applyForVisitor(QueryBuilder $queryBuilder, string $rootAlias, string $operationName): void
+    {
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
+            ->leftJoin('customer.user', 'user')
+            ->andWhere('user IS NULL')
+            ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+        ;
+
+        if ($operationName !== 'shop_select_payment_method') {
+            $this->filterCart($queryBuilder, $rootAlias);
+        }
+    }
+
+    private function applyForShopUser(
+        QueryBuilder $queryBuilder,
+        string $rootAlias,
+        string $operationName,
+        ShopUserInterface $user
+    ): void {
+        $queryBuilder
+            ->andWhere(sprintf('%s.customer = :customer', $rootAlias))
+            ->setParameter('customer', $user->getCustomer()->getId())
+        ;
+
+        if ($operationName !== 'shop_select_payment_method') {
+            $this->filterCart($queryBuilder, $rootAlias);
+        }
+    }
+
+    private function applyForAdminUser(QueryBuilder $queryBuilder, string $rootAlias, string $httpRequestMethodType): void
+    {
+        if ($httpRequestMethodType === Request::METHOD_DELETE) {
+            $this->filterCart($queryBuilder, $rootAlias);
+        }
+    }
+    private function filterCart(QueryBuilder $queryBuilder, string $rootAlias): void
+    {
+        $queryBuilder
+            ->andWhere(sprintf('%s.state = :state', $rootAlias))
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
     }
 }
