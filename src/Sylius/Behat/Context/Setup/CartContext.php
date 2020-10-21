@@ -85,8 +85,12 @@ final class CartContext implements Context
     /**
      * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
      */
-    public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, string $tokenValue): void
+    public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
             $productVariant->getProduct()->getCode(),
