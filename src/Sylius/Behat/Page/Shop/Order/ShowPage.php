@@ -59,6 +59,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return count($paymentItems);
     }
 
+    public function getChosenPaymentMethod(): string
+    {
+        $paymentMethodItems = $this->getDocument()->findAll('css', '[data-test-payment-item]');
+
+        foreach ($paymentMethodItems as $method) {
+            if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
+                return $method->find('css', 'a')->getText();
+            }
+        }
+
+        return '';
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

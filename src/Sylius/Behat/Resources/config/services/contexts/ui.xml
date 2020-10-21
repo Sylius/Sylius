@@ -319,12 +319,14 @@
 
         <service id="sylius.behat.context.ui.shop.checkout.thank_you" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutThankYouContext">
             <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
-            <argument type="service" id="sylius.behat.page.shop.account.order.show"></argument>
+            <argument type="service" id="sylius.behat.page.shop.account.order.show" />
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.behat.page.shop.order.show" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.order_details" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutOrderDetailsContext">
             <argument type="service" id="sylius.behat.page.shop.order.show" />
+            <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.addressing" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext">

@@ -21,6 +21,7 @@
         </attribute>
         <attribute name="name">
             <group>payment_method:read</group>
+            <group>payment:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="code">

@@ -23,9 +23,11 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -255,6 +257,19 @@ final class OrderContext implements Context
         }
 
         Assert::same(-$discount, $amount);
+    }
+
+    /**
+     * @Then I should have chosen :paymentMethod payment method
+     */
+    public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethod $paymentMethod): void
+    {
+        $paymentIri = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
+
+        Assert::same(
+            $this->iriConverter->getIriFromItem($paymentMethod),
+            $this->responseChecker->getValue($this->client->showByIri($this->adminToShopIriConverter->convert($paymentIri)),'method')['@id']
+        );
     }
 
     private function getAdjustmentsForOrder(): array
