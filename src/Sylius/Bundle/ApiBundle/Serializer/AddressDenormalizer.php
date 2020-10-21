@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
@@ -30,9 +30,6 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
     /** @var TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var CustomerProviderInterface */
-    private $customerProvider;
-
     /** @var string */
     private $classType;
 
@@ -42,12 +39,10 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
     public function __construct(
         DenormalizerInterface $objectNormalizer,
         TokenStorageInterface $tokenStorage,
-        CustomerProviderInterface $customerProvider,
         string $classType,
         string $interfaceType
     ) {
         $this->tokenStorage = $tokenStorage;
-        $this->customerProvider = $customerProvider;
         $this->objectNormalizer = $objectNormalizer;
         $this->classType = $classType;
         $this->interfaceType = $interfaceType;
@@ -68,11 +63,11 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
             throw new TokenNotFoundException();
         }
 
-        /** @var UserInterface $loggedUser */
+        /** @var ShopUserInterface $loggedUser */
         $loggedUser = $token->getUser();
 
-        if ($loggedUser instanceof UserInterface) {
-            $customer = $this->customerProvider->provide($loggedUser->getEmail());
+        if ($loggedUser instanceof ShopUserInterface) {
+            $customer = $loggedUser->getCustomer();
 
             $address->setCustomer($customer);
 
@@ -84,6 +79,6 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
 
     public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
     {
-        return $type === $this->classType;
+        return $type === $this->interfaceType || $type === $this->classType;
     }
 }

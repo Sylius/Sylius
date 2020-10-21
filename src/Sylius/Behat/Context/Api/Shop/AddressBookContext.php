@@ -171,7 +171,7 @@ final class AddressBookContext implements Context
     }
 
     /**
-     *  @Then /^I should be notified about (\d+) errors$/
+     *  @Then I should be notified about :expectedCount errors
      */
     public function iShouldBeNotifiedAboutErrors(int $expectedCount): void
     {
@@ -199,10 +199,10 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then I should still have :province as my specified province
-     * @Then I should still have :value as my chosen province
+     * @Then I should still have :provinceName as my specified province
+     * @Then I should still have :provinceName as my chosen province
      */
-    public function iShouldStillHaveAsMySpecifiedProvince(string $province): void
+    public function iShouldStillHaveAsMySpecifiedProvince(string $provinceName): void
     {
         Assert::false($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
