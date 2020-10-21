@@ -70,7 +70,7 @@ Future Releases
 +---------+----------------------+------------------------+--------------------+
 | Version | Development starts   | Stabilization starts   | Release date       |
 +=========+======================+========================+====================+
-| 1.9     | Sep 14, 2020         | to be announced        | to be announced    |
+| 1.9     | Sep 14, 2020         | Mid December 2020      | Late January 2021  |
 +---------+----------------------+------------------------+--------------------+
 
 Backward Compatibility
