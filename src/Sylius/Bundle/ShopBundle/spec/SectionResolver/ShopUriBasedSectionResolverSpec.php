@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ShopBundle\SectionResolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
+use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 
 final class ShopUriBasedSectionResolverSpec extends ObjectBehavior
 {
