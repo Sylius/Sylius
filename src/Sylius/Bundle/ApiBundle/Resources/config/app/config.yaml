@@ -2,7 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 parameters:
-    sylius_api.authorization_header: AuthorizationTestHeader
+    env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
+    sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
 
 api_platform:
     patch_formats:
@@ -12,7 +13,7 @@ api_platform:
         versions: [3]
         api_keys:
             apiKey:
-                name: "%sylius_api.authorization_header%"
+                name: "%sylius.api.authorization_header%"
                 type: header
     exception_to_status:
         SM\SMException: 422
@@ -37,4 +38,4 @@ lexik_jwt_authentication:
         authorization_header:
             enabled: true
             prefix: Bearer
-            name: "%sylius_api.authorization_header%"
+            name: "%sylius.api.authorization_header%"
