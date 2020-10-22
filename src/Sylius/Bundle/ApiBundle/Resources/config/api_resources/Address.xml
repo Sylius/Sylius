@@ -17,8 +17,6 @@
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>address:read</attribute>
-                <attribute>shop:address:create</attribute>
-                <attribute>shop:address:update</attribute>
             </attribute>
         </attribute>
 
