@@ -43,7 +43,8 @@ final class UriBasedSectionProvider implements SectionProviderInterface
         foreach ($this->resolvers as $resolver) {
             try {
                 return $resolver->getSection($uri);
-            } catch (SectionCannotBeResolvedException $exception) {}
+            } catch (SectionCannotBeResolvedException $exception) {
+            }
         }
 
         return null;
