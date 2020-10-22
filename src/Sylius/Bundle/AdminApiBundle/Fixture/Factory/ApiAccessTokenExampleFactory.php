@@ -92,7 +92,7 @@ class ApiAccessTokenExampleFactory extends AbstractExampleFactory
             })
             ->setDefault('client', LazyOption::randomOne($this->clientRepository))
             ->setAllowedTypes('client', ['string', ClientInterface::class, 'null'])
-            ->setNormalizer('client', LazyOption::findOneBy($this->clientRepository, 'randomId'))
+            ->setNormalizer('client', LazyOption::getOneBy($this->clientRepository, 'randomId'))
             ->setDefault('expires_at', null)
             ->setAllowedTypes('expires_at', ['null', \DateTimeInterface::class])
         ;
