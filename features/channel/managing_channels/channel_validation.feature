@@ -34,7 +34,7 @@ Feature: Channel validation
         Then I should be notified that base currency is required
         And channel with code "MOBILE" should not be added
 
-    @ui @oi
+    @ui
     Scenario: Trying to add a new channel without default locale
         Given I want to create a new channel
         When I specify its code as "MOBILE"
