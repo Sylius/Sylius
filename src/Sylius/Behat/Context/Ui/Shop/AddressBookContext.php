@@ -157,6 +157,14 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @When I do not specify province
+     */
+    public function iDoNotSpecifyProvince(): void
+    {
+        // Intentionally left empty
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt()
@@ -256,9 +264,9 @@ final class AddressBookContext implements Context
     /**
      * @Then /^I should be notified about (\d+) errors$/
      */
-    public function iShouldBeNotifiedAboutErrors($expectedCount)
+    public function iShouldBeNotifiedAboutErrors(int $expectedCount): void
     {
-        Assert::same($this->addressBookCreatePage->countValidationMessages(), (int) $expectedCount);
+        Assert::same($this->addressBookCreatePage->countValidationMessages(), $expectedCount);
     }
 
     /**

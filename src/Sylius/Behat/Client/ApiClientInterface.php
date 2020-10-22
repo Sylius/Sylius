@@ -52,6 +52,8 @@ interface ApiClientInterface
 
     public function buildUploadRequest(): void;
 
+    public function setRequestData(array $data): void;
+
     /** @param string|int $value */
     public function addParameter(string $key, $value): void;
 

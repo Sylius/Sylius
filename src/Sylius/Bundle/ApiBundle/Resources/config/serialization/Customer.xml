@@ -38,5 +38,9 @@
         <attribute name="fullName">
             <group>customer:read</group>
         </attribute>
+
+        <attribute name="defaultAddress">
+            <group>customer:read</group>
+        </attribute>
     </class>
 </serializer>
