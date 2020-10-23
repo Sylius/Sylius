@@ -2,7 +2,7 @@
 
 {% block toolbar %}
     {% if collector.hasCart %}
-        {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+        {% import "@SyliusCore/Common/Macro/money.html.twig" as money %}
 
         {% set icon %}
             {{ include('@SyliusCore/Collector/Icon/cart.svg') }}
@@ -49,7 +49,7 @@
 
 {% block panel %}
     {% if collector.hasCart %}
-        {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+        {% import "@SyliusCore/Common/Macro/money.html.twig" as money %}
 
         <h2>Cart</h2>
         <table>
