@@ -30,7 +30,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     /** @var string */
     private $expirationPeriod;
 
-    /** @var LoggerInterface */
+    /** @var LoggerInterface|null */
     private $logger;
 
     /**
@@ -40,11 +40,18 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         OrderRepositoryInterface $orderRepository,
         Factory $stateMachineFactory,
         $expirationPeriod,
-        LoggerInterface $logger
+        LoggerInterface $logger = null
     ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->expirationPeriod = $expirationPeriod;
+        if (null === $logger) {
+            @trigger_error(
+                'Not passing a logger is deprecated since 1.7',
+                \E_USER_DEPRECATED
+            );
+        }
+
         $this->logger = $logger;
     }
 
@@ -55,7 +62,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
             try {
                 $this->cancelOrder($expiredUnpaidOrder);
             } catch (\Exception $e) {
-                $this->logger->error(
+                $this->logger && $this->logger->error(
                     sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
                     ['exception' => $e, 'message' => $e->getMessage()]
                 );
