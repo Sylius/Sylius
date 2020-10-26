@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
+    - suites/api/account/shop_user_account.yml
     - suites/api/account/customer.yml
     - suites/api/account/customer_registration.yml
     - suites/api/account/login.yml

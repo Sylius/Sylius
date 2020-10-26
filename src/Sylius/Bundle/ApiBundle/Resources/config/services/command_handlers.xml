@@ -86,5 +86,13 @@
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="messenger.message_handler" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\ChangePasswordShopUserHandler">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="security.encoder_factory" />
+            <tag name="messenger.message_handler" />
+        </service>
     </services>
 </container>
