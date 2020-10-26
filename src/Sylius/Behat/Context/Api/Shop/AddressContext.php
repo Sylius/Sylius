@@ -24,24 +24,29 @@ use Webmozart\Assert\Assert;
 final class AddressContext implements Context
 {
     /** @var ApiClientInterface */
-    private $client;
+    private $addressClient;
+
+    /** @var ApiClientInterface */
+    private $customerClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
     /** @var AdminToShopIriConverterInterface */
     private $adminToShopIriConverter;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
-        ApiClientInterface $client,
+        ApiClientInterface $addressClient,
+        ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
         SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
+        $this->addressClient = $addressClient;
+        $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
@@ -52,7 +57,7 @@ final class AddressContext implements Context
      */
     public function iAmEditingTheAddressOf(AddressInterface $address): void
     {
-        $this->client->buildUpdateRequest((string) $address->getId());
+        $this->addressClient->buildUpdateRequest((string) $address->getId());
     }
 
     /**
@@ -60,7 +65,7 @@ final class AddressContext implements Context
      */
     public function iWantToAddANewAddressToMyAddressBook(): void
     {
-        $this->client->buildCreateRequest();
+        $this->addressClient->buildCreateRequest();
     }
 
     /**
@@ -68,7 +73,7 @@ final class AddressContext implements Context
      */
     public function iSpecifyTheAddressAs(AddressInterface $address): void
     {
-        $this->client->setRequestData([
+        $this->addressClient->setRequestData([
             'countryCode' => $address->getCountryCode(),
             'street' => $address->getStreet(),
             'city' => $address->getCity(),
@@ -84,7 +89,7 @@ final class AddressContext implements Context
      */
     public function iAddIt(): void
     {
-        $this->client->create();
+        $this->addressClient->create();
     }
 
     /**
@@ -92,7 +97,7 @@ final class AddressContext implements Context
      */
     public function iLeaveEveryFieldEmpty(): void
     {
-        $this->client->setRequestData([]);
+        $this->addressClient->setRequestData([]);
     }
 
     /**
@@ -100,7 +105,7 @@ final class AddressContext implements Context
      */
     public function iChooseAsMyCountry(string $countryCode): void
     {
-        $this->client->addRequestData('countryCode', $countryCode);
+        $this->addressClient->addRequestData('countryCode', $countryCode);
     }
 
     /**
@@ -108,8 +113,8 @@ final class AddressContext implements Context
      */
     public function iDoNotSpecifyProvince(): void
     {
-        $this->client->addRequestData('provinceName', '');
-        $this->client->addRequestData('provinceCode', '');
+        $this->addressClient->addRequestData('provinceName', '');
+        $this->addressClient->addRequestData('provinceCode', '');
     }
 
     /**
@@ -117,7 +122,7 @@ final class AddressContext implements Context
      */
     public function iRemoveTheStreet(): void
     {
-        $this->client->addRequestData('street', null);
+        $this->addressClient->addRequestData('street', null);
     }
 
     /**
@@ -125,7 +130,7 @@ final class AddressContext implements Context
      */
     public function iSaveMyChangedAddress(): void
     {
-        $this->client->update();
+        $this->addressClient->update();
     }
 
     /**
@@ -133,7 +138,7 @@ final class AddressContext implements Context
      */
     public function iBrowseMyAddresses(): void
     {
-        $this->client->index();
+        $this->addressClient->index();
     }
 
     /**
@@ -143,7 +148,19 @@ final class AddressContext implements Context
     {
         $id = $this->getAddressIdFromAddressBookByFullName($fullName);
 
-        $this->client->delete($id);
+        $this->addressClient->delete($id);
+    }
+
+    /**
+     * @When I set the address of :fullName as default
+     */
+    public function iSetTheAddressOfAsDefault(string $fullName): void
+    {
+        $addressIri = $this->getAddressIriFromAddressBookByFullName($fullName);
+
+        $this->customerClient->buildUpdateRequest((string) $this->sharedStorage->get('user')->getCustomer()->getId());
+        $this->customerClient->addRequestData('defaultAddress', $addressIri);
+        $this->customerClient->update();
     }
 
     /**
@@ -152,22 +169,26 @@ final class AddressContext implements Context
      */
     public function iShouldHaveAddresses(int $count = 1): void
     {
-        $this->client->index();
+        $this->addressClient->index();
 
-        Assert::same(count($this->responseChecker->getCollection($this->client->getLastResponse())), $count);
+        Assert::same(count($this->responseChecker->getCollection($this->addressClient->getLastResponse())), $count);
     }
 
     /**
      * @Then this address should be assigned to :fullName
+     * @Then the address assigned to :fullName should be in my book
      */
     public function thisAddressShouldBeAssignedTo(string $fullName): void
     {
-        /** @var AddressInterface $address */
-        $address = $this->sharedStorage->get('address_assigned_to_' . $fullName);
+        $addressIri = $this->getAddressIriFromAddressBookByFullName($fullName);
+        $addressBook = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
 
-        $addressBook = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::true($this->addressBookHasAddress($addressBook, $address));
+        Assert::notEmpty(
+            array_filter($addressBook, function($address) use ($addressIri) {
+            return $address['@id'] === $addressIri;
+        }),
+            sprintf('There is no Address assigned to %s', $fullName)
+        );
     }
 
     /**
@@ -178,7 +199,7 @@ final class AddressContext implements Context
         /** @var AddressInterface $address */
         $address = $this->sharedStorage->get('address_assigned_to_' . $fullName);
 
-        $addressBook = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $addressBook = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
 
         Assert::false($this->addressBookHasAddress($addressBook, $address));
     }
@@ -188,9 +209,9 @@ final class AddressContext implements Context
      */
     public function thereShouldBeNoAddresses(): void
     {
-        $this->client->index();
+        $this->addressClient->index();
 
-        Assert::same(count($this->responseChecker->getCollection($this->client->getLastResponse())), 0);
+        Assert::same(count($this->responseChecker->getCollection($this->addressClient->getLastResponse())), 0);
     }
 
     /**
@@ -198,7 +219,7 @@ final class AddressContext implements Context
      */
     public function iShouldBeNotifiedThatAddressHasBeenDeleted(): void
     {
-        Assert::true($this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()));
+        Assert::true($this->responseChecker->isDeletionSuccessful($this->addressClient->getLastResponse()));
     }
 
     /**
@@ -206,18 +227,18 @@ final class AddressContext implements Context
      */
     public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyAdded(): void
     {
-        Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
+        Assert::true($this->responseChecker->isCreationSuccessful($this->addressClient->getLastResponse()));
     }
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should(?:| still) be marked as my default address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should(?:| still) be set as my default address$/
      */
     public function addressShouldBeMarkedAsMyDefaultAddress(AddressInterface $address): void
     {
-        $customerResponse = $this->client->showByIri($this->adminToShopIriConverter->convert(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'customer')
-        ));
-        $addressResponse = $this->client->showByIri($this->adminToShopIriConverter->convert(
+        $customerResponse = $this->customerClient->show((string) $this->sharedStorage->get('user')->getCustomer()->getId());
+
+        $addressResponse = $this->addressClient->showByIri($this->adminToShopIriConverter->convert(
             $this->responseChecker->getValue($customerResponse, 'defaultAddress')
         ));
 
@@ -242,7 +263,7 @@ final class AddressContext implements Context
      */
     public function iShouldBeNotifiedAboutErrors(int $expectedCount): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $response = $this->responseChecker->getResponseContent($this->addressClient->getLastResponse());
 
         Assert::same(sizeof($response['violations']), $expectedCount);
     }
@@ -252,7 +273,7 @@ final class AddressContext implements Context
      */
     public function iShouldBeNotifiedThatTheProvinceNeedsToBeSpecified(): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $response = $this->responseChecker->getResponseContent($this->addressClient->getLastResponse());
 
         Assert::inArray(['propertyPath' => '', 'message' => 'Please select proper province.'], $response['violations']);
     }
@@ -271,7 +292,25 @@ final class AddressContext implements Context
      */
     public function iShouldStillHaveAsMySpecifiedProvince(string $provinceName): void
     {
-        Assert::false($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+        Assert::false($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not have a default address
+     */
+    public function iShouldHaveNoDefaultAddress(): void
+    {
+        $userShowResponse = $this->customerClient->show((string) $this->sharedStorage->get('user')->getCustomer()->getId());
+        Assert::null($this->responseChecker->getValue($userShowResponse, 'defaultAddress'), 'Default address should be null'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the address has been set as default
+     */
+    public function iShouldBeNotifiedThatAddressHasBeenSetAsDefault(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
     }
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool
@@ -297,14 +336,30 @@ final class AddressContext implements Context
     private function getAddressIdFromAddressBookByFullName(string $fullName): ?string
     {
         Assert::notNull($fullName);
-        $fullNameArray = explode(' ',$fullName);
+        [$firstName, $lastName] = explode(' ',$fullName);
 
-        $addresses = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $addresses = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
         /** @var AddressInterface $address */
         foreach ($addresses as $address){
-            if ($fullNameArray[0] === $address['firstName'] && $fullNameArray[1] === $address['lastName']) {
+            if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
                 $addressIriArray = explode('/', $address['@id']);
                 return end($addressIriArray);
+            }
+        }
+
+        return null;
+    }
+
+    private function getAddressIriFromAddressBookByFullName(string $fullName): ?string
+    {
+        Assert::notNull($fullName);
+        [$firstName, $lastName] = explode(' ',$fullName);
+
+        $addresses = $this->responseChecker->getCollection($this->addressClient->index());
+        /** @var AddressInterface $address */
+        foreach ($addresses as $address){
+            if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
+                return $address['@id'];
             }
         }
 

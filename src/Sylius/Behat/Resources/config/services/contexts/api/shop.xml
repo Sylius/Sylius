@@ -88,6 +88,7 @@
 
         <service id="sylius.behat.context.api.shop.address" class="Sylius\Behat\Context\Api\Shop\AddressContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.address" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop.account" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.admin_to_shop_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
