@@ -348,6 +348,7 @@ final class AddressBookContext implements Context
 
     /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should(?:| still) be marked as my default address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should(?:| still) be set as my default address$/
      */
     public function addressShouldBeMarkedAsMyDefaultAddress(AddressInterface $address)
     {

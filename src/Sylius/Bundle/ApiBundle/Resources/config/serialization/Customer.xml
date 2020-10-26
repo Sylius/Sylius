@@ -41,6 +41,7 @@
 
         <attribute name="defaultAddress">
             <group>customer:read</group>
+            <group>customer:update</group>
         </attribute>
     </class>
 </serializer>
