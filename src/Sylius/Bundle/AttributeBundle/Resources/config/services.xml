@@ -40,6 +40,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.validator.valid_attribute_name" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeNameValidator">
+            <tag name="validator.constraint_validator" alias="sylius_valid_attribute_name_validator" />
+        </service>
+
         <service id="sylius.validator.valid_attribute_value" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator">
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="validator.constraint_validator" alias="sylius_valid_attribute_value_validator" />
