@@ -11,6 +11,7 @@
             </a>
         {% endfor %}
     </div>
+
     {% for localeCode, translationForm in attr.translations %}
         <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
             {% apply spaceless %}
