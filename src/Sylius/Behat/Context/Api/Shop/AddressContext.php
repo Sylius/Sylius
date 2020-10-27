@@ -169,9 +169,7 @@ final class AddressContext implements Context
      */
     public function iShouldHaveAddresses(int $count = 1): void
     {
-        $this->addressClient->index();
-
-        Assert::same(count($this->responseChecker->getCollection($this->addressClient->getLastResponse())), $count);
+        Assert::same(count($this->responseChecker->getCollection($this->addressClient->index())), $count);
     }
 
     /**
@@ -180,14 +178,9 @@ final class AddressContext implements Context
      */
     public function thisAddressShouldBeAssignedTo(string $fullName): void
     {
-        $addressIri = $this->getAddressIriFromAddressBookByFullName($fullName);
-        $addressBook = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
-
-        Assert::notEmpty(
-            array_filter($addressBook, function($address) use ($addressIri) {
-            return $address['@id'] === $addressIri;
-        }),
-            sprintf('There is no Address assigned to %s', $fullName)
+        Assert::notNull(
+            $this->getAddressIriFromAddressBookByFullName($fullName),
+            sprintf('There is no address assigned to %s', $fullName)
         );
     }
 
@@ -209,9 +202,7 @@ final class AddressContext implements Context
      */
     public function thereShouldBeNoAddresses(): void
     {
-        $this->addressClient->index();
-
-        Assert::same(count($this->responseChecker->getCollection($this->addressClient->getLastResponse())), 0);
+        Assert::same(count($this->responseChecker->getCollection($this->addressClient->index())), 0);
     }
 
     /**
@@ -301,7 +292,9 @@ final class AddressContext implements Context
     public function iShouldHaveNoDefaultAddress(): void
     {
         $userShowResponse = $this->customerClient->show((string) $this->sharedStorage->get('user')->getCustomer()->getId());
-        Assert::null($this->responseChecker->getValue($userShowResponse, 'defaultAddress'), 'Default address should be null'
+        Assert::null(
+            $this->responseChecker->getValue($userShowResponse, 'defaultAddress'),
+            'Default address should be null'
         );
     }
 
@@ -336,7 +329,7 @@ final class AddressContext implements Context
     private function getAddressIdFromAddressBookByFullName(string $fullName): ?string
     {
         Assert::notNull($fullName);
-        [$firstName, $lastName] = explode(' ',$fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         $addresses = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
         /** @var AddressInterface $address */
@@ -353,7 +346,7 @@ final class AddressContext implements Context
     private function getAddressIriFromAddressBookByFullName(string $fullName): ?string
     {
         Assert::notNull($fullName);
-        [$firstName, $lastName] = explode(' ',$fullName);
+        [$firstName, $lastName] = explode(' ', $fullName);
 
         $addresses = $this->responseChecker->getCollection($this->addressClient->index());
         /** @var AddressInterface $address */
