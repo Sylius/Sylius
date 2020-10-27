@@ -45,7 +45,7 @@ sylius:
             item_total: Položka celkem
             nth_order: V pořadí objednávka
             shipping_country: Dodací adresa – země
-            taxonomy: Taxy DPH
+            taxonomy: Taxonomie
             total_price_of_items_from_taxon: Celková cena položek z taxonu
             cart_quantity_configuration:
                 count: Počet
