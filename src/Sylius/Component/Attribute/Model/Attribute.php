@@ -44,6 +44,12 @@ class Attribute implements AttributeInterface
     /** @var int */
     protected $position;
 
+    /** @var string|null */
+    protected $notTranslatableName;
+
+    /** @var bool */
+    protected $translatable = true;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -73,12 +79,22 @@ class Attribute implements AttributeInterface
 
     public function getName(): ?string
     {
-        return $this->getTranslation()->getName();
+        if($this->isTranslatable()) {
+            return $this->getTranslation()->getName();
+        }
+
+        return $this->getNotTranslatableName();
     }
 
     public function setName(?string $name): void
     {
-        $this->getTranslation()->setName($name);
+        if($this->isTranslatable()) {
+            $this->getTranslation()->setName($name);
+
+            return;
+        }
+
+        $this->setNotTranslatableName($name);
     }
 
     public function getType(): ?string
@@ -119,6 +135,26 @@ class Attribute implements AttributeInterface
     public function setPosition(?int $position): void
     {
         $this->position = $position;
+    }
+
+    public function getNotTranslatableName(): ?string
+    {
+        return $this->notTranslatableName;
+    }
+
+    public function setNotTranslatableName(?string $notTranslatableName): void
+    {
+        $this->notTranslatableName = $notTranslatableName;
+    }
+
+    public function isTranslatable(): bool
+    {
+        return $this->translatable;
+    }
+
+    public function setTranslatable(bool $translatable): void
+    {
+        $this->translatable = $translatable;
     }
 
     /**
