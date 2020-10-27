@@ -9,6 +9,12 @@
         {{ form_row(form.type) }}
     </div>
 </div>
+<div class="ui segment">
+    <div class="two fields">
+        {{ form_row(form.notTranslatableName) }}
+        {{ form_row(form.translatable) }}
+    </div>
+</div>
 {% if form.configuration is defined %}
 <div class="ui segment">
     <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>

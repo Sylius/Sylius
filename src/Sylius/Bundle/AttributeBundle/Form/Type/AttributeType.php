@@ -13,11 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeName;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -49,6 +53,12 @@ abstract class AttributeType extends AbstractResourceType
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => $this->attributeTranslationType,
                 'label' => 'sylius.form.attribute.translations',
+            ])
+            ->add('notTranslatableName', TextType::class, [
+                'label' => 'sylius.form.attribute.not_translatable_name',
+            ])
+            ->add('translatable', CheckboxType::class, [
+                'label' => 'sylius.form.attribute.translatable',
             ])
             ->add('type', AttributeTypeChoiceType::class, [
                 'label' => 'sylius.form.attribute.type',

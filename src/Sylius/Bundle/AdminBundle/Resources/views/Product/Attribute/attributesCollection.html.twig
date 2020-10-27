@@ -11,7 +11,6 @@
             </a>
         {% endfor %}
     </div>
-
     {% for localeCode, translationForm in attr.translations %}
         <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ localeCode }}">
             {% apply spaceless %}
@@ -36,13 +35,23 @@
                 <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
             </button>
         {% else %}
-            <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
-                <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
-                {{ form_widget(form.value) }}
-                <button class="ui red right labeled icon button">
-                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
-                </button>
-            </div>
+            {% if form.vars.value.attribute.translatable == false %}
+                <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
+                    <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                    {{ form_widget(form.value) }}
+                    <button class="ui red right labeled icon button">
+                        <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                    </button>
+                </div>
+            {% else %}
+                <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
+                    <div class="ui label">{{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}</div>
+                    {{ form_widget(form.value) }}
+                    <button class="ui red right labeled icon button">
+                        <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                    </button>
+                </div>
+            {% endif %}
             {{ form_errors(form.value) }}
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>

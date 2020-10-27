@@ -13,6 +13,8 @@ sylius:
             max_length: Configuration max length must be greater or equal to the min length.
             min_entries: Configuration min entries value must be lower or equal to the number of added choices.
             multiple: Configuration multiple must be true if min or max entries values are specified.
+        not_translatable_name:
+            not_blank: Please enter attribute not translatable name.
         presentation:
             not_blank: Please enter attribute presentation.
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.

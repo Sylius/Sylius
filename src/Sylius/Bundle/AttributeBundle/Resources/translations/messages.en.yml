@@ -6,6 +6,8 @@ sylius:
             choices: Choices
             code: Code
             name: Name
+            not_translatable_name: Not translatable name
+            translatable: Translatable
             translations: Translations
             type: Type
         attribute_type:
