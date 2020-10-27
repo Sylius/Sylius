@@ -20,7 +20,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
-
 final class AccountContext implements Context
 {
     /** @var ApiClientInterface */

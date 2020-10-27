@@ -1,4 +1,4 @@
-@customer_account
+@shop_user_account
 Feature: Changing a customer password
     In order to enhance the security of my account
     As a Customer
@@ -9,7 +9,7 @@ Feature: Changing a customer password
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui @shop_user_account_api
+    @ui @api
     Scenario: Changing my password
         When I want to change my password
         And I change password from "sylius" to "blackhouse"

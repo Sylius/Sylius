@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_shop_user_account:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.shop_security
+
+                - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.email
+
+            filters:
+                tags: "@shop_user_account && @ui"
