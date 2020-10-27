@@ -51,7 +51,7 @@ class ChangePasswordShopUserHandler implements MessageHandlerInterface
     public function __invoke(ChangePasswordShopUser $changePasswordShopUser){
 
         if ($changePasswordShopUser->confirmPassword !== $changePasswordShopUser->password) {
-            return;
+            throw new \RuntimeException("Your password and confirmation password does not match.");
         }
 
         /** @var ShopUser $user */
@@ -59,8 +59,8 @@ class ChangePasswordShopUserHandler implements MessageHandlerInterface
 
         $encoder = $this->encoderFactory->getEncoder($user);
 
-        if(!$encoder->isPasswordValid($user->getPassword(), $changePasswordShopUser->oldPassword, $user->getSalt())){
-            return;
+        if (!$encoder->isPasswordValid($user->getPassword(), $changePasswordShopUser->oldPassword, $user->getSalt())) {
+            throw new \RuntimeException("Could not authenticate. Your old password is different then the provided");
         }
 
         if (in_array('ROLE_USER', $user->getRoles(), true)) {

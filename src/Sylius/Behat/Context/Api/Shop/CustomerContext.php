@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 final class CustomerContext implements Context
 {
     /** @var ApiClientInterface */
-    private $accountClient;
+    private $customerClient;
 
     /** @var ApiClientInterface */
     private $orderShopClient;
@@ -47,7 +47,7 @@ final class CustomerContext implements Context
     private $shopApiSecurityContext;
 
     public function __construct(
-        ApiClientInterface $accountClient,
+        ApiClientInterface $customerClient,
         ApiClientInterface $orderShopClient,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker,
@@ -55,7 +55,7 @@ final class CustomerContext implements Context
         LoginContext $loginContext,
         ShopSecurityContext $shopApiSecurityContext
     ) {
-        $this->accountClient = $accountClient;
+        $this->customerClient = $customerClient;
         $this->orderShopClient = $orderShopClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
@@ -73,7 +73,7 @@ final class CustomerContext implements Context
         $shopUser = $this->sharedStorage->get('user');
         $customer = $shopUser->getCustomer();
 
-        $this->accountClient->buildUpdateRequest((string) $customer->getId());
+        $this->customerClient->buildUpdateRequest((string) $customer->getId());
     }
 
     /**
@@ -82,7 +82,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheFirstName(string $firstName = ''): void
     {
-        $this->accountClient->addRequestData('firstName', $firstName);
+        $this->customerClient->addRequestData('firstName', $firstName);
     }
 
     /**
@@ -91,7 +91,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheLastName(string $lastName = ''): void
     {
-        $this->accountClient->addRequestData('lastName', $lastName);
+        $this->customerClient->addRequestData('lastName', $lastName);
     }
 
     /**
@@ -100,7 +100,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyCustomerTheEmail(string $email = ''): void
     {
-        $this->accountClient->addRequestData('email', $email);
+        $this->customerClient->addRequestData('email', $email);
     }
 
     /**
@@ -109,7 +109,7 @@ final class CustomerContext implements Context
      */
     public function iSaveMyChanges(): void
     {
-        $this->accountClient->update();
+        $this->customerClient->update();
     }
 
     /**
@@ -117,7 +117,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->accountClient->getLastResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->customerClient->getLastResponse()));
     }
 
     /**
@@ -131,7 +131,7 @@ final class CustomerContext implements Context
 
         $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
-        $response = $this->accountClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
@@ -145,7 +145,7 @@ final class CustomerContext implements Context
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
 
-        $response = $this->accountClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
@@ -156,7 +156,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'First name must be at least 2 characters long.'
         );
     }
@@ -167,7 +167,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'Last name must be at least 2 characters long.'
         );
     }
@@ -178,7 +178,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'Please enter your email.'
         );
     }
@@ -189,7 +189,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'This email is already used.'
         );
     }
@@ -200,7 +200,7 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatElementIsInvalid(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'This email is invalid.'
         );
     }

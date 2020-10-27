@@ -20,13 +20,13 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class ChangePasswordShopUser
 {
     /** @var string|null */
-    public $oldPassword;
-
-    /** @var string|null */
     public $password;
 
     /** @var string|null */
     public $confirmPassword;
+
+    /** @var string|null */
+    public $oldPassword;
 
     public function __construct(?string $password, ?string $confirmPassword, ?string $oldPassword)
     {

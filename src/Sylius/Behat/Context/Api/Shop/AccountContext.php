@@ -29,9 +29,8 @@ final class AccountContext implements Context
     /** @var Request */
     private $request;
 
-    public function __construct(
-        ApiClientInterface $shopUserClient
-    ) {
+    public function __construct(ApiClientInterface $shopUserClient)
+    {
         $this->shopUserClient = $shopUserClient;
     }
 
