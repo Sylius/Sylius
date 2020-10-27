@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /** @experimental */
 class ChangePasswordShopUserHandler implements MessageHandlerInterface
@@ -33,35 +34,24 @@ class ChangePasswordShopUserHandler implements MessageHandlerInterface
     /** @var UserContextInterface */
     private $userContext;
 
-    /** @var EncoderFactoryInterface */
-    private $encoderFactory;
-
     public function __construct(
         DataPersisterInterface $dataPersister,
         PasswordUpdaterInterface $passwordUpdater,
-        UserContextInterface $userContext,
-        EncoderFactoryInterface $encoderFactory
+        UserContextInterface $userContext
     ) {
         $this->dataPersister = $dataPersister;
         $this->passwordUpdater = $passwordUpdater;
         $this->userContext = $userContext;
-        $this->encoderFactory = $encoderFactory;
     }
 
     public function __invoke(ChangePasswordShopUser $changePasswordShopUser){
 
         if ($changePasswordShopUser->confirmPassword !== $changePasswordShopUser->password) {
-            throw new \RuntimeException("Your password and confirmation password does not match.");
+            throw new HttpException(400, "Your password and confirmation password does not match.");
         }
 
         /** @var ShopUser $user */
         $user = $this->userContext->getUser();
-
-        $encoder = $this->encoderFactory->getEncoder($user);
-
-        if (!$encoder->isPasswordValid($user->getPassword(), $changePasswordShopUser->oldPassword, $user->getSalt())) {
-            throw new \RuntimeException("Could not authenticate. Your old password is different then the provided");
-        }
 
         if (in_array('ROLE_USER', $user->getRoles(), true)) {
             $this->passwordUpdater->updatePassword($user);

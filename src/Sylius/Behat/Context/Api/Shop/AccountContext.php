@@ -25,12 +25,16 @@ final class AccountContext implements Context
     /** @var ApiClientInterface */
     private $shopUserClient;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var Request */
     private $request;
 
-    public function __construct(ApiClientInterface $shopUserClient)
+    public function __construct(ApiClientInterface $shopUserClient, ResponseCheckerInterface $responseChecker)
     {
         $this->shopUserClient = $shopUserClient;
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -43,6 +47,30 @@ final class AccountContext implements Context
             'password' => $newPassword,
             'confirmPassword' => $newPassword
         ]);
+    }
+
+    /**
+     * @Given I specify the current password as :password
+     */
+    public function iSpecifyTheCurrentPasswordAs(string $password): void
+    {
+        $this->request->updateContent(['oldPassword' => $password]);
+    }
+
+    /**
+     * @Given I specify the new password as :password
+     */
+    public function iSpecifyTheNewPasswordAs(string $password): void
+    {
+        $this->request->updateContent(['password' => $password]);
+    }
+
+    /**
+     * @Given I confirm this password as :password
+     */
+    public function iSpecifyTheConfirmationPasswordAs(string $password): void
+    {
+        $this->request->updateContent(['confirmPassword' => $password]);
     }
 
     /**
@@ -68,5 +96,37 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
     {
         Assert::same($this->shopUserClient->getLastResponse()->getStatusCode(), 204);
+    }
+
+    /**
+     * @Then I should be notified that provided password is different than the current one
+     */
+    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
+    {
+        Assert::same($this->shopUserClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains($this->responseChecker->getError($this->shopUserClient->getLastResponse()),
+            'Provided password is different than the current one.');
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        Assert::same($this->shopUserClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains($this->responseChecker->getError($this->shopUserClient->getLastResponse()),
+            'Your password and confirmation password does not match.');
+    }
+
+    /**
+     * @Then /^I should be notified that the ([^"]+) should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
+    {
+        Assert::contains($this->responseChecker->getError($this->shopUserClient->getLastResponse()),
+            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
+        );
     }
 }
