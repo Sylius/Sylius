@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - suites/api/account/shop_user_account.yml
     - suites/api/account/customer.yml
     - suites/api/account/customer_registration.yml
     - suites/api/account/login.yml
+    - suites/api/account/shop_user_account.yml
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
     - suites/api/account/address_book.yml
