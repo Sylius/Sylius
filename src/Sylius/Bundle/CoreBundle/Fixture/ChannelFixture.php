@@ -42,6 +42,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->arrayNode('currencies')->scalarPrototype()->end()->end()
                 ->scalarNode('theme_name')->end()
                 ->scalarNode('contact_email')->end()
+                ->scalarNode('contact_phone_number')->end()
                 ->arrayNode('shop_billing_data')
                     ->children()
                         ->scalarNode('company')->end()
