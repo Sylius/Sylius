@@ -783,7 +783,7 @@ sylius:
         taxation_categories: 'Typy zdanění'
         taxation_settings: 'Nastavení zdanění'
         taxes: 'DPH'
-        taxonomy: 'Taxy DPH'
+        taxonomy: 'Taxonomie'
         taxons: 'Taxony'
         terms_and_conditions: 'Obchodní podmínky'
         text: 'Text'
