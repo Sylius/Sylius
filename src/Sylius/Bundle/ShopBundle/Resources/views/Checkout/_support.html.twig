@@ -1,10 +1,12 @@
-<h2 class="ui center aligned icon header">
-    <i class="circular phone icon"></i>
-    +48 123 456 789
-    <span class="sub header">
-        {{ 'sylius.ui.need_assistance'|trans }} {{ 'sylius.ui.call_us'|trans }}
-    </span>
-</h2>
+{% if order.channel.contactPhoneNumber %}
+    <h2 class="ui center aligned icon header">
+        <i class="circular phone icon"></i>
+        {{ order.channel.contactPhoneNumber }}
+        <span class="sub header">
+            {{ 'sylius.ui.need_assistance'|trans }} {{ 'sylius.ui.call_us'|trans }}
+        </span>
+    </h2>
+{% endif %}
 
 <div class="ui divider"></div>
 
