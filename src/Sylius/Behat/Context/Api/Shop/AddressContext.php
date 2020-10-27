@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -37,6 +38,9 @@ final class AddressContext implements Context
     /** @var AdminToShopIriConverterInterface */
     private $adminToShopIriConverter;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -45,12 +49,14 @@ final class AddressContext implements Context
         ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
+        IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->addressClient = $addressClient;
         $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
+        $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -275,6 +281,14 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When /^I try to view details of (address belonging to "([^"]+)")$/
+     */
+    public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
+    {
+        $this->addressClient->showByIri($this->iriConverter->getIriFromItem($address));
+    }
+
+    /**
      * @Then /^I should(?:| still) have a single address in my address book$/
      * @Then /^I should(?:| still) have (\d+) addresses in my address book$/
      */
@@ -415,6 +429,14 @@ final class AddressContext implements Context
     public function iShouldBeNotifiedThatAddressHasBeenSetAsDefault(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not see any details of address
+     */
+    public function iShouldNotSeeAnyDetailsOfAddress(): void
+    {
+        Assert::same($this->responseChecker->getError($this->addressClient->getLastResponse()), 'Not Found');
     }
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool
