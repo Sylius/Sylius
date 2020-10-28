@@ -51,9 +51,6 @@ final class CartContext implements Context
     /** @var ProductVariantResolverInterface */
     private $productVariantResolver;
 
-    /** @var Response */
-    private $response;
-
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $productsClient,
@@ -180,8 +177,10 @@ final class CartContext implements Context
      */
     public function myCartSTotalShouldBe(string $tokenValue, int $total): void
     {
-        $this->response = $this->cartsClient->show($tokenValue);
-        $responseTotal = $this->responseChecker->getValue($this->response, 'total');
+        $responseTotal = $this->responseChecker->getValue(
+            $this->cartsClient->show($tokenValue),
+            'total'
+        );
 
         Assert::same($total, (int) $responseTotal);
     }
@@ -192,7 +191,10 @@ final class CartContext implements Context
      */
     public function myDiscountShouldBe(int $discount = 0): void
     {
-        $discountTotal = $this->responseChecker->getValue($this->response, 'orderPromotionTotal');
+        $discountTotal = $this->responseChecker->getValue(
+            $this->cartsClient->show($this->sharedStorage->get('cart_token')),
+            'orderPromotionTotal'
+        );
 
         Assert::same($discount, (int) $discountTotal);
     }

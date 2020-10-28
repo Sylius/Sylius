@@ -24,7 +24,5 @@ default:
                 - sylius.behat.context.setup.taxonomy
                     
                 - sylius.behat.context.api.shop.cart
-
-                
             filters:
                 tags: "@receiving_discount && @api"
