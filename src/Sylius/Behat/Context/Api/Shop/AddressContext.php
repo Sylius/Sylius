@@ -18,6 +18,10 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Converter\CountryNameConverter;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
+use Sylius\Component\Addressing\Provider\ProvinceProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Webmozart\Assert\Assert;
 
@@ -38,18 +42,23 @@ final class AddressContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var ProvinceProviderInterface */
+    private $provinceProvider;
+
     public function __construct(
         ApiClientInterface $addressClient,
         ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        ProvinceProviderInterface $provinceProvider
     ) {
         $this->addressClient = $addressClient;
         $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
+        $this->provinceProvider = $provinceProvider;
     }
 
     /**
@@ -212,6 +221,18 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When I choose :provinceName as my province
+     */
+    public function iChooseAsMyProvince(string $provinceName)
+    {
+        /** @var ProvinceInterface */
+        $province = $this->provinceProvider->findByName($provinceName);
+
+        $this->addressClient->addRequestData('provinceName', $province->getName());
+        $this->addressClient->addRequestData('provinceCode', $province->getCode());
+    }
+
+    /**
      * @Then it should contain :value
      */
     public function itShouldContain(string $value)
@@ -222,6 +243,13 @@ final class AddressContext implements Context
                 $value
             )
         );
+    }
+
+    /**
+     * @Then /^it should contain country "([^"]+)"$/
+     */
+    public function itShouldContainCountry(string $countryName)
+    {
     }
 
     /**
@@ -423,8 +451,11 @@ final class AddressContext implements Context
     private function containsValue(array $data, string $value): bool
     {
         foreach ($data as $key=>$dataValue) {
-            if ($dataValue === $value) return true;
+            if ($dataValue === $value) {
+                return true;
+            }
         }
+
         return false;
     }
 

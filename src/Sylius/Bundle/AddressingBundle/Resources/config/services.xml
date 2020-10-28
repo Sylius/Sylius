@@ -25,6 +25,10 @@
         </service>
         <service id="Sylius\Component\Addressing\Factory\ZoneFactoryInterface" alias="sylius.custom_factory.zone" />
 
+        <service id="sylius.province_provider" class="Sylius\Component\Addressing\Provider\ProvinceProvider" lazy="true">
+            <argument type="service" id="sylius.repository.province" />
+        </service>
+
         <service id="sylius.province_naming_provider" class="Sylius\Component\Addressing\Provider\ProvinceNamingProvider" lazy="true">
             <argument type="service" id="sylius.repository.province" />
         </service>
