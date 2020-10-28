@@ -188,6 +188,43 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When I change the street to :street
+     */
+    public function iChangeTheStreetTo(string $street)
+    {
+        $this->addressClient->addRequestData('street', $street);
+    }
+
+    /**
+     * @When I change the city to :city
+     */
+    public function iChangeTheCityTo(string $city)
+    {
+        $this->addressClient->addRequestData('city', $city);
+    }
+
+    /**
+     * @When I change the postcode to :postcode
+     */
+    public function iChangeThePostcodeTo(string $postcode)
+    {
+        $this->addressClient->addRequestData('postcode', $postcode);
+    }
+
+    /**
+     * @Then it should contain :value
+     */
+    public function itShouldContain(string $value)
+    {
+        Assert::true(
+            $this->containsValue(
+                $this->responseChecker->getResponseContent($this->addressClient->getLastResponse())['hydra:member'][0],
+                $value
+            )
+        );
+    }
+
+    /**
      * @Then I should be notified that the address has been successfully updated
      */
     public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyUpdated()
@@ -381,6 +418,14 @@ final class AddressContext implements Context
         }
 
         return null;
+    }
+
+    private function containsValue(array $data, string $value): bool
+    {
+        foreach ($data as $key=>$dataValue) {
+            if ($dataValue === $value) return true;
+        }
+        return false;
     }
 
     private function getAddressIriFromAddressBookByFullName(string $fullName): ?string

@@ -26,18 +26,18 @@ Feature: Making changes in existing addresses
         And I should still have a single address in my address book
         And this address should be assigned to "Stephanie Edgley"
 
-#    @ui
-#    Scenario: Changing my location
-#        Given I am editing the address of "Lucifer Morningstar"
-#        When I change the street to "Vildegard Av"
-#        And I change the city to "Liverpool"
-#        And I change the postcode to "GBA-20B"
-#        And I save my changed address
-#        Then I should be notified that the address has been successfully updated
-#        And I should still have a single address in my address book
-#        And it should contain "Vildegard Av"
-#        And it should contain "Liverpool"
-#        And it should contain "GBA-20B"
+    @ui @api
+    Scenario: Changing my location
+        Given I am editing the address of "Lucifer Morningstar"
+        When I change the street to "Vildegard Av"
+        And I change the city to "Liverpool"
+        And I change the postcode to "GBA-20B"
+        And I save my changed address
+        Then I should be notified that the address has been successfully updated
+        And I should still have a single address in my address book
+        And it should contain "Vildegard Av"
+        And it should contain "Liverpool"
+        And it should contain "GBA-20B"
 #
 #    @ui @javascript
 #    Scenario: Changing province to one from the list
