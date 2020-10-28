@@ -172,6 +172,30 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When I change the first name to :firstName
+     */
+    public function iChangeTheFirstNameTo(string $firstName)
+    {
+        $this->addressClient->addRequestData('firstName', $firstName);
+    }
+
+    /**
+     * @When I change the last name to :lastName
+     */
+    public function iChangeTheLastNameTo(string $lastName)
+    {
+        $this->addressClient->addRequestData('lastName', $lastName);
+    }
+
+    /**
+     * @Then I should be notified that the address has been successfully updated
+     */
+    public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyUpdated()
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
+    }
+
+    /**
      * @Then I should be unable to edit their address
      */
     public function iShouldBeUnableToEditTheirAddress()

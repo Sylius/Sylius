@@ -16,16 +16,16 @@ Feature: Making changes in existing addresses
         When I try to edit the address of "John Doe"
         Then I should be unable to edit their address
 
-#    @ui
-#    Scenario: Changing the names on my address
-#        Given I am editing the address of "Lucifer Morningstar"
-#        When I change the first name to "Stephanie"
-#        And I change the last name to "Edgley"
-#        And I save my changed address
-#        Then I should be notified that the address has been successfully updated
-#        And I should still have a single address in my address book
-#        And this address should be assigned to "Stephanie Edgley"
-#
+    @ui @api
+    Scenario: Changing the names on my address
+        Given I am editing the address of "Lucifer Morningstar"
+        When I change the first name to "Stephanie"
+        And I change the last name to "Edgley"
+        And I save my changed address
+        Then I should be notified that the address has been successfully updated
+        And I should still have a single address in my address book
+        And this address should be assigned to "Stephanie Edgley"
+
 #    @ui
 #    Scenario: Changing my location
 #        Given I am editing the address of "Lucifer Morningstar"
