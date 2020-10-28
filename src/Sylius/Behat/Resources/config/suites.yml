@@ -26,6 +26,7 @@ imports:
     - suites/api/product/managing_product_variants.yml
     - suites/api/product/managing_products.yml
     - suites/api/product/viewing_products.yml
+    - suites/api/promotion/receiving_discount.yml
     - suites/api/shipping/managing_shipments.yml
     - suites/api/shipping/managing_shipping_categories.yml
     - suites/api/shipping/managing_shipping_methods.yml
