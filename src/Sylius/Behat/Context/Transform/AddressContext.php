@@ -150,7 +150,7 @@ final class AddressContext implements Context
 
     /**
      * @Transform /^address of "([^"]+)"$/
-     * @Transform /^address belonging to "([^"]+)"$/
+     * @Transform /^address belongs to "([^"]+)"$/
      */
     public function getByFullName(string $fullName): AddressInterface
     {

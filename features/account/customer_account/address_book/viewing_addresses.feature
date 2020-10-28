@@ -22,8 +22,3 @@ Feature: Viewing my address book
         Then I should have a single address in my address book
         And this address should be assigned to "Lucifer Morningstar"
         And I should not see the address assigned to "John Doe"
-
-    @api
-    Scenario: Inability to view details of an address belonging to other customer
-        When I try to view details of address belonging to "John Doe"
-        Then I should not see any details of address

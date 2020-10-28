@@ -94,6 +94,7 @@ final class AddressContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -157,6 +158,14 @@ final class AddressContext implements Context
         $id = $this->getAddressIdFromAddressBookByFullName($fullName);
 
         $this->addressClient->delete($id);
+    }
+
+    /**
+     * @When /^I try to delete (address belongs to "([^"]+)")$/
+     */
+    public function iDeleteTheAddressBelongsTo(AddressInterface $address): void
+    {
+        $this->addressClient->delete((string) $address->getId());
     }
 
     /**
@@ -281,7 +290,7 @@ final class AddressContext implements Context
     }
 
     /**
-     * @When /^I try to view details of (address belonging to "([^"]+)")$/
+     * @When /^I try to view details of (address belongs to "([^"]+)")$/
      */
     public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
     {
@@ -436,7 +445,23 @@ final class AddressContext implements Context
      */
     public function iShouldNotSeeAnyDetailsOfAddress(): void
     {
-        Assert::same($this->responseChecker->getError($this->addressClient->getLastResponse()), 'Not Found');
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not be able to add it
+     */
+    public function iShouldNotBeAbleToDoIt(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not be able to delete it
+     */
+    public function iShouldNotBeAbleToDeleteIt(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
     }
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool
