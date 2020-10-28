@@ -185,6 +185,7 @@
         "nikic/php-parser":"^4.7",
         "doctrine/inflector": "^1.4",
         "sylius/grid-bundle": "1.7.4",
+        "symfony/doctrine-bridge": "4.4.16",
         "twig/twig": "2.6.1"
     },
     "suggest": {
