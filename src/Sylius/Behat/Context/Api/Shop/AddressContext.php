@@ -164,6 +164,22 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When /^I try to edit the (address of "([^"]+)")$/
+     */
+    public function iTryToEditTheAddressOf(AddressInterface $address)
+    {
+        $this->addressClient->buildUpdateRequest((string) $address->getId());
+    }
+
+    /**
+     * @Then I should be unable to edit their address
+     */
+    public function iShouldBeUnableToEditTheirAddress()
+    {
+        Assert::false($this->responseChecker->isUpdateSuccessful($this->addressClient->update()));
+    }
+
+    /**
      * @Then /^I should(?:| still) have a single address in my address book$/
      * @Then /^I should(?:| still) have (\d+) addresses in my address book$/
      */
