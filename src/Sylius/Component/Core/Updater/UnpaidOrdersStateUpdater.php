@@ -62,10 +62,12 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
             try {
                 $this->cancelOrder($expiredUnpaidOrder);
             } catch (\Exception $e) {
-                $this->logger && $this->logger->error(
-                    sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
-                    ['exception' => $e, 'message' => $e->getMessage()]
-                );
+                if ($this->logger instanceof LoggerInterface) {
+                    $this->logger->error(
+                        sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
+                        ['exception' => $e, 'message' => $e->getMessage()]
+                    );
+                }
             }
         }
     }
