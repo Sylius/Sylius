@@ -186,20 +186,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my discount should be ("[^"]+")$/
-     * @Then there should be no discount
-     */
-    public function myDiscountShouldBe(int $discount = 0): void
-    {
-        $discountTotal = $this->responseChecker->getValue(
-            $this->cartsClient->show($this->sharedStorage->get('cart_token')),
-            'orderPromotionTotal'
-        );
-
-        Assert::same($discount, (int) $discountTotal);
-    }
-
-    /**
      * @Then /^my (cart) should be empty$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
