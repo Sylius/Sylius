@@ -326,7 +326,7 @@ EOT;
     /**
      * @test
      */
-    public function it_allows_to_create_non_translatable_product_attribute()
+    public function it_allows_to_create_non_translatable_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/locales.yml');
@@ -340,7 +340,7 @@ EOT;
                 "choices": [
                     {"en_US": "yellow", "fr_FR": "jaune"},
                     {"en_US": "green"},
-                    {"en_US": "black"}
+                    {"null": "black"}
                 ],
                 "multiple": true,
                 "min": 1,
@@ -365,7 +365,7 @@ EOT;
         $expectedChoiceValues = [
             ['en_US' => 'yellow', 'fr_FR' => 'jaune'],
             ['en_US' => 'green'],
-            ['en_US' => 'black'],
+            ['null' => 'black'],
         ];
         $this->assertSelectChoicesInResponse($response, $expectedChoiceValues);
     }

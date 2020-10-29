@@ -93,7 +93,10 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
         const attributeFormElements = modifyAttributeFormElements($(response));
 
         attributeFormElements.each((index, element) => {
-          const localeCode = $(element).data('localecode');
+          let localeCode = $(element).data('locale-code');
+          if (!localeCode && typeof localeCode !== 'undefined') {
+            localeCode = "__not_translatable__";
+          }
           $(`#attributesContainer > div[data-tab="${localeCode}"]`).append(element);
         });
 

@@ -4,8 +4,10 @@
     {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
     {% import _self as self %}
 
+    {% set noTranslatableKey = '__not_translatable__' %}
+
     <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="__not_translatable__">{{ 'sylius.ui.not_translatable'|trans }}</a>
+        <a class="item active" data-tab="{{ noTranslatableKey }}">{{ 'sylius.ui.not_translatable'|trans }}</a>
         {% for localeCode, translationForm in attr.translations %}
             <a class="item" data-tab="{{ localeCode }}">
                 {{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}
@@ -13,10 +15,10 @@
         {% endfor %}
     </div>
 
-    <div class="ui bottom attached tab segment active" data-tab="__not_translatable__">
+    <div class="ui bottom attached tab segment active" data-tab="{{ noTranslatableKey }}">
         {% apply spaceless %}
             {% for child in form %}
-                {% if child.localeCode.vars.value is empty %}
+                {% if child.vars.value.attribute.translatable == false %}
                     {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                 {% endif %}
             {% endfor %}
@@ -57,9 +59,10 @@
             {{ form_errors(form.value) }}
         {% endif %}
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>
-
         {% if form.localeCode.vars.value is not empty %}
             <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="{{ form.localeCode.vars.value }}"/>
+        {% else %}
+            <input type="hidden" name="{{ form.localeCode.vars.full_name }}" id="{{ form.localeCode.vars.id }}" value="__not_translatable__"/>
         {% endif %}
     </div>
 {% endmacro %}

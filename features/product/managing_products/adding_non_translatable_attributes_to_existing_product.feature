@@ -1,7 +1,7 @@
 @managing_products
 Feature: Adding non translatable attributes to an existing product
     In order to reduce configuration overhead
-    As an administrator
+    As an Administrator
     I want to be able to add non translatable attributes to an existing product
 
     Background:

@@ -520,11 +520,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its non translatable :attribute attribute to :value
+     * @When I set its non translatable :attributeName attribute to :value
      */
-    public function iSetItsNonTranslatableAttributeTo($attribute, $value = null)
+    public function iSetItsNonTranslatableAttributeTo(string $attributeName, ?string $value = null): void
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', '__not_translatable__');
+        $this->createSimpleProductPage->addAttribute($attributeName, $value ?? '', '__not_translatable__');
     }
 
     /**
