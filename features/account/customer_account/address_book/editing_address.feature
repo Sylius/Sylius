@@ -39,8 +39,7 @@ Feature: Making changes in existing addresses
         And it should contain "Liverpool"
         And it should contain "GBA-20B"
 
-#    @ui @javascript
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Changing province to one from the list
         Given the store also has country "Australia"
         And this country has the "Queensland" province with "AU-QLD" code
@@ -50,14 +49,14 @@ Feature: Making changes in existing addresses
         And I save my changed address
         Then I should be notified that the address has been successfully updated
         And I should still have a single address in my address book
-        And it should contain country "AU"
+        And it should contain "AUSTRALIA"
         And it should contain "Queensland"
 
-#    @ui @javascript
-#    Scenario: Changing province to for country with no provinces defined
-#        Given I am editing the address of "Lucifer Morningstar"
-#        When I specify "New York" as my province
-#        And I save my changed address
-#        Then I should be notified that the address has been successfully updated
-#        And I should still have a single address in my address book
-#        And it should contain "New York"
+    @ui @javascript @api
+    Scenario: Changing province to for country with no provinces defined
+        Given I am editing the address of "Lucifer Morningstar"
+        When I specify "New York" as my province
+        And I save my changed address
+        Then I should be notified that the address has been successfully updated
+        And I should still have a single address in my address book
+        And it should contain "New York"

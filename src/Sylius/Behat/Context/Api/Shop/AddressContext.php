@@ -233,6 +233,15 @@ final class AddressContext implements Context
     }
 
     /**
+     * @When I specify :provinceName as my province
+     */
+    public function iSpecyfiProvince(string $provinceName)
+    {
+        $this->addressClient->addRequestData('provinceName', $provinceName);
+        $this->addressClient->addRequestData('provinceCode', '');
+    }
+
+    /**
      * @Then it should contain :value
      */
     public function itShouldContain(string $value)

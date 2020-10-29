@@ -26,7 +26,7 @@ class ProvinceProvider implements ProvinceProviderInterface
         $this->provinceRepository = $provinceRepository;
     }
 
-    public function findByName(string $provinceName): ProvinceInterface
+    public function findByName(string $provinceName): ?ProvinceInterface
     {
         /** @var ProvinceInterface $province */
         $province = $this->provinceRepository->findOneBy(['name' => $provinceName]);

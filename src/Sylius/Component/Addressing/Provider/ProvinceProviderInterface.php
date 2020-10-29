@@ -17,5 +17,5 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 interface ProvinceProviderInterface
 {
-    public function findByName(string $name): ProvinceInterface;
+    public function findByName(string $name): ?ProvinceInterface;
 }
