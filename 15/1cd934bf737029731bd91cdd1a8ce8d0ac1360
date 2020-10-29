@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by twojtylak at 2020-10-27T17:31:37Z
+
+Hey @lchrusciel,
+
+I adjusted the `_support.html.twig` template. The 'need_assistance' block is now only displayed if the channel has a contact phone number. I also adjusted the fixtures so that something is displayed here after loading them.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-29T13:33:28Z
+
+Thank you, @twojtylak! :tada:
