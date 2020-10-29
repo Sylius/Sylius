@@ -18,9 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Addressing\Converter\CountryNameConverter;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 use Sylius\Component\Addressing\Provider\ProvinceProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Webmozart\Assert\Assert;
@@ -42,23 +40,18 @@ final class AddressContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var ProvinceProviderInterface */
-    private $provinceProvider;
-
     public function __construct(
         ApiClientInterface $addressClient,
         ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
-        SharedStorageInterface $sharedStorage,
-        ProvinceProviderInterface $provinceProvider
+        SharedStorageInterface $sharedStorage
     ) {
         $this->addressClient = $addressClient;
         $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
-        $this->provinceProvider = $provinceProvider;
     }
 
     /**
@@ -175,7 +168,7 @@ final class AddressContext implements Context
     /**
      * @When /^I try to edit the (address of "([^"]+)")$/
      */
-    public function iTryToEditTheAddressOf(AddressInterface $address)
+    public function iTryToEditTheAddressOf(AddressInterface $address): void
     {
         $this->addressClient->buildUpdateRequest((string) $address->getId());
     }
@@ -183,7 +176,7 @@ final class AddressContext implements Context
     /**
      * @When I change the first name to :firstName
      */
-    public function iChangeTheFirstNameTo(string $firstName)
+    public function iChangeTheFirstNameTo(string $firstName): void
     {
         $this->addressClient->addRequestData('firstName', $firstName);
     }
@@ -191,7 +184,7 @@ final class AddressContext implements Context
     /**
      * @When I change the last name to :lastName
      */
-    public function iChangeTheLastNameTo(string $lastName)
+    public function iChangeTheLastNameTo(string $lastName): void
     {
         $this->addressClient->addRequestData('lastName', $lastName);
     }
@@ -199,7 +192,7 @@ final class AddressContext implements Context
     /**
      * @When I change the street to :street
      */
-    public function iChangeTheStreetTo(string $street)
+    public function iChangeTheStreetTo(string $street): void
     {
         $this->addressClient->addRequestData('street', $street);
     }
@@ -207,7 +200,7 @@ final class AddressContext implements Context
     /**
      * @When I change the city to :city
      */
-    public function iChangeTheCityTo(string $city)
+    public function iChangeTheCityTo(string $city): void
     {
         $this->addressClient->addRequestData('city', $city);
     }
@@ -215,27 +208,23 @@ final class AddressContext implements Context
     /**
      * @When I change the postcode to :postcode
      */
-    public function iChangeThePostcodeTo(string $postcode)
+    public function iChangeThePostcodeTo(string $postcode): void
     {
         $this->addressClient->addRequestData('postcode', $postcode);
     }
 
     /**
-     * @When I choose :provinceName as my province
+     * @When I choose :province as my province
      */
-    public function iChooseAsMyProvince(string $provinceName)
+    public function iChooseAsMyProvince(ProvinceInterface $province): void
     {
-        /** @var ProvinceInterface */
-        $province = $this->provinceProvider->findByName($provinceName);
-
-        $this->addressClient->addRequestData('provinceName', $province->getName());
         $this->addressClient->addRequestData('provinceCode', $province->getCode());
     }
 
     /**
      * @When I specify :provinceName as my province
      */
-    public function iSpecifyProvince(string $provinceName)
+    public function iSpecifyProvince(string $provinceName): void
     {
         $this->addressClient->addRequestData('provinceName', $provinceName);
     }
@@ -243,24 +232,27 @@ final class AddressContext implements Context
     /**
      * @Then it should contain country :countryCode
      */
-    public function itShouldContainCountry(string $countryCode)
+    public function itShouldContainCountry(string $countryCode): void
     {
-        Assert::true(
-            $this->containsValue(
-                $this->responseChecker->getResponseContent($this->addressClient->getLastResponse())['hydra:member'][0],
-                $countryCode
-            )
-        );
+        $this->itShouldContain($countryCode);
+    }
+
+    /**
+     * @Then it should contain province :province
+     */
+    public function itShouldContainProvince(ProvinceInterface $province): void
+    {
+        $this->itShouldContain($province->getCode());
     }
 
     /**
      * @Then it should contain :value
      */
-    public function itShouldContain(string $value)
+    public function itShouldContain(string $value): void
     {
         Assert::true(
             $this->containsValue(
-                $this->responseChecker->getResponseContent($this->addressClient->getLastResponse())['hydra:member'][0],
+                $this->responseChecker->getCollection($this->addressClient->getLastResponse())[0],
                 $value
             )
         );
@@ -269,7 +261,7 @@ final class AddressContext implements Context
     /**
      * @Then I should be notified that the address has been successfully updated
      */
-    public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyUpdated()
+    public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyUpdated(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
     }
@@ -277,7 +269,7 @@ final class AddressContext implements Context
     /**
      * @Then I should be unable to edit their address
      */
-    public function iShouldBeUnableToEditTheirAddress()
+    public function iShouldBeUnableToEditTheirAddress(): void
     {
         Assert::false($this->responseChecker->isUpdateSuccessful($this->addressClient->update()));
     }
@@ -464,7 +456,7 @@ final class AddressContext implements Context
 
     private function containsValue(array $data, string $value): bool
     {
-        foreach ($data as $key=>$dataValue) {
+        foreach ($data as $key => $dataValue) {
             if ($dataValue === $value) {
                 return true;
             }

@@ -211,15 +211,24 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then /^it should contain country "([^"]+)"$/
+     * @Then it should contain country :countryName
      */
-    public function itShouldContainCountry(string $countryName)
+    public function itShouldContainCountry(string $countryName): void
     {
         $fullName = $this->sharedStorage->get('full_name');
 
         Assert::true($this->addressBookIndexPage->addressOfContains($fullName, strtoupper($countryName)));
     }
 
+    /**
+     * @Then it should contain province :provinceName
+     */
+    public function itShouldContainProvince(string $provinceName): void
+    {
+        $fullName = $this->sharedStorage->get('full_name');
+
+        Assert::true($this->addressBookIndexPage->addressOfContains($fullName, $provinceName));
+    }
     /**
      * @Then this address should be assigned to :fullName
      * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/

@@ -92,7 +92,6 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.admin_to_shop_iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.province_provider" />
         </service>
     </services>
 </container>

@@ -50,7 +50,7 @@ Feature: Making changes in existing addresses
         Then I should be notified that the address has been successfully updated
         And I should still have a single address in my address book
         And it should contain country "Australia"
-        And it should contain "Queensland"
+        And it should contain province "Queensland"
 
     @ui @javascript @api
     Scenario: Changing province to for country with no provinces defined
