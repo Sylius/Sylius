@@ -28,7 +28,7 @@ final class ProvinceProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ProvinceInterface $province
     ): void {
-        $repository->findBy(['name' => 'Queensland'])->willReturn($province);
+        $repository->findOneBy(['name' => 'Queensland'])->willReturn($province);
 
         $this->findByName('Queensland')->shouldReturn($province);
     }

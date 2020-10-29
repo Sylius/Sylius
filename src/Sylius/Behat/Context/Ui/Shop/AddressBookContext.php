@@ -211,6 +211,16 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Then /^it should contain country "([^"]+)"$/
+     */
+    public function itShouldContainCountry(string $countryName)
+    {
+        $fullName = $this->sharedStorage->get('full_name');
+
+        Assert::true($this->addressBookIndexPage->addressOfContains($fullName, strtoupper($countryName)));
+    }
+
+    /**
      * @Then this address should be assigned to :fullName
      * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/
      */

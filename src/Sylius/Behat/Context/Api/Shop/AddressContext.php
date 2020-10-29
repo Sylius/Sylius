@@ -235,10 +235,22 @@ final class AddressContext implements Context
     /**
      * @When I specify :provinceName as my province
      */
-    public function iSpecyfiProvince(string $provinceName)
+    public function iSpecifyProvince(string $provinceName)
     {
         $this->addressClient->addRequestData('provinceName', $provinceName);
-        $this->addressClient->addRequestData('provinceCode', '');
+    }
+
+    /**
+     * @Then it should contain country :countryCode
+     */
+    public function itShouldContainCountry(string $countryCode)
+    {
+        Assert::true(
+            $this->containsValue(
+                $this->responseChecker->getResponseContent($this->addressClient->getLastResponse())['hydra:member'][0],
+                $countryCode
+            )
+        );
     }
 
     /**
@@ -252,13 +264,6 @@ final class AddressContext implements Context
                 $value
             )
         );
-    }
-
-    /**
-     * @Then /^it should contain country "([^"]+)"$/
-     */
-    public function itShouldContainCountry(string $countryName)
-    {
     }
 
     /**
