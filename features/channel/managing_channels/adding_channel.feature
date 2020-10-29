@@ -30,6 +30,7 @@ Feature: Adding a new channel
         And I describe it as "Main distribution channel for mobile apps"
         And I set its hostname as "m.avengers-gear.com"
         And I set its contact email as "contact@avengers-gear.com"
+        And I set its contact phone number as "11331122"
         And I define its color as "blue"
         And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale

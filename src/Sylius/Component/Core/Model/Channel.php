@@ -62,6 +62,9 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var string */
     protected $contactEmail;
 
+    /** @var string|null */
+    protected $contactPhoneNumber;
+
     /** @var bool */
     protected $skippingShippingStepAllowed = false;
 
@@ -219,6 +222,16 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setContactEmail(?string $contactEmail): void
     {
         $this->contactEmail = $contactEmail;
+    }
+
+    public function getContactPhoneNumber(): ?string
+    {
+        return $this->contactPhoneNumber;
+    }
+
+    public function setContactPhoneNumber(?string $contactPhoneNumber): void
+    {
+        $this->contactPhoneNumber = $contactPhoneNumber;
     }
 
     public function isSkippingShippingStepAllowed(): bool

@@ -162,6 +162,7 @@ EOT;
             "menuTaxon": "mugs",
             "color": "ClassicBlue",
             "contactEmail": "admin@quickmart.eu",
+            "contactPhoneNumber": "11331122",
             "skippingShippingStepAllowed": true,
             "skippingPaymentStepAllowed": true,
             "accountVerificationRequired": false

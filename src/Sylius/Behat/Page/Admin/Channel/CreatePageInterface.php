@@ -31,6 +31,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function setContactEmail(string $contactEmail): void;
 
+    public function setContactPhoneNumber(string $contactPhoneNumber): void;
+
     public function defineColor(string $color): void;
 
     public function chooseLocale(string $language): void;

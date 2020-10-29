@@ -138,6 +138,17 @@ final class ChannelSpec extends ObjectBehavior
         $this->getContactEmail()->shouldReturn('contact@example.com');
     }
 
+    function it_has_no_contact_phone_number_by_default(): void
+    {
+        $this->getContactPhoneNumber()->shouldReturn(null);
+    }
+
+    function its_contact_phone_number_is_mutable(): void
+    {
+        $this->setContactPhoneNumber('113321122');
+        $this->getContactPhoneNumber()->shouldReturn('113321122');
+    }
+
     function it_can_allow_to_skip_shipping_step_if_only_a_single_shipping_method_is_resolved(): void
     {
         $this->setSkippingShippingStepAllowed(true);

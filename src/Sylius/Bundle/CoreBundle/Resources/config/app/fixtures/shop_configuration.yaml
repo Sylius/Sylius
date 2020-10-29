@@ -103,6 +103,7 @@ sylius_fixtures:
                                     city: 'eCommerce Town'
                                     postcode: '00 33 22'
                                 menu_taxon: 'MENU_CATEGORY'
+                                contact_phone_number: '+41 123 456 789'
 
                 payment_method:
                     options:

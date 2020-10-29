@@ -89,6 +89,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
         $channel->setThemeName($options['theme_name']);
         $channel->setContactEmail($options['contact_email']);
+        $channel->setContactPhoneNumber($options['contact_phone_number']);
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
         $channel->setAccountVerificationRequired($options['account_verification_required']);
@@ -179,6 +180,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
             ->setDefault('theme_name', null)
             ->setDefault('contact_email', null)
+            ->setDefault('contact_phone_number', null)
             ->setDefault('shop_billing_data', null)
         ;
 

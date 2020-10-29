@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ChannelTypeExtension extends AbstractTypeExtension
@@ -74,6 +75,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
                 'required' => false,
+            ])
+            ->add('contactPhoneNumber', TextType::class, [
+                'required' => false,
+                'label' => 'sylius.form.channel.contact_phone_number',
             ])
             ->add('skippingShippingStepAllowed', CheckboxType::class, [
                 'label' => 'sylius.form.channel.skipping_shipping_step_allowed',
