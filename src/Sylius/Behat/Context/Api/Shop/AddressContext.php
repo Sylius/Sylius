@@ -18,6 +18,8 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Provider\ProvinceProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Webmozart\Assert\Assert;
 
@@ -161,6 +163,115 @@ final class AddressContext implements Context
         $this->customerClient->buildUpdateRequest((string) $this->sharedStorage->get('user')->getCustomer()->getId());
         $this->customerClient->addRequestData('defaultAddress', $addressIri);
         $this->customerClient->update();
+    }
+
+    /**
+     * @When /^I try to edit the (address of "([^"]+)")$/
+     */
+    public function iTryToEditTheAddressOf(AddressInterface $address): void
+    {
+        $this->addressClient->buildUpdateRequest((string) $address->getId());
+    }
+
+    /**
+     * @When I change the first name to :firstName
+     */
+    public function iChangeTheFirstNameTo(string $firstName): void
+    {
+        $this->addressClient->addRequestData('firstName', $firstName);
+    }
+
+    /**
+     * @When I change the last name to :lastName
+     */
+    public function iChangeTheLastNameTo(string $lastName): void
+    {
+        $this->addressClient->addRequestData('lastName', $lastName);
+    }
+
+    /**
+     * @When I change the street to :street
+     */
+    public function iChangeTheStreetTo(string $street): void
+    {
+        $this->addressClient->addRequestData('street', $street);
+    }
+
+    /**
+     * @When I change the city to :city
+     */
+    public function iChangeTheCityTo(string $city): void
+    {
+        $this->addressClient->addRequestData('city', $city);
+    }
+
+    /**
+     * @When I change the postcode to :postcode
+     */
+    public function iChangeThePostcodeTo(string $postcode): void
+    {
+        $this->addressClient->addRequestData('postcode', $postcode);
+    }
+
+    /**
+     * @When I choose :province as my province
+     */
+    public function iChooseAsMyProvince(ProvinceInterface $province): void
+    {
+        $this->addressClient->addRequestData('provinceCode', $province->getCode());
+    }
+
+    /**
+     * @When I specify :provinceName as my province
+     */
+    public function iSpecifyProvince(string $provinceName): void
+    {
+        $this->addressClient->addRequestData('provinceName', $provinceName);
+    }
+
+    /**
+     * @Then it should contain country :countryCode
+     */
+    public function itShouldContainCountry(string $countryCode): void
+    {
+        $this->itShouldContain($countryCode);
+    }
+
+    /**
+     * @Then it should contain province :province
+     */
+    public function itShouldContainProvince(ProvinceInterface $province): void
+    {
+        $this->itShouldContain($province->getCode());
+    }
+
+    /**
+     * @Then it should contain :value
+     */
+    public function itShouldContain(string $value): void
+    {
+        Assert::true(
+            $this->containsValue(
+                $this->responseChecker->getCollection($this->addressClient->getLastResponse())[0],
+                $value
+            )
+        );
+    }
+
+    /**
+     * @Then I should be notified that the address has been successfully updated
+     */
+    public function iShouldBeNotifiedThatTheAddressHasBeenSuccessfullyUpdated(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be unable to edit their address
+     */
+    public function iShouldBeUnableToEditTheirAddress(): void
+    {
+        Assert::false($this->responseChecker->isUpdateSuccessful($this->addressClient->update()));
     }
 
     /**
@@ -341,6 +452,17 @@ final class AddressContext implements Context
         }
 
         return null;
+    }
+
+    private function containsValue(array $data, string $value): bool
+    {
+        foreach ($data as $key => $dataValue) {
+            if ($dataValue === $value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function getAddressIriFromAddressBookByFullName(string $fullName): ?string
