@@ -682,11 +682,21 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then /^my discount should be ("[^"]+")$/
      * @Then there should be no discount
      */
-    public function thereShouldBeNoDiscount(): void
+    public function myDiscountShouldBe(int $discount = 0): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'orderPromotionTotal'), 0);
+        if ($this->sharedStorage->has('cart_token')) {
+            $discountTotal = $this->responseChecker->getValue(
+                $this->ordersClient->show($this->sharedStorage->get('cart_token')),
+                'orderPromotionTotal'
+            );
+
+            Assert::same($discount, (int) $discountTotal);
+        } else {
+            Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'orderPromotionTotal'), $discount);
+        }
     }
 
     /**

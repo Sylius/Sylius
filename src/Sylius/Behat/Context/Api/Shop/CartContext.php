@@ -173,12 +173,15 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart)'s total should be ("[^"]+")$/
+     * @Then /^my (cart) total should be ("[^"]+")$/
      */
     public function myCartSTotalShouldBe(string $tokenValue, int $total): void
     {
-        $response = $this->cartsClient->show($tokenValue);
+        $responseTotal = $this->responseChecker->getValue(
+            $this->cartsClient->show($tokenValue),
+            'total'
+        );
 
-        $responseTotal = $this->responseChecker->getValue($response, 'total');
         Assert::same($total, (int) $responseTotal);
     }
 
