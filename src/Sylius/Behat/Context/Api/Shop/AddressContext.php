@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -37,6 +38,9 @@ final class AddressContext implements Context
     /** @var AdminToShopIriConverterInterface */
     private $adminToShopIriConverter;
 
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -45,12 +49,14 @@ final class AddressContext implements Context
         ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
         AdminToShopIriConverterInterface $adminToShopIriConverter,
+        IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->addressClient = $addressClient;
         $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
+        $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -88,6 +94,7 @@ final class AddressContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -151,6 +158,14 @@ final class AddressContext implements Context
         $id = $this->getAddressIdFromAddressBookByFullName($fullName);
 
         $this->addressClient->delete($id);
+    }
+
+    /**
+     * @When /^I try to delete (address belongs to "([^"]+)")$/
+     */
+    public function iDeleteTheAddressBelongsTo(AddressInterface $address): void
+    {
+        $this->addressClient->delete((string) $address->getId());
     }
 
     /**
@@ -272,6 +287,14 @@ final class AddressContext implements Context
     public function iShouldBeUnableToEditTheirAddress(): void
     {
         Assert::false($this->responseChecker->isUpdateSuccessful($this->addressClient->update()));
+    }
+
+    /**
+     * @When /^I try to view details of (address belongs to "([^"]+)")$/
+     */
+    public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
+    {
+        $this->addressClient->showByIri($this->iriConverter->getIriFromItem($address));
     }
 
     /**
@@ -415,6 +438,30 @@ final class AddressContext implements Context
     public function iShouldBeNotifiedThatAddressHasBeenSetAsDefault(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not see any details of address
+     */
+    public function iShouldNotSeeAnyDetailsOfAddress(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not be able to add it
+     */
+    public function iShouldNotBeAbleToDoIt(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should not be able to delete it
+     */
+    public function iShouldNotBeAbleToDeleteIt(): void
+    {
+        Assert::true($this->responseChecker->hasAccessDenied($this->addressClient->getLastResponse()));
     }
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool

@@ -54,7 +54,7 @@ final class AddressItemDataProvider implements ItemDataProviderInterface, Restri
             in_array('ROLE_USER', $user->getRoles(), true) &&
             $customer !== null
         ) {
-            return $this->addressRepository->findOneByCustomer($id, $customer);
+            return $this->addressRepository->findOneByCustomer((string) $id, $customer);
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {

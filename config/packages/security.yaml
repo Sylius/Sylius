@@ -8,6 +8,8 @@ parameters:
     sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
     sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
     sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
+    sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
+    sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
 
 security:
     always_authenticate_before_granting: true
@@ -145,5 +147,6 @@ security:
 
         - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
         - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
         - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
