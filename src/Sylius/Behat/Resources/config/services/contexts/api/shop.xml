@@ -86,11 +86,6 @@
             <argument type="service" id="sylius.behat.context.setup.shop_api_security" />
         </service>
 
-        <service id="sylius.behat.context.api.shop.account" class="Sylius\Behat\Context\Api\Shop\AccountContext">
-            <argument type="service" id="sylius.behat.api_platform_client.shop.user" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-        </service>
-
         <service id="sylius.behat.context.api.shop.address" class="Sylius\Behat\Context\Api\Shop\AddressContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.address" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.account" />

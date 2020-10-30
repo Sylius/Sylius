@@ -144,28 +144,6 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function customUpdate(?string $section, ?string $resource, ?string $id = null, ?string $urlResource = null, ?string $token = null): RequestInterface
-    {
-        $headers = ['CONTENT_TYPE' => 'application/ld+json'];
-        if ($token !== null) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
-        }
-
-        $url = sprintf(
-            '/new-api/%s%s%s%s',
-            self::prepareSection($section),
-            self::prepareSection($resource),
-            self::prepareSection($id),
-            $urlResource
-        );
-
-        return new self(
-            $url,
-            HttpRequest::METHOD_POST,
-            $headers
-        );
-    }
-
     public function url(): string
     {
         return $this->url;

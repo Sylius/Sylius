@@ -1,4 +1,4 @@
-@shop_user_account
+@customer_account
 Feature: Customer password validation
     In order to avoid making mistakes when changing my password
     As a Customer

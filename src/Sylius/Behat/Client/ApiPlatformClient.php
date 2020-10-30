@@ -155,6 +155,11 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
 
+    public function buildCustomUpdateRequest(string $id, string $customSuffix): void
+    {
+        $this->request = Request::update($this->section, $this->resource, sprintf('%s/%s', $id, $customSuffix), $this->getToken());
+    }
+
     public function buildUploadRequest(): void
     {
         $this->request = Request::upload($this->section, $this->resource, $this->getToken());

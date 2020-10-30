@@ -1,4 +1,4 @@
-@shop_user_account
+@customer_account
 Feature: Changing a customer password
     In order to enhance the security of my account
     As a Customer

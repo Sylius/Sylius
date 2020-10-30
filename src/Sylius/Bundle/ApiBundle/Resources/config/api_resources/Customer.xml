@@ -44,6 +44,20 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="shop_password_update">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/customers/{id}/password</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangePasswordShopUser</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">customer:password:write</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Change password for logged in customer</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>

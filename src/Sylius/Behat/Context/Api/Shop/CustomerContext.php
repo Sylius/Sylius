@@ -18,7 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -77,6 +77,19 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @When I want to change my password
+     */
+    public function iWantToChangeMyPassword(): void
+    {
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->sharedStorage->get('user');
+        /** @var CustomerInterface $customer */
+        $customer = $shopUser->getCustomer();
+
+        $this->customerClient->buildCustomUpdateRequest((string) $customer->getId(), 'password');
+    }
+
+    /**
      * @When I specify the first name as :firstName
      * @When I remove the first name
      */
@@ -110,6 +123,42 @@ final class CustomerContext implements Context
     public function iSaveMyChanges(): void
     {
         $this->customerClient->update();
+    }
+
+    /**
+     * @When I specify the current password as :password
+     */
+    public function iSpecifyTheCurrentPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('oldPassword', $password);
+    }
+
+    /**
+     * @When I specify the new password as :password
+     */
+    public function iSpecifyTheNewPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('password', $password);
+    }
+
+    /**
+     * @When I confirm this password as :password
+     */
+    public function iSpecifyTheConfirmationPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('confirmPassword', $password);
+    }
+
+    /**
+     * @When I change password from :oldPassword to :newPassword
+     */
+    public function iChangePasswordTo(string $oldPassword, string $newPassword): void
+    {
+        $this->customerClient->setRequestData([
+            'oldPassword' => $oldPassword,
+            'password' => $newPassword,
+            'confirmPassword' => $newPassword
+        ]);
     }
 
     /**
@@ -257,5 +306,55 @@ final class CustomerContext implements Context
         }
 
         return false;
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
+    {
+        $response = $this->customerClient->getLastResponse();
+
+        Assert::same(
+            $response->getStatusCode(),
+            204,
+            $response->getContent()
+        );
+    }
+
+    /**
+     * @Then I should be notified that provided password is different than the current one
+     */
+    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
+    {
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            'Provided password is different than the current one.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            'Your password and confirmation password does not match.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the ([^"]+) should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
+    {
+        Assert::contains($this->responseChecker->getError($this->customerClient->getLastResponse()),
+            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
+        );
     }
 }
