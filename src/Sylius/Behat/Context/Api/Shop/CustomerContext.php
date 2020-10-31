@@ -130,7 +130,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheCurrentPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('oldPassword', $password);
+        $this->customerClient->addRequestData('currentPassword', $password);
     }
 
     /**
@@ -138,7 +138,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheNewPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('password', $password);
+        $this->customerClient->addRequestData('newPassword', $password);
     }
 
     /**
@@ -146,7 +146,7 @@ final class CustomerContext implements Context
      */
     public function iSpecifyTheConfirmationPasswordAs(string $password): void
     {
-        $this->customerClient->addRequestData('confirmPassword', $password);
+        $this->customerClient->addRequestData('confirmNewPassword', $password);
     }
 
     /**
@@ -155,9 +155,9 @@ final class CustomerContext implements Context
     public function iChangePasswordTo(string $oldPassword, string $newPassword): void
     {
         $this->customerClient->setRequestData([
-            'oldPassword' => $oldPassword,
-            'password' => $newPassword,
-            'confirmPassword' => $newPassword
+            'currentPassword' => $oldPassword,
+            'newPassword' => $newPassword,
+            'confirmNewPassword' => $newPassword
         ]);
     }
 
@@ -344,7 +344,7 @@ final class CustomerContext implements Context
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
-            'Your password and confirmation password does not match.'
+            'newPassword: The entered passwords don\'t match'
         );
     }
 

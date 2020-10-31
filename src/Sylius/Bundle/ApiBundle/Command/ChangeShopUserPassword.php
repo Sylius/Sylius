@@ -13,25 +13,44 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-/**
- * @experimental
- * @psalm-immutable
- */
-class ChangeShopUserPassword
+/** @experimental */
+class ChangeShopUserPassword implements ShopUserIdAwareInterface
 {
-    /** @var string|null */
-    public $password;
+    /** @psalm-suppress MissingReturnType */
+    public $shopUserId;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
+    public $newPassword;
+
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
     public $confirmPassword;
 
-    /** @var string|null */
-    public $oldPassword;
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
+    public $currentPassword;
 
-    public function __construct(?string $password, ?string $confirmPassword, ?string $oldPassword)
+    public function __construct(?string $newPassword, ?string $confirmNewPassword, ?string $currentPassword)
     {
-        $this->password = $password;
-        $this->confirmPassword = $confirmPassword;
-        $this->oldPassword = $oldPassword;
+        $this->newPassword = $newPassword;
+        $this->confirmPassword = $confirmNewPassword;
+        $this->currentPassword = $currentPassword;
+    }
+
+    public function getShopUserId()
+    {
+        return $this->shopUserId;
+    }
+
+    public function setShopUserId($shopUserId): void
+    {
+        $this->shopUserId = $shopUserId;
     }
 }

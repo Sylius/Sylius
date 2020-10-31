@@ -19,7 +19,7 @@ Feature: Customer password validation
         Then I should be notified that provided password is different than the current one
 
     @ui @api
-    Scenario: Trying to change my password with a wrong confirmation password2
+    Scenario: Trying to change my password with a wrong confirmation password
         When I want to change my password
         And I specify the current password as "sylius"
         And I specify the new password as "blackhouse"

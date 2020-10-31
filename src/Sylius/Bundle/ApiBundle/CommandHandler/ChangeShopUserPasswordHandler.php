@@ -13,49 +13,41 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\ShopUser;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
-class ChangeShopUserPasswordHandler implements MessageHandlerInterface
+final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
-    /** @var DataPersisterInterface */
-    private $dataPersister;
-
     /** @var PasswordUpdaterInterface */
     private $passwordUpdater;
 
-    /** @var UserContextInterface */
-    private $userContext;
+    /** @var UserRepositoryInterface */
+    private $userRepository;
 
-    public function __construct(
-        DataPersisterInterface $dataPersister,
-        PasswordUpdaterInterface $passwordUpdater,
-        UserContextInterface $userContext
-    ) {
-        $this->dataPersister = $dataPersister;
+    public function __construct(PasswordUpdaterInterface $passwordUpdater, UserRepositoryInterface $userRepository)
+    {
         $this->passwordUpdater = $passwordUpdater;
-        $this->userContext = $userContext;
+        $this->userRepository = $userRepository;
     }
 
-    public function __invoke(ChangeShopUserPassword $changePasswordShopUser){
-
-        if ($changePasswordShopUser->confirmPassword !== $changePasswordShopUser->password) {
-            throw new HttpException(400, "Your password and confirmation password does not match.");
+    public function __invoke(ChangeShopUserPassword $changeShopUserPassword)
+    {
+        if ($changeShopUserPassword->confirmPassword !== $changeShopUserPassword->newPassword) {
+            throw new \InvalidArgumentException('Passwords do not match.');
         }
 
-        /** @var ShopUser $user */
-        $user = $this->userContext->getUser();
+        /** @var ShopUserInterface|null $user */
+        $user = $this->userRepository->find($changeShopUserPassword->getShopUserId());
 
-        if (in_array('ROLE_USER', $user->getRoles(), true)) {
-            $this->passwordUpdater->updatePassword($user);
-            $this->dataPersister->persist($user);
-        }
+        Assert::notNull($user);
+
+        $user->setPlainPassword($changeShopUserPassword->newPassword);
+
+        $this->passwordUpdater->updatePassword($user);
     }
 }
