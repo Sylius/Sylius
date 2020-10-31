@@ -48,7 +48,7 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}/password</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangePasswordShopUser</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">customer:password:write</attribute>

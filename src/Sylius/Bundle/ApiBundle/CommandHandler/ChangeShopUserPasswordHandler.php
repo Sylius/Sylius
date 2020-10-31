@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
-use Sylius\Bundle\ApiBundle\Command\ChangePasswordShopUser;
+use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /** @experimental */
-class ChangePasswordShopUserHandler implements MessageHandlerInterface
+class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
     /** @var DataPersisterInterface */
     private $dataPersister;
@@ -44,7 +44,7 @@ class ChangePasswordShopUserHandler implements MessageHandlerInterface
         $this->userContext = $userContext;
     }
 
-    public function __invoke(ChangePasswordShopUser $changePasswordShopUser){
+    public function __invoke(ChangeShopUserPassword $changePasswordShopUser){
 
         if ($changePasswordShopUser->confirmPassword !== $changePasswordShopUser->password) {
             throw new HttpException(400, "Your password and confirmation password does not match.");

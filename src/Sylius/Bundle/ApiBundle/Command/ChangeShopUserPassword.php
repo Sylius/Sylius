@@ -17,7 +17,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
  * @experimental
  * @psalm-immutable
  */
-class ChangePasswordShopUser
+class ChangeShopUserPassword
 {
     /** @var string|null */
     public $password;
