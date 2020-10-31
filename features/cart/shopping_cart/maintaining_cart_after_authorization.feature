@@ -51,7 +51,7 @@ Feature: Maintaining cart after authorization
         Then there should be one item in my cart
         And this item should have name "Stark T-Shirt"
 
-    @ui
+    @ui @api
     Scenario: Having cart maintained after registration
         Given I have product "Stark T-Shirt" in the cart
         When I register with email "eddard@stak.com" and password "handOfTheKing"

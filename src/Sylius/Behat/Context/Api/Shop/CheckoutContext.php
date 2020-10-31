@@ -694,9 +694,10 @@ final class CheckoutContext implements Context
             );
 
             Assert::same($discount, (int) $discountTotal);
-        } else {
-            Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'orderPromotionTotal'), $discount);
+            return;
         }
+
+        Assert::same($this->responseChecker->getValue($this->client->getResponse(), 'orderPromotionTotal'), $discount);
     }
 
     /**

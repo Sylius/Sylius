@@ -14,6 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Client\ApiSecurityClientInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ShopUser;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Webmozart\Assert\Assert;
 
@@ -22,11 +27,23 @@ final class RegistrationContext implements Context
     /** @var AbstractBrowser */
     private $client;
 
+    /** @var LoginContext */
+    private $loginContext;
+
+    /** @var ObjectManager */
+    private $orderManager;
+
+    /** @var ObjectManager */
+    private $shopUserManager;
+
     private $content = [];
 
-    public function __construct(AbstractBrowser $client)
+    public function __construct(AbstractBrowser $client, LoginContext $loginContext, ObjectManager $orderManager, ObjectManager $shopUserManager)
     {
         $this->client = $client;
+        $this->loginContext = $loginContext;
+        $this->orderManager = $orderManager;
+        $this->shopUserManager = $shopUserManager;
     }
 
     /**
@@ -35,12 +52,7 @@ final class RegistrationContext implements Context
      */
     public function iWantToRegisterNewAccount(): void
     {
-        $this->content = [
-            'firstName' => 'First',
-            'lastName' => 'Last',
-            'email' => 'example@example.com',
-            'password' => 'example',
-        ];
+        $this->fillContent();
     }
 
     /**
@@ -96,6 +108,17 @@ final class RegistrationContext implements Context
     }
 
     /**
+     * @When I register with email :email and password :password
+     */
+    public function iRegisterWithEmailAndPassword(string $email, string $password): void
+    {
+        $this->fillContent($email, $password);
+        $this->iRegisterThisAccount();
+        $this->enableAccount($email);
+        $this->loginContext->iLogInAsWithPassword($email,$password);
+    }
+
+    /**
      * @When I register this account
      * @When I try to register this account
      */
@@ -110,6 +133,22 @@ final class RegistrationContext implements Context
             json_encode($this->content, \JSON_THROW_ON_ERROR)
         );
         $this->content = [];
+    }
+
+    /**
+     * @When I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->loginContext->iLogInAsWithPassword($email, $password);
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut(): void
+    {
+        $this->loginContext->iLogOut();
     }
 
     /**
@@ -185,5 +224,29 @@ final class RegistrationContext implements Context
             ['propertyPath' => $path, 'message' => $message],
             $decodedResponse['violations']
         );
+    }
+
+    private function fillContent(?string $email = 'example@example.com', ?string $password = 'example'): void
+    {
+        $this->content = [
+            'firstName' => 'First',
+            'lastName' => 'Last',
+            'email' => $email,
+            'password' => $password
+            ];
+    }
+
+    private function enableAccount(string $email): void
+    {
+        // Temporary implementation until we will have an endpoint to enable account by administrator
+        // 'on this channel account verification is not required' step from ChannelContext does not work
+        $repository = $this->shopUserManager->getRepository(ShopUser::class);
+
+        /** @var ShopUserInterface $user */
+        $user = $repository->findOneBy(['username' => $email]);
+        $user->setEnabled(true);
+
+        $this->shopUserManager->persist($user);
+        $this->shopUserManager->flush();
     }
 }

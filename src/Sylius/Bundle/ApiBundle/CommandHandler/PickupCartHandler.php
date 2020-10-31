@@ -27,6 +27,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -50,13 +51,17 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var RandomnessGeneratorInterface */
     private $generator;
 
+    /** @var SessionInterface */
+    private $session;
+
     public function __construct(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator
+        RandomnessGeneratorInterface $generator,
+        SessionInterface $session
     ) {
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
@@ -64,6 +69,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         $this->userContext = $userContext;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
+        $this->session = $session;
     }
 
     public function __invoke(PickupCart $pickupCart)
@@ -97,6 +103,8 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         $this->orderManager->persist($cart);
+
+        $this->session->set('cart_token', $cart->getTokenValue());
 
         return $cart;
     }

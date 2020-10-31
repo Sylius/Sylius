@@ -20,6 +20,8 @@
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="sylius.api.cart_to_user_assigner" />
+            <argument>true</argument>
             <tag name="messenger.message_handler" />
         </service>
 
@@ -30,6 +32,7 @@
             <argument type="service" id="sylius.api.context.user" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.random_generator" />
+            <argument type="service" id="session" />
             <tag name="messenger.message_handler" />
         </service>
 
