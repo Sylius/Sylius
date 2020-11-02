@@ -182,7 +182,6 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "nikic/php-parser":"^4.7",
         "doctrine/inflector": "^1.4",
         "sylius/grid-bundle": "1.7.4",
         "symfony/doctrine-bridge": "4.4.16",
