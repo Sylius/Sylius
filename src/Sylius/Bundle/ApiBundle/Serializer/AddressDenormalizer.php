@@ -38,7 +38,7 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
         $this->interfaceType = $interfaceType;
     }
 
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         return $this->objectNormalizer->denormalize(
             $data,
@@ -48,7 +48,7 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
         );
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = [])
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
         return $type === $this->interfaceType;
     }

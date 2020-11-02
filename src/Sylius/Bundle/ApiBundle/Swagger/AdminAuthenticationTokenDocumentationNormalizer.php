@@ -31,12 +31,12 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
         $this->apiRoute = $apiRoute;
     }
 
-    public function supportsNormalization($data, string $format = null): bool
+    public function supportsNormalization($data, $format = null): bool
     {
         return $this->decoratedNormalizer->supportsNormalization($data, $format);
     }
 
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
