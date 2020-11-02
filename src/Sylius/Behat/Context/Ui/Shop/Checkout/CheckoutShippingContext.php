@@ -68,7 +68,7 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
-     * @When /^I(?:| try to) complete the shipping step$/
+     * @When /^I(?:| try to) complete(?:|d) the shipping step$/
      * @When I complete the shipping step with first shipping method
      */
     public function iCompleteTheShippingStep(): void

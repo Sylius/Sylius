@@ -867,6 +867,15 @@ final class CheckoutContext implements Context
         $this->assertProvinceMessage('billingAddress');
     }
 
+    /**
+     * @Then I should not be able to address an order with an empty cart
+     */
+    public function iShouldNotBeAbleToAddressAnOrderWithAnEmptyCart(): void
+    {
+        $response = $this->client->getResponse();
+        $response = $response;
+    }
+
     private function assertProvinceMessage(string $addressType): void
     {
         /** @var Response $response */

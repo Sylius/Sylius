@@ -309,6 +309,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
+     * @Then I should not be able to address an order with an empty cart
      */
     public function shouldBeOnMyCartSummaryPage()
     {

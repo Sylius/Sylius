@@ -74,7 +74,7 @@ final class CheckoutPaymentContext implements Context
     }
 
     /**
-     * @When I complete the payment step
+     * @When /^I complete(?:|d) the payment step$/
      */
     public function iCompleteThePaymentStep()
     {
