@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-interface SubresourceIdAwareInterface extends CommandAwareDataTransformerInterface
+interface ShopUserIdAwareCommandInterface extends EnrichableCommandInterface
 {
-    public function getSubresourceId(): ?string;
+    public function getShopUserId();
 
-    public function setSubresourceId(?string $subresourceId): void;
-
-    public function getSubresourceIdAttributeKey(): string;
+    public function setShopUserId($shopUserId): void;
 }

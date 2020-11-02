@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPasswordCommand;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -43,7 +43,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword('PLAIN_PASSWORD')->shouldBeCalled();
         $passwordUpdater->updatePassword($shopUser)->shouldBeCalled();
 
-        $changePasswordShopUser = new ChangeShopUserPassword(
+        $changePasswordShopUser = new ChangeShopUserPasswordCommand(
             'PLAIN_PASSWORD',
             'PLAIN_PASSWORD',
             'OLD_PASSWORD'
@@ -64,7 +64,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword(Argument::any())->shouldNotBeCalled();
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
-        $changePasswordShopUser = new ChangeShopUserPassword(
+        $changePasswordShopUser = new ChangeShopUserPasswordCommand(
             'PLAIN_PASSWORD',
             'WRONG_PASSWORD',
             'OLD_PASSWORD'
@@ -88,7 +88,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword(Argument::any())->shouldNotBeCalled();
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
-        $changePasswordShopUser = new ChangeShopUserPassword(
+        $changePasswordShopUser = new ChangeShopUserPasswordCommand(
             'PLAIN_PASSWORD',
             'PLAIN_PASSWORD',
             'OLD_PASSWORD'

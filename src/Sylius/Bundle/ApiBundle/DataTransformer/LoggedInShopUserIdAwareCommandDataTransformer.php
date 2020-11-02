@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareCommandInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -30,9 +30,9 @@ final class LoggedInShopUserIdAwareCommandDataTransformer implements CommandData
     }
 
     /**
-     * @param ShopUserIdAwareInterface $object
+     * @param ShopUserIdAwareCommandInterface $object
      */
-    public function transform($object, string $to, array $context = []): ShopUserIdAwareInterface
+    public function transform($object, string $to, array $context = []): ShopUserIdAwareCommandInterface
     {
         /** @var ShopUserInterface|UserInterface $user */
         $user = $this->userContext->getUser();
@@ -48,6 +48,6 @@ final class LoggedInShopUserIdAwareCommandDataTransformer implements CommandData
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof ShopUserIdAwareInterface;
+        return $object instanceof ShopUserIdAwareCommandInterface;
     }
 }

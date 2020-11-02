@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
+use Sylius\Bundle\ApiBundle\Command\EnrichableCommandInterface;
 
 /** @experimental */
-final class CommandAwareInputDataTransformer implements DataTransformerInterface
+final class CompositeEnrichableCommandDataTransformer implements DataTransformerInterface
 {
     /** @var CommandDataTransformerInterface[] */
     private $commandDataTransformers;
@@ -42,7 +42,7 @@ final class CommandAwareInputDataTransformer implements DataTransformerInterface
     {
         return
             isset($context['input']['class']) &&
-            is_a($context['input']['class'], CommandAwareDataTransformerInterface::class, true)
+            is_a($context['input']['class'], EnrichableCommandInterface::class, true)
         ;
     }
 }

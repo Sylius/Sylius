@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-interface ShopUserIdAwareInterface extends CommandAwareDataTransformerInterface
+interface OrderTokenValueAwareCommandInterface extends EnrichableCommandInterface
 {
-    public function getShopUserId();
+    public function getOrderTokenValue(): ?string;
 
-    public function setShopUserId($shopUserId): void;
+    public function setOrderTokenValue(?string $orderTokenValue): void;
 }

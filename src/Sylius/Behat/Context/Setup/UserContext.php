@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPasswordCommand;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -179,7 +179,7 @@ final class UserContext implements Context
      */
     public function iveChangedMyPasswordFromTo(UserInterface $user, string $currentPassword, string $newPassword): void
     {
-        $changeShopUserPassword = new ChangeShopUserPassword($newPassword, $newPassword, $currentPassword);
+        $changeShopUserPassword = new ChangeShopUserPasswordCommand($newPassword, $newPassword, $currentPassword);
 
         $changeShopUserPassword->setShopUserId($user->getId());
 

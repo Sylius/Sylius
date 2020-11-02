@@ -15,8 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\EnrichableCommandInterface;
+use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareCommandInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -29,8 +29,8 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
     }
 
     function it_supports_only_shop_user_id_commands(
-        ShopUserIdAwareInterface $shopUserIdAware,
-        CommandAwareDataTransformerInterface $commandAwareDataTransformer
+        ShopUserIdAwareCommandInterface $shopUserIdAware,
+        EnrichableCommandInterface $commandAwareDataTransformer
     ): void {
         $this->supportsTransformation($shopUserIdAware)->shouldReturn(true);
         $this->supportsTransformation($commandAwareDataTransformer)->shouldReturn(false);
@@ -39,7 +39,7 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
     function it_sets_current_shop_user_id(
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
-        ShopUserIdAwareInterface $shopUserIdAwareCommand
+        ShopUserIdAwareCommandInterface $shopUserIdAwareCommand
     ): void {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -53,7 +53,7 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
     function it_does_nothing_if_logged_in_user_is_not_shop_user(
         UserContextInterface $userContext,
         UserInterface $user,
-        ShopUserIdAwareInterface $shopUserIdAwareCommand
+        ShopUserIdAwareCommandInterface $shopUserIdAwareCommand
     ): void {
         $userContext->getUser()->willReturn($user);
 

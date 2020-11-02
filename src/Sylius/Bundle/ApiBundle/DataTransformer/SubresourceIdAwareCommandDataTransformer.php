@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareCommandInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
@@ -45,6 +45,6 @@ final class SubresourceIdAwareCommandDataTransformer implements CommandDataTrans
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof SubresourceIdAwareInterface;
+        return $object instanceof SubresourceIdAwareCommandInterface;
     }
 }

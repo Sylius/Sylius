@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /** @experimental */
@@ -31,6 +31,6 @@ final class OrderTokenValueAwareInputCommandDataTransformer implements CommandDa
 
     public function supportsTransformation($object): bool
     {
-        return $object instanceof OrderTokenValueAwareInterface;
+        return $object instanceof OrderTokenValueAwareCommandInterface;
     }
 }

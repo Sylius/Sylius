@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-class ChangeShopUserPassword implements ShopUserIdAwareInterface
+class ChangeShopUserPasswordCommand implements ShopUserIdAwareCommandInterface
 {
     /** @var mixed|null */
     public $shopUserId;
