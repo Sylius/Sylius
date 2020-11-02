@@ -15,6 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssigner;
+use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -27,9 +29,10 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function let(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider
+        CustomerProviderInterface $customerProvider,
+        CartToUserAssignerInterface $cartToUserAssigner
     ): void {
-        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider);
+        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $cartToUserAssigner, true);
     }
 
     function it_is_a_message_handler(): void

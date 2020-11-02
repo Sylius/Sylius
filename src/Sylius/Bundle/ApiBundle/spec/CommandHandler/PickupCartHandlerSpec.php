@@ -28,6 +28,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
@@ -38,8 +39,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator
-
+        RandomnessGeneratorInterface $generator,
+        SessionInterface $session
     ): void {
         $this->beConstructedWith(
             $cartFactory,
@@ -47,7 +48,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $channelContext,
             $userContext,
             $orderManager,
-            $generator
+            $generator,
+            $session
         );
     }
 
@@ -68,7 +70,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
+        SessionInterface $session
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
@@ -92,6 +95,9 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldBeCalled();
 
+        $cart->getTokenValue()->willReturn('urisafestr');
+        $session->set('cart_token', 'urisafestr')->shouldBeCalled();
+
         $this(new PickupCart());
     }
 
@@ -104,7 +110,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ObjectManager $orderManager,
         OrderInterface $cart,
-        ChannelInterface $channel
+        ChannelInterface $channel,
+        SessionInterface $session
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -119,6 +126,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldNotBeCalled();
 
+        $session->set('cart_token', 'urisafestr')->shouldNotBeCalled();
+
         $this(new PickupCart());
     }
 
@@ -132,7 +141,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
+        SessionInterface $session
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
@@ -154,6 +164,9 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
+
+        $cart->getTokenValue()->willReturn('urisafestr');
+        $session->set('cart_token', 'urisafestr')->shouldBeCalled();
 
         $this(new PickupCart());
     }
