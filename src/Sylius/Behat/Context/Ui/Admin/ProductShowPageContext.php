@@ -385,11 +385,11 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see attribute :attribute with value :value in :locale locale
+     * @Then I should see attribute :attribute with value :value in :nameOfLocale locale
      */
-    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $locale): void
+    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $nameOfLocale): void
     {
-        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale, $value));
+        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $nameOfLocale, $value));
     }
 
     /**
