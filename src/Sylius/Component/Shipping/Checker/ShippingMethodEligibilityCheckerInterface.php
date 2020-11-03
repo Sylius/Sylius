@@ -27,5 +27,5 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 interface ShippingMethodEligibilityCheckerInterface extends NewShippingMethodEligibilityCheckerInterface
 {
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool;
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool;
 }
