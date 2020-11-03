@@ -58,3 +58,9 @@ sylius_admin_render_attribute_forms:
     defaults:
         _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
         template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"
+
+sylius_admin_get_product_attributes_json:
+    path: /products/{productCode}/attributes-json
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:getAttributesJsonAction
