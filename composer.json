@@ -136,7 +136,7 @@
         "phpspec/phpspec": "^6.1",
         "phpstan/phpstan": "0.12.29",
         "phpstan/phpstan-doctrine": "0.12.16",
-        "phpunit/phpunit": "^9.4",
+        "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "^0.3",
         "psr/event-dispatcher": "^1.0",
         "sspooky13/yaml-standards": "^5.1",
