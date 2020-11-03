@@ -18,6 +18,14 @@ use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 
 class ProductAttribute extends BaseAttribute implements ProductAttributeInterface
 {
+    public function getNameByLocaleCode(string $localeCode): string
+    {
+        /** @var ProductTranslationInterface $translation */
+        $translation = $this->getTranslation($localeCode);
+
+        return $translation->getName();
+    }
+
     protected function createTranslation(): AttributeTranslationInterface
     {
         return new ProductAttributeTranslation();
