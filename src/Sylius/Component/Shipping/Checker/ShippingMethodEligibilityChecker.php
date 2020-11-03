@@ -26,21 +26,21 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method): bool
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
-        if (!$category = $method->getCategory()) {
+        if (!$category = $shippingMethod->getCategory()) {
             return true;
         }
 
         $numMatches = $numShippables = 0;
-        foreach ($subject->getShippables() as $shippable) {
+        foreach ($shippingSubject->getShippables() as $shippable) {
             ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
                 ++$numMatches;
             }
         }
 
-        switch ($method->getCategoryRequirement()) {
+        switch ($shippingMethod->getCategoryRequirement()) {
             case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE:
                 return 0 === $numMatches;
             case ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY:

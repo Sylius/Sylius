@@ -29,14 +29,14 @@ final class ShippingMethodRulesEligibilityChecker implements ShippingMethodEligi
         $this->ruleRegistry = $ruleRegistry;
     }
 
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $shippingMethod): bool
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
         if (!$shippingMethod->hasRules()) {
             return true;
         }
 
         foreach ($shippingMethod->getRules() as $rule) {
-            if (!$this->isEligibleToRule($subject, $rule)) {
+            if (!$this->isEligibleToRule($shippingSubject, $rule)) {
                 return false;
             }
         }

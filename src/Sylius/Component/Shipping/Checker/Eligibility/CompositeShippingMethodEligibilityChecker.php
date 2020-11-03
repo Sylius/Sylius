@@ -32,10 +32,10 @@ final class CompositeShippingMethodEligibilityChecker implements ShippingMethodE
         $this->eligibilityCheckers = $eligibilityCheckers;
     }
 
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $shippingMethod): bool
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
         foreach ($this->eligibilityCheckers as $eligibilityChecker) {
-            if (!$eligibilityChecker->isEligible($subject, $shippingMethod)) {
+            if (!$eligibilityChecker->isEligible($shippingSubject, $shippingMethod)) {
                 return false;
             }
         }
