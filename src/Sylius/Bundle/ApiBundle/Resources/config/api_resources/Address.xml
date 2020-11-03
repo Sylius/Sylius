@@ -42,9 +42,6 @@
             </itemOperation>
             <itemOperation name="shop_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:address:update</attribute>
-                </attribute>
             </itemOperation>
         </itemOperations>
 
