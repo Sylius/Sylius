@@ -23,7 +23,7 @@ The new rule needs a RuleChecker class:
     {
         public const TYPE = 'total_volume_less_than_or_equal';
 
-        public function isEligible(ShippingSubjectInterface $subject, array $configuration): bool
+        public function isEligible(ShippingSubjectInterface $shippingSubject, array $configuration): bool
         {
             return $subject->getShippingVolume() <= $configuration['volume'];
         }

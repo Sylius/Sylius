@@ -18,14 +18,14 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class CategoryRequirementEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $shippingMethod): bool
+    public function isEligible(ShippingSubjectInterface $shippingSubject, ShippingMethodInterface $shippingMethod): bool
     {
         if (!$category = $shippingMethod->getCategory()) {
             return true;
         }
 
         $numMatches = $numShippables = 0;
-        foreach ($subject->getShippables() as $shippable) {
+        foreach ($shippingSubject->getShippables() as $shippable) {
             ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
                 ++$numMatches;

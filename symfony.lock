@@ -55,6 +55,9 @@
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
     },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -795,6 +798,9 @@
             "ref": "87c585d24de9f43bca80ebcfd5cf5cb39445d95f"
         }
     },
+    "symfony/http-client-contracts": {
+        "version": "v2.3.1"
+    },
     "symfony/http-foundation": {
         "version": "v4.1.3"
     },
@@ -1059,6 +1065,9 @@
     },
     "symplify/smart-file-system": {
         "version": "8.2.21"
+    },
+    "symplify/symplify-kernel": {
+        "version": "8.3.48"
     },
     "textalk/websocket": {
         "version": "1.2.0"
