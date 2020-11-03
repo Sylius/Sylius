@@ -94,12 +94,12 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I choose :locale as a default locale
+     * @When I choose :defaultLocaleName as a default locale
      * @When I do not choose default locale
      */
-    public function iChooseAsADefaultLocale(string $locale = null): void
+    public function iChooseAsADefaultLocale(string $defaultLocaleName = null): void
     {
-        $this->createPage->chooseDefaultLocale($locale);
+        $this->createPage->chooseDefaultLocale($defaultLocaleName);
     }
 
     /**
@@ -404,24 +404,24 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I make it available (only) in :locale
+     * @When I make it available (only) in :nameOfLocale
      */
-    public function iMakeItAvailableIn(string $localeName): void
+    public function iMakeItAvailableIn(string $nameOfLocale): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->chooseLocale($localeName);
+        $currentPage->chooseLocale($nameOfLocale);
     }
 
     /**
-     * @Then the channel :channel should be available in :locale
+     * @Then the channel :channel should be available in :nameOfLocale
      */
-    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, string $locale): void
+    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, string $nameOfLocale): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isLocaleChosen($locale));
+        Assert::true($this->updatePage->isLocaleChosen($nameOfLocale));
     }
 
     /**
