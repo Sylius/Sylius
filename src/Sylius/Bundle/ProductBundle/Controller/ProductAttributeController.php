@@ -17,10 +17,16 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Webmozart\Assert\Assert;
 
 class ProductAttributeController extends ResourceController
 {
@@ -77,6 +83,63 @@ class ProductAttributeController extends ResourceController
             'count' => $request->query->get('count'),
             'metadata' => $this->metadata,
         ]);
+    }
+
+    public function getAttributesJsonAction(Request $request): JsonResponse
+    {
+        /** @var string|null $productCode */
+        $productCode = $request->attributes->get('productCode');
+        Assert::notNull($productCode);
+
+        /** @var ProductRepositoryInterface|null $productRepository */
+        $productRepository = $this->get('sylius.repository.product');
+        Assert::notNull($productRepository);
+
+        /** @var ProductInterface $product */
+        $product = $productRepository->findOneByCode($productCode);
+
+        $attributes = [];
+
+        /** @var AttributeValueInterface $attributeValue */
+        foreach ($product->getAttributes() as $attributeValue) {
+            /** @var string|null $localeCode */
+            $localeCode = $attributeValue->getLocaleCode();
+
+            /** @var ProductAttributeInterface $attribute */
+            $attribute = $attributeValue->getAttribute();
+
+            $value = [
+                'id' => (string) $attributeValue->getId(),
+                'localeCode' => $localeCode,/*remove after add the translatable flag*/
+                'value' => $attributeValue->getValue(),
+                'label' => $attribute->getNameByLocaleCode($localeCode)
+            ];
+
+            /* uncomment after add the translatable flag
+            if($attribute->isTranslatable()) {
+                $value['localeCode'] = $localeCode;
+            }
+            */
+
+            $attributeCode = $attribute->getCode();
+
+            $values = isset($attributes[$attributeCode]['values']) ? $attributes[$attributeCode]['values'] : [];
+
+            if (isset($values)) {
+                $values[] = $value;
+            }
+
+            $attributes[$attribute->getCode()] = [
+                'code' => $attributeCode,
+                'type' => $attributeValue->getType(),
+                /* uncomment after add the translatable flag
+                'translatable' => $attribute->isTranslatable(),
+                */
+                'values' => $values
+            ];
+
+        }
+        return new JsonResponse(['attributes' => $attributes]);
     }
 
     /**
