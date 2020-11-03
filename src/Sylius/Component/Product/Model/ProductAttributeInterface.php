@@ -17,4 +17,5 @@ use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterfac
 
 interface ProductAttributeInterface extends BaseAttributeInterface
 {
+    public function getNameByLocaleCode(string $localeCode): string;
 }
