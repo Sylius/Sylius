@@ -110,35 +110,27 @@ class ProductAttributeController extends ResourceController
 
             $value = [
                 'id' => (string) $attributeValue->getId(),
-                'localeCode' => $localeCode,/*remove after add the translatable flag*/
                 'value' => $attributeValue->getValue(),
                 'label' => $attribute->getNameByLocaleCode($localeCode)
             ];
 
-            /* uncomment after add the translatable flag
-            if($attribute->isTranslatable()) {
+            if ($attribute->isTranslatable()) {
                 $value['localeCode'] = $localeCode;
             }
-            */
 
             $attributeCode = $attribute->getCode();
 
             $values = isset($attributes[$attributeCode]['values']) ? $attributes[$attributeCode]['values'] : [];
+            $values[] = $value;
 
-            if (isset($values)) {
-                $values[] = $value;
-            }
-
-            $attributes[$attribute->getCode()] = [
+            $attributes[$attributeCode] = [
                 'code' => $attributeCode,
                 'type' => $attributeValue->getType(),
-                /* uncomment after add the translatable flag
                 'translatable' => $attribute->isTranslatable(),
-                */
                 'values' => $values
             ];
-
         }
+
         return new JsonResponse(['attributes' => $attributes]);
     }
 
