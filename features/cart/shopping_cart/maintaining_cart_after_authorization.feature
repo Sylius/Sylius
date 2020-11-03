@@ -6,6 +6,7 @@ Feature: Maintaining cart after authorization
 
     Background:
         Given the store operates on a single channel in "United States"
+        And on this channel account verification is not required
         And the store has a product "Stark T-Shirt" priced at "$12.00"
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 

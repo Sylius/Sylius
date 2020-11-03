@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -30,20 +31,14 @@ final class RegistrationContext implements Context
     /** @var LoginContext */
     private $loginContext;
 
-    /** @var ObjectManager */
-    private $orderManager;
-
-    /** @var ObjectManager */
-    private $shopUserManager;
-
     private $content = [];
 
-    public function __construct(AbstractBrowser $client, LoginContext $loginContext, ObjectManager $orderManager, ObjectManager $shopUserManager)
-    {
+    public function __construct(
+        AbstractBrowser $client,
+        LoginContext $loginContext
+    ) {
         $this->client = $client;
         $this->loginContext = $loginContext;
-        $this->orderManager = $orderManager;
-        $this->shopUserManager = $shopUserManager;
     }
 
     /**
@@ -114,8 +109,7 @@ final class RegistrationContext implements Context
     {
         $this->fillContent($email, $password);
         $this->iRegisterThisAccount();
-        $this->enableAccount($email);
-        $this->loginContext->iLogInAsWithPassword($email,$password);
+        $this->loginContext->iLogInAsWithPassword($email, $password);
     }
 
     /**
@@ -233,20 +227,6 @@ final class RegistrationContext implements Context
             'lastName' => 'Last',
             'email' => $email,
             'password' => $password
-            ];
-    }
-
-    private function enableAccount(string $email): void
-    {
-        // Temporary implementation until we will have an endpoint to enable account by administrator
-        // 'on this channel account verification is not required' step from ChannelContext does not work
-        $repository = $this->shopUserManager->getRepository(ShopUser::class);
-
-        /** @var ShopUserInterface $user */
-        $user = $repository->findOneBy(['username' => $email]);
-        $user->setEnabled(true);
-
-        $this->shopUserManager->persist($user);
-        $this->shopUserManager->flush();
+        ];
     }
 }

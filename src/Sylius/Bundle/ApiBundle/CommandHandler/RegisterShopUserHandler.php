@@ -17,6 +17,9 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -39,21 +42,21 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     /** @var CartToUserAssignerInterface */
     private $cartToUserAssignerInterface;
 
-    /** @var bool */
-    private $assignCartToRegisterUser;
+    /** @var ChannelContextInterface */
+    private $channelContext;
 
     public function __construct(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
         CartToUserAssignerInterface $cartToUserAssignerInterface,
-        bool $assignCartToRegisterUser
+        ChannelContextInterface $channelContext
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
         $this->customerProvider = $customerProvider;
         $this->cartToUserAssignerInterface = $cartToUserAssignerInterface;
-        $this->assignCartToRegisterUser = $assignCartToRegisterUser;
+        $this->channelContext = $channelContext;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -64,9 +67,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
 
         $customer = $this->customerProvider->provide($command->email);
 
-        if($this->assignCartToRegisterUser) {
-            $this->cartToUserAssignerInterface->assignByCustomer($customer);
-        }
+        $this->cartToUserAssignerInterface->assignByCustomer($customer);
 
         if ($customer->getUser() !== null) {
             throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));
@@ -77,6 +78,18 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $customer->setPhoneNumber($command->phoneNumber);
         $customer->setUser($user);
 
+        $this->handleVerification($user);
+
         $this->shopUserManager->persist($user);
+    }
+
+    private function handleVerification(ShopUserInterface $user): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        if (!$channel->isAccountVerificationRequired()) {
+            $user->setEnabled(true);
+        }
     }
 }

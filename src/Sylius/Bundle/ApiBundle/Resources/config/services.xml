@@ -121,7 +121,6 @@
         <service id="sylius.api.authentication_success_handler_decorator" class="Sylius\Bundle\ApiBundle\Decorator\AuthenticationSuccessHandlerDecorator" decorates="lexik_jwt_authentication.handler.authentication_success" >
             <argument type="service" id="sylius.api.authentication_success_handler_decorator.inner" />
             <argument type="service" id="sylius.api.cart_to_user_assigner" />
-            <argument>true</argument>
         </service>
 
         <service id="sylius.api.cart_to_user_assigner" class="Sylius\Bundle\ApiBundle\Assigner\CartToUserAssigner">

@@ -36,22 +36,17 @@ class AuthenticationSuccessHandlerDecorator implements AuthenticationSuccessHand
     /** @var CartToUserAssignerInterface */
     private $cartToUserAssignerInterface;
 
-    /** @var bool */
-    private $assignCartToLoginUser;
-
     public function __construct(
         AuthenticationSuccessHandlerInterface $authenticationSuccessHandlerInterface,
-        CartToUserAssignerInterface $cartToUserAssignerInterface,
-        bool $assignCartToLoginUser
+        CartToUserAssignerInterface $cartToUserAssignerInterface
     ) {
         $this->authenticationSuccessHandlerInterface = $authenticationSuccessHandlerInterface;
         $this->cartToUserAssignerInterface = $cartToUserAssignerInterface;
-        $this->assignCartToLoginUser = $assignCartToLoginUser;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
-        if ($this->assignCartToLoginUser && $token->getUser() instanceof ShopUserInterface) {
+        if ($token->getUser() instanceof ShopUserInterface) {
             /** @var ShopUserInterface $user */
             $user = $token->getUser();
 
