@@ -21,14 +21,12 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class CorrectChangeShopUserConfirmPasswordValidator extends ConstraintValidator
 {
-    /**
-     * @param ChangeShopUserPassword|mixed $command
-     */
-    public function validate($command, Constraint $constraint): void
+    /** @param ChangeShopUserPassword|mixed $value */
+    public function validate($value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($command, ChangeShopUserPassword::class);
+        Assert::isInstanceOf($value, ChangeShopUserPassword::class);
 
-        if ($command->confirmPassword !== $command->newPassword) {
+        if ($value->confirmPassword !== $value->newPassword) {
             $this->context->buildViolation('sylius.user.plainPassword.mismatch')
                 ->atPath('newPassword')
                 ->addViolation()

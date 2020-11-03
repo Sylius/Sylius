@@ -16,7 +16,9 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class ChangeShopUserPassword implements ShopUserIdAwareInterface
 {
-    /** @psalm-suppress MissingReturnType */
+    /**
+     * @var mixed|null
+     */
     public $shopUserId;
 
     /**

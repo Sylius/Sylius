@@ -80,4 +80,13 @@ final class HomepageContext implements Context
             }
         }
     }
+
+    /**
+     * @Then I should be logged in
+     */
+    public function iShouldBeLoggedIn(): void
+    {
+        $this->homePage->verify();
+        Assert::true($this->homePage->hasLogoutButton());
+    }
 }
