@@ -192,7 +192,6 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "nikic/php-parser":"^4.7",
         "doctrine/inflector": "^1.4",
         "phpspec/prophecy": "1.11.0",
         "sylius/grid-bundle": "1.7.4",
