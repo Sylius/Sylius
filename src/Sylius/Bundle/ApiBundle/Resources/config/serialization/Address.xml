@@ -25,47 +25,61 @@
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="lastName">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
+        </attribute>
+        <attribute name="phoneNumber">
+            <group>shop:address:update</group>
+        </attribute>
+        <attribute name="company">
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="city">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="street">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="postcode">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="countryCode">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="provinceCode">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
+            <group>shop:address:update</group>
         </attribute>
         <attribute name="provinceName">
             <group>address:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
+            <group>shop:address:update</group>
         </attribute>
     </class>
 </serializer>
