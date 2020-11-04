@@ -14,17 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -38,9 +33,6 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
 
     /** @var CustomerProviderInterface */
     private $customerProvider;
-
-    /** @var CartToUserAssignerInterface */
-    private $cartToUserAssignerInterface;
 
     /** @var ChannelContextInterface */
     private $channelContext;
