@@ -20,7 +20,6 @@
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
-            <argument type="service" id="sylius.api.cart_to_user_assigner" />
             <argument type="service" id="sylius.context.channel" />
             <tag name="messenger.message_handler" />
         </service>

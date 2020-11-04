@@ -13,19 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Decorator;
 
-use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssigner;
-use Sylius\Bundle\ApiBundle\Assigner\CartToUserAssignerInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\User\Model\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
-
 
 /** @experimental */
 class AuthenticationSuccessHandlerDecorator implements AuthenticationSuccessHandlerInterface
@@ -50,6 +42,7 @@ class AuthenticationSuccessHandlerDecorator implements AuthenticationSuccessHand
             /** @var ShopUserInterface $user */
             $user = $token->getUser();
 
+            #TODO use CartBlamerListener maybe
             $this->cartToUserAssignerInterface->assignByCustomer($user->getCustomer());
         }
 

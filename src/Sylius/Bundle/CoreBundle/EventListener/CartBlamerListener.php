@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTAuthenticatedEvent;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -49,6 +50,16 @@ final class CartBlamerListener
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent): void
     {
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
+        if (!$user instanceof ShopUserInterface) {
+            return;
+        }
+
+        $this->blame($user);
+    }
+
+    public function onJWTAuthenticatedLogin(JWTAuthenticatedEvent $JWTAuthenticatedEvent): void
+    {
+        $user = $JWTAuthenticatedEvent->getToken()->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
         }

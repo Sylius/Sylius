@@ -49,13 +49,11 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
-        CartToUserAssignerInterface $cartToUserAssignerInterface,
         ChannelContextInterface $channelContext
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
         $this->customerProvider = $customerProvider;
-        $this->cartToUserAssignerInterface = $cartToUserAssignerInterface;
         $this->channelContext = $channelContext;
     }
 
@@ -66,8 +64,6 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $user->setPlainPassword($command->password);
 
         $customer = $this->customerProvider->provide($command->email);
-
-        $this->cartToUserAssignerInterface->assignByCustomer($customer);
 
         if ($customer->getUser() !== null) {
             throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));
