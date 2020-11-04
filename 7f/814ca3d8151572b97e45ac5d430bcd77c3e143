@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-10-22T07:57:17Z
+
+Also please add to your PR description: `Fixes #11945` as this will relate this PR to the issue and close the issue upon merge.
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2020-10-26T07:07:56Z
+
+Your `Fixes` statement only closes 11768 right now. I think you should prepend `Fixes` to each issue number to have it closed :) Just a heads up ;)
+
+---------------------------------------------------------------------------
+
+by twojtylak at 2020-10-26T20:39:17Z
+
+> Your `Fixes` statement only closes 11768 right now. I think you should prepend `Fixes` to each issue number to have it closed :) Just a heads up ;)
+
+Alright I added `fixes` in the pr description 😄
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-11-02T19:59:31Z
+
+Hey @twojtylak, I've restarted also your build.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-11-04T17:02:08Z
+
+Thanks, @twojtylak! :1st_place_medal:
