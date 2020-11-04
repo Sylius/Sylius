@@ -69,20 +69,20 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I browse orders
-     */
-    public function iBrowseOrders(): void
-    {
-        $this->client->index();
-    }
-
-    /**
      * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
         $this->client->show($order->getTokenValue());
+    }
+
+    /**
+     * @When I browse orders
+     */
+    public function iBrowseOrders(): void
+    {
+        $this->client->index();
     }
 
     /**

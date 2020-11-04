@@ -54,25 +54,17 @@ final class ManagingCustomerGroupsContext implements Context
 
     /**
      * @When I specify its name as :name
+     * @When I remove its name
      */
-    public function iSpecifyItsNameAs(string $name): void
+    public function iSpecifyItsNameAs(string $name = ''): void
     {
         $this->client->addRequestData('name', $name);
     }
 
     /**
-     * @When I remove its name
+     * @When I (try to) add it
      */
-    public function iRemoveItsName(): void
-    {
-        $this->client->addRequestData('name', '');
-    }
-
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->client->create();
     }
@@ -86,8 +78,7 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -200,7 +191,7 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then /^(this customer group) should no longer exist in the registry$/
      */
-    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup)
+    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup): void
     {
         $code = $customerGroup->getCode();
         Assert::false($this->isItemOnIndex('code', $code), sprintf('Customer group with code %s exist', $code));

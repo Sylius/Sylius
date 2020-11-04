@@ -69,6 +69,19 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I sort the shipping methods :sortType by name
+     * @When I switch the way shipping methods are sorted :sortType by name
+     * @Given the shipping methods are already sorted :sortType by name
+     */
+    public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
+    {
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
+    }
+
+    /**
      * @When I change my locale to :localeCode
      */
     public function iSwitchTheLocaleToTheLocale(string $localeCode): void
@@ -116,16 +129,14 @@ final class ManagingShippingMethodsContext implements Context
     public function iTryToCreateANewShippingMethodWithValidData(): void
     {
         $this->client->buildCreateRequest();
-        $this->client->addRequestData('code', 'FED_EX_CARRIER');
-        $this->client->addRequestData('position', 0);
-        $this->client->updateRequestData(
-            ['translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']]]
-        );
-        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')));
-        $this->client->addRequestData('calculator', 'Flat rate per shipment');
-        $this->client->addRequestData(
-            'configuration', [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]]
-        );
+        $this->client->setRequestData([
+            'code' => 'FED_EX_CARRIER',
+            'position' => 0,
+            'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
+            'zone' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')),
+            'calculator' => 'Flat rate per shipment',
+            'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]]
+        ]);
     }
 
     /**
@@ -137,8 +148,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -228,37 +238,19 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I archive the :shippingMethod shipping method
+     * @When I (try to) archive the :shippingMethod shipping method
      */
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
-        $this->client->index();
     }
 
     /**
-     * @When I try to archive the :shippingMethod shipping method
-     */
-    public function iTryToArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
-    }
-
-    /**
-     * @When I try to restore the :shippingMethod shipping method
+     * @When I (try to) restore the :shippingMethod shipping method
      */
     public function iTryToRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
-    }
-
-    /**
-     * @When I restore the :shippingMethod shipping method
-     */
-    public function iRestoreTheShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'restore');
-        $this->client->index();
     }
 
     /**
@@ -280,8 +272,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -295,19 +286,6 @@ final class ManagingShippingMethodsContext implements Context
     public function iSortShippingMethodsByCode(string $sortType = 'ascending'): void
     {
         $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
-    }
-
-    /**
-     * @When I sort the shipping methods :sortType by name
-     * @When I switch the way shipping methods are sorted :sortType by name
-     * @Given the shipping methods are already sorted :sortType by name
-     */
-    public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
-    {
-        $this->client->sort([
-            'translation.name' => self::SORT_TYPES[$sortType],
-            'localeCode' => $this->getAdminLocaleCode(),
-        ]);
     }
 
     /**
@@ -530,6 +508,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theOnlyShippingMethodOnTheListShouldBe(string $name): void
     {
+        $this->client->index();
+
         $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
@@ -542,6 +522,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldSeeShippingMethodOnTheList(int $amount): void
     {
+        $this->client->index();
+
         $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 

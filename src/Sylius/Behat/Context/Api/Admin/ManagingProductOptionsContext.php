@@ -42,19 +42,19 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I browse product options
-     */
-    public function iBrowseProductOptions(): void
-    {
-        $this->client->index();
-    }
-
-    /**
      * @Given I want to create a new product option
      */
     public function iWantToCreateANewProductOption(): void
     {
         $this->client->buildCreateRequest();
+    }
+
+    /**
+     * @When I browse product options
+     */
+    public function iBrowseProductOptions(): void
+    {
+        $this->client->index();
     }
 
     /**
@@ -127,8 +127,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -136,8 +135,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {

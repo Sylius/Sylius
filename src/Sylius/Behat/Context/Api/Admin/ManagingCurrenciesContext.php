@@ -57,8 +57,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {

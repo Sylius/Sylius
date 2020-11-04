@@ -15,20 +15,20 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
-    /** @var Client */
+    /** @var AbstractBrowser */
     private $client;
 
     /** @var SessionInterface */
     private $session;
 
-    public function __construct(Client $client, SessionInterface $session)
+    public function __construct(AbstractBrowser $client, SessionInterface $session)
     {
         $this->client = $client;
         $this->session = $session;
@@ -37,7 +37,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I look for a variant with :phrase in descriptor within the :product product
      */
-    public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product)
+    public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product): void
     {
         $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
         $this->client->request(
@@ -52,7 +52,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should see (\d+) product variants? on the list$/
      */
-    public function iShouldSeeProductVariantsInTheList($number)
+    public function iShouldSeeProductVariantsInTheList($number): void
     {
         Assert::eq(count($this->getJSONResponse()), $number);
     }
@@ -63,9 +63,9 @@ final class ManagingProductVariantsContext implements Context
      * @Then I should see the product variants named :firstName, :secondName and :thirdName on the list
      * @Then I should see the product variants named :firstName, :secondName, :thirdName and :fourthName on the list
      */
-    public function iShouldSeeTheProductVariantNamedAnd(...$names)
+    public function iShouldSeeTheProductVariantNamedAnd(...$names): void
     {
-        $itemsNames = array_map(function ($item) {
+        $itemsNames = array_map(static function ($item) {
             return strstr($item['descriptor'], ' ', true);
         }, $this->getJSONResponse());
 
@@ -75,7 +75,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should see the product variant labeled :label on the list
      */
-    public function iShouldSeeTheProductVariantLabeledAs($label)
+    public function iShouldSeeTheProductVariantLabeledAs($label): void
     {
         $itemsLabels = array_column($this->getJSONResponse(), 'descriptor');
 

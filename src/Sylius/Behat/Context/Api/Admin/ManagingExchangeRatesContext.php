@@ -43,14 +43,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I want to add a new exchange rate
-     */
-    public function iWantToAddNewExchangeRate(): void
-    {
-        $this->client->buildCreateRequest();
-    }
-
-    /**
      * @When /^I want to edit (this exchange rate)$/
      * @Given /^I am editing (this exchange rate)$/
      */
@@ -69,6 +61,14 @@ final class ManagingExchangeRatesContext implements Context
     public function iBrowseExchangeRatesOfTheStore(): void
     {
         $this->client->index();
+    }
+
+    /**
+     * @When I want to add a new exchange rate
+     */
+    public function iWantToAddNewExchangeRate(): void
+    {
+        $this->client->buildCreateRequest();
     }
 
     /**
@@ -202,7 +202,7 @@ final class ManagingExchangeRatesContext implements Context
     public function itShouldHaveARatioOf(float $ratio): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'ratio', (float) $ratio),
+            $this->responseChecker->hasItemWithValue($this->client->index(), 'ratio', $ratio),
             sprintf('ExchangeRate with ratio %s does not exist', $ratio)
         );
     }

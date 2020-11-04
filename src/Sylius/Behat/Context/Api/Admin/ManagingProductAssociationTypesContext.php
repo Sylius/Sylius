@@ -74,8 +74,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -143,8 +142,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
+     * @Then /^I should be notified that (?:it has|they have) been successfully deleted$/
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
@@ -182,8 +180,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -226,8 +223,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I check the :productAssociationType product association type
-     * @When I check also the :productAssociationType product association type
+     * @When I check (also) the :productAssociationType product association type
      */
     public function iCheckTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
     {
