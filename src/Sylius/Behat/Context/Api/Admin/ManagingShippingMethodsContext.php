@@ -243,6 +243,7 @@ final class ManagingShippingMethodsContext implements Context
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->customItemAction($shippingMethod->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+        $this->client->index();
     }
 
     /**
@@ -508,8 +509,6 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theOnlyShippingMethodOnTheListShouldBe(string $name): void
     {
-        $this->client->index();
-
         $response = $this->client->getLastResponse();
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
