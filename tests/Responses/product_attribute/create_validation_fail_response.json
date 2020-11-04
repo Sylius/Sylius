@@ -5,6 +5,7 @@
         "children": {
             "type": {},
             "position": {},
+            "translatable": {},
             "translations": {},
             "code": {
                 "errors": [

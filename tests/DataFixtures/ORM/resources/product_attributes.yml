@@ -19,9 +19,14 @@ Sylius\Component\Product\Model\ProductAttributeTranslation:
         locale: en_US
         name: "Mug color"
         translatable: "@productAttributeSelect"
+    attributeTranslation6:
+        locale: en_US
+        name: "Mug size"
+        translatable: "@productAttributeNotTranslatable"
 
 Sylius\Component\Product\Model\ProductAttribute:
     productAttribute1:
+        translatable: true
         fallbackLocale: en_US
         currentLocale: de
         code: mug_material
@@ -31,6 +36,7 @@ Sylius\Component\Product\Model\ProductAttribute:
             - "@attributeTranslation1"
             - "@attributeTranslation3"
     productAttribute2:
+        translatable: true
         fallbackLocale: en_US
         currentLocale: de
         code: mug_collection
@@ -40,6 +46,7 @@ Sylius\Component\Product\Model\ProductAttribute:
             - "@attributeTranslation2"
             - "@attributeTranslation4"
     productAttributeSelect:
+        translatable: true
         fallbackLocale: en_US
         currentLocale: de
         code: mug_color
@@ -54,3 +61,12 @@ Sylius\Component\Product\Model\ProductAttribute:
             multiple: true
         translations:
             - "@attributeTranslation5"
+    productAttributeNotTranslatable:
+        translatable: false
+        fallbackLocale: en_US
+        currentLocale: de
+        code: mug_size
+        type: text
+        storage_type: text
+        translations:
+            - "@attributeTranslation6"

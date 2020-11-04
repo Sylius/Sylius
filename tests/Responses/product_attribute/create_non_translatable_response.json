@@ -11,7 +11,7 @@
     "position": 0,
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
-    "translatable": true,
+    "translatable": false,
     "translations": {
         "en_US": {
             "id": @integer@,

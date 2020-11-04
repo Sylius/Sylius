@@ -6,6 +6,7 @@
     "position": 0,
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
+    "translatable": true,
     "translations": {
         "de": {
             "id": @integer@,
