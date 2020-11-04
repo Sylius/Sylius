@@ -184,7 +184,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         if (null !== $this->taxonRepository) {
             $resolver
-                ->setDefault('menu_taxon', LazyOption::randomOne($this->taxonRepository))
+                ->setDefault('menu_taxon', LazyOption::randomOneOrNull($this->taxonRepository))
                 ->setAllowedTypes('menu_taxon', ['null', 'string', TaxonInterface::class])
                 ->setNormalizer('menu_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
             ;
