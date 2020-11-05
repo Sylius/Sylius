@@ -99,6 +99,11 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
+        <service id="sylius.api.data_transformer.logged_in_shop_user_id_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+
         <service id="sylius.api.data_transformer.subresource_id_aware_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\SubresourceIdAwareCommandDataTransformer">
             <argument type="service" id="request_stack" />
             <tag name="sylius.api.command_data_transformer" />

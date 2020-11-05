@@ -18,15 +18,15 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class AccountContext implements Context
+final class CustomerContext implements Context
 {
     /** @var ApiClientInterface */
-    private $accountClient;
+    private $customerClient;
 
     /** @var ApiClientInterface */
     private $orderShopClient;
@@ -47,7 +47,7 @@ final class AccountContext implements Context
     private $shopApiSecurityContext;
 
     public function __construct(
-        ApiClientInterface $accountClient,
+        ApiClientInterface $customerClient,
         ApiClientInterface $orderShopClient,
         SharedStorageInterface $sharedStorage,
         ResponseCheckerInterface $responseChecker,
@@ -55,7 +55,7 @@ final class AccountContext implements Context
         LoginContext $loginContext,
         ShopSecurityContext $shopApiSecurityContext
     ) {
-        $this->accountClient = $accountClient;
+        $this->customerClient = $customerClient;
         $this->orderShopClient = $orderShopClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
@@ -73,7 +73,20 @@ final class AccountContext implements Context
         $shopUser = $this->sharedStorage->get('user');
         $customer = $shopUser->getCustomer();
 
-        $this->accountClient->buildUpdateRequest((string) $customer->getId());
+        $this->customerClient->buildUpdateRequest((string) $customer->getId());
+    }
+
+    /**
+     * @When I want to change my password
+     */
+    public function iWantToChangeMyPassword(): void
+    {
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->sharedStorage->get('user');
+        /** @var CustomerInterface $customer */
+        $customer = $shopUser->getCustomer();
+
+        $this->customerClient->buildCustomUpdateRequest((string) $customer->getId(), 'password');
     }
 
     /**
@@ -82,7 +95,7 @@ final class AccountContext implements Context
      */
     public function iSpecifyTheFirstName(string $firstName = ''): void
     {
-        $this->accountClient->addRequestData('firstName', $firstName);
+        $this->customerClient->addRequestData('firstName', $firstName);
     }
 
     /**
@@ -91,7 +104,7 @@ final class AccountContext implements Context
      */
     public function iSpecifyTheLastName(string $lastName = ''): void
     {
-        $this->accountClient->addRequestData('lastName', $lastName);
+        $this->customerClient->addRequestData('lastName', $lastName);
     }
 
     /**
@@ -100,7 +113,7 @@ final class AccountContext implements Context
      */
     public function iSpecifyCustomerTheEmail(string $email = ''): void
     {
-        $this->accountClient->addRequestData('email', $email);
+        $this->customerClient->addRequestData('email', $email);
     }
 
     /**
@@ -109,7 +122,43 @@ final class AccountContext implements Context
      */
     public function iSaveMyChanges(): void
     {
-        $this->accountClient->update();
+        $this->customerClient->update();
+    }
+
+    /**
+     * @When I specify the current password as :password
+     */
+    public function iSpecifyTheCurrentPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('currentPassword', $password);
+    }
+
+    /**
+     * @When I specify the new password as :password
+     */
+    public function iSpecifyTheNewPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('newPassword', $password);
+    }
+
+    /**
+     * @When I confirm this password as :password
+     */
+    public function iSpecifyTheConfirmationPasswordAs(string $password): void
+    {
+        $this->customerClient->addRequestData('confirmNewPassword', $password);
+    }
+
+    /**
+     * @When I change password from :oldPassword to :newPassword
+     */
+    public function iChangePasswordTo(string $oldPassword, string $newPassword): void
+    {
+        $this->customerClient->setRequestData([
+            'currentPassword' => $oldPassword,
+            'newPassword' => $newPassword,
+            'confirmNewPassword' => $newPassword
+        ]);
     }
 
     /**
@@ -117,7 +166,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->accountClient->getLastResponse()));
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->customerClient->getLastResponse()));
     }
 
     /**
@@ -131,7 +180,7 @@ final class AccountContext implements Context
 
         $this->shopApiSecurityContext->iAmLoggedInAs($email);
 
-        $response = $this->accountClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
@@ -145,7 +194,7 @@ final class AccountContext implements Context
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->sharedStorage->get('user');
 
-        $response = $this->accountClient->show((string) $shopUser->getCustomer()->getId());
+        $response = $this->customerClient->show((string) $shopUser->getCustomer()->getId());
 
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
@@ -156,7 +205,7 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'First name must be at least 2 characters long.'
         );
     }
@@ -167,7 +216,7 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'Last name must be at least 2 characters long.'
         );
     }
@@ -178,7 +227,7 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'Please enter your email.'
         );
     }
@@ -189,7 +238,7 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'This email is already used.'
         );
     }
@@ -200,7 +249,7 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatElementIsInvalid(): void
     {
         $this->isViolationWithMessageInResponse(
-            $this->accountClient->getLastResponse(),
+            $this->customerClient->getLastResponse(),
             'This email is invalid.'
         );
     }
@@ -257,5 +306,55 @@ final class AccountContext implements Context
         }
 
         return false;
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
+    {
+        $response = $this->customerClient->getLastResponse();
+
+        Assert::same(
+            $response->getStatusCode(),
+            204,
+            $response->getContent()
+        );
+    }
+
+    /**
+     * @Then I should be notified that provided password is different than the current one
+     */
+    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
+    {
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            'Provided password is different than the current one.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+
+        Assert::contains(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
+            'newPassword: The entered passwords don\'t match'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the ([^"]+) should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
+    {
+        Assert::contains($this->responseChecker->getError($this->customerClient->getLastResponse()),
+            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
+        );
     }
 }

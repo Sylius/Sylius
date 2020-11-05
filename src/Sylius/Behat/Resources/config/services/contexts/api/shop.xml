@@ -76,7 +76,7 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
-        <service id="sylius.behat.context.api.shop.account" class="Sylius\Behat\Context\Api\Shop\AccountContext">
+        <service id="sylius.behat.context.api.shop.customer" class="Sylius\Behat\Context\Api\Shop\CustomerContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop.account" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
             <argument type="service" id="sylius.behat.shared_storage" />

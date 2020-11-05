@@ -276,6 +276,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
+            <argument type="service" id="sylius_default.bus" />
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="Sylius\Behat\Context\Setup\ZoneContext">
