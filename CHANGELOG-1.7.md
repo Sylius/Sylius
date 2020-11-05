@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.10 (2020-11-05)
+
+#### Details
+
+- [#11940](https://github.com/Sylius/Sylius/issues/11940) [Maintenance] Adjusting symfony.lock to lowest supported PHP version ([@lchrusciel](https://github.com/lchrusciel))
+- [#11957](https://github.com/Sylius/Sylius/issues/11957) Minor CS fixes detected by ECS ([@Zales0123](https://github.com/Zales0123))
+- [#11972](https://github.com/Sylius/Sylius/issues/11972) [Maintenance] Conflict symfony doctrine bridge ([@lchrusciel](https://github.com/lchrusciel))
+- [#11871](https://github.com/Sylius/Sylius/issues/11871) Patch for Unable to extends ShopBillingData [#11625] ([@jbcr](https://github.com/jbcr))
+- [#11991](https://github.com/Sylius/Sylius/issues/11991) Remove nikic/php-parser as a conflict ([@loevgaard](https://github.com/loevgaard))
+- [#11894](https://github.com/Sylius/Sylius/issues/11894) [Order] Do not stop cancelling unpaid orders on exception during canc… ([@twojtylak](https://github.com/twojtylak))
+
 ## v1.7.9 (2020-10-20)
 
 #### Details
