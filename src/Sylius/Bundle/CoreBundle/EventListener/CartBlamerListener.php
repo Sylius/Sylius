@@ -57,9 +57,9 @@ final class CartBlamerListener
         $this->blame($user);
     }
 
-    public function onJWTAuthenticatedLogin(JWTAuthenticatedEvent $JWTAuthenticatedEvent): void
+    public function onJWTAuthenticatedLogin(JWTAuthenticatedEvent $event): void
     {
-        $user = $JWTAuthenticatedEvent->getToken()->getUser();
+        $user = $event->getToken()->getUser();
         if (!$user instanceof ShopUserInterface) {
             return;
         }

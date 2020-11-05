@@ -33,10 +33,8 @@ final class RegistrationContext implements Context
 
     private $content = [];
 
-    public function __construct(
-        AbstractBrowser $client,
-        LoginContext $loginContext
-    ) {
+    public function __construct(AbstractBrowser $client, LoginContext $loginContext)
+    {
         $this->client = $client;
         $this->loginContext = $loginContext;
     }

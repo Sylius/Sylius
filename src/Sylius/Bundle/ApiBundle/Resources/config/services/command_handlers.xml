@@ -31,7 +31,6 @@
             <argument type="service" id="sylius.api.context.user" />
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.random_generator" />
-            <argument type="service" id="session" />
             <tag name="messenger.message_handler" />
         </service>
 
