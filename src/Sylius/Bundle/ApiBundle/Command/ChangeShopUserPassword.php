@@ -31,7 +31,7 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
      * @var string|null
      * @psalm-immutable
      */
-    public $confirmPassword;
+    public $confirmNewPassword;
 
     /**
      * @var string|null
@@ -42,7 +42,7 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
     public function __construct(?string $newPassword, ?string $confirmNewPassword, ?string $currentPassword)
     {
         $this->newPassword = $newPassword;
-        $this->confirmPassword = $confirmNewPassword;
+        $this->confirmNewPassword = $confirmNewPassword;
         $this->currentPassword = $currentPassword;
     }
 
