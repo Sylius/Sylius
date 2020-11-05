@@ -1,0 +1,3 @@
+sylius:
+    order:
+        not_empty: 'An empty order cannot be completed.'

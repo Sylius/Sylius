@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -359,5 +361,20 @@ final class CheckoutCompleteContext implements Context
                 $productVariant->getName()
             )
         );
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout complete step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutCompleteStep(): void
+    {
+        $this->completePage->tryToOpen();
+        try {
+            $this->completePage->confirmOrder();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
     }
 }

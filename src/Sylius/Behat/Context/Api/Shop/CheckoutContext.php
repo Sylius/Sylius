@@ -333,6 +333,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I completed the shipping step with :shippingMethod shipping method
      * @When I proceed with :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
@@ -382,6 +383,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I completed the payment step with :paymentMethod payment method
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
      * @When I have proceeded selecting :paymentMethod payment method
@@ -596,6 +598,37 @@ final class CheckoutContext implements Context
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout shipping step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
+    {
+        $this->iShouldBeOnTheCheckoutShippingStep();
+        Assert::isEmpty($this->getCart()['shipments']);
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout payment step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
+    {
+        $this->iShouldBeOnTheCheckoutPaymentStep();
+        Assert::isEmpty($this->getCart()['payments']);
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout complete step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutCompleteStep(): void
+    {
+        $this->iShouldBeOnTheCheckoutCompleteStep();
+        $this->iConfirmMyOrder();
+
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+        Assert::same($this->responseChecker->getError($response), 'An empty order cannot be completed.');
     }
 
     /**
@@ -866,6 +899,14 @@ final class CheckoutContext implements Context
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress(): void
     {
         $this->assertProvinceMessage('billingAddress');
+    }
+
+    /**
+     * @Then I should not be able to address an order with an empty cart
+     */
+    public function iShouldNotBeAbleToAddressAnOrderWithAnEmptyCart(): void
+    {
+        $this->client->getResponse();
     }
 
     private function assertProvinceMessage(string $addressType): void
