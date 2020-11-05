@@ -190,7 +190,7 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
     # config/services.yaml
     services:
-        app.controller.shop.homepage:
+        sylius.controller.shop.homepage:
             class: App\Controller\Shop\HomepageController
             arguments: ['@templating']
             tags: ['controller.service_arguments']
