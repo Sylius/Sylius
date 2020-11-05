@@ -64,6 +64,7 @@
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
             <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.context.api.shop.login" />
         </service>
 
         <service id="sylius.behat.context.api.shop.order" class="Sylius\Behat\Context\Api\Shop\OrderContext">

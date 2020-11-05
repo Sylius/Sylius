@@ -17,6 +17,8 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -27,9 +29,10 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function let(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider
+        CustomerProviderInterface $customerProvider,
+        ChannelContextInterface $channelContext
     ): void {
-        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider);
+        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $channelContext);
     }
 
     function it_is_a_message_handler(): void
@@ -42,7 +45,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
+        ChannelContextInterface $channelContext,
+        Channel $channel
     ): void {
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
@@ -55,6 +60,39 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setLastName('Smith')->shouldBeCalled();
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
+
+        $channelContext->getChannel()->willReturn($channel);
+        $channel->isAccountVerificationRequired()->willReturn(true);
+
+        $shopUserManager->persist($shopUser)->shouldBeCalled();
+
+        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+    }
+
+    function it_creates_a_shop_user_with_given_data_and_verifies_it(
+        FactoryInterface $shopUserFactory,
+        ObjectManager $shopUserManager,
+        CustomerProviderInterface $customerProvider,
+        ShopUserInterface $shopUser,
+        CustomerInterface $customer,
+        ChannelContextInterface $channelContext,
+        Channel $channel
+    ): void {
+        $shopUserFactory->createNew()->willReturn($shopUser);
+        $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
+
+        $customer->getUser()->willReturn(null);
+
+        $shopUser->setPlainPassword('iamrobot')->shouldBeCalled();
+
+        $customer->setFirstName('Will')->shouldBeCalled();
+        $customer->setLastName('Smith')->shouldBeCalled();
+        $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
+        $customer->setUser($shopUser)->shouldBeCalled();
+
+        $channelContext->getChannel()->willReturn($channel);
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $shopUser->setEnabled(true)->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
