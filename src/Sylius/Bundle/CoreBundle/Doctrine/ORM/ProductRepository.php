@@ -39,7 +39,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
 

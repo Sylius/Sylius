@@ -63,3 +63,9 @@ Feature: Sorting listed products
         And I sort the products descending by name
         Then I should see 3 products in the list
         And the first product on the list should have name "Szałowy Mops"
+
+    @ui @api
+    Scenario: Products are visible independent from the user locale
+        Given this administrator is using "Zulu (South Africa)" locale
+        Given I am browsing products
+        Then I should see 3 products in the list
