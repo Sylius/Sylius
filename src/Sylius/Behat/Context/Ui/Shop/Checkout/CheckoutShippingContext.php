@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
@@ -41,6 +43,7 @@ final class CheckoutShippingContext implements Context
     }
 
     /**
+     * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
      * @When I proceed with :shippingMethodName shipping method
      */
@@ -203,5 +206,20 @@ final class CheckoutShippingContext implements Context
     public function iShouldBeCheckingOutAs($email)
     {
         Assert::same($this->selectShippingPage->getPurchaserEmail(), 'Checking out as ' . $email . '.');
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout shipping step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
+    {
+        $this->selectShippingPage->tryToOpen();
+        try {
+            $this->selectShippingPage->nextStep();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new UnexpectedPageException('It should not be possible to complete checkout shipping step.');
     }
 }

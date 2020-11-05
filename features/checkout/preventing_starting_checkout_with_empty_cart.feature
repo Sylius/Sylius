@@ -16,29 +16,29 @@ Feature: Preventing starting checkout with an empty cart
         When I try to open checkout addressing page
         Then I should be redirected to my cart summary page
 
-    @ui
+    @ui @api
     Scenario: Being unable to start checkout shipping step with an empty cart
         Given I added product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Joe Doe"
         When I remove product "PHP T-Shirt" from the cart
-        And I try to open checkout shipping page
-        Then I should be redirected to my cart summary page
+        Then I should not be able to proceed checkout shipping step
+        And I should be redirected to my cart summary page
 
-    @ui
+    @ui @api
     Scenario: Being unable to start checkout payment step with an empty cart
         Given I added product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Joe Doe"
-        And I completed the shipping step
+        And I completed the shipping step with "Free" shipping method
         When I remove product "PHP T-Shirt" from the cart
-        And I try to open checkout payment page
-        Then I should be redirected to my cart summary page
+        Then I should not be able to proceed checkout payment step
+        And I should be redirected to my cart summary page
 
-    @ui
+    @ui @api
     Scenario: Being unable to start checkout complete step with an empty cart
         Given I added product "PHP T-Shirt" to the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Joe Doe"
-        And I completed the shipping step
-        And I completed the payment step
+        And I completed the shipping step with "Free" shipping method
+        And I completed the payment step with "Offline" payment method
         When I remove product "PHP T-Shirt" from the cart
-        And I try to open checkout complete page
-        Then I should be redirected to my cart summary page
+        Then I should not be able to proceed checkout complete step
+        And I should be redirected to my cart summary page

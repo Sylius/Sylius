@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Webmozart\Assert\Assert;
@@ -49,9 +51,10 @@ final class CheckoutPaymentContext implements Context
     }
 
     /**
+     * @Given I completed the payment step with :paymentMethodName payment method
      * @When /^I choose "([^"]*)" payment method$/
      */
-    public function iChoosePaymentMethod($paymentMethodName)
+    public function iChoosePaymentMethod(string $paymentMethodName): void
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
         $this->selectPaymentPage->nextStep();
@@ -149,5 +152,20 @@ final class CheckoutPaymentContext implements Context
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
 
         Assert::same(end($paymentMethods), $paymentMethodName);
+    }
+
+    /**
+     * @Then I should not be able to proceed checkout payment step
+     */
+    public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
+    {
+        $this->selectPaymentPage->tryToOpen();
+        try {
+            $this->selectPaymentPage->nextStep();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new UnexpectedPageException('It should not be possible to complete checkout payment step.');
     }
 }
