@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.4 (2020-11-05)
+
+#### Details
+
+- [#11932](https://github.com/Sylius/Sylius/issues/11932) [Minor][API] Add missing messenger handler interfaces ([@lchrusciel](https://github.com/lchrusciel))
+- [#11940](https://github.com/Sylius/Sylius/issues/11940) [Maintenance] Adjusting symfony.lock to lowest supported PHP version ([@lchrusciel](https://github.com/lchrusciel))
+- [#11946](https://github.com/Sylius/Sylius/issues/11946) Changed behavior of string inflector ([@arti0090](https://github.com/arti0090))
+- [#11957](https://github.com/Sylius/Sylius/issues/11957) Minor CS fixes detected by ECS ([@Zales0123](https://github.com/Zales0123))
+- [#11958](https://github.com/Sylius/Sylius/issues/11958) [Core] Decouple cart collector from shop ([@lchrusciel](https://github.com/lchrusciel))
+- [#11972](https://github.com/Sylius/Sylius/issues/11972) [Maintenance] Conflict symfony doctrine bridge ([@lchrusciel](https://github.com/lchrusciel))
+- [#11871](https://github.com/Sylius/Sylius/issues/11871) Patch for Unable to extends ShopBillingData [#11625] ([@jbcr](https://github.com/jbcr))
+- [#11982](https://github.com/Sylius/Sylius/issues/11982) [Minor] Update service definition to not using depracated service ([@lchrusciel](https://github.com/lchrusciel))
+- [#11988](https://github.com/Sylius/Sylius/issues/11988) [Behat] Fix argument name after upgrade Behat to v3.8.0 ([@GSadee](https://github.com/GSadee))
+- [#11981](https://github.com/Sylius/Sylius/issues/11981) Adjust services to symfony/serializer:^4.4 ([@Zales0123](https://github.com/Zales0123))
+- [#11991](https://github.com/Sylius/Sylius/issues/11991) Remove nikic/php-parser as a conflict ([@loevgaard](https://github.com/loevgaard))
+- [#11999](https://github.com/Sylius/Sylius/issues/11999) [Maintenance] Bump psalm, fix naming issues and build ([@lchrusciel](https://github.com/lchrusciel))
+- [#11894](https://github.com/Sylius/Sylius/issues/11894) [Order] Do not stop cancelling unpaid orders on exception during canc… ([@twojtylak](https://github.com/twojtylak))
+
 ## v1.8.3 (2020-10-20)
 
 #### Details
