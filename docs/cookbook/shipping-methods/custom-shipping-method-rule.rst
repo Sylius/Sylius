@@ -25,7 +25,7 @@ The new rule needs a RuleChecker class:
 
         public function isEligible(ShippingSubjectInterface $shippingSubject, array $configuration): bool
         {
-            return $subject->getShippingVolume() <= $configuration['volume'];
+            return $shippingSubject->getShippingVolume() <= $configuration['volume'];
         }
     }
 
