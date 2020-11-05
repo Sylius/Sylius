@@ -104,8 +104,6 @@ final class PickupCartHandler implements MessageHandlerInterface
 
         $this->orderManager->persist($cart);
 
-        $this->session->set('cart_token', $cart->getTokenValue());
-
         return $cart;
     }
 
