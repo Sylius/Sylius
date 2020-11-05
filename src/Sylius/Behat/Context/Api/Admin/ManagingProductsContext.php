@@ -66,6 +66,30 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I start sorting products by name
+     * @When I sort the products :sortType by name
+     * @When I switch the way products are sorted :sortType by name
+     * @Given the products are already sorted :sortType by name
+     */
+    public function iStartSortingProductsByName(string $sortType = 'ascending'): void
+    {
+        $this->client->sort([
+            'translation.name' => self::SORT_TYPES[$sortType],
+            'localeCode' => $this->getAdminLocaleCode(),
+        ]);
+    }
+
+    /**
+     * @Given I am browsing products
+     * @When I browse products
+     * @When I want to browse products
+     */
+    public function iWantToBrowseProducts(): void
+    {
+        $this->client->index();
+    }
+
+    /**
      * @When I change my locale to :localeCode
      */
     public function iSwitchTheLocaleToTheLocale(string $localeCode): void
@@ -153,8 +177,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -185,8 +208,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {
@@ -212,32 +234,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I start sorting products by name
-     * @When I sort the products :sortType by name
-     * @When I switch the way products are sorted :sortType by name
-     * @Given the products are already sorted :sortType by name
-     */
-    public function iStartSortingProductsByName(string $sortType = 'ascending'): void
-    {
-        $this->client->sort([
-            'translation.name' => self::SORT_TYPES[$sortType],
-            'localeCode' => $this->getAdminLocaleCode(),
-        ]);
-    }
-
-    /**
-     * @Given I am browsing products
-     * @When I browse products
-     * @When I want to browse products
-     */
-    public function iWantToBrowseProducts(): void
-    {
-        $this->client->index();
-    }
-
-    /**
-     * @When I delete the :product product
-     * @When I try to delete the :product product
+     * @When I (try to) delete the :product product
      */
     public function iDeleteProduct(ProductInterface $product): void
     {
@@ -245,9 +242,8 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
-     * @When I modify the :product product
+     * @When I (want to) modify the :product product
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
@@ -367,7 +363,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should( still) see a product with :field :value
+     * @Then I should see a product with :field :value
      */
     public function iShouldSeeProductWith(string $field, string $value): void
     {
@@ -459,7 +455,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options']),
+            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName())
         );
     }

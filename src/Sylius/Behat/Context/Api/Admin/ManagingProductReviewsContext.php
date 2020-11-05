@@ -42,8 +42,7 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I browse product reviews
-     * @When I want to browse product reviews
+     * @When I (want to) browse product reviews
      */
     public function iWantToBrowseProductReviews(): void
     {
@@ -77,8 +76,7 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
+     * @When I (try to) save my changes
      */
     public function iSaveMyChanges(): void
     {

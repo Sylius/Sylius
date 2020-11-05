@@ -204,6 +204,10 @@ final class ManagingShipmentsContext implements Context
             if (!$this->responseChecker->HasValue($this->client->getLastResponse(), 'email', $customer->getEmail())) {
                 continue;
             }
+
+            if ($channel === null) {
+                return;
+            }
             $this->client->showByIri($this->responseChecker->getValue($orderShowResponse, 'channel'));
             if ($this->responseChecker->HasValue($this->client->getLastResponse(), 'name', $channel->getName())) {
                 return;

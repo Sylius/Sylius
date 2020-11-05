@@ -35,8 +35,7 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @When I want to create a new locale
-     * @Given I want to add a new locale
+     * @Given /^I want to (?:create|add) a new locale$/
      */
     public function iWantToAddNewLocale(): void
     {
@@ -53,8 +52,7 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {

@@ -129,8 +129,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I add it
-     * @When I try to add it
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -155,8 +154,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I check the :zone zone
-     * @When I check also the :zone zone
+     * @When I check (also) the :zone zone
      */
     public function iCheckTheZone(ZoneInterface $zone): void
     {

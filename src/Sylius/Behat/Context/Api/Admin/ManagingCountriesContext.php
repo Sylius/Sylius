@@ -273,7 +273,7 @@ final class ManagingCountriesContext implements Context
             $this->responseChecker->hasValue(
                 $this->client->show($country->getCode()),
                 'enabled',
-                $enabled === 'enabled' ? true : false
+                $enabled === 'enabled'
             ),
             'Country is not disabled'
         );
