@@ -252,6 +252,24 @@ migrations catalog is `src/Migrations`, you can run such a script:
    
 1. Run `bin/console doctrine:migrations:migrate` to apply migrations added in Sylius 1.8
 
+#### Re-enable product variants and taxons
+
+In the migrations of the 1.8 we add a flag `enabled` on the product variants and the taxons. This flag is on `0` by default, which leads to an empty catalog and some errors due to products without enabled variants.
+
+To resolve this, you should run these two SQL requests on production:
+
+```sql
+UPDATE sylius_taxon SET enabled = 1;
+UPDATE sylius_product_variant SET enabled = 1;
+```
+
+This could also be done in a Migration as well if you prefer. You can create an empty migration (then you can fill it!) like this:
+
+```bash
+./bin/console doctrine:migrations:generate
+```
+
+
 ### Translations
 
 Some translations have changed, you may want to search for them in your project:
