@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -35,6 +36,15 @@ final class OrderContext implements Context
 {
     /** @var ApiClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $productsAdminClient;
+
+    /** @var ApiClientInterface */
+    private $productsShopClient;
+
+    /** @var AbstractBrowser */
+    private $accountOrderClient;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
@@ -47,11 +57,17 @@ final class OrderContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
+        ApiClientInterface $productsAdminClient,
+        ApiClientInterface $productsShopClient,
+        AbstractBrowser $accountOrderClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
+        $this->productsAdminClient = $productsAdminClient;
+        $this->productsShopClient = $productsShopClient;
+        $this->accountOrderClient = $accountOrderClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -93,6 +109,36 @@ final class OrderContext implements Context
             $this->sharedStorage->get('order_number'),
             $this->responseChecker->getValue($this->client->getLastResponse(), 'number')
         );
+    }
+
+    /**
+     * @Then /^I should be able to change (payment method on "[^"]+") for (this order)$/
+     */
+    public function iShouldBeAbleToChangePaymentMethodForThisOrder(
+        PaymentMethodInterface $paymentMethod,
+        OrderInterface $order
+    ): void {
+        $this->accountOrderClient->request(
+            HttpRequest::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/account/orders/%s/payments/%s',
+                $order->getTokenValue(),
+                (string) $order->getPayments()->first()->getId()
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'paymentMethodCode' => $paymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
+        );
+
+        $paymentMethodIri = $this
+            ->responseChecker
+            ->getValue($this->accountOrderClient->getResponse(), 'payments')[0]['method']['@id']
+        ;
+
+        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getId(), $paymentMethod->getId());
     }
 
     /**
@@ -332,5 +378,18 @@ final class OrderContext implements Context
     private function hasAdjustmentWithLabel(string $label): bool
     {
         return $this->getAdjustmentWithLabel($label) !== null;
+    }
+
+    private function getHeaders(array $headers = []): array
+    {
+        if (empty($headers)) {
+            $headers = ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'];
+        }
+
+        if ($this->sharedStorage->has('token')) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
+        }
+
+        return $headers;
     }
 }

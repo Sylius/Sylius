@@ -29,6 +29,7 @@ final class PaymentMethodContext implements Context
 
     /**
      * @Transform /^"([^"]+)" payment(s)?$/
+     * @Transform /^payment method on "([^"]+)"$/
      * @Transform :paymentMethod
      */
     public function getPaymentMethodByName($paymentMethodName)
