@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-29T13:16:51Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by misaon at 2020-11-06T12:44:14Z
+
+@lchrusciel I don't think this block is used in your demo, however with us we used this block in custom administration modifications.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-11-06T16:24:48Z
+
+Thanks, Ondřej! :1st_place_medal:
