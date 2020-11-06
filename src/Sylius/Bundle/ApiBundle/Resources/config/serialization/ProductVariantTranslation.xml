@@ -6,16 +6,19 @@
 >
     <class name="Sylius\Component\Product\Model\ProductVariantTranslation">
         <attribute name="id">
+            <group>account:order:read</group>
             <group>order:read</group>
             <group>product_variant:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="name">
+            <group>account:order:read</group>
             <group>order:read</group>
             <group>product_variant:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="locale">
+            <group>account:order:read</group>
             <group>order:read</group>
             <group>product_variant:read</group>
             <group>checkout:read</group>
