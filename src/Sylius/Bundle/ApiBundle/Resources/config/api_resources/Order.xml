@@ -232,6 +232,19 @@
                     <attribute name="summary">Changes quantity of order item</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="shop_apply_coupon">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shop/orders/{id}/apply-coupon</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:apply_coupon</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Applies coupon to cart</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
