@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\SharedStorage;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
@@ -26,14 +26,17 @@ final class PromotionContext implements Context
     /** @var ApiClientInterface */
     private $cartsClient;
 
-    /** @var SharedStorage */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    public function __construct(ApiClientInterface $cartsClient, SharedStorage $sharedStorage, ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        ApiClientInterface $cartsClient,
+        SharedStorageInterface $sharedStorage,
+        ResponseCheckerInterface $responseChecker
+    ) {
         $this->cartsClient = $cartsClient;
         $this->sharedStorage = $sharedStorage;
         $this->responseChecker = $responseChecker;
@@ -52,8 +55,10 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        Assert::same($this->cartsClient->getLastResponse()->getStatusCode(), 500);
-        Assert::notNull($this->responseChecker->getError($this->cartsClient->getLastResponse()));
+        $response = $this->cartsClient->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 500);
+        Assert::notNull($this->responseChecker->getError($response));
     }
 
     private function getCartTokenValue(): ?string

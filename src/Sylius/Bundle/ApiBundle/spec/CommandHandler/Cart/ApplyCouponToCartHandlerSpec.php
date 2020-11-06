@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
@@ -39,20 +40,22 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
 
     function it_applies_coupon_to_cart(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $cart,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
-        PromotionCouponInterface $promotion,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon,
+        PromotionInterface $promotion
     ): void {
         $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
 
-        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotion);
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $promotionCoupon->getUsageLimit()->willReturn(null);
+        $promotionCoupon->getExpiresAt()->willReturn(null);
 
-        $promotion->getUsageLimit()->willReturn(null);
+        $promotionCoupon->getPromotion()->willReturn($promotion);
+        $promotion->getEndsAt()->willReturn(null);
 
-        $promotion->getExpiresAt()->willReturn(null);
-
-        $cart->setPromotionCoupon($promotion)->shouldBeCalled();
+        $cart->setPromotionCoupon($promotionCoupon)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 
@@ -61,8 +64,8 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
 
     function it_throws_exception_when_coupon_code_is_invalid(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $cart,
-        PromotionCouponRepositoryInterface $promotionCouponRepository
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderInterface $cart
     ): void {
         $command = new ApplyCouponToCart('couponCode');
         $command->setOrderTokenValue('cart');
@@ -76,38 +79,77 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
 
     function it_throws_exception_when_coupon_usage_limit_has_expired(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $cart,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
-        PromotionCouponInterface $promotion
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon
     ): void {
         $command = new ApplyCouponToCart('couponCode');
         $command->setOrderTokenValue('cart');
 
         $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
 
-        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotion);
-
-        $promotion->getUsageLimit()->willReturn(0);
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $promotionCoupon->getUsageLimit()->willReturn(0);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$command]);
     }
 
     function it_throws_exception_when_coupon_date_has_expired(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $cart,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
-        PromotionCouponInterface $promotion
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon
     ): void {
         $command = new ApplyCouponToCart('couponCode');
         $command->setOrderTokenValue('cart');
 
         $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
 
-        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotion);
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $promotionCoupon->getUsageLimit()->willReturn(1);
+        $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('now -1 year'));
 
-        $promotion->getUsageLimit()->willReturn(1);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$command]);
+    }
 
-        $promotion->getExpiresAt()->willReturn(new \DateTime('now -1 year'));
+    function it_throws_exception_when_promotion_date_has_expired(
+        OrderRepositoryInterface $orderRepository,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon,
+        PromotionInterface $promotion
+    ): void {
+        $command = new ApplyCouponToCart('couponCode');
+        $command->setOrderTokenValue('cart');
+
+        $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
+
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $promotionCoupon->getUsageLimit()->willReturn(1);
+        $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('now +1 year'));
+
+        $promotionCoupon->getPromotion()->willReturn($promotion);
+        $promotion->getEndsAt()->willReturn(new \DateTime('now -1 year'));
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$command]);
+    }
+
+    function it_throws_exception_when_coupon_does_not_have_promotion(
+        OrderRepositoryInterface $orderRepository,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon
+    ): void {
+        $command = new ApplyCouponToCart('couponCode');
+        $command->setOrderTokenValue('cart');
+
+        $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
+
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
+        $promotionCoupon->getUsageLimit()->willReturn(1);
+        $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('now +1 year'));
+
+        $promotionCoupon->getPromotion()->willReturn(null);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$command]);
     }

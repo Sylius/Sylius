@@ -26,13 +26,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ApplyCouponToCartHandler implements MessageHandlerInterface
 {
-    /** @var OrderRepositoryInterface $orderRepository */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /** @var PromotionCouponRepositoryInterface $promotionCouponRepository */
+    /** @var PromotionCouponRepositoryInterface */
     private $promotionCouponRepository;
 
-    /** @var OrderProcessorInterface $orderProcessor */
+    /** @var OrderProcessorInterface */
     private $orderProcessor;
 
     public function __construct(
@@ -52,24 +52,34 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart doesn\'t exist');
 
-        /** @var PromotionCouponInterface $promotion */
-        $promotion = $this->promotionCouponRepository->findOneBy(['code' => $command->couponCode]);
+        /** @var PromotionCouponInterface $promotionCoupon */
+        $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $command->couponCode]);
 
-        Assert::notNull($promotion, 'Could not find promotion with given code');
+        Assert::notNull($promotionCoupon, 'Could not find promotion coupon with given code');
 
-        $couponUsageLimit = $promotion->getUsageLimit();
+        $couponUsageLimit = $promotionCoupon->getUsageLimit();
 
         if (null !== $couponUsageLimit) {
             Assert::greaterThan($couponUsageLimit, 0, 'Promotion coupon usage has expired');
         }
 
-        $expireDate = $promotion->getExpiresAt();
+        $couponExpireDate = $promotionCoupon->getExpiresAt();
 
-        if (null !== $expireDate) {
-            Assert::greaterThan($expireDate, new DateTime(), 'Promotion coupon has expired');
+        if (null !== $couponExpireDate) {
+            Assert::greaterThan($couponExpireDate, new DateTime(), 'Promotion coupon has expired');
         }
 
-        $cart->setPromotionCoupon($promotion);
+        $promotion = $promotionCoupon->getPromotion();
+
+        Assert::notNull($promotion, 'Could not find promotion linked with this coupon');
+
+        $promotionEndDate = $promotion->getEndsAt();
+
+        if (null !== $promotionEndDate) {
+            Assert::greaterThan($promotionEndDate, new DateTime(), 'Promotion has expired');
+        }
+
+        $cart->setPromotionCoupon($promotionCoupon);
 
         $this->orderProcessor->process($cart);
     }
