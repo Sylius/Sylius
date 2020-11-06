@@ -60,8 +60,8 @@
             {%- for child in form %}
                 <div class="field">
                     <div class="ui toggle checkbox">
-                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
                         {{- form_widget(child, sylius_test_form_attribute('option')) -}}
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
                     </div>
                 </div>
             {% endfor -%}
