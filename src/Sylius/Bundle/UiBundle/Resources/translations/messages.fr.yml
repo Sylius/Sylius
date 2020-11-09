@@ -578,7 +578,7 @@ sylius:
         number: 'Numéro'
         number_of_orders: 'Nombre de commandes'
         oauth_provider: 'Fournisseur OAuth'
-        oldest_first: 'Plus anciens en premier'
+        oldest_first: 'Plus ancien en premier'
         on_hold: 'En attente'
         options: 'Options'
         options_matching: 'Option de correspondance de variante'

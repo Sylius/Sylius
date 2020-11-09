@@ -51,7 +51,7 @@ sylius:
             cannot_disable_base: La base locale ne peut pas être désactivée.
     product:
         variants:
-            all_prices_defined: Vous avez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
+            all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
     product_attribute:
         invalid: La position doit être un entier positif.
     product_image:
