@@ -11,7 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Command\Account;
+
+use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 
 /** @experimental */
 interface ShopUserIdAwareInterface extends CommandAwareDataTransformerInterface
