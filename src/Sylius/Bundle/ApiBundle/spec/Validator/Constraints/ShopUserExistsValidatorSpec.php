@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserExists;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;

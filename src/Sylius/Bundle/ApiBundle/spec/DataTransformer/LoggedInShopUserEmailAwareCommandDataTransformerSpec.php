@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\AddProductReview;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;

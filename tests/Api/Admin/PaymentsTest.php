@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;

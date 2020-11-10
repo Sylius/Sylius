@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use Sylius\Bundle\ApiBundle\Command\BlameCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;

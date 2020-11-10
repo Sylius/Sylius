@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
+use Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPassword;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

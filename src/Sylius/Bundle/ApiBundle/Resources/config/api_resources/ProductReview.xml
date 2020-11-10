@@ -32,7 +32,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/product-reviews</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\AddProductReview</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:product_review:create</attribute>
                 </attribute>

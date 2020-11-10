@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendResetPasswordEmailHandler;
+use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;
