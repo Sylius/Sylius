@@ -17,10 +17,8 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Provider\ProvinceProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Webmozart\Assert\Assert;
 
@@ -35,9 +33,6 @@ final class AddressContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var AdminToShopIriConverterInterface */
-    private $adminToShopIriConverter;
-
     /** @var IriConverterInterface */
     private $iriConverter;
 
@@ -48,14 +43,12 @@ final class AddressContext implements Context
         ApiClientInterface $addressClient,
         ApiClientInterface $customerClient,
         ResponseCheckerInterface $responseChecker,
-        AdminToShopIriConverterInterface $adminToShopIriConverter,
         IriConverterInterface $iriConverter,
         SharedStorageInterface $sharedStorage
     ) {
         $this->addressClient = $addressClient;
         $this->customerClient = $customerClient;
         $this->responseChecker = $responseChecker;
-        $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->iriConverter = $iriConverter;
         $this->sharedStorage = $sharedStorage;
     }
@@ -361,10 +354,7 @@ final class AddressContext implements Context
     public function addressShouldBeMarkedAsMyDefaultAddress(AddressInterface $address): void
     {
         $customerResponse = $this->customerClient->show((string) $this->sharedStorage->get('user')->getCustomer()->getId());
-
-        $addressResponse = $this->addressClient->showByIri($this->adminToShopIriConverter->convert(
-            $this->responseChecker->getValue($customerResponse, 'defaultAddress')
-        ));
+        $addressResponse = $this->addressClient->showByIri($this->responseChecker->getValue($customerResponse, 'defaultAddress'));
 
         Assert::true($this->responseChecker->hasValue($addressResponse, 'city', $address->getCity()));
         Assert::true($this->responseChecker->hasValue($addressResponse, 'street', $address->getStreet()));

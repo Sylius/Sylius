@@ -18,7 +18,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,7 +26,6 @@ use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -46,9 +44,6 @@ final class OrderContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var AdminToShopIriConverterInterface */
-    private $adminToShopIriConverter;
-
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
@@ -60,7 +55,6 @@ final class OrderContext implements Context
         ApiClientInterface $productsAdminClient,
         ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
-        AdminToShopIriConverterInterface $adminToShopIriConverter,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
@@ -68,7 +62,6 @@ final class OrderContext implements Context
         $this->productsAdminClient = $productsAdminClient;
         $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
-        $this->adminToShopIriConverter = $adminToShopIriConverter;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
     }
@@ -268,7 +261,7 @@ final class OrderContext implements Context
 
         Assert::same(
             $this->iriConverter->getIriFromItem($paymentMethod),
-            $this->responseChecker->getValue($this->client->showByIri($this->adminToShopIriConverter->convert($paymentIri)),'method')['@id']
+            $this->responseChecker->getValue($this->client->showByIri($paymentIri),'method')['@id']
         );
     }
 
@@ -312,9 +305,7 @@ final class OrderContext implements Context
             );
         }
 
-        $this->client->executeCustomRequest(
-            Request::custom($this->adminToShopIriConverter->convert($item['variant']), HttpRequest::METHOD_GET)
-        );
+        $this->client->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
 
         $product = $this->responseChecker->getValue($this->client->getLastResponse(), 'product');
 
