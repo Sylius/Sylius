@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by jacquesbh at 2020-10-16T16:29:18Z
+
+@Zales0123 Are you sure you want to merge this on 1.7 branch? And not on 1.8 or master?
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-10-16T16:42:54Z
+
+This is already on master by #11930 :wink:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2020-10-19T09:10:03Z
+
+I think the developer should be informed about all supported branches, no matter where the PR is opened :) 🖖
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-11-10T16:43:00Z
+
+Thanks, Mateusz! :tada:
