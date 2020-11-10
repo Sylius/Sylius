@@ -1,4 +1,4 @@
-# UPGRADE FROM `v1.8.1` TO `v1.8.3`
+# UPGRADE FROM `v1.8.4` TO `v1.8.5`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
@@ -272,4 +272,3 @@ Some translations have changed, you may want to search for them in your project:
 - `sylius.email.shipment_confirmation.tracking_code` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code` has been added instead of the two above.
-
