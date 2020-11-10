@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\ApiPlatform\Bridge\Symfony\Routing;
 
 use ApiPlatform\Core\Api\OperationType;
-use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver;
-use Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface;
-use Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
@@ -42,16 +40,9 @@ final class RouteNameResolverTest extends TestCase
         $router = $this->prophesize(RouterInterface::class);
         $router->getRouteCollection()->willReturn($routeCollection);
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
+        $routeNameResolver = new RouteNameResolver($router->reveal(), $pathPrefixProvider->reveal());
         $routeNameResolver->getRouteName('AppBundle\Entity\User', OperationType::ITEM);
     }
 
@@ -73,16 +64,9 @@ final class RouteNameResolverTest extends TestCase
         $router = $this->prophesize(RouterInterface::class);
         $router->getRouteCollection()->willReturn($routeCollection);
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
+        $routeNameResolver = new RouteNameResolver($router->reveal(), $pathPrefixProvider->reveal());
         $actual = $routeNameResolver->getRouteName('AppBundle\Entity\User', OperationType::ITEM);
 
         $this->assertSame('certain_item_route', $actual);
@@ -105,16 +89,9 @@ final class RouteNameResolverTest extends TestCase
         $router = $this->prophesize(RouterInterface::class);
         $router->getRouteCollection()->willReturn($routeCollection);
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
+        $routeNameResolver = new RouteNameResolver($router->reveal(), $pathPrefixProvider->reveal());
         $routeNameResolver->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION);
     }
 
@@ -136,16 +113,9 @@ final class RouteNameResolverTest extends TestCase
         $router = $this->prophesize(RouterInterface::class);
         $router->getRouteCollection()->willReturn($routeCollection);
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
+        $routeNameResolver = new RouteNameResolver($router->reveal(), $pathPrefixProvider->reveal());
         $actual = $routeNameResolver->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION);
 
         $this->assertSame('certain_collection_route', $actual);
@@ -175,17 +145,9 @@ final class RouteNameResolverTest extends TestCase
         $router = $this->prophesize(RouterInterface::class);
         $router->getRouteCollection()->willReturn($routeCollection);
 
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
-
-        $apiPathPrefixProvider = $this->prophesize(ApiPathPrefixProviderInterface::class);
-
-        $routeNameResolver = new RouteNameResolver(
-            $router->reveal(),
-            $requestApiPathPrefixProvider->reveal(),
-            $apiPathPrefixProvider->reveal()
-        );
-
+        $routeNameResolver = new RouteNameResolver($router->reveal(), $pathPrefixProvider->reveal());
         $actual = $routeNameResolver->getRouteName('AppBundle\Entity\User', OperationType::SUBRESOURCE, ['subresource_resources' => ['foo' => 1]]);
 
         $this->assertSame('b_certain_subresource_route', $actual);

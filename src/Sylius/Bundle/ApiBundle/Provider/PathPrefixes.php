@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-/** @experimental */
-interface ApiPathPrefixProviderInterface
+interface PathPrefixes
 {
-    public function getPathPrefix(string $path): ?string;
+    public const ADMIN_PREFIX = 'admin';
+
+    public const SHOP_PREFIX = 'shop';
 }

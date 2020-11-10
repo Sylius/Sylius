@@ -22,7 +22,7 @@ use Psr\Cache\CacheException;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\CachedRouteNameResolver;
-use Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 
 final class CachedRouteNameResolverTest extends TestCase
 {
@@ -48,12 +48,12 @@ final class CachedRouteNameResolverTest extends TestCase
             )
             ->shouldBeCalled();
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
         $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', OperationType::ITEM);
     }
@@ -77,12 +77,12 @@ final class CachedRouteNameResolverTest extends TestCase
             ->willReturn('certain_item_route')->shouldBeCalledTimes(1)
         ;
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
 
         $this->assertSame(
@@ -112,12 +112,12 @@ final class CachedRouteNameResolverTest extends TestCase
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
 
         $this->assertSame(
@@ -153,20 +153,22 @@ final class CachedRouteNameResolverTest extends TestCase
         $cacheItemPool->save($cacheItem)->shouldNotBeCalled();
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
-        $decorated->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION, [])
+        $decorated
+            ->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION, [])
             ->willThrow(
                 new InvalidArgumentException(
                     'No collection route associated with the type "AppBundle\Entity\User".'
                 )
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
         $cachedRouteNameResolver->getRouteName(
             'AppBundle\Entity\User',
@@ -193,12 +195,12 @@ final class CachedRouteNameResolverTest extends TestCase
             ->willReturn('certain_collection_route')->shouldBeCalledTimes(1)
         ;
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
 
         $this->assertSame(
@@ -228,12 +230,12 @@ final class CachedRouteNameResolverTest extends TestCase
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName(Argument::cetera())->shouldNotBeCalled();
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
 
         $this->assertSame(
@@ -274,12 +276,12 @@ final class CachedRouteNameResolverTest extends TestCase
             ->willReturn('certain_item_route')->shouldBeCalledTimes(1)
         ;
 
-        $requestApiPathPrefixProvider = $this->prophesize(RequestApiPathPrefixProviderInterface::class);
+        $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $requestApiPathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal()
         );
 
         $this->assertSame(

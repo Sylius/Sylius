@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
 use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use ApiPlatform\Core\Cache\CachedTrait;
 use Psr\Cache\CacheItemPoolInterface;
-use Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 
 /**
  * @experimental
@@ -30,29 +30,26 @@ final class CachedRouteNameResolver implements RouteNameResolverInterface
     /** @var RouteNameResolverInterface */
     private $decorated;
 
-    /** @var RequestApiPathPrefixProviderInterface */
-    private $requestApiPathPrefixProvider;
+    /** @var PathPrefixProviderInterface */
+    private $pathPrefixProvider;
 
     public function __construct(
         CacheItemPoolInterface $cacheItemPool,
         RouteNameResolverInterface $decorated,
-        RequestApiPathPrefixProviderInterface $requestApiPathPrefixProvider)
-    {
+        PathPrefixProviderInterface $pathPrefixProvider
+    ) {
         $this->cacheItemPool = $cacheItemPool;
         $this->decorated = $decorated;
-        $this->requestApiPathPrefixProvider = $requestApiPathPrefixProvider;
+        $this->pathPrefixProvider = $pathPrefixProvider;
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = []*/): string
     {
-        $requestPrefix = sprintf(
-            'route_name_%s_',
-            $this->requestApiPathPrefixProvider->getCurrentRequestPrefix()
-        );
+        $currentPrefix = sprintf('route_name_%s_', $this->pathPrefixProvider->getCurrentPrefix());
 
         $context = \func_num_args() > 2 ? func_get_arg(2) : [];
 
-        $cacheKey = $requestPrefix . md5(
+        $cacheKey = $currentPrefix . md5(
             serialize([$resourceClass, $operationType, $context['subresource_resources'] ?? null])
         );
 

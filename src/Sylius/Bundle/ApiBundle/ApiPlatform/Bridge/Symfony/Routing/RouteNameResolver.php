@@ -16,8 +16,7 @@ namespace Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing;
 use ApiPlatform\Core\Api\OperationType;
 use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
-use Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface;
-use Sylius\Bundle\ApiBundle\Provider\RequestApiPathPrefixProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -30,20 +29,13 @@ final class RouteNameResolver implements RouteNameResolverInterface
     /** @var RouterInterface */
     private $router;
 
-    /** @var RequestApiPathPrefixProviderInterface */
-    private $requestApiPathPrefixProvider;
+    /** @var PathPrefixProviderInterface */
+    private $pathPrefixProvider;
 
-    /** @var ApiPathPrefixProviderInterface */
-    private $apiPathPrefixProvider;
-
-    public function __construct(
-        RouterInterface $router,
-        RequestApiPathPrefixProviderInterface $requestApiPathPrefixProvider,
-        ApiPathPrefixProviderInterface $apiPathPrefixProvider
-    ) {
+    public function __construct(RouterInterface $router, PathPrefixProviderInterface $pathPrefixProvider)
+    {
         $this->router = $router;
-        $this->requestApiPathPrefixProvider = $requestApiPathPrefixProvider;
-        $this->apiPathPrefixProvider = $apiPathPrefixProvider;
+        $this->pathPrefixProvider = $pathPrefixProvider;
     }
 
     public function getRouteName(string $resourceClass, $operationType /*, array $context = [] */): string
@@ -98,19 +90,16 @@ final class RouteNameResolver implements RouteNameResolverInterface
         }
 
         foreach ($matchingRoutes as $routeName => $route) {
-            $requestPrefix = $this->requestApiPathPrefixProvider->getCurrentRequestPrefix();
+            $requestPrefix = $this->pathPrefixProvider->getCurrentPrefix();
+            $routePrefix = $this->pathPrefixProvider->getPathPrefix($route->getPath());
 
-            $routePrefix = $this->apiPathPrefixProvider->getPathPrefix($route->getPath());
-
-            if (
-                $requestPrefix !== null &&
-                $routePrefix !== null &&
-                $requestPrefix === $routePrefix
-            ) {
+            if ($requestPrefix !== null && $routePrefix !== null && $requestPrefix === $routePrefix) {
                 return $routeName;
             }
         }
 
-        throw new InvalidArgumentException(sprintf('No %s route associated with the type "%s".', $operationType, $resourceClass));
+        throw new InvalidArgumentException(
+            sprintf('No %s route associated with the type "%s".', $operationType, $resourceClass)
+        );
     }
 }
