@@ -1,9 +1,15 @@
 How to configure PayPal Express Checkout?
 =========================================
 
+.. warning::
+
+    PayPal Express Checkout integration is deprecated. Take a look at the
+    `PayPal Commerce Platform <https://github.com/Sylius/PayPalPlugin>`_ integration, which is now the default
+    PayPal-related gateway for Sylius.
+
 One of the most frequently used payment methods in e-commerce is PayPal. Its configuration in Sylius is really simple.
 
-Add a payment method with the Paypal Expresss gateway in the Admin Panel
+Add a payment method with the Paypal Express gateway in the Admin Panel
 ------------------------------------------------------------------------
 
 .. note::

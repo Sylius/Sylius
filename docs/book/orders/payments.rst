@@ -117,8 +117,10 @@ Payment Gateways that already have a Sylius bridge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First you need to create the configuration form type for your gateway. Have a look at the configuration form types of
-`Paypal <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
-and `Stripe <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/StripeGatewayConfigurationType.php>`_.
+
+* `Paypal Commerce Platform <https://github.com/Sylius/PayPalPlugin/blob/master/src/Form/Type/PayPalConfigurationType.php>`_
+* `Paypal Express Checkout <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/PaypalGatewayConfigurationType.php>`_
+* `Stripe <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PayumBundle/Form/Type/StripeGatewayConfigurationType.php>`_
 
 Then you should register its configuration form type with ``sylius.gateway_configuration_type`` tag.
 After that it will be available in the Admin panel in the gateway choice dropdown.
