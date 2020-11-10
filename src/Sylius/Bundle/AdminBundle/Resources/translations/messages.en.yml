@@ -46,4 +46,7 @@ sylius:
     ui:
         gateway:
             no_sca_support_notice: The chosen payment gateway does not support SCA.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout is deprecated. Please, use new
+                <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         sales_summary: Sales summary
