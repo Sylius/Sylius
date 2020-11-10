@@ -40,6 +40,7 @@
             <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.factory.shop_billing_data" />
         </service>
 
         <service id="sylius.fixture.example_factory.customer_group" class="Sylius\Bundle\CoreBundle\Fixture\Factory\CustomerGroupExampleFactory">

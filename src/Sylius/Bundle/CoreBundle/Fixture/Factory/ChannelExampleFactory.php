@@ -20,10 +20,10 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope;
-use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -52,12 +52,16 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     /** @var TaxonRepositoryInterface|null */
     private $taxonRepository;
 
+    /** @var FactoryInterface|null */
+    private $shopBillingDataFactory;
+
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $zoneRepository,
-        ?TaxonRepositoryInterface $taxonRepository = null
+        ?TaxonRepositoryInterface $taxonRepository = null,
+        ?FactoryInterface $shopBillingDataFactory = null
     ) {
         if (null === $taxonRepository) {
             @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
@@ -68,6 +72,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $this->currencyRepository = $currencyRepository;
         $this->zoneRepository = $zoneRepository;
         $this->taxonRepository = $taxonRepository;
+        $this->shopBillingDataFactory = $shopBillingDataFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -108,8 +113,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             $channel->addCurrency($currency);
         }
 
-        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data']) {
-            $shopBillingData = new ShopBillingData();
+        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data'] && null !== $this->shopBillingDataFactory) {
+            $shopBillingData = $this->shopBillingDataFactory->createNew();
             $shopBillingData->setCompany($options['shop_billing_data']['company'] ?? null);
             $shopBillingData->setTaxId($options['shop_billing_data']['tax_id'] ?? null);
             $shopBillingData->setCountryCode($options['shop_billing_data']['country_code'] ?? null);
