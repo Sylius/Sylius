@@ -46,5 +46,15 @@
         <service id="sylius.api.validator.correct_change_shop_user_confirm_password" class="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator">
             <tag name="validator.constraint_validator" alias="sylius_api_correct_change_shop_user_confirm_password" />
         </service>
+
+        <service id="sylius.api.validator.promotion_coupon_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <tag name="validator.constraint_validator" alias="sylius_api_promotion_coupon_eligibility" />
+        </service>
+
+        <service id="sylius.api.validator.promotion_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionEligibilityValidator">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <tag name="validator.constraint_validator" alias="sylius_api_promotion_eligibility" />
+        </service>
     </services>
 </container>

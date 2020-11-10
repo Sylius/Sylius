@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
-use DateTime;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -50,34 +49,12 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($command->getOrderTokenValue());
 
-        Assert::notNull($cart, 'Cart doesn\'t exist');
+        Assert::notNull($cart);
 
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $command->couponCode]);
 
-        Assert::notNull($promotionCoupon, 'Could not find promotion coupon with given code');
-
-        $couponUsageLimit = $promotionCoupon->getUsageLimit();
-
-        if (null !== $couponUsageLimit) {
-            Assert::greaterThan($couponUsageLimit, 0, 'Promotion coupon usage has expired');
-        }
-
-        $couponExpireDate = $promotionCoupon->getExpiresAt();
-
-        if (null !== $couponExpireDate) {
-            Assert::greaterThan($couponExpireDate, new DateTime(), 'Promotion coupon has expired');
-        }
-
-        $promotion = $promotionCoupon->getPromotion();
-
-        Assert::notNull($promotion, 'Could not find promotion linked with this coupon');
-
-        $promotionEndDate = $promotion->getEndsAt();
-
-        if (null !== $promotionEndDate) {
-            Assert::greaterThan($promotionEndDate, new DateTime(), 'Promotion has expired');
-        }
+        Assert::notNull($promotionCoupon);
 
         $cart->setPromotionCoupon($promotionCoupon);
 
