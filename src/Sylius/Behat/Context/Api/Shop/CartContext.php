@@ -144,6 +144,22 @@ final class CartContext implements Context
     }
 
     /**
+     * @When I pick up my cart (again)
+     */
+    public function iPickUpMyCart(): void
+    {
+        $this->pickupCart();
+    }
+
+    /**
+     * @When /^I check details of my (cart)$/
+     */
+    public function iCheckDetailsOfMyCart(string $tokenValue): void
+    {
+        $this->cartsClient->show($tokenValue);
+    }
+
+    /**
      * @Then I don't have access to see the summary of my cart
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(): void
@@ -321,6 +337,26 @@ final class CartContext implements Context
         $response = $this->cartsClient->getLastResponse();
 
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
+    }
+
+    /**
+     * @Then /^I should have empty (cart)$/
+     */
+    public function iShouldHaveEmptyCart(string $tokenValue): void
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        Assert::same(count($items), 0, 'There should be an empty cart');
+    }
+
+    private function pickupCart(): string
+    {
+        $this->cartsClient->buildCreateRequest();
+        $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
+
+        $this->sharedStorage->set('cart_token', $tokenValue);
+
+        return $tokenValue;
     }
 
     private function putProductToCart(ProductInterface $product, string $tokenValue, int $quantity = 1): void
