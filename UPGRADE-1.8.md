@@ -1,3 +1,16 @@
+# UPGRADE FROM `v1.8.4` TO `v1.8.5`
+
+1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
+
+    ```diff
+        security:
+            access_control:
+    -            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +            - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    -            - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    +            - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    ```
+
 # UPGRADE FROM `v1.8.0` TO `v1.8.1`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
@@ -259,4 +272,3 @@ Some translations have changed, you may want to search for them in your project:
 - `sylius.email.shipment_confirmation.tracking_code` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location` has been removed.
 - `sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code` has been added instead of the two above.
-
