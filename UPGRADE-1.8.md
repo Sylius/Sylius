@@ -68,6 +68,14 @@ If you are using they on your custom entity `api_resource` configuration or seri
 - `zone_member:read` changed to: `admin:zone_member:read`
 - removed redundant `zone_member:write` 
 
+1. Following namespaces has been changed:
+    * `\Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword` => `\Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\ChangeShopUserPasswordHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler`
+    * `\Sylius\Bundle\ApiBundle\Command\RegisterShopUser` => `\Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\RegisterShopUserHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\ShopUserIdAwareInterface` => `\Sylius\Bundle\ApiBundle\CommandHandler\Account\ShopUserIdAwareInterface`
+    * `\Sylius\Bundle\ApiBundle\CommandHandler\PickupCartHandler` => `\Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler`
+
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:

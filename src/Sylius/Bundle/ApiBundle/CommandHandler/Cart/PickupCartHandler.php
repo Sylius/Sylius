@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler;
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
