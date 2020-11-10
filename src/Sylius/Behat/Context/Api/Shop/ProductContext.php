@@ -17,12 +17,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Service\Checker\ApiPrefixCheckerInterface;
 use Sylius\Behat\Service\Converter\AdminToShopIriConverterInterface;
-use Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -36,24 +33,14 @@ final class ProductContext implements Context
     /** @var AdminToShopIriConverterInterface */
     private $adminToShopIriConverter;
 
-    /** @var ApiPathPrefixProviderInterface */
-    private $apiPathPrefixProvider;
-
-    /** @var ApiPrefixCheckerInterface */
-    private $apiPrefixChecker;
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        AdminToShopIriConverterInterface $adminToShopIriConverter,
-        ApiPathPrefixProviderInterface $apiPathPrefixProvider,
-        ApiPrefixCheckerInterface $apiPrefixChecker
+        AdminToShopIriConverterInterface $adminToShopIriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->adminToShopIriConverter = $adminToShopIriConverter;
-        $this->apiPathPrefixProvider = $apiPathPrefixProvider;
-        $this->apiPrefixChecker = $apiPrefixChecker;
     }
 
     /**
@@ -102,102 +89,5 @@ final class ProductContext implements Context
                 $variantName
             )
         );
-    }
-
-    /**
-     * @Then /^I should see (shop) as main iri identifier on this product$/
-     */
-    public function iShouldSeeShopAsMainIriIdentifierOnThisProduct(string $prefixType): void
-    {
-        $iri = $this->responseChecker->getValue($this->client->getLastResponse(), '@id');
-        Assert::same($this->apiPathPrefixProvider->getPathPrefix($iri), $prefixType);
-    }
-
-    /**
-     * @Then /^I should see (shop) as variants iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsVariantsIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        foreach ($this->responseChecker->getValue($this->client->getLastResponse(), 'variants') as $variant) {
-            Assert::same($this->apiPathPrefixProvider->getPathPrefix($variant), $prefixType);
-        }
-    }
-
-    /**
-     * @Then /^I should see (shop) as translations iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsTranslationsIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $iri = $this->responseChecker->getValue($this->client->getLastResponse(), 'translations')['en_US']['@id'];
-        Assert::same($this->apiPathPrefixProvider->getPathPrefix($iri), $prefixType);
-    }
-
-    /**
-     * @Then /^I should see (shop) as images iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsImagesIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
-        Assert::notEmpty($images);
-
-        foreach ($images as $image) {
-            Assert::same($this->apiPathPrefixProvider->getPathPrefix($image['@id']), $prefixType);
-        }
-    }
-
-    /**
-     * @Then /^I should see (shop) as product taxon iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsProductTaxonIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $this->checkIriPrefixOnArray($this->client->getLastResponse(), 'productTaxons', $prefixType);
-    }
-
-    /**
-     * @Then /^I should see (shop) as main taxon iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsMainTaxonIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $iri = $this->responseChecker->getValue($this->client->getLastResponse(), 'mainTaxon');
-        Assert::same($this->apiPathPrefixProvider->getPathPrefix($iri), $prefixType);
-    }
-
-    /**
-     * @Then /^I should see (shop) as product review iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsProductReviewIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $this->checkIriPrefixOnArray($this->client->getLastResponse(), 'reviews', $prefixType);
-    }
-
-    /**
-     * @Then /^I should see (shop) as product options iri identifiers on this product$/
-     */
-    public function iShouldSeeShopAsProductOptionsIriIdentifiersOnThisProduct(string $prefixType): void
-    {
-        $this->checkIriPrefixOnArray($this->client->getLastResponse(), 'options', $prefixType);
-    }
-
-    /**
-     * @Then /^this product should have only (shop) iri's identifiers$/
-     */
-    public function thisProductShouldHaveOnlyShopIriSIdentifiers(string $prefixType): void
-    {
-        $response = $this->client->getLastResponse();
-
-        $this->apiPrefixChecker->searchProperPrefixesRecursively(
-            json_decode($response->getContent(), true),
-            $prefixType
-        );
-    }
-
-    private function checkIriPrefixOnArray(Response $response, string $fieldType, string $prefixType): void
-    {
-        $fields = $this->responseChecker->getValue($response, $fieldType);
-        Assert::notEmpty($fields);
-
-        foreach ($fields as $productTaxon) {
-            Assert::same($this->apiPathPrefixProvider->getPathPrefix($productTaxon), $prefixType);
-        }
     }
 }

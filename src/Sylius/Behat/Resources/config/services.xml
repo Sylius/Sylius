@@ -66,10 +66,6 @@
             <argument type="string">%sylius_core.public_dir%</argument>
         </service>
 
-        <service id="sylius.behat.checker.api_prefix_checker" class="Sylius\Behat\Service\Checker\ApiPrefixChecker">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ApiPathPrefixProviderInterface" />
-        </service>
-
         <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
