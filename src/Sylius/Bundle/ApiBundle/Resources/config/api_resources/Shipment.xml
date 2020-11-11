@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipment.class%" shortName="Shipment">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipment:read</attribute>
@@ -39,6 +37,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipments</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
@@ -48,17 +47,30 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipments/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/shipments/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_ship">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shipments/{id}/ship</attribute>
+                <attribute name="path">/admin/shipments/{id}/ship</attribute>
                 <attribute name="controller">sylius.api.shipment_state_machine_transition_applicator::ship</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="methods_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/shipments/{id}/methods</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" />
         <property name="createdAt" />
