@@ -75,6 +75,17 @@ final class OrderContext implements Context
     }
 
     /**
+     * @When I try to see the order placed by a customer :customer
+     */
+    public function iTryToSeeTheOrderPlacedByACustomer(): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->iViewTheSummaryOfMyOrder($order);
+    }
+
+    /**
      * @Then I should be able to access this order's details
      */
     public function iShouldBeAbleToAccessThisOrderDetails(): void
@@ -263,6 +274,14 @@ final class OrderContext implements Context
             $this->iriConverter->getIriFromItem($paymentMethod),
             $this->responseChecker->getValue($this->client->showByIri($paymentIri),'method')['@id']
         );
+    }
+
+    /**
+     * @Then I should not be able to see that order
+     */
+    public function iShouldNotBeAbleToSeeThatOrder(): void
+    {
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
     private function getAdjustmentsForOrder(): array

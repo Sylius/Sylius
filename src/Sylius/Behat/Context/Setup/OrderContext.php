@@ -147,6 +147,20 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method$/
+     */
+    public function thereIsACustomerThatPlacedOrderWithProductToBasedBillingAddressWithShippingMethodAndPaymentMethod(
+        CustomerInterface $customer,
+        ProductInterface $product,
+        AddressInterface $address,
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ) {
+        $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 1);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
      */
     public function theGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
