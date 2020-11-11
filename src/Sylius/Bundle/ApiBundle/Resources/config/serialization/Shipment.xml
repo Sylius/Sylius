@@ -16,15 +16,17 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Core\Model\Shipment">
+        <attribute name="id">
+            <group>shipment:read</group>
+            <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
         <attribute name="createdAt">
             <group>shipment:read</group>
         </attribute>
 
         <attribute name="updatedAt">
-            <group>shipment:read</group>
-        </attribute>
-
-        <attribute name="id">
             <group>shipment:read</group>
         </attribute>
 

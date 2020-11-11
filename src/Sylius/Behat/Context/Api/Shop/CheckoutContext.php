@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -25,7 +24,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -57,9 +55,6 @@ final class CheckoutContext implements Context
     /** @var ApiClientInterface */
     private $addressesClient;
 
-    /** @var IriConverterInterface */
-    private $iriConverter;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -86,7 +81,6 @@ final class CheckoutContext implements Context
         ApiClientInterface $ordersClient,
         ApiClientInterface $countriesClient,
         ApiClientInterface $addressesClient,
-        IriConverterInterface $iriConverter,
         ResponseCheckerInterface $responseChecker,
         RepositoryInterface $shippingMethodRepository,
         OrderRepositoryInterface $orderRepository,
@@ -98,7 +92,6 @@ final class CheckoutContext implements Context
         $this->ordersClient = $ordersClient;
         $this->countriesClient = $countriesClient;
         $this->addressesClient = $addressesClient;
-        $this->iriConverter = $iriConverter;
         $this->responseChecker = $responseChecker;
         $this->shippingMethodRepository = $shippingMethodRepository;
         $this->orderRepository = $orderRepository;
@@ -349,7 +342,7 @@ final class CheckoutContext implements Context
             \sprintf(
                 '/new-api/shop/orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                (string) $this->iriConverter->getItemFromIri($this->getCart()['shipments'][0])->getId()
+                $this->getCart()['shipments'][0]['id']
             ),
             [],
             [],
@@ -400,7 +393,7 @@ final class CheckoutContext implements Context
             \sprintf(
                 '/new-api/shop/orders/%s/payments/%s',
                 $this->sharedStorage->get('cart_token'),
-                (string) $this->iriConverter->getItemFromIri($this->getCart()['payments'][0])->getId()
+                $this->getCart()['payments'][0]['id']
             ),
             [],
             [],
@@ -995,14 +988,9 @@ final class CheckoutContext implements Context
 
     private function getCartShippingMethods(array $cart): array
     {
-        $shipmentIri = $cart['shipments'][0];
-
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->iriConverter->getItemFromIri($shipmentIri);
-
         $this->client->request(
             Request::METHOD_GET,
-            \sprintf('/new-api/shop/orders/%s/shipments/%s/methods', $cart['tokenValue'], $shipment->getId()),
+            \sprintf('/new-api/shop/orders/%s/shipments/%s/methods', $cart['tokenValue'], $cart['shipments'][0]['id']),
             [],
             [],
             $this->getHeaders(),
