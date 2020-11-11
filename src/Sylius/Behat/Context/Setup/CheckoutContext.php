@@ -19,7 +19,6 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\AddressOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\AddressInterface;
-<<<<<<< HEAD
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -62,28 +61,30 @@ final class CheckoutContext implements Context
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->commandBus = $commandBus;
         $this->addressFactory = $addressFactory;
-=======
-use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
-
-final class CheckoutContext implements Context
-{
-    /** @var MessageBusInterface */
-    private $commandBus;
-
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
-
-    public function __construct(MessageBusInterface $commandBus, SharedStorageInterface  $sharedStorage)
-    {
-        $this->commandBus = $commandBus;
->>>>>>> 7f2cb5abed... [API] Order confirmation email sending
         $this->sharedStorage = $sharedStorage;
     }
 
     /**
-<<<<<<< HEAD
+     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
+     */
+    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email)
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
+        Assert::notNull($cart);
+
+        $cart->setLocaleCode($localeCode);
+
+        $command = new AddressOrder($email, $this->getDefaultAddress());
+        $command->setOrderTokenValue($cartToken);
+        $this->commandBus->dispatch($command);
+
+       $this->completeCheckout($cart);
+    }
+
+    /**
      * @Given I have proceeded through checkout process
      */
     public function iHaveProceededThroughCheckoutProcess(): void
@@ -94,8 +95,18 @@ final class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
+        $command = new AddressOrder('rich@sylius.com', $this->getDefaultAddress());
+        $command->setOrderTokenValue($cartToken);
+        $this->commandBus->dispatch($command);
+
+        $this->completeCheckout($cart);
+    }
+
+    private function getDefaultAddress(): AddressInterface
+    {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
+
         $address->setCity('New York');
         $address->setStreet('Wall Street');
         $address->setPostcode('00-001');
@@ -103,53 +114,27 @@ final class CheckoutContext implements Context
         $address->setFirstName('Richy');
         $address->setLastName('Rich');
 
-        $command = new AddressOrder('rich@sylius.com', $address);
-        $command->setOrderTokenValue($cartToken);
-        $this->commandBus->dispatch($command);
+        return $address;
+    }
 
+    private function completeCheckout(OrderInterface $order): void
+    {
         $command = new ChooseShippingMethod($this->shippingMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($cartToken);
+        $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $cart->getShipments()->first();
+        $shipment = $order->getShipments()->first();
 
         $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
         $command = new ChoosePaymentMethod($this->paymentMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($cartToken);
+        $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var PaymentInterface $payment */
-        $payment = $cart->getPayments()->first();
+        $payment = $order->getPayments()->first();
         $command->setSubresourceId((string) $payment->getId());
 
         $this->commandBus->dispatch($command);
-=======
-     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
-     */
-    public function iHaveCompletedAddressingStepWithEmail(string $email, AddressInterface $address): void
-    {
-        $addressOrder = new AddressOrder($email, $address);
-
-        $addressOrder->setOrderTokenValue($this->sharedStorage->get('cart_token'));
-
-        $this->commandBus->dispatch($addressOrder);
-    }
-
-    /**
-     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
-     */
-    public function iProceedOrderWithShippingMethodAndPayment(ShippingMethodInterface $shippingMethod, PaymentMethodInterface $paymentMethod): void
-    {
-        $cartToken = $this->sharedStorage->get('cart_token');
-        $chooseShippingMethod = new ChooseShippingMethod(0, $shippingMethod->getCode());
-        $choosePaymentMethod = new ChoosePaymentMethod(0, $paymentMethod->getCode());
-
-        $chooseShippingMethod->setOrderTokenValue($cartToken);
-        $choosePaymentMethod->setOrderTokenValue($cartToken);
-
-        $this->commandBus->dispatch($chooseShippingMethod);
-        $this->commandBus->dispatch($choosePaymentMethod);
->>>>>>> 7f2cb5abed... [API] Order confirmation email sending
     }
 }
