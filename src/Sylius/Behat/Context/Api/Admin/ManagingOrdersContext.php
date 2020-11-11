@@ -161,13 +161,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveShipmentState(string $state): void
     {
-        $shipmentsIri = $this->responseChecker->getValue(
+        $shipmentIri = $this->responseChecker->getValue(
             $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'shipments'
-        );
+        )[0];
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($shipmentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($shipmentIri['@id']), 'state', strtolower($state)),
             sprintf('Shipment for this order is not %s', $state)
         );
     }
@@ -177,13 +177,13 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState($state): void
     {
-        $paymentsIri = $this->responseChecker->getValue(
+        $paymentIri = $this->responseChecker->getValue(
             $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
             'payments'
-        );
+        )[0];
 
         Assert::true(
-            $this->responseChecker->hasValue($this->client->showByIri($paymentsIri[0]), 'state', strtolower($state)),
+            $this->responseChecker->hasValue($this->client->showByIri($paymentIri['@id']), 'state', strtolower($state)),
             sprintf('payment for this order is not %s', $state)
         );
     }

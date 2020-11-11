@@ -23,6 +23,7 @@
         </attribute>
         <attribute name="method">
             <group>payment:read</group>
+            <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="currencyCode">

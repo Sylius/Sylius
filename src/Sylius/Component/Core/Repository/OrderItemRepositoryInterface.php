@@ -15,9 +15,9 @@ namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Order\Repository\OrderItemRepositoryInterface as BaseOrderItemRepositoryInterface;
 
-interface OrderItemRepositoryInterface extends RepositoryInterface
+interface OrderItemRepositoryInterface extends BaseOrderItemRepositoryInterface
 {
     public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemInterface;
 }

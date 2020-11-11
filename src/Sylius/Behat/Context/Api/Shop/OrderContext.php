@@ -23,6 +23,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -170,7 +171,7 @@ final class OrderContext implements Context
     ): void {
         $resources = $this->responseChecker->getValue($this->client->getLastResponse(), $elementType . 's');
 
-        $resource = $this->iriConverter->getItemFromIri($resources[$position]);
+        $resource = $this->iriConverter->getItemFromIri($resources[$position]['@id']);
 
         Assert::same(ucfirst($resource->getState()), $elementStatus);
     }
@@ -266,14 +267,11 @@ final class OrderContext implements Context
     /**
      * @Then I should have chosen :paymentMethod payment method
      */
-    public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethod $paymentMethod): void
+    public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
     {
-        $paymentIri = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
+        $payment = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
 
-        Assert::same(
-            $this->iriConverter->getIriFromItem($paymentMethod),
-            $this->responseChecker->getValue($this->client->showByIri($paymentIri),'method')['@id']
-        );
+        Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
     }
 
     /**
