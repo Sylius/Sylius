@@ -25,7 +25,7 @@
     "require": {
         "php": "^7.3",
         "api-platform/core": "^2.5",
-        "sylius/core-bundle": "^1.7",
+        "sylius/core-bundle": "dev-master",
         "symfony/messenger": "^4.4"
     },
     "require-dev": {
