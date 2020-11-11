@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use DateTime;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -30,11 +30,28 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     /** @var PromotionCouponRepositoryInterface */
     private $promotionCouponRepository;
 
-    public function __construct(PromotionCouponRepositoryInterface $promotionCouponRepository)
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    /** @var PromotionEligibilityCheckerInterface */
+    private $promotionChecker;
+
+    /** @var PromotionCouponEligibilityCheckerInterface */
+    private $promotionCouponChecker;
+
+
+    public function __construct(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        PromotionEligibilityCheckerInterface $promotionChecker,
+        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+    )
     {
         $this->promotionCouponRepository = $promotionCouponRepository;
+        $this->orderRepository = $orderRepository;
+        $this->promotionChecker = $promotionChecker;
+        $this->promotionCouponChecker = $promotionCouponChecker;
     }
-
 
     public function validate($value, Constraint $constraint): void
     {
@@ -43,19 +60,21 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 
-        $couponUsageLimit = $promotionCoupon->getUsageLimit();
+       /** @var OrderInterface $cart*/
+        $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
-        if (null !== $couponUsageLimit || $couponUsageLimit === 0) {
-            $this->context->buildViolation('sylius.promotion_coupon.usage_limit.expired')
+        $cart->setPromotionCoupon($promotionCoupon);
+
+        if (!$this->promotionCouponChecker->isEligible($cart, $promotionCoupon)) {
+            $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()
             ;
+            return;
         }
 
-        $couponExpireDate = $promotionCoupon->getExpiresAt();
-
-        if (null !== $couponExpireDate && $couponExpireDate < new DateTime()) {
-            $this->context->buildViolation('sylius.promotion_coupon.expired')
+        if (!$this->promotionChecker->isEligible($cart, $promotionCoupon->getPromotion())) {
+            $this->context->buildViolation('sylius.promotion.is_invalid')
                 ->atPath('couponCode')
                 ->addViolation()
             ;

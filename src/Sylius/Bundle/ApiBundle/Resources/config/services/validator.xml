@@ -49,6 +49,9 @@
 
         <service id="sylius.api.validator.promotion_coupon_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator">
             <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
             <tag name="validator.constraint_validator" alias="sylius_api_promotion_coupon_eligibility" />
         </service>
 

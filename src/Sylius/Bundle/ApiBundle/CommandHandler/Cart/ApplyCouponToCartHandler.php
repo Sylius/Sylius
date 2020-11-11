@@ -49,7 +49,7 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($command->getOrderTokenValue());
 
-        Assert::notNull($cart);
+        Assert::notNull($cart, 'Cart doesn\'t exist');
 
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $command->couponCode]);
