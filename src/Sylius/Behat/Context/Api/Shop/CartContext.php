@@ -151,6 +151,22 @@ final class CartContext implements Context
     }
 
     /**
+     * @When I pick up my cart (again)
+     */
+    public function iPickUpMyCart(): void
+    {
+        $this->pickupCart();
+    }
+
+    /**
+     * @When /^I check details of my (cart)$/
+     */
+    public function iCheckDetailsOfMyCart(string $tokenValue): void
+    {
+        $this->cartsClient->show($tokenValue);
+    }
+
+    /**
      * @Then /^I don't have access to see the summary of my (previous cart)$/
      */
     public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
@@ -375,6 +391,16 @@ final class CartContext implements Context
     public function iShouldBeRedirectedToMyCartSummaryPage(): void
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then /^I should have empty (cart)$/
+     */
+    public function iShouldHaveEmptyCart(string $tokenValue): void
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
+
+        Assert::same(count($items), 0, 'There should be an empty cart');
     }
 
     private function pickupCart(): string

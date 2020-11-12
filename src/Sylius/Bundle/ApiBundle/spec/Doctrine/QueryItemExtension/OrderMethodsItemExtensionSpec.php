@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -35,7 +36,8 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_delete_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -54,13 +56,18 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL')
+            ->expr()
             ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+            ->willReturn($expr);
+
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
         ;
 
         $queryBuilder
-            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -90,7 +97,8 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_patch_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -109,13 +117,18 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL')
+            ->expr()
             ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+            ->willReturn($expr);
+
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
         ;
 
         $queryBuilder
-            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -145,7 +158,8 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_put_order_with_state_cart_and_with_null_user_and_customer_if_present_user_and_customer_are_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -164,13 +178,18 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL')
+            ->expr()
             ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+            ->willReturn($expr);
+
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
         ;
 
         $queryBuilder
-            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -217,6 +236,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()
@@ -393,6 +413,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()
@@ -441,6 +462,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()
@@ -489,6 +511,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()
@@ -537,6 +560,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->setParameter('customer', 1)
             ->shouldBeCalled()

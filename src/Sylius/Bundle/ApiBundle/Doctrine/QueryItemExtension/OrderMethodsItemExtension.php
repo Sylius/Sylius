@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
 final class OrderMethodsItemExtension implements QueryItemExtensionInterface
@@ -84,8 +83,7 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         $queryBuilder
             ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
             ->leftJoin('customer.user', 'user')
-            ->andWhere('user IS NULL')
-            ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+            ->andWhere($queryBuilder->expr()->orX('user IS NULL', sprintf('%s.customer IS NULL', $rootAlias)))
         ;
 
         if ($operationName !== 'shop_select_payment_method') {
