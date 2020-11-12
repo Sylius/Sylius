@@ -149,12 +149,12 @@
         </service>
 
         <service id="sylius.behat.api_platform_client.shop.payment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>payment</argument>
+            <argument>payments</argument>
             <argument>shop</argument>
         </service>
 
         <service id="sylius.behat.api_platform_client.shop.shipment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>shipment</argument>
+            <argument>shipments</argument>
             <argument>shop</argument>
         </service>
 
