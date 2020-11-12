@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Service\Converter;
+namespace Sylius\Bundle\ApiBundle\Provider;
 
-final class AdminToShopIriConverter implements AdminToShopIriConverterInterface
+/** @experimental */
+interface PathPrefixProviderInterface
 {
-    public function convert(string $iri): string
-    {
-        return str_replace('/admin/', '/shop/', $iri);
-    }
+    public function getPathPrefix(string $path): ?string;
+
+    public function getCurrentPrefix(): ?string;
 }

@@ -16,8 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method.class%" shortName="ShippingMethod">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="normalization_context">
             <attribute name="groups">
                 <attribute>shipping_method:read</attribute>
@@ -33,10 +31,20 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipping-methods/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/shipping-methods/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:shipping_method:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/shipping-methods/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:update</attribute>
                 </attribute>
@@ -44,11 +52,12 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/shipping-methods/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_archive">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shipping-methods/{id}/archive</attribute>
+                <attribute name="path">/admin/shipping-methods/{id}/archive</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:archive</attribute>
                 <attribute name="openapi_context">
@@ -58,7 +67,7 @@
 
             <itemOperation name="admin_restore">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shipping-methods/{id}/restore</attribute>
+                <attribute name="path">/admin/shipping-methods/{id}/restore</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.archiving_shipping_method_applicator:restore</attribute>
                 <attribute name="openapi_context">
@@ -70,6 +79,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.filter_archived_shipping_methods</attribute>
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
@@ -79,6 +89,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:create</attribute>
                 </attribute>

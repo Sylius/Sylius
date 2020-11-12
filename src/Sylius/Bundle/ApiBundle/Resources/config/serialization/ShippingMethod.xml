@@ -18,6 +18,7 @@
     <class name="Sylius\Component\Core\Model\ShippingMethod">
         <attribute name="id">
             <group>shipping_method:read</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="translations">
@@ -25,17 +26,20 @@
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
             <group>checkout:read</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="code">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="position">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="zone">
@@ -48,12 +52,14 @@
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="channels">
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>
+            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="calculator">

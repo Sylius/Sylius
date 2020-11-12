@@ -28,6 +28,30 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.item_data_provider.order_item" class="Sylius\Bundle\ApiBundle\DataProvider\OrderItemItemDataProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="sylius.api.item_data_provider.order_item_unit" class="Sylius\Bundle\ApiBundle\DataProvider\OrderItemUnitItemDataProvider">
+            <argument type="service" id="sylius.repository.order_item_unit" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="sylius.api.item_data_provider.payment" class="Sylius\Bundle\ApiBundle\DataProvider\PaymentItemDataProvider">
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="sylius.api.item_data_provider.shipment" class="Sylius\Bundle\ApiBundle\DataProvider\ShipmentItemDataProvider">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
         <service id="sylius.api.collection_data_provider.country" class="Sylius\Bundle\ApiBundle\DataProvider\CountryCollectionDataProvider">
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.api.context.user" />

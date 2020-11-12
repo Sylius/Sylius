@@ -11,9 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Service\Converter;
+namespace Sylius\Bundle\ApiBundle\Provider;
 
-interface AdminToShopIriConverterInterface
+interface PathPrefixes
 {
-    public function convert(string $iri): string;
+    public const ADMIN_PREFIX = 'admin';
+
+    public const SHOP_PREFIX = 'shop';
 }

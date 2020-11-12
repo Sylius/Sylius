@@ -21,5 +21,10 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.customer" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
+            <argument type="service" id="sylius.api.context.user" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
     </services>
 </container>
