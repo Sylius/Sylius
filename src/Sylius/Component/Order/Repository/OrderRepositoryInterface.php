@@ -32,6 +32,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
+    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
     public function findCartByTokenValue(string $tokenValue): ?OrderInterface;
 
     public function findCartById($id): ?OrderInterface;
