@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use SM\Factory\Factory;
+use SM\SMException;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
@@ -77,7 +78,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
 
         $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new \Exception());
+            ->willThrow(new SMException());
         $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $logger->error(
@@ -109,7 +110,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
 
         $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new \Exception());
+            ->willThrow(new SMException());
         $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel();
