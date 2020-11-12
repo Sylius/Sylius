@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -64,7 +65,11 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         ?FactoryInterface $shopBillingDataFactory = null
     ) {
         if (null === $taxonRepository) {
-            @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+            @trigger_error('Passing RouterInterface as the fifth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+        }
+
+        if (null === $shopBillingDataFactory) {
+            @trigger_error('Passing RouterInterface as the sixth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
         }
 
         $this->channelFactory = $channelFactory;
@@ -113,8 +118,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             $channel->addCurrency($currency);
         }
 
-        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data'] && null !== $this->shopBillingDataFactory) {
-            $shopBillingData = $this->shopBillingDataFactory->createNew();
+        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data']) {
+            $shopBillingData = $this->shopBillingDataFactory ? $this->shopBillingDataFactory->createNew() : new ShopBillingData();
             $shopBillingData->setCompany($options['shop_billing_data']['company'] ?? null);
             $shopBillingData->setTaxId($options['shop_billing_data']['tax_id'] ?? null);
             $shopBillingData->setCountryCode($options['shop_billing_data']['country_code'] ?? null);
