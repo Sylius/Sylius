@@ -11,6 +11,17 @@
     +            - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     ```
 
+# UPGRADE FROM `v1.8.3` TO `v1.8.4`
+
+1. The `sylius:cancel-unpaid-orders` command now continues to proceed even if an error occurred. The behavior here is now normal but it leads to a few issues for an upgrade:
+
+    - Product variants with `on_hold = on_hand` will become available as soon as the uncancelled orders are now cancelled. This could lead to a lot of products on sale which were not previously on sale. This behavior is normal but the Merchant could be used to the previous behavior and could have acted around it.  
+    **Before** you upgrade on production you may want to verify the stocks of these products variants:
+    ```sql
+    SELECT code FROM sylius_product_variant WHERE on_hand = on_hold; -- These products will go back on "available" and may be sold
+    ```
+    - If the merchant is used to this (now gone) bug, then they should be careful about this situation as well: if they worked with the issue and considered that increasing the `on_hand` value to sale more since some on hand stocks were locked by the `on_hold` items, they may be in the situation of having more items on hand than the reality.
+
 # UPGRADE FROM `v1.8.0` TO `v1.8.1`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
