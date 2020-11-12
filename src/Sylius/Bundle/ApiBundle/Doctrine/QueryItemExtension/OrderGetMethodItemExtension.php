@@ -67,8 +67,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
             $queryBuilder
                 ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
                 ->leftJoin('customer.user', 'user')
-                ->andWhere('user IS NULL')
-                ->orWhere(sprintf('%s.customer IS NULL', $rootAlias))
+                ->andWhere($queryBuilder->expr()->orX('user IS NULL', sprintf('%s.customer IS NULL', $rootAlias)))
             ;
 
             return;

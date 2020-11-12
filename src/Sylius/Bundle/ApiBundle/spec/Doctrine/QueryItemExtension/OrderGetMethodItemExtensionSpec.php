@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -34,7 +35,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -53,13 +55,18 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL')
+            ->expr()
             ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+            ->willReturn($expr);
+
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
         ;
 
         $queryBuilder
-            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
