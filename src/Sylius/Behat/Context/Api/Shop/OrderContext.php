@@ -22,7 +22,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -36,12 +35,6 @@ final class OrderContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ApiClientInterface */
-    private $productsAdminClient;
-
-    /** @var ApiClientInterface */
-    private $productsShopClient;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -53,15 +46,11 @@ final class OrderContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productsAdminClient,
-        ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->productsAdminClient = $productsAdminClient;
-        $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -324,12 +313,7 @@ final class OrderContext implements Context
 
         $this->client->executeCustomRequest(Request::custom($item['variant'], HttpRequest::METHOD_GET));
 
-        $product = $this->responseChecker->getValue($this->client->getLastResponse(), 'product');
-
-        $pathElements = explode('/', $product);
-        $productCode = $pathElements[array_key_last($pathElements)];
-
-        return $this->productsShopClient->show(StringInflector::nameToSlug($productCode));
+        return $this->client->showByIri($this->responseChecker->getValue($this->client->getLastResponse(), 'product'));
     }
 
     private function getAdjustmentWithLabel(string $label): ?array

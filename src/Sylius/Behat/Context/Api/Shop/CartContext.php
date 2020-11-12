@@ -19,7 +19,6 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -31,9 +30,6 @@ final class CartContext implements Context
 {
     /** @var ApiClientInterface */
     private $cartsClient;
-
-    /** @var ApiClientInterface */
-    private $productsClient;
 
     /** @var ApiClientInterface */
     private $ordersAdminClient;
@@ -49,14 +45,12 @@ final class CartContext implements Context
 
     public function __construct(
         ApiClientInterface $cartsClient,
-        ApiClientInterface $productsClient,
         ApiClientInterface $ordersAdminClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
-        $this->productsClient = $productsClient;
         $this->ordersAdminClient = $ordersAdminClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
@@ -461,13 +455,7 @@ final class CartContext implements Context
 
         $response = $this->cartsClient->showByIri(urldecode($item['variant']));
 
-        $product = $this->responseChecker->getValue($response, 'product');
-
-        $pathElements = explode('/', $product);
-
-        $productCode = urldecode($pathElements[array_key_last($pathElements)]);
-
-        return $this->productsClient->show(StringInflector::nameToSlug(urldecode($productCode)));
+        return $this->cartsClient->showByIri(urldecode($this->responseChecker->getValue($response, 'product')));
     }
 
     private function getProductVariantForItem(array $item): Response

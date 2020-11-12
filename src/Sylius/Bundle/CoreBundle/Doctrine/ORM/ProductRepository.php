@@ -166,6 +166,31 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $product;
     }
 
+    public function findOneByChannelAndCode(ChannelInterface $channel, string $code): ?ProductInterface
+    {
+        $product = $this->createQueryBuilder('o')
+            ->where('o.code = :code')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = true')
+            ->setParameter('channel', $channel)
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->associationHydrator->hydrateAssociations($product, [
+            'images',
+            'options',
+            'options.translations',
+            'variants',
+            'variants.channelPricings',
+            'variants.optionValues',
+            'variants.optionValues.translations',
+        ]);
+
+        return $product;
+    }
+
     public function findOneByCode(string $code): ?ProductInterface
     {
         return $this->createQueryBuilder('o')

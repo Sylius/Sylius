@@ -41,5 +41,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 
     public function findOneByChannelAndSlug(ChannelInterface $channel, string $locale, string $slug): ?ProductInterface;
 
+    public function findOneByChannelAndCode(ChannelInterface $channel, string $code): ?ProductInterface;
+
     public function findOneByCode(string $code): ?ProductInterface;
 }
