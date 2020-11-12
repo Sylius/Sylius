@@ -9,6 +9,8 @@ Unified API
     The new, unified Sylius API is still under development, that's why the whole ``ApiBundle`` is tagged with ``@experimental``.
     This means that all code from ``ApiBundle`` is excluded from :doc:`Backward Compatibility Promise </book/organization/backward-compatibility-promise>`.
 
+To use this API remember to generate JWT token.
+
 This part of the documentation is about the currently developed unified API for the Sylius platform.
 
 .. toctree::
