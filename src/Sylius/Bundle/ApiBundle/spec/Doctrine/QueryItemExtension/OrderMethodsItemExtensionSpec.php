@@ -305,7 +305,8 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
     function it_applies_conditions_to_shop_select_payment_method_operation_with_user_equal_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -323,14 +324,15 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->willReturn($queryBuilder)
         ;
 
-        $queryBuilder
-            ->andWhere('user IS NULL')
+        $queryBuilder->expr()->shouldBeCalled()->willReturn($expr);
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
             ->shouldBeCalled()
-            ->willReturn($queryBuilder)
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
         ;
 
         $queryBuilder
-            ->orWhere(sprintf('%s.customer IS NULL', 'o'))
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
