@@ -1,5 +1,21 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.5 (2020-11-12)
+
+#### Details
+
+- [#12005](https://github.com/Sylius/Sylius/issues/12005) Use the correct variable ([@jacquesbh](https://github.com/jacquesbh))
+- [#12009](https://github.com/Sylius/Sylius/issues/12009) Updated translation.rst ([@Romain](https://github.com/Romain))
+- [#12011](https://github.com/Sylius/Sylius/issues/12011) Customize a controller fix typo in services config ([@Oipnet](https://github.com/Oipnet))
+- [#11974](https://github.com/Sylius/Sylius/issues/11974) [UI] Fix broken checkboxes that dont change state ([@misaon](https://github.com/misaon))
+- [#11908](https://github.com/Sylius/Sylius/issues/11908) Use proper parameters in access control patterns ([@loevgaard](https://github.com/loevgaard), [@lchrusciel](https://github.com/lchrusciel))
+- [#11899](https://github.com/Sylius/Sylius/issues/11899) Update Github PR template ([@Zales0123](https://github.com/Zales0123))
+- [#12019](https://github.com/Sylius/Sylius/issues/12019) [AUTO] Updated translations from Crowdin (1.7) ()
+- [#12022](https://github.com/Sylius/Sylius/issues/12022) Suggest PayPalPlugin as the default PayPal integration ([@Zales0123](https://github.com/Zales0123))
+- [#11993](https://github.com/Sylius/Sylius/issues/11993) [API] Explicitly define bus to all handlers ([@lchrusciel](https://github.com/lchrusciel))
+- [#12014](https://github.com/Sylius/Sylius/issues/12014) Add some explanations about the stocks issue ([@jacquesbh](https://github.com/jacquesbh))
+- [#11895](https://github.com/Sylius/Sylius/issues/11895) [API][Order] Fixed wrong where condition when looking for order ([@stloyd](https://github.com/stloyd), [@AdamKasp](https://github.com/AdamKasp))
+
 ## v1.8.4 (2020-11-05)
 
 #### Details
