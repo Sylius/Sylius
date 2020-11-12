@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Updater;
 
 use Psr\Log\LoggerInterface;
 use SM\Factory\Factory;
+use SM\SMException;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -61,7 +62,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
             try {
                 $this->cancelOrder($expiredUnpaidOrder);
-            } catch (\Exception $e) {
+            } catch (SMException $e) {
                 if (null !== $this->logger) {
                     $this->logger->error(
                         sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
