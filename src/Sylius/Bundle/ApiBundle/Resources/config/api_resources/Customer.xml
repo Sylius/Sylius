@@ -25,7 +25,21 @@
             </attribute>
         </attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/customers/</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Registers a new customer</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:write</attribute>
+                </attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
+                <attribute name="output">false</attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
