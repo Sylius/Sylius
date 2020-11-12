@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.7.X`
 
+## v1.7.11 (2020-11-12)
+
+#### Details
+
+- [#12009](https://github.com/Sylius/Sylius/issues/12009) Updated translation.rst ([@Romain](https://github.com/Romain))
+- [#12011](https://github.com/Sylius/Sylius/issues/12011) Customize a controller fix typo in services config ([@Oipnet](https://github.com/Oipnet))
+- [#11974](https://github.com/Sylius/Sylius/issues/11974) [UI] Fix broken checkboxes that dont change state ([@misaon](https://github.com/misaon))
+- [#11899](https://github.com/Sylius/Sylius/issues/11899) Update Github PR template ([@Zales0123](https://github.com/Zales0123))
+- [#12019](https://github.com/Sylius/Sylius/issues/12019) [AUTO] Updated translations from Crowdin (1.7) ()
+- [#12022](https://github.com/Sylius/Sylius/issues/12022) Suggest PayPalPlugin as the default PayPal integration ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.7.10 (2020-11-05)
 
 #### Details
