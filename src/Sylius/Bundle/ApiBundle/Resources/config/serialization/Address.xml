@@ -16,6 +16,9 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Core\Model\Address">
+        <attribute name="id">
+            <group>address:read</group>
+        </attribute>
         <attribute name="customer">
             <group>shop:address:create</group>
             <group>shop:address:update</group>

@@ -480,10 +480,9 @@ final class AddressContext implements Context
 
         $addresses = $this->responseChecker->getCollection($this->addressClient->getLastResponse());
         /** @var AddressInterface $address */
-        foreach ($addresses as $address){
+        foreach ($addresses as $address) {
             if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
-                $addressIriArray = explode('/', $address['@id']);
-                return end($addressIriArray);
+                return (string) $address['id'];
             }
         }
 
