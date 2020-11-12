@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2020-10-06T08:57:32Z
+
+@lchrusciel @pamil Anything missing with this bugfix?
+
+---------------------------------------------------------------------------
+
+by stloyd at 2020-10-09T13:39:21Z
+
+@pamil @AdamKasp @Zales0123 Guys... this bug blocks any usage of shop API with guess orders (you can do one order, next will die with fatal error), is there anything we can push this forward?
+
+---------------------------------------------------------------------------
+
+by stloyd at 2020-10-14T14:35:46Z
+
+@pamil @lchrusciel Just noticed that exactly same problem is when you ask for order items.
+
+It will die with Doctrine exception founding more than one item for given "parameters".
+> More than one result was found for query although one row or none was expected.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-11-10T16:48:40Z
+
+Fixes #12023 as well
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-11-12T10:24:44Z
+
+Thanks, Joseph! :tada:
