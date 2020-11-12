@@ -44,7 +44,7 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
         $this->orderProcessor = $orderProcessor;
     }
 
-    public function __invoke(ApplyCouponToCart $command): void
+    public function __invoke(ApplyCouponToCart $command): OrderInterface
     {
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($command->getOrderTokenValue());
@@ -59,5 +59,7 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
         $cart->setPromotionCoupon($promotionCoupon);
 
         $this->orderProcessor->process($cart);
+
+        return $cart;
     }
 }
