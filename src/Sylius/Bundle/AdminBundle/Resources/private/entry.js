@@ -1,7 +1,7 @@
 import './js/shim/shim-jquery';
 import './js/shim/shim-semantic-ui';
 
-import 'semantic-ui-css/semantic.css';
+import 'fomantic-ui/dist/semantic.css';
 
 import 'sylius/ui-resources/js/app';
 import './js/app';

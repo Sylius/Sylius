@@ -529,8 +529,10 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 }
 
 @media (min-width: 768px) {
-    width: 900px;
-    transform: translate(-122px, -70px);
+    [data-route="sylius_shop_product_index"] .twelve.wide.column .ui.segment {
+        width: 900px;
+        transform: translate(-122px, -70px);
+    }
 }
 
 [data-route="sylius_shop_product_index"] .twelve.wide.column .ui.segment form > .grid {
