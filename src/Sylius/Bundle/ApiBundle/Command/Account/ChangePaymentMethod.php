@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Checkout;
+namespace Sylius\Bundle\ApiBundle\Command\Account;
 
 use Sylius\Bundle\ApiBundle\Command\AbstractPaymentMethod;
 
 /** @experimental */
-final class ChoosePaymentMethod extends AbstractPaymentMethod
+final class ChangePaymentMethod extends AbstractPaymentMethod
 {
 }
