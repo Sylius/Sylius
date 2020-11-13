@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Webmozart\Assert\Assert;
@@ -45,10 +46,11 @@ final class ShipmentContext implements Context
     /**
      * @When I try to see the shipment of the order placed by a customer :customer
      */
-    public function iTryToSeeTheShipmentOfTheOrderPlacedByACustomer(): void
+    public function iTryToSeeTheShipmentOfTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
+        Assert::eq($order->getCustomer(), $customer);
 
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();

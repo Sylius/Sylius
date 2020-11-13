@@ -21,6 +21,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -67,10 +68,11 @@ final class OrderContext implements Context
     /**
      * @When I try to see the order placed by a customer :customer
      */
-    public function iTryToSeeTheOrderPlacedByACustomer(): void
+    public function iTryToSeeTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
+        Assert::eq($order->getCustomer(), $customer);
 
         $this->iViewTheSummaryOfMyOrder($order);
     }

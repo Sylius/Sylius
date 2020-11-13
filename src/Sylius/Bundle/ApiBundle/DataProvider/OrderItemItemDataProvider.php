@@ -50,11 +50,11 @@ final class OrderItemItemDataProvider implements ItemDataProviderInterface, Rest
         $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
 
         if ($customer !== null && in_array('ROLE_USER', $user->getRoles(), true)) {
-            return $this->orderItemRepository->findOneByCustomer($id, $customer);
+            return $this->orderItemRepository->findOneByIdAndCustomer($id, $customer);
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->orderItemRepository->findOneBy(['id' => $id]);
+            return $this->orderItemRepository->find($id);
         }
 
         return null;

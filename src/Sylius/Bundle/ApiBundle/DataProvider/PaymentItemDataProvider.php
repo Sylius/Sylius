@@ -54,7 +54,7 @@ final class PaymentItemDataProvider implements ItemDataProviderInterface, Restri
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->paymentRepository->findOneBy(['id' => $id]);
+            return $this->paymentRepository->find($id);
         }
 
         return null;

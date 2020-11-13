@@ -66,7 +66,7 @@ final class PaymentItemDataProviderSpec extends ObjectBehavior
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
-        $paymentRepository->findOneBy(['id' => '123'])->willReturn($payment);
+        $paymentRepository->find('123')->willReturn($payment);
 
         $this->getItem(PaymentInterface::class, '123')->shouldReturn($payment);
     }

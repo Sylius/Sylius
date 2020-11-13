@@ -83,7 +83,7 @@ final class RouteNameResolver implements RouteNameResolverInterface
     private function returnMatchingRouteName(
         array $matchingRoutes,
         string $operationType,
-        string$resourceClass
+        string $resourceClass
     ): string {
         if (count($matchingRoutes) === 1) {
             return array_key_first($matchingRoutes);
