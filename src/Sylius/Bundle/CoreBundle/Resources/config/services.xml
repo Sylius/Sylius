@@ -35,6 +35,10 @@
         <import resource="services/validators.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -166,7 +170,7 @@
 
         <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier" decoration-priority="256">
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
-            <argument>9999</argument>
+            <argument>%sylius.order_item_quantity_modifier.limit%</argument>
         </service>
 
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />

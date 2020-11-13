@@ -85,6 +85,15 @@ In order to change the amount of items use the **OrderItemQuantityModifier**.
 
     $this->container->get('sylius.order_item_quantity_modifier')->modify($orderItem, 3);
 
+You can also change **maximum order item quantity** parameter in ``config/services.xml``.
+
+.. code-block:: xml
+
+    # config/services.xml
+    <parameters>
+        <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter> # by default it is 9999
+    </parameters>
+
 Add the item to the order. And then call the **CompositeOrderProcessor** on the order to have
 everything recalculated.
 
