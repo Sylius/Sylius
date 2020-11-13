@@ -56,7 +56,7 @@ final class OrderItemUnitItemDataProvider implements ItemDataProviderInterface, 
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->orderItemUnitRepository->findOneBy(['id' => $id]);
+            return $this->orderItemUnitRepository->find($id);
         }
 
         return null;

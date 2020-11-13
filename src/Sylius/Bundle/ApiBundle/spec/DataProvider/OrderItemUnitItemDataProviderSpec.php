@@ -66,7 +66,7 @@ final class OrderItemUnitItemDataProviderSpec extends ObjectBehavior
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
-        $orderItemUnitRepository->findOneBy(['id' => '123'])->willReturn($orderItemUnit);
+        $orderItemUnitRepository->find('123')->willReturn($orderItemUnit);
 
         $this->getItem(OrderItemUnitInterface::class, '123')->shouldReturn($orderItemUnit);
     }

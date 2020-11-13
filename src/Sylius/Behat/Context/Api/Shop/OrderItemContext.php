@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -51,10 +52,11 @@ final class OrderItemContext implements Context
     /**
      * @When I try to see one of the items from the order placed by a customer :customer
      */
-    public function iTryToSeeOneOfTheItemsFromTheOrderPlacedByACustomer(): void
+    public function iTryToSeeOneOfTheItemsFromTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
+        Assert::eq($order->getCustomer(), $customer);
 
         /** @var OrderItemInterface $orderItem */
         $orderItem = $order->getItems()->first();
@@ -65,10 +67,11 @@ final class OrderItemContext implements Context
     /**
      * @When I try to see one of the units from the order placed by a customer :customer
      */
-    public function iTryToSeeOneOfTheUnitsFromTheOrderPlacedByACustomer(): void
+    public function iTryToSeeOneOfTheUnitsFromTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
+        Assert::eq($order->getCustomer(), $customer);
 
         /** @var OrderItemUnitInterface $orderItemUnit */
         $orderItemUnit = $order->getItemUnits()->first();

@@ -49,7 +49,7 @@ final class OrderItemItemDataProviderSpec extends ObjectBehavior
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
         $orderItemRepository
-            ->findOneByCustomer('123', $customer->getWrappedObject())
+            ->findOneByIdAndCustomer('123', $customer->getWrappedObject())
             ->willReturn($orderItem)
         ;
 
@@ -66,7 +66,7 @@ final class OrderItemItemDataProviderSpec extends ObjectBehavior
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
-        $orderItemRepository->findOneBy(['id' => '123'])->willReturn($orderItem);
+        $orderItemRepository->find('123')->willReturn($orderItem);
 
         $this->getItem(OrderItemInterface::class, '123')->shouldReturn($orderItem);
     }
@@ -81,7 +81,7 @@ final class OrderItemItemDataProviderSpec extends ObjectBehavior
         $shopUser->getCustomer()->willReturn(null);
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
 
-        $orderItemRepository->findOneByCustomer('123', new Customer())->shouldNotBeCalled();
+        $orderItemRepository->findOneByIdAndCustomer('123', new Customer())->shouldNotBeCalled();
 
         $this->getItem(OrderItemInterface::class, '123')->shouldReturn(null);
     }
@@ -97,7 +97,7 @@ final class OrderItemItemDataProviderSpec extends ObjectBehavior
         $shopUser->getCustomer()->willReturn($customer);
         $shopUser->getRoles()->willReturn(['']);
 
-        $orderItemRepository->findOneByCustomer('123', new Customer())->shouldNotBeCalled();
+        $orderItemRepository->findOneByIdAndCustomer('123', new Customer())->shouldNotBeCalled();
 
         $this->getItem(OrderItemInterface::class, '123')->shouldReturn(null);
     }

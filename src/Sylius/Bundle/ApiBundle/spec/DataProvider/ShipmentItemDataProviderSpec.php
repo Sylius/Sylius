@@ -66,7 +66,7 @@ final class ShipmentItemDataProviderSpec extends ObjectBehavior
 
         $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
-        $shipmentRepository->findOneBy(['id' => '123'])->willReturn($shipment);
+        $shipmentRepository->find('123')->willReturn($shipment);
 
         $this->getItem(ShipmentInterface::class, '123')->shouldReturn($shipment);
     }

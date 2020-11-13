@@ -54,7 +54,7 @@ final class ShipmentItemDataProvider implements ItemDataProviderInterface, Restr
         }
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->shipmentRepository->findOneBy(['id' => $id]);
+            return $this->shipmentRepository->find($id);
         }
 
         return null;
