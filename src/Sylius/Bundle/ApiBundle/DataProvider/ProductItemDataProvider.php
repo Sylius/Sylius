@@ -47,13 +47,11 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
         }
 
         Assert::keyExists($context, ContextKeys::CHANNEL);
-        Assert::keyExists($context, ContextKeys::LOCALE_CODE);
 
         /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
-        $locale = $context[ContextKeys::LOCALE_CODE];
 
-        return $this->productRepository->findOneByChannelAndSlug($channel, $locale, $id);
+        return $this->productRepository->findOneByChannelAndCode($channel, $id);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

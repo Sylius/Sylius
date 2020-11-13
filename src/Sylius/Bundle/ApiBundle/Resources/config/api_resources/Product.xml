@@ -71,7 +71,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products/{id}</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Use $slug to retrieve a product resource.</attribute>
+                    <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
             </itemOperation>
 

@@ -41,25 +41,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getItem', [
-                ProductInterface::class,
-                'ford',
-                Request::METHOD_GET,
-                [ContextKeys::LOCALE_CODE => 'en_US'],
-            ])
-        ;
-    }
-
-    function it_throws_an_exception_if_context_has_no_locale_code(ChannelInterface $channel): void
-    {
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getItem', [
-                ProductInterface::class,
-                'ford',
-                Request::METHOD_GET,
-                [ContextKeys::CHANNEL => $channel],
-            ])
+            ->during('getItem', [ProductInterface::class, 'ford', Request::METHOD_GET, []])
         ;
     }
 
@@ -75,12 +57,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $productRepository->findOneByCode('FORD_FOCUS')->willReturn($product);
 
         $this
-            ->getItem(
-                ProductInterface::class,
-                'FORD_FOCUS',
-                Request::METHOD_GET,
-                []
-            )
+            ->getItem(ProductInterface::class, 'FORD_FOCUS', Request::METHOD_GET, [])
             ->shouldReturn($product)
         ;
     }
@@ -95,7 +72,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
-        $productRepository->findOneByChannelAndSlug($channel, 'en_US', 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -104,7 +81,6 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                    ContextKeys::LOCALE_CODE => 'en_US',
                 ]
             )
             ->shouldReturn($product)
@@ -119,7 +95,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn(null);
 
-        $productRepository->findOneByChannelAndSlug($channel, 'en_US', 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -128,7 +104,6 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                    ContextKeys::LOCALE_CODE => 'en_US',
                 ]
             )
             ->shouldReturn($product)

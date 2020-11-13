@@ -41,7 +41,7 @@ final class ProductContext implements Context
      */
     public function iOpenProductPage(ProductInterface $product): void
     {
-        $this->client->show($product->getSlug());
+        $this->client->show($product->getCode());
     }
 
     /**
