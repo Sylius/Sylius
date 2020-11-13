@@ -20,6 +20,7 @@ use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepositor
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
@@ -418,5 +419,17 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ]);
 
         return $order;
+    }
+
+    public function findCartByTokenValue(string $tokenValue): ?BaseOrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }
