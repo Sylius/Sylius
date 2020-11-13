@@ -17,7 +17,8 @@
 >
     <class name="Sylius\Component\Core\Model\OrderItem">
         <attribute name="id">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order_item:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
@@ -30,13 +31,15 @@
             <group>order_item:read</group>
         </attribute>
         <attribute name="variant">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order_item:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
         <attribute name="quantity">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order_item:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
@@ -63,7 +66,8 @@
             <group>order_item:read</group>
         </attribute>
         <attribute name="productName">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order_item:read</group>
             <group>checkout:read</group>
             <group>order:read</group>

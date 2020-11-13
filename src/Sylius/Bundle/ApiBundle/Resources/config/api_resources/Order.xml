@@ -191,15 +191,49 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/account/orders/{id}/payments/{paymentId}</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">account:select_payment_method</attribute>
+                    <attribute name="groups">shop:order:account:change_payment_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">account:order:read</attribute>
+                    <attribute name="groups">shop:order:account:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Change the payment method</attribute>
+                    <attribute name="summary">Change the payment method as logged shopUser</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">id</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">paymentId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_guest_change_payment_method">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/shop/guest/orders/{id}/payments/{paymentId}</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\GuestSChangePaymentMethod</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:order:guest:change_payment_method</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:order:guest:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Change the payment method as guest</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">id</attribute>

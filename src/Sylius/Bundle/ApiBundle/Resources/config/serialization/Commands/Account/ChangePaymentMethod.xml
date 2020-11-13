@@ -15,9 +15,9 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod">
-       <attribute name="paymentMethodCode">
-           <group>cart:select_payment_method</group>
-       </attribute>
+    <class name="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">
+        <attribute name="paymentMethodCode">
+            <group>shop:order:account:change_payment_method</group>
+        </attribute>
     </class>
 </serializer>

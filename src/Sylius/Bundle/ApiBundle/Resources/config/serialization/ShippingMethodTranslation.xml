@@ -22,7 +22,8 @@
         </attribute>
 
         <attribute name="name">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>shipping_method:read</group>
             <group>shipping_method:create</group>
             <group>shipping_method:update</group>

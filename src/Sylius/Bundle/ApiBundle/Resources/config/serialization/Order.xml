@@ -17,14 +17,16 @@
 >
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="number">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
             <group>shop:order:read</group>
@@ -39,19 +41,22 @@
         </attribute>
 
         <attribute name="payments">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="shipments">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="checkoutState">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
@@ -69,26 +74,30 @@
         </attribute>
 
         <attribute name="total">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="orderPromotionTotal">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="tokenValue">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="items">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
@@ -98,30 +107,35 @@
         </attribute>
 
         <attribute name="taxTotal">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="localeCode">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>checkout:read</group>
         </attribute>
 
         <attribute name="shippingTotal">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>checkout:read</group>
             <group>order:read</group>
         </attribute>
 
         <attribute name="shippingAddress">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>checkout:read</group>
             <group>order:read</group>
         </attribute>
 
         <attribute name="billingAddress">
-            <group>account:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:guest:read</group>
             <group>checkout:read</group>
             <group>order:read</group>
         </attribute>
