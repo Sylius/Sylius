@@ -1,7 +1,7 @@
 <div class="ui basic segment">
     <div class="ui large text menu">
         <div class="ui small image">
-            <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" /></a>
+            <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('build/shop/images/logo.png', 'shop') }}" /></a>
         </div>
         <div class="right menu">
             {% if order.customer.id|default(null) is not null %}

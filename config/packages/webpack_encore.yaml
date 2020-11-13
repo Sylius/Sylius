@@ -1,0 +1,12 @@
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build/default'
+    builds:
+        shop: '%kernel.project_dir%/public/build/shop'
+        admin: '%kernel.project_dir%/public/build/admin'
+framework:
+    assets:
+        packages:
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'

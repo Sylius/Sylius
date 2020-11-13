@@ -51,3 +51,13 @@
 .promotion-disabled {
     color: #a0a0a0;
 }
+
+.ui.form .field input:not(:placeholder-shown):invalid {
+    background: #FFFFFF;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.ui.form .field input:not(:placeholder-shown):invalid:focus {
+    border-color: rgba(26, 187, 156, 0.4);
+}

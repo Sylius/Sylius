@@ -1,58 +1,29 @@
 {
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "chart.js": "^3.7.1",
+    "fomantic-ui": "^2.9.0-beta.288",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "dedent": "^0.7.0",
+    "@symfony/webpack-encore": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-import": "^2.11.0",
-    "fast-async": "^6.3.7",
-    "gulp": "^4.0.0",
-    "gulp-chug": "^0.5",
-    "gulp-concat": "^2.6.0",
-    "gulp-debug": "^2.1.2",
-    "gulp-if": "^2.0.0",
-    "gulp-livereload": "^4.0.1",
-    "gulp-order": "^1.1.1",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglifycss": "^1.0.5",
-    "merge-stream": "^1.0.0",
-    "rollup": "^0.66.2",
-    "rollup-plugin-babel": "^3.0.4",
-    "rollup-plugin-commonjs": "^9.1.3",
-    "rollup-plugin-inject": "^2.0.0",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-uglify": "^6.0.2",
-    "sass": "^1.48.0",
-    "sass-loader": "^7.0.1",
-    "upath": "^1.1.0",
-    "yargs": "^6.4.0"
+    "sass": "^1.51.0",
+    "sass-loader": "^12.0.0"
   },
   "engines": {
     "node": "^14 || ^16"
   },
   "engineStrict": true,
   "scripts": {
-    "build": "gulp build",
-    "gulp": "gulp build",
-    "lint": "yarn lint:js",
-    "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js"
+    "dev": "encore dev",
+    "build": "encore production",
+    "watch": "encore dev --watch"
   },
   "repository": {
     "type": "git",

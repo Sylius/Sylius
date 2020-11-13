@@ -60,4 +60,5 @@ return [
     Sonata\Doctrine\Bridge\Symfony\SonataDoctrineSymfonyBundle::class => ['all' => true],
     Sonata\Twig\Bridge\Symfony\SonataTwigSymfonyBundle::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+    Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
 ];
