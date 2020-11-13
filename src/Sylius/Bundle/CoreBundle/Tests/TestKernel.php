@@ -7,6 +7,7 @@ namespace Sylius\Bundle\CoreBundle\Tests;
 use Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
+use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
@@ -39,6 +40,7 @@ use Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle;
 use Sylius\Bundle\ThemeBundle\SyliusThemeBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Sylius\Bundle\UserBundle\SyliusUserBundle;
+use SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -99,6 +101,8 @@ final class TestKernel extends BaseKernel
             new SyliusPayumBundle(),
             new SyliusThemeBundle(),
             new SonataBlockBundle(),
+            new DoctrineMigrationsBundle(),
+            new SyliusLabsDoctrineMigrationsExtraBundle()
         ];
     }
 

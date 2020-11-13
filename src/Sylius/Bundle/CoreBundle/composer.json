@@ -65,7 +65,9 @@
         "symfony/messenger": "^4.4",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^4.4",
-        "winzou/state-machine-bundle": "^0.3"
+        "winzou/state-machine-bundle": "^0.3",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
+        "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^1.1",
