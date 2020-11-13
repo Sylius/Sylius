@@ -73,33 +73,6 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $this($choosePaymentMethod)->shouldReturn($cart);
     }
 
-    function it_assigns_chosen_payment_method_to_specified_payment_after_checkout(
-        OrderRepositoryInterface $orderRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentRepositoryInterface $paymentRepository,
-        OrderInterface $cart,
-        PaymentInterface $payment,
-        PaymentMethodInterface $paymentMethod
-    ): void {
-        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $choosePaymentMethod->setSubresourceId('123');
-
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
-        $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
-        $cart->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_COMPLETED);
-        $cart->getId()->willReturn('111');
-
-        $paymentRepository->findOneByOrderId('123', '111')->willReturn($payment);
-
-        $cart->getState()->willReturn(OrderInterface::STATE_NEW);
-
-        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
-        $payment->setMethod($paymentMethod)->shouldBeCalled();
-
-        $this($choosePaymentMethod)->shouldReturn($cart);
-    }
-
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         PaymentInterface $payment

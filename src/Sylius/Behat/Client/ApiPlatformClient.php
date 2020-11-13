@@ -213,6 +213,19 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
+    public function customRequest(
+        string $method,
+        string $uri,
+        array $parameters = [],
+        array $files = [],
+        array $headers = [],
+        ?string $content = null
+    ): Response {
+        $this->client->request($method, $uri, $parameters, $files, $headers, $content);
+
+        return $this->client->getResponse();
+    }
+
     private function request(RequestInterface $request): Response
     {
         if ($this->sharedStorage->has('hostname')) {

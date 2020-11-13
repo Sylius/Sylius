@@ -20,9 +20,9 @@ interface IndexPageInterface extends SymfonyPageInterface
 {
     public function countOrders(): int;
 
-    public function isOrderWithNumberInTheList(string $number): bool;
+    public function changePaymentMethod(OrderInterface $order);
 
-    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order): bool;
+    public function isOrderWithNumberInTheList(string $number): bool;
 
     public function openLastOrderPage(): void;
 }

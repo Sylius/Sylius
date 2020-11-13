@@ -199,7 +199,7 @@
                     <attribute name="groups">shop:order:account:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Change the payment method as logged shopUser</attribute>
+                    <attribute name="summary">Change the payment method as logged shop user</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">id</attribute>

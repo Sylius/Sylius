@@ -16,6 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Command\AbstractPaymentMethod;
 
 /** @experimental */
-final class ChangePaymentMethod extends AbstractPaymentMethod
+class ChangePaymentMethod extends AbstractPaymentMethod
 {
 }

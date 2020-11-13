@@ -14,6 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-final class GuestSChangePaymentMethod extends AbstractPaymentMethod
+class GuestSChangePaymentMethod extends AbstractPaymentMethod
 {
 }

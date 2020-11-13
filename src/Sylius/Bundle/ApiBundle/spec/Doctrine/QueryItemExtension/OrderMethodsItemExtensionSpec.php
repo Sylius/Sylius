@@ -302,6 +302,43 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         );
     }
 
+    function it_applies_conditions_to_shop_account_change_payment_method_operation_with_given_user(
+        UserContextInterface $userContext,
+        QueryBuilder $queryBuilder,
+        ShopUserInterface $shopUser,
+        CustomerInterface $customer,
+        QueryNameGeneratorInterface $queryNameGenerator
+    ): void {
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $userContext->getUser()->willReturn($shopUser);
+
+        $shopUser->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
+        $shopUser->getRoles()->willReturn(['ROLE_USER']);
+
+        $queryBuilder
+            ->andWhere(sprintf('%s.customer = :customer', 'o'))
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->setParameter('customer', 1)
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $this->applyToItem(
+            $queryBuilder,
+            $queryNameGenerator,
+            OrderInterface::class,
+            ['tokenValue' => 'xaza-tt_fee'],
+            'shop_account_change_payment_method',
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
+            );
+    }
+
     function it_applies_conditions_to_shop_select_payment_method_operation_with_user_equal_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
@@ -345,6 +382,51 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             'shop_select_payment_method',
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
         );
+    }
+
+    function it_applies_conditions_to_shop_guest_change_payment_method_operation_with_user_equal_null(
+        UserContextInterface $userContext,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        Expr $expr
+    ): void {
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $userContext->getUser()->willReturn(null);
+
+        $queryBuilder
+            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->leftJoin('customer.user', 'user')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder->expr()->shouldBeCalled()->willReturn($expr);
+        $expr
+            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+        ;
+
+        $queryBuilder
+            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
+        $this->applyToItem(
+            $queryBuilder,
+            $queryNameGenerator,
+            OrderInterface::class,
+            ['tokenValue' => 'xaza-tt_fee'],
+            'shop_guest_change_payment_method',
+            [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
+            );
     }
 
     function it_applies_conditions_to_patch_order_with_state_cart_and_with_null_user_and_not_null_customer_if_present_user_is_null_and_present_customer_is_not_null(

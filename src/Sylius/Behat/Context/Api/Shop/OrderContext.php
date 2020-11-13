@@ -27,7 +27,6 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
-use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -43,9 +42,6 @@ final class OrderContext implements Context
     /** @var ApiClientInterface */
     private $productsShopClient;
 
-    /** @var AbstractBrowser */
-    private $accountOrderClient;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -59,7 +55,6 @@ final class OrderContext implements Context
         ApiClientInterface $client,
         ApiClientInterface $productsAdminClient,
         ApiClientInterface $productsShopClient,
-        AbstractBrowser $accountOrderClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
@@ -67,10 +62,33 @@ final class OrderContext implements Context
         $this->client = $client;
         $this->productsAdminClient = $productsAdminClient;
         $this->productsShopClient = $productsShopClient;
-        $this->accountOrderClient = $accountOrderClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
+    }
+
+    /**
+     * @When I change my payment method to :paymentMethod
+     */
+    public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->client->customRequest(
+            HttpRequest::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/account/orders/%s/payments/%s',
+                $order->getTokenValue(),
+                (string) $order->getPayments()->first()->getId()
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'paymentMethodCode' => $paymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
+        );
     }
 
     /**
@@ -109,36 +127,6 @@ final class OrderContext implements Context
             $this->sharedStorage->get('order_number'),
             $this->responseChecker->getValue($this->client->getLastResponse(), 'number')
         );
-    }
-
-    /**
-     * @Then /^I should be able to change (payment method on "[^"]+") for (this order)$/
-     */
-    public function iShouldBeAbleToChangePaymentMethodForThisOrder(
-        PaymentMethodInterface $paymentMethod,
-        OrderInterface $order
-    ): void {
-        $this->accountOrderClient->request(
-            HttpRequest::METHOD_PATCH,
-            \sprintf(
-                '/new-api/shop/account/orders/%s/payments/%s',
-                $order->getTokenValue(),
-                (string) $order->getPayments()->first()->getId()
-            ),
-            [],
-            [],
-            $this->getHeaders(),
-            json_encode([
-                'paymentMethodCode' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR)
-        );
-
-        $paymentMethodIri = $this
-            ->responseChecker
-            ->getValue($this->accountOrderClient->getResponse(), 'payments')[0]['method']['@id']
-        ;
-
-        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getId(), $paymentMethod->getId());
     }
 
     /**
@@ -306,7 +294,9 @@ final class OrderContext implements Context
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
     {
-        $payment = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
+        $payment = $this->responseChecker
+            ->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
+        ;
 
         Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
     }
@@ -317,6 +307,19 @@ final class OrderContext implements Context
     public function iShouldNotBeAbleToSeeThatOrder(): void
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should have :paymentMethod payment method on my order
+     */
+    public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethodIri = $this
+            ->responseChecker
+            ->getValue($this->client->getLastResponse(), 'payments')[0]['method']['@id']
+        ;
+
+        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getId(), $paymentMethod->getId());
     }
 
     private function getAdjustmentsForOrder(): array

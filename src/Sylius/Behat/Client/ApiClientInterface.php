@@ -72,4 +72,13 @@ interface ApiClientInterface
     public function updateRequestData(array $data): void;
 
     public function getLastResponse(): Response;
+
+    public function customRequest(
+        string $method,
+        string $uri,
+        array $parameters = [],
+        array $files = [],
+        array $headers = [],
+        ?string $content = null
+    ): Response;
 }

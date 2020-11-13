@@ -91,7 +91,6 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
             <argument type="service" id="sylius.behat.api_platform_client.admin.product" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.product" />
-            <argument type="service" id="test.client" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="api_platform.iri_converter" />
