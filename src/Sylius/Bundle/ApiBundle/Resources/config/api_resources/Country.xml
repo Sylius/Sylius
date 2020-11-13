@@ -57,6 +57,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries/{id}</attribute>
             </itemOperation>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/countries/{id}</attribute>
+            </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
