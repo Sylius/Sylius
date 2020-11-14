@@ -147,7 +147,7 @@
 
 1. Unified API registration path in shop has been changed from `/new-api/shop/register` to `/new-api/shop/customers/`. 
  
-1. Identifier needed to retrieve a product in shop API endpoint (`/new-api/shop/products/{id}`) has been changed from `slug` to `code`. 
+1. Identifier needed to retrieve a product in shop API endpoint (`/new-api/shop/products/{id}`) has been changed from `slug` to `code`.
 
 1. Replace and add new keys in `config/packages/dev/jms_serializer.yaml`:
 
@@ -229,3 +229,11 @@ on `Sylius\Component\Core\Model\Adjustment` instead of `Sylius\Component\Order\M
     -       use Sylius\Component\Order\Model\Adjustment as BaseAdjustment;
     +       use Sylius\Component\Core\Model\Adjustment as BaseAdjustment;
     ```
+
+1. Following interfaces has been renamed:
+    * `Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface` to `Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareCommandInterface`
+    * `Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface` to `Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareCommandInterface`
+    * `Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface` to `Sylius\Bundle\ApiBundle\Command\EnrichableCommandInterface`
+
+1. Following classes has been renamed:
+    * `\Sylius\Bundle\ApiBundle\DataTransformer\CommandAwareInputDataTransformer` to `\Sylius\Bundle\ApiBundle\DataTransformer\CompositeEnrichableCommandDataTransformer`
