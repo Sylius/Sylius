@@ -1,4 +1,4 @@
-SyliusUserBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusUserBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusUserBundle)
+SyliusUserBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusUserBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusUserBundle)
 ==================
 
 [**Symfony2**](https://symfony.com) integration of Sylius User management component.

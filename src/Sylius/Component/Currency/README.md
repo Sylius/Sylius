@@ -1,4 +1,4 @@
-Currency Component [![Build status...](https://secure.travis-ci.org/Sylius/Currency.png?branch=master)](http://travis-ci.org/Sylius/Currency)
+Currency Component [![Build status...](https://secure.travis-ci.org/Sylius/Currency.png?branch=master)](https://travis-ci.org/Sylius/Currency)
 ===============
 
 Currency converting engine for PHP objects.

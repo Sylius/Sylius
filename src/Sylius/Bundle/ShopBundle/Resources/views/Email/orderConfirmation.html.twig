@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) %}
+    {% set url = channel.hostname is not null ? 'https://' ~ channel.hostname ~ path('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) : url('sylius_shop_order_show', {'tokenValue': order.tokenValue, '_locale': localeCode}) %}
 
     <div style="text-align: center; margin-bottom: 30px;">
         {{ 'sylius.email.order_confirmation.your_order_number'|trans({}, null, localeCode) }}

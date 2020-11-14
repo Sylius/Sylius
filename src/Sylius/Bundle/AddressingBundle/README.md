@@ -1,4 +1,4 @@
-SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](https://travis-ci.org/Sylius/SyliusAddressingBundle)
 ======================
 
 Addresses management is a common task for almost every ecommerce application.  
@@ -15,7 +15,7 @@ Every address can be matched against all defined zones, which is useful for tax 
 Sylius
 ------
 
-![Sylius](http://demo.sylius.com/assets/admin/img/logo.png)
+![Sylius](https://demo.sylius.com/assets/admin/img/logo.png)
 
 Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
 

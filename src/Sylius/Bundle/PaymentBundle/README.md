@@ -1,4 +1,4 @@
-SyliusPaymentBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPaymentBundle.png)](http://travis-ci.org/Sylius/SyliusPaymentBundle)
+SyliusPaymentBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPaymentBundle.png)](https://travis-ci.org/Sylius/SyliusPaymentBundle)
 ====================
 
 Payments component integration for [**Symfony2**](https://symfony.com) eCommerce applications.
