@@ -65,6 +65,26 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
+     */
+    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email)
+    {
+        $cartToken = $this->sharedStorage->get('cart_token');
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
+        Assert::notNull($cart);
+
+        $cart->setLocaleCode($localeCode);
+
+        $command = new AddressOrder($email, $this->getDefaultAddress());
+        $command->setOrderTokenValue($cartToken);
+        $this->commandBus->dispatch($command);
+
+       $this->completeCheckout($cart);
+    }
+
+    /**
      * @Given I have proceeded through checkout process
      */
     public function iHaveProceededThroughCheckoutProcess(): void
@@ -75,8 +95,18 @@ final class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
+        $command = new AddressOrder('rich@sylius.com', $this->getDefaultAddress());
+        $command->setOrderTokenValue($cartToken);
+        $this->commandBus->dispatch($command);
+
+        $this->completeCheckout($cart);
+    }
+
+    private function getDefaultAddress(): AddressInterface
+    {
         /** @var AddressInterface $address */
         $address = $this->addressFactory->createNew();
+
         $address->setCity('New York');
         $address->setStreet('Wall Street');
         $address->setPostcode('00-001');
@@ -84,24 +114,25 @@ final class CheckoutContext implements Context
         $address->setFirstName('Richy');
         $address->setLastName('Rich');
 
-        $command = new AddressOrder('rich@sylius.com', $address);
-        $command->setOrderTokenValue($cartToken);
-        $this->commandBus->dispatch($command);
+        return $address;
+    }
 
+    private function completeCheckout(OrderInterface $order): void
+    {
         $command = new ChooseShippingMethod($this->shippingMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($cartToken);
+        $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $cart->getShipments()->first();
+        $shipment = $order->getShipments()->first();
 
         $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
         $command = new ChoosePaymentMethod($this->paymentMethodRepository->findOneBy([])->getCode());
-        $command->setOrderTokenValue($cartToken);
+        $command->setOrderTokenValue($order->getTokenValue());
 
         /** @var PaymentInterface $payment */
-        $payment = $cart->getPayments()->first();
+        $payment = $order->getPayments()->first();
         $command->setSubresourceId((string) $payment->getId());
 
         $this->commandBus->dispatch($command);

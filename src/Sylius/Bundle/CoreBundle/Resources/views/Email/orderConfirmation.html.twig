@@ -1,0 +1,9 @@
+{% extends '@SyliusCore/Email/layout.html.twig' %}
+
+{% block subject %}
+    {% include '@SyliusCore/Email/Blocks/OrderConfirmation/_subject.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    {% include '@SyliusCore/Email/Blocks/OrderConfirmation/_content.html.twig' %}
+{% endblock %}

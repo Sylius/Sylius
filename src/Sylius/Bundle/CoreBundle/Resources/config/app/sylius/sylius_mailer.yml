@@ -5,3 +5,7 @@ sylius_mailer:
     sender:
         name: Example.com
         address: no-reply@example.com
+    emails:
+        order_confirmation:
+            subject: sylius.emails.order_confirmation.subject
+            template: "@SyliusCore/Email/orderConfirmation.html.twig"
