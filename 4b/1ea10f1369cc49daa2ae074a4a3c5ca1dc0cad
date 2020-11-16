@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-10-21T15:30:23Z
+
+This PR extracted mailing from Shop to Core. This move allowed us to use the same email code and twig files in both Shop, Admin, and API context. Templates are moved, but in order to provide backward compatibility, files where they were used before, are left and include content from the core. To finish this PR, we should:
+1. Refactor twig includes
+1. Rebase
+1. Fix API Bundle composer.json
+1. Consider refactoring mailing trigger to separate command (and perhaps introduce event bus, for integration layer) <- could be part of separate PR/task
+1. Write ADR about placing emails & sending them from API context
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-11-16T15:33:16Z
+
+Thank you, Łukasz! :1st_place_medal:
