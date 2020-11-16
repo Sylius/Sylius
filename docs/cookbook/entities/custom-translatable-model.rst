@@ -450,7 +450,7 @@ Having a grid prepared we can configure routing for the entity administration:
         resource: |
             alias: app.supplier
             section: admin
-            templates: SyliusAdminBundle:Crud
+            templates: "@SyliusAdmin\\Crud"
             redirect: update
             grid: app_admin_supplier
             vars:
