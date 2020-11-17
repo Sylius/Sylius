@@ -78,8 +78,8 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler">
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.mailer.order_email_manager" />
-            <tag name="messenger.message_handler" />
+            <argument type="service" id="api_platform.message_bus" />
+            <tag name="messenger.command_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">
@@ -100,6 +100,11 @@
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="messenger.message_handler" bus="sylius_default.bus"/>
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendOrderConfirmationHandler">
+            <argument type="service" id="sylius.email_sender" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
     </services>
 </container>

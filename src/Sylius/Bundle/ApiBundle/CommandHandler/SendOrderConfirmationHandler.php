@@ -11,13 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
+use Sylius\Bundle\ApiBundle\Command\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class OrderEmailSender implements OrderEmailSenderInterface
+/** @experimental */
+final class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
     /** @var SenderInterface */
     private $emailSender;
@@ -27,8 +29,10 @@ final class OrderEmailSender implements OrderEmailSenderInterface
         $this->emailSender = $emailSender;
     }
 
-    public function sendConfirmationEmail(OrderInterface $order): void
+    public function __invoke(SendOrderConfirmation $sendOrderConfirmation): void
     {
+        $order = $sendOrderConfirmation->order();
+
         $this->emailSender->send(
             Emails::ORDER_CONFIRMATION_RESENT,
             [$order->getCustomer()->getEmail()],

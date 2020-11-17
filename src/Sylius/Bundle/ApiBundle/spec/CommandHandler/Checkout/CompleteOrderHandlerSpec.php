@@ -14,22 +14,26 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\Event\OrderCompletedEvent;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class CompleteOrderHandlerSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
-        OrderEmailManagerInterface $emailManager
+        MessageBusInterface $messageBus
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, $emailManager);
+        $this->beConstructedWith($orderRepository, $stateMachineFactory, $messageBus);
     }
 
     function it_handles_order_completion_without_notes(
@@ -37,7 +41,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        OrderEmailManagerInterface $emailManager
+        MessageBusInterface $messageBus
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -51,8 +55,6 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
 
         $stateMachine->apply('complete')->shouldBeCalled();
-
-        $emailManager->sendConfirmationEmail($order)->shouldBeCalled();
 
         $this($completeOrder)->shouldReturn($order);
     }

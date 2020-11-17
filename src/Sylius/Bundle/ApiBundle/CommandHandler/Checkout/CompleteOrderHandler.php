@@ -15,11 +15,13 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
+use Sylius\Bundle\ApiBundle\Event\OrderCompletedEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
@@ -31,17 +33,17 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     /** @var FactoryInterface */
     private $stateMachineFactory;
 
-    /** @var OrderEmailManagerInterface */
-    private $emailManager;
+    /** @var MessageBusInterface */
+    private $messageBus;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
-        OrderEmailManagerInterface $emailManager
+        MessageBusInterface $messageBus
     ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->emailManager = $emailManager;
+        $this->messageBus = $messageBus;
     }
 
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
@@ -66,7 +68,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
-        $this->emailManager->sendConfirmationEmail($cart);
+        $this->messageBus->dispatch(new OrderCompletedEvent($orderTokenValue), [new DispatchAfterCurrentBusStamp()]);
 
         return $cart;
     }
