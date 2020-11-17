@@ -30,6 +30,6 @@ final class FilterExtension extends BaseFilterExtension
 
     private function canImageBeFiltered(string $path): bool
     {
-        return substr($path, -3) !== 'svg';
+        return substr($path, -4) !== '.svg';
     }
 }
