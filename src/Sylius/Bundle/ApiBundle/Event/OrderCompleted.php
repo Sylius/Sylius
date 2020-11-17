@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Event;
 
-final class OrderCompletedEvent
+final class OrderCompleted
 {
     /** @var string */
     protected $orderToken;

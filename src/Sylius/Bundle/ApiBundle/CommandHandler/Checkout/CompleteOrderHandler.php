@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Event\OrderCompletedEvent;
+use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -34,16 +35,16 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     private $stateMachineFactory;
 
     /** @var MessageBusInterface */
-    private $messageBus;
+    private $eventBus;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $messageBus
+        MessageBusInterface $eventBus
     ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->messageBus = $messageBus;
+        $this->eventBus = $eventBus;
     }
 
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
@@ -68,7 +69,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
-        $this->messageBus->dispatch(new OrderCompletedEvent($orderTokenValue), [new DispatchAfterCurrentBusStamp()]);
+        $this->eventBus->dispatch(new OrderCompleted($cart->getTokenValue()), [new DispatchAfterCurrentBusStamp()]);
 
         return $cart;
     }

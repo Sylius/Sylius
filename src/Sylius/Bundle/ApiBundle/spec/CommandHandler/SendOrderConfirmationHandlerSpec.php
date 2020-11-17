@@ -19,15 +19,15 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
 {
-    function let(
-        SenderInterface $sender
-    ): void {
-        $this->beConstructedWith($sender);
+    function let(SenderInterface $sender, OrderRepositoryInterface $orderRepository): void
+    {
+        $this->beConstructedWith($sender, $orderRepository);
     }
 
     function it_is_a_message_handler(): void
@@ -40,9 +40,12 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
         SendOrderConfirmation $sendOrderConfirmation,
         SenderInterface $sender,
         CustomerInterface $customer,
-        ChannelInterface $channel
+        ChannelInterface $channel,
+        OrderRepositoryInterface $orderRepository
     ): void {
-        $sendOrderConfirmation->order()->willReturn($order);
+        $sendOrderConfirmation->orderToken()->willReturn('TOKEN');
+
+        $orderRepository->findOneByTokenValue('TOKEN')->willReturn($order);
 
         $order->getChannel()->willReturn($channel);
         $order->getLocaleCode()->willReturn('pl_PL');
@@ -60,6 +63,6 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
             ]
         )->shouldBeCalled();
 
-        $this(new SendOrderConfirmation($order->getWrappedObject()));
+        $this(new SendOrderConfirmation('TOKEN'));
     }
 }

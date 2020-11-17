@@ -15,6 +15,8 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Command\SendOrderConfirmation;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -24,14 +26,19 @@ final class SendOrderConfirmationHandler implements MessageHandlerInterface
     /** @var SenderInterface */
     private $emailSender;
 
-    public function __construct(SenderInterface $emailSender)
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
+    public function __construct(SenderInterface $emailSender, OrderRepositoryInterface $orderRepository)
     {
         $this->emailSender = $emailSender;
+        $this->orderRepository = $orderRepository;
     }
 
     public function __invoke(SendOrderConfirmation $sendOrderConfirmation): void
     {
-        $order = $sendOrderConfirmation->order();
+        /** @var OrderInterface $order */
+        $order = $this->orderRepository->findOneByTokenValue($sendOrderConfirmation->orderToken());
 
         $this->emailSender->send(
             Emails::ORDER_CONFIRMATION_RESENT,

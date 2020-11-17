@@ -13,20 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-use Sylius\Component\Order\Model\OrderInterface;
-
 class SendOrderConfirmation
 {
-    /** @var OrderInterface */
-    protected $order;
+    /** @var string */
+    protected $orderToken;
 
-    public function __construct(OrderInterface $order)
+    public function __construct(string $orderToken)
     {
-        $this->order = $order;
+        $this->orderToken = $orderToken;
     }
 
-    public function order(): OrderInterface
+    public function orderToken(): string
     {
-        return $this->order;
+        return $this->orderToken;
     }
 }
