@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Changer;
+namespace Sylius\Bundle\ApiBundle\Changer;
 
-use Sylius\Bundle\ApiBundle\Command\AbstractPaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -22,7 +21,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class CommandPaymentMethodChanger implements CommandPaymentMethodChangerInterface
+final class PaymentMethodChanger implements PaymentMethodChangerInterface
 {
     /** @var PaymentRepositoryInterface */
     private $paymentRepository;
@@ -39,16 +38,17 @@ final class CommandPaymentMethodChanger implements CommandPaymentMethodChangerIn
     }
 
     public function changePaymentMethod(
-        AbstractPaymentMethod $abstractPaymentMethod,
+        string $paymentMethodCode,
+        string $paymentId,
         OrderInterface $order
     ): OrderInterface {
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
-            'code' => $abstractPaymentMethod->paymentMethodCode,
+            'code' => $paymentMethodCode,
         ]);
         Assert::notNull($paymentMethod, 'Payment method has not been found');
 
-        $payment = $this->paymentRepository->findOneByOrderId($abstractPaymentMethod->paymentId, $order->getId());
+        $payment = $this->paymentRepository->findOneByOrderId($paymentId, $order->getId());
         Assert::notNull($payment, 'Can not find payment with given identifier.');
 
         if ($order->getState() === OrderInterface::STATE_NEW) {

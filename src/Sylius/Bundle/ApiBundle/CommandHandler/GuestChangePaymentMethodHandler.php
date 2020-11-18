@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-use Sylius\Bundle\ApiBundle\Command\GuestSChangePaymentMethod;
-use Sylius\Bundle\ApiBundle\CommandHandler\Changer\CommandPaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Command\GuestChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -22,10 +22,10 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class GuestSChangePaymentMethodHandler implements MessageHandlerInterface
+final class GuestChangePaymentMethodHandler implements MessageHandlerInterface
 {
-    /** @var CommandPaymentMethodChangerInterface */
-    private $commandPaymentMethodChanger;
+    /** @var PaymentMethodChangerInterface */
+    private $paymentMethodChanger;
 
     /** @var OrderRepositoryInterface */
     private $orderRepository;
@@ -34,19 +34,19 @@ final class GuestSChangePaymentMethodHandler implements MessageHandlerInterface
     private $userContext;
 
     public function __construct(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $commandPaymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
         UserContextInterface $userContext
     ) {
-        $this->commandPaymentMethodChanger = $commandPaymentMethodChanger;
+        $this->paymentMethodChanger = $commandPaymentMethodChanger;
         $this->orderRepository = $orderRepository;
         $this->userContext = $userContext;
     }
 
-    public function __invoke(GuestSChangePaymentMethod $guestSChangePaymentMethod): OrderInterface
+    public function __invoke(GuestChangePaymentMethod $changePaymentMethod): OrderInterface
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $guestSChangePaymentMethod->orderTokenValue]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $changePaymentMethod->orderTokenValue]);
 
         Assert::notNull($order, 'Cart has not been found.');
 
@@ -56,6 +56,10 @@ final class GuestSChangePaymentMethodHandler implements MessageHandlerInterface
             throw new \InvalidArgumentException('User is not null');
         }
 
-        return $this->commandPaymentMethodChanger->changePaymentMethod($guestSChangePaymentMethod, $order);
+        return $this->paymentMethodChanger->changePaymentMethod(
+            $changePaymentMethod->paymentMethodCode,
+            $changePaymentMethod->paymentId,
+            $order
+        );
     }
 }

@@ -336,7 +336,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ['tokenValue' => 'xaza-tt_fee'],
             'shop_account_change_payment_method',
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
-            );
+        );
     }
 
     function it_applies_conditions_to_shop_select_payment_method_operation_with_user_equal_null(
@@ -426,7 +426,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ['tokenValue' => 'xaza-tt_fee'],
             'shop_guest_change_payment_method',
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
-            );
+        );
     }
 
     function it_applies_conditions_to_patch_order_with_state_cart_and_with_null_user_and_not_null_customer_if_present_user_is_null_and_present_customer_is_not_null(
@@ -523,7 +523,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ['tokenValue' => 'xaza-tt_fee'],
             Request::METHOD_DELETE,
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_DELETE],
-            );
+        );
     }
 
     function it_applies_conditions_to_delete_order_with_state_cart_by_authorized_shop_user_that_is_assigns_to_this_order(

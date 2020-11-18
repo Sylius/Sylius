@@ -16,22 +16,22 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
-use Sylius\Bundle\ApiBundle\CommandHandler\Changer\CommandPaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
 {
     function let(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository
     ): void {
-        $this->beConstructedWith($commandPaymentMethodChanger, $orderRepository);
+        $this->beConstructedWith($paymentMethodChanger, $orderRepository);
     }
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger
+        PaymentMethodChangerInterface $paymentMethodChanger
     ): void {
         $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -39,8 +39,12 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
-        $commandPaymentMethodChanger
-            ->changePaymentMethod($changePaymentMethod, Argument::type(OrderInterface::class))
+        $paymentMethodChanger
+            ->changePaymentMethod(
+                'CASH_ON_DELIVERY_METHOD',
+                '123',
+                Argument::type(OrderInterface::class)
+            )
             ->shouldNotBeCalled()
         ;
 
@@ -51,7 +55,7 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
     }
 
     function it_assigns_guest_s_change_payment_method_to_specified_payment_after_checkout_completed(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order
     ): void {
@@ -61,7 +65,14 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
-        $commandPaymentMethodChanger->changePaymentMethod($changePaymentMethod, $order)->willReturn($order);
+        $paymentMethodChanger
+            ->changePaymentMethod(
+                'CASH_ON_DELIVERY_METHOD',
+                '123',
+                $order
+            )
+            ->willReturn($order)
+        ;
 
         $this($changePaymentMethod)->shouldReturn($order);
     }

@@ -16,7 +16,7 @@ Feature: Changing a payment method of a placed order
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @api @ui
+    @ui @api
     Scenario: Changing a payment method of an order
         When I browse my orders
         And I change my payment method to "Bank Transfer"

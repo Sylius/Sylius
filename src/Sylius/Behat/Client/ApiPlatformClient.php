@@ -213,17 +213,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
-    public function customRequest(
-        string $method,
-        string $uri,
-        array $parameters = [],
-        array $files = [],
-        array $headers = [],
-        ?string $content = null
-    ): Response {
-        $this->client->request($method, $uri, $parameters, $files, $headers, $content);
-
-        return $this->client->getResponse();
+    public function getToken(): ?string
+    {
+        return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
     private function request(RequestInterface $request): Response
@@ -242,10 +234,5 @@ final class ApiPlatformClient implements ApiClientInterface
         );
 
         return $this->getLastResponse();
-    }
-
-    private function getToken(): ?string
-    {
-        return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 }

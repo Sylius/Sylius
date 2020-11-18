@@ -14,30 +14,30 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\GuestSChangePaymentMethod;
-use Sylius\Bundle\ApiBundle\CommandHandler\Changer\CommandPaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Command\GuestChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-final class GuestSChangePaymentMethodHandlerSpec extends ObjectBehavior
+final class GuestChangePaymentMethodHandlerSpec extends ObjectBehavior
 {
     function let(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
         UserContextInterface $userContext
     ): void {
-        $this->beConstructedWith($commandPaymentMethodChanger, $orderRepository, $userContext);
+        $this->beConstructedWith($paymentMethodChanger, $orderRepository, $userContext);
     }
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
         UserContextInterface $userContext
     ): void {
-        $guestSChangePaymentMethod = new GuestSChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $guestSChangePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $guestSChangePaymentMethod->setSubresourceId('123');
+        $changePaymentMethod = new GuestChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $changePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn(null);
 
@@ -45,7 +45,7 @@ final class GuestSChangePaymentMethodHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [$guestSChangePaymentMethod])
+            ->during('__invoke', [$changePaymentMethod])
         ;
     }
 
@@ -55,9 +55,9 @@ final class GuestSChangePaymentMethodHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         ShopUserInterface $shopUser
     ): void {
-        $guestSChangePaymentMethod = new GuestSChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $guestSChangePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $guestSChangePaymentMethod->setSubresourceId('123');
+        $changePaymentMethod = new GuestChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $changePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -66,27 +66,34 @@ final class GuestSChangePaymentMethodHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [$guestSChangePaymentMethod])
+            ->during('__invoke', [$changePaymentMethod])
         ;
     }
 
     function it_assigns_guest_s_change_payment_method_to_specified_payment_after_checkout_completed(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
         UserContextInterface $userContext,
         OrderInterface $order
     ): void {
-        $guestSChangePaymentMethod = new GuestSChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
-        $guestSChangePaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $guestSChangePaymentMethod->setSubresourceId('123');
+        $changePaymentMethod = new GuestChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $changePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $userContext->getUser()->willReturn(null);
         $order->getUser()->willReturn(null);
 
-        $commandPaymentMethodChanger->changePaymentMethod($guestSChangePaymentMethod, $order)->willReturn($order);
+        $paymentMethodChanger
+            ->changePaymentMethod(
+                'CASH_ON_DELIVERY_METHOD',
+                '123',
+                $order
+            )
+            ->willReturn($order)
+        ;
 
-        $this($guestSChangePaymentMethod)->shouldReturn($order);
+        $this($changePaymentMethod)->shouldReturn($order);
     }
 }

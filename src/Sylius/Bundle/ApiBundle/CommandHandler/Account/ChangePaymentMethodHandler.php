@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
-use Sylius\Bundle\ApiBundle\CommandHandler\Changer\CommandPaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -23,17 +23,17 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ChangePaymentMethodHandler implements MessageHandlerInterface
 {
-    /** @var CommandPaymentMethodChangerInterface */
-    private $commandPaymentMethodChanger;
+    /** @var PaymentMethodChangerInterface */
+    private $paymentMethodChanger;
 
     /** @var OrderRepositoryInterface */
     private $orderRepository;
 
     public function __construct(
-        CommandPaymentMethodChangerInterface $commandPaymentMethodChanger,
+        PaymentMethodChangerInterface $commandPaymentMethodChanger,
         OrderRepositoryInterface $orderRepository
     ) {
-        $this->commandPaymentMethodChanger = $commandPaymentMethodChanger;
+        $this->paymentMethodChanger = $commandPaymentMethodChanger;
         $this->orderRepository = $orderRepository;
     }
 
@@ -44,6 +44,10 @@ final class ChangePaymentMethodHandler implements MessageHandlerInterface
 
         Assert::notNull($order, 'Cart has not been found.');
 
-        return $this->commandPaymentMethodChanger->changePaymentMethod($changePaymentMethod, $order);
+        return $this->paymentMethodChanger->changePaymentMethod(
+            $changePaymentMethod->paymentMethodCode,
+            $changePaymentMethod->paymentId,
+            $order
+        );
     }
 }

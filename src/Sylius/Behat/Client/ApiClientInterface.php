@@ -73,12 +73,5 @@ interface ApiClientInterface
 
     public function getLastResponse(): Response;
 
-    public function customRequest(
-        string $method,
-        string $uri,
-        array $parameters = [],
-        array $files = [],
-        array $headers = [],
-        ?string $content = null
-    ): Response;
+    public function getToken(): ?string;
 }

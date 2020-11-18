@@ -11,17 +11,16 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Changer;
+namespace spec\Sylius\Bundle\ApiBundle\Changer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\AbstractPaymentMethod;use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
-final class CommandPaymentMethodChangerSpec extends ObjectBehavior
+final class PaymentMethodChangerSpec extends ObjectBehavior
 {
     function let(
         PaymentRepositoryInterface $paymentRepository,
@@ -35,22 +34,15 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         OrderInterface $order
     ): void {
-        $abstractPaymentMethod = new class extends AbstractPaymentMethod {
-            public function __construct()
-            {
-                parent::__construct('CASH_ON_DELIVERY_METHOD');
-            }
-        };
-        $abstractPaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $abstractPaymentMethod->setSubresourceId('123');
-
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
 
-        $paymentRepository->findOneByOrderId(Argument::type(AbstractPaymentMethod::class))->shouldNotBeCalled();
+        $order->getId()->willReturn('100');
+
+        $paymentRepository->findOneByOrderId('123', '100')->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('changePaymentMethod', [$abstractPaymentMethod, $order])
+            ->during('changePaymentMethod', ['CASH_ON_DELIVERY_METHOD', '123', $order])
         ;
     }
 
@@ -60,15 +52,6 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
         PaymentMethodInterface $paymentMethod,
         OrderInterface $order
     ): void {
-        $abstractPaymentMethod = new class extends AbstractPaymentMethod {
-            public function __construct()
-            {
-                parent::__construct('CASH_ON_DELIVERY_METHOD');
-            }
-        };
-        $abstractPaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $abstractPaymentMethod->setSubresourceId('123');
-
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
         $order->getId()->willReturn('444');
@@ -79,7 +62,7 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('changePaymentMethod', [$abstractPaymentMethod, $order])
+            ->during('changePaymentMethod', ['CASH_ON_DELIVERY_METHOD', '123', $order])
         ;
     }
 
@@ -90,15 +73,6 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ): void {
-        $abstractPaymentMethod = new class extends AbstractPaymentMethod {
-            public function __construct()
-            {
-                parent::__construct('CASH_ON_DELIVERY_METHOD');
-            }
-        };
-        $abstractPaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $abstractPaymentMethod->setSubresourceId('123');
-
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
         $order->getId()->willReturn('444');
@@ -111,7 +85,7 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('changePaymentMethod', [$abstractPaymentMethod, $order])
+            ->during('changePaymentMethod', ['CASH_ON_DELIVERY_METHOD', '123', $order])
         ;
     }
 
@@ -122,15 +96,6 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ): void {
-        $abstractPaymentMethod = new class extends AbstractPaymentMethod {
-            public function __construct()
-            {
-                parent::__construct('CASH_ON_DELIVERY_METHOD');
-            }
-        };
-        $abstractPaymentMethod->setOrderTokenValue('ORDERTOKEN');
-        $abstractPaymentMethod->setSubresourceId('123');
-
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
         $order->getId()->willReturn('444');
@@ -142,6 +107,6 @@ final class CommandPaymentMethodChangerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $payment->setMethod($paymentMethod)->shouldBeCalled();
 
-        $this->changePaymentMethod($abstractPaymentMethod, $order)->shouldReturn($order);
+        $this->changePaymentMethod('CASH_ON_DELIVERY_METHOD', '123', $order)->shouldReturn($order);
     }
 }

@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Changer;
+namespace Sylius\Bundle\ApiBundle\Changer;
 
-use Sylius\Bundle\ApiBundle\Command\AbstractPaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 
-interface CommandPaymentMethodChangerInterface
+interface PaymentMethodChangerInterface
 {
     public function changePaymentMethod(
-        AbstractPaymentMethod $abstractPaymentMethod,
+        string $paymentMethodCode,
+        string $paymentId,
         OrderInterface $order
     ): OrderInterface;
 }

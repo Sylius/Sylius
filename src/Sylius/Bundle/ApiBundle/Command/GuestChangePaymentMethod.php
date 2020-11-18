@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-abstract class AbstractPaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
+class GuestChangePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;

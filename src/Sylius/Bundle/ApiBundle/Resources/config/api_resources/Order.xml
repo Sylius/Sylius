@@ -225,7 +225,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/guest/orders/{id}/payments/{paymentId}</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\GuestSChangePaymentMethod</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\GuestChangePaymentMethod</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:order:guest:change_payment_method</attribute>
                 </attribute>

@@ -36,12 +36,6 @@ final class OrderContext implements Context
     /** @var ApiClientInterface */
     private $client;
 
-    /** @var ApiClientInterface */
-    private $productsAdminClient;
-
-    /** @var ApiClientInterface */
-    private $productsShopClient;
-
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -53,15 +47,11 @@ final class OrderContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ApiClientInterface $productsAdminClient,
-        ApiClientInterface $productsShopClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
-        $this->productsAdminClient = $productsAdminClient;
-        $this->productsShopClient = $productsShopClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
@@ -75,20 +65,19 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
-        $this->client->customRequest(
-            HttpRequest::METHOD_PATCH,
+        $request = Request::custom(
             \sprintf(
                 '/new-api/shop/account/orders/%s/payments/%s',
                 $order->getTokenValue(),
                 (string) $order->getPayments()->first()->getId()
             ),
-            [],
-            [],
-            $this->getHeaders(),
-            json_encode([
-                'paymentMethodCode' => $paymentMethod->getCode(),
-            ], \JSON_THROW_ON_ERROR)
+            HttpRequest::METHOD_PATCH,
+            $this->client->getToken()
         );
+
+        $request->setContent(['paymentMethodCode' => $paymentMethod->getCode()]);
+
+        $this->client->executeCustomRequest($request);
     }
 
     /**
@@ -294,7 +283,8 @@ final class OrderContext implements Context
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
     {
-        $payment = $this->responseChecker
+        $payment = $this
+            ->responseChecker
             ->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
         ;
 
@@ -381,18 +371,5 @@ final class OrderContext implements Context
     private function hasAdjustmentWithLabel(string $label): bool
     {
         return $this->getAdjustmentWithLabel($label) !== null;
-    }
-
-    private function getHeaders(array $headers = []): array
-    {
-        if (empty($headers)) {
-            $headers = ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'];
-        }
-
-        if ($this->sharedStorage->has('token')) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
-        }
-
-        return $headers;
     }
 }
