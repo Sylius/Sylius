@@ -1,10 +1,19 @@
-# UPGRADE FROM `v1.8.4` TO `v1.8.5`
+# UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
 
     ```diff
-        security:
-            access_control:
+         security:
+             firewalls:
+                 new_api_admin_user:
+                     json_login:
+    -                    check_path: "%sylius.security.new_api_route%/admin/authentication-token"
+    +                    check_path: "%sylius.security.new_api_admin_route%/authentication-token"
+                 new_api_shop_user:
+                     json_login:
+    -                    check_path: "%sylius.security.new_api_route%/shop/authentication-token"
+    +                    check_path: "%sylius.security.new_api_shop_route%/authentication-token"
+             access_control:
     -            - { path: "%sylius.security.new_api_route%/admin/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +            - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     -            - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
