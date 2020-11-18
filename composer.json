@@ -132,7 +132,7 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
         "pamil/prophecy-common": "^0.1",
-        "phpspec/phpspec": "^6.1",
+        "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "0.12.29",
         "phpstan/phpstan-doctrine": "0.12.16",
         "phpunit/phpunit": "^8.5",
