@@ -136,7 +136,7 @@
         "phpstan/phpstan": "0.12.29",
         "phpstan/phpstan-doctrine": "0.12.16",
         "phpunit/phpunit": "^8.5",
-        "psalm/plugin-mockery": "^0.3",
+        "psalm/plugin-mockery": "0.6.1",
         "psr/event-dispatcher": "^1.0",
         "sspooky13/yaml-standards": "^5.1",
         "stripe/stripe-php": "^6.43",
@@ -146,7 +146,7 @@
         "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4",
-        "vimeo/psalm": "^3.11.6"
+        "vimeo/psalm": "4.1.1"
     },
     "replace": {
         "sylius/addressing": "self.version",

@@ -151,7 +151,8 @@
 
         <MoreSpecificReturnType errorLevel="info" />
         <LessSpecificReturnStatement errorLevel="info" />
-        <TypeCoercion errorLevel="info" />
+        <ArgumentTypeCoercion errorLevel="info" />
+        <PropertyTypeCoercion errorLevel="info" />
 
         <PossiblyInvalidArgument errorLevel="info" />
         <PossiblyInvalidArrayAccess errorLevel="info" />
