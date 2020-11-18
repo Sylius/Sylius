@@ -67,5 +67,5 @@ Feature: Sorting listed products
     @ui @api
     Scenario: Products are visible independent from the user locale
         Given this administrator is using "Zulu (South Africa)" locale
-        Given I am browsing products
+        When I am browsing products
         Then I should see 3 products in the list
