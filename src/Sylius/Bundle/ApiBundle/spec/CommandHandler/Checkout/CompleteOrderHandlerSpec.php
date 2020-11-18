@@ -57,9 +57,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $orderCompleted = new OrderCompleted('COMPLETED_ORDER_TOKEN');
 
-        $eventBus->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
+        $eventBus
+            ->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
             ->willReturn(new Envelope($orderCompleted))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this($completeOrder)->shouldReturn($order);
     }
@@ -86,9 +88,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
         $orderCompleted = new OrderCompleted('COMPLETED_ORDER_TOKEN');
 
-        $eventBus->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
+        $eventBus
+            ->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
             ->willReturn(new Envelope($orderCompleted))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this($completeOrder)->shouldReturn($order);
     }

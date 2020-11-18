@@ -11,26 +11,25 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler;
+namespace Sylius\Bundle\ApiBundle\EventHandler;
 
 use Sylius\Bundle\ApiBundle\Command\SendOrderConfirmation;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
-use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/** @experimental */
 final class OrderCompletedHandler
 {
     /** @var MessageBusInterface */
-    private $bus;
+    private $commandBus;
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(MessageBusInterface $commandBus)
     {
-        $this->bus = $bus;
+        $this->commandBus = $commandBus;
     }
 
     public function __invoke(OrderCompleted $orderCompleted): void
     {
-        $this->bus->dispatch(new SendOrderConfirmation($orderCompleted->orderToken()));
+        $this->commandBus->dispatch(new SendOrderConfirmation($orderCompleted->orderToken()));
     }
 }

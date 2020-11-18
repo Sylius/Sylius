@@ -107,11 +107,5 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\OrderCompletedHandler">
-            <argument type="service" id="message_bus" />
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus"/>
-        </service>
     </services>
 </container>
