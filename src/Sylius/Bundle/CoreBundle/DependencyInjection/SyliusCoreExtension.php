@@ -100,6 +100,13 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             return;
         }
 
+        if (
+            $container->hasParameter('sylius.disable_prepending_doctrine_migrations') &&
+            $container->getParameter('sylius.disable_prepending_doctrine_migrations')
+        ) {
+            return;
+        }
+
         $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
         $container->prependExtensionConfig('doctrine_migrations', [
             'migrations_paths' => \array_merge(\array_pop($doctrineConfig)['migrations_paths'] ?? [], [

@@ -10,6 +10,7 @@ imports:
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
+    sylius.disable_prepending_doctrine_migrations: false
 
 sylius_shop:
     product_grid:
