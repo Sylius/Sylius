@@ -21,6 +21,8 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    use PrependDoctrineMigrationsTrait;
+
     /** @var array */
     private static $bundles = [
         'sylius_addressing',
@@ -68,6 +70,21 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDoctrineMigrations($container);
     }
 
+    protected function getMigrationsNamespace(): string
+    {
+        return 'Sylius\Bundle\CoreBundle\Migrations';
+    }
+
+    protected function getMigrationsDirectory(): string
+    {
+        return '@SyliusCoreBundle/Migrations';
+    }
+
+    protected function getNamespacesOfMigrationsExecutedBefore(): array
+    {
+        return [];
+    }
+
     private function prependHwiOauth(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('hwi_oauth')) {
@@ -92,32 +109,5 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
-    }
-
-    private function prependDoctrineMigrations(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
-            return;
-        }
-
-        if (
-            $container->hasParameter('sylius.disable_prepending_doctrine_migrations') &&
-            $container->getParameter('sylius.disable_prepending_doctrine_migrations')
-        ) {
-            return;
-        }
-
-        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
-        $container->prependExtensionConfig('doctrine_migrations', [
-            'migrations_paths' => \array_merge(\array_pop($doctrineConfig)['migrations_paths'] ?? [], [
-                'Sylius\Bundle\CoreBundle\Migrations' => '@SyliusCoreBundle/Migrations',
-            ]),
-        ]);
-
-        $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
-            'migrations' => [
-                'Sylius\Bundle\CoreBundle\Migrations' => [],
-            ],
-        ]);
     }
 }

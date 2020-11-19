@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminApiBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\DependencyInjection\PrependDoctrineMigrationsTrait;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -22,6 +23,8 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusAdminApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    use PrependDoctrineMigrationsTrait;
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
@@ -59,30 +62,18 @@ final class SyliusAdminApiExtension extends AbstractResourceExtension implements
         ]);
     }
 
-    private function prependDoctrineMigrations(ContainerBuilder $container): void
+    protected function getMigrationsNamespace(): string
     {
-        if (!$container->hasExtension('doctrine_migrations') || !$container->hasExtension('sylius_labs_doctrine_migrations_extra')) {
-            return;
-        }
+        return 'Sylius\Bundle\AdminApiBundle\Migrations';
+    }
 
-        if (
-            $container->hasParameter('sylius.disable_prepending_doctrine_migrations') &&
-            $container->getParameter('sylius.disable_prepending_doctrine_migrations')
-        ) {
-            return;
-        }
+    protected function getMigrationsDirectory(): string
+    {
+        return '@SyliusAdminApiBundle/Migrations';
+    }
 
-        $doctrineConfig = $container->getExtensionConfig('doctrine_migrations');
-        $container->prependExtensionConfig('doctrine_migrations', [
-            'migrations_paths' => \array_merge(\array_pop($doctrineConfig)['migrations_paths'] ?? [], [
-                'Sylius\Bundle\AdminApiBundle\Migrations' => '@SyliusAdminApiBundle/Migrations',
-            ]),
-        ]);
-
-        $container->prependExtensionConfig('sylius_labs_doctrine_migrations_extra', [
-            'migrations' => [
-                'Sylius\Bundle\AdminApiBundle\Migrations' => ['Sylius\Bundle\CoreBundle\Migrations'],
-            ],
-        ]);
+    protected function getNamespacesOfMigrationsExecutedBefore(): array
+    {
+        return ['Sylius\Bundle\CoreBundle\Migrations'];
     }
 }
