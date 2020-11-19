@@ -29,7 +29,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -39,7 +38,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -59,7 +57,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -69,7 +66,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -79,7 +75,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -89,7 +84,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>
@@ -99,7 +93,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>shop:address:update</group>
@@ -108,7 +101,6 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>cart:address</group>
             <group>checkout:read</group>
             <group>order:read</group>

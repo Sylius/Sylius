@@ -54,7 +54,7 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_assigns_guest_s_change_payment_method_to_specified_payment_after_checkout_completed(
+    function it_assigns_shop_user_s_change_payment_method_to_specified_payment_after_checkout_completed(
         PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order

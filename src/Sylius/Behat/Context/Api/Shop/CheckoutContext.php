@@ -411,7 +411,7 @@ final class CheckoutContext implements Context
         $this->client->request(
             Request::METHOD_PATCH,
             \sprintf(
-                '/new-api/shop/guest/orders/%s/payments/%s',
+                '/new-api/shop/orders/%s/payments/%s',
                 $this->sharedStorage->get('cart_token'),
                 $this->getCart()['payments'][0]['id']
             ),

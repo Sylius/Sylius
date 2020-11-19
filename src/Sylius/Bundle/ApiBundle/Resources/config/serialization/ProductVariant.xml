@@ -27,7 +27,6 @@
         </attribute>
         <attribute name="translations">
             <group>shop:order:account:read</group>
-            <group>shop:order:guest:read</group>
             <group>product_variant:read</group>
             <group>checkout:read</group>
         </attribute>

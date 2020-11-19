@@ -86,7 +86,7 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             ->andWhere($queryBuilder->expr()->orX('user IS NULL', sprintf('%s.customer IS NULL', $rootAlias)))
         ;
 
-        if ($operationName !== 'shop_select_payment_method' && $operationName !== 'shop_guest_change_payment_method') {
+        if ($operationName !== 'shop_select_payment_method') {
             $this->filterCart($queryBuilder, $rootAlias);
         }
     }

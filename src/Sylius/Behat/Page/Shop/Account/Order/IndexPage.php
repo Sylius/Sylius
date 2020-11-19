@@ -53,7 +53,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             ['number' => $order->getNumber()]
         );
 
-        $row->clickLink('Pay');
+        $link = $row->find('css', '[data-test-button="sylius.ui.pay"]');
+        $link->click();
     }
 
     public function isOrderWithNumberInTheList($number): bool

@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -33,9 +34,16 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentRepositoryInterface $paymentRepository,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        PaymentMethodChangerInterface $paymentMethodChanger
     ): void {
-        $this->beConstructedWith($orderRepository, $paymentMethodRepository, $paymentRepository, $stateMachineFactory);
+        $this->beConstructedWith(
+            $orderRepository,
+            $paymentMethodRepository,
+            $paymentRepository,
+            $stateMachineFactory,
+            $paymentMethodChanger
+        );
     }
 
     function it_assigns_chosen_payment_method_to_specified_payment_while_checkout(
@@ -104,6 +112,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
+
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
         $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(false);
@@ -130,6 +141,9 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
+
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
         $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
@@ -157,6 +171,8 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $choosePaymentMethod->setSubresourceId('123');
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_CART);
 
         $stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('select_payment')->willReturn(true);
@@ -203,5 +219,30 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [$choosePaymentMethod])
         ;
+    }
+
+    function it_assigns_chosen_payment_method_to_specified_payment_after_checkout(
+        OrderRepositoryInterface $orderRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodChangerInterface $paymentMethodChanger,
+        OrderInterface $cart
+    ): void {
+        $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
+        $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
+        $choosePaymentMethod->setSubresourceId('123');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $cart->getState()->willReturn(OrderInterface::STATE_NEW);
+
+        $paymentMethodChanger->changePaymentMethod('CASH_ON_DELIVERY_METHOD', '123', $cart);
+
+        $paymentMethodRepository
+            ->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])
+            ->willReturn(Argument::type(PaymentMethodInterface::class))
+            ->shouldNotBeCalled()
+        ;
+
+        $this($choosePaymentMethod)->shouldReturn($cart);
     }
 }

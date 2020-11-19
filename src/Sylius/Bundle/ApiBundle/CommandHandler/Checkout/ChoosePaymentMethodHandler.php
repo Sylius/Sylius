@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -39,16 +40,21 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
     /** @var FactoryInterface */
     private $stateMachineFactory;
 
+    /** @var PaymentMethodChangerInterface */
+    private $paymentMethodChanger;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentRepositoryInterface $paymentRepository,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
+        PaymentMethodChangerInterface $paymentMethodChanger
     ) {
         $this->orderRepository = $orderRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentRepository = $paymentRepository;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->paymentMethodChanger = $paymentMethodChanger;
     }
 
     public function __invoke(ChoosePaymentMethod $choosePaymentMethod): OrderInterface
@@ -58,13 +64,22 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart has not been found.');
 
+        $paymentMethodCode = $choosePaymentMethod->paymentMethodCode;
+        $paymentId = $choosePaymentMethod->paymentId;
+
+        if ($cart->getState() === OrderInterface::STATE_NEW) {
+            $this->paymentMethodChanger->changePaymentMethod($paymentMethodCode, $paymentId, $cart);
+
+            return $cart;
+        }
+
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
-            'code' => $choosePaymentMethod->paymentMethodCode,
+            'code' => $paymentMethodCode,
         ]);
         Assert::notNull($paymentMethod, 'Payment method has not been found');
 
-        $payment = $this->paymentRepository->findOneByOrderId($choosePaymentMethod->paymentId, $cart->getId());
+        $payment = $this->paymentRepository->findOneByOrderId($paymentId, $cart->getId());
         Assert::notNull($payment, 'Can not find payment with given identifier.');
 
         if ($cart->getState() === OrderInterface::STATE_CART) {

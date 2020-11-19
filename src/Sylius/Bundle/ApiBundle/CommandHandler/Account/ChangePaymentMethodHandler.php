@@ -42,7 +42,7 @@ final class ChangePaymentMethodHandler implements MessageHandlerInterface
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $changePaymentMethod->orderTokenValue]);
 
-        Assert::notNull($order, 'Cart has not been found.');
+        Assert::notNull($order, 'Order has not been found.');
 
         return $this->paymentMethodChanger->changePaymentMethod(
             $changePaymentMethod->paymentMethodCode,
