@@ -700,7 +700,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an image with "([^"]*)" type$/
-     * @Then /^(?:this product|the product "[^"]+"|it) should(?:| also) have an svg file with "([^"]*)" type$/
      */
     public function thisProductShouldHaveAnImageWithType(string $type): void
     {
