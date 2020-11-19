@@ -5,7 +5,7 @@
 
 ## Context and Problem Statement
 
-To achieve 100% api coverage, we need to handle emails by api.
+To achieve 100% API coverage, we need to handle emails by api.
 
 ## Considered Options
 
@@ -33,7 +33,10 @@ $this->emailSender->send(
 );
 ```
 
-* Good, because its sending email based on triggered event, once understood it's simple to add new handlers.
+* Good, because it's easy to integrate other logic after the initial command will succeed.
+* Good, because it's easy to trigger the same operation several times.
+* Good, because it's easier to handle mailing server downs gracefully.
+
 * Bad, because adds a lot of abstraction, can be hard to understand.
 
 ### Direct email call
@@ -46,6 +49,7 @@ $this->emailManager->sendConfirmationEmail($cart);
 ```
 
 * Good, because its easy to understand.
+
 * Bad, because it can generate a lot of problems in future as it should be sent asynchronously, email manager class should be changed to handle it somehow, hard to implement.
 
 ## Decision Outcome
