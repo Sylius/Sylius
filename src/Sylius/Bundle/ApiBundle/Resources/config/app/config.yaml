@@ -25,3 +25,7 @@ framework:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
+            sylius_event.bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'
