@@ -12,7 +12,7 @@ Copy [a new migration file](https://raw.githubusercontent.com/Sylius/Sylius-Stan
 bin/console doctrine:migrations:migrate
 ```
 
-Update your `package.json` in order to add `jquery.dirtyforms` as mentionned in [issue #88](https://github.com/Sylius/SyliusDemo/pull/88/files) : 
+Update your `package.json` in order to add `jquery.dirtyforms` as mentioned in [issue #88](https://github.com/Sylius/SyliusDemo/pull/88/files) : 
 
 ```diff
 {
