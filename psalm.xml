@@ -151,7 +151,8 @@
 
         <MoreSpecificReturnType errorLevel="info" />
         <LessSpecificReturnStatement errorLevel="info" />
-        <TypeCoercion errorLevel="info" />
+        <ArgumentTypeCoercion errorLevel="info" />
+        <PropertyTypeCoercion errorLevel="info" />
 
         <PossiblyInvalidArgument errorLevel="info" />
         <PossiblyInvalidArrayAccess errorLevel="info" />
@@ -224,12 +225,6 @@
         <!-- level 8 issues - some fatal errors in PHP -->
 
         <MethodSignatureMismatch errorLevel="info" />
-
-        <!-- Custom -->
-
-        <!-- remove after guzzlehttp-release -->
-        <!-- see https://github.com/guzzle/guzzle/pull/2273 -->
-        <InvalidCatch errorLevel="info" />
     </issueHandlers>
 
     <stubs>
