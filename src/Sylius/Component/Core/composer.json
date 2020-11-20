@@ -53,7 +53,7 @@
         "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^6.1",
+        "phpspec/phpspec": "^7.0",
         "symfony/property-access": "^4.4"
     },
     "config": {
