@@ -23,8 +23,10 @@ use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
@@ -50,6 +52,9 @@ final class AccountContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
     public function __construct(
         DashboardPageInterface $dashboardPage,
         ProfileUpdatePageInterface $profileUpdatePage,
@@ -57,7 +62,8 @@ final class AccountContext implements Context
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
         LoginPageInterface $loginPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SharedStorageInterface $sharedStorage
     ) {
         $this->dashboardPage = $dashboardPage;
         $this->profileUpdatePage = $profileUpdatePage;
@@ -66,6 +72,7 @@ final class AccountContext implements Context
         $this->orderShowPage = $orderShowPage;
         $this->loginPage = $loginPage;
         $this->notificationChecker = $notificationChecker;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -264,6 +271,19 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I change my payment method to :paymentMethod
+     */
+    public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->changePaymentMethod($order);
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+        $this->orderShowPage->pay();
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
     public function iShouldSeeASingleOrderInTheList()
@@ -375,6 +395,21 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I should have :paymentMethod payment method on my order
+     */
+    public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->open();
+        $this->orderIndexPage->changePaymentMethod($order);
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+
+        Assert::same($this->orderShowPage->getChosenPaymentMethod(), $paymentMethod->getName());
+    }
+
+    /**
      * @Then I should see :itemPrice as item price
      */
     public function iShouldSeeAsItemPrice($itemPrice)
@@ -412,14 +447,6 @@ final class AccountContext implements Context
     public function iShouldSeeAsProvinceInTheBillingAddress($provinceName)
     {
         Assert::true($this->orderShowPage->hasBillingProvinceName($provinceName));
-    }
-
-    /**
-     * @Then /^I should be able to change payment method for (this order)$/
-     */
-    public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
-    {
-        Assert::true($this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order));
     }
 
     /**

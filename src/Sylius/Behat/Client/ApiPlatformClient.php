@@ -213,6 +213,11 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->client->getResponse();
     }
 
+    public function getToken(): ?string
+    {
+        return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
+    }
+
     private function request(RequestInterface $request): Response
     {
         if ($this->sharedStorage->has('hostname')) {
@@ -229,10 +234,5 @@ final class ApiPlatformClient implements ApiClientInterface
         );
 
         return $this->getLastResponse();
-    }
-
-    private function getToken(): ?string
-    {
-        return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 }

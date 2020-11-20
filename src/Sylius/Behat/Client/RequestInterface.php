@@ -31,7 +31,7 @@ interface RequestInterface
 
     public static function upload(?string $section, string $resource, ?string $token = null): self;
 
-    public static function custom(string $url, string $method): self;
+    public static function custom(string $url, string $method, ?string $token = null): self;
 
     public function url(): string;
 

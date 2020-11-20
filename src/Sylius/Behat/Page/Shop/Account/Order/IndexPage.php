@@ -17,6 +17,7 @@ use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
@@ -45,6 +46,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
+    public function changePaymentMethod(OrderInterface $order): void
+    {
+        $row = $this->tableAccessor->getRowWithFields(
+            $this->getElement('customer_orders'),
+            ['number' => $order->getNumber()]
+        );
+
+        $link = $row->find('css', '[data-test-button="sylius.ui.pay"]');
+        $link->click();
+    }
+
     public function isOrderWithNumberInTheList($number): bool
     {
         try {
@@ -57,16 +69,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
-    }
-
-    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order): bool
-    {
-        $row = $this->tableAccessor->getRowWithFields(
-            $this->getElement('customer_orders'),
-            ['number' => $order->getNumber()]
-        );
-
-        return $row->has('css', '[data-test-button="sylius.ui.pay"]');
     }
 
     public function openLastOrderPage(): void

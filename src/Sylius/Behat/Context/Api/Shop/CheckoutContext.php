@@ -383,10 +383,30 @@ final class CheckoutContext implements Context
      * @When I proceed selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
+     */
+    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
+        $this->client->request(
+            Request::METHOD_PATCH,
+            \sprintf(
+                '/new-api/shop/orders/%s/payments/%s',
+                $this->sharedStorage->get('cart_token'),
+                $this->getCart()['payments'][0]['id']
+            ),
+            [],
+            [],
+            $this->getHeaders(),
+            json_encode([
+                'paymentMethodCode' => $paymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR)
+        );
+    }
+
+    /**
      * @When I try to change payment method to :paymentMethod payment
      * @When I change payment method to :paymentMethod after checkout
      */
-    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    public function iChangePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->client->request(
             Request::METHOD_PATCH,

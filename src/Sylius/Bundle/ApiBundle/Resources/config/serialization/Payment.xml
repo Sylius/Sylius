@@ -22,6 +22,7 @@
             <group>checkout:read</group>
         </attribute>
         <attribute name="method">
+            <group>shop:order:account:read</group>
             <group>payment:read</group>
             <group>order:read</group>
             <group>checkout:read</group>

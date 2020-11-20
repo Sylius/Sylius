@@ -135,13 +135,14 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function custom(string $url, string $method): RequestInterface
+    public static function custom(string $url, string $method, ?string $token = null): RequestInterface
     {
-        return new self(
-            $url,
-            $method,
-            ['CONTENT_TYPE' => 'application/merge-patch+json']
-        );
+        $headers = ['CONTENT_TYPE' => 'application/merge-patch+json'];
+        if ($token !== null) {
+            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+        }
+
+        return new self($url, $method, $headers);
     }
 
     public function url(): string

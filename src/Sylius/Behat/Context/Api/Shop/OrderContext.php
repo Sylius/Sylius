@@ -58,6 +58,29 @@ final class OrderContext implements Context
     }
 
     /**
+     * @When I change my payment method to :paymentMethod
+     */
+    public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $request = Request::custom(
+            \sprintf(
+                '/new-api/shop/account/orders/%s/payments/%s',
+                $order->getTokenValue(),
+                (string) $order->getPayments()->first()->getId()
+            ),
+            HttpRequest::METHOD_PATCH,
+            $this->client->getToken()
+        );
+
+        $request->setContent(['paymentMethodCode' => $paymentMethod->getCode()]);
+
+        $this->client->executeCustomRequest($request);
+    }
+
+    /**
      * @When I view the summary of my order :order
      */
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
@@ -260,7 +283,10 @@ final class OrderContext implements Context
      */
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
     {
-        $payment = $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0];
+        $payment = $this
+            ->responseChecker
+            ->getValue($this->client->show($this->sharedStorage->get('cart_token')), 'payments')[0]
+        ;
 
         Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
     }
@@ -271,6 +297,19 @@ final class OrderContext implements Context
     public function iShouldNotBeAbleToSeeThatOrder(): void
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should have :paymentMethod payment method on my order
+     */
+    public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethodIri = $this
+            ->responseChecker
+            ->getValue($this->client->getLastResponse(), 'payments')[0]['method']['@id']
+        ;
+
+        Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getId(), $paymentMethod->getId());
     }
 
     private function getAdjustmentsForOrder(): array
