@@ -31,7 +31,7 @@ Feature: Applying promotion with an expiration date
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @apig
+    @ui @api
     Scenario: Receiving no discount from a promotion that has not been started yet
         Given this promotion starts tomorrow
         When I add product "PHP T-Shirt" to the cart
