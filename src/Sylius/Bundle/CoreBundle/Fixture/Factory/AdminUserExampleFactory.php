@@ -27,6 +27,9 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @var FactoryInterface */
     private $userFactory;
 
+    /** @var FactoryInterface|null */
+    private $avatarImageFactory;
+
     /** @var \Faker\Generator */
     private $faker;
 
@@ -46,12 +49,14 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         FactoryInterface $userFactory,
         string $localeCode,
         ?FileLocatorInterface $fileLocator = null,
-        ?ImageUploaderInterface $imageUploader = null
+        ?ImageUploaderInterface $imageUploader = null,
+        ?FactoryInterface $avatarImageFactory = null
     ) {
         $this->userFactory = $userFactory;
         $this->localeCode = $localeCode;
         $this->fileLocator = $fileLocator;
         $this->imageUploader = $imageUploader;
+        $this->avatarImageFactory = $avatarImageFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -60,6 +65,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
         if ($this->fileLocator === null || $this->imageUploader === null) {
             @trigger_error(sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
+
+        if ($this->avatarImageFactory === null) {
+            @trigger_error(sprintf('Not passing a $avatarImageFactory to %s constructor is deprecated since Sylius 1.7 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
         }
     }
 
@@ -124,7 +133,13 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         $imagePath = $this->fileLocator->locate($options['avatar']);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
-        $avatarImage = new AvatarImage();
+        /** @var AvatarImage $avatarImage */
+        if ($this->avatarImageFactory === null) {
+            $avatarImage = new AvatarImage();
+        } else {
+            $avatarImage = $this->avatarImageFactory->createNew();
+        }
+
         $avatarImage->setFile($uploadedImage);
 
         $this->imageUploader->upload($avatarImage);
