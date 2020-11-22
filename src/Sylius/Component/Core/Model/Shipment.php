@@ -15,6 +15,8 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
+use Webmozart\Assert\Assert;
 
 class Shipment extends BaseShipment implements ShipmentInterface
 {
@@ -29,5 +31,14 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(?BaseOrderInterface $order): void
     {
         $this->order = $order;
+    }
+
+    public function getShippingUnitTotal(): int
+    {
+        return array_sum(array_map(function (ShipmentUnitInterface $shipmentUnit) {
+            Assert::isInstanceOf($shipmentUnit, OrderItemUnitInterface::class);
+
+            return $shipmentUnit->getTotal();
+        }, $this->units->toArray()));
     }
 }
