@@ -122,6 +122,7 @@ final class CartContext implements Context
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
+     * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/
      */
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
@@ -320,6 +321,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be informed that cart items are no longer available
+     */
+    public function iShouldBeInformedThatCartItemsAreNoLongerAvailable(): void
+    {
+       $response = $this->sharedStorage->get('response') ?? $this->cartsClient->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 404);
+
+        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+    }
+
+    /**
      * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
      */
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
@@ -403,9 +416,7 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
-        if ($tokenValue === null) {
-            $tokenValue = $this->pickupCart();
-        }
+        $tokenValue = $tokenValue ?? $this->pickupCart();
 
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
@@ -420,9 +431,7 @@ final class CartContext implements Context
 
     private function putProductVariantToCart(ProductVariantInterface $productVariant, ?string $tokenValue, int $quantity = 1): void
     {
-        if ($tokenValue === null) {
-            $tokenValue = $this->pickupCart();
-        }
+        $tokenValue = $tokenValue ?? $this->pickupCart();
 
         $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
 
@@ -449,7 +458,7 @@ final class CartContext implements Context
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
-                json_encode($item)
+                $item
             );
         }
 
@@ -463,7 +472,7 @@ final class CartContext implements Context
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
-                json_encode($item)
+                $item
             );
         }
 
@@ -493,11 +502,13 @@ final class CartContext implements Context
         $request->updateContent(['orderItemId' => $orderItemId, 'newQuantity' => $quantity]);
 
         $this->cartsClient->executeCustomRequest($request);
+
+        $this->sharedStorage->set('response', $this->cartsClient->getLastResponse());
     }
 
     private function hasItemWithNameAndQuantity(Response $response, string $productName, int $quantity): bool
     {
-        $items = json_decode($response->getContent(), true)['hydra:member'];
+        $items = $this->responseChecker->getCollection($response);
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
