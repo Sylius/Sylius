@@ -1036,9 +1036,6 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
-    "symplify/auto-bind-parameter": {
-        "version": "v8.2.9"
-    },
     "symplify/autowire-array-parameter": {
         "version": "v8.2.9"
     },
@@ -1053,12 +1050,6 @@
     },
     "symplify/package-builder": {
         "version": "8.2.21"
-    },
-    "symplify/parameter-name-guard": {
-        "version": "v8.2.1"
-    },
-    "symplify/phpstan-extensions": {
-        "version": "v8.1.19"
     },
     "symplify/set-config-resolver": {
         "version": "8.2.21"
