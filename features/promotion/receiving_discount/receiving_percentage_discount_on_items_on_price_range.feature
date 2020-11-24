@@ -10,35 +10,35 @@ Feature: Receiving percentage discount on products from specific price range
         And the store has a product "PHP Mug" priced at "$20.00"
         And there is a promotion "Christmas sale"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a single item fulfilling minimum price criteria
         Given this promotion gives "10%" off on every product with minimum price at "$50.00"
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$90.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a single item with price equal to filter minimum criteria
         Given this promotion gives "10%" off on every product with minimum price at "$100.00"
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$90.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a single item fulfilling range price criteria
         Given this promotion gives "50%" off on every product priced between "$15.00" and "$50.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a single item with price equal to filter range minimum criteria
         Given this promotion gives "50%" off on every product priced between "$20.00" and "$50.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount on a single item with price equal to filter range maximum criteria
         Given this promotion gives "50%" off on every product priced between "$15.00" and "$20.00"
         When I add product "PHP Mug" to the cart
