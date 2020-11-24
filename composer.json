@@ -34,7 +34,7 @@
         "egulias/email-validator": "^2.1",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.7",
-        "fzaninotto/faker": "^1.9",
+        "fakerphp/faker": "^1.9",
         "gedmo/doctrine-extensions": "^2.4.12",
         "jms/serializer-bundle": "^2.4",
         "knplabs/gaufrette": "^0.8",
