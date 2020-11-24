@@ -19,6 +19,9 @@
             "src/Entity/.gitignore"
         ]
     },
+    "babdev/pagerfanta-bundle": {
+        "version": "v2.8.0"
+    },
     "behat/behat": {
         "version": "v3.7.0"
     },
@@ -257,9 +260,6 @@
     "jms/metadata": {
         "version": "1.7.0"
     },
-    "jms/parser-lib": {
-        "version": "1.0.0"
-    },
     "jms/serializer": {
         "version": "1.14.1"
     },
@@ -453,9 +453,6 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
-    "phpcollection/phpcollection": {
-        "version": "0.5.0"
-    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -464,9 +461,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
-    },
-    "phpoption/phpoption": {
-        "version": "1.5.0"
     },
     "phpspec/php-diff": {
         "version": "v1.1.0"
@@ -1089,9 +1083,6 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
-    },
-    "white-october/pagerfanta-bundle": {
-        "version": "v1.3.2"
     },
     "willdurand/hateoas": {
         "version": "2.12.0"
