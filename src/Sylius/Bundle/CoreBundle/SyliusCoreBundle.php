@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle;
 
+use Doctrine\Inflector\InflectorFactory;
+use Doctrine\Inflector\Rules\Patterns;
+use Doctrine\Inflector\Rules\Ruleset;
+use Doctrine\Inflector\Rules\Substitution;
+use Doctrine\Inflector\Rules\Substitutions;
+use Doctrine\Inflector\Rules\Transformations;
+use Doctrine\Inflector\Rules\Word;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
@@ -22,6 +29,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectio
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
@@ -31,6 +39,21 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
+    }
+
+    public function boot(): void
+    {
+        parent::boot();
+
+        $factory = InflectorFactory::create();
+        $factory->withPluralRules(new Ruleset(
+            new Transformations(),
+            new Patterns(),
+            new Substitutions(new Substitution(new Word('taxon'), new Word('taxons')))
+        ));
+        $inflector = $factory->build();
+
+        Metadata::setInflector($inflector);
     }
 
     public function build(ContainerBuilder $container): void
