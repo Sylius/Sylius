@@ -6,7 +6,7 @@ Require upgraded Sylius version using Composer:
 composer require sylius/sylius:~1.6.0
 ```
 
-Copy [a new migration file](https://raw.githubusercontent.com/Sylius/Sylius-Standard/master/src/Migrations/Version20190621035710.php) and run new migrations:
+Copy [a new migration file](https://raw.githubusercontent.com/Sylius/Sylius/1.6/app/migrations/Version20190607135638.php) and run new migrations:
 
 ```bash
 bin/console doctrine:migrations:migrate
