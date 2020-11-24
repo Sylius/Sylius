@@ -511,7 +511,7 @@ final class CartContext implements Context
         $items = $this->responseChecker->getCollection($response);
 
         foreach ($items as $item) {
-            if ($item['quantity'] === $quantity && $item['productName'] === $productName) {
+            if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
                 return true;
             }
         }
