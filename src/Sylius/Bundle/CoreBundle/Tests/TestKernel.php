@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests;
 
+use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
@@ -59,7 +60,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle;
 use winzou\Bundle\StateMachineBundle\winzouStateMachineBundle;
 
 final class TestKernel extends BaseKernel
@@ -105,7 +105,7 @@ final class TestKernel extends BaseKernel
             new LiipImagineBundle(),
             new PayumBundle(),
             new StofDoctrineExtensionsBundle(),
-            new WhiteOctoberPagerfantaBundle(),
+            new BabDevPagerfantaBundle(),
             new SyliusFixturesBundle(),
             new SyliusPayumBundle(),
             new SyliusThemeBundle(),
