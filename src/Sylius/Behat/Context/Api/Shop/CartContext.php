@@ -19,6 +19,7 @@ use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -312,6 +313,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
+     */
+    public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
+    {
+        $pricing = $this->getChannelPricing($product);
+
+        $this->compareItemSubtotal($product->getName(), $pricing->getPrice() - $amount);
+    }
+
+    /**
+     * @Then product :product price should not be decreased
+     */
+    public function productPriceShouldNotBeDecreased(ProductInterface $product): void
+    {
+        $this->compareItemSubtotal($product->getName(), $this->getChannelPricing($product)->getPrice());
+    }
+
+    /**
      * @Then I should see :productName with quantity :quantity in my cart
      * @Then /^the (?:customer|visitor) should see product "([^"]+)" with quantity (\d+) in his cart$/
      */
@@ -540,5 +559,25 @@ final class CartContext implements Context
                 );
             }
         }
+    }
+
+    private function compareItemSubtotal(string $productName, int $productPrice): void
+    {
+        $items = $this->responseChecker->getValue($this->cartsClient->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName) {
+                Assert::same($productPrice, $item['total']);
+            }
+
+            return;
+        }
+
+        throw new \InvalidArgumentException('Expected product does not exist');
+    }
+
+    private function getChannelPricing(ProductInterface $product): ChannelPricingInterface
+    {
+        return $product->getVariants()->first()->getChannelPricingForChannel($this->sharedStorage->get('channel'));
     }
 }

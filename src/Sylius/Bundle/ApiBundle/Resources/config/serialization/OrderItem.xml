@@ -72,5 +72,9 @@
             <group>order_item:read</group>
             <group>order:read</group>
         </attribute>
+        <attribute name="total">
+            <group>order_item:read</group>
+            <group>order:read</group>
+        </attribute>
     </class>
 </serializer>
