@@ -17,11 +17,11 @@ Sylius\Component\Product\Model\ProductOption:
             groups: [Default, Detailed]
         values:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
     relations:
         -   rel: self
