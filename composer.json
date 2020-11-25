@@ -193,6 +193,7 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
+        "lcobucci/jwt": "^3.4",
         "phpspec/prophecy": "1.11.0",
         "sylius/grid-bundle": "1.7.4",
         "symfony/doctrine-bridge": "4.4.16",
