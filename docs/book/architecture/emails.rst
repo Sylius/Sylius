@@ -84,6 +84,21 @@ You have the following parameters available:
 * ``channel``: Channel in which an order was placed
 * ``localeCode``: Locale code in which an order was placed
 
+Contact Request
+---------------
+
+This e-mail is sent when a customer validades contact form.
+
+**Code**: ``contact_request``
+
+**The default template**: ``@SyliusShop/Email/contactRequest.html.twig``
+
+You have the following parameters available:
+
+* ``data``: An array of submitted data from form
+* ``channel``: Channel in which an order was placed
+* ``localeCode``: Locale code in which an order was placed
+
 .. rst-class:: plus-doc
 
 Return Requests Emails
