@@ -192,6 +192,7 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
+        "lcobucci/jwt": "^3.4",
         "symfony/doctrine-bridge": "4.4.16"
     },
     "suggest": {
