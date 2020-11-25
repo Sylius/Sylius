@@ -29,7 +29,7 @@
         "php": "^7.3",
         "egulias/email-validator": "^2.1",
         "fzaninotto/faker": "^1.9",
-        "jms/serializer-bundle": "^2.4",
+        "jms/serializer-bundle": "^3.5",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
         "liip/imagine-bundle": "^2.3",
@@ -66,7 +66,7 @@
         "symfony/messenger": "^4.4",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^4.4",
-        "winzou/state-machine-bundle": "^0.3",
+        "winzou/state-machine-bundle": "^0.5",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3"
     },
