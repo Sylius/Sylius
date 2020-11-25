@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
-
-print_header "Validating (Symfony CLI security checker)" "Sylius"
-run_command "$SYLIUS_CACHE_DIR/symfony security:check"
