@@ -155,6 +155,9 @@
     "ergebnis/json-printer": {
         "version": "3.0.2"
     },
+    "fakerphp/faker": {
+        "version": "v1.12.0"
+    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -217,9 +220,6 @@
             "version": "2.2",
             "ref": "cad41ef93d6150067ae2bb3c7fd729492dff6f0a"
         }
-    },
-    "fzaninotto/faker": {
-        "version": "v1.9.1"
     },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
