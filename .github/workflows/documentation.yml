@@ -1,0 +1,30 @@
+name: Documentation
+
+on:
+    push:
+        paths:
+            - "docs/**"
+    pull_request:
+        paths:
+            - "docs/**"
+    release:
+        types: [created]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+        name: "Build"
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: Install documentation dependencies
+                run: docker build -t sylius-docs docs
+
+            -
+                name: Build the documentation
+                run: docker run --rm sylius-docs
