@@ -13,7 +13,7 @@ Sylius\Component\Taxonomy\Model\Taxon:
             groups: [Default, Detailed, Autocomplete]
         children:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
         root:
             expose: true
@@ -41,7 +41,7 @@ Sylius\Component\Taxonomy\Model\Taxon:
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
     virtual_properties:
         getName:

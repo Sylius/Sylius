@@ -13,7 +13,7 @@ Sylius\Component\Product\Model\ProductAssociationType:
             groups: [Default, Detailed]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
         createdAt:
             expose: true

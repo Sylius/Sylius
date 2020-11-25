@@ -4,7 +4,7 @@ Sylius\Component\Core\Model\Taxon:
     properties:
         images:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]
     relations:
         -   rel: self

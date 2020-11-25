@@ -4,7 +4,7 @@ Sylius\Component\Core\Model\Promotion:
     properties:
         channels:
             expose: true
-            type: array
+            type: iterable
             groups: [Detailed]
     relations:
         -   rel: self

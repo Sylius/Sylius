@@ -42,7 +42,7 @@ Sylius\Component\Core\Model\ProductVariant:
             groups: [Default, Detailed, DetailedCart]
         channelPricings:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
     relations:
         -   rel: self
