@@ -106,6 +106,8 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
      * @Given the store (also) operates on a channel named :channelName with hostname :hostname
+     * @Given the store (also) operates on a channel named :channelName in :currency currency with hostname :hostname
+     * @Given the store (also) operates on another channel named :channelName in :currency currency with hostname :hostname
      */
     public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
     {

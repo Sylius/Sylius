@@ -258,4 +258,12 @@ final class ManagingOrdersContext implements Context
 
         Assert::same($notes, $orderNotes);
     }
+
+    /**
+     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
+     */
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(): void
+    {
+        // Intentionally left blank, we do not return currency in API at the moment
+    }
 }

@@ -46,6 +46,13 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.setup.api.cart" class="Sylius\Behat\Context\Setup\Api\CartContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+        </service>
+
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.factory.default_united_states_channel" />

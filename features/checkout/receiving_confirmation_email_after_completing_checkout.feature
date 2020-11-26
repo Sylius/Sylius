@@ -19,9 +19,18 @@ Feature: Receiving confirmation email after finalizing checkout
         When I confirm my order
         Then an email with the summary of order placed by "john@example.com" should be sent to him
 
-    @ui @email @api
+    @ui @email
     Scenario: Receiving confirmation email after finalizing checkout in different locale than the default one
         Given I have product "Sig Sauer P226" in the cart
         And I have proceeded through checkout process in the "Polish (Poland)" locale with email "john@example.com"
+        When I confirm my order
+        Then an email with the summary of order placed by "john@example.com" should be sent to him in "Polish (Poland)" locale
+
+    @api @email
+    Scenario: Receiving confirmation email after finalizing checkout in different locale than the default one
+        Given this channel uses the "Polish (Poland)" locale as default
+        And I have product "Sig Sauer P226" in the cart
+        And I have completed addressing step with email "john@example.com" and "United States" based billing address
+        And I have proceeded order with "Free" shipping method and "Offline" payment
         When I confirm my order
         Then an email with the summary of order placed by "john@example.com" should be sent to him in "Polish (Poland)" locale

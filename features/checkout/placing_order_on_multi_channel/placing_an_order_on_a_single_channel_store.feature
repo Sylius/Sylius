@@ -16,7 +16,7 @@ Feature: Placing an order on a single channel store
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @ui
+    @ui @api
     Scenario: Placing an order in a channels base currency
         Given I have product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
