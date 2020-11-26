@@ -39,6 +39,8 @@ final class ApiSecurityService implements SecurityServiceInterface
 
     public function logIn(UserInterface $user): void
     {
+        error_reporting(error_reporting() & ~E_USER_DEPRECATED);
+
         $this->client->request(
             'POST',
             sprintf('/new-api/%s/authentication-token', $this->loginEndpoint),

@@ -56,6 +56,8 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function call(): void
     {
+        error_reporting(error_reporting() & ~E_USER_DEPRECATED);
+
         $this->client->request(
             $this->request['method'],
             $this->request['url'],
