@@ -31,13 +31,19 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
         return $this->adjustmentFactory->createNew();
     }
 
-    public function createWithData(string $type, string $label, int $amount, bool $neutral = false): AdjustmentInterface
-    {
+    public function createWithData(
+        string $type,
+        string $label,
+        int $amount,
+        bool $neutral = false,
+        array $details = []
+    ): AdjustmentInterface {
         $adjustment = $this->createNew();
         $adjustment->setType($type);
         $adjustment->setLabel($label);
         $adjustment->setAmount($amount);
         $adjustment->setNeutral($neutral);
+        $adjustment->setDetails($details);
 
         return $adjustment;
     }
