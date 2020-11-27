@@ -61,6 +61,31 @@ const isInTheAttributesContainer = function isInTheAttributesContainer(attribute
   return result;
 };
 
+const copyValueToAllLanguages = function copyValueToAllLanguages() {
+  $('#attributesContainer').on('click', '.attribute [data-attribute="copy"]', (event) => {
+    event.preventDefault();
+
+    const $attributesContainer = $('#attributesContainer');
+    const $masterAttribute = $(event.currentTarget).closest('.attribute');
+    const attributeID = $masterAttribute.attr('data-id');
+    const $attributeCollection = $attributesContainer.find(`[data-id="${attributeID}"]`);
+
+    const $masterAttributeInputs = $masterAttribute.find('input:visible, select, textarea');
+
+    $attributeCollection.each((index, attr) => {
+      const $inputs = $(attr).find('input:visible, select, textarea');
+
+      $inputs.each((i, input) => {
+        if (input.getAttribute('type') === 'checkbox') {
+          input.checked = $masterAttributeInputs[i].checked;
+        } else {
+          input.value = $masterAttributeInputs[i].value;
+        }
+      });
+    });
+  });
+};
+
 const setAttributeChoiceListener = function setAttributeChoiceListener() {
   const $attributeChoice = $('#attributeChoice');
   $attributeChoice.find('button').on('click', (event) => {
@@ -94,7 +119,7 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
 
         attributeFormElements.each((index, element) => {
           const localeCode = $(element).find('input[type="hidden"]').last().val();
-          $(`#attributesContainer > div[data-tab="${localeCode}"]`).append(element);
+          $(`#attributesContainer > div`).append(element);
         });
 
         $('#sylius_product_attribute_choice').val('');
@@ -121,5 +146,6 @@ $.fn.extend({
 
     controlAttributesList();
     modifySelectorOnAttributesListElementDelete();
+    copyValueToAllLanguages();
   },
 });

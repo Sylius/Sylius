@@ -1,0 +1,49 @@
+.attribute-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.attribute-label {
+    align-self: center;
+    width: 200px;
+    margin-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.attribute-input {
+    flex-grow: 1;
+}
+
+.attribute-input, .attribute-input div {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.attribute-input *:not(:last-child) {
+    margin-right: 5px;
+}
+
+.attribute-input *:not(:first-child) {
+    margin-left: 5px;
+}
+
+.attribute-input textarea {
+    height: 6em !important;
+    min-height: 6em !important;
+}
+
+.attribute-action > * {
+    margin-right: 0 !important;
+    margin-left: 10px !important;
+}
+
+.attribute-error {
+    width: 100%;
+    text-align: center;
+}
