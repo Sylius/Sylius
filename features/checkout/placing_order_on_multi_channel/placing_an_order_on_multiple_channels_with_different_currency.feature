@@ -5,8 +5,8 @@ Feature: Placing an order on multiple channels with different currency
     I want user to place orders in channel’s base currency
 
     Background:
-        Given the store operates on a channel named "United States" in "USD" currency with hostname "usa-store"
-        And the store operates on another channel named "Colombia" in "COP" currency with hostname "columbia-store"
+        Given the store operates on a channel named "United States" in "USD" currency with hostname "usa-store.com"
+        And the store operates on another channel named "Colombia" in "COP" currency with hostname "columbia-store.co"
         And the store ships to "United States"
         And the store has a zone "United States" with code "US"
         And this zone has the "United States" country member
