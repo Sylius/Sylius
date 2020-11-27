@@ -130,7 +130,8 @@ final class TaxonSpec extends ObjectBehavior
 
     function its_fullname_prepends_with_parents_fullname(TaxonInterface $root): void
     {
-        $root->getFullname()->willReturn('Category');
+        $root->getFullname()->withArguments([' / '])->willReturn('Category');
+        $root->getFullname()->withArguments([' -- '])->willReturn('Category');
         $this->setName('T-shirts');
 
         $root->addChild($this)->shouldBeCalled();
