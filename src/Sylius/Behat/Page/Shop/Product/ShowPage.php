@@ -16,16 +16,29 @@ namespace Sylius\Behat\Page\Shop\Product;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
+    /** @var SummaryPageInterface */
+    private $summaryPage;
+
+    public function __construct(Session $session, $minkParameters, RouterInterface $router, SummaryPageInterface $summaryPage)
+    {
+        parent::__construct($session, $minkParameters, $router);
+
+        $this->summaryPage = $summaryPage;
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_shop_product_show';
@@ -35,9 +48,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
-            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        }
+        $this->waitForCartSummary();
     }
 
     public function addToCartWithQuantity(string $quantity): void
@@ -45,9 +56,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('quantity')->setValue($quantity);
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
-            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        }
+        $this->waitForCartSummary();
     }
 
     public function addToCartWithVariant(string $variant): void
@@ -56,9 +65,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getElement('add_to_cart_button')->click();
 
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
-            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        }
+        $this->waitForCartSummary();
     }
 
     public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
@@ -67,6 +74,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getElement('add_to_cart_button')->click();
+
+        $this->waitForCartSummary();
     }
 
     public function getAttributeByName(string $name): ?string
@@ -311,5 +320,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
         ]);
+    }
+
+    private function waitForCartSummary(): void
+    {
+        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+            $this->getDocument()->waitFor(3, function (): bool {
+                return $this->summaryPage->isOpen();
+            });
+        }
     }
 }

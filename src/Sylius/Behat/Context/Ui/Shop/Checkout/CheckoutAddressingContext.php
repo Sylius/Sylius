@@ -376,7 +376,9 @@ final class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
+        $this->waitUntilAssertionPasses(3, function () use ($address): void {
+            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
+        });
     }
 
     /**
@@ -384,7 +386,9 @@ final class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
+        $this->waitUntilAssertionPasses(3, function () use ($address): void {
+            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
+        });
     }
 
     /**
@@ -474,5 +478,27 @@ final class CheckoutAddressingContext implements Context
     {
         $element = sprintf('%s_%s', $type, str_replace(' ', '_', $element));
         Assert::true($this->addressPage->checkValidationMessageFor($element, $expectedMessage));
+    }
+
+    private function waitUntilAssertionPasses(int $timeout, callable $assertion): void
+    {
+        $start = microtime(true);
+        $end = $start + $timeout;
+
+        $exception = new \InvalidArgumentException('Time has run out and the assertion has not passed yet.');
+
+        do {
+            try {
+                $assertion();
+            } catch (\InvalidArgumentException $exception) {
+                usleep(100000);
+
+                continue;
+            }
+
+            return;
+        } while (microtime(true) < $end);
+
+        throw $exception;
     }
 }

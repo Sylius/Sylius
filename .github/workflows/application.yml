@@ -1,0 +1,343 @@
+name: Application
+
+on:
+    push:
+        paths-ignore:
+            - "docs/**"
+            - "*.md"
+    pull_request:
+        paths-ignore:
+            - "docs/**"
+            - "*.md"
+    release:
+        types: [created]
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+
+jobs:
+    static-checks:
+        runs-on: ubuntu-latest
+        
+        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [7.3, 7.4]
+                symfony: [4.4.*]
+                
+        steps:
+            -   
+                uses: actions/checkout@v2
+
+            -   
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    tools: symfony
+                    coverage: none
+
+            -   
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -   
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -   
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+
+            -   
+                name: Validate composer.json
+                run: composer validate --strict
+                
+            -
+                name: Check for security vulnerabilities
+                run: symfony security:check
+                
+            -
+                name: Validate Doctrine mapping
+                run: bin/console doctrine:schema:validate --skip-sync -vvv
+                
+            -
+                name: Validate Twig templates
+                run: bin/console lint:twig src
+                
+            -
+                name: Validate Yaml files
+                run: bin/console lint:yaml src
+                
+            -
+                name: Run Psalm
+                run: vendor/bin/psalm --show-info=false --output-format=github
+                
+            -
+                name: Run PHPStan
+                run: vendor/bin/phpstan analyse -c phpstan.neon -l 1 src
+
+    test-application-without-frontend:
+        runs-on: ubuntu-latest
+
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [7.3, 7.4]
+                symfony: [4.4.*]
+                mysql: [5.7]
+                
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   
+                uses: actions/checkout@v2
+
+            -   
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+
+            -   
+                name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ matrix.mysql }}"
+                    mysql root password: "root"
+
+            -   
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    tools: symfony
+                    coverage: none
+
+            -   
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -   
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -   
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+
+            -
+                name: Dump the environment
+                run: |
+                    echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
+                    composer dump-env $APP_ENV
+
+            -   
+                name: Warmup cache
+                run: bin/console cache:warmup
+                
+            -   
+                name: Make filesystem readonly
+                run: chmod -R 555 app bin config docs features src templates tests translations vendor
+                
+            -   
+                name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv
+                
+            -
+                name: Test provided migrations
+                run: |
+                    bin/console doctrine:migrations:migrate first --no-interaction
+                    bin/console doctrine:migrations:migrate latest --no-interaction
+                    bin/console doctrine:schema:validate --skip-mapping -vvv
+                    
+            -
+                name: Test installer
+                run: bin/console sylius:install --no-interaction -vvv
+                    
+            -
+                name: Load fixtures
+                run: bin/console sylius:fixtures:load default --no-interaction
+
+            -   
+                name: Run PHPSpec
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+                    
+            -
+                name: Run PHPUnit
+                run: vendor/bin/phpunit --colors=always
+                    
+            -
+                name: Run non-JS Behat
+                run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
+               
+            -     
+                name: Run CLI Behat
+                run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" --rerun
+                
+    test-application-with-frontend:
+        runs-on: ubuntu-latest
+
+        name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [7.3, 7.4]
+                symfony: [4.4.*]
+                node: [10.x]
+                mysql: [5.7]
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   
+                uses: actions/checkout@v2
+                
+            -   
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+
+            -   
+                name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ matrix.mysql }}"
+                    mysql root password: "root"
+
+            -   
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    tools: symfony
+                    coverage: none
+
+            -   
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+    
+            -   
+                name: Install certificates
+                run: symfony server:ca:install
+    
+            -   
+                name: Run Chrome Headless
+                run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
+    
+            -   
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -   
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+             
+            -   
+                name: Setup Node
+                uses: actions/setup-node@v1
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -   
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -   
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -   
+                name: Install JS dependencies
+                run: yarn install
+
+            -   
+                name: Validate Yarn packages
+                run: yarn check
+             
+            -   
+                name: Dump the environment
+                run: |
+                    echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
+                    composer dump-env $APP_ENV
+                
+            -
+                name: Warmup cache
+                run: bin/console cache:warmup
+
+            -   
+                name: Run webserver
+                run: symfony server:start --port=8080 --dir=public --daemon
+
+            -   
+                name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv
+            
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn build
+                
+            -
+                name: Make filesystem readonly
+                run: chmod -R 555 app bin config docs features src templates tests translations vendor
+                
+            -
+                name: Run JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun
