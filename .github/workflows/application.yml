@@ -199,14 +199,23 @@ jobs:
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
                     
-            -
-                name: Run non-JS Behat
-                run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
-               
             -     
                 name: Run CLI Behat
                 run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" --rerun
                 
+            -
+                name: Run non-JS Behat
+                run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
+               
+            -   
+                name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+                    path: etc/build/
+                    if-no-files-found: ignore
+            
     test-application-with-frontend:
         runs-on: ubuntu-latest
 
@@ -341,3 +350,12 @@ jobs:
             -
                 name: Run JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun
+
+            -   
+                name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: "Behat logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+                    path: etc/build/
+                    if-no-files-found: ignore
