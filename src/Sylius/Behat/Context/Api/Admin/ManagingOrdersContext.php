@@ -262,8 +262,15 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
      */
-    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(): void
-    {
-        // Intentionally left blank, we do not return currency in API at the moment
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
+        AdminUserInterface $user,
+        OrderInterface $order,
+        string $currency
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        $currencyCode = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'currencyCode');
+
+        Assert::same($currencyCode, $currency);
     }
 }
