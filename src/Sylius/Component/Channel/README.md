@@ -1,4 +1,4 @@
-Channel Component [![Build status...](https://secure.travis-ci.org/Sylius/Channel.png?branch=master)](http://travis-ci.org/Sylius/Channel)
+Channel Component
 =================
 
 E-Commerce PHP component for managing different sales channels.

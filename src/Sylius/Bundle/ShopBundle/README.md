@@ -1,4 +1,4 @@
-SyliusShopBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShopBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShopBundle)
+SyliusShopBundle
 ================
 
 This bundle contains Sylius eCommerce storefront. 

@@ -1,4 +1,4 @@
-Inventory Component [![Build status...](https://secure.travis-ci.org/Sylius/Inventory.png?branch=master)](http://travis-ci.org/Sylius/Inventory)
+Inventory Component
 ===================
 
 Inventory management for PHP applications.

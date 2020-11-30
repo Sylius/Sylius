@@ -1,4 +1,4 @@
-SyliusAddressingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+SyliusAddressingBundle
 ======================
 
 Addresses management is a common task for almost every ecommerce application.  

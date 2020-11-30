@@ -1,4 +1,4 @@
-Taxation Component [![Build status...](https://secure.travis-ci.org/Sylius/Taxatione.png?branch=master)](http://travis-ci.org/Sylius/Taxation)
+Taxation Component
 ==================
 
 Taxation needs to handle different type of items, zones and tax rates. Sylius

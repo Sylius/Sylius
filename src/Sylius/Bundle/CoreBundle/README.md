@@ -1,4 +1,4 @@
-SyliusCoreBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCoreBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCoreBundle)
+SyliusCoreBundle
 ================
 
 Sylius Core Bundle integrates all other bundles into complete eCommerce solution for [Symfony2](https://symfony.com).

@@ -49,7 +49,7 @@ final class ApiSecurityService implements SecurityServiceInterface
         );
 
         $response = $this->client->getResponse();
-        $content = json_decode($response->getContent(), true);
+        $content = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         Assert::keyExists(
             $content,

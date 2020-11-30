@@ -1,4 +1,4 @@
-SyliusInventoryBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInventoryBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusInventoryBundle)
+SyliusInventoryBundle
 =====================
 
 Flexible inventory management for [**Symfony2**](https://symfony.com) eCommerce applications.

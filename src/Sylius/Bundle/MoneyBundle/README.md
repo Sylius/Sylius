@@ -1,4 +1,4 @@
-SyliusMoneyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusMoneyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusMoneyBundle)
+SyliusMoneyBundle
 =================
 
 [**Symfony2**](https://symfony.com) integration with PHP Money library.

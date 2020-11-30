@@ -1,4 +1,4 @@
-Shipping Component [![Build status...](https://secure.travis-ci.org/Sylius/Shipping.png?branch=master)](http://travis-ci.org/Sylius/Shipping)
+Shipping Component
 ==================
 
 Sylius e-commerce Shipping component is a complete solution to manage

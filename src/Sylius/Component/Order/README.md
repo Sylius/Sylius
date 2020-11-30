@@ -1,4 +1,4 @@
-Order Component [![Build status...](https://secure.travis-ci.org/Sylius/Order.png?branch=master)](http://travis-ci.org/Sylius/Order)
+Order Component
 ===============
 
 This component contains default Order model for PHP applications. It supports

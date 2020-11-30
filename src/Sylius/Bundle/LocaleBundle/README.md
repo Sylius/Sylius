@@ -1,4 +1,4 @@
-SyliusLocaleBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusLocaleBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusLocaleBundle)
+SyliusLocaleBundle
 ==================
 
 [**Symfony2**](https://symfony.com) integration of Sylius Locale management component.

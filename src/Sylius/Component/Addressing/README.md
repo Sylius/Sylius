@@ -1,4 +1,4 @@
-Addressing Component [![Build status...](https://secure.travis-ci.org/Sylius/Addressing.png?branch=master)](http://travis-ci.org/Sylius/Addressing)
+Addressing Component
 ====================
 
 Addresses management is a common task for almost every eCommerce project.  

@@ -1,4 +1,4 @@
-SyliusUiBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusUiBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusUiBundle)
+SyliusUiBundle
 ==============
 
 Sylius

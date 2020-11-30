@@ -1,4 +1,4 @@
-SyliusTaxonomyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxonomyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusTaxonomyBundle)
+SyliusTaxonomyBundle
 ======================
 
 Flexible categorization system based on [Spree Taxonomies system](http://guides.spreecommerce.org/user/configuring_taxonomies.html) for [**Symfony2**](https://symfony.com) eCommerce applications.

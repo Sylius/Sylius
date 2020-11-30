@@ -1,4 +1,4 @@
-SyliusProductBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusProductBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusProductBundle)
+SyliusProductBundle
 ===================
 
 Products system for [**Symfony2**](https://symfony.com) applications.

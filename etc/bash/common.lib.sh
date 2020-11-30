@@ -86,16 +86,6 @@ exit_on_error() {
     fi
 }
 
-# Argument 1: String to hash
-text_md5sum() {
-    echo "$1" | md5sum | awk '{ print $1 }'
-}
-
-# Argument 1: File to hash
-file_md5sum() {
-    md5sum "$1" | awk '{ print $1 }'
-}
-
 # Argument 1: Binary name
 get_binary()
 {
@@ -108,35 +98,9 @@ get_binary()
     fi
 }
 
-get_number_of_jobs_for_parallel()
-{
-    local jobs="100%"
-
-    if [[ "${TRAVIS}" = "true" ]]; then
-        jobs="2"
-    fi
-
-    echo "${jobs}"
-}
-
 get_sylius_path()
 {
     echo "$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)"
-}
-
-has_sylius_cache() {
-    if [[ ! -z "${SYLIUS_CACHE_DIR}" && -d "${SYLIUS_CACHE_DIR}" ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-inform_about_sylius_cache() {
-    if ! has_sylius_cache; then
-        print_warning "Sylius cache should be used, but it is not configured correctly."
-        print_warning "Check whether you have \$SYLIUS_CACHE_DIR set and if that directory exists."
-    fi
 }
 
 locate_packages() {
@@ -170,28 +134,4 @@ cast_package_argument_to_package_path() {
     fi
 
     echo "${package_path}"
-}
-
-# Argument 1: Package path or name
-is_package_cache_fresh() {
-    local current_hash cached_hash
-    local package_path="$(cast_package_argument_to_package_path "$1")"
-    local cache_key="$(get_package_cache_key "$1")"
-
-    if [[ -f "${SYLIUS_CACHE_DIR}/composer-${cache_key}.lock" && -f "${SYLIUS_CACHE_DIR}/composer-${cache_key}.json.md5sum" ]]; then
-        current_hash="$(file_md5sum "${package_path}/composer.json")"
-        cached_hash="$(cat "${SYLIUS_CACHE_DIR}/composer-${cache_key}.json.md5sum")"
-
-        if [ "${current_hash}" = "${cached_hash}" ]; then
-            return 0
-        fi
-    fi
-
-    return 1
-}
-
-# Argument 1: Package path or name
-get_package_cache_key()
-{
-    text_md5sum "$(cast_package_argument_to_package_path "$1")"
 }
