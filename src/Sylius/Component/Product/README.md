@@ -1,4 +1,4 @@
-Product Component [![Build status...](https://secure.travis-ci.org/Sylius/Product.png?branch=master)](http://travis-ci.org/Sylius/Product)
+Product Component
 =================
 
 Sylius product catalog comes with support of different product attributes,

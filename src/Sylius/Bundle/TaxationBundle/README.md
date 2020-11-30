@@ -1,4 +1,4 @@
-SyliusTaxationBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxationBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusTaxationBundle)
+SyliusTaxationBundle
 ====================
 
 Customizable taxation system for [**Symfony2**](https://symfony.com) e-commerce applications.

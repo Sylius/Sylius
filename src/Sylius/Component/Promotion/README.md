@@ -1,4 +1,4 @@
-Promotion Component [![Build status...](https://secure.travis-ci.org/Sylius/Promotion.png?branch=master)](http://travis-ci.org/Sylius/Promotion)
+Promotion Component
 ===================
 
 Almost every e-commerce project needs strong tools for marketing campaigns.

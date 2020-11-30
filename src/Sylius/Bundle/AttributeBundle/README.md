@@ -1,4 +1,4 @@
-SyliusAttributeBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAttributeBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAttributeBundle)
+SyliusAttributeBundle
 =====================
 
 Attributes system for entities in Symfony2 applications.

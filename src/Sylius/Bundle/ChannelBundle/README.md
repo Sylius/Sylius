@@ -1,4 +1,4 @@
-SyliusChannelBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusChannelBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusChannelBundle)
+SyliusChannelBundle
 ===================
 
 Symfony2 bundle for handling multiple channels in e-commerce applications.

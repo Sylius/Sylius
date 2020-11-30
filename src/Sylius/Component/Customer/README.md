@@ -1,4 +1,4 @@
-Customer Component [![Build status...](https://secure.travis-ci.org/Sylius/Customer.png?branch=master)](http://travis-ci.org/Sylius/Customer)
+Customer Component
 ================
 
 Managing customers in PHP applications.

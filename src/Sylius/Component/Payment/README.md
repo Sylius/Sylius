@@ -1,4 +1,4 @@
-Payment Component [![Build status...](https://secure.travis-ci.org/Sylius/Payment.png?branch=master)](http://travis-ci.org/Sylius/Payment)
+Payment Component
 =================
 
 Sylius Payment component **does not** provide any gateways. It is only a raw

@@ -1,4 +1,4 @@
-SyliusPayumBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPayumBundle.png)](http://travis-ci.org/Sylius/SyliusPayumBundle)
+SyliusPayumBundle
 =================
 
 Payum integration for Sylius.

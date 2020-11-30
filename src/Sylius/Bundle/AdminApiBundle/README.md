@@ -1,4 +1,4 @@
-SyliusAdminApiBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAdminApiBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAdminApiBundle)
+SyliusAdminApiBundle
 ===============
 
 Sylius REST API bundle.

@@ -1,4 +1,4 @@
-SyliusCustomerBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCustomerBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCustomerBundle)
+SyliusCustomerBundle
 ==================
 
 [**Symfony2**](https://symfony.com) integration of Sylius Customer management component.
