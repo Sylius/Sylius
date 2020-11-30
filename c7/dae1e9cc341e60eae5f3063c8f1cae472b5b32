@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by pamil at 2020-11-26T15:08:06Z
+
+The execution time will be improved by #12093. Also, there might be some rough edges, we'll probably need to add some conditional waits to our JS Behat suite, but it'll make it less fragile in the end.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-11-27T09:50:22Z
+
+@oallain we can put PHPSpec into static checks, although the name isn't perfect, and it's just a few seconds. PHPUnit is bundled with Behat cause both needs fully set-up application with the database schema created as well (and it takes some time).
+
+As for ECS, we apply coding standard fixes manually from time to time. We don't want to interrupt contributors with failures related to the coding standards.
+
+---------------------------------------------------------------------------
+
+by oallain at 2020-11-28T09:25:09Z
+
+Hello @pamil ,
+
+Thanks for your answer, now I understand better and therefore I share your opinion :wink:
+
+So the PR is good for me, just one last idea. You can export Behat logs as artifact to help debug, like :
+
+```yaml
+name: Upload Behat logs as artifact
+uses: actions/upload-artifact@v2
+if: failure()
+with:
+    name: Behat logs
+    path: etc/build/
+    if-no-files-found: ignore
+```
+
+Regards
