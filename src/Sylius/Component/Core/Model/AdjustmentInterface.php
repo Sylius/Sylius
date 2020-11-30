@@ -28,4 +28,8 @@ interface AdjustmentInterface extends BaseAdjustmentInterface
     public const SHIPPING_ADJUSTMENT = 'shipping';
 
     public const TAX_ADJUSTMENT = 'tax';
+
+    public const DETAILS_ASSOCIATED_WITH_ORDER_ITEM_UNIT = 'order_item_unit';
+
+    public const DETAILS_ASSOCIATED_WITH_SHIPMENT = 'shipment';
 }

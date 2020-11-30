@@ -67,11 +67,19 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $calculator->calculate($shipment)->willReturn(450);
 
         $shipment->getMethod()->willReturn($shippingMethod);
+        $shippingMethod->getCode()->willReturn('fedex');
         $shippingMethod->getName()->willReturn('FedEx');
 
         $adjustment->setAmount(450)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('FedEx')->shouldBeCalled();
+        $adjustment
+            ->setDetails([
+                'shippingMethodCode' => 'fedex',
+                'shippingMethodName' => 'FedEx',
+            ])
+            ->shouldBeCalled()
+        ;
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();

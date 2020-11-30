@@ -23,10 +23,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
@@ -69,6 +69,9 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
 
         $taxRate->getLabel()->willReturn('Simple tax (10%)');
+        $taxRate->getCode()->willReturn('simple_tax');
+        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getAmount()->willReturn(0.1);
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $orderItem->getUnits()->willReturn($units);
@@ -81,11 +84,33 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $calculator->calculate(900, $taxRate)->willReturn(90);
 
         $adjustmentsFactory
-            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                100,
+                false,
+                [
+                    'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_ORDER_ITEM_UNIT,
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1,
+                ]
+            )
             ->willReturn($taxAdjustment1)
         ;
         $adjustmentsFactory
-            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 90, false)
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                90,
+                false,
+                [
+                    'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_ORDER_ITEM_UNIT,
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1,
+                ]
+            )
             ->willReturn($taxAdjustment2)
         ;
 

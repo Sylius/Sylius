@@ -21,10 +21,10 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
@@ -57,7 +57,13 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $shipment->getMethod()->willReturn($shippingMethod);
         $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
 
+        $shippingMethod->getCode()->willReturn('fedex');
+        $shippingMethod->getName()->willReturn('FedEx');
+
         $taxRate->getLabel()->willReturn('Simple tax (10%)');
+        $taxRate->getCode()->willReturn('simple_tax');
+        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getAmount()->willReturn(0.1);
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $order->getShippingTotal()->willReturn(1000);
@@ -65,7 +71,19 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $calculator->calculate(1000, $taxRate)->willReturn(100);
 
         $adjustmentsFactory
-            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                100,
+                false,
+                [
+                    'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_SHIPMENT,
+                    'shippingMethodCode' => 'fedex',
+                    'shippingMethodName' => 'FedEx',
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1,
+                ])
             ->willReturn($shippingTaxAdjustment)
         ;
         $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
