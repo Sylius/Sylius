@@ -77,7 +77,6 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                 100,
                 false,
                 [
-                    'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_SHIPMENT,
                     'shippingMethodCode' => 'fedex',
                     'shippingMethodName' => 'FedEx',
                     'taxRateCode' => 'simple_tax',

@@ -93,7 +93,6 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
                 50,
                 false,
                 [
-                    'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_ORDER_ITEM_UNIT,
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,

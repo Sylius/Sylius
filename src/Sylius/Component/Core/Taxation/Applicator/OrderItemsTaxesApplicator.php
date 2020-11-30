@@ -88,7 +88,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             $taxAmount,
             $taxRate->isIncludedInPrice(),
             [
-                'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_ORDER_ITEM_UNIT,
                 'taxRateCode' => $taxRate->getCode(),
                 'taxRateName' => $taxRate->getName(),
                 'taxRateAmount' => $taxRate->getAmount(),

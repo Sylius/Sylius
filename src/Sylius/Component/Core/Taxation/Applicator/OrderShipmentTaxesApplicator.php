@@ -69,8 +69,8 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
     }
 
     private function addAdjustment(
-        OrderInterface $order, 
-        int $taxAmount, 
+        OrderInterface $order,
+        int $taxAmount,
         TaxRateInterface $taxRate,
         ShippingMethodInterface $shippingMethod
     ): void {
@@ -81,7 +81,6 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             $taxAmount,
             $taxRate->isIncludedInPrice(),
             [
-                'associatedWith' => AdjustmentInterface::DETAILS_ASSOCIATED_WITH_SHIPMENT,
                 'shippingMethodCode' => $shippingMethod->getCode(),
                 'shippingMethodName' => $shippingMethod->getName(),
                 'taxRateCode' => $taxRate->getCode(),
