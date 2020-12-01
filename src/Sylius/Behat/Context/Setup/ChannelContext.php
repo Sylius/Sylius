@@ -254,6 +254,14 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
+     */
+    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
+    {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

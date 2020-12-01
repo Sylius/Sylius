@@ -26,10 +26,9 @@ default:
                 - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
 
-                - sylius.behat.context.setup.api.cart
-                
                 - sylius.behat.context.setup.address
                 - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.checkout
                 - sylius.behat.context.setup.geographical
