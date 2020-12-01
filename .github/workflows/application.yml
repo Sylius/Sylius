@@ -63,34 +63,42 @@ jobs:
             -   
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
+                id: end-of-setup
 
             -   
                 name: Validate composer.json
                 run: composer validate --strict
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Check for security vulnerabilities
                 run: symfony security:check
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Validate Doctrine mapping
                 run: bin/console doctrine:schema:validate --skip-sync -vvv
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Validate Twig templates
                 run: bin/console lint:twig src
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Validate Yaml files
                 run: bin/console lint:yaml src
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Run Psalm
                 run: vendor/bin/psalm --show-info=false --output-format=github
+                if: always() && steps.end-of-setup.outcome == 'success'
                 
             -
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse -c phpstan.neon -l 1 src
+                if: always() && steps.end-of-setup.outcome == 'success'
 
     test-application-without-frontend:
         runs-on: ubuntu-latest
