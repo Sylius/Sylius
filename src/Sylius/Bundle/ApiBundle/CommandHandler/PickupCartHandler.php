@@ -17,7 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\AdminApiBundle\Model\UserInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -38,8 +38,8 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var OrderRepositoryInterface */
     private $cartRepository;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    /** @var ChannelRepositoryInterface */
+    private $channelRepository;
 
     /** @var UserContextInterface */
     private $userContext;
@@ -53,14 +53,14 @@ final class PickupCartHandler implements MessageHandlerInterface
     public function __construct(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
     ) {
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
-        $this->channelContext = $channelContext;
+        $this->channelRepository = $channelRepository;
         $this->userContext = $userContext;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
@@ -69,7 +69,7 @@ final class PickupCartHandler implements MessageHandlerInterface
     public function __invoke(PickupCart $pickupCart)
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->channelContext->getChannel();
+        $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
 
         $customer = $this->provideCustomer();
         if ($customer !== null) {

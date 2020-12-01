@@ -60,15 +60,6 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
-     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
-     */
-    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
-    {
-        $this->channelContextSetter->setChannel($channel);
-    }
-
-    /**
      * @When I create a new channel :channelName
      */
     public function iCreateNewChannel(string $channelName): void

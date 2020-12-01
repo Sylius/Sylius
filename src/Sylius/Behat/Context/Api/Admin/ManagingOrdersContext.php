@@ -258,4 +258,19 @@ final class ManagingOrdersContext implements Context
 
         Assert::same($notes, $orderNotes);
     }
+
+    /**
+     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
+     */
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
+        AdminUserInterface $user,
+        OrderInterface $order,
+        string $currency
+    ): void {
+        $this->adminSecurityService->logIn($user);
+
+        $currencyCode = $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'currencyCode');
+
+        Assert::same($currencyCode, $currency);
+    }
 }

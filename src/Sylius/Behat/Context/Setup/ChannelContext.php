@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -30,12 +31,15 @@ final class ChannelContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+
+    /** @var ChannelContextSetterInterface */
+    private $channelContextSetter;
+
     /** @var DefaultChannelFactoryInterface */
     private $unitedStatesChannelFactory;
 
     /** @var DefaultChannelFactoryInterface */
     private $defaultChannelFactory;
-
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
@@ -44,12 +48,14 @@ final class ChannelContext implements Context
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        ChannelContextSetterInterface $channelContextSetter,
         DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->channelContextSetter = $channelContextSetter;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelRepository = $channelRepository;
@@ -249,6 +255,17 @@ final class ChannelContext implements Context
         }
 
         $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
+     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
+     */
+    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
+    {
+        $this->sharedStorage->set('channel', $channel);
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+        $this->channelContextSetter->setChannel($channel);
     }
 
     /**
