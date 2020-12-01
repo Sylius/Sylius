@@ -18,12 +18,6 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/SirDomin/PayPalPlugin.git"
-        }
-    ],
     "require": {
         "php": "^7.3",
         "ext-exif": "*",
@@ -38,9 +32,9 @@
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^2.1",
-        "fakerphp/faker": "^1.9",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.7",
+        "fakerphp/faker": "^1.9",
         "gedmo/doctrine-extensions": "^2.4.12",
         "jms/serializer-bundle": "^2.4",
         "knplabs/gaufrette": "^0.8",
@@ -48,7 +42,7 @@
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "liip/imagine-bundle": "2.3",
+        "liip/imagine-bundle": "^2.3",
         "ocramius/proxy-manager": "^2.2",
         "payum/payum": "^1.6",
         "payum/payum-bundle": "^2.4",
@@ -65,7 +59,6 @@
         "sylius/grid-bundle": "^1.7.5",
         "sylius/mailer": "^1.5",
         "sylius/mailer-bundle": "^1.5",
-        "sylius/paypal-plugin": "dev-api-platform-integration",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.6",
         "sylius/resource-bundle": "^1.6",
@@ -288,6 +281,5 @@
         "branch-alias": {
             "dev-master": "1.9-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

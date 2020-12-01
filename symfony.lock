@@ -152,9 +152,6 @@
     "ergebnis/json-printer": {
         "version": "3.0.2"
     },
-    "fakerphp/faker": {
-        "version": "v1.12.0"
-    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -214,6 +211,9 @@
             "version": "2.2",
             "ref": "cad41ef93d6150067ae2bb3c7fd729492dff6f0a"
         }
+    },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
     },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
@@ -298,9 +298,6 @@
     },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
-    },
-    "lcobucci/clock": {
-        "version": "2.1.x-dev"
     },
     "lcobucci/jwt": {
         "version": "3.3.1"
@@ -402,9 +399,6 @@
     "nikic/php-parser": {
         "version": "v4.6.0"
     },
-    "nyholm/append-query-string": {
-        "version": "0.1.1"
-    },
     "ocramius/package-versions": {
         "version": "1.5.1"
     },
@@ -485,9 +479,6 @@
     },
     "phpoption/phpoption": {
         "version": "1.5.0"
-    },
-    "phpseclib/phpseclib": {
-        "version": "2.0.29"
     },
     "phpspec/php-diff": {
         "version": "v1.1.0"
@@ -701,9 +692,6 @@
     },
     "sylius/mailer-bundle": {
         "version": "v1.5.1"
-    },
-    "sylius/paypal-plugin": {
-        "version": "v1.0.0-rc.2"
     },
     "sylius/registry": {
         "version": "v1.4.0"
@@ -1068,6 +1056,9 @@
     },
     "symplify/smart-file-system": {
         "version": "8.2.21"
+    },
+    "symplify/symplify-kernel": {
+        "version": "8.3.48"
     },
     "textalk/websocket": {
         "version": "1.2.0"

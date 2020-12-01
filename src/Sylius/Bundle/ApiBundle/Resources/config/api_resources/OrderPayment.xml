@@ -16,19 +16,15 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order.class%" shortName="OrderPayment">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>order:read</attribute>
-            </attribute>
-        </attribute>
+        <collectionOperations>
 
-        <attribute name="validation_groups">sylius</attribute>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="get_configuration">
                 <attribute name="method">GET</attribute>
                 <attribute name="controller">sylius.api.get_configuration_action</attribute>
-                <attribute name="path">/order/payments/configuration/{id}</attribute>
+                <attribute name="path">/shop/orders/payment-configuration/{id}</attribute>
             </itemOperation>
         </itemOperations>
     </resource>
