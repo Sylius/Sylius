@@ -15,6 +15,8 @@ namespace Sylius\Behat\Page;
 
 interface ErrorPageInterface
 {
+    public function getCode(): int;
+
     /**
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
