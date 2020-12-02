@@ -221,6 +221,33 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="get_configuration">
+                <attribute name="method">GET</attribute>
+                <attribute name="controller">sylius.api.get_configuration_action</attribute>
+                <attribute name="path">/shop/orders/{id}/payments/{paymentId}/configuration</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieve payment method configuration</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">id</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">paymentId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_complete">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/shop/orders/{id}/complete</attribute>

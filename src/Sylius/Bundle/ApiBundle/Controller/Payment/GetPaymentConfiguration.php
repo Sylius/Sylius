@@ -39,7 +39,7 @@ final class GetPaymentConfiguration
     public function __invoke(Request $request): JsonResponse
     {
         /** @var OrderInterface $order */
-        $order = $this->orderRepository->find($request->get('id'));
+        $order = $this->orderRepository->findOneByTokenValue($request->get('id'));
 
         return new JsonResponse($this->paymentConfigurationProvider->provide($order->getLastPayment()));
     }
