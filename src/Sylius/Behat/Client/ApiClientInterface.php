@@ -48,7 +48,7 @@ interface ApiClientInterface
 
     public function buildCreateRequest(): void;
 
-    public function buildUpdateRequest(string $id): void;
+    public function buildUpdateRequest(string $id, bool $context = true): void;
 
     public function buildUploadRequest(): void;
 

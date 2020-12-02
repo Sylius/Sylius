@@ -147,12 +147,14 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->authorize($this->getToken());
     }
 
-    public function buildUpdateRequest(string $id): void
+    public function buildUpdateRequest(string $id, bool $context = true): void
     {
         $this->show($id);
 
         $this->request = Request::update($this->section, $this->resource, $id, $this->getToken());
-        $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+        if ($context === true) {
+            $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
+        }
     }
 
     public function buildCustomUpdateRequest(string $id, string $customSuffix): void
