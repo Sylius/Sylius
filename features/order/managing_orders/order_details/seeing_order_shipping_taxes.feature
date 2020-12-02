@@ -23,6 +23,7 @@ Feature: Seeing taxes of an order
         When I view the summary of the order "#00000666"
         Then the order's items total should be "$172.20"
         And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping tax "$2.30"
         And the order's shipping total should be "$12.30"
         And the order's tax total should be "$34.50"
         And the order's total should be "$184.50"

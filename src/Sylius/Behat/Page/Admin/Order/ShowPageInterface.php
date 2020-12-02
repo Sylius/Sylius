@@ -54,6 +54,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function hasShippingCharge(string $shippingCharge): bool;
 
+    public function hasShippingTax(string $shippingTax): bool;
+
     public function getTaxTotal(): string;
 
     public function getOrderPromotionTotal(): string;

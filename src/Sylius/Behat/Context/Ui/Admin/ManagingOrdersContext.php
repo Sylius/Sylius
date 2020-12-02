@@ -345,6 +345,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then there should be a shipping tax :shippingTax
+     */
+    public function thereShouldBeAShippingTax(string $shippingTax): void
+    {
+        Assert::true($this->showPage->hasShippingTax($shippingTax));
+    }
+
+    /**
      * @Then the order's shipping total should be :shippingTotal
      */
     public function theOrdersShippingTotalShouldBe($shippingTotal)

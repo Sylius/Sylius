@@ -186,6 +186,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return stripos($shippingChargesText, $shippingCharge) !== false;
     }
 
+    public function hasShippingTax(string $shippingTax): bool
+    {
+        return stripos($this->getElement('shipping_tax')->getText(), $shippingTax) !== false;
+    }
+
     public function getOrderPromotionTotal(): string
     {
         $promotionTotalElement = $this->getElement('promotion_total');
@@ -405,6 +410,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
             'shipping_charges' => '#shipping-base-value',
+            'shipping_tax' => '#shipping-tax-value',
             'shipping_total' => '#shipping-total',
             'table' => '.table',
             'tax_total' => '#tax-total',
