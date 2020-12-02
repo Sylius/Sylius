@@ -30,6 +30,11 @@
             <group>shop:order:read</group>
         </attribute>
 
+        <attribute name="currencyCode">
+            <group>order:read</group>
+            <group>checkout:read</group>
+        </attribute>
+
         <attribute name="channel">
             <group>order:read</group>
         </attribute>

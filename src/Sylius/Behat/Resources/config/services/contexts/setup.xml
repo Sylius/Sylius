@@ -48,6 +48,7 @@
 
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.behat.factory.default_united_states_channel" />
             <argument type="service" id="sylius.behat.factory.default_channel" />
             <argument type="service" id="sylius.repository.channel" />

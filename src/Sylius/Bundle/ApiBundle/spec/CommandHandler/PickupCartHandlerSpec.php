@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -35,7 +35,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     function let(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
@@ -43,7 +43,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $this->beConstructedWith(
             $cartFactory,
             $cartRepository,
-            $channelContext,
+            $channelRepository,
             $userContext,
             $orderManager,
             $generator
@@ -58,7 +58,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     function it_picks_up_a_new_cart_for_logged_in_shop_user(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
@@ -69,7 +69,10 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CurrencyInterface $currency,
         LocaleInterface $locale
     ): void {
-        $channelContext->getChannel()->willReturn($channel);
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
@@ -91,13 +94,13 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldBeCalled();
 
-        $this(new PickupCart());
+        $this($pickupCart);
     }
 
     function it_picks_up_an_existing_cart_for_logged_in_shop_user(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
@@ -105,7 +108,10 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel
     ): void {
-        $channelContext->getChannel()->willReturn($channel);
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
 
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -118,13 +124,13 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldNotBeCalled();
 
-        $this(new PickupCart());
+        $this($pickupCart);
     }
 
     function it_picks_up_a_cart_for_visitor(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
@@ -133,7 +139,10 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CurrencyInterface $currency,
         LocaleInterface $locale
     ): void {
-        $channelContext->getChannel()->willReturn($channel);
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
@@ -154,6 +163,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $orderManager->persist($cart)->shouldBeCalled();
 
-        $this(new PickupCart());
+        $this($pickupCart);
     }
 }

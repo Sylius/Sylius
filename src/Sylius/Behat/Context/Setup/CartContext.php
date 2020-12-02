@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -61,7 +62,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
-     * @Given /^I have (product "[^"]+") in the (cart)$/
+     * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
@@ -132,7 +133,14 @@ final class CartContext implements Context
     {
         $tokenValue = $this->generator->generateUriSafeString(10);
 
-        $this->commandBus->dispatch(new PickupCart($tokenValue));
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channelCode = $channel->getCode();
+
+        $commandPickupCart = new PickupCart($tokenValue);
+        $commandPickupCart->setChannelCode($channelCode);
+
+        $this->commandBus->dispatch($commandPickupCart);
 
         $this->sharedStorage->set('cart_token', $tokenValue);
 

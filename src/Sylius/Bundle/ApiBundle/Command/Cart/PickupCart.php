@@ -13,17 +13,31 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-/**
- * @experimental
- * @psalm-immutable
- */
-class PickupCart
+use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
+
+/** @experimental */
+class PickupCart implements ChannelCodeAwareInterface
 {
-    /** @var string|null */
+    /** @var string|null
+     * @psalm-immutable
+     */
     public $tokenValue;
+
+    /** @var string|null */
+    private $channelCode;
 
     public function __construct(?string $tokenValue = null)
     {
         $this->tokenValue = $tokenValue;
+    }
+
+    public function getChannelCode(): ?string
+    {
+        return $this->channelCode;
+    }
+
+    public function setChannelCode(?string $channelCode): void
+    {
+        $this->channelCode = $channelCode;
     }
 }
