@@ -79,6 +79,7 @@ jobs:
                 run: |
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+                working-directory: "src/Sylius/${{ matrix.package }}"
                     
             -
                 name: Validate composer.json
