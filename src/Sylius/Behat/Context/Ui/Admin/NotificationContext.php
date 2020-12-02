@@ -16,15 +16,22 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\TestAssertionHelper;
+use Sylius\Behat\TestAssertionHelperInterface;
+use Webmozart\Assert\Assert;
 
 final class NotificationContext implements Context
 {
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    public function __construct(NotificationCheckerInterface $notificationChecker)
+    /** @var TestAssertionHelperInterface */
+    private $assertionHelper;
+
+    public function __construct(NotificationCheckerInterface $notificationChecker, TestAssertionHelperInterface $assertionHelper)
     {
         $this->notificationChecker = $notificationChecker;
+        $this->assertionHelper = $assertionHelper;
     }
 
     /**
@@ -32,7 +39,12 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
-        $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
+        $this->assertionHelper->waitUntilAssertionPasses(
+            3,
+            function (): void {
+                $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
+            }
+        );
     }
 
     /**
@@ -40,7 +52,12 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
     {
-        $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
+        $this->assertionHelper->waitUntilAssertionPasses(
+            3,
+            function (): void {
+                $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
+            }
+        );
     }
 
     /**
@@ -48,7 +65,12 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
     {
-        $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
+        $this->assertionHelper->waitUntilAssertionPasses(
+            3,
+            function (): void {
+                $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
+            }
+        );
     }
 
     /**
@@ -56,6 +78,11 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
     {
-        $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
+        $this->assertionHelper->waitUntilAssertionPasses(
+            3,
+            function (): void {
+                $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
+            }
+        );
     }
 }

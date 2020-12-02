@@ -88,6 +88,8 @@
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
+        <service id="sylius.behat.test_assertion_helper" class="Sylius\Behat\TestAssertionHelper" />
+
         <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
             <argument>%kernel.project_dir%</argument>
         </service>

@@ -280,6 +280,7 @@
 
         <service id="sylius.behat.context.ui.admin.notification" class="Sylius\Behat\Context\Ui\Admin\NotificationContext">
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.test_assertion_helper" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.impersonating_customers" class="Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext">
