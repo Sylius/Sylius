@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat;
 
+use Behat\Mink\Exception\ElementNotFoundException;
+
 final class TestAssertionHelper implements TestAssertionHelperInterface
 {
-    public function waitUntilAssertionPasses(int $timeout, callable $assertion): void
+    public function waitUntilNotificationPopups(int $timeout, callable $assertion): void
     {
         $start = microtime(true);
         $end = $start + $timeout;
@@ -14,7 +16,7 @@ final class TestAssertionHelper implements TestAssertionHelperInterface
         do {
             try {
                 $assertion();
-            } catch (\InvalidArgumentException $exception) {
+            } catch (ElementNotFoundException $exception) {
                 usleep(100000);
 
                 continue;

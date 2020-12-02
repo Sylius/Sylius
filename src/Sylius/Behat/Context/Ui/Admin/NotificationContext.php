@@ -39,7 +39,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
-        $this->assertionHelper->waitUntilAssertionPasses(
+        $this->assertionHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
@@ -52,7 +52,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
     {
-        $this->assertionHelper->waitUntilAssertionPasses(
+        $this->assertionHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
@@ -65,7 +65,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
     {
-        $this->assertionHelper->waitUntilAssertionPasses(
+        $this->assertionHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
@@ -78,7 +78,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
     {
-        $this->assertionHelper->waitUntilAssertionPasses(
+        $this->assertionHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());

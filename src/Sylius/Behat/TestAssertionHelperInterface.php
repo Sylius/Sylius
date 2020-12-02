@@ -6,5 +6,5 @@ namespace Sylius\Behat;
 
 interface TestAssertionHelperInterface
 {
-    public function waitUntilAssertionPasses(int $timeout, callable $assertion): void;
+    public function waitUntilNotificationPopups(int $timeout, callable $assertion): void;
 }
