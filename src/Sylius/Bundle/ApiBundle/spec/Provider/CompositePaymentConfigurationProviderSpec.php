@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Payment\ApiPaymentMethodInterface;
+use Sylius\Bundle\ApiBundle\Payment\ApiPaymentMethodHandlerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class PaymentConfigurationProviderSpec extends ObjectBehavior
+final class CompositePaymentConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(ApiPaymentMethodInterface $apiPaymentMethod): void
+    function let(ApiPaymentMethodHandlerInterface $apiPaymentMethod): void
     {
         $this->beConstructedWith([$apiPaymentMethod]);
     }
@@ -28,7 +28,7 @@ final class PaymentConfigurationProviderSpec extends ObjectBehavior
     function it_provides_payment_data_if_payment_is_supported(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ApiPaymentMethodInterface $apiPaymentMethod
+        ApiPaymentMethodHandlerInterface $apiPaymentMethod
     ): void {
         $payment->getMethod()->willReturn($paymentMethod);
 
@@ -42,7 +42,7 @@ final class PaymentConfigurationProviderSpec extends ObjectBehavior
     function it_returns_empty_array_if_payment_is_not_supported(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ApiPaymentMethodInterface $apiPaymentMethod
+        ApiPaymentMethodHandlerInterface $apiPaymentMethod
     ): void {
         $payment->getMethod()->willReturn($paymentMethod);
 
@@ -56,8 +56,8 @@ final class PaymentConfigurationProviderSpec extends ObjectBehavior
     function it_supports_more_than_one_payment_method(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ApiPaymentMethodInterface $apiPaymentMethodOne,
-        ApiPaymentMethodInterface $apiPaymentMethodTwo
+        ApiPaymentMethodHandlerInterface $apiPaymentMethodOne,
+        ApiPaymentMethodHandlerInterface $apiPaymentMethodTwo
     ): void {
         $this->beConstructedWith([$apiPaymentMethodOne, $apiPaymentMethodTwo]);
 

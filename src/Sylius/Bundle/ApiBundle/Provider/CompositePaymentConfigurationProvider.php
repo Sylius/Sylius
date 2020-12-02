@@ -13,18 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
+use Sylius\Bundle\ApiBundle\Payment\ApiPaymentMethodHandlerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 /** @experimental */
-final class PaymentConfigurationProvider
+final class CompositePaymentConfigurationProvider implements PaymentConfigurationProviderInterface
 {
-    /** @var iterable */
-    private $apiPayments;
+    /** @var iterable<ApiPaymentMethodHandlerInterface> */
+    private $apiPaymentMethodHandlers;
 
-    public function __construct(iterable $apiPayments)
+    public function __construct(iterable $apiPaymentMethodHandlers)
     {
-        $this->apiPayments = $apiPayments;
+        $this->apiPaymentMethodHandlers = $apiPaymentMethodHandlers;
     }
 
     public function provide(PaymentInterface $payment): array
@@ -32,9 +33,9 @@ final class PaymentConfigurationProvider
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $payment->getMethod();
 
-        foreach ($this->apiPayments as $apiPayment) {
-            if ($apiPayment->supports($paymentMethod)) {
-                return $apiPayment->provideConfiguration($payment);
+        foreach ($this->apiPaymentMethodHandlers as $apiPaymentMethodHandler) {
+            if ($apiPaymentMethodHandler->supports($paymentMethod)) {
+                return $apiPaymentMethodHandler->provideConfiguration($payment);
             }
         }
 

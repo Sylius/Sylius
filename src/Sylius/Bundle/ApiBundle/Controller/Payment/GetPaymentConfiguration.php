@@ -13,34 +13,50 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller\Payment;
 
-use Sylius\Bundle\ApiBundle\Provider\PaymentConfigurationProvider;
+use Sylius\Bundle\ApiBundle\Provider\PaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class GetPaymentConfiguration
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    /** @var PaymentRepositoryInterface */
+    private $paymentRepository;
 
-    /** @var PaymentConfigurationProvider */
+    /** @var PaymentConfigurationProviderInterface */
     private $paymentConfigurationProvider;
 
+    /** @var OrderRepositoryInterface $orderRepository */
+    private $orderRepository;
+
     public function __construct(
-        OrderRepositoryInterface $orderRepository,
-        PaymentConfigurationProvider $paymentConfigurationProvider
+        PaymentRepositoryInterface $paymentRepository,
+        PaymentConfigurationProviderInterface $paymentConfigurationProvider,
+        OrderRepositoryInterface $orderRepository
     ) {
-        $this->orderRepository = $orderRepository;
+        $this->paymentRepository = $paymentRepository;
         $this->paymentConfigurationProvider = $paymentConfigurationProvider;
+        $this->orderRepository = $orderRepository;
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        /** @var OrderInterface $order */
+        /** @var PaymentInterface|null $payment */
+        $payment = $this->paymentRepository->find($request->get('paymentId'));
+
+        /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneByTokenValue($request->get('id'));
 
-        return new JsonResponse($this->paymentConfigurationProvider->provide($order->getLastPayment()));
+        Assert::notNull($order);
+        Assert::notNull($payment);
+
+        Assert::same($payment->getOrder(), $order);
+
+        return new JsonResponse($this->paymentConfigurationProvider->provide($payment));
     }
 }
