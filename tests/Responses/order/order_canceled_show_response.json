@@ -87,7 +87,35 @@
             "id": @integer@,
             "type": "shipping",
             "label": "UPS",
-            "amount": 1000
+            "amount": 1000,
+            "shipment": {
+                "id": @integer@,
+                "state": "cancelled",
+                "method": {
+                    "id": @integer@,
+                    "code": "UPS",
+                    "enabled": true,
+                    "_links": {
+                        "self": {
+                            "href": "\/api\/v1\/shipping-methods\/UPS"
+                        },
+                        "zone": {
+                            "href": "\/api\/v1\/zones\/EU"
+                        }
+                    }
+                },
+                "_links": {
+                    "self": {
+                        "href": "@string@"
+                    },
+                    "shipping-method": {
+                        "href": "\/api\/v1\/shipping-methods\/UPS"
+                    },
+                    "order": {
+                        "href": "@string@"
+                    }
+                }
+            }
         }
     ],
     "adjustmentsTotal": 1000,
