@@ -31,7 +31,6 @@ final class ChannelContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-
     /** @var ChannelContextSetterInterface */
     private $channelContextSetter;
 
@@ -40,6 +39,7 @@ final class ChannelContext implements Context
 
     /** @var DefaultChannelFactoryInterface */
     private $defaultChannelFactory;
+
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 

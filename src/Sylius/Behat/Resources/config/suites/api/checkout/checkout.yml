@@ -49,7 +49,6 @@ default:
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
-                - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.order
 
