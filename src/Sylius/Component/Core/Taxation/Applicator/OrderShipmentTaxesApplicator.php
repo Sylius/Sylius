@@ -95,7 +95,7 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     private function getShipment(OrderInterface $order): ShipmentInterface
     {
-        /** @var ShipmentInterface|bool $shipment */
+        /** @var ShipmentInterface|false $shipment */
         $shipment = $order->getShipments()->first();
         if (false === $shipment) {
             throw new \LogicException('Order should have at least one shipment.');

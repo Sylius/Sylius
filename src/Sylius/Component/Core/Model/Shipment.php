@@ -25,9 +25,9 @@ class Shipment extends BaseShipment implements ShipmentInterface
     protected $order;
 
     /**
-     * @var Collection|AdjustmentInterface[]
+     * @var Collection|BaseAdjustmentInterface[]
      *
-     * @psalm-var Collection<array-key, AdjustmentInterface>
+     * @psalm-var Collection<array-key, BaseAdjustmentInterface>
      */
     protected $adjustments;
 
@@ -38,7 +38,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     {
         parent::__construct();
 
-        /** @var ArrayCollection<array-key, AdjustmentInterface> $this->adjustments */
+        /** @var ArrayCollection<array-key, BaseAdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
     }
 
