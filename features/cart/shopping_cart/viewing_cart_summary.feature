@@ -1,7 +1,7 @@
 @shopping_cart
 Feature: Viewing a cart summary
     In order to see details about my order
-    As a visitor
+    As a Visitor
     I want to be able to see my cart summary
 
     Background:

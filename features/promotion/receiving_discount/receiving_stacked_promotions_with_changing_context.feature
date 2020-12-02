@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving stacked promotion with changing context
     In order to pay proper amount while buying promoted goods
-    As a Customer
+    As a Visitor
     I want to receive discount for my purchase
 
     Background:

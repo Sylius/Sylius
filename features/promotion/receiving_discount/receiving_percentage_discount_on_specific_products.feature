@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving percentage discount on specific products
     In order to buy specific product with a discount
-    As a Customer
+    As a Visitor
     I want to receive discount on each unit of promoted product
 
     Background:
