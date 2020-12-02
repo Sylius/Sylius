@@ -280,7 +280,7 @@
 
         <service id="sylius.behat.context.ui.admin.notification" class="Sylius\Behat\Context\Ui\Admin\NotificationContext">
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="sylius.behat.test_assertion_helper" />
+            <argument type="service" id="sylius.behat.java_script_test_helper" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.impersonating_customers" class="Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext">
@@ -334,6 +334,7 @@
             <argument type="service" id="sylius.factory.address" />
             <argument type="service" id="sylius.address_comparator" />
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
+            <argument type="service" id="sylius.behat.java_script_test_helper" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.shipping" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutShippingContext">

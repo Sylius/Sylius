@@ -16,8 +16,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\TestAssertionHelper;
-use Sylius\Behat\TestAssertionHelperInterface;
+use Sylius\Behat\JavaScriptTestHelper;
+use Sylius\Behat\JavaScriptTestHelperInterface;
 use Webmozart\Assert\Assert;
 
 final class NotificationContext implements Context
@@ -25,13 +25,13 @@ final class NotificationContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
-    /** @var TestAssertionHelperInterface */
-    private $assertionHelper;
+    /** @var JavaScriptTestHelperInterface */
+    private $testHelper;
 
-    public function __construct(NotificationCheckerInterface $notificationChecker, TestAssertionHelperInterface $assertionHelper)
+    public function __construct(NotificationCheckerInterface $notificationChecker, JavaScriptTestHelperInterface $testHelper)
     {
         $this->notificationChecker = $notificationChecker;
-        $this->assertionHelper = $assertionHelper;
+        $this->testHelper = $testHelper;
     }
 
     /**
@@ -39,7 +39,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
-        $this->assertionHelper->waitUntilNotificationPopups(
+        $this->testHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
@@ -52,7 +52,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
     {
-        $this->assertionHelper->waitUntilNotificationPopups(
+        $this->testHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
@@ -65,7 +65,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
     {
-        $this->assertionHelper->waitUntilNotificationPopups(
+        $this->testHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
@@ -78,7 +78,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
     {
-        $this->assertionHelper->waitUntilNotificationPopups(
+        $this->testHelper->waitUntilNotificationPopups(
             3,
             function (): void {
                 $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());

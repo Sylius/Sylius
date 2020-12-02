@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat;
 
-interface TestAssertionHelperInterface
+interface JavaScriptTestHelperInterface
 {
     public function waitUntilNotificationPopups(int $timeout, callable $assertion): void;
+
+    public function waitUntilAssertionPasses(int $timeout, callable $assertion): void;
 }

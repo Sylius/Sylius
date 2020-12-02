@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\JavaScriptTestHelperInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -40,18 +41,23 @@ final class CheckoutAddressingContext implements Context
     /** @var SelectShippingPageInterface */
     private $selectShippingPage;
 
+    /** @var JavaScriptTestHelperInterface */
+    private $testHelper;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         AddressPageInterface $addressPage,
         FactoryInterface $addressFactory,
         AddressComparatorInterface $addressComparator,
-        SelectShippingPageInterface $selectShippingPage
+        SelectShippingPageInterface $selectShippingPage,
+        JavaScriptTestHelperInterface $testHelper
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->addressPage = $addressPage;
         $this->addressFactory = $addressFactory;
         $this->addressComparator = $addressComparator;
         $this->selectShippingPage = $selectShippingPage;
+        $this->testHelper = $testHelper;
     }
 
     /**
@@ -368,7 +374,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        $this->waitUntilAssertionPasses(3, function () use ($address): void {
+        $this->testHelper->waitUntilAssertionPasses(3, function () use ($address): void {
             Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
         });
     }
