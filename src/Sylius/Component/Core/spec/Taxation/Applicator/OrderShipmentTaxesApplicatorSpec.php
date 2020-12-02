@@ -85,7 +85,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                 ])
             ->willReturn($shippingTaxAdjustment)
         ;
-        $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
+        $shipment->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
 
         $this->apply($order, $zone);
     }

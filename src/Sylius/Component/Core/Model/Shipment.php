@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
@@ -63,29 +63,33 @@ class Shipment extends BaseShipment implements ShipmentInterface
         });
     }
 
-    public function addAdjustment(AdjustmentInterface $adjustment): void
+    public function addAdjustment(BaseAdjustmentInterface $adjustment): void
     {
+        /** @var AdjustmentInterface $adjustment */
         if ($this->hasAdjustment($adjustment)) {
             return;
         }
 
         $this->adjustments->add($adjustment);
-        $this->order->addAdjustment($adjustment);
-        $adjustment->setAdjustable($this);
+        $adjustment->setShipment($this);
+        $this->recalculateAdjustmentsTotal();
+        $this->order->recalculateAdjustmentsTotal();
     }
 
-    public function removeAdjustment(AdjustmentInterface $adjustment): void
+    public function removeAdjustment(BaseAdjustmentInterface $adjustment): void
     {
+        /** @var AdjustmentInterface $adjustment */
         if ($adjustment->isLocked() || !$this->hasAdjustment($adjustment)) {
             return;
         }
 
         $this->adjustments->removeElement($adjustment);
-        $this->order->removeAdjustment($adjustment);
-        $adjustment->setAdjustable(null);
+        $adjustment->setShipment(null);
+        $this->recalculateAdjustmentsTotal();
+        $this->order->recalculateAdjustmentsTotal();
     }
 
-    public function hasAdjustment(AdjustmentInterface $adjustment): bool
+    public function hasAdjustment(BaseAdjustmentInterface $adjustment): bool
     {
         return $this->adjustments->contains($adjustment);
     }

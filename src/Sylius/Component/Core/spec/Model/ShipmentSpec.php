@@ -56,18 +56,18 @@ final class ShipmentSpec extends ObjectBehavior
         $this->setOrder($order);
 
         $adjustment->isNeutral()->willReturn(true);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->setShipment($this)->shouldBeCalled();
 
         $this->addAdjustment($adjustment);
-        $order->addAdjustment($adjustment)->shouldBeCalled();
         $this->hasAdjustment($adjustment)->shouldReturn(true);
 
-        $adjustment->setAdjustable(null)->shouldBeCalled();
+        $adjustment->setShipment(null)->shouldBeCalled();
         $adjustment->isLocked()->willReturn(false);
 
         $this->removeAdjustment($adjustment);
-        $order->removeAdjustment($adjustment)->shouldBeCalled();
         $this->hasAdjustment($adjustment)->shouldReturn(false);
+
+        $order->recalculateAdjustmentsTotal()->shouldBeCalledTimes(2);
     }
 
     function it_does_not_remove_adjustment_when_it_is_locked(
@@ -77,17 +77,17 @@ final class ShipmentSpec extends ObjectBehavior
         $this->setOrder($order);
 
         $adjustment->isNeutral()->willReturn(true);
-        $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->setShipment($this)->shouldBeCalled();
 
         $this->addAdjustment($adjustment);
-        $order->addAdjustment($adjustment)->shouldBeCalled();
 
-        $adjustment->setAdjustable(null)->shouldNotBeCalled();
+        $adjustment->setShipment(null)->shouldNotBeCalled();
         $adjustment->isLocked()->willReturn(true);
 
         $this->removeAdjustment($adjustment);
-        $order->removeAdjustment($adjustment)->shouldNotBeCalled();
         $this->hasAdjustment($adjustment)->shouldReturn(true);
+
+        $order->recalculateAdjustmentsTotal()->shouldBeCalledOnce();
     }
 
     function it_has_correct_adjustments_total_after_adjustment_add_and_remove(
@@ -100,34 +100,31 @@ final class ShipmentSpec extends ObjectBehavior
         $this->setOrder($order);
 
         $adjustment1->isNeutral()->willReturn(false);
-        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment1->setShipment($this)->shouldBeCalled();
         $adjustment1->isLocked()->willReturn(false);
-        $adjustment1->setAdjustable(null)->shouldBeCalled();
+        $adjustment1->setShipment(null)->shouldBeCalled();
         $adjustment1->getAmount()->willReturn(100);
 
         $adjustment2->isNeutral()->willReturn(false);
-        $adjustment2->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setShipment($this)->shouldBeCalled();
         $adjustment2->getAmount()->willReturn(50);
 
         $adjustment3->isNeutral()->willReturn(false);
-        $adjustment3->setAdjustable($this)->shouldBeCalled();
+        $adjustment3->setShipment($this)->shouldBeCalled();
         $adjustment3->getAmount()->willReturn(250);
 
         $adjustment4->isNeutral()->willReturn(true);
-        $adjustment4->setAdjustable($this)->shouldBeCalled();
+        $adjustment4->setShipment($this)->shouldBeCalled();
         $adjustment4->getAmount()->willReturn(150);
 
         $this->addAdjustment($adjustment1);
-        $order->addAdjustment($adjustment1)->shouldBeCalled();
         $this->addAdjustment($adjustment2);
-        $order->addAdjustment($adjustment2)->shouldBeCalled();
         $this->addAdjustment($adjustment3);
-        $order->addAdjustment($adjustment3)->shouldBeCalled();
         $this->addAdjustment($adjustment4);
-        $order->addAdjustment($adjustment4)->shouldBeCalled();
 
         $this->removeAdjustment($adjustment1);
-        $order->removeAdjustment($adjustment1)->shouldBeCalled();
+
+        $order->recalculateAdjustmentsTotal()->shouldBeCalledTimes(5);
 
         $this->getAdjustmentsTotal()->shouldReturn(300);
     }

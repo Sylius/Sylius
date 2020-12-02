@@ -27,6 +27,18 @@ class Adjustment extends BaseAdjustment implements AdjustmentInterface
 
     public function setShipment(?ShipmentInterface $shipment): void
     {
+        if ($this->shipment === $shipment) {
+            return;
+        }
+
+        if ($this->shipment !== null) {
+            $this->shipment->removeAdjustment($this);
+        }
+
         $this->shipment = $shipment;
+
+        if ($shipment !== null) {
+            $this->setAdjustable($this->shipment->getOrder());
+        }
     }
 }

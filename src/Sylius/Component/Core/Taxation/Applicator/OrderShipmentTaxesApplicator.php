@@ -52,7 +52,8 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $shippingMethod = $this->getShippingMethod($order);
+        $shipment = $this->getShipment($order);
+        $shippingMethod = $this->getShippingMethod($shipment);
 
         /** @var TaxRateInterface|null $taxRate */
         $taxRate = $this->taxRateResolver->resolve($shippingMethod, ['zone' => $zone]);
@@ -65,17 +66,16 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $this->addAdjustment($order, (int) $taxAmount, $taxRate, $shippingMethod);
+        $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
     }
 
     private function addAdjustment(
-        OrderInterface $order,
+        ShipmentInterface $shipment,
         int $taxAmount,
         TaxRateInterface $taxRate,
         ShippingMethodInterface $shippingMethod
     ): void {
-        /** @var AdjustmentInterface $shippingTaxAdjustment */
-        $shippingTaxAdjustment = $this->adjustmentFactory->createWithData(
+        $shipment->addAdjustment($this->adjustmentFactory->createWithData(
             AdjustmentInterface::TAX_ADJUSTMENT,
             $taxRate->getLabel(),
             $taxAmount,
@@ -87,14 +87,13 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
                 'taxRateName' => $taxRate->getName(),
                 'taxRateAmount' => $taxRate->getAmount(),
             ]
-        );
-        $order->addAdjustment($shippingTaxAdjustment);
+        ));
     }
 
     /**
      * @throws \LogicException
      */
-    private function getShippingMethod(OrderInterface $order): ShippingMethodInterface
+    private function getShipment(OrderInterface $order): ShipmentInterface
     {
         /** @var ShipmentInterface|bool $shipment */
         $shipment = $order->getShipments()->first();
@@ -102,6 +101,14 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             throw new \LogicException('Order should have at least one shipment.');
         }
 
+        return $shipment;
+    }
+
+    /**
+     * @throws \LogicException
+     */
+    private function getShippingMethod(ShipmentInterface $shipment): ShippingMethodInterface
+    {
         $method = $shipment->getMethod();
 
         /** @var ShippingMethodInterface $method */

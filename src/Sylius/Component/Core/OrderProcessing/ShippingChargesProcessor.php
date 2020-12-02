@@ -47,6 +47,8 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
         foreach ($order->getShipments() as $shipment) {
+            $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+
             try {
                 $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
                 $shippingMethod = $shipment->getMethod();
@@ -62,7 +64,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
                 ]);
 
 
-                $order->addAdjustment($adjustment);
+                $shipment->addAdjustment($adjustment);
             } catch (UndefinedShippingMethodException $exception) {
             }
         }
