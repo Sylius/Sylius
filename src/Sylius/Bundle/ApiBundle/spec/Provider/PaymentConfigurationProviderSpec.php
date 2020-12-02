@@ -13,34 +13,62 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Provider;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use PHPStan\Type\IterableType;
 use Sylius\Bundle\ApiBundle\Payment\ApiPaymentMethodInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 final class PaymentConfigurationProviderSpec extends ObjectBehavior
 {
-    function let(Collection $apiPayments): void
+    function let(ApiPaymentMethodInterface $apiPaymentMethod): void
     {
-        $this->beConstructedWith($apiPayments);
+        $this->beConstructedWith([$apiPaymentMethod]);
     }
 
     function it_provides_payment_data_if_payment_is_supported(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ApiPaymentMethodInterface $apiPaymentMethod,
-        Collection $apiPayments
+        ApiPaymentMethodInterface $apiPaymentMethod
     ): void {
-        $apiPayments->toArray()->willReturn([$apiPaymentMethod]);
-
         $payment->getMethod()->willReturn($paymentMethod);
 
         $apiPaymentMethod->supports($paymentMethod)->willReturn(true);
 
-        $apiPaymentMethod->provideConfiguration($payment)->willReturn(['test']);
+        $apiPaymentMethod->provideConfiguration($payment)->willReturn(['payment_data' => 'PAYMENT_DATA']);
 
-        $this->provide($payment)->shouldReturn(['test']);
+        $this->provide($payment)->shouldReturn(['payment_data' => 'PAYMENT_DATA']);
+    }
+
+    function it_returns_empty_array_if_payment_is_not_supported(
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod,
+        ApiPaymentMethodInterface $apiPaymentMethod
+    ): void {
+        $payment->getMethod()->willReturn($paymentMethod);
+
+        $apiPaymentMethod->supports($paymentMethod)->willReturn(false);
+
+        $apiPaymentMethod->provideConfiguration($payment)->shouldNotBeCalled();
+
+        $this->provide($payment)->shouldReturn([]);
+    }
+
+    function it_supports_more_than_one_payment_method(
+        PaymentInterface $payment,
+        PaymentMethodInterface $paymentMethod,
+        ApiPaymentMethodInterface $apiPaymentMethodOne,
+        ApiPaymentMethodInterface $apiPaymentMethodTwo
+    ): void {
+        $this->beConstructedWith([$apiPaymentMethodOne, $apiPaymentMethodTwo]);
+
+        $payment->getMethod()->willReturn($paymentMethod);
+
+        $apiPaymentMethodOne->supports($paymentMethod)->willReturn(false);
+        $apiPaymentMethodTwo->supports($paymentMethod)->willReturn(true);
+
+        $apiPaymentMethodOne->provideConfiguration($payment)->shouldNotBeCalled();
+        $apiPaymentMethodTwo->provideConfiguration($payment)->willReturn(['payment_data_two' => 'PAYMENT_DATA_TWO']);
+
+        $this->provide($payment)->shouldReturn(['payment_data_two' => 'PAYMENT_DATA_TWO']);
     }
 }

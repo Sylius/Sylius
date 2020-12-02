@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-use Sylius\Bundle\ApiBundle\Payment\ApiPaymentMethodInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
+/** @experimental */
 final class PaymentConfigurationProvider
 {
     /** @var iterable */
@@ -28,17 +27,17 @@ final class PaymentConfigurationProvider
         $this->apiPayments = $apiPayments;
     }
 
-    public function provide(PaymentInterface $payment): JsonResponse
+    public function provide(PaymentInterface $payment): array
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $payment->getMethod();
 
         foreach ($this->apiPayments as $apiPayment) {
             if ($apiPayment->supports($paymentMethod)) {
-                return new JsonResponse($apiPayment->provideConfiguration($payment));
+                return $apiPayment->provideConfiguration($payment);
             }
         }
 
-        return new JsonResponse([]);
+        return [];
     }
 }

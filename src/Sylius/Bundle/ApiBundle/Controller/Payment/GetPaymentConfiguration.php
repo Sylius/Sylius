@@ -16,9 +16,10 @@ namespace Sylius\Bundle\ApiBundle\Controller\Payment;
 use Sylius\Bundle\ApiBundle\Provider\PaymentConfigurationProvider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
+/** @experimental */
 final class GetPaymentConfiguration
 {
     /** @var OrderRepositoryInterface */
@@ -35,11 +36,11 @@ final class GetPaymentConfiguration
         $this->paymentConfigurationProvider = $paymentConfigurationProvider;
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request): JsonResponse
     {
         /** @var OrderInterface $order */
         $order = $this->orderRepository->find($request->get('id'));
 
-        return $this->paymentConfigurationProvider->provide($order->getLastPayment());
+        return new JsonResponse($this->paymentConfigurationProvider->provide($order->getLastPayment()));
     }
 }
