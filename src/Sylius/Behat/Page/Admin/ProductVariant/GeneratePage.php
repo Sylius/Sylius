@@ -67,8 +67,8 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_generate_variants_variants_%position%_code',
-            'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings input[id*="%channelCode%"]',
-            'prices_validation_message' => '#sylius_product_generate_variants_variants_%position%_channelPricings ~ .sylius-validation-error',
+            'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings_%channelCode% input[id*="%channelCode%"]',
+            'prices_validation_message' => 'div[data-form-collection-index="%position%"] div.tabular.menu ~ .sylius-validation-error',
         ]);
     }
 
