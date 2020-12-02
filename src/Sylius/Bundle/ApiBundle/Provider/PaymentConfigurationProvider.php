@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class PaymentConfigurationProvider
 {
-    /** @var ApiPaymentMethodInterface[] */
+    /** @var iterable */
     private $apiPayments;
 
     public function __construct(iterable $apiPayments)
