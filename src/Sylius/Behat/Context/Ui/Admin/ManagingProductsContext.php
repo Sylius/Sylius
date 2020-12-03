@@ -27,6 +27,8 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface as VariantUpdatePageInterface;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -77,6 +79,9 @@ final class ManagingProductsContext implements Context
     /** @var VariantUpdatePageInterface */
     private $variantUpdatePage;
 
+    /** @var JavaScriptTestHelperInterface */
+    private $testHelper;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -90,7 +95,8 @@ final class ManagingProductsContext implements Context
         GeneratePageInterface $variantGeneratePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker,
-        VariantUpdatePageInterface $variantUpdatePage
+        VariantUpdatePageInterface $variantUpdatePage,
+        JavaScriptTestHelperInterface $testHelper
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -105,6 +111,7 @@ final class ManagingProductsContext implements Context
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
         $this->variantUpdatePage = $variantUpdatePage;
+        $this->testHelper = $testHelper;
     }
 
     /**
@@ -431,12 +438,16 @@ final class ManagingProductsContext implements Context
         $this->sharedStorage->set('product', $product);
 
         if ($product->isSimple()) {
-            $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+            $this->testHelper->waitUntilPageOpens(3, function() use ($product): void {
+                $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+            });
 
             return;
         }
 
-        $this->updateConfigurableProductPage->open(['id' => $product->getId()]);
+        $this->testHelper->waitUntilPageOpens(3, function() use ($product): void {
+            $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+        });
     }
 
     /**
