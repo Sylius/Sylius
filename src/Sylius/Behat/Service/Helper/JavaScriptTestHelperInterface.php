@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat;
+namespace Sylius\Behat\Service\Helper;
 
 interface JavaScriptTestHelperInterface
 {

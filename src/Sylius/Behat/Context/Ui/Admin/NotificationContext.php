@@ -16,9 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\JavaScriptTestHelper;
-use Sylius\Behat\JavaScriptTestHelperInterface;
-use Webmozart\Assert\Assert;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 
 final class NotificationContext implements Context
 {

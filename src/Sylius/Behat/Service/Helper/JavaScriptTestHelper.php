@@ -2,12 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat;
+namespace Sylius\Behat\Service\Helper;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 
 final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 {
+    private $sleepTime;
+
+    public function __construct(int $sleepTime)
+    {
+        $this->sleepTime = $sleepTime;
+    }
+
     public function waitUntilNotificationPopups(int $timeout, callable $assertion): void
     {
         $start = microtime(true);
@@ -17,7 +24,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
             try {
                 $assertion();
             } catch (ElementNotFoundException $exception) {
-                usleep(100000);
+                usleep($this->sleepTime);
 
                 continue;
             }
@@ -37,7 +44,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
             try {
                 $assertion();
             } catch (\InvalidArgumentException $exception) {
-                usleep(100000);
+                usleep($this->sleepTime);
 
                 continue;
             }
