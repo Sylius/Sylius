@@ -167,6 +167,9 @@
     "friends-of-behat/mink-browserkit-driver": {
         "version": "v1.4.0"
     },
+    "friends-of-behat/mink-debug-extension": {
+        "version": "v2.0.0"
+    },
     "friends-of-behat/mink-extension": {
         "version": "v2.4.0"
     },
@@ -283,18 +286,6 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
-    },
-    "lakion/mink-debug-extension": {
-        "version": "v1.2.3"
-    },
-    "laminas/laminas-code": {
-        "version": "3.4.1"
-    },
-    "laminas/laminas-eventmanager": {
-        "version": "3.3.0"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.1.0"
     },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
@@ -1036,6 +1027,9 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
+    "symplify/auto-bind-parameter": {
+        "version": "v8.2.9"
+    },
     "symplify/autowire-array-parameter": {
         "version": "v8.2.9"
     },
@@ -1050,6 +1044,12 @@
     },
     "symplify/package-builder": {
         "version": "8.2.21"
+    },
+    "symplify/parameter-name-guard": {
+        "version": "v8.2.1"
+    },
+    "symplify/phpstan-extensions": {
+        "version": "v8.1.19"
     },
     "symplify/set-config-resolver": {
         "version": "8.2.21"
@@ -1084,11 +1084,11 @@
     "vimeo/psalm": {
         "version": "3.11.6"
     },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
-    },
     "webmozart/assert": {
         "version": "1.9.1"
+    },
+    "webmozart/glob": {
+        "version": "4.1.0"
     },
     "webmozart/path-util": {
         "version": "2.3.0"
