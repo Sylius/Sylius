@@ -42,11 +42,19 @@ final class Request implements RequestInterface
         $this->headers = array_merge($this->headers, $headers);
     }
 
-    public static function index(?string $section, string $resource, ?string $token = null): RequestInterface
-    {
-        $headers = $token ? ['HTTP_Authorization' => 'Bearer ' . $token] : [];
+    public static function index(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
+        $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
-        return new self(sprintf('/new-api/%s%s', self::prepareSection($section), $resource), HttpRequest::METHOD_GET, $headers);
+        return new self(
+            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
+            HttpRequest::METHOD_GET,
+            $headers
+        );
     }
 
     public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): RequestInterface
@@ -57,9 +65,14 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function show(?string $section, string $resource, string $id, ?string $token = null): RequestInterface
-    {
-        $headers = $token ? ['HTTP_Authorization' => 'Bearer ' . $token] : [];
+    public static function show(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
+        $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
         return new self(
             sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
@@ -68,11 +81,15 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function create(?string $section, string $resource, ?string $token = null): RequestInterface
-    {
+    public static function create(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
         $headers = ['CONTENT_TYPE' => 'application/ld+json'];
         if ($token !== null) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+            $headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
 
         return new self(
@@ -82,11 +99,16 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function update(?string $section, string $resource, string $id, ?string $token = null): RequestInterface
-    {
+    public static function update(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
         $headers = ['CONTENT_TYPE' => 'application/ld+json'];
         if ($token !== null) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+            $headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
 
         return new self(
@@ -96,9 +118,14 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function delete(?string $section, string $resource, string $id, ?string $token = null): RequestInterface
-    {
-        $headers = $token ? ['HTTP_Authorization' => 'Bearer ' . $token] : [];
+    public static function delete(
+        ?string $section,
+        string $resource,
+        string $id,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
+        $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
         return new self(
             sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
@@ -121,11 +148,15 @@ final class Request implements RequestInterface
         );
     }
 
-    public static function upload(?string $section, string $resource, ?string $token = null): RequestInterface
-    {
+    public static function upload(
+        ?string $section,
+        string $resource,
+        string $authorizationHeader,
+        ?string $token = null
+    ): RequestInterface {
         $headers = ['CONTENT_TYPE' => 'multipart/form-data'];
         if ($token !== null) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $token;
+            $headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
 
         return new self(
@@ -209,10 +240,10 @@ final class Request implements RequestInterface
         }
     }
 
-    public function authorize(?string $token): void
+    public function authorize(?string $token, string $authorizationHeader): void
     {
         if ($token !== null) {
-            $this->headers['HTTP_Authorization'] = 'Bearer ' . $token;
+            $this->headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         }
     }
 

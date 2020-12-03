@@ -73,6 +73,9 @@ final class CheckoutContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var string */
+    private $authorizationHeader;
+
     /** @var string[] */
     private $content = [];
 
@@ -86,7 +89,8 @@ final class CheckoutContext implements Context
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $paymentMethodRepository,
         ProductVariantResolverInterface $productVariantResolver,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        string $authorizationHeader
     ) {
         $this->client = $client;
         $this->ordersClient = $ordersClient;
@@ -98,6 +102,7 @@ final class CheckoutContext implements Context
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->productVariantResolver = $productVariantResolver;
         $this->sharedStorage = $sharedStorage;
+        $this->authorizationHeader = $authorizationHeader;
     }
 
     /**
@@ -959,7 +964,7 @@ final class CheckoutContext implements Context
         }
 
         if ($this->sharedStorage->has('token')) {
-            $headers['HTTP_Authorization'] = 'Bearer ' . $this->sharedStorage->get('token');
+            $headers['HTTP_' . $this->authorizationHeader] = 'Bearer ' . $this->sharedStorage->get('token');
         }
 
         return $headers;
