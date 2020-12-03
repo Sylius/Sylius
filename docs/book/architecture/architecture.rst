@@ -9,7 +9,7 @@ You already know that Sylius is built from components and Symfony bundles, which
 
 All bundles share the same conventions for naming things and the way of data persistence. Sylius, by default, uses the Doctrine ORM for managing all entities.
 
-For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
+For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/index.html>`_.
 
 Fullstack Symfony
 -----------------
@@ -34,7 +34,7 @@ Doctrine
 The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
 One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
 
-To learn more about Doctrine - see `their documentation <http://www.doctrine-project.org/about.html>`_.
+To learn more about Doctrine - see `their documentation <https://www.doctrine-project.org/projects/doctrine-orm/en/2.7/index.html>`_.
 
 Twig
 ----
