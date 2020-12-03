@@ -41,6 +41,19 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
         ;
     }
 
+    public function findOneByOrderToken(string $paymentId, string $orderToken): ?PaymentInterface
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.order', 'o')
+            ->andWhere('p.id = :paymentId')
+            ->andWhere('o.tokenValue = :orderToken')
+            ->setParameter('paymentId', $paymentId)
+            ->setParameter('orderToken', $orderToken)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findOneByCustomer($id, CustomerInterface $customer): ?PaymentInterface
     {
         return $this->createQueryBuilder('o')

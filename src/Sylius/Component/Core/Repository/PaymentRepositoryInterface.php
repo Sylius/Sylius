@@ -24,5 +24,7 @@ interface PaymentRepositoryInterface extends RepositoryInterface
 
     public function findOneByOrderId($paymentId, $orderId): ?PaymentInterface;
 
+    public function findOneByOrderToken(string $paymentId, string $orderToken): ?PaymentInterface;
+
     public function findOneByCustomer($id, CustomerInterface $customer): ?PaymentInterface;
 }
