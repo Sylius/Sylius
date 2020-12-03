@@ -27,7 +27,6 @@ imports:
 
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
-    sylius_core.prepend_doctrine_migrations: true
 
 doctrine:
     orm:

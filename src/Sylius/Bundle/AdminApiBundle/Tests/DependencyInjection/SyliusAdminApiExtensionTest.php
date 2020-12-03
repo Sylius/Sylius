@@ -22,19 +22,6 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 final class SyliusAdminApiExtensionTest extends AbstractExtensionTestCase
 {
-    /** @var array */
-    private $config =
-        ['sylius_admin_api' =>
-            ['resources' =>
-                ['api_user' =>
-                    ['classes' =>
-                        ['model' => 'Sylius\Component\Core\Model\AdminUser'],
-                    ],
-                ],
-            ],
-        ]
-    ;
-
     /**
      * @test
      */
@@ -42,7 +29,7 @@ final class SyliusAdminApiExtensionTest extends AbstractExtensionTestCase
     {
         $this->configureContainer();
 
-        $this->customLoad($this->config);
+        $this->customLoad();
 
         $doctrineMigrationsExtensionConfig = $this->container->getExtensionConfig('doctrine_migrations');
 
@@ -63,21 +50,21 @@ final class SyliusAdminApiExtensionTest extends AbstractExtensionTestCase
             $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\AdminApiBundle\Migrations']
         ));
         $this->assertSame(
-            [0 => 'Sylius\Bundle\CoreBundle\Migrations'],
-            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\AdminApiBundle\Migrations']
+            'Sylius\Bundle\CoreBundle\Migrations',
+            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\AdminApiBundle\Migrations'][0]
         );
     }
 
     /**
      * @test
      */
-    public function it_not_autoconfigures_prepending_doctrine_migration_with_proper_migrations_paths(): void
+    public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled(): void
     {
         $this->configureContainer();
 
         $this->container->setParameter('sylius_core.prepend_doctrine_migrations', false);
 
-        $this->customLoad($this->config);
+        $this->customLoad();
 
         $doctrineMigrationsExtensionConfig = $this->container->getExtensionConfig('doctrine_migrations');
 
@@ -106,8 +93,20 @@ final class SyliusAdminApiExtensionTest extends AbstractExtensionTestCase
         $this->container->registerExtension(new FOSOAuthServerExtension());
     }
 
-    private function customLoad(array $configurationValues = []): void
+    private function customLoad(): void
     {
+        $configurationValues =
+            ['sylius_admin_api' =>
+                ['resources' =>
+                    ['api_user' =>
+                        ['classes' =>
+                            ['model' => 'Sylius\Component\Core\Model\AdminUser'],
+                        ],
+                    ],
+                ],
+            ]
+        ;
+
         $configs = [$this->getMinimalConfiguration(), $configurationValues];
 
         foreach ($this->container->getExtensions() as $extension) {

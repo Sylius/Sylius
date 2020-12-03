@@ -25,7 +25,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
      */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
     {
-        $this->autoConfigurePrependingDoctrineMigrations('test');
+        $this->testPrependingDoctrineMigrations('test');
     }
 
     /**
@@ -33,7 +33,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
      */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_cached_env(): void
     {
-        $this->autoConfigurePrependingDoctrineMigrations('test_cached');
+        $this->testPrependingDoctrineMigrations('test_cached');
     }
 
     /**
@@ -41,31 +41,31 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
      */
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
-        $this->autoConfigurePrependingDoctrineMigrations('dev');
+        $this->testPrependingDoctrineMigrations('dev');
     }
 
     /**
      * @test
      */
-    public function it_not_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_env(): void
+    public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_env(): void
     {
-        $this->autoConfigureNotPrependingDoctrineMigrations('test');
+        $this->testNotPrependingDoctrineMigrations('test');
     }
 
     /**
      * @test
      */
-    public function it_not_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_test_cached_env(): void
+    public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_test_cached_env(): void
     {
-        $this->autoConfigureNotPrependingDoctrineMigrations('test_cached');
+        $this->testNotPrependingDoctrineMigrations('test_cached');
     }
 
     /**
      * @test
      */
-    public function it_not_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
+    public function it_does_not_autoconfigure_prepending_doctrine_migrations_if_it_is_disabled_for_dev_env(): void
     {
-        $this->autoConfigureNotPrependingDoctrineMigrations('dev');
+        $this->testNotPrependingDoctrineMigrations('dev');
     }
 
     protected function getContainerExtensions(): array
@@ -73,7 +73,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         return [new SyliusCoreExtension()];
     }
 
-    private function autoConfigurePrependingDoctrineMigrations(string $env): void
+    private function testPrependingDoctrineMigrations(string $env): void
     {
         $this->configureContainer($env);
 
@@ -103,7 +103,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    private function autoConfigureNotPrependingDoctrineMigrations(string $env): void
+    private function testNotPrependingDoctrineMigrations(string $env): void
     {
         $this->configureContainer($env);
 
