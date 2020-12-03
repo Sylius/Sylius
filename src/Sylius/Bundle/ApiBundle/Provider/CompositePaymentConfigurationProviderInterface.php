@@ -11,15 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment;
+namespace Sylius\Bundle\ApiBundle\Provider;
 
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 /** @experimental */
-interface ApiPaymentMethodHandlerInterface
+interface CompositePaymentConfigurationProviderInterface
 {
-    public function supports(PaymentMethodInterface $paymentMethod): bool;
-
-    public function provideConfiguration(PaymentInterface $payment): array;
+    public function provide(PaymentInterface $payment): array;
 }

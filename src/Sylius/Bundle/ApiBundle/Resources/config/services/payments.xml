@@ -19,7 +19,6 @@
         <service id="sylius.api.get_configuration_action" class="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration" public="true">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
-            <argument type="service" id="sylius.repository.order" />
         </service>
     </services>
 </container>

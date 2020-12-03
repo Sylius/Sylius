@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller\Payment;
 
-use Sylius\Bundle\ApiBundle\Provider\PaymentConfigurationProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -28,20 +28,15 @@ final class GetPaymentConfiguration
     /** @var PaymentRepositoryInterface */
     private $paymentRepository;
 
-    /** @var PaymentConfigurationProviderInterface */
-    private $paymentConfigurationProvider;
-
-    /** @var OrderRepositoryInterface $orderRepository */
-    private $orderRepository;
+    /** @var CompositePaymentConfigurationProviderInterface */
+    private $compositePaymentConfigurationProvider;
 
     public function __construct(
         PaymentRepositoryInterface $paymentRepository,
-        PaymentConfigurationProviderInterface $paymentConfigurationProvider,
-        OrderRepositoryInterface $orderRepository
+        CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider
     ) {
         $this->paymentRepository = $paymentRepository;
-        $this->paymentConfigurationProvider = $paymentConfigurationProvider;
-        $this->orderRepository = $orderRepository;
+        $this->compositePaymentConfigurationProvider = $compositePaymentConfigurationProvider;
     }
 
     public function __invoke(Request $request): JsonResponse
@@ -51,6 +46,6 @@ final class GetPaymentConfiguration
 
         Assert::notNull($payment);
 
-        return new JsonResponse($this->paymentConfigurationProvider->provide($payment));
+        return new JsonResponse($this->compositePaymentConfigurationProvider->provide($payment));
     }
 }
