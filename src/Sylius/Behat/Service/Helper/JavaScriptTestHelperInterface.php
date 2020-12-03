@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Helper;
 
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+
 interface JavaScriptTestHelperInterface
 {
-    public function waitUntilNotificationPopups(int $timeout, callable $assertion): void;
+    public function waitUntilAssertionPasses(callable $assertion, ?int $timeout = null): void;
 
-    public function waitUntilAssertionPasses(int $timeout, callable $assertion): void;
+    public function waitUntilNotificationPopups(NotificationCheckerInterface $notificationChecker, NotificationType $type, string $message, ?int $timeout = null): void;
 
-    public function waitUntilPageOpens(int $timeout, callable $assertion): void;
+    public function waitUntilPageOpens(PageInterface $page, ?array $options, ?int $timeout = null): void;
 }

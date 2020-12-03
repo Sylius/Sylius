@@ -438,16 +438,12 @@ final class ManagingProductsContext implements Context
         $this->sharedStorage->set('product', $product);
 
         if ($product->isSimple()) {
-            $this->testHelper->waitUntilPageOpens(3, function() use ($product): void {
-                $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-            });
+            $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
 
             return;
         }
 
-        $this->testHelper->waitUntilPageOpens(3, function() use ($product): void {
-            $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        });
+        $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
     }
 
     /**

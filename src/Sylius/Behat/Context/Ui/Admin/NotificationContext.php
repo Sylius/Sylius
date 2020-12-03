@@ -35,52 +35,31 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
+    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-            3,
-            function (): void {
-                $this->notificationChecker->checkNotification('has been successfully created.', NotificationType::success());
-            }
+            $this->notificationChecker, NotificationType::success(), 'has been successfully created.'
         );
     }
 
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-            3,
-            function (): void {
-                $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
-            }
+            $this->notificationChecker, NotificationType::success(), 'has been successfully updated.'
         );
     }
 
     /**
      * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
-    {
-        $this->testHelper->waitUntilNotificationPopups(
-            3,
-            function (): void {
-                $this->notificationChecker->checkNotification('has been successfully deleted.', NotificationType::success());
-            }
-        );
-    }
-
-    /**
      * @Then I should be notified that they have been successfully deleted
      */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
-            3,
-            function (): void {
-                $this->notificationChecker->checkNotification('have been successfully deleted.', NotificationType::success());
-            }
+                $this->notificationChecker, NotificationType::success(), 'has been successfully deleted.'
         );
     }
 }

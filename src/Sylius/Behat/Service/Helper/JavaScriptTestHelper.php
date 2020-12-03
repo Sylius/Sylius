@@ -5,69 +5,65 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Helper;
 
 use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\NotificationType;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 {
-    private $sleepTime;
+    private $microsecondsInterval;
 
-    public function __construct(int $sleepTime)
+    private $defaultTimeout;
+
+    public function __construct(int $microsecondsInterval, int $defaultTimeout)
     {
-        $this->sleepTime = $sleepTime;
+        $this->microsecondsInterval = $microsecondsInterval;
+        $this->defaultTimeout = $defaultTimeout;
     }
 
-    public function waitUntilNotificationPopups(int $timeout, callable $assertion): void
+    public function waitUntilAssertionPasses(callable $callable, ?int $timeout = null): void
+    {
+        $this->waitUntilExceptionDisappears($callable, \InvalidArgumentException::class, $timeout);
+    }
+
+    public function waitUntilNotificationPopups(
+        NotificationCheckerInterface $notificationChecker,
+        NotificationType $type,
+        string $message,
+        ?int $timeout = null
+    ): void {
+        $callable = function() use ($notificationChecker, $message, $type): void {
+            $notificationChecker->checkNotification($message, $type);
+        };
+
+        $this->waitUntilExceptionDisappears($callable, ElementNotFoundException::class, $timeout);
+    }
+
+    public function waitUntilPageOpens(PageInterface $page, ?array $options = [], ?int $timeout = null): void
+    {
+        $callable = function() use ($page, $options): void {
+            $page->open($options);
+        };
+
+        $this->waitUntilExceptionDisappears($callable, UnexpectedPageException::class, $timeout);
+    }
+
+    private function waitUntilExceptionDisappears(callable $callable, string $exceptionClass, ?int $timeout = null): void
     {
         $start = microtime(true);
+        $timeout = $timeout ?? $this->defaultTimeout;
         $end = $start + $timeout;
 
         do {
             try {
-                $assertion();
-            } catch (ElementNotFoundException $exception) {
-                usleep($this->sleepTime);
+                $callable();
+            } catch (\Exception $exception) {
+                if ($exception instanceof $exceptionClass) {
+                    usleep($this->microsecondsInterval);
 
-                continue;
-            }
-
-            return;
-        } while (microtime(true) < $end);
-
-        throw new \InvalidArgumentException('Time has run out and the assertion has not passed yet.');
-    }
-
-    public function waitUntilAssertionPasses(int $timeout, callable $assertion): void
-    {
-        $start = microtime(true);
-        $end = $start + $timeout;
-
-        do {
-            try {
-                $assertion();
-            } catch (\InvalidArgumentException $exception) {
-                usleep($this->sleepTime);
-
-                continue;
-            }
-
-            return;
-        } while (microtime(true) < $end);
-
-        throw new \InvalidArgumentException('Time has run out and the assertion has not passed yet.');
-    }
-
-    public function waitUntilPageOpens(int $timeout, callable $assertion): void
-    {
-        $start = microtime(true);
-        $end = $start + $timeout;
-
-        do {
-            try {
-                $assertion();
-            } catch (UnexpectedPageException $exception) {
-                usleep($this->sleepTime);
-
-                continue;
+                    continue;
+                }
             }
 
             return;
