@@ -49,6 +49,7 @@ final class ChannelPricingType extends AbstractResourceType
             ])
             ->add('originalPrice', MoneyType::class, [
                 'label' => 'sylius.ui.original_price',
+                'required' => false,
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
         ;
