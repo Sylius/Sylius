@@ -14,5 +14,5 @@ interface JavaScriptTestHelperInterface
 
     public function waitUntilNotificationPopups(NotificationCheckerInterface $notificationChecker, NotificationType $type, string $message, ?int $timeout = null): void;
 
-    public function waitUntilPageOpens(PageInterface $page, ?array $options, ?int $timeout = null): void;
+    public function waitUntilPageOpens(PageInterface $page, ?array $options = [], ?int $timeout = null): void;
 }
