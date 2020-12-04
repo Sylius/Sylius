@@ -242,7 +242,7 @@ As we switched to the `3.0` version of Doctrine Migrations, there are some thing
    +        table_storage:
    +            table_name: sylius_migrations
    +    migrations_paths:
-   +        'DoctrineMigrations': 'src/Migrations'
+   +        'DoctrineMigrations': '%kernel.project_dir%/src/Migrations'
    ``` 
 
 1. Remove all the legacy Sylius-Standard migrations (they're not needed anymore)
