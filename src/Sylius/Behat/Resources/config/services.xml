@@ -90,7 +90,7 @@
 
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
             <argument>100000</argument>
-            <argument>3</argument>
+            <argument>5</argument>
         </service>
 
         <service id="sylius.calendar" class="Sylius\Behat\Service\Provider\Calendar">
