@@ -34,6 +34,7 @@
         "doctrine/doctrine-bundle": "^1.12",
         "doctrine/orm": "^2.7",
         "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3",
