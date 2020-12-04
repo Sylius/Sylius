@@ -269,7 +269,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldSeePaymentMethodsInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $amount);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
