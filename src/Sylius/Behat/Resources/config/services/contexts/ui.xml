@@ -261,6 +261,7 @@
             <argument type="service" id="sylius.behat.page.admin.taxon.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.java_script_test_helper" />
             <argument type="service" id="behat.mink.default_session" />
         </service>
 

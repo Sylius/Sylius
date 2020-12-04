@@ -117,9 +117,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I want to create a new simple product
      */
-    public function iWantToCreateANewSimpleProduct()
+    public function iWantToCreateANewSimpleProduct(): void
     {
-        $this->createSimpleProductPage->open();
+        $this->testHelper->waitUntilPageOpens($this->createSimpleProductPage);
     }
 
     /**
@@ -127,7 +127,7 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {
-        $this->createConfigurableProductPage->open();
+        $this->testHelper->waitUntilPageOpens($this->createConfigurableProductPage);
     }
 
     /**
@@ -945,7 +945,9 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductElementShouldHaveSlugIn($slug, $language)
     {
-        Assert::same($this->updateSimpleProductPage->getSlug($language), $slug);
+        $this->testHelper->waitUntilAssertionPasses(function () use ($language, $slug): void {
+            Assert::same($this->updateSimpleProductPage->getSlug($language), $slug);
+        });
     }
 
     /**

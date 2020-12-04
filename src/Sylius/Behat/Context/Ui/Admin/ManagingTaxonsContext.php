@@ -18,6 +18,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
+use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -44,13 +45,17 @@ final class ManagingTaxonsContext implements Context
     /** @var NotificationCheckerInterface */
     private $notificationChecker;
 
+    /** @var JavaScriptTestHelper */
+    private $testHelper;
+
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         CreateForParentPageInterface $createForParentPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        JavaScriptTestHelper $testHelper
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
@@ -58,6 +63,7 @@ final class ManagingTaxonsContext implements Context
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->testHelper = $testHelper;
     }
 
     /**
@@ -74,7 +80,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon)
     {
-        $this->createForParentPage->open(['id' => $taxon->getId()]);
+        $this->testHelper->waitUntilPageOpens($this->createForParentPage, ['id' => $taxon->getId()]);
     }
 
     /**
@@ -84,7 +90,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->sharedStorage->set('taxon', $taxon);
 
-        $this->updatePage->open(['id' => $taxon->getId()]);
+        $this->testHelper->waitUntilPageOpens($this->updatePage, ['id' => $taxon->getId()]);
     }
 
     /**
