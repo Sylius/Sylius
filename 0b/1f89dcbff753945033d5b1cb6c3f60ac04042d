@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by arti0090 at 2020-12-03T09:33:05Z
+
+If this will help with JS tests i would think about some changes to it as logic is almost same for every function. Only the type of exception is different for those tests.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-12-03T10:29:35Z
+
+As for opening pages, a nice solution to consider would be building it in `Page` class, so that it would wait automatically. This would reduce the complexity and use this feature for every page. We could enable it conditionally for `Selenium2Driver` and `ChromeDriver` only.
+
+---------------------------------------------------------------------------
+
+by arti0090 at 2020-12-03T12:03:42Z
+
+I was able to extract logics to one private function, so there is no duplication. Also the timeout is now as argument of service (default) or we can use it as function argument. I still don't like look of `$callable = function() use` blocks 🙃
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-12-04T06:13:09Z
+
+Thanks, @arti0090! :1st_place_medal:
