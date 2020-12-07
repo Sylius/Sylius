@@ -27,7 +27,7 @@
     "require": {
         "php": "^7.3",
         "sylius/channel": "^1.6",
-        "sylius/resource-bundle": "1.6.*",
+        "sylius/resource-bundle": "^1.7@rc",
         "symfony/framework-bundle": "^4.4"
     },
     "require-dev": {
