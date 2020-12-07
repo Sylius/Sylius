@@ -74,7 +74,6 @@ final class TestKernel extends BaseKernel
             new SwiftmailerBundle(),
             new TwigBundle(),
             new DoctrineBundle(),
-            new DoctrineCacheBundle(),
             new SyliusOrderBundle(),
             new SyliusMoneyBundle(),
             new SyliusCurrencyBundle(),
