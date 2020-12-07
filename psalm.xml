@@ -86,10 +86,6 @@
 
         <DeprecatedClass>
             <errorLevel type="info">
-                <referencedClass name="Doctrine\Common\Persistence\ManagerRegistry" />
-                <referencedClass name="Doctrine\Common\Persistence\Mapping\ClassMetadata" />
-                <referencedClass name="Doctrine\Common\Persistence\ObjectManager" />
-                <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
@@ -107,8 +103,6 @@
         </DeprecatedClass>
         <DeprecatedInterface>
             <errorLevel type="info">
-                <referencedClass name="Doctrine\Common\Persistence\ObjectManager" />
-                <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Symfony\Component\Security\Core\User\AdvancedUserInterface" />
             </errorLevel>
