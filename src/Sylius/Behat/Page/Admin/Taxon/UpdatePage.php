@@ -83,10 +83,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+        $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return strpos((string) $statusCode, '2') === 0;
     }
 
     public function isSlugReadonly(string $languageCode = 'en_US'): bool
