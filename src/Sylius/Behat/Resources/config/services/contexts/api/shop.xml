@@ -51,9 +51,7 @@
         </service>
 
         <service id="sylius.behat.context.api.shop.checkout" class="Sylius\Behat\Context\Api\Shop\CheckoutContext">
-            <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.order" />
-            <argument type="service" id="sylius.behat.api_platform_client.shop.country" />
             <argument type="service" id="sylius.behat.api_platform_client.shop.address" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.repository.shipping_method" />
@@ -61,7 +59,6 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>%sylius.api.authorization_header%</argument>
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
