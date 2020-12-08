@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20201208105207 extends AbstractMigration implements ContainerAwareInterface
 {
     /** @var ContainerInterface */
@@ -27,45 +21,49 @@ final class Version20201208105207 extends AbstractMigration implements Container
 
     public function getDescription() : string
     {
-        return '';
+        return 'Set details and shipment_id on shipping adjustments.';
     }
 
     public function up(Schema $schema) : void
     {
-        $adjustments = $this->getAdjustments();
+        $this->setDefaultAdjustmentData();
 
-        // this up() migration is auto-generated, please modify it to your needs
+        $adjustments = $this->getShipmentAdjustmentsWithData();
 
+        foreach ($adjustments as $adjustment) {
+            $this->updateAdjustment(
+                (int) $adjustment['id'],
+                (int) $adjustment['shipping_id'],
+                json_encode(['shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $adjustment['label']])
+            );
+        }
     }
 
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-
+        $this->setDefaultAdjustmentData();
     }
 
-    private function getAdjustments(): array
+    private function setDefaultAdjustmentData(): void
     {
-        $adjustmentClass = $this->container->getParameter('sylius.model.adjustment.class');
-
-        $entityManager = $this->getEntityManager($adjustmentClass);
-
-        return $entityManager->createQueryBuilder()
-            ->select('o')
-            ->from($adjustmentClass, 'o')
-            ->getQuery()
-            ->getArrayResult()
-            ;
+        $this->connection->exec("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
     }
 
-    private function getEntityManager(string $class): EntityManagerInterface
+    private function updateAdjustment(int $adjustmentId, int $shipmentId, string $details): void
     {
-        /** @var ManagerRegistry $managerRegistry */
-        $managerRegistry = $this->container->get('doctrine');
+        $this->connection->exec("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
+    }
 
-        /** @var EntityManagerInterface $manager */
-        $manager = $managerRegistry->getManagerForClass($class);
-
-        return $manager;
+    private function getShipmentAdjustmentsWithData(): array
+    {
+       return $this->connection->fetchAll(
+            '
+                SELECT sa.id, sa.label, sa.order_id, s.id as shipping_id, s.method_id, ssm.code AS shipment_code
+                FROM sylius_adjustment sa
+                JOIN sylius_shipment s ON s.order_id = sa.order_id
+                JOIN sylius_shipping_method ssm on s.method_id = ssm.id
+                WHERE sa.type = "shipping"
+            '
+        );
     }
 }
