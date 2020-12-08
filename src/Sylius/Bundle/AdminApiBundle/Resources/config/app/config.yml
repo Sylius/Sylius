@@ -13,6 +13,9 @@ imports:
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/shipment.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/grids/taxon.yml" }
 
+parameters:
+    sylius.security.api_regex: "^/api"
+
 sylius_admin_api:
     resources:
         api_user:

@@ -8,6 +8,9 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
+parameters:
+    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
+
 sylius_grid:
     templates:
         action:
@@ -19,7 +22,7 @@ sylius_grid:
 
 sylius_shop:
     checkout_resolver:
-        pattern: /checkout/.+
+        pattern: "%sylius.security.shop_regex%/checkout/.+"
         route_map:
             empty_order:
                 route: sylius_shop_cart_summary

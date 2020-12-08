@@ -1,6 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+parameters:
+    sylius.security.new_api_route: "/new-api"
+    sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
+    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
+    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
+    sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
+    sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
+
 api_platform:
     patch_formats:
         json: ['application/merge-patch+json']
