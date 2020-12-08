@@ -306,6 +306,14 @@
                     <attribute name="summary">Applies coupon to cart</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:update</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
