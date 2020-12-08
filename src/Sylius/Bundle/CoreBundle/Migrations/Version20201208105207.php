@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Migrations;
@@ -9,22 +18,17 @@ use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-final class Version20201208105207 extends AbstractMigration implements ContainerAwareInterface
+final class Version20201208105207 extends AbstractMigration
 {
     /** @var ContainerInterface */
     private $container;
 
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Set details and shipment_id on shipping adjustments.';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->setDefaultAdjustmentData();
 
@@ -39,7 +43,7 @@ final class Version20201208105207 extends AbstractMigration implements Container
         }
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->setDefaultAdjustmentData();
     }
@@ -58,11 +62,11 @@ final class Version20201208105207 extends AbstractMigration implements Container
     {
        return $this->connection->fetchAllAssociative(
             '
-                SELECT sa.id, sa.label, sa.order_id, s.id as shipping_id, s.method_id, ssm.code AS shipment_code
-                FROM sylius_adjustment sa
-                JOIN sylius_shipment s ON s.order_id = sa.order_id
-                JOIN sylius_shipping_method ssm on s.method_id = ssm.id
-                WHERE sa.type = "shipping"
+                SELECT adjustment.id, adjustment.label, adjustment.order_id, shipment.id as shipping_id, shipment.method_id, shipping_method.code AS shipment_code
+                FROM sylius_adjustment adjustment
+                JOIN sylius_shipment shipment ON shipment.order_id = adjustment.order_id
+                JOIN sylius_shipping_method shipping_method on shipment.method_id = shipping_method.id
+                WHERE adjustment.type = "shipping"
             '
         );
     }
