@@ -46,17 +46,17 @@ final class Version20201208105207 extends AbstractMigration implements Container
 
     private function setDefaultAdjustmentData(): void
     {
-        $this->connection->exec("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
+        $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
     }
 
     private function updateAdjustment(int $adjustmentId, int $shipmentId, string $details): void
     {
-        $this->connection->exec("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
+        $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
     }
 
     private function getShipmentAdjustmentsWithData(): array
     {
-       return $this->connection->fetchAll(
+       return $this->connection->fetchAllAssociative(
             '
                 SELECT sa.id, sa.label, sa.order_id, s.id as shipping_id, s.method_id, ssm.code AS shipment_code
                 FROM sylius_adjustment sa
