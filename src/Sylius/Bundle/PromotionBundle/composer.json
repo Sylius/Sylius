@@ -32,7 +32,7 @@
         "sylius/money-bundle": "^1.6",
         "sylius/promotion": "^1.6",
         "sylius/registry": "^1.5",
-        "sylius/resource-bundle": "^1.7@rc",
+        "sylius/resource-bundle": "^1.7",
         "symfony/framework-bundle": "^4.4"
     },
     "conflict": {
