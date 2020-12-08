@@ -85,11 +85,22 @@ final class PickupCartHandler implements MessageHandlerInterface
 
         /** @var LocaleInterface $locale */
         $locale = $channel->getDefaultLocale();
+
+        /** @var string $localeCode */
+        $localeCode = $locale->getCode();
+
+        /** @var string|null $commandLocaleCode */
+        $commandLocaleCode = $pickupCart->localeCode;
+
+        if ($commandLocaleCode !== null && $channel->hasLocaleWithLocaleCode($commandLocaleCode)) {
+            $localeCode = $commandLocaleCode;
+        }
+
         /** @var CurrencyInterface $currency */
         $currency = $channel->getBaseCurrency();
 
         $cart->setChannel($channel);
-        $cart->setLocaleCode($locale->getCode());
+        $cart->setLocaleCode($localeCode);
         $cart->setCurrencyCode($currency->getCode());
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
         if ($customer !== null) {

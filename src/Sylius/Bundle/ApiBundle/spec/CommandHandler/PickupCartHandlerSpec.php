@@ -165,4 +165,45 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $this($pickupCart);
     }
+
+    function it_picks_up_a_cart_with_locale_code_for_visitor(
+        FactoryInterface $cartFactory,
+        OrderRepositoryInterface $cartRepository,
+        ChannelRepositoryInterface $channelRepository,
+        UserContextInterface $userContext,
+        ObjectManager $orderManager,
+        RandomnessGeneratorInterface $generator,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        LocaleInterface $locale
+    ): void {
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+        $pickupCart->localeCode = 'en_US';
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
+        $channel->getBaseCurrency()->willReturn($currency);
+        $channel->getDefaultLocale()->willReturn($locale);
+        $channel->hasLocaleWithLocaleCode('en_US')->willReturn(true);
+
+        $userContext->getUser()->willReturn(null);
+
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
+
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $currency->getCode()->willReturn('USD');
+        $locale->getCode()->willReturn('en_US');
+
+        $cartFactory->createNew()->willReturn($cart);
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $cart->setChannel($channel)->shouldBeCalled();
+        $cart->setCurrencyCode('USD')->shouldBeCalled();
+        $cart->setLocaleCode('en_US')->shouldBeCalled();
+        $cart->setTokenValue('urisafestr')->shouldBeCalled();
+
+        $orderManager->persist($cart)->shouldBeCalled();
+
+        $this($pickupCart);
+    }
 }
