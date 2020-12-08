@@ -1,6 +1,8 @@
 @checkout
-Feature: Adding product with promotion that makes the order free
-    I want to buy a product with a promotion that gives me free shipping and free order
+Feature: Buying product with promotion that makes the order free
+    In order to buy a product that is free
+    As a Customer
+    I should be able to purchase a full discounted order
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,12 +15,12 @@ Feature: Adding product with promotion that makes the order free
         And I am a logged in customer
 
     @ui
-    Scenario: Adding a simple product to the cart
-        Given I have product "T-shirt banana" in the cart
-        And I am at the checkout addressing step
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+    Scenario: Buying product with promotion that makes the order free
+        When I add product "T-shirt banana" to the cart
+        And I go to the checkout addressing step
+        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method
         Then I should be on the checkout summary step
         And "Holiday promotion" should be applied to my order shipping
-        Then my order total should be "$0.00"
+        And my order total should be "$0.00"
         And I confirm my order
