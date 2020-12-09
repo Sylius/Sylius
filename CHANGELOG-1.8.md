@@ -1,5 +1,39 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.6 (2020-12-09)
+
+#### Details
+
+- [#12004](https://github.com/Sylius/Sylius/issues/12004) Menu taxon can be null, even by default ([@jacquesbh](https://github.com/jacquesbh))
+- [#12010](https://github.com/Sylius/Sylius/issues/12010) [Hot-fix] Allow to use svg images without filtration ([@Zales0123](https://github.com/Zales0123), [@AdamKasp](https://github.com/AdamKasp), [@SirDomin](https://github.com/SirDomin))
+- [#12018](https://github.com/Sylius/Sylius/issues/12018) [BC BREAK] [Order] Order cancelation fix ([@lchrusciel](https://github.com/lchrusciel))
+- [#12046](https://github.com/Sylius/Sylius/issues/12046) Bugfix | Don't suggest old format for template locations ([@stloyd](https://github.com/stloyd))
+- [#12052](https://github.com/Sylius/Sylius/issues/12052) #12051 fix attribute registry initialized twice ([@Fantus](https://github.com/Fantus))
+- [#12055](https://github.com/Sylius/Sylius/issues/12055) Change route prefixes in security.yaml ([@jacquesbh](https://github.com/jacquesbh))
+- [#12060](https://github.com/Sylius/Sylius/issues/12060) [PoC] Add parameter to be able to disable prepending doctrine migrations ([@GSadee](https://github.com/GSadee), [@Tomanhez](https://github.com/Tomanhez))
+- [#12066](https://github.com/Sylius/Sylius/issues/12066) Fix typo in UPGRADE-1.6.md ([@stefandoorn](https://github.com/stefandoorn))
+- [#12069](https://github.com/Sylius/Sylius/issues/12069) Adjust link to migration file ([@stefandoorn](https://github.com/stefandoorn))
+- [#12071](https://github.com/Sylius/Sylius/issues/12071) Update supported versions info ([@Zales0123](https://github.com/Zales0123))
+- [#12086](https://github.com/Sylius/Sylius/issues/12086) Add conflict with lcobucci/jwt to prevent Behat build failures ([@pamil](https://github.com/pamil))
+- [#12087](https://github.com/Sylius/Sylius/issues/12087) [CI] Switch documentation build from Travis to GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12089](https://github.com/Sylius/Sylius/issues/12089) [CI] Switch packages build from Travis to GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12090](https://github.com/Sylius/Sylius/issues/12090) [CI] Switch application build from Travis to GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12093](https://github.com/Sylius/Sylius/issues/12093) Use sha512 to encode passwords in test environments ([@pamil](https://github.com/pamil))
+- [#12101](https://github.com/Sylius/Sylius/issues/12101) Remove lcobucci/jwt v3.4 conflict ([@Tomanhez](https://github.com/Tomanhez))
+- [#12103](https://github.com/Sylius/Sylius/issues/12103) Fix the uploaded image path generator spec ([@pamil](https://github.com/pamil))
+- [#12105](https://github.com/Sylius/Sylius/issues/12105) [CI] Uploade Behat logs as artifacts if failed ([@pamil](https://github.com/pamil))
+- [#12108](https://github.com/Sylius/Sylius/issues/12108) [CI] GitHub Actions setup improvements ([@pamil](https://github.com/pamil))
+- [#12114](https://github.com/Sylius/Sylius/issues/12114) [Behat]Javascript tests helper ([@arti0090](https://github.com/arti0090))
+- [#12115](https://github.com/Sylius/Sylius/issues/12115) [CI] Improve DX while debugging failed Behat scenarios ([@pamil](https://github.com/pamil))
+- [#12117](https://github.com/Sylius/Sylius/issues/12117) Remove pamil/prophecy-common from require-dev dependencies ([@pamil](https://github.com/pamil))
+- [#12118](https://github.com/Sylius/Sylius/issues/12118) Original price is not required in UI ([@jacquesbh](https://github.com/jacquesbh))
+- [#12120](https://github.com/Sylius/Sylius/issues/12120) Fix doctrine migrations config in UPGRADE-1.8.md ([@mmenozzi](https://github.com/mmenozzi))
+- [#12123](https://github.com/Sylius/Sylius/issues/12123) [Behat] Introduce test helper for more JS tests and increase timeout ([@arti0090](https://github.com/arti0090))
+- [#12125](https://github.com/Sylius/Sylius/issues/12125) [Maintenance] Add retry to github action ([@lchrusciel](https://github.com/lchrusciel))
+- [#12127](https://github.com/Sylius/Sylius/issues/12127) [Maintenance] Move dependency from require-dev to require in CoreBundle and AdminApiBundle composers ([@GSadee](https://github.com/GSadee))
+- [#12140](https://github.com/Sylius/Sylius/issues/12140) Temporarily lock on Resource 1.6.* ([@Zales0123](https://github.com/Zales0123))
+- [#12149](https://github.com/Sylius/Sylius/issues/12149) Improve retrying Behat and reduce failure rate ([@pamil](https://github.com/pamil))
+
 ## v1.8.5 (2020-11-12)
 
 #### Details
