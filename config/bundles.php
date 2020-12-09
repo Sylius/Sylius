@@ -7,7 +7,6 @@ return [
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
-    Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class => ['all' => true],
     Sylius\Bundle\OrderBundle\SyliusOrderBundle::class => ['all' => true],
     Sylius\Bundle\MoneyBundle\SyliusMoneyBundle::class => ['all' => true],
     Sylius\Bundle\CurrencyBundle\SyliusCurrencyBundle::class => ['all' => true],

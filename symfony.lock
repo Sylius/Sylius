@@ -103,9 +103,6 @@
             "src/Repository/.gitignore"
         ]
     },
-    "doctrine/doctrine-cache-bundle": {
-        "version": "1.4.0"
-    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "2.2",
         "recipe": {
@@ -142,6 +139,9 @@
     },
     "doctrine/reflection": {
         "version": "1.2.1"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
     },
     "egulias/email-validator": {
         "version": "2.1.19"
@@ -197,9 +197,6 @@
             ".php_cs.dist"
         ]
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.1"
-    },
     "friendsofsymfony/oauth-server-bundle": {
         "version": "1.6.2"
     },
@@ -244,9 +241,6 @@
     },
     "instaclick/php-webdriver": {
         "version": "1.4.7"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "jean85/pretty-package-versions": {
         "version": "1.5.0"
@@ -392,6 +386,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.6.0"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.10.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -1068,6 +1065,9 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"

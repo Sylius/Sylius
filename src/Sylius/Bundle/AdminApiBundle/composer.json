@@ -32,7 +32,7 @@
         "symfony/validator": "^4.4"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^1.12",
+        "doctrine/doctrine-bundle": "^1.12 || ^2.0",
         "doctrine/orm": "^2.7",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",

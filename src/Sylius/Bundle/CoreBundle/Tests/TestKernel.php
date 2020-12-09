@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Tests;
 use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
