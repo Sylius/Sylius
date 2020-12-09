@@ -42,7 +42,7 @@
         "sylius/product": "^1.6",
         "sylius/promotion": "^1.6",
         "sylius/registry": "^1.5",
-        "sylius/resource": "^1.6",
+        "sylius/resource": "1.6.*",
         "sylius/review": "^1.6",
         "sylius/shipping": "^1.6",
         "sylius/taxation": "^1.6",

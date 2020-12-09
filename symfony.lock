@@ -402,9 +402,6 @@
     "pagerfanta/pagerfanta": {
         "version": "v2.4.1"
     },
-    "pamil/prophecy-common": {
-        "version": "v0.1.0"
-    },
     "paragonie/random_compat": {
         "version": "v2.0.18"
     },
