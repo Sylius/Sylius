@@ -20,6 +20,16 @@
 1. Identifier needed to retrieve a product in shop API endpoint (`/new-api/shop/products/{id}`) has been changed 
 from `slug` to `code`. 
 
-# warning
-Migration added `CoreBundle/Migrations/Version20201208105207.php` which connects existing shipping adjustment to shipping and fills adjustment details.
-If TaxRate Name was customized it may cause issues, as it's name should contain actual tax rate! (it is use to connect tax rate and adjustment details)
+1. The `CoreBundle/Migrations/Version20201208105207.php` migration was added which adds:
+ * Taxation details(percentage and relation to tax rate)
+ * Shipping details(shipping relation)
+ * Taxation for shipping(combined details of percentage and shipping relation)
+ 
+ This data is fetched based on two assumptions:
+ * Order level taxes relates to shipping only (default Sylius behaviour)
+ * Tax rate name has not change since the time, the first order has been placed
+ 
+ It these are not true, please adjust migration accordingly to your need. To exclude following migration from execution run following code: 
+    ```
+    bin/console doctrine:migrations:version 'CoreBundle/Migrations/Version20201208105207' --add
+    ```
