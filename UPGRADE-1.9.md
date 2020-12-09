@@ -20,4 +20,6 @@
 1. Identifier needed to retrieve a product in shop API endpoint (`/new-api/shop/products/{id}`) has been changed 
 from `slug` to `code`. 
 
-1. Migration added `CoreBundle/Migrations/Version20201208105207.php` which connects existing shipping adjustment to shipping and fills adjustment details.
+# warning
+Migration added `CoreBundle/Migrations/Version20201208105207.php` which connects existing shipping adjustment to shipping and fills adjustment details.
+If TaxRate Name was customized it may cause issues, as it's name should contain actual tax rate! (it is use to connect tax rate and adjustment details)

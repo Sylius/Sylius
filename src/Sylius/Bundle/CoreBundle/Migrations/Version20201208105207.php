@@ -20,8 +20,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class Version20201208105207 extends AbstractMigration
 {
-    /** @var ContainerInterface */
-    private $container;
+    /** @var array $shippingName */
+    private $shippingName = [];
 
     public function getDescription(): string
     {
@@ -35,10 +35,14 @@ final class Version20201208105207 extends AbstractMigration
         $adjustments = $this->getShipmentAdjustmentsWithData();
 
         foreach ($adjustments as $adjustment) {
+            if (!isset($this->shippingName[$adjustment['shipment_code']])) {
+                $this->shippingName[$adjustment['shipment_code']] = $adjustment['label'];
+            }
+
             $this->updateAdjustment(
                 (int) $adjustment['id'],
-                (int) $adjustment['shipping_id'],
-                json_encode(['shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $adjustment['label']])
+                isset($adjustment['shipping_id']) ? $adjustment['shipping_id'] : 'NULL',
+                $this->getParsedDetails(['taxRateCode' => $adjustment['tax_rate_code'], 'taxRateName' => $adjustment['tax_rate_name'], 'taxRateAmount' => ($adjustment['tax_rate_amount'] ? (float) $adjustment['tax_rate_amount'] : null), 'shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $this->getShippingMethodName($adjustment['shipment_code'])])
             );
         }
     }
@@ -48,12 +52,35 @@ final class Version20201208105207 extends AbstractMigration
         $this->setDefaultAdjustmentData();
     }
 
+    private function getShippingMethodName(?string $shippingMethodCode)
+    {
+        if ($shippingMethodCode === null) {
+            return $shippingMethodCode;
+        }
+
+        return $this->shippingName[$shippingMethodCode];
+    }
+
+    private function getParsedDetails(array $details): string
+    {
+        /** @var array $parsedDetails */
+        $parsedDetails = [];
+
+        foreach ($details as $key=>$value) {
+            if ($value !== null) {
+                $parsedDetails[$key] = $value;
+            }
+        }
+
+        return json_encode($parsedDetails);
+    }
+
     private function setDefaultAdjustmentData(): void
     {
         $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
     }
 
-    private function updateAdjustment(int $adjustmentId, int $shipmentId, string $details): void
+    private function updateAdjustment(int $adjustmentId, string $shipmentId, string $details): void
     {
         $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
     }
@@ -62,11 +89,13 @@ final class Version20201208105207 extends AbstractMigration
     {
        return $this->connection->fetchAllAssociative(
             '
-                SELECT adjustment.id, adjustment.label, adjustment.order_id, shipment.id as shipping_id, shipment.method_id, shipping_method.code AS shipment_code
+                SELECT adjustment.id, adjustment.label, tax_rate.code as tax_rate_code, tax_rate.name as tax_rate_name, tax_rate.amount as tax_rate_amount, adjustment.order_id, shipment.id as shipping_id, shipment.method_id, shipping_method.code AS shipment_code
                 FROM sylius_adjustment adjustment
-                JOIN sylius_shipment shipment ON shipment.order_id = adjustment.order_id
-                JOIN sylius_shipping_method shipping_method on shipment.method_id = shipping_method.id
-                WHERE adjustment.type = "shipping"
+                LEFT JOIN sylius_shipment shipment ON shipment.order_id = adjustment.order_id
+                LEFT JOIN sylius_shipping_method shipping_method on shipment.method_id = shipping_method.id
+                LEFT JOIN sylius_tax_rate tax_rate on adjustment.label LIKE CONCAT(tax_rate.name, \'%\')
+                WHERE adjustment.type IN ("shipping", "tax")
+                ORDER BY adjustment.type
             '
         );
     }
