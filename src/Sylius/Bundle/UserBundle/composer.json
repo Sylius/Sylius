@@ -40,6 +40,7 @@
         "php": "^7.3",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^2.1",
+        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/mailer-bundle": "^1.4",
         "sylius/resource-bundle": "^1.7",
         "sylius/user": "^1.6",

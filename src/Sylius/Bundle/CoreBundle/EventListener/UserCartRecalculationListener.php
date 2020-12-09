@@ -40,6 +40,14 @@ final class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(object $event): void
     {
+        if (!$event instanceof InteractiveLoginEvent && !$event instanceof UserEvent) {
+            throw new \TypeError(sprintf(
+                '$event needs to be an instance of "%s" or "%s"',
+                InteractiveLoginEvent::class,
+                UserEvent::class
+            ));
+        }
+
         try {
             $cart = $this->cartContext->getCart();
         } catch (CartNotFoundException $exception) {

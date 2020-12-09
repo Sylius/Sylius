@@ -15,11 +15,14 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
@@ -28,10 +31,23 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         $this->beConstructedWith($cartContext, $orderProcessor);
     }
 
-    function it_recalculates_cart_for_logged_in_user(
+    function it_recalculates_cart_for_logged_in_user_and_interactive_login_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
-        Event $event,
+        Request $request,
+        TokenInterface $token,
+        OrderInterface $order
+    ): void {
+        $cartContext->getCart()->willReturn($order);
+        $orderProcessor->process($order)->shouldBeCalled();
+
+        $this->recalculateCartWhileLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+    }
+
+    function it_recalculates_cart_for_logged_in_user_and_user_event(
+        CartContextInterface $cartContext,
+        OrderProcessorInterface $orderProcessor,
+        UserEvent $event,
         OrderInterface $order
     ): void {
         $cartContext->getCart()->willReturn($order);
@@ -40,10 +56,22 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         $this->recalculateCartWhileLogin($event);
     }
 
-    function it_does_nothing_if_cannot_find_cart(
+    function it_does_nothing_if_cannot_find_cart_for_interactive_login_event(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
-        Event $event
+        Request $request,
+        TokenInterface $token
+    ): void {
+        $cartContext->getCart()->willThrow(CartNotFoundException::class);
+        $orderProcessor->process(Argument::any())->shouldNotBeCalled();
+
+        $this->recalculateCartWhileLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+    }
+
+    function it_does_nothing_if_cannot_find_cart_for_user_event(
+        CartContextInterface $cartContext,
+        OrderProcessorInterface $orderProcessor,
+        UserEvent $event
     ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $orderProcessor->process(Argument::any())->shouldNotBeCalled();
