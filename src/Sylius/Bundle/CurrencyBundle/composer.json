@@ -27,7 +27,7 @@
     "require": {
         "php": "^7.3",
         "sylius/currency": "^1.6",
-        "sylius/resource-bundle": "^1.6",
+        "sylius/resource-bundle": "1.6.*",
         "symfony/framework-bundle": "^4.4",
         "symfony/intl": "^4.4",
         "symfony/templating": "^4.4"

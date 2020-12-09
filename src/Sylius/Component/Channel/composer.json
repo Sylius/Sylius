@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "sylius/resource": "^1.6",
+        "sylius/resource": "1.6.*",
         "symfony/form": "^4.4",
         "symfony/http-foundation": "^4.4",
         "zendframework/zend-stdlib": "^3.2"
