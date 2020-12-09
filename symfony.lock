@@ -146,15 +146,6 @@
     "egulias/email-validator": {
         "version": "2.1.19"
     },
-    "ergebnis/composer-normalize": {
-        "version": "2.5.1"
-    },
-    "ergebnis/json-normalizer": {
-        "version": "0.12.0"
-    },
-    "ergebnis/json-printer": {
-        "version": "3.0.2"
-    },
     "fakerphp/faker": {
         "version": "v1.12.0"
     },
@@ -272,9 +263,6 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
-    "justinrainbow/json-schema": {
-        "version": "5.2.10"
-    },
     "knplabs/gaufrette": {
         "version": "v0.8.3"
     },
@@ -334,9 +322,6 @@
             "version": "1.8",
             "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
         }
-    },
-    "localheinz/diff": {
-        "version": "1.0.1"
     },
     "marcj/topsort": {
         "version": "1.1.0"
@@ -1018,9 +1003,6 @@
     "symfony/yaml": {
         "version": "v4.4.13"
     },
-    "symplify/auto-bind-parameter": {
-        "version": "v8.2.9"
-    },
     "symplify/autowire-array-parameter": {
         "version": "v8.2.9"
     },
@@ -1035,12 +1017,6 @@
     },
     "symplify/package-builder": {
         "version": "8.2.21"
-    },
-    "symplify/parameter-name-guard": {
-        "version": "v8.2.1"
-    },
-    "symplify/phpstan-extensions": {
-        "version": "v8.1.19"
     },
     "symplify/set-config-resolver": {
         "version": "8.2.21"
@@ -1077,9 +1053,6 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
-    },
-    "webmozart/glob": {
-        "version": "4.1.0"
     },
     "webmozart/path-util": {
         "version": "2.3.0"
