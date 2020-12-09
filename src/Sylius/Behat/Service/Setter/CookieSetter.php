@@ -83,7 +83,7 @@ final class CookieSetter implements CookieSetterInterface
             return true;
         }
 
-        if ($driver instanceof ChromeDriver && $driver->isStarted() === false) {
+        if ($driver instanceof ChromeDriver) {
             return true;
         }
 
