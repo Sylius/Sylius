@@ -27,7 +27,7 @@
     "require": {
         "php": "^7.3",
         "sylius/resource": "^1.7",
-        "symfony/intl": "^4.4",
+        "symfony/intl": "^4.4 || ^5.2",
         "zendframework/zend-stdlib": "^3.2"
     },
     "require-dev": {

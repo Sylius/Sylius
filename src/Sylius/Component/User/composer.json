@@ -37,7 +37,7 @@
         "doctrine/collections": "^1.6",
         "sylius/resource": "^1.7",
         "symfony/polyfill-mbstring": "^1.17",
-        "symfony/security": "^4.4"
+        "symfony/security": "^4.4 || ^5.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0"

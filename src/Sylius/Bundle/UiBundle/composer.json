@@ -34,11 +34,11 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^3.20|^4.0",
         "sylius/grid-bundle": "^1.8",
-        "symfony/config": "^4.4",
-        "symfony/framework-bundle": "^4.4",
-        "symfony/security": "^4.4",
-        "symfony/security-bundle": "^4.4",
-        "symfony/templating": "^4.4",
+        "symfony/config": "^4.4 || ^5.2",
+        "symfony/framework-bundle": "^4.4 || ^5.2",
+        "symfony/security": "^4.4 || ^5.2",
+        "symfony/security-bundle": "^4.4 || ^5.2",
+        "symfony/templating": "^4.4 || ^5.2",
         "zendframework/zend-stdlib": "^3.2"
     },
     "conflict": {
@@ -49,8 +49,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4",
-        "symfony/form": "^4.4",
+        "symfony/dependency-injection": "^4.4 || ^5.2",
+        "symfony/form": "^4.4 || ^5.2",
         "twig/twig": "^2.12"
     },
     "config": {
