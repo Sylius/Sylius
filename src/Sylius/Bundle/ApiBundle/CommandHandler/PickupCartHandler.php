@@ -83,24 +83,11 @@ final class PickupCartHandler implements MessageHandlerInterface
         /** @var OrderInterface $cart */
         $cart = $this->cartFactory->createNew();
 
-        /** @var LocaleInterface $locale */
-        $locale = $channel->getDefaultLocale();
-
-        /** @var string $localeCode */
-        $localeCode = $locale->getCode();
-
-        /** @var string|null $commandLocaleCode */
-        $commandLocaleCode = $pickupCart->localeCode;
-
-        if ($commandLocaleCode !== null && $channel->hasLocaleWithLocaleCode($commandLocaleCode)) {
-            $localeCode = $commandLocaleCode;
-        }
-
         /** @var CurrencyInterface $currency */
         $currency = $channel->getBaseCurrency();
 
         $cart->setChannel($channel);
-        $cart->setLocaleCode($localeCode);
+        $cart->setLocaleCode($this->getLocaleCode($pickupCart->localeCode, $channel));
         $cart->setCurrencyCode($currency->getCode());
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
         if ($customer !== null) {
@@ -121,5 +108,32 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         return null;
+    }
+
+    private function hasLocaleWithLocaleCode(ChannelInterface $channel, ?string $localeCode): bool
+    {
+        $locales = $channel->getLocales();
+
+        $localeWithExpectedCode = $locales->filter(function (LocaleInterface $locale) use ($localeCode): bool {
+            return $locale->getCode() === $localeCode;
+        });
+
+        return !$localeWithExpectedCode->isEmpty();
+    }
+
+    private function getLocaleCode(?string $localeCode, ChannelInterface $channel): string
+    {
+        if ($localeCode === null) {
+            /** @var LocaleInterface $locale */
+            $locale = $channel->getDefaultLocale();
+
+            $localeCode = $locale->getCode();
+        }
+
+        if (!$this->hasLocaleWithLocaleCode($channel, $localeCode)) {
+            throw new \InvalidArgumentException('Choosen localeCode doesn\'t exist.');
+        }
+
+        return $localeCode;
     }
 }

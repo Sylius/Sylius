@@ -39,8 +39,7 @@
                     <attribute name="groups">order:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart</attribute>
-                </attribute>
+                    <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -379,5 +378,6 @@
         </property>
         <property name="billingAddress" writable="false" />
         <property name="shippingAddress" writable="false" />
+        <property name="localeCode" writable="true" />
     </resource>
 </resources>

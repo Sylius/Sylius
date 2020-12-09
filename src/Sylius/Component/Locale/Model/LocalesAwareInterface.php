@@ -26,8 +26,6 @@ interface LocalesAwareInterface
 
     public function hasLocale(LocaleInterface $locale): bool;
 
-    public function hasLocaleWithLocaleCode(string $localeCode): bool;
-
     public function addLocale(LocaleInterface $locale): void;
 
     public function removeLocale(LocaleInterface $locale): void;

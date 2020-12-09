@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -85,6 +86,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
+        $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
+
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer($customer)->shouldBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
@@ -154,6 +157,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
+        $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
+
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
@@ -185,7 +190,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
-        $channel->hasLocaleWithLocaleCode('en_US')->willReturn(true);
+        $locale->getCode()->willReturn('en_US');
+        $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
         $userContext->getUser()->willReturn(null);
 
@@ -205,5 +211,44 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $orderManager->persist($cart)->shouldBeCalled();
 
         $this($pickupCart);
+    }
+
+    function it_throws_exception_if_locale_code_is_not_correct(
+        FactoryInterface $cartFactory,
+        OrderRepositoryInterface $cartRepository,
+        ChannelRepositoryInterface $channelRepository,
+        UserContextInterface $userContext,
+        RandomnessGeneratorInterface $generator,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        LocaleInterface $locale
+    ): void {
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+        $pickupCart->localeCode = 'ru_RU';
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
+        $channel->getBaseCurrency()->willReturn($currency);
+        $channel->getDefaultLocale()->willReturn($locale);
+        $locale->getCode()->willReturn('en_US');
+        $locales = new ArrayCollection([]);
+        $channel->getLocales()->willReturn($locales);
+
+        $userContext->getUser()->willReturn(null);
+
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
+
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $currency->getCode()->willReturn('USD');
+
+        $cartFactory->createNew()->willReturn($cart);
+        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $cart->setChannel($channel)->shouldBeCalled();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [$pickupCart])
+        ;
     }
 }

@@ -22,6 +22,7 @@ use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -144,10 +145,11 @@ final class CartContext implements Context
 
     /**
      * @When I pick up my cart (again)
+     * @When I pick up cart in the :localeCode locale
      */
-    public function iPickUpMyCart(): void
+    public function iPickUpMyCart(?string $localeCode = null): void
     {
-        $this->pickupCart();
+        $this->pickupCart($localeCode);
     }
 
     /**
@@ -156,6 +158,17 @@ final class CartContext implements Context
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->cartsClient->show($tokenValue);
+    }
+
+    /**
+     * @Then my cart's locale should be :locale
+     */
+    public function myCartLocaleShouldBe(LocaleInterface $locale): void
+    {
+        Assert::same($this->responseChecker->getValue(
+            $this->cartsClient->getLastResponse(), 'localeCode'),
+            $locale->getCode()
+        );
     }
 
     /**
@@ -426,9 +439,10 @@ final class CartContext implements Context
         Assert::same(count($items), 0, 'There should be an empty cart');
     }
 
-    private function pickupCart(): string
+    private function pickupCart(?string $localeCode = null): string
     {
         $this->cartsClient->buildCreateRequest();
+        $this->cartsClient->addRequestData('localeCode', $localeCode);
         $tokenValue = $this->responseChecker->getValue($this->cartsClient->create(), 'tokenValue');
 
         $this->sharedStorage->set('cart_token', $tokenValue);

@@ -24,4 +24,4 @@ Feature: Seeing order locale on order summary page
         Given I have product "Stark T-Shirt" in the cart
         When I proceed through checkout process in the "French (France)" locale
         Then I should be on the checkout summary step
-        And my order's locale should be "français (France)"
+        And my order's locale should be "French (France)"

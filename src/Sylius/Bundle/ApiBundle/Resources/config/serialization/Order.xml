@@ -113,6 +113,7 @@
             <group>order:read</group>
             <group>checkout:read</group>
             <group>cart:update</group>
+            <group>order:read</group>
         </attribute>
 
         <attribute name="shippingTotal">

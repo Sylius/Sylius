@@ -180,17 +180,6 @@ class Channel extends BaseChannel implements ChannelInterface
         return $this->locales->contains($locale);
     }
 
-    public function hasLocaleWithLocaleCode(string $localeCode): bool
-    {
-        return !$this
-            ->locales
-            ->filter(function (LocaleInterface $locale) use ($localeCode): bool {
-                return $locale->getCode() === $localeCode;
-            })
-            ->isEmpty()
-        ;
-    }
-
     public function getCountries(): Collection
     {
         return $this->countries;
