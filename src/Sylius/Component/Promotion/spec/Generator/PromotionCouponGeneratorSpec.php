@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
