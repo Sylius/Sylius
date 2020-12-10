@@ -106,6 +106,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I specified the billing address
+     */
+    public function iSpecifiedTheBillingAddress(): void
+    {
+        $this->addressOrder($this->getArrayWithDefaultAddress());
+    }
+
+    /**
      * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
      * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
      * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
@@ -393,17 +401,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedThroughCheckoutProcess(): void
     {
-        $this->addressOrder([
-            'email' => 'rich@sylius.com',
-            'billingAddress' => [
-                'city' => 'New York',
-                'street' => 'Wall Street',
-                'postcode' => '00-001',
-                'countryCode' => 'US',
-                'firstName' => 'Richy',
-                'lastName' => 'Rich',
-            ],
-        ]);
+        $this->addressOrder($this->getArrayWithDefaultAddress());
 
         $this->iCompleteTheShippingStepWithFirstShippingMethod();
 
@@ -939,6 +937,8 @@ final class CheckoutContext implements Context
 
     private function getCheckoutState(): string
     {
+        $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+
         $response = $this->ordersClient->getLastResponse();
 
         return $this->responseChecker->getValue($response, 'checkoutState');
@@ -1030,6 +1030,21 @@ final class CheckoutContext implements Context
         $this->content[$addressType]['firstName'] = $address->getFirstName() ?? '';
         $this->content[$addressType]['lastName'] = $address->getLastName() ?? '';
         $this->content[$addressType]['provinceName'] = $address->getProvinceName();
+    }
+
+    private function getArrayWithDefaultAddress(): array
+    {
+        return [
+            'email' => 'rich@sylius.com',
+            'billingAddress' => [
+                'city' => 'New York',
+                'street' => 'Wall Street',
+                'postcode' => '00-001',
+                'countryCode' => 'US',
+                'firstName' => 'Richy',
+                'lastName' => 'Rich',
+            ],
+        ];
     }
 
     private function getViolation(array $violations, string $element): array

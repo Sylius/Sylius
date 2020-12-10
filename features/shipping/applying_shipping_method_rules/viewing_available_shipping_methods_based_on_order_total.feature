@@ -15,7 +15,7 @@ Feature: Viewing available shipping methods based on order total
         And this shipping method is only available for orders under or equal to "$50"
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping methods that handle expensive goods
         Given I have product "Expensive Jacket" in the cart
         When I specified the billing address
@@ -24,7 +24,7 @@ Feature: Viewing available shipping methods based on order total
         And I should see "Ship with us, ship with pride" shipping method
         And I should not see "We delivery cheap goodz" shipping method
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping methods that handle cheap goods
         Given I have product "Cheap Jacket" in the cart
         When I specified the billing address
@@ -33,7 +33,7 @@ Feature: Viewing available shipping methods based on order total
         And I should see "We delivery cheap goodz" shipping method
         And I should not see "Ship with us, ship with pride" shipping method
 
-    @ui
+    @ui @api
     Scenario: Seeing shipping methods that handle all goods
         Given I have product "Cheap Jacket" in the cart
         And I add 2 of them to my cart
