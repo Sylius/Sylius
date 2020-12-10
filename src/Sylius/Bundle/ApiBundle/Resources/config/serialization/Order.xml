@@ -110,6 +110,7 @@
 
         <attribute name="localeCode">
             <group>shop:order:account:read</group>
+            <group>order:read</group>
             <group>checkout:read</group>
         </attribute>
 

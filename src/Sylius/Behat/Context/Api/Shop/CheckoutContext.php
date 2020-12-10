@@ -544,11 +544,16 @@ final class CheckoutContext implements Context
      */
     public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
     {
-        $response = $this->ordersClient->getLastResponse();
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['payments'][0]['method']['name'],
-            $paymentMethod->getName()
-        );
+        $paymentMethods = $this->getPossiblePaymentMethods();
+        $paymentMethodName = $paymentMethod->getName();
+
+        foreach ($paymentMethods as $method) {
+            if ($method['name'] === $paymentMethodName) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException('Couldn\'t find given payment method for this order');
     }
 
     /**
@@ -556,11 +561,16 @@ final class CheckoutContext implements Context
      */
     public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod): void
     {
-        $response = $this->ordersClient->getLastResponse();
-        Assert::same(
-            $this->responseChecker->getResponseContent($response)['shipments'][0]['method']['translations']['en_US']['name'],
-            $shippingMethod->getName()
-        );
+        $shippingMethods = $this->getCartShippingMethods($this->getCart());
+        $shippingMethodName = $shippingMethod->getName();
+
+        foreach ($shippingMethods as $method) {
+            if ($method['shippingMethod']['translations']['en_US']['name'] === $shippingMethodName) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException('Couldn\'t find given shipping method for this order');
     }
 
     /**
