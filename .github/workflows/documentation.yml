@@ -16,7 +16,11 @@ on:
 jobs:
     tests:
         runs-on: ubuntu-latest
+        
         name: "Build"
+
+        timeout-minutes: 10
+        
         steps:
             -
                 uses: actions/checkout@v2

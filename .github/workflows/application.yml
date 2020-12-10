@@ -21,6 +21,8 @@ jobs:
         
         name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
 
+        timeout-minutes: 10
+
         strategy:
             fail-fast: false
             matrix:
@@ -104,6 +106,8 @@ jobs:
         runs-on: ubuntu-latest
 
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+
+        timeout-minutes: 25
 
         strategy:
             fail-fast: false
@@ -228,6 +232,8 @@ jobs:
         runs-on: ubuntu-latest
 
         name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+
+        timeout-minutes: 25
 
         strategy:
             fail-fast: false
