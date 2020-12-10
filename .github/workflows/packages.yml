@@ -39,6 +39,8 @@ jobs:
         runs-on: ubuntu-latest
         
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
+
+        timeout-minutes: 10
         
         strategy:
             fail-fast: false
