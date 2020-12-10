@@ -28,6 +28,7 @@ imports:
     - suites/api/product/viewing_products.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/receiving_discount.yml
+    - suites/api/shipping/applying_shipping_method_rules.yml
     - suites/api/shipping/managing_shipments.yml
     - suites/api/shipping/managing_shipping_categories.yml
     - suites/api/shipping/managing_shipping_methods.yml
