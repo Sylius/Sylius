@@ -119,7 +119,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I want to complete checkout
      * @Given I am at the checkout addressing step
      * @When I complete the payment step
      * @When I complete the shipping step
@@ -283,6 +282,18 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I want to complete checkout
+     */
+    public function iWantToCompleteCheckout(): void
+    {
+        $response = $this->completeOrder();
+
+        Assert::notSame($response->getStatusCode(), 200);
+
+        $this->ordersClient->show($this->sharedStorage->get('cart_token'));
+    }
+
+    /**
      * @Given I confirmed my order
      * @When I confirm my order
      * @When I try to confirm my order
@@ -290,19 +301,7 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder(): void
     {
-        $notes = $this->content['additionalNote'] ?? null;
-
-        $request = Request::customItemAction(
-            'shop',
-            'orders',
-            $this->sharedStorage->get('cart_token'),
-            HTTPRequest::METHOD_PATCH,
-            'complete'
-        );
-
-        $request->setContent(['notes' => $notes]);
-
-        $response = $this->ordersClient->executeCustomRequest($request);
+        $response = $this->completeOrder();
 
         if ($response->getStatusCode() === 400) {
             return;
@@ -1137,5 +1136,22 @@ final class CheckoutContext implements Context
         $addressFromResponse = $this->responseChecker->getValue($response, $addressType . 'Address');
 
         Assert::true($this->addressesAreEqual($addressFromResponse, $address));
+    }
+
+    private function completeOrder(): Response
+    {
+        $notes = $this->content['additionalNote'] ?? null;
+
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $this->sharedStorage->get('cart_token'),
+            HTTPRequest::METHOD_PATCH,
+            'complete'
+        );
+
+        $request->setContent(['notes' => $notes]);
+
+        return $this->ordersClient->executeCustomRequest($request);
     }
 }
