@@ -32,7 +32,7 @@ const modifyAttributesListOnSelectorElementDelete = function modifyAttributesLis
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
   $('.attribute button').off('click').on('click', (event) => {
-    if ($(event.originalEvent.explicitOriginalTarget.id).is(':empty')) {
+    if (!event.originalEvent.explicitOriginalTarget.id) {
       const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
 
       $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
