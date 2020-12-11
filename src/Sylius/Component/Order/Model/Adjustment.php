@@ -49,6 +49,9 @@ class Adjustment implements AdjustmentInterface
     /** @var string|null */
     protected $originCode;
 
+    /** @var array */
+    protected $details = [];
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -180,6 +183,16 @@ class Adjustment implements AdjustmentInterface
     public function getOrderItemUnit(): ?OrderItemUnitInterface
     {
         return $this->orderItemUnit;
+    }
+
+    public function getDetails(): array
+    {
+        return $this->details;
+    }
+
+    public function setDetails(array $details): void
+    {
+        $this->details = $details;
     }
 
     private function recalculateAdjustable(): void

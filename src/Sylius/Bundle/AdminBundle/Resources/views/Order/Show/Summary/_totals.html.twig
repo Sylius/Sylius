@@ -22,15 +22,33 @@
         {% if not order.adjustments(shippingAdjustment).isEmpty() %}
             <div class="ui relaxed divided list">
                 <div class="item"><strong>{{ 'sylius.ui.shipping'|trans }}:</strong></div>
-                {% for adjustment in order.adjustments(shippingAdjustment) %}
-                    <div class="item">
-                        <div id="shipping-base-value" class="right floated">{{ money.format(adjustment.amount, order.currencyCode) }}</div>
-                        <div class="content">
-                            <div id="shipping-adjustment-label" class="description">
-                                <strong>{{ adjustment.label }}</strong>:
+                {% for shipment in order.shipments %}
+                    {% for adjustment in shipment.adjustments(shippingAdjustment) %}
+                        <div class="item">
+                            <div id="shipping-base-value" class="right floated">{{ money.format(adjustment.amount, order.currencyCode) }}</div>
+                            <div class="content">
+                                <div id="shipping-adjustment-label" class="description">
+                                    <strong>{{ adjustment.label }}</strong>:
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
+
+                    {% for adjustment in shipment.adjustments(taxAdjustment) %}
+                        <div class="item{% if adjustment.isNeutral %} tax-disabled{% endif %}">
+                            <div id="shipping-tax-value" class="right floated">
+                                {{ money.format(adjustment.amount, order.currencyCode) }}
+                                {% if adjustment.isNeutral %}
+                                    <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <div id="shipping-adjustment-label" class="description">
+                                    <strong{% if adjustment.isNeutral %} class="tax-disabled"{% endif %}>{{ adjustment.label }}</strong>:
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 {% endfor %}
             </div>
         {% else %}

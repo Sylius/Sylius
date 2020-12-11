@@ -18,10 +18,10 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class ShippingChargesProcessorSpec extends ObjectBehavior
@@ -67,14 +67,23 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $calculator->calculate($shipment)->willReturn(450);
 
         $shipment->getMethod()->willReturn($shippingMethod);
+        $shippingMethod->getCode()->willReturn('fedex');
         $shippingMethod->getName()->willReturn('FedEx');
 
         $adjustment->setAmount(450)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setLabel('FedEx')->shouldBeCalled();
+        $adjustment
+            ->setDetails([
+                'shippingMethodCode' => 'fedex',
+                'shippingMethodName' => 'FedEx',
+            ])
+            ->shouldBeCalled()
+        ;
 
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
-        $order->addAdjustment($adjustment)->shouldBeCalled();
+        $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+        $shipment->addAdjustment($adjustment)->shouldBeCalled();
 
         $this->process($order);
     }

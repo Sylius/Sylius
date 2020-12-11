@@ -28,4 +28,8 @@ interface AdjustmentInterface extends BaseAdjustmentInterface
     public const SHIPPING_ADJUSTMENT = 'shipping';
 
     public const TAX_ADJUSTMENT = 'tax';
+
+    public function getShipment(): ?ShipmentInterface;
+
+    public function setShipment(?ShipmentInterface $shipment): void;
 }

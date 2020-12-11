@@ -3,6 +3,9 @@
 
 sylius_order:
     resources:
+        adjustment:
+            classes:
+                model: Sylius\Component\Core\Model\Adjustment
         order:
             classes:
                 model: Sylius\Component\Core\Model\Order

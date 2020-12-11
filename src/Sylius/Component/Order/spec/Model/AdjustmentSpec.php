@@ -234,4 +234,10 @@ final class AdjustmentSpec extends ObjectBehavior
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
+
+    function its_details_are_mutable(): void
+    {
+        $this->setDetails(['taxRateAmount' => 0.1]);
+        $this->getDetails()->shouldReturn(['taxRateAmount' => 0.1]);
+    }
 }
