@@ -37,7 +37,7 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
     {
         $methods = [];
 
-        foreach ($this->shippingMethodRepository->findBy(['enabled' => true]) as $shippingMethod) {
+        foreach ($this->shippingMethodRepository->findBy(['enabled' => true], ['position' => 'ASC']) as $shippingMethod) {
             if ($this->eligibilityChecker->isEligible($subject, $shippingMethod)) {
                 $methods[] = $shippingMethod;
             }

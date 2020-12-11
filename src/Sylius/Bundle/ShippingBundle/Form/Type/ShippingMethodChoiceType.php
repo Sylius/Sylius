@@ -66,7 +66,7 @@ final class ShippingMethodChoiceType extends AbstractType
                         return $this->shippingMethodsResolver->getSupportedMethods($options['subject']);
                     }
 
-                    return $this->repository->findAll();
+                    return $this->repository->findBy(['enabled' => true], ['position' => 'ASC']);
                 },
                 'choice_value' => 'code',
                 'choice_label' => 'name',

@@ -31,6 +31,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
+            ->addOrderBy('o.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
