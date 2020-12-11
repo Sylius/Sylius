@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-12-04T11:20:19Z
+
+Have you guys ever thought that maybe you ask too much from this adjustment and maybe it would be better to split it into separate entities?
+Adding a free-form field to store random data isn't going to improve the DX and might even make it worse.
+If you are interested I can elaborate more on the issues I see with this approach and suggest others.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2020-12-04T11:43:15Z
+
+> Have you guys ever thought that maybe you ask too much from this adjustment and maybe it would be better to split it into separate entities?
+> Adding a free-form field to store random data isn't going to improve the DX and might even make it worse.
+> If you are interested I can elaborate more on the issues I see with this approach and suggest others.
+
+Hey @vvasiloi! Thank you for sharing your doubts with us. I wanted to propose some simple and non-bc breaks solution for a known problem and I'm of course aware, that it is probably not the best approach in the end. So If you would like to share your suggestions with us, it would be really appreciated 😃
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-12-08T14:58:29Z
+
+@GSadee Thanks for the answer! Good to know that you also thought about it. I will open a new issue for it when I have the time. Hopefully we can do something about it in 2.0.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-12-11T08:12:28Z
+
+Thank you, Grzegorz! :1st_place_medal:
