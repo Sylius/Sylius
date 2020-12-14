@@ -85,55 +85,6 @@ class ProductAttributeController extends ResourceController
         ]);
     }
 
-    public function getAttributesJsonAction(Request $request): JsonResponse
-    {
-        /** @var string|null $productCode */
-        $productCode = $request->attributes->get('productCode');
-        Assert::notNull($productCode);
-
-        /** @var ProductRepositoryInterface|null $productRepository */
-        $productRepository = $this->get('sylius.repository.product');
-        Assert::notNull($productRepository);
-
-        /** @var ProductInterface $product */
-        $product = $productRepository->findOneByCode($productCode);
-
-        $attributes = [];
-
-        /** @var AttributeValueInterface $attributeValue */
-        foreach ($product->getAttributes() as $attributeValue) {
-            /** @var string|null $localeCode */
-            $localeCode = $attributeValue->getLocaleCode();
-
-            /** @var ProductAttributeInterface $attribute */
-            $attribute = $attributeValue->getAttribute();
-
-            $value = [
-                'id' => (string) $attributeValue->getId(),
-                'value' => $attributeValue->getValue(),
-                'label' => $attribute->getNameByLocaleCode($localeCode)
-            ];
-
-            if ($attribute->isTranslatable()) {
-                $value['localeCode'] = $localeCode;
-            }
-
-            $attributeCode = $attribute->getCode();
-
-            $values = isset($attributes[$attributeCode]['values']) ? $attributes[$attributeCode]['values'] : [];
-            $values[] = $value;
-
-            $attributes[$attributeCode] = [
-                'code' => $attributeCode,
-                'type' => $attributeValue->getType(),
-                'translatable' => $attribute->isTranslatable(),
-                'values' => $values
-            ];
-        }
-
-        return new JsonResponse(['attributes' => $attributes]);
-    }
-
     /**
      * @param array|string[] $localeCodes
      *
