@@ -286,7 +286,7 @@ sylius:
         edit_your_personal_information: 'Persönliche Informationen bearbeiten'
         edit_zone: 'Zone bearbeiten'
         editing_attribute: 'Attribute editieren'
-        editing_channel: 'Channel editieren'
+        editing_channel: 'Kanal bearbeiten'
         editing_country: 'Land editieren'
         editing_coupon: 'Gutschein editieren'
         editing_currency: 'Währung editieren'

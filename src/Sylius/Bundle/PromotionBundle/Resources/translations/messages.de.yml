@@ -17,8 +17,8 @@ sylius:
             starts_at: Beginnt am
             usage_limit: Nutzungslimit
         promotion_action:
-            item_fixed_discount: Fixer Rabatt
-            item_percentage_discount: Prozentualer Rabatt
+            item_fixed_discount: Fixer Rabatt - Bestellposition
+            item_percentage_discount: Prozentualer Rabatt - Bestellposition
             order_fixed_discount: Fester Rabatt
             order_percentage_discount: Prozentualer Rabatt
             shipping_percentage_discount: Prozentualer Versandrabatt
