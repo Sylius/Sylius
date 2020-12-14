@@ -144,13 +144,35 @@ class ProductAttributeController extends ResourceController
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 
         $forms = [];
-        foreach ($localeCodes as $localeCode) {
-            $forms[$localeCode] = $this
-                ->get('form.factory')
-                ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()])
-                ->createView()
-            ;
+
+        if (!$attribute->isTranslatable()) {
+            array_push($localeCodes, null);
+
+            return $this->createFormAndView($attributeForm, $attribute, null, $forms);
         }
+
+        foreach ($localeCodes as $localeCode) {
+            $forms = $this->createFormAndView($attributeForm, $attribute, $localeCode, $forms);
+        }
+
+        return $forms;
+    }
+
+    private function createFormAndView(
+        $attributeForm,
+        AttributeInterface $attribute,
+        ?string $localeCode,
+        array $forms
+    ): array {
+        $forms[$localeCode] = $this
+            ->get('form.factory')
+            ->createNamed(
+                'value',
+                $attributeForm,
+                null,
+                ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()]
+            )
+            ->createView();
 
         return $forms;
     }
