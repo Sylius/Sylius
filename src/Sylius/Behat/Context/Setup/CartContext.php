@@ -61,6 +61,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I have(?:| added) (\d+) (products "[^"]+") (?:to|in) the (cart)$/
+     */
+    public function iHaveAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
+    {
+        $this->addProductToCart($product, $tokenValue, $quantity);
+    }
+
+    /**
      * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
@@ -69,18 +77,7 @@ final class CartContext implements Context
      */
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
-        if ($tokenValue === null) {
-            $tokenValue = $this->pickupCart();
-        }
-
-        $this->commandBus->dispatch(AddItemToCart::createFromData(
-            $tokenValue,
-            $product->getCode(),
-            $this->productVariantResolver->getVariant($product)->getCode(),
-            1
-        ));
-
-        $this->sharedStorage->set('product', $product);
+        $this->addProductToCart($product, $tokenValue);
     }
 
     /**
@@ -165,5 +162,21 @@ final class CartContext implements Context
         }
 
         return null;
+    }
+
+    private function addProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
+    {
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
+
+        $this->commandBus->dispatch(AddItemToCart::createFromData(
+            $tokenValue,
+            $product->getCode(),
+            $this->productVariantResolver->getVariant($product)->getCode(),
+            $quantity
+        ));
+
+        $this->sharedStorage->set('product', $product);
     }
 }
