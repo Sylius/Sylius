@@ -35,6 +35,7 @@ sylius:
                 street: Straße
                 tax_id: USt-ID
             contact_email: Kontakt E-Mail
+            contact_phone_number: Kontakt Telefonnummer
             countries: Länder
             currencies: Währungen
             currency_base: Basis-Währung
@@ -125,6 +126,7 @@ sylius:
             shipping_required: Ist ein Versand erforderlich?
             weight: Gewicht
             width: Breite
+            tracked_help: Wenn diese Option aktiviert ist, wird Sylius den Lagerbestand verfolgen und den Verkauf einstellen, sobald der Lagerbestand 0 erreicht hat.
         attribute:
             product_attribute_value:
                 attribute: Attribut

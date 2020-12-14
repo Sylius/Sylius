@@ -35,6 +35,7 @@ sylius:
                 street: Adresse
                 tax_id: N° de TVA
             contact_email: Email de contact
+            contact_phone_number: Numéro de téléphone de contact
             countries: Pays
             currencies: Devises
             currency_base: Devise de référence
