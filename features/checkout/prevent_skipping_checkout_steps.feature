@@ -14,7 +14,7 @@ Feature: Prevent skipping checkout steps
         And the store allows paying offline
         And I am a logged in customer
 
-    @ui @api
+    @ui @no-api
     Scenario: Skipping shipping checkout step
         Given I have product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
