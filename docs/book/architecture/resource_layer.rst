@@ -156,7 +156,7 @@ Displaying a resource with a custom template and repository methods:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
     app_product_show:
         path: /products/{slug}
         methods: [GET]
@@ -172,7 +172,7 @@ Creating a product using custom form and a redirection method:
 
 .. code-block:: yaml
 
-    # routing.yml
+    # config/routes.yaml
     app_product_create:
         path: /my-stores/{store}/products/new
         methods: [GET, POST]
