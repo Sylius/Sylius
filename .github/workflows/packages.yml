@@ -17,7 +17,7 @@ on:
 
 jobs:
     list:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
         
         name: "Create a list of packages"
         
@@ -36,7 +36,7 @@ jobs:
     test:
         needs: list
         
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
         
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
