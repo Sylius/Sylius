@@ -27,12 +27,12 @@ const controlAttributesList = function controlAttributesList() {
 };
 
 const modifyAttributesListOnSelectorElementDelete = function modifyAttributesListOnSelectorElementDelete(removedValue) {
-  $(`#attributesContainer .attribute[data-id="${removedValue}"]`).remove();
+  $(`#attributesContainer .attributes-group[data-attribute-code="${removedValue}"]`).remove();
 };
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
-  $('.attribute button').off('click').on('click', (event) => {
-    const attributeId = $(event.currentTarget).parents('.attribute').attr('data-id');
+  $('.attributes-group button[data-attribute="delete"]').off('click').on('click', (event) => {
+    const attributeId = $(event.currentTarget).parents('.attributes-group').attr('data-attribute-code');
 
     $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
     modifyAttributesListOnSelectorElementDelete(attributeId);

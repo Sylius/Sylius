@@ -883,6 +883,7 @@ sylius:
         tracked: 'Tracked'
         tracking_code: 'Tracking code'
         tracking_number: 'Tracking number'
+        translatable: 'Translatable'
         translations: 'Translations'
         type: 'Type'
         unavailable: 'Unavailable'
