@@ -34,7 +34,7 @@ from `slug` to `code`.
     bin/console doctrine:migrations:version 'CoreBundle/Migrations/Version20201208105207' --add
     ```
 
-1. The base of `Adjustment` class has changed. If you extend your adjustments already(or have them overridden by default, because of Sylius-Standard usage), you should base your Adjustment class on `AdjustmentFQCN`
+1. The base of the `Adjustment` class has changed. If you extend your adjustments already(or have them overridden by default, because of Sylius-Standard usage), you should base your Adjustment class on `Sylius\Component\Core\Model\Adjustment` instead of `Sylius\Component\Order\Model\Adjustment`.
 
     ```diff
     -       use Sylius\Component\Order\Model\Adjustment as BaseAdjustment;
