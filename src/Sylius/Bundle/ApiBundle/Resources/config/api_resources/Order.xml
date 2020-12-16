@@ -39,8 +39,7 @@
                     <attribute name="groups">order:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart</attribute>
-                </attribute>
+                    <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -306,6 +305,14 @@
                     <attribute name="summary">Applies coupon to cart</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/orders/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">cart:update</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
@@ -371,5 +378,6 @@
         </property>
         <property name="billingAddress" writable="false" />
         <property name="shippingAddress" writable="false" />
+        <property name="localeCode" writable="true" />
     </resource>
 </resources>

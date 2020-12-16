@@ -23,12 +23,19 @@ class PickupCart implements ChannelCodeAwareInterface
      */
     public $tokenValue;
 
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
+    public $localeCode;
+
     /** @var string|null */
     private $channelCode;
 
-    public function __construct(?string $tokenValue = null)
+    public function __construct(?string $tokenValue = null, ?string $localeCode = null)
     {
         $this->tokenValue = $tokenValue;
+        $this->localeCode = $localeCode;
     }
 
     public function getChannelCode(): ?string

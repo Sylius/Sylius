@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutCompleteContext implements Context
@@ -246,9 +247,9 @@ final class CheckoutCompleteContext implements Context
     /**
      * @Then my order's locale should be :locale
      */
-    public function myOrderLocaleShouldBe($locale)
+    public function myOrderLocaleShouldBe(LocaleInterface $locale): void
     {
-        Assert::true($this->completePage->hasLocale($locale));
+        Assert::true($this->completePage->hasLocale($locale->getName()));
     }
 
     /**
