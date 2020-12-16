@@ -8,7 +8,7 @@ Feature: Switching the current currency
         Given the store operates on a channel named "Web" in "EUR" currency
         And that channel allows to shop using "EUR" and "USD" currencies
 
-    @ui
+    @ui @api
     Scenario: Showing the current currency
         When I browse that channel
         Then I should shop using the "EUR" currency
