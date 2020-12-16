@@ -49,7 +49,7 @@
                 {% endif %}
                 {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
             </div>
-            <div class="attribute-input">
+            <div class="attribute-input" data-test-product-attribute-value-in-locale="{{ "%s %s"|format(form.vars.data.attribute.name, form.localeCode.vars.value) }}">
                 <div {{ 'checkbox' in form.children.value.vars.block_prefixes ? 'class="ui toggle checkbox"' : '' }}>
                     {{ form_widget(form.value) }}
                 </div>

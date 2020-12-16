@@ -78,9 +78,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function getAttributeValue(string $attribute, string $localeCode): string
     {
         $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
 
         return $this->getElement('attribute', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode])->getValue();
+    }
+
+    public function getNonTranslatableAttributeValue(string $attribute): string
+    {
+        $this->clickTabIfItsNotActive('attributes');
+
+        return $this->getElement('non_translatable_attribute', ['%attributeName%' => $attribute])->getValue();
     }
 
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
@@ -408,7 +414,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-            'attribute' => '.tab[data-tab="%localeCode%"] .attribute:contains("%attributeName%") input',
+            'attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attribute_element' => '.attribute',
             'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
             'code' => '#sylius_product_code',
@@ -421,6 +427,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
+            'non_translatable_attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'show_product_dropdown' => '.scrolling.menu',
             'show_product_single_button' => 'a:contains("Show product in shop page")',

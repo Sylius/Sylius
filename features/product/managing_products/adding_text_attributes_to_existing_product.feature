@@ -20,7 +20,7 @@ Feature: Adding attributes to an existing product
 
     @ui @javascript
     Scenario: Adding another text attribute to an existing product
-        Given this product has text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
+        Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
         And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
         And I save my changes
@@ -39,7 +39,7 @@ Feature: Adding attributes to an existing product
 
     @ui @javascript
     Scenario: Adding and removing after saving text attributes on product update page
-        Given this product has text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
+        Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
         And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
         And I save my changes

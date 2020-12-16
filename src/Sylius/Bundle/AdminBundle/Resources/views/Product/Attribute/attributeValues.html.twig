@@ -25,7 +25,7 @@
                             {% endif %}
                             {{ form.vars.label }}
                         </div>
-                        <div class="attribute-input">
+                        <div class="attribute-input" data-test-product-attribute-value-in-locale="{{ "%s %s"|format(form.vars.label, localeCode) }}">
                             {% if 'type_checkbox' in form.vars.cache_key %}
                                 <div class="ui toggle checkbox">
                                     {{ self.formField(form, count, id, '', subject, metadata.applicationName) }}
