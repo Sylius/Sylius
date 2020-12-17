@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Accessing a product which does not exist
     In order to have a good navigation
-    As a visitor
+    As a Visitor
     I want to be able to be informed that a product does not exits
 
     Background:

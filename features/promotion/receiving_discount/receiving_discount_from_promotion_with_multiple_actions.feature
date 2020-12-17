@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving discount from a promotion with multiple actions
     In order to pay less while buying goods
-    As a Customer
+    As a Visitor
     I want to receive discount for my purchase
 
     Background:

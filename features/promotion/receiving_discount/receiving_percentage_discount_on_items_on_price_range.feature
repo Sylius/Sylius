@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving percentage discount on products from specific price range
     In order to pay less while buying goods from specific price range
-    As a Customer
+    As a Visitor
     I want to receive discount for my purchase
 
     Background:
