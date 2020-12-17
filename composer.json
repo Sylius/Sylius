@@ -135,7 +135,7 @@
         "phpstan/phpstan": "0.12.56",
         "phpstan/phpstan-doctrine": "0.12.22",
         "phpunit/phpunit": "^8.5",
-        "psalm/plugin-mockery": "0.6.1",
+        "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
         "sspooky13/yaml-standards": "^5.1",
         "stripe/stripe-php": "^6.43",
