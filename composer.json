@@ -76,7 +76,7 @@
         "symfony/framework-bundle": "^4.4",
         "symfony/http-foundation": "^4.4",
         "symfony/http-kernel": "^4.4",
-        "symfony/intl": "^4.4",
+        "symfony/intl": "^5.2",
         "symfony/messenger": "^4.4",
         "symfony/monolog-bundle": "^3.5",
         "symfony/options-resolver": "^4.4",
