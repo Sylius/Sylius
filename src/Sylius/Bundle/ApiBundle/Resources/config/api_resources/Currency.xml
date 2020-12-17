@@ -16,23 +16,39 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.currency.class%" shortName="Currency">
-        <attribute name="route_prefix">admin</attribute>
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>currency:read</attribute>
+            </attribute>
+        </attribute>
 
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/currencies</attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/currencies</attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/currencies/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="route_prefix">shop</attribute>
+                <attribute name="path">/shop/currencies/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:currencies:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

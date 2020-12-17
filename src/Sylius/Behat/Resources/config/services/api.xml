@@ -39,6 +39,11 @@
             <argument>admin</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.shop.channel" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>channels</argument>
+            <argument>shop</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.admin.country" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>countries</argument>
             <argument>admin</argument>

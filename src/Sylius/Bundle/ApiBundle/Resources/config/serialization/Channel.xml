@@ -41,6 +41,7 @@
         <attribute name="baseCurrency">
             <group>channel:read</group>
             <group>channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="defaultLocale">
             <group>channel:read</group>
