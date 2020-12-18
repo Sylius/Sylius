@@ -22,16 +22,16 @@ use Webmozart\Assert\Assert;
 final class ManagingPromotionsContext implements Context
 {
     /** @var ApiClientInterface */
-    private $apiAdminClient;
+    private $client;
 
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
     public function __construct(
-        ApiClientInterface $apiAdminClient,
+        ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->apiAdminClient = $apiAdminClient;
+        $this->client = $client;
         $this->responseChecker = $responseChecker;
     }
 
@@ -41,7 +41,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iWantToBrowsePromotions(): void
     {
-        $this->apiAdminClient->index();
+        $this->client->index();
     }
 
     /**
@@ -51,7 +51,7 @@ final class ManagingPromotionsContext implements Context
     public function thereShouldBePromotion(int $amount = 1): void
     {
         Assert::same(
-            count($this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())),
+            count($this->responseChecker->getCollection($this->client->getLastResponse())),
             $amount
         );
     }
@@ -61,12 +61,13 @@ final class ManagingPromotionsContext implements Context
      */
     public function thePromotionShouldAppearInTheRegistry(string $promotionName): void
     {
-        $promotion = $this->getPromotionByPromotionNameFromResponseCollection(
-            $promotionName,
-            $this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())
-        );
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotionName
+        ));
 
-        Assert::notNull($promotion, sprintf('There is no promotion %s in registry', $promotionName));
+        Assert::notNull($returnedPromotion, sprintf('There is no promotion %s in registry', $promotionName));
     }
 
     /**
@@ -74,10 +75,12 @@ final class ManagingPromotionsContext implements Context
      */
     public function thisPromotionShouldBeCouponBased(PromotionInterface $promotion): void
     {
-        $returnedPromotion = $this->getPromotionByPromotionNameFromResponseCollection(
-            $promotion->getName(),
-            $this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())
-        );
+
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotion->getName()
+        ));
 
         Assert::true(
             $returnedPromotion['couponBased'],
@@ -88,26 +91,14 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then /^I should be able to manage coupons for (this promotion)$/
      */
-    public function iShouldBeAbleToManageCouponsForThisPromotion(PromotionInterface $promotion)
+    public function iShouldBeAbleToManageCouponsForThisPromotion(PromotionInterface $promotion): void
     {
-        $returnedPromotion = $this->getPromotionByPromotionNameFromResponseCollection(
-            $promotion->getName(),
-            $this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())
-        );
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotion->getName()
+        ));
 
         Assert::keyExists($returnedPromotion, 'coupons');
-    }
-
-    private function getPromotionByPromotionNameFromResponseCollection(
-        string $promotionName,
-        array $responseCollection
-    ): ?array {
-        foreach ($responseCollection as $promotion) {
-            if ($promotion['name'] === $promotionName) {
-                return $promotion;
-            }
-        }
-
-        return null;
     }
 }
