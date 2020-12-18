@@ -66,7 +66,7 @@ final class ManagingPromotionsContext implements Context
             $this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())
         );
 
-        Assert::notNull($promotion);
+        Assert::notNull($promotion, sprintf('There is no promotion %s in registry', $promotionName));
     }
 
     /**
@@ -79,7 +79,10 @@ final class ManagingPromotionsContext implements Context
             $this->responseChecker->getCollection($this->apiAdminClient->getLastResponse())
         );
 
-        Assert::true($returnedPromotion['couponBased']);
+        Assert::true(
+            $returnedPromotion['couponBased'],
+            sprintf('The promotion %s isn\'t coupon based', $promotion->getName())
+        );
     }
 
     /**
