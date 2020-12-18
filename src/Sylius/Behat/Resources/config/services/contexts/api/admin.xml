@@ -152,5 +152,10 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument>%sylius.model.zone_member.class%</argument>
         </service>
+
+        <service id="sylius.behat.context.api.admin.managing_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingPromotionsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin.promotion" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
     </services>
 </container>
