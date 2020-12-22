@@ -18,7 +18,7 @@
     <resource class="%sylius.model.country.class%" shortName="Country">
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>country:read</attribute>
+                <attribute>admin:country:read</attribute>
             </attribute>
         </attribute>
 
@@ -47,7 +47,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/countries</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">country:create</attribute>
+                    <attribute name="groups">admin:country:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -66,7 +66,7 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/countries/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">country:update</attribute>
+                    <attribute name="groups">admin:country:update</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

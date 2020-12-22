@@ -26,21 +26,21 @@
            <group>province:read</group>
        </attribute>
        <attribute name="code">
-           <group>country:create</group>
-           <group>country:update</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
            <group>shop:country:read</group>
            <group>province:read</group>
        </attribute>
        <attribute name="name">
-           <group>country:create</group>
-           <group>country:update</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
            <group>shop:country:read</group>
            <group>province:read</group>
            <group>province:update</group>
        </attribute>
        <attribute name="abbreviation">
-           <group>country:create</group>
-           <group>country:update</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
            <group>province:read</group>
            <group>province:update</group>
        </attribute>
