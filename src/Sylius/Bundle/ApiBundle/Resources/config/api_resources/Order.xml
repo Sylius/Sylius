@@ -107,7 +107,7 @@
                     <attribute name="groups">shop:cart:address</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:checkout:read</attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email</attribute>
@@ -127,7 +127,7 @@
                     <attribute name="groups">shop:cart:select_shipping_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:checkout:read</attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects shipping methods for particular shipment</attribute>
@@ -161,7 +161,7 @@
                     <attribute name="groups">shop:cart:select_payment_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:checkout:read</attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects payment methods for particular payment</attribute>
@@ -260,7 +260,7 @@
                     <attribute name="groups">shop:cart:complete</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:checkout:read</attribute>
+                    <attribute name="groups">shop:cart:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes checkout</attribute>

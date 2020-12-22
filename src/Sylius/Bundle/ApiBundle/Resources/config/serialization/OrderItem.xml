@@ -20,7 +20,7 @@
             <group>shop:order:account:read</group>
             <group>order_item:read</group>
             <group>admin:order:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
         <attribute name="code">
             <group>order_item:read</group>
@@ -33,13 +33,13 @@
             <group>shop:order:account:read</group>
             <group>order_item:read</group>
             <group>admin:order:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
         <attribute name="quantity">
             <group>shop:order:account:read</group>
             <group>order_item:read</group>
             <group>admin:order:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
         <attribute name="unitPrice">
             <group>order_item:read</group>
@@ -65,7 +65,7 @@
         <attribute name="productName">
             <group>shop:order:account:read</group>
             <group>order_item:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
             <group>admin:order:read</group>
         </attribute>
         <attribute name="subtotal">

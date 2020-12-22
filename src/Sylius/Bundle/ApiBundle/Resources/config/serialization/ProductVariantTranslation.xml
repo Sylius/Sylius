@@ -9,19 +9,19 @@
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
             <group>product_variant:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
         <attribute name="name">
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
             <group>product_variant:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
         <attribute name="locale">
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
             <group>product_variant:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
     </class>
 </serializer>

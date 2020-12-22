@@ -19,7 +19,7 @@
         <attribute name="id">
             <group>shipment:read</group>
             <group>admin:order:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="createdAt">
@@ -37,7 +37,7 @@
         <attribute name="method">
             <group>shop:order:account:read</group>
             <group>shipment:read</group>
-            <group>shop:checkout:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="units">
