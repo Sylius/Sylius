@@ -47,7 +47,7 @@
                 <attribute name="route_prefix">shop</attribute>
                 <attribute name="path">/shop/currencies/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:currency:read</attribute>
+                    <attribute name="groups">shop:currency:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

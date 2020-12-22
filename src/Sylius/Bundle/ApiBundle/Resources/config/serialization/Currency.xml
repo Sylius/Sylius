@@ -18,16 +18,16 @@
     <class name="Sylius\Component\Currency\Model\Currency">
         <attribute name="id">
             <group>admin:currency:read</group>
-            <group>admin:currency:read</group>
+            <group>shop:currency:read</group>
         </attribute>
        <attribute name="code">
            <group>admin:currency:read</group>
-           <group>admin:currency:read</group>
+           <group>shop:currency:read</group>
            <group>shop:channel:read</group>
        </attribute>
         <attribute name="name">
             <group>admin:currency:read</group>
-            <group>admin:currency:read</group>
+            <group>shop:currency:read</group>
         </attribute>
     </class>
 </serializer>
