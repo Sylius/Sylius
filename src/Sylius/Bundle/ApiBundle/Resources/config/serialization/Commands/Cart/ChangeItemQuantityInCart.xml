@@ -17,11 +17,11 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart">
         <attribute name="orderItemId">
-            <group>cart:change_quantity</group>
+            <group>shop:cart:change_quantity</group>
         </attribute>
 
         <attribute name="newQuantity">
-            <group>cart:change_quantity</group>
+            <group>shop:cart:change_quantity</group>
         </attribute>
     </class>
 </serializer>

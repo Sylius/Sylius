@@ -23,7 +23,7 @@
             <group>shop:order:account:read</group>
             <group>payment_method:read</group>
             <group>payment:read</group>
-            <group>checkout:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
         <attribute name="code">
             <group>payment_method:read</group>

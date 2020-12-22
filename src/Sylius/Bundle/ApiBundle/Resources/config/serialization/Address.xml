@@ -29,18 +29,18 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="lastName">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="phoneNumber">
@@ -57,53 +57,53 @@
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="street">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="postcode">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="countryCode">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="provinceCode">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
             <group>shop:address:update</group>
         </attribute>
         <attribute name="provinceName">
             <group>admin:address:read</group>
             <group>shop:address:read</group>
             <group>shop:order:account:read</group>
-            <group>cart:address</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:cart:address</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
             <group>shop:address:update</group>
         </attribute>
     </class>

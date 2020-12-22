@@ -18,120 +18,120 @@
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="number">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="currencyCode">
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="channel">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="customer">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="payments">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="shipments">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="checkoutState">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="state">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="paymentState">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="shippingState">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="total">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="orderPromotionTotal">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="tokenValue">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="items">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="notes">
-            <group>order:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="taxTotal">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="localeCode">
             <group>shop:order:account:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
-            <group>cart:update</group>
-            <group>order:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
+            <group>admin:cart:update</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="shippingTotal">
             <group>shop:order:account:read</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="shippingAddress">
             <group>shop:order:account:read</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="billingAddress">
             <group>shop:order:account:read</group>
-            <group>checkout:read</group>
-            <group>order:read</group>
+            <group>shop:checkout:read</group>
+            <group>admin:order:read</group>
         </attribute>
     </class>
 </serializer>

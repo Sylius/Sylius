@@ -18,8 +18,8 @@
     <class name="Sylius\Component\Core\Model\Shipment">
         <attribute name="id">
             <group>shipment:read</group>
-            <group>order:read</group>
-            <group>checkout:read</group>
+            <group>admin:order:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="createdAt">
@@ -37,7 +37,7 @@
         <attribute name="method">
             <group>shop:order:account:read</group>
             <group>shipment:read</group>
-            <group>checkout:read</group>
+            <group>shop:checkout:read</group>
         </attribute>
 
         <attribute name="units">
