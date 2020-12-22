@@ -18,7 +18,7 @@
     <resource class="%sylius.model.currency.class%" shortName="Currency">
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>currency:read</attribute>
+                <attribute>admin:currency:read</attribute>
             </attribute>
         </attribute>
 
@@ -47,7 +47,7 @@
                 <attribute name="route_prefix">shop</attribute>
                 <attribute name="path">/shop/currencies/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:currencies:read</attribute>
+                    <attribute name="groups">admin:currency:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
