@@ -2,6 +2,8 @@ name: Application
 
 on:
     push:
+        branches-ignore:
+            - 'dependabot/**'
         paths-ignore:
             - "docs/**"
             - "*.md"
