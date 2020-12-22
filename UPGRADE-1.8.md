@@ -1,3 +1,23 @@
+# UPGRADE FROM `v1.8.X` TO `v1.9.0`
+ 
+1. To have better control over the serialization process, we introduced `shop` and `admin` prefixes to names of serialization groups on `src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/*` and `src/Sylius/Bundle/ApiBundle/Resources/config/serialization/*`. 
+Several additional serialization groups have been rephrased, to improve readability and predictability of them.
+If you are using they on your custom entity `api_resource` configuration or serialization groups, you should check if one of these changes may affect on your app. If yes, change all occurs by this pattern:
+
+    `admin_user:create` changed to: `admin:admin_user:create`
+    `admin_user:read` changed to: `admin:admin_user:read`
+    `admin_user:update` changed to: `admin:admin_user:update`
+    `avatar_image:read` changed to: `admin:avatar_image:read`
+    `channel:create` changed to: `admin:channel:create`
+    `channel:read` changed to: `admin:channel:read`
+    `country:read` changed to: `admin:country:read`
+    `currency:read` changed to: `admin:currency:read`
+    `customer:password:write` changed to: `shop:customer:password:update`
+    `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
+    `customer:update` changed to: `shop:customer:update`
+    `shop:currencies:read` changed to: `shop:currency:read`
+    `shop:customer:write` changed to: `shop:customer:create`
+
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
 1. Change configuration of new ApiBundle in your `config/packages/security.yaml` file:
