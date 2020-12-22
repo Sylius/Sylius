@@ -18,7 +18,7 @@
     <resource class="%sylius.model.channel.class%" shortName="Channel">
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>channel:read</attribute>
+                <attribute>admin:channel:read</attribute>
             </attribute>
         </attribute>
 
@@ -32,7 +32,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/channels</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">channel:create</attribute>
+                    <attribute name="groups">admin:channel:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
