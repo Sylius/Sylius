@@ -6,6 +6,7 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Templating\FilterExtension as BaseFilterExtension;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class FilterExtension extends BaseFilterExtension
 {
@@ -19,13 +20,18 @@ final class FilterExtension extends BaseFilterExtension
         parent::__construct($cache);
     }
 
-    public function filter($path, $filter, array $config = [], $resolver = null)
-    {
+    public function filter(
+        $path,
+        $filter,
+        array $config = [],
+        $resolver = null,
+        $referenceType = UrlGeneratorInterface::ABSOLUTE_URL
+    ) {
         if (!$this->canImageBeFiltered($path)) {
             return $this->imagesPath.$path;
         }
 
-        return parent::filter($path, $filter, $config, $resolver);
+        return parent::filter($path, $filter, $config, $resolver, $referenceType);
     }
 
     private function canImageBeFiltered(string $path): bool
