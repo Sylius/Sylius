@@ -33,6 +33,9 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
 
+parameters:
+    sylius_admin.path_name: admin
+
 sylius_grid:
     templates:
         action:
