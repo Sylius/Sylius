@@ -61,10 +61,10 @@ class Kernel extends BaseKernel
         }
     }
 
-    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader): void
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $c->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
-        $c->setParameter('container.dumper.inline_class_loader', true);
+        $container->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
+        $container->setParameter('container.dumper.inline_class_loader', true);
         $confDir = $this->getProjectDir() . '/config';
 
         $loader->load($confDir . '/{packages}/*' . self::CONFIG_EXTS, 'glob');
