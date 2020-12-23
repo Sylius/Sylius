@@ -2,6 +2,8 @@ name: Packages
 
 on:
     push:
+        branches-ignore:
+            - 'dependabot/**'
         paths:
             - "src/Sylius/Bundle/**"
             - "src/Sylius/Component/**"
@@ -14,6 +16,7 @@ on:
     schedule:
         -
             cron: "0 1 * * 6" # Run at 1am every Saturday
+    workflow_dispatch: ~ 
 
 jobs:
     list:
