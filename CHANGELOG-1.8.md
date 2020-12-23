@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.7 (2020-12-23)
+
+#### Details
+
+- [#12067](https://github.com/Sylius/Sylius/issues/12067) [UI] change image dimensions ([@SirDomin](https://github.com/SirDomin))
+- [#12110](https://github.com/Sylius/Sylius/issues/12110) Add behat scenario with free order ([@clem21](https://github.com/clem21))
+- [#12155](https://github.com/Sylius/Sylius/issues/12155) [CI] Add timeouts to GitHub Actions ([@pamil](https://github.com/pamil))
+- [#12156](https://github.com/Sylius/Sylius/issues/12156) Update resource_layer.rst ([@abdounikarim](https://github.com/abdounikarim))
+- [#12163](https://github.com/Sylius/Sylius/issues/12163) [CI] Switch from ubuntu-latest to ubuntu-18.04 ([@pamil](https://github.com/pamil))
+- [#12169](https://github.com/Sylius/Sylius/issues/12169) [CI] Ignore dependabot/* branch pushes, build PRs only ([@pamil](https://github.com/pamil))
+- [#12185](https://github.com/Sylius/Sylius/issues/12185) [Bugfix][1.8] `Kernel::configureContainer()` should match it's parent signature ([@stloyd](https://github.com/stloyd))
+- [#12187](https://github.com/Sylius/Sylius/issues/12187) [BugFix] Add missing argument in metchod ([@Tomanhez](https://github.com/Tomanhez))
+- [#12189](https://github.com/Sylius/Sylius/issues/12189) Notify about failed jobs ([@pamil](https://github.com/pamil))
+
 ## v1.8.6 (2020-12-09)
 
 #### Details
