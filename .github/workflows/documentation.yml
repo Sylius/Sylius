@@ -39,7 +39,7 @@ jobs:
     notify-about-build-failure:
         runs-on: ubuntu-18.04
 
-        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release' || github.event_name == 'workflow_dispatch')
 
         needs: [test]
 
@@ -49,32 +49,7 @@ jobs:
 
         steps:
             -   
-                name: "Process data"
-                id: process-data
-                shell: bash
-                run: |
-                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
-                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
-
-            -   
                 name: "Notify on Slack"
-                uses: edge/simple-slack-notify@master
+                uses: SyliusLabs/SlackBuildNotificationAction@main
                 env:
                     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-                if: env.SLACK_WEBHOOK_URL != null
-                with:
-                    channel: "#builds"
-                    username: "GitHub Actions"
-                    text: |
-                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
-
-                        _ _ _ _ _ _ _
-                    color: "danger"
-                    fields: |
-                        [
-                            { "title": "Repository", "value": "<https://github.com/${{ github.repository }} | ${{ github.repository }}>", "short": true },
-                            { "title": "Action", "value": "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }}>", "short": true },
-                            { "title": "Reference", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.process-data.outputs.branch }} | ${{ steps.process-data.outputs.branch }}>", "short": true },
-                            { "title": "Commit", "value": "<https://github.com/${{ github.repository }}/commit/${{ github.sha }} | ${{ steps.process-data.outputs.sha }}>", "short": true },
-                            { "title": "Event", "value": "${{ github.event_name }}", "short": true }
-                        ]
