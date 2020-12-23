@@ -218,7 +218,7 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder(): void
     {
-        $notes = isset($this->content['additionalNote']) ? $this->content['additionalNote'] : null;
+        $notes = $this->content['additionalNote'] ?? null;
 
         $this->client->request(
             Request::METHOD_PATCH,

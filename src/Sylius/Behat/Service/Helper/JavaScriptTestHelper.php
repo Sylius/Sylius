@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Helper;
@@ -33,7 +42,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         string $message,
         ?int $timeout = null
     ): void {
-        $callable = function() use ($notificationChecker, $message, $type): void {
+        $callable = function () use ($notificationChecker, $message, $type): void {
             $notificationChecker->checkNotification($message, $type);
         };
 
@@ -42,7 +51,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 
     public function waitUntilPageOpens(PageInterface $page, ?array $options = [], ?int $timeout = null): void
     {
-        $callable = function() use ($page, $options): void {
+        $callable = function () use ($page, $options): void {
             $page->open($options);
         };
 

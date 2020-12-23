@@ -96,11 +96,7 @@ final class SyliusAdminApiExtensionTest extends AbstractExtensionTestCase
     private function customLoad(): void
     {
         $configurationValues =
-            ['sylius_admin_api' =>
-                ['resources' =>
-                    ['api_user' =>
-                        ['classes' =>
-                            ['model' => 'Sylius\Component\Core\Model\AdminUser'],
+            ['sylius_admin_api' => ['resources' => ['api_user' => ['classes' => ['model' => 'Sylius\Component\Core\Model\AdminUser'],
                         ],
                     ],
                 ],

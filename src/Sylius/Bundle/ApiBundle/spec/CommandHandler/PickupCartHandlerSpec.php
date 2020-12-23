@@ -36,7 +36,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator
-
     ): void {
         $this->beConstructedWith(
             $cartFactory,
