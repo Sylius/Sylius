@@ -17,16 +17,16 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\RegisterShopUser">
         <attribute name="firstName">
-            <group>shop:customer:write</group>
+            <group>shop:customer:create</group>
         </attribute>
         <attribute name="lastName">
-            <group>shop:customer:write</group>
+            <group>shop:customer:create</group>
         </attribute>
         <attribute name="email">
-            <group>shop:customer:write</group>
+            <group>shop:customer:create</group>
         </attribute>
         <attribute name="password">
-            <group>shop:customer:write</group>
+            <group>shop:customer:create</group>
         </attribute>
     </class>
 </serializer>

@@ -21,7 +21,7 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>customer:read</attribute>
+                <attribute>admin:customer:read</attribute>
             </attribute>
         </attribute>
 
@@ -33,7 +33,7 @@
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:write</attribute>
+                    <attribute name="groups">shop:customer:create</attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
@@ -45,16 +45,15 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
-                <attribute name="groups">
-                    <attribute>customer:read</attribute>
-                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>
-                <attribute name="groups">
-                    <attribute>customer:read</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:customer:read</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -65,7 +64,7 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">customer:password:write</attribute>
+                    <attribute name="groups">shop:customer:password:update</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Change password for logged in customer</attribute>
@@ -76,7 +75,7 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">customer:update</attribute>
+                    <attribute name="groups">shop:customer:update</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

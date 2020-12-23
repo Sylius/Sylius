@@ -17,28 +17,28 @@
 >
     <class name="Sylius\Component\Addressing\Model\Country">
         <attribute name="id">
-            <group>country:read</group>
+            <group>admin:country:read</group>
         </attribute>
         <attribute name="createdAt">
-           <group>country:read</group>
+           <group>admin:country:read</group>
        </attribute>
         <attribute name="updatedAt">
-           <group>country:read</group>
+           <group>admin:country:read</group>
        </attribute>
        <attribute name="code">
-           <group>country:read</group>
-           <group>country:create</group>
+           <group>admin:country:read</group>
+           <group>admin:country:create</group>
            <group>shop:country:read</group>
        </attribute>
        <attribute name="enabled">
-           <group>country:read</group>
-           <group>country:create</group>
-           <group>country:update</group>
+           <group>admin:country:read</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
        </attribute>
        <attribute name="provinces">
-           <group>country:read</group>
-           <group>country:create</group>
-           <group>country:update</group>
+           <group>admin:country:read</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
            <group>shop:country:read</group>
        </attribute>
     </class>

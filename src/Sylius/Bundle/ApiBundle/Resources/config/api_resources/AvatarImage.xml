@@ -20,7 +20,7 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>avatar_image:read</attribute>
+                <attribute>admin:avatar_image:read</attribute>
             </attribute>
         </attribute>
 
