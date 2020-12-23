@@ -20,11 +20,11 @@ use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepositor
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface

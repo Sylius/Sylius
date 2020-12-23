@@ -116,6 +116,7 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
             $this->filterCart($queryBuilder, $rootAlias);
         }
     }
+
     private function filterCart(QueryBuilder $queryBuilder, string $rootAlias): void
     {
         $queryBuilder

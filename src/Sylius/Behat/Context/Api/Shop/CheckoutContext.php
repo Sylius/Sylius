@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -31,7 +32,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
-use Sylius\Behat\Client\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -339,7 +339,7 @@ final class CheckoutContext implements Context
             'orders',
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('shipments/%s' , $this->getCart()['shipments'][0]['id'])
+            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id'])
         );
 
         $request->setContent(['shippingMethodCode' => $shippingMethod->getCode()]);
@@ -708,6 +708,7 @@ final class CheckoutContext implements Context
             );
 
             Assert::same($discount, (int) $discountTotal);
+
             return;
         }
 
@@ -793,7 +794,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(string $fullName, string ...$addressTypes): void
     {
-        foreach($addressTypes as $addressType){
+        foreach ($addressTypes as $addressType) {
             $this->hasFullNameInAddress($fullName, $addressType);
         }
     }
@@ -833,7 +834,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-    * @When /^I try to remove (product "[^"]+") from the (cart)$/
+     * @When /^I try to remove (product "[^"]+") from the (cart)$/
      */
     public function iTryToRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
@@ -960,7 +961,7 @@ final class CheckoutContext implements Context
             'orders',
             $cart['tokenValue'],
             HTTPRequest::METHOD_GET,
-            sprintf('shipments/%s/methods',$cart['shipments'][0]['id'])
+            sprintf('shipments/%s/methods', $cart['shipments'][0]['id'])
         );
 
         $this->ordersClient->executeCustomRequest($request);
@@ -1008,7 +1009,7 @@ final class CheckoutContext implements Context
             'orders',
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_GET,
-            sprintf('payments/%s/methods',$order->getLastPayment()->getId())
+            sprintf('payments/%s/methods', $order->getLastPayment()->getId())
         );
 
         $this->ordersClient->executeCustomRequest($request);

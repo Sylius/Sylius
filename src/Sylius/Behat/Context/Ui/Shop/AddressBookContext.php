@@ -229,6 +229,7 @@ final class AddressBookContext implements Context
 
         Assert::true($this->addressBookIndexPage->addressOfContains($fullName, $provinceName));
     }
+
     /**
      * @Then this address should be assigned to :fullName
      * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/

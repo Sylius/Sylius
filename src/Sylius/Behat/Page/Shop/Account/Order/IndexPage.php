@@ -17,7 +17,6 @@ use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface

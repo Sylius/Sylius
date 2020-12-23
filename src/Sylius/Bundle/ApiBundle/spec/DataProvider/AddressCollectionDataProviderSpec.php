@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
-
 final class AddressCollectionDataProviderSpec extends ObjectBehavior
 {
     function let(

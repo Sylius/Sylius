@@ -40,7 +40,8 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new class() extends Constraint {}])
+            ->during('validate', [new CompleteOrder(), new class() extends Constraint {
+            }])
         ;
     }
 
@@ -48,7 +49,8 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {}])
+            ->during('validate', ['', new class() extends Constraint {
+            }])
         ;
     }
 

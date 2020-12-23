@@ -14,12 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Persistence\ObjectManager;
-use Sylius\Behat\Client\ApiSecurityClientInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\ShopBundle\EventListener\UserRegistrationListener;
-use Sylius\Component\Core\Model\ShopUser;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Webmozart\Assert\Assert;
 
@@ -224,7 +218,7 @@ final class RegistrationContext implements Context
             'firstName' => 'First',
             'lastName' => 'Last',
             'email' => $email,
-            'password' => $password
+            'password' => $password,
         ];
     }
 }

@@ -156,7 +156,7 @@ final class CustomerContext implements Context
         $this->customerClient->setRequestData([
             'currentPassword' => $oldPassword,
             'newPassword' => $newPassword,
-            'confirmNewPassword' => $newPassword
+            'confirmNewPassword' => $newPassword,
         ]);
     }
 

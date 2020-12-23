@@ -166,7 +166,6 @@ final class OrderContext implements Context
 
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
-
                 return;
             }
         }

@@ -45,11 +45,13 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {}])
+            ->during('validate', ['', new class() extends Constraint {
+            }])
         ;
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void {
+    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
+    {
         $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
             private $orderTokenValue;
 
@@ -112,8 +114,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation(
-                "sylius.order.shipping_method_eligibility",
-                ["%shippingMethodName%" => "InPost"]
+                'sylius.order.shipping_method_eligibility',
+                ['%shippingMethodName%' => 'InPost']
             )
             ->shouldBeCalled()
         ;
@@ -148,8 +150,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation(
-                "sylius.order.shipping_method_eligibility",
-                ["%shippingMethodName%" => "InPost"]
+                'sylius.order.shipping_method_eligibility',
+                ['%shippingMethodName%' => 'InPost']
             )
             ->shouldNotBeCalled()
         ;

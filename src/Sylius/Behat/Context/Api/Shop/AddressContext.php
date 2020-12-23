@@ -379,7 +379,7 @@ final class AddressContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->addressClient->getLastResponse());
 
-        Assert::same(sizeof($response['violations']), $expectedCount);
+        Assert::same(count($response['violations']), $expectedCount);
     }
 
     /**
@@ -507,7 +507,7 @@ final class AddressContext implements Context
 
         $addresses = $this->responseChecker->getCollection($this->addressClient->index());
         /** @var AddressInterface $address */
-        foreach ($addresses as $address){
+        foreach ($addresses as $address) {
             if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
                 return $address['@id'];
             }

@@ -39,7 +39,6 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     /** @var PromotionCouponEligibilityCheckerInterface */
     private $promotionCouponChecker;
 
-
     public function __construct(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderRepositoryInterface $orderRepository,
@@ -59,7 +58,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 
-       /** @var OrderInterface $cart*/
+        /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
         $cart->setPromotionCoupon($promotionCoupon);
@@ -69,6 +68,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
                 ->atPath('couponCode')
                 ->addViolation()
             ;
+
             return;
         }
 

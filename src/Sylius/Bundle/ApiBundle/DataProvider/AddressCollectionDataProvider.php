@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
 /** @experimental */
-final class AddressCollectionDataProvider implements CollectionDataProviderInterface,RestrictedDataProviderInterface
+final class AddressCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var AddressRepositoryInterface */
     private $addressRepository;

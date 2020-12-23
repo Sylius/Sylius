@@ -42,11 +42,13 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new class() extends Constraint {}])
+            ->during('validate', ['', new class() extends Constraint {
+            }])
         ;
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void {
+    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
+    {
         $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
             private $orderTokenValue;
 
@@ -108,8 +110,8 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation(
-                "sylius.order.payment_method_eligibility",
-                ["%paymentMethodName%" => 'bank transfer']
+                'sylius.order.payment_method_eligibility',
+                ['%paymentMethodName%' => 'bank transfer']
             )
             ->shouldBeCalled()
         ;
@@ -142,8 +144,8 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation(
-                "sylius.order.payment_method_eligibility",
-                ["%paymentMethodName%" => 'bank transfer']
+                'sylius.order.payment_method_eligibility',
+                ['%paymentMethodName%' => 'bank transfer']
             )
             ->shouldNotBeCalled()
         ;

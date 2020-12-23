@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
-use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
+use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

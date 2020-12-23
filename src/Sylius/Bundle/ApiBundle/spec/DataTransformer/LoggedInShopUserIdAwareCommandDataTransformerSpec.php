@@ -18,10 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBehavior

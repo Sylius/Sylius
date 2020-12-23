@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller\Payment;
 
 use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

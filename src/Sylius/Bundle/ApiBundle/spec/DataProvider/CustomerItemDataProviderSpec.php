@@ -26,7 +26,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext, CustomerRepositoryInterface $customerRepository): void
     {
-     $this->beConstructedWith($userContext, $customerRepository);
+        $this->beConstructedWith($userContext, $customerRepository);
     }
 
     function it_supports_only_customer(): void
@@ -40,7 +40,6 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         AdminUserInterface $user,
         CustomerRepositoryInterface $customerRepository,
         CustomerInterface $customer
-
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -63,7 +62,6 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         CustomerRepositoryInterface $customerRepository
-
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -87,7 +85,6 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         CustomerRepositoryInterface $customerRepository
-
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);

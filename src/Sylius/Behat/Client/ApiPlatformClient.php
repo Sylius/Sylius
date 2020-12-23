@@ -181,7 +181,7 @@ final class ApiPlatformClient implements ApiClientInterface
     public function buildCustomUpdateRequest(string $id, string $customSuffix): void
     {
         $this->request = Request::update(
-            $this->section, 
+            $this->section,
             $this->resource,
             sprintf('%s/%s', $id, $customSuffix),
             $this->authorizationHeader,

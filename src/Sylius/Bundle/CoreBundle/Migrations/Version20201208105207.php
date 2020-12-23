@@ -15,12 +15,10 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class Version20201208105207 extends AbstractMigration
 {
-    /** @var array $shippingName */
+    /** @var array */
     private $shippingName = [];
 
     public function getDescription(): string
@@ -41,7 +39,7 @@ final class Version20201208105207 extends AbstractMigration
 
             $this->updateAdjustment(
                 (int) $adjustment['id'],
-                isset($adjustment['shipping_id']) ? $adjustment['shipping_id'] : 'NULL',
+                $adjustment['shipping_id'] ?? 'NULL',
                 $this->getParsedDetails(['taxRateCode' => $adjustment['tax_rate_code'], 'taxRateName' => $adjustment['tax_rate_name'], 'taxRateAmount' => ($adjustment['tax_rate_amount'] ? (float) $adjustment['tax_rate_amount'] : null), 'shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $this->getShippingMethodName($adjustment['shipment_code'])])
             );
         }
@@ -66,7 +64,7 @@ final class Version20201208105207 extends AbstractMigration
         /** @var array $parsedDetails */
         $parsedDetails = [];
 
-        foreach ($details as $key=>$value) {
+        foreach ($details as $key => $value) {
             if ($value !== null) {
                 $parsedDetails[$key] = $value;
             }
@@ -87,7 +85,7 @@ final class Version20201208105207 extends AbstractMigration
 
     private function getShipmentAdjustmentsWithData(): array
     {
-       return $this->connection->fetchAllAssociative(
+        return $this->connection->fetchAllAssociative(
             '
                 SELECT adjustment.id, adjustment.label, tax_rate.code as tax_rate_code, tax_rate.name as tax_rate_name, tax_rate.amount as tax_rate_amount, adjustment.order_id, shipment.id as shipping_id, shipment.method_id, shipping_method.code AS shipment_code
                 FROM sylius_adjustment adjustment

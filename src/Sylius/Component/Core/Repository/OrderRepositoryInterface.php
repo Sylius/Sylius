@@ -17,8 +17,8 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface

@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;

@@ -21,7 +21,6 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class CountryCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface

@@ -51,7 +51,8 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_is_not_of_expected_type(): void
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', ['', new class() extends Constraint {}]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('validate', ['', new class() extends Constraint {
+        }]);
     }
 
     function it_does_not_add_violation_if_promotion_coupon_is_eligible(

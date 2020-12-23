@@ -135,7 +135,7 @@ final class ManagingShippingMethodsContext implements Context
             'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
             'zone' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')),
             'calculator' => 'Flat rate per shipment',
-            'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]]
+            'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]],
         ]);
     }
 

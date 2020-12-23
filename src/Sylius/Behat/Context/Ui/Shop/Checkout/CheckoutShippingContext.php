@@ -214,6 +214,7 @@ final class CheckoutShippingContext implements Context
     public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
     {
         $this->selectShippingPage->tryToOpen();
+
         try {
             $this->selectShippingPage->nextStep();
         } catch (ElementNotFoundException $exception) {

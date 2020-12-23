@@ -81,7 +81,7 @@ final class CheckoutContext implements Context
         $command->setOrderTokenValue($cartToken);
         $this->commandBus->dispatch($command);
 
-       $this->completeCheckout($cart);
+        $this->completeCheckout($cart);
     }
 
     /**

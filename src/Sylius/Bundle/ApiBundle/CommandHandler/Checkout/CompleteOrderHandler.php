@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Component\Core\Model\OrderInterface;

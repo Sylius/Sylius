@@ -15,9 +15,6 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartTokenContext implements Context
 {

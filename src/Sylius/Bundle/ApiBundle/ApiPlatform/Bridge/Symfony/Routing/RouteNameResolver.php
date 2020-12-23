@@ -56,8 +56,7 @@ final class RouteNameResolver implements RouteNameResolverInterface
             ) {
                 if (
                     OperationType::SUBRESOURCE === $operationType &&
-                    false === $this->isSameSubresource($context, $route->getDefault('_api_subresource_context')))
-                {
+                    false === $this->isSameSubresource($context, $route->getDefault('_api_subresource_context'))) {
                     continue;
                 }
 

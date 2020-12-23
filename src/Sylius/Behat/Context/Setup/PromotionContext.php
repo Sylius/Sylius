@@ -550,7 +550,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") off on the customer's (\d)(?:st|nd|rd|th) order$/
      */
-    public function itGivesPercentageOffCustomersNthOrder(PromotionInterface $promotion, float $discount,int $nth): void
+    public function itGivesPercentageOffCustomersNthOrder(PromotionInterface $promotion, float $discount, int $nth): void
     {
         $rule = $this->ruleFactory->createNthOrder($nth);
 

@@ -43,7 +43,7 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
         Assert::notNull($order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]));
 
         /** @var PaymentInterface $payment */
-        foreach($order->getPayments() as $payment) {
+        foreach ($order->getPayments() as $payment) {
             if (!$payment->getMethod()->isEnabled()) {
                 $this->context->addViolation(
                     $constraint->message,

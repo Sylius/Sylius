@@ -370,6 +370,7 @@ final class CheckoutCompleteContext implements Context
     public function iShouldNotBeAbleToProceedCheckoutCompleteStep(): void
     {
         $this->completePage->tryToOpen();
+
         try {
             $this->completePage->confirmOrder();
         } catch (ElementNotFoundException $exception) {

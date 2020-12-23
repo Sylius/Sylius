@@ -160,6 +160,7 @@ final class CheckoutPaymentContext implements Context
     public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->tryToOpen();
+
         try {
             $this->selectPaymentPage->nextStep();
         } catch (ElementNotFoundException $exception) {

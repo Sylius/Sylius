@@ -19,8 +19,7 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 class PickupCart implements ChannelCodeAwareInterface
 {
     /** @var string|null
-     * @psalm-immutable
-     */
+     * @psalm-immutable */
     public $tokenValue;
 
     /**

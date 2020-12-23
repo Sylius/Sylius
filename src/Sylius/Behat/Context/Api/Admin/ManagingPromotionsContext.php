@@ -75,7 +75,6 @@ final class ManagingPromotionsContext implements Context
      */
     public function thisPromotionShouldBeCouponBased(PromotionInterface $promotion): void
     {
-
         $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'name',

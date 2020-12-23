@@ -93,7 +93,6 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames): void
     {
-
         $response = $this->responseChecker->getResponseContent($this->client->getResponse());
         $taxonNames = array_column($response, 'name');
 

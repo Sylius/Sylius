@@ -18,14 +18,16 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class OrderEmailManagerTest extends KernelTestCase
 {
     private const RECIPIENT_EMAIL = 'test@example.com';
+
     private const LOCALE_CODE = 'en_US';
+
     private const ORDER_NUMBER = '#000001';
 
     /**

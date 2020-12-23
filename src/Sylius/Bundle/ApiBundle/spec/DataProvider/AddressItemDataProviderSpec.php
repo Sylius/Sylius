@@ -63,7 +63,6 @@ final class AddressItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         AdminUserInterface $adminUser,
         AddressInterface $address
-
     ) {
         $userContext->getUser()->willReturn($adminUser);
 

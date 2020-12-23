@@ -15,9 +15,9 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
