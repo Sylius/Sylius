@@ -94,7 +94,7 @@
         "symfony/security-csrf": "^4.4",
         "symfony/security-guard": "^4.4",
         "symfony/security-http": "^4.4",
-        "symfony/serializer": "^4.4",
+        "symfony/serializer": "^5.2",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^4.4",
         "symfony/thanks": "^1.2",
