@@ -27,7 +27,6 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface as VariantUpdatePageInterface;
-use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;

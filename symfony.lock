@@ -40,6 +40,9 @@
     "coduo/php-to-string": {
         "version": "3.0.0"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.1"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -143,14 +146,8 @@
     "egulias/email-validator": {
         "version": "2.1.19"
     },
-    "ergebnis/composer-normalize": {
-        "version": "2.5.1"
-    },
-    "ergebnis/json-normalizer": {
-        "version": "0.12.0"
-    },
-    "ergebnis/json-printer": {
-        "version": "3.0.2"
+    "fakerphp/faker": {
+        "version": "v1.13.0"
     },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
@@ -215,9 +212,6 @@
             "ref": "cad41ef93d6150067ae2bb3c7fd729492dff6f0a"
         }
     },
-    "fzaninotto/faker": {
-        "version": "v1.9.1"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
     },
@@ -272,9 +266,6 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
-    "justinrainbow/json-schema": {
-        "version": "5.2.10"
-    },
     "knplabs/gaufrette": {
         "version": "v0.8.3"
     },
@@ -287,8 +278,20 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
     },
+    "laminas/laminas-code": {
+        "version": "3.5.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
+    },
+    "lcobucci/clock": {
+        "version": "2.0.0"
     },
     "lcobucci/jwt": {
         "version": "3.3.1"
@@ -334,9 +337,6 @@
             "version": "1.8",
             "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
         }
-    },
-    "localheinz/diff": {
-        "version": "1.0.1"
     },
     "marcj/topsort": {
         "version": "1.1.0"
@@ -389,9 +389,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.6.0"
-    },
-    "ocramius/package-versions": {
-        "version": "1.5.1"
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
@@ -1042,20 +1039,11 @@
     "symplify/package-builder": {
         "version": "8.2.21"
     },
-    "symplify/parameter-name-guard": {
-        "version": "v8.2.1"
-    },
-    "symplify/phpstan-extensions": {
-        "version": "v8.1.19"
-    },
     "symplify/set-config-resolver": {
         "version": "8.2.21"
     },
     "symplify/smart-file-system": {
         "version": "8.2.21"
-    },
-    "symplify/symplify-kernel": {
-        "version": "8.3.48"
     },
     "textalk/websocket": {
         "version": "1.2.0"
@@ -1081,11 +1069,11 @@
     "vimeo/psalm": {
         "version": "3.11.6"
     },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
+    },
     "webmozart/assert": {
         "version": "1.9.1"
-    },
-    "webmozart/glob": {
-        "version": "4.1.0"
     },
     "webmozart/path-util": {
         "version": "2.3.0"

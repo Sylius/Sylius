@@ -145,6 +145,7 @@
         "symfony/dotenv": "^4.4",
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4",
+        "symplify/package-builder": "^8.0 <8.3",
         "vimeo/psalm": "4.1.1"
     },
     "replace": {

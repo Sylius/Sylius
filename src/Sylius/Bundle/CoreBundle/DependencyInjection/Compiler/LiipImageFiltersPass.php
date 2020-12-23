@@ -31,7 +31,7 @@ final class LiipImageFiltersPass implements CompilerPassInterface
         $svgAwareFilterExtensionDefinition = new Definition(FilterExtension::class);
         $svgAwareFilterExtensionDefinition->setArguments([
             '/media/image/',
-            new Reference('liip_imagine.cache.manager')
+            new Reference('liip_imagine.cache.manager'),
         ]);
         $svgAwareFilterExtensionDefinition->addTag('twig.extension');
         $container->setDefinition('liip_imagine.templating.filter_extension', $svgAwareFilterExtensionDefinition);
