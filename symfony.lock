@@ -55,9 +55,6 @@
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
     },
-    "dnoegel/php-xdg-base-dir": {
-        "version": "v0.1.1"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -287,8 +284,20 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
     },
+    "laminas/laminas-code": {
+        "version": "3.5.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "lchrusciel/api-test-case": {
         "version": "v5.0.0"
+    },
+    "lcobucci/clock": {
+        "version": "2.0.0"
     },
     "lcobucci/jwt": {
         "version": "3.3.1"
@@ -1054,9 +1063,6 @@
     "symplify/smart-file-system": {
         "version": "8.2.21"
     },
-    "symplify/symplify-kernel": {
-        "version": "8.3.48"
-    },
     "textalk/websocket": {
         "version": "1.2.0"
     },
@@ -1080,6 +1086,9 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"
