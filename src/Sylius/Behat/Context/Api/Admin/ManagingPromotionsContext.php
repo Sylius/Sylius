@@ -101,4 +101,38 @@ final class ManagingPromotionsContext implements Context
 
         Assert::keyExists($returnedPromotion, 'coupons');
     }
+
+    /**
+     * @When /^I delete a ("([^"]+)" promotion)$/
+     * @When /^I try to delete a ("([^"]+)" promotion)$/
+     */
+    public function iDeletePromotion(PromotionInterface $promotion): void
+    {
+        $this->client->delete((string) $promotion->getId());
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Promotion still exists, but it should not'
+        );
+    }
+
+    /**
+     * @Then /^(this promotion) should no longer exist in the promotion registry$/
+     */
+    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion): void
+    {
+        $response = $this->client->index();
+        $promotionName = (string) $promotion->getName();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
+            sprintf('Promotion with name %s still exist', $promotionName)
+        );
+    }
 }
