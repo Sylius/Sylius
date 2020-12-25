@@ -19,6 +19,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Zend\Stdlib\SplPriorityQueue;
 
@@ -59,6 +60,14 @@ final class SyliusUiExtension extends Extension
             }
 
             foreach ($blocksPriorityQueue->toArray() as $details) {
+                if (\is_array($details['context'])) {
+                    foreach ($details['context'] as $key => &$value) {
+                        if (\is_string($value) && 0 === strpos($value, '@=')) {
+                            $value = new Expression(substr($value, 2));
+                        }
+                    }
+                }
+
                 /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
                 $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
                     $details['name'],

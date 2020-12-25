@@ -89,4 +89,16 @@ final class TemplateEventTest extends KernelTestCase
 
         Assert::assertSame($expectedLines, $renderedLines);
     }
+
+    /** @test */
+    public function it_evaluates_expressions_and_passes_the_result(): void
+    {
+        $expectedLines = [
+            'LogDir: ' . __DIR__ . '/var/log'
+        ];
+
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('blockContextExpressionEvent.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
 }
