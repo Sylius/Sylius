@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.product_association.class%" shortName="ProductAssociation">
+        <attribute name="normalization_context">
+            <attribute name="groups">
+                <attribute>product_association:read</attribute>
+            </attribute>
+        </attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-associations</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_association_filter</attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-associations</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_association_filter</attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-associations</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">product_association:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+            </itemOperation>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-associations/{id}</attribute>
+            </itemOperation>
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">product_association:update</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="type" readable="true" writable="true" />
+        <property name="owner" readable="true" writable="true" />
+        <property name="associatedProducts" readable="true" writable="true" />
+    </resource>
+</resources>
