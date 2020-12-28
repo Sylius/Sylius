@@ -5,7 +5,7 @@
         </div>
         <div class="right menu">
             {% if order.customer.id|default(null) is not null %}
-                <div class="item" id="purchaser-email" {{ sylius_test_html_attribute('purchaser-name-or-email') }}>{{ 'sylius.ui.checking_out_as'|trans }} {{ order.customer.fullName|default(order.customer.email) }}.</div>
+                <div class="item" id="purchaser-email" {{ sylius_test_html_attribute('purchaser-name-or-email') }}>{{ 'sylius.ui.checking_out_as'|trans }} {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}.</div>
             {% else %}
                 <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.sign_in'|trans }}</a>
             {% endif %}
