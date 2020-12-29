@@ -106,7 +106,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         $this->getElement('address')->click();
     }
 
-    public function getPurchaserEmail(): string
+    public function getPurchaserIdentifier(): string
     {
         return $this->getElement('purchaser_email')->getText();
     }

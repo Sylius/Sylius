@@ -35,7 +35,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function changeAddressByStepLabel(): void;
 
-    public function getPurchaserEmail(): string;
+    public function getPurchaserIdentifier(): string;
 
     public function getValidationMessageForShipment(): string;
 

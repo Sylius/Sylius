@@ -1,5 +1,8 @@
 @checkout
-Feature: Seeing proper checkout name when im checking out with existing account.
+Feature: Seeing purchaser identifier in checkout page
+    In order to improve checkout experience
+    As a customer
+    I want to see my name or email in checkout header
 
     Background:
         Given the store operates on a single channel in "United States"
