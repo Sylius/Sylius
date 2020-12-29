@@ -35,7 +35,7 @@
     {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
 {%- endif %}
 {% if item.hasChildren %}
-<div class="item {% if item.level is same as(1) %}open {%endif%}{% if attributes.class is defined %}{{ attributes.class }}{% endif %}">
+<div class="item {% if item.level is same as(1) %}open {% endif %}{% if attributes.class is defined %}{{ attributes.class }}{% endif %}">
     <div class="header">{{ item.label|trans }}</div>
     <div class="menu">
         {{ block('list') }}
