@@ -287,6 +287,14 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Then I should see :displayName in checkout header
+     */
+    public function iShouldSeeInCheckoutHeader(string $displayName): void
+    {
+        Assert::contains($this->selectShippingPage->getPurchaserEmail(), $displayName);
+    }
+
+    /**
      * @When I sign in
      */
     public function iSignIn()
