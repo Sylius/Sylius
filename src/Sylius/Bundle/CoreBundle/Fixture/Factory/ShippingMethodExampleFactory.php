@@ -174,9 +174,10 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefined('rules')
+            ->setDefault('rules', [])
             ->setNormalizer('rules', static function (Options $options, array $rules): array {
                 if (empty($rules)) {
-                    return [[]];
+                    return [];
                 }
 
                 return $rules;
