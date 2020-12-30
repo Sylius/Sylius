@@ -28,6 +28,9 @@ If you are using they on your custom entity `api_resource` configuration or seri
     `order:create` changed to: `shop:order:create`
     `order:read` changed to: `admin:order:read`
     `order:update` changed to: `admin:order:update`
+    `product:create` changed to: `admin:product:create`
+    `product:read` changed to: `admin:product:read` and `shop:product:read`
+    `product:update` changed to: `admin:product:update`
     `shop:currencies:read` changed to: `shop:currency:read`
     `shop:customer:write` changed to: `shop:customer:create`
 

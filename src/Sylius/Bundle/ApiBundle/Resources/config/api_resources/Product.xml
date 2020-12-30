@@ -16,12 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product.class%" shortName="Product">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>product:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -37,6 +31,9 @@
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -47,13 +44,16 @@
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product:create</attribute>
+                    <attribute name="groups">admin:product:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -65,6 +65,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -73,13 +76,16 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/products/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product:update</attribute>
+                    <attribute name="groups">admin:product:update</attribute>
                 </attribute>
             </itemOperation>
 
