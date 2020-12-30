@@ -218,6 +218,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->waitForElement(5, 'shipping_province');
     }
 
+    public function hasEmailInput(): bool
+    {
+        return $this->hasElement('customer_email');
+    }
+
     public function hasBillingAddressInput(): bool
     {
         return $this->waitForElement(5, 'billing_province');
