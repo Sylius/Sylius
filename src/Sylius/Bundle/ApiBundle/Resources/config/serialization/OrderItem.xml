@@ -17,64 +17,79 @@
 >
     <class name="Sylius\Component\Core\Model\OrderItem">
         <attribute name="id">
-            <group>shop:order:account:read</group>
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
             <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="code">
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="order">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="variant">
-            <group>shop:order:account:read</group>
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
             <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="quantity">
-            <group>shop:order:account:read</group>
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
             <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="unitPrice">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="units">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="adjustments">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="adjustmentsRecursively">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="adjustmentsTotal">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="adjustmentsTotalRecursively">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="product">
-            <group>order_item:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="productName">
-            <group>shop:order:account:read</group>
-            <group>order_item:read</group>
-            <group>shop:cart:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="subtotal">
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
         <attribute name="total">
-            <group>order_item:read</group>
             <group>admin:order:read</group>
+            <group>admin:order_item:read</group>
+            <group>shop:order_item:read</group>
         </attribute>
     </class>
 </serializer>
