@@ -15,11 +15,14 @@ Feature: Changing email during checkout with registered email
     Scenario: Seeing email input when i checkout as guest
         Given I have product "Mantis blade" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
-        Then I go to the addressing step
-        And I should see email input
+        And I go to the addressing step
+        And I complete addressing step with email "new-email@example.com" and "United States" based billing address
+        And I should be checking out as "new-email@example.com"
 
     @ui
     Scenario: Hiding email input when checking as logged used
         Given I am logged in as "john@example.com"
         And I have product "Mantis blade" in the cart
-        And I should not see email input
+        When I complete addressing step with "United States" based billing address
+        And I go to the addressing step
+        Then I should not be able to change email

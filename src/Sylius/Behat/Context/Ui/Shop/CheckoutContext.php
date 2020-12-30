@@ -228,9 +228,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not see email input
+     * @Then I should not be able to change email
      */
-    public function iShouldNotSeeEmailInput(): void
+    public function iShouldNotBeAbleToChangeEmail(): void
     {
         Assert::false($this->addressPage->hasEmailInput());
     }
