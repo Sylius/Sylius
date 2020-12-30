@@ -295,6 +295,14 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Then I should see :purchaserIdentifier in checkout header
+     */
+    public function iShouldSeeInCheckoutHeader(string $purchaserIdentifier): void
+    {
+        Assert::contains($this->selectShippingPage->getPurchaserIdentifier(), $purchaserIdentifier);
+    }
+
+    /**
      * @When I sign in
      */
     public function iSignIn()
