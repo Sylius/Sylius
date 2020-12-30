@@ -17,7 +17,7 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart">
         <attribute name="couponCode">
-            <group>cart:apply_coupon</group>
+            <group>shop:cart:apply_coupon</group>
         </attribute>
     </class>
 </serializer>

@@ -8,13 +8,26 @@ If you are using they on your custom entity `api_resource` configuration or seri
     `admin_user:read` changed to: `admin:admin_user:read`
     `admin_user:update` changed to: `admin:admin_user:update`
     `avatar_image:read` changed to: `admin:avatar_image:read`
+    `cart:add_item` changed to: `shop:cart:add_item`
+    `cart:address` changed to: `shop:cart:address`
+    `cart:apply_coupon` changed to: `shop:cart:apply_coupon`
+    `cart:change_quantity` changed to: `shop:cart:change_quantity`
+    `cart:complete` changed to: `shop:cart:complete`
+    `cart:remove_item` changed to: `shop:cart:remove_item`
+    `cart:select_payment_method` changed to: `shop:cart:select_payment_method`
+    `cart:select_shipping_method` changed to: `shop:cart:select_shipping_method`
+    `cart:update` changed to: `shop:cart:update`
     `channel:create` changed to: `admin:channel:create`
     `channel:read` changed to: `admin:channel:read`
+    `checkout:read` changed to: `shop:cart:read`
     `country:read` changed to: `admin:country:read`
     `currency:read` changed to: `admin:currency:read`
     `customer:password:write` changed to: `shop:customer:password:update`
     `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
     `customer:update` changed to: `shop:customer:update`
+    `order:create` changed to: `shop:order:create`
+    `order:read` changed to: `admin:order:read`
+    `order:update` changed to: `admin:order:update`
     `shop:currencies:read` changed to: `shop:currency:read`
     `shop:customer:write` changed to: `shop:customer:create`
 
