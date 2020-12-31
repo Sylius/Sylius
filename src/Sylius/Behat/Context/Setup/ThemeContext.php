@@ -90,7 +90,7 @@ final class ThemeContext implements Context
      */
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
     {
-        $this->changeTemplateContents('/SyliusShopBundle/views/Homepage/index.html.twig', $theme, $contents);
+        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/Homepage/index.html.twig', $theme, $contents);
     }
 
     /**
@@ -98,7 +98,7 @@ final class ThemeContext implements Context
      */
     public function themeChangesPluginMainTemplateContent(ThemeInterface $theme, string $content): void
     {
-        $this->changeTemplateContents('/SyliusTestPlugin/views/main.html.twig', $theme, $content);
+        $this->changeTemplateContents('/templates/bundles/SyliusTestPlugin/main.html.twig', $theme, $content);
     }
 
     private function changeTemplateContents(string $templatePath, ThemeInterface $theme, string $contents): void
