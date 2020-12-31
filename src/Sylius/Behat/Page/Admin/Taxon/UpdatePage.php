@@ -86,7 +86,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return strpos((string) $statusCode, '2') === 0;
+        return in_array($statusCode, [200, 304], true);
     }
 
     public function isSlugReadonly(string $languageCode = 'en_US'): bool

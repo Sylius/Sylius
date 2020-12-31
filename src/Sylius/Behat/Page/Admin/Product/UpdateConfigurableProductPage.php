@@ -82,7 +82,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return strpos((string) $statusCode, '2') === 0;
+        return in_array($statusCode, [200, 304], true);
     }
 
     public function attachImage(string $path, string $type = null): void
