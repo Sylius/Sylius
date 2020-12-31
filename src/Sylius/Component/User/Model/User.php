@@ -124,6 +124,7 @@ class User implements UserInterface
         $this->enabled = false;
     }
 
+    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function __toString(): string
     {
         return (string) $this->getUsername();

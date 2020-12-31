@@ -114,7 +114,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getDatabaseName(): string
     {
-        return (string) $this->getEntityManager()->getConnection()->getDatabase();
+        return $this->getEntityManager()->getConnection()->getDatabase();
     }
 
     private function getSchemaManager(): AbstractSchemaManager
