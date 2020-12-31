@@ -37,7 +37,7 @@
         "sylius/grid-bundle": "^1.8",
         "symfony/config": "^4.4 || ^5.2",
         "symfony/framework-bundle": "^4.4 || ^5.2",
-        "symfony/security": "^4.4 || ^5.2",
+        "symfony/security-core": "^4.4 || ^5.2",
         "symfony/security-bundle": "^4.4 || ^5.2",
         "symfony/templating": "^4.4 || ^5.2",
         "zendframework/zend-stdlib": "^3.2"
