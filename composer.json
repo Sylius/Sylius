@@ -156,8 +156,8 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
-        "symfony/doctrine-bridge": "4.4.16",
-        "laminas/laminas-code": "^4.0.0"
+        "laminas/laminas-code": "^4.0.0",
+        "symfony/doctrine-bridge": "4.4.16"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
