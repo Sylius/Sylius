@@ -92,12 +92,13 @@
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Controller\Controller" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" />
+                <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\CurrencyBundleInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\LanguageBundleInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\LocaleBundleInterface" />
                 <referencedClass name="Symfony\Component\Intl\ResourceBundle\RegionBundleInterface" />
+                <referencedClass name="Symfony\Component\Routing\RouteCollectionBuilder" />
                 <referencedClass name="Symfony\Component\Security\Core\Role\Role" />
-                <referencedClass name="Symfony\Bundle\WebServerBundle\WebServerBundle" />
             </errorLevel>
         </DeprecatedClass>
         <DeprecatedInterface>
@@ -110,12 +111,13 @@
             <errorLevel type="info">
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
                 <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" />
+                <referencedMethod name="Symfony\Component\HttpFoundation\JsonResponse::create" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent::getException" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Kernel::getRootDir" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getCurrencyBundle" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getLanguageBundle" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getLocaleBundle" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getRegionBundle" />
-                <referencedMethod name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent::getException" />
             </errorLevel>
         </DeprecatedMethod>
 

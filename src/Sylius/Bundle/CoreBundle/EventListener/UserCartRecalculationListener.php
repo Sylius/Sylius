@@ -40,6 +40,7 @@ final class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(object $event): void
     {
+        /** @psalm-suppress DocblockTypeContradiction */
         if (!$event instanceof InteractiveLoginEvent && !$event instanceof UserEvent) {
             throw new \TypeError(sprintf(
                 '$event needs to be an instance of "%s" or "%s"',
