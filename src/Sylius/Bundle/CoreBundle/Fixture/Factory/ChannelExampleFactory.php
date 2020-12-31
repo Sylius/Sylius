@@ -149,10 +149,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $options['code'] . '.localhost';
             })
             ->setDefault('color', function (Options $options): string {
-                return (string) $this->faker->colorName;
+                return $this->faker->colorName;
             })
             ->setDefault('enabled', function (Options $options): bool {
-                return (bool) $this->faker->boolean(90);
+                return $this->faker->boolean(90);
             })
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)
