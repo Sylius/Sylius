@@ -43,7 +43,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "liip/imagine-bundle": "^2.3",
-        "ocramius/proxy-manager": "^2.2",
+        "friendsofphp/proxy-manager-lts": "^1.0",
         "payum/payum": "^1.6",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
