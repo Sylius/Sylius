@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Payum\Core\Model\GatewayConfigInterface;
 use Payum\Core\Payum;
 use Payum\Core\Request\Generic;

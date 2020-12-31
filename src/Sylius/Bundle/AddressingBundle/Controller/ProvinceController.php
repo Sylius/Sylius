@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler;
 
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceUpdateHandlerInterface;

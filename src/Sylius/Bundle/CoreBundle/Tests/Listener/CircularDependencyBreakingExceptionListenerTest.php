@@ -42,9 +42,11 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
 
         // Act
         $throwable = null;
+
         try {
             $listener->onKernelException($event);
-        } catch (\Throwable $throwable) {}
+        } catch (\Throwable $throwable) {
+        }
 
         // Assert
         Assert::assertNotNull($throwable);
@@ -78,9 +80,11 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
 
         // Act
         $throwable = null;
+
         try {
             $listener->onKernelException($event);
-        } catch (\Throwable $throwable) {}
+        } catch (\Throwable $throwable) {
+        }
 
         // Assert
         Assert::assertNotNull($throwable);
@@ -111,9 +115,11 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
 
         // Act
         $throwable = null;
+
         try {
             $listener->onKernelException($event);
-        } catch (\Throwable $throwable) {}
+        } catch (\Throwable $throwable) {
+        }
 
         // Assert
         Assert::assertNotNull($throwable);
