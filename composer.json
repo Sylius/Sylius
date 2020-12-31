@@ -192,7 +192,8 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
-        "symfony/doctrine-bridge": "4.4.16"
+        "symfony/doctrine-bridge": "4.4.16",
+        "laminas/laminas-code": "^4.0.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
