@@ -197,6 +197,9 @@
             ".php_cs.dist"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.1"
+    },
     "friendsofsymfony/oauth-server-bundle": {
         "version": "1.6.2"
     },
@@ -401,9 +404,6 @@
     },
     "ocramius/package-versions": {
         "version": "1.5.1"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -1086,9 +1086,6 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"

@@ -2,8 +2,8 @@
     "name": "sylius/sylius",
     "type": "project",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
-    "license": "MIT",
     "homepage": "https://sylius.com",
+    "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
@@ -32,6 +32,7 @@
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.7",
         "egulias/email-validator": "^2.1",
+        "friendsofphp/proxy-manager-lts": "^1.0",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/rest-bundle": "^2.7",
         "fzaninotto/faker": "^1.9",
@@ -43,7 +44,6 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "lexik/jwt-authentication-bundle": "^2.6",
         "liip/imagine-bundle": "^2.3",
-        "friendsofphp/proxy-manager-lts": "^1.0",
         "payum/payum": "^1.6",
         "payum/payum-bundle": "^2.4",
         "php-http/guzzle6-adapter": "^2.0",
@@ -112,43 +112,6 @@
         "zendframework/zend-hydrator": "^2.4",
         "zendframework/zend-stdlib": "^3.2"
     },
-    "require-dev": {
-        "behat/behat": "^3.6.1",
-        "behat/mink-selenium2-driver": "^1.4",
-        "dmore/behat-chrome-extension": "^1.3",
-        "dmore/chrome-mink-driver": "^2.7",
-        "doctrine/data-fixtures": "^1.4",
-        "ergebnis/composer-normalize": "^2.5",
-        "friends-of-behat/mink": "^1.8",
-        "friends-of-behat/mink-browserkit-driver": "^1.4",
-        "friends-of-behat/mink-debug-extension": "^2.0",
-        "friends-of-behat/mink-extension": "^2.4",
-        "friends-of-behat/page-object-extension": "^0.3",
-        "friends-of-behat/symfony-extension": "^2.1",
-        "friends-of-behat/variadic-extension": "^1.3",
-        "hwi/oauth-bundle": "^1.1",
-        "lchrusciel/api-test-case": "^5.0",
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "mikey179/vfsstream": "^1.6",
-        "mockery/mockery": "^1.4",
-        "phpspec/phpspec": "^6.1",
-        "phpstan/phpstan": "0.12.29",
-        "phpstan/phpstan-doctrine": "0.12.16",
-        "phpunit/phpunit": "^8.5",
-        "psalm/plugin-mockery": "^0.3",
-        "psr/event-dispatcher": "^1.0",
-        "sspooky13/yaml-standards": "^5.1",
-        "stripe/stripe-php": "^6.43",
-        "sylius-labs/coding-standard": "^3.1",
-        "symfony/browser-kit": "^4.4",
-        "symfony/debug-bundle": "^4.4",
-        "symfony/dotenv": "^4.4",
-        "symfony/flex": "^1.7",
-        "symfony/web-profiler-bundle": "^4.4",
-        "symplify/package-builder": "^8.0 <8.3",
-        "vimeo/psalm": "^3.11.6"
-    },
     "replace": {
         "sylius/addressing": "self.version",
         "sylius/addressing-bundle": "self.version",
@@ -195,10 +158,61 @@
         "doctrine/inflector": "^1.4",
         "symfony/doctrine-bridge": "4.4.16"
     },
+    "require-dev": {
+        "behat/behat": "^3.6.1",
+        "behat/mink-selenium2-driver": "^1.4",
+        "dmore/behat-chrome-extension": "^1.3",
+        "dmore/chrome-mink-driver": "^2.7",
+        "doctrine/data-fixtures": "^1.4",
+        "ergebnis/composer-normalize": "^2.5",
+        "friends-of-behat/mink": "^1.8",
+        "friends-of-behat/mink-browserkit-driver": "^1.4",
+        "friends-of-behat/mink-debug-extension": "^2.0",
+        "friends-of-behat/mink-extension": "^2.4",
+        "friends-of-behat/page-object-extension": "^0.3",
+        "friends-of-behat/symfony-extension": "^2.1",
+        "friends-of-behat/variadic-extension": "^1.3",
+        "hwi/oauth-bundle": "^1.1",
+        "lchrusciel/api-test-case": "^5.0",
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "mikey179/vfsstream": "^1.6",
+        "mockery/mockery": "^1.4",
+        "phpspec/phpspec": "^6.1",
+        "phpstan/phpstan": "0.12.29",
+        "phpstan/phpstan-doctrine": "0.12.16",
+        "phpunit/phpunit": "^8.5",
+        "psalm/plugin-mockery": "^0.3",
+        "psr/event-dispatcher": "^1.0",
+        "sspooky13/yaml-standards": "^5.1",
+        "stripe/stripe-php": "^6.43",
+        "sylius-labs/coding-standard": "^3.1",
+        "symfony/browser-kit": "^4.4",
+        "symfony/debug-bundle": "^4.4",
+        "symfony/dotenv": "^4.4",
+        "symfony/flex": "^1.7",
+        "symfony/web-profiler-bundle": "^4.4",
+        "symplify/package-builder": "^8.0 <8.3",
+        "vimeo/psalm": "^3.11.6"
+    },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.8-dev"
+        },
+        "symfony": {
+            "allow-contrib": false
+        }
     },
     "autoload": {
         "psr-4": {
@@ -255,32 +269,20 @@
             "spec\\Sylius\\Bundle\\UiBundle\\": "src/Sylius/Bundle/UiBundle/spec/",
             "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/"
         },
-        "classmap": ["src/Kernel.php"]
+        "classmap": [
+            "src/Kernel.php"
+        ]
     },
     "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
-        },
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
-    },
-    "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true
-    },
-    "extra": {
-        "symfony": {
-            "allow-contrib": false
-        },
-        "branch-alias": {
-            "dev-master": "1.8-dev"
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
     }
 }
