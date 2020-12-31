@@ -17,9 +17,28 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
-use Symfony\Component\HttpKernel\EventListener\ErrorListener as SymfonyErrorListener;
 
 /**
+ * `Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException` happens to set previous
+ * exception for a wrapper exception. This is meant to improve DX while debugging nested exceptions,
+ * but also creates some issues.
+ *
+ * After upgrading to ResourceBundle v1.7 and GridBundle v1.8, the test suite started to fail
+ * because of a timeout. By artifically setting the previous exception, in some cases it created
+ * an exception with circular dependencies, so that:
+ *
+ *   `$exception->getPrevious()->getPrevious()->getPrevious() === $exception`
+ *
+ * That exception is rethrown and other listeners like `Symfony\Component\Security\Http\Firewall\ExceptionListener`
+ * try to deal with an exception and all their previous ones, causing infinite loops.
+ *
+ * This fix only works if "framework.templating" setting DOES NOT include "twig". Otherwise, TwigBundle
+ * registers deprecated `Symfony\Component\HttpKernel\EventListener\ExceptionListener`, removes the non-deprecated
+ * "exception_listener" service, so that the issue still persists.
+ *
+ * This listener behaves as a decorator, but also extends the original ErrorListener, because of yet another
+ * listener `ApiPlatform\Core\EventListener\ExceptionListener` requires the original class.
+ *
  * @internal
  *
  * @see \Symfony\Component\HttpKernel\EventListener\ErrorListener
@@ -29,7 +48,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
     /** @var CircularDependencyBreakingErrorListener */
     private $decoratedListener;
 
-    public function __construct(SymfonyErrorListener $decoratedListener)
+    public function __construct(ErrorListener $decoratedListener)
     {
         $this->decoratedListener = $decoratedListener;
     }
