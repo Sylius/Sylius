@@ -16,9 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 class ChangeShopUserPassword implements ShopUserIdAwareInterface
 {
-    /**
-     * @var mixed|null
-     */
+    /** @var mixed|null */
     public $shopUserId;
 
     /**

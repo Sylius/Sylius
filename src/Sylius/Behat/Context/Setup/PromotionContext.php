@@ -327,7 +327,7 @@ final class PromotionContext implements Context
         int $secondChannelDiscount,
         ChannelInterface $secondChannel
     ): void {
-        /** @var PromotionActionInterface */
+        /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createFixedDiscount($firstChannelDiscount, $firstChannel->getCode());
         $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondChannelDiscount]]));
 
