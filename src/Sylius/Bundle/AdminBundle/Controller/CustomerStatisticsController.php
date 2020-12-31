@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Twig\Environment;
 
 final class CustomerStatisticsController
 {
@@ -29,13 +30,16 @@ final class CustomerStatisticsController
     /** @var RepositoryInterface */
     private $customerRepository;
 
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
         CustomerStatisticsProviderInterface $statisticsProvider,
         RepositoryInterface $customerRepository,
-        EngineInterface $templatingEngine
+        object $templatingEngine
     ) {
         $this->statisticsProvider = $statisticsProvider;
         $this->customerRepository = $customerRepository;
@@ -60,9 +64,9 @@ final class CustomerStatisticsController
 
         $customerStatistics = $this->statisticsProvider->getCustomerStatistics($customer);
 
-        return $this->templatingEngine->renderResponse(
+        return new Response($this->templatingEngine->render(
             '@SyliusAdmin/Customer/Show/Statistics/index.html.twig',
             ['statistics' => $customerStatistics]
-        );
+        ));
     }
 }

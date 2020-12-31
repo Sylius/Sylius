@@ -23,13 +23,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
 final class DashboardController
 {
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /** @var EngineInterface */
+    /** @var EngineInterface|Environment */
     private $templatingEngine;
 
     /** @var RouterInterface */
@@ -41,9 +42,12 @@ final class DashboardController
     /** @var StatisticsDataProviderInterface */
     private $statisticsDataProvider;
 
+    /**
+     * @param EngineInterface|Environment $templatingEngine
+     */
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
-        EngineInterface $templatingEngine,
+        object $templatingEngine,
         RouterInterface $router,
         ?SalesDataProviderInterface $salesDataProvider = null,
         ?StatisticsDataProviderInterface $statisticsDataProvider = null
@@ -64,9 +68,9 @@ final class DashboardController
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return $this->templatingEngine->renderResponse('@SyliusAdmin/Dashboard/index.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusAdmin/Dashboard/index.html.twig', [
             'channel' => $channel,
-        ]);
+        ]));
     }
 
     public function getRawData(Request $request): Response

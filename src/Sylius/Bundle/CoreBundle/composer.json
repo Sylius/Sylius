@@ -58,7 +58,7 @@
         "sylius/shipping-bundle": "^1.6",
         "sylius/taxation-bundle": "^1.6",
         "sylius/taxonomy-bundle": "^1.6",
-        "sylius/theme-bundle": "^1.5",
+        "sylius/theme-bundle": "^2.1",
         "sylius/ui-bundle": "^1.6",
         "sylius/user-bundle": "^1.6",
         "symfony/framework-bundle": "^4.4",

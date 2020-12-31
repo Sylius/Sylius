@@ -124,9 +124,6 @@ final class TestKernel extends BaseKernel
             'session' => [
                 'handler_id' => null,
             ],
-            'templating' => [
-                'engines' => ['twig'],
-            ],
             'default_locale' => '%locale%',
             'translator' => [
                 'fallbacks' => [
