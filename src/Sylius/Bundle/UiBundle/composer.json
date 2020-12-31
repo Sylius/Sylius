@@ -33,7 +33,7 @@
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^3.20|^4.0",
-        "sylius/grid-bundle": "^1.6",
+        "sylius/grid-bundle": "^1.8",
         "symfony/config": "^4.4",
         "symfony/framework-bundle": "^4.4",
         "symfony/security": "^4.4",
