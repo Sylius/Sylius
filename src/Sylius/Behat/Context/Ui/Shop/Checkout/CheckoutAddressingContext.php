@@ -295,7 +295,7 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
-     * @Then I should see :purchaserIdentifier in checkout header
+     * @Then I should be making an order as :purchaserIdentifier
      */
     public function iShouldSeeInCheckoutHeader(string $purchaserIdentifier): void
     {
