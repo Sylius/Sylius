@@ -97,7 +97,7 @@ jobs:
 
             -
                 name: Run Psalm
-                run: vendor/bin/psalm --show-info=false --output-format=github
+                run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -

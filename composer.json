@@ -156,7 +156,6 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
-        "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16"
     },
     "require-dev": {
