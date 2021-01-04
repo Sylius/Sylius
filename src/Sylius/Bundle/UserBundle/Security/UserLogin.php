@@ -56,7 +56,7 @@ class UserLogin implements UserLoginInterface
         }
 
         $this->tokenStorage->setToken($token);
-        $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
+        $this->eventDispatcher->dispatch(new UserEvent($user), UserEvents::SECURITY_IMPLICIT_LOGIN);
     }
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken

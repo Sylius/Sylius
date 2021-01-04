@@ -49,7 +49,7 @@ final class UserLoginSpec extends ObjectBehavior
         $userChecker->checkPreAuth($user)->willThrow(DisabledException::class);
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
-        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(Argument::type(UserEvent::class), UserEvents::SECURITY_IMPLICIT_LOGIN)->shouldNotBeCalled();
 
         $this->shouldThrow(DisabledException::class)->during('login', [$user]);
     }
@@ -65,7 +65,7 @@ final class UserLoginSpec extends ObjectBehavior
         $userChecker->checkPostAuth($user)->willThrow(CredentialsExpiredException::class);
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
-        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(Argument::type(UserEvent::class), UserEvents::SECURITY_IMPLICIT_LOGIN)->shouldNotBeCalled();
 
         $this->shouldThrow(CredentialsExpiredException::class)->during('login', [$user]);
     }
@@ -81,7 +81,7 @@ final class UserLoginSpec extends ObjectBehavior
         $userChecker->checkPostAuth($user)->shouldBeCalled();
 
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldNotBeCalled();
-        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(Argument::type(UserEvent::class), UserEvents::SECURITY_IMPLICIT_LOGIN)->shouldNotBeCalled();
 
         $this->shouldThrow(AuthenticationException::class)->during('login', [$user]);
     }
@@ -97,7 +97,7 @@ final class UserLoginSpec extends ObjectBehavior
         $userChecker->checkPreAuth($user)->shouldBeCalled();
         $userChecker->checkPostAuth($user)->shouldBeCalled();
         $tokenStorage->setToken(Argument::type(UsernamePasswordToken::class))->shouldBeCalled();
-        $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type(UserEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch(Argument::type(UserEvent::class), UserEvents::SECURITY_IMPLICIT_LOGIN)->shouldBeCalled();
 
         $this->login($user);
     }
