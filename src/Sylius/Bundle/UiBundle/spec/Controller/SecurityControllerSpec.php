@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -25,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Templating\EngineInterface;
 
 final class SecurityControllerSpec extends ObjectBehavior
 {
@@ -46,8 +46,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         Form $form,
         FormView $formView,
         EngineInterface $templatingEngine,
-        AuthorizationCheckerInterface $authorizationChecker,
-        Response $response
+        AuthorizationCheckerInterface $authorizationChecker
     ): void {
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(false);
 
@@ -64,15 +63,17 @@ final class SecurityControllerSpec extends ObjectBehavior
         $form->createView()->willReturn($formView);
 
         $templatingEngine
-            ->renderResponse('CustomTemplateName', [
+            ->render('CustomTemplateName', [
                 'form' => $formView,
                 'last_username' => 'john.doe',
                 'last_error' => 'Bad credentials.',
             ])
-            ->willReturn($response)
+            ->willReturn('content')
         ;
 
-        $this->loginAction($request)->shouldReturn($response);
+        $response = $this->loginAction($request);
+        $response->shouldHaveType(Response::class);
+        $response->getContent()->shouldReturn('content');
     }
 
     function it_redirects_when_user_is_logged_in(
