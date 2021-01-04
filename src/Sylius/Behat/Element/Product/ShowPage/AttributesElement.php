@@ -26,6 +26,11 @@ final class AttributesElement extends Element implements AttributesElementInterf
         return $attributeValue === $value;
     }
 
+    public function hasNonTranslatableAttribute(string $attribute, string $value): bool
+    {
+
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

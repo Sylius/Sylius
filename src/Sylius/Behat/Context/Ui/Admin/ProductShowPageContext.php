@@ -393,6 +393,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see non-translatable attribute :attribute with value :value in :nameOfLocale locale
+     */
+    public function iShouldSeeNonTranslatableAttributeWithValueInLocale(string $attribute, string $value, string $nameOfLocale): void
+    {
+        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $nameOfLocale, $value));
+    }
+
+    /**
      * @Then I should not be able to show this product in shop
      */
     public function iShouldNotBeAbleToShowThisProductInShop(): void
