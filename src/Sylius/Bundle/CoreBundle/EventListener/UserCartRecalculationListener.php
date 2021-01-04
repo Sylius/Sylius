@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Webmozart\Assert\Assert;
 
 final class UserCartRecalculationListener
@@ -34,7 +35,10 @@ final class UserCartRecalculationListener
         $this->orderProcessor = $orderProcessor;
     }
 
-    public function recalculateCartWhileLogin(Event $event): void
+    /**
+     * @param InteractiveLoginEvent|UserEvent $event
+     */
+    public function recalculateCartWhileLogin(object $event): void
     {
         try {
             $cart = $this->cartContext->getCart();
