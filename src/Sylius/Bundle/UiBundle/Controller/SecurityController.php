@@ -77,10 +77,7 @@ final class SecurityController
             'last_error' => $lastError,
         ]);
 
-        $response = new Response();
-        $response->setContent($content);
-
-        return $response;
+        return new Response($content);
     }
 
     public function checkAction(Request $request): void
