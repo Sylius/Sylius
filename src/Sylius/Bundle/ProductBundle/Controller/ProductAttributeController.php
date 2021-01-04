@@ -99,11 +99,11 @@ class ProductAttributeController extends ResourceController
         if (!$attribute->isTranslatable()) {
             array_push($localeCodes, null);
 
-            return $this->createFormAndView($attributeForm, $attribute, null, $forms);
+            return $this->createFormAndView($attributeForm, $attribute, null);
         }
 
         foreach ($localeCodes as $localeCode) {
-            $forms = $this->createFormAndView($attributeForm, $attribute, $localeCode, $forms);
+            $forms[$localeCode] = $this->createFormAndView($attributeForm, $attribute, $localeCode);
         }
 
         return $forms;
@@ -112,8 +112,7 @@ class ProductAttributeController extends ResourceController
     private function createFormAndView(
         $attributeForm,
         AttributeInterface $attribute,
-        ?string $localeCode,
-        array $forms
+        ?string $localeCode
     ): array {
         $forms[$localeCode] = $this
             ->get('form.factory')

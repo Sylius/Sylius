@@ -25,20 +25,20 @@ Feature: Adding a new product with text attribute
 
     @ui @javascript
     Scenario: Adding a non-translatable text attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its non-translatable "Author" attribute to "Colt"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
-        And Non-translatable attribute "Author" of product "44 Magnum" should be "Colt"
+        And non-translatable attribute "Author" of product "44 Magnum" should be "Colt"
 
     @ui @javascript
     Scenario: Adding multiple text attributes to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
@@ -51,8 +51,8 @@ Feature: Adding a new product with text attribute
 
     @ui @javascript
     Scenario: Adding and removing text attributes on product create page
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"

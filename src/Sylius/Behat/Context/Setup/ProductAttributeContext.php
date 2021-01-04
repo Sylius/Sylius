@@ -292,8 +292,8 @@ final class ProductAttributeContext implements Context
      */
     public function thisProductHasNonTranslatableCheckboxAttributeWithValue(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
+        string $productAttributeType,
+        string $productAttributeName,
         $value
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
@@ -343,8 +343,8 @@ final class ProductAttributeContext implements Context
      */
     public function thisProductHasNonTranslatableDateTimeAttributeWithDate(
         ProductInterface $product,
-        $productAttributeType,
-        $productAttributeName,
+        string $productAttributeType,
+        string $productAttributeName,
         $date
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
