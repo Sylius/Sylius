@@ -98,7 +98,7 @@ a {
     }
     .item {
         padding-bottom: 5px;
-        .menu {
+        > .menu {
             visibility: hidden;
             overflow: hidden;
             max-height: 0;
@@ -109,7 +109,7 @@ a {
             -ms-transform: translate(0, 0);
             -ms-transition: -ms-transform .5s ease-in-out;
         }
-        .header {
+        > .header {
             margin-bottom: 0;
             -webkit-transform: translateY(0);
             -webkit-transition: -webkit-transform .7s ease-in-out;
@@ -137,13 +137,13 @@ a {
         }
         &.open,
         &.current_ancestor {
-            .menu{
+            > .menu{
                 max-height: 120vh;
                 overflow: visible;
                 visibility: visible;
                 border-bottom-color: #f0f0f0;
             }
-            .header {
+            > .header {
                 margin-bottom: 15px;
                 &:after {
                     transform: rotate(0deg);
