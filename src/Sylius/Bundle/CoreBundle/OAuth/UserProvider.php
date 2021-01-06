@@ -17,10 +17,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -50,8 +50,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /** @var ObjectManager */
     private $userManager;
 
-    /** @var CustomerRepositoryInterface */
-    private $customerRepository;
+    /** @var CustomerProviderInterface */
+    private $customerProvider;
 
     public function __construct(
         string $supportedUserClass,
@@ -62,7 +62,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerProviderInterface $customerProvider
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
 
@@ -71,7 +71,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $this->oauthRepository = $oauthRepository;
         $this->userFactory = $userFactory;
         $this->userManager = $userManager;
-        $this->customerRepository = $customerRepository;
+        $this->customerProvider = $customerProvider;
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
@@ -110,30 +110,18 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
 
-        $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
-
         /** @var CustomerInterface|null $customer */
-        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $canonicalEmail]);
-
-        if (null === $customer) {
-            /** @var CustomerInterface $customer */
-            $customer = $this->customerFactory->createNew();
-        }
+        $customer = $this->customerProvider->provide($response->getEmail());
 
         $user->setCustomer($customer);
 
-        // set default values taken from OAuth sign-in provider account
-        if (null !== $email = $response->getEmail()) {
-            $customer->setEmail($email);
-        }
-
-        if (null !== $name = $response->getFirstName()) {
+        if (empty($customer->getFirstName()) && null !== $name = $response->getFirstName()) {
             $customer->setFirstName($name);
-        } elseif (null !== $realName = $response->getRealName()) {
+        } elseif (empty($customer->getFirstName()) && null !== $realName = $response->getRealName()) {
             $customer->setFirstName($realName);
         }
 
-        if (null !== $lastName = $response->getLastName()) {
+        if (empty($customer->getLastName()) && null !== $lastName = $response->getLastName()) {
             $customer->setLastName($lastName);
         }
 

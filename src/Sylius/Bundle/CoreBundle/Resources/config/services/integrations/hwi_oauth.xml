@@ -24,7 +24,7 @@
             <argument type="service" id="sylius.repository.oauth_user" />
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.canonicalizer" />
-            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
         </service>
     </services>
 </container>
