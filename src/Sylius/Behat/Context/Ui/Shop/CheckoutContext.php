@@ -220,14 +220,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see email input
-     */
-    public function iShouldSeeEmailInput(): void
-    {
-        Assert::true($this->addressPage->hasEmailInput());
-    }
-
-    /**
      * @Then I should not be able to change email
      */
     public function iShouldNotBeAbleToChangeEmail(): void
