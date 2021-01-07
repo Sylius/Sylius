@@ -645,6 +645,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see non-translatable attribute :attribute with value :value
+     */
+    public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
+    {
+        Assert::true($this->updateSimpleProductPage->hasNonTranslatableAttributeWithValue($attribute, $value));
+    }
+
+    /**
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */

@@ -109,6 +109,16 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return null !== $this->getDocument()->find('css', sprintf('.attribute .label:contains("%s")', $attributeName));
     }
 
+    public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool
+    {
+        $attribute = $this->getDocument()->find('css', sprintf('.attribute .attribute-label:contains("%s")', $attributeName));
+
+        return (
+            $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
+            $attribute->find('css', '.globe.icon') !== null
+        );
+    }
+
     public function selectMainTaxon(TaxonInterface $taxon): void
     {
         $this->openTaxonBookmarks();

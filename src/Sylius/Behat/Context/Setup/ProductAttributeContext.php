@@ -264,7 +264,7 @@ final class ProductAttributeContext implements Context
     public function thisProductHasNonTranslatablePercentAttributeWithValue(ProductInterface $product, string $productAttributeName, int $value): void
     {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value / 100, $attribute, 'en_US', false);
+        $attributeValue = $this->createProductAttributeValue($value / 100, $attribute, null, false);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -399,11 +399,13 @@ final class ProductAttributeContext implements Context
     private function createProductAttributeValue(
         $value,
         ProductAttributeInterface $attribute,
-        string $localeCode = 'en_US',
+        ?string $localeCode = 'en_US',
         bool $translatable = true
     ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attribute->setTranslatable($translatable);
+        $this->objectManager->persist($attribute);
+
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);

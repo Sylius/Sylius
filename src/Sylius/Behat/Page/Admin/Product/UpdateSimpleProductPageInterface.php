@@ -43,6 +43,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function hasAttribute(string $attributeName): bool;
 
+    public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool;
+
     public function isMainTaxonChosen(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
