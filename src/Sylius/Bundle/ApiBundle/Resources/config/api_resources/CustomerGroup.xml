@@ -18,15 +18,9 @@
     <resource class="%sylius.model.customer_group.class%" shortName="CustomerGroup">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>customer_group:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="denormalization_context">
             <attribute name="groups">
-                <attribute>customer_group:create</attribute>
+                <attribute>admin:customer_group:create</attribute>
             </attribute>
         </attribute>
 
@@ -35,6 +29,9 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer_group:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -45,12 +42,15 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer_group:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">customer_group:update</attribute>
+                    <attribute name="groups">admin:customer_group:update</attribute>
                 </attribute>
             </itemOperation>
 

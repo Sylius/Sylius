@@ -18,12 +18,6 @@
     <resource class="%sylius.model.exchange_rate.class%" shortName="ExchangeRate">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>exchange_rate:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -32,12 +26,15 @@
                 <attribute name="filters">
                     <attribute>sylius.api.exchange_rate_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">exchange_rate:create</attribute>
+                    <attribute name="groups">admin:exchange_rate:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -45,12 +42,15 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">exchange_rate:update</attribute>
+                    <attribute name="groups">admin:exchange_rate:update</attribute>
                 </attribute>
             </itemOperation>
 
