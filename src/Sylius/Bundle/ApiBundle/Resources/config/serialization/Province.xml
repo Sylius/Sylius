@@ -17,32 +17,32 @@
 >
     <class name="Sylius\Component\Addressing\Model\Province">
         <attribute name="id">
-            <group>province:read</group>
+            <group>admin:province:read</group>
         </attribute>
         <attribute name="createdAt">
-           <group>province:read</group>
+           <group>admin:province:read</group>
        </attribute>
         <attribute name="updatedAt">
-           <group>province:read</group>
+           <group>admin:province:read</group>
        </attribute>
        <attribute name="code">
            <group>admin:country:create</group>
            <group>admin:country:update</group>
            <group>shop:country:read</group>
-           <group>province:read</group>
+           <group>admin:province:read</group>
        </attribute>
        <attribute name="name">
            <group>admin:country:create</group>
            <group>admin:country:update</group>
            <group>shop:country:read</group>
-           <group>province:read</group>
-           <group>province:update</group>
+           <group>admin:province:read</group>
+           <group>admin:province:update</group>
        </attribute>
        <attribute name="abbreviation">
            <group>admin:country:create</group>
            <group>admin:country:update</group>
-           <group>province:read</group>
-           <group>province:update</group>
+           <group>admin:province:read</group>
+           <group>admin:province:update</group>
        </attribute>
     </class>
 </serializer>
