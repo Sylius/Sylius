@@ -16,12 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment.class%" shortName="Payment">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>payment:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -35,6 +29,9 @@
                 <attribute name="filters">
                     <attribute>sylius.api.search_payment_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -42,11 +39,17 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payments/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payments/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_complete">
@@ -64,6 +67,9 @@
             <subresourceOperation name="methods_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payments/{id}/methods</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment:read</attribute>
+                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 
