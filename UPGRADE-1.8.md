@@ -4,6 +4,7 @@
 Several additional serialization groups have been rephrased, to improve readability and predictability of them.
 If you are using they on your custom entity `api_resource` configuration or serialization groups, you should check if one of these changes may affect on your app. If yes, change all occurs by this pattern:
 
+    `adjustment:read` changed to: `admin:adjustment:read` and `shop:adjustment:read`
     `admin_user:create` changed to: `admin:admin_user:create`
     `admin_user:read` changed to: `admin:admin_user:read`
     `admin_user:update` changed to: `admin:admin_user:update`

@@ -19,12 +19,6 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:customer:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
@@ -45,6 +39,9 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">

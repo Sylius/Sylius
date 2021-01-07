@@ -12,25 +12,23 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.address.class%" shortName="Address">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shop:address:read</attribute>
-                <attribute>shop:address:create</attribute>
-                <attribute>shop:address:update</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/addresses</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:address:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/account/addresses</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:address:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -48,6 +46,9 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/account/addresses/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:address:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_delete">
