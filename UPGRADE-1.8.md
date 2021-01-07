@@ -45,6 +45,11 @@ If you are using they on your custom entity `api_resource` configuration or seri
 - `product:update` changed to: `admin:product:update`
 - `province:read` changed to: `admin:province:read`
 - `province:update` changed to: `admin:province:update`
+- `shipment:read` changed to: `admin:shipment:read` and `shop:shipment:read`
+- `shipment:update` changed to: `admin:shipment:update`
+- `shipping_category:create` changed to: `admin:shipping_category:create`
+- `shipping_category:read` changed to: `admin:shipping_category:read`
+- `shipping_category:update` changed to: `admin:shipping_category:update`
 - `shop:currencies:read` changed to: `shop:currency:read`
 - `shop:customer:write` changed to: `shop:customer:create`
 

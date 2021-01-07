@@ -17,27 +17,27 @@
 >
     <class name="Sylius\Component\Shipping\Model\ShippingCategory">
         <attribute name="id">
-            <group>shipping_category:read</group>
+            <group>admin:shipping_category:read</group>
         </attribute>
         <attribute name="code">
-            <group>shipping_category:read</group>
-            <group>shipping_category:create</group>
+            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:create</group>
         </attribute>
         <attribute name="name">
-            <group>shipping_category:read</group>
-            <group>shipping_category:update</group>
-            <group>shipping_category:create</group>
+            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:update</group>
+            <group>admin:shipping_category:create</group>
         </attribute>
         <attribute name="description">
-            <group>shipping_category:read</group>
-            <group>shipping_category:update</group>
-            <group>shipping_category:create</group>
+            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:update</group>
+            <group>admin:shipping_category:create</group>
         </attribute>
         <attribute name="createdAt">
-            <group>shipping_category:read</group>
+            <group>admin:shipping_category:read</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>shipping_category:read</group>
+            <group>admin:shipping_category:read</group>
         </attribute>
     </class>
 </serializer>
