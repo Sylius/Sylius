@@ -16,23 +16,23 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>payment_method:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations />
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment_method:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payment-methods/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment_method:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

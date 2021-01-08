@@ -18,23 +18,14 @@
     <resource class="%sylius.model.admin_user.class%" shortName="Administrator">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:admin_user:read</attribute>
-            </attribute>
-        </attribute>
-
-        <attribute name="denormalization_context">
-            <attribute name="groups">
-                <attribute>admin:admin_user:create</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -43,12 +34,18 @@
                     <attribute>sylius</attribute>
                     <attribute>sylius_user_create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">

@@ -4,6 +4,8 @@
 Several additional serialization groups have been rephrased, to improve readability and predictability of them.
 If you are using they on your custom entity `api_resource` configuration or serialization groups, you should check if one of these changes may affect on your app. If yes, change all occurs by this pattern:
 
+    created serialization groups for `Locale` resource as: `admin:locale:read` and `admin:locale:create`
+    `adjustment:read` changed to: `admin:adjustment:read` and `shop:adjustment:read`
     `admin_user:create` changed to: `admin:admin_user:create`
     `admin_user:read` changed to: `admin:admin_user:read`
     `admin_user:update` changed to: `admin:admin_user:update`
@@ -25,11 +27,19 @@ If you are using they on your custom entity `api_resource` configuration or seri
     `customer:password:write` changed to: `shop:customer:password:update`
     `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
     `customer:update` changed to: `shop:customer:update`
+    `customer_group:create` changed to: `admin:customer_group:create`
+    `customer_group:read` changed to: `admin:customer_group:read`
+    `customer_group:update` changed to: `admin:customer_group:update`
+    `exchange_rate:create` changed to: `admin:exchange_rate:create`
+    `exchange_rate:read` changed to: `admin:exchange_rate:read`
+    `exchange_rate:update` changed to: `admin:exchange_rate:update`
     `order:create` changed to: `shop:order:create`
     `order:read` changed to: `admin:order:read`
     `order:update` changed to: `admin:order:update`
     `order_item:read` changed to: `admin:order_item:read` and `shop:order_item:read`
     `order_item_unit:read` changed to: `admin:order_item_unit:read` and `shop:order_item_unit:read`
+    `payment:read` changed to: `admin:payment:read` and `shop:payment:read`
+    `payment_method:read` changed to: `admin:payment_method:read` and `shop:payment_method:read`
     `product:create` changed to: `admin:product:create`
     `product:read` changed to: `admin:product:read` and `shop:product:read`
     `product:update` changed to: `admin:product:update`

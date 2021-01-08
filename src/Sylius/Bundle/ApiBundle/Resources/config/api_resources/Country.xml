@@ -16,18 +16,15 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.country.class%" shortName="Country">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:country:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:country:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -56,6 +53,9 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:country:read</attribute>
+                </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>

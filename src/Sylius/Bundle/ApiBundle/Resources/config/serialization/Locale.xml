@@ -15,22 +15,13 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="Sylius\Component\Core\Model\PaymentMethod">
+    <class name="Sylius\Component\Locale\Model\Locale">
         <attribute name="id">
-            <group>admin:payment_method:read</group>
-            <group>shop:payment_method:read</group>
-        </attribute>
-        <attribute name="name">
-            <group>admin:payment:read</group>
-            <group>admin:payment_method:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:payment:read</group>
-            <group>shop:payment_method:read</group>
+            <group>admin:locale:read</group>
         </attribute>
         <attribute name="code">
-            <group>admin:payment_method:read</group>
-            <group>shop:payment_method:read</group>
+            <group>admin:locale:read</group>
+            <group>admin:locale:create</group>
         </attribute>
     </class>
 </serializer>

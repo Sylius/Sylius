@@ -17,39 +17,48 @@
 >
     <class name="Sylius\Component\Order\Model\Adjustment">
         <attribute name="id">
-            <group>adjustment:read</group>
+            <group>admin:adjustment:read</group>
+            <group>shop:adjustment:read</group>
         </attribute>
 
         <attribute name="type">
-           <group>adjustment:read</group>
+            <group>admin:adjustment:read</group>
+            <group>shop:adjustment:read</group>
        </attribute>
 
         <attribute name="label">
-           <group>adjustment:read</group>
+            <group>admin:adjustment:read</group>
+            <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="amount">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="order">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="order_item">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="order_item_unit">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="neutral">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
 
        <attribute name="locked">
-           <group>adjustment:read</group>
+           <group>admin:adjustment:read</group>
+           <group>shop:adjustment:read</group>
        </attribute>
     </class>
 </serializer>
