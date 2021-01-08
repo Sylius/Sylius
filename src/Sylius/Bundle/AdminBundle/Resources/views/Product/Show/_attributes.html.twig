@@ -11,14 +11,14 @@
                     {% if attributeValue.localeCode is not null  %}
                         <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ localeCode|sylius_locale_name }}" {{ sylius_test_html_attribute('tab', localeCode|sylius_locale_name) }}>{{ flags.fromLocaleCode(localeCode)}} {{ localeCode|sylius_locale_name }}</a>
                     {% else %}
-                        <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ 'global' }}" {{ sylius_test_html_attribute('tab', 'global') }}><i class="globe icon"></i></a>
+                        <a class="item{% if loop.first %} active {% endif %}" {% if loop.first %}{{ sylius_test_html_attribute('active') }}{% endif %} data-tab="{{ 'non-translatable' }}" {{ sylius_test_html_attribute('tab', 'non-translatable') }}><i class="globe icon"></i></a>
                     {% endif %}
                     {%  set setLocales = setLocales|merge([localeCode]) %}
                 {% endif %}
             {% endfor %}
         </div>
         {% for locale in setLocales %}
-            {% set data_tab = (locale is not null ? locale|sylius_locale_name : 'global') %}
+            {% set data_tab = (locale is not null ? locale|sylius_locale_name : 'non-translatable') %}
             <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ data_tab }}" {{ sylius_test_html_attribute('tab', data_tab) }}>
                 <table class="ui very basic celled table">
                     <tbody>

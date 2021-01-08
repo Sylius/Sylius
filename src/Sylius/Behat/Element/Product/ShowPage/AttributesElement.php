@@ -28,9 +28,8 @@ final class AttributesElement extends Element implements AttributesElementInterf
 
     public function hasNonTranslatableAttribute(string $attribute, string $value): bool
     {
-        $values = $this->getDocument()->find('css', '.attribute');
+        $attributeValue = $this->getDocument()->find('css', sprintf('.ui.segment[data-tab="non-translatable"] tr:contains("%s") td:nth-child(2)', $attribute))->getText();
 
-        $attributeValue = $values->find('css', sprintf('tr:contains("%s") td:nth-child(2)', $attribute))->getText();
         return $attributeValue === $value;
     }
 
