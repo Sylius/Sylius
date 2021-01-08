@@ -112,7 +112,8 @@ final class AddressType extends AbstractResourceType
 
                 if (
                     (null === $customer && null === $resourceCustomer) ||
-                    (null !== $resourceCustomer && null === $resourceCustomer->getUser())
+                    (null !== $resourceCustomer && null === $resourceCustomer->getUser()) ||
+                    ($resourceCustomer !== $customer)
                 ) {
                     $form->add('customer', CustomerCheckoutGuestType::class, ['constraints' => [new Valid()]]);
                 }

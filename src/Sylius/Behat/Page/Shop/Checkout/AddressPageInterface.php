@@ -58,6 +58,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function hasBillingAddressInput(): bool;
 
+    public function hasEmailInput(): bool;
+
     public function selectShippingAddressFromAddressBook(AddressInterface $address): void;
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void;
