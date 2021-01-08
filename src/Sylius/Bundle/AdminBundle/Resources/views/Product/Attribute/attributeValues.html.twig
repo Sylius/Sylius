@@ -17,13 +17,15 @@
                 <div class="attribute" data-id="{{ code }}">
                     {% set id = form.vars.label|replace({' ': '_'})|lower %}
                     <div class="attribute-row">
-                        <div class="attribute-label">
-                            {% if localeCode %}
-                                {{ flags.fromLocaleCode(localeCode) }}
-                            {% else %}
-                                <i class="globe icon"></i>
-                            {% endif %}
-                            {{ form.vars.label }}
+                        <div class="attribute-label {% if not localeCode or localeCode == sylius_base_locale %} required field {% endif %}">
+                            <label>
+                                {% if localeCode %}
+                                    {{ flags.fromLocaleCode(localeCode) }}
+                                {% else %}
+                                    <i class="globe icon"></i>
+                                {% endif %}
+                                {{ form.vars.label }}
+                            </label>
                         </div>
                         <div class="attribute-input" data-test-product-attribute-value-in-locale="{{ "%s %s"|format(form.vars.label, localeCode) }}">
                             {% if 'type_checkbox' in form.vars.cache_key %}
