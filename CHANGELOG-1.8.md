@@ -1,5 +1,17 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.8 (2021-01-11)
+
+#### Details
+
+- [#11794](https://github.com/Sylius/Sylius/issues/11794) Fixed deprecated `Intl` component usage ([@stloyd](https://github.com/stloyd))
+- [#12196](https://github.com/Sylius/Sylius/issues/12196) [CI] Ignore depenabot pushes & allow for triggering manual workflows ([@pamil](https://github.com/pamil))
+- [#12201](https://github.com/Sylius/Sylius/issues/12201) [BUG-FIX] display customer email if user is not logged in ([@SirDomin](https://github.com/SirDomin))
+- [#12209](https://github.com/Sylius/Sylius/issues/12209) Add friendsofphp/proxy-manager-lts for ocramius/proxy-manager ([@Tomanhez](https://github.com/Tomanhez))
+- [#12210](https://github.com/Sylius/Sylius/issues/12210) [BUG-FIX] [Checkout] Change email addressing step ([@SirDomin](https://github.com/SirDomin))
+- [#12211](https://github.com/Sylius/Sylius/issues/12211) [Behat][Minor] Step rephrasing to decouple from UI ([@lchrusciel](https://github.com/lchrusciel))
+- [#12216](https://github.com/Sylius/Sylius/issues/12216) Update release cycle with Sylius 1.9 information ([@pamil](https://github.com/pamil))
+
 ## v1.8.7 (2020-12-23)
 
 #### Details
