@@ -156,7 +156,8 @@
     },
     "conflict": {
         "doctrine/inflector": "^1.4",
-        "symfony/doctrine-bridge": "4.4.16"
+        "symfony/doctrine-bridge": "4.4.16",
+        "symfony/polyfill-mbstring": "1.22.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
