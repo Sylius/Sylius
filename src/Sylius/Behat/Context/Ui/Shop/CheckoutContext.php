@@ -220,6 +220,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not be able to change email
+     */
+    public function iShouldNotBeAbleToChangeEmail(): void
+    {
+        Assert::false($this->addressPage->hasEmailInput());
+    }
+
+    /**
      * @When I register with previously used :email email and :password password
      */
     public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
