@@ -572,7 +572,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then non-translatable attribute :attributeName of product :product should be :value
      */
-    public function itsNonTranslatableAttributeShouldBe(string $attributeName, ProductInterface $product, $value): void
+    public function itsNonTranslatableAttributeShouldBe(string $attributeName, ProductInterface $product, string $value): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 

@@ -1,7 +1,7 @@
 @managing_products
-Feature: Viewing product's non translatable attributes
+Feature: Viewing product's non translatable attributes on edit page
     In order to see product's non translatable attribute
-    As a Administrator
+    As an Administrator
     I want to be able to see product's single non translatable attribute
 
     Background:
