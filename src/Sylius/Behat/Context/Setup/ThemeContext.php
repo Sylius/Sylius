@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -90,7 +90,7 @@ final class ThemeContext implements Context
      */
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, $contents)
     {
-        $this->changeTemplateContents('/SyliusShopBundle/views/Homepage/index.html.twig', $theme, $contents);
+        $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/Homepage/index.html.twig', $theme, $contents);
     }
 
     /**
@@ -98,7 +98,7 @@ final class ThemeContext implements Context
      */
     public function themeChangesPluginMainTemplateContent(ThemeInterface $theme, string $content): void
     {
-        $this->changeTemplateContents('/SyliusTestPlugin/views/main.html.twig', $theme, $content);
+        $this->changeTemplateContents('/templates/bundles/SyliusTestPlugin/main.html.twig', $theme, $content);
     }
 
     private function changeTemplateContents(string $templatePath, ThemeInterface $theme, string $contents): void

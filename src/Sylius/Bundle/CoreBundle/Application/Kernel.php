@@ -97,7 +97,7 @@ class Kernel extends HttpKernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Payum\Bundle\PayumBundle\PayumBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new \BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
 
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

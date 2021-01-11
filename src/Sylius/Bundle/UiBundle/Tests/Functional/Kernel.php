@@ -38,9 +38,6 @@ final class Kernel extends HttpKernel
     {
         $containerBuilder->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
-            'templating' => [
-                'engines' => ['twig'],
-            ],
         ]);
 
         $containerBuilder->loadFromExtension('security', ['firewalls' => ['main' => ['anonymous' => null]]]);

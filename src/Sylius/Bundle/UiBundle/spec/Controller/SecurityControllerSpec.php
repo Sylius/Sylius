@@ -64,15 +64,15 @@ final class SecurityControllerSpec extends ObjectBehavior
         $form->createView()->willReturn($formView);
 
         $templatingEngine
-            ->renderResponse('CustomTemplateName', [
+            ->render('CustomTemplateName', [
                 'form' => $formView,
                 'last_username' => 'john.doe',
                 'last_error' => 'Bad credentials.',
             ])
-            ->willReturn($response)
+            ->willReturn('content')
         ;
 
-        $this->loginAction($request)->shouldReturn($response);
+        $this->loginAction($request)->getContent()->shouldReturn('content');
     }
 
     function it_redirects_when_user_is_logged_in(

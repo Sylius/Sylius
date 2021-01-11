@@ -548,7 +548,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeInformedThatTheProductDoesNotExist()
     {
-        Assert::eq($this->errorPage->getTitle(), 'The "product" has not been found');
+        Assert::same($this->errorPage->getCode(), 404);
     }
 
     /**
@@ -600,7 +600,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
     {
-        Assert::same($this->errorPage->getTitle(), 'Requested page is invalid.');
+        Assert::same($this->errorPage->getCode(), 404);
     }
 
     /**

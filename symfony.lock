@@ -103,9 +103,6 @@
             "src/Repository/.gitignore"
         ]
     },
-    "doctrine/doctrine-cache-bundle": {
-        "version": "1.4.0"
-    },
     "doctrine/doctrine-migrations-bundle": {
         "version": "2.2",
         "recipe": {
@@ -143,11 +140,14 @@
     "doctrine/reflection": {
         "version": "1.2.1"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.19"
     },
     "fakerphp/faker": {
-        "version": "v1.13.0"
+        "version": "v1.12.0"
     },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
@@ -241,9 +241,6 @@
     },
     "instaclick/php-webdriver": {
         "version": "1.4.7"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "jean85/pretty-package-versions": {
         "version": "1.5.0"
@@ -391,7 +388,7 @@
         "version": "v4.6.0"
     },
     "ocramius/proxy-manager": {
-        "version": "2.2.3"
+        "version": "2.10.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"

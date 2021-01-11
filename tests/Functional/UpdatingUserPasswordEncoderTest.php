@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\AbstractResourceOwner;

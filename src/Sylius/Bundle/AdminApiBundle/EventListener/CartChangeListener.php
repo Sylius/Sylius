@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminApiBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;

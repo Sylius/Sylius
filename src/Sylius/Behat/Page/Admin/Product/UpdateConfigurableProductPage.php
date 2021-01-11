@@ -79,10 +79,10 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         }
 
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+        $statusCode = $this->getDriver()->getStatusCode();
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return in_array($statusCode, [200, 304], true);
     }
 
     public function attachImage(string $path, string $type = null): void

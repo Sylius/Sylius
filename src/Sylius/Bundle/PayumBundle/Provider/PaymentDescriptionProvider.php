@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PayumBundle\Provider;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PaymentDescriptionProvider implements PaymentDescriptionProviderInterface
 {

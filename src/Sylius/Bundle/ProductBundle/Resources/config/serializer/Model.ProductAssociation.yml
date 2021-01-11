@@ -15,5 +15,5 @@ Sylius\Component\Product\Model\ProductAssociation:
             groups: [Default, Detailed]
         associatedProducts:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed]

@@ -59,10 +59,10 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        return $this->container->get('templating')->renderResponse(
+        return new Response($this->container->get('twig')->render(
             $configuration->getTemplate('changePassword.html'),
             ['form' => $form->createView()]
-        );
+        ));
     }
 
     public function requestPasswordResetTokenAction(Request $request): Response
@@ -108,13 +108,13 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        return $this->container->get('templating')->renderResponse(
+        return new Response($this->container->get('twig')->render(
             $configuration->getTemplate('resetPassword.html'),
             [
                 'form' => $form->createView(),
                 'user' => $user,
             ]
-        );
+        ));
     }
 
     public function verifyAction(Request $request, string $token): Response
@@ -247,12 +247,12 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        return $this->container->get('templating')->renderResponse(
+        return new Response($this->container->get('twig')->render(
             $template,
             [
                 'form' => $form->createView(),
             ]
-        );
+        ));
     }
 
     protected function addTranslatedFlash(string $type, string $message): void

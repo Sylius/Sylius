@@ -96,7 +96,7 @@ final class ThemeContext implements Context
      */
     public function iShouldSeeThemedHomepage(ThemeInterface $theme)
     {
-        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/templates/bundles/SyliusShopBundle/Homepage/index.html.twig');
 
         Assert::same($this->homePage->getContent(), $content);
     }
@@ -106,7 +106,7 @@ final class ThemeContext implements Context
      */
     public function iShouldNotSeeThemedHomepage(ThemeInterface $theme)
     {
-        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/templates/bundles/SyliusShopBundle/Homepage/index.html.twig');
 
         Assert::notSame($this->homePage->getContent(), $content);
     }

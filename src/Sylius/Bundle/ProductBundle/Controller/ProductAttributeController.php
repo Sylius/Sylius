@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -26,18 +25,13 @@ class ProductAttributeController extends ResourceController
 {
     public function getAttributeTypesAction(Request $request, string $template): Response
     {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $view = View::create()
-            ->setTemplate($template)
-            ->setTemplateVar($this->metadata->getPluralName())
-            ->setData([
+        return $this->render(
+            $template,
+            [
                 'types' => $this->get('sylius.registry.attribute_type')->all(),
                 'metadata' => $this->metadata,
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function renderAttributesAction(Request $request): Response

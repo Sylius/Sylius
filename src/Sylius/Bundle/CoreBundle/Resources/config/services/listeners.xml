@@ -104,5 +104,9 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener" decorates="exception_listener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener.inner" />
+        </service>
     </services>
 </container>

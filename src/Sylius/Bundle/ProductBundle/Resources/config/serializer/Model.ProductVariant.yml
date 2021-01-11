@@ -17,11 +17,11 @@ Sylius\Component\Product\Model\ProductVariant:
             groups: [Default, Detailed, DetailedCart]
         optionValues:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
         translations:
             expose: true
-            type: array
+            type: iterable
             groups: [Default, Detailed, DetailedCart]
     virtual_properties:
         getDescriptor:

@@ -44,15 +44,13 @@ class OrderController extends ResourceController
 
         $form = $this->resourceFormFactory->create($configuration, $cart);
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate('summary.html'),
+            [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function widgetAction(Request $request): Response
@@ -65,12 +63,12 @@ class OrderController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($cart));
         }
 
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
-            ->setData(['cart' => $cart])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render(
+            $configuration->getTemplate('summary.html'),
+            [
+                'cart' => $cart,
+            ]
+        );
     }
 
     public function saveAction(Request $request): Response
@@ -118,17 +116,15 @@ class OrderController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        $view = View::create()
-            ->setData([
+        return $this->render(
+            $configuration->getTemplate(ResourceActions::UPDATE . '.html'),
+            [
                 'configuration' => $configuration,
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
                 'cart' => $resource,
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
+            ]
+        );
     }
 
     public function clearAction(Request $request): Response
