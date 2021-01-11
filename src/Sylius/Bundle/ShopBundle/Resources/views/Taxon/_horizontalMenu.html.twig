@@ -7,7 +7,9 @@
             <i class="dropdown icon"></i>
             <div class="menu">
                 {% for childTaxon in taxon.enabledChildren %}
-                    {{ macros.item(childTaxon) }}
+                    {% if childTaxon.enabled == true %}
+                        {{ macros.item(childTaxon) }}
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -21,7 +23,9 @@
 {% if taxons|length > 0 %}
 <div class="ui large stackable menu" {{ sylius_test_html_attribute('menu') }}>
     {% for taxon in taxons %}
-        {{ macros.item(taxon) }}
+        {% if taxon.enabled == true %}
+            {{ macros.item(taxon) }}
+        {% endif %}
     {% endfor %}
 </div>
 {% endif %}
