@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2021-01-04T10:20:40Z
+
+@pamil @Zales0123 Be careful, AdvancedUserInterface has been removed
+User component needs symfony/security-core instead of symfony/security and maybe you need to introduce a pollyfill to prevent BC on this removed interface.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-01-04T10:46:23Z
+
+@loic425 good catch 👍 the solution is already proposed in https://github.com/Sylius/Sylius/pull/11774
+
+---------------------------------------------------------------------------
+
+by loic425 at 2021-01-04T10:56:26Z
+
+@Zales0123 Is a PR already exist with the `Symfony\Component\EventDispatcher\Event` replacement to `Symfony\Contracts\EventDispatcher\Event`?
