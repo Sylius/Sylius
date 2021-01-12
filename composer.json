@@ -155,6 +155,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
+        "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/polyfill-mbstring": "1.22.0"
     },
