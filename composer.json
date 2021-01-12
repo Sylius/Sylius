@@ -64,7 +64,7 @@
         "sylius/resource": "^1.7",
         "sylius/resource-bundle": "^1.7",
         "sylius/theme-bundle": "^2.1",
-        "symfony/asset": "^4.4",
+        "symfony/asset": "^5.2",
         "symfony/config": "^4.4",
         "symfony/console": "^4.4",
         "symfony/dependency-injection": "^4.4",
