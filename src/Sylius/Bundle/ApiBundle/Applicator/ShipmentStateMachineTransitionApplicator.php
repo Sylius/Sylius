@@ -40,7 +40,7 @@ final class ShipmentStateMachineTransitionApplicator implements ShipmentStateMac
     {
         $this->applyTransition($data, ShipmentTransitions::TRANSITION_SHIP);
 
-        $this->eventDispatcher->dispatch('sylius.shipment.post_ship', new GenericEvent($data));
+        $this->eventDispatcher->dispatch(new GenericEvent($data), 'sylius.shipment.post_ship');
 
         return $data;
     }
