@@ -35,6 +35,7 @@
     "require": {
         "php": "^7.3",
         "doctrine/collections": "^1.6",
+        "sylius-labs/polyfill-symfony-security": "^1.0",
         "sylius/resource": "^1.7",
         "symfony/polyfill-mbstring": "^1.17",
         "symfony/security-core": "^4.4 || ^5.2"
