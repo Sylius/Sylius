@@ -17,7 +17,7 @@ use FOS\OAuthServerBundle\Model\ClientManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminApiBundle\Model\Client;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

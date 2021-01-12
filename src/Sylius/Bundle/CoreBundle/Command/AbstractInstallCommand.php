@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
