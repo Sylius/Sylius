@@ -102,7 +102,7 @@
         "symfony/translation": "^4.4",
         "symfony/twig-bundle": "^4.4",
         "symfony/validator": "^4.4",
-        "symfony/yaml": "^4.4",
+        "symfony/yaml": "^5.2",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12",
         "webmozart/assert": "^1.9",
