@@ -134,6 +134,12 @@
             </errorLevel>
         </InvalidDocblock>
 
+        <UndefinedDocblockClass>
+            <errorLevel type="info">
+                <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" /> <!-- for backwards compatibility with symfony/templating ^4.4 -->
+            </errorLevel>
+        </UndefinedDocblockClass>
+
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
