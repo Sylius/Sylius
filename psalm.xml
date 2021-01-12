@@ -128,6 +128,12 @@
             </errorLevel>
         </InternalMethod>
 
+        <InvalidDocblock>
+            <errorLevel type="info">
+                <file name="vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php" />
+            </errorLevel>
+        </InvalidDocblock>
+
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
