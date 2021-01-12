@@ -37,7 +37,7 @@
         "friendsofphp/proxy-manager-lts": "^1.0",
         "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
         "friendsofsymfony/rest-bundle": "^3.0",
-        "gedmo/doctrine-extensions": "^2.4.12",
+        "gedmo/doctrine-extensions": "^2.4.12 || ^3.0",
         "jms/serializer-bundle": "^3.5",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
