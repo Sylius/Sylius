@@ -657,6 +657,9 @@
     "sylius-labs/polyfill-symfony-event-dispatcher": {
         "version": "v1.0.0"
     },
+    "sylius-labs/polyfill-symfony-security": {
+        "version": "v1.0.0"
+    },
     "sylius-labs/sensio-distribution-bundle": {
         "version": "v6.0.1"
     },
