@@ -111,7 +111,6 @@
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
                 <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" />
                 <referencedMethod name="Symfony\Component\HttpFoundation\JsonResponse::create" />
-                <referencedMethod name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent::getException" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Kernel::getRootDir" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getCurrencyBundle" />
                 <referencedMethod name="Symfony\Component\Intl\Intl::getLanguageBundle" />
