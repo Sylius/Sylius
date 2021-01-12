@@ -31,6 +31,8 @@ jobs:
             matrix:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
+                
+        continue-on-error: ${{ matrix.symfony == '^5.2' }}
 
         steps:
             -   
@@ -118,8 +120,10 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4]
+                symfony: [^4.4, ^5.2]
                 mysql: [5.7]
+
+        continue-on-error: ${{ matrix.symfony == '^5.2' }}
 
         env:
             APP_ENV: test_cached
@@ -246,9 +250,11 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4]
+                symfony: [^4.4, ^5.2]
                 node: [10.x]
                 mysql: [5.7]
+                
+        continue-on-error: ${{ matrix.symfony == '^5.2' }}
 
         env:
             APP_ENV: test_cached

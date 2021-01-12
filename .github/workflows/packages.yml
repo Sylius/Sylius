@@ -51,6 +51,8 @@ jobs:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
+                
+        continue-on-error: ${{ matrix.symfony == '^5.2' }}
         
         steps:
             -   
