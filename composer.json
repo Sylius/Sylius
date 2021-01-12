@@ -70,7 +70,7 @@
         "symfony/dependency-injection": "^4.4",
         "symfony/doctrine-bridge": "^4.4",
         "symfony/event-dispatcher": "^4.4",
-        "symfony/expression-language": "^4.4",
+        "symfony/expression-language": "^5.2",
         "symfony/filesystem": "^4.4",
         "symfony/finder": "^4.4",
         "symfony/form": "^4.4",
