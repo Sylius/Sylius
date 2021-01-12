@@ -97,6 +97,7 @@
         "symfony/security-guard": "^4.4 || ^5.2",
         "symfony/security-http": "^4.4 || ^5.2",
         "symfony/serializer": "^4.4 || ^5.2",
+        "symfony/string": "^5.2",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^4.4 || ^5.2",
         "symfony/thanks": "^1.2",
