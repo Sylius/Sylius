@@ -32,10 +32,9 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_user_does_not_implement_user_interface(
         ObjectManager $objectManager,
+        Request $request,
         TokenInterface $token
     ): void {
-        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
-
         $user = new \stdClass();
 
         $token->getUser()->willReturn($user);
@@ -43,31 +42,29 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_user_does_not_implement_specified_class_or_interface(
         ObjectManager $objectManager,
+        Request $request,
         TokenInterface $token,
         User $user
     ): void {
-        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
-
         $token->getUser()->willReturn($user);
 
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_user_uses_the_recommended_encoder(
         ObjectManager $objectManager,
+        Request $request,
         TokenInterface $token,
         FixtureUser $user
     ): void {
-        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
-
         $token->getUser()->willReturn($user);
 
         $user->getEncoderName()->willReturn('newalgo');
@@ -78,7 +75,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_plain_password_could_not_be_resolved(
@@ -86,7 +83,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         TokenInterface $token,
         FixtureUser $user
     ): void {
-        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
+        $request = new Request();
 
         $token->getUser()->willReturn($user);
 
@@ -98,7 +95,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request, $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_resolved_plain_password_is_null(
@@ -109,8 +106,6 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $request = new Request();
         $request->request->set('_password', null);
 
-        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
-
         $token->getUser()->willReturn($user);
 
         $user->getEncoderName()->willReturn('oldalgo');
@@ -121,7 +116,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request, $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_resolved_plain_password_is_empty(
@@ -132,8 +127,6 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $request = new Request();
         $request->request->set('_password', '');
 
-        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
-
         $token->getUser()->willReturn($user);
 
         $user->getEncoderName()->willReturn('oldalgo');
@@ -144,7 +137,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request, $token->getWrappedObject()));
     }
 
     function it_updates_the_encoder_and_plain_password_if_using_old_encoder_and_plain_password_could_be_resolved(
@@ -154,8 +147,6 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
     ): void {
         $request = new Request();
         $request->request->set('_password', 'plainpassword');
-
-        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -167,7 +158,7 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldBeCalled();
         $objectManager->flush()->shouldBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request, $token->getWrappedObject()));
     }
 
     function it_updates_the_encoder_and_plain_password_if_using_default_null_encoder_and_plain_password_could_be_resolved(
@@ -177,8 +168,6 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
     ): void {
         $request = new Request();
         $request->request->set('_password', 'plainpassword');
-
-        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -190,6 +179,6 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         $objectManager->persist($user)->shouldBeCalled();
         $objectManager->flush()->shouldBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request, $token->getWrappedObject()));
     }
 }

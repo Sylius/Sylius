@@ -48,10 +48,10 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
 
     function it_updates_user_last_login_on_security_interactive_login(
         ObjectManager $userManager,
+        Request $request,
         TokenInterface $token,
         UserInterface $user
     ): void {
-        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $user->setLastLogin(Argument::type(\DateTimeInterface::class))->shouldBeCalled();
@@ -59,7 +59,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
 
-        $this->onSecurityInteractiveLogin($event);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_updates_user_last_login_on_implicit_login(
@@ -96,12 +96,12 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     function it_updates_only_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
+        Request $request,
         TokenInterface $token,
         SymfonyUserInterface $user
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
-        $interactiveLoginEvent = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $event->getUser()->willReturn($user);
@@ -109,22 +109,25 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $userManager->persist(Argument::any())->shouldNotBeCalled();
         $userManager->flush()->shouldNotBeCalled();
 
-        $this->onSecurityInteractiveLogin($interactiveLoginEvent);
+        $this->onSecurityInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_throws_exception_if_subscriber_is_used_for_class_other_than_sylius_user_interface(
         ObjectManager $userManager,
+        Request $request,
         TokenInterface $token,
         SymfonyUserInterface $user
     ): void {
         $this->beConstructedWith($userManager, SymfonyUserInterface::class);
 
-        $interactiveLoginEvent = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $userManager->persist(Argument::any())->shouldNotBeCalled();
         $userManager->flush()->shouldNotBeCalled();
 
-        $this->shouldThrow(\UnexpectedValueException::class)->during('onSecurityInteractiveLogin', [$interactiveLoginEvent]);
+        $this
+            ->shouldThrow(\UnexpectedValueException::class)
+            ->during('onSecurityInteractiveLogin', [new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject())])
+        ;
     }
 }
