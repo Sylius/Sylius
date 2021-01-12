@@ -111,7 +111,7 @@ final class CustomerEmailUpdaterListener
         }
 
         if (!$user->isEnabled() && !$user->isVerified() && null !== $user->getEmailVerificationToken()) {
-            $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
+            $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
             /** @var FlashBagInterface $flashBag */
             $flashBag = $this->session->getBag('flashes');

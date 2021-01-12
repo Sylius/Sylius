@@ -199,7 +199,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $flashBag->add('success', 'sylius.user.verify_email_request')->shouldBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldBeCalled()
         ;
 
@@ -234,7 +234,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $flashBag->add(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 
@@ -269,7 +269,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $flashBag->add(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 
@@ -304,7 +304,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $flashBag->add(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 
@@ -335,7 +335,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $flashBag->add(Argument::any())->shouldNotBeCalled();
 
         $eventDispatcher
-            ->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, Argument::type(GenericEvent::class))
+            ->dispatch(Argument::type(GenericEvent::class), UserEvents::REQUEST_VERIFICATION_TOKEN)
             ->shouldNotBeCalled()
         ;
 
