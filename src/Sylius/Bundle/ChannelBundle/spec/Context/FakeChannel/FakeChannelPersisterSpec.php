@@ -30,53 +30,54 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         $this->beConstructedWith($fakeHostnameProvider);
     }
 
-    function it_applies_only_to_master_requests(ResponseEvent $responseEvent): void
+    function it_applies_only_to_master_requests(HttpKernelInterface $kernel, Request $request, Response $response): void
     {
-        $responseEvent->getRequestType()->willReturn(HttpKernelInterface::SUB_REQUEST);
-
-        $responseEvent->getRequest()->shouldNotBeCalled();
-        $responseEvent->getResponse()->shouldNotBeCalled();
-
-        $this->onKernelResponse($responseEvent);
+        $this->onKernelResponse(new ResponseEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::SUB_REQUEST,
+            $response->getWrappedObject()
+        ));
     }
 
     function it_applies_only_for_request_with_fake_channel_code(
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
-        ResponseEvent $responseEvent,
-        Request $request
+        HttpKernelInterface $kernel,
+        Request $request,
+        Response $response
     ): void {
-        $responseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
-        $responseEvent->getRequest()->willReturn($request);
-
         $fakeHostnameProvider->getCode($request)->willReturn(null);
 
-        $responseEvent->getResponse()->shouldNotBeCalled();
-
-        $this->onKernelResponse($responseEvent);
+        $this->onKernelResponse(new ResponseEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $response->getWrappedObject()
+        ));
     }
 
     function it_persists_fake_channel_codes_in_a_cookie(
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
-        ResponseEvent $responseEvent,
+        HttpKernelInterface $kernel,
         Request $request,
         Response $response,
         ResponseHeaderBag $responseHeaderBag
     ): void {
-        $responseEvent->getRequestType()->willReturn(HttpKernelInterface::MASTER_REQUEST);
-        $responseEvent->getRequest()->willReturn($request);
-
         $fakeHostnameProvider->getCode($request)->willReturn('fake_channel_code');
-
-        $responseEvent->getResponse()->willReturn($response);
 
         $response->headers = $responseHeaderBag;
         $responseHeaderBag
-            ->setCookie(Argument::that(function (Cookie $cookie) {
+            ->setCookie(Argument::that(static function (Cookie $cookie): bool {
                 return $cookie->getName() === '_channel_code' && $cookie->getValue() === 'fake_channel_code';
             }))
             ->shouldBeCalled()
         ;
 
-        $this->onKernelResponse($responseEvent);
+        $this->onKernelResponse(new ResponseEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $response->getWrappedObject()
+        ));
     }
 }
