@@ -32,7 +32,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
 
