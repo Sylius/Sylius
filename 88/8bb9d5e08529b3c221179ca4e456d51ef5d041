@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by clem21 at 2021-01-11T16:10:29Z
+
+> Why is this fix enabled? In one loop we iterate over **enabled**Children, in the main loop we get taxons with `findChildrenByChannelMenuTaxon` repository method, which also included filtration by `enabled` field
+
+You're right, there has been a misunderstanding between me and @lchrusciel the check needs to be on breadcrumbs
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-01-12T16:39:39Z
+
+Thank you, Clémence! :tada:
