@@ -72,8 +72,8 @@ final class ZoneType extends AbstractResourceType
             ];
 
             if ($zone->getType() === ZoneInterface::TYPE_ZONE) {
-                $entryOptions['entry_options']['choice_filter'] = function (ZoneInterface $subZone) use ($zone): bool {
-                    return $zone->getId() !== $subZone->getId();
+                $entryOptions['entry_options']['choice_filter'] = static function (?ZoneInterface $subZone) use ($zone): bool {
+                    return $subZone !== null && $zone->getId() !== $subZone->getId();
                 };
             }
 
