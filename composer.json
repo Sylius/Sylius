@@ -92,7 +92,7 @@
         "symfony/routing": "^4.4",
         "symfony/security-bundle": "^4.4",
         "symfony/security-core": "^4.4",
-        "symfony/security-csrf": "^4.4",
+        "symfony/security-csrf": "^5.2",
         "symfony/security-guard": "^4.4",
         "symfony/security-http": "^4.4",
         "symfony/serializer": "^4.4",
