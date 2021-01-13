@@ -89,8 +89,8 @@ final class ProductUpdateMenuBuilder
         $menu->addChild($manageVariantsItem);
 
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new ProductMenuBuilderEvent($this->factory, $menu, $product)
+            new ProductMenuBuilderEvent($this->factory, $menu, $product),
+            self::EVENT_NAME
         );
 
         return $menu;
