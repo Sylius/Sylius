@@ -71,7 +71,7 @@
         "symfony/doctrine-bridge": "^4.4",
         "symfony/event-dispatcher": "^4.4",
         "symfony/expression-language": "^4.4",
-        "symfony/filesystem": "^4.4",
+        "symfony/filesystem": "^5.2",
         "symfony/finder": "^4.4",
         "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.4",
