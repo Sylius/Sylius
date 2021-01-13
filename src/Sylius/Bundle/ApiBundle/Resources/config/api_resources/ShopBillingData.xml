@@ -18,12 +18,6 @@
     <resource class="%sylius.model.shop_billing_data.class%" shortName="ShopBillingData">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shop_billing_data:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations />
@@ -31,6 +25,9 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shop_billing_data:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

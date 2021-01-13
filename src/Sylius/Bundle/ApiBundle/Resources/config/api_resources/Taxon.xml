@@ -7,29 +7,29 @@
     <resource class="%sylius.model.taxon.class%" shortName="Taxon">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>taxon:read</attribute>
-            </attribute>
-        </attribute>
-
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">taxon:create</attribute>
+                    <attribute name="groups">admin:taxon:create</attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:taxon:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -37,19 +37,25 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/taxons/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">taxon:update</attribute>
+                    <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:taxon:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
