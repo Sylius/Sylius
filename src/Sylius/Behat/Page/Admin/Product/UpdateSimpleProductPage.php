@@ -92,7 +92,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
     {
         $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $validationError = $this->getElement('attribute_element')->find('css', '.sylius-validation-error');
 
@@ -426,11 +425,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attribute_element' => '.attribute',
-            'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
+            'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
-            'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
+            'locale_tab' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
             'prices' => '#sylius_product_variant_channelPricings',
             'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',

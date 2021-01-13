@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Viewing product's non translatable attributes
     In order to see product's non translatable attribute
-    As a Administrator
+    As an Administrator
     I want to be able to see product's when checking details
 
     Background:

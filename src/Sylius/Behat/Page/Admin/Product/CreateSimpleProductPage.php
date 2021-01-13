@@ -94,7 +94,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
     {
         $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
 
@@ -241,7 +240,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '.attribute',
-            'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
+            'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
             'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',

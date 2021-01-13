@@ -12,8 +12,8 @@ Feature: Adding a new product with an integer attribute
 
     @ui @javascript
     Scenario: Adding an integer attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its "Production year" attribute to "1955" in "English (United States)"
@@ -24,8 +24,8 @@ Feature: Adding a new product with an integer attribute
 
     @ui @javascript
     Scenario: Adding an integer non-translatable attribute to product
-        Given I want to create a new simple product
-        When I specify its code as "44_MAGNUM"
+        When I want to create a new simple product
+        And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
         And I set its price to "$100.00" for "United States" channel
         And I set its non-translatable "Weight" attribute to "10"
