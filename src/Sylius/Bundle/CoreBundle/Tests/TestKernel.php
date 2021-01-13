@@ -173,4 +173,14 @@ final class TestKernel extends BaseKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
     }
+
+    public function getCacheDir(): string
+    {
+        return sys_get_temp_dir() . '/SyliusCoreBundle/cache/' . $this->getEnvironment();
+    }
+
+    public function getLogDir(): string
+    {
+        return sys_get_temp_dir() . '/SyliusCoreBundle/logs';
+    }
 }
