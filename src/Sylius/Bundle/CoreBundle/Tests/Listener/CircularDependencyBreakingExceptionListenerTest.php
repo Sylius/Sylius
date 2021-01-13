@@ -16,8 +16,10 @@ namespace Sylius\Bundle\CoreBundle\Tests\Listener;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class CircularDependencyBreakingExceptionListenerTest extends TestCase
 {
@@ -28,7 +30,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
         $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
-        $event = $this->createMock(ExceptionEvent::class);
+        $event = $this->createExceptionEvent();
 
         $secondException = new \Exception('Second');
         $firstException = new \Exception('First', 0, $secondException);
@@ -62,7 +64,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
         $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
-        $event = $this->createMock(ExceptionEvent::class);
+        $event = $this->createExceptionEvent();
 
         $fourthException = new \Exception('Fourth');
         $thirdException = new \Exception('Third', 0, $fourthException);
@@ -102,7 +104,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
         $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
-        $event = $this->createMock(ExceptionEvent::class);
+        $event = $this->createExceptionEvent();
 
         $secondException = new \Exception('Second');
         $firstException = new \Exception('First', 0, $secondException);
@@ -133,5 +135,14 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
         $property = new \ReflectionProperty(\Exception::class, 'previous');
         $property->setAccessible(true);
         $property->setValue($exception, $previous);
+    }
+
+    private function createExceptionEvent(): ExceptionEvent
+    {
+        $kernel = $this->createMock(HttpKernelInterface::class);
+        $request = $this->createMock(Request::class);
+        $exception = new \Exception();
+
+        return new ExceptionEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $exception);
     }
 }
