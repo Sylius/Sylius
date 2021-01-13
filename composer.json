@@ -80,7 +80,7 @@
         "symfony/intl": "^4.4",
         "symfony/messenger": "^4.4",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/options-resolver": "^4.4",
+        "symfony/options-resolver": "^5.2",
         "symfony/polyfill-iconv": "^1.17",
         "symfony/polyfill-intl-icu": "^1.17",
         "symfony/polyfill-mbstring": "^1.17",
