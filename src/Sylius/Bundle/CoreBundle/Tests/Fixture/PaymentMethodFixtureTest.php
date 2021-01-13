@@ -78,7 +78,7 @@ final class PaymentMethodFixtureTest extends TestCase
     public function payment_method_instructions_configuration_must_by_string(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['instructions' => 'test']]]], 'custom.*.instructions');
-        $this->assertConfigurationIsInvalid([['custom' => [['instructions' => ['test']]]]], 'Invalid type for path "payment_method.custom.0.instructions". Expected scalar, but got array');
+        $this->assertConfigurationIsInvalid([['custom' => [['instructions' => ['test']]]]]);
     }
 
     /**
@@ -115,7 +115,7 @@ final class PaymentMethodFixtureTest extends TestCase
     public function payment_method_gateway_configuration_must_by_array(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['gatewayConfig' => ['username' => 'USERNAME']]]]], 'custom.*.gatewayConfig');
-        $this->assertConfigurationIsInvalid([['custom' => [['gatewayConfig' => 'USERNAME']]]], 'Invalid type for path "payment_method.custom.0.gatewayConfig". Expected array, but got string');
+        $this->assertConfigurationIsInvalid([['custom' => [['gatewayConfig' => 'USERNAME']]]]);
     }
 
     /**
