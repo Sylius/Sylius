@@ -53,6 +53,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                         continue;
                     }
 
+                    $key = (string) $key;
                     $newKey = $this->getUniqueKey();
                     $fixedData[$newKey] = $this->resolveValues($values);
 
