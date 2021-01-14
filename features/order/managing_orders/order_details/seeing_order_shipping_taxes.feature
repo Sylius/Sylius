@@ -20,6 +20,7 @@ Feature: Seeing taxes of an order
     Scenario: Seeing taxes of order items and shipping
         Given the customer bought a single "Symfony2 T-Shirt"
         And the customer chose "DHL" shipping method to "United States" with "Offline" payment
+        And the order "#00000666" is already paid
         When I view the summary of the order "#00000666"
         Then the order's items total should be "$172.20"
         And there should be a shipping charge "DHL $10.00"
