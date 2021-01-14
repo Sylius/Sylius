@@ -51,7 +51,7 @@ final class Request implements RequestInterface
         $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
         return new self(
-            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
+            sprintf('/api/%s%s', self::prepareSection($section), $resource),
             HttpRequest::METHOD_GET,
             $headers
         );
@@ -60,7 +60,7 @@ final class Request implements RequestInterface
     public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $subResource),
+            sprintf('/api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $subResource),
             HttpRequest::METHOD_GET
         );
     }
@@ -75,7 +75,7 @@ final class Request implements RequestInterface
         $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
         return new self(
-            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
+            sprintf('/api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_GET,
             $headers
         );
@@ -93,7 +93,7 @@ final class Request implements RequestInterface
         }
 
         return new self(
-            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
+            sprintf('/api/%s%s', self::prepareSection($section), $resource),
             HttpRequest::METHOD_POST,
             $headers
         );
@@ -112,7 +112,7 @@ final class Request implements RequestInterface
         }
 
         return new self(
-            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
+            sprintf('/api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_PUT,
             $headers
         );
@@ -128,7 +128,7 @@ final class Request implements RequestInterface
         $headers = $token ? ['HTTP_' . $authorizationHeader => 'Bearer ' . $token] : [];
 
         return new self(
-            sprintf('/new-api/%s%s/%s', self::prepareSection($section), $resource, $id),
+            sprintf('/api/%s%s/%s', self::prepareSection($section), $resource, $id),
             HttpRequest::METHOD_DELETE,
             $headers
         );
@@ -142,7 +142,7 @@ final class Request implements RequestInterface
     public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): RequestInterface
     {
         return new self(
-            sprintf('/new-api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $action),
+            sprintf('/api/%s%s/%s/%s', self::prepareSection($section), $resource, $id, $action),
             $type,
             ['CONTENT_TYPE' => 'application/merge-patch+json']
         );
@@ -160,7 +160,7 @@ final class Request implements RequestInterface
         }
 
         return new self(
-            sprintf('/new-api/%s%s', self::prepareSection($section), $resource),
+            sprintf('/api/%s%s', self::prepareSection($section), $resource),
             HttpRequest::METHOD_POST,
             $headers
         );

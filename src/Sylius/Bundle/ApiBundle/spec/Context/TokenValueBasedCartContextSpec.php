@@ -26,7 +26,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
 {
     function let(RequestStack $requestStack, OrderRepositoryInterface $orderRepository): void
     {
-        $this->beConstructedWith($requestStack, $orderRepository, '/new-api');
+        $this->beConstructedWith($requestStack, $orderRepository, '/api');
     }
 
     function it_implements_cart_context_interface(): void
@@ -41,7 +41,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         OrderInterface $cart
     ): void {
         $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
-        $request->getRequestUri()->willReturn('/new-api/orders/TOKEN_VALUE');
+        $request->getRequestUri()->willReturn('/api/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn($cart);
@@ -79,7 +79,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         Request $request
     ): void {
         $request->attributes = new ParameterBag([]);
-        $request->getRequestUri()->willReturn('/new-api/orders');
+        $request->getRequestUri()->willReturn('/api/orders');
 
         $requestStack->getMasterRequest()->willReturn($request);
 
@@ -95,7 +95,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         Request $request
     ): void {
         $request->attributes = new ParameterBag(['id' => 'TOKEN_VALUE']);
-        $request->getRequestUri()->willReturn('/new-api/orders/TOKEN_VALUE');
+        $request->getRequestUri()->willReturn('/api/orders/TOKEN_VALUE');
 
         $requestStack->getMasterRequest()->willReturn($request);
         $orderRepository->findCartByTokenValue('TOKEN_VALUE')->willReturn(null);

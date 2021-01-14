@@ -1,8 +1,8 @@
 parameters:
     sylius.security.admin_regex: "^/%sylius_admin.path_name%"
-    sylius.security.api_regex: "^/api"
-    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
-    sylius.security.new_api_route: "/new-api"
+    sylius.security.api_regex: "^/api/v1"
+    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+    sylius.security.new_api_route: "/api"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
     sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"

@@ -400,7 +400,7 @@ final class ManagingProductsContext implements Context
                 $this->client->getLastResponse(),
                 0,
                 'code',
-                '/new-api/admin/products/_NEW'
+                '/api/admin/products/_NEW'
             ),
             sprintf('It was possible to change %s', '_NEW')
         );
