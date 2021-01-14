@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
@@ -87,11 +88,17 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
-    private function clearTaxes(BaseOrderInterface $order): void
+    private function clearTaxes(OrderInterface $order): void
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+
         foreach ($order->getItems() as $item) {
             $item->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT);
+        }
+
+        /** @var ShipmentInterface $shipment */
+        foreach ($order->getShipments() as $shipment) {
+            $shipment->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         }
     }
 }
