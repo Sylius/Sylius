@@ -150,13 +150,13 @@
 
 {% block sylius_promotion_rule_widget %}
     <div class="ui segment">
-        {{ form_widget(form) }}
+        {{ block('form_widget') }}
     </div>
 {% endblock %}
 
 {% block sylius_promotion_action_widget %}
     <div class="ui segment">
-        {{ form_widget(form) }}
+        {{ block('form_widget') }}
     </div>
 {% endblock %}
 
