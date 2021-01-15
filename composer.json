@@ -180,7 +180,7 @@
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "0.12.66",
-        "phpstan/phpstan-doctrine": "0.12.27",
+        "phpstan/phpstan-doctrine": "0.12.28",
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
