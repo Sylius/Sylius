@@ -75,7 +75,7 @@
         "symfony/finder": "^4.4",
         "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.4",
-        "symfony/http-foundation": "^4.4",
+        "symfony/http-foundation": "^5.2",
         "symfony/http-kernel": "^4.4",
         "symfony/intl": "^4.4",
         "symfony/messenger": "^4.4",
