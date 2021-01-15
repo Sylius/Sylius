@@ -179,7 +179,7 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.0",
-        "phpstan/phpstan": "0.12.66",
+        "phpstan/phpstan": "0.12.67",
         "phpstan/phpstan-doctrine": "0.12.27",
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "0.7.0",
