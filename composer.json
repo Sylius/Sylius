@@ -109,7 +109,7 @@
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
         "winzou/state-machine-bundle": "^0.5",
-        "zendframework/zend-hydrator": "^2.4",
+        "zendframework/zend-hydrator": "^3.0",
         "zendframework/zend-stdlib": "^3.2"
     },
     "replace": {
