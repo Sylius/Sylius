@@ -83,9 +83,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
 
                 return $words;
             })
-            ->setDefault('translatable', function(Options $options): bool {
-                return true;
-            })
+            ->setDefault('translatable', true)
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })

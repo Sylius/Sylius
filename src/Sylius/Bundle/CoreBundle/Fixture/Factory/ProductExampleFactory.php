@@ -365,14 +365,15 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
 
-            if ($productAttribute->isTranslatable()) {
-                foreach ($this->getLocales() as $localeCode) {
-                    $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, $localeCode, $value);
-                }
-            } else {
+            if (!$productAttribute->isTranslatable()) {
                 $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, null, $value);
+
+                continue;
             }
 
+            foreach ($this->getLocales() as $localeCode) {
+                $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, $localeCode, $value);
+            }
         }
 
         return $productAttributesValues;
