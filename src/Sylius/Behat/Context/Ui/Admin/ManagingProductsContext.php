@@ -526,6 +526,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its non-translatable :attribute attribute to :value
+     */
+    public function iSetItsNonTranslatableAttributeTo(string $attribute, string $value): void
+    {
+        $this->createSimpleProductPage->addNonTranslatableAttribute($attribute, $value);
+    }
+
+    /**
      * @When I remove its :attribute attribute
      * @When I remove its :attribute attribute from :language
      */
@@ -559,6 +567,16 @@ final class ManagingProductsContext implements Context
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $language), $value);
+    }
+
+    /**
+     * @Then non-translatable attribute :attributeName of product :product should be :value
+     */
+    public function itsNonTranslatableAttributeShouldBe(string $attributeName, ProductInterface $product, string $value): void
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same($this->updateSimpleProductPage->getNonTranslatableAttributeValue($attributeName), $value);
     }
 
     /**
@@ -624,6 +642,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->selectMainTaxon($taxon);
+    }
+
+    /**
+     * @Then I should see non-translatable attribute :attribute with value :value
+     */
+    public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
+    {
+        Assert::true($this->updateSimpleProductPage->hasNonTranslatableAttributeWithValue($attribute, $value));
     }
 
     /**

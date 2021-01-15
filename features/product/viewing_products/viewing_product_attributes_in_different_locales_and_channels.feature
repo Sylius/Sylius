@@ -13,9 +13,9 @@ Feature: Viewing product's attributes in different locales and channels
         And it uses the "Polish (Poland)" locale by default
         And the store has a product "T-shirt banana" available in "US Channel" channel
         And this product is also available in "PL Channel" channel
-        And this product has text attribute "T-shirt material" with value "Banana skin" in "English (United States)" locale
-        And this product has text attribute "T-shirt material" with value "Skórka banana" in "Polish (Poland)" locale
-        And this product has textarea attribute "T-shirt details" with value "Banana is a very good material." in "English (United States)" locale
+        And this product has a text attribute "T-shirt material" with value "Banana skin" in "English (United States)" locale
+        And this product has a text attribute "T-shirt material" with value "Skórka banana" in "Polish (Poland)" locale
+        And this product has a textarea attribute "T-shirt details" with value "Banana is a very good material." in "English (United States)" locale
         And I am browsing the channel "US Channel"
 
     @ui

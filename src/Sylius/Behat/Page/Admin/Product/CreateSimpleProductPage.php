@@ -68,7 +68,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function addAttribute(string $attributeName, string $value, string $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
@@ -79,10 +78,22 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->setValue($value);
     }
 
+    public function addNonTranslatableAttribute(string $attributeName, string $value): void
+    {
+        $this->clickTabIfItsNotActive('attributes');
+
+        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
+        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
+
+        $this->getDocument()->pressButton('Add attributes');
+        $this->waitForFormElement();
+
+        $this->getElement('non_translatable_attribute_value', ['%attributeName%' => $attributeName])->setValue($value);
+    }
+
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
     {
         $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
 
         $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
 
@@ -229,8 +240,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '.attribute',
-            'attribute_delete_button' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ button',
-            'attribute_value' => '.tab[data-tab="%localeCode%"] .attribute .label:contains("%attributeName%") ~ input',
+            'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
+            'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'code' => '#sylius_product_code',
@@ -240,6 +251,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_%locale%_name',
+            'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
             'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
             'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',

@@ -6,6 +6,7 @@
     "configuration": [],
     "createdAt": "@string@.isDateTime()",
     "updatedAt": "@string@.isDateTime()",
+    "translatable": true,
     "translations": {
         "de": {
             "id": @integer@,

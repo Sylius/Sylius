@@ -66,6 +66,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
             }
         );
 
+        /** @var ProductAttributeValueInterface $attribute */
         foreach ($attributes as $attribute) {
             $this->resolveLocalizedAttributes($product, $attribute);
         }

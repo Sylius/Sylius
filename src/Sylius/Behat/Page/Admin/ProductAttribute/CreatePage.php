@@ -34,6 +34,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return 'disabled' === $this->getElement('type')->getAttribute('disabled');
     }
 
+    public function disableTranslation(): void
+    {
+        $this->getElement('translation')->uncheck();
+    }
+
     public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getDocument()->clickLink('Add');
@@ -83,6 +88,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'multiple' => 'label[for=sylius_product_attribute_configuration_multiple]',
             'name' => '#sylius_product_attribute_translations_en_US_name',
             'type' => '#sylius_product_attribute_type',
+            'translation' => '#sylius_product_attribute_translatable',
         ]);
     }
 }

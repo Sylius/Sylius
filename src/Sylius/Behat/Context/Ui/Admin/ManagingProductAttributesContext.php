@@ -80,6 +80,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When I disable its translatability
+     */
+    public function iDisableItsTranslatability(): void
+    {
+        $this->createPage->disableTranslation();
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
