@@ -4,49 +4,49 @@
 Several additional serialization groups have been rephrased, to improve readability and predictability of them.
 If you are using they on your custom entity `api_resource` configuration or serialization groups, you should check if one of these changes may affect on your app. If yes, change all occurs by this pattern:
 
-    created serialization groups for `Locale` resource as: `admin:locale:read` and `admin:locale:create`
-    `adjustment:read` changed to: `admin:adjustment:read` and `shop:adjustment:read`
-    `admin_user:create` changed to: `admin:admin_user:create`
-    `admin_user:read` changed to: `admin:admin_user:read`
-    `admin_user:update` changed to: `admin:admin_user:update`
-    `avatar_image:read` changed to: `admin:avatar_image:read`
-    `cart:add_item` changed to: `shop:cart:add_item`
-    `cart:address` changed to: `shop:cart:address`
-    `cart:apply_coupon` changed to: `shop:cart:apply_coupon`
-    `cart:change_quantity` changed to: `shop:cart:change_quantity`
-    `cart:complete` changed to: `shop:cart:complete`
-    `cart:remove_item` changed to: `shop:cart:remove_item`
-    `cart:select_payment_method` changed to: `shop:cart:select_payment_method`
-    `cart:select_shipping_method` changed to: `shop:cart:select_shipping_method`
-    `cart:update` changed to: `shop:cart:update`
-    `channel:create` changed to: `admin:channel:create`
-    `channel:read` changed to: `admin:channel:read`
-    `checkout:read` changed to: `shop:cart:read`
-    `country:read` changed to: `admin:country:read`
-    `currency:read` changed to: `admin:currency:read`
-    `customer:password:write` changed to: `shop:customer:password:update`
-    `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
-    `customer:update` changed to: `shop:customer:update`
-    `customer_group:create` changed to: `admin:customer_group:create`
-    `customer_group:read` changed to: `admin:customer_group:read`
-    `customer_group:update` changed to: `admin:customer_group:update`
-    `exchange_rate:create` changed to: `admin:exchange_rate:create`
-    `exchange_rate:read` changed to: `admin:exchange_rate:read`
-    `exchange_rate:update` changed to: `admin:exchange_rate:update`
-    `order:create` changed to: `shop:order:create`
-    `order:read` changed to: `admin:order:read`
-    `order:update` changed to: `admin:order:update`
-    `order_item:read` changed to: `admin:order_item:read` and `shop:order_item:read`
-    `order_item_unit:read` changed to: `admin:order_item_unit:read` and `shop:order_item_unit:read`
-    `payment:read` changed to: `admin:payment:read` and `shop:payment:read`
-    `payment_method:read` changed to: `admin:payment_method:read` and `shop:payment_method:read`
-    `product:create` changed to: `admin:product:create`
-    `product:read` changed to: `admin:product:read` and `shop:product:read`
-    `product:update` changed to: `admin:product:update`
-    `province:read` changed to: `admin:province:read`
-    `province:update` changed to: `admin:province:update`
-    `shop:currencies:read` changed to: `shop:currency:read`
-    `shop:customer:write` changed to: `shop:customer:create`
+- created serialization groups for `Locale` resource as: `admin:locale:read` and `admin:locale:create`
+- `adjustment:read` changed to: `admin:adjustment:read` and `shop:adjustment:read`
+- `admin_user:create` changed to: `admin:admin_user:create`
+- `admin_user:read` changed to: `admin:admin_user:read`
+- `admin_user:update` changed to: `admin:admin_user:update`
+- `avatar_image:read` changed to: `admin:avatar_image:read`
+- `cart:add_item` changed to: `shop:cart:add_item`
+- `cart:address` changed to: `shop:cart:address`
+- `cart:apply_coupon` changed to: `shop:cart:apply_coupon`
+- `cart:change_quantity` changed to: `shop:cart:change_quantity`
+- `cart:complete` changed to: `shop:cart:complete`
+- `cart:remove_item` changed to: `shop:cart:remove_item`
+- `cart:select_payment_method` changed to: `shop:cart:select_payment_method`
+- `cart:select_shipping_method` changed to: `shop:cart:select_shipping_method`
+- `cart:update` changed to: `shop:cart:update`
+- `channel:create` changed to: `admin:channel:create`
+- `channel:read` changed to: `admin:channel:read`
+- `checkout:read` changed to: `shop:cart:read`
+- `country:read` changed to: `admin:country:read`
+- `currency:read` changed to: `admin:currency:read`
+- `customer:password:write` changed to: `shop:customer:password:update`
+- `customer:read` changed to: `admin:customer:read` and `shop:customer:read`
+- `customer:update` changed to: `shop:customer:update`
+- `customer_group:create` changed to: `admin:customer_group:create`
+- `customer_group:read` changed to: `admin:customer_group:read`
+- `customer_group:update` changed to: `admin:customer_group:update`
+- `exchange_rate:create` changed to: `admin:exchange_rate:create`
+- `exchange_rate:read` changed to: `admin:exchange_rate:read`
+- `exchange_rate:update` changed to: `admin:exchange_rate:update`
+- `order:create` changed to: `shop:order:create`
+- `order:read` changed to: `admin:order:read`
+- `order:update` changed to: `admin:order:update`
+- `order_item:read` changed to: `admin:order_item:read` and `shop:order_item:read`
+- `order_item_unit:read` changed to: `admin:order_item_unit:read` and `shop:order_item_unit:read`
+- `payment:read` changed to: `admin:payment:read` and `shop:payment:read`
+- `payment_method:read` changed to: `admin:payment_method:read` and `shop:payment_method:read`
+- `product:create` changed to: `admin:product:create`
+- `product:read` changed to: `admin:product:read` and `shop:product:read`
+- `product:update` changed to: `admin:product:update`
+- `province:read` changed to: `admin:province:read`
+- `province:update` changed to: `admin:province:update`
+- `shop:currencies:read` changed to: `shop:currency:read`
+- `shop:customer:write` changed to: `shop:customer:create`
 
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
