@@ -60,6 +60,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         /** @var ProductAttributeInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($options['type']);
         $productAttribute->setCode($options['code']);
+        $productAttribute->setTranslatable($options['translatable']);
 
         foreach ($this->getLocales() as $localeCode) {
             $productAttribute->setCurrentLocale($localeCode);
@@ -81,6 +82,9 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
                 $words = $this->faker->words(3, true);
 
                 return $words;
+            })
+            ->setDefault('translatable', function(Options $options): bool {
+                return true;
             })
             ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
