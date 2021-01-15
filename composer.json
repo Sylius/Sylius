@@ -193,7 +193,7 @@
         "symfony/flex": "^1.7",
         "symfony/web-profiler-bundle": "^4.4",
         "symplify/package-builder": "^8.0 <8.3",
-        "vimeo/psalm": "4.3.2"
+        "vimeo/psalm": "4.4.1"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
