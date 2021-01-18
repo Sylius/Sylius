@@ -40,9 +40,9 @@ Non-translatable attribute
 Some attributes (dates, author name) don't need a different value in each locale. For those attributes, we introduced the possibility to disable translation.
 Shop Owner declares values only once and regardless of the chosen locale customer will see a proper attribute value.
 
-Warning
+.. warning::
 
-Once the attribute has disabled translatability it will erase attribute values in all locales for this attribute.
+    Once the attribute has disabled translatability it will erase attribute values in all locales for this attribute.
 
 How to create an Attribute?
 ---------------------------
