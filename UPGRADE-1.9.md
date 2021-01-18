@@ -15,11 +15,54 @@
     -           - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
                 - { path: "%sylius.security.new_api_route%/shop/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
     +           - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
-        ```
+    ```
 
 1. Unified API registration path in shop has been changed from `/new-api/shop/register` to `/new-api/shop/customers/`. 
  
 1. Identifier needed to retrieve a product in shop API endpoint (`/new-api/shop/products/{id}`) has been changed from `slug` to `code`. 
+
+1. Replace and add new keys in `config/packages/dev/jms_serializer.yaml`:
+
+    ```diff
+        jms_serializer:
+            visitors:
+    -           json:
+    +           json_serialization:
+                   options:
+                       - JSON_PRETTY_PRINT
+                       - JSON_UNESCAPED_SLASHES
+                       - JSON_PRESERVE_ZERO_FRACTION
+    +           json_deserialization:
+    +              options:
+    +                  - JSON_PRETTY_PRINT
+    +                  - JSON_UNESCAPED_SLASHES
+    +                  - JSON_PRESERVE_ZERO_FRACTION
+    ```
+
+1. Replace and add new keys in `config/packages/prod/jms_serializer.yaml`:
+
+    ```diff
+        jms_serializer:
+            visitors:
+    -           json:
+    +           json_serialization:
+                   options:
+                       - JSON_UNESCAPED_SLASHES
+                       - JSON_PRESERVE_ZERO_FRACTION
+    +           json_deserialization:
+    +              options:
+    +                  - JSON_UNESCAPED_SLASHES
+    +                  - JSON_PRESERVE_ZERO_FRACTION
+    ```
+   
+   1. Replace key in `config/packages/jms_serializer.yaml`:
+   
+   ```diff
+       jms_serializer:
+           visitors:
+   -           xml:
+   +           xml_serialization:
+   ```
 
 ### Data migrations
 
