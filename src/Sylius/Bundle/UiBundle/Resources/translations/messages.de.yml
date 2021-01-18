@@ -727,7 +727,7 @@ sylius:
         search_products: 'Artikel suchen'
         security_settings: 'Sicherheitseinstellungen'
         see_issue: 'Fehler gefunden'
-        select: 'Bundesland auswählen'
+        select: 'Auswahl'
         select_address_from_book: 'Adresse aus Adressbuch auswählen'
         select_products: 'Produkt auswählen'
         select_taxon: 'Klassifizierung wählen'
