@@ -8,6 +8,9 @@ use Sylius\Bundle\PayumBundle\Storage\DoctrineStorage;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @internal
+ */
 final class UseTweakedDoctrineStoragePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
