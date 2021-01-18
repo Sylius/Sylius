@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonSpec extends ObjectBehavior
@@ -130,18 +131,6 @@ final class TaxonSpec extends ObjectBehavior
 
     function its_fullname_prepends_with_parents_fullname(TaxonInterface $root): void
     {
-        $root->getFullname()->willReturn('Category');
-        $this->setName('T-shirts');
-
-        $root->addChild($this)->shouldBeCalled();
-        $this->setParent($root);
-
-        $this->getFullname()->shouldReturn('Category / T-shirts');
-        $this->getFullname(' -- ')->shouldReturn('Category -- T-shirts');
-    }
-    
-    function its_fullname_prepends_with_parents_fullname_with_custom_separator(TaxonInterface $root): void
-    {
         $root->getFullname()->withArguments([' / '])->willReturn('Category');
         $root->getFullname()->withArguments([' -- '])->willReturn('Category');
         $this->setName('T-shirts');
@@ -151,6 +140,26 @@ final class TaxonSpec extends ObjectBehavior
 
         $this->getFullname()->shouldReturn('Category / T-shirts');
         $this->getFullname(' -- ')->shouldReturn('Category -- T-shirts');
+    }
+
+    function its_fullname_prepends_with_parents_fullname_with_custom_separator(TaxonInterface $root): void
+    {
+        $root->getFullname()->withArguments([' / '])->willReturn('Category');
+        $root->getFullname()->withArguments([' -- '])->willReturn('Category');
+
+        $middle = new Taxon();
+        $middle->setCurrentLocale('en_GB');
+        $middle->setName('Summer');
+        $middle->addChild($this->getWrappedObject());
+        $middle->setParent($root->getWrappedObject());
+
+        $this->setName('T-shirts');
+
+        $root->addChild($middle)->shouldBeCalled();
+        $this->setParent($middle);
+
+        $this->getFullname()->shouldReturn('Category / Summer / T-shirts');
+        $this->getFullname(' -- ')->shouldReturn('Category -- Summer -- T-shirts');
     }
 
     function it_has_no_description_by_default(): void
