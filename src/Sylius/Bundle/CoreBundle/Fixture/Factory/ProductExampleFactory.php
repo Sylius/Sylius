@@ -360,21 +360,27 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         $productAttributesValues = [];
         foreach ($productAttributes as $code => $value) {
+            /** @var ProductAttributeInterface|null $productAttribute */
+            $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
+
+            Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
+
+            if (!$productAttribute->isTranslatable()) {
+                $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, null, $value);
+
+                continue;
+            }
+
             foreach ($this->getLocales() as $localeCode) {
-                $productAttributesValues[] = $this->configureProductAttributeValue($code, $localeCode, $value);
+                $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute, $localeCode, $value);
             }
         }
 
         return $productAttributesValues;
     }
 
-    private function configureProductAttributeValue(string $code, string $localeCode, $value): ProductAttributeValueInterface
+    private function configureProductAttributeValue(ProductAttributeInterface $productAttribute, ?string $localeCode, $value): ProductAttributeValueInterface
     {
-        /** @var ProductAttributeInterface|null $productAttribute */
-        $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $code]);
-
-        Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
-
         /** @var ProductAttributeValueInterface $productAttributeValue */
         $productAttributeValue = $this->productAttributeValueFactory->createNew();
         $productAttributeValue->setAttribute($productAttribute);

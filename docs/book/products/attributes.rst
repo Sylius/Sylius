@@ -34,6 +34,16 @@ What these types may be useful for?
 - datetime - accurate date and time of an event
 - select - genre(s) of a book. one or more of them can be selected
 
+Non-translatable attribute
+--------------------------
+
+Some attributes (dates, author name) don't need a different value in each locale. For those attributes, we introduced the possibility to disable translation.
+Shop Owner declares values only once and regardless of the chosen locale customer will see a proper attribute value.
+
+Warning
+
+Once the attribute has disabled translatability it will erase attribute values in all locales for this attribute.
+
 How to create an Attribute?
 ---------------------------
 
