@@ -75,12 +75,12 @@ final class Version20201208105207 extends AbstractMigration
 
     private function setDefaultAdjustmentData(): void
     {
-        $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
+        $this->addSql("UPDATE sylius_adjustment SET shipment_id = null, details = '[]'");
     }
 
     private function updateAdjustment(int $adjustmentId, string $shipmentId, string $details): void
     {
-        $this->connection->executeQuery("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
+        $this->addSql("UPDATE sylius_adjustment SET shipment_id = $shipmentId, details = '" . $details . "' WHERE id = $adjustmentId");
     }
 
     private function getShipmentAdjustmentsWithData(): array
