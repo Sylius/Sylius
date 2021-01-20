@@ -41,7 +41,7 @@ final class ApiSecurityService implements SecurityServiceInterface
     {
         $this->client->request(
             'POST',
-            sprintf('/api/%s/authentication-token', $this->loginEndpoint),
+            sprintf('/api/v2/%s/authentication-token', $this->loginEndpoint),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],

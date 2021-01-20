@@ -20,7 +20,7 @@ but all responses will be prepared as for Shop User.
 
     As an Admin User:
     ```bash
-    curl -X POST http://127.0.0.1:8000/api/admin-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
+    curl -X POST http://127.0.0.1:8000/api/v2/admin-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
     ```
    
     > Email "api@example.com" and password "sylius-api" are default credentials for API administrator provided in the default
@@ -28,7 +28,7 @@ but all responses will be prepared as for Shop User.
     
     As a Shop User:
     ```bash
-    curl -X POST http://127.0.0.1:8000/api/shop-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
+    curl -X POST http://127.0.0.1:8000/api/v2/shop-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
     ```
 
     > Email "shop@example.com" and password "sylius" are default credentials for API client provided in the default
@@ -40,7 +40,7 @@ but all responses will be prepared as for Shop User.
     {"token": "VERY_SECURE_TOKEN"}
     ```
 
-3. If you're using Api Platform Swagger docs (available on `/api/docs/` URL), you can set the authentication token
+3. If you're using Api Platform Swagger docs (available on `/api/v2/docs/` URL), you can set the authentication token
 for each request.
 
     i. Go the the Swagger docs page. Notice the **Authorize** button and unlocked padlock near the available URLs:

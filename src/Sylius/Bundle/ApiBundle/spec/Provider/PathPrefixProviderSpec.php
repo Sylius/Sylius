@@ -23,7 +23,7 @@ final class PathPrefixProviderSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
-        $this->beConstructedWith($userContext, '/api');
+        $this->beConstructedWith($userContext, '/api/v2/');
     }
 
     function it_implements_a_path_prefix_provider_interface(): void
@@ -38,17 +38,17 @@ final class PathPrefixProviderSpec extends ObjectBehavior
 
     function it_returns_null_if_the_given_path_does_not_match_api_path(): void
     {
-        $this->getPathPrefix('/api/wrong/certain-route')->shouldReturn(null);
+        $this->getPathPrefix('/api/v2/wrong/certain-route')->shouldReturn(null);
     }
 
     function it_returns_shop_prefix_based_on_the_given_path(): void
     {
-        $this->getPathPrefix('/api/shop/certain-route')->shouldReturn('shop');
+        $this->getPathPrefix('/api/v2/shop/certain-route')->shouldReturn('shop');
     }
 
     function it_returns_admin_prefix_based_on_the_given_path(): void
     {
-        $this->getPathPrefix('/api/admin/certain-route')->shouldReturn('admin');
+        $this->getPathPrefix('/api/v2/admin/certain-route')->shouldReturn('admin');
     }
 
     function it_returns_admin_prefix_if_currently_logged_in_is_admin_user(

@@ -135,3 +135,6 @@
 1. We've replaced deprecated Symfony Translator API with the new one.
    
     Replace `Symfony\Component\Translation\TranslatorInterface` with `Symfony\Contracts\Translation\TranslatorInterface` in your codebase.
+
+1. We've changed `/new-api` prefix to `/api/v2`. If you're using API, replace api request url to `/api/v2`.
+   Old api is hardcoded to `/api/v1`.
