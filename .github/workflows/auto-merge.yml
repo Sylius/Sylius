@@ -1,0 +1,17 @@
+name: Auto-merge
+
+on:
+    pull_request: ~
+
+jobs:
+    auto-merge:
+        runs-on: ubuntu-18.04
+        steps:
+            -   uses: actions/checkout@v2
+
+            -
+                name: Auto-merge minor dependencies upgrades
+                uses: ahmadnassri/action-dependabot-auto-merge@v2
+                with:
+                    target: minor
+                    github-token: ${{ secrets.DEPENDABOT_TOKEN }}
