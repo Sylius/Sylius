@@ -12,4 +12,3 @@ Sylius\Component\Core\Model\Taxon:
                 route: sylius_admin_api_taxon_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1

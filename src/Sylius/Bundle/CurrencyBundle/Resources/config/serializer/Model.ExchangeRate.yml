@@ -26,6 +26,5 @@ Sylius\Component\Currency\Model\ExchangeRate:
                 parameters:
                     sourceCurrencyCode: expr(object.getSourceCurrency().getCode())
                     targetCurrencyCode: expr(object.getTargetCurrency().getCode())
-                    version: 1
                 exclusion:
                     groups: [Default, Detailed]

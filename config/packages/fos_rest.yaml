@@ -7,5 +7,5 @@ fos_rest:
         empty_content: 204
     format_listener:
         rules:
-            - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/api/v1/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }

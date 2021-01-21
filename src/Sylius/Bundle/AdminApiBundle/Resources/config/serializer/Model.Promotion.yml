@@ -12,12 +12,10 @@ Sylius\Component\Core\Model\Promotion:
                 route: sylius_admin_api_promotion_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1
         -   rel: coupons
             href:
                 route: sylius_admin_api_promotion_coupon_index
                 parameters:
                     promotionCode: expr(object.getCode())
-                    version: 1
             exclusion:
                 exclude_if: expr(!object.isCouponBased() || !object.getCode())

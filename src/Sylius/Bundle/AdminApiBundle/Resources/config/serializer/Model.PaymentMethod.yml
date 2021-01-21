@@ -11,4 +11,3 @@ Sylius\Component\Core\Model\PaymentMethod:
                 route: sylius_admin_api_payment_method_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1

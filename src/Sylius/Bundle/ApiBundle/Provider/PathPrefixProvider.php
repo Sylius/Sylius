@@ -35,17 +35,17 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
 
     public function getPathPrefix(string $path): ?string
     {
-        $pathElements = array_values(array_filter(explode('/', $path)));
-
-        if ('/' . $pathElements[0] !== $this->apiRoute) {
+        if (!str_contains($path, $this->apiRoute)) {
             return null;
         }
 
-        if ($pathElements[1] === PathPrefixes::SHOP_PREFIX) {
+        $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
+
+        if ($pathElements[0] === PathPrefixes::SHOP_PREFIX) {
             return PathPrefixes::SHOP_PREFIX;
         }
 
-        if ($pathElements[1] === PathPrefixes::ADMIN_PREFIX) {
+        if ($pathElements[0] === PathPrefixes::ADMIN_PREFIX) {
             return PathPrefixes::ADMIN_PREFIX;
         }
 

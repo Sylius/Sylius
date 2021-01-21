@@ -67,7 +67,7 @@ final class OrderContext implements Context
 
         $request = Request::custom(
             \sprintf(
-                '/new-api/shop/account/orders/%s/payments/%s',
+                '/api/v2/shop/account/orders/%s/payments/%s',
                 $order->getTokenValue(),
                 (string) $order->getPayments()->first()->getId()
             ),
@@ -321,7 +321,7 @@ final class OrderContext implements Context
     private function getAdjustmentsForOrderItem(string $itemId): array
     {
         $response = $this->client->customAction(
-            sprintf('/new-api/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
+            sprintf('/api/v2/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
             HttpRequest::METHOD_GET
         );
 

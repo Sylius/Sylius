@@ -15,6 +15,5 @@ Sylius\Component\Core\Model\Channel:
                 route: sylius_admin_api_channel_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1
             exclusion:
                 groups: [Default, Detailed, DetailedCart]

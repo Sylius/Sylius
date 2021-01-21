@@ -10,16 +10,13 @@ Sylius\Component\Core\Model\TaxRate:
                 route: sylius_admin_api_tax_rate_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1
         -   rel: zone
             href:
                 route: sylius_admin_api_zone_show
                 parameters:
                     code: expr(object.getZone().getCode())
-                    version: 1
         -   rel: category
             href:
                 route: sylius_admin_api_tax_category_show
                 parameters:
                     code: expr(object.getCategory().getCode())
-                    version: 1

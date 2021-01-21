@@ -2,7 +2,7 @@ Authorization
 =============
 
 In the new API all admin routes are protected by JWT authentication. If you would like to test these endpoints
-`in our Swagger UI docs <http://master.demo.sylius.com/new-api/docs>`_, you need to retrieve a JWT token first.
+`in our Swagger UI docs <http://master.demo.sylius.com/api/v2/docs>`_, you need to retrieve a JWT token first.
 You could do that by using an endpoint with default credentials for API administrators:
 
 .. image:: ../../_images/sylius_api/api_platform_authentication_endpoint.png

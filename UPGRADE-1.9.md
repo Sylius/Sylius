@@ -55,7 +55,7 @@
     +                  - JSON_PRESERVE_ZERO_FRACTION
     ```
    
-   1. Replace key in `config/packages/jms_serializer.yaml`:
+1. Replace key in `config/packages/jms_serializer.yaml`:
    
    ```diff
        jms_serializer:
@@ -63,6 +63,25 @@
    -           xml:
    +           xml_serialization:
    ```
+
+1. Unified API parameters have been changed in `config/packages/security.yaml` to:
+
+    ```diff   
+        parameters:
+    -       sylius.security.api_regex: "^/api"
+    -       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
+    -       sylius.security.new_api_route: "/new-api"
+    +       sylius.security.api_regex: "^/api/v1"
+    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+    +       sylius.security.new_api_route: "/api/v2"
+    ```
+1. `config/packages/fos_rest.yaml` rules have been changed to:
+
+    ```diff   
+        rules:
+    -       - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+    +       - { path: '^/api/v1/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+    ```
 
 ### Data migrations
 
@@ -135,3 +154,6 @@
 1. We've replaced deprecated Symfony Translator API with the new one.
    
     Replace `Symfony\Component\Translation\TranslatorInterface` with `Symfony\Contracts\Translation\TranslatorInterface` in your codebase.
+
+1. `/new-api` prefix has been changed to `/api/v2`. Please adjust your routes accordingly.
+   Admin API is hardcoded to `/api/v1` instead of `/api/v{version}`.
