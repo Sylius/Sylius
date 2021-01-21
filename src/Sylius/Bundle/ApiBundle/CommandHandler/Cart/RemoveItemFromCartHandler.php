@@ -42,7 +42,7 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
     {
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $removeItemFromCart->orderItemId,
+            $removeItemFromCart->itemId,
             $removeItemFromCart->orderTokenValue
         );
 

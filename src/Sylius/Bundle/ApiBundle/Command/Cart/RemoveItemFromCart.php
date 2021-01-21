@@ -25,20 +25,17 @@ class RemoveItemFromCart implements OrderTokenValueAwareInterface
      * @var string
      * @psalm-immutable
      */
-    public $orderItemId;
+    public $itemId;
 
-    public function __construct(string $orderItemId)
+    public function __construct(?string $orderTokenValue, string $itemId)
     {
-        $this->orderItemId = $orderItemId;
+        $this->orderTokenValue = $orderTokenValue;
+        $this->itemId = $itemId;
     }
 
     public static function removeFromData(string $tokenValue, string $orderItemId): self
     {
-        $command = new self($orderItemId);
-
-        $command->orderTokenValue = $tokenValue;
-
-        return $command;
+        return new self($tokenValue, $orderItemId);
     }
 
     public function getOrderTokenValue(): ?string
