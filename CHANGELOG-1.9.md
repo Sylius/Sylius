@@ -1,5 +1,28 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-ALPHA.2 (2021-01-21)
+
+#### TL;DR
+
+- Added support for Symfony 5
+
+#### Details
+
+- [#12098](https://github.com/Sylius/Sylius/issues/12098) [Attributes][PoC] Attributes view reorganization ([@Tomanhez](https://github.com/Tomanhez), [@kulczy](https://github.com/kulczy), [@AdamKasp](https://github.com/AdamKasp), [@SirDomin](https://github.com/SirDomin))
+- [#12148](https://github.com/Sylius/Sylius/issues/12148) Support for Symfony 5 ([@pamil](https://github.com/pamil))
+- [#12220](https://github.com/Sylius/Sylius/issues/12220) Fix event deprecations ([@loic425](https://github.com/loic425))
+- [#12233](https://github.com/Sylius/Sylius/issues/12233) [Bug] Add Twig verification to check is taxon is enabled ([@clem21](https://github.com/clem21))
+- [#12234](https://github.com/Sylius/Sylius/issues/12234) Backport symfony/polyfill-mbstring:1.22.0 conflict to make the build passing on 1.8 ([@pamil](https://github.com/pamil))
+- [#12246](https://github.com/Sylius/Sylius/issues/12246) [OrderProcessor] Fix clearing tax adjustments ([@GSadee](https://github.com/GSadee))
+- [#12248](https://github.com/Sylius/Sylius/issues/12248) Make upgrade of serializations easier to read ([@Jeroen-G](https://github.com/Jeroen-G))
+- [#12255](https://github.com/Sylius/Sylius/issues/12255) Auto-merge passing dependabot PRs ([@Zales0123](https://github.com/Zales0123))
+- [#12256](https://github.com/Sylius/Sylius/issues/12256) Ability to create non-translatable attributes fixtures + info about non-translatable attributes. ([@SirDomin](https://github.com/SirDomin))
+- [#12257](https://github.com/Sylius/Sylius/issues/12257) [API] change new-api prefix to api ([@SirDomin](https://github.com/SirDomin))
+- [#12258](https://github.com/Sylius/Sylius/issues/12258) [Docs] Add steps to upgrade jms configuration in UPGRADE-1.9 file ([@Tomanhez](https://github.com/Tomanhez))
+- [#12260](https://github.com/Sylius/Sylius/issues/12260) [Minor][Documentation] Improve attribute documentation ([@lchrusciel](https://github.com/lchrusciel))
+- [#12262](https://github.com/Sylius/Sylius/issues/12262) [Migrations] Use adding SQL instead of query execution ([@GSadee](https://github.com/GSadee))
+- [#12270](https://github.com/Sylius/Sylius/issues/12270) [Cart] change remove order item from PATCH method to DELETE method ([@AdamKasp](https://github.com/AdamKasp))
+
 ## v1.9.0-ALPHA.1 (2021-01-11)
 
 #### Details
