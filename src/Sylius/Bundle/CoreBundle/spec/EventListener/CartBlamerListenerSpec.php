@@ -24,6 +24,7 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
@@ -48,14 +49,17 @@ final class CartBlamerListenerSpec extends ObjectBehavior
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
         BaseOrderInterface $order,
         CartContextInterface $cartContext,
-        InteractiveLoginEvent $interactiveLoginEvent,
         ShopUserInterface $user,
+        Request $request,
         TokenInterface $token
     ): void {
         $cartContext->getCart()->willReturn($order);
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
-        $this->shouldThrow(UnexpectedTypeException::class)->during('onInteractiveLogin', [$interactiveLoginEvent]);
+
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->during('onInteractiveLogin', [new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject())])
+        ;
     }
 
     function it_blames_cart_on_user_on_implicit_login(
@@ -79,32 +83,34 @@ final class CartBlamerListenerSpec extends ObjectBehavior
         ObjectManager $cartManager,
         CartContextInterface $cartContext,
         OrderInterface $cart,
-        InteractiveLoginEvent $interactiveLoginEvent,
+        Request $request,
         TokenInterface $token,
         ShopUserInterface $user,
         CustomerInterface $customer
     ): void {
         $cartContext->getCart()->willReturn($cart);
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
+
         $cart->setCustomer($customer)->shouldBeCalled();
         $cartManager->persist($cart)->shouldBeCalled();
         $cartManager->flush()->shouldBeCalled();
-        $this->onInteractiveLogin($interactiveLoginEvent);
+
+        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_given_user_is_invalid_on_interactive_login(
         CartContextInterface $cartContext,
         OrderInterface $cart,
-        InteractiveLoginEvent $interactiveLoginEvent,
+        Request $request,
         TokenInterface $token
     ): void {
         $cartContext->getCart()->willReturn($cart);
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn('anon.');
+
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $this->onInteractiveLogin($interactiveLoginEvent);
+
+        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 
     function it_does_nothing_if_there_is_no_existing_cart_on_implicit_login(
@@ -119,13 +125,13 @@ final class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_existing_cart_on_interactive_login(
         CartContextInterface $cartContext,
-        InteractiveLoginEvent $interactiveLoginEvent,
+        Request $request,
         TokenInterface $token,
         ShopUserInterface $user
     ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
-        $this->onInteractiveLogin($interactiveLoginEvent);
+
+        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
     }
 }

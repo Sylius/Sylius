@@ -37,7 +37,7 @@ final class ShipmentStateMachineTransitionApplicatorSpec extends ObjectBehavior
         $stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
 
-        $eventDispatcher->dispatch('sylius.shipment.post_ship', new GenericEvent($shipment->getWrappedObject()))->shouldBeCalled();
+        $eventDispatcher->dispatch(new GenericEvent($shipment->getWrappedObject()), 'sylius.shipment.post_ship')->shouldBeCalled();
 
         $this->ship($shipment);
     }

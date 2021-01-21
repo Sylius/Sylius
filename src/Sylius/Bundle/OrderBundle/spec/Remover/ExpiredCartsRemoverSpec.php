@@ -47,7 +47,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         ]);
 
         $eventDispatcher
-            ->dispatch(SyliusExpiredCartsEvents::PRE_REMOVE, Argument::any())
+            ->dispatch(Argument::any(), SyliusExpiredCartsEvents::PRE_REMOVE)
             ->shouldBeCalled()
         ;
 
@@ -56,7 +56,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         $orderManager->flush();
 
         $eventDispatcher
-            ->dispatch(SyliusExpiredCartsEvents::POST_REMOVE, Argument::any())
+            ->dispatch(Argument::any(), SyliusExpiredCartsEvents::POST_REMOVE)
             ->shouldBeCalled()
         ;
 

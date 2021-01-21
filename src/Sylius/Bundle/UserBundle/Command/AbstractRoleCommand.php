@@ -16,7 +16,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;

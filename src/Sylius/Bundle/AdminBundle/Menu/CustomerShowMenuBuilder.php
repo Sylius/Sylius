@@ -49,8 +49,8 @@ final class CustomerShowMenuBuilder
         $this->addChildren($menu, $customer);
 
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer)
+            new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer),
+            self::EVENT_NAME
         );
 
         return $menu;

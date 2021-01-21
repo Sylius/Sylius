@@ -88,8 +88,8 @@ final class OrderShowMenuBuilder
         }
 
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $stateMachine)
+            new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $stateMachine),
+            self::EVENT_NAME
         );
 
         return $menu;

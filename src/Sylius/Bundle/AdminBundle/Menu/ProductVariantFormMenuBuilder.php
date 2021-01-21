@@ -63,8 +63,8 @@ final class ProductVariantFormMenuBuilder
         ;
 
         $this->eventDispatcher->dispatch(
-            self::EVENT_NAME,
-            new ProductVariantMenuBuilderEvent($this->factory, $menu, $options['product_variant'])
+            new ProductVariantMenuBuilderEvent($this->factory, $menu, $options['product_variant']),
+            self::EVENT_NAME
         );
 
         return $menu;

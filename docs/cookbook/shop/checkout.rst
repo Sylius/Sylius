@@ -203,7 +203,7 @@ to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file.
         path: /
         methods: [GET]
         defaults:
-            _controller: FrameworkBundle:Redirect:redirect
+            _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController:redirectAction
             route: sylius_shop_checkout_address
 
     sylius_shop_checkout_address:

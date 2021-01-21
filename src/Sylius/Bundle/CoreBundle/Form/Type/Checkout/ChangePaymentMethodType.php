@@ -29,8 +29,8 @@ final class ChangePaymentMethodType extends AbstractType
             $form = $event->getForm();
 
             foreach ($payments as $key => $payment) {
-                if (!in_array($payment->getState(), [PaymentInterface::STATE_NEW, PaymentInterface::STATE_CART])) {
-                    $form->remove($key);
+                if (!in_array($payment->getState(), [PaymentInterface::STATE_NEW, PaymentInterface::STATE_CART], true)) {
+                    $form->remove((string) $key);
                 }
             }
         });

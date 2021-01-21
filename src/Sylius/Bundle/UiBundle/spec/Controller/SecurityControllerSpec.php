@@ -25,13 +25,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 final class SecurityControllerSpec extends ObjectBehavior
 {
     function let(
         AuthenticationUtils $authenticationUtils,
         FormFactoryInterface $formFactory,
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
         RouterInterface $router
     ): void {
@@ -45,7 +46,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         Form $form,
         FormView $formView,
-        EngineInterface $templatingEngine,
+        Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
         Response $response
     ): void {

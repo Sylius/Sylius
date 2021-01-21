@@ -72,11 +72,6 @@
             <tag name="doctrine.event_listener" event="prePersist" lazy="true" />
             <tag name="doctrine.event_listener" event="preUpdate" lazy="true" />
         </service>
-        <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
-            <argument type="service" id="translator" />
-            <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2" />
-        </service>
         <service id="sylius.listener.review_create" class="Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener">
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />

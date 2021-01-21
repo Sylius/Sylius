@@ -54,4 +54,16 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
         $this->updatePassword($user);
     }
+
+    function it_does_nothing_if_plain_password_is_null(UserPasswordEncoderInterface $userPasswordEncoder, UserInterface $user): void
+    {
+        $user->getPlainPassword()->willReturn(null);
+
+        $userPasswordEncoder->encode($user)->willReturn('topSecretEncodedPassword');
+
+        $user->setPassword(Argument::any())->shouldNotBeCalled();
+        $user->eraseCredentials()->shouldNotBeCalled();
+
+        $this->updatePassword($user);
+    }
 }

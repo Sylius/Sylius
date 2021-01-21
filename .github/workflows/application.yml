@@ -30,8 +30,8 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4]
-
+                symfony: [^4.4, ^5.2]
+                
         steps:
             -   
                 uses: actions/checkout@v2
@@ -49,7 +49,9 @@ jobs:
             -   
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
-                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   
                 name: Get Composer cache directory
@@ -116,7 +118,7 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4]
+                symfony: [^4.4, ^5.2]
                 mysql: [5.7]
 
         env:
@@ -151,7 +153,9 @@ jobs:
             -   
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
-                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   
                 name: Get Composer cache directory
@@ -242,10 +246,10 @@ jobs:
             fail-fast: false
             matrix:
                 php: [7.3, 7.4]
-                symfony: [^4.4]
+                symfony: [^4.4, ^5.2]
                 node: [10.x]
                 mysql: [5.7]
-
+                
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
@@ -278,7 +282,9 @@ jobs:
             -   
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
-                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   
                 name: Install certificates
