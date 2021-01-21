@@ -271,7 +271,7 @@
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/orders/{id}/items/{itemId}</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\OrderController</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction</attribute>
                 <attribute name="write">false</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:remove_item</attribute>

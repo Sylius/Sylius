@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class OrderController
+final class DeleteOrderItemAction
 {
     /** @var MessageBusInterface */
     private $commandBus;

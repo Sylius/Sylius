@@ -487,7 +487,8 @@ final class CartContext implements Context
             'orders',
             $tokenValue,
             HttpRequest::METHOD_DELETE,
-            \sprintf('items/%s', $orderItemId));
+            \sprintf('items/%s', $orderItemId)
+        );
 
 
         $this->cartsClient->executeCustomRequest($request);

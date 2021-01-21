@@ -33,6 +33,11 @@ class RemoveItemFromCart implements OrderTokenValueAwareInterface
         $this->itemId = $itemId;
     }
 
+    public static function removeFromData(string $tokenValue, string $orderItemId): self
+    {
+        return new self($tokenValue, $orderItemId);
+    }
+
     public function getOrderTokenValue(): ?string
     {
         return $this->orderTokenValue;
@@ -41,15 +46,5 @@ class RemoveItemFromCart implements OrderTokenValueAwareInterface
     public function setOrderTokenValue(?string $orderTokenValue): void
     {
         $this->orderTokenValue = $orderTokenValue;
-    }
-
-    public function getItemId(): string
-    {
-        return $this->itemId;
-    }
-
-    public function setItemId(string $itemId): void
-    {
-        $this->itemId = $itemId;
     }
 }

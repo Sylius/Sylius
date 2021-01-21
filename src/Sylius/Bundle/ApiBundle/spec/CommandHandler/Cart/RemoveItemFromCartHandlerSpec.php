@@ -27,13 +27,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 {
     function let(
-        OrderRepositoryInterface $orderRepository,
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         ProductVariantResolverInterface $variantResolver
     ): void {
         $this->beConstructedWith(
-            $orderRepository,
             $orderItemRepository,
             $orderModifier,
             $variantResolver
@@ -46,18 +44,17 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     }
 
     function it_removes_order_item_from_cart(
-        OrderRepositoryInterface $orderRepository,
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderInterface $cart,
         OrderItemInterface $cartItem
     ): void {
-        $orderRepository->findOneBy(['tokenValue' => 'TOKEN_VALUE'])->willReturn($cart);
-
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
             'TOKEN_VALUE'
         )->willReturn($cartItem);
+
+        $cartItem->getOrder()->willReturn($cart);
 
         $cart->getTokenValue()->willReturn('TOKEN_VALUE');
 

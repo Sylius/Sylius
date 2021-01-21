@@ -1117,11 +1117,9 @@ final class CheckoutContext implements Context
             'shop',
             'orders',
             $tokenValue,
-            HTTPRequest::METHOD_PATCH,
-            'remove'
+            HttpRequest::METHOD_DELETE,
+            \sprintf('items/%s', $orderItemId)
         );
-
-        $request->setContent(['orderItemId' => $orderItemId]);
 
         $this->sharedStorage->set('response', $this->ordersClient->executeCustomRequest($request));
     }

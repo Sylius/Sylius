@@ -128,7 +128,7 @@
             <argument type="service" id="sylius.repository.payment_method"/>
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\OrderController" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
             <argument type="service" id="sylius_default.bus" />
         </service>
     </services>
