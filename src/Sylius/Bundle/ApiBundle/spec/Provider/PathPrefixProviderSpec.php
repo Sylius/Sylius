@@ -23,7 +23,7 @@ final class PathPrefixProviderSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
-        $this->beConstructedWith($userContext, '/api/v2/');
+        $this->beConstructedWith($userContext, '/api/v2');
     }
 
     function it_implements_a_path_prefix_provider_interface(): void
@@ -49,6 +49,12 @@ final class PathPrefixProviderSpec extends ObjectBehavior
     function it_returns_admin_prefix_based_on_the_given_path(): void
     {
         $this->getPathPrefix('/api/v2/admin/certain-route')->shouldReturn('admin');
+    }
+
+    function it_returns_prefix_from_api_route_with_slashes(UserContextInterface $userContext): void
+    {
+        $this->beConstructedWith($userContext, '/api/long/route/name');
+        $this->getPathPrefix('/api/long/route/name/admin/certain-route')->shouldReturn('admin');
     }
 
     function it_returns_admin_prefix_if_currently_logged_in_is_admin_user(
