@@ -141,11 +141,11 @@ class UserController extends ResourceController
         $user->enable();
 
         $eventDispatcher = $this->container->get('event_dispatcher');
-        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
+        $eventDispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_EMAIL_VERIFICATION);
 
         $this->manager->flush();
 
-        $eventDispatcher->dispatch(UserEvents::POST_EMAIL_VERIFICATION, new GenericEvent($user));
+        $eventDispatcher->dispatch(new GenericEvent($user), UserEvents::POST_EMAIL_VERIFICATION);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($user));
@@ -190,7 +190,7 @@ class UserController extends ResourceController
         $this->manager->flush();
 
         $eventDispatcher = $this->container->get('event_dispatcher');
-        $eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
+        $eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -309,7 +309,7 @@ class UserController extends ResourceController
         $manager->flush();
 
         $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch($senderEvent, new GenericEvent($user));
+        $dispatcher->dispatch(new GenericEvent($user), $senderEvent);
     }
 
     protected function handleResetPassword(
@@ -323,12 +323,12 @@ class UserController extends ResourceController
         $user->setPasswordRequestedAt(null);
 
         $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch(UserEvents::PRE_PASSWORD_RESET, new GenericEvent($user));
+        $dispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_RESET);
 
         $this->manager->flush();
         $this->addTranslatedFlash('success', 'sylius.user.reset_password');
 
-        $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
+        $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_RESET);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -349,12 +349,12 @@ class UserController extends ResourceController
         $user->setPlainPassword($newPassword);
 
         $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch(UserEvents::PRE_PASSWORD_CHANGE, new GenericEvent($user));
+        $dispatcher->dispatch(new GenericEvent($user), UserEvents::PRE_PASSWORD_CHANGE);
 
         $this->manager->flush();
         $this->addTranslatedFlash('success', 'sylius.user.change_password');
 
-        $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
+        $dispatcher->dispatch(new GenericEvent($user), UserEvents::POST_PASSWORD_CHANGE);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));

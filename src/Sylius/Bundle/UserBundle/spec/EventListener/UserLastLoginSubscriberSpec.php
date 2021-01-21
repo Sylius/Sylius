@@ -20,6 +20,7 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -47,11 +48,10 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
 
     function it_updates_user_last_login_on_security_interactive_login(
         ObjectManager $userManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         UserInterface $user
     ): void {
-        $event->getAuthenticationToken()->willReturn($token);
+        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $user->setLastLogin(Argument::type(\DateTimeInterface::class))->shouldBeCalled();
@@ -96,13 +96,12 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     function it_updates_only_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
-        InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
         SymfonyUserInterface $user
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
+        $interactiveLoginEvent = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $event->getUser()->willReturn($user);
@@ -113,16 +112,14 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $this->onSecurityInteractiveLogin($interactiveLoginEvent);
     }
 
-    function it_throws_excepcion_if_subscriber_is_used_for_class_other_than_sylius_user_interface(
+    function it_throws_exception_if_subscriber_is_used_for_class_other_than_sylius_user_interface(
         ObjectManager $userManager,
-        UserEvent $event,
-        InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
         SymfonyUserInterface $user
     ): void {
         $this->beConstructedWith($userManager, SymfonyUserInterface::class);
 
-        $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
+        $interactiveLoginEvent = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
         $token->getUser()->willReturn($user);
 
         $userManager->persist(Argument::any())->shouldNotBeCalled();

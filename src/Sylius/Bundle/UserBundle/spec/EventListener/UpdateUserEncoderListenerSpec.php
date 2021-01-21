@@ -32,10 +32,9 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_user_does_not_implement_user_interface(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token
     ): void {
-        $event->getAuthenticationToken()->willReturn($token);
+        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
 
         $user = new \stdClass();
 
@@ -49,11 +48,10 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_user_does_not_implement_specified_class_or_interface(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         User $user
     ): void {
-        $event->getAuthenticationToken()->willReturn($token);
+        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -65,11 +63,10 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_user_uses_the_recommended_encoder(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
-        $event->getAuthenticationToken()->willReturn($token);
+        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -86,14 +83,10 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_plain_password_could_not_be_resolved(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
-        $request = new Request();
-
-        $event->getAuthenticationToken()->willReturn($token);
-        $event->getRequest()->willReturn($request);
+        $event = new InteractiveLoginEvent(new Request(), $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -110,15 +103,13 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_resolved_plain_password_is_null(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
         $request = new Request();
         $request->request->set('_password', null);
 
-        $event->getAuthenticationToken()->willReturn($token);
-        $event->getRequest()->willReturn($request);
+        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -135,15 +126,13 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_resolved_plain_password_is_empty(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
         $request = new Request();
         $request->request->set('_password', '');
 
-        $event->getAuthenticationToken()->willReturn($token);
-        $event->getRequest()->willReturn($request);
+        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -160,15 +149,13 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_updates_the_encoder_and_plain_password_if_using_old_encoder_and_plain_password_could_be_resolved(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
         $request = new Request();
         $request->request->set('_password', 'plainpassword');
 
-        $event->getAuthenticationToken()->willReturn($token);
-        $event->getRequest()->willReturn($request);
+        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 
@@ -185,15 +172,13 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
 
     function it_updates_the_encoder_and_plain_password_if_using_default_null_encoder_and_plain_password_could_be_resolved(
         ObjectManager $objectManager,
-        InteractiveLoginEvent $event,
         TokenInterface $token,
         FixtureUser $user
     ): void {
         $request = new Request();
         $request->request->set('_password', 'plainpassword');
 
-        $event->getAuthenticationToken()->willReturn($token);
-        $event->getRequest()->willReturn($request);
+        $event = new InteractiveLoginEvent($request, $token->getWrappedObject());
 
         $token->getUser()->willReturn($user);
 

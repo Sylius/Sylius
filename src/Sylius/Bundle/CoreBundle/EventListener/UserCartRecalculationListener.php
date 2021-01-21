@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Webmozart\Assert\Assert;
 
@@ -39,7 +38,7 @@ final class UserCartRecalculationListener
     /**
      * @param InteractiveLoginEvent|UserEvent $event
      */
-    public function recalculateCartWhileLogin(Event $event): void
+    public function recalculateCartWhileLogin(object $event): void
     {
         try {
             $cart = $this->cartContext->getCart();

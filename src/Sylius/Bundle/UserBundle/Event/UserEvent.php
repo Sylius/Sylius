@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Event;
 
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
-/** @psalm-suppress DeprecatedClass */
 class UserEvent extends Event
 {
     /** @var UserInterface */
