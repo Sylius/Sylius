@@ -32,8 +32,6 @@ jobs:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
                 
-        continue-on-error: ${{ matrix.symfony == '^5.2' }}
-
         steps:
             -   
                 uses: actions/checkout@v2
@@ -122,8 +120,6 @@ jobs:
                 php: [7.3, 7.4]
                 symfony: [^4.4, ^5.2]
                 mysql: [5.7]
-
-        continue-on-error: ${{ matrix.symfony == '^5.2' }}
 
         env:
             APP_ENV: test_cached
@@ -254,8 +250,6 @@ jobs:
                 node: [10.x]
                 mysql: [5.7]
                 
-        continue-on-error: ${{ matrix.symfony == '^5.2' }}
-
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
