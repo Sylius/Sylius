@@ -34,26 +34,6 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
 
         $loader->load('services.xml');
 
-//        $services = [
-//            Controller\AuthorizeController::class,
-//            Controller\CancelController::class,
-//            Controller\CaptureController::class,
-//            Controller\NotifyController::class,
-//            Controller\PayoutController::class,
-//            Controller\RefundController::class,
-//            Controller\SyncController::class,
-//        ];
-//
-//        foreach ($services as $service) {
-//            try {
-//                $definition = $container->findDefinition($service);
-//            } catch (ServiceNotFoundException $exception) {
-//                $definition = new Definition($service);
-//            }
-//
-//            $definition->addMethodCall('setContainer', [new Reference('service_container')]);
-//        }
-
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
     }
