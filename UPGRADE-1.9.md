@@ -64,6 +64,25 @@
    +           xml_serialization:
    ```
 
+1. Unified API parameters have been changed to
+
+    ```diff   
+        parameters:
+    -       sylius.security.api_regex: "^/api"
+    -       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|new-api|api/.*|api$|media/.*)[^/]++"
+    -       sylius.security.new_api_route: "/new-api"
+    +       sylius.security.api_regex: "^/api/v1"
+    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+    +       sylius.security.new_api_route: "/api/v2"
+    ```
+1. fos_rest rules have been changed to
+
+    ```diff   
+        rules:
+    -       - { path: '^/api/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+    +       - { path: '^/api/v1/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+    ```
+
 ### Data migrations
 
 1. The `CoreBundle/Migrations/Version20201208105207.php` migration was added which extends existing adjustments with additional details (context). 
@@ -136,5 +155,5 @@
    
     Replace `Symfony\Component\Translation\TranslatorInterface` with `Symfony\Contracts\Translation\TranslatorInterface` in your codebase.
 
-1. We've changed `/new-api` prefix to `/api/v2`. If you're using API, replace api request url to `/api/v2`.
-   Old api is hardcoded to `/api/v1`.
+1. `/new-api` prefix has been changed to `/api/v2`. Please adjust your routes accordingly.
+   Admin api is hardcoded to `/api/v1`.
