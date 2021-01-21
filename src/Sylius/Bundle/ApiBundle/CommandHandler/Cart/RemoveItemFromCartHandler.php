@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -24,6 +25,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
+    /** @var OrderRepositoryInterface */
+    private $orderRepository;
+
     /** @var OrderItemRepositoryInterface */
     private $orderItemRepository;
 
@@ -31,25 +35,29 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
     private $orderModifier;
 
     public function __construct(
+        OrderRepositoryInterface $orderRepository,
         OrderItemRepositoryInterface $orderItemRepository,
         OrderModifierInterface $orderModifier
     ) {
+        $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->orderModifier = $orderModifier;
     }
 
     public function __invoke(RemoveItemFromCart $removeItemFromCart): OrderInterface
     {
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findOneBy(['tokenValue' => $removeItemFromCart->orderTokenValue]);
+
+        Assert::notNull($cart, 'Cart has not been found.');
+
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
-            $removeItemFromCart->orderItemId,
+            $removeItemFromCart->itemId,
             $removeItemFromCart->orderTokenValue
         );
 
         Assert::notNull($orderItem);
-
-        /** @var OrderInterface $cart */
-        $cart = $orderItem->getOrder();
 
         Assert::same($cart->getTokenValue(), $removeItemFromCart->orderTokenValue);
 

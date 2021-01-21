@@ -482,9 +482,13 @@ final class CartContext implements Context
 
     private function removeOrderItemFromCart(string $orderItemId, string $tokenValue): void
     {
-        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'remove');
+        $request = Request::customItemAction(
+            'shop',
+            'orders',
+            $tokenValue,
+            HttpRequest::METHOD_DELETE,
+            \sprintf('items/%s', $orderItemId));
 
-        $request->updateContent(['orderItemId' => $orderItemId]);
 
         $this->cartsClient->executeCustomRequest($request);
     }

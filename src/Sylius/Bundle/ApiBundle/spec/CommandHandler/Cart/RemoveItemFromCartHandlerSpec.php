@@ -16,8 +16,10 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -25,11 +27,13 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 {
     function let(
+        OrderRepositoryInterface $orderRepository,
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         ProductVariantResolverInterface $variantResolver
     ): void {
         $this->beConstructedWith(
+            $orderRepository,
             $orderItemRepository,
             $orderModifier,
             $variantResolver
@@ -42,17 +46,18 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     }
 
     function it_removes_order_item_from_cart(
+        OrderRepositoryInterface $orderRepository,
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderInterface $cart,
         OrderItemInterface $cartItem
     ): void {
+        $orderRepository->findOneBy(['tokenValue' => 'TOKEN_VALUE'])->willReturn($cart);
+
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
             'TOKEN_VALUE'
         )->willReturn($cartItem);
-
-        $cartItem->getOrder()->willReturn($cart);
 
         $cart->getTokenValue()->willReturn('TOKEN_VALUE');
 

@@ -268,15 +268,33 @@
             </itemOperation>
 
             <itemOperation name="shop_remove_item">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/orders/{id}/remove</attribute>
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/shop/orders/{id}/items/{itemId}</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\OrderController</attribute>
+                <attribute name="write">false</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:remove_item</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Removes Item</attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">id</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">itemId</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
