@@ -25,4 +25,3 @@ Sylius\Component\Currency\Model\Currency:
                 route: sylius_admin_api_currency_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1

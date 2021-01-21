@@ -6,4 +6,4 @@ fos_oauth_server_token:
 
 sylius_admin_api:
     resource: "@SyliusAdminApiBundle/Resources/config/routing/main.yml"
-    prefix: /v{version}
+    prefix: /v1

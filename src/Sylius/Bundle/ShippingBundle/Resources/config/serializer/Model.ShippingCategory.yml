@@ -33,4 +33,3 @@ Sylius\Component\Shipping\Model\ShippingCategory:
                 route: sylius_admin_api_shipping_category_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1

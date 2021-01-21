@@ -25,4 +25,3 @@ Sylius\Component\Addressing\Model\Country:
                 route: sylius_admin_api_country_show
                 parameters:
                     code: expr(object.getCode())
-                    version: 1

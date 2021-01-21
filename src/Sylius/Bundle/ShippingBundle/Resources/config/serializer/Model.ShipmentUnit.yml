@@ -22,10 +22,8 @@ Sylius\Component\Shipping\Model\ShipmentUnit:
                 parameters:
                     shipmentId: expr(object.getShipment().getId())
                     id: expr(object.getId())
-                    version: 1
         -   rel: shipment
             href:
                 route: sylius_admin_api_shipment_show
                 parameters:
                     id: expr(object.getShipment().getId())
-                    version: 1

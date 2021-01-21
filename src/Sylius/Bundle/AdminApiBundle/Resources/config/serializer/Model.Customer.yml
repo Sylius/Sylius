@@ -11,6 +11,5 @@ Sylius\Component\Core\Model\Customer:
                 route: sylius_admin_api_customer_show
                 parameters:
                     id: expr(object.getId())
-                    version: 1
             exclusion:
                 groups: [Default, Detailed, DetailedCart]

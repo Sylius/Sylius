@@ -55,7 +55,7 @@
     +                  - JSON_PRESERVE_ZERO_FRACTION
     ```
    
-   1. Replace key in `config/packages/jms_serializer.yaml`:
+1. Replace key in `config/packages/jms_serializer.yaml`:
    
    ```diff
        jms_serializer:
@@ -64,7 +64,7 @@
    +           xml_serialization:
    ```
 
-1. Unified API parameters have been changed to
+1. Unified API parameters have been changed in `config/packages/security.yaml` to:
 
     ```diff   
         parameters:
@@ -75,7 +75,7 @@
     +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
     +       sylius.security.new_api_route: "/api/v2"
     ```
-1. fos_rest rules have been changed to
+1. `config/packages/fos_rest.yaml` rules have been changed to:
 
     ```diff   
         rules:
@@ -156,4 +156,4 @@
     Replace `Symfony\Component\Translation\TranslatorInterface` with `Symfony\Contracts\Translation\TranslatorInterface` in your codebase.
 
 1. `/new-api` prefix has been changed to `/api/v2`. Please adjust your routes accordingly.
-   Admin api is hardcoded to `/api/v1`.
+   Admin API is hardcoded to `/api/v1` instead of `/api/v{version}`.

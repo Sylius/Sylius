@@ -346,8 +346,8 @@ EOT;
 <<<EOT
         {
             "code": "MONSTER_MUG",
-            "optionValues": { 
-                "MUG_TYPE": "MUG_TYPE_MEDIUM" 
+            "optionValues": {
+                "MUG_TYPE": "MUG_TYPE_MEDIUM"
             }
         }
 EOT;
@@ -423,7 +423,7 @@ EOT;
 <<<EOT
         {
             "code": "NEW_MUG_CODE",
-            "version": $version
+            "version": "$version"
         }
 EOT;
         $this->client->request('PUT', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, $data);
