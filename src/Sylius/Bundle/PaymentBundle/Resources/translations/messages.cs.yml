@@ -14,8 +14,6 @@ sylius:
             amount: Platební částka
             method: Způsob platby
             state:
-                header: Stav platby
-                checkout: Objednat
                 completed: Dokončeno
                 authorized: Autorizováno
                 failed: Neúspěšné
@@ -27,8 +25,5 @@ sylius:
                 cancelled: Zrušeno
                 refunded: Platba vrácena
         payment_method:
-            description: Popis
             enabled: Povoleno?
             instructions: Instrukce
-            name: Jméno
-            position: Pozice

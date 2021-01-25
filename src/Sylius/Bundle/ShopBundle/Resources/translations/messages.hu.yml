@@ -2,11 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    lightbox:
+        image_album_label: '%1. a %2 képből'
     menu:
         shop:
             account:
-                change_password: 'Jelszó változtatás'
-                dashboard: 'Vezérlőpult'
+                address_book: 'Címjegyzék'
+                change_password: 'Jelszó módosítása'
                 header: 'Fiókod'
-                order_history: 'Rendelési előzmények'
-                personal_information: 'Személyes információk'

@@ -6,18 +6,10 @@ sylius:
         customer:
             first_name: Jméno
             group: Skupina
-            last_name: Příjmení
-            email: Email
-            phone_number: Telefonní číslo
             gender: Pohlaví
             birthday: Narozeniny
-            billing_address: Fakturační adresa
             only_customer_registration: Vytvořit účet?
             subscribed_to_newsletter: Přihlášeni k odběru novinek
-        customer_group:
-            name: Jméno
-            roles: Role
     gender:
-        unknown: Neznámý
         male: Muž
         female: Žena

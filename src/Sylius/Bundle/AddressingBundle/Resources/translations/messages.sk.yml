@@ -16,27 +16,15 @@ sylius:
             zone: Zóna
         country:
             add_province: Pridať provinciu
-            name: Názov
             provinces: Provincie
             select: Vyberte
             enabled: Zapnuté
         province:
-            name: Názov
             abbreviation: Skratka
-            select: Vyberte
         zone:
             add_member: Pridať člena
             members: Používatelia
-            name: Názov
-            type: Typ
-            types:
-                country: Krajina
-                province: Provincia
-                zone: Zóna
             scope: Rozsah
             scopes:
                 all: Všetky
-            select: Vyberte
             select_scope: Vyberte rozsah
-        zone_member:
-            select: Vyberte

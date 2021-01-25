@@ -3,8 +3,6 @@
 
 sylius:
     review:
-        author:
-            already_exists: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.
         comment:
             not_blank: Komentář recenze nesmí být prázdný.
         rating:

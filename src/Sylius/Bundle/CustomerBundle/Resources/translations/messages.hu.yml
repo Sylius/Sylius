@@ -4,19 +4,12 @@
 sylius:
     form:
         customer:
-            first_name: Keresztnév
-            last_name: Vezetéknév
-            email: E-mail
-            phone_number: Telefonszám
+            group: Csoport
+            email: Email
             gender: Nem
             birthday: Születésnap
-            billing_address: Számlázási cím
-            different_billing_address: A számlázási címe különbözik a megadott címtől?
             only_customer_registration: Fiók létrehozása?
-        customer_group:
-            name: Név
-            roles: Szerepek
+            subscribed_to_newsletter: Feliratkozás a hírlevélre
     gender:
-        unknown: Ismeretlen
         male: Férfi
         female: Nő

@@ -12,8 +12,6 @@ sylius:
         default_locale:
             not_blank: Zadejte výchozí národní prostředí kanálu.
         contact_email:
-            invalid: Tento email je neplatný.
-            max: E-mail nesmí být delší než {{ limit }} znaků.
             min: E-mail musí být alespoň {{ limit }} znaků.
     channel_pricing:
         price:
@@ -22,9 +20,6 @@ sylius:
         shipping_method:
             not_blank: Vyberte prosím způsob dopravy.
     contact:
-        email:
-            invalid: Tento email je neplatný.
-            not_blank: Prosím vložte Váš email.
         message:
             not_blank: Prosím vložte Vaši zprávu.
     currency:
@@ -36,8 +31,6 @@ sylius:
     cart_item:
         not_available: '%itemName% nemá žádné dostatečné skladové zásoby.'
     order:
-        currency_code:
-            not_valid: Kód měny, kterou jste zadali, je neplatný.
         payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím znovu vyberte způsob platby.'
         product_eligibility: 'Tento produkt %productName% byl zakázán.'
         shipping_method_eligibility: 'Produkt se nevejde požadavky na %shippingMethodName% způsob dopravy. Prosím znovu vyberte způsob dopravy.'
@@ -86,7 +79,6 @@ sylius:
             upload_ini_size: Obrázek je příliš velký. Maximální povolená velikost je {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Tento e-mail je již používán.
             min: E-mail musí mít alespoň {{ min }} znaků.
             max: E-mail může mít maximálně {{ max }} znaků.
             invalid: Tento email je neplatný.

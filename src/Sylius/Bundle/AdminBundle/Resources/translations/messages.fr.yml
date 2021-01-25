@@ -5,7 +5,6 @@ sylius:
     email:
         shipment_confirmation:
             has_been_sent_using: 'a été envoyé en utilisant'
-            subject: 'Confirmation d''expédition'
             thank_you_for_transaction: 'Merci pour votre transaction réussie.'
             you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
             your_order_with_number: 'Votre commande numéro'
@@ -26,7 +25,6 @@ sylius:
                     countries: Pays
                     currencies: Devises
                     exchange_rates: Taux de change
-                    header: Configuration
                     locales: Locales
                     payment_methods: Moyens de paiement
                     shipping_categories: Catégories d'expédition

@@ -5,7 +5,5 @@ sylius:
     form:
         channel:
             color: Warna
-            description: Keterangan
-            enabled: Diaktifkan
-            name: Nama
+            description: Deskripsi
             url: URL

@@ -5,18 +5,16 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Mennyiség
                 equal: Egyenlő
             type: Szabály típusa
         shipment:
             state: Állapot
             states:
-                checkout: Fizetés
                 pending: Függőben
                 ready: Kész
                 shipped: Kiszállítva
                 returned: Visszaküldött
-                cancelled: Megszakítva
+                cancelled: Törölt
             tracking_code: Követési kód
         shipping_calculator:
             flat_rate_configuration:
@@ -24,18 +22,14 @@ sylius:
                 amount: Összeg
             per_unit_rate_configuration:
                 label: Átalánydíj per elem
-                amount: Összeg
-        shipping_category:
-            description: Leírás
-            name: Név
         shipping_method:
             calculator: Számológép
-            category: Kategória
             category_requirement: Kategória követelmény
-            channels: Csatornák
             configuration: Konfiguráció
-            description: Leírás
-            enabled: Engedélyezve
-            name: Név
-            tax_category: ÁFA-kategória
-            translations: Fordítások
+            match_all_category_requirement: Minden elemnek meg kell felelnie a szállítási mód feltételeinek
+            match_any_category_requirement: Legalább egy elemnek meg kell felelni szállítási mód feltételeinek
+            match_none_category_requirement: Egy elemnek sem kell megfelelnie a szállítási mód feltételeinek
+            position: Pozíció
+            tax_category: ÁFA kategória
+        shipping_method_rule:
+            amount: Összeg

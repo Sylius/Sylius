@@ -16,27 +16,16 @@ sylius:
             zone: Strefa
         country:
             add_province: Dodaj województwo
-            name: Nazwa
+            name: nazwa
             provinces: Województwa
             select: Wybierz
             enabled: Dostępny
         province:
-            name: Nazwa
             abbreviation: Skrót
-            select: Wybierz
         zone:
             add_member: Dodaj kraj
             members: Kraje należące do strefy
-            name: Nazwa
-            type: Typ
-            types:
-                country: Kraj
-                province: Województwo
-                zone: Strefa
             scope: Zakres
             scopes:
                 all: Wszystko
-            select: Wybierz
             select_scope: Wybierz zakres
-        zone_member:
-            select: Wybierz

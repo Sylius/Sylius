@@ -4,20 +4,9 @@
 sylius:
     form:
         user:
-            email: E-mail
-            enabled: Engedélyezve
             password:
-                label: Jelszó
                 confirmation: Ellenőrzés
             remember_me: Emlékezzen rám
             shipping_address: Szállítási cím
-            username: Felhasználónév
         user_filter:
             query: Keresés
-        user_change_password:
-            confirmation: Megerősítés
-            current: Aktuális jelszó
-            new: Új jelszó
-        user_reset_password:
-            confirmation: Megerősítés
-            new: Új jelszó

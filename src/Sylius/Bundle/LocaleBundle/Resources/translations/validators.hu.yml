@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Kérjük, válassza ki a nyelvi kódot.
+            regex: A területi kód csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: A nyelvi kódnak egyedinek kell lennie.

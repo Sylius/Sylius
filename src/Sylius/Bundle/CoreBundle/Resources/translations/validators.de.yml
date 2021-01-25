@@ -13,8 +13,6 @@ sylius:
             enabled: Standard-Gebietsschema muss aktiviert sein.
             not_blank: Bitte Standard-Gebietsschema für diesen Kanal angeben.
         contact_email:
-            invalid: Diese E-Mail Adresse ist ungültig.
-            max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
             min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
     channel_pricing:
         price:
@@ -24,22 +22,14 @@ sylius:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
     contact:
-        email:
-            invalid: Diese E-Mail Adresse ist ungültig.
-            not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
         message:
             not_blank: Bitte geben Sie Ihre Nachricht ein.
     currency:
         enabled:
             cannot_disable_base: Die Basiswährung kann nicht deaktiviert werden.
-    customer:
-        currency_code:
-            not_valid: Der eingegebene Währungscode ist ungültig.
     cart_item:
         not_available: '%itemName% hat keinen ausreichenden Vorrat.'
     order:
-        currency_code:
-            not_valid: Der eingegebene Währungscode ist ungültig.
         payment_method_eligibility: 'Diese Zahlung Methode %paymentMethodName% wurde deaktiviert. Bitte wählen Sie eine andere Zahlungsart aus.'
         product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
         shipping_method_eligibility: 'Das Produkt erfüllt nicht die Voraussetzungen für die Versandart %shippingMethodName%. Bitte wählen Sie eine andere Versandart.'
@@ -88,7 +78,6 @@ sylius:
             upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Diese E-Mail-Adresse wird bereits verwendet.
             min: E-Mail muss mindestens {{ min }} Zeichen haben.
             max: Email darf maximal {{ max }} Zeichen lang sein.
             invalid: Diese E-Mail Adresse ist ungültig.

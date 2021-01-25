@@ -16,27 +16,16 @@ sylius:
             zone: Zóna
         country:
             add_province: Tartomány/megye hozzáadása
-            name: Név
             provinces: Tartományok
             select: Válassza ki
             enabled: Engedélyezve
         province:
-            name: Név
             abbreviation: Rövidítés
-            select: Válassza ki
+            select: Válasszon
         zone:
             add_member: Tag hozzáadása
             members: Tagok
-            name: Név
-            type: Típus
-            types:
-                country: Ország
-                province: Tartomány/állam
-                zone: Zóna
             scope: Hatókör
             scopes:
                 all: Mind
-            select: Válassza ki
             select_scope: Hatókör kiválasztása
-        zone_member:
-            select: Válassza ki

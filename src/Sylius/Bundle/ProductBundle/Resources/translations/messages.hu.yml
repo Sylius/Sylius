@@ -4,26 +4,17 @@
 sylius:
     form:
         product:
-            name: Név
-            description: Leírás
-            attributes: Tulajdonságok
             options: Beállítások
             meta_keywords: Meta kulcsszavak
             meta_description: Meta leírás
-            taxons: Taxonok
+            slug: Url kompatibilis megnevezés
         product_variant:
-            name: Név
-        association_type:
-            name: Név
-            translations: Fordítások
+            name: Megnevezés
         association:
             type: Kapcsolódó típus
             product: Kapcsolódó termék
-        variant:
-            name: Név
         option:
-            name: Név
             values: Lehetséges értékek
         option_value:
-            add_value: Adja hozzá az értéket
+            add_value: Adjon meg értéket
             value: Érték

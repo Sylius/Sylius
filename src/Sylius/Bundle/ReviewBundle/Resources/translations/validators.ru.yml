@@ -3,8 +3,6 @@
 
 sylius:
     review:
-        author:
-            already_exists: Этот e-mail уже занят, пожалуйста, войдите или используйте восстановление пароля.
         comment:
             not_blank: Комментарий к отзыву не должен быть пустым.
         rating:

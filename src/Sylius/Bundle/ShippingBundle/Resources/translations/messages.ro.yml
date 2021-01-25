@@ -5,18 +5,15 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Număr
                 equal: Egal cu
             type: Tipul de regulă
         shipment:
             state: Status
             states:
-                checkout: Trimite comanda
                 pending: În așteptare
                 ready: Gata
                 shipped: Expediată
                 returned: Returnată
-                cancelled: Anulată
             tracking_code: Codul de urmărire
         shipping_calculator:
             flat_rate_configuration:
@@ -24,29 +21,13 @@ sylius:
                 amount: Valoare
             per_unit_rate_configuration:
                 label: Sumă forfetară pe unitate
-                amount: Valoare
-        shipping_category:
-            description: Descriere
-            name: Nume produs
         shipping_method:
-            add_rule: Adaugă regulă
             calculator: Calculator
-            category: Categorie
             category_requirement: Cerința categoriei
-            channels: Canale
             configuration: Configurare
-            description: Descriere
-            enabled: Activat
             match_all_category_requirement: Toate categoriile unităților trebuie să coincidă cu categoria metodei
             match_any_category_requirement: Cel puțin o unitate trebuie să aibă aceeași categorie cu metoda
             match_none_category_requirement: Nicio unitate nu trebuie să aibă aceeași categorie cu metoda
-            name: Nume produs
             position: Poziţie
-            rules: Reguli
-            tax_category: Categoria de taxă
-            translations: Traduceri
         shipping_method_rule:
-            type: Tip
-            total: Total
-            weight: Greutate
             amount: Valoare

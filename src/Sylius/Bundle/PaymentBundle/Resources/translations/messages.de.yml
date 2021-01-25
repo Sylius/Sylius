@@ -14,21 +14,15 @@ sylius:
             amount: Zahlungsbetrag
             method: Zahlungsweise
             state:
-                header: Zahlungsstatus
-                checkout: Zur Kasse
                 completed: Abgeschlossen
                 authorized: Autorisiert
                 failed: Fehlgeschlagen
                 new: Neu
-                pending: Ausstehend
                 processing: Wird verarbeitet
                 unknown: Unbekannt
                 void: Ungültig
                 cancelled: Abgebrochen
                 refunded: Rückerstattet
         payment_method:
-            description: Beschreibung
             enabled: Aktiviert?
             instructions: Anweisungen
-            name: Name
-            position: Position

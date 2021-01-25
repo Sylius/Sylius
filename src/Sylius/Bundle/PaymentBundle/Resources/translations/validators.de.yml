@@ -8,7 +8,6 @@ sylius:
             not_blank: Bitte geben Sie den Namen des Karteninhabers ein.
         expiry_month:
             max_range: Das Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} sein.
-            min_range: Das Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} sein.
             not_blank: Bitte wählen Sie den Ablaufmonat aus.
         number:
             not_blank: Bitte geben Sie die Kartennummer ein.

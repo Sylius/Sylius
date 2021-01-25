@@ -11,7 +11,6 @@ sylius:
             description: Keterangan
             ends_at: Berakhir di
             exclusive: Eksklusif
-            name: Nama
             priority: Prioritas
             rules: Aturan
             starts_at: Mulai di
@@ -26,15 +25,10 @@ sylius:
                 amount: Jumlah
             percentage_discount_configuration:
                 percentage: Persentase
-            type: Jenis
         promotion_coupon:
             expires_at: Berakhir pada
-            usage_limit: Batas penggunaan
         promotion_coupon_generator_instruction:
-            amount: Jumlah
             code_length: Panjang kode
-            expires_at: Berakhir pada
-            usage_limit: Batas penggunaan
         promotion_filter:
             price_range: Filter rentang harga
         promotion_rule:
@@ -52,14 +46,5 @@ sylius:
                 equal: Sama
             contains_product_configuration:
                 exclude: Mengecualikan
-                variants: Produk
-            item_total_configuration:
-                amount: Jumlah
             nth_order_configuration:
                 nth: Ke-n
-            shipping_country_configuration:
-                country: Negara
-            taxonomy_configuration:
-                exclude: Mengecualikan
-                taxons: Taksonomi
-            type: Jenis

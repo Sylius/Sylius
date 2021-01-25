@@ -4,45 +4,26 @@
 sylius:
     form:
         block:
-            body: Corps
-            id: ID
             title: Titre
         cart:
             coupon: Code promo
         checkout:
-            addressing:
-                different_billing_address: Utiliser une adresse différente pour la facturation ?
-                different_shipping_address: Utiliser une adresse différente pour la livraison ?
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
-        promotion:
-            channels: Canaux
-        promotion_action:
-            add_product_configuration:
-                product: Produit
         promotion_coupon:
             per_customer_usage_limit: Limite d'utilisation par client
             reusable_from_cancelled_orders: Réutilisable suite à commandes annulées
         group:
-            name: Nom
             roles: Rôles
         channel:
             billing_data:
-                city: Ville
-                company: Société
-                country: Pays
-                postcode: Code postal
-                street: Adresse
                 tax_id: N° de TVA
             contact_email: Email de contact
             contact_phone_number: Numéro de téléphone de contact
-            countries: Pays
             currencies: Devises
-            currency_base: Devise de référence
             account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
-            locales: Locales
             menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
@@ -54,65 +35,27 @@ sylius:
             taxonomies: Taxonomies
             theme: Thème
         image:
-            type: Type
             file: Image
         locale:
-            code: Code
-            enabled: Activé
+            enabled: Activée
         order_filter:
             created_at_from: Créé après le
             created_at_to: Créé avant le
-            number: Numéro
-            total_from: De
-            total_to: À
-            payment_state: État du paiement
             channel: Tous les canaux
-        page:
-            body: Corps
-            id: ID
-            title: Titre
         product:
-            images: Images
             restricted_zone: Restriction de zone
             short_description: Brève description
             variant_selection_method: Méthode de sélection de variante
             main_taxon: Taxonomie principale
-            channels: Canaux
-            enabled: Activé
-        product_filter:
-            name: Nom
-            code: Code
-        product_variant:
-            tax_category: Catégorie de taxe
-            shipping_category: Catégorie de livraison
         shipment_filter:
-            created_at_from: De
-            created_at_to: À
             number: Numéro de commande
             shipping_address: Expédié à
-            channel: Tous les canaux
         payment_filter:
-            created_at_from: De
-            created_at_to: À
-            number: Numéro de commande
             billing_address: Adresse de facturation
-            channel: Tous les canaux
-        shipping_method:
-            zone: Zone
         taxon:
-            code: Code
-            file: Sélectionnez une image
-            images: Images
-        taxonomy:
             file: Sélectionnez une image
         user:
-            billing_address: Adresse de facturation
-            different_shipping_address: Utiliser une adresse différente pour la livraison ?
-            enabled: Activé
-            first_name: Prénom
             groups: Groupes
-            roles: Rôles
-            last_name: Nom
             password: Mot de passe
             shipping_address: Adresse de livraison
         user_filter:
@@ -121,8 +64,6 @@ sylius:
             depth: Profondeur
             height: Hauteur
             on_hand: Stock actuel
-            price: Prix
-            sku: Référence
             shipping_required: Expédition requise ?
             weight: Poids
             width: Largeur
@@ -130,35 +71,15 @@ sylius:
         attribute:
             product_attribute_value:
                 attribute: Attribut 
-                value: Valeur
-        guest:
-            email: E-mail
         product_association:
             product: Produits associés
             type: Type d'association
-        product_association_type:
-            name: Nom
         promotion_filter:
             products: Filtre de produits
             taxons: Filtre de taxons
         promotion_rule:
-            customer_group:
-                group: Groupe de clients
-            has_taxon:
-                taxons: Taxons
-            product:
-                products: Produits
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Montant
-        payment_method:
-            channels: Canaux
-        product_attribute:
-            position: Emplacement
-        zone:
-            scopes:
-                shipping: Expédition
-                tax: Tva
     installer:
         extensions:
             header: Extensions
@@ -192,7 +113,6 @@ sylius:
             exists: Existe
             logs:
                 header: logs
-                help: "Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: N'existe pas
             not_writable: pas accessible en écriture
             parameters:

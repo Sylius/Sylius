@@ -8,7 +8,6 @@ sylius:
             not_blank: Kérjük, adja mega kártyabirtokos nevét.
         expiry_month:
             max_range: A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.
-            min_range: A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.
             not_blank: Kérjük, adjon meg lejárati hónapot.
         number:
             not_blank: Kérjük, adja meg a kártya számát.
@@ -22,6 +21,8 @@ sylius:
     payment:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.
+        method:
+            not_blank: 'Kérem, válassza ki a fizetési módot.'
     payment_method:
         gateway:
             not_blank: Kérjük, válasszon fizetési módot.
@@ -39,4 +40,5 @@ sylius:
                 not_blank: Kérjük, írja be a százalék díjat.
         code:
             not_blank: 'Kérjük, írja be a fizetési mód kódját.'
+            regex: 'Fizetési mód kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.'
             unique: 'A fizetési mód a megadott kóddal már létezik.'

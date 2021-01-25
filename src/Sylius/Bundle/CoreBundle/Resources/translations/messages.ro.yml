@@ -4,44 +4,25 @@
 sylius:
     form:
         block:
-            body: Corp
-            id: Id
             title: Titlu
         cart:
             coupon: Cod promoțional
         checkout:
-            addressing:
-                different_billing_address: Folosiți o adresă de facturare diferită?
-                different_shipping_address: Folosiți o adresă diferită pentru livrare?
             payment_method: Metoda de plată
             shipping_method: Metoda de livrare
-        promotion:
-            channels: Canale
-        promotion_action:
-            add_product_configuration:
-                product: Produs
         promotion_coupon:
             per_customer_usage_limit: Limita de utilizare per client
             reusable_from_cancelled_orders: Reutilizabil din comenzile anulate
         group:
-            name: Nume produs
             roles: Roluri
         channel:
             billing_data:
-                city: Oraș
-                company: Firmă
-                country: Țară
-                postcode: Cod poștal
-                street: Adresă
                 tax_id: Cod Unic de identificare fiscală
             contact_email: E-mail de contact
-            countries: Țări
             currencies: Monede
-            currency_base: Monedă de bază
             account_verification_required: Este necesară verificarea conturilor?
             hostname: Nume domeniu
             locale_default: Setări regionale implicite
-            locales: Setări regionale
             menu_taxon: Meniu categorie
             payment_methods: Metode de plată
             shipping_methods: Metode de livrare
@@ -53,109 +34,54 @@ sylius:
             taxonomies: Categorizări
             theme: Temă
         image:
-            type: Tip
             file: Imagine
         locale:
-            code: Cod
             enabled: Activat
         order_filter:
             created_at_from: Creată după
             created_at_to: Creată înainte de
-            number: Număr
-            total_from: De la
-            total_to: Până la
-            payment_state: Status plată
             channel: Toate canalele
-        page:
-            body: Corp
-            id: Id
-            title: Titlu
         product:
-            images: Imagini
             restricted_zone: Zonă cu restricție
             short_description: Descriere scurtă
-            variant_selection_method: Metoda de selectare a variantei
+            variant_selection_method: Metoda de selecţie a variantei
             main_taxon: Taxonul principal
-            channels: Canale
-            enabled: Activat
-        product_filter:
-            name: Nume produs
-            code: Cod
-        product_variant:
-            tax_category: Categoria de taxă
-            shipping_category: Categoria de livrare
         shipment_filter:
-            created_at_from: De la
-            created_at_to: Până la
             number: Număr comandă
             shipping_address: Livrează la
-            channel: Toate canalele
         payment_filter:
-            created_at_from: De la
-            created_at_to: Până la
-            number: Număr comandă
             billing_address: Facturat către
-            channel: Toate canalele
-        shipping_method:
-            zone: Zonă
         taxon:
-            code: Cod
-            file: Alege imagine
-            images: Imagini
-        taxonomy:
             file: Alege imagine
         user:
-            billing_address: Adresa de facturare
-            different_shipping_address: Folosiți o adresă diferită pentru livrare?
-            enabled: Activat
-            first_name: Prenume
             groups: Grupuri
-            roles: Roluri
-            last_name: Nume
             password: Parolă
-            shipping_address: Adresa de livrare
+            shipping_address: Adresă de livrare
         user_filter:
             query: Căutare
         variant:
             depth: Adâncime
             height: Înălţime
             on_hand: Stoc curent
-            price: Preț
-            sku: SKU
             shipping_required: Este livrarea obligatorie?
             weight: Greutate
             width: Lăţime
         attribute:
             product_attribute_value:
                 attribute: Atribut
-                value: Valoare
-        guest:
-            email: Adresă e-mail
         product_association:
             product: Produs asociat
             type: Tipul de asociere
-        product_association_type:
-            name: Nume produs
         promotion_filter:
             products: Filtru produse
             taxons: Filtru de taxoni
         promotion_rule:
             customer_group:
                 group: Grup de clienți
-            has_taxon:
-                taxons: Taxoni
-            product:
-                products: Produse
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Valoare
-        payment_method:
-            channels: Canale
-        product_attribute:
-            position: Poziţie
         zone:
             scopes:
-                shipping: Livrare
                 tax: Taxe
     installer:
         extensions:
@@ -190,7 +116,6 @@ sylius:
             exists: există
             logs:
                 header: logs
-                help: "Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
             not_exists: nu există
             not_writable: nu sunt drepturi de scriere
             parameters:

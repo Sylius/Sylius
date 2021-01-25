@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    email:
-        shipment_confirmation:
-            subject: 'Potvrzení odeslání'
     menu:
         admin:
             main:
@@ -22,7 +19,6 @@ sylius:
                     countries: Země
                     currencies: Měny
                     exchange_rates: Směnný kurz
-                    header: Konfigurace
                     locales: Lokalizace
                     payment_methods: Způsoby plateb
                     shipping_categories: Přepravní kategorie

@@ -5,7 +5,6 @@ sylius:
     email:
         shipment_confirmation:
             has_been_sent_using: 'a fost trimis folosind'
-            subject: 'Confirmare livrare'
             thank_you_for_transaction: 'Tranzacție reușită. Vă mulțumim'
             your_order_with_number: 'Comanda ta cu numarul'
     menu:
@@ -25,7 +24,6 @@ sylius:
                     countries: Țări
                     currencies: Monede
                     exchange_rates: Cursul de schimb
-                    header: Configurare
                     locales: Setări regionale
                     payment_methods: Metode de plată
                     shipping_categories: Categorii de livrare

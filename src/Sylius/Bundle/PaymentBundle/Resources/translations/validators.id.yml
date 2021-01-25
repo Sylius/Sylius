@@ -8,7 +8,6 @@ sylius:
             not_blank: Mohon masukkan nama pemegang kartu.
         expiry_month:
             max_range: Bulan kadaluarsa kartu kredit harus antara {{ min }} dan {{ max }}.
-            min_range: Bulan kadaluarsa kartu kredit harus antara {{ min }} dan {{ max }}.
             not_blank: Silakan pilih bulan kadaluarsa.
         number:
             not_blank: Harap masukkan nomor kartu.

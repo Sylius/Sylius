@@ -26,8 +26,6 @@ sylius:
         attribute_type_configuration:
             datetime:
                 format: Formátum
-            date:
-                format: Formátum
             select:
                 values: Értékek
                 choose: Válassz egy lehetőséget

@@ -11,7 +11,6 @@ sylius:
             description: Popis
             ends_at: Koniec
             exclusive: Exkluzívne
-            name: Názov
             priority: Priorita
             rules: Pravidlá
             starts_at: Začiatok
@@ -26,15 +25,10 @@ sylius:
                 amount: Suma
             percentage_discount_configuration:
                 percentage: Percentuálna
-            type: Typ
         promotion_coupon:
             expires_at: Platnosť uplynie
-            usage_limit: Limit použitia
         promotion_coupon_generator_instruction:
-            amount: Suma
             code_length: Dĺžka kódu
-            expires_at: Platnosť uplynie
-            usage_limit: Limit použitia
         promotion_filter:
             price_range: Filter cenového rozsahu
         promotion_rule:
@@ -52,14 +46,5 @@ sylius:
                 equal: Rovná sa
             contains_product_configuration:
                 exclude: Vylúčiť
-                variants: Produkty
-            item_total_configuration:
-                amount: Suma
             nth_order_configuration:
                 nth: N-tý
-            shipping_country_configuration:
-                country: Krajina
-            taxonomy_configuration:
-                exclude: Vylúčiť
-                taxons: Kategórie
-            type: Typ

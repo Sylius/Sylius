@@ -8,7 +8,6 @@ sylius:
             not_blank: Podaj nazwisko posiadacza karty.
         expiry_month:
             max_range: Miesiąc wygaśnięcia karty kredytowej musi być między {{ min }} i {{ max }}.
-            min_range: Miesiąc wygaśnięcia karty kredytowej musi być między {{ min }} i {{ max }}.
             not_blank: Proszę wybrać miesiąc wygaśnięcia.
         number:
             not_blank: Proszę wprowadzić numer karty.

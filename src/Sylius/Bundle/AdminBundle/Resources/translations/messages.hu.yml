@@ -19,7 +19,6 @@ sylius:
                     countries: Országok
                     currencies: Pénznemek
                     exchange_rates: Árfolyamok
-                    header: Konfiguráció
                     locales: Területi beállítások
                     payment_methods: Fizetési módok
                     shipping_categories: Szállítási kategóriák

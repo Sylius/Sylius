@@ -4,17 +4,13 @@
 sylius:
     email:
         contact_request:
-            content: 'Contenu'
             message_from: 'Message de'
             subject: 'Demande de contact'
         order_confirmation:
             has_been_successfully_placed: 'a été passée avec succès.'
-            subject: 'Confirmation de commande'
-            view_order_or_change_payment_method: 'Afficher une commande ou changer le mode de paiement'
             thank_you: 'Merci d''avoir acheté dans notre boutique !'
             your_order_number: 'Votre commande n°'
         password_reset:
-            hello: 'Bonjour'
             reset_your_password: 'Réinitialiser votre mot de passe'
             subject: 'Réinitialisation du mot de passe'
             to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
@@ -24,7 +20,6 @@ sylius:
             welcome_to_our_store: 'Bienvenue dans notre boutique !'
             you_have_just_been_registered: 'Vous venez d''être enregistré. Merci'
         verification_token:
-            hello: 'Bonjour'
             subject: 'Vérification de l''adresse e-mail'
             to_verify_your_email_address: 'Pour confirmer votre adresse e-mail, cliquez sur le lien ci-dessous'
             verify_your_email_address: 'Vérifiez votre adresse email'
@@ -41,8 +36,4 @@ sylius:
         shop:
             account:
                 address_book: 'Carnet d’adresses'
-                change_password: 'Changer votre mot de passe'
-                dashboard: 'Tableau de bord'
                 header: 'Votre compte'
-                order_history: 'Historique des commandes'
-                personal_information: 'Informations personnelles'

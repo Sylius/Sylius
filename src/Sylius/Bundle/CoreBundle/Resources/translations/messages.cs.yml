@@ -4,41 +4,22 @@
 sylius:
     form:
         block:
-            body: Tělo
-            id: ID
             title: Název
         cart:
             coupon: Kupón
         checkout:
-            addressing:
-                different_billing_address: Použít jinou adresu pro fakturaci?
             payment_method: Způsob platby
             shipping_method: Způsoby dopravy
-        promotion:
-            channels: Kanály
-        promotion_action:
-            add_product_configuration:
-                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Omezení použití na zákazníka
         group:
-            name: Jméno
             roles: Role
         channel:
-            billing_data:
-                city: Město
-                company: Firma
-                country: Země
-                postcode: PSČ
-                street: Ulice
             contact_email: Kontaktní e-mail
-            countries: Země
             currencies: Měny
-            currency_base: Základní měna
             account_verification_required: Je požadováno ověření účtu?
             hostname: Hostname
             locale_default: Výchozí jazyk
-            locales: Lokalizace
             payment_methods: Způsoby platby
             shipping_methods: Způsoby dopravy
             skipping_shipping_step_allowed: Přeskočit výběr doručení pokud je k dispozici pouze jedna možnost?
@@ -48,64 +29,28 @@ sylius:
             taxonomies: Taxonomie
             theme: Vzhled
         image:
-            type: Typ
             file: Obrázek
         locale:
-            code: Kód
             enabled: Povoleno
         order_filter:
             created_at_from: Vytvořeno po
             created_at_to: Vytvořeno před
-            number: Číslo
-            total_from: Od
-            total_to: Do
-            payment_state: Stav platby
             channel: Všechny kanály
-        page:
-            body: Tělo
-            id: ID
-            title: Název
         product:
-            images: Obrázky
             restricted_zone: Zóna s omezeným přístupem
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
             main_taxon: Hlavní taxon
-            channels: Kanály
-            enabled: Povoleno
-        product_filter:
-            name: Jméno
-            code: Kód
-        product_variant:
-            tax_category: Typ daně
-            shipping_category: Typ dopravy
         shipment_filter:
-            created_at_from: Od
-            created_at_to: Do
             number: Číslo objednávky
             shipping_address: Jméno příjemce
-            channel: Všechny kanály
         payment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Číslo objednávky
             billing_address: Fakturační adresa – jméno
-            channel: Všechny kanály
-        shipping_method:
-            zone: Oblast
         taxon:
-            code: Kód
-            file: Vybrat obrázek
-            images: Obrázky
-        taxonomy:
             file: Vybrat obrázek
         user:
-            billing_address: Fakturační adresa
-            enabled: Povoleno
             first_name: Křestní Jméno
             groups: Skupiny
-            roles: Role
-            last_name: Příjmení
             password: Heslo
             shipping_address: Doručovací adresa
         user_filter:
@@ -114,7 +59,6 @@ sylius:
             depth: Hloubka
             height: Výška
             on_hand: Aktuálně skladem
-            price: Cena
             sku: SKU
             shipping_required: Je povinná doprava?
             weight: Hmotnost
@@ -122,35 +66,15 @@ sylius:
         attribute:
             product_attribute_value:
                 attribute: Atribut
-                value: Hodnota
-        guest:
-            email: Email
         product_association:
             product: Související produkt
             type: Typy asociace
-        product_association_type:
-            name: Jméno
         promotion_filter:
             products: Filtr produktů
             taxons: Taxonů filtr
         promotion_rule:
-            customer_group:
-                group: Skupina zákazníků
-            has_taxon:
-                taxons: Taxony
-            product:
-                products: Produkty
             total_of_items_from_taxon:
                 taxon: Taxonu
-                amount: Částka
-        payment_method:
-            channels: Kanály
-        product_attribute:
-            position: Pozice
-        zone:
-            scopes:
-                shipping: Přeprava
-                tax: Daň
     installer:
         extensions:
             header: rozšíření
@@ -184,7 +108,6 @@ sylius:
             exists: Existuje
             logs:
                 header: logy
-                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: neexistuje
             not_writable: nelze zapisovat
             parameters:

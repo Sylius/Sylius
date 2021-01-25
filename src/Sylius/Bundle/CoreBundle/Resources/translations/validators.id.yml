@@ -12,8 +12,6 @@ sylius:
         default_locale:
             not_blank: Mohon masukan default bahasa channel.
         contact_email:
-            invalid: Email ini tidak valid.
-            max: Email tidak boleh lebih dari {{ limit }} karakter.
             min: Email setidaknya harus sepanjang {{ limit }} karakter.
     channel_pricing:
         price:
@@ -22,22 +20,14 @@ sylius:
         shipping_method:
             not_blank: Mohon pilih metode pengiriman.
     contact:
-        email:
-            invalid: Email ini tidak valid.
-            not_blank: Masukkan email Anda.
         message:
             not_blank: Masukkan pesan Anda.
     currency:
         enabled:
             cannot_disable_base: Mata uang utama tidak dapat dinonaktifkan.
-    customer:
-        currency_code:
-            not_valid: Kode mata uang yang anda masukkan tidak valid.
     cart_item:
         not_available: '%itemName% tidak memiliki stok yang cukup.'
     order:
-        currency_code:
-            not_valid: Kode mata uang yang anda masukkan tidak valid.
         payment_method_eligibility: 'Metode pembayaran %paymentMethodName% ini telah dinonaktifkan. Silahkan pilih ulang metode pembayaran Anda.'
         product_eligibility: 'Produk %productName% ini telah dinonaktifkan.'
         shipping_method_eligibility: 'Produk tidak memenuhi persyaratan untuk pengiriman metode %shippingMethodName%. Silahkan memilih ulang metode pengiriman Anda.'
@@ -86,7 +76,6 @@ sylius:
             upload_ini_size: Gambar terlalu besar. Ukuran maksimal yang diperbolehkan {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Email ini telah digunakan.
             min: Email harus mengandung minimal {{ min }} karakter.
             max: Email maksimal hanya terdiri dari {{ max }} karakter.
             invalid: Email ini tidak valid.

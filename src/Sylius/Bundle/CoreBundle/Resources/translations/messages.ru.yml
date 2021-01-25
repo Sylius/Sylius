@@ -4,40 +4,22 @@
 sylius:
     form:
         block:
-            body: Содержание
-            id: ID
-            title: Название
+            title: Заголовок
         cart:
             coupon: Купон
         checkout:
-            addressing:
-                different_billing_address: Использовать другой адрес для выставления счета?
             payment_method: Способ оплаты
             shipping_method: Способ доставки
-        promotion:
-            channels: Каналы
-        promotion_action:
-            add_product_configuration:
-                product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
-            name: Округ
             roles: Роли
         channel:
-            billing_data:
-                city: Город
-                company: Компания
-                country: Страна
-                postcode: Индекс
-                street: Улица
             contact_email: Контактный email
             currencies: Валюты
-            currency_base: Базовая валюта
             account_verification_required: Требуется ли подтверждение аккаунта?
             hostname: Хост
             locale_default: Локаль по умолчанию
-            locales: Языки
             payment_methods: Список методов оплаты
             shipping_methods: Список способов доставки
             skipping_shipping_step_allowed: Пропустить шаг доставки, если доступен только один способ доставки?
@@ -47,65 +29,29 @@ sylius:
             taxonomies: Список каталогов
             theme: Тема оформления
         image:
-            type: Тип
             file: Изображение
         locale:
-            code: Код
             enabled: Активен
         order_filter:
             created_at_from: Создан после
             created_at_to: Создан до
-            number: Номер
-            total_from: От
-            total_to: До
-            payment_state: Статус платежа
             channel: Все каналы
         page:
-            body: Содержание
-            id: ID
             title: Название
         product:
-            images: Изображения
             restricted_zone: Зона ограничений
             short_description: Короткое описание
-            variant_selection_method: Метод выбора вариантов
+            variant_selection_method: Метод выборки вариантов
             main_taxon: Основной таксон
-            channels: Каналы
-            enabled: Активен
-        product_filter:
-            name: Округ
-            code: Код
-        product_variant:
-            tax_category: Категория налогов
-            shipping_category: Категория доставки
         shipment_filter:
-            created_at_from: От
-            created_at_to: До
             number: Номер заказа
             shipping_address: Имя получателя
-            channel: Все каналы
         payment_filter:
-            created_at_from: От
-            created_at_to: До
-            number: Номер заказа
             billing_address: Счет на имя
-            channel: Все каналы
-        shipping_method:
-            zone: Зона
         taxon:
-            code: Код
-            file: Выберите изображение
-            images: Изображения
-        taxonomy:
             file: Выберите изображение
         user:
-            billing_address: Адрес для выставления счета
-            different_billing_address: Использовать другой адрес для выставления счета?
-            enabled: Активен
-            first_name: Имя
             groups: Группы
-            roles: Роли
-            last_name: Фамилия
             password: Пароль
             shipping_address: Адрес доставки
         user_filter:
@@ -113,8 +59,7 @@ sylius:
         variant:
             depth: Глубина
             height: Высота
-            on_hand: Количество на складе
-            price: Цена
+            on_hand: Наличие
             sku: Идентификатор товарной позиции
             shipping_required: Требуется ли доставка?
             weight: Вес
@@ -122,35 +67,17 @@ sylius:
         attribute:
             product_attribute_value:
                 attribute: Атрибут
-                value: Значение
-        guest:
-            email: Email
         product_association:
             product: Связанные продукты
             type: Типы взаимосвязи
-        product_association_type:
-            name: Округ
         promotion_filter:
             products: Фильтр товаров
             taxons: Фильтр таксонов
         promotion_rule:
-            customer_group:
-                group: Группа клиента
             has_taxon:
                 taxons: Категории
-            product:
-                products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
-                amount: Количество
-        payment_method:
-            channels: Каналы
-        product_attribute:
-            position: Позиция
-        zone:
-            scopes:
-                shipping: Способ доставки
-                tax: Налог
     installer:
         extensions:
             header: расширения
@@ -184,7 +111,6 @@ sylius:
             exists: существует
             logs:
                 header: журналы
-                help: "Чтобы выставить разрешения запустите: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: не существует
             not_writable: не доступно для записи
             parameters:

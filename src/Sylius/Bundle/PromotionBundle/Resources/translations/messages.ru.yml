@@ -25,15 +25,10 @@ sylius:
                 amount: Количество
             percentage_discount_configuration:
                 percentage: Процент
-            type: Тип
         promotion_coupon:
             expires_at: Истекает
-            usage_limit: Предел
         promotion_coupon_generator_instruction:
-            amount: Количество
             code_length: Длина кода
-            expires_at: Истекает
-            usage_limit: Предел
         promotion_filter:
             price_range: Фильтр диапазона цен
         promotion_rule:
@@ -51,14 +46,5 @@ sylius:
                 equal: Равно
             contains_product_configuration:
                 exclude: Исключить
-                variants: Товары
-            item_total_configuration:
-                amount: Количество
             nth_order_configuration:
                 nth: Количество
-            shipping_country_configuration:
-                country: Страна
-            taxonomy_configuration:
-                exclude: Исключить
-                taxons: Категории
-            type: Тип

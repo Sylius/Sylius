@@ -14,21 +14,15 @@ sylius:
             amount: Jumlah pembayaran
             method: Metode pembayaran
             state:
-                header: Tahap pembayaran
-                checkout: Checkout
                 completed: Selesai
                 authorized: Terotrisasi
                 failed: Gagal
                 new: Baru
-                pending: Tertunda
                 processing: Memproses
                 unknown: Tak diketahui
                 void: Ditolak
                 cancelled: Dibatalkan
                 refunded: Biaya telah dikembalikan
         payment_method:
-            description: Keterangan
             enabled: Aktifkan?
             instructions: Petunjuk
-            name: Nama
-            position: Posisi

@@ -4,11 +4,6 @@
 sylius:
     form:
         tax_category:
-            name: Nama
             description: Keterangan
         tax_rate:
-            category: Kategori
-            name: Nama
-            amount: Jumlah
             included_in_price: Termasuk harga?
-            calculator: Kalkulator

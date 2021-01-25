@@ -4,20 +4,11 @@
 sylius:
     form:
         customer:
-            first_name: Imię
             group: Grupa
-            last_name: Nazwisko
-            email: Email
-            phone_number: Numer telefonu
             gender: Płeć
             birthday: Data urodzenia
-            billing_address: Adres do rachunku
             only_customer_registration: Utworzyć konto?
             subscribed_to_newsletter: Zapisz się do newslettera
-        customer_group:
-            name: Nazwa
-            roles: Role
     gender:
-        unknown: Nieznany
         male: Mężczyzna
         female: Kobieta

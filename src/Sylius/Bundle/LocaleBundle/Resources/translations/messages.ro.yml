@@ -4,5 +4,4 @@
 sylius:
     form:
         locale:
-            name: Nume produs
             select: Selectează setare regională

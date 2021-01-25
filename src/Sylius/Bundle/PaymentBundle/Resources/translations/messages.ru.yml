@@ -12,9 +12,8 @@ sylius:
             type: Тип карты
         payment:
             amount: Сумма платежа
-            method: Метод платежа
+            method: Способ оплаты
             state:
-                header: Статус платежа
                 checkout: Сверка
                 completed: Завершен
                 authorized: Авторизовано
@@ -27,8 +26,5 @@ sylius:
                 cancelled: Отменён
                 refunded: Возвращено
         payment_method:
-            description: Описание
             enabled: Включен?
             instructions: Инструкции
-            name: Округ
-            position: Позиция

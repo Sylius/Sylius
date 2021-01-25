@@ -14,7 +14,6 @@ sylius:
             not_blank: Vă rugăm să introduceţi setări regionale implicite de canal.
         contact_email:
             invalid: Adresa de email nu este validă.
-            max: Adresa de email nu trebuie să aibă mai mult de {{ limit }} caractere.
             min: Adresa de email trebuie să aibă minim {{ limit }} caractere.
     channel_pricing:
         price:
@@ -24,9 +23,6 @@ sylius:
         shipping_method:
             not_blank: Vă rugăm să alegeți metoda de livrare.
     contact:
-        email:
-            invalid: Adresa de email nu este validă.
-            not_blank: Vă rugăm să completați adresa de e-mail.
         message:
             not_blank: Scrie-ne un mesaj.
     currency:
@@ -38,8 +34,6 @@ sylius:
     cart_item:
         not_available: 'Nu există stoc suficient pentru %itemName%.'
     order:
-        currency_code:
-            not_valid: Codul de valută pe care l-aţi introdus nu este valid.
         payment_method_eligibility: 'Metoda de plată %paymentMethodName% a fost dezactivată. Te rugăm să selectezi o altă metodă.'
         product_eligibility: 'Produsul %productName% a fost dezactivat.'
         shipping_method_eligibility: 'Metoda %shippingMethodName% nu poate fi folosită pentru acest produs. Te rugăm să selectezi o altă metodă de livrare.'
@@ -91,7 +85,7 @@ sylius:
             unique: Acest e-mail este deja folosit.
             min: Adresa de email trebuie să aibă minim {{ min }} caractere.
             max: Adresa de email poate să aibă maxim {{ max }} caractere.
-            invalid: Adresa de email nu este validă.
+            invalid: Această adresă de e-mail este invalidă.
         username:
             unique: Acest nume de utilizator este deja folosit.
             not_blank: Introdu un nume de utilizator.

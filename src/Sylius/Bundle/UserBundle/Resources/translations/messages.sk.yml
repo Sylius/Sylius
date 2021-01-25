@@ -4,21 +4,9 @@
 sylius:
     form:
         user:
-            email: E-mail
-            enabled: Zapnuté
             password:
-                label: Heslo
                 confirmation: Overenie
             remember_me: Zapamätať si ma
             shipping_address: Adresa doručenia
-            username: Používateľské meno
-            verified: Overené
         user_filter:
             query: Vyhľadať
-        user_change_password:
-            confirmation: Potvrdenie
-            current: Aktuálne heslo
-            new: Nové heslo
-        user_reset_password:
-            confirmation: Potvrdenie
-            new: Nové heslo

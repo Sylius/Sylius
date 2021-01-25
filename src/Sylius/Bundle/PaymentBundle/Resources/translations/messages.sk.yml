@@ -14,21 +14,15 @@ sylius:
             amount: Suma platby
             method: Spôsob platby
             state:
-                header: Stav platby
-                checkout: Košík
                 completed: Dokončená
                 authorized: Autorizovaná
                 failed: Neúspešná
                 new: Nová
-                pending: Čakajúca
                 processing: Spracúvava sa
                 unknown: Neznáme
                 void: Neplatná
                 cancelled: Zrušená
                 refunded: Vrátené peniaze
         payment_method:
-            description: Popis
             enabled: Zapnuté?
             instructions: Inštrukcie
-            name: Názov
-            position: Pozícia

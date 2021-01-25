@@ -11,7 +11,6 @@ sylius:
             description: Opis
             ends_at: Data zakończenia
             exclusive: Wyłączna
-            name: Nazwa
             priority: Priorytet
             rules: Reguły
             starts_at: Data rozpoczęcia
@@ -26,17 +25,12 @@ sylius:
                 amount: Wartość
             percentage_discount_configuration:
                 percentage: Procentowa
-            type: Typ
         promotion_coupon:
             expires_at: Wygasa
-            usage_limit: Limit użycia
         promotion_coupon_generator_instruction:
-            amount: Wartość
             code_length: Długość kodu
-            expires_at: Wygasa
             prefix: Przedrostek
             suffix: Przyrostek
-            usage_limit: Limit użycia
         promotion_filter:
             price_range: Zakres ceny
         promotion_rule:
@@ -54,14 +48,5 @@ sylius:
                 equal: Równe
             contains_product_configuration:
                 exclude: Nie zawiera
-                variants: Produkty
-            item_total_configuration:
-                amount: Wartość
             nth_order_configuration:
                 nth: N-ty
-            shipping_country_configuration:
-                country: Kraj
-            taxonomy_configuration:
-                exclude: Nie zawiera
-                taxons: Taksonomie
-            type: Typ

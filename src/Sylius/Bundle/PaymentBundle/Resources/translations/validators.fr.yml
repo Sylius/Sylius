@@ -8,7 +8,6 @@ sylius:
             not_blank: Veuillez entrer le nom du titulaire de la carte bancaire.
         expiry_month:
             max_range: Le mois d'expiration de la carte bancaire doit être compris entre {{ min }} et {{ max }}.
-            min_range: Le mois d'expiration de la carte bancaire doit être compris entre {{ min }} et {{ max }}.
             not_blank: Veuillez sélectionner le mois d'expiration.
         number:
             not_blank: Veuillez entrer le numéro de la carte.
