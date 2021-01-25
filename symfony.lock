@@ -387,9 +387,6 @@
     "nikic/php-parser": {
         "version": "v4.6.0"
     },
-    "ocramius/proxy-manager": {
-        "version": "2.10.1"
-    },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
     },
@@ -795,6 +792,15 @@
     "symfony/intl": {
         "version": "v4.1.3"
     },
+    "symfony/maker-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
     "symfony/messenger": {
         "version": "4.3",
         "recipe": {
@@ -1068,9 +1074,6 @@
     },
     "vimeo/psalm": {
         "version": "3.11.6"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"

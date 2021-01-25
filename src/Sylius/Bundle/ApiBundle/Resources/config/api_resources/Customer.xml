@@ -33,6 +33,15 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
                 <attribute name="output">false</attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_get_all">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </collectionOperation>
+
         </collectionOperations>
 
         <itemOperations>
@@ -79,9 +88,15 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="email" writable="true" />
+        <property name="customerGroup" writable="false"/>
+        <property name="gender" writable="true" />
         <property name="firstName" writable="true" />
         <property name="lastName" writable="true" />
         <property name="fullName" writable="false" />
         <property name="defaultAddress" writable="true" />
+        <property name="phoneNumber" writable="true" />
+        <property name="subscribedToNewsletter" writable="true" />
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
     </resource>
 </resources>

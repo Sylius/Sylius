@@ -20,6 +20,9 @@
             <group>admin:customer:read</group>
         </attribute>
 
+        <attribute name="customerGroup">
+            <group>admin:customer:read</group>
+        </attribute>
         <attribute name="email">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
@@ -43,10 +46,39 @@
             <group>shop:customer:read</group>
         </attribute>
 
+        <attribute name="gender">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
+        </attribute>
+
+        <attribute name="gender">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
+        </attribute>
+
+        <attribute name="phoneNumber">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
+        </attribute>
+
         <attribute name="defaultAddress">
             <group>admin:customer:read</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>
+
+        <attribute name="createdAt">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+        </attribute>
+
+        <attribute name="updatedAt">
+            <group>admin:customer:read</group>
+            <group>shop:customer:read</group>
+        </attribute>
+
     </class>
 </serializer>
