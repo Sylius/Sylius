@@ -25,3 +25,6 @@ jms_serializer:
             sylius-core:
                 namespace_prefix: "Sylius\\Component\\Core"
                 path: "@SyliusAdminApiBundle/Resources/config/serializer"
+
+parameters:
+    sylius.security.api_regex: "^/api/v1"
