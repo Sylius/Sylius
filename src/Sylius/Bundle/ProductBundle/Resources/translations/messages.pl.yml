@@ -4,27 +4,15 @@
 sylius:
     form:
         product:
-            name: Nazwa
-            description: Opis
             attributes: Cechy
-            options: Warianty
+            options: Opcje
             meta_keywords: Słowa kluczowe w sekcji meta
             meta_description: Opis w sekcji meta
             slug: Fragment URL
-            taxons: Taksonomie
-        product_variant:
-            name: Nazwa
-        association_type:
-            name: Nazwa
-            translations: Tłumaczenia
         association:
             type: Rodzaj powiązania
             product: Powiązany produkt
-        variant:
-            name: Nazwa
         option:
-            name: Nazwa
-            position: Położenie
             values: Możliwe wartości
         option_value:
             add_value: Dodaj wartość

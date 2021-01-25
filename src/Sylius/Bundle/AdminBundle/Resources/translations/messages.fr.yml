@@ -5,7 +5,6 @@ sylius:
     email:
         shipment_confirmation:
             has_been_sent_using: 'a été envoyé en utilisant'
-            subject: 'Confirmation d''expédition'
             thank_you_for_transaction: 'Merci pour votre transaction réussie.'
             tracking_code: 'code de suivi.'
             you_can_check_its_location: 'Vous pouvez vérifier sa position avec'
@@ -27,7 +26,6 @@ sylius:
                     countries: Pays
                     currencies: Devises
                     exchange_rates: Taux de change
-                    header: Configuration
                     locales: Locales
                     payment_methods: Moyens de paiement
                     shipping_categories: Catégories d'expédition
@@ -49,4 +47,6 @@ sylius:
     ui:
         gateway:
             no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
         sales_summary: Récapitulatif des ventes

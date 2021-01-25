@@ -4,9 +4,5 @@
 sylius:
     form:
         taxon:
-            description: Opis
-            name: Nazwa
             parent: Rodzic
             slug: Fragment URL
-        taxonomy:
-            name: Nazwa

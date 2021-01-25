@@ -5,18 +5,15 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Ilość
                 equal: Równy
             type: Typ reguły
         shipment:
             state: Status
             states:
-                checkout: Koszyk
                 pending: Oczekujący
                 ready: Gotowe
                 shipped: Dostarczono
                 returned: Zwrócone
-                cancelled: Anulowane
             tracking_code: Kod śledzenia
         shipping_calculator:
             flat_rate_configuration:
@@ -24,22 +21,11 @@ sylius:
                 amount: Wartość
             per_unit_rate_configuration:
                 label: Jednolita stawka za jednostkę
-                amount: Wartość
-        shipping_category:
-            description: Opis
-            name: Nazwa
         shipping_method:
             calculator: Kalkulator
-            category: Kategoria
             category_requirement: Wymagania kategorii
-            channels: Kanały
             configuration: Konfiguracja
-            description: Opis
-            enabled: Dostępny
             match_all_category_requirement: Wszystkie przedmioty muszą pochodzić z tej samej kategorii wysyłki
             match_any_category_requirement: Przynajmniej 1 przedmiot musi pochodzić z kategorii wysyłki
             match_none_category_requirement: Żaden przedmiot nie musi pochodzić z kategorii wysyłki
-            name: Nazwa
-            position: Położenie
-            tax_category: Kategoria podatkowa
-            translations: Tłumaczenia
+            position: Pozycja

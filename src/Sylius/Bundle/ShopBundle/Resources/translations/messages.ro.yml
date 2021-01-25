@@ -4,17 +4,13 @@
 sylius:
     email:
         contact_request:
-            content: 'Conţinut'
             message_from: 'Mesaj de la'
             subject: 'Solicitare de contact'
         order_confirmation:
             has_been_successfully_placed: 'a fost plasata cu succes.'
-            subject: 'Confirmare comandă'
-            view_order_or_change_payment_method: 'Vezi comanda sau modifică metoda de plată'
             thank_you: 'Iti multumim ca ai cumparat la magazinul nostru!'
             your_order_number: 'Comanda dvs. nr.'
         password_reset:
-            hello: 'Salut'
             reset_your_password: 'Resetați-vă parola'
             subject: 'Resetare parolă'
             to_reset_your_password: 'Pentru a reseta parola - faceţi clic pe link-ul de mai jos'
@@ -24,7 +20,6 @@ sylius:
             welcome_to_our_store: 'Bine ați venit la magazinul nostru!'
             you_have_just_been_registered: 'Tocmai aţi fost înregistrat. Vă mulţumim'
         verification_token:
-            hello: 'Salut'
             subject: 'Verificare adresă e-mail'
             to_verify_your_email_address: 'Pentru a vă verifica adresa de e-mail - faceți clic pe link-ul de mai jos'
             verify_your_email_address: 'Verificați adresa dvs. de e-mail'
@@ -39,8 +34,5 @@ sylius:
         shop:
             account:
                 address_book: 'Lista de adrese'
-                change_password: 'Schimbă parola'
-                dashboard: 'Panou de administrare'
                 header: 'Contul tău'
                 order_history: 'Istoric comenzi'
-                personal_information: 'Informaţii personale'

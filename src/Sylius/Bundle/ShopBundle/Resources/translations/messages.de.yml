@@ -10,8 +10,7 @@ sylius:
         order_confirmation:
             has_been_successfully_placed: 'wurde erfolgreich platziert.'
             subject: 'Bestellbestätigung'
-            view_order_or_change_payment_method: 'Bestellung anzeigen oder Zahlungsart ändern'
-            thank_you: 'Vielen Dank für Ihren Einkauf in unserem Shop!'
+            thank_you: 'Vielen Dank für den Einkauf in unserem Shop!'
             your_order_number: 'Ihre Bestellnr.'
         password_reset:
             hello: 'Hallo'
@@ -26,7 +25,7 @@ sylius:
         verification_token:
             hello: 'Hallo'
             subject: 'E-Mail-Adressenüberprüfung'
-            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu verifizieren - klicken Sie auf den folgenden Link'
+            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu bestätigen - klicken Sie auf den folgenden Link'
             verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
     homepage:
         about_us: 'Über uns'
@@ -42,4 +41,4 @@ sylius:
                 dashboard: 'Dashboard'
                 header: 'Ihr Konto'
                 order_history: 'Bestellverlauf'
-                personal_information: 'Persönliche Informationen'
+                personal_information: 'Mein Profil'

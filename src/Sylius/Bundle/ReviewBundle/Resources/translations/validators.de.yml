@@ -3,8 +3,6 @@
 
 sylius:
     review:
-        author:
-            already_exists: Diese E-Mail wird bereits verwendet. Bitte melden Sie sich an oder benutzen Sie Passwort vergessen.
         comment:
             not_blank: Kommentar der Rezension darf nicht leer sein.
         rating:

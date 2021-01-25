@@ -5,19 +5,9 @@ sylius:
     form:
         user:
             email: Adresă e-mail
-            enabled: Activat
             password:
-                label: Parolă
                 confirmation: Verificare
             remember_me: Ţine-mă minte
-            shipping_address: Adresa de livrare
-            username: Nume de utilizator
+            shipping_address: Adresă de livrare
         user_filter:
             query: Căutare
-        user_change_password:
-            confirmation: Confirmare
-            current: Parola actuală
-            new: Parolă nouă
-        user_reset_password:
-            confirmation: Confirmare
-            new: Parolă nouă

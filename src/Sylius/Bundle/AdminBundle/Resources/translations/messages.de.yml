@@ -5,7 +5,6 @@ sylius:
     email:
         shipment_confirmation:
             has_been_sent_using: 'wurde gesendet mit'
-            subject: 'Versandbestätigung'
             thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
             tracking_code: 'Tracking-Code.'
             you_can_check_its_location: 'Sie können den Standort mit dem'
@@ -27,7 +26,6 @@ sylius:
                     countries: Länder
                     currencies: Währungen
                     exchange_rates: Wechselkurse
-                    header: Einstellung
                     locales: Gebietsschemata
                     payment_methods: Bezahlmethoden
                     shipping_categories: Versandkategorien

@@ -5,7 +5,4 @@ sylius:
     form:
         channel:
             color: Culoare
-            description: Descriere
-            enabled: Activat
-            name: Nume produs
             url: Adresă

@@ -13,8 +13,6 @@ sylius:
             enabled: Les paramètres régionaux par défaut doivent être activés.
             not_blank: Veuillez renseigner la locale par défaut du canal.
         contact_email:
-            invalid: Cet e-mail n'est pas valide.
-            max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
     channel_pricing:
         price:
@@ -24,22 +22,14 @@ sylius:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
     contact:
-        email:
-            invalid: Cet e-mail n'est pas valide.
-            not_blank: Veuillez saisir votre adresse email.
         message:
             not_blank: Veuillez saisir votre message.
     currency:
         enabled:
             cannot_disable_base: La devise de base ne peut pas être désactivée.
-    customer:
-        currency_code:
-            not_valid: Le code de devise que vous avez entré n’est pas valide.
     cart_item:
         not_available: '%itemName% est en rupture de stock.'
     order:
-        currency_code:
-            not_valid: Le code de devise que vous avez entré n’est pas valide.
         payment_method_eligibility: 'Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.'
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
@@ -88,7 +78,6 @@ sylius:
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
     user:
         email:
-            unique: Cet e-mail est déjà utilisé.
             min: L'e-mail doit contenir au moins {{ min }} caractères.
             max: L'e-mail doit contenir au plus {{ max }} caractères.
             invalid: Cet e-mail n'est pas valide.

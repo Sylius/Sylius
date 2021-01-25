@@ -26,8 +26,6 @@ sylius:
         attribute_type_configuration:
             datetime:
                 format: Format
-            date:
-                format: Format
             select:
                 multiple: Multiple
                 values: Valori

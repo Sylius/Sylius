@@ -4,41 +4,22 @@
 sylius:
     form:
         block:
-            body: Zawartość
-            id: ID
             title: Tytuł
         cart:
             coupon: Kupon
         checkout:
-            addressing:
-                different_billing_address: Użyć innego adresu do rozliczeń?
             payment_method: Metoda płatności
             shipping_method: Metoda wysyłki
-        promotion:
-            channels: Kanały
-        promotion_action:
-            add_product_configuration:
-                product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Limit użycia na 1 klienta
         group:
-            name: Nazwa
             roles: Role
         channel:
-            billing_data:
-                city: Miejscowość
-                company: Firma
-                country: Kraj
-                postcode: Kod pocztowy
-                street: Adres
             contact_email: E-mail do kontaktu
-            countries: Kraje
             currencies: Waluty
-            currency_base: Waluta podstawowa
             account_verification_required: Czy weryfikacja konta jest wymagana?
             hostname: Nazwa hosta
             locale_default: Domyślne ustawienia regionalne
-            locales: Ustawienia regionalne
             payment_methods: Metody płatności
             shipping_methods: Metody wysyłki
             skipping_shipping_step_allowed: Czy pomijać krok wysyłki, jeżeli dostępna jest tylko jedna metoda wysyłki?
@@ -48,64 +29,28 @@ sylius:
             taxonomies: Kategorie
             theme: Motyw
         image:
-            type: Typ
             file: Zdjęcie
         locale:
-            code: Kod
             enabled: Dostępny
         order_filter:
             created_at_from: Stworzony po
             created_at_to: Stworzony przed
-            number: Numer
-            total_from: Od
-            total_to: Do
-            payment_state: Status płatności
             channel: Wszystkie kanały
-        page:
-            body: Zawartość
-            id: ID
-            title: Tytuł
         product:
-            images: Zdjęcia
             restricted_zone: Strefa
             short_description: Krótki opis
-            variant_selection_method: Metody wyboru wariantu
+            variant_selection_method: Metoda wyboru wariantu
             main_taxon: Główne grupy
-            channels: Kanały
-            enabled: Dostępny
-        product_filter:
-            name: Nazwa
-            code: Kod
-        product_variant:
-            tax_category: Kategoria podatkowa
-            shipping_category: Kategoria wysyłki
         shipment_filter:
-            created_at_from: Od
-            created_at_to: Do
             number: Numer zamówienia
             shipping_address: Dostarcz do
-            channel: Wszystkie kanały
         payment_filter:
-            created_at_from: Od
-            created_at_to: Do
-            number: Numer zamówienia
             billing_address: Dane do rachunku
-            channel: Wszystkie kanały
-        shipping_method:
-            zone: Strefa
         taxon:
-            code: Kod
-            file: Wybierz zdjęcie
-            images: Zdjęcia
-        taxonomy:
             file: Wybierz zdjęcie
         user:
-            billing_address: Adres do rachunku
-            enabled: Dostępny
-            first_name: Imię
+            enabled: Aktywne
             groups: Grupy
-            roles: Role
-            last_name: Nazwisko
             password: Hasło
             shipping_address: Adres dostawy
         user_filter:
@@ -114,43 +59,25 @@ sylius:
             depth: Głębokość
             height: Wysokość
             on_hand: Dostępny
-            price: Cena
-            sku: SKU
             shipping_required: Czy wymagana jest dostawa?
             weight: Waga
             width: Szerokość
         attribute:
             product_attribute_value:
                 attribute: Cecha
-                value: Wartość
-        guest:
-            email: Email
         product_association:
             product: Powiązany produkt
             type: Rodzaj powiązania
-        product_association_type:
-            name: Nazwa
         promotion_filter:
             products: Filtr produktów
             taxons: Filtr taksonomii
         promotion_rule:
-            customer_group:
-                group: Grupa klientów
             has_taxon:
                 taxons: Taksonomie
-            product:
-                products: Produkty
             total_of_items_from_taxon:
                 taxon: Takson
-                amount: Wartość
-        payment_method:
-            channels: Kanały
         product_attribute:
             position: Położenie
-        zone:
-            scopes:
-                shipping: Wysyłka
-                tax: Podatek
     installer:
         extensions:
             header: rozszerzenia
@@ -184,7 +111,6 @@ sylius:
             exists: istnieje
             logs:
                 header: logi
-                help: "Aby ustawić uprawnienia uruchom: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: nie istnieje
             not_writable: niezapisywalny
             parameters:
