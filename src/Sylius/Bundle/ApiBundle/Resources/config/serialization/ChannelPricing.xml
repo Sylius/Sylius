@@ -17,11 +17,11 @@
 >
     <class name="Sylius\Component\Core\Model\ChannelPricing">
         <attribute name="price">
-            <group>channel_pricing:read</group>
+            <group>shop:channel_pricing:read</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="originalPrice">
-            <group>channel_pricing:read</group>
+            <group>shop:channel_pricing:read</group>
             <group>shop:product:read</group>
         </attribute>
     </class>

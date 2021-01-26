@@ -20,7 +20,7 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>channel_pricing:read</attribute>
+                <attribute>shop:channel_pricing:read</attribute>
             </attribute>
         </attribute>
 
@@ -31,6 +31,10 @@
             </itemOperation>
         </itemOperations>
 
+        <collectionOperations>
+        </collectionOperations>
+
+        <property name="id" writable="false" readable="true" identifier="true" />
         <property name="price" writable="false" readable="true" />
         <property name="originalPrice" writable="false" readable="true" />
     </resource>
