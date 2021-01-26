@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by stloyd at 2021-01-25T09:47:25Z
+
+Related API-Platform issue: https://github.com/api-platform/core/issues/3975
+
+---------------------------------------------------------------------------
+
+by Chrysweel at 2021-01-25T18:25:44Z
+
+While I fixed the error restricting the version `"api-platform/core": "v2.5.10",`
+
+:(
+
+---------------------------------------------------------------------------
+
+by pamil at 2021-01-26T15:29:37Z
+
+Thank you, @kayue! :tada:
