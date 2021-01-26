@@ -5,3 +5,11 @@ sylius:
     review:
         author:
             already_exists: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
+        comment:
+            not_blank: Atsiliepimo komentaras negali būti tuščias.
+        rating:
+            not_blank: Privalote pasirinkti atsiliepimo reitingą.
+        title:
+            not_blank: Atsiliepimo antraštė negali būti tuščia.
+            min_length: Atsiliepimo antraštė privalo būti bent 2 simboliai.
+            max_length: Ilgiausia galima atsiliepimo antraštė yra 255 simboliai.

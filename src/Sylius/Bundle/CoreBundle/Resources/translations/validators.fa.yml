@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: تصویر بسیار بزرگ است -{{ size }}{{ suffix }}. حداکثر اندازه مجاز {{ limit }}{{ suffix }} می باشد.
+            upload_ini_size: این تصویر بسیار بزرگ است. حداکثر اندازی مجاز {{ suffix }}{{ limit }} است.
     channel:
         base_currency:
             not_blank: لطفا ارز پایه کانال را وارد کنید.
@@ -13,7 +17,6 @@ sylius:
             min: ایمیل باید حداقل {{ limit }} حرف داشته باشد.
     channel_pricing:
         price:
-            min: قیمت باید حداقل {{ limit }} باشد.
             not_blank: لطفا قیمت را وارد کنید.
     checkout:
         shipping_method:

@@ -12,6 +12,7 @@ sylius:
             remember_me: 记住我
             shipping_address: 送货地址
             username: 用户名
+            verified: 已验证
         user_filter:
             query: 搜索
         user_change_password:

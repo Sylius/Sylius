@@ -4,7 +4,7 @@
 sylius:
     form:
         customer:
-            first_name: Nama Depan
+            first_name: Nama depan
             group: Grup
             last_name: Nama belakang
             email: Email

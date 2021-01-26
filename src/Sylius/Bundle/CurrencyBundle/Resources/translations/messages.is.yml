@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        currency:
+            base: Grunngjaldmiðill
+            code: Nafn
+            enabled: Virkt
+            exchange_rate: Gengi
+        exchange_rate:
+            source_currency: Gjaldmiðill birgja
+            ratio: Hlutfall

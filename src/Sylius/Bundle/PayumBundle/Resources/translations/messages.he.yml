@@ -8,4 +8,12 @@ sylius:
         gateway_configuration:
             paypal:
                 password: סיסמה
+                signature: חתימה
                 username: שם משתמש
+                sandbox: סנדבוקס
+            stripe:
+                publishable_key: מפתח שיטופי
+                secret_key: מפתח סודי
+    payum_gateway_factory:
+        offline: תנותק
+        paypal_express_checkout: תשלום Paypal אקספרס

@@ -26,7 +26,7 @@ sylius:
             not_valid: O código de moeda introduzido é inválido.
     order:
         currency_code:
-            not_valid: O código de moeda introduzido é inválido.
+            not_valid: O código de moeda inserido é inválido.
     locale:
         code:
             not_blank: Introduza o código de localidade.

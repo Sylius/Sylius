@@ -7,12 +7,11 @@ sylius:
             first_name: ชื่อ
             group: กลุ่มลูกค้า
             last_name: นามสกุล
-            email: อีเมล
+            email: Email
             phone_number: หมายเลขโทรศัพท์
             gender: เพศ
             birthday: วัน/เดือน/ปี เกิด
             billing_address: ที่อยู่สำหรับออกใบเสร็จ
-            different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
             only_customer_registration: สร้างบัญชี?
             subscribed_to_newsletter: สมัครรับจดหมายข่าว
         customer_group:

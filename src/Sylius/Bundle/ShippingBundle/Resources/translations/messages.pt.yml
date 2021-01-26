@@ -29,6 +29,7 @@ sylius:
             description: Descrição
             name: Nome
         shipping_method:
+            add_rule: Adicionar regra
             calculator: Calculadora
             category: Categoria
             category_requirement: Exigência de categoria
@@ -38,5 +39,11 @@ sylius:
             enabled: Ativado
             name: Nome
             position: Posição
+            rules: Regras
             tax_category: Categoria de imposto
             translations: Traduções
+        shipping_method_rule:
+            type: Tipo
+            total: Total
+            weight: Peso
+            amount: Quantia

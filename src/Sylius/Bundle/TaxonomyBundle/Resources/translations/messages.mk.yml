@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Опис
+            enabled: Овозможено
             name: Име
             parent: Родител
         taxonomy:

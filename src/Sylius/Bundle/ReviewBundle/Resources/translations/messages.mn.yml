@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        review:
+            author: Автор
+            comment: Сэтгэгдэл
+            header: Үнэлгээ нэмэх
+            rating: Үнэлэгээ
+            status:
+                approved: Баталгажуулсан.
+                label: Статус
+                new: Шинэ
+                rejected: Татгалзсан
+            submit: Илгээх
+            title: Гарчиг

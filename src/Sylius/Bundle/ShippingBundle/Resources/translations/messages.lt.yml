@@ -29,6 +29,7 @@ sylius:
             description: Aprašymas
             name: Pavadinimas
         shipping_method:
+            add_rule: Pridėti taisyklę
             calculator: Skaičiuoklė
             category: Kategorija
             category_requirement: Kategorijos reikalavimas
@@ -38,5 +39,11 @@ sylius:
             enabled: Įjungta
             name: Pavadinimas
             position: Pozicija
+            rules: Taisyklės
             tax_category: Mokesčių kategorija
             translations: Vertimai
+        shipping_method_rule:
+            type: Tipas
+            total: Iš viso
+            weight: Svoris
+            amount: Suma

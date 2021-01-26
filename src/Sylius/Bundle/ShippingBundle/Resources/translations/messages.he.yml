@@ -17,11 +17,19 @@ sylius:
             description: תיאור
             name: שם
         shipping_method:
+            add_rule: הוסף כלל
             calculator: מחשבון
             category: קטגוריה
             channels: ערוצים
+            configuration: הגדרות
             description: תיאור
             enabled: הופעל
             name: שם
             position: מיקום
+            rules: כללים
             translations: תרגומים
+        shipping_method_rule:
+            type: סוג
+            total: סה"כ
+            weight: משקל
+            amount: כמות

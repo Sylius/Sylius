@@ -9,7 +9,7 @@ sylius:
                 equal: Ist gleich
             type: Regeltyp
         shipment:
-            state: Versandstatus
+            state: Bundesland
             states:
                 checkout: Zur Kasse
                 pending: Ausstehend
@@ -30,7 +30,7 @@ sylius:
             name: Name
         shipping_method:
             add_rule: Regel hinzufügen
-            calculator: Rechner
+            calculator: Steuersatzrechner
             category: Kategorie
             category_requirement: Kategorievoraussetzungen
             channels: Ausgabekanäle
@@ -43,6 +43,7 @@ sylius:
             name: Name
             position: Position
             rules: Regeln
+            rules_help: Verwenden Sie Regeln, um zu entscheiden, ob diese Versandart auf eine bestimmte Bestellung angewendet werden kann. Wenn eine Regel zutrifft ist, kann diese Versandart angewendet werden. Beachten Sie, dass, wenn Sie mehrere Regeln hinzufügen, alle Regeln wahr sein müssen.
             tax_category: Steuerkategorie
             translations: Übersetzungen
         shipping_method_rule:

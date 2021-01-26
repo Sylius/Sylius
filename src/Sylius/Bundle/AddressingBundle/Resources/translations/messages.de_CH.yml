@@ -11,7 +11,7 @@ sylius:
             last_name: Nachname
             phone_number: Telefonnummer
             postcode: Postleitzahl
-            street: Straße und Hausnummer
+            street: Strasse und Hausnummer
             province: Kanton
             zone: Zone
         country:
@@ -23,7 +23,7 @@ sylius:
         province:
             name: Name
             abbreviation: Abkürzung
-            select: Auswählen
+            select: Kanton auswählen
         zone:
             add_member: Mitglied hinzufügen
             members: Mitglieder
@@ -36,7 +36,7 @@ sylius:
             scope: Umfang
             scopes:
                 all: Alle
-            select: Auswählen
+            select: Gebiet auswählen
             select_scope: Bereich auswählen
         zone_member:
-            select: Auswählen
+            select: Mitglied auswählen

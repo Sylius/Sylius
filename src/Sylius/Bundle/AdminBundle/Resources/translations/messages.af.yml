@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        admin:
+            main:
+                catalog:
+                    attributes: Kenmerke
+                    header: Katalogus
+                    inventory: Voorraad
+                    products: Produkte
+                configuration:
+                    channels: Kanale
+                    countries: Lande
+                    currencies: Geldeenhede
+                    header: Konfigurasie
+                marketing:
+                    header: Bemarking
+                    product_reviews: Produk resensies
+                    promotions: Promosies
+                customers:
+                    customers: Kliënte
+                    groups: Groepe
+                    header: Kliënt
+                sales:
+                    header: Verkope
+                    orders: Bestellings

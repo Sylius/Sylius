@@ -7,7 +7,7 @@ sylius:
             name: Nombre
             description: Descripción
         tax_rate:
-            category: Categoría
+            category: Categoria
             name: Nombre
             amount: Cantidad
             included_in_price: '¿Incluido en el precio?'

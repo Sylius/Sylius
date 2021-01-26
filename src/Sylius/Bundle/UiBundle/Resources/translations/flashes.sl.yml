@@ -2,10 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    checkout:
+        complete_error: 'Pri oddaji naročila je prišlo do napake. Prosimo, poskusite ponovno.'
     contact:
         request_success: 'Sporočilo je bilo uspešno oddano.'
+        request_error: 'Pri oddaji sporočila je prišlo do napake. Prosimo, poskusite ponovno kasneje.'
     customer:
         add_address: 'Naslov je bil uspešno dodan.'
         set_address_as_default: 'Naslov je bil nastavljen kot privzet.'
     order:
+        apply_state_machine_transition_error: 'Pri posodabljanju naročila je prišlo do napake. Prosimo, poskusite ponovno.'
         promotion_integrity: 'Promocije %promotionName% ne morete več uveljavljati.'
+        update_error: 'Pri posodabljanju naročila je prišlo do napake. Prosimo, poskusite ponovno.'

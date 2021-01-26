@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Валютын код яг 3 тэмдэгтийн урттай байх ёстой.
+            not_blank: Валютын кодыг сонгоно уу.
+            regex: Валютын код нь зөвхөн үсэг, тоо, дундуур зураас, доогуур зурааснаас бүрдэнэ.
+            unique: Валютын код давтагдахгүй байх ёстой.
+        exchange_rate:
+            not_blank: Валютын ханшаа оруулна уу.
+    exchange_rate:
+        ratio:
+            greater_than: Валютын харьцаа нь 0-ээс их байх ёстой.
+            invalid: Валютын харьцаа нь тоо байх ёстой.
+            not_blank: Ханшийн харьцааг оруулна уу.
+        source_currency:
+            not_blank: Валютын ханшийг аль валютаас авах ёстойг оруулна уу.
+        target_currency:
+            not_blank: Валютын ханшийг аль валютаар тохируулахыг оруулна уу.
+        unique_currency_pair: Валютын хослол нь давтагдашгүй байх ёстой.
+        different_source_target_currency: Source & target валютууд хоорондоо ялгаатай байх ёстой.

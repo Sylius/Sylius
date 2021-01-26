@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Sisältö'
     menu:
         shop:
             account:

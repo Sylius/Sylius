@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Opis
+            enabled: Omogućeno
             name: Naziv regije
             parent: Nadređena kategorija
             slug: Slug

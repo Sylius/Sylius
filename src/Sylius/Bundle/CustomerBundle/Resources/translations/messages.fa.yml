@@ -12,7 +12,6 @@ sylius:
             gender: جنسیت
             birthday: تاریخ تولد
             billing_address: مشخصات پرداخت کننده
-            different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
             only_customer_registration: ایجاد حساب کاربری؟
             subscribed_to_newsletter: عضویت در خبرنامه
         customer_group:

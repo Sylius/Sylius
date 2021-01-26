@@ -19,7 +19,7 @@ sylius:
                 completed: Completado
                 authorized: Autorizado
                 failed: Fallido
-                new: Nuevo
+                new: Nueva
                 pending: Pendiente
                 processing: En proceso
                 unknown: Desconocido

@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: Staður
+            company: Fyrirtæki
+            country: Land
+            first_name: Fornafn
+            last_name: Eftirnafn
+            phone_number: Símanúmer
+            postcode: Póstnúmer
+            street: Heimilisfang
+            province: Ríki/hérað
+            zone: Svæði
+        country:
+            add_province: Skrá ríki/hérað
+            name: Nafn
+            provinces: Ríki/héruð
+            select: Vallisti
+            enabled: Virkt
+        province:
+            name: Nafn
+            abbreviation: Skammstöfun
+            select: Vallisti
+        zone:
+            add_member: Bæta við undirsvæði
+            members: Undirsvæði
+            name: Nafn
+            type: Tegund
+            types:
+                country: Land
+                province: Ríki/hérað
+                zone: Svæði
+            scope: Umfang
+            scopes:
+                all: Allt
+            select: Vallisti
+            select_scope: Velja umfang
+        zone_member:
+            select: Vallisti
