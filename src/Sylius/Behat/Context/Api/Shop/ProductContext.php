@@ -18,7 +18,9 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -42,6 +44,36 @@ final class ProductContext implements Context
     public function iOpenProductPage(ProductInterface $product): void
     {
         $this->client->show($product->getCode());
+    }
+
+    /**
+     * @When /^I browse products from (taxon "([^"]+)")$/
+     */
+    public function iCheckListOfProductsForTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->index();
+        $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
+        $this->client->filter();
+    }
+
+    /**
+     * @Then I should see the product price :productPrice
+     */
+    public function iShouldSeeTheProductPrice(string $productPrice): void
+    {
+        $price = (int) filter_var($productPrice, FILTER_SANITIZE_NUMBER_INT);
+
+        Assert::true($this->hasProductWithPrice([$this->responseChecker->getResponseContent($this->client->getLastResponse())], $price));
+    }
+
+    /**
+     * @Then I should see the product :product with price :productPrice
+     */
+    public function iShouldSeeTheProductWithPrice(ProductInterface $product, string $productPrice): void
+    {
+        $price = (int) filter_var($productPrice, FILTER_SANITIZE_NUMBER_INT);
+
+        Assert::true($this->hasProductWithPrice($this->responseChecker->getCollection($this->client->getLastResponse()), $price, $product->getCode()));
     }
 
     /**
@@ -79,5 +111,24 @@ final class ProductContext implements Context
                 $variantName
             )
         );
+    }
+
+    private function hasProductWithPrice(array $resource, int $price, ?string $productCode = null): bool
+    {
+        foreach ($resource as $product) {
+            if ($productCode && $product['code'] !== $productCode) {
+                continue;
+            }
+
+            foreach ($product['variants'] as $variant) {
+                foreach ($variant['channelPricings'] as $channelPricing) {
+                    if ($channelPricing['price'] === $price) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
