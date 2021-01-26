@@ -40,7 +40,7 @@
 
         <property name="firstName" required="true" />
         <property name="lastName" required="true" />
-        <property name="email" required="true" />
+        <property name="email" required="true" identifier="true" />
         <property name="password" required="true" />
     </resource>
 </resources>
