@@ -3,6 +3,10 @@
 This document explains why certain conflicts were added to `composer.json` and
 refereneces related issues.
 
+ - `api-platform/core:^2.6`:
+
+   API Platform 2.6 introduces a series of issues that make our Behat suite fail.
+
  - `doctrine/inflector:^1.4`:
     
    Inflector 1.4 changes pluralization of `taxon` from `taxons` (used in Sylius) to `taxa`.
