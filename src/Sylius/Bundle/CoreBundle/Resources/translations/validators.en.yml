@@ -41,9 +41,6 @@ sylius:
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
     locale:
-        code:
-            not_blank: Please enter locale code.
-            unique: This locale already exists.
         enabled:
             cannot_disable_base: The base locale cannot be disabled.
     product:

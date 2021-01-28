@@ -1,7 +1,13 @@
 # CONFLICTS
 
 This document explains why certain conflicts were added to `composer.json` and
-refereneces related issues.
+references related issues.
+
+ - `symfony/serializer:4.4.19|5.2.2`:
+
+   These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
+   
+   References: https://github.com/symfony/symfony/pull/40004
 
  - `api-platform/core:^2.6`:
 

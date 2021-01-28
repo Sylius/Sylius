@@ -93,7 +93,7 @@ final class ManagingLocalesContext implements Context
             $this->responseChecker->isCreationSuccessful($response),
             'Locale has been created successfully, but it should not'
         );
-        Assert::same($this->responseChecker->getError($response), 'code: This locale already exists.');
+        Assert::same($this->responseChecker->getError($response), 'code: Locale code must be unique.');
     }
 
     /**
@@ -106,6 +106,6 @@ final class ManagingLocalesContext implements Context
             $this->responseChecker->isCreationSuccessful($response),
             'Locale has been created successfully, but it should not'
         );
-        Assert::same($this->responseChecker->getError($response), 'code: Please enter locale code.');
+        Assert::same($this->responseChecker->getError($response), 'code: Please choose locale code.');
     }
 }
