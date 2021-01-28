@@ -46,4 +46,5 @@
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 !/config/jwt/*-test.pem
+/config/packages/lexik_jwt_authentication.yaml
 ###< lexik/jwt-authentication-bundle ###
