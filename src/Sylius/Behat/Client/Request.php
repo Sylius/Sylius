@@ -216,6 +216,11 @@ final class Request implements RequestInterface
         $this->parameters = $this->mergeArraysUniquely($this->parameters, $newParameters);
     }
 
+    public function clearParameters(): void
+    {
+        $this->parameters = [];
+    }
+
     public function files(): array
     {
         return $this->files;
