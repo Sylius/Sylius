@@ -19,7 +19,7 @@
                 <attribute name="path">/admin/taxons</attribute>
             </collectionOperation>
 
-            <collectionOperation name="admin_get">
+            <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="denormalization_context">
