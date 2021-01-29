@@ -66,6 +66,46 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I clear filter
+     */
+    public function iClearFilter(): void
+    {
+        $this->client->clearParameters();
+        $this->client->filter();
+    }
+
+    /**
+     * @When I search for products with name :name
+     */
+    public function iSearchForProductsWithName(string $name)
+    {
+        $this->client->addFilter('translations.name', $name);
+        $this->client->filter();
+    }
+
+    /**
+     * @Then I should see the product :name
+     */
+    public function iShouldSeeTheProduct(string $name): void
+    {
+        Assert::true($this->hasProductWithName(
+            $this->responseChecker->getCollection($this->client->getLastResponse()),
+            $name
+        ));
+    }
+
+    /**
+     * @Then I should not see the product :name
+     */
+    public function iShouldNotSeeTheProduct(string $name): void
+    {
+        Assert::false($this->hasProductWithName(
+            $this->responseChecker->getCollection($this->client->getLastResponse()),
+            $name
+        ));
+    }
+
+    /**
      * @Then /^I should see the product price ("[^"]+")$/
      */
     public function iShouldSeeTheProductPrice(int $price): void
@@ -141,6 +181,19 @@ final class ProductContext implements Context
 
             foreach ($product['variants'] as $variant) {
                 if ($variant['channelPricings'][$channel->getCode()]['price'] === $price) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithName(array $products, string $name): bool
+    {
+        foreach ($products as $product) {
+            foreach ($product['translations'] as $translation) {
+                if ($translation['name'] === $name) {
                     return true;
                 }
             }
