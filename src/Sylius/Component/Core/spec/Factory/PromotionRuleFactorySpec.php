@@ -49,7 +49,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(CartQuantityRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['count' => 5])->shouldBeCalled();
+        $rule->setConfiguration(['count' => 5, 'comparison_operator' => '>='])->shouldBeCalled();
 
         $this->createCartQuantity(5)->shouldReturn($rule);
     }
@@ -58,7 +58,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ItemTotalRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['WEB_US' => ['amount' => 1000]])->shouldBeCalled();
+        $rule->setConfiguration(['WEB_US' => ['amount' => 1000, 'comparison_operator' => '>=']])->shouldBeCalled();
 
         $this->createItemTotal('WEB_US', 1000)->shouldReturn($rule);
     }
