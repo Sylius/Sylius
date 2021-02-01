@@ -36,14 +36,14 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->decoratedFactory->createNew();
     }
 
-    public function createCartQuantity(int $count): PromotionRuleInterface
+    public function createCartQuantity(int $count, string $comparisonOperator = '>='): PromotionRuleInterface
     {
-        return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count]);
+        return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count, 'comparison_operator' => $comparisonOperator]);
     }
 
-    public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface
+    public function createItemTotal(string $channelCode, int $amount, string $comparisonOperator = '>='): PromotionRuleInterface
     {
-        return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount]]);
+        return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount, 'comparison_operator' => $comparisonOperator]]);
     }
 
     public function createHasTaxon(array $taxons): PromotionRuleInterface
