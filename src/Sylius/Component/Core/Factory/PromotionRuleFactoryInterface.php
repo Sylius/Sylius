@@ -23,9 +23,9 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 interface PromotionRuleFactoryInterface extends FactoryInterface
 {
-    public function createCartQuantity(int $count): PromotionRuleInterface;
+    public function createCartQuantity(int $count, string $comparisonOperator = '>='): PromotionRuleInterface;
 
-    public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface;
+    public function createItemTotal(string $channelCode, int $amount, string $comparisonOperator = '>='): PromotionRuleInterface;
 
     /** @param array<mixed> $taxons */
     public function createHasTaxon(array $taxons): PromotionRuleInterface;
