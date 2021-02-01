@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        contact_request:
+            content: 'Innihald'
+        order_confirmation:
+            subject: 'Staðfesting pöntunar'
+            view_order_or_change_payment_method: 'Skoða pöntun eða skipta um greiðslumáta'
+        password_reset:
+            hello: 'Halló'
+        verification_token:
+            hello: 'Halló'
+    menu:
+        shop:
+            account:
+                address_book: 'Heimilisfangaskrá'
+                change_password: 'Breyta lykilorði'
+                dashboard: 'Stjórnborð'
+                order_history: 'Yfirlit pantana'
+                personal_information: 'Persónuupplýsingar'

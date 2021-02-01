@@ -8,9 +8,11 @@ sylius:
             unique: Produkt SKU skal være unik.
         slug:
             not_blank: Venligst angiv produkt slug.
+            unique: Produktets slug skal være unik.
         code:
             not_blank: Venligst angiv varenummer.
             regex: Varenummeret kan kun bestå af bogstaver, tal, bindestreger og understregninger.
+            unique: Produktets kode skal være unik.
         name:
             not_blank: Indtast produktnavn.
             min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.
@@ -19,8 +21,17 @@ sylius:
         combination: Variant med denne indstilling eksisterer allerede.
         code:
             not_blank: Angiv venligst koden.
+            regex: Produktvariantens kode kan bestå af bogstaver, tal, streg og underscore.
+            unique: Produktvariantens kode skal være unik.
             within_product_unique: Denne kode skal være unik i dette produkt.
+    simple_product:
+        code:
+            unique: En simpel produktkode skal være unik blandt alle produkter og produktvarianter.
     option:
+        code:
+            not_blank: Angiv venligst koden for valgmuligheden.
+            regex: Kode for valgmulighed kan bestå af bogstaver, tal, streg og underscore.
+            unique: Valgmuligheden med den angivne kode findes i forvejen.
         name:
             not_blank: Indtast egenskabens systemnavn.
             min_length: Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.
@@ -28,5 +39,18 @@ sylius:
         values:
             min_count: Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.
     option_value:
+        code:
+            not_blank: Angiv venligst kode for valgmulighedens værdi.
+            regex: Kode for valgmulighedens værdi kan bestå af bogstaver, tal, streg og underscore.
+            unique: Værdi for valgmuligheden med den angivne kode findes i forvejen.
         value:
             not_blank: Angiv egenskabens værdi.
+    association_type:
+        name:
+            not_blank: Angiv venligst navn på tilknytningstypen.
+            min_length: Navn på tilknytningstypen skal være mindst {{ limit }} tegn lang.
+            max_length: Navn på tilknytningstypen kan ikke være længere end {{ limit }} tegn.
+        code:
+            not_blank: Angiv venligst kode for tilknytningstype.
+            regex: Kode for tilknytningstype kan bestå af bogstaver, tal, streg og underscore.
+            unique: Tilknytningstypen med den angivne kode findes i forvejen.

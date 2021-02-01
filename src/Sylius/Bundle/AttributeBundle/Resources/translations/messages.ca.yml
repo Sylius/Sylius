@@ -4,9 +4,31 @@
 sylius:
     form:
         attribute:
+            add: Afegir
+            add_attributes: Afegir atributs
             code: Codi
             name: Nom
+            translations: Traduccions
             type: Tipus
         attribute_type:
+            checkbox: Casella de selecció
             configuration: Configuració
+            date: Data
+            datetime: Data i hora
             select: Tria
+            text: Text
+            textarea: Àrea de text
+            title: Tipus d'atributs
+            validation: Validació
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            select:
+                multiple: Múltiple
+                values: Valors
+                choose: Escull una opció
+            text:
+                min: Longitud mínima
+                max: Longitud màxima

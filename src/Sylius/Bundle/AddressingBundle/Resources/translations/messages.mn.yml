@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: Хот
+            company: Компани
+            country: Улс
+            first_name: Нэр
+            last_name: Овог
+            phone_number: Утасны дугаар
+            postcode: Шуудангийн код
+            street: Гудамж
+            province: Аймаг
+            zone: Бүс
+        country:
+            add_province: Аймаг нэмэх
+            name: Нэр
+            provinces: Аймгууд
+            select: Сонгох
+            enabled: Идэвхтэй
+        province:
+            name: Нэр
+            abbreviation: Товчилсон үг
+            select: Сонгох
+        zone:
+            add_member: Гишүүн нэмэх
+            members: Гишүүд
+            name: Нэр
+            type: Төрөл
+            types:
+                country: Улс
+                province: Аймаг
+                zone: Бүс
+            scope: Бүс
+            scopes:
+                all: Бүгд
+            select: Сонгох
+            select_scope: Бүс сонгох
+        zone_member:
+            select: Сонгох

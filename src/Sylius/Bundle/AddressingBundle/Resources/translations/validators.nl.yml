@@ -4,29 +4,29 @@
 sylius:
     address:
         city:
-            max_length: Plaats mag niet langer dan 255 tekens zijn|Plaats mag niet langer dan 255 tekens zijn.
-            min_length: Stad moet minstens 2 tekens lang zijn|Stad moet minstens 2 tekens lang zijn.
+            max_length: Plaats mag niet langer dan {{ limit }} tekens zijn|Plaats mag niet langer dan {{ limit }} tekens zijn.
+            min_length: Stad moet minstens {{ limit }} tekens lang zijn|Stad moet minstens {{ limit }} tekens lang zijn.
             not_blank: Voer een stad in.
         country:
             not_blank: Selecteer een land.
             disabled: Het gekozen land is uitgeschakeld. Gelieve een ander land te kiezen.
         first_name:
-            max_length: Voornaam mag niet langer dan 255 tekens zijn|Voornaam mag niet langer dan 255 tekens zijn.
-            min_length: Voornaam moet minstens 2 tekens lang zijn|Voornaam moet minstens 2 tekens lang zijn.
+            max_length: Voornaam mag niet langer dan {{ limit }} tekens zijn|Voornaam mag niet langer dan {{ limit }} tekens zijn.
+            min_length: Voornaam moet minstens {{ limit }} tekens lang zijn|Voornaam moet minstens {{ limit }} tekens lang zijn.
             not_blank: Voer een voornaam in.
         last_name:
-            max_length: Achternaam mag niet langer dan 255 tekens zijn|Achternaam mag niet langer dan 255 tekens zijn.
-            min_length: Achternaam moet minstens 2 tekens lang zijn|Achternaam moet minstens 2 tekens lang zijn.
+            max_length: Achternaam mag niet langer dan {{ limit }} tekens zijn|Achternaam mag niet langer dan {{ limit }} tekens zijn.
+            min_length: Achternaam moet minstens {{ limit }} tekens lang zijn|Achternaam moet minstens {{ limit }} tekens lang zijn.
             not_blank: Voer een achternaam in.
         postcode:
-            max_length: Postcode mag niet langer dan 255 tekens zijn|Postcode mag niet langer dan 255 tekens zijn.
-            min_length: Postcode moet minstens 2 tekens lang zijn|Postcode moet minstens 2 tekens lang zijn.
+            max_length: De postcode mag niet langer zijn dan {{ limit }} karakters|De postcode mag niet langer zijn dan {{ limit }} karakters.
+            min_length: Postcode moet ten minste {{ limit }} tekens lang zijn|Postcode moet ten minste {{ limit }} tekens lang zijn
             not_blank: Voer een postcode in.
         province:
             valid: Selecteer een provincie.
         street:
-            max_length: Straat mag niet langer dan 255 tekens zijn|Straat mag niet langer dan 255 tekens zijn.
-            min_length: Straat moet minstens 2 tekens lang zijn|Straat moet minstens 2 tekens lang zijn.
+            max_length: Straat mag niet langer dan {{ limit }} tekens zijn|Straat mag niet langer dan {{ limit }} tekens zijn
+            min_length: Straat moet ten minste {{ limit }} tekens lang zijn|Straat moet ten minste {{ limit }} tekens lang zijn
             not_blank: Voer een straat in.
         not_shippable: Dit adres is geen geldige bestemming.
     country:
@@ -41,8 +41,8 @@ sylius:
             regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
             unique: Provinciecode moet uniek zijn.
         name:
-            max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
-            min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
+            max_length: Provincie mag niet langer dan {{ limit }} tekens zijn|Provincie mag niet langer dan {{ limit }} tekens zijn.
+            min_length: Provincie moet ten minste {{ limit }} tekens lang zijn|Provincie moet ten minste {{ limit }} tekens lang zijn
             not_blank: Voer een provincie naam in.
             unique: De provincienaam moet uniek zijn.
     zone:
@@ -55,10 +55,11 @@ sylius:
         members:
             min_count: Voeg minstens {{ limit }} zone leden toe.
         name:
-            max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
-            min_length: Zone naam moet minstens 2 karakters bevatten.
+            max_length: Zone mag niet langer dan {{ limit }} tekens zijn|Zone mag niet langer dan {{ limit }} tekens zijn.
+            min_length: Zone moet ten minste {{ limit }} tekens lang zijn|Zone moet ten minste {{ limit }} tekens lang zijn
             not_blank: Voer een zone naam in.
     zone_member:
+        cannot_be_the_same_as_zone: Zonelid kan niet hetzelfde zijn als een zone.
         code:
             not_blank: Kies een lid voor deze zone.
             regex: De code van een lid van een zone kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.

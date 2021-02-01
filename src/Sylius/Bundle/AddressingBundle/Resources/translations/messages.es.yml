@@ -18,7 +18,7 @@ sylius:
             add_province: Añadir provincia
             name: Nombre
             provinces: Provincias
-            select: Selecciona
+            select: Selección
             enabled: '¿Activado?'
         province:
             name: Nombre
@@ -36,7 +36,7 @@ sylius:
             scope: Ámbito
             scopes:
                 all: Todos
-            select: Selecciona
+            select: Seleccionar
             select_scope: Seleccione ámbito
         zone_member:
-            select: Selecciona
+            select: Selección

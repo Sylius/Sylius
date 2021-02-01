@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: 이메일
-            enabled: 사용
+            enabled: 활성
             password:
                 label: 비밀번호
                 confirmation: 인증

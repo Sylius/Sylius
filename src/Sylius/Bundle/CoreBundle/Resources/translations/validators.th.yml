@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: ภาพใหญ่เกินไป - {{ size }}{{ suffix }} ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
+            upload_ini_size: ภาพใหญ่เกินไป ขนาดสูงสุดคือ {{ limit }}{{ suffix }}
     channel:
         base_currency:
             not_blank: กรุณาระบุสกุลเงินเริ่มต้น
@@ -13,7 +17,6 @@ sylius:
             min: อีเมลล์จะต้องมีความยาวไม่น้อยกว่า {{ limit }} ตัวอักษร
     channel_pricing:
         price:
-            min: ราคาต้องอย่างน้อย {{ limit }}
             not_blank: กรุณาระบุราคา
     checkout:
         shipping_method:

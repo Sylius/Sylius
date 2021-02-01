@@ -38,6 +38,8 @@ sylius:
         provinces: 'Provintsid'
         roles: 'Rollid'
         scope: 'Ulatus'
+        select: 'Vali'
+        short_description: 'Lühikirjeldus'
         street: 'Tänav'
         tax_category: 'Maksu kategooria'
         theme: 'Välimused'

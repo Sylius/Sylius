@@ -6,6 +6,6 @@ sylius:
         channel:
             color: Цвят
             description: Описание
-            enabled: Активирано
+            enabled: Включено
             name: Име
             url: URL-адрес

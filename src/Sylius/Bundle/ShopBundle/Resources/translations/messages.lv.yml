@@ -2,6 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            message_from: 'Ziņa no'
+            subject: 'Kontaktu pieprasījums'
+        password_reset:
+            reset_your_password: 'Atjaunot paroli'
+            subject: 'Atjaunot paroli'
+            to_reset_your_password: 'Lai atjaunotu savu paroli, noklikšķiniet uz šīs saites '
+        user_registration:
+            start_shopping: 'Sāk iepirkties'
+            subject: 'Lietotāja reģistrācija'
+            welcome_to_our_store: 'Laipni lūdzam mūsu veikalā!'
+            you_have_just_been_registered: 'Tu esi pierēģistrējies. Paldies!'
+        verification_token:
+            subject: 'Nepieciešama e-pasta adreses pārbaude'
+    homepage:
+        about_us: 'Par mums'
+        newsletter: 'Jaunumi'
+        subscribe: 'Pieteikties'
     menu:
         shop:
             account:

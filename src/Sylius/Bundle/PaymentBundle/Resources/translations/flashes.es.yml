@@ -3,6 +3,7 @@
 
 sylius:
     payment:
+        authorized: 'El pago ha sido autorizado.'
         cancelled: 'El pago ha sido cancelado.'
         completed: 'El pago se ha completado.'
         failed: 'El pago ha fallado.'

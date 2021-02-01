@@ -78,7 +78,6 @@ sylius:
             code: Kood
             images: Pildid
         user:
-            different_billing_address: Kasutada arvel erinevat aadressi?
             enabled: Lubatud
             first_name: Eesnimi
             roles: Rollid

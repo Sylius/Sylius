@@ -6,7 +6,7 @@ sylius:
         block:
             body: Sadržaj
             id: ID
-            title: Naslov
+            title: Naziv
         cart:
             coupon: Kupon
         checkout:
@@ -26,6 +26,7 @@ sylius:
                 country: Zemlja
                 postcode: Poštanski broj
                 street: Ulica
+            countries: Zemlje
             currencies: Valute
             currency_base: Osnovna valuta
             hostname: Hostname
@@ -50,7 +51,7 @@ sylius:
         page:
             body: Sadržaj
             id: ID
-            title: Naslov
+            title: Naziv
         product:
             images: Slike
             short_description: Kratak opis

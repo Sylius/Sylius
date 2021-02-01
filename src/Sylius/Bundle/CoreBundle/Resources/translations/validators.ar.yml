@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: يتم الصورة كبيرة جداً--{{ size }}{{ suffix }}. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
+            upload_ini_size: الصورة كبير جداً. الحد الأقصى المسموح به لحجم هو {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: الرجاء إدخال العملة الرئيسية.
@@ -13,14 +17,13 @@ sylius:
             min: البريد الإلكتروني يجب أن يكون على الأقل {{ limit }} حرفاً.
     channel_pricing:
         price:
-            min: يجب أن تكون الأسعار على الأقل {{ limit }}.
             not_blank: يجب أن تدخل المحتوى.
     checkout:
         shipping_method:
             not_blank: يرجى تحديد أسلوب الشحن.
     contact:
         email:
-            invalid: البريد الإلكتروني غير صالح.
+            invalid: هذا البريد الإلكتروني غير صالح.
             not_blank: الرجاء إدخال البريدك الإلكتروني.
         message:
             not_blank: الرجاء إدخال رسالتك.

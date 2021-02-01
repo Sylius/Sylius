@@ -36,7 +36,7 @@ sylius:
             channels: Canaux
             configuration: Configuration
             description: Description
-            enabled: Activé
+            enabled: Activée
             match_all_category_requirement: Tous les produits doivent correspondre à la catégorie d'expédition
             match_any_category_requirement: Au moins un des produits doivent correspondre à la catégorie d'expédition
             match_none_category_requirement: Aucun produit ne doit correspondre à la catégorie d'expédition

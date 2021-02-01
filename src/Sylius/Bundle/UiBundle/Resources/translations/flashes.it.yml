@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'In magazzino la rimanenza di questo prodotto è solo %quantity%.'
     product_variant:
         update_error: 'C''è stato un problema imprevisto con l''aggiornamento di una variante di prodotto. Per favore, prova ad aggiornare la variante prodotto nuovamente.'
+    promotion:
+        update_rules: 'Alcune regole delle promozioni con i codici %codes% sono state aggiornate.'

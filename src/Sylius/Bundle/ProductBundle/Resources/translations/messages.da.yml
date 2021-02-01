@@ -7,7 +7,7 @@ sylius:
             name: Navn
             description: Beskrivelse
             attributes: Egenskaber
-            options: Indstillinger
+            options: Egenskaber
             meta_keywords: Meta søgeord
             meta_description: Meta beskrivelse
             slug: Slug
@@ -24,7 +24,7 @@ sylius:
             name: Navn
         option:
             name: Navn
-            position: Placering
+            position: Position
             values: Mulige værdier
         option_value:
             add_value: Tilføj værdi

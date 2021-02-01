@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Il codice del gruppo cliente può includere solo lettere, numeri, trattini e underscore.
             unique: Il codice del gruppo cliente deve essere univoco.
+            not_blank: Inserisci un codice di gruppo cliente.
         name:
             max: Il nome del gruppo cliente non deve contenere più di {{ limit }} caratteri.
             min: Il nome del gruppo cliente deve contenere almeno {{ limit }} caratteri.

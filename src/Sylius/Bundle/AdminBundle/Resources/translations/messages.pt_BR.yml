@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Confirmação de postagem'
     menu:
         admin:
             main:
@@ -12,7 +15,7 @@ sylius:
                     inventory: Estoque
                     options: Opções
                     products: Produtos
-                    taxons: Táxons
+                    taxons: Categorias
                 configuration:
                     admin_users: Administradores
                     channels: Canais

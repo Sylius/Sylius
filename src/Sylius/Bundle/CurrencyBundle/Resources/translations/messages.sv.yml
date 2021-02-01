@@ -11,4 +11,4 @@ sylius:
         exchange_rate:
             source_currency: Ursprungsvaluta
             target_currency: Målvaluta
-            ratio: Kurs
+            ratio: Förhållande

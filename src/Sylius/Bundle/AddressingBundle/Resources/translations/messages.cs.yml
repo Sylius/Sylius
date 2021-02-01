@@ -16,7 +16,7 @@ sylius:
             zone: Oblast
         country:
             add_province: Přidat provincii
-            name: Jméno
+            name: Název
             provinces: Provincie
             select: Vybrat
             enabled: Povoleno

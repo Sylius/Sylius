@@ -8,7 +8,14 @@ sylius:
             enabled: Activat
             password:
                 label: Contrasenya
+                confirmation: Verificació
+            remember_me: Recorda'm
             shipping_address: Adreça d'enviament
             username: Nom d'usuari
         user_filter:
             query: Cerca
+        user_change_password:
+            confirmation: Confirmació
+            current: Contrasenya actual
+        user_reset_password:
+            confirmation: Confirmació

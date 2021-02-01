@@ -7,7 +7,7 @@ sylius:
             name: نام
             description: شرح
             attributes: قابلیت ها
-            options: آپشن ها
+            options: گزینه‎ها
             meta_keywords: کلمات کلیدی
             meta_description: توضیحات سئو
             slug: حلزون
@@ -24,7 +24,7 @@ sylius:
             name: نام
         option:
             name: نام
-            position: جایگاه
+            position: موقعیت
             values: مقادیر قابل قبول
         option_value:
             add_value: افزودن مقدار

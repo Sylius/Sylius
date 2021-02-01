@@ -21,16 +21,17 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: 统一费用/每次配送
-                amount: 金额
+                amount: 折扣金额
             per_unit_rate_configuration:
                 label: 每个单位的费用
-                amount: 金额
+                amount: 折扣金额
         shipping_category:
             description: 描述
             name: 名称
         shipping_method:
+            add_rule: 添加规则
             calculator: 计算器
-            category: 税目
+            category: 分类
             category_requirement: 类别要求
             channels: 门店
             configuration: 配置：
@@ -40,6 +41,12 @@ sylius:
             match_any_category_requirement: 至少一个单位必须匹配送货方式的分类
             match_none_category_requirement: 所有单位都无需匹配送货方式的分类
             name: 名称
-            position: 优先级
+            position: 位置
+            rules: 規則
             tax_category: 税类别
             translations: 翻译
+        shipping_method_rule:
+            type: 类型
+            total: 共计
+            weight: 重量
+            amount: 折扣金额

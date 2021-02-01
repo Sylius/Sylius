@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Slika je previše velika -{{ size }}{{ suffix }}. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
+            upload_ini_size: Slika je previše velika. Maksimalna dozvoljena veličina je {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Molimo unesite osnovnu valutu za ovaj kanal.
@@ -13,7 +17,6 @@ sylius:
             min: Email adresa mora imati barem {{ limit }} znakova.
     channel_pricing:
         price:
-            min: Cijena mora biti barem {{ limit }}.
             not_blank: Molimo unesite cijenu.
     checkout:
         shipping_method:

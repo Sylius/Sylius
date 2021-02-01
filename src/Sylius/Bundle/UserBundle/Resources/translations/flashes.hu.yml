@@ -3,10 +3,12 @@
 
 sylius:
     user:
+        expire_password_reset_token: 'Ez a jelszó visszaállítási kérelem érvénytelen.'
         change_password: 'Jelszavát sikeresen megváltoztattuk!'
         reset_password: 'Jelszava sikeresen visszaállítva!'
         reset_password_request: 'Ha az általad megadott email létezik rendszerünkben, akkor küldtünk egy emailt a további instrukciókkal.'
         verify_email: 'Email címe megerősítése sikeres.'
         verify_email_by_invalid_token: 'Ez ellenőrzőkód hibás.'
         verify_email_request: 'Egy megerősítő link el lett küldve az e-mail címére.'
+        verify_no_user: 'Nincs bejelentkezett felhasználó.'
         verify_verified_email: 'Az email címed már meg lett erősítve.'

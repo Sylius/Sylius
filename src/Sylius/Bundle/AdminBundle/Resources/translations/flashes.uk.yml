@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        shipment_confirmation_resent: 'Підтвердження доставки успішно надіслано покупцю.'

@@ -12,6 +12,7 @@ sylius:
             remember_me: Onthoud mijn gegevens
             shipping_address: Bezorgadres
             username: Gebruikersnaam
+            verified: Bevestigd
         user_filter:
             query: Zoeken
         user_change_password:
