@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -32,6 +33,20 @@ final class ItemTotalConfigurationType extends AbstractType
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
                 'currency' => $options['currency'],
+            ])
+            ->add('comparison_operator', ChoiceType::class, [
+                'label' => 'sylius.form.promotion_rule.item_total_configuration.comparison_operator.label',
+                'choices' => [
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.greater_than_equal' => '>=',
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.equal' => '===',
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.different' => '!==',
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.lower_than' => '<',
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.lower_than_equal' => '<=',
+                    'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.greater_than' => '>',
+                ],
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
+                ],
             ])
         ;
     }
