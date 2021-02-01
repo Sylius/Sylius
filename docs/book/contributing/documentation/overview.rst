@@ -69,7 +69,7 @@ To test the documentation before a commit you need to install Sphinx and needed 
 
 Our recommendation is to install ``Sphinx`` via `Pip`_.
 
-We prefer to install ``Sphinx v1.8.5``
+We suggest to install & use ``Sphinx v1.8.5``
 
 .. code-block:: bash
 
