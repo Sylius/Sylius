@@ -218,7 +218,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-master": "1.10-dev"
         },
         "symfony": {
             "allow-contrib": false

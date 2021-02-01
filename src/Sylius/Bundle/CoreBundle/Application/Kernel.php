@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
 
     public const MAJOR_VERSION = '1';
 
-    public const MINOR_VERSION = '9';
+    public const MINOR_VERSION = '10';
 
     public const RELEASE_VERSION = '4';
 
