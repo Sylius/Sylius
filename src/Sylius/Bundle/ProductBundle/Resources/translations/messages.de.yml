@@ -10,7 +10,7 @@ sylius:
             options: Optionen
             meta_keywords: Metastichwörter
             meta_description: Metabeschreibung
-            slug: Produkt SEO-URL
+            slug: Kategorie SEO-URL
             taxons: Produktgruppen
         product_variant:
             name: Name

@@ -34,6 +34,8 @@ sylius:
             amount: Ποσό
             code_length: Μήκος κωδικού
             expires_at: Λήγει στις
+            prefix: Πρόθεμα
+            suffix: Επίθεμα
             usage_limit: Όριο χρήσης
         promotion_filter:
             price_range: Εύρος τιμών φίλτρου

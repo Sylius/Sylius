@@ -5,11 +5,15 @@ sylius:
     form:
         customer:
             first_name: Όνομα
+            group: Ομάδα
             last_name: Επώνυμο
             email: Ηλεκτρονικό ταχυδρομείο
             phone_number: Αριθμός τηλεφώνου
+            gender: Φύλο
+            birthday: Ημερομηνία γέννησης
             billing_address: Διεύθυνση τιμολόγησης
-            different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
+            only_customer_registration: Δημιουργία λογαριασμού
+            subscribed_to_newsletter: Εγγραφείτε στο ενημερωτικό δελτίο
         customer_group:
             name: Ονομασία
             roles: Ρόλοι

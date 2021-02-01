@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Şehir adı 255 karakterden daha uzun olmamalıdır.
-            min_length: Şehir adı, en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Şehir yazınız.
         country:
             not_blank: Lütfen ülkeyi seçiniz.
             disabled: Seçilen ülke devre dışıdır. Lütfen farklı bir ülke seçin.
         first_name:
-            max_length: İsim 255 karakterden uzun olmamalıdır.
-            min_length: İsim en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen adınızı yazın.
         last_name:
-            max_length: Soyadı 255 karakterden uzun olmamalıdır.
-            min_length: Soyadı en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen soyadı girin.
         postcode:
-            max_length: Posta kodu 255 karakterden daha uzun olmamalıdır.
-            min_length: Posta kodu, en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen posta kodu yazınız.
         province:
             valid: Lütfen Yaşadığınız şehri seçiniz.
         street:
-            max_length: Sokak adı 255 karakterden uzun olmamalıdır | Sokak adı 255 karakterden uzun olmamalıdır.
-            min_length: Sokak adı en az 2 karakter uzunluğunda olmalıdır | Sokak adı en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen sokak adı yazınız.
         not_shippable: Bu adres uygun bir kargo varış adresi değildir.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: İl kodu XX-XX formatında (örn. US-FL) olmalıdır.
             unique: İl kodunun benzersiz olmalıdır.
         name:
-            max_length: Şehir adı 255 karakterden uzun olmamalıdır | Şehir adı 255 karakterden uzun olmamalıdır.
-            min_length: Şehir adı en az 2 karakter uzunluğunda olmalıdır | Şehir adı en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen şehir adını yazınız.
             unique: İl adı benzersiz olmalıdır.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Lütfen en az {{ limit }} bölge üyesi ekleyiniz.
         name:
-            max_length: Bölge adı 255 karakterden uzun olmamalıdır | Bölge adı 255 karakterden uzun olmamalıdır.
-            min_length: Bölge adı en az 2 karakter uzunluğunda olmalı | Bölge adı en az 2 karakter uzunluğunda olmalıdır.
             not_blank: Lütfen bölge adını yazınız.
     zone_member:
         code:

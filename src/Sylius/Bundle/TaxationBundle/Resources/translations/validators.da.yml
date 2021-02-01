@@ -5,6 +5,10 @@ sylius:
     tax_category:
         name:
             not_blank: Angiv moms kategorinavn.
+        code:
+            not_blank: Angiv venligt momskategori-kode.
+            regex: Momskategori-koden kan bestå af bogstaver, tal, streg og underscore.
+            unique: Momskategorien med den angivne kode findes i forvejen.
     tax_rate:
         category:
             not_blank: Angiv moms kategori.
@@ -14,3 +18,9 @@ sylius:
             not_blank: Angiv moms rate beløb.
         calculator:
             not_blank: Angiv moms beregning.
+        zone:
+            not_blank: Vælg venligst moms-zone.
+        code:
+            not_blank: Angiv momsrate kode.
+            regex: Momssatsens kode kan bestå af bogstaver, tal, streg og underscore.
+            unique: Momssatsen med den angivne kode findes i forvejen.

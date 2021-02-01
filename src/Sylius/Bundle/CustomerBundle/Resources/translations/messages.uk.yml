@@ -12,13 +12,13 @@ sylius:
             gender: Стать
             birthday: Дата народження
             billing_address: Адреса для рахунків
-            different_billing_address: Використати іншу адресу для виставлення рахунків?
+            different_shipping_address: Використати іншу адресу для доставки?
             only_customer_registration: Створити обліковку?
             subscribed_to_newsletter: Підписатись на інформаційний бюлетень
         customer_group:
-            name: Назва
+            name: Назва регіону
             roles: Ролі
     gender:
-        unknown: Невідомо
-        male: Чоловіча
+        unknown: Не вказана
+        male: Чоловічий
         female: Жіноча

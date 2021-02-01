@@ -12,6 +12,7 @@ sylius:
             remember_me: Kom ihåg mig
             shipping_address: Leveransadress
             username: Användarnanm
+            verified: Verifierad
         user_filter:
             query: Sök
         user_change_password:

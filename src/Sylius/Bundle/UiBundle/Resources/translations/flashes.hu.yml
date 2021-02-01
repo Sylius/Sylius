@@ -4,3 +4,23 @@
 sylius:
     channel:
         delete_error: 'A csatornát nem lehet törölni. Legalább egy engedélyezett csatornának lennie kell.'
+    checkout:
+        complete_error: 'Váratlan probléma volt a megrendelés teljesítésével. Kérjük, próbálja meg újból megrendelni.'
+    contact:
+        request_success: 'Kapcsolatfelvételi kérelme sikeresen benyújtva.'
+        request_error: 'Probléma történt a kapcsolat kérelem elküldése közben. Kérlek, próbáld újra később.'
+    customer:
+        add_address: 'A cím sikeresen hozzáadva.'
+        impersonate: 'Sikeresen megszemélyesített ügyfél %name%.'
+        set_address_as_default: 'A cím alapértelmezetté lett beállítva.'
+    order:
+        apply_state_machine_transition_error: 'Váratlan probléma volt egy megrendelés frissítésével. Kérjük, próbálja frissíteni a rendelést.'
+        promotion_integrity: 'Már nem jogosult a promócióra %promotionName%.'
+        total_integrity: 'A rendelés teljes összege megváltozott, ellenőrizze rendelési információit, és erősítse meg újra.'
+        update_error: 'Váratlan probléma lépett fel egy megrendelés módosítása közben. Kérjük, próbálja újra frissíteni a megrendelését.'
+    payment:
+        apply_state_machine_transition_error: 'Probléma volt a fizetés frissítésével. Próbálja meg újra frissíteni a fizetést.'
+    product:
+        out_of_stock: 'Csak %quantity% van raktáron ebből a termekből.'
+    product_variant:
+        update_error: 'Váratlan probléma volt a termékváltozat frissítésével. Kérjük, próbálja frissíteni a termékváltozatot.'

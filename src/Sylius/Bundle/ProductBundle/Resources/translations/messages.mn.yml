@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: Нэр
+            description: Тодорхойлолт
+            attributes: Шинж чанарууд
+            options: Сонголтууд
+            meta_keywords: Мета түлхүүр үгс
+            meta_description: Мета тайлбар
+            slug: Эмхэлсэн холбоос
+            taxons: Таксонууд
+        product_variant:
+            name: Нэр
+        association_type:
+            name: Нэр
+            translations: Орчуулгууд
+        association:
+            type: Холбооны төрөл
+            product: Холбоотой бүтээгдэхүүн
+        variant:
+            name: Нэр
+        option:
+            name: Нэр
+            position: Байрлал
+            values: Боломжит утга
+        option_value:
+            add_value: Утга нэмэх
+            value: Утга

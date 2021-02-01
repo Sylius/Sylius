@@ -16,7 +16,7 @@ sylius:
             zone: Зона
         country:
             add_province: Додадете регион
-            name: Име
+            name: Назив
             provinces: Региони
             select: Изберете
             enabled: Овозможено

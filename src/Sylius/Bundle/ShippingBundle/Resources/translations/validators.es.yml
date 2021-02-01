@@ -12,6 +12,8 @@ sylius:
             regex: 'El código de categoría de envío solo puede contener letras, números, guiones y guiones bajos.'
             unique: 'Ya existe una categoría de envío con ese código.'
     shipping_method:
+        calculator:
+            not_blank: 'Por favor, seleccione la calculadora de método de envío.'
         name:
             max_length: 'El nombre del método de envío no debe tener más de {{ limit }} caracteres.'
             min_length: 'El nombre del método de envío debe tener al menos {{ limit }} caracteres.'

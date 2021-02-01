@@ -3,5 +3,10 @@
 
 sylius:
     payment:
+        authorized: 'A fizetés jóvá lett hagyva.'
         cancelled: 'A fizetés meg lett szakítva.'
         completed: 'A fizetés befejeződött.'
+        failed: 'A fizetés meghiúsult.'
+        processing: 'A fizetés feldolgozása folyamatban van.'
+        refunded: 'A fizetés visszatérítése sikeresen megtörtént.'
+        unknown: 'A fizetés során ismeretlen hiba lépett fel.'

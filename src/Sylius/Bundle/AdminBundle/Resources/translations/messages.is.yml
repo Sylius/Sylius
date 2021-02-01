@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Staðfesting sendingar'
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Tengslategundir
+                    attributes: Eiginleikar
+                    header: Vörulisti
+                    inventory: Birgðir
+                    options: Valkostir
+                    products: Vörur
+                    taxons: Vöruflokkar
+                configuration:
+                    admin_users: Stjórnendur
+                    channels: Sölumátar
+                    countries: Lönd
+                    currencies: Gjaldmiðlar
+                    exchange_rates: Gengi gjaldmiðla
+                    header: Stillingar
+                    locales: Tungumálasvæði
+                    payment_methods: Greiðslumátar
+                    shipping_categories: Sendingarflokkar
+                    shipping_methods: Sendingarmátar
+                    tax_categories: Skattaflokkar
+                    tax_rates: Skattar
+                    zones: Svæði
+                marketing:
+                    header: Markaðssetning
+                    product_reviews: Umsagnir
+                    promotions: Tilboð
+                customers:
+                    customers: Viðskiptavinir
+                    groups: Viðskiptavinahópar
+                    header: Viðskiptavinur
+                sales:
+                    header: Sala
+                    orders: Pantanir

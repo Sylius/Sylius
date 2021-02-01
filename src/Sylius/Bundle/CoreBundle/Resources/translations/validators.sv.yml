@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: Bilden är för stor - {{ size }}{{ suffix }}. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
+            upload_ini_size: Bilden är för stor. Högsta tillåtna storlek är {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Var god ange en basvaluta för kanalen.
@@ -13,7 +17,6 @@ sylius:
             min: E-posten måste vara minst {{ limit }} tecken långt.
     channel_pricing:
         price:
-            min: Priset måste vara minst {{ limit }}.
             not_blank: Var god ange priset.
     checkout:
         shipping_method:

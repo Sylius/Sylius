@@ -5,10 +5,10 @@ sylius:
     form:
         currency:
             base: Основна валюта
-            code: Назва
+            code: Назва регіону
             enabled: Ввімкнено
             exchange_rate: Курс валют
         exchange_rate:
             source_currency: Джерело валюти
             target_currency: Цільова валюта
-            ratio: Рейтинг
+            ratio: По рейтингу

@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Naziv grada ne smije biti dulji od 255 znakova.|Naziv grada ne smije biti dulji od 255 znakova.
-            min_length: Naziv grada mora sadržavati najmanje 2 znaka.|Grad mora sadržavati najmanje 2 znaka.
             not_blank: Unesite naziv grada.
         country:
             not_blank: Odaberite državu.
             disabled: Odabranu državu nije moguće odabrati. Molimo odaberite drugu državu.
         first_name:
-            max_length: Ime ne smije biti duže od 255 znakova|Ime ne smije biti duže od 255 znakova.
-            min_length: Ime mora sadržavati najmanje dva znaka|Ime mora sadržavati najmanje dva znaka.
             not_blank: Unesite Vaše ime.
         last_name:
-            max_length: Prezime ne smije biti duže od 255 znakova|Prezime ne smije biti duže od 255 znakova.
-            min_length: Prezime mora sadržavati najmanje 2 znaka|Prezime mora sadržavati najmanje 2 znaka.
             not_blank: Unesite Vaše prezime.
         postcode:
-            max_length: Poštanski broj ne smije biti duži od 255 znakova|Poštanski broj ne smije biti duži od 255 znakova.
-            min_length: Poštanski broj mora sadržavati najmanje dva znaka|Poštanski broj mora sadržavati najmanje dva znaka.
             not_blank: Unesite poštanski broj.
         province:
             valid: Odaberite ispravnu regiju.
         street:
-            max_length: Naziv ulice ne smije biti duži od 255 znakova|Naziv ulice ne smije biti duži od 255 znakova.
-            min_length: Naziv ulice mora sadržavati najmanje 2 znaka|Naziv ulice mora sadržavati najmanje 2 znakova.
             not_blank: Unesite naziv ulice.
         not_shippable: Adresa koju ste unijeli nije valjano odredište za dostavu.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Kod (oznaka) provincije mora biti u formatu XX-XX (npr. US_FL).
             unique: Kod (oznaka) pokrajine mora biti jedinstvena.
         name:
-            max_length: Naziv regije ne smije biti duži od 255 znakova|Naziv regije ne smije biti duži od 255 znakova.
-            min_length: Naziv županije mora sadržavati najmanje 2 znaka|Naziv županije mora sadržavati najmanje 2 znakova.
             not_blank: Unesite naziv pokrajine.
             unique: Naziv pokrajine mora biti jedinstven.
     zone:
@@ -55,8 +43,6 @@ sylius:
         members:
             min_count: Dodajte barem {{ limit }} člana u područje (zonu).
         name:
-            max_length: Naziv regije ne smije biti duži od 255 znakova|Naziv regije ne smije biti duži od 255 znakova.
-            min_length: Naziv područja (zone) mora sadržavati minimalno 2 znaka|Naziv područja (zone) mora sadržavati minimalno 2 znaka.
             not_blank: Unesite naziv regije.
     zone_member:
         code:

@@ -12,7 +12,6 @@ sylius:
             gender: Cinsiyet
             birthday: Doğum günü
             billing_address: Fatura adresi
-            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
             only_customer_registration: Hesap oluştur?
             subscribed_to_newsletter: Bültene abone olun
         customer_group:

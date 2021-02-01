@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    avatar_image:
+        file:
+            max_size: L'immagine è troppo grande - {{ size }}{{ suffix }}. La dimensione massima consentita è {{ limit }}{{ suffix }}.
+            upload_ini_size: L'immagine è troppo grande. La dimensione massima consentita è {{ limit }}{{ suffix }}.
     channel:
         base_currency:
             not_blank: Inserisci la valuta di base del canale.
@@ -13,7 +17,6 @@ sylius:
             min: L'e-mail dovrebbe contenere almeno {{ limit }} caratteri.
     channel_pricing:
         price:
-            min: Il prezzo deve essere almeno {{ limit }}.
             not_blank: Inserisci il prezzo.
     checkout:
         shipping_method:

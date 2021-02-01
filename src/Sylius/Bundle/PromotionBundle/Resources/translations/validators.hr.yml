@@ -16,10 +16,6 @@ sylius:
             max_length: Naziv akcije ne smije biti duži od jednog znaka.|Naziv akcije ne smije biti duži od {{ limit }} znakova.
             min_length: Naziv akcije mora imati najmanje jedan znak.|Naziv akcije mora sadržavati najmanje {{ limit }} znakova.
             not_blank: Unesite naziv akcije.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Vrijednost postotka popusta mora biti najmanje 0%.
-            max: Maksimalna vrijednost postotka popusta je 100%.
     promotion_coupon:
         code:
             max_length: Kod za popust ne smije biti duži od jednog znaka|Kupon za popust ne smije biti duži od {{ limit }} znakova.
@@ -38,6 +34,5 @@ sylius:
             min: Kod kupona mora imati najmanje {{ limit }} znakova.
             max: Kod kupona ne smije biti duži od {{ limit }} znakova.
             not_blank: Molimo unesite duljinu koda kupona.
-        possible_generation_amount: Nevaljana duljina koda kupona ili količina kupona. Nije moguće generirati %expectedAmount% jedinstvenih kupona s duljinom koda dužine %codeLength%. Moguća količina generiranih kupona je %possibleAmount%.
         usage_limit:
             min: Vrijeme valjanosti generiranih kupona mora biti najmanje {{ limit }}.

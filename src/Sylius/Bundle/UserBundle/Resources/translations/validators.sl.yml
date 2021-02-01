@@ -11,3 +11,5 @@ sylius:
             not_blank: Prosimo, vnesite vaše geslo.
             mismatch: Vneseni gesli se ne ujemata
             wrong_current: Podano geslo je različno od sedanjega.
+        password:
+            min: Geslo mora vsebovati vsaj {{ limit }} znakov.

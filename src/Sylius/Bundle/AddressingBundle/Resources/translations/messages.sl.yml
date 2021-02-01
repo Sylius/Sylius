@@ -11,6 +11,7 @@ sylius:
             last_name: Priimek
             phone_number: Telefonska številka
             postcode: Poštna številka
+            street: Ulica
             province: Regija
             zone: Cona
         country:
@@ -30,7 +31,7 @@ sylius:
             type: Vrsta
             types:
                 country: Država
-                province: Regija
+                province: Provinca
                 zone: Cona
             scope: Področje
             select: Izberite

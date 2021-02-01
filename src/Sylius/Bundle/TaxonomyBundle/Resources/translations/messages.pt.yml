@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Descrição
+            enabled: Ativado
             name: Nome
             parent: Pai
         taxonomy:

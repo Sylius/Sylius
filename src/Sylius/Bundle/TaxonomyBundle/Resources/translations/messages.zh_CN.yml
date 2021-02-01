@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: 描述
+            enabled: 已启用
             name: 名称
             parent: 上一级
             slug: Slug

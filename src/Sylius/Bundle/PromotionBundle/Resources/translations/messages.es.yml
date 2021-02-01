@@ -34,6 +34,8 @@ sylius:
             amount: Cantidad
             code_length: Longitud del código
             expires_at: Caduca el
+            prefix: Prefijo
+            suffix: Sufijo
             usage_limit: límite de uso de la promoción
         promotion_filter:
             price_range: Filtro de rango de precio

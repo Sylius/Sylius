@@ -2,6 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Contenido'
+            subject: 'Solicitudes de contacto'
+        order_confirmation:
+            subject: 'Confirmación de pedido'
+            view_order_or_change_payment_method: 'Ver pedido o cambiar forma de pago'
+        password_reset:
+            hello: 'Hola'
+            subject: 'Restablecer contraseña'
+        user_registration:
+            welcome_to_our_store: '¡Bienvenido a nuestra tienda!'
+        verification_token:
+            hello: 'Hola'
+            subject: 'Verificación de dirección de correo electrónico'
     lightbox:
         image_album_label: 'Imagen %1 de %2'
     menu:

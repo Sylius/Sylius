@@ -19,7 +19,7 @@ sylius:
                     countries: Lande
                     currencies: Valutaer
                     exchange_rates: Valutakurser
-                    header: Konfiguration
+                    header: Opsætning
                     locales: Landekoder
                     payment_methods: Betalingsmetoder
                     shipping_categories: Forsendelseskategorier
