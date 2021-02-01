@@ -48,6 +48,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_tracked_filter" parent="api_platform.doctrine.orm.boolean_filter">
+            <argument type="collection">
+                <argument key="variants.tracked">true</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.shipping_method_order_filter" parent="api_platform.doctrine.orm.order_filter">
             <argument type="collection">
                 <argument key="code"/>
