@@ -44,9 +44,6 @@ final class ItemTotalConfigurationType extends AbstractType
                     'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.lower_than_equal' => '<=',
                     'sylius.form.promotion_rule.item_total_configuration.comparison_operator.choices.greater_than' => '>',
                 ],
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                ],
             ])
         ;
     }
