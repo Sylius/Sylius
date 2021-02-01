@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-BETA.1 (2021-02-01)
+
+#### Details
+
+- [#12272](https://github.com/Sylius/Sylius/issues/12272) [Docs] fix for admin RBAC channels ([@AdamKasp](https://github.com/AdamKasp))
+- [#12274](https://github.com/Sylius/Sylius/issues/12274) Fix no identifier defined error in ApiPlatform 2.6 ([@kayue](https://github.com/kayue))
+- [#12279](https://github.com/Sylius/Sylius/issues/12279) [API] show product price ([@SirDomin](https://github.com/SirDomin))
+- [#12281](https://github.com/Sylius/Sylius/issues/12281) Add conflict with api-platform/core:^2.6 ([@pamil](https://github.com/pamil))
+- [#12282](https://github.com/Sylius/Sylius/issues/12282) [Shipment] Applying discounts and taxes for each shipment ([@GSadee](https://github.com/GSadee))
+- [#12283](https://github.com/Sylius/Sylius/issues/12283) Getting back to customer details in admin panel. ([@mamazu](https://github.com/mamazu))
+- [#12284](https://github.com/Sylius/Sylius/issues/12284) [Psalm] Fix build by casting to string in sprintf methods ([@GSadee](https://github.com/GSadee))
+- [#12287](https://github.com/Sylius/Sylius/issues/12287) [API] Search products by name within specific taxon ([@pamil](https://github.com/pamil))
+- [#12288](https://github.com/Sylius/Sylius/issues/12288) Add proper date in licenses ([@Tomanhez](https://github.com/Tomanhez))
+- [#12290](https://github.com/Sylius/Sylius/issues/12290) [Docs] Upgrade sphinx installation guide ([@Tomanhez](https://github.com/Tomanhez), [@pamil](https://github.com/pamil))
+- [#12291](https://github.com/Sylius/Sylius/issues/12291) Fix Taxon collection API name ([@kayue](https://github.com/kayue))
+- [#12295](https://github.com/Sylius/Sylius/issues/12295) [Api] Fix CommandAwareInputDataTransformer ([@Tomanhez](https://github.com/Tomanhez))
+- [#12296](https://github.com/Sylius/Sylius/issues/12296) Typo fix ([@Xeriaz](https://github.com/Xeriaz))
+
 ## v1.9.0-ALPHA.2 (2021-01-21)
 
 #### TL;DR
