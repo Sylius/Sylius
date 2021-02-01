@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -29,6 +30,20 @@ final class CartQuantityConfigurationType extends AbstractType
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                ],
+            ])
+            ->add('comparison_operator', ChoiceType::class, [
+                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.label',
+                'choices' => [
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.greater_than_equal' => '>=',
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.equal' => '===',
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.different' => '!==',
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.lower_than' => '<',
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.lower_than_equal' => '<=',
+                    'sylius.form.promotion_rule.cart_quantity_configuration.comparison_operator.choices.greater_than' => '>',
+                ],
+                'constraints' => [
+                    new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
         ;

@@ -26,6 +26,37 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $subject->getPromotionSubjectCount() >= $configuration['count'];
+        // Legacy operator to avoid BC break
+        if (!isset($configuration['comparison_operator'])) {
+            $configuration['comparison_operator'] = '>=';
+        }
+
+        $promotionSubjectCount = $subject->getPromotionSubjectCount();
+
+        if ('>=' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount >= $configuration['count'];
+        }
+
+        if ('===' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount === $configuration['count'];
+        }
+
+        if ('!==' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount !== $configuration['count'];
+        }
+
+        if ('<' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount < $configuration['count'];
+        }
+
+        if ('<=' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount <= $configuration['count'];
+        }
+
+        if ('>' === $configuration['comparison_operator']) {
+            return $promotionSubjectCount > $configuration['count'];
+        }
+
+        return false;
     }
 }
