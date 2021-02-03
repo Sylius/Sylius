@@ -15,7 +15,8 @@ on:
         types: [created]
     schedule:
         -
-            cron: "0 1 * * 6" # Run at 1am every Saturday
+            # Run at 1am every Saturday
+            cron: "00 01  * * 6"
     workflow_dispatch: ~
 
 jobs:
