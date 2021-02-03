@@ -18,39 +18,36 @@
     <resource class="%sylius.model.tax_category.class%" shortName="TaxCategory">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>tax_category:read</attribute>
-            </attribute>
-        </attribute>
-
-        <attribute name="denormalization_context">
-            <attribute name="groups">
-                <attribute>tax_category:create</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:tax_category:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:tax_category:create</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:tax_category:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">tax_category:update</attribute>
+                    <attribute name="groups">admin:tax_category:update</attribute>
                 </attribute>
             </itemOperation>
 

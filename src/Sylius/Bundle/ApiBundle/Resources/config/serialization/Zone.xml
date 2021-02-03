@@ -17,35 +17,35 @@
 >
     <class name="Sylius\Component\Addressing\Model\Zone">
         <attribute name="id">
-            <group>zone:read</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="code">
-            <group>zone:read</group>
-            <group>zone:create</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="name">
-            <group>zone:read</group>
-            <group>zone:create</group>
-            <group>zone:update</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:update</group>
         </attribute>
         <attribute name="type">
-            <group>zone:read</group>
-            <group>zone:create</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="scope">
-            <group>zone:read</group>
-            <group>zone:create</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="createdAt">
-            <group>zone:read</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>zone:read</group>
+            <group>admin:zone:read</group>
         </attribute>
         <attribute name="members">
-            <group>zone:read</group>
-            <group>zone:create</group>
-            <group>zone:update</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:update</group>
         </attribute>
     </class>
 </serializer>
