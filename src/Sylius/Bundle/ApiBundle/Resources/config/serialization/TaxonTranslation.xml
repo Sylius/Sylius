@@ -6,19 +6,23 @@
 >
     <class name="Sylius\Component\Taxonomy\Model\TaxonTranslation">
         <attribute name="id">
-            <group>taxon:read</group>
+            <group>admin:taxon:read</group>
+            <group>shop:taxon:read</group>
             <group>taxon_translation:read</group>
         </attribute>
         <attribute name="name">
-            <group>taxon:read</group>
+            <group>admin:taxon:read</group>
+            <group>shop:taxon:read</group>
             <group>taxon_translation:read</group>
         </attribute>
         <attribute name="description">
-            <group>taxon:read</group>
+            <group>admin:taxon:read</group>
+            <group>shop:taxon:read</group>
             <group>taxon_translation:read</group>
         </attribute>
         <attribute name="slug">
-            <group>taxon:read</group>
+            <group>admin:taxon:read</group>
+            <group>shop:taxon:read</group>
             <group>taxon_translation:read</group>
         </attribute>
     </class>
