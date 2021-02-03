@@ -1,8 +1,13 @@
 includes:
-	- vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
+    level: 1
+
     reportUnmatchedIgnoredErrors: false
+
+    paths:
+        - 'src/'
 
     excludes_analyse:
         # Test dependencies
