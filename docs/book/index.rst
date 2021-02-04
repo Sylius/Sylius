@@ -130,6 +130,7 @@ Documentation sections of The Book referring to Sylius Plus features are:
     orders/shipments
     orders/returns
     products/multi_source_inventory
+    loyalty/loyalty_rule
 
 
 .. image:: ../_images/sylius_plus/banner.png
