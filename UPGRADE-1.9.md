@@ -83,38 +83,21 @@
     +       - { path: '^/api/v1/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
     ```
 
-1. Moved parameters from `config/packages/security.yaml` to separated bundles
+1. Parameters from `config/packages/security.yaml` has been moved to separated bundles. You may delete them if you are using the default values
 
-- `src/Sylius/Bundle/AdminApiBundle/Resources/config/app/config.yml`: 
-    ```diff   
-    +    parameters:
-    +       sylius.security.api_regex: "^/api/v1"
-    ```
-
-- `src/Sylius/Bundle/AdminBundle/Resources/config/app/config.yml`: 
-    ```diff   
-         parameters:
-    +       sylius.security.admin_regex: "^/%sylius_admin.path_name%"
-    ```
-
-- `src/Sylius/Bundle/ApiBundle/Resources/config/app/config.yaml`: 
-    ```diff   
-         parameters:
-    +       sylius.security.new_api_route: "/api/v2"
-    +       sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    +       sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    +       sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    +       sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    +       sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-    +       sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
-    +       sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
-    ```
-
-- `src/Sylius/Bundle/ShopBundle/Resources/config/app/config.yml `: 
-    ```diff   
-    +   parameters:
-    +       sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
-    ```
+```diff
+- parameters:
+-     sylius.security.admin_regex: "^/%sylius_admin.path_name%"
+-     sylius.security.api_regex: "^/api/v1"
+-     sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+-     sylius.security.new_api_route: "/api/v2"
+-     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
+-     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
+-     sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
+-     sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
+-     sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
+-     sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
+-     sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
 ### Data migrations
 
 1. The `CoreBundle/Migrations/Version20201208105207.php` migration was added which extends existing adjustments with additional details (context). 
