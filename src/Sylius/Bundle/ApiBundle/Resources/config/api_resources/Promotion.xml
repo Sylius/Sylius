@@ -24,7 +24,14 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
+                    <attribute name="groups">admin:promotion:all</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -36,6 +43,14 @@
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_update">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:update</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
@@ -47,6 +62,7 @@
         <property name="priority" readable="true" />
         <property name="exclusive" readable="true" />
         <property name="usageLimit" readable="true" />
+        <property name="used" readable="true" />
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
         <property name="couponBased" readable="true" />

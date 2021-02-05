@@ -48,7 +48,7 @@
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/channels/{id}</attribute>
+                <attribute name="path">/shop/channels/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:channel:read</attribute>
                 </attribute>
