@@ -5,10 +5,12 @@ on:
         branches-ignore:
             - 'dependabot/**'
         paths-ignore:
+            - "adr/**"
             - "docs/**"
             - "*.md"
     pull_request:
         paths-ignore:
+            - "adr/**"
             - "docs/**"
             - "*.md"
     release:
