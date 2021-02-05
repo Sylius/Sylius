@@ -27,12 +27,13 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="filters">
+                    <attribute>sylius.api.product_tracked_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">admin:product:all</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -83,15 +84,16 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
+                    <attribute name="max-depth">2</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/products/{id}</attribute>
+                <attribute name="path">/admin/products/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
@@ -119,5 +121,6 @@
         <property name="mainTaxon" required="false" />
         <property name="variants" readable="true"/>
         <property name="enabled" readable="true"/>
+        <property name="attributes" readable="false" writable="false"/>
     </resource>
 </resources>

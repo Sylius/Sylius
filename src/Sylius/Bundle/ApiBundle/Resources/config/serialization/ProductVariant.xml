@@ -17,17 +17,71 @@
 >
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <attribute name="id">
-            <group>product_variant:read</group>
+            <group>admin:product_variant:read</group>
         </attribute>
         <attribute name="code">
-            <group>product_variant:read</group>
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
         </attribute>
         <attribute name="product">
-            <group>product_variant:read</group>
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="channelPricings">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="tracked">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:all</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="onHand">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:all</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="weight">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="width">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="height">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="depth">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
         </attribute>
         <attribute name="translations">
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
             <group>shop:order:account:read</group>
-            <group>product_variant:read</group>
+            <group>admin:product_variant:read</group>
             <group>shop:cart:read</group>
         </attribute>
     </class>

@@ -18,27 +18,26 @@
     <resource class="%sylius.model.product_variant.class%" shortName="ProductVariant">
         <attribute name="validation_groups">sylius</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>product_variant:read</attribute>
-            </attribute>
-        </attribute>
-
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants/{code}</attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/product-variants</attribute>
-                <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants/{id}</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-variants/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_variant:update</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -47,11 +46,27 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
+            
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
+                <!-- <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute> -->
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_variant:create</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="product" />
+        <property name="channelPricings" />
+        <property name="tracked" />
+        <property name="onHand" />
+        <property name="weight" />
+        <property name="width" />
+        <property name="height" />
+        <property name="depth" />
         <property name="translations">
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
