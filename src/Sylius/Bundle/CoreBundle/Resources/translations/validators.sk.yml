@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Tento produkt %productName% bola vypnutý.'
         shipping_method_eligibility: 'Produkt nezodpovedá požiadavkám dopravy %shippingMethodName%. Prosím vyberte iný spôsob dopravy.'
     locale:
-        code:
-            not_blank: Zadajte kód jazyka.
-            unique: Tento jazyk už existuje.
         enabled:
             cannot_disable_base: Základná mena sa nedá vypnúť.
     product:

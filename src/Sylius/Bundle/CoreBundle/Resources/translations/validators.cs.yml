@@ -44,9 +44,6 @@ sylius:
         product_eligibility: 'Tento produkt %productName% byl zakázán.'
         shipping_method_eligibility: 'Produkt se nevejde požadavky na %shippingMethodName% způsob dopravy. Prosím znovu vyberte způsob dopravy.'
     locale:
-        code:
-            not_blank: Prosím vložte místní (locale) kód.
-            unique: Tento locale již existuje.
         enabled:
             cannot_disable_base: Základní prostředí nemůže být zakázán.
     product:

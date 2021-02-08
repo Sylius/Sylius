@@ -42,9 +42,6 @@ sylius:
         product_eligibility: '%productName% สินค้านี้ถูกปิดใช้งาน'
         shipping_method_eligibility: 'สินค้าไม่สามารถจัดส่งด้วยวิธีจัดส่ง %shippingMethodName% กรุณาเลือกวิธีการจัดส่งใหม่'
     locale:
-        code:
-            not_blank: กรุณาระบุรหัสภาษา
-            unique: มีภาษานี้อยู่แล้ว
         enabled:
             cannot_disable_base: ไม่สามารถปิดใช้งานภาษาที่เป็นค่าเริ่มต้นได้
     product:

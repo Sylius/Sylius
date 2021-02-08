@@ -44,9 +44,6 @@ sylius:
         product_eligibility: 'Het product %productName% is uitgeschakeld.'
         shipping_method_eligibility: 'Product past niet binnen de vereisten voor de verzendmethode %shippingMethodName%. Kies alstublieft een andere verzendmethode.'
     locale:
-        code:
-            not_blank: Voer een locatie code in.
-            unique: Deze locatie bestaat al.
         enabled:
             cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
     product:
