@@ -1,6 +1,6 @@
 # API - Sending emails
 
-* Status: proposed
+* Status: accepted
 * Date: 2020-11-18
 
 ## Context and Problem Statement
@@ -48,10 +48,11 @@ we create direct call to email
 $this->emailManager->sendConfirmationEmail($cart);
 ```
 
-* Good, because its easy to understand.
+* Good, because it's easy and straightforward to understand.
 
-* Bad, because it can generate a lot of problems in future as it should be sent asynchronously, email manager class should be changed to handle it somehow, hard to implement.
+* Bad, because it can generate a lot of problems in the future. I may be required to send these messages asynchronously, while it can be hard to implement in sync manner.
+* Bad, because it makes harder to place additional logic between order cancellation and email dispatching.
 
 ## Decision Outcome
 
-Chosen option: "Using events", because it allows us to send email using events, commands and handlers. Thanks to this we can queue few messages in async transport.
+Chosen option: "Using events", because it allows us to decouple message sending from requesting of operation. In addition, we can easily queue few messages in async transport.
