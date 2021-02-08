@@ -51,3 +51,7 @@
 ###> Jet Brains ###
 .idea
 ###< Jet Brains ###
+
+###> vscode project files ###
+/.vscode
+###< vscode project files ###
