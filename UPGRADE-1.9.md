@@ -98,6 +98,8 @@
 -     sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
 -     sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
 -     sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
+```
+
 ### Data migrations
 
 1. The `CoreBundle/Migrations/Version20201208105207.php` migration was added which extends existing adjustments with additional details (context). 
