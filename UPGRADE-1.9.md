@@ -2,6 +2,12 @@
 
 ### Package upgrades
 
+1. Add new bundles to your list of used bundles in `config/bundles.php` if they are not already there:
+
+    ```diff
+    +   BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    +   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+
 1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
 
 1. We've removed the support for Symfony's Templating component (which is removed in Symfony 5). 
