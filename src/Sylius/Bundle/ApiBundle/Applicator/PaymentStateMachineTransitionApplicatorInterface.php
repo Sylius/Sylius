@@ -19,4 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 interface PaymentStateMachineTransitionApplicatorInterface
 {
     public function complete(PaymentInterface $data): PaymentInterface;
+
+    public function refund(PaymentInterface $data): PaymentInterface;
 }

@@ -61,6 +61,16 @@
                     <attribute name="summary">Completes Payment</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_refund">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="path">/admin/payments/{id}/refund</attribute>
+                <attribute name="controller">sylius.api.payment_state_machine_transition_applicator:refund</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Refunds Payment</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>

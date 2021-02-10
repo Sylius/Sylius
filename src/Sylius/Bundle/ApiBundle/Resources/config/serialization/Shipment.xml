@@ -35,6 +35,7 @@
         </attribute>
 
         <attribute name="method">
+            <group>admin:order:read</group>
             <group>shop:order:account:read</group>
             <group>shipment:read</group>
             <group>shop:cart:read</group>

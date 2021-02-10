@@ -31,7 +31,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/shipping-methods/{id}</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -44,7 +44,7 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/shipping-methods/{id}</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shipping_method:update</attribute>
                 </attribute>
@@ -52,7 +52,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/shipping-methods/{id}</attribute>
+                <attribute name="path">/admin/shipping-methods/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_archive">
