@@ -1,0 +1,7 @@
+security:
+    encoders:
+        sha512: sha512
+        Sylius\Component\User\Model\UserInterface: sha512
+
+sylius_user:
+    encoder: sha512
