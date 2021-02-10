@@ -55,6 +55,19 @@
 1. `/new-api` prefix has been changed to `/api/v2`. Please adjust your routes accordingly.
    Admin API is hardcoded to `/api/v1` instead of `/api/v{version}`.
 
+1. Add proper redirect to changing password page in your `config/routes/sylius_shop.yaml` file:
+
+    ```diff
+    +   # see https://web.dev/change-password-url/
+    +   sylius_shop_request_password_reset_token_redirect:
+    +       path: /.well-known/change-password
+    +       methods: [GET]
+    +       controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    +       defaults:
+    +           route: sylius_shop_request_password_reset_token
+    +           permanent: false
+    ```
+
 ### New API
 
 1. Adjust your `config/packages/security.yaml`.
