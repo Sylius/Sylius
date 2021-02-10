@@ -71,6 +71,7 @@ class ManagingTaxRateContext implements Context
     /**
      * @When I name it :name
      * @When I do not name it
+     * @When I rename it to :name
      */
     public function iNameIt(?string $name = null): void
     {
@@ -82,6 +83,7 @@ class ManagingTaxRateContext implements Context
     /**
      * @When I define it for the :zone zone
      * @When I do not specify its zone
+     * @When I change its zone to :zone
      */
     public function iDefineItForTheZone(?ZoneInterface $zone = null): void
     {
@@ -92,6 +94,7 @@ class ManagingTaxRateContext implements Context
 
     /**
      * @When I make it applicable for the :taxCategory tax category
+     * @When I change it to be applicable for the :taxCategory tax category
      * @When I do not specify related tax category
      */
     public function iMakeItApplicableForTheTaxCategory(?TaxCategoryInterface $taxCategory = null): void
@@ -332,10 +335,14 @@ class ManagingTaxRateContext implements Context
 
     /**
      * @When /^I want to modify (this tax rate)$/
+     * @When I want to modify a tax rate :taxRate
      */
     public function iWantToModifyThisTaxRate(TaxRateInterface $taxRate): void
     {
         $this->client->buildUpdateRequest((string) $taxRate->getId());
+
+        /* cast amount to string */
+        $this->client->addRequestData('amount', (string) $taxRate->getAmount());
     }
 
     /**
@@ -347,6 +354,7 @@ class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @When I save my changes
      * @When I try to save my changes
      */
     public function iSaveMyChanges(): void
@@ -357,7 +365,7 @@ class ManagingTaxRateContext implements Context
     /**
      * @Then /^(this tax rate) amount should still be ([^"]+)%$/
      */
-    public function thisTaxRateAmountShouldStillBe(TaxRateInterface $taxRate, $taxRateAmount): void
+    public function thisTaxRateAmountShouldStillBe(TaxRateInterface $taxRate, string $taxRateAmount): void
     {
         Assert::true($taxRate->getAmount(), $taxRateAmount);
     }
@@ -372,12 +380,67 @@ class ManagingTaxRateContext implements Context
 
     /**
      * @Then /^(this tax rate) should still be named "([^"]+)"$/
+     * @Then /^(this tax rate) name should be "([^"]*)"$/
      */
     public function thisTaxRateShouldStillBeNamed(TaxRateInterface $taxRate, string $taxRateName): void
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show((string) $taxRate->getId()), 'name', $taxRateName),
-            sprintf('Tax category rate is not %s', $taxRateName)
+            sprintf('Tax rate name is not %s', $taxRateName)
+        );
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+
+        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Tax rate could not be edited'
+        );
+    }
+
+    /**
+     * @Then /^(this tax rate) amount should be ([^"]+)%$/
+     */
+    public function thisTaxRateAmountShouldBe(TaxRateInterface $taxRate, int $taxRateAmount): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->show((string) $taxRate->getId()), 'amount', $taxRateAmount),
+            sprintf('Tax rate amount is not %s', $taxRateAmount)
+        );
+    }
+
+    /**
+     * @Then /^(this tax rate) should be applicable for the ("[^"]+" tax category)$/
+     */
+    public function thisTaxRateShouldBeApplicableForTheTaxCategory(TaxRateInterface $taxRate, TaxCategoryInterface $taxCategory): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->show((string) $taxRate->getId()), 'category', $this->iriConverter->getIriFromItem($taxCategory)),
+            sprintf('Tax rate is not applicable for %s tax category', $taxCategory)
+        );
+    }
+
+    /**
+     * @Then /^(this tax rate) should be applicable in ("[^"]+" zone)$/
+     */
+    public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, ZoneInterface $zone): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->show((string) $taxRate->getId()), 'zone', $this->iriConverter->getIriFromItem($zone)),
+            sprintf('Tax rate is not applicable for %s zone', $zone)
         );
     }
 }
