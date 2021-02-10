@@ -60,7 +60,6 @@ getting a list of recommended products from your external api.
 
     namespace App\Controller;
 
-    use FOS\RestBundle\View\View;
     use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
     use Sylius\Component\Resource\ResourceActions;
     use Symfony\Component\HttpFoundation\Request;
@@ -81,23 +80,17 @@ getting a list of recommended products from your external api.
 
             $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $product);
 
-            $view = View::create($product);
-
             if ($configuration->isHtmlRequest()) {
-                $view
-                    ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
-                    ->setTemplateVar($this->metadata->getName())
-                    ->setData([
-                        'configuration' => $configuration,
-                        'metadata' => $this->metadata,
-                        'resource' => $product,
-                        'recommendedProducts' => $recommendedProducts,
-                        $this->metadata->getName() => $product,
-                    ])
-                ;
+                return $this->render($configuration->getTemplate(ResourceActions::SHOW . '.html'), [
+                    'configuration' => $configuration,
+                    'metadata' => $this->metadata,
+                    'resource' => $product,
+                    'recommendedProducts' => $recommendedProducts,
+                    $this->metadata->getName() => $product,
+                ]);
             }
 
-            return $this->viewHandler->handle($configuration, $view);
+            return $this->createRestView($configuration, $product);
         }
     }
 
@@ -122,6 +115,44 @@ getting a list of recommended products from your external api.
             arguments: ['@sylius.repository.product']
             public: true
 
+
+.. note::
+
+    Example of product provider with faked information
+
+    .. code-block:: yaml
+
+        # config/services.yaml
+        services:
+            app.provider.product:
+                class: App\Provider\ProductProvider
+                arguments: ['@sylius.fixture.example_factory.product']
+                public: true
+
+    .. code-block:: php
+
+        <?php
+
+        namespace App\Provider;
+
+        use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
+        use Sylius\Component\Core\Model\ProductInterface;
+
+        class ProductProvider
+        {
+            /** @var ProductExampleFactory */
+            private $productExampleFactory;
+
+            public function __construct(ProductExampleFactory $productExampleFactory)
+            {
+                $this->productExampleFactory = $productExampleFactory;
+            }
+            public function getRecommendedProducts(): ProductInterface
+            {
+                return $this->productExampleFactory->create();
+            }
+        }
+
 **4.** Disable autowire for your controller in ``config/services.yaml``
 
 .. code-block:: yaml
@@ -133,7 +164,7 @@ getting a list of recommended products from your external api.
 
     Run ``php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
 
-**4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
+**5.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
@@ -142,6 +173,10 @@ getting a list of recommended products from your external api.
         methods: [GET]
         defaults:
             _controller: sylius.controller.product:showAction
+
+.. note::
+
+    You can create a twig template to see your resource.
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -160,27 +195,27 @@ If you still need the methods of the original ``HomepageController``, then copy 
 
     namespace App\Controller\Shop;
 
-    use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
     use Symfony\Component\HttpFoundation\Response;
+    use Twig\Environment;
 
     final class HomepageController
     {
-        /** @var EngineInterface */
-        private $templatingEngine;
+        /** @var Environment */
+        private $twig;
 
-        public function __construct(EngineInterface $templatingEngine)
+        public function __construct(Environment $twig)
         {
-            $this->templatingEngine = $templatingEngine;
+            $this->twig = $twig;
         }
 
         public function indexAction(): Response
         {
-            return $this->templatingEngine->renderResponse('@SyliusShop/Homepage/index.html.twig');
+            return new Response($this->twig->render('@SyliusShop/Homepage/index.html.twig'));
         }
 
         public function customAction(): Response
         {
-            return $this->templatingEngine->renderResponse('custom.html.twig');
+            return new Response($this->twig->render('custom.html.twig'));
         }
     }
 
@@ -192,7 +227,7 @@ If you still need the methods of the original ``HomepageController``, then copy 
     services:
         sylius.controller.shop.homepage:
             class: App\Controller\Shop\HomepageController
-            arguments: ['@templating']
+            arguments: ['@twig']
             tags: ['controller.service_arguments']
 
 .. tip::
