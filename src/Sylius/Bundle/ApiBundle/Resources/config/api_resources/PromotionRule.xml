@@ -20,14 +20,7 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion-rule:all</attribute>
-                </attribute>
-            </collectionOperation>
-        </collectionOperations>
+        <collectionOperations />
 
         <itemOperations>
             <itemOperation name="admin_get">
