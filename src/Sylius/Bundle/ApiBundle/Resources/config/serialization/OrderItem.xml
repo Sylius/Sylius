@@ -47,6 +47,7 @@
             <group>shop:order_item:read</group>
         </attribute>
         <attribute name="unitPrice">
+            <group>admin:order:read</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
         </attribute>

@@ -16,11 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.order.class%" shortName="Order">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:order:read</attribute>
-            </attribute>
-        </attribute>
 
         <attribute name="validation_groups">sylius</attribute>
 
@@ -28,6 +23,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">admin/orders</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:order:all</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_post">
@@ -56,7 +54,10 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{id}</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:order:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -74,7 +75,7 @@
 
             <itemOperation name="admin_cancel">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/orders/{id}/cancel</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">sylius.api.order_state_machine_transition_applicator:cancel</attribute>
                 <attribute name="denormalization_context">
@@ -397,5 +398,6 @@
         <property name="billingAddress" writable="false" />
         <property name="shippingAddress" writable="false" />
         <property name="localeCode" writable="true" />
+        <property name="checkoutCompletedAt" writable="true" />
     </resource>
 </resources>

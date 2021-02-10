@@ -18,6 +18,7 @@
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order:read</group>
@@ -25,6 +26,7 @@
 
         <attribute name="number">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order:read</group>
@@ -41,6 +43,7 @@
 
         <attribute name="customer">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
         </attribute>
 
         <attribute name="payments">
@@ -67,14 +70,17 @@
 
         <attribute name="paymentState">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
         </attribute>
 
         <attribute name="shippingState">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
         </attribute>
 
         <attribute name="total">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>
@@ -85,8 +91,13 @@
             <group>shop:order:account:read</group>
         </attribute>
 
+        <attribute name="promotions">
+            <group>admin:order:read</group>
+        </attribute>
+
         <attribute name="tokenValue">
             <group>admin:order:read</group>
+            <group>admin:order:all</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order:read</group>
@@ -131,6 +142,11 @@
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="checkoutCompletedAt">
+            <group>admin:order:read</group>
+            <group>admin:order:all</group>
         </attribute>
     </class>
 </serializer>

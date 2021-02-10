@@ -35,6 +35,13 @@ final class PaymentStateMachineTransitionApplicator implements PaymentStateMachi
         return $data;
     }
 
+    public function refund(PaymentInterface $data): PaymentInterface
+    {
+        $this->applyTransition($data, PaymentTransitions::TRANSITION_REFUND);
+
+        return $data;
+    }
+
     private function applyTransition(PaymentInterface $payment, string $transition): void
     {
         $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);

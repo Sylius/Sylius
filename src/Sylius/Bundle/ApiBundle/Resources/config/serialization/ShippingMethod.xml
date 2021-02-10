@@ -86,5 +86,9 @@
         <attribute name="archivedAt">
             <group>shipping_method:read</group>
         </attribute>
+
+        <attribute name="name">
+            <group>admin:order:read</group>
+        </attribute>
     </class>
 </serializer>
