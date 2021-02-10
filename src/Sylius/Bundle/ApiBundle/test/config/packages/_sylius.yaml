@@ -11,11 +11,19 @@ framework:
         storage_id: session.storage.mock_file
     http_method_override: true
     test: ~
+    serializer:
+        mapping:
+            paths: ['%kernel.project_dir%/src/Resources/serialization']
 
 lexik_jwt_authentication:
     secret_key: '%env(resolve:JWT_SECRET_KEY)%'
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
     pass_phrase: '%env(JWT_PASSPHRASE)%'
+
+doctrine_migrations:
+    storage:
+        table_storage:
+            table_name: sylius_migrations
 
 doctrine:
     dbal:
@@ -24,10 +32,18 @@ doctrine:
         charset: UTF8
 
         url: '%env(resolve:DATABASE_URL)%'
+
     orm:
         entity_managers:
             default:
-                auto_mapping: true
+                mappings:
+                    test:
+                        mapping:              true
+                        type:                 xml
+                        dir:                  "%kernel.project_dir%/src/Resources/config/doctrine"
+                        alias:                ~
+                        prefix:               Sylius\Bundle\ApiBundle\test\src\Entity
+                        is_bundle:            false
 
 security:
     always_authenticate_before_granting: true
@@ -39,6 +55,7 @@ security:
 
     encoders:
         Sylius\Component\User\Model\UserInterface: argon2i
+
     firewalls:
         new_api_admin_user:
             pattern: "%sylius.security.new_api_admin_regex%/.*"
@@ -80,3 +97,8 @@ security:
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
         - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+api_platform:
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Resources/api_resources'

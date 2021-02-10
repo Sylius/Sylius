@@ -1,0 +1,7 @@
+Sylius\Bundle\ApiBundle\test\src\Entity\Foo:
+    foo1:
+        id: "0"
+        name: Foo1
+    foo2:
+        id: "1"
+        name: Foo2

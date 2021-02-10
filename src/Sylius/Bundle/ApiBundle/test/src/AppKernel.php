@@ -51,7 +51,8 @@ final class AppKernel extends BaseKernel
 
     public function registerBundles(): iterable
     {
-        $contents = require $this->getProjectDir() . '/config/bundles.php';
+        $bundlesPath = $this->getProjectDir() . '/config/bundles.php';
+        $contents = require $bundlesPath;
         foreach ($contents as $class => $envs) {
             if (isset($envs['all']) || isset($envs[$this->environment])) {
                 yield new $class();
