@@ -74,6 +74,7 @@ getting a list of recommended products from your external api.
             $this->isGrantedOr403($configuration, ResourceActions::SHOW);
             $product = $this->findOr404($configuration);
 
+            // some custom provider service to retrieve recommended products
             $recommendationService = $this->get('app.provider.product');
 
             $recommendedProducts = $recommendationService->getRecommendedProducts($product);
@@ -104,47 +105,7 @@ getting a list of recommended products from your external api.
                 classes:
                     controller: App\Controller\ProductController
 
-**3.** The next thing you have to do is to override the ``sylius.repository.product`` service definition in the ``config/services.yaml``.
-
-.. code-block:: yaml
-
-    # config/services.yaml
-    services:
-        app.provider.product:
-            class: App\Provider\ProductProvider
-            arguments: ['@sylius.repository.product']
-            public: true
-
-
-.. note::
-
-    Example of product provider with faked information
-
-    .. code-block:: yaml
-
-        # config/services.yaml
-        services:
-            app.provider.product:
-                class: App\Provider\ProductProvider
-                arguments: ['@sylius.fixture.example_factory.product']
-                public: true
-
-    .. code-block:: php
-
-        <?php
-
-        namespace App\Provider;
-
-        class ProductProvider
-        {
-            public function getRecommendedProducts(): array
-            {
-                // some custom logic with getting recommended products
-                return $recommendedProducts;
-            }
-        }
-
-**4.** Disable autowire for your controller in ``config/services.yaml``
+**3.** Disable autowire for your controller in ``config/services.yaml``
 
 .. code-block:: yaml
 
@@ -155,7 +116,7 @@ getting a list of recommended products from your external api.
 
     Run ``php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
 
-**5.** Finally you’ll need to add routes in the ``config/routes.yaml``.
+**4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
