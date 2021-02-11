@@ -2,32 +2,12 @@
 
 ### Package upgrades
 
-1. Add new bundles to your list of used bundles in `config/bundles.php` if they are not already there:
+1. Upgrade the version of `friendsofsymfony/oauth-server-bundle` by:
 
-    ```diff
-    +   BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
-    +   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+    ```bash
+    composer require "friendsofsymfony/oauth-server-bundle" ">2.0.0-alpha.0 ^2.0@dev"
+    ```
 
-1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
-
-1. We've removed the support for Symfony's Templating component (which is removed in Symfony 5). 
-
-    * Remove `templating` from framework's configuration:
-        
-        ```diff
-        # config/packages/framework.yaml
-       
-        framework:
-            # ...
-        -    templating: { engines: ["twig"] }
-        ```
-      
-    * Replace any usages of `Symfony\Bundle\FrameworkBundle\Templating\EngineInterface` with `Twig\Environment`.
-   
-        Inject `twig` service into your controllers instead of `templating`.
-      
-        `$templating->renderResponse(...)` might be replaced with `new Response($twig->render(...))`.
-    
 1. We've upgraded Sylius' ResourceBundle and GridBundle packages which forced us to upgrade major versions of our dependencies.
    
     Please follow [ResourceBundle's upgrade instructions](https://github.com/Sylius/SyliusResourceBundle/blob/master/UPGRADE.md#from-16x-to-17x).
@@ -37,7 +17,7 @@
     Due to FOS Rest Bundle major version upgrade, the JSON error responses might have changed. If your tests stop passing,
     you can bring back old behaviour by overriding `error.json.twig` and `exception.json.twig` templates. You can check
     how we've done that in Sylius by looking into vendor code in `templates/bundles/TwigBundle/Exception/` directory. 
-   
+
 1. We've replaced deprecated Doctrine Persistence API with the new one.
    
     Replace `Doctrine\Common\Persistence` namespace in your codebase to `Doctrine\Persistence`.
@@ -66,6 +46,54 @@
     +       defaults:
     +           route: sylius_shop_request_password_reset_token
     +           permanent: false
+    ```
+
+#### Upgrades Symfony to v5.2
+
+1. Upgrade Symfony dependencies by:
+
+    ```bash
+    composer config extra.symfony.require "^5.2"
+    composer require --dev "symfony/browser-kit" "^5.2" --no-update --no-scripts
+    composer require --dev "symfony/debug-bundle" "^5.2" --no-update --no-scripts
+    composer require --dev "symfony/intl" "^5.2" --no-update --no-scripts
+    composer require --dev "symfony/web-profiler-bundle" "^5.2" --no-update --no-scripts
+    composer update
+    ```
+
+1. Add new bundles to your list of used bundles in `config/bundles.php` if they are not already there:
+
+    ```diff
+    +   BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    +   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+    ```
+
+1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
+
+1. We've removed the support for Symfony's Templating component (which is removed in Symfony 5). 
+
+    * Remove `templating` from framework's configuration:
+        
+        ```diff
+        # config/packages/framework.yaml
+       
+        framework:
+            # ...
+        -    templating: { engines: ["twig"] }
+        ```
+      
+    * Replace any usages of `Symfony\Bundle\FrameworkBundle\Templating\EngineInterface` with `Twig\Environment`.
+   
+        Inject `twig` service into your controllers instead of `templating` or `templating.engine.twig`.
+      
+        `$templating->renderResponse(...)` might be replaced with `new Response($twig->render(...))`.
+
+1. Remove Twig route configuration from your `config/routes/dev/twig.yaml`:
+
+    ```diff
+    -   _errors:
+    -       resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    -       prefix: /_error
     ```
 
 ### New API
