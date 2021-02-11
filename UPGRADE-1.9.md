@@ -37,7 +37,15 @@
     Due to FOS Rest Bundle major version upgrade, the JSON error responses might have changed. If your tests stop passing,
     you can bring back old behaviour by overriding `error.json.twig` and `exception.json.twig` templates. You can check
     how we've done that in Sylius by looking into vendor code in `templates/bundles/TwigBundle/Exception/` directory. 
-   
+
+1. Remove Twig route configuration from your `config/routes/dev/twig.yaml`:
+
+    ```diff
+    -   _errors:
+    -       resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    -       prefix: /_error
+    ```
+
 1. We've replaced deprecated Doctrine Persistence API with the new one.
    
     Replace `Doctrine\Common\Persistence` namespace in your codebase to `Doctrine\Persistence`.
