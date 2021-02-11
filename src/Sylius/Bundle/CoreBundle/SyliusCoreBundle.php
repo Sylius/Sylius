@@ -21,6 +21,7 @@ use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
@@ -60,6 +61,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new CircularDependencyBreakingErrorListenerPass());
         $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());

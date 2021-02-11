@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-BETA.2 (2021-02-10)
+
+#### Details
+
+- [#12230](https://github.com/Sylius/Sylius/issues/12230) [BC BREAK] [Api] [ShippingMethod] [ShopBillingData] [TaxCategory] [Taxon][TaxonTranslation] [Zone] [ZoneMemberRefactor] serializations groups  ([@Tomanhez](https://github.com/Tomanhez))
+- [#12278](https://github.com/Sylius/Sylius/issues/12278) [API] move security parameters to bundles ([@SirDomin](https://github.com/SirDomin), [@lchrusciel](https://github.com/lchrusciel))
+- [#12289](https://github.com/Sylius/Sylius/issues/12289) [Docs] Add docs for LoyaltyRule ([@Tomanhez](https://github.com/Tomanhez))
+- [#12301](https://github.com/Sylius/Sylius/issues/12301) [API] Add missing api and no-api tags ([@lchrusciel](https://github.com/lchrusciel))
+- [#12312](https://github.com/Sylius/Sylius/issues/12312) [CI] Ignore changes in "adr" directory ([@pamil](https://github.com/pamil))
+- [#12319](https://github.com/Sylius/Sylius/issues/12319) Fix the appearance of the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12323](https://github.com/Sylius/Sylius/issues/12323) Change the order of sections in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12325](https://github.com/Sylius/Sylius/issues/12325) fix problem with registered service ([@AdamKasp](https://github.com/AdamKasp), [@pamil](https://github.com/pamil))
+- [#12326](https://github.com/Sylius/Sylius/issues/12326) Fixes in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+
 ## v1.9.0-BETA.1 (2021-02-01)
 
 #### Details
