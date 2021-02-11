@@ -174,10 +174,6 @@ getting a list of recommended products from your external api.
         defaults:
             _controller: sylius.controller.product:showAction
 
-.. note::
-
-    You can create a twig template to see your resource.
-
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
