@@ -135,21 +135,12 @@ getting a list of recommended products from your external api.
 
         namespace App\Provider;
 
-        use Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory;
-        use Sylius\Component\Core\Model\ProductInterface;
-
         class ProductProvider
         {
-            /** @var ProductExampleFactory */
-            private $productExampleFactory;
-
-            public function __construct(ProductExampleFactory $productExampleFactory)
+            public function getRecommendedProducts(): array
             {
-                $this->productExampleFactory = $productExampleFactory;
-            }
-            public function getRecommendedProducts(): ProductInterface
-            {
-                return $this->productExampleFactory->create();
+                // some custom logic with getting recommended products
+                return $recommendedProducts;
             }
         }
 
