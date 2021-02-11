@@ -14,32 +14,32 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingExceptionListenerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
+use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingExceptionListener;
 
-final class CircularDependencyBreakingErrorListenerPassTest extends AbstractCompilerPassTestCase
+final class CircularDependencyBreakingExceptionListenerPassTest extends AbstractCompilerPassTestCase
 {
 
     public function it_register_circular_dependency_breaking_error_listener_when_exception_listener_is_registered(): void
     {
-        $this->container->setDefinition('exception_listener', new Definition('ExceptionListener'));
+        $this->container->setDefinition('twig.exception_listener', new Definition('ExceptionListener'));
 
         $this->compile();
 
-        $this->assertContainerBuilderHasService(CircularDependencyBreakingErrorListener::class);
+        $this->assertContainerBuilderHasService(CircularDependencyBreakingExceptionListener::class);
     }
 
     public function it_does_nothing_when_exception_listener_is_not_registered(): void
     {
         $this->compile();
 
-        $this->assertContainerBuilderNotHasService(CircularDependencyBreakingErrorListener::class);
+        $this->assertContainerBuilderNotHasService(CircularDependencyBreakingExceptionListener::class);
     }
 
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new CircularDependencyBreakingErrorListenerPass());
+        $container->addCompilerPass(new CircularDependencyBreakingExceptionListenerPass());
     }
 }

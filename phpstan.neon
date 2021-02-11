@@ -23,5 +23,11 @@ parameters:
         - 'src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/ReflectionExtractorHotfixPass.php'
         - 'src/Sylius/Bundle/ApiBundle/PropertyInfo/Extractor/ReflectionExtractor.php'
 
+        # Symfony 4.4-specific issues
+        - 'src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/CircularDependencyBreakingExceptionListenerPass.php'
+        - 'src/Sylius/Bundle/CoreBundle/EventListener/CircularDependencyBreakingExceptionListener.php'
+        - 'src/Sylius/Bundle/CoreBundle/Tests/DependencyInjection/CircularDependencyBreakingExceptionListenerPassTest.php'
+        - 'src/Sylius/Bundle/CoreBundle/Tests/Listener/CircularDependencyBreakingExceptionListenerTest.php'
+
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
