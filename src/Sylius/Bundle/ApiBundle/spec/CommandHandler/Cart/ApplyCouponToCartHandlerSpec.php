@@ -84,4 +84,19 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [ApplyCouponToCart::createFromData('cart', 'couponCode')]);
     }
+
+    function it_removes_coupon_if_promotion_coupon_is_not_found(
+        OrderRepositoryInterface $orderRepository,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderProcessorInterface $orderProcessor,
+        OrderInterface $cart
+    ): void {
+        $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
+
+        $promotionCouponRepository->findOneBy(['code' => null])->willReturn(null);
+
+        $orderProcessor->process($cart)->shouldBeCalled();
+
+        $this(ApplyCouponToCart::createFromData('cart', null));
+    }
 }
