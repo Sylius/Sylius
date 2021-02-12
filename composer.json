@@ -1,6 +1,6 @@
 {
     "name": "sylius/sylius",
-    "type": "project",
+    "type": "library",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -185,7 +185,7 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.0",
-        "phpstan/phpstan": "0.12.74",
+        "phpstan/phpstan": "0.12.75",
         "phpstan/phpstan-doctrine": "0.12.32",
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "0.7.0",
