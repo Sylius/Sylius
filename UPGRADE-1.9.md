@@ -5,7 +5,7 @@
 1. Upgrade the version of `friendsofsymfony/oauth-server-bundle` by:
 
     ```bash
-    composer require "friendsofsymfony/oauth-server-bundle" ">2.0.0-alpha.0 ^2.0@dev"
+    composer require "friendsofsymfony/oauth-server-bundle":">2.0.0-alpha.0 ^2.0@dev"
     ```
 
 1. We've upgraded Sylius' ResourceBundle and GridBundle packages which forced us to upgrade major versions of our dependencies.
@@ -54,10 +54,10 @@
 
     ```bash
     composer config extra.symfony.require "^5.2"
-    composer require --dev "symfony/browser-kit" "^5.2" --no-update --no-scripts
-    composer require --dev "symfony/debug-bundle" "^5.2" --no-update --no-scripts
-    composer require --dev "symfony/intl" "^5.2" --no-update --no-scripts
-    composer require --dev "symfony/web-profiler-bundle" "^5.2" --no-update --no-scripts
+    composer require --dev "symfony/browser-kit":"^5.2" --no-update --no-scripts
+    composer require --dev "symfony/debug-bundle":"^5.2" --no-update --no-scripts
+    composer require --dev "symfony/intl":"^5.2" --no-update --no-scripts
+    composer require --dev "symfony/web-profiler-bundle":"^5.2" --no-update --no-scripts
     composer update
     ```
 
