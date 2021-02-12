@@ -114,7 +114,7 @@ getting a list of recommended products from your external api.
 
 .. tip::
 
-    Run ``php bin/console debug:container sylius.controller.product`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.product`` to make sure the class has changed to your implementation.
 
 **4.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
@@ -124,7 +124,7 @@ getting a list of recommended products from your external api.
         path: /product/show
         methods: [GET]
         defaults:
-            _controller: sylius.controller.product:showAction
+            _controller: sylius.controller.product::showAction
 
 How to customize a Standard Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -175,22 +175,22 @@ If you still need the methods of the original ``HomepageController``, then copy 
     services:
         sylius.controller.shop.homepage:
             class: App\Controller\Shop\HomepageController
-            arguments: ['@twig']
+            autowire: true
             tags: ['controller.service_arguments']
 
 .. tip::
 
-    Run ``php bin/console debug:container sylius.controller.shop.homepage`` to check if the class has changed to your implementation.
+    Run ``php bin/console debug:container sylius.controller.shop.homepage`` to make sure the class has changed to your implementation.
 
 **3.** Finally you’ll need to add routes in the ``config/routes.yaml``.
 
 .. code-block:: yaml
 
-    app_shop_custom_product:
-        path: /custom/product
+    app_shop_custom_action:
+        path: /custom/action
         methods: [GET]
         defaults:
-            _controller: sylius.controller.product:showAction
+            _controller: sylius.controller.shop.homepage::customAction
 
 From now on your ``customAction`` of the ``HomepageController`` will be available alongside the ``indexAction`` from the base class.
 
