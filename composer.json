@@ -1,6 +1,6 @@
 {
     "name": "sylius/sylius",
-    "type": "project",
+    "type": "library",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
