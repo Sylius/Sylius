@@ -86,7 +86,9 @@ final class CartContext implements Context
      */
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
-        $tokenValue = $this->pickupCart($tokenValue);
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
 
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
@@ -107,7 +109,9 @@ final class CartContext implements Context
         string $productOptionValue,
         ?string $tokenValue
     ): void {
-        $tokenValue = $this->pickupCart($tokenValue);
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
 
         $this->commandBus->dispatch(AddItemToCart::createFromData(
             $tokenValue,
@@ -128,17 +132,15 @@ final class CartContext implements Context
      */
     public function thisCartHasCouponAppliedWithCode(?string $tokenValue, string $couponCode): void
     {
-        $tokenValue = $this->pickupCart($tokenValue);
+        if ($tokenValue === null) {
+            $tokenValue = $this->pickupCart();
+        }
 
         $this->commandBus->dispatch(ApplyCouponToCart::createFromData($tokenValue, $couponCode));
     }
 
-    private function pickupCart(?string $tokenValue = null): string
+    private function pickupCart(): string
     {
-        if ($tokenValue !== null) {
-            return $tokenValue;
-        }
-
         $tokenValue = $this->generator->generateUriSafeString(10);
 
         /** @var ChannelInterface $channel */
