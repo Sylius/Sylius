@@ -28,7 +28,7 @@ final class FooTest extends ApiTestCase
     {
         $files = [
             'test/fixtures/administrator.yaml',
-            'test/fixtures/foo.yaml',
+            'test/fixtures/foo_sylius_resource.yaml',
             'test/fixtures/channel.yaml',
         ];
 
@@ -56,7 +56,7 @@ final class FooTest extends ApiTestCase
     {
         $response = static::createClient()->request(
             'GET',
-            'api/v2/foos',
+            'api/v2/foo-sylius-resources',
             ['auth_bearer' => $this->JWTUserToken]
         );
 
@@ -65,8 +65,8 @@ final class FooTest extends ApiTestCase
 
         $objects = json_decode($response->getContent(), true)['hydra:member'];
 
-        $this->assertSame('Foo1', $objects[0]['name']);
-        $this->assertSame('Foo2', $objects[1]['name']);
+        $this->assertSame('FooSyliusResource1', $objects[0]['name']);
+        $this->assertSame('FooSyliusResource2', $objects[1]['name']);
     }
 
     /**
@@ -74,16 +74,15 @@ final class FooTest extends ApiTestCase
      */
     public function it_allows_to_get_collection_as_a_visitor(): void
     {
-        $response = static::createClient()->request('GET', 'api/v2/foos');
+        $response = static::createClient()->request('GET', 'api/v2/foo-sylius-resources');
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
         $objects = json_decode($response->getContent(), true)['hydra:member'];
 
-        $this->assertSame('Foo1', $objects[0]['name']);
-        $this->assertSame('Foo2', $objects[1]['name']);
-
+        $this->assertSame('FooSyliusResource1', $objects[0]['name']);
+        $this->assertSame('FooSyliusResource2', $objects[1]['name']);
     }
 
     /**
@@ -93,13 +92,13 @@ final class FooTest extends ApiTestCase
     {
         $response = static::createClient()->request(
             'POST',
-            'api/v2/foos',
-            ['json' => ["name" => "FooPost"]]
+            'api/v2/foo-sylius-resources',
+            ['json' => ["name" => "FooSyliusResourcePost"]]
         );
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->assertSame('FooPost', json_decode($response->getContent(), true)['name']);
+        $this->assertSame('FooSyliusResourcePost', json_decode($response->getContent(), true)['name']);
     }
 }
