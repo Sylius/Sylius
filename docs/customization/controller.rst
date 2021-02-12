@@ -187,7 +187,7 @@ If you still need the methods of the original ``HomepageController``, then copy 
 .. code-block:: yaml
 
     app_shop_custom_action:
-        path: /custom/action
+        path: /custom
         methods: [GET]
         defaults:
             _controller: sylius.controller.shop.homepage::customAction
