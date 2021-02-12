@@ -16,29 +16,77 @@ namespace Sylius\Bundle\ApiBundle\test\tests;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 final class FooTest extends ApiTestCase
 {
-    /** @var EntityManagerInterface|null */
-    private $entityManager;
+    /** @var string */
+    private $JWTUserToken;
 
     public function setUp(): void
     {
         $files = [
             'test/fixtures/administrator.yaml',
             'test/fixtures/foo.yaml',
+            'test/fixtures/channel.yaml',
         ];
 
         parent::setUp();
         $kernel = self::bootKernel();
         $container = $kernel->getContainer();
+
         /** @var LoaderInterface $loader */
         $loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
+
+        /** @var JWTTokenManagerInterface $JWTManager */
+        $JWTManager = $container->get('lexik_jwt_authentication.jwt_manager');
+
         $objects = $loader->load($files);
-        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
+
+        /** @var EntityManagerInterface|null */
+        $entityManager = $kernel->getContainer()->get('doctrine')->getManager();
         foreach ($objects as $object) {
-            $this->entityManager->persist($object);
+            $entityManager->persist($object);
         }
+
+        $adminUser = $objects['admin'];
+
+        $this->JWTUserToken = $JWTManager->create($adminUser);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_collection_for_login_administrator_on_new_not_admin_resource(): void
+    {
+        static::createClient()->request('GET', 'api/v2/foos', ['auth_bearer' => $this->JWTUserToken]);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertJson(
+            <<<EOT
+{
+    "@context":"\/api\/v2\/contexts\/Foo",
+    "@id":"\/api\/v2\/foos",
+    "@type":"hydra:Collection",
+    "hydra:member":[
+        {
+            "@id":"\/api\/v2\/foos\/2",
+            "@type":"Foo",
+            "id":2,
+            "name":"Foo2"
+        },
+        {
+            "@id":"\/api\/v2\/foos\/1",
+            "@type":"Foo",
+            "id":1,
+            "name":"Foo1"
+        }
+    ],
+    "hydra:totalItems":2
+}
+EOT
+        );
     }
 
     /**
