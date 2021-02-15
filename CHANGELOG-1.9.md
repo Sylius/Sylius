@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-BETA.3 (2021-02-15)
+
+#### Details
+
+- [#12313](https://github.com/Sylius/Sylius/issues/12313) Change package type from "project" to "library" ([@vvasiloi](https://github.com/vvasiloi))
+- [#12322](https://github.com/Sylius/Sylius/issues/12322) update documentation for creating custom model ([@arti0090](https://github.com/arti0090))
+- [#12328](https://github.com/Sylius/Sylius/issues/12328) update documentation for creating custom resource controller ([@arti0090](https://github.com/arti0090))
+- [#12331](https://github.com/Sylius/Sylius/issues/12331) Add note about removing Twig route config in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12332](https://github.com/Sylius/Sylius/issues/12332) Reorganize UPGRADE-1.9 file to extract steps for Symfony v5.2 ([@GSadee](https://github.com/GSadee))
+- [#12336](https://github.com/Sylius/Sylius/issues/12336) Fix timeout on 404 Not Found errors when using templating and Symfony 4.4 ([@pamil](https://github.com/pamil))
+- [#12338](https://github.com/Sylius/Sylius/issues/12338) [DOCS] Updating the controller customization ([@Roshyo](https://github.com/Roshyo))
+- [#12342](https://github.com/Sylius/Sylius/issues/12342) Fixes according to composer require commands in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+
 ## v1.9.0-BETA.2 (2021-02-10)
 
 #### Details
