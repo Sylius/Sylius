@@ -18,15 +18,9 @@ Symfony, the framework Sylius uses, provides the `SymfonyMakerBundle <https://sy
 
 .. warning::
 
-    Remember to have the ``SensioGeneratorBundle`` (or SymfonyMakerBundle depending on your Symfony version) imported in the AppKernel, as it is not there by default.
+    Remember to have the ``SymfonyMakerBundle`` imported in the AppKernel, as it is not there by default.
 
 You need to use such a command in your project directory.
-
-With the Generator Bundle
-
-.. code-block:: bash
-
-    php bin/console generate:doctrine:entity
 
 With the Maker Bundle
 
