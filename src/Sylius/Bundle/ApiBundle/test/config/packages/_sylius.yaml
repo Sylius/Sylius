@@ -11,9 +11,6 @@ framework:
         storage_id: session.storage.mock_file
     http_method_override: true
     test: ~
-    serializer:
-        mapping:
-            paths: ['%kernel.project_dir%/src/Resources/serialization']
 
 lexik_jwt_authentication:
     secret_key: '%env(resolve:JWT_SECRET_KEY)%'
@@ -97,14 +94,3 @@ security:
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
         - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.new_api_shop_regex%/.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-api_platform:
-    mapping:
-        paths:
-            - '%kernel.project_dir%/src/Resources/api_resources'
-
-sylius_resource:
-    resources:
-        test.foo_sylius_resource:
-            classes:
-                model: Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource

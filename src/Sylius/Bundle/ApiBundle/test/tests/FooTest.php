@@ -14,39 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\test\tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use Doctrine\ORM\EntityManagerInterface;
-use Fidry\AliceDataFixtures\LoaderInterface;
-use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 final class FooTest extends ApiTestCase
 {
-    /** @var string */
-    private $JWTUserToken;
+    use Test;
 
     public function setUp(): void
     {
-        $files = [
-            'test/fixtures/administrator.yaml',
-            'test/fixtures/foo.yaml',
-            'test/fixtures/channel.yaml',
-        ];
-
-        parent::setUp();
-        $kernel = self::bootKernel();
-        $container = $kernel->getContainer();
-
-        /** @var LoaderInterface $loader */
-        $loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
-
-        /** @var JWTTokenManagerInterface $JWTManager */
-        $JWTManager = $container->get('lexik_jwt_authentication.jwt_manager');
-
-        $objects = $loader->load($files, [], [], PurgeMode::createDeleteMode());
-
-        $adminUser = $objects['admin'];
-
-        $this->JWTUserToken = $JWTManager->create($adminUser);
+        $this->setFixturesFiles(['test/fixtures/foo.yaml']);
+        $this->setUpTest();
     }
 
     /**
@@ -57,7 +33,7 @@ final class FooTest extends ApiTestCase
         $response = static::createClient()->request(
             'GET',
             'api/v2/foos',
-            ['auth_bearer' => $this->JWTUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken]
         );
 
         $this->assertResponseIsSuccessful();
