@@ -44,9 +44,6 @@ sylius:
         product_eligibility: 'Энэ бүтээгдэхүүнийг %productName% идэвхгүй болгосон.'
         shipping_method_eligibility: 'Бүтээгдэхүүн нь %shippingMethodName% хүргэлтийн төрлийн шаардлагад нийцэхгүй байна. Хүргэлтийн төрлийг дахин сонгоно уу.'
     locale:
-        code:
-            not_blank: Газрын кодоо оруулна уу.
-            unique: Энэ газар аль хэдийн бүртгэгдсэн байна.
         enabled:
             cannot_disable_base: Үндсэн газрыг идэвхгүй болгох боломжгүй.
     product:

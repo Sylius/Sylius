@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Bu ürün%productName% devre dışı bırakılmıştır.'
         shipping_method_eligibility: 'Ürün gereksinimleri %shippingMethodName% sevkiyat yöntemi için uygun değil. Lütfen, sevkiyat yöntemi yeniden seçin.'
     locale:
-        code:
-            not_blank: Lütfen bölge kodunu giriniz.
-            unique: Bu bölge kodu zaten var.
         enabled:
             cannot_disable_base: Ana mahal devre dışı bırakılamaz.
     product:

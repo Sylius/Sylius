@@ -43,9 +43,6 @@ sylius:
         product_eligibility: 'Продукт %productName% был выключен.'
         shipping_method_eligibility: 'Продукт не соответствует требованиям способа доставки %shippingMethodName%. Пожалуйста выберете другой способ доставки.'
     locale:
-        code:
-            not_blank: Пожалуйста, введите код языка.
-            unique: Этот язык уже существует.
         enabled:
             cannot_disable_base: Базовый язык не может быть отключен.
     product:

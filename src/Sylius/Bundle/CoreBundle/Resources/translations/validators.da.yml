@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Dette produkt %productName% er blevet deaktiveret.'
         shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmetode. Vælg venligst din forsendelsesmetode.'
     locale:
-        code:
-            not_blank: Venligst angiv landekode.
-            unique: Denne landekode eksisterer allerede.
         enabled:
             cannot_disable_base: Grundvalutaen kan ikke deaktiveres.
     product:

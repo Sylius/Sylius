@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Produktet %productName% er deaktivert.'
         shipping_method_eligibility: 'Produktet passer ikke krav til %shippingMethodName% forsendelsesmåte. Vennligst velg en annen fraktmetode.'
     locale:
-        code:
-            not_blank: Angi språkskode.
-            unique: Dette språket finnes allerede.
         enabled:
             cannot_disable_base: Standardspråk kan ikke deaktiveres.
     product:

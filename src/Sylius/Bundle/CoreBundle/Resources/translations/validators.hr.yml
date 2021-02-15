@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Proizvod %productName% je onemogućen.'
         shipping_method_eligibility: 'Proizvod ne spada u tražene zahtjeve za %shippingMethodName% metodu dostave. Molimo ponovo odaberite svoju metodu dostave.'
     locale:
-        code:
-            not_blank: Unesite lokalni kod.
-            unique: Ovaj lokalni kod već postoji.
         enabled:
             cannot_disable_base: Osnovni jezik nije moguće onemogućiti.
     product:
