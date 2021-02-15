@@ -18,5 +18,13 @@
         </id>
 
         <field name="name" column="name" type="string" />
+
+        <many-to-one field="owner" target-entity="Sylius\Component\Core\Model\AdminUserInterface">
+            <join-column name="owner_id" referenced-column-name="id" />
+        </many-to-one>
+
+        <many-to-one field="fooSyliusResource" target-entity="Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource">
+            <join-column name="foo_sylius_resource_id" referenced-column-name="id" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

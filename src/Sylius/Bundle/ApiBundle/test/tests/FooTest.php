@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\test\tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use Sylius\Bundle\ApiBundle\test\src\Entity\Foo;
+use Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource;
+use Sylius\Component\Core\Model\AdminUser;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 final class FooTest extends ApiTestCase
 {
@@ -39,10 +43,8 @@ final class FooTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
-
-        $this->assertSame('Foo1', $objects[0]['name']);
-        $this->assertSame('Foo2', $objects[1]['name']);
+        $this->runAssertions($response, 0);
+        $this->runAssertions($response, 1);
     }
 
     /**
@@ -55,11 +57,21 @@ final class FooTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
+        $this->runAssertions($response, 0);
+        $this->runAssertions($response, 1);
+    }
 
-        $this->assertSame('Foo1', $objects[0]['name']);
-        $this->assertSame('Foo2', $objects[1]['name']);
+    /**
+     * @test
+     */
+    public function it_allows_to_get_item_by_iri(): void
+    {
+        $response = static::createClient()->request('GET', $this->findIriBy(Foo::class, ['name' => 'Foo0']));
 
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertSame(json_decode($response->getContent(), true)['name'], 'Foo0');
     }
 
     /**
@@ -67,15 +79,39 @@ final class FooTest extends ApiTestCase
      */
     public function it_allows_to_post_as_a_visitor(): void
     {
+        $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource3']);
+        $adminIri = $this->findIriBy(AdminUser::class, ['username' => 'sylius']);
+
         $response = static::createClient()->request(
             'POST',
             'api/v2/foos',
-            ['json' => ["name" => "FooPost"]]
+            ['json' =>
+                [
+                    "name" => "FooPost",
+                    "owner" => $adminIri,
+                    "fooSyliusResource" => $fooSyliusResourceIri,
+                ],
+            ]
         );
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->assertSame('FooPost', json_decode($response->getContent(), true)['name']);
+        $object = json_decode($response->getContent(), true);
+
+        $this->assertSame('FooPost', $object['name']);
+        $this->assertTrue(str_contains($object['owner'], 'api/v2/admin/administrators'));
+        $this->assertTrue(str_contains($object['fooSyliusResource'], 'api/v2/foo-sylius-resource'));
+    }
+
+    private function runAssertions(ResponseInterface $response, int $objectNumber): void
+    {
+        $objects = json_decode($response->getContent(), true)['hydra:member'];
+
+        $object1 = $objects[$objectNumber];
+
+        $this->assertSame('Foo' . $objectNumber, $object1['name']);
+        $this->assertTrue(str_contains($object1['owner'], 'api/v2/admin/administrators'));
+        $this->assertTrue(str_contains($object1['fooSyliusResource'], 'api/v2/foo-sylius-resource'));
     }
 }

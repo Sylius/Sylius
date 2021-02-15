@@ -6,6 +6,10 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
 test_package() {
     local exit_code=0
 
+    if [ "$(package_path_to_package_name "$1")" == "ApiBundle" ] ; then
+        (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:schema:update --force -e test)
+    fi
+
     print_header "Testing" "$(package_path_to_package_name "$1")"
 
     cd "$1" 2>/dev/null

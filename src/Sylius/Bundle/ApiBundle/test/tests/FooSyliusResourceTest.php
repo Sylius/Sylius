@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\test\tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 
-final class FooTest extends ApiTestCase
+final class FooSyliusResourceTest extends ApiTestCase
 {
     use Test;
 
@@ -28,7 +28,7 @@ final class FooTest extends ApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_login_administrator_on_new_not_admin_resource(): void
+    public function it_allows_to_get_collection_as_a_logged_in_administrator_on_new_not_admin_resource(): void
     {
         $response = static::createClient()->request(
             'GET',

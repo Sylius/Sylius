@@ -13,13 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\test\src\Entity;
 
-final class Foo
+use Sylius\Component\Core\Model\AdminUserInterface;
+
+class Foo
 {
     /** @var int */
     private $id;
 
     /** @var string */
     private $name;
+
+    /** @var AdminUserInterface */
+    private $owner;
+
+    /** @var FooSyliusResource */
+    private $fooSyliusResource;
 
     public function getId(): int
     {
@@ -39,5 +47,25 @@ final class Foo
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getOwner(): AdminUserInterface
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(AdminUserInterface $owner): void
+    {
+        $this->owner = $owner;
+    }
+
+    public function getFooSyliusResource(): FooSyliusResource
+    {
+        return $this->fooSyliusResource;
+    }
+
+    public function setFooSyliusResource(FooSyliusResource $fooSyliusResource): void
+    {
+        $this->fooSyliusResource = $fooSyliusResource;
     }
 }

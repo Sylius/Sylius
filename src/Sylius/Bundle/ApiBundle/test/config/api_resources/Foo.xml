@@ -39,5 +39,7 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="name" writable="true" />
+        <property name="owner" writable="true" readable="true" />
+        <property name="fooSyliusResource" writable="true" readable="true" />
     </resource>
 </resources>

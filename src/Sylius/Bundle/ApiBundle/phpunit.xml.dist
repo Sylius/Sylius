@@ -9,7 +9,7 @@
 
         <server name="KERNEL_CLASS" value="Sylius\Bundle\ApiBundle\test\src\AppKernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
-        <server name="DATABASE_URL" value="mysql://root@127.0.0.1/sylius_%kernel.environment%" />
+        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/db.sql" />
         <server name="APP_SECRET" value="EDITME" />
         <server name="JWT_PASSPHRASE" value="ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST" />
         <server name="JWT_PUBLIC_KEY" value="%kernel.project_dir%/config/jwt/public-test.pem" />

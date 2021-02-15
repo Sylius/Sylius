@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\test\src\Entity;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-final class FooSyliusResource implements ResourceInterface
+class FooSyliusResource implements ResourceInterface
 {
     /** @var int */
     private $id;

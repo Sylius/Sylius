@@ -100,15 +100,7 @@ jobs:
                 
             -
                 name: Test package
-#                if: ${{ matrix.package }} != ApiBundle
                 run: bin/test-package src/Sylius/${{ matrix.package }}
-                
-#            -
-#                name: Test ApiBundle
-#                if: ${{ matrix.package }} == ApiBundle
-#                run: |
-#                    (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:schema:update --force -e test)
-#                    bin/test-package src/Sylius/ApiBundle
 
     notify-about-build-failure:
         runs-on: ubuntu-18.04

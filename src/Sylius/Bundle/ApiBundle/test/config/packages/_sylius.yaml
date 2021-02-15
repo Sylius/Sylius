@@ -21,14 +21,12 @@ doctrine_migrations:
     storage:
         table_storage:
             table_name: sylius_migrations
-
+        
 doctrine:
     dbal:
-        driver: 'pdo_mysql'
-        server_version: '5.7'
+        driver: "%database_driver%"
+        path: "%database_path%"
         charset: UTF8
-
-        url: '%env(resolve:DATABASE_URL)%'
 
     orm:
         entity_managers:

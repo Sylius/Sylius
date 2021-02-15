@@ -23,5 +23,13 @@
             <group>foo:read</group>
             <group>foo:create</group>
         </attribute>
+        <attribute name="owner">
+            <group>foo:read</group>
+            <group>foo:create</group>
+        </attribute>
+        <attribute name="fooSyliusResource">
+            <group>foo:read</group>
+            <group>foo:create</group>
+        </attribute>
     </class>
 </serializer>
