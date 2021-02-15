@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'A %productName% termék le van tiltva.'
         shipping_method_eligibility: 'A termék nem felel meg a %shippingMethodName% kiszállítási mód feltételeinek. Kérjük válasszon másik kiszállítási módot.'
     locale:
-        code:
-            not_blank: Kérjük, írja be a hely kódját.
-            unique: A területi beállítás már létezik.
         enabled:
             cannot_disable_base: Az alapértelmezett területi formátum nem tiltható le.
     product:

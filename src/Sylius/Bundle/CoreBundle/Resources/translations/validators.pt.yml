@@ -27,10 +27,6 @@ sylius:
     order:
         currency_code:
             not_valid: O código de moeda inserido é inválido.
-    locale:
-        code:
-            not_blank: Introduza o código de localidade.
-            unique: Esta localidade já existe.
     product_attribute:
         invalid: Posição deve ser um número inteiro.
     product_variant:

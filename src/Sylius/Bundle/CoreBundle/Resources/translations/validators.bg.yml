@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Този продукт %productName% не е активен.'
         shipping_method_eligibility: 'Продукт не покрива изисквания за метод на доставка %shippingMethodName%. Моля изберете друг метод на доставка.'
     locale:
-        code:
-            not_blank: Моля, въведете код на езика.
-            unique: Този езиков код вече съществува.
         enabled:
             cannot_disable_base: Базовия езиков код не може да бъде забранен.
     product:
