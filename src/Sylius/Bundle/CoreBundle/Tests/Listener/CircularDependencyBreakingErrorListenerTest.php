@@ -15,20 +15,20 @@ namespace Sylius\Bundle\CoreBundle\Tests\Listener;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingExceptionListener;
+use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
+use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-final class CircularDependencyBreakingExceptionListenerTest extends TestCase
+final class CircularDependencyBreakingErrorListenerTest extends TestCase
 {
     /** @test */
     public function it_breaks_circular_dependencies_in_exceptions(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
-        $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
+        $decoratedListener = $this->createMock(ErrorListener::class);
+        $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
 
@@ -61,8 +61,8 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
     public function it_breaks_more_complex_circular_dependencies_in_exceptions(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
-        $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
+        $decoratedListener = $this->createMock(ErrorListener::class);
+        $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
 
@@ -101,8 +101,8 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
     public function it_does_nothing_when_circular_dependencies_are_not_found(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
-        $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
+        $decoratedListener = $this->createMock(ErrorListener::class);
+        $listener = new CircularDependencyBreakingErrorListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
 

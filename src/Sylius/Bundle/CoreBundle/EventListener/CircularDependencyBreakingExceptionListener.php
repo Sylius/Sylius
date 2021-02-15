@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\EventListener\ErrorListener;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 /**
- * For Symfony 5+.
+ * For Symfony 4.
  *
- * `Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException` happens to set previous
+ * `Symfony\Component\HttpKernel\EventListener\ExceptionListener::onKernelException` happens to set previous
  * exception for a wrapper exception. This is meant to improve DX while debugging nested exceptions,
  * but also creates some issues.
  *
@@ -38,43 +36,40 @@ use Symfony\Component\HttpKernel\EventListener\ErrorListener;
  * registers deprecated `Symfony\Component\HttpKernel\EventListener\ExceptionListener`, removes the non-deprecated
  * "exception_listener" service, so that the issue still persists.
  *
- * This listener behaves as a decorator, but also extends the original ErrorListener, because of yet another
+ * This listener behaves as a decorator, but also extends the original ExceptionListener, because of yet another
  * listener `ApiPlatform\Core\EventListener\ExceptionListener` requires the original class.
  *
  * @internal
  *
- * @see \Symfony\Component\HttpKernel\EventListener\ErrorListener
+ * @see \Symfony\Component\HttpKernel\EventListener\ExceptionListener
+ *
+ * @psalm-suppress UndefinedClass
+ * @psalm-suppress MissingDependency
  */
-final class CircularDependencyBreakingErrorListener extends ErrorListener
+final class CircularDependencyBreakingExceptionListener extends ExceptionListener
 {
-    /** @var ErrorListener */
+    /** @var ExceptionListener */
     private $decoratedListener;
 
-    public function __construct(ErrorListener $decoratedListener)
+    public function __construct(ExceptionListener $decoratedListener)
     {
         $this->decoratedListener = $decoratedListener;
     }
 
-    public function logKernelException(ExceptionEvent $event): void
+    public function logKernelException(GetResponseForExceptionEvent $event): void
     {
         $this->decoratedListener->logKernelException($event);
     }
 
-    public function onKernelException(ExceptionEvent $event, string $eventName = null, EventDispatcherInterface $eventDispatcher = null): void
+    public function onKernelException(GetResponseForExceptionEvent $event): void
     {
         try {
-            /** @psalm-suppress TooManyArguments */
-            $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
+            $this->decoratedListener->onKernelException($event);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);
 
             throw $throwable;
         }
-    }
-
-    public function onControllerArguments(ControllerArgumentsEvent $event): void
-    {
-        $this->decoratedListener->onControllerArguments($event);
     }
 
     private function breakCircularDependency(\Throwable $throwable): void
