@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'تم تعطيل هذا المنتج %productName%.'
         shipping_method_eligibility: 'المنتج لا تتناسب مع متطلبات %shippingMethodName% أسلوب الشحن. الرجاء إعادة تحديد أسلوب الشحن الخاص بك.'
     locale:
-        code:
-            not_blank: الرجاء إدخال رمز المنطقة.
-            unique: هذا الاسم موجود بالفعل.
         enabled:
             cannot_disable_base: لا يمكن تعطيل للعملة الأساسية.
     product:

@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'El producto %productName% ha sido desactivado.'
         shipping_method_eligibility: 'El producto no cumple los requisitos para el método de envío %shippingMethodName%. Por favor, seleccionar otro método de envío.'
     locale:
-        code:
-            not_blank: Por favor, introduzca el código del idioma.
-            unique: Este idioma ya existe.
         enabled:
             cannot_disable_base: El código de idioma base no se puede desactivar.
     product:

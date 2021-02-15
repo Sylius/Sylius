@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Αυτό το προϊόν %productName% έχει απενεργοποιηθεί.'
         shipping_method_eligibility: 'Το προϊόν δεν ανταποκρίνεται στις απαιτήσεις για την μέθοδο αποστολής %shippingMethodName%. Παρακαλώ επιλέξτε ξανά τη μέθοδο αποστολής σας.'
     locale:
-        code:
-            not_blank: Εισάγετε τον κωδικό περιοχής.
-            unique: Αυτές οι τοπικές ρυθμίσεις υπάρχουν ήδη.
         enabled:
             cannot_disable_base: Οι βασικές τοπικές ρυθμίσεις δεν μπορούν να απενεργοποιηθούν.
     product:

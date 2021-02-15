@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Questo prodotto %productName% è stato disattivato.'
         shipping_method_eligibility: 'Il prodotto non risponde alle richieste di %shippingMethodName% metodo di spedizione. Riseleziona il tuo metodo di spedizione.'
     locale:
-        code:
-            not_blank: Per favore inserisci il CAP.
-            unique: Questo locale esiste già.
         enabled:
             cannot_disable_base: Le impostazioni locali di base non possono essere disattivate.
     product:

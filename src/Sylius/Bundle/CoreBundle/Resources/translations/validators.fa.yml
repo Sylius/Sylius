@@ -41,9 +41,6 @@ sylius:
         payment_method_eligibility: 'این روش پرداخت %paymentMethodName% غیرفعال شده است. لطفا نحوه پرداخت را مجددا انتخاب کنید.'
         product_eligibility: 'این محصول %productName% غیرفعال شده است.'
     locale:
-        code:
-            not_blank: لطفاً کد زبان را وارد کنید.
-            unique: این زبان قبلا در سیستم ثبت شده است.
         enabled:
             cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.
     product_attribute:
