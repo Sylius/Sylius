@@ -21,5 +21,13 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius_event.bus"/>
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventHandler\ShopUserRegisteredHandler">
+            <argument type="service" id="sylius_default.bus" />
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
+            <tag name="messenger.message_handler" bus="sylius_event.bus" />
+        </service>
     </services>
 </container>

@@ -9,7 +9,7 @@ Feature: Verifying account's email address
         And there is a user "valkyrie@cain.com" identified by "sylius"
         And this user is not verified
 
-    @ui
+    @ui @api
     Scenario: Getting verified after clicking the link in the verification message
         Given a verification email has already been sent to "valkyrie@cain.com"
         When I try to verify my account using the link from this email
