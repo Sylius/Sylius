@@ -40,7 +40,7 @@
         "symfony/security-core": "^4.4 || ^5.2",
         "symfony/security-bundle": "^4.4 || ^5.2",
         "symfony/templating": "^4.4 || ^5.2",
-        "zendframework/zend-stdlib": "^3.2"
+        "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
         "twig/twig": "^1.0"

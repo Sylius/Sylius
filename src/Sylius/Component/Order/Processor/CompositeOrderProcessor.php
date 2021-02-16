@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Order\Processor;
 
 use Sylius\Component\Order\Model\OrderInterface;
-use Zend\Stdlib\PriorityQueue;
+use Laminas\Stdlib\PriorityQueue;
 
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {

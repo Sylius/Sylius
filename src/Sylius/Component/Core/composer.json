@@ -52,7 +52,7 @@
         "symfony/mime": "^4.4 || ^5.2",
         "symfony/string": "^5.2",
         "webmozart/assert": "^1.8",
-        "zendframework/zend-stdlib": "^3.2"
+        "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0",
