@@ -17,7 +17,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
  * @experimental
  * @psalm-immutable
  */
-class RegisterShopUser
+class RegisterShopUser implements ChannelCodeAwareInterface
 {
     /** @var string */
     public $firstName;
@@ -34,6 +34,9 @@ class RegisterShopUser
     /** @var string|null */
     public $phoneNumber;
 
+    /** @var string */
+    public $channelCode;
+
     public function __construct(
         string $firstName,
         string $lastName,
@@ -46,5 +49,15 @@ class RegisterShopUser
         $this->email = $email;
         $this->password = $password;
         $this->phoneNumber = $phoneNumber;
+    }
+
+    public function getChannelCode(): string
+    {
+        return $this->channelCode;
+    }
+
+    public function setChannelCode(?string $channelCode): void
+    {
+        $this->channelCode = $channelCode;
     }
 }
