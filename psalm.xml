@@ -224,7 +224,7 @@
     </issueHandlers>
 
     <stubs>
-        <file name="etc/psalm/ZendPriorityQueueStub.php" />
+        <file name="etc/psalm/LaminasPriorityQueueStub.php" />
     </stubs>
 
     <plugins>

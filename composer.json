@@ -44,6 +44,7 @@
         "knplabs/knp-gaufrette-bundle": "^0.7",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
+        "laminas/laminas-stdlib": "^3.3.1",
         "lexik/jwt-authentication-bundle": "^2.6",
         "liip/imagine-bundle": "^2.3",
         "payum/payum": "^1.6",
@@ -114,8 +115,7 @@
         "webmozart/assert": "^1.9",
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
-        "winzou/state-machine-bundle": "^0.5",
-        "zendframework/zend-stdlib": "^3.2"
+        "winzou/state-machine-bundle": "^0.5"
     },
     "replace": {
         "sylius/addressing": "self.version",

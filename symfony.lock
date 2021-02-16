@@ -284,6 +284,9 @@
     "laminas/laminas-eventmanager": {
         "version": "3.3.0"
     },
+    "laminas/laminas-stdlib": {
+        "version": "3.3.1"
+    },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
@@ -1112,9 +1115,6 @@
         "version": "3.4.1"
     },
     "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
-    },
-    "zendframework/zend-stdlib": {
         "version": "3.2.1"
     }
 }
