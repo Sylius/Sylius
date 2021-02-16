@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -30,9 +31,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
-        ChannelContextInterface $channelContext
+        ChannelRepositoryInterface $channelRepository
     ): void {
-        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $channelContext);
+        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $channelRepository);
     }
 
     function it_is_a_message_handler(): void
@@ -46,9 +47,12 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         Channel $channel
     ): void {
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command->setChannelCode('CHANNEL_CODE');
+
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
 
@@ -61,12 +65,12 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
-        $channelContext->getChannel()->willReturn($channel);
+       $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
         $channel->isAccountVerificationRequired()->willReturn(true);
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $this($command);
     }
 
     function it_creates_a_shop_user_with_given_data_and_verifies_it(
@@ -75,9 +79,12 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ChannelContextInterface $channelContext,
+        ChannelRepositoryInterface $channelRepository,
         Channel $channel
     ): void {
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command->setChannelCode('CHANNEL_CODE');
+
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
 
@@ -90,13 +97,13 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
-        $channelContext->getChannel()->willReturn($channel);
+        $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
         $channel->isAccountVerificationRequired()->willReturn(false);
         $shopUser->setEnabled(true)->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $this($command);
     }
 
     function it_throws_an_exception_if_customer_with_user_already_exists(
