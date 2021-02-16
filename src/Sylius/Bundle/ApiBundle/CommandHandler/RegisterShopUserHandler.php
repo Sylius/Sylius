@@ -17,10 +17,12 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
@@ -34,19 +36,19 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     /** @var CustomerProviderInterface */
     private $customerProvider;
 
-    /** @var ChannelContextInterface */
-    private $channelContext;
+    /** @var ChannelRepositoryInterface */
+    private $channelRepository;
 
     public function __construct(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
-        ChannelContextInterface $channelContext
+        ChannelRepositoryInterface $channelRepository
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
         $this->customerProvider = $customerProvider;
-        $this->channelContext = $channelContext;
+        $this->channelRepository = $channelRepository;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -66,15 +68,17 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $customer->setPhoneNumber($command->phoneNumber);
         $customer->setUser($user);
 
-        $this->handleVerification($user);
+        $this->handleVerificationInChannel($user, $command->channelCode);
 
         $this->shopUserManager->persist($user);
     }
 
-    private function handleVerification(ShopUserInterface $user): void
+    private function handleVerificationInChannel(ShopUserInterface $user, ?string $channelCode): void
     {
+        Assert::notNull($channelCode);
+
         /** @var ChannelInterface $channel */
-        $channel = $this->channelContext->getChannel();
+        $channel = $this->channelRepository->findOneByCode($channelCode);
 
         if (!$channel->isAccountVerificationRequired()) {
             $user->setEnabled(true);
