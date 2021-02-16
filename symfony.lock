@@ -432,8 +432,8 @@
     "php-http/discovery": {
         "version": "1.4.0"
     },
-    "php-http/guzzle6-adapter": {
-        "version": "v1.1.1"
+    "php-http/guzzle7-adapter": {
+        "version": "0.1.1"
     },
     "php-http/httplug": {
         "version": "v1.1.0"
