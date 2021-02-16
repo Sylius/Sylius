@@ -38,7 +38,7 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
-        /** @var ShopUserInterface $user */
+        /** @var ShopUserInterface|null $user */
         $user = $this->userContext->getUser();
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
@@ -49,6 +49,10 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
             $user instanceof ShopUserInterface &&
             $id === $user->getCustomer()->getId()
         ) {
+            return $this->customerRepository->find($id);
+        }
+
+        if ($user === null && $operationName === 'shop_verify_customer_account') {
             return $this->customerRepository->find($id);
         }
 

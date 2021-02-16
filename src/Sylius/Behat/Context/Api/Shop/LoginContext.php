@@ -168,6 +168,15 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Then I should be able to log in as :email with :password password
+     */
+    public function iShouldBeAbleToLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->iLogInAsWithPassword($email, $password);
+        $this->iShouldBeLoggedIn();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn(): void

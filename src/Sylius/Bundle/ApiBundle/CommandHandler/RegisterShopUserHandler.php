@@ -15,14 +15,16 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Event\ShopUserRegistered;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
@@ -39,16 +41,26 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
+    /** @var GeneratorInterface */
+    private $tokenGenerator;
+
+    /** @var MessageBusInterface */
+    private $eventBus;
+
     public function __construct(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        GeneratorInterface $tokenGenerator,
+        MessageBusInterface $eventBus
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
         $this->customerProvider = $customerProvider;
         $this->channelRepository = $channelRepository;
+        $this->tokenGenerator = $tokenGenerator;
+        $this->eventBus = $eventBus;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -68,20 +80,18 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $customer->setPhoneNumber($command->phoneNumber);
         $customer->setUser($user);
 
-        $this->handleVerificationInChannel($user, $command->channelCode);
-
-        $this->shopUserManager->persist($user);
-    }
-
-    private function handleVerificationInChannel(ShopUserInterface $user, ?string $channelCode): void
-    {
-        Assert::notNull($channelCode);
-
         /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($channelCode);
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        if (!$channel->isAccountVerificationRequired()) {
+        if ($channel->isAccountVerificationRequired()) {
+            $token = $this->tokenGenerator->generate();
+            $user->setEmailVerificationToken($token);
+        } else {
             $user->setEnabled(true);
         }
+
+        $this->shopUserManager->persist($user);
+
+        $this->eventBus->dispatch(new ShopUserRegistered($command->email, $command->channelCode, $command->localeCode), [new DispatchAfterCurrentBusStamp()]);
     }
 }

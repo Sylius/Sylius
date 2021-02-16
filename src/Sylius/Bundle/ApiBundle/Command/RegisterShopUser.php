@@ -15,27 +15,44 @@ namespace Sylius\Bundle\ApiBundle\Command;
 
 /**
  * @experimental
- * @psalm-immutable
  */
-class RegisterShopUser implements ChannelCodeAwareInterface
+class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $firstName;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $lastName;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $email;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $password;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
     public $phoneNumber;
 
     /** @var string */
     public $channelCode;
+
+    /** @var string|null */
+    public $localeCode;
 
     public function __construct(
         string $firstName,
@@ -59,5 +76,15 @@ class RegisterShopUser implements ChannelCodeAwareInterface
     public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
+    }
+
+    public function getLocaleCode(): ?string
+    {
+        return $this->localeCode;
+    }
+
+    public function setLocaleCode(?string $localeCode): void
+    {
+        $this->localeCode = $localeCode;
     }
 }

@@ -102,4 +102,27 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
             ->shouldReturn(null)
         ;
     }
+
+    function it_provides_customer_by_id_for_email_verification_purpose(
+        UserContextInterface $userContext,
+        ShopUserInterface $user,
+        CustomerInterface $customer,
+        CustomerRepositoryInterface $customerRepository
+    ): void {
+        $userContext->getUser()->willReturn($user);
+        $user->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn('1');
+
+        $customerRepository->find('1')->willReturn($customer);
+
+        $this
+            ->getItem(
+                CustomerInterface::class,
+                '1',
+                'shop_verify_customer_account',
+                []
+            )
+            ->shouldReturn($customer)
+        ;
+    }
 }

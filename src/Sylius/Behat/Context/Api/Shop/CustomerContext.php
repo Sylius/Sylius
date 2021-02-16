@@ -15,11 +15,13 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -161,6 +163,7 @@ final class CustomerContext implements Context
     }
 
     /**
+<<<<<<< HEAD
      * @When I subscribe to the newsletter
      */
     public function iSubscribeToTheNewsletter(): void
@@ -176,6 +179,21 @@ final class CustomerContext implements Context
         $response = $this->customerClient->getLastResponse();
 
         Assert::true($this->responseChecker->getValue($response, 'subscribedToNewsletter'));
+    }
+
+    /**
+     * @When /^(I) try to verify my account using the link from this email$/
+     */
+    public function iTryToVerifyMyAccountUsingTheLinkFromEmail(ShopUserInterface $user): void
+    {
+        $request = Request::custom(
+            \sprintf('/api/v2/shop/customers/%s/verify-account', (string)$user->getId()),
+            HttpRequest::METHOD_PATCH,
+        );
+
+        $request->setContent(['token' => $this->sharedStorage->get('verification_token')]);
+
+        $this->customerClient->executeCustomRequest($request);
     }
 
     /**
@@ -221,10 +239,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'First name must be at least 2 characters long.'
-        ));
+        );
     }
 
     /**
@@ -232,10 +250,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'Last name must be at least 2 characters long.'
-        ));
+        );
     }
 
     /**
@@ -243,10 +261,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'Please enter your email.'
-        ));
+        );
     }
 
     /**
@@ -254,10 +272,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'This email is already used.'
-        ));
+        );
     }
 
     /**
@@ -265,10 +283,10 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid(): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
             'This email is invalid.'
-        ));
+        );
     }
 
     /**
@@ -311,6 +329,26 @@ final class CustomerContext implements Context
                 $orderNumber
             )
         );
+    }
+
+    /**
+     * @Then I should be notified that the verification was successful
+     */
+    public function iShouldBeNotifiedThatTheVerificationWasSuccessful(): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->customerClient->getLastResponse());
+    }
+
+    private function isViolationWithMessageInResponse(Response $response, string $message): bool
+    {
+        $violations = $this->responseChecker->getResponseContent($response)['violations'];
+        foreach ($violations as $violation) {
+            if ($violation['message'] === $message) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -363,15 +401,17 @@ final class CustomerContext implements Context
         );
     }
 
-    private function isViolationWithMessageInResponse(Response $response, string $message): bool
+    /**
+     * @Then my account should be verified
+     */
+    public function myAccountShouldBeVerified(): void
     {
-        $violations = $this->responseChecker->getResponseContent($response)['violations'];
-        foreach ($violations as $violation) {
-            if ($violation['message'] === $message) {
-                return true;
-            }
-        }
+        /** @var ShopUserInterface $user */
+        $user = $this->sharedStorage->get('user');
+        $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
 
-        return false;
+        $response = $this->customerClient->show((string) $user->getId());
+
+        Assert::true($this->responseChecker->getResponseContent($response)['user']['verified']);
     }
 }
