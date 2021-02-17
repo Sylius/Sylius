@@ -9,3 +9,6 @@ sylius_mailer:
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
             template: "@SyliusCore/Email/orderConfirmation.html.twig"
+        password_reset:
+            subject: sylius.emails.user.password_reset.subject
+            template: "@SyliusCore/Email/passwordReset.html.twig"
