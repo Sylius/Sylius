@@ -35,6 +35,11 @@ final class Version20201204071301 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $adjustmentTable = $schema->getTable('sylius_adjustment');
+        if (!$adjustmentTable->hasColumn('details')) {
+            return;
+        }
+
         $this->addSql('ALTER TABLE sylius_adjustment DROP details');
     }
 }
