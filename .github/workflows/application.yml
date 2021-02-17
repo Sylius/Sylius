@@ -119,7 +119,7 @@ jobs:
             matrix:
                 php: [7.3, 7.4]
                 symfony: [^4.4]
-                mysql: [5.7]
+                mysql: [5.7, 8.0]
 
         env:
             APP_ENV: test_cached
@@ -246,8 +246,8 @@ jobs:
                 php: [7.3, 7.4]
                 symfony: [^4.4]
                 node: [10.x]
-                mysql: [5.7]
-
+                mysql: [5.7, 8.0]
+                
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
