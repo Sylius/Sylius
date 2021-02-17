@@ -23,7 +23,7 @@ on:
 jobs:
     static-checks:
         runs-on: ubuntu-18.04
-        
+
         name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
 
         timeout-minutes: 10
@@ -35,10 +35,10 @@ jobs:
                 symfony: [^4.4]
 
         steps:
-            -   
+            -
                 uses: actions/checkout@v2
 
-            -   
+            -
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
@@ -48,17 +48,17 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: composer config extra.symfony.require "${{ matrix.symfony }}"
 
-            -   
+            -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-            -   
+            -
                 name: Cache Composer
                 uses: actions/cache@v2
                 with:
@@ -67,12 +67,12 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -   
+            -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
                 id: end-of-setup
 
-            -   
+            -
                 name: Validate composer.json
                 run: composer validate --strict
                 if: always() && steps.end-of-setup.outcome == 'success'
@@ -119,28 +119,33 @@ jobs:
             matrix:
                 php: [7.3, 7.4]
                 symfony: [^4.4]
-                mysql: [5.7]
+                mysql: [5.7, 8.0]
+
+                exclude:
+                    -
+                        php: 7.3
+                        mysql: 8.0
 
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -   
+            -
                 uses: actions/checkout@v2
 
-            -   
+            -
                 name: Shutdown default MySQL
                 run: sudo service mysql stop
 
-            -   
+            -
                 name: Setup MySQL
                 uses: mirromutth/mysql-action@v1.1
                 with:
                     mysql version: "${{ matrix.mysql }}"
                     mysql root password: "root"
 
-            -   
+            -
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
@@ -150,17 +155,17 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: composer config extra.symfony.require "${{ matrix.symfony }}"
 
-            -   
+            -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-            -   
+            -
                 name: Cache Composer
                 uses: actions/cache@v2
                 with:
@@ -169,7 +174,7 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -   
+            -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
 
@@ -179,15 +184,15 @@ jobs:
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
                     composer dump-env $APP_ENV
 
-            -   
+            -
                 name: Warmup cache
                 run: bin/console cache:warmup
 
-            -   
+            -
                 name: Make filesystem readonly
                 run: chmod -R 555 app bin config docs features src templates tests translations vendor
 
-            -   
+            -
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
@@ -208,7 +213,7 @@ jobs:
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -   
+            -
                 name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
@@ -216,7 +221,7 @@ jobs:
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
 
-            -     
+            -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli && ~@todo" --rerun
 
@@ -224,7 +229,7 @@ jobs:
                 name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
 
-            -   
+            -
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v2
                 if: failure()
@@ -246,28 +251,33 @@ jobs:
                 php: [7.3, 7.4]
                 symfony: [^4.4]
                 node: [10.x]
-                mysql: [5.7]
+                mysql: [5.7, 8.0]
+
+                exclude:
+                    -
+                        php: 7.3
+                        mysql: 8.0
 
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -   
+            -
                 uses: actions/checkout@v2
 
-            -   
+            -
                 name: Shutdown default MySQL
                 run: sudo service mysql stop
 
-            -   
+            -
                 name: Setup MySQL
                 uses: mirromutth/mysql-action@v1.1
                 with:
                     mysql version: "${{ matrix.mysql }}"
                     mysql root password: "root"
 
-            -   
+            -
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
@@ -277,25 +287,25 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: composer config extra.symfony.require "${{ matrix.symfony }}"
 
-            -   
+            -
                 name: Install certificates
                 run: symfony server:ca:install
 
-            -   
+            -
                 name: Run Chrome Headless
                 run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
 
-            -   
+            -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-            -   
+            -
                 name: Cache Composer
                 uses: actions/cache@v2
                 with:
@@ -304,22 +314,22 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -   
+            -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
 
-            -   
+            -
                 name: Setup Node
                 uses: actions/setup-node@v1
                 with:
                     node-version: "${{ matrix.node }}"
 
-            -   
+            -
                 name: Get Yarn cache directory
                 id: yarn-cache
                 run: echo "::set-output name=dir::$(yarn cache dir)"
 
-            -   
+            -
                 name: Cache Yarn
                 uses: actions/cache@v2
                 with:
@@ -328,15 +338,15 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-node-${{ matrix.node }}-yarn-
 
-            -   
+            -
                 name: Install JS dependencies
                 run: yarn install
 
-            -   
+            -
                 name: Validate Yarn packages
                 run: yarn check
 
-            -   
+            -
                 name: Dump the environment
                 run: |
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
@@ -346,11 +356,11 @@ jobs:
                 name: Warmup cache
                 run: bin/console cache:warmup
 
-            -   
+            -
                 name: Run webserver
                 run: symfony server:start --port=8080 --dir=public --daemon
 
-            -   
+            -
                 name: Prepare application database
                 run: |
                     APP_DEBUG=1 bin/console doctrine:database:create -vvv
@@ -370,7 +380,7 @@ jobs:
                 name: Run JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun
 
-            -   
+            -
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v2
                 if: failure()
@@ -382,23 +392,23 @@ jobs:
     notify-about-build-failure:
         runs-on: ubuntu-18.04
 
-        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release') 
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
 
         needs: [static-checks, test-application-without-frontend, test-application-with-frontend]
-        
+
         name: "Notify about build failure"
 
         timeout-minutes: 5
-        
+
         steps:
-            -   
+            -
                 name: "Process data"
                 id: process-data
                 shell: bash
                 run: |
                     echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
                     echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
-                
+
             -
                 name: "Notify on Slack"
                 uses: edge/simple-slack-notify@master
@@ -410,11 +420,11 @@ jobs:
                     username: "GitHub Actions"
                     text: |
                         *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
-                        
+
                         ${{ needs.static-checks.result == 'success' && ':+1:' || ':x:' }} Static checks
                         ${{ needs.test-application-without-frontend.result == 'success' && ':+1:' || ':x:' }} Test non-JS application
                         ${{ needs.test-application-with-frontend.result == 'success' && ':+1:' || ':x:' }} Test JS application
-                        
+
                         _ _ _ _ _ _ _
                     color: "danger"
                     fields: |
