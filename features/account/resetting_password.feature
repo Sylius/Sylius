@@ -9,7 +9,7 @@ Feature: Resetting a password
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And there is a user "goodman@example.com" identified by "heisenberg"
 
-    @ui @email
+    @ui @email @api
     Scenario: Resetting an account password
         When I want to reset password
         And I specify the email as "goodman@example.com"

@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Symfony\Component\HttpFoundation\Response;
+
 interface ApiSecurityClientInterface
 {
     public function prepareLoginRequest(): void;
+
+    public function preparePasswordResetRequest(): void;
 
     public function setEmail(string $email): void;
 
@@ -28,4 +32,8 @@ interface ApiSecurityClientInterface
     public function getErrorMessage(): string;
 
     public function logOut(): void;
+
+    public function resetPassword(): void;
+
+    public function getLastResponse(): Response;
 }

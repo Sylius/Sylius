@@ -44,7 +44,24 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I want to reset password
+     */
+    public function iWantToResetPassword(): void
+    {
+        $this->client->preparePasswordResetRequest();
+    }
+
+    /**
+     * @When I reset it
+     */
+    public function iResetIt(): void
+    {
+        $this->client->resetPassword();
+    }
+
+    /**
      * @When I specify the username as :username
+     * @When I specify the email as :username
      */
     public function iSpecifyTheUsername(string $username): void
     {
@@ -110,5 +127,14 @@ final class LoginContext implements Context
     public function iShouldBeNotifiedAboutBadCredentials(): void
     {
         Assert::same($this->client->getErrorMessage(), 'Invalid credentials.');
+    }
+
+    /**
+     * @Then I should be notified that email with reset instruction has been sent
+     */
+    public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::same($response->getStatusCode(), 202);
     }
 }

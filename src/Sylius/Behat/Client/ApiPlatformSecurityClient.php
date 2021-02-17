@@ -44,6 +44,12 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
         $this->request['method'] = 'POST';
     }
 
+    public function preparePasswordResetRequest(): void
+    {
+        $this->request['url'] = sprintf('/api/v2/%s/password-reset-request', $this->section);
+        $this->request['method'] = 'POST';
+    }
+
     public function setEmail(string $email): void
     {
         $this->request['body']['email'] = $email;
@@ -56,14 +62,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function call(): void
     {
-        $this->client->request(
-            $this->request['method'],
-            $this->request['url'],
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode($this->request['body'])
-        );
+        $this->callRequest();
 
         $response = $this->client->getResponse();
         $content = json_decode($response->getContent(), true);
@@ -96,5 +95,27 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
             $this->sharedStorage->set('previous_cart_token', $this->sharedStorage->get('cart_token'));
             $this->sharedStorage->set('cart_token', null);
         }
+    }
+
+    public function resetPassword(): void
+    {
+        $this->callRequest();
+    }
+
+    private function callRequest(): void
+    {
+        $this->client->request(
+            $this->request['method'],
+            $this->request['url'],
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
+            json_encode($this->request['body'])
+        );
+    }
+
+    public function getLastResponse(): Response
+    {
+        return $this->client->getResponse();
     }
 }

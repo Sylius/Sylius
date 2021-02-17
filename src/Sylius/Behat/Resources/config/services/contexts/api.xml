@@ -18,5 +18,6 @@
     <imports>
         <import resource="api/admin.xml" />
         <import resource="api/shop.xml" />
+        <import resource="api/email.xml" />
     </imports>
 </container>
