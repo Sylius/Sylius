@@ -14,13 +14,22 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
+use Sylius\Behat\Client\Request;
 use Webmozart\Assert\Assert;
+use \Symfony\Component\HttpFoundation\Request as HTTPRequest;
 
 final class LoginContext implements Context
 {
     /** @var ApiSecurityClientInterface */
     private $client;
+
+    /** @var ApiClientInterface */
+    private $apiClient;
+
+    /** @var Request */
+    private $request;
 
     public function __construct(ApiSecurityClientInterface $client)
     {
@@ -48,7 +57,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->client->preparePasswordResetRequest();
+        $this->request = Request::custom('shop/password-reset-request', HTTPRequest::METHOD_POST);
     }
 
     /**
@@ -56,16 +65,23 @@ final class LoginContext implements Context
      */
     public function iResetIt(): void
     {
-        $this->client->resetPassword();
+        $this->apiClient->executeCustomRequest($this->request);
     }
 
     /**
      * @When I specify the username as :username
-     * @When I specify the email as :username
      */
     public function iSpecifyTheUsername(string $username): void
     {
         $this->client->setEmail($username);
+    }
+
+    /**
+     * @When I specify the email as :email
+     */
+    public function iSpecifyTheEmail(string $email): void
+    {
+        $this->request->setContent(['email' => $email]);
     }
 
     /**

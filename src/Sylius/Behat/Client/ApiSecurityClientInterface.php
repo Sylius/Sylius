@@ -19,8 +19,6 @@ interface ApiSecurityClientInterface
 {
     public function prepareLoginRequest(): void;
 
-    public function preparePasswordResetRequest(): void;
-
     public function setEmail(string $email): void;
 
     public function setPassword(string $password): void;
@@ -32,8 +30,4 @@ interface ApiSecurityClientInterface
     public function getErrorMessage(): string;
 
     public function logOut(): void;
-
-    public function resetPassword(): void;
-
-    public function getLastResponse(): Response;
 }

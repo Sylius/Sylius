@@ -13,7 +13,7 @@ class ResetPasswordRequested
     private $channelCode;
 
     /** @var string */
-    private $localeCode;
+    protected $localeCode;
 
     public function __construct(
         string $email,

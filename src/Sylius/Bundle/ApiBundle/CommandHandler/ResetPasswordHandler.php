@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-use Sylius\Bundle\ApiBundle\Command\ResetPasswordRequest;
+use Sylius\Bundle\ApiBundle\Command\ResetPassword;
 use Sylius\Bundle\ApiBundle\Event\ResetPasswordRequested;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-class ResetPasswordRequestHandler
+class ResetPasswordHandler
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
@@ -33,7 +33,7 @@ class ResetPasswordRequestHandler
         $this->generator = $generator;
     }
 
-    public function __invoke(ResetPasswordRequest $command): void
+    public function __invoke(ResetPassword $command): void
     {
         $user = $this->userRepository->findOneByEmail($command->getEmail());
         Assert::notNull($user);
@@ -45,7 +45,5 @@ class ResetPasswordRequestHandler
             new ResetPasswordRequested($command->getEmail(), $command->getChannelCode(), $command->getLocaleCode()),
             [new DispatchAfterCurrentBusStamp()
         ]);
-
-
     }
 }

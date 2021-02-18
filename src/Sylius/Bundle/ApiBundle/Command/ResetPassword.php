@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-class ResetPasswordRequest implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class ResetPassword implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     /** @var string */
     public $email;
