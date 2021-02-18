@@ -31,9 +31,10 @@ final class LoginContext implements Context
     /** @var Request */
     private $request;
 
-    public function __construct(ApiSecurityClientInterface $client)
+    public function __construct(ApiSecurityClientInterface $client, ApiClientInterface $apiClient)
     {
         $this->client = $client;
+        $this->apiClient = $apiClient;
     }
 
     /**
@@ -57,7 +58,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = Request::custom('shop/password-reset-request', HTTPRequest::METHOD_POST);
+        $this->request = Request::create('shop', 'password-reset-request', 'Bearer');
     }
 
     /**
@@ -150,7 +151,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {
-        $response = $this->client->getLastResponse();
+        $response = $this->apiClient->getLastResponse();
         Assert::same($response->getStatusCode(), 202);
     }
 }
