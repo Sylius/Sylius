@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\test\src;
 
-use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -49,6 +48,11 @@ final class AppKernel extends BaseKernel
         return $this->getProjectDir() . '/var/log';
     }
 
+    public function getProjectDir(): string
+    {
+        return parent::getProjectDir() . '/test';
+    }
+
     public function registerBundles(): iterable
     {
         $bundlesPath = $this->getProjectDir() . '/config/bundles.php';
@@ -81,15 +85,6 @@ final class AppKernel extends BaseKernel
         $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS, '/', 'glob');
     }
 
-    protected function getContainerBaseClass(): string
-    {
-        if ($this->isTestEnvironment()) {
-            return MockerContainer::class;
-        }
-
-        return parent::getContainerBaseClass();
-    }
-
     protected function getContainerLoader(ContainerInterface $container): LoaderInterface
     {
         /** @var ContainerBuilder $container */
@@ -107,10 +102,5 @@ final class AppKernel extends BaseKernel
         ));
 
         return new DelegatingLoader($resolver);
-    }
-
-    private function isTestEnvironment(): bool
-    {
-        return 0 === strpos($this->getEnvironment(), 'test');
     }
 }

@@ -17,7 +17,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 
 final class PromotionTest extends ApiTestCase
 {
-    use Test;
+    use SetUpTestsTrait;
 
     public function setUp(): void
     {

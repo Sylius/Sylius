@@ -15,7 +15,7 @@ use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
-trait Test
+trait SetUpTestsTrait
 {
     /** @var string */
     private $JWTAdminUserToken;

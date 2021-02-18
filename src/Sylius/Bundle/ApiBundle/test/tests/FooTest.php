@@ -21,7 +21,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 final class FooTest extends ApiTestCase
 {
-    use Test;
+    use SetUpTestsTrait;
 
     public function setUp(): void
     {

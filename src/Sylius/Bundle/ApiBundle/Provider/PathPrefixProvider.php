@@ -57,7 +57,11 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
         /** @var UserInterface|null $user */
         $user = $this->userContext->getUser();
 
-        if ($user === null || $user instanceof ShopUserInterface) {
+        if ($user === null) {
+            return '';
+        }
+
+        if ($user instanceof ShopUserInterface) {
             return PathPrefixes::SHOP_PREFIX;
         }
 

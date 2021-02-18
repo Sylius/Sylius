@@ -33,13 +33,11 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.5",
-        "symfony/monolog-bundle": "^3.5",
         "symfony/debug-bundle": "^4.4 || ^5.2",
         "friends-of-behat/symfony-extension": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.6",
         "theofidry/alice-data-fixtures": "^1.4",
         "nelmio/alice": "^3.6",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "symfony/browser-kit": "^4.4 || ^5.2",
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/http-client": "^5.2"

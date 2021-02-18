@@ -8,3 +8,8 @@ framework:
     serializer:
         mapping:
             paths: ['%kernel.project_dir%/src/Resources/serialization']
+            
+lexik_jwt_authentication:
+    secret_key: "%kernel.project_dir%/config/jwt/private-test.pem"
+    public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
+    pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"

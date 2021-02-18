@@ -75,10 +75,10 @@ final class PathPrefixProviderSpec extends ObjectBehavior
         $this->getCurrentPrefix()->shouldReturn('shop');
     }
 
-    function it_returns_shop_prefix_if_there_is_no_logged_in_user(UserContextInterface $userContext): void
+    function it_returns_empty_string_if_there_is_no_logged_in_user(UserContextInterface $userContext): void
     {
         $userContext->getUser()->willReturn(null);
 
-        $this->getCurrentPrefix()->shouldReturn('shop');
+        $this->getCurrentPrefix()->shouldReturn('');
     }
 }
