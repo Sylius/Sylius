@@ -175,17 +175,6 @@ final class LoginContext implements Context
         Assert::same($response->getStatusCode(), 202);
     }
 
-    /**
-     * @Then I should be notified that the :elementName is required
-     */
-    public function iShouldBeNotifiedThatFirstNameIsRequired(string $elementName): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->apiClient->getLastResponse()),
-            sprintf('Please enter your %s.', $elementName)
-        );
-    }
-
     private function addLocaleCode(string $localeCode): void
     {
         $this->request->updateContent(['localeCode' => $localeCode]);

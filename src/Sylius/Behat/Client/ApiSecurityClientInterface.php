@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
-use Symfony\Component\HttpFoundation\Response;
-
 interface ApiSecurityClientInterface
 {
     public function prepareLoginRequest(): void;
