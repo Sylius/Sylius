@@ -17,10 +17,8 @@ class EmailContext implements Context
     /** @var TranslatorInterface */
     private $translator;
 
-    public function __construct(
-        EmailCheckerInterface $emailChecker,
-        TranslatorInterface $translator
-    ) {
+    public function __construct(EmailCheckerInterface $emailChecker, TranslatorInterface $translator)
+    {
         $this->emailChecker = $emailChecker;
         $this->translator = $translator;
     }

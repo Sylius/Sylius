@@ -22,7 +22,7 @@ class ResetPasswordRequestedHandler
     {
         $this->commandBus->dispatch(
             new SendResetPasswordEmail(
-                $resetPasswordRequested->email,
+                $resetPasswordRequested->email(),
                 $resetPasswordRequested->channelCode(),
                 $resetPasswordRequested->localeCode()
             )
