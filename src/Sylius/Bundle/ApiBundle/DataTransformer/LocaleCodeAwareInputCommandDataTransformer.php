@@ -20,6 +20,10 @@ final class LocaleCodeAwareInputCommandDataTransformer implements CommandDataTra
 
     public function transform($object, string $to, array $context = [])
     {
+        if ($object->getLocaleCode() !== null) {
+            return $object;
+        }
+
         $localeCode = $this->localeContext->getLocaleCode();
 
         $object->setLocaleCode($localeCode);

@@ -17,7 +17,7 @@ Feature: Resetting a password
         Then I should be notified that email with reset instruction has been sent
         And an email with reset token should be sent to "goodman@example.com"
 
-    @ui @email
+    @ui @email @api
     Scenario: Resetting an account password in different locale than the default one
         When I reset password for email "goodman@example.com" in "Polish (Poland)" locale
         Then an email with reset token should be sent to "goodman@example.com" in "Polish (Poland)" locale
