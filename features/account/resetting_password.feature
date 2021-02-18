@@ -12,7 +12,7 @@ Feature: Resetting a password
     @ui @email @api
     Scenario: Resetting an account password
         When I want to reset password
-        And I specify the email as "goodman@example.com"
+        And I specify customer email as "goodman@example.com"
         And I reset it
         Then I should be notified that email with reset instruction has been sent
         And an email with reset token should be sent to "goodman@example.com"
