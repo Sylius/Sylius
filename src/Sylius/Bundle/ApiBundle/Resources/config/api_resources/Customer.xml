@@ -46,7 +46,7 @@
                     <attribute>sylius_shop_password_reset</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shop_user:password_reset</attribute>
+                    <attribute name="groups">shop:customer:password_reset</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Request password reset</attribute>

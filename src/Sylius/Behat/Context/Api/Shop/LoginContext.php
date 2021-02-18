@@ -17,8 +17,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Webmozart\Assert\Assert;
-use \Symfony\Component\HttpFoundation\Request as HTTPRequest;
 
 final class LoginContext implements Context
 {
@@ -28,13 +28,20 @@ final class LoginContext implements Context
     /** @var ApiClientInterface */
     private $apiClient;
 
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     /** @var Request */
     private $request;
 
-    public function __construct(ApiSecurityClientInterface $client, ApiClientInterface $apiClient)
-    {
+    public function __construct(
+        ApiSecurityClientInterface $client,
+        ApiClientInterface $apiClient,
+        ResponseCheckerInterface $responseChecker
+    ) {
         $this->client = $client;
         $this->apiClient = $apiClient;
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -62,7 +69,19 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I reset password for email :email in :localeCode locale
+     */
+    public function iResetPasswordForEmailInLocale(string $email, string $localeCode): void
+    {
+        $this->iWantToResetPassword();
+        $this->iSpecifyTheEmail($email);
+        $this->addLocaleCode($localeCode);
+        $this->iResetIt();
+    }
+
+    /**
      * @When I reset it
+     * @When I try to reset it
      */
     public function iResetIt(): void
     {
@@ -79,8 +98,9 @@ final class LoginContext implements Context
 
     /**
      * @When I specify the email as :email
+     * @When I do not specify the email
      */
-    public function iSpecifyTheEmail(string $email): void
+    public function iSpecifyTheEmail(string $email = ''): void
     {
         $this->request->setContent(['email' => $email]);
     }
@@ -153,5 +173,21 @@ final class LoginContext implements Context
     {
         $response = $this->apiClient->getLastResponse();
         Assert::same($response->getStatusCode(), 202);
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatFirstNameIsRequired(string $elementName): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->apiClient->getLastResponse()),
+            sprintf('Please enter your %s.', $elementName)
+        );
+    }
+
+    private function addLocaleCode(string $localeCode): void
+    {
+        $this->request->updateContent(['localeCode' => $localeCode]);
     }
 }
