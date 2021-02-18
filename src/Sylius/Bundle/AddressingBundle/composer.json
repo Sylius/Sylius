@@ -27,7 +27,6 @@
     ],
     "require": {
         "php": "^7.4",
-        "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/addressing": "^1.6",
         "sylius/resource-bundle": "^1.7",
         "symfony/framework-bundle": "^4.4 || ^5.2",

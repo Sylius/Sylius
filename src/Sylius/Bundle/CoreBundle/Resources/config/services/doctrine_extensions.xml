@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="stof_doctrine_extensions.listener.tree.class">Gedmo\Tree\TreeListener</parameter>
+        <parameter key="stof_doctrine_extensions.listener.sluggable.class">Gedmo\Sluggable\SluggableListener</parameter>
+        <parameter key="stof_doctrine_extensions.listener.timestampable.class">Gedmo\Timestampable\TimestampableListener</parameter>
+        <parameter key="stof_doctrine_extensions.listener.loggable.class">Gedmo\Loggable\LoggableListener</parameter>
+        <parameter key="stof_doctrine_extensions.event_listener.logger.class">Sylius\Bundle\CoreBundle\EventListener\LoggerListener</parameter>
+        <parameter key="stof_doctrine_extensions.listener.sortable.class">Gedmo\Sortable\SortableListener</parameter>
+    </parameters>
+
+    <services>
+        <!-- Tree -->
+        <service id="stof_doctrine_extensions.listener.tree" class="%stof_doctrine_extensions.listener.tree.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <!-- Sluggable -->
+        <service id="stof_doctrine_extensions.listener.sluggable" class="%stof_doctrine_extensions.listener.sluggable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <!-- Timestampable -->
+        <service id="stof_doctrine_extensions.listener.timestampable" class="%stof_doctrine_extensions.listener.timestampable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <!-- Loggable -->
+        <service id="stof_doctrine_extensions.listener.loggable" class="%stof_doctrine_extensions.listener.loggable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="stof_doctrine_extensions.event_listener.logger" class="%stof_doctrine_extensions.event_listener.logger.class%">
+            <argument type="service" id="stof_doctrine_extensions.listener.loggable" />
+            <argument type="service" id="security.token_storage" on-invalid="null" />
+            <argument type="service" id="security.authorization_checker" on-invalid="null" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- Sortable -->
+        <service id="stof_doctrine_extensions.listener.sortable" class="%stof_doctrine_extensions.listener.sortable.class%" public="false">
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotation_reader" />
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+    </services>
+</container>

@@ -42,6 +42,13 @@ doctrine:
                         MONTH: Sylius\Bundle\CoreBundle\Doctrine\DQL\Month
                         WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
                         YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
+                mappings:
+                    tree:
+                        type: annotation
+                        alias: Gedmo
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Tree/Entity"
+                        is_bundle: false
 
 knp_gaufrette:
     adapters:
@@ -90,16 +97,6 @@ payum:
     gateways:
         offline:
             factory: offline
-
-stof_doctrine_extensions:
-    default_locale: "%locale%"
-    orm:
-        default:
-            tree: true
-            sluggable: true
-            timestampable: true
-            loggable: true
-            sortable: true
 
 twig:
     debug: "%kernel.debug%"

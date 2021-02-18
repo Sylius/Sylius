@@ -2,6 +2,9 @@
     "aeon-php/calendar": {
         "version": "0.15.0"
     },
+    "alcohol/iso4217": {
+        "version": "3.1.5"
+    },
     "amphp/amp": {
         "version": "v2.5.0"
     },
@@ -305,20 +308,8 @@
     "league/uri-components": {
         "version": "1.8.2"
     },
-    "league/uri-hostname-parser": {
-        "version": "1.1.1"
-    },
     "league/uri-interfaces": {
         "version": "1.1.1"
-    },
-    "league/uri-manipulations": {
-        "version": "1.5.0"
-    },
-    "league/uri-parser": {
-        "version": "1.4.1"
-    },
-    "league/uri-schemes": {
-        "version": "1.2.1"
     },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
@@ -635,15 +626,6 @@
     },
     "sspooky13/yaml-standards": {
         "version": "5.0.0"
-    },
-    "stof/doctrine-extensions-bundle": {
-        "version": "1.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.2",
-            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
-        }
     },
     "stripe/stripe-php": {
         "version": "v4.13.0"

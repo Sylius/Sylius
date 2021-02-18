@@ -23,7 +23,6 @@ use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
 use Payum\Bundle\PayumBundle\PayumBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
-use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
 use Sylius\Bundle\AddressingBundle\SyliusAddressingBundle;
 use Sylius\Bundle\AttributeBundle\SyliusAttributeBundle;
 use Sylius\Bundle\ChannelBundle\SyliusChannelBundle;
@@ -102,7 +101,6 @@ final class TestKernel extends BaseKernel
             new KnpGaufretteBundle(),
             new LiipImagineBundle(),
             new PayumBundle(),
-            new StofDoctrineExtensionsBundle(),
             new BabDevPagerfantaBundle(),
             new SyliusFixturesBundle(),
             new SyliusPayumBundle(),
@@ -156,10 +154,6 @@ final class TestKernel extends BaseKernel
                 'type' => 'file',
                 'path' => '%kernel.cache_dir%/spool',
             ],
-        ]);
-
-        $containerBuilder->loadFromExtension('stof_doctrine_extensions', [
-            'default_locale' => '%locale%',
         ]);
 
         $containerBuilder->loadFromExtension('twig', [

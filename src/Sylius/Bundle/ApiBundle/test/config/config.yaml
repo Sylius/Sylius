@@ -41,6 +41,12 @@ doctrine:
         entity_managers:
             default:
                 mappings:
+                    tree:
+                        type: annotation
+                        alias: Gedmo
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.project_dir%/../vendor/gedmo/doctrine-extensions/src/Tree/Entity"
+                        is_bundle: false
                     test:
                         mapping: true
                         type: xml

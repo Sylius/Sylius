@@ -27,7 +27,6 @@
     ],
     "require": {
         "php": "^7.4",
-        "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/attribute-bundle": "^1.6",
         "sylius/locale-bundle": "^1.6",
         "sylius/product": "^1.6",
