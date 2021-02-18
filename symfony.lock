@@ -1,4 +1,7 @@
 {
+    "aeon-php/calendar": {
+        "version": "0.15.0"
+    },
     "amphp/amp": {
         "version": "v2.5.0"
     },
@@ -1107,9 +1110,6 @@
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"
-    },
-    "zendframework/zend-hydrator": {
-        "version": "2.4.2"
     },
     "zendframework/zend-stdlib": {
         "version": "3.2.1"
