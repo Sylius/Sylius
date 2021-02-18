@@ -15,6 +15,7 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 class Zone implements ZoneInterface
 {
@@ -40,10 +41,20 @@ class Zone implements ZoneInterface
      */
     protected $members;
 
+    /**
+     * @var Collection|ShippingMethodInterface[]
+     * 
+     * @psalm-var Collection<array-key, ShippingMethodInterface>
+     */
+    protected $shippingMethods;
+
     public function __construct()
     {
         /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
         $this->members = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, ShippingMethodInterface> $this->shippingMethods */
+        $this->shippingMethods = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -137,5 +148,36 @@ class Zone implements ZoneInterface
     public function hasMember(ZoneMemberInterface $member): bool
     {
         return $this->members->contains($member);
+    }
+
+    public function getShippingMethods(): Collection
+    {
+        return $this->shippingMethods;
+    }
+
+    public function hasShippingMethods(): bool
+    {
+        return !$this->shippingMethods->isEmpty();
+    }
+
+    public function addShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        if (!$this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->add($shippingMethod);
+            $shippingMethod->setZone($this);
+        }
+    }
+
+    public function removeShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        if ($this->hasShippingMethod($shippingMethod)) {
+            $this->shippingMethods->removeElement($shippingMethod);
+            $shippingMethod->setZone(null);
+        }
+    }
+
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
+    {
+        return $this->shippingMethods->contains($shippingMethod);
     }
 }

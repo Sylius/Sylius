@@ -17,13 +17,13 @@
 >
     <class name="Sylius\Component\Addressing\Model\ZoneMember">
         <attribute name="id">
-            <group>zone_member:read</group>
+            <group>admin:zone_member:read</group>
         </attribute>
         <attribute name="code">
-            <group>zone:create</group>
-            <group>zone:update</group>
-            <group>zone_member:read</group>
-            <group>zone_member:write</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:create</group>
+            <group>admin:zone:update</group>
+            <group>admin:zone_member:read</group>
         </attribute>
     </class>
 </serializer>

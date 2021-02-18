@@ -28,6 +28,12 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        
+        <one-to-many field="shippingMethods" target-entity="Sylius\Component\Core\Model\ShippingMethodInterface" mapped-by="zone" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
