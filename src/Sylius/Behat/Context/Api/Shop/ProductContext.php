@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -20,6 +21,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,14 +38,19 @@ final class ProductContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var IriConverter */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        IriConverter $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -160,7 +167,7 @@ final class ProductContext implements Context
         $response = $this->client->getLastResponse();
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
-        $this->client->executeCustomRequest(Request::custom($productVariant[0]['@id'], HttpRequest::METHOD_GET));
+        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
 
         Assert::true(
             $this->responseChecker->hasTranslation(
@@ -179,8 +186,11 @@ final class ProductContext implements Context
                 continue;
             }
 
-            foreach ($product['variants'] as $variant) {
-                if ($variant['channelPricings'][$channel->getCode()]['price'] === $price) {
+            foreach ($product['variants'] as $variantIri) {
+                /** @var ProductVariantInterface $variant */
+                $variant = $this->iriConverter->getItemFromIri($variantIri);
+
+                if ($variant->getChannelPricingForChannel($channel)->getPrice() === $price) {
                     return true;
                 }
             }
