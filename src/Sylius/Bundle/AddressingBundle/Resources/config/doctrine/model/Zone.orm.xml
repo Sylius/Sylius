@@ -34,6 +34,12 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+        
+        <one-to-many field="taxRates" target-entity="Sylius\Component\Core\Model\TaxRateInterface" mapped-by="zone" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>

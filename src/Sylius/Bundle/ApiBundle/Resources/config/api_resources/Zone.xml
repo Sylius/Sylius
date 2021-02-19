@@ -69,5 +69,8 @@
         <property name="shippingMethods" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.shipping_method.class%" collection="true" />
         </property>
+        <property name="taxRates" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.tax_rate.class%" collection="true" />
+        </property>
     </resource>
 </resources>

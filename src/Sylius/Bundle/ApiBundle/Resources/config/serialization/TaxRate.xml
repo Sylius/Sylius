@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<!--
+ This file is part of the Sylius package.
+ (c) Paweł Jędrzejewski
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\TaxRate">
+        <attribute name="id">
+            <group>admin:tax_rate:read</group>
+        </attribute>
+        <attribute name="code">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+        <attribute name="name">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+        <attribute name="amount">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:all</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+        <attribute name="includedInPrice">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+        <attribute name="calculator">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+        <attribute name="category">
+            <group>admin:tax_rate:read</group>
+            <group>admin:zone:update</group>
+        </attribute>
+    </class>
+</serializer>

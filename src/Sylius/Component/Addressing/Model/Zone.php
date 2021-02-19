@@ -16,6 +16,7 @@ namespace Sylius\Component\Addressing\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 
 class Zone implements ZoneInterface
 {
@@ -48,6 +49,13 @@ class Zone implements ZoneInterface
      */
     protected $shippingMethods;
 
+    /**
+     * @var Collection|TaxRateInterface[]
+     * 
+     * @psalm-var Collection<array-key, TaxRateInterface>
+     */
+    protected $taxRates;
+
     public function __construct()
     {
         /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
@@ -55,6 +63,9 @@ class Zone implements ZoneInterface
 
         /** @var ArrayCollection<array-key, ShippingMethodInterface> $this->shippingMethods */
         $this->shippingMethods = new ArrayCollection();
+
+        /** @var ArrayCollection<array-key, TaxRateInterface> $this->taxRates */
+        $this->taxRates = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -179,5 +190,36 @@ class Zone implements ZoneInterface
     public function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         return $this->shippingMethods->contains($shippingMethod);
+    }
+
+    public function getTaxRates(): Collection
+    {
+        return $this->taxRates;
+    }
+
+    public function hasTaxRates(): bool
+    {
+        return !$this->taxRates->isEmpty();
+    }
+
+    public function addTaxRate(TaxRateInterface $taxRate): void
+    {
+        if (!$this->hasTaxRate($taxRate)) {
+            $this->taxRates->add($taxRate);
+            $taxRate->setZone($this);
+        }
+    }
+
+    public function removeTaxRate(TaxRateInterface $taxRate): void
+    {
+        if ($this->hasTaxRate($taxRate)) {
+            $this->taxRates->removeElement($taxRate);
+            $taxRate->setZone(null);
+        }
+    }
+
+    public function hasTaxRate(TaxRateInterface $taxRate): bool
+    {
+        return $this->taxRates->contains($taxRate);
     }
 }
