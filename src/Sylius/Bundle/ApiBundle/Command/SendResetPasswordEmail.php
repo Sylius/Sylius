@@ -19,10 +19,10 @@ class SendResetPasswordEmail
     public $email;
 
     /** @var string */
-    private $channelCode;
+    public $channelCode;
 
     /** @var string */
-    private $localeCode;
+    public $localeCode;
 
     public function __construct(
         string $email,

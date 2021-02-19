@@ -18,7 +18,7 @@ use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
-class EmailContext implements Context
+final class EmailContext implements Context
 {
     /** @var EmailCheckerInterface */
     private $emailChecker;
