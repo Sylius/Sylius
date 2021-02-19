@@ -160,7 +160,7 @@ final class ProductContext implements Context
         $response = $this->client->getLastResponse();
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
-        $this->client->executeCustomRequest(Request::custom($productVariant[0]['@id'], HttpRequest::METHOD_GET));
+        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
 
         Assert::true(
             $this->responseChecker->hasTranslation(
@@ -179,9 +179,22 @@ final class ProductContext implements Context
                 continue;
             }
 
-            foreach ($product['variants'] as $variant) {
-                if ($variant['channelPricings'][$channel->getCode()]['price'] === $price) {
-                    return true;
+            foreach ($product['variants'] as $variantIri) {
+                $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+
+                /** @var array $channelPricings */
+                $channelPricings = $this->responseChecker->getValue($this->client->getLastResponse(), "channelPricings");
+
+                foreach($channelPricings as $channelCode => $channelPricingIri) {
+                    if ($channel->getCode() === $channelCode) {
+                        $this->client->executeCustomRequest(Request::custom($channelPricingIri, HttpRequest::METHOD_GET));
+
+                        $channelPricing = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+                        if ($channelPricing['price'] === $price) {
+                            return true;
+                        }
+                    }
                 }
             }
         }

@@ -18,11 +18,9 @@
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <attribute name="id">
             <group>product_variant:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="code">
             <group>product_variant:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="product">
             <group>product_variant:read</group>
@@ -31,10 +29,9 @@
             <group>shop:order:account:read</group>
             <group>product_variant:read</group>
             <group>shop:cart:read</group>
-            <group>shop:product:read</group>
         </attribute>
         <attribute name="channelPricings">
-            <group>shop:product:read</group>
+            <group>product_variant:read</group>
         </attribute>
     </class>
 </serializer>
