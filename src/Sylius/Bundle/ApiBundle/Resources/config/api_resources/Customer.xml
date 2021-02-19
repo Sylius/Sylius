@@ -36,9 +36,9 @@
 
             <collectionOperation name="shop_password_reset_request">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">shop/password-reset-request</attribute>
+                <attribute name="path">shop/request-reset-password</attribute>
                 <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResetPassword</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="validation_groups">
@@ -46,7 +46,7 @@
                     <attribute>sylius_shop_password_reset</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:customer:password_reset</attribute>
+                    <attribute name="groups">shop:password_reset:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Request password reset</attribute>

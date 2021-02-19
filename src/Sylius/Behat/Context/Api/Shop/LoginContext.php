@@ -65,7 +65,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = Request::create('shop', 'password-reset-request', 'Bearer');
+        $this->request = Request::create('shop', 'request-reset-password', 'Bearer');
     }
 
     /**
