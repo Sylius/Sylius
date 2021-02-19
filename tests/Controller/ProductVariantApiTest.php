@@ -470,6 +470,73 @@ EOT;
     /**
      * @test
      */
+    public function it_allows_updating_information_about_product_variant_options()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
+
+        /** @var ProductInterface $product */
+        $product = $productVariantsData['product1'];
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $productVariantsData['productVariant22'];
+
+        $version = $productVariant->getVersion();
+
+        $data =
+<<<EOT
+        {
+            "version": "$version",
+            "optionValues": {
+                "MUG_TYPE": "MUG_TYPE_MEDIUM"
+            }
+        }
+EOT;
+
+        $this->client->request('PUT', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_updating_partial_information_about_product_variant_options()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $productVariantsData = $this->loadFixturesFromFiles([
+            'resources/locales.yml',
+            'resources/product_variants.yml',
+        ]);
+
+        /** @var ProductInterface $product */
+        $product = $productVariantsData['product1'];
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $productVariantsData['productVariant22'];
+
+        $data =
+<<<EOT
+        {
+            "optionValues": {
+                "MUG_TYPE": "MUG_TYPE_MEDIUM"
+            }
+        }
+EOT;
+
+        $this->client->request('PATCH', $this->getVariantUrl($product, $productVariant), [], [], static::$authorizedHeaderWithContentType, $data);
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
     public function it_not_change_on_hand_after_updating_product_variant()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');

@@ -1,8 +1,8 @@
 {
     "page": 1,
     "limit": 10,
-    "pages": 2,
-    "total": 20,
+    "pages": 3,
+    "total": 21,
     "_links": {
         "self": {
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
@@ -11,7 +11,7 @@
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
+            "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=3&limit=10"
         },
         "next": {
             "href": "\/api\/v1\/products\/MUG_SW\/variants\/?page=2&limit=10"
