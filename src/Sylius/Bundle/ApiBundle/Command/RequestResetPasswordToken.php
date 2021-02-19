@@ -19,10 +19,10 @@ class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCode
     public $email;
 
     /** @var string|null */
-    private $channelCode;
+    public $channelCode;
 
     /** @var string|null */
-    private $localeCode;
+    public $localeCode;
 
     public function __construct(string $email)
     {

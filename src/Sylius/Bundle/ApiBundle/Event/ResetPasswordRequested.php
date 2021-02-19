@@ -19,10 +19,10 @@ class ResetPasswordRequested
     public $email;
 
     /** @var string */
-    private $channelCode;
+    public $channelCode;
 
     /** @var string */
-    protected $localeCode;
+    public $localeCode;
 
     public function __construct(
         string $email,
