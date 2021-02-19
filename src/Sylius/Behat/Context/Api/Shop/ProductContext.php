@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -21,7 +20,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,19 +36,14 @@ final class ProductContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /** @var IriConverter */
-    private $iriConverter;
-
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverter $iriConverter
+        SharedStorageInterface $sharedStorage
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -187,11 +180,21 @@ final class ProductContext implements Context
             }
 
             foreach ($product['variants'] as $variantIri) {
-                /** @var ProductVariantInterface $variant */
-                $variant = $this->iriConverter->getItemFromIri($variantIri);
+                $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
-                if ($variant->getChannelPricingForChannel($channel)->getPrice() === $price) {
-                    return true;
+                /** @var array $channelPricings */
+                $channelPricings = $this->responseChecker->getValue($this->client->getLastResponse(), "channelPricings");
+
+                foreach($channelPricings as $channelCode => $channelPricingIri) {
+                    if ($channel->getCode() === $channelCode) {
+                        $this->client->executeCustomRequest(Request::custom($channelPricingIri, HttpRequest::METHOD_GET));
+
+                        $channelPricing = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+
+                        if ($channelPricing['price'] === $price) {
+                            return true;
+                        }
+                    }
                 }
             }
         }
