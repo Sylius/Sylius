@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-RC.1 (2021-02-22)
+
+#### Details
+
+- [#12311](https://github.com/Sylius/Sylius/issues/12311) [ADR] Unified API prefix ([@lchrusciel](https://github.com/lchrusciel))
+- [#12351](https://github.com/Sylius/Sylius/issues/12351) [Doc] remove generator bundle info (deprecated) ([@SirDomin](https://github.com/SirDomin))
+- [#12352](https://github.com/Sylius/Sylius/issues/12352) [Frontend] add box with info about api identifiers ([@SirDomin](https://github.com/SirDomin))
+- [#12355](https://github.com/Sylius/Sylius/issues/12355) Remove unneeded zendframework/zend-hydrator dependency ([@pamil](https://github.com/pamil))
+- [#12363](https://github.com/Sylius/Sylius/issues/12363) [Maintenance] Run test suite for MySQL 8.0 ([@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee))
+- [#12364](https://github.com/Sylius/Sylius/issues/12364) [Adjustment] Update new migrations not to execute if the changes already exist in db ([@GSadee](https://github.com/GSadee))
+- [#12365](https://github.com/Sylius/Sylius/issues/12365) [Adjustment] Update down methods of new migrations not to execute if the changes already exist in db ([@GSadee](https://github.com/GSadee))
+- [#12367](https://github.com/Sylius/Sylius/issues/12367) change swagger API info color to blue ([@SirDomin](https://github.com/SirDomin))
+- [#12373](https://github.com/Sylius/Sylius/issues/12373) Move some steps to different section in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+
 ## v1.9.0-BETA.3 (2021-02-15)
 
 #### Details
