@@ -32,6 +32,7 @@
             <group>admin:zone:create</group>
             <group>admin:zone:read</group>
             <group>admin:zone:all</group>
+            <group>admin:order:read</group>
         </attribute>
 
         <attribute name="description">
