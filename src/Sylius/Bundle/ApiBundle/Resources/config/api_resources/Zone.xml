@@ -18,23 +18,20 @@
     <resource class="%sylius.model.zone.class%" shortName="Zone">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>zone:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:zone:all</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">zone:create</attribute>
+                    <attribute name="groups">admin:zone:create</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -42,12 +39,15 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:zone:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">zone:update</attribute>
+                    <attribute name="groups">admin:zone:update</attribute>
                 </attribute>
             </itemOperation>
 
@@ -65,6 +65,12 @@
         <property name="type" readable="true" writable="true" />
         <property name="members" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.zone_member.class%" collection="true" />
+        </property>
+        <property name="shippingMethods" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.shipping_method.class%" collection="true" />
+        </property>
+        <property name="taxRates" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.tax_rate.class%" collection="true" />
         </property>
     </resource>
 </resources>
