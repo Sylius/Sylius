@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-RC.2 (2021-02-23)
+
+#### Details
+
+- [#12378](https://github.com/Sylius/Sylius/issues/12378) [Bug-fix] Fix default form problem with _token field ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.9.0-RC.1 (2021-02-22)
 
 #### Details
