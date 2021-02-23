@@ -5,14 +5,15 @@ sylius:
     form:
         customer:
             first_name: Keresztnév
+            group: Csoport
             last_name: Vezetéknév
-            email: E-mail
+            email: Email
             phone_number: Telefonszám
             gender: Nem
             birthday: Születésnap
             billing_address: Számlázási cím
-            different_billing_address: A számlázási címe különbözik a megadott címtől?
             only_customer_registration: Fiók létrehozása?
+            subscribed_to_newsletter: Feliratkozás a hírlevélre
         customer_group:
             name: Név
             roles: Szerepek

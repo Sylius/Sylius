@@ -12,6 +12,7 @@ sylius:
             remember_me: Zapomni si me
             shipping_address: Naslov za dostavo
             username: Uporabniško ime
+            verified: Potrjeno
         user_filter:
             query: Iskanje
         user_change_password:

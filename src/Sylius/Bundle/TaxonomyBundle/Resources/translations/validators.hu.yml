@@ -5,10 +5,14 @@ sylius:
     taxon:
         code:
             not_blank: Kérjük, írja be a Taxon kódját.
+            regex: A taxon kódja csak betűket, számokat, kötőjelek és aláhúzásjelek tartalmazhat.
             unique: A taxon a megadott kóddal már létezik.
         name:
             max_length: A taxon neve nem lehet hosszabb 255 karakternél.
             not_blank: Kérjük, írja be a taxon nevét.
+        slug:
+            not_blank: Kérem adja meg a taxon url kompatibilis megnevezését.
+            unique: A taxon url kompatibilis megnevezésének egyedinek kell lennie.
     taxonomy:
         name:
             max_length: A taxonómia neve nem lehet hosszabb 255 karakternél.

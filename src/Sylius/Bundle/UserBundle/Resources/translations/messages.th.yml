@@ -4,14 +4,15 @@
 sylius:
     form:
         user:
-            email: อีเมล
-            enabled: เปิดใช้งาน
+            email: Email
+            enabled: เปิดใช้งานแล้ว
             password:
                 label: Password
                 confirmation: ยืนยันรหัสผ่าน
             remember_me: จำฉันไว้
             shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
             username: Username
+            verified: ยืนยันแล้ว
         user_filter:
             query: ค้นหา
         user_change_password:

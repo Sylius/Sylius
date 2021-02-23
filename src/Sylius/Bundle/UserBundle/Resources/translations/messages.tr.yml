@@ -12,6 +12,7 @@ sylius:
             remember_me: Beni hatırla
             shipping_address: Teslimat adresi
             username: Kullanıcı adı
+            verified: Doğrulandı
         user_filter:
             query: Arama
         user_change_password:

@@ -7,5 +7,5 @@ sylius:
             color: Колір
             description: Опис
             enabled: Ввімкнено
-            name: Назва
+            name: Назва регіону
             url: URL

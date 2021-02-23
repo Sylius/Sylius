@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: Email
-            enabled: Dostępny
+            enabled: Aktywne
             password:
                 label: Hasło
                 confirmation: Weryfikacja
@@ -20,5 +20,5 @@ sylius:
             current: Obecne hasło
             new: Nowe hasło
         user_reset_password:
-            confirmation: Potwierdzenie
+            confirmation: Powtórz nowe hasło
             new: Nowe hasło

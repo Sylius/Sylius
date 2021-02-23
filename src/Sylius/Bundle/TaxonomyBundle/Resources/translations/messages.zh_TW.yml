@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: 説明
+            enabled: 啓用
             name: 名稱
             slug: Slug
         taxonomy:

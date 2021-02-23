@@ -24,12 +24,12 @@ class ApplyCouponToCart implements OrderTokenValueAwareInterface
     /** @var string|null */
     public $couponCode;
 
-    public function __construct(string $couponCode)
+    public function __construct(?string $couponCode)
     {
         $this->couponCode = $couponCode;
     }
 
-    public static function createFromData(string $orderTokenValue, string $couponCode): self
+    public static function createFromData(string $orderTokenValue, ?string $couponCode): self
     {
         $command = new self($couponCode);
 

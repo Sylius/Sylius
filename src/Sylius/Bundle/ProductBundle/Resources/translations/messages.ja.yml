@@ -6,13 +6,16 @@ sylius:
         product:
             name: ゾーン名
             description: 説明
-            options: sylius.breadcrumb.option.index
+            attributes: 属性
+            options: オプション
             meta_keywords: Metaタグ(keywords)
             meta_description: metaタグ(description)
+            taxons: タクソン(分類群)
         product_variant:
             name: ゾーン名
         association_type:
             name: ゾーン名
+            translations: 翻訳
         variant:
             name: ゾーン名
         option:

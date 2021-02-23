@@ -12,10 +12,14 @@ sylius:
             min_length: Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.
             not_blank: Zadejte popis propagace.
         end_date_cannot_be_set_prior_start_date: Datu konce akce nemůže být před datem začátku akce.
+        is_invalid: Akce je neplatná.
         name:
             max_length: Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.
             min_length: Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.
             not_blank: Vyplňte prosím název akce.
+    promotion_action:
+        percentage_discount_configuration:
+            not_in_range: Procentuální sleva musí být mezi 0% a 100%.
     promotion_coupon:
         code:
             max_length: Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.
@@ -34,5 +38,6 @@ sylius:
             min: Kód kupónu musí mít minimálně {{ limit }} znaků.
             max: Kód kupónu nesmí být delší než {{ limit }} znaků.
             not_blank: Zadejte kód kupónu.
+        possible_generation_amount: Neplatná délka kódu kupónu nebo počet kupónů. Nelze vygenerovat %expectedAmount% unikátních kuponů s délkou kódu %codeLength%. Možný počet pro vygenerování je %possibleAmount%.
         usage_limit:
             min: Limit využití generovaných kupónů musí být alespoň {{ limit }}.

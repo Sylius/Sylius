@@ -4,7 +4,7 @@
 sylius:
     form:
         product:
-            name: Назва
+            name: Назва регіону
             description: Опис
             attributes: Атрибути
             options: Опції
@@ -13,17 +13,17 @@ sylius:
             slug: Слаґ
             taxons: Таксони
         product_variant:
-            name: Назва
+            name: Назва регіону
         association_type:
-            name: Назва
+            name: Назва регіону
             translations: Переклади
         association:
             type: Тип асоціювання
             product: Асоційований продукт
         variant:
-            name: Назва
+            name: Назва регіону
         option:
-            name: Назва
+            name: Назва регіону
             position: Позиція
             values: Можливі значення
         option_value:

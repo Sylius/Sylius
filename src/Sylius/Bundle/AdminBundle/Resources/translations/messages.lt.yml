@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Pristatymo patvirtinimas'
     menu:
         admin:
             main:

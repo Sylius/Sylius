@@ -14,10 +14,12 @@ sylius:
             name: Nom
         association_type:
             name: Nom
+            translations: Traduccions
         variant:
             name: Nom
         option:
             name: Nom
             position: Posició
         option_value:
+            add_value: Afegir un valor
             value: Valor

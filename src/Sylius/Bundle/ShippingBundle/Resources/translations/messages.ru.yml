@@ -11,8 +11,8 @@ sylius:
         shipment:
             state: Cтатус
             states:
-                checkout: Сверка
-                pending: Ожидает
+                checkout: Оформить заказ
+                pending: В обработке
                 ready: Готов
                 shipped: Доставлено
                 returned: Возвращено
@@ -29,11 +29,12 @@ sylius:
             description: Описание
             name: Округ
         shipping_method:
+            add_rule: Добавить правило
             calculator: Калькулятор
             category: Категория
             category_requirement: Условия категории
             channels: Каналы
-            configuration: Конфигурация
+            configuration: Настройки
             description: Описание
             enabled: Активен
             match_all_category_requirement: Все единицы товара должны соответствовать способу доставки
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Ни одна из единиц товара не должна соответствовать способу доставки
             name: Округ
             position: Позиция
+            rules: Правила
             tax_category: Категория налогов
             translations: '﻿Переводы'
+        shipping_method_rule:
+            type: Тип
+            total: Итого
+            weight: Вес
+            amount: Количество

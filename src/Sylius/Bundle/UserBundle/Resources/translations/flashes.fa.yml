@@ -10,4 +10,5 @@ sylius:
         verify_email: 'ایمیل شما با موفقیت تایید شده است.'
         verify_email_by_invalid_token: 'کلمه رمز نامعتبر است.'
         verify_email_request: 'یک ایمیل با لینک تایید به آدرس ایمیل شما فرستاده شده است.'
+        verify_no_user: 'هیچ کاربری وارد نشده است.'
         verify_verified_email: 'ایمیل شما را قبلا تایید شده است.'

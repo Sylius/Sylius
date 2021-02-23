@@ -8,7 +8,6 @@ sylius:
             last_name: 姓
             email: メールアドレス
             phone_number: 電話番号
-            billing_address: ご請求先住所
-            different_billing_address: 請求先として別の住所を指定する
+            billing_address: 請求先住所
         customer_group:
             name: ゾーン名

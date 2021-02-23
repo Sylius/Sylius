@@ -12,6 +12,7 @@ sylius:
             remember_me: Ricordami
             shipping_address: Indirizzo di spedizione
             username: Nome utente
+            verified: Verificato
         user_filter:
             query: Ricerca
         user_change_password:

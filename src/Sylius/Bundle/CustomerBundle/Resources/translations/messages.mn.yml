@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        customer:
+            first_name: Нэр
+            group: Бүлэг
+            last_name: Овог
+            email: Имэйл
+            phone_number: Утасны дугаар
+            gender: Хүйс
+            birthday: Төрсөн өдөр
+            billing_address: Нэхэмжлэх хаяг
+            different_shipping_address: Хүргэлтийн өөр хаяг ашиглах уу?
+            only_customer_registration: Акаунт үүсгэх үү?
+            subscribed_to_newsletter: Мэдээллийн товхимолд бүртгүүлэх
+        customer_group:
+            name: Нэр
+            roles: Дүрүүд
+    gender:
+        unknown: Тодорхойгүй
+        male: Эрэгтэй
+        female: Эмэгтэй

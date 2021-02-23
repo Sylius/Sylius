@@ -2,11 +2,26 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Conteúdo'
+            subject: 'Solicitação de contato'
+        order_confirmation:
+            subject: 'Confirmação do pedido'
+            view_order_or_change_payment_method: 'Ver pedido ou trocar método de pagamento'
+        password_reset:
+            hello: 'Olá'
+            subject: 'Redefinir a senha'
+        verification_token:
+            hello: 'Olá'
+            subject: 'Verificação de endereço de e-mail'
+    lightbox:
+        image_album_label: 'Imagem %1 de %2'
     menu:
         shop:
             account:
                 address_book: 'Catálogo de endereços'
-                change_password: 'Alterar palavra-passe'
+                change_password: 'Alterar senha'
                 dashboard: 'Painel'
                 header: 'Sua conta'
                 order_history: 'Histórico de pedidos'

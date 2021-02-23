@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        credit_card:
+            cardholder_name: Карт эзэмшигчийн нэр
+            expiry_month: Хугацаа дуусах сар
+            expiry_year: Хугацаа дуусах жил
+            number: Картын дугаар
+            security_code: Аюулгүйн код (CVV)
+            type: Картын төрөл
+        payment:
+            amount: Төлбөрийн хэмжээ
+            method: Төлбөрийн хэрэгсэл
+            state:
+                header: Төлбөрийн төлөв
+                checkout: Төлбөр төлөх
+                completed: Дууссан
+                authorized: Эрх бүхий
+                failed: Амжилтгүй
+                new: Шинэ
+                pending: Хүлээгдэж байгаа
+                processing: Боловсруулж байна
+                unknown: Тодорхойгүй
+                void: Хоосон
+                cancelled: Цуцлагдсан
+                refunded: Буцаагдсан
+        payment_method:
+            description: Тодорхойлолт
+            enabled: Идэвхжүүлсэн үү?
+            instructions: Зааварчилгаа
+            name: Нэр
+            position: Байрлал

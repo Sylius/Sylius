@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        add_item: 'Varan er komin í körfuna'
+        cannot_modify: 'Karfan sem þú ert að reyna að breyta er þegar orðin að pöntun.'
+        remove_item: 'Varan er farin úr körfunni'
+        save: 'Karfan hefur verið uppfærð'

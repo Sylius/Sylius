@@ -42,9 +42,6 @@ sylius:
         product_eligibility: 'Produkt o nazwie %productName% został dezaktywowany.'
         shipping_method_eligibility: 'Wybrany produkt nie może być użyty z metodą wysyłki o nazwie %shippingMethodName%. Wybierz ponownie metodę wysyłki.'
     locale:
-        code:
-            not_blank: Proszę podać kod ISO języka.
-            unique: Ten język jest już skonfigurowany.
         enabled:
             cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
     product:

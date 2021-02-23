@@ -34,6 +34,8 @@ sylius:
             amount: Bedrag
             code_length: Lengte van de code
             expires_at: Verloopt op
+            prefix: Voorvoegsel
+            suffix: Achtervoegsel
             usage_limit: Gebruikslimiet
         promotion_filter:
             price_range: Prijs bereik filter

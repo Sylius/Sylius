@@ -31,4 +31,4 @@ sylius:
             enabled: Aktywna?
             instructions: Instrukcje
             name: Nazwa
-            position: Położenie
+            position: Pozycja

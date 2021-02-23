@@ -15,7 +15,7 @@ sylius:
                 pending: อยู่ระหว่างดำเนินการ
                 ready: พร้อมส่ง
                 shipped: ส่งของแล้ว
-                returned: ถูกส่งคืน
+                returned: ตีกลับ
                 cancelled: ถูกยกเลิก
             tracking_code: รหัสการติดตาม
         shipping_calculator:
@@ -29,6 +29,7 @@ sylius:
             description: คำอธิบาย
             name: ชื่อภาษา
         shipping_method:
+            add_rule: เพิ่มเงื่อนไข
             calculator: การคำนวณ
             category: หมวดหมู่
             category_requirement: ความต้องการสำหรับหมวดหมู่
@@ -38,5 +39,11 @@ sylius:
             enabled: เปิดใช้งาน
             name: ชื่อภาษา
             position: ตำแหน่ง
+            rules: เงื่อนไข
             tax_category: ประเภทภาษี
             translations: การแปลภาษา
+        shipping_method_rule:
+            type: ชนิด
+            total: ผลรวม
+            weight: น้ำหนัก
+            amount: ยอดรวม

@@ -2,6 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'wurde gesendet mit'
+            subject: 'Versandbestätigung'
+            thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem Tracking-Code %tracking_code% überprüfen.'
+            your_order_with_number: 'Ihre Bestellung mit Nummer'
     menu:
         admin:
             main:
@@ -38,3 +45,18 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Bestellungen
+    ui:
+        product:
+            product_not_active_in_channel: Das Produkt ist in diesem Kanal noch nicht aktiviert.
+        gateway:
+            no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout ist veraltet. Bitte verwenden Sie die neue <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Handelsplattform</a> Integration.
+        sales_summary: Verkaufszusammenfassung
+        statistics:
+            day: Tag
+            lifetime: Gesamter Zeitraum
+            month: Monat
+            week: Woche
+            2weeks: 2 Wochen
+            year: Jahr
