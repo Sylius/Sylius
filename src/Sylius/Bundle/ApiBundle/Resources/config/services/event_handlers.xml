@@ -21,10 +21,5 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius_event.bus"/>
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\EventHandler\ResetPasswordRequestedHandler">
-            <argument type="service" id="messenger.default_bus" />
-            <tag name="messenger.message_handler" bus="sylius_event.bus"/>
-        </service>
     </services>
 </container>
