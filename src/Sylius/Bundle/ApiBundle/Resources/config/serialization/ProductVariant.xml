@@ -30,7 +30,7 @@
             <group>product_variant:read</group>
             <group>shop:cart:read</group>
         </attribute>
-        <attribute name="channelPricings">
+        <attribute name="optionValues">
             <group>product_variant:read</group>
         </attribute>
     </class>
