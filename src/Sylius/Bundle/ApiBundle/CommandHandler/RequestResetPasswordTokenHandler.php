@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken;
+use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\Event\ResetPasswordRequested;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -51,8 +52,11 @@ final class RequestResetPasswordTokenHandler
         $user->setPasswordRequestedAt(new \DateTime());
 
         $this->eventBus->dispatch(
-            new ResetPasswordRequested($command->getEmail(), $command->getChannelCode(), $command->getLocaleCode()),
-            [new DispatchAfterCurrentBusStamp()]
+            new SendResetPasswordEmail(
+                $command->getEmail(),
+                $command->getChannelCode(),
+                $command->getLocaleCode()
+            )
         );
     }
 }
