@@ -9,6 +9,7 @@
     {% include '@SyliusAdmin/Crud/form_validation_errors_checker.html.twig' %}
     {% if configuration.vars.templates.form is defined %}
         {% include configuration.vars.templates.form %}
+        {{ form_row(form._token) }}
     {% else %}
         {{ form_widget(form) }}
     {% endif %}
@@ -17,6 +18,5 @@
 
     {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': index_url}} %}
 
-    {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
 </div>
