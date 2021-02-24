@@ -12,13 +12,9 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
     /** @var NormalizerInterface */
     private $decoratedNormalizer;
 
-    /** @var string */
-    private $apiRoute;
-
-    public function __construct(NormalizerInterface $decoratedNormalizer, string $apiRoute)
+    public function __construct(NormalizerInterface $decoratedNormalizer)
     {
         $this->decoratedNormalizer = $decoratedNormalizer;
-        $this->apiRoute = $apiRoute;
     }
 
     public function supportsNormalization($data, $format = null): bool

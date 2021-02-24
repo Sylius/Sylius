@@ -2,17 +2,13 @@
 
 declare(strict_types=1);
 
-
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculator;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Symfony\Component\Serializer\Exception\CircularReferenceException;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductVariantSerializer implements NormalizerInterface
 {
@@ -35,18 +31,17 @@ final class ProductVariantSerializer implements NormalizerInterface
         $this->channelContext = $channelContext;
     }
 
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): array
     {
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $object;
+        Assert::isInstanceOf($object, ProductVariantInterface::class);
 
         $data = $this->objectNormalizer->normalize($object, $format, $context);
-        $data['price'] = $this->priceCalculator->calculate($productVariant, ['channel' => $this->channelContext->getChannel()]);
+        $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
 
         return $data;
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof ProductVariantInterface;
     }

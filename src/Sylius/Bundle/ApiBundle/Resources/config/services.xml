@@ -64,7 +64,6 @@
                 decoration-priority="20"
         >
             <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
