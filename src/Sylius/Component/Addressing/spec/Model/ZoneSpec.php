@@ -19,6 +19,7 @@ use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 final class ZoneSpec extends ObjectBehavior
 {
@@ -83,6 +84,32 @@ final class ZoneSpec extends ObjectBehavior
 
         $this->removeMember($member);
         $this->hasMember($member)->shouldReturn(false);
+    }
+
+    function it_initializes_shipping_methods_collection_by_default(): void
+    {
+        $this->getShippingMethods()->shouldHaveType(Collection::class);
+    }
+
+    function it_has_no_shipping_methods_by_default(): void
+    {
+        $this->hasShippingMethods()->shouldReturn(false);
+    }
+
+    function it_adds_shipping_method(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->addShippingMethod($shippingMethod);
+        $this->hasShippingMethods()->shouldReturn(true);
+        $this->hasShippingMethod($shippingMethod)->shouldReturn(true);
+    }
+
+    function it_removes_shipping_method(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->addShippingMethod($shippingMethod);
+        $this->hasShippingMethod($shippingMethod)->shouldReturn(true);
+
+        $this->removeShippingMethod($shippingMethod);
+        $this->hasShippingMethod($shippingMethod)->shouldReturn(false);
     }
 
     function it_has_scope_all_by_default(): void
