@@ -51,7 +51,7 @@
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
-        <property name="product" />
+        <property name="product" readable="false"/>
         <property name="translations">
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
