@@ -111,10 +111,9 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductPrice(int $price): void
     {
         Assert::true(
-            $this->hasProductWithPriceInChannel(
+            $this->hasProductWithPrice(
                 [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
                 $price,
-                $this->sharedStorage->get('channel'),
             )
         );
     }
@@ -125,10 +124,9 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductWithPrice(ProductInterface $product, int $price): void
     {
         Assert::true(
-            $this->hasProductWithPriceInChannel(
+            $this->hasProductWithPrice(
                 $this->responseChecker->getCollection($this->client->getLastResponse()),
                 $price,
-                $this->sharedStorage->get('channel'),
                 $product->getCode()
             ),
             sprintf("There is no product with %s code and %s price", $product->getCode(), $price)
@@ -172,7 +170,7 @@ final class ProductContext implements Context
         );
     }
 
-    private function hasProductWithPriceInChannel(array $products, int $price, ChannelInterface $channel, ?string $productCode = null): bool
+    private function hasProductWithPrice(array $products, int $price, ?string $productCode = null): bool
     {
         foreach ($products as $product) {
             if ($productCode !== null && $product['code'] !== $productCode) {
@@ -182,19 +180,11 @@ final class ProductContext implements Context
             foreach ($product['variants'] as $variantIri) {
                 $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
 
-                /** @var array $channelPricings */
-                $channelPricings = $this->responseChecker->getValue($this->client->getLastResponse(), "channelPricings");
+                /** @var int $variantPrice */
+                $variantPrice = $this->responseChecker->getValue($this->client->getLastResponse(), "price");
 
-                foreach($channelPricings as $channelCode => $channelPricingIri) {
-                    if ($channel->getCode() === $channelCode) {
-                        $this->client->executeCustomRequest(Request::custom($channelPricingIri, HttpRequest::METHOD_GET));
-
-                        $channelPricing = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-
-                        if ($channelPricing['price'] === $price) {
-                            return true;
-                        }
-                    }
+                if ($price === $variantPrice) {
+                    return true;
                 }
             }
         }
