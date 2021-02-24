@@ -1,0 +1,59 @@
+---------------------------------------------------------------------------
+
+by kayue at 2020-12-18T12:46:41Z
+
+Anything blocking this? Just want to make sure this will get merged in the next release. Thanks.
+
+---------------------------------------------------------------------------
+
+by kayue at 2020-12-24T00:45:37Z
+
+@pamil Could you include this into the next release? Clearly a bug and simple fix. Thanks.
+
+---------------------------------------------------------------------------
+
+by kayue at 2021-01-08T08:50:26Z
+
+@Zales0123 do you want me to change the base to 1.8?
+
+---------------------------------------------------------------------------
+
+by kayue at 2021-01-12T02:37:18Z
+
+This didn't get merged in the last release 🤦
+
+Ping @pamil @lchrusciel
+
+---------------------------------------------------------------------------
+
+by kayue at 2021-01-26T16:22:59Z
+
+Ping @pamil again. Think this is an easy bug fix.
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2021-02-24T09:52:19Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-5"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by kayue at 2021-02-24T12:52:23Z
+
+Not sure what you mean, do you still want this branch to merge against 1.8?
+There was no conflict in this PR so should be ready to merge anytime.
+
+Anyway I have rebased the commit against the latest 1.8 branch.
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2021-02-24T13:47:37Z
+
+Thanks, @kayue! :1st_place_medal:
