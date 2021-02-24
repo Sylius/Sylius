@@ -7,8 +7,8 @@ sylius:
             name: Округ
             description: Описание
         tax_rate:
-            category: Категория
+            category: sylius.tax_rate.category
             name: Округ
-            amount: Количество
+            amount: Сумма
             included_in_price: Включено в цену?
             calculator: Калькулятор

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_blank: Имэйл хаягаа оруулна уу.
+            invalid: Энэ имэйл буруу байна.
+            not_registered: Ийм имэйлтэй хэрэглэгч алга. Эхлээд бүртгүүлнэ үү.
+        plainPassword:
+            not_blank: Нууц үгээ оруулна уу.
+            mismatch: Оруулсан нууц үг олдсонгүй.
+            wrong_current: Оруулсан нууц үг нь одоогийнхоос өөр байна.
+        password:
+            min: Нууц үг хамгийн багадаа {{ limit }} тэмдэгтээс бүрдэх ёстой.
+            max: Нууц үг {{ limit }} тэмдэгтээс ихгүй байх ёстой.

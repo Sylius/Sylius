@@ -6,7 +6,7 @@ sylius:
         product:
             name: Názov
             description: Popis
-            attributes: Vlastnosti
+            attributes: Produktové vlastnosti
             options: Voľby
             meta_keywords: Meta kľúčové slová
             meta_description: Meta popis

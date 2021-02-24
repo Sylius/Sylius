@@ -6,6 +6,7 @@ sylius:
         address:
             city: المدينة
             company: الشركة
+            country: الدولة
             first_name: الاسم الأول
             last_name: اسم العائلة
             phone_number: رقم الهاتف
@@ -29,7 +30,7 @@ sylius:
             name: الاسم
             type: نوع
             types:
-                country: البلد
+                country: الدولة
                 province: مقاطعة
                 zone: المنطقة
             scope: نطاق

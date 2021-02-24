@@ -3,6 +3,10 @@
 
 sylius:
     form:
+        shipment:
+            states:
+                checkout: Pirkuma noformēšana
+                cancelled: Atcelts
         shipping_calculator:
             flat_rate_configuration:
                 amount: Summa
@@ -14,5 +18,9 @@ sylius:
         shipping_method:
             calculator: '- Kalkulators'
             category: Kategorija
+            channels: Kanāli
             description: Apraksts
+            enabled: Ieslēgts
             name: Nosaukums
+        shipping_method_rule:
+            amount: Summa

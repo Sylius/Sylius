@@ -24,7 +24,7 @@ Feature: Seeing aggregated discounts of an order
         Then the order's items total should be "$280.00"
         And the order's shipping promotion should be "-$5.00"
         And the order's promotion total should be "-$20.00"
-        And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping charge "$10.00" for "DHL" method
         And the order's shipping total should be "$5.00"
         And the order's total should be "$285.00"
 
@@ -38,6 +38,6 @@ Feature: Seeing aggregated discounts of an order
         When I view the summary of the order "#00000006"
         Then the order's items total should be "$810.00"
         And the order's shipping promotion should be "-$5.00"
-        And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping charge "$10.00" for "DHL" method
         And the order's shipping total should be "$5.00"
         And the order's total should be "$815.00"

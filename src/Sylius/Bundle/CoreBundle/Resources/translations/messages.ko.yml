@@ -24,7 +24,7 @@ sylius:
             zone: 영역
         user:
             billing_address: 청구지 주소
-            enabled: 사용
+            enabled: 활성
             first_name: 이름
             groups: 그룹
             roles: 역할

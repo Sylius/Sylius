@@ -11,13 +11,12 @@ sylius:
             phone_number: Kontakt telefon
             gender: Spol
             birthday: Rođendan
-            billing_address: Adresa za dostavu
-            different_billing_address: Želim koristiti drugu adresu za račun.
+            billing_address: Adresa
             only_customer_registration: Napravite račun
             subscribed_to_newsletter: Pretplatite se na naš newsletter
         customer_group:
             name: Naziv regije
-            roles: Role (korisnička prava)
+            roles: Uloge
     gender:
         unknown: Nepoznato
         male: Muško

@@ -8,6 +8,12 @@ sylius:
         gateway_configuration:
             paypal:
                 password: Jelszó
+                signature: Aláírás
                 username: Felhasználónév
+                sandbox: Homokozó (tesztüzem)
+            stripe:
+                publishable_key: Nyilvános kulcs
+                secret_key: Titkos kulcs
     payum_gateway_factory:
         offline: Nem elérhető
+        paypal_express_checkout: Paypal express fizetés

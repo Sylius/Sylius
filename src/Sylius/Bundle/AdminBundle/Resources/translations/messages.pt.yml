@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        shipment_confirmation:
+            subject: 'Confirmação de envio'
     menu:
         admin:
             main:

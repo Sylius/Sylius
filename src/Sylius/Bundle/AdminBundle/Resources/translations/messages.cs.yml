@@ -4,7 +4,11 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'byl odeslán pomocí'
             subject: 'Potvrzení odeslání'
+            thank_you_for_transaction: 'Děkujeme vám za úspěšnou transakci.'
+            you_can_check_its_location_with_the_tracking_code: 'Můžete zkontrolovat polohu pomocí sledovacího kódu %tracking_code%.'
+            your_order_with_number: 'Vaše objednávka s číslem'
     menu:
         admin:
             main:
@@ -22,7 +26,7 @@ sylius:
                     countries: Země
                     currencies: Měny
                     exchange_rates: Směnný kurz
-                    header: Konfigurace
+                    header: Nastavení
                     locales: Lokalizace
                     payment_methods: Způsoby plateb
                     shipping_categories: Přepravní kategorie
@@ -41,3 +45,18 @@ sylius:
                 sales:
                     header: Prodeje
                     orders: Objednávky
+    ui:
+        product:
+            product_not_active_in_channel: Produkt ještě není v tomto kanálu aktivován.
+        gateway:
+            no_sca_support_notice: Zvolená platební brána nepodporuje SCA.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout je zastaralý. Použijte prosím novou integraci <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
+        sales_summary: Přehled prodejů
+        statistics:
+            day: Den
+            lifetime: Od počátku
+            month: Měsíc
+            week: Týden
+            2weeks: 2 týdny
+            year: Rok

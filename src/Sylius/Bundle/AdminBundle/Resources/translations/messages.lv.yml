@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Asociācijas veidi
+                    attributes: Atribūti
+                    header: Katalogs
+                    inventory: Inventārs
+                    options: Iestatījumi
+                    products: Preces
+                    taxons: Sadaļas
+                configuration:
+                    admin_users: Administratori
+                    channels: Kanāli
+                    countries: Valstis
+                    currencies: Valūta
+                    exchange_rates: Maiņas kurss
+                    locales: Atrašanās vietas valodas
+                    payment_methods: Apmaksas veidi
+                    shipping_categories: Piegādes kategorijas
+                    shipping_methods: Piegādes veidi
+                    tax_categories: Nodokļu kategorijas
+                    tax_rates: Nodokļu likmes
+                    zones: Rajoni
+                marketing:
+                    header: Mārketings
+                    product_reviews: Preču atsauksmes
+                    promotions: Akcijas
+                customers:
+                    customers: Klienti
+                    groups: Grupas
+                    header: Klients
+                sales:
+                    header: Pārdošana
+                    orders: Pasūtījumi

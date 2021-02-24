@@ -2,10 +2,26 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        contact_request:
+            content: 'Tartalom'
+            subject: 'Kapcsolatfelvételi kérelem'
+        order_confirmation:
+            subject: 'Rendelés visszaigazolás'
+            view_order_or_change_payment_method: 'Megrendelés megtekintése vagy fizetési mód változtatása'
+        password_reset:
+            hello: 'Üdvözlünk'
+            subject: 'Jelszó visszaállítás'
+        verification_token:
+            hello: 'Üdvözlünk'
+            subject: 'Email cím hitelesítése'
+    lightbox:
+        image_album_label: '%1. a %2 képből'
     menu:
         shop:
             account:
-                change_password: 'Jelszó változtatás'
+                address_book: 'Címjegyzék'
+                change_password: 'Jelszó módosítása'
                 dashboard: 'Vezérlőpult'
                 header: 'Fiókod'
                 order_history: 'Rendelési előzmények'

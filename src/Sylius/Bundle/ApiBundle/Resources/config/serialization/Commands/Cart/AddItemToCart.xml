@@ -16,14 +16,14 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart">
-       <attribute name="productCode">
-           <group>shop:cart:add_item</group>
-       </attribute>
-       <attribute name="productVariantCode">
-           <group>shop:cart:add_item</group>
-       </attribute>
-       <attribute name="quantity">
-           <group>shop:cart:add_item</group>
-       </attribute>
+        <attribute name="productCode">
+            <group>shop:cart:add_item</group>
+        </attribute>
+        <attribute name="productVariantCode">
+            <group>shop:cart:add_item</group>
+        </attribute>
+        <attribute name="quantity">
+            <group>shop:cart:add_item</group>
+        </attribute>
     </class>
 </serializer>

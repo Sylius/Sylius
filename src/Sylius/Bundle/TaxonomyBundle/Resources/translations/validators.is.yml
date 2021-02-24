@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    taxon:
+        code:
+            not_blank: Vinsamlega sláðu inn kóda vöruflokks.
+            regex: Kódi vöruflokks má aðeins innihalda stafi, tölur, bandstrik og undirstrik.
+            unique: Vöruflokkur með þessum kóda er þegar til.
+        name:
+            max_length: Nafn vöruflokks má ekki vera lengra en 255 stafir.
+            not_blank: Vinsamlega sláðu inn nafn vöruflokks.
+        slug:
+            not_blank: Vinsamlega sláðu inn vefslóðarheiti vöruflokks.
+            unique: Vefslóðarheiti vöruflokks verður að vera einstakt.
+    taxonomy:
+        name:
+            max_length: Nafn flokkunarkerfis má ekki vera lengra en 255 stafir.
+            not_blank: Vinsamlega sláðu inn nafn flokkunarkerfis.

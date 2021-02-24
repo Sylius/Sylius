@@ -25,10 +25,6 @@ sylius:
     order:
         currency_code:
             not_valid: Valiutos kodas yra neteisingas.
-    locale:
-        code:
-            not_blank: Įveskite lokalės kodą.
-            unique: Šią lokalė jau egzistuoja.
     product_variant:
         onHand:
             min: Atsargos turi būti didesnės nei {{ limit }}.

@@ -11,8 +11,7 @@ sylius:
             phone_number: Número de Telefone
             gender: Gênero
             birthday: Data de Nascimento
-            billing_address: Endereço de cobrança
-            different_billing_address: Utilizar um endereço diferente para cobrança?
+            billing_address: Endereço para fatura
             only_customer_registration: Criar conta?
             subscribed_to_newsletter: Increver-se ao newsletter
         customer_group:

@@ -11,4 +11,16 @@ sylius:
         request_error: 'Der skete en fejl under afsendelsen af beskeden. Prøv venligst igen senere.'
     customer:
         add_address: 'Adressen er blevet tilføjet.'
+        impersonate: 'Efterligner nu kunde %name%.'
         set_address_as_default: 'Adressen er angivet som standard.'
+    order:
+        apply_state_machine_transition_error: 'Der var et uventet problem med at opdatere en ordre. Prøv at opdatere ordren igen.'
+        promotion_integrity: 'Du er ikke længere berettiget til denne kampagne %promotionName%.'
+        total_integrity: 'Din ordretotal er blevet ændret, tjek dine ordreoplysninger og bekræft dem igen.'
+        update_error: 'Der var et uventet problem med at opdatere ordren. Prøv at opdatere ordren igen.'
+    payment:
+        apply_state_machine_transition_error: 'Der var et uventet problem med at opdatere en betaling. Prøv at opdatere betalingen igen.'
+    product:
+        out_of_stock: 'Der er kun %quantity% af dette produkt på lager.'
+    product_variant:
+        update_error: 'Der var et uventet problem med at opdatere produktvarianten. Prøv at opdatere produktvarianten igen.'

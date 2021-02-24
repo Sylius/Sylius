@@ -19,6 +19,7 @@ sylius:
         user_registration:
             start_shopping: 'Rozpocznij zakupy'
             subject: 'Rejestracja użytkownika'
+            welcome_to_our_store: 'Zapraszamy do naszego sklepu!'
         verification_token:
             hello: 'Witaj'
             subject: 'Weryfikacja adresu e-mail'

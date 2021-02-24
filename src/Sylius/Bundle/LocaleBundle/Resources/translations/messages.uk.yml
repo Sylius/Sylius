@@ -4,4 +4,5 @@
 sylius:
     form:
         locale:
-            name: Назва
+            name: Назва регіону
+            select: Виберіть локаль...

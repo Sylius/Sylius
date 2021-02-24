@@ -20,10 +20,6 @@ sylius:
     currency:
         enabled:
             cannot_disable_base: No es pot desactivar la moneda base.
-    locale:
-        code:
-            not_blank: Introduïu un codi local.
-            unique: Aquest codi local ja existeix.
     product_attribute:
         invalid: Posició ha de ser un nombre sencer.
     product_variant:

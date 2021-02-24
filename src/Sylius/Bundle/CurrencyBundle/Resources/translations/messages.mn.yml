@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        currency:
+            base: Үндсэн валют
+            code: Нэр
+            enabled: Идэвхтэй
+            exchange_rate: Валютийн ханш
+        exchange_rate:
+            source_currency: Эх валют
+            target_currency: Таргет валют
+            ratio: Харьцаа

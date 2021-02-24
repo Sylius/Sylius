@@ -16,11 +16,14 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method.class%" shortName="ShippingMethod">
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
             <attribute name="position">ASC</attribute>
+        </attribute>
+
+        <attribute name="normalization_context">
+            <attribute name="groups">admin:shipping_method:read</attribute>
         </attribute>
 
         <itemOperations>
@@ -85,6 +88,9 @@
                     <attribute>sylius.api.filter_archived_shipping_methods</attribute>
                     <attribute>sylius.api.shipping_method_order_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </collectionOperation>
 

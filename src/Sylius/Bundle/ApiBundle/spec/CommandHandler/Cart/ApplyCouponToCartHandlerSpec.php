@@ -48,6 +48,8 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
 
+        $cart->setPromotionCoupon($promotionCoupon)->shouldBeCalled();
+
         $orderProcessor->process($cart)->shouldBeCalled();
 
         $this(ApplyCouponToCart::createFromData('cart', 'couponCode'));
@@ -57,11 +59,14 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderProcessorInterface $orderProcessor,
-        OrderInterface $cart
+        OrderInterface $cart,
+        PromotionCouponInterface $promotionCoupon
     ): void {
         $orderRepository->findCartByTokenValue('cart')->willReturn(null);
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->shouldNotBeCalled();
+
+        $cart->setPromotionCoupon($promotionCoupon)->shouldNotBeCalled();
 
         $orderProcessor->process($cart)->shouldNotBeCalled();
 
@@ -79,9 +84,28 @@ final class ApplyCouponToCartHandlerSpec extends ObjectBehavior
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
 
+        $cart->setPromotionCoupon(null)->shouldNotBeCalled();
+
         $orderProcessor->process($cart)->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [ApplyCouponToCart::createFromData('cart', 'couponCode')]);
+    }
+
+    function it_removes_coupon_if_passed_promotion_coupon_code_is_null(
+        OrderRepositoryInterface $orderRepository,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderProcessorInterface $orderProcessor,
+        OrderInterface $cart
+    ): void {
+        $orderRepository->findCartByTokenValue('cart')->willReturn($cart);
+
+        $promotionCouponRepository->findOneBy(['code' => null])->shouldNotBeCalled();
+
+        $cart->setPromotionCoupon(null)->shouldBeCalled();
+
+        $orderProcessor->process($cart)->shouldBeCalled();
+
+        $this(ApplyCouponToCart::createFromData('cart', null));
     }
 }

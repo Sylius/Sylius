@@ -29,11 +29,12 @@ sylius:
             description: Описание
             name: Име
         shipping_method:
+            add_rule: Добавяне на правило
             calculator: Калкулатор
             category: Категория
             category_requirement: Категория изискване
             channels: Канали
-            configuration: Конфигурация
+            configuration: Настройки
             description: Описание
             enabled: Активирано
             match_all_category_requirement: Всички единици трябва да съответстват на категорията за доставка
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Нито една единица не трябва да съответстват на категорията за доставка
             name: Име
             position: Позиция
+            rules: Правила
             tax_category: Данъчна категория
             translations: Преводи
+        shipping_method_rule:
+            type: Тип
+            total: Общо
+            weight: Тегло
+            amount: Сума

@@ -1,16 +1,3 @@
-parameters:
-    sylius.security.admin_regex: "^/%sylius_admin.path_name%"
-    sylius.security.api_regex: "^/api/v1"
-    sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
-    sylius.security.new_api_route: "/api/v2"
-    sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-    sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
-    sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
-
 security:
     always_authenticate_before_granting: true
     providers:

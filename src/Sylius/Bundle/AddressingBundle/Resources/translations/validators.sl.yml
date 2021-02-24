@@ -4,29 +4,19 @@
 sylius:
     address:
         city:
-            max_length: Mesto mora biti daljše od 255 znakov|Mesto mora biti daljše od 255 znakov.
-            min_length: Mesto mora biti dolgo vsaj 2 znaka|Mesto mora biti dolgo vsaj 2 znaka.
             not_blank: Vnesite mesto.
         country:
             not_blank: Izberite državo.
             disabled: Izbrana država je onemogočena. Prosimo, Izberite drugo.
         first_name:
-            max_length: Ime ne sme biti daljše od 255 znakov|Ime ne sme biti daljše od 255 znakov.
-            min_length: Ime mora biti dolgo vsaj 2 znaka|Ime mora biti dolgo vsaj dva znaka.
             not_blank: Prosim, vnesite ime.
         last_name:
-            max_length: Priimek ne sme biti daljši od 255 znakov|Priimek ne sme biti daljši od 255 znakov.
-            min_length: Priimek mora vsebovati vsaj 2 znaka.
             not_blank: Prosimo, vnesite priimek.
         postcode:
-            max_length: Poštna številka ne sme biti daljša od 255 znakov|Poštna številka ne sme biti daljša od 255 znakov.
-            min_length: Poštna številka mora dolga biti vsaj 2 znaka|Poštna številka mora biti dolga vsaj 2 znaka.
             not_blank: Prosimo, vnesite poštno številko.
         province:
             valid: Prosimo, izberite ustrezno provinco.
         street:
-            max_length: Ulica ne sme biti daljša od 255 znakov|Ulica ne sme biti daljše od 255 znakov.
-            min_length: Cesta mora biti dolga vsaj 2 znaka|Cesta mora biti dolga vsaj 2 znaka.
             not_blank: Prosimo, vnesite ulico.
         not_shippable: Ta naslov ni veljavna destinacija za dostavo.
     country:
@@ -41,8 +31,6 @@ sylius:
             regex: Koda province mora imeti naslednjo obliko XX-XX (npr. US-FL).
             unique: Koda province mora biti edinstvena.
         name:
-            max_length: Ime province ne sme biti daljše od 255 znakov|Ime province ne sme biti daljše od 255 znakov.
-            min_length: Ime province mora biti dolgo vsaj 2 znaka|Ime province mora biti dolgo vsaj 2 znaka.
             not_blank: Prosimo, vnesite ime province.
             unique: Ime province mora biti edinstveno.
     zone:
@@ -53,8 +41,6 @@ sylius:
         members:
             min_count: Prosimo, dodajte vsaj {{ limit }} člane cone.
         name:
-            max_length: Ime cone ne sme biti daljše od 255 znakov|Ime cone ne sme biti daljše od 255 znakov.
-            min_length: Ime pasu mora biti dolgo vsaj 2 znaka|Ime pasu mora biti dolgo vsaj 2 znaka.
             not_blank: Prosimo, vnesite ime cone.
     zone_member:
         code:

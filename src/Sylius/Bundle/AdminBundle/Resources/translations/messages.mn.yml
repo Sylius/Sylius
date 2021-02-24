@@ -1,0 +1,60 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'ашиглан илгээсэн болно'
+            subject: 'Хүргэлтийн баталгаажуулалт'
+            thank_you_for_transaction: 'Амжилттай гүйлгээ хийсэнд баярлалаа.'
+            you_can_check_its_location_with_the_tracking_code: 'Та байршилыг %tracking_code% хянах кодоор шалгаж болно.'
+            your_order_with_number: 'Дугаар бүхий таны захиалга'
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Нэгдлийн төрлүүд
+                    attributes: Шинж чанарууд
+                    header: Каталог
+                    inventory: Бараа материал
+                    options: Сонголтууд
+                    products: Бүтээгдэхүүнүүд
+                    taxons: Таксонууд
+                configuration:
+                    admin_users: Администраторууд
+                    channels: Сувгууд
+                    countries: Улсууд
+                    currencies: Мөнгөн тэмдэгтүүд
+                    exchange_rates: Валют харьцаанууд
+                    header: Тохируулга
+                    locales: Хэл
+                    payment_methods: Төлбөрийн хэрэгслүүд
+                    shipping_categories: Хүргэлтийн ангиллууд
+                    shipping_methods: Хүргэлтийн хэлбэрүүд
+                    tax_categories: Татварын ангиллууд
+                    tax_rates: Татварын хэм хэмжээнүүд
+                    zones: Бүсчлэлүүд
+                marketing:
+                    header: Маркетинг
+                    product_reviews: Бүтээгдэхүүний үнэлгээнүүд
+                    promotions: Урамшууллууд
+                customers:
+                    customers: Хэрэглэгчид
+                    groups: Бүлгүүд
+                    header: Хэрэглэгч
+                sales:
+                    header: Борлуулалт
+                    orders: Захиалгууд
+    ui:
+        product:
+            product_not_active_in_channel: Энэ сувагт бүтээгдэхүүн хараахан идэвхижээгүй байна.
+        gateway:
+            no_sca_support_notice: Сонгосон төлбөрийн гарц нь SCA-г дэмжихгүй байна.
+        sales_summary: Борлуулалтын хураангуй
+        statistics:
+            day: Өдөр
+            lifetime: Байнгын
+            month: Сар
+            week: Долоо хоног
+            2weeks: Хоёр долоо хоног
+            year: Жил

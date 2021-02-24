@@ -4,5 +4,7 @@
 sylius:
     form:
         channel:
+            color: Krāsa
             description: Apraksts
+            enabled: Ieslēgts
             name: Nosaukums

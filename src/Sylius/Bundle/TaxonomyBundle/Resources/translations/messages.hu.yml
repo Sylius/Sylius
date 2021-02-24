@@ -5,7 +5,9 @@ sylius:
     form:
         taxon:
             description: Leírás
+            enabled: Engedélyezve
             name: Név
             parent: Szülő
+            slug: Megnevezés url-ben történő megjelenés esetén
         taxonomy:
             name: Név

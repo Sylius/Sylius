@@ -17,6 +17,7 @@ sylius:
             description: Descripció
             name: Nom
         shipping_method:
+            category: Categoria
             channels: Canals
             configuration: Configuració
             description: Descripció
@@ -24,3 +25,9 @@ sylius:
             name: Nom
             position: Posició
             tax_category: Categoria d'impost
+            translations: Traduccions
+        shipping_method_rule:
+            type: Tipus
+            total: Total
+            weight: Pes
+            amount: Total

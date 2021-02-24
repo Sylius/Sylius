@@ -64,7 +64,7 @@ sylius:
             number: Număr
             total_from: De la
             total_to: Până la
-            payment_state: Status plată
+            payment_state: Statusul plății
             channel: Toate canalele
         page:
             body: Corp
@@ -74,7 +74,7 @@ sylius:
             images: Imagini
             restricted_zone: Zonă cu restricție
             short_description: Descriere scurtă
-            variant_selection_method: Metoda de selectare a variantei
+            variant_selection_method: Metoda de selecţie a variantei
             main_taxon: Taxonul principal
             channels: Canale
             enabled: Activat
@@ -105,7 +105,7 @@ sylius:
         taxonomy:
             file: Alege imagine
         user:
-            billing_address: Adresa de facturare
+            billing_address: Adresă de facturare
             different_shipping_address: Folosiți o adresă diferită pentru livrare?
             enabled: Activat
             first_name: Prenume
@@ -113,7 +113,7 @@ sylius:
             roles: Roluri
             last_name: Nume
             password: Parolă
-            shipping_address: Adresa de livrare
+            shipping_address: Adresă de livrare
         user_filter:
             query: Căutare
         variant:
@@ -130,7 +130,7 @@ sylius:
                 attribute: Atribut
                 value: Valoare
         guest:
-            email: Adresă e-mail
+            email: E-mail
         product_association:
             product: Produs asociat
             type: Tipul de asociere

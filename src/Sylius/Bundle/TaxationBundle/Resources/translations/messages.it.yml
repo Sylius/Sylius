@@ -7,8 +7,8 @@ sylius:
             name: "Nome\n"
             description: Descrizione
         tax_rate:
-            category: Categoria
+            category: Categoria fiscale
             name: "Nome\n"
-            amount: Importo
+            amount: Valore
             included_in_price: Incluso nel prezzo?
             calculator: Calcolatore

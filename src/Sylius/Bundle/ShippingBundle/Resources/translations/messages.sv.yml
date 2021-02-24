@@ -21,7 +21,7 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Schablonbelopp per sändning
-                amount: Antal
+                amount: Belopp
             per_unit_rate_configuration:
                 label: Schablonbelopp per enhet
                 amount: Antal
@@ -29,6 +29,7 @@ sylius:
             description: Beskrivning
             name: Namn
         shipping_method:
+            add_rule: Lägg till regel
             calculator: Kalkylator
             category: Kategori
             category_requirement: Kategorikrav
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Inga av enheterna måste matcha metodkategorin
             name: Namn
             position: Position
+            rules: Regler
             tax_category: Momskategori
             translations: Översättningar
+        shipping_method_rule:
+            type: Typ
+            total: Summa
+            weight: Vikt
+            amount: Belopp

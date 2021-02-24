@@ -12,7 +12,6 @@ sylius:
             gender: Kön
             birthday: Födelsedag
             billing_address: Faktureringsadress
-            different_billing_address: Använda annan adress för fakturering?
             only_customer_registration: Skapa konto?
             subscribed_to_newsletter: Prenumerera på nyhetsbrevet
         customer_group:

@@ -337,19 +337,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then there should be a shipping charge :shippingCharge
+     * @Then there should be a shipping charge :shippingCharge for :shippingMethodName method
      */
-    public function theOrdersShippingChargesShouldBe($shippingCharge)
+    public function thereShouldBeAShippingChargeForMethod(string $shippingCharge, string $shippingMethodName): void
     {
-        Assert::true($this->showPage->hasShippingCharge($shippingCharge));
+        Assert::true($this->showPage->hasShippingCharge($shippingCharge, $shippingMethodName));
     }
 
     /**
-     * @Then there should be a shipping tax :shippingTax
+     * @Then there should be a shipping tax :shippingTax for :shippingMethodName method
      */
-    public function thereShouldBeAShippingTax(string $shippingTax): void
+    public function thereShouldBeAShippingTaxForMethod(string $shippingTax, string $shippingMethodName): void
     {
-        Assert::true($this->showPage->hasShippingTax($shippingTax));
+        Assert::true($this->showPage->hasShippingTax($shippingTax, $shippingMethodName));
     }
 
     /**

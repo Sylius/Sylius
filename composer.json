@@ -1,6 +1,6 @@
 {
     "name": "sylius/sylius",
-    "type": "project",
+    "type": "library",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*",
@@ -113,7 +113,6 @@
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
         "winzou/state-machine-bundle": "^0.5",
-        "zendframework/zend-hydrator": "^2.4",
         "zendframework/zend-stdlib": "^3.2"
     },
     "replace": {
@@ -159,9 +158,11 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
+        "api-platform/core": "^2.6",
         "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16",
-        "symfony/polyfill-mbstring": "1.22.0"
+        "symfony/polyfill-mbstring": "^1.22.0",
+        "symfony/serializer": "4.4.19 || 5.2.2"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -183,8 +184,8 @@
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.0",
-        "phpstan/phpstan": "0.12.68",
-        "phpstan/phpstan-doctrine": "0.12.30",
+        "phpstan/phpstan": "0.12.78",
+        "phpstan/phpstan-doctrine": "0.12.32",
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
@@ -213,7 +214,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-master": "1.10-dev"
         },
         "symfony": {
             "allow-contrib": false

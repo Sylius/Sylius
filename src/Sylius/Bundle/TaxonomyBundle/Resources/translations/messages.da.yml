@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Beskrivelse
+            enabled: Aktiveret
             name: Navn
             parent: Overordnede
             slug: Slug

@@ -91,6 +91,8 @@
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" /> <!-- deprecated in Symfony 4.3 -->
+                <referencedClass name="Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent" /> <!-- deprected in Symfony 4.4 -->
+                <referencedClass name="Symfony\Component\HttpKernel\EventListener\ExceptionListener" /> <!-- deprected in Symfony 4.4 -->
                 <referencedClass name="Symfony\Component\Routing\RouteCollectionBuilder" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Role\Role" /> <!-- deprecated in Symfony 4.3 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" /> <!-- deprecated in Symfony 5.1 -->

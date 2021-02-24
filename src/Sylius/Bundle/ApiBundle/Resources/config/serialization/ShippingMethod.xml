@@ -23,13 +23,14 @@
         </attribute>
 
         <attribute name="translations">
-            <group>shop:order:account:read</group>
             <group>admin:shipping_method:read</group>
             <group>admin:shipping_method:all</group>
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
             <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
             <group>shop:shipping_method:read</group>
+            <group>shop:shipment:read</group>
             <group>admin:zone:update</group>
             <group>admin:zone:create</group>
             <group>admin:zone:read</group>

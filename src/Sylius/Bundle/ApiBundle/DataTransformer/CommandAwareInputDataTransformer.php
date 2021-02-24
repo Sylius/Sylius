@@ -40,6 +40,9 @@ final class CommandAwareInputDataTransformer implements DataTransformerInterface
 
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        return is_a($context['input']['class'], CommandAwareDataTransformerInterface::class, true);
+        return
+            isset($context['input']['class']) &&
+            is_a($context['input']['class'], CommandAwareDataTransformerInterface::class, true)
+        ;
     }
 }

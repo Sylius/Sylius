@@ -5,8 +5,9 @@ sylius:
     form:
         taxon:
             description: Опис
-            name: Назва
+            enabled: Ввімкнено
+            name: Назва регіону
             parent: Батьківський об'єкт
             slug: Слаґ
         taxonomy:
-            name: Назва
+            name: Назва регіону
