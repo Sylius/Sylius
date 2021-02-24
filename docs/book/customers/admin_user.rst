@@ -197,7 +197,7 @@ You can also use a twig function:
    {% endif %}
 
 Administrators per Channel
-''''''''''''''''''''''''''
+--------------------------
 
 It is a possible to choose a channel to which an Administrator has access. It is done on the Administrator's configuration page.
 If a channel is not chosen on an Administrator then they will have access to all channels.

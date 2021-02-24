@@ -17,10 +17,10 @@
 >
     <class name="Sylius\Bundle\ApiBundle\View\CartShippingMethod">
         <attribute name="shippingMethod">
-            <group>admin:shipping_method:read</group>
+            <group>shipping_method:read</group>
         </attribute>
         <attribute name="cost">
-            <group>admin:shipping_method:read</group>
+            <group>shipping_method:read</group>
         </attribute>
     </class>
 </serializer>

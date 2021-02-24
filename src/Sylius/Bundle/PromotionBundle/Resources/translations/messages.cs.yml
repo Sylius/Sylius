@@ -31,11 +31,9 @@ sylius:
             expires_at: Vyprší za
             usage_limit: Omezení použití
         promotion_coupon_generator_instruction:
-            amount: Množství
+            amount: Částka
             code_length: Délka kódu
             expires_at: Vyprší za
-            prefix: Prefix
-            suffix: Sufix
             usage_limit: Omezení použití
         promotion_filter:
             price_range: Cenový rozsah
@@ -56,12 +54,12 @@ sylius:
                 exclude: Výjma
                 variants: Produkty
             item_total_configuration:
-                amount: Množství
+                amount: Částka
             nth_order_configuration:
                 nth: N-tá
             shipping_country_configuration:
                 country: Země
             taxonomy_configuration:
-                exclude: Vyloučit
+                exclude: Výjma
                 taxons: Taxony
             type: Typ

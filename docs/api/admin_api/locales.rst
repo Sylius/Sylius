@@ -118,7 +118,7 @@ Exemplary Response
             "children": {
                 "code": {
                     "errors": [
-                        "Please choose locale code."
+                        "Please enter locale code."
                     ]
                 }
             }

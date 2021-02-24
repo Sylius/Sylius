@@ -21,10 +21,9 @@ sylius:
                 product: Producto
         promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
-            reusable_from_cancelled_orders: Reusable de pedidos cancelados
         group:
             name: Nombre
-            roles: Perfiles
+            roles: Roles
         channel:
             billing_data:
                 city: Ciudad
@@ -32,9 +31,7 @@ sylius:
                 country: País
                 postcode: Código postal
                 street: Calle
-                tax_id: ID del impuesto
             contact_email: Email de contacto
-            countries: Países
             currencies: Monedas
             currency_base: Moneda base
             account_verification_required: '¿Se requiere verificación de cuenta?'
@@ -43,7 +40,6 @@ sylius:
             locales: Idiomas
             payment_methods: Métodos de pago
             shipping_methods: Métodos de envío
-            shop_billing_data: Datos de facturación de la tienda
             skipping_shipping_step_allowed: '¿Omitir formulario de envío si sólo hay un método de envío?'
             skipping_payment_step_allowed: '¿Omitir formulario de pago si solo hay un método de pago disponible?'
             tax_calculation_strategy: Estrategia de cálculo de impuestos
@@ -104,10 +100,11 @@ sylius:
             file: Seleccione una imagen
         user:
             billing_address: Dirección de facturación
-            enabled: Activado
+            different_billing_address: '¿Usar una dirección diferente para la facturación?'
+            enabled: '¿Activado?'
             first_name: Nombre
             groups: Grupos
-            roles: Perfiles
+            roles: Roles
             last_name: Apellidos
             password: Contraseña de API
             shipping_address: Dirección de envío

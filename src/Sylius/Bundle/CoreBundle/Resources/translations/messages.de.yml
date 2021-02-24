@@ -11,7 +11,7 @@ sylius:
             coupon: Gutschein
         checkout:
             addressing:
-                different_billing_address: Eine abweichende Rechnungsadresse benutzen?
+                different_billing_address: Eine andere Rechnungsadresse benutzen?
                 different_shipping_address: Eine abweichende Lieferadresse benutzen?
             payment_method: Zahlungsmethode
             shipping_method: Versandarten
@@ -98,7 +98,7 @@ sylius:
             billing_address: Rechnungsadresse
             channel: Alle Kanäle
         shipping_method:
-            zone: Gebiet
+            zone: Versandgebiet
         taxon:
             code: Code
             file: Foto auswählen
@@ -116,11 +116,11 @@ sylius:
             password: Passwort
             shipping_address: Lieferadresse
         user_filter:
-            query: Suchen
+            query: Suche
         variant:
             depth: Tiefe
             height: Höhe
-            on_hand: Aktueller Lagerbestand
+            on_hand: Auf Lager
             price: Preis
             sku: Bestandseinheit
             shipping_required: Ist ein Versand erforderlich?

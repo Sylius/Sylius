@@ -7,7 +7,7 @@ sylius:
             first_name: Prénom
             group: Groupe
             last_name: Nom
-            email: Courriel
+            email: E-mail
             phone_number: Téléphone
             gender: Sexe
             birthday: Date de naissance
@@ -20,5 +20,5 @@ sylius:
             roles: Rôles
     gender:
         unknown: Inconnu
-        male: Masculin
-        female: Féminin
+        male: Homme
+        female: Femme

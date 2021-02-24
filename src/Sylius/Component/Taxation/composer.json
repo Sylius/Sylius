@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.7"
     },

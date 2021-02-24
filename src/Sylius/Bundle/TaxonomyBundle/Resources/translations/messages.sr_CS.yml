@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Opis
-            enabled: Omogućeno
             name: Ime
             parent: Roditelj
         taxonomy:

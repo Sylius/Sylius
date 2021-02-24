@@ -10,5 +10,3 @@ sylius:
             enabled: Lubatud
             name: Nimi
             tax_category: Maksu kategooria
-        shipping_method_rule:
-            type: Tüüp

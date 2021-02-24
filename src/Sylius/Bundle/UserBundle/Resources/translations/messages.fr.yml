@@ -4,8 +4,8 @@
 sylius:
     form:
         user:
-            email: Courriel
-            enabled: Activée
+            email: E-mail
+            enabled: Activé
             password:
                 label: Mot de passe
                 confirmation: Vérification

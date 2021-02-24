@@ -61,7 +61,7 @@
         <subresourceOperations>
             <subresourceOperation name="shop_billing_data_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
+                <attribute name="path">/admin/channels/{id}/shop-billing-data</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

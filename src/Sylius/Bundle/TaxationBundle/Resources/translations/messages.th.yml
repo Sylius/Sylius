@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: หมวดหมู่
             name: ชื่อภาษา
-            amount: รวม
+            amount: ยอดรวม
             included_in_price: รวมในราคาสินค้า?
             calculator: การคำนวณ

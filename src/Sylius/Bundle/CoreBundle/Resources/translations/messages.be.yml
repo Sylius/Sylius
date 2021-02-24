@@ -32,7 +32,6 @@ sylius:
                 postcode: Паштовы код
                 street: Вуліца
             contact_email: Кантактны емейл
-            countries: Краіны
             currencies: Валюты
             currency_base: Базавая валюта
             account_verification_required: Ці патрэбна падцвярджаць акаўнт?
@@ -52,7 +51,7 @@ sylius:
             file: малюнак
         locale:
             code: Код
-            enabled: Уключаны
+            enabled: Уключана
         order_filter:
             created_at_from: Створана пасля
             created_at_to: Створана перад
@@ -62,7 +61,7 @@ sylius:
             payment_state: Статус аплаты
             channel: Усе каналы
         page:
-            body: Цела
+            body: Змест
             id: ID
             title: Назва
         product:
@@ -72,7 +71,7 @@ sylius:
             variant_selection_method: Метад выбару варыянта
             main_taxon: Галоўная катэгорыя
             channels: Каналы
-            enabled: Уключаны
+            enabled: Уключана
         product_filter:
             name: Назва
             code: Код
@@ -101,6 +100,7 @@ sylius:
             file: Выберыце малюнак
         user:
             billing_address: Адрас для аплаты
+            different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
             enabled: Уключана
             first_name: Імя
             groups: Групы

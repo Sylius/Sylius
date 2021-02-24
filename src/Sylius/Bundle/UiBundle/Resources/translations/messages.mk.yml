@@ -47,7 +47,6 @@ sylius:
         remember_me: 'Запамти ме'
         scope: 'Опсег'
         search: 'Пребарај'
-        select: 'Изберете'
         shipping_address: 'Адреса за испорака'
         street: 'Улица'
         title: 'Наслов'

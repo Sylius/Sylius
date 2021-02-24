@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    email:
-        shipment_confirmation:
-            subject: 'Потвърждаване на доставката'
     menu:
         admin:
             main:
@@ -22,7 +19,7 @@ sylius:
                     countries: Страни
                     currencies: Валути
                     exchange_rates: Валутни курсове
-                    header: Настройки
+                    header: Конфигурация
                     locales: Езикови променливи
                     payment_methods: Начин на плащане
                     shipping_categories: Категории за доставка

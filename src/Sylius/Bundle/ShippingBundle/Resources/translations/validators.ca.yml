@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    shipping_method:
-        calculator:
-            min: 'Les despeses d’enviament no poden ser inferiors a 0.'
     shipment:
         shipping_method:
             not_blank: 'Si us plau seleccioneu el mètode d''enviament.'

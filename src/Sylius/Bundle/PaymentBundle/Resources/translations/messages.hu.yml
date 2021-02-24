@@ -31,4 +31,3 @@ sylius:
             enabled: Engedélyezve?
             instructions: Utasítások
             name: Név
-            position: Pozíció

@@ -4,7 +4,6 @@
 sylius:
     form:
         taxon:
-            enabled: 사용
             name: 이름
         taxonomy:
             name: 이름

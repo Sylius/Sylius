@@ -5,7 +5,5 @@ sylius:
     form:
         tax_category:
             name: Naam
-            description: Beskrywing
         tax_rate:
             name: Naam
-            calculator: Sakrekenaar

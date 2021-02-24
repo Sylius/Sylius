@@ -12,7 +12,6 @@ sylius:
         checkout:
             addressing:
                 different_billing_address: Eine andere Rechnungsadresse benutzen?
-                different_shipping_address: Eine abweichende Lieferadresse benutzen?
             payment_method: Zahlungsart
             shipping_method: Versandarten
         promotion:
@@ -22,7 +21,6 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
-            reusable_from_cancelled_orders: Wiederverwertbar bei abgebrochenen Bestellungen
         group:
             name: Name
             roles: Rollen
@@ -33,20 +31,15 @@ sylius:
                 country: Land
                 postcode: Postleitzahl
                 street: Strasse / Nr.
-                tax_id: USt-ID
             contact_email: Kontakt E-Mail
-            contact_phone_number: Kontakt Telefonnummer
-            countries: Länder
             currencies: Währungen
             currency_base: Basis-Währung
             account_verification_required: Ist eine Konto Bestätigung erforderlich?
             hostname: Server-Name
             locale_default: Standard Lokalisierung
             locales: Gebietsschemata
-            menu_taxon: Klassifizierung
             payment_methods: Zahlungsmethoden
             shipping_methods: Versandmethoden
-            shop_billing_data: Shop Rechnungsadresse
             skipping_shipping_step_allowed: Versandart überspringen, wenn nur eine Versandart verfügbar ist?
             skipping_payment_step_allowed: Überspringen des Zahlungsschritt, wenn nur eine Zahlungsmethode verfügbar ist?
             tax_calculation_strategy: Steuerberechnungsgrundlage
@@ -107,7 +100,7 @@ sylius:
             file: Foto auswählen
         user:
             billing_address: Rechnungsadresse
-            different_shipping_address: Eine abweichende Lieferadresse benutzen?
+            different_billing_address: Eine andere Rechnungsadresse benutzen?
             enabled: Aktiviert
             first_name: Vorname
             groups: Gruppen
@@ -126,7 +119,6 @@ sylius:
             shipping_required: Ist ein Versand erforderlich?
             weight: Gewicht
             width: Breite
-            tracked_help: Wenn diese Option aktiviert ist, wird Sylius den Lagerbestand verfolgen und den Verkauf einstellen, sobald der Lagerbestand 0 erreicht hat.
         attribute:
             product_attribute_value:
                 attribute: Attribut
@@ -204,7 +196,6 @@ sylius:
             header: PHP-Version und -Einstellungen
             any: Jeder
             detect_unicode: detect_unicode
-            detect_unicode_help: Setzen Sie 'detect_unicode = Off' in der php.ini Datei
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Nicht veraltet
             off: false
@@ -212,16 +203,13 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
-                auto_start_help: Setzen Sie 'session.auto_start = Off' in Ihrer php.ini Datei
             short_open_tag: short_open_tag
             timezone: Zeitzone
-            timezone_help: Legen Sie 'date.timezone' in Ihrer php.ini Datei fest (z.B. date.timezone = "Europe/Berlin")
             timezone_deprecated:
                 header: Veraltete Zeitzone
                 help: 'Zeitzone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
             version: PHP Version
             version_recommended: Empfohlene PHP Version
-            version_help: Sylius empfiehlt PHP Version %recommended%, Ihre aktuelle Version ist %current%. Bitte aktualisieren Sie diese.
     payum_gateway:
         cash_on_delivery: Nachnahme
         offline: Offline

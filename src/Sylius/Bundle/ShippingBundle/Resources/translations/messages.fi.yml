@@ -17,7 +17,6 @@ sylius:
             description: Kuvaus
             name: Nimi
         shipping_method:
-            add_rule: Lisää sääntö
             calculator: Laskin
             category: Kategoria
             channels: Kanavat
@@ -27,6 +26,3 @@ sylius:
             name: Nimi
             position: Asema
             translations: Käännökset
-        shipping_method_rule:
-            type: Tyyppi
-            amount: Summa

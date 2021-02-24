@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -63,9 +62,6 @@ final class OrderContext implements Context
     /** @var FactoryInterface */
     private $orderItemFactory;
 
-    /** @var FactoryInterface */
-    private $shipmentFactory;
-
     /** @var StateMachineFactoryInterface */
     private $stateMachineFactory;
 
@@ -99,7 +95,6 @@ final class OrderContext implements Context
         FactoryInterface $addressFactory,
         FactoryInterface $customerFactory,
         FactoryInterface $orderItemFactory,
-        FactoryInterface $shipmentFactory,
         StateMachineFactoryInterface $stateMachineFactory,
         RepositoryInterface $countryRepository,
         RepositoryInterface $customerRepository,
@@ -115,7 +110,6 @@ final class OrderContext implements Context
         $this->addressFactory = $addressFactory;
         $this->customerFactory = $customerFactory;
         $this->orderItemFactory = $orderItemFactory;
-        $this->shipmentFactory = $shipmentFactory;
         $this->stateMachineFactory = $stateMachineFactory;
         $this->countryRepository = $countryRepository;
         $this->customerRepository = $customerRepository;
@@ -321,27 +315,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+")$/
-     */
-    public function theCustomerChoseShippingTo(ShippingMethodInterface $shippingMethod, AddressInterface $address): void
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        $order->setShippingAddress($address);
-        $order->setBillingAddress(clone $address);
-
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      * @Given /^I chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      */
@@ -353,7 +326,6 @@ final class OrderContext implements Context
         $order = $this->sharedStorage->get('order');
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
-        $this->completeCheckout($order);
 
         $this->objectManager->flush();
     }
@@ -404,27 +376,6 @@ final class OrderContext implements Context
     public function theCustomerBoughtSingleProduct(ProductInterface $product, ?ChannelInterface $channel = null)
     {
         $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1, $channel);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given the customer bought another :product with separate :shippingMethod shipment
-     */
-    public function theCustomerBoughtAnotherProductWithSeparateShipment(
-        ProductInterface $product,
-        ShippingMethodInterface $shippingMethod
-    ): void {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1);
-
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentFactory->createNew();
-        $shipment->setMethod($shippingMethod);
-        $shipment->setOrder($order);
-        $order->addShipment($shipment);
 
         $this->objectManager->flush();
     }
@@ -794,18 +745,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer completed the order
-     */
-    public function theCustomerCompletedTheOrder(): void
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-        $this->completeCheckout($order);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
@@ -983,12 +922,6 @@ final class OrderContext implements Context
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
-        $this->completeCheckout($order);
-    }
-
-    private function completeCheckout(OrderInterface $order)
-    {
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
     }
 
     private function createShippingPaymentMethodsAndAddress(): void
@@ -1024,6 +957,7 @@ final class OrderContext implements Context
         $payment->setMethod($paymentMethod);
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
     }
 
     /**

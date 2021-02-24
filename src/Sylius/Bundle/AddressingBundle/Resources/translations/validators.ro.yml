@@ -59,7 +59,6 @@ sylius:
             min_length: Numele zonei trebuie să conțină cel puțin {{ limit }} caractere. Numele zonei trebuie să fie de cel puțin {{ limit }} caractere.
             not_blank: Vă rugăm să completați numele zonei.
     zone_member:
-        cannot_be_the_same_as_zone: Membrul zonei nu poate fi la fel ca o zonă.
         code:
             not_blank: Vă rugăm să alegeţi membru al zonei.
             regex: Codul membrului din zonă poate conține doar litere, numere, - și _.

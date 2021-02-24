@@ -22,8 +22,8 @@ Feature: Seeing taxes of an order
         And the customer chose "DHL" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
         Then the order's items total should be "$172.20"
-        And there should be a shipping charge "$10.00" for "DHL" method
-        And there should be a shipping tax "$2.30" for "DHL" method
+        And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping tax "$2.30"
         And the order's shipping total should be "$12.30"
         And the order's tax total should be "$34.50"
         And the order's total should be "$184.50"
@@ -35,8 +35,8 @@ Feature: Seeing taxes of an order
         And the order "#00000666" is already paid
         When I view the summary of the order "#00000666"
         Then the order's items total should be "$172.20"
-        And there should be a shipping charge "$10.00" for "DHL" method
-        And there should be a shipping tax "$2.30" for "DHL" method
+        And there should be a shipping charge "DHL $10.00"
+        And there should be a shipping tax "$2.30"
         And the order's shipping total should be "$12.30"
         And the order's tax total should be "$34.50"
         And the order's total should be "$184.50"

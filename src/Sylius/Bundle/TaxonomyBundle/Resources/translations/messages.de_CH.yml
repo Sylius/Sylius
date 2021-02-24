@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Beschreibung
-            enabled: Aktiviert
             name: Name
             parent: Parent
             slug: Kategorie SEO-URL

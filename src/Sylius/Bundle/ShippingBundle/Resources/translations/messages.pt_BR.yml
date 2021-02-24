@@ -29,7 +29,6 @@ sylius:
             description: Descrição
             name: Nome
         shipping_method:
-            add_rule: Adicionar regra
             calculator: Calculadora
             category: Categoria
             category_requirement: Requerimentos da categoria
@@ -41,12 +40,6 @@ sylius:
             match_any_category_requirement: Pelo menos uma unidade deve corresponder à categoria do método
             match_none_category_requirement: Nenhuma das unidades deve corresponder à categoria do método
             name: Nome
-            position: Função
-            rules: Regras
+            position: Posição
             tax_category: Categoria de imposto
             translations: Traduções
-        shipping_method_rule:
-            type: Tipo
-            total: Total
-            weight: Peso
-            amount: Total

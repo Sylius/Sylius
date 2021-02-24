@@ -1,16 +1,5 @@
 <?xml version="1.0" ?>
 
-<!--
-
- This file is part of the Sylius package.
-
- (c) Paweł Jędrzejewski
-
- For the full copyright and license information, please view the LICENSE
- file that was distributed with this source code.
-
--->
-
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
@@ -31,14 +20,12 @@
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
             <group>admin:product:create</group>
-            <group>shop:channel_pricing:read</group>
         </attribute>
         <attribute name="originalPrice">
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
             <group>admin:product:create</group>
-            <group>shop:channel_pricing:read</group>
         </attribute>
     </class>
 </serializer>

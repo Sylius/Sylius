@@ -5,14 +5,13 @@ sylius:
     form:
         user:
             email: البريد الإلكتروني
-            enabled: تمكين
+            enabled: تفعيل
             password:
-                label: كلمة المرور
+                label: كلمة السر
                 confirmation: تأكد
             remember_me: تذكرني
             shipping_address: عنوان الشحن
             username: اسم المستخدم
-            verified: تم التحقق
         user_filter:
             query: بحث
         user_change_password:

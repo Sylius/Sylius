@@ -25,11 +25,6 @@ final class Version20201130071338 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $adjustmentTable = $schema->getTable('sylius_adjustment');
-        if ($adjustmentTable->hasColumn('shipment_id')) {
-            return;
-        }
-
         $this->addSql('ALTER TABLE sylius_adjustment ADD shipment_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_adjustment ADD CONSTRAINT FK_ACA6E0F27BE036FC FOREIGN KEY (shipment_id) REFERENCES sylius_shipment (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_ACA6E0F27BE036FC ON sylius_adjustment (shipment_id)');
@@ -38,11 +33,6 @@ final class Version20201130071338 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $adjustmentTable = $schema->getTable('sylius_adjustment');
-        if (!$adjustmentTable->hasColumn('shipment_id')) {
-            return;
-        }
-
         $this->addSql('ALTER TABLE sylius_adjustment DROP FOREIGN KEY FK_ACA6E0F27BE036FC');
         $this->addSql('DROP INDEX IDX_ACA6E0F27BE036FC ON sylius_adjustment');
         $this->addSql('ALTER TABLE sylius_adjustment DROP shipment_id');

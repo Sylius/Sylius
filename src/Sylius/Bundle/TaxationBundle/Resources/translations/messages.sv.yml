@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: Kategori
             name: Namn
-            amount: Belopp
+            amount: Antal
             included_in_price: Ingår i priset?
             calculator: Kalkylator

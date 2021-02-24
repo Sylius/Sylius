@@ -5,9 +5,8 @@ sylius:
     form:
         taxon:
             description: Описание
-            enabled: Активен
-            name: Название
+            name: Округ
             parent: Родитель
             slug: Псевдоним
         taxonomy:
-            name: Название
+            name: Округ

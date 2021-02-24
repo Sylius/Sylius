@@ -31,7 +31,7 @@ sylius:
             type: Jenis
             types:
                 country: Negara
-                province: Wilayah
+                province: Daerah
                 zone: Zon
             scope: Skop
             scopes:

@@ -19,7 +19,6 @@ sylius:
                 country: Земља
                 postcode: Поштански број
                 street: Улица
-            countries: Земље
             locales: Локални
             payment_methods: Метод плаћања
             shipping_methods: Начини доставе

@@ -16,7 +16,6 @@ sylius:
             name: Naam
             provinces: Provinsies
             select: Kies
-            enabled: Aktief
         province:
             name: Naam
             select: Kies

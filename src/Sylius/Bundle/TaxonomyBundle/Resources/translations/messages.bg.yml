@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Описание
-            enabled: Активирано
             name: Име
             parent: Източник
             slug: Слъг

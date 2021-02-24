@@ -7,7 +7,7 @@ sylius:
             name: ชื่อภาษา
             description: คำอธิบาย
             attributes: คุณลักษณะ (Attribute)
-            options: ตัวเลือกสินค้า
+            options: ตัวเลือก
             meta_keywords: Meta Keywords
             meta_description: Meta Description
             slug: Slug

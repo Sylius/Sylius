@@ -6,8 +6,6 @@ sylius:
         review:
             author: Συντάκτης
             comment: Σχόλιο
-            rating: Βαθμολογία
             status:
-                label: Κατάσταση
                 new: Νέα
             title: Τίτλος

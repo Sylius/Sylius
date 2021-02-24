@@ -23,6 +23,5 @@ sylius:
         province: 'Daerah'
         provinces: 'Daerah-Daerah'
         scope: 'Skop'
-        select: 'Pilih'
         type: 'Jenis'
         zone: 'Zon'

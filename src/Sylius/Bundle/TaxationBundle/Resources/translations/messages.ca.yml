@@ -7,6 +7,5 @@ sylius:
             name: Nom
             description: Descripció
         tax_rate:
-            category: Categoria
             name: Nom
             amount: Total

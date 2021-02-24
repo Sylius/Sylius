@@ -29,7 +29,6 @@ sylius:
             description: Përshkrimi
             name: Emri
         shipping_method:
-            add_rule: Shto rregull
             calculator: Llogaritësi
             category: Kategorija
             category_requirement: Kërkesa e kategorisë
@@ -38,11 +37,5 @@ sylius:
             description: Përshkrimi
             enabled: E aktivizuar
             name: Emri
-            rules: Rregullat
             tax_category: Kategoria e taksimit
             translations: Përkthime
-        shipping_method_rule:
-            type: Lloji
-            total: Totali
-            weight: Pesha
-            amount: Shuma

@@ -61,5 +61,5 @@ sylius:
                 country: País
             taxonomy_configuration:
                 exclude: Excluir
-                taxons: Tipos
+                taxons: Táxons
             type: Tipo

@@ -16,27 +16,27 @@ sylius:
             zone: Versandgebiet
         country:
             add_province: Bundesland hinzufügen
-            name: Datenbankname
+            name: Name
             provinces: Bundesländer
-            select: Land auswählen
+            select: Auswahl
             enabled: Aktiviert
         province:
             name: Name
             abbreviation: Abkürzung
-            select: Bundesland auswählen
+            select: Auswahl
         zone:
             add_member: Mitglied hinzufügen
             members: Mitglieder
-            name: Ländername
-            type: Aktionsregeltyp
+            name: Name
+            type: Typ
             types:
                 country: Land
                 province: Bundesland
-                zone: Gebiet
+                zone: Versandgebiet
             scope: Umfang
             scopes:
                 all: Alle
-            select: Gebiet auswählen
+            select: Auswahl
             select_scope: Bereich wählen
         zone_member:
-            select: Mitglied auswählen
+            select: Auswahl

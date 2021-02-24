@@ -18,5 +18,10 @@
                 <value>sylius</value>
             </option>
         </constraint>
+        <property name="couponCode">
+            <constraint name="NotNull" >
+                <option name="message">sylius.promotion_coupon.code.not_blank</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

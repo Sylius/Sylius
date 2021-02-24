@@ -58,8 +58,8 @@ sylius:
             nth_order_configuration:
                 nth: Ennesimo
             shipping_country_configuration:
-                country: Nazione
+                country: Paese
             taxonomy_configuration:
                 exclude: Escludi
-                taxons: Tassonomia
+                taxons: Taxons
             type: Tipo

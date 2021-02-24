@@ -8,5 +8,3 @@ sylius:
         shipping_method:
             enabled: Dibenarkan
             name: Nama
-        shipping_method_rule:
-            type: Jenis

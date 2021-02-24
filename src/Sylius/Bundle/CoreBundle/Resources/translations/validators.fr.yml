@@ -44,6 +44,9 @@ sylius:
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
     locale:
+        code:
+            not_blank: Veuillez saisir le code de la locale.
+            unique: Ce paramètre régional existe déjà.
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
     product:

@@ -32,7 +32,7 @@ sylius:
             types:
                 country: País
                 province: Estado
-                zone: Região
+                zone: Zona
             scope: Escopo
             scopes:
                 all: Todos(as)

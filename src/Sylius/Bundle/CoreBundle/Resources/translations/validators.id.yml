@@ -42,6 +42,9 @@ sylius:
         product_eligibility: 'Produk %productName% ini telah dinonaktifkan.'
         shipping_method_eligibility: 'Produk tidak memenuhi persyaratan untuk pengiriman metode %shippingMethodName%. Silahkan memilih ulang metode pengiriman Anda.'
     locale:
+        code:
+            not_blank: Masukkan kode lokal.
+            unique: Lokal ini sudah ada.
         enabled:
             cannot_disable_base: Bahasa utama tidak dapat dinonaktifkan.
     product:

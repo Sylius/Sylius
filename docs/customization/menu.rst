@@ -55,7 +55,7 @@ In the example below we are adding a one new item and sub-item to the Admin pane
 
             $newSubmenu
                 ->addChild('new-subitem')
-                ->setLabel('Custom Admin Menu Item')
+                ->setLabel('Custom Admin Menu Itemu')
             ;
         }
     }

@@ -10,7 +10,7 @@ sylius:
         shipment:
             state: Tilstand
             states:
-                checkout: Sjekk ut
+                checkout: Gå til kassen
                 pending: Venter
                 ready: Klar
                 shipped: Sendt
@@ -26,7 +26,6 @@ sylius:
             description: Beskrivelse
             name: Navn
         shipping_method:
-            add_rule: Legg til regel
             calculator: Kalkulator
             category: Kategori
             category_requirement: Kategorikrav
@@ -36,11 +35,5 @@ sylius:
             enabled: Aktivert
             name: Navn
             position: Plassering
-            rules: Regler
             tax_category: Skattekategori
             translations: Oversettelser
-        shipping_method_rule:
-            type: Type
-            total: Totalt
-            weight: Vekt
-            amount: Antall

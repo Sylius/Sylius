@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
         "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
