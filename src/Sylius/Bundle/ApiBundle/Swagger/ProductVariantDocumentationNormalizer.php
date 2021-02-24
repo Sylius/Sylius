@@ -17,12 +17,12 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
         $this->decoratedNormalizer = $decoratedNormalizer;
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null)
     {
         return $this->decoratedNormalizer->supportsNormalization($data, $format);
     }
 
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 

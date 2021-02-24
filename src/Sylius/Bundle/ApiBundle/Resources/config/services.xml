@@ -56,12 +56,12 @@
         </service>
 
         <service
-                id="sylius.api.swagger_product_variant_documentation_normalizer"
-                class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
-                decorates="api_platform.swagger.normalizer.documentation"
-                public="true"
-                autoconfigure="false"
-                decoration-priority="20"
+            id="sylius.api.swagger_product_variant_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
         >
             <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
         </service>
