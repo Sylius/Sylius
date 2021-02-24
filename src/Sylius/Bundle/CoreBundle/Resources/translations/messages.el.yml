@@ -32,7 +32,6 @@ sylius:
                 postcode: Ταχ. Κώδικας
                 street: Οδός
             contact_email: Email επικοινωνίας
-            countries: Χώρες
             currencies: Νομίσματα
             currency_base: Βασικό νόμισμα
             account_verification_required: Απαιτείται η επαλήθευση του λογαριασμού;
@@ -51,7 +50,7 @@ sylius:
             type: Τύπος
             file: Εικόνα
         locale:
-            code: Κωδικός
+            code: Κώδικος
             enabled: Ενεργοποιημένο
         order_filter:
             created_at_from: Δημιουργήθηκε μετά από
@@ -75,7 +74,7 @@ sylius:
             enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
-            code: Κωδικός
+            code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
             shipping_category: Κατηγορία αποστολής
@@ -94,13 +93,14 @@ sylius:
         shipping_method:
             zone: Ζώνη
         taxon:
-            code: Κωδικός
+            code: Κώδικος
             file: Επιλέξτε εικόνα
             images: Εικόνες
         taxonomy:
             file: Επιλέξτε εικόνα
         user:
             billing_address: Διεύθυνση τιμολόγησης
+            different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             enabled: Ενεργοποιημένο
             first_name: Όνομα
             groups: Ομάδες

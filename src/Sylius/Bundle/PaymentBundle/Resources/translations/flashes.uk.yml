@@ -3,7 +3,6 @@
 
 sylius:
     payment:
-        authorized: 'Платіж був авторизований.'
         cancelled: 'Оплата була скасована.'
         completed: 'Оплата завершена.'
         failed: 'Оплата не виконана.'

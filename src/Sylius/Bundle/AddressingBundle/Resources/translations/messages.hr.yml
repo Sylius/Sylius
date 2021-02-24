@@ -16,23 +16,23 @@ sylius:
             zone: Regija
         country:
             add_province: Dodaj pokrajinu
-            name: Naziv pokrajine
+            name: Naziv regije
             provinces: Županije
             select: Odaberite
             enabled: Omogućeno
         province:
-            name: Naziv
+            name: Naziv regije
             abbreviation: Skraćeno
             select: Odaberite
         zone:
             add_member: Dodaj
             members: Članovi
-            name: Naziv Države
-            type: Tip
+            name: Naziv regije
+            type: Vrsta
             types:
                 country: Država
                 province: Županija
-                zone: Zona
+                zone: Regija
             scope: Djelokrug
             scopes:
                 all: Sve

@@ -28,7 +28,6 @@ sylius:
             description: Opis
             name: Ime
         shipping_method:
-            add_rule: Dodajte pravilo
             calculator: Kalkulator
             category: Kategorija
             category_requirement: Zahteva kategorije
@@ -37,11 +36,5 @@ sylius:
             description: Opis
             enabled: Omogočeno
             name: Ime
-            rules: Pravila
             tax_category: Kategorija davka
             translations: Prevodi
-        shipping_method_rule:
-            type: Vrsta
-            total: Skupaj
-            weight: Teža
-            amount: Znesek

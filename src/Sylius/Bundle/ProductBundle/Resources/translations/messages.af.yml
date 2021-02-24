@@ -5,13 +5,10 @@ sylius:
     form:
         product:
             name: Naam
-            description: Beskrywing
-            attributes: Kenmerke
         product_variant:
             name: Naam
         association_type:
             name: Naam
-            translations: Vertalings
         variant:
             name: Naam
         option:

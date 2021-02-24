@@ -8,7 +8,3 @@ sylius:
             code: Név
             enabled: Engedélyezve
             exchange_rate: Árfolyam
-        exchange_rate:
-            source_currency: Forrás pénznem
-            target_currency: Cél pénznem
-            ratio: Arány

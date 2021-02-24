@@ -17,27 +17,27 @@
 >
     <class name="Sylius\Component\Taxation\Model\TaxCategory">
         <attribute name="id">
-            <group>admin:tax_category:read</group>
+            <group>tax_category:read</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:tax_category:read</group>
+            <group>tax_category:read</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:tax_category:read</group>
+            <group>tax_category:read</group>
         </attribute>
         <attribute name="code">
-            <group>admin:tax_category:create</group>
-            <group>admin:tax_category:read</group>
+            <group>tax_category:read</group>
+            <group>tax_category:create</group>
         </attribute>
         <attribute name="name">
-            <group>admin:tax_category:create</group>
-            <group>admin:tax_category:read</group>
-            <group>admin:tax_category:update</group>
+            <group>tax_category:read</group>
+            <group>tax_category:create</group>
+            <group>tax_category:update</group>
         </attribute>
         <attribute name="description">
-            <group>admin:tax_category:create</group>
-            <group>admin:tax_category:read</group>
-            <group>admin:tax_category:update</group>
+            <group>tax_category:read</group>
+            <group>tax_category:create</group>
+            <group>tax_category:update</group>
         </attribute>
     </class>
 </serializer>

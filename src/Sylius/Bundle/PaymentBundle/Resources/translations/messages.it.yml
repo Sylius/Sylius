@@ -12,9 +12,9 @@ sylius:
             type: Tipo di carta
         payment:
             amount: Ammontare del pagamento
-            method: Metodi di pagamento
+            method: Metodo di pagamento
             state:
-                header: Stato del pagamento
+                header: Stato pagamento
                 checkout: Checkout
                 completed: Completato
                 authorized: Autorizzato

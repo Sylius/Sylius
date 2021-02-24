@@ -12,7 +12,7 @@ sylius:
             type: Tip kartice
         payment:
             amount: Iznos
-            method: Tip plaćanja
+            method: Način plaćanja
             state:
                 header: Stanje plaćanja
                 checkout: Blagajna

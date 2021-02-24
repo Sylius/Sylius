@@ -65,7 +65,6 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        /** @var string $defaultLocale */
         $defaultLocale = $this->container->getParameter('locale');
         $productAttributes = $this->getProductAttributes();
 
@@ -96,7 +95,6 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
 
     private function getProductAttributes(): array
     {
-        /** @var string $productAttributeClass */
         $productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
 
         $entityManager = $this->getEntityManager($productAttributeClass);

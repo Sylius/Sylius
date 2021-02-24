@@ -32,7 +32,7 @@ sylius:
             types:
                 country: Maa
                 province: Lääni
-                zone: Alue
+                zone: Vyöhyke
             scope: Alue
             scopes:
                 all: Kaikki

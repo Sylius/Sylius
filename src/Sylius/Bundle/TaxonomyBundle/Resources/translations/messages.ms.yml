@@ -4,7 +4,6 @@
 sylius:
     form:
         taxon:
-            enabled: Dibenarkan
             name: Nama
         taxonomy:
             name: Nama

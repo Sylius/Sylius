@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        payment:
-            state:
-                checkout: Pirkuma noformēšana
-                completed: Izpildīts
-                cancelled: Atcelts
         payment_method:
             description: Apraksts
             name: Nosaukums

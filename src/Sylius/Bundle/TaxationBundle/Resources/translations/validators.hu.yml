@@ -7,7 +7,6 @@ sylius:
             not_blank: Kérjük, adja meg az adókategória nevét.
         code:
             not_blank: Kérjük, adja meg az adókategória kódját.
-            regex: Az adó kategória kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Az adó kategória ezzel a kóddal már létezik.
     tax_rate:
         category:
@@ -22,5 +21,4 @@ sylius:
             not_blank: Kérjük válasszon adózási területet.
         code:
             not_blank: Kérjük, írja be az adó mértékét.
-            regex: Az adókulcs kódja csak betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Ez az adóegység ezzel a kóddal már létezik.

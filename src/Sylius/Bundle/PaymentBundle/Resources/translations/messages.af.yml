@@ -3,10 +3,5 @@
 
 sylius:
     form:
-        payment:
-            state:
-                pending: Hangende
-                cancelled: Gekanselleer
         payment_method:
-            description: Beskrywing
             name: Naam

@@ -14,7 +14,7 @@ sylius:
             username: Benutzername
             verified: Überprüft
         user_filter:
-            query: Suchen
+            query: Suche
         user_change_password:
             confirmation: Bestätigung
             current: Aktuelles Passwort

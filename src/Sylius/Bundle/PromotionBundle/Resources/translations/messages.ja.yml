@@ -29,6 +29,4 @@ sylius:
                 amount: 税率
             shipping_country_configuration:
                 country: 国
-            taxonomy_configuration:
-                taxons: タクソン(分類群)
             type: タイプ

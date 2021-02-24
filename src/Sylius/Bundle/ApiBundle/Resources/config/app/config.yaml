@@ -4,14 +4,6 @@
 parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
-    sylius.security.new_api_route: "/api/v2"
-    sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
-    sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
-    sylius.security.new_api_admin_regex: "^%sylius.security.new_api_admin_route%"
-    sylius.security.new_api_shop_route: "%sylius.security.new_api_route%/shop"
-    sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
-    sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
-    sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
 
 api_platform:
     patch_formats:

@@ -4,7 +4,7 @@
 sylius:
     form:
         user:
-            email: Elektroninis paštas
+            email: El. paštas
             enabled: Įjungta
             password:
                 label: Slaptažodis
@@ -12,7 +12,6 @@ sylius:
             remember_me: Prisiminti mane
             shipping_address: Pristatymo adresas
             username: Vartotojo vardas
-            verified: Patvirtinta
         user_filter:
             query: Ieškoti
         user_change_password:

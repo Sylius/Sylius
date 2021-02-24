@@ -25,6 +25,13 @@ Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/en/lat
  
 Documentation is available at [docs.sylius.com](https://docs.sylius.com).
 
+🛣️ Roadmap
+----------
+
+Our agile roadmap is available publicly on [our website](https://sylius.com/roadmap/).
+
+If you'd like to contribute, please post your ideas via [Github Issues](https://github.com/Sylius/Sylius/issues).
+
 🤝 Community
 ------------
 

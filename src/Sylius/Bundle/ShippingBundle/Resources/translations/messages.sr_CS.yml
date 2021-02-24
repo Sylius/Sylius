@@ -25,20 +25,13 @@ sylius:
             description: Opis
             name: Ime
         shipping_method:
-            add_rule: Dodajte pravilo
             calculator: Kalkulator
-            category: Kategorija
+            category: Kategorija poreske stope
             channels: Kanali
             configuration: Konfiguracija
             description: Opis
             enabled: Omogućeno
             name: Ime
             position: Pozicija
-            rules: Pravila
             tax_category: Kategorija proizvoda
             translations: Prevodi
-        shipping_method_rule:
-            type: Tip
-            total: Ukupno
-            weight: Težina
-            amount: Iznos

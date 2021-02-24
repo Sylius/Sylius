@@ -11,32 +11,21 @@ sylius:
             last_name: 姓
             phone_number: 電話番号
             postcode: 郵便番号
-            street: 番地
             province: 都道府県
             zone: 対象の地域
         country:
             add_province: 都道府県を設定する
-            name: カテゴリ名
+            name: ゾーン名
             provinces: 都道府県
-            select: 選択
             enabled: 有効
         province:
-            name: 税区分名
-            abbreviation: 略称
-            select: 選択
+            name: ゾーン名
         zone:
             add_member: 追加
             members: 地域
-            name: 名称
-            type: 条件タイプ
+            name: ゾーン名
+            type: タイプ
             types:
                 country: 国
                 province: 都道府県
-                zone: 対象地域
-            scope: スコープ
-            scopes:
-                all: すべて
-            select: 選択
-            select_scope: スコープを選択
-        zone_member:
-            select: 選択
+                zone: 対象の地域

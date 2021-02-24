@@ -58,7 +58,7 @@ sylius:
             nth_order_configuration:
                 nth: Nth
             shipping_country_configuration:
-                country: الدولة
+                country: البلد
             taxonomy_configuration:
                 exclude: استثناء
                 taxons: تاكسونس

@@ -42,7 +42,7 @@ sylius:
             account_verification_required: La vérification des comptes est-elle requise ?
             hostname: Nom d'hôte
             locale_default: Paramètres régionaux par défaut
-            locales: Paramètres régionaux
+            locales: Locales
             menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
             shipping_methods: Modes de livraison
@@ -58,14 +58,14 @@ sylius:
             file: Image
         locale:
             code: Code
-            enabled: Activée
+            enabled: Activé
         order_filter:
             created_at_from: Créé après le
             created_at_to: Créé avant le
             number: Numéro
             total_from: De
             total_to: À
-            payment_state: Etat du paiement
+            payment_state: État du paiement
             channel: Tous les canaux
         page:
             body: Corps
@@ -78,7 +78,7 @@ sylius:
             variant_selection_method: Méthode de sélection de variante
             main_taxon: Taxonomie principale
             channels: Canaux
-            enabled: Activée
+            enabled: Activé
         product_filter:
             name: Nom
             code: Code
@@ -108,7 +108,7 @@ sylius:
         user:
             billing_address: Adresse de facturation
             different_shipping_address: Utiliser une adresse différente pour la livraison ?
-            enabled: Activée
+            enabled: Activé
             first_name: Prénom
             groups: Groupes
             roles: Rôles
@@ -132,7 +132,7 @@ sylius:
                 attribute: Attribut 
                 value: Valeur
         guest:
-            email: Courriel
+            email: E-mail
         product_association:
             product: Produits associés
             type: Type d'association

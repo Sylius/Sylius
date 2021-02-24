@@ -16,27 +16,27 @@ sylius:
             zone: Zona
         country:
             add_province: Aggiungi provincia
-            name: Nome
+            name: "Nome\n"
             provinces: Provincia
-            select: Seleziona
+            select: Scegli
             enabled: Abilitato
         province:
             name: "Nome\n"
             abbreviation: Abbreviazione
-            select: Seleziona
+            select: Scegli
         zone:
             add_member: Aggiungi membro
             members: Membri
             name: "Nome\n"
             type: Tipo
             types:
-                country: Nazione
+                country: Paese
                 province: Provincia
                 zone: Zona
             scope: Ambito
             scopes:
                 all: Tutti
-            select: Seleziona
+            select: Scegli
             select_scope: Selezionare il campo di applicazione
         zone_member:
-            select: Seleziona
+            select: Scegli

@@ -13,7 +13,7 @@ Feature: Buying product with promotion that makes the order free
         And the promotion gives "100%" discount to every order
         And I am a logged in customer
 
-    @ui @api
+    @ui
     Scenario: Buying product with promotion that makes the order free
         Given I have product "T-shirt banana" in the cart
         And I am at the checkout addressing step

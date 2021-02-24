@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: شرح
-            enabled: فعال
             name: نام
             parent: شاخه بالادستی
             slug: حلزون

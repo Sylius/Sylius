@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Përshkrimi
-            enabled: E aktivizuar
             name: Emri
             parent: Prind
         taxonomy:

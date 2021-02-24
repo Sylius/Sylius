@@ -55,10 +55,6 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, ApplyCouponToCart::class);
 
-        if ($value->couponCode === null) {
-            return;
-        }
-
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 

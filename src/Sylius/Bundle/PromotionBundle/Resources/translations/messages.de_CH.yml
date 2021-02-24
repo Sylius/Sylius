@@ -34,8 +34,6 @@ sylius:
             amount: Steuersatz
             code_length: Codelänge
             expires_at: Verfällt am
-            prefix: Präfix
-            suffix: Suffix
             usage_limit: Nutzungslimit
         promotion_filter:
             price_range: Preisspanne Filter

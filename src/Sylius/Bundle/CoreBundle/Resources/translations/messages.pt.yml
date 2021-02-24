@@ -32,7 +32,6 @@ sylius:
                 postcode: Código postal
                 street: Rua
             contact_email: E-mail de Contacto
-            countries: Países
             currencies: Moedas
             currency_base: Moeda base
             account_verification_required: É necessária a verificação da conta?
@@ -99,13 +98,14 @@ sylius:
             file: Selecionar imagem
         user:
             billing_address: Endereço de faturação
+            different_billing_address: Usar uma morada diferente para a faturação?
             enabled: Ativado
-            first_name: Primeiro nome
+            first_name: Nome próprio
             groups: Grupos
             roles: Funções
             last_name: Apelido
             password: Palavra-passe
-            shipping_address: Morada de expedição
+            shipping_address: Endereço de entrega
         user_filter:
             query: Pesquisar
         variant:

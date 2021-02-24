@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: 説明
-            enabled: 有効
             name: ゾーン名
         taxonomy:
             name: ゾーン名

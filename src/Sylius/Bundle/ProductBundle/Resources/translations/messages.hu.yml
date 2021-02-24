@@ -10,10 +10,9 @@ sylius:
             options: Beállítások
             meta_keywords: Meta kulcsszavak
             meta_description: Meta leírás
-            slug: Url kompatibilis megnevezés
             taxons: Taxonok
         product_variant:
-            name: Megnevezés
+            name: Név
         association_type:
             name: Név
             translations: Fordítások
@@ -24,8 +23,7 @@ sylius:
             name: Név
         option:
             name: Név
-            position: Pozíció
             values: Lehetséges értékek
         option_value:
-            add_value: Adjon meg értéket
+            add_value: Adja hozzá az értéket
             value: Érték

@@ -14,7 +14,7 @@ sylius:
             amount: Сума за плащане
             method: Начин на плащане
             state:
-                header: Състояние на плащането
+                header: Състояние на плащане
                 checkout: Плащане
                 completed: Завършено
                 authorized: Оторизирано

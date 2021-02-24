@@ -5,7 +5,6 @@ sylius:
     form:
         taxon:
             description: Апісанне
-            enabled: Уключаны
             name: Назва
             parent: Бацькоўскі аб'ект
         taxonomy:

@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
-use Sylius\Bundle\ApiBundle\Command\Cart\ApplyCouponToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -125,18 +124,6 @@ final class CartContext implements Context
                 ->getCode(),
             1
         ));
-    }
-
-    /**
-     * @Given /^this (cart) has promotion applied with coupon "([^"]+)"$/
-     */
-    public function thisCartHasCouponAppliedWithCode(?string $tokenValue, string $couponCode): void
-    {
-        if ($tokenValue === null) {
-            $tokenValue = $this->pickupCart();
-        }
-
-        $this->commandBus->dispatch(ApplyCouponToCart::createFromData($tokenValue, $couponCode));
     }
 
     private function pickupCart(): string

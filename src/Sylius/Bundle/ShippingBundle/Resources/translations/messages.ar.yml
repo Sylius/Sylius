@@ -29,11 +29,10 @@ sylius:
             description: الوصف
             name: الاسم
         shipping_method:
-            add_rule: إضافة قاعدة
             calculator: الحاسبة
             category: القسم
             category_requirement: متطلبات القسم
-            channels: قنوات
+            channels: القنوات
             configuration: الضبط
             description: الوصف
             enabled: تفعيل
@@ -42,11 +41,5 @@ sylius:
             match_none_category_requirement: جميع الوحدات يجب أن تطابق فئة الأسلوب
             name: الاسم
             position: المهنة
-            rules: القوانين
             tax_category: أقسام الضريبة
             translations: التّرجمة
-        shipping_method_rule:
-            type: نوع
-            total: الضرائب
-            weight: الوزن
-            amount: القيمة

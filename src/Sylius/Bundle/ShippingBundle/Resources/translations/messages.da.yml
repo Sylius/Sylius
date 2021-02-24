@@ -29,24 +29,17 @@ sylius:
             description: Beskrivelse
             name: Navn
         shipping_method:
-            add_rule: Tilføj regel
             calculator: Beregner
             category: Kategori
             category_requirement: Kategori krav
             channels: Kanaler
-            configuration: Opsætning
+            configuration: Konfiguration
             description: Beskrivelse
             enabled: Aktiveret
             match_all_category_requirement: Alle enheder skal matche med forsendelseskategorien
             match_any_category_requirement: Mindst en enhed skal matche med forsendelseskategorien
             match_none_category_requirement: Ingen af enhederne behøves at matche med forsendelseskategorien
             name: Navn
-            position: Position
-            rules: Regler
+            position: Placering
             tax_category: Momskategori
             translations: Oversættelser
-        shipping_method_rule:
-            type: Type
-            total: Total
-            weight: Vægt
-            amount: Beløb

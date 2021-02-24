@@ -102,7 +102,7 @@ sylius:
         user:
             billing_address: Alamat Penagihan
             enabled: Diaktifkan
-            first_name: Nama depan
+            first_name: Nama Depan
             groups: Kelompok
             roles: Peran
             last_name: Nama belakang

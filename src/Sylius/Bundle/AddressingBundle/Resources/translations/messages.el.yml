@@ -16,7 +16,7 @@ sylius:
             zone: Ζώνη
         country:
             add_province: Προσθήκη επαρχίας
-            name: ονομασία
+            name: Ονομασία
             provinces: Επαρχίες
             select: Επιλέξτε
             enabled: Ενεργοποιημένο

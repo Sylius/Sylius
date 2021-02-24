@@ -32,7 +32,6 @@ sylius:
                 postcode: Pašto kodas
                 street: Gatvė
             contact_email: Kontaktinis el. pašto adresas
-            countries: Šalys
             currencies: Valiutos
             currency_base: Bazinė valiuta
             account_verification_required: Ar reikalingas sąskaitos patikrinimas?
@@ -101,6 +100,7 @@ sylius:
             file: Pasirinkite paveikslėlį
         user:
             billing_address: Mokėtojo adresas
+            different_billing_address: Naudoti kitą adresą apmokėjimui?
             enabled: Įjungta
             first_name: Vardas
             groups: Grupės

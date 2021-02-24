@@ -16,8 +16,8 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\PickupCart">
-        <attribute name="localeCode">
-            <group>shop:order:create</group>
-        </attribute>
+       <attribute name="localeCode">
+           <group>shop:order:create</group>
+       </attribute>
     </class>
 </serializer>

@@ -6,18 +6,15 @@
 >
     <class name="Sylius\Component\Core\Model\Taxon">
         <attribute name="id">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>taxon:read</group>
         </attribute>
         <attribute name="code">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
-            <group>admin:taxon:create</group>
-            <group>admin:taxon:update</group>
+            <group>taxon:read</group>
+            <group>taxon:create</group>
+            <group>taxon:update</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>taxon:read</group>
         </attribute>
     </class>
 </serializer>

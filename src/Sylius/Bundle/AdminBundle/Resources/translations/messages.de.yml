@@ -50,8 +50,6 @@ sylius:
             product_not_active_in_channel: Das Produkt ist in diesem Kanal noch nicht aktiviert.
         gateway:
             no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout ist veraltet. Bitte verwenden Sie die neue <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Handelsplattform</a> Integration.
         sales_summary: Verkaufszusammenfassung
         statistics:
             day: Tag

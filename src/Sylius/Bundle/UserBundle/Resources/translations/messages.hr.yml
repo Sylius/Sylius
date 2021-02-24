@@ -10,9 +10,8 @@ sylius:
                 label: Lozinka
                 confirmation: Verifikacija
             remember_me: Zapamti me
-            shipping_address: Adresa za slanje
+            shipping_address: Adresa za dostavu
             username: Korisničko ime
-            verified: Potvrđeno
         user_filter:
             query: Pretraga
         user_change_password:
