@@ -21,7 +21,7 @@ final class TaxonTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles(['test/fixtures/taxons.yaml']);
+        $this->setFixturesFiles(['test/config/fixtures/taxons.yaml']);
         $this->setUpTest();
     }
 

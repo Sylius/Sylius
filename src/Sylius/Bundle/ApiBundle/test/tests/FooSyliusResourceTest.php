@@ -21,7 +21,7 @@ final class FooSyliusResourceTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles(['test/fixtures/foo_sylius_resource.yaml']);
+        $this->setFixturesFiles(['test/config/fixtures/foo_sylius_resource.yaml']);
         $this->setUpTest();
     }
 

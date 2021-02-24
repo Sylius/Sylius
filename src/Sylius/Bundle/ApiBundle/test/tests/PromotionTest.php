@@ -21,7 +21,7 @@ final class PromotionTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles(['test/fixtures/promotions.yaml']);
+        $this->setFixturesFiles(['test/config/fixtures/promotions.yaml']);
         $this->setUpTest();
     }
 

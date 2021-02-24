@@ -25,7 +25,7 @@ final class FooTest extends ApiTestCase
 
     public function setUp(): void
     {
-        $this->setFixturesFiles(['test/fixtures/foo.yaml']);
+        $this->setFixturesFiles(['test/config/fixtures/foo.yaml']);
         $this->setUpTest();
     }
 
