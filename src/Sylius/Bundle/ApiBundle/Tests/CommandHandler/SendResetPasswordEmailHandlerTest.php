@@ -27,7 +27,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 {
-
     /**
      * @test
      */
@@ -74,7 +73,6 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'CHANNEL_CODE',
             'en_US'
         ));
-
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
 

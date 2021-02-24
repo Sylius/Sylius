@@ -15,20 +15,20 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
-use Sylius\Bundle\ApiBundle\Event\ResetPasswordRequested;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class RequestResetPasswordTokenHandler
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
 
     /** @var MessageBusInterface */
-    private $eventBus;
+    private $commandBus;
 
     /** @var GeneratorInterface */
     private $generator;
@@ -39,7 +39,7 @@ final class RequestResetPasswordTokenHandler
         GeneratorInterface $generator
     ) {
         $this->userRepository = $userRepository;
-        $this->eventBus = $eventBus;
+        $this->commandBus = $eventBus;
         $this->generator = $generator;
     }
 
@@ -51,12 +51,13 @@ final class RequestResetPasswordTokenHandler
         $user->setPasswordResetToken($this->generator->generate());
         $user->setPasswordRequestedAt(new \DateTime());
 
-        $this->eventBus->dispatch(
+        $this->commandBus->dispatch(
             new SendResetPasswordEmail(
                 $command->getEmail(),
                 $command->getChannelCode(),
                 $command->getLocaleCode()
-            )
+            ),
+            [new DispatchAfterCurrentBusStamp()]
         );
     }
 }

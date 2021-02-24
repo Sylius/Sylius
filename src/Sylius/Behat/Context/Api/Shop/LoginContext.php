@@ -31,7 +31,7 @@ final class LoginContext implements Context
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
-    /** @var Request */
+    /** @var Request|null */
     private $request;
 
     public function __construct(
