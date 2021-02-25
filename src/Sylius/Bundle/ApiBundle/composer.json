@@ -26,7 +26,8 @@
         "php": "^7.4",
         "api-platform/core": "^2.5",
         "sylius/core-bundle": "^1.7",
-        "symfony/messenger": "^4.4 || ^5.2"
+        "symfony/messenger": "^4.4 || ^5.2",
+        "lexik/jwt-authentication-bundle": "^2.6"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",

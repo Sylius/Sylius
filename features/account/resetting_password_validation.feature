@@ -8,7 +8,7 @@ Feature: Resetting a password validation
         Given the store operates on a single channel in "United States"
         And there is a user "goodman@example.com" identified by "heisenberg"
 
-    @ui
+    @ui @api
     Scenario: Trying to reset password without specifying email
         When I want to reset password
         And I do not specify the email
