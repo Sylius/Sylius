@@ -8,10 +8,11 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantSerializer implements NormalizerInterface
+final class ProductVariantSerializer implements ContextAwareNormalizerInterface
 {
     /** @var NormalizerInterface */
     private $objectNormalizer;
@@ -46,8 +47,14 @@ final class ProductVariantSerializer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null, $context = []): bool
     {
-        return $data instanceof ProductVariantInterface;
+        if ($data instanceof ProductVariantInterface) {
+            if (isset($context['item_operation_name']) && $context['item_operation_name'] === 'admin_get') {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }
