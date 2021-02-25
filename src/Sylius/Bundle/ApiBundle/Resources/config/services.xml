@@ -133,7 +133,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantSerializer">
-            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
             <tag name="serializer.normalizer" priority="64" />
