@@ -32,20 +32,20 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_password_reset_token_email_without_hostname(): void
     {
-        static::bootKernel();
+        $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = static::$kernel->getContainer()->get('filesystem');
+        $filesystem = $container->get('filesystem');
 
         /** @var TranslatorInterface $translator */
-        $translator = static::$kernel->getContainer()->get('translator');
+        $translator = $container->get('translator');
 
         /** @var EmailChecker $emailChecker */
-        $emailChecker = static::$kernel->getContainer()->get('sylius.behat.email_checker');
+        $emailChecker = $container->get('sylius.behat.email_checker');
 
         $filesystem->remove($emailChecker->getSpoolDirectory());
 
-        $emailSender = static::$kernel->getContainer()->get('sylius.email_sender');
+        $emailSender = $container->get('sylius.email_sender');
 
         /** @var ChannelRepositoryInterface|ObjectProphecy $channelRepository */
         $channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
@@ -75,9 +75,8 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         ));
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-
         self::assertTrue($emailChecker->hasMessageTo(
-                $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
+            $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
             'user@example.com'
         ));
     }
@@ -87,20 +86,20 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_password_reset_token_email_with_hostname(): void
     {
-        static::bootKernel();
+        $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = static::$kernel->getContainer()->get('filesystem');
+        $filesystem = $container->get('filesystem');
 
         /** @var TranslatorInterface $translator */
-        $translator = static::$kernel->getContainer()->get('translator');
+        $translator = $container->get('translator');
 
         /** @var EmailChecker $emailChecker */
-        $emailChecker = static::$kernel->getContainer()->get('sylius.behat.email_checker');
+        $emailChecker = $container->get('sylius.behat.email_checker');
 
         $filesystem->remove($emailChecker->getSpoolDirectory());
 
-        $emailSender = static::$kernel->getContainer()->get('sylius.email_sender');
+        $emailSender = $container->get('sylius.email_sender');
 
         /** @var ChannelRepositoryInterface|ObjectProphecy $channelRepository */
         $channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
@@ -130,7 +129,6 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         ));
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-
         self::assertTrue($emailChecker->hasMessageTo(
             $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
             'user@example.com'
