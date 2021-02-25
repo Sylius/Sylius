@@ -104,6 +104,7 @@ sylius_fixtures:
                                     postcode: '00 33 22'
                                 menu_taxon: 'MENU_CATEGORY'
                                 contact_phone_number: '+41 123 456 789'
+                                contact_email: 'contact@example.com'
 
                 payment_method:
                     options:
