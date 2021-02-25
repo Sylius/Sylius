@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 final class LoginContext implements Context
 {
     /** @var ApiSecurityClientInterface */
-    private $client;
+    private $apiSecurityClient;
 
     /** @var ApiClientInterface */
     private $apiClient;
@@ -35,11 +35,11 @@ final class LoginContext implements Context
     private $request;
 
     public function __construct(
-        ApiSecurityClientInterface $client,
+        ApiSecurityClientInterface $apiSecurityClient,
         ApiClientInterface $apiClient,
         ResponseCheckerInterface $responseChecker
     ) {
-        $this->client = $client;
+        $this->apiSecurityClient = $apiSecurityClient;
         $this->apiClient = $apiClient;
         $this->responseChecker = $responseChecker;
     }
@@ -57,7 +57,7 @@ final class LoginContext implements Context
      */
     public function iWantToLogIn(): void
     {
-        $this->client->prepareLoginRequest();
+        $this->apiSecurityClient->prepareLoginRequest();
     }
 
     /**
@@ -93,7 +93,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheUsername(string $username): void
     {
-        $this->client->setEmail($username);
+        $this->apiSecurityClient->setEmail($username);
     }
 
     /**
@@ -110,7 +110,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyThePasswordAs(string $password): void
     {
-        $this->client->setPassword($password);
+        $this->apiSecurityClient->setPassword($password);
     }
 
     /**
@@ -119,7 +119,7 @@ final class LoginContext implements Context
      */
     public function iLogIn(): void
     {
-        $this->client->call();
+        $this->apiSecurityClient->call();
     }
 
     /**
@@ -127,10 +127,10 @@ final class LoginContext implements Context
      */
     public function iLogInAsWithPassword(string $email, string $password): void
     {
-        $this->client->prepareLoginRequest();
-        $this->client->setEmail($email);
-        $this->client->setPassword($password);
-        $this->client->call();
+        $this->apiSecurityClient->prepareLoginRequest();
+        $this->apiSecurityClient->setEmail($email);
+        $this->apiSecurityClient->setPassword($password);
+        $this->apiSecurityClient->call();
     }
 
     /**
@@ -139,7 +139,7 @@ final class LoginContext implements Context
      */
     public function iLogOut()
     {
-        $this->client->logOut();
+        $this->apiSecurityClient->logOut();
     }
 
     /**
@@ -147,7 +147,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn(): void
     {
-        Assert::true($this->client->isLoggedIn(), 'Shop user should be logged in, but they are not.');
+        Assert::true($this->apiSecurityClient->isLoggedIn(), 'Shop user should be logged in, but they are not.');
     }
 
     /**
@@ -155,7 +155,7 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->client->isLoggedIn(), 'Shop user should not be logged in, but they are.');
+        Assert::false($this->apiSecurityClient->isLoggedIn(), 'Shop user should not be logged in, but they are.');
     }
 
     /**
@@ -163,7 +163,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutBadCredentials(): void
     {
-        Assert::same($this->client->getErrorMessage(), 'Invalid credentials.');
+        Assert::same($this->apiSecurityClient->getErrorMessage(), 'Invalid credentials.');
     }
 
     /**
