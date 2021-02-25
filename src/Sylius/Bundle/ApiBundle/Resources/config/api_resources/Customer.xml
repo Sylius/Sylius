@@ -33,25 +33,6 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
                 <attribute name="output">false</attribute>
             </collectionOperation>
-
-            <collectionOperation name="shop_password_reset_request">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">shop/request-reset-password</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken</attribute>
-                <attribute name="output">false</attribute>
-                <attribute name="status">202</attribute>
-                <attribute name="validation_groups">
-                    <attribute>sylius</attribute>
-                    <attribute>sylius_shop_password_reset</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:reset_password:create</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Request password reset</attribute>
-                </attribute>
-            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
