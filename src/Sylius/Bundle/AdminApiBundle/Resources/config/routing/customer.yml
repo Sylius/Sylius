@@ -11,6 +11,7 @@ sylius_admin_api_customer_index:
             serialization_groups: [Default]
             paginate: $limit
             sortable: true
+            grid: sylius_admin_customer
             sorting:
                 id: desc
 
@@ -64,5 +65,6 @@ sylius_admin_api_customer_order_index:
             filterable: true
             criteria: { customer: $id }
             sortable: true
+            grid: sylius_admin_customer_order
             sorting: { updatedAt: desc }
             csrf_protection: false
