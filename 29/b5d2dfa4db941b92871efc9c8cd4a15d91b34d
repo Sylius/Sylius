@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------
+
+by arti0090 at 2021-02-18T09:16:56Z
+
+TODO for part 2:
+
+- [x] Add phpspecs to new classes
+- [ ] if possible update swagger docs with properties that are needed for password reset
+- [ ] add endpoint for change the password with token from email
+- [ ] implement rest of behat scenarios
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-02-25T12:09:11Z
+
+Thank you, @arti0090! :1st_place_medal:
