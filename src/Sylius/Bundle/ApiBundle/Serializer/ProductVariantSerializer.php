@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -36,7 +37,11 @@ final class ProductVariantSerializer implements NormalizerInterface
         Assert::isInstanceOf($object, ProductVariantInterface::class);
 
         $data = $this->objectNormalizer->normalize($object, $format, $context);
-        $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
+        try {
+            $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $this->channelContext->getChannel()]);
+        } catch (ChannelNotFoundException $exception) {
+            unset($data['price']);
+        }
 
         return $data;
     }
