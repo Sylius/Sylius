@@ -1,6 +1,12 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
+    - { resource: "security.yaml" }
+
+parameters:
+    locale: en_US
+    database_driver: pdo_sqlite
+    database_path: "%kernel.project_dir%/var/db.sql"
 
 api_platform:
     mapping:
@@ -19,7 +25,7 @@ framework:
     test: ~
     serializer:
         mapping:
-            paths: ['%kernel.project_dir%/src/Resources/serialization']
+            paths: ['%kernel.project_dir%/config/serialization']
 
 doctrine_migrations:
     storage:
@@ -31,7 +37,6 @@ doctrine:
         driver: "%database_driver%"
         path: "%database_path%"
         charset: UTF8
-
     orm:
         entity_managers:
             default:
@@ -39,9 +44,9 @@ doctrine:
                     test:
                         mapping: true
                         type: xml
-                        dir: "%kernel.project_dir%/src/Resources/config/doctrine"
+                        dir: '%kernel.project_dir%/config/doctrine'
                         alias: ~
-                        prefix: Sylius\Bundle\ApiBundle\test\src\Entity
+                        prefix: Sylius\Bundle\ApiBundle\Application\Entity
                         is_bundle: false
 
 lexik_jwt_authentication:
@@ -53,10 +58,10 @@ sylius_taxonomy:
     resources:
         taxon:
             classes:
-                model: Sylius\Bundle\ApiBundle\test\src\Entity\Taxon
+                model: Sylius\Bundle\ApiBundle\Application\Entity\Taxon
 
 sylius_resource:
     resources:
         test.foo_sylius_resource:
             classes:
-                model: Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource
+                model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource

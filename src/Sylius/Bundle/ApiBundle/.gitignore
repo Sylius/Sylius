@@ -2,4 +2,3 @@
 
 /composer.lock
 /.phpunit.result.cache
-/test/db.sql

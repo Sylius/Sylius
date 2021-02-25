@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\test\src;
+namespace Sylius\Bundle\ApiBundle\Application;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\DelegatingLoader;
@@ -32,7 +32,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Webmozart\Assert\Assert;
 
-final class AppKernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
@@ -68,35 +68,13 @@ final class AppKernel extends BaseKernel
     {
         $container->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
         $container->setParameter('container.dumper.inline_class_loader', true);
-        $confDir = $this->getProjectDir() . '/config';
 
-        $loader->load($confDir . '/config.yaml' . self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir . '/security.yaml' . self::CONFIG_EXTS, 'glob');
+        $loader->load($this->getProjectDir() . '/config/config.yaml');
+        $loader->load($this->getProjectDir() . '/config/services.php');
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
-        $confDir = $this->getProjectDir() . '/config';
-
-        $routes->import($confDir . '/routing.yaml' . self::CONFIG_EXTS, '/', 'glob');
-    }
-
-    protected function getContainerLoader(ContainerInterface $container): LoaderInterface
-    {
-        /** @var ContainerBuilder $container */
-        Assert::isInstanceOf($container, ContainerBuilder::class);
-
-        $locator = new FileLocator($this, $this->getProjectDir() . '/src/Resources');
-        $resolver = new LoaderResolver(array(
-            new XmlFileLoader($container, $locator),
-            new YamlFileLoader($container, $locator),
-            new IniFileLoader($container, $locator),
-            new PhpFileLoader($container, $locator),
-            new GlobFileLoader($container, $locator),
-            new DirectoryLoader($container, $locator),
-            new ClosureLoader($container),
-        ));
-
-        return new DelegatingLoader($resolver);
+        $routes->import($this->getProjectDir() . '/config/routing.yaml', '/');
     }
 }

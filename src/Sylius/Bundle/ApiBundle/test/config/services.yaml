@@ -1,4 +1,0 @@
-parameters:
-    locale: en_US
-    database_driver: pdo_sqlite
-    database_path: "%kernel.project_dir%/db.sql"

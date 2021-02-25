@@ -12,11 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <entity name="Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource" table="foo_sylius_resource">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
-
-        <field name="name" column="name" type="string" />
+    <entity name="Sylius\Bundle\ApiBundle\Application\Entity\Taxon" table="sylius_taxon">
+        <field name="type" column="type" type="string" />
     </entity>
 </doctrine-mapping>

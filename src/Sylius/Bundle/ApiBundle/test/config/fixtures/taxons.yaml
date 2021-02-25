@@ -1,4 +1,4 @@
-Sylius\Bundle\ApiBundle\test\src\Entity\Taxon:
+Sylius\Bundle\ApiBundle\Application\Entity\Taxon:
     category:
         code: "category"
     mugs:

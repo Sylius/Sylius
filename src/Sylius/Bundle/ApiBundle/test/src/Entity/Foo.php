@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\test\src\Entity;
+namespace Sylius\Bundle\ApiBundle\Application\Entity;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
 

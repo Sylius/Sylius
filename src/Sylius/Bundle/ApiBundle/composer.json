@@ -58,7 +58,8 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "test/src/"
         }
     },
     "repositories": [

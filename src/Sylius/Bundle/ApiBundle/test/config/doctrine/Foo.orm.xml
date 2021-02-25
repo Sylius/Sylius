@@ -12,7 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <entity name="Sylius\Bundle\ApiBundle\test\src\Entity\Foo" table="foo">
+    <entity name="Sylius\Bundle\ApiBundle\Application\Entity\Foo" table="foo">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -23,7 +23,7 @@
             <join-column name="owner_id" referenced-column-name="id" />
         </many-to-one>
 
-        <many-to-one field="fooSyliusResource" target-entity="Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource">
+        <many-to-one field="fooSyliusResource" target-entity="Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource">
             <join-column name="foo_sylius_resource_id" referenced-column-name="id" />
         </many-to-one>
     </entity>

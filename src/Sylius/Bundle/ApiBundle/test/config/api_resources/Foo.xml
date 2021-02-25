@@ -11,7 +11,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="Sylius\Bundle\ApiBundle\test\src\Entity\Foo" shortName="Foo">
+    <resource class="Sylius\Bundle\ApiBundle\Application\Entity\Foo" shortName="Foo">
         <collectionOperations>
             <collectionOperation name="get">
                 <attribute name="method">GET</attribute>

@@ -7,9 +7,9 @@
     <php>
         <ini name="error_reporting" value="-1" />
 
-        <server name="KERNEL_CLASS" value="Sylius\Bundle\ApiBundle\test\src\AppKernel" />
+        <server name="KERNEL_CLASS" value="Sylius\Bundle\ApiBundle\Application\Kernel" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
-        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/db.sql" />
+        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/db.sql" />
         <server name="APP_DEBUG" value="0" />
         <server name="APP_SECRET" value="ch4mb3r0f5ecr3ts"/>
     </php>
@@ -17,7 +17,7 @@
     <testsuites>
         <testsuite name="SyliusApiBundle Test Suite">
             <directory>./Tests/</directory>
-            <directory>./test/tests/</directory>
+            <directory>./test/Tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

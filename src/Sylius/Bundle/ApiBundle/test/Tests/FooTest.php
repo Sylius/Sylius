@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\test\tests;
+namespace Sylius\Bundle\ApiBundle\test\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use Sylius\Bundle\ApiBundle\test\src\Entity\Foo;
-use Sylius\Bundle\ApiBundle\test\src\Entity\FooSyliusResource;
+use Sylius\Bundle\ApiBundle\Application\Entity\Foo;
+use Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource;
 use Sylius\Component\Core\Model\AdminUser;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
