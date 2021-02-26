@@ -1,0 +1,5 @@
+Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource:
+    fooSyliusResource1:
+        name: FooSyliusResource1
+    fooSyliusResource2:
+        name: FooSyliusResource2

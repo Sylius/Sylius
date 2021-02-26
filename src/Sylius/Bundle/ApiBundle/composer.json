@@ -29,10 +29,17 @@
         "symfony/messenger": "^4.4 || ^5.2"
     },
     "require-dev": {
+        "lexik/jwt-authentication-bundle": "^2.6",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "nelmio/alice": "^3.6",
         "phpspec/phpspec": "^7.0",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "symfony/browser-kit": "^4.4 || ^5.2",
+        "symfony/debug-bundle": "^4.4 || ^5.2",
+        "symfony/dotenv": "^4.4 || ^5.2",
+        "symfony/http-client": "^5.2",
+        "theofidry/alice-data-fixtures": "^1.4"
     },
     "extra": {
         "branch-alias": {
@@ -51,7 +58,8 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "test/src/"
         }
     },
     "repositories": [
