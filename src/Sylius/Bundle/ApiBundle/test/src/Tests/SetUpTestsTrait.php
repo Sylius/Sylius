@@ -23,6 +23,9 @@ trait SetUpTestsTrait
     /** @var array */
     private $fixturesFiles;
 
+    /** @var array */
+    private $objects;
+
     public function setFixturesFiles(array $fixturesFiles)
     {
         $this->fixturesFiles = array_merge(
@@ -43,9 +46,9 @@ trait SetUpTestsTrait
         /** @var JWTTokenManagerInterface $JWTManager */
         $JWTManager = $container->get('lexik_jwt_authentication.jwt_manager');
 
-        $objects = $loader->load($this->fixturesFiles, [], [], PurgeMode::createDeleteMode());
+        $this->objects = $loader->load($this->fixturesFiles, [], [], PurgeMode::createDeleteMode());
 
-        $adminUser = $objects['admin'];
+        $adminUser = $this->objects['admin'];
 
         $this->JWTAdminUserToken = $JWTManager->create($adminUser);
     }

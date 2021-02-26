@@ -66,7 +66,10 @@ final class FooTest extends ApiTestCase
      */
     public function it_allows_to_get_item_by_iri(): void
     {
-        $response = static::createClient()->request('GET', $this->findIriBy(Foo::class, ['name' => 'Foo0']));
+        /** @var Foo $foo */
+        $foo = $this->objects['foo1'];
+
+        $response = static::createClient()->request('GET', 'api/v2/foos/' . $foo->getId());
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
