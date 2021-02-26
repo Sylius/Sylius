@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2021-02-17T06:52:47Z
+
+Is this PR fixes https://github.com/Sylius/Sylius/issues/12152 ?
+
+---------------------------------------------------------------------------
+
+by stloyd at 2021-02-17T07:21:46Z
+
+> Is this PR fixes #12152 ?
+
+No, this is just confirming that using Sylius + Api-platform works, but issue is about overwriting/extending/injecting Sylius entities/resources, which is not covered here & requires mentioned changes in the issue (or even more).
+
+---------------------------------------------------------------------------
+
+by Tomanhez at 2021-02-17T07:41:33Z
+
+Hi @stloyd
+
+I tested overwriting resource configuration on `Promotion` entities and its look working properly. I will add test for extended sylius resource with overwrited api resource configuration.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-02-26T18:38:08Z
+
+Thank you, Tomasz! :1st_place_medal:
