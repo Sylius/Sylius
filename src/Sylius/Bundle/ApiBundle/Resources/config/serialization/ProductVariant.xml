@@ -30,8 +30,5 @@
             <group>product_variant:read</group>
             <group>shop:cart:read</group>
         </attribute>
-        <attribute name="channelPricings">
-            <group>product_variant:read</group>
-        </attribute>
     </class>
 </serializer>

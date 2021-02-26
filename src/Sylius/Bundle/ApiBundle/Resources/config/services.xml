@@ -55,6 +55,17 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
+        <service
+            id="sylius.api.swagger_product_variant_documentation_normalizer"
+            class="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            public="true"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="sylius.api.swagger_product_variant_documentation_normalizer.inner" />
+        </service>
+
         <service id="sylius.api.api_platform.metadata.property.metadata_factory.xml" decorates="api_platform.metadata.property.metadata_factory.xml" class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Property\Factory\ExtractorPropertyMetadataFactory" public="false">
             <argument type="service" id="sylius.api.api_platform.metadata.property.metadata_factory.xml.inner" />
             <argument type="service" id="service_container" />
@@ -118,6 +129,13 @@
             <argument type="service" id="serializer.normalizer.object" />
             <argument type="string">%sylius.model.address.class%</argument>
             <argument type="string">%sylius.model.address.interface%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantSerializer">
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.context.channel" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
