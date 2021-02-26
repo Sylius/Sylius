@@ -64,6 +64,5 @@
                 </attribute>
             </attribute>
         </property>
-        <property name="channelPricings" writable="true" readable="true" />
     </resource>
 </resources>
