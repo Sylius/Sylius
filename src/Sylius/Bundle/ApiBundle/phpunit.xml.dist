@@ -17,7 +17,7 @@
     <testsuites>
         <testsuite name="SyliusApiBundle Test Suite">
             <directory>./Tests/</directory>
-            <directory>./test/Tests/</directory>
+            <directory>./test/src/Tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
