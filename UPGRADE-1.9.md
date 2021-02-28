@@ -200,6 +200,8 @@
     +       - { path: '^/api/v1/.*', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
     ```
 
+1. API CartShippingMethod key `cost` has been changed to `price`.
+
 ### Data migrations
 
 1. The `CoreBundle/Migrations/Version20201208105207.php` migration was added which extends existing adjustments with additional details (context). 
