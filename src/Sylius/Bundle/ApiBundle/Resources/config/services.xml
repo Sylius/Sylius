@@ -139,7 +139,14 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CartShippingMethodSerializer">
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.shipment"/>
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment"/>
