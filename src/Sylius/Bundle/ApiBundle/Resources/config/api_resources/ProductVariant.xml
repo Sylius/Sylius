@@ -46,11 +46,12 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
+                <attribute name="identifiedBy">id</attribute>
             </collectionOperation>
         </collectionOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <property name="id" writable="false" />
+        <property name="code" required="true" />
         <property name="product" />
         <property name="translations">
             <attribute name="openapi_context">

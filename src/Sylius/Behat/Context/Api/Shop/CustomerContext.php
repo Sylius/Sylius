@@ -326,7 +326,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
     {
-        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+        Assert::oneOf($this->customerClient->getLastResponse()->getStatusCode(), [400, 422]);
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
@@ -339,7 +339,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
-        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 400);
+        Assert::oneOf($this->customerClient->getLastResponse()->getStatusCode(), [400, 422]);
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),

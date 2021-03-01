@@ -310,8 +310,9 @@ final class CheckoutContext implements Context
     public function iConfirmMyOrder(): void
     {
         $response = $this->completeOrder();
+        $statusCode = $response->getStatusCode();
 
-        if ($response->getStatusCode() === 400) {
+        if ($statusCode=== 400 || $statusCode === 422) {
             return;
         }
 
@@ -447,7 +448,7 @@ final class CheckoutContext implements Context
 
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::oneOf($response->getStatusCode(), [400,422]);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
@@ -754,7 +755,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::true($response->getStatusCode() === 400);
+        Assert::oneOf($response->getStatusCode(), [400, 422]);
 
         /** @var array|null $violations */
         $violations = $this->responseChecker->getResponseContent($response)['violations'];
@@ -785,7 +786,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldNotSeeTheThankYouPage(): void
     {
-        Assert::same($this->ordersClient->getLastResponse()->getStatusCode(), 400);
+        Assert::oneOf($this->ordersClient->getLastResponse()->getStatusCode(), [400, 422]);
     }
 
     /**
@@ -814,7 +815,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::oneOf($response->getStatusCode(), [400, 422]);
 
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
@@ -884,7 +885,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->ordersClient->getLastResponse();
 
-        Assert::same($response->getStatusCode(), 400);
+        Assert::oneOf($response->getStatusCode(), [400, 422]);
         Assert::true($this->isViolationWithMessageInResponse(
             $response,
             'Please select proper province.',
