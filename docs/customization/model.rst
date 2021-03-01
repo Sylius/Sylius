@@ -8,6 +8,11 @@ All models in Sylius are placed in the ``Sylius\Component\*ComponentName*\Model`
     Many models in Sylius are **extended in the Core component**.
     If the model you are willing to override exists in the ``Core`` you should be extending the ``Core`` one, not the base model from the component.
 
+.. warning::
+
+    Removing the generated and executed doctrine migration may cause warnings while a new migration is executed.
+    To avoid it, we suggest you do not delete the migration.
+
 .. note::
 
     Note that there are **translatable models** in Sylius also. The guide to translatable entities can be found below the regular one.
