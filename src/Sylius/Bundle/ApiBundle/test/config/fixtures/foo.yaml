@@ -1,0 +1,13 @@
+Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource:
+    fooSyliusResource3:
+        name: FooSyliusResource3
+
+Sylius\Bundle\ApiBundle\Application\Entity\Foo:
+    foo1:
+        name: Foo0
+        owner: '@admin'
+        fooSyliusResource: '@fooSyliusResource3'
+    foo2:
+        name: Foo1
+        owner: '@admin'
+        fooSyliusResource: '@fooSyliusResource3'

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="Sylius\Bundle\ApiBundle\Application\Entity\Foo" table="foo">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="name" column="name" type="string" />
+
+        <many-to-one field="owner" target-entity="Sylius\Component\Core\Model\AdminUserInterface">
+            <join-column name="owner_id" referenced-column-name="id" />
+        </many-to-one>
+
+        <many-to-one field="fooSyliusResource" target-entity="Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource">
+            <join-column name="foo_sylius_resource_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
