@@ -41,6 +41,9 @@
         "symfony/http-client": "^5.2",
         "theofidry/alice-data-fixtures": "^1.4"
     },
+    "conflict": {
+        "api-platform/core": "^2.6"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.7-dev"
