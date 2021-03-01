@@ -18,6 +18,9 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -80,6 +83,19 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When /^I follow link on (my) email to reset my password$/
+     */
+    public function iFollowLinkOnMyEmailToResetPassword(UserInterface $user): void
+    {
+        $this->request = Request::update(
+            'shop',
+            'request-reset-password',
+            $user->getPasswordResetToken(),
+            'Bearer'
+        );
+    }
+
+    /**
      * @When I reset it
      * @When I try to reset it
      */
@@ -102,7 +118,25 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheEmail(string $email = ''): void
     {
-        $this->request->setContent(['email' => $email]);
+        $this->request->updateContent(['email' => $email]);
+    }
+
+    /**
+     * @When I specify my new password as :password
+     * @When I do not specify my new password
+     */
+    public function iSpecifyMyNewPassword(?string $password = null): void
+    {
+        $this->request->updateContent(['newPassword' => $password]);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     * @When I do not confirm my new password
+     */
+    public function iConfirmMyNewPassword(?string $password = null): void
+    {
+        $this->request->updateContent(['confirmNewPassword' => $password]);
     }
 
     /**
@@ -168,11 +202,23 @@ final class LoginContext implements Context
 
     /**
      * @Then I should be notified that email with reset instruction has been sent
+     * @Then I should be notified that my password has been successfully reset
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {
         $response = $this->apiClient->getLastResponse();
         Assert::same($response->getStatusCode(), 202);
+    }
+
+    /**
+     * @Then I should be able to log in as :email with :password password
+     * @Then the customer should be able to log in as :email with :password password
+     */
+    public function iShouldBeAbleToLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->iLogInAsWithPassword($email, $password);
+
+        $this->iShouldBeLoggedIn();
     }
 
     private function addLocaleCode(string $localeCode): void

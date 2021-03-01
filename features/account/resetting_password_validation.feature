@@ -15,7 +15,7 @@ Feature: Resetting a password validation
         And I try to reset it
         Then I should be notified that the email is required
 
-    @ui
+    @ui @api
     Scenario: Trying to reset password with a wrong confirmation password
         Given I have already received a resetting password email
         When I follow link on my email to reset my password
@@ -24,7 +24,7 @@ Feature: Resetting a password validation
         And I try to reset it
         Then I should be notified that the entered passwords do not match
 
-    @ui
+    @ui @api
     Scenario: Trying to reset my password with a too short password
         Given I have already received a resetting password email
         When I follow link on my email to reset my password

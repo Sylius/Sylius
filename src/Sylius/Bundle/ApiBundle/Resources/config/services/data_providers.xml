@@ -76,6 +76,11 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.item_data_provider.reset_password_customer" class="Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordCustomerDataProvider">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
         <service
             id="sylius.api.collection_data_provider.shipping_methods_available_for_order"
             class="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider"
