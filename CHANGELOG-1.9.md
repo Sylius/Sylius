@@ -4,7 +4,10 @@
 
 #### TL;DR
 
-- Symfony 5 support
+- Added support for Symfony 5
+- Enhanced adjustment calculations to take shipping and promotions taxes into account while generating invoices and credit memos
+- Added support for non-translatable product attributes
+- Improved API v2 coverage up to 50% (customer account, orders, emails, products & product variants management) 
 
 #### Details
 
