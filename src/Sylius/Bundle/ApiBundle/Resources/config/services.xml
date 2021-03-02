@@ -110,11 +110,6 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
-        <!-- should be used when api-platform v2.6 support will be added -->
-<!--        <service id="sylius.api.data_transformer.reset_password_token_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\ResetPasswordTokenAwareInputCommandDataTransformer">-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
         <service id="sylius.api.data_transformer.logged_in_shop_user_id_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">
             <argument type="service" id="sylius.api.context.user" />
             <tag name="sylius.api.command_data_transformer" />
