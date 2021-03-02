@@ -63,8 +63,8 @@ class ResetPasswordHandler
         }
 
         $changeShopUserPassword = new ChangeShopUserPassword(
-            $command->getNewPassword(),
-            $command->getConfirmNewPassword(),
+            $command->newPassword,
+            $command->confirmNewPassword,
             ''
         );
 
