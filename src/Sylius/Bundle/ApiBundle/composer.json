@@ -25,12 +25,12 @@
     "require": {
         "php": "^7.4",
         "api-platform/core": "^2.5",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "sylius/core-bundle": "^1.7",
         "symfony/messenger": "^4.4 || ^5.2",
         "lexik/jwt-authentication-bundle": "^2.6"
     },
     "require-dev": {
-        "lexik/jwt-authentication-bundle": "^2.6",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "nelmio/alice": "^3.6",
@@ -41,6 +41,9 @@
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/http-client": "^5.2",
         "theofidry/alice-data-fixtures": "^1.4"
+    },
+    "conflict": {
+        "api-platform/core": "^2.6"
     },
     "extra": {
         "branch-alias": {
