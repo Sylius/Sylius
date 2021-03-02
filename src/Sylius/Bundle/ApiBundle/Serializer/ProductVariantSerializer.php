@@ -49,12 +49,14 @@ final class ProductVariantSerializer implements ContextAwareNormalizerInterface
 
     public function supportsNormalization($data, $format = null, $context = []): bool
     {
-        if ($data instanceof ProductVariantInterface) {
-            if (isset($context['item_operation_name']) && $context['item_operation_name'] === 'admin_get') {
-                return false;
-            }
-            return true;
-        }
-        return false;
+       return $this->isProductVariantInterface($data) && $this->isAdminGetOperation($context);
+    }
+
+    private function isProductVariantInterface($data): bool {
+        return $data instanceof ProductVariantInterface;
+    }
+
+    private function isAdminGetOperation(array $context): bool {
+        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
     }
 }
