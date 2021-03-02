@@ -242,3 +242,8 @@ sylius:
 
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel
+        
+    email:
+        account_verification_token: 
+            subject: Email address verification
+            message: "Verify your account with token: "
