@@ -89,14 +89,6 @@ final class LoginContext implements Context
     {
         $this->request = Request::create('shop', 'reset-password', 'Bearer');
         $this->request->updateContent(['resetPasswordToken' => $user->getPasswordResetToken()]);
-
-//       should be used when api-platform v2.6 support will be added
-//        $this->request = Request::update(
-//            'shop',
-//            'request-reset-password',
-//            $user->getPasswordResetToken(),
-//            'Bearer'
-//        );
     }
 
     /**
