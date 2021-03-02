@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Event\ShopUserRegistered;
+use Sylius\Bundle\ApiBundle\Command\SendShopUserVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -24,7 +24,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
@@ -45,7 +44,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     private $tokenGenerator;
 
     /** @var MessageBusInterface */
-    private $eventBus;
+    private $commandBus;
 
     public function __construct(
         FactoryInterface $shopUserFactory,
@@ -53,14 +52,14 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         CustomerProviderInterface $customerProvider,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $tokenGenerator,
-        MessageBusInterface $eventBus
+        MessageBusInterface $commandBus
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
         $this->customerProvider = $customerProvider;
         $this->channelRepository = $channelRepository;
         $this->tokenGenerator = $tokenGenerator;
-        $this->eventBus = $eventBus;
+        $this->commandBus = $commandBus;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -86,12 +85,16 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         if ($channel->isAccountVerificationRequired()) {
             $token = $this->tokenGenerator->generate();
             $user->setEmailVerificationToken($token);
+
+            $this->commandBus->dispatch(new SendShopUserVerificationEmail(
+                $command->email,
+                $command->localeCode,
+                $command->channelCode
+            ));
         } else {
             $user->setEnabled(true);
         }
 
         $this->shopUserManager->persist($user);
-
-        $this->eventBus->dispatch(new ShopUserRegistered($command->email, $command->channelCode, $command->localeCode), [new DispatchAfterCurrentBusStamp()]);
     }
 }
