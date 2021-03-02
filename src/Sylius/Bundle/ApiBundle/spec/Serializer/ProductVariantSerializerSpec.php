@@ -46,7 +46,7 @@ final class ProductVariantSerializerSpec extends ObjectBehavior
         $this->supportsNormalization($variant, null, ['item_operation_name' => 'admin_get'])->shouldReturn(false);
     }
 
-    function it_serialize_product_variant_if_item_operation_name_is_different_that_admin_get(
+    function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
         NormalizerInterface $objectNormalizer,
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         ChannelInterface $channel,
