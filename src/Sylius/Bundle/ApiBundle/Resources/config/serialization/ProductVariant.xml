@@ -36,6 +36,7 @@
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>shop:product:read</group>
         </attribute>
         <attribute name="tracked">
             <group>admin:product_variant:create</group>

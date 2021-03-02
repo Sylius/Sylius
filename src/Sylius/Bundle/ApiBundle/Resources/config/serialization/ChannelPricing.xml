@@ -20,6 +20,7 @@
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>shop:product:read</group>
         </attribute>
         <attribute name="originalPrice">
             <group>admin:product_variant:create</group>
