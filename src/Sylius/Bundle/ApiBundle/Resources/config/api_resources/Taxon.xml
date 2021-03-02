@@ -36,7 +36,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/taxons/{code}</attribute>
+                <attribute name="path">/admin/taxons/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">

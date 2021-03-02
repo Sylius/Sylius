@@ -36,7 +36,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/currencies/{code}</attribute>
+                <attribute name="path">/admin/currencies/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:currency:read</attribute>
                 </attribute>

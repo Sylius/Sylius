@@ -62,7 +62,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/products/{code}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
@@ -84,7 +84,7 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/products/{code}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
                     <attribute name="max-depth">2</attribute>
@@ -93,7 +93,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/products/{code}</attribute>
+                <attribute name="path">/admin/products/{id}</attribute>
             </itemOperation>
         </itemOperations>
 
