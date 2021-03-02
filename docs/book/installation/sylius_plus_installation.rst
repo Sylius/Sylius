@@ -295,7 +295,7 @@ and apply them to your database:
 .. code-block:: bash
 
     bin/console doctrine:database:create --if-not-exists
-    cp -f vendor/sylius/plus/migrations/* src/Migrations
+    cp -f vendor/sylius/plus/src/Migrations/* src/Migrations
     bin/console doctrine:migrations:migrate -n
 
 **8.** Install Sylius with Sylius Plus fixtures:
