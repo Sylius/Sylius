@@ -13,20 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-
-use Sylius\Bundle\ApiBundle\Command\ChangeShopUserPassword;
 use Sylius\Bundle\ApiBundle\Command\ResetPassword;
-use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-class ResetPasswordHandler
+class ResetPasswordHandler implements MessageHandlerInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
@@ -34,23 +30,25 @@ class ResetPasswordHandler
     /** @var MetadataInterface */
     private $metadata;
 
-    /** @var MessageBusInterface */
-    private $commandBus;
+    /** @var PasswordUpdaterInterface */
+    private $passwordUpdater;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
         MetadataInterface $metadata,
-        MessageBusInterface $commandBus
+        PasswordUpdaterInterface $passwordUpdater
     ) {
         $this->userRepository = $userRepository;
         $this->metadata = $metadata;
-        $this->commandBus = $commandBus;
+        $this->passwordUpdater = $passwordUpdater;
     }
 
     public function __invoke(ResetPassword $command): void
     {
-        /** @var ShopUserInterface $user */
+        /** @var ShopUserInterface|null $user */
         $user = $this->userRepository->findOneBy(['passwordResetToken' => $command->getResetPasswordToken()]);
+
+        Assert::notNull($user);
 
         $resetting = $this->metadata->getParameter('resetting');
         $lifetime = new \DateInterval($resetting['token']['ttl']);
@@ -62,17 +60,8 @@ class ResetPasswordHandler
             throw new \InvalidArgumentException('Password reset token do not match.');
         }
 
-        $changeShopUserPassword = new ChangeShopUserPassword(
-            $command->newPassword,
-            $command->confirmNewPassword,
-            ''
-        );
+        $user->setPlainPassword($command->newPassword);
 
-        $changeShopUserPassword->setShopUserId($user->getId());
-
-        $this->commandBus->dispatch(
-            $changeShopUserPassword,
-            [new DispatchAfterCurrentBusStamp()]
-        );
+        $this->passwordUpdater->updatePassword($user);
     }
 }
