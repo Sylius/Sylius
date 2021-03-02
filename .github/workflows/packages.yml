@@ -1,12 +1,12 @@
 name: Packages
 
 on:
-    push:
-        branches-ignore:
-            - 'dependabot/**'
-        paths:
-            - "src/Sylius/Bundle/**"
-            - "src/Sylius/Component/**"
+    # push:
+    #     branches-ignore:
+    #         - 'dependabot/**'
+    #     paths:
+    #         - "src/Sylius/Bundle/**"
+    #         - "src/Sylius/Component/**"
     pull_request:
         paths:
             - "src/Sylius/Bundle/**"

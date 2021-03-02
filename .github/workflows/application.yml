@@ -1,12 +1,12 @@
 name: Application
 
 on:
-    push:
-        branches-ignore:
-            - 'dependabot/**'
-        paths-ignore:
-            - "docs/**"
-            - "*.md"
+    # push:
+    #     branches-ignore:
+    #         - 'dependabot/**'
+    #     paths-ignore:
+    #         - "docs/**"
+    #         - "*.md"
     pull_request:
         paths-ignore:
             - "docs/**"
