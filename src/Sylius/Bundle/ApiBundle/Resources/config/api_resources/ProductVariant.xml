@@ -53,7 +53,7 @@
                 <attribute name="path">/shop/product-variants</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_variant_product_filter</attribute>
-<!--                    <attribute>sylius.api.product_variant_option_value_filter</attribute>-->
+                    <attribute>sylius.api.product_variant_option_value_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

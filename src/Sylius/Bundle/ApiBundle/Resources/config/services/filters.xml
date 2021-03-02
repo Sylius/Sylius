@@ -86,5 +86,11 @@
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.product_variant_option_value_filter" class="Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter">
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>
