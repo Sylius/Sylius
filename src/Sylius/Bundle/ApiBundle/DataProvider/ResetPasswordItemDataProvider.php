@@ -19,19 +19,11 @@ use Sylius\Bundle\ApiBundle\Command\ResetPassword;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /** @experimental */
-final class ResetPasswordCustomerDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
+final class ResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    /** @var UserRepositoryInterface */
-    private $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
-        return $this->userRepository->findOneBy(['passwordResetToken' => $id]);
+        return new ResetPassword($id);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

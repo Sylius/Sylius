@@ -55,7 +55,8 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword('newPassword')->shouldBeCalled();
         $passwordUpdater->updatePassword($shopUser)->shouldBeCalled();
 
-        $command = new ResetPassword('newPassword', 'newPassword');
+        $command = new ResetPassword('TOKEN');
+        $command->newPassword = 'newPassword';
         $command->setResetPasswordToken('TOKEN');
 
         $this->__invoke($command);
@@ -78,7 +79,8 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword('newPassword')->shouldNotBeCalled();
         $passwordUpdater->updatePassword($shopUser)->shouldNotBeCalled();
 
-        $command = new ResetPassword('newPassword', 'newPassword');
+        $command = new ResetPassword('TOKEN');
+        $command->newPassword = 'newPassword';
         $command->setResetPasswordToken('TOKEN');
 
         $this
@@ -104,7 +106,8 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $shopUser->setPlainPassword('newPassword')->shouldNotBeCalled();
         $passwordUpdater->updatePassword($shopUser)->shouldNotBeCalled();
 
-        $command = new ResetPassword('newPassword', 'newPassword');
+        $command = new ResetPassword('TOKEN');
+        $command->newPassword = 'newPassword';
         $command->setResetPasswordToken('TOKEN');
 
         $this

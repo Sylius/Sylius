@@ -78,7 +78,6 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="resetPasswordToken" readable="false" />
         <property name="email" writable="true" />
         <property name="firstName" writable="true" />
         <property name="lastName" writable="true" />
