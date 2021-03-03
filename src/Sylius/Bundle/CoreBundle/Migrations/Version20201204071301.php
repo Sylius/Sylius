@@ -30,7 +30,7 @@ final class Version20201204071301 extends AbstractMigration
             return;
         }
 
-        $this->addSql('ALTER TABLE sylius_adjustment ADD details JSON NOT NULL');
+        $this->addSql('ALTER TABLE sylius_adjustment ADD details LONGTEXT NOT NULL');
     }
 
     public function down(Schema $schema): void
