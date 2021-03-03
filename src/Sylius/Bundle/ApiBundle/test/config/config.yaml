@@ -54,6 +54,13 @@ lexik_jwt_authentication:
     public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
     pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"
 
+swiftmailer:
+    disable_delivery: true
+    logging: true
+    spool:
+        type: file
+        path: '%kernel.cache_dir%/spool'
+
 sylius_taxonomy:
     resources:
         taxon:
