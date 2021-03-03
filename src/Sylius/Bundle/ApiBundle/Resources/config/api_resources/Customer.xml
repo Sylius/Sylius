@@ -20,6 +20,25 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Registers a new customer</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_get_all">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/customers/</attribute>
@@ -33,29 +52,6 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute>
                 <attribute name="output">false</attribute>
             </collectionOperation>
-
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/customers</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Registers a new customer</attribute>
-                </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:customer:create</attribute>
-                </attribute>
-                <!-- <attribute name="messenger">input</attribute> -->
-                <!-- <attribute name="input">Sylius\Bundle\ApiBundle\Command\RegisterShopUser</attribute> -->
-                <!-- <attribute name="output">false</attribute> -->
-            </collectionOperation>
-
-            <collectionOperation name="admin_get_all">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/customers</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:read</attribute>
-                </attribute>
-            </collectionOperation>
-
         </collectionOperations>
 
         <itemOperations>
@@ -65,6 +61,19 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:customer:read</attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/customers/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/customers/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -97,19 +106,6 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:customer:update</attribute>
                 </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/customers/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:customer:update</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/customers/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

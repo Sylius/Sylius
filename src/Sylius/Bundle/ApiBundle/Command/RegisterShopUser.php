@@ -33,7 +33,7 @@ class RegisterShopUser
 
     /** @var string */
     public $birthday;
-    
+
     /** @var string */
     public $gender;
 
