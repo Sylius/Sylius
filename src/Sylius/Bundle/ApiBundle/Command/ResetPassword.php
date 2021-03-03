@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-class ResetPassword implements ResetPasswordTokenAwareInterface
+class ResetPassword
 {
     /** @var string */
     public $newPassword;
@@ -25,10 +25,9 @@ class ResetPassword implements ResetPasswordTokenAwareInterface
     /** @var string */
     public $resetPasswordToken;
 
-    public function __construct(string $newPassword, string $confirmNewPassword)
+    public function __construct(string $resetPasswordToken)
     {
-        $this->newPassword = $newPassword;
-        $this->confirmNewPassword = $confirmNewPassword;
+        $this->resetPasswordToken = $resetPasswordToken;
     }
 
     public function getResetPasswordToken(): string

@@ -16,7 +16,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
+final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,

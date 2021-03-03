@@ -22,7 +22,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-class ResetPasswordHandler implements MessageHandlerInterface
+final class ResetPasswordHandler implements MessageHandlerInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
@@ -52,6 +52,7 @@ class ResetPasswordHandler implements MessageHandlerInterface
 
         $resetting = $this->metadata->getParameter('resetting');
         $lifetime = new \DateInterval($resetting['token']['ttl']);
+
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             throw new \InvalidArgumentException('Password reset token has expired');
         }
