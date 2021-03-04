@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendShopUserVerificationEmail;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendShopUserVerificationEmailHandler;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;
@@ -25,7 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SendShopUserVerificationEmailHandlerTest extends KernelTestCase
+final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 {
     public function it_sends_account_verification_token_email_without_hostname(): void
     {
@@ -59,13 +59,13 @@ final class SendShopUserVerificationEmailHandlerTest extends KernelTestCase
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel->reveal());
         $userRepository->findOneByEmail('user@example.com')->willReturn($user->reveal());
 
-        $sendShopUserVerificationEmailHandler = new SendShopUserVerificationEmailHandler(
+        $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
             $emailSender
         );
 
-        $sendShopUserVerificationEmailHandler(new SendShopUserVerificationEmail(
+        $sendAccountVerificationEmailHandler(new SendAccountVerificationEmail(
             'user@example.com',
             'en_US',
             'CHANNEL_CODE')
@@ -110,13 +110,13 @@ final class SendShopUserVerificationEmailHandlerTest extends KernelTestCase
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel->reveal());
         $userRepository->findOneByEmail('user@example.com')->willReturn($user->reveal());
 
-        $sendShopUserVerificationEmailHandler = new SendShopUserVerificationEmailHandler(
+        $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
             $emailSender
         );
 
-        $sendShopUserVerificationEmailHandler(new SendShopUserVerificationEmail(
+        $sendAccountVerificationEmailHandler(new SendAccountVerificationEmail(
                 'user@example.com',
                 'en_US',
                 'CHANNEL_CODE')

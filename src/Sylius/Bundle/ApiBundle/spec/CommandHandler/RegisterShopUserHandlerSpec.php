@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Command\SendShopUserVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -38,7 +38,14 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         MessageBusInterface $commandBus
     ): void {
-        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $channelRepository, $generator, $commandBus);
+        $this->beConstructedWith(
+            $shopUserFactory,
+            $shopUserManager,
+            $customerProvider,
+            $channelRepository,
+            $generator,
+            $commandBus
+        );
     }
 
     function it_is_a_message_handler(): void
@@ -78,7 +85,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
 
-        $sendEmailCommand = new SendShopUserVerificationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $sendEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
         $commandBus->dispatch($sendEmailCommand)->shouldBeCalled()->willReturn(new Envelope($sendEmailCommand));
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();

@@ -19,7 +19,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class VerifyCustomerAccountItemDataProviderSpec extends ObjectBehavior
 {
-
     function it_supports_only_verify_customer_account(): void
     {
         $this->supports(VerifyCustomerAccount::class, 'post')->shouldReturn(true);
@@ -28,8 +27,8 @@ final class VerifyCustomerAccountItemDataProviderSpec extends ObjectBehavior
 
     function it_creates_and_provides_verify_customer_account_class(): void
     {
-        $this->getItem(VerifyCustomerAccount::class, 'ToKeN')
+        $this
+            ->getItem(VerifyCustomerAccount::class, 'ToKeN')
             ->shouldBeLike(new VerifyCustomerAccount('ToKeN'));
     }
-
 }

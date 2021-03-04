@@ -17,7 +17,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
  * @experimental
  * @psalm-immutable
  */
-class SendShopUserVerificationEmail
+class SendAccountVerificationEmail
 {
     /** @var string */
     public $shopUserEmail;
@@ -33,20 +33,5 @@ class SendShopUserVerificationEmail
         $this->shopUserEmail = $shopUserEmail;
         $this->localeCode = $localeCode;
         $this->channelCode = $channelCode;
-    }
-
-    public function getShopUserEmail(): string
-    {
-        return $this->shopUserEmail;
-    }
-
-    public function getLocale(): string
-    {
-        return $this->localeCode;
-    }
-
-    public function getChannelCode(): string
-    {
-        return $this->channelCode;
     }
 }

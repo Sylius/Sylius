@@ -187,7 +187,7 @@ final class CustomerContext implements Context
     public function iTryToVerifyMyAccountUsingTheLinkFromEmail(ShopUserInterface $user): void
     {
         $request = Request::custom(
-            \sprintf('/api/v2/shop/verify-account/%s', (string) $user->getEmailVerificationToken()),
+            \sprintf('/api/v2/shop/account-verification-requests/%s', (string) $user->getEmailVerificationToken()),
             HttpRequest::METHOD_PATCH,
         );
 
