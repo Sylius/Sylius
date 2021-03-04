@@ -53,7 +53,7 @@ final class SendShopUserVerificationEmailHandler implements MessageHandlerInterf
         $this->emailSender->send(
             Emails::ACCOUNT_VERIFICATION_TOKEN,
             [$shopUser->getEmail()],
-            ['user' => $shopUser, 'localeCode' => $command->locale, 'channel' => $channel]
+            ['user' => $shopUser, 'localeCode' => $command->localeCode, 'channel' => $channel]
         );
     }
 }

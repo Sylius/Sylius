@@ -20,13 +20,13 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class SendShopUserVerificationEmail
 {
     /** @var string */
-    protected $shopUserEmail;
+    public $shopUserEmail;
 
     /** @var string */
-    protected $localeCode;
+    public $localeCode;
 
     /** @var string */
-    protected $channelCode;
+    public $channelCode;
 
     public function __construct(string $shopUserEmail, string $localeCode, string $channelCode)
     {
