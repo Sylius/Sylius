@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by arti0090 at 2021-03-02T06:57:13Z
+
+I have intentionally left comments with some changes (that tested on apiplatform v2.6) that will work when endpoint will be PATCH /request-reset-password/{token}  At the moment it does not work. We first need support for that version. There should be also no issue with removing these comments as my last commit is pushed https://github.com/Sylius/Sylius/pull/12391/commits/2149e879c5ac8011801c3cf829c012bfdc33b0b5
+
+---------------------------------------------------------------------------
+
+by GSadee at 2021-03-04T11:33:08Z
+
+Thank you, @arti0090! :tada:
