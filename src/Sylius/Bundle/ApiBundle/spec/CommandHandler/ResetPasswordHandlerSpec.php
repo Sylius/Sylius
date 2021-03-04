@@ -46,7 +46,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval ) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
         } ))->willReturn(true);
 
@@ -57,7 +57,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
-        $command->setResetPasswordToken('TOKEN');
+        $command->resetPasswordToken = 'TOKEN';
 
         $this->__invoke($command);
     }
@@ -71,7 +71,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval ) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
         } ))->willReturn(false);
 
@@ -81,7 +81,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
-        $command->setResetPasswordToken('TOKEN');
+        $command->resetPasswordToken = 'TOKEN';
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -98,7 +98,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
 
-        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval ) {
+        $shopUser->isPasswordRequestNonExpired(Argument::that(function(\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '5';
         } ))->willReturn(false);
 
@@ -108,7 +108,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
-        $command->setResetPasswordToken('TOKEN');
+        $command->resetPasswordToken = 'TOKEN';
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
