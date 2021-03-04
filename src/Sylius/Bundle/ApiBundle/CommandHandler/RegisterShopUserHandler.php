@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Command\SendShopUserVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -86,7 +86,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
             $token = $this->tokenGenerator->generate();
             $user->setEmailVerificationToken($token);
 
-            $this->commandBus->dispatch(new SendShopUserVerificationEmail(
+            $this->commandBus->dispatch(new SendAccountVerificationEmail(
                 $command->email,
                 $command->localeCode,
                 $command->channelCode

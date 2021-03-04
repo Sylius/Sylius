@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
-use Sylius\Bundle\ApiBundle\Command\SendShopUserVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental  */
-final class SendShopUserVerificationEmailHandler implements MessageHandlerInterface
+final class SendAccountVerificationEmailHandler implements MessageHandlerInterface
 {
     /** @var UserRepositoryInterface */
     private $shopUserRepository;
@@ -43,12 +43,12 @@ final class SendShopUserVerificationEmailHandler implements MessageHandlerInterf
         $this->emailSender = $emailSender;
     }
 
-    public function __invoke(SendShopUserVerificationEmail $command): void
+    public function __invoke(SendAccountVerificationEmail $command): void
     {
         /** @var ShopUserInterface $shopUser */
-        $shopUser = $this->shopUserRepository->findOneByEmail($command->getShopUserEmail());
+        $shopUser = $this->shopUserRepository->findOneByEmail($command->shopUserEmail);
 
-        $channel = $this->channelRepository->findOneByCode($command->getChannelCode());
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
         $this->emailSender->send(
             Emails::ACCOUNT_VERIFICATION_TOKEN,

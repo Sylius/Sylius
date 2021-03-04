@@ -17,7 +17,7 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount">
         <attribute name="token">
-            <group>shop:customer:verify</group>
+            <group>shop:account_verification:update</group>
         </attribute>
     </class>
 </serializer>

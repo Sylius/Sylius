@@ -24,15 +24,15 @@
         <itemOperations>
             <itemOperation name="shop_verify_customer_account">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/verify-account/{id}</attribute>
+                <attribute name="path">/account-verification-requests/{id}</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:verify</attribute>
+                    <attribute name="groups">shop:account_verification:update</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Verify Customer account</attribute>
+                    <attribute name="summary">Verifies Customer account</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

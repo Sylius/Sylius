@@ -145,12 +145,10 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\VerifyCustomerAccountHandler">
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="event_dispatcher" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendShopUserVerificationEmailHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.email_sender" />
