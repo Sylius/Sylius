@@ -22,7 +22,7 @@ Feature: Resetting a password
         When I reset password for email "goodman@example.com" in "Polish (Poland)" locale
         Then an email with reset token should be sent to "goodman@example.com" in "Polish (Poland)" locale
 
-    @ui @email
+    @ui @email @api
     Scenario: Changing my account password with token I received
         Given I have already received a resetting password email
         When I follow link on my email to reset my password

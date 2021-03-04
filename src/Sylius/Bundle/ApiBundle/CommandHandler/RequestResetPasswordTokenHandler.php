@@ -17,12 +17,13 @@ use Sylius\Bundle\ApiBundle\Command\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class RequestResetPasswordTokenHandler
+final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 {
     /** @var UserRepositoryInterface */
     private $userRepository;
