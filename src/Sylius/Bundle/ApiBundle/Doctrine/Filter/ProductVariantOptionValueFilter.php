@@ -65,12 +65,10 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
                 ],
             ],
             'optionValues[]' => [
-                'type' => 'array[string]',
+                'type' => 'string',
                 'required' => false,
                 'property' => 'optionValues',
-                'schema' => [
-                    'type' => 'array[string]',
-                ],
+                'is_collection' => true,
             ],
         ];
     }
