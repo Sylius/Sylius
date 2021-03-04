@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
@@ -78,7 +78,7 @@ final class LoginContext implements Context
     /**
      * @When /^I follow link on (my) email to reset my password$/
      */
-    public function iFollowLinkOnMyEmailToResetPassword(UserInterface $user): void
+    public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = Request::custom(
             sprintf('api/v2/shop/reset-password/%s', $user->getPasswordResetToken()),

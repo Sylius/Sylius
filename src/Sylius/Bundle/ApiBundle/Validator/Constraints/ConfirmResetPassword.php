@@ -16,11 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class ConfirmNewPassword extends Constraint
+final class ConfirmResetPassword extends Constraint
 {
     public function validatedBy(): string
     {
-        return 'sylius_api_confirm_new_password';
+        return 'sylius_api_confirm_reset_password';
     }
 
     public function getTargets(): string

@@ -29,14 +29,4 @@ class ResetPassword
     {
         $this->resetPasswordToken = $resetPasswordToken;
     }
-
-    public function getResetPasswordToken(): string
-    {
-        return $this->resetPasswordToken;
-    }
-
-    public function setResetPasswordToken(string $token): void
-    {
-        $this->resetPasswordToken = $token;
-    }
 }
