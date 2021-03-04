@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource;
 
 final class FooSyliusResourceTest extends ApiTestCase
 {
@@ -28,9 +29,9 @@ final class FooSyliusResourceTest extends ApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_logged_in_administrator_on_new_not_admin_resource(): void
+    public function it_gets_a_collection_as_a_logged_in_administrator(): void
     {
-        $response = static::createClient()->request(
+        static::createClient()->request(
             'GET',
             'api/v2/foo-sylius-resources',
             ['auth_bearer' => $this->JWTAdminUserToken]
@@ -39,42 +40,86 @@ final class FooSyliusResourceTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
-
-        $this->assertSame('FooSyliusResource1', $objects[0]['name']);
-        $this->assertSame('FooSyliusResource2', $objects[1]['name']);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/FooSyliusResource',
+            '@id' => '/api/v2/foo-sylius-resources',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [[
+                '@type' => 'FooSyliusResource',
+                'name' => 'FooSyliusResource1',
+            ], [
+                '@type' => 'FooSyliusResource',
+                'name' => 'FooSyliusResource2',
+            ]],
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_visitor(): void
+    public function it_gets_a_collection_as_a_visitor(): void
     {
-        $response = static::createClient()->request('GET', 'api/v2/foo-sylius-resources');
+        static::createClient()->request('GET', 'api/v2/foo-sylius-resources');
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
-
-        $this->assertSame('FooSyliusResource1', $objects[0]['name']);
-        $this->assertSame('FooSyliusResource2', $objects[1]['name']);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/FooSyliusResource',
+            '@id' => '/api/v2/foo-sylius-resources',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [[
+                '@type' => 'FooSyliusResource',
+                'name' => 'FooSyliusResource1',
+            ], [
+                '@type' => 'FooSyliusResource',
+                'name' => 'FooSyliusResource2',
+            ]],
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_post_as_a_visitor(): void
+    public function it_creates_a_new_entity_as_a_visitor(): void
     {
-        $response = static::createClient()->request(
+        static::createClient()->request(
             'POST',
             'api/v2/foo-sylius-resources',
-            ['json' => ["name" => "FooSyliusResourcePost"]]
+            ['json' => ['name' => 'FooSyliusResourcePost']]
         );
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->assertSame('FooSyliusResourcePost', json_decode($response->getContent(), true)['name']);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/FooSyliusResource',
+            '@type' => 'FooSyliusResource',
+            'name' => 'FooSyliusResourcePost',
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_an_item_as_a_logged_in_administrator(): void
+    {
+        $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource1']);
+
+        static::createClient()->request(
+            'GET',
+            $fooSyliusResourceIri,
+            ['auth_bearer' => $this->JWTAdminUserToken]
+        );
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/FooSyliusResource',
+            '@id' => $fooSyliusResourceIri,
+            '@type' => 'FooSyliusResource',
+            'name' => 'FooSyliusResource1',
+        ]);
     }
 }
