@@ -26,7 +26,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
     {
         $this
             ->setName('sylius:remove-expired-carts')
-            ->setDescription('Removes carts that have been idle for a period set in `sylius_order.expiration.cart` configuration key.')
+            ->setDescription('Removes carts that have been idle for a period set in `sylius_order.cart_expiration_period` configuration key.')
         ;
     }
 
