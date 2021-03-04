@@ -22,5 +22,5 @@ or you can add a proper prefix for all paths in the chosen resource:
 
 .. note::
 
-    In some situations, you may need to add a path with a custom structure, in this case, you will probably need to configure also the appropriate access in the security file (``ApiBundle/test/config/security.yaml``)
-
+    In some situations, you may need to add a path with a custom structure, in this case, you will probably need to
+    configure also the appropriate access in the security file (``config/security.yaml``)
