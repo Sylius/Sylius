@@ -75,20 +75,6 @@
                     <attribute name="groups">shop:customer:update</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="shop_verify_customer_account">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/shop/customers/{id}/verify-account</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount</attribute>
-                <attribute name="output">false</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:verify</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Verify Customer account</attribute>
-                </attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
