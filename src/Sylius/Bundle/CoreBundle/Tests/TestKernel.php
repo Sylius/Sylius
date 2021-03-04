@@ -110,6 +110,9 @@ final class TestKernel extends BaseKernel
             new SonataBlockBundle(),
             new DoctrineMigrationsBundle(),
             new SyliusLabsDoctrineMigrationsExtraBundle(),
+            new ApiPlatformBundle(),
+            new LexikJWTAuthenticationBundle(),
+            new SyliusApiBundle()
         ];
     }
 
