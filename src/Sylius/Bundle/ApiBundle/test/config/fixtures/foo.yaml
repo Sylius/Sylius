@@ -1,13 +1,9 @@
 Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource:
-    fooSyliusResource3:
-        name: FooSyliusResource3
+    fooSyliusResource:
+        name: FooSyliusResource
 
 Sylius\Bundle\ApiBundle\Application\Entity\Foo:
-    foo1:
-        name: Foo0
+    foo{1..2}:
+        name: Foo<current()>
         owner: '@admin'
-        fooSyliusResource: '@fooSyliusResource3'
-    foo2:
-        name: Foo1
-        owner: '@admin'
-        fooSyliusResource: '@fooSyliusResource3'
+        fooSyliusResource: '@fooSyliusResource'

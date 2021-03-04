@@ -89,10 +89,13 @@ final class RouteNameResolver implements RouteNameResolverInterface
         }
 
         foreach ($matchingRoutes as $routeName => $route) {
-            $requestPrefix = $this->pathPrefixProvider->getCurrentPrefix();
             $routePrefix = $this->pathPrefixProvider->getPathPrefix($route->getPath());
+            if ($routePrefix === null) {
+                return $routeName;
+            }
 
-            if ($requestPrefix !== null && $routePrefix !== null && $requestPrefix === $routePrefix) {
+            $requestPrefix = $this->pathPrefixProvider->getCurrentPrefix();
+            if ($requestPrefix === $routePrefix) {
                 return $routeName;
             }
         }
