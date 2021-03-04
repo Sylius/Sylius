@@ -28,23 +28,33 @@ final class PromotionTest extends ApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_visitor_on_resource_from_api_bundle_with_customized_path(): void
+    public function it_gets_resource_collection_as_a_guest_by_custom_path(): void
     {
-        $response = static::createClient()->request('GET', '/api/v2/custom/promotions');
+        static::createClient()->request('GET', '/api/v2/custom/promotions');
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
-        $this->assertSame('Sunday promotion', $objects[0]['name']);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Promotion',
+            '@id' => '/api/v2/custom/promotions',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [
+                [
+                  '@type' => 'Promotion',
+                  'name' => 'Sunday promotion'
+                ],
+            ],
+            'hydra:totalItems' => 1,
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_an_login_administrator_on_resource_from_api_bundle_with_customized_path(): void
+    public function it_gets_resource_collection_as_a_admin_by_custom_path(): void
     {
-        $response = static::createClient()->request(
+        static::createClient()->request(
             'GET',
             '/api/v2/custom/promotions',
             ['auth_bearer' => $this->JWTAdminUserToken]
@@ -53,7 +63,17 @@ final class PromotionTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
-        $this->assertSame('Sunday promotion', $objects[0]['name']);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Promotion',
+            '@id' => '/api/v2/custom/promotions',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [
+                [
+                    '@type' => 'Promotion',
+                    'name' => 'Sunday promotion'
+                ],
+            ],
+            'hydra:totalItems' => 1,
+        ]);
     }
 }
