@@ -22,9 +22,9 @@
    
     Replace `Doctrine\Common\Persistence` namespace in your codebase to `Doctrine\Persistence`.
    
-1. We've removed DoctrineCacheBundle from our required packages while upgrading to the next major version of DoctrineBundle (v2).
+1. **We've removed DoctrineCacheBundle from our required packages while upgrading to the next major version of DoctrineBundle (v2).**
    
-1. We've upgraded SyliusThemeBundle to the next major version (v2.1).
+1. **We've upgraded SyliusThemeBundle to the next major version (v2.1).**
    
     Please follow [SyliusThemeBundle's upgrade instructions](https://github.com/Sylius/SyliusThemeBundle/blob/master/UPGRADE.md).
    
