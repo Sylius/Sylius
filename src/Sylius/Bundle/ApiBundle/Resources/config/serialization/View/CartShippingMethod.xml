@@ -19,7 +19,7 @@
         <attribute name="shippingMethod">
             <group>admin:shipping_method:read</group>
         </attribute>
-        <attribute name="cost">
+        <attribute name="price">
             <group>admin:shipping_method:read</group>
         </attribute>
     </class>

@@ -20,5 +20,5 @@ interface CartShippingMethodInterface
 {
     public function getShippingMethod(): ShippingMethodInterface;
 
-    public function getCost(): int;
+    public function getPrice(): int;
 }
