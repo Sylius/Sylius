@@ -6,5 +6,6 @@ The REST API Reference
 
     introduction
     authorization
+    custom_paths
 
 .. include:: /api/unified_api/map.rst.inc
