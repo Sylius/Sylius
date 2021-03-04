@@ -17,7 +17,6 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use Sylius\Bundle\ApiBundle\Application\Entity\Foo;
 use Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource;
 use Sylius\Component\Core\Model\AdminUser;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 final class FooTest extends ApiTestCase
 {
@@ -32,9 +31,9 @@ final class FooTest extends ApiTestCase
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_login_administrator_on_new_not_admin_resource(): void
+    public function it_gets_collection_as_a_logged_in_administrator(): void
     {
-        $response = static::createClient()->request(
+        static::createClient()->request(
             'GET',
             'api/v2/foos',
             ['auth_bearer' => $this->JWTAdminUserToken]
@@ -43,78 +42,139 @@ final class FooTest extends ApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->runAssertions($response, 0);
-        $this->runAssertions($response, 1);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Foo',
+            '@id' => '/api/v2/foos',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [[
+                '@type' => 'Foo',
+                'name' => 'Foo1',
+                'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+                'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+            ], [
+                '@type' => 'Foo',
+                'name' => 'Foo2',
+                'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+                'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+            ]],
+            'hydra:totalItems' => 2,
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_get_collection_as_a_visitor(): void
+    public function it_gets_collection_as_a_visitor(): void
     {
-        $response = static::createClient()->request('GET', 'api/v2/foos');
+        static::createClient()->request('GET', 'api/v2/foos');
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->runAssertions($response, 0);
-        $this->runAssertions($response, 1);
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Foo',
+            '@id' => '/api/v2/foos',
+            '@type' => 'hydra:Collection',
+            'hydra:member' => [[
+                '@type' => 'Foo',
+                'name' => 'Foo1',
+                'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+                'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+            ], [
+                '@type' => 'Foo',
+                'name' => 'Foo2',
+                'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+                'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+            ]],
+            'hydra:totalItems' => 2,
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_get_item_by_iri(): void
+    public function it_gets_an_item_as_a_vistor(): void
     {
         /** @var Foo $foo */
         $foo = $this->objects['foo1'];
 
-        $response = static::createClient()->request('GET', 'api/v2/foos/' . $foo->getId());
+        static::createClient()->request('GET', 'api/v2/foos/' . $foo->getId());
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $this->assertSame(json_decode($response->getContent(), true)['name'], 'Foo0');
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Foo',
+            '@type' => 'Foo',
+            'name' => 'Foo1',
+            'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+            'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+        ]);
     }
 
     /**
      * @test
      */
-    public function it_allows_to_post_as_a_visitor(): void
+    public function it_gets_an_item_as_a_logged_in_administrator_by_admin_endpoint(): void
     {
-        $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource3']);
-        $adminIri = $this->findIriBy(AdminUser::class, ['username' => 'sylius']);
+        /** @var Foo $foo */
+        $foo = $this->objects['foo1'];
 
-        $response = static::createClient()->request(
-            'POST',
-            'api/v2/foos',
-            ['json' =>
-                [
-                    "name" => "FooPost",
-                    "owner" => $adminIri,
-                    "fooSyliusResource" => $fooSyliusResourceIri,
-                ],
-            ]
+        static::createClient()->request(
+            'GET',
+            'api/v2/admin/foos/' . $foo->getId(),
+            ['auth_bearer' => $this->JWTAdminUserToken]
         );
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
-        $object = json_decode($response->getContent(), true);
-
-        $this->assertSame('FooPost', $object['name']);
-        $this->assertTrue(str_contains($object['owner'], 'api/v2/admin/administrators'));
-        $this->assertTrue(str_contains($object['fooSyliusResource'], 'api/v2/foo-sylius-resource'));
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Foo',
+            '@type' => 'Foo',
+            'name' => 'Foo1',
+            'owner' => $this->findIriBy(AdminUser::class, ['username' => 'sylius']),
+            'fooSyliusResource' => $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']),
+        ]);
     }
 
-    private function runAssertions(ResponseInterface $response, int $objectNumber): void
+    /**
+     * @test
+     */
+    public function it_does_not_get_an_item_as_a_visitor_by_admin_endpoint(): void
     {
-        $objects = json_decode($response->getContent(), true)['hydra:member'];
+        /** @var Foo $foo */
+        $foo = $this->objects['foo1'];
 
-        $object1 = $objects[$objectNumber];
+        static::createClient()->request('GET', 'api/v2/admin/foos/' . $foo->getId());
 
-        $this->assertSame('Foo' . $objectNumber, $object1['name']);
-        $this->assertTrue(str_contains($object1['owner'], 'api/v2/admin/administrators'));
-        $this->assertTrue(str_contains($object1['fooSyliusResource'], 'api/v2/foo-sylius-resource'));
+        $this->assertResponseStatusCodeSame(401);
+        $this->assertJsonContains(['message' => 'JWT Token not found']);
+    }
+
+    /**
+     * @test
+     */
+    public function it_creates_a_new_entity_as_a_visitor(): void
+    {
+        $fooSyliusResourceIri = $this->findIriBy(FooSyliusResource::class, ['name' => 'FooSyliusResource']);
+        $adminUserIri = $this->findIriBy(AdminUser::class, ['username' => 'sylius']);
+
+        static::createClient()->request('POST', 'api/v2/foos', ['json' => [
+            'name' => 'FooNew',
+            'owner' => $adminUserIri,
+            'fooSyliusResource' => $fooSyliusResourceIri,
+        ]]);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertJsonContains([
+            '@context' => '/api/v2/contexts/Foo',
+            '@type' => 'Foo',
+            'name' => 'FooNew',
+            'owner' => $adminUserIri,
+            'fooSyliusResource' => $fooSyliusResourceIri,
+        ]);
     }
 }
