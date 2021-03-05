@@ -79,6 +79,9 @@
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^4.4 || ^5.2"
     },
+    "conflict": {
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4"
+    },
     "config": {
         "bin-dir": "bin"
     },

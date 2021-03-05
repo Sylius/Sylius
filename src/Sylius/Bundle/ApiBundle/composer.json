@@ -42,7 +42,8 @@
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
-        "api-platform/core": "^2.6"
+        "api-platform/core": "^2.6",
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4"
     },
     "extra": {
         "branch-alias": {
