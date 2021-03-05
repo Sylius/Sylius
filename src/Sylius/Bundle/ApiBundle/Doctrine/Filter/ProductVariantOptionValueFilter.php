@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\Filter;
@@ -15,15 +24,20 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
 {
-    /**
-     * @var IriConverterInterface
-     */
+    /** @var IriConverterInterface */
     private IriConverterInterface $iriConverter;
 
-    public function __construct(IriConverterInterface $iriConverter, ManagerRegistry $managerRegistry, ?RequestStack $requestStack = null, LoggerInterface $logger = null, array $properties = null, NameConverterInterface $nameConverter = null)
-    {
+    public function __construct(
+        IriConverterInterface $iriConverter,
+        ManagerRegistry $managerRegistry,
+        ?RequestStack $requestStack = null,
+        LoggerInterface $logger = null,
+        array $properties = null,
+        NameConverterInterface $nameConverter = null
+    ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
 
         $this->iriConverter = $iriConverter;
@@ -49,7 +63,8 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
             $parameterName = $queryNameGenerator->generateParameterName($property);
             $queryBuilder
                 ->andWhere(sprintf(':%s MEMBER OF o.optionValues', $parameterName))
-                ->setParameter($parameterName, $optionValue);
+                ->setParameter($parameterName, $optionValue)
+            ;
         }
     }
 
