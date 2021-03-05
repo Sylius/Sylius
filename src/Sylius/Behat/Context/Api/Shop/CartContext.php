@@ -188,34 +188,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
-     */
-    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
-    {
-        $item = $this->sharedStorage->get('item');
-
-        $variantData = json_decode($this->cartsClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
-        foreach ($variantData['optionValues'] as $valueIri) {
-            $optionValueData = json_decode($this->cartsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
-            if ($optionValueData['value'] !== $optionValue) {
-                continue;
-            }
-
-            $optionData = json_decode($this->cartsClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
-            if ($optionData['name'] !== $optionName) {
-                continue;
-            }
-
-            return;
-        }
-
-        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
-    }
-
-    /**
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
@@ -530,6 +502,34 @@ final class CartContext implements Context
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         Assert::same(count($items), 0, 'There should be an empty cart');
+    }
+
+    /**
+     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
+     */
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
+    {
+        $item = $this->sharedStorage->get('item');
+
+        $variantData = json_decode($this->cartsClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+        foreach ($variantData['optionValues'] as $valueIri) {
+            $optionValueData = json_decode($this->cartsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+            if ($optionValueData['value'] !== $optionValue) {
+                continue;
+            }
+
+            $optionData = json_decode($this->cartsClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+            if ($optionData['name'] !== $optionName) {
+                continue;
+            }
+
+            return;
+        }
+
+        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
     private function pickupCart(?string $localeCode = null): string
