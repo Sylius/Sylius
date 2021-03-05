@@ -104,6 +104,11 @@
             <argument>shop</argument>
         </service>
 
+        <service id="sylius.behat.api_platform_client.shop.product_variant" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>product-variants</argument>
+            <argument>shop</argument>
+        </service>
+
         <service id="sylius.behat.api_platform_client.admin.province" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>provinces</argument>
             <argument>admin</argument>

@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,12 @@ final class CartContext implements Context
     /** @var ApiClientInterface */
     private $ordersAdminClient;
 
+    /** @var ApiClientInterface */
+    private $productsClient;
+
+    /** @var ApiClientInterface */
+    private $productVariantsClient;
+
     /** @var ResponseCheckerInterface */
     private $responseChecker;
 
@@ -48,12 +55,16 @@ final class CartContext implements Context
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $ordersAdminClient,
+        ApiClientInterface $productsClient,
+        ApiClientInterface $productVariantsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         ProductVariantResolverInterface $productVariantResolver
     ) {
         $this->cartsClient = $cartsClient;
         $this->ordersAdminClient = $ordersAdminClient;
+        $this->productsClient = $productsClient;
+        $this->productVariantsClient = $productVariantsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->productVariantResolver = $productVariantResolver;
@@ -120,6 +131,60 @@ final class CartContext implements Context
     public function iAddVariantOfThisProductToTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
+    }
+
+    /**
+     * @When I add :product with :productOption :productOptionValue to the cart
+     */
+    public function iAddThisProductWithToTheCart(
+        ProductInterface $product,
+        string $productOption,
+        string $productOptionValue
+    ): void {
+        $productData = json_decode($this->productsClient->show($product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+        $variantCode = null;
+        foreach ($productData['options'] as $optionIri) {
+            $optionData = json_decode($this->productsClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+            if ($optionData['name'] !== $productOption) {
+                continue;
+            }
+
+            foreach ($optionData['values'] as $valueIri) {
+                $optionValueData = json_decode($this->productsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+                if ($optionValueData['value'] !== $productOptionValue) {
+                    continue;
+                }
+
+                $this->productVariantsClient->index();
+                $this->productVariantsClient->addFilter('product', $productData['@id']);
+                $this->productVariantsClient->addFilter('optionValues', $valueIri);
+
+                $variantsData = json_decode($this->productVariantsClient->filter()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+                Assert::same($variantsData['hydra:totalItems'], 1);
+
+                $variantCode = $variantsData['hydra:member'][0]['code'];
+            }
+        }
+
+        if (null === $variantCode) {
+            throw new \DomainException(sprintf('Could not find variant with option "%s" set to "%s"', $productOption, $productOptionValue));
+        }
+
+        $tokenValue = $this->pickupCart();
+
+        $request = Request::customItemAction('shop', 'orders', $tokenValue, HttpRequest::METHOD_PATCH, 'items');
+
+        $request->updateContent([
+            'productCode' => $productData['code'],
+            'productVariantCode' => $variantCode,
+            'quantity' => 1,
+        ]);
+
+        $this->cartsClient->executeCustomRequest($request);
     }
 
     /**
@@ -437,6 +502,34 @@ final class CartContext implements Context
         $items = $this->responseChecker->getValue($this->cartsClient->show($tokenValue), 'items');
 
         Assert::same(count($items), 0, 'There should be an empty cart');
+    }
+
+    /**
+     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
+     */
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
+    {
+        $item = $this->sharedStorage->get('item');
+
+        $variantData = json_decode($this->cartsClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+        foreach ($variantData['optionValues'] as $valueIri) {
+            $optionValueData = json_decode($this->cartsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+            if ($optionValueData['value'] !== $optionValue) {
+                continue;
+            }
+
+            $optionData = json_decode($this->cartsClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+
+            if ($optionData['name'] !== $optionName) {
+                continue;
+            }
+
+            return;
+        }
+
+        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
     private function pickupCart(?string $localeCode = null): string

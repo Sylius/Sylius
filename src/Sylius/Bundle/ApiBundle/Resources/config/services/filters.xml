@@ -47,6 +47,13 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter">
+            <argument type="collection">
+                <argument key="product">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.product_order_filter" parent="api_platform.doctrine.orm.order_filter">
             <argument type="collection">
                 <argument key="code" />
@@ -76,6 +83,12 @@
         </service>
 
         <service id="sylius.api.translation_order_name_and_locale_filter" class="Sylius\Bundle\ApiBundle\Doctrine\Filters\TranslationOrderNameAndLocaleFilter">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.product_variant_option_value_filter" class="Sylius\Bundle\ApiBundle\Doctrine\Filter\ProductVariantOptionValueFilter">
+            <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
