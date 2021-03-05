@@ -76,6 +76,12 @@
             <group>admin:product:read</group>
             <group>admin:product:create</group>
         </attribute>
+        <attribute name="shippingRequired">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>admin:product:read</group>
+        </attribute>
         <attribute name="translations">
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
