@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2021-03-05T10:03:47Z
+
+> Should we mention it in https://github.com/Sylius/Sylius/blob/master/CONFLICTS.md? Also, why don't we need it in the main composer file?
+
+I didn't mention that conflict, because I added that only in bundles, and to be honest, I don't know why only these 2 bundles are failing
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-03-05T10:07:03Z
+
+Thanks, Grzegorz! :1st_place_medal:
