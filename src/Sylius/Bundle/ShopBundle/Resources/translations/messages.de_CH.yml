@@ -18,6 +18,8 @@ sylius:
             reset_your_password: 'Passwort zurücksetzen'
             subject: 'Passwort zurücksetzen'
             to_reset_your_password: 'Um Ihr Passwort zurück zu setzen, klicken Sie bitte nachstehenden Link'
+            to_reset_your_password_token: 'Um das Passwort zurück zu setzen - benutze den Token unten'
+            token: 'Ihr Password Zurücksetzen Token ist'
         user_registration:
             start_shopping: 'Jetzt einkaufen'
             subject: 'Benutzerregistrierung'
