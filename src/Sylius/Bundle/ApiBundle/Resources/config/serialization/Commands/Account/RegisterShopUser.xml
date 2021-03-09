@@ -35,10 +35,6 @@
             <group>admin:customer:create</group>
         </attribute>
 
-        <attribute name="birthday">
-            <group>admin:customer:create</group>
-        </attribute>
-
         <attribute name="password">
             <group>shop:customer:create</group>
         </attribute>

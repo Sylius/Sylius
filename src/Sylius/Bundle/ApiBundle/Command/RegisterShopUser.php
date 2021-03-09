@@ -31,12 +31,6 @@ class RegisterShopUser
     /** @var string */
     public $password;
 
-    /** @var string */
-    public $birthday;
-
-    /** @var string */
-    public $gender;
-
     /** @var string|null */
     public $phoneNumber;
 
