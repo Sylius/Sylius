@@ -86,6 +86,7 @@
         <attribute name="enabled">
             <group>admin:product:read</group>
             <group>admin:product:all</group>
+            <group>admin:product:create</group>
             <group>admin:product:update</group>
         </attribute>
     </class>
