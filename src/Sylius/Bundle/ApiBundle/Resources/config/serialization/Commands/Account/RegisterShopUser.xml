@@ -31,10 +31,6 @@
             <group>shop:customer:create</group>
         </attribute>
 
-        <attribute name="gender">
-            <group>admin:customer:create</group>
-        </attribute>
-
         <attribute name="password">
             <group>shop:customer:create</group>
         </attribute>
