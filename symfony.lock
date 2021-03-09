@@ -1,4 +1,10 @@
 {
+    "aeon-php/calendar": {
+        "version": "0.16.1"
+    },
+    "alcohol/iso4217": {
+        "version": "3.1.5"
+    },
     "amphp/amp": {
         "version": "v2.5.0"
     },
