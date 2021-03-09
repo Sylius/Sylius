@@ -966,7 +966,7 @@ final class CheckoutContext implements Context
 
         $this->ordersClient->executeCustomRequest($request);
 
-        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse());
+        return $this->responseChecker->getCollection($this->ordersClient->getLastResponse())[0];
     }
 
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
@@ -985,7 +985,7 @@ final class CheckoutContext implements Context
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
                 $cartShippingMethod['price'] === $fee &&
-                $cartShippingMethod['code'] === $shippingMethod->getCode()
+                $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
             ) {
                 return true;
             }

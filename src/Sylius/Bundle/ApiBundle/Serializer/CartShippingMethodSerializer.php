@@ -68,7 +68,7 @@ final class CartShippingMethodSerializer implements ContextAwareNormalizerInterf
         /** @var int $price */
         $data['price'] = $calculator->calculate($shipment, $shippingMethod->getConfiguration());
 
-        return $data;
+        return $this->getCartShippingMethods($cart, $shipment);
     }
 
     public function supportsNormalization($data, $format = null, $context = []): bool
@@ -76,5 +76,30 @@ final class CartShippingMethodSerializer implements ContextAwareNormalizerInterf
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
         return $data instanceof ShippingMethodInterface && isset($subresourceIdentifiers['id'], $subresourceIdentifiers['shipments']);
+    }
+
+    private function getCartShippingMethods(OrderInterface $cart, ShipmentInterface $shipment): array
+    {
+        if (!$cart->hasShipments()) {
+            return [];
+        }
+
+        $cartShippingMethods = [];
+
+        $shippingMethods = $this->shippingMethodsResolver->getSupportedMethods($shipment);
+
+        /** @var ShippingMethodInterface $shippingMethod */
+        foreach ($shippingMethods as $shippingMethod) {
+            $calculator = $this->calculators->get($shippingMethod->getCalculator());
+            /** @var int $price */
+            $price = $calculator->calculate($shipment, $shippingMethod->getConfiguration());
+
+            $cartShippingMethods[] = [
+                'shippingMethod' => $this->objectNormalizer->normalize($shippingMethod),
+                'price' => $price
+            ];
+        }
+
+        return $cartShippingMethods;
     }
 }
