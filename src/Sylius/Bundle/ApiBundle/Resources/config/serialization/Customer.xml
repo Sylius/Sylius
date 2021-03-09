@@ -59,6 +59,8 @@
             <group>admin:customer:create</group>
             <group>admin:customer:read</group>
             <group>admin:customer:update</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
         </attribute>
 
         <attribute name="gender">
