@@ -41,7 +41,7 @@
 
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">/shop/customers/</attribute>
+                <attribute name="path">/shop/customers</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
