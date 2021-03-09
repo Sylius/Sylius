@@ -39,16 +39,12 @@ class RegisterShopUser
         string $lastName,
         string $email,
         string $password,
-        string $birthday,
-        string $gender,
         ?string $phoneNumber = null
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-        $this->birthday = $birthday;
-        $this->gender = $gender;
         $this->phoneNumber = $phoneNumber;
     }
 }
