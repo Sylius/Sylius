@@ -24,22 +24,24 @@ final class ApiSecurityService implements SecurityServiceInterface
     private $sharedStorage;
 
     /** @var JWTTokenManagerInterface */
-    private $JWTTokenManager;
+    private $jwtTokenManager;
 
-    public function __construct(SharedStorageInterface $sharedStorage, JWTTokenManagerInterface $JWTTokenManager)
+    public function __construct(SharedStorageInterface $sharedStorage, JWTTokenManagerInterface $jwtTokenManager)
     {
         $this->sharedStorage = $sharedStorage;
-        $this->JWTTokenManager = $JWTTokenManager;
+        $this->jwtTokenManager = $jwtTokenManager;
     }
 
     public function logIn(UserInterface $user): void
     {
-        $this->sharedStorage->set('token', $this->JWTTokenManager->create($user));
+        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
+        $this->sharedStorage->set('user', $user);
     }
 
     public function logOut(): void
     {
         $this->sharedStorage->set('token', null);
+        $this->sharedStorage->set('user', null);
     }
 
     public function getCurrentToken(): TokenInterface

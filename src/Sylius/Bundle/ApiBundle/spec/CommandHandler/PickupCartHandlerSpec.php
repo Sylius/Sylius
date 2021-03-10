@@ -18,7 +18,6 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -29,6 +28,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
@@ -37,17 +37,17 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator
+        RandomnessGeneratorInterface $generator,
+        UserRepositoryInterface $userRepository
     ): void {
         $this->beConstructedWith(
             $cartFactory,
             $cartRepository,
             $channelRepository,
-            $userContext,
             $orderManager,
-            $generator
+            $generator,
+            $userRepository
         );
     }
 
@@ -60,11 +60,11 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
+        UserRepositoryInterface $userRepository,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -72,12 +72,13 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
+        $pickupCart->setShopUserId(42);
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
-        $userContext->getUser()->willReturn($user);
+        $userRepository->find(42)->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
@@ -104,7 +105,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
+        UserRepositoryInterface $userRepository,
         ShopUserInterface $user,
         CustomerInterface $customer,
         ObjectManager $orderManager,
@@ -113,10 +114,11 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
+        $pickupCart->setShopUserId(42);
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
 
-        $userContext->getUser()->willReturn($user);
+        $userRepository->find(42)->willReturn($user);
         $user->getCustomer()->willReturn($customer);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
@@ -134,7 +136,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
@@ -148,8 +149,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channelRepository->findOneByCode('code')->willReturn($channel);
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
-
-        $userContext->getUser()->willReturn(null);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
@@ -175,7 +174,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
@@ -192,8 +190,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channel->getDefaultLocale()->willReturn($locale);
         $locale->getCode()->willReturn('en_US');
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
-
-        $userContext->getUser()->willReturn(null);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
@@ -217,7 +213,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
@@ -234,8 +229,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $locale->getCode()->willReturn('en_US');
         $locales = new ArrayCollection([]);
         $channel->getLocales()->willReturn($locales);
-
-        $userContext->getUser()->willReturn(null);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 

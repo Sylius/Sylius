@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -26,7 +25,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -41,29 +40,29 @@ final class PickupCartHandler implements MessageHandlerInterface
     /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /** @var UserContextInterface */
-    private $userContext;
-
     /** @var ObjectManager */
     private $orderManager;
 
     /** @var RandomnessGeneratorInterface */
     private $generator;
 
+    /** @var UserRepositoryInterface */
+    private $userRepository;
+
     public function __construct(
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        UserContextInterface $userContext,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator
+        RandomnessGeneratorInterface $generator,
+        UserRepositoryInterface $userRepository
     ) {
         $this->cartFactory = $cartFactory;
         $this->cartRepository = $cartRepository;
         $this->channelRepository = $channelRepository;
-        $this->userContext = $userContext;
         $this->orderManager = $orderManager;
         $this->generator = $generator;
+        $this->userRepository = $userRepository;
     }
 
     public function __invoke(PickupCart $pickupCart)
@@ -71,7 +70,12 @@ final class PickupCartHandler implements MessageHandlerInterface
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
 
-        $customer = $this->provideCustomer();
+        $customer = null;
+
+        if ($pickupCart->getShopUserId() !== null) {
+            $customer = $this->provideCustomer($pickupCart->getShopUserId());
+        }
+
         if ($customer !== null) {
             /** @var OrderInterface|null $cart */
             $cart = $this->cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
@@ -99,12 +103,15 @@ final class PickupCartHandler implements MessageHandlerInterface
         return $cart;
     }
 
-    private function provideCustomer(): ?CustomerInterface
+    private function provideCustomer($shopUserId): ?CustomerInterface
     {
-        /** @var UserInterface|null $user */
-        $user = $this->userContext->getUser();
-        if ($user !== null && $user instanceof ShopUserInterface) {
-            return $user->getCustomer();
+        /** @var ShopUserInterface|null $user */
+        $user = $this->userRepository->find($shopUserId);
+        if ($user !== null) {
+            /** @var CustomerInterface $customer */
+            $customer = $user->getCustomer();
+
+            return $customer;
         }
 
         return null;

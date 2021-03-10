@@ -13,19 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Utils;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+
 trait ShopUserLoginTrait
 {
-    protected function logInShopUser(string $email, string $password): array
+    protected function logInShopUser(string $email): string
     {
-        $this->client->request(
-            'POST',
-            '/api/v2/shop/authentication-token',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => $password])
-        );
+        /** @var UserRepositoryInterface $shopUserRepository */
+        $shopUserRepository = $this->get('sylius.repository.shop_user');
+        /** @var JWTTokenManagerInterface $manager */
+        $manager = $this->get('lexik_jwt_authentication.jwt_manager');
 
-        return json_decode($this->client->getResponse()->getContent(), true);
+        /** @var ShopUserInterface|null $shopUser */
+        $shopUser = $shopUserRepository->findOneByEmail($email);
+
+        return $manager->create($shopUser);
     }
 }

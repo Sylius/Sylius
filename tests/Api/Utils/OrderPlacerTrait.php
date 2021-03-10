@@ -27,7 +27,7 @@ use Webmozart\Assert\Assert;
 
 trait OrderPlacerTrait
 {
-    protected function placeOrder(string $tokenValue): void
+    protected function placeOrder(string $tokenValue, string $email = 'sylius@example.com'): void
     {
         /** @var MessageBusInterface $commandBus */
         $commandBus = $this->get('sylius.command_bus');
@@ -48,7 +48,7 @@ trait OrderPlacerTrait
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $addressOrderCommand = new AddressOrder('sylius@example.com', $address);
+        $addressOrderCommand = new AddressOrder($email, $address);
         $addressOrderCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addressOrderCommand);
 

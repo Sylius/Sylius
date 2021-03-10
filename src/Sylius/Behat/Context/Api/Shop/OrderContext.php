@@ -51,7 +51,7 @@ final class OrderContext implements Context
     private $iriConverter;
 
     /** @var SecurityServiceInterface */
-    private $adminSecurityService;
+    private $securityService;
 
     public function __construct(
         ApiClientInterface $shopOrderClient,
@@ -59,14 +59,14 @@ final class OrderContext implements Context
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
-        SecurityServiceInterface $adminSecurityService
+        SecurityServiceInterface $securityService
     ) {
         $this->shopOrderClient = $shopOrderClient;
         $this->adminOrderClient = $adminOrderClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
-        $this->adminSecurityService = $adminSecurityService;
+        $this->securityService = $securityService;
     }
 
     /**
@@ -352,7 +352,7 @@ final class OrderContext implements Context
         string $notes,
         OrderInterface $order
     ): void {
-        $this->adminSecurityService->logIn($user);
+        $this->securityService->logIn($user);
 
         Assert::same(
             $notes,
@@ -368,7 +368,7 @@ final class OrderContext implements Context
         OrderInterface $order,
         string $currency
     ): void {
-        $this->adminSecurityService->logIn($user);
+        $this->securityService->logIn($user);
 
         Assert::same(
             $currency,
