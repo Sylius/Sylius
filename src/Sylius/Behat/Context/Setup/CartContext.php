@@ -20,6 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -134,8 +135,17 @@ final class CartContext implements Context
         $channel = $this->sharedStorage->get('channel');
         $channelCode = $channel->getCode();
 
+
         $commandPickupCart = new PickupCart($tokenValue);
         $commandPickupCart->setChannelCode($channelCode);
+
+        if ($this->sharedStorage->has('user')) {
+            $user = $this->sharedStorage->get('user');
+
+            if ($user instanceof ShopUserInterface) {
+                $commandPickupCart->setShopUserId($user->getId());
+            }
+        }
 
         $this->commandBus->dispatch($commandPickupCart);
 
