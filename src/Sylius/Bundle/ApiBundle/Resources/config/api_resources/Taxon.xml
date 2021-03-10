@@ -25,6 +25,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon:read</attribute>
                 </attribute>
+                <attribute name="enable_max_depth">true</attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
