@@ -9,8 +9,8 @@
 
         <attribute name="normalization_context">
             <attribute name="groups">
-                <attribute>taxon:read</attribute>
-                <attribute>taxon_translation:read</attribute>
+                <attribute>admin:taxon:read</attribute>
+                <attribute>admin:taxon_translation:read</attribute>
             </attribute>
         </attribute>
 
