@@ -25,14 +25,13 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon:read</attribute>
                 </attribute>
-                <attribute name="enable_max_depth">true</attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">shop:taxon:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -52,13 +51,21 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/taxons/{id}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">shop:taxon:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
