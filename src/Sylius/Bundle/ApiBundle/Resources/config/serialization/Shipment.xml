@@ -19,6 +19,7 @@
         <attribute name="id">
             <group>shipment:read</group>
             <group>admin:order:read</group>
+            <group>shop:order:read</group>
             <group>shop:cart:read</group>
         </attribute>
 
