@@ -36,6 +36,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_items_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:order_item:subresource</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="order" readable="true" />
         <property name="productName" readable="true" />

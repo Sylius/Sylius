@@ -22,6 +22,7 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="code">
             <group>admin:order:read</group>
@@ -38,6 +39,7 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="quantity">
             <group>admin:order:read</group>
@@ -45,15 +47,18 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="unitPrice">
             <group>admin:order:read</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="units">
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="adjustments">
             <group>admin:order_item:read</group>
@@ -74,6 +79,7 @@
         <attribute name="product">
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="productName">
             <group>admin:order:read</group>
@@ -81,16 +87,19 @@
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="subtotal">
             <group>admin:order:read</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
         <attribute name="total">
             <group>admin:order:read</group>
             <group>admin:order_item:read</group>
             <group>shop:order_item:read</group>
+            <group>shop:order_item:subresource</group>
         </attribute>
     </class>
 </serializer>

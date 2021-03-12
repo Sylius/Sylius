@@ -396,6 +396,7 @@
         <property name="paymentState" writable="false" />
         <property name="shippingState" writable="false" />
         <property name="total" writable="false" />
+        <property name="itemsTotal" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.order_item.class%" />
