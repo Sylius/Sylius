@@ -61,9 +61,10 @@
         </attribute>
 
         <attribute name="checkoutState">
-            <group>shop:order:account:read</group>
-            <group>shop:cart:read</group>
             <group>admin:order:read</group>
+            <group>shop:order:account:read</group>
+            <group>shop:order:read</group>
+            <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="state">
