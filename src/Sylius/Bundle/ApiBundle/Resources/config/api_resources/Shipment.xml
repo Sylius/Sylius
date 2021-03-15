@@ -16,18 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipment.class%" shortName="Shipment">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shipment:read</attribute>
-            </attribute>
-        </attribute>
-
-        <attribute name="denormalization_context">
-            <attribute name="groups">
-                <attribute>shipment:update</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -41,6 +29,9 @@
                 <attribute name="filters">
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipment:read</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -48,11 +39,17 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipments/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipment:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:shipment:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_ship">
@@ -69,14 +66,17 @@
             <subresourceOperation name="methods_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}/methods</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:shipment:read</attribute>
+                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 
-        <property name="id" identifier="true" />
-        <property name="createdAt" />
-        <property name="updatedAt" />
-        <property name="state" />
-        <property name="method">
+        <property name="id" identifier="true" writable="false" />
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
+        <property name="state" writable="false"/>
+        <property name="method" writable="false">
             <subresource resourceClass="%sylius.model.shipping_method.class%" />
         </property>
         <property name="units" />
