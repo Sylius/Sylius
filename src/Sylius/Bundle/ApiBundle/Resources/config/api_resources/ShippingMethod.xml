@@ -23,6 +23,29 @@
             <attribute name="position">ASC</attribute>
         </attribute>
 
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:all</attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.filter_archived_shipping_methods</attribute>
+                    <attribute>sylius.api.shipping_method_order_filter</attribute>
+                    <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipping-methods</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:shipping_method:create</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -73,29 +96,6 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
-
-        <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:all</attribute>
-                </attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.filter_archived_shipping_methods</attribute>
-                    <attribute>sylius.api.shipping_method_order_filter</attribute>
-                    <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_method:create</attribute>
-                </attribute>
-            </collectionOperation>
-        </collectionOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
