@@ -97,6 +97,13 @@
             </itemOperation>
         </itemOperations>
 
+        <!-- <subresourceOperations>
+            <subresourceOperation name="product_variants_get_subresourcey">
+                <attribute></attribute>
+                <attribute></attribute>
+            </subresourceOperation>
+        </subresourceOperations> -->
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />

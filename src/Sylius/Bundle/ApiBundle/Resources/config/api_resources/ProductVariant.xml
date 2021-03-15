@@ -30,6 +30,9 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_variant:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
@@ -38,6 +41,11 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:update</attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-variants/{id}</attribute>
             </itemOperation>
         </itemOperations>
 
