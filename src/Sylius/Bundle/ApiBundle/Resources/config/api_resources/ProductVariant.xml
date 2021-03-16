@@ -45,7 +45,6 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
-                <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
