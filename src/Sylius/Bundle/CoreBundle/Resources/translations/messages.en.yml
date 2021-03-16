@@ -244,6 +244,14 @@ sylius:
         by_zones_and_channel: By zones and channel
         
     email:
-        account_verification_token: 
-            subject: Email address verification
+        user_registration:
+            start_shopping: 'Start shopping'
+            subject: 'User registration'
+            welcome_to_our_store: 'Welcome to our store!'
+            you_have_just_been_registered: 'You have just been registered. Thank you'
+        verification_token:
+            hello: 'Hello'
             message: "Verify your account with token: "
+            subject: 'Email address verification'
+            to_verify_your_email_address: 'To verify your email address - click the link below'
+            verify_your_email_address: 'Verify your email address'

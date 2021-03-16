@@ -48,6 +48,9 @@ final class CustomerContext implements Context
     /** @var ShopSecurityContext */
     private $shopApiSecurityContext;
 
+    /** @var string */
+    private $verificationToken = '';
+
     public function __construct(
         ApiClientInterface $customerClient,
         ApiClientInterface $orderShopClient,
@@ -186,12 +189,25 @@ final class CustomerContext implements Context
      */
     public function iTryToVerifyMyAccountUsingTheLinkFromEmail(ShopUserInterface $user): void
     {
-        $request = Request::custom(
-            \sprintf('/api/v2/shop/account-verification-requests/%s', (string) $user->getEmailVerificationToken()),
-            HttpRequest::METHOD_PATCH,
-        );
+        $this->verificationToken = $user->getEmailVerificationToken();
+        $this->verifyAccount($this->verificationToken);
+    }
 
-        $this->customerClient->executeCustomRequest($request);
+    /**
+     * @When I (try to )verify using :token token
+     */
+    public function iTryToVerifyUsing(string $token): void
+    {
+        $this->verifyAccount($token);
+    }
+
+    /**
+     * @When I register with email :email and password :password
+     */
+    public function iRegisterWithEmailAndPassword(string $email, string $password): void
+    {
+        $this->iRegisterThisAccount($email, $password);
+        $this->loginContext->iLogInAsWithPassword($email, $password);
     }
 
     /**
@@ -288,6 +304,17 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Then I should be notified that the verification token is invalid
+     */
+    public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
+    {
+        $this->isViolationWithMessageInResponse(
+            $this->customerClient->getLastResponse(),
+            sprintf('There is no shop user with %s email verification token.', $this->verificationToken)
+        );
+    }
+
+    /**
      * @When I browse my orders
      */
     public function iBrowseMyOrders(): void
@@ -337,20 +364,10 @@ final class CustomerContext implements Context
         $this->responseChecker->isCreationSuccessful($this->customerClient->getLastResponse());
     }
 
-    private function isViolationWithMessageInResponse(Response $response, string $message): bool
-    {
-        $violations = $this->responseChecker->getResponseContent($response)['violations'];
-        foreach ($violations as $violation) {
-            if ($violation['message'] === $message) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     /**
      * @Then I should be notified that my password has been successfully changed
+     * @Then I should be notified that new account has been successfully created
+     * @Then I should be notified that my account has been created and the verification email has been sent
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
     {
@@ -408,8 +425,48 @@ final class CustomerContext implements Context
         $user = $this->sharedStorage->get('user');
         $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
 
-        $response = $this->customerClient->show((string) $user->getId());
+        $response = $this->customerClient->show((string) $user->getCustomer()->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['user']['verified']);
+    }
+
+    private function isViolationWithMessageInResponse(Response $response, string $message): bool
+    {
+        $violations = $this->responseChecker->getResponseContent($response)['violations'];
+        foreach ($violations as $violation) {
+            if ($violation['message'] === $message) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function verifyAccount(string $token): void
+    {
+        $request = Request::custom(
+            \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
+            HttpRequest::METHOD_PATCH,
+        );
+
+        $this->customerClient->executeCustomRequest($request);
+    }
+
+    private function iRegisterThisAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
+    {
+        $request = Request::create(
+            'shop',
+            'customers',
+            '',
+        );
+
+        $request->setContent([
+            'firstName' => 'First',
+            'lastName' => 'Last',
+            'email' => $email,
+            'password' => $password,
+        ]);
+
+        $this->customerClient->executeCustomRequest($request);
     }
 }

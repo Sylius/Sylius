@@ -18,6 +18,7 @@
     <resource class="Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount" shortName="VerifyCustomerAccount">
         <attribute name="route_prefix">shop</attribute>
         <attribute name="messenger">input</attribute>
+        <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations />
 

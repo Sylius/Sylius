@@ -22,6 +22,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -46,13 +48,17 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     /** @var MessageBusInterface */
     private $commandBus;
 
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
     public function __construct(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $tokenGenerator,
-        MessageBusInterface $commandBus
+        MessageBusInterface $commandBus,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
@@ -60,6 +66,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->channelRepository = $channelRepository;
         $this->tokenGenerator = $tokenGenerator;
         $this->commandBus = $commandBus;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -82,6 +89,11 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
+        $this->shopUserManager->persist($user);
+        $this->shopUserManager->flush();
+
+        $this->eventDispatcher->dispatch(new GenericEvent($customer), 'sylius.customer.post_register');
+
         if ($channel->isAccountVerificationRequired()) {
             $token = $this->tokenGenerator->generate();
             $user->setEmailVerificationToken($token);
@@ -95,6 +107,5 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
             $user->setEnabled(true);
         }
 
-        $this->shopUserManager->persist($user);
     }
 }
