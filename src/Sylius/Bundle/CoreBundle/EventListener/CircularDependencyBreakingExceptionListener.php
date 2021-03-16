@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 
 /**
  * For Symfony 4.
@@ -46,22 +46,22 @@ use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
  * @psalm-suppress UndefinedClass
  * @psalm-suppress MissingDependency
  */
-final class CircularDependencyBreakingExceptionListener extends ExceptionListener
+final class CircularDependencyBreakingExceptionListener extends ErrorListener
 {
-    /** @var ExceptionListener */
+    /** @var ErrorListener */
     private $decoratedListener;
 
-    public function __construct(ExceptionListener $decoratedListener)
+    public function __construct(ErrorListener $decoratedListener)
     {
         $this->decoratedListener = $decoratedListener;
     }
 
-    public function logKernelException(GetResponseForExceptionEvent $event): void
+    public function logKernelException(ExceptionEvent $event): void
     {
         $this->decoratedListener->logKernelException($event);
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         try {
             $this->decoratedListener->onKernelException($event);

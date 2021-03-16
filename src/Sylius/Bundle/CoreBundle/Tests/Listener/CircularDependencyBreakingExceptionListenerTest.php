@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingExceptionListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
+use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class CircularDependencyBreakingExceptionListenerTest extends TestCase
@@ -27,7 +27,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
     public function it_breaks_circular_dependencies_in_exceptions(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
+        $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
@@ -61,7 +61,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
     public function it_breaks_more_complex_circular_dependencies_in_exceptions(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
+        $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
@@ -101,7 +101,7 @@ final class CircularDependencyBreakingExceptionListenerTest extends TestCase
     public function it_does_nothing_when_circular_dependencies_are_not_found(): void
     {
         // Arrange
-        $decoratedListener = $this->createMock(ExceptionListener::class);
+        $decoratedListener = $this->createMock(ErrorListener::class);
         $listener = new CircularDependencyBreakingExceptionListener($decoratedListener);
 
         $event = $this->createExceptionEvent();
