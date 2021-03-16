@@ -100,8 +100,8 @@ $(document).ready(() => {
   $(document).previewUploadedImage('#add-avatar');
 
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
-    if ($(event.target).find('.accordion').length > 0) {
-      $(event.target).find('.accordion').accordion();
+    if ($(event.target).find('.ui.accordion').length > 0) {
+      $(event.target).find('.ui.accordion').accordion();
     }
   });
 
