@@ -44,6 +44,14 @@ final class EmailContext implements Context
         );
     }
 
+    /**
+     * @Then :count email(s) should be sent to :recipient
+     */
+    public function numberOfEmailsShouldBeSentTo(int $count, string $recipient): void
+    {
+        Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
+    }
+
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));

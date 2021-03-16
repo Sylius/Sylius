@@ -1,11 +1,7 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-    {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
         {{ 'sylius.email.verification_token.subject'|trans({}, null, localeCode) }}
-    {% else %}
-        {{ 'sylius.email.account_verification_token.subject'|trans({}, null, localeCode) }}
-    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +21,7 @@
         </div>
     {% else %}
     <div style="text-align: center;">
-        <span>{{ 'sylius.email.account_verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
+        <span>{{ 'sylius.email.verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
     </div>
     {% endif %}
 {% endblock %}

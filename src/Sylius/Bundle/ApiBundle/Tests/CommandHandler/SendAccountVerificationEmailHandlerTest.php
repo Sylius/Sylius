@@ -27,6 +27,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 {
+    /**
+     * @test
+     */
     public function it_sends_account_verification_token_email_without_hostname(): void
     {
         $container = self::bootKernel()->getContainer();
@@ -78,6 +81,9 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         ));
     }
 
+    /**
+     * @test
+     */
     public function it_sends_account_verification_token_email_with_hostname(): void
     {
         $container = self::bootKernel()->getContainer();
