@@ -13,6 +13,11 @@
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
+        <attribute name="name">
+            <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+        </attribute>
         <attribute name="translations">
             <group>admin:taxon:read</group>
         </attribute>
