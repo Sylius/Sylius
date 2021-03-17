@@ -18,12 +18,10 @@
     <class name="Sylius\Component\Core\Model\Product">
         <attribute name="id">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="code">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
@@ -31,31 +29,26 @@
         </attribute>
         <attribute name="createdAt">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="updatedAt">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="translations">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="mainTaxon">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="productTaxons">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
@@ -66,14 +59,12 @@
         </attribute>
         <attribute name="options">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="images">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
@@ -81,13 +72,10 @@
         </attribute>
         <attribute name="variants">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
-            <group>admin:product:create</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="enabled">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
         </attribute>

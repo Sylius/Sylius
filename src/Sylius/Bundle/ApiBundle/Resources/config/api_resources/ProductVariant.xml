@@ -68,7 +68,18 @@
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="product" />
-        <property name="channelPricings" />
+        <property name="channelPricings">
+            <attribute name="openapi_context">
+                <attribute name="type">array</attribute>
+                <attribute name="example">
+                    <attribute name="FASHION_WEB">
+                        <attribute name="channelCode">string</attribute>
+                        <attribute name="price">0</attribute>
+                        <attribute name="originalPrice">0</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
         <property name="tracked" />
         <property name="onHand" />
         <property name="weight" />
@@ -81,7 +92,6 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
-                        <attribute name="slug">string</attribute>
                         <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>

@@ -14,6 +14,8 @@
         </attribute>
         <attribute name="name">
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
             <group>admin:order:read</group>
             <group>shop:order:account:read</group>
             <group>shop:cart:read</group>
@@ -22,7 +24,6 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:product:create</group>
             <group>admin:order:read</group>
             <group>shop:order:account:read</group>
             <group>shop:cart:read</group>

@@ -23,8 +23,6 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
             <group>shop:product:read</group>
             <group>shop:order_item:subresource</group>
@@ -32,8 +30,6 @@
         <attribute name="product">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
-            <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="channelPricings">
@@ -41,7 +37,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
             <group>shop:product:read</group>
         </attribute>
@@ -50,23 +45,18 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
-            <group>admin:product:create</group>
         </attribute>
         <attribute name="onHand">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
-            <group>admin:product:create</group>
         </attribute>
         <attribute name="weight">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="width">
@@ -74,7 +64,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="height">
@@ -82,7 +71,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="depth">
@@ -90,7 +78,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="shippingRequired">
@@ -104,7 +91,6 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
-            <group>admin:product:create</group>
             <group>shop:product_variant:read</group>
             <group>shop:order:account:read</group>
             <group>shop:cart:read</group>
