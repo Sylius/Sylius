@@ -6,7 +6,7 @@ Feature: Subscribing to the newsletter
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a customer account "francis@underwood.com"
+        And there is a customer "Francis Underwood" with an email "francis@underwood.com"
         And I am logged in as "francis@underwood.com"
 
     @ui @api
