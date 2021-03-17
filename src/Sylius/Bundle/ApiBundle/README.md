@@ -50,15 +50,15 @@ Testing
 -----------------------
 
 To test locally, run commands:
-    ```bash
-    (cd src/Sylius/Bundle/ApiBundle && composer install)
-    (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:database:create -e test)
-    (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:schema:update --force -e test)
-    (cd src/Sylius/Bundle/ApiBundle/test && bin/console assets:install public)
-    (cd src/Sylius/Bundle/ApiBundle/test && APP_ENV=test symfony serve)
-    ```
+```bash
+(cd src/Sylius/Bundle/ApiBundle && composer install)
+(cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:database:create -e test)
+(cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:schema:update --force -e test)
+(cd src/Sylius/Bundle/ApiBundle/test && bin/console assets:install public)
+(cd src/Sylius/Bundle/ApiBundle/test && APP_ENV=test symfony serve)
+```
 
 To run tests:
-    ```bash
-    (cd src/Sylius/Bundle/ApiBundle && vendor/bin/phpunit)
-    ```
+```bash
+(cd src/Sylius/Bundle/ApiBundle && vendor/bin/phpunit)
+```
