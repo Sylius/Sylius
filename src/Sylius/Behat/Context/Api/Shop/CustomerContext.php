@@ -161,6 +161,24 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @When I subscribe to the newsletter
+     */
+    public function iSubscribeToTheNewsletter(): void
+    {
+        $this->customerClient->addRequestData('subscribedToNewsletter', true);
+    }
+
+    /**
+     * @Then I should be subscribed to the newsletter
+     */
+    public function iShouldBeSubscribedToTheNewsletter(): void
+    {
+        $response = $this->customerClient->getLastResponse();
+
+        Assert::true($this->responseChecker->getValue($response, 'subscribedToNewsletter'));
+    }
+
+    /**
      * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
