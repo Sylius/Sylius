@@ -126,14 +126,17 @@ final class CustomerContext implements Context
      * @Given there is a customer :name identified by an email :email and a password :password
      * @Given there is a customer :name with an email :email and a password :password
      */
-    public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password)
+    public function theStoreHasCustomerAccountWithEmailAndPassword(string $name, string $email, string $password): void
     {
-        $names = explode(' ', $name);
-        $firstName = $names[0];
-        $lastName = count($names) > 1 ? $names[1] : null;
+        $this->createCustomerWithFullNameEmailAndPassword($name, $email, $password);
+    }
 
-        $customer = $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
-        $this->customerRepository->add($customer);
+    /**
+     * @Given there is a customer :name with an email :email
+     */
+    public function theStoreHasCustomerAccountWithEmailAndName(string $name, string $email): void
+    {
+        $this->createCustomerWithFullNameEmailAndPassword($name, $email, 'sylius');
     }
 
     /**
@@ -257,5 +260,15 @@ final class CustomerContext implements Context
         $this->sharedStorage->set('customer', $customer);
 
         return $customer;
+    }
+
+    private function createCustomerWithFullNameEmailAndPassword(string $name, string $email, string $password): void
+    {
+        $names = explode(' ', $name);
+        $firstName = $names[0];
+        $lastName = count($names) > 1 ? $names[1] : null;
+
+        $customer = $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
+        $this->customerRepository->add($customer);
     }
 }
