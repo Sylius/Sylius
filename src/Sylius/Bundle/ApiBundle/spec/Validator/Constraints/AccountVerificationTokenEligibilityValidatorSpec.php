@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -31,6 +32,27 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
     function it_is_a_constraint_validator(): void
     {
         $this->shouldImplement(ConstraintValidatorInterface::class);
+    }
+
+    function it_throws_an_exception_if_value_is_not_type_of_verify_customer_account(): void
+    {
+        $constraint = new AccountVerificationTokenEligibility();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('validate', ['', $constraint])
+        ;
+    }
+
+    function it_throws_an_exception_if_constraint_is_not_type_of_account_verification_eligibility(): void
+    {
+        $value = new VerifyCustomerAccount('TOKEN');
+        $constraint = new OrderPaymentMethodEligibility();
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('validate', [$value, $constraint])
+        ;
     }
 
     function it_adds_violation_if_account_is_null(

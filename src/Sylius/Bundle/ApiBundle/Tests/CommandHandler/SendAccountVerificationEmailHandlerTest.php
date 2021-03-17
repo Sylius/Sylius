@@ -76,7 +76,7 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.account_verification_token.message', [], null, 'en_US'),
+            $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
             'user@example.com'
         ));
     }

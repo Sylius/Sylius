@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class AccountVerificationTokenEligibilityValidator extends ConstraintValidator
@@ -33,6 +34,11 @@ final class AccountVerificationTokenEligibilityValidator extends ConstraintValid
     /** @param VerifyCustomerAccount|mixed $value */
     public function validate($value, Constraint $constraint)
     {
+        Assert::isInstanceOf($value, VerifyCustomerAccount::class);
+
+        /** @var AccountVerificationTokenEligibility $constraint */
+        Assert::isInstanceOf($constraint, AccountVerificationTokenEligibility::class);
+
         /** @var UserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $value->token]);
 
