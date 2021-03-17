@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -22,10 +23,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental */
 final class RegisterShopUserHandler implements MessageHandlerInterface
@@ -48,17 +48,13 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     /** @var MessageBusInterface */
     private $commandBus;
 
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
     public function __construct(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $tokenGenerator,
-        MessageBusInterface $commandBus,
-        EventDispatcherInterface $eventDispatcher
+        MessageBusInterface $commandBus
     ) {
         $this->shopUserFactory = $shopUserFactory;
         $this->shopUserManager = $shopUserManager;
@@ -66,7 +62,6 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->channelRepository = $channelRepository;
         $this->tokenGenerator = $tokenGenerator;
         $this->commandBus = $commandBus;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function __invoke(RegisterShopUser $command): void
@@ -90,22 +85,26 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
         $this->shopUserManager->persist($user);
-        $this->shopUserManager->flush();
 
-        $this->eventDispatcher->dispatch(new GenericEvent($customer), 'sylius.customer.post_register');
+        $this->commandBus->dispatch(new SendAccountRegistrationEmail(
+            $command->email,
+            $command->localeCode,
+            $command->channelCode
+        ), [new DispatchAfterCurrentBusStamp()]);
 
-        if ($channel->isAccountVerificationRequired()) {
-            $token = $this->tokenGenerator->generate();
-            $user->setEmailVerificationToken($token);
-
-            $this->commandBus->dispatch(new SendAccountVerificationEmail(
-                $command->email,
-                $command->localeCode,
-                $command->channelCode
-            ));
-        } else {
+        if (!$channel->isAccountVerificationRequired()) {
             $user->setEnabled(true);
+
+            return;
         }
 
+        $token = $this->tokenGenerator->generate();
+        $user->setEmailVerificationToken($token);
+
+        $this->commandBus->dispatch(new SendAccountVerificationEmail(
+            $command->email,
+            $command->localeCode,
+            $command->channelCode
+        ), [new DispatchAfterCurrentBusStamp()]);
     }
 }

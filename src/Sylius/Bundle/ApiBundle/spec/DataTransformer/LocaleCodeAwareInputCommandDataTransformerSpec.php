@@ -29,8 +29,7 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
     function it_supports_only_locale_code_aware_interface(
         LocaleCodeAwareInterface $localeCodeAware,
         ResourceInterface $resource
-    ): void
-    {
+    ): void {
         $this->supportsTransformation($localeCodeAware)->shouldReturn(true);
         $this->supportsTransformation($resource)->shouldReturn(false);
     }

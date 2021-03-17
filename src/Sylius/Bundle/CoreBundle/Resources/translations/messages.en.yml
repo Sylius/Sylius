@@ -20,7 +20,7 @@ sylius:
             you_have_just_been_registered: 'You have just been registered. Thank you'
         verification_token:
             hello: 'Hello'
-            message: "Verify your account with token: "
+            message: 'Verify your account with token: '
             subject: 'Email address verification'
             to_verify_your_email_address: 'To verify your email address - click the link below'
             verify_your_email_address: 'Verify your email address'

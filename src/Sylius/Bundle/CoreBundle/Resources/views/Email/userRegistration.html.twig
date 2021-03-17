@@ -1,4 +1,4 @@
-{% extends '@SyliusShop/Email/layout.html.twig' %}
+{% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
     {{ 'sylius.email.user_registration.subject'|trans({}, null, localeCode) }}
@@ -16,8 +16,14 @@
     </div>
 
     <div style="text-align: center;">
-        <a href="{{ url|raw }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
-            {{ 'sylius.email.user_registration.start_shopping'|trans({}, null, localeCode) }}
-        </a>
+        {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+            <a href="{{ url|raw }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+                {{ 'sylius.email.user_registration.start_shopping'|trans({}, null, localeCode) }}
+            </a>
+        {% else %}
+            <a href="{{ channel.hostname|raw }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+                {{ 'sylius.email.user_registration.start_shopping'|trans({}, null, localeCode) }}
+            </a>
+        {% endif %}
     </div>
 {% endblock %}
