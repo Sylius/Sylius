@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -24,11 +25,10 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RegisterShopUserHandlerSpec extends ObjectBehavior
 {
@@ -38,8 +38,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $generator,
-        MessageBusInterface $commandBus,
-        EventDispatcherInterface $eventDispatcher
+        MessageBusInterface $commandBus
     ): void {
         $this->beConstructedWith(
             $shopUserFactory,
@@ -47,8 +46,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
             $customerProvider,
             $channelRepository,
             $generator,
-            $commandBus,
-            $eventDispatcher
+            $commandBus
         );
     }
 
@@ -66,8 +64,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
         GeneratorInterface $generator,
-        MessageBusInterface $commandBus,
-        EventDispatcherInterface $eventDispatcher
+        MessageBusInterface $commandBus
     ): void {
         $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
         $command->setChannelCode('CHANNEL_CODE');
@@ -91,11 +88,20 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
-        $shopUserManager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatch(new GenericEvent($customer->getWrappedObject()), 'sylius.customer.post_register')->shouldBeCalled();
+
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus
+            ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendRegistrationEmailCommand))
+        ;
 
         $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
-        $commandBus->dispatch($sendVerificationEmailCommand)->shouldBeCalled()->willReturn(new Envelope($sendVerificationEmailCommand));
+        $commandBus
+            ->dispatch($sendVerificationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendVerificationEmailCommand))
+        ;
 
         $this($command);
     }
@@ -108,7 +114,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        EventDispatcherInterface $eventDispatcher
+        MessageBusInterface $commandBus
     ): void {
         $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
         $command->setChannelCode('CHANNEL_CODE');
@@ -127,13 +133,17 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setUser($shopUser)->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
-        $shopUserManager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatch(new GenericEvent($customer->getWrappedObject()), 'sylius.customer.post_register')->shouldBeCalled();
+
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus
+            ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendRegistrationEmailCommand))
+        ;
 
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
         $channel->isAccountVerificationRequired()->willReturn(false);
         $shopUser->setEnabled(true);
-
 
         $this($command);
     }
@@ -145,7 +155,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         ShopUserInterface $existingShopUser,
-        EventDispatcherInterface $eventDispatcher
+        MessageBusInterface $commandBus
     ): void {
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
@@ -153,8 +163,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->getUser()->willReturn($existingShopUser);
 
         $shopUserManager->persist($shopUser)->shouldNotBeCalled();
-        $shopUserManager->flush()->shouldNotBeCalled();
-        $eventDispatcher->dispatch(new GenericEvent($customer->getWrappedObject()), 'sylius.customer.post_register')->shouldNotBeCalled();
+
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus->dispatch($sendRegistrationEmailCommand)->shouldNotBeCalled()->willReturn(new Envelope($sendRegistrationEmailCommand));
 
         $this
             ->shouldThrow(\DomainException::class)

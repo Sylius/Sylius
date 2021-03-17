@@ -3,4 +3,3 @@ sylius:
         invalid_verification_token: 'There is no shop user with %verificationToken% email verification token.'
     order:
         not_empty: 'An empty order cannot be completed.'
-        

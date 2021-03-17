@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
+namespace Sylius\Tests\Functional\Bundles\ApiBundle\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
@@ -30,7 +30,7 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_sends_password_reset_token_email(): void
+    public function it_sends_password_reset_token_email_without_hostname(): void
     {
         $container = self::bootKernel()->getContainer();
 
@@ -76,7 +76,61 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
+            $translator->trans('sylius.email.password_reset.to_reset_your_password', [], null, 'en_US'),
+            'user@example.com'
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function it_sends_password_reset_token_email_with_hostname(): void
+    {
+        $container = self::bootKernel()->getContainer();
+
+        /** @var Filesystem $filesystem */
+        $filesystem = $container->get('filesystem');
+
+        /** @var TranslatorInterface $translator */
+        $translator = $container->get('translator');
+
+        /** @var EmailChecker $emailChecker */
+        $emailChecker = $container->get('sylius.behat.email_checker');
+
+        $filesystem->remove($emailChecker->getSpoolDirectory());
+
+        $emailSender = $container->get('sylius.email_sender');
+
+        /** @var ChannelRepositoryInterface|ObjectProphecy $channelRepository */
+        $channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
+        /** @var UserRepositoryInterface|ObjectProphecy $userRepository */
+        $userRepository = $this->prophesize(UserRepositoryInterface::class);
+        /** @var ChannelInterface|ObjectProphecy $channel */
+        $channel = $this->prophesize(ChannelInterface::class);
+        /** @var UserInterface|ObjectProphecy $user */
+        $user = $this->prophesize(UserInterface::class);
+
+        $user->getUsername()->willReturn('username');
+        $user->getPasswordResetToken()->willReturn('token');
+
+        $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel->reveal());
+        $userRepository->findOneByEmail('user@example.com')->willReturn($user->reveal());
+
+        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler(
+            $emailSender,
+            $channelRepository->reveal(),
+            $userRepository->reveal()
+        );
+
+        $resetPasswordEmailHandler(new SendResetPasswordEmail(
+            'user@example.com',
+            'CHANNEL_CODE',
+            'en_US'
+        ));
+
+        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
+        self::assertTrue($emailChecker->hasMessageTo(
+            $translator->trans('sylius.email.password_reset.to_reset_your_password', [], null, 'en_US'),
             'user@example.com'
         ));
     }

@@ -166,7 +166,6 @@ final class CustomerContext implements Context
     }
 
     /**
-<<<<<<< HEAD
      * @When I subscribe to the newsletter
      */
     public function iSubscribeToTheNewsletter(): void
@@ -206,7 +205,7 @@ final class CustomerContext implements Context
      */
     public function iRegisterWithEmailAndPassword(string $email, string $password): void
     {
-        $this->iRegisterThisAccount($email, $password);
+        $this->registerAccount($email, $password);
         $this->loginContext->iLogInAsWithPassword($email, $password);
     }
 
@@ -452,13 +451,9 @@ final class CustomerContext implements Context
         $this->customerClient->executeCustomRequest($request);
     }
 
-    private function iRegisterThisAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
+    private function registerAccount(?string $email = 'example@example.com', ?string $password = 'example'): void
     {
-        $request = Request::create(
-            'shop',
-            'customers',
-            '',
-        );
+        $request = Request::create('shop', 'customers', '');
 
         $request->setContent([
             'firstName' => 'First',

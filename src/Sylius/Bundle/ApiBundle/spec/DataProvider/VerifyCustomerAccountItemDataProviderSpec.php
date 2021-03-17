@@ -29,6 +29,7 @@ final class VerifyCustomerAccountItemDataProviderSpec extends ObjectBehavior
     {
         $this
             ->getItem(VerifyCustomerAccount::class, 'ToKeN')
-            ->shouldBeLike(new VerifyCustomerAccount('ToKeN'));
+            ->shouldBeLike(new VerifyCustomerAccount('ToKeN'))
+        ;
     }
 }
