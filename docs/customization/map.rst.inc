@@ -12,4 +12,5 @@
 * :doc:`/customization/grid`
 * :doc:`/customization/fixtures`
 * :doc:`/customization/fixture_suites`
+* :doc:`/customization/admin_prefix`
 * :doc:`/customization/tips_and_tricks`
