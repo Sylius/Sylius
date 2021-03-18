@@ -96,6 +96,8 @@
             <tag name="api_platform.subresource_data_provider" priority="10" />
         </service>
 
+        <service id="sylius.api.collection_data_provider."
+
         <service
             id="sylius.api.collection_data_provider.adjustments_for_order"
             class="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider"

@@ -54,6 +54,14 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_get_inventory">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/inventory</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:read</attribute>
+                </attribute>
+            </collectionOperation>
             
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
