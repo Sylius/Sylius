@@ -9,7 +9,7 @@ Feature: Verifying account's email address
         And there is a user "valkyrie@cain.com" identified by "sylius"
         And this user is not verified
 
-    @ui
+    @ui @api
     Scenario: Getting verified after clicking the link in the verification message
         Given a verification email has already been sent to "valkyrie@cain.com"
         When I try to verify my account using the link from this email
@@ -17,7 +17,7 @@ Feature: Verifying account's email address
         And I should be able to log in as "valkyrie@cain.com" with "sylius" password
         And my account should be verified
 
-    @ui
+    @ui @api
     Scenario: Being unable to verify with invalid token
         When I try to verify using "twinklelittlestar" token
         Then I should be notified that the verification token is invalid
@@ -45,14 +45,14 @@ Feature: Verifying account's email address
         And I have already verified my account
         Then I should not be able to resend the verification email
 
-    @ui @email
+    @ui @email @api
     Scenario: Receiving account verification email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that my account has been created and the verification email has been sent
         And 2 emails should be sent to "ghastly@bespoke.com"
         But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password
 
-    @ui @email
+    @ui @email @api
     Scenario: Do not send verification email when account verification on the channel is not required
         Given "United States" channel has account verification disabled
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"

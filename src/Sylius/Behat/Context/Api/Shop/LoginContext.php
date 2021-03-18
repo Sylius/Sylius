@@ -211,6 +211,16 @@ final class LoginContext implements Context
         $this->iShouldBeLoggedIn();
     }
 
+    /**
+     * @Then I should not be able to log in as :email with :password password
+     */
+    public function iShouldNotBeAbleToLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->iLogInAsWithPassword($email, $password);
+
+        $this->iShouldNotBeLoggedIn();
+    }
+
     private function addLocaleCode(string $localeCode): void
     {
         $this->request->updateContent(['localeCode' => $localeCode]);

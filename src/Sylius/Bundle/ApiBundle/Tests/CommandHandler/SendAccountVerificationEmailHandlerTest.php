@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\SendResetPasswordEmail;
-use Sylius\Bundle\ApiBundle\CommandHandler\SendResetPasswordEmailHandler;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\CommandHandler\SendAccountVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\EmailChecker;
@@ -25,12 +25,12 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SendResetPasswordEmailHandlerTest extends KernelTestCase
+final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 {
     /**
      * @test
      */
-    public function it_sends_password_reset_token_email(): void
+    public function it_sends_account_verification_token_email(): void
     {
         $container = self::bootKernel()->getContainer();
 
@@ -57,26 +57,26 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         $user = $this->prophesize(UserInterface::class);
 
         $user->getUsername()->willReturn('username');
-        $user->getPasswordResetToken()->willReturn('token');
+        $user->getEmailVerificationToken()->willReturn('token');
 
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel->reveal());
         $userRepository->findOneByEmail('user@example.com')->willReturn($user->reveal());
 
-        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler(
-            $emailSender,
+        $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
+            $userRepository->reveal(),
             $channelRepository->reveal(),
-            $userRepository->reveal()
+            $emailSender
         );
 
-        $resetPasswordEmailHandler(new SendResetPasswordEmail(
-            'user@example.com',
-            'CHANNEL_CODE',
-            'en_US'
-        ));
+        $sendAccountVerificationEmailHandler(new SendAccountVerificationEmail(
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE')
+        );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
+            $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
             'user@example.com'
         ));
     }

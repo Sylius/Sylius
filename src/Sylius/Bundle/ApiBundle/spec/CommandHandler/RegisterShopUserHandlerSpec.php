@@ -16,13 +16,19 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\SendAccountRegistrationEmail;
+use Sylius\Bundle\ApiBundle\Command\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\Channel;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RegisterShopUserHandlerSpec extends ObjectBehavior
 {
@@ -30,9 +36,18 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
         CustomerProviderInterface $customerProvider,
-        ChannelContextInterface $channelContext
+        ChannelRepositoryInterface $channelRepository,
+        GeneratorInterface $generator,
+        MessageBusInterface $commandBus
     ): void {
-        $this->beConstructedWith($shopUserFactory, $shopUserManager, $customerProvider, $channelContext);
+        $this->beConstructedWith(
+            $shopUserFactory,
+            $shopUserManager,
+            $customerProvider,
+            $channelRepository,
+            $generator,
+            $commandBus
+        );
     }
 
     function it_is_a_message_handler(): void
@@ -46,9 +61,15 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ChannelContextInterface $channelContext,
-        Channel $channel
+        ChannelRepositoryInterface $channelRepository,
+        ChannelInterface $channel,
+        GeneratorInterface $generator,
+        MessageBusInterface $commandBus
     ): void {
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command->setChannelCode('CHANNEL_CODE');
+        $command->setLocaleCode('en_US');
+
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
 
@@ -61,12 +82,28 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
-        $channelContext->getChannel()->willReturn($channel);
+       $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
         $channel->isAccountVerificationRequired()->willReturn(true);
+        $generator->generate()->willReturn('TOKEN');
+        $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
 
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus
+            ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendRegistrationEmailCommand))
+        ;
+
+        $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus
+            ->dispatch($sendVerificationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendVerificationEmailCommand))
+        ;
+
+        $this($command);
     }
 
     function it_creates_a_shop_user_with_given_data_and_verifies_it(
@@ -75,9 +112,14 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ChannelContextInterface $channelContext,
-        Channel $channel
+        ChannelRepositoryInterface $channelRepository,
+        ChannelInterface $channel,
+        MessageBusInterface $commandBus
     ): void {
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command->setChannelCode('CHANNEL_CODE');
+        $command->setLocaleCode('en_US');
+
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
 
@@ -90,13 +132,20 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->isAccountVerificationRequired()->willReturn(false);
-        $shopUser->setEnabled(true)->shouldBeCalled();
-
         $shopUserManager->persist($shopUser)->shouldBeCalled();
 
-        $this(new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400'));
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus
+            ->dispatch($sendRegistrationEmailCommand, [new DispatchAfterCurrentBusStamp()])
+            ->shouldBeCalled()
+            ->willReturn(new Envelope($sendRegistrationEmailCommand))
+        ;
+
+        $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $shopUser->setEnabled(true);
+
+        $this($command);
     }
 
     function it_throws_an_exception_if_customer_with_user_already_exists(
@@ -105,7 +154,8 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ShopUserInterface $existingShopUser
+        ShopUserInterface $existingShopUser,
+        MessageBusInterface $commandBus
     ): void {
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
@@ -113,6 +163,9 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $customer->getUser()->willReturn($existingShopUser);
 
         $shopUserManager->persist($shopUser)->shouldNotBeCalled();
+
+        $sendRegistrationEmailCommand = new SendAccountRegistrationEmail('WILL.SMITH@example.com',  'en_US', 'CHANNEL_CODE');
+        $commandBus->dispatch($sendRegistrationEmailCommand)->shouldNotBeCalled()->willReturn(new Envelope($sendRegistrationEmailCommand));
 
         $this
             ->shouldThrow(\DomainException::class)

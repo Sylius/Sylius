@@ -22,7 +22,7 @@
         <collectionOperations>
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">/shop/customers/</attribute>
+                <attribute name="path">/shop/customers</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
@@ -84,5 +84,6 @@
         <property name="fullName" writable="false" />
         <property name="defaultAddress" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
+        <property name="user" readable="true" />
     </resource>
 </resources>
