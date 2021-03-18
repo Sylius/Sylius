@@ -1,5 +1,30 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.1 (2021-03-18)
+
+#### Details
+
+- [#12324](https://github.com/Sylius/Sylius/issues/12324) Removing hard timeout on edit while load selected values ([@christopherhero](https://github.com/christopherhero))
+- [#12376](https://github.com/Sylius/Sylius/issues/12376) Pass path delimiter up to parent taxon ([@Jeroen-G](https://github.com/Jeroen-G), [@Jeroen](https://github.com/Jeroen), [@pamil](https://github.com/pamil))
+- [#12384](https://github.com/Sylius/Sylius/issues/12384) Doc: Fix Doctrine project url ([@n3wborn](https://github.com/n3wborn))
+- [#12393](https://github.com/Sylius/Sylius/issues/12393) [ApiBundle] Fixes in test application ([@GSadee](https://github.com/GSadee))
+- [#12397](https://github.com/Sylius/Sylius/issues/12397) Do not fail when mb_detect_encoding returns false ([@stefandoorn](https://github.com/stefandoorn))
+- [#12398](https://github.com/Sylius/Sylius/issues/12398) [API] add missing spec ([@AdamKasp](https://github.com/AdamKasp))
+- [#12401](https://github.com/Sylius/Sylius/issues/12401) Use bold to alert on some changes in the README ([@jacquesbh](https://github.com/jacquesbh))
+- [#12403](https://github.com/Sylius/Sylius/issues/12403) Minor fixes and CS ([@AdamKasp](https://github.com/AdamKasp))
+- [#12404](https://github.com/Sylius/Sylius/issues/12404) Fix nested accordion initialisation ([@DjLeChuck](https://github.com/DjLeChuck))
+- [#12407](https://github.com/Sylius/Sylius/issues/12407) [AttributeBundle] custom locale_code fixed ([@Mateuszry](https://github.com/Mateuszry))
+- [#12410](https://github.com/Sylius/Sylius/issues/12410) [ApiBundle] Improve tests for custom Sylius resource in test application ([@GSadee](https://github.com/GSadee))
+- [#12411](https://github.com/Sylius/Sylius/issues/12411) [API] improve tests for overwriting api configs ([@AdamKasp](https://github.com/AdamKasp))
+- [#12412](https://github.com/Sylius/Sylius/issues/12412) [API][DOCS] custom path ([@AdamKasp](https://github.com/AdamKasp))
+- [#12416](https://github.com/Sylius/Sylius/issues/12416) [ApiBundle] Improve tests for custom entity in test application ([@GSadee](https://github.com/GSadee))
+- [#12417](https://github.com/Sylius/Sylius/issues/12417) [API][Documentation] Fix link to jwt documentation ([@GSadee](https://github.com/GSadee))
+- [#12418](https://github.com/Sylius/Sylius/issues/12418) [API][Documentation] Fix path to security file ([@GSadee](https://github.com/GSadee))
+- [#12423](https://github.com/Sylius/Sylius/issues/12423) Temporarily conflict to symfony/doctrine-bridge in Core and Api bundles ([@GSadee](https://github.com/GSadee))
+- [#12427](https://github.com/Sylius/Sylius/issues/12427) [FOSOAuthServerBundle] Remove incompatible version ([@Prometee](https://github.com/Prometee))
+- [#12447](https://github.com/Sylius/Sylius/issues/12447) Fix build for CoreBundle and ApiBundle packages ([@pamil](https://github.com/pamil))
+- [#12448](https://github.com/Sylius/Sylius/issues/12448) [ApiBundle] Fix displaying testing section in README file ([@GSadee](https://github.com/GSadee))
+
 ## v1.9.0 (2021-03-01)
 
 #### TL;DR
