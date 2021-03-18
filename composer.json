@@ -107,6 +107,7 @@
         "symfony/translation": "^4.4 || ^5.2",
         "symfony/twig-bundle": "^4.4 || ^5.2",
         "symfony/validator": "^4.4 || ^5.2",
+        "symfony/webpack-encore-bundle": "^1.11",
         "symfony/yaml": "^4.4 || ^5.2",
         "twig/intl-extra": "^2.12",
         "twig/twig": "^2.12",

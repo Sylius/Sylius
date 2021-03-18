@@ -1,6 +1,6 @@
 {% block body %}
     {% autoescape false %}
-        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('assets/shop/img/logo.png') : absolute_url(asset('assets/shop/img/logo.png')) %}
+        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('build/shop/images/logo.png', 'shop') : absolute_url(asset('build/shop/images/logo.png', 'shop')) %}
 
         <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
             <div style="max-width: 600px; margin: 20px auto;">
