@@ -7,13 +7,11 @@
     <class name="Sylius\Component\Core\Model\ProductImage">
         <attribute name="id">
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="path">
             <group>shop:product_image:read</group>
             <group>admin:product:read</group>
-            <group>admin:product:all</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>

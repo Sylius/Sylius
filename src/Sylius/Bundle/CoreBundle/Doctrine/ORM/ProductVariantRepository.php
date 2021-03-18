@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository as BaseProductVariantRepository;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 class ProductVariantRepository extends BaseProductVariantRepository implements ProductVariantRepositoryInterface
 {
@@ -25,6 +26,30 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('o.tracked = true')
             ->setParameter('locale', $locale)
+        ;
+    }
+
+    public function findInventoryList(string $locale): array
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere('o.tracked = true')
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findOneInventoryItem(string $code, string $locale): ?ProductVariantInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere('o.code = :code')
+            ->andWhere('o.tracked = true')
+            ->setParameter('code', $code)
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

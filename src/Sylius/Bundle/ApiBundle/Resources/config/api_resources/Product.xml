@@ -27,13 +27,12 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="filters">
-                    <attribute>sylius.api.product_tracked_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
                     <attribute>sylius.api.translation_order_name_and_locale_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:all</attribute>
+                    <attribute name="groups">admin:product:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -96,13 +95,6 @@
                 <attribute name="path">/admin/products/{id}</attribute>
             </itemOperation>
         </itemOperations>
-
-        <!-- <subresourceOperations>
-            <subresourceOperation name="product_variants_get_subresourcey">
-                <attribute></attribute>
-                <attribute></attribute>
-            </subresourceOperation>
-        </subresourceOperations> -->
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />

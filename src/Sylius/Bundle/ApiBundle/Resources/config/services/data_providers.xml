@@ -124,5 +124,17 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
+
+        <service id="sylius.api.collection_data_provider.inventory" class="Sylius\Bundle\ApiBundle\DataProvider\InventoryCollectionDataProvider">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
+
+        <service id="sylius.api.item_data_provider.inventory" class="Sylius\Bundle\ApiBundle\DataProvider\InventoryItemDataProvider">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
     </services>
 </container>
