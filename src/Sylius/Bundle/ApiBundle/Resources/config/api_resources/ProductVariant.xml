@@ -27,11 +27,30 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_inventory_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/inventory/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant_inventory:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product_variant:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_inventory_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/inventory/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant_inventory:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_variant_inventory:update</attribute>
                 </attribute>
             </itemOperation>
 
@@ -55,11 +74,11 @@
                 <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
 
-            <collectionOperation name="admin_get_inventory">
+            <collectionOperation name="admin_inventory_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/inventory</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:read</attribute>
+                    <attribute name="groups">admin:product_variant_inventory:read</attribute>
                 </attribute>
             </collectionOperation>
             

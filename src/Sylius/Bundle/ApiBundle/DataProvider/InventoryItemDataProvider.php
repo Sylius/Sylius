@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
@@ -23,7 +23,7 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class InventoryCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+final class InventoryItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /** @var ProductVariantRepositoryInterface */
     private $productVariantRepository;
@@ -39,10 +39,10 @@ final class InventoryCollectionDataProvider implements CollectionDataProviderInt
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return is_a($resourceClass, ProductVariantInterface::class, true) && ($operationName === 'admin_inventory_get');
+        return is_a($resourceClass, ProductVariantInterface::class, true) && str_starts_with($operationName, 'admin_inventory_');
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
+    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
         $user = $this->userContext->getUser();
 
@@ -50,7 +50,7 @@ final class InventoryCollectionDataProvider implements CollectionDataProviderInt
         $localeCode = $context[ContextKeys::LOCALE_CODE];
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
-            return $this->productVariantRepository->findInventoryList($localeCode);
+            return $this->productVariantRepository->findOneInventoryItem($id, $localeCode);
         }
 
         return null;
