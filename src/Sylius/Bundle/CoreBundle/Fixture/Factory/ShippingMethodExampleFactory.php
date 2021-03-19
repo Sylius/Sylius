@@ -79,6 +79,11 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodFactory->createNew();
         $shippingMethod->setCode($options['code']);
+
+        if (array_key_exists('position', $options)) {
+            $shippingMethod->setPosition($options['position']);
+        }
+
         $shippingMethod->setEnabled($options['enabled']);
         $shippingMethod->setZone($options['zone']);
         $shippingMethod->setCalculator($options['calculator']['type']);
@@ -87,6 +92,10 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
 
         if (array_key_exists('category', $options)) {
             $shippingMethod->setCategory($options['category']);
+        }
+
+        if(array_key_exists('category_requirements', $options)) {
+            $shippingMethod->setCategoryRequirement($options['category_requirements']);
         }
 
         if (array_key_exists('tax_category', $options) && ($options['tax_category'] instanceof TaxCategoryInterface)) {
@@ -123,6 +132,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefault('description', function (Options $options): string {
                 return $this->faker->sentence();
             })
+            ->setDefined('position')
+            ->setAllowedTypes('position', ['null', 'int'])
+            ->setDefault('position', null)
             ->setDefault('enabled', function (Options $options): bool {
                 return $this->faker->boolean(90);
             })
@@ -135,6 +147,16 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setDefined('category')
             ->setAllowedTypes('category', ['null', 'string', ShippingCategoryInterface::class])
             ->setNormalizer('category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
+            ->setDefined('category_requirement')
+            ->setDefault('category_requirement', ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL)
+            ->setAllowedTypes('category_requirement', ['null', 'int'])
+            ->setNormalizer('category_requirement', function (Options $options): ?int {
+                return [
+                    'none' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE,
+                    'any' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
+                    'all' => ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
+                ][$options['category_requirement']];
+            })
             ->setDefault('calculator', function (Options $options): array {
                 $configuration = [];
                 /** @var ChannelInterface $channel */
