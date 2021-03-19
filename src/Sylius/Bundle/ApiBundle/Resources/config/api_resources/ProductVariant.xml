@@ -30,12 +30,6 @@
                 <attribute name="path">/admin/product-variants/{id}</attribute>
             </itemOperation>
 
-            <itemOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/product-variants</attribute>
-                <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute>
-            </itemOperation>
-
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants/{id}</attribute>
@@ -45,6 +39,11 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-variants</attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
 
