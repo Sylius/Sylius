@@ -111,7 +111,7 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="email" writable="true" />
-        <property name="group" writable="false" />
+        <property name="group" writable="true" />
         <property name="orders" writable="false" />
         <property name="gender" writable="true" />
         <property name="firstName" writable="true" />
