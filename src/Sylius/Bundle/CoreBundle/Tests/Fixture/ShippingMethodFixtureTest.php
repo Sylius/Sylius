@@ -51,6 +51,14 @@ final class ShippingMethodFixtureTest extends TestCase
     /**
      * @test
      */
+    public function shipping_method_position_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['position' => 10]]]], 'custom.*.position');
+    }
+
+    /**
+     * @test
+     */
     public function shipping_method_may_be_toggled(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');
@@ -70,6 +78,14 @@ final class ShippingMethodFixtureTest extends TestCase
     public function shipping_method_category_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['category' => 'BOOKS']]]], 'custom.*.category');
+    }
+
+    /**
+     * @test
+     */
+    public function shipping_method_category_requirements_are_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['category_requirement' => 'all']]]], 'custom.*.category_requirement');
     }
 
     /**
