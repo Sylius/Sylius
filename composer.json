@@ -189,7 +189,7 @@
         "phpunit/phpunit": "^8.5",
         "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
-        "sspooky13/yaml-standards": "^5.1",
+        "sspooky13/yaml-standards": "^5.1 || ^6.0",
         "stripe/stripe-php": "^6.43",
         "sylius-labs/coding-standard": "^3.1",
         "symfony/browser-kit": "^4.4 || ^5.2",
