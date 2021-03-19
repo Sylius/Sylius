@@ -20,9 +20,10 @@
             <group>admin:customer:read</group>
         </attribute>
 
-        <attribute name="customerGroup">
+        <attribute name="group">
             <group>admin:customer:read</group>
         </attribute>
+        
         <attribute name="email">
             <group>admin:customer:create</group>
             <group>admin:customer:read</group>
