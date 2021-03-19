@@ -20,6 +20,14 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/customers</attribute>
@@ -28,14 +36,6 @@
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:customer:create</attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="admin_get_all">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/customers</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -86,6 +86,14 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/customers/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:customer:update</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_password_update">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}/password</attribute>
@@ -99,19 +107,12 @@
                     <attribute name="summary">Change password for logged in customer</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="shop_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/shop/customers/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:update</attribute>
-                </attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="email" writable="true" />
-        <property name="customerGroup" writable="false"/>
+        <property name="group" writable="true" />
+        <property name="orders" writable="false" />
         <property name="gender" writable="true" />
         <property name="firstName" writable="true" />
         <property name="lastName" writable="true" />
