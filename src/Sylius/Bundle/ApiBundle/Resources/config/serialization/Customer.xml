@@ -83,6 +83,10 @@
             <group>shop:customer:update</group>
         </attribute>
 
+        <attribute name="addresses">
+            <group>admin:customer:read</group>
+        </attribute>
+
         <attribute name="defaultAddress">
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
