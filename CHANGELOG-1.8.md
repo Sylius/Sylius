@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.11 (2021-03-22)
+
+#### Details
+
+- [#12468](https://github.com/Sylius/Sylius/issues/12468) Fix the build by conflicting with doctrine/doctrine-bundle 2.3.0 ([@pamil](https://github.com/pamil))
+
 ## v1.8.10 (2021-03-18)
 
 #### Details
