@@ -3,6 +3,12 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
+ - `doctrine/doctrine-bundle:2.3.0`:
+
+   This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
+
+   References: https://github.com/doctrine/DoctrineBundle/issues/1305
+
  - `symfony/serializer:4.4.19|5.2.2`:
 
    These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.

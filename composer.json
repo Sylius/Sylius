@@ -156,6 +156,7 @@
     },
     "conflict": {
         "api-platform/core": "^2.6",
+        "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/inflector": "^1.4",
         "laminas/laminas-code": "^4.0.0",
         "symfony/doctrine-bridge": "4.4.16",
