@@ -9,6 +9,13 @@ references related issues.
 
    References: https://github.com/doctrine/DoctrineBundle/issues/1305
 
+ - `jms/serializer-bundle:3.9`:
+
+   This version automatically registered DocBlockDriver, which is always turned on, while docblocks used in our code are not usable with it. Sample error:
+   `Can't use incorrect type object for collection in Doctrine\ORM\PersistentCollection:owner`
+
+   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/844
+
  - `symfony/serializer:4.4.19|5.2.2`:
 
    These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
