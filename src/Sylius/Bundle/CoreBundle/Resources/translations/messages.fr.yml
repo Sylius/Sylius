@@ -2,6 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Voir la commande ou modifier le mode de paiement'
+            thank_you: 'Merci d''avoir acheté dans notre boutique !'
+            your_order_number: 'Votre commande n°'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
     form:
         block:
             body: Corps
