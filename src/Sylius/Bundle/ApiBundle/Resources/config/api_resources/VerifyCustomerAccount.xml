@@ -19,15 +19,28 @@
         <attribute name="route_prefix">shop</attribute>
         <attribute name="messenger">input</attribute>
         <attribute name="validation_groups">sylius</attribute>
+        <attribute name="output">false</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="shop_resend_verification_email">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/account-verification-requests</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:resend_verification_email:create</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends verification email</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="shop_verify_customer_account">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/account-verification-requests/{id}</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\VerifyCustomerAccount</attribute>
-                <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:account_verification:update</attribute>
