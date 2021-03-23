@@ -42,11 +42,6 @@
                 <attribute name="path">/admin/product-variants</attribute>
             </collectionOperation>
 
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/product-variants</attribute>
-            </collectionOperation>
-
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants</attribute>
