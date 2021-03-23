@@ -42,6 +42,7 @@
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
+        <property name="value" />
         <property name="translations" readable="true" writable="true" >
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
