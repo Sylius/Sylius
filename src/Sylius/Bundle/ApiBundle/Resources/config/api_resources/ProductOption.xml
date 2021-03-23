@@ -61,6 +61,11 @@
                     <attribute name="groups">product_option:update</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-options/{id}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
