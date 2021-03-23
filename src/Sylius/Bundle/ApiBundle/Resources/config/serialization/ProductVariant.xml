@@ -101,6 +101,12 @@
             <group>admin:product_variant:update</group>
             <group>admin:product:read</group>
         </attribute>
+        <attribute name="optionValues">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>shop:product:read</group>
+        </attribute>
         <attribute name="translations">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>

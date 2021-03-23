@@ -114,6 +114,7 @@
         <property name="height" />
         <property name="depth" />
         <property name="enabled" />
+        <property name="optionValues" />
         <property name="translations">
             <attribute name="openapi_context">
                 <attribute name="type">array</attribute>
