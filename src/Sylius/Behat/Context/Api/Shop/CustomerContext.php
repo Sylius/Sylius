@@ -201,6 +201,27 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @When I resend the verification email
+     */
+    public function iResendVerificationEmail(): void
+    {
+        /** @var ShopUserInterface $user */
+        $user = $this->sharedStorage->get('user');
+
+        $this->resendVerificationEmail($user->getEmail());
+    }
+
+    /**
+     * @When I use the verification link from the first email to verify
+     */
+    public function iUseVerificationLinkFromFirstEmailToVerify(): void
+    {
+        $token = $this->sharedStorage->get('verification_token');
+
+        $this->verifyAccount($token);
+    }
+
+    /**
      * @When I register with email :email and password :password
      */
     public function iRegisterWithEmailAndPassword(string $email, string $password): void
@@ -215,6 +236,14 @@ final class CustomerContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->customerClient->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that the verification email has been sent
+     */
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
+    {
+        Assert::same($this->customerClient->getLastResponse()->getStatusCode(), 202);
     }
 
     /**
@@ -420,13 +449,35 @@ final class CustomerContext implements Context
      */
     public function myAccountShouldBeVerified(): void
     {
-        /** @var ShopUserInterface $user */
-        $user = $this->sharedStorage->get('user');
-        $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
-
-        $response = $this->customerClient->show((string) $user->getCustomer()->getId());
+        $response = $this->getResponseWithAccountData();
 
         Assert::true($this->responseChecker->getResponseContent($response)['user']['verified']);
+    }
+
+    /**
+     * @Then /^(?:my|his|her) account should not be verified$/
+     */
+    public function myAccountShouldNotBeVerified(): void
+    {
+        $response = $this->getResponseWithAccountData();
+
+        Assert::false($this->responseChecker->getResponseContent($response)['user']['verified']);
+    }
+
+    /**
+     * @Then I should not be able to resend the verification email
+     */
+    public function iShouldBeUnableToResendVerificationEmail(): void
+    {
+        /** @var ShopUserInterface $user */
+        $user = $this->sharedStorage->get('user');
+
+        $this->resendVerificationEmail($user->getEmail());
+
+        Assert::same($this->responseChecker->getError($this->customerClient->getLastResponse()),
+            \sprintf('Account with email %s is currently verified.', $user->getEmail()),
+            'Validation message is different then expected.'
+        );
     }
 
     private function isViolationWithMessageInResponse(Response $response, string $message): bool
@@ -463,5 +514,23 @@ final class CustomerContext implements Context
         ]);
 
         $this->customerClient->executeCustomRequest($request);
+    }
+
+    private function resendVerificationEmail(string $email): void
+    {
+        $request = Request::create('shop', 'account-verification-requests', 'Bearer');
+
+        $request->setContent(['email' => $email]);
+
+        $this->customerClient->executeCustomRequest($request);
+    }
+
+    private function getResponseWithAccountData(): Response
+    {
+        /** @var ShopUserInterface $user */
+        $user = $this->sharedStorage->get('user');
+        $this->loginContext->iLogInAsWithPassword($user->getEmail(), 'sylius');
+
+        return $this->customerClient->show((string) $user->getCustomer()->getId());
     }
 }

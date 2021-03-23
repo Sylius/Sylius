@@ -52,6 +52,15 @@ final class EmailContext implements Context
         Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
     }
 
+    /**
+     * @Then it should be sent to :recipient
+     * @Then the email with contact request should be sent to :recipient
+     */
+    public function anEmailShouldBeSentTo(string $recipient): void
+    {
+        Assert::true($this->emailChecker->hasRecipient($recipient));
+    }
+
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
