@@ -1,5 +1,15 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.2 (2021-03-23)
+
+#### Details
+
+- [#12439](https://github.com/Sylius/Sylius/issues/12439) Don't render _token field if it's already rendered ([@maximehuran](https://github.com/maximehuran))
+- [#12454](https://github.com/Sylius/Sylius/issues/12454) Don't render _token field if it's already rendered in update template ([@pamil](https://github.com/pamil))
+- [#12461](https://github.com/Sylius/Sylius/issues/12461) Fix packages builds: ResourceBundle v1.8 does not require StofDoctrineExtensionsBundle anymore ([@pamil](https://github.com/pamil))
+- [#12468](https://github.com/Sylius/Sylius/issues/12468) Fix the build by conflicting with doctrine/doctrine-bundle 2.3.0 ([@pamil](https://github.com/pamil))
+- [#12471](https://github.com/Sylius/Sylius/issues/12471) [Maintenance] Conflict with JMSSerializer 3.9.0 due to issues with mapping of persistent collection ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.9.1 (2021-03-18)
 
 #### Details
