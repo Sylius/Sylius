@@ -18,7 +18,7 @@
                 <value>sylius</value>
             </option>
         </constraint>
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationState">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified">
             <option name="groups">
                 <value>sylius</value>
             </option>

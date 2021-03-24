@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class ShopUserVerificationStateValidator extends ConstraintValidator
+final class ShopUserNotVerifiedValidator extends ConstraintValidator
 {
     /** @var UserRepositoryInterface */
     private $shopUserRepository;
@@ -34,8 +34,8 @@ final class ShopUserVerificationStateValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, ResendVerificationEmail::class);
 
-        /** @var ShopUserVerificationState $constraint */
-        Assert::isInstanceOf($constraint, ShopUserVerificationState::class);
+        /** @var ShopUserNotVerified $constraint */
+        Assert::isInstanceOf($constraint, ShopUserNotVerified::class);
 
         $shopUser = $this->shopUserRepository->findOneByEmail($value->email);
 
@@ -45,9 +45,6 @@ final class ShopUserVerificationStateValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation(
-            $constraint->message,
-            ['%email%' => $value->email]
-        );
+        $this->context->addViolation($constraint->message, ['%email%' => $value->email]);
     }
 }

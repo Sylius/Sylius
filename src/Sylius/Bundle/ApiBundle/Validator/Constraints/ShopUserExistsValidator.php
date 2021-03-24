@@ -39,13 +39,10 @@ final class ShopUserExistsValidator extends ConstraintValidator
 
         $shopUser = $this->shopUserRepository->findOneByEmail($value->email);
 
-        if($shopUser !== null) {
+        if ($shopUser !== null) {
             return;
         }
 
-        $this->context->addViolation(
-            $constraint->message,
-            ['%email%' => $value->email]
-        );
+        $this->context->addViolation($constraint->message, ['%email%' => $value->email]);
     }
 }

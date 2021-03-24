@@ -16,14 +16,14 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\ResendVerificationEmail;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationState;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ShopUserVerificationStateValidatorSpec extends ObjectBehavior
+final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository): void
     {
@@ -61,7 +61,7 @@ final class ShopUserVerificationStateValidatorSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$value, new ShopUserVerificationState()])
+            ->during('validate', [$value, new ShopUserNotVerified()])
         ;
     }
 
@@ -82,7 +82,7 @@ final class ShopUserVerificationStateValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
             ->shouldBeCalled();
 
-        $this->validate($value, new ShopUserVerificationState());
+        $this->validate($value, new ShopUserNotVerified());
     }
 
     function it_does_not_add_violation_if_shop_user_exists(
@@ -102,6 +102,6 @@ final class ShopUserVerificationStateValidatorSpec extends ObjectBehavior
             ->addViolation('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ShopUserVerificationState());
+        $this->validate($value, new ShopUserNotVerified());
     }
 }
