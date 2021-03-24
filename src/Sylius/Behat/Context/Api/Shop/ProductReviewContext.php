@@ -46,6 +46,7 @@ final class ProductReviewContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->iriConverter = $iriConverter;
     }
+
     /**
      * @When I check this product's reviews
      */
@@ -55,7 +56,6 @@ final class ProductReviewContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $this->client->index();
-
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->filter();
     }
