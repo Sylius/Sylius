@@ -35,6 +35,14 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-reviews</attribute>
             </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-reviews</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_review_product_filter</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
@@ -85,6 +93,7 @@
         <property name="id" identifier="true" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
+        <property name="product" />
         <property name="title" required="true" readable="true" writable="true" />
         <property name="rating" readable="true" writable="true" />
         <property name="comment" readable="true" writable="true" />
