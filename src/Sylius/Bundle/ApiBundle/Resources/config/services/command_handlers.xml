@@ -98,6 +98,15 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\AddProductReviewHandler">
+            <argument type="service" id="sylius.api.context.user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="sylius.repository.product_review" />
+            <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus"/>
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\ChangeShopUserPasswordHandler">
             <argument type="service" id="sylius.security.password_updater" />
             <argument type="service" id="sylius.repository.shop_user" />
