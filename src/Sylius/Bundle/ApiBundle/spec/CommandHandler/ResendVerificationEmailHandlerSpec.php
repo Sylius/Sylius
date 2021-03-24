@@ -77,23 +77,4 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
 
         $this($resendVerificationEmail);
     }
-
-    function it_does_nothing_if_channel_does_not_require_verification(
-        UserRepositoryInterface $userRepository,
-        ChannelRepositoryInterface $channelRepository,
-        ShopUserInterface $shopUser,
-        ChannelInterface $channel
-    ): void {
-        $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
-        $channelRepository->findOneByCode('WEB')->willReturn($channel);
-
-        $channel->isAccountVerificationRequired()->willReturn(false);
-        $shopUser->setEnabled(true)->shouldBeCalled();
-
-        $resendVerificationEmail = new ResendVerificationEmail('test@email.com');
-        $resendVerificationEmail->setChannelCode('WEB');
-        $resendVerificationEmail->setLocaleCode('en_US');
-
-        $this($resendVerificationEmail);
-    }
 }
