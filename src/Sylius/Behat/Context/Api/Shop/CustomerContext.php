@@ -474,7 +474,8 @@ final class CustomerContext implements Context
 
         $this->resendVerificationEmail($user->getEmail());
 
-        Assert::same($this->responseChecker->getError($this->customerClient->getLastResponse()),
+        Assert::same(
+            $this->responseChecker->getError($this->customerClient->getLastResponse()),
             \sprintf('Account with email %s is currently verified.', $user->getEmail()),
             'Validation message is different then expected.'
         );

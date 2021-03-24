@@ -16,14 +16,14 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class ShopUserVerificationState extends Constraint
+final class ShopUserNotVerified extends Constraint
 {
     /** @var string */
     public $message = 'sylius.account.is_verified';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_shop_user_verification_state';
+        return 'sylius_api_shop_user_not_verified';
     }
 
     public function getTargets(): string
