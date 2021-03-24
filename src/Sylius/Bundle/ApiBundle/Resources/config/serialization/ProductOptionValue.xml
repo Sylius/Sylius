@@ -27,8 +27,6 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="value">
-            <group>product_option:create</group>
-            <group>product_option:update</group>
             <group>product_option_value:read</group>
             <group>product_option_value:write</group>
             <group>shop:product:read</group>
