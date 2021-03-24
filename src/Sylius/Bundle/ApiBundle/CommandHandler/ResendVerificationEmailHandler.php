@@ -60,12 +60,6 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        if (!$channel->isAccountVerificationRequired()) {
-            $user->setEnabled(true);
-
-            return;
-        }
-
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
 
