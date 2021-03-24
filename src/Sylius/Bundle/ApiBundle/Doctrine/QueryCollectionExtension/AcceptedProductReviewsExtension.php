@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /** @experimental */
 final class AcceptedProductReviewsExtension implements ContextAwareQueryCollectionExtensionInterface
@@ -39,11 +40,15 @@ final class AcceptedProductReviewsExtension implements ContextAwareQueryCollecti
             return;
         }
 
+        if ($operationName !== 'shop_get') {
+            return;
+        }
+
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
             ->andWhere(sprintf('%s.status = :status', $rootAlias))
-            ->setParameter('status', 'accepted')
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
         ;
     }
 }

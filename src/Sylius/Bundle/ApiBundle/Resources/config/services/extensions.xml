@@ -26,9 +26,9 @@
         </service>
 
         <service
-                id="sylius.api.doctrine.query_collection_extension.accepted_product_reviews"
-                class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension"
-                public="true"
+            id="sylius.api.doctrine.query_collection_extension.accepted_product_reviews"
+            class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension"
+            public="true"
         >
             <argument>%sylius.model.product_review.class%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
