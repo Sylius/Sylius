@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
@@ -40,7 +49,7 @@ final class ProductReviewContext implements Context
     /**
      * @When I check this product's reviews
      */
-    public function iCheckThisProductsReviews()
+    public function iCheckThisProductsReviews(): void
     {
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
@@ -54,7 +63,7 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should see :amount product reviews in the list
      */
-    public function iShouldSeeProductReviewsInTheList(int $amount)
+    public function iShouldSeeProductReviewsInTheList(int $amount): void
     {
         $result = $this->responseChecker->getCollection($this->client->getLastResponse());
 
@@ -64,19 +73,32 @@ final class ProductReviewContext implements Context
     /**
      * @Then I should not see review titled :title in the list
      */
-    public function iShouldNotSeeReviewTitledInTheList(string $title)
+    public function iShouldNotSeeReviewTitledInTheList(string $title): void
     {
         $result = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::null($this->findReviewByTitle($title, $result));
     }
 
     /**
      * @Then I should be notified that there are no reviews
      */
-    public function iShouldBeNotifiedThatThereAreNoReviews()
+    public function iShouldBeNotifiedThatThereAreNoReviews(): void
     {
         $result = $this->responseChecker->getCollection($this->client->getLastResponse());
 
         Assert::same(sizeof($result), 0);
     }
 
+    private function findReviewByTitle(string $title, array $reviews): ?array
+    {
+        /** @var array $review */
+        foreach ($reviews as $review) {
+            if ($review['title'] === $title) {
+                return $review;
+            }
+        }
+
+        return null;
+    }
 }
