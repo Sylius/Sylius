@@ -78,6 +78,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
 
         $customer->setFirstName($command->firstName);
         $customer->setLastName($command->lastName);
+        $customer->setSubscribedToNewsletter($command->subscribedToNewsletter);
         $customer->setPhoneNumber($command->phoneNumber);
         $customer->setUser($user);
 

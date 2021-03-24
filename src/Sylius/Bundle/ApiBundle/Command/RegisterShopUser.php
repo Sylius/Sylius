@@ -43,6 +43,12 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
     public $password;
 
     /**
+     * @var bool
+     * @psalm-immutable
+     */
+    public $subscribedToNewsletter;
+
+    /**
      * @var string|null
      * @psalm-immutable
      */
@@ -59,12 +65,14 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
         string $lastName,
         string $email,
         string $password,
+        bool $subscribedToNewsletter,
         ?string $phoneNumber = null
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
+        $this->subscribedToNewsletter = $subscribedToNewsletter;
         $this->phoneNumber = $phoneNumber;
     }
 

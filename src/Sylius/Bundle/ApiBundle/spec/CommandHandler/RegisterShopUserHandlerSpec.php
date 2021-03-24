@@ -66,7 +66,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         MessageBusInterface $commandBus
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true,'+13104322400');
         $command->setChannelCode('CHANNEL_CODE');
         $command->setLocaleCode('en_US');
 
@@ -79,6 +79,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $customer->setFirstName('Will')->shouldBeCalled();
         $customer->setLastName('Smith')->shouldBeCalled();
+        $customer->setSubscribedToNewsletter(true)->shouldBeCalled();
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
@@ -116,7 +117,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         MessageBusInterface $commandBus
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400');
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true, '+13104322400');
         $command->setChannelCode('CHANNEL_CODE');
         $command->setLocaleCode('en_US');
 
@@ -129,6 +130,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $customer->setFirstName('Will')->shouldBeCalled();
         $customer->setLastName('Smith')->shouldBeCalled();
+        $customer->setSubscribedToNewsletter(true)->shouldBeCalled();
         $customer->setPhoneNumber('+13104322400')->shouldBeCalled();
         $customer->setUser($shopUser)->shouldBeCalled();
 
@@ -169,7 +171,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\DomainException::class)
-            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', '+13104322400')])
+            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', true, '+13104322400')])
         ;
     }
 }
