@@ -26,6 +26,15 @@
         </service>
 
         <service
+                id="sylius.api.doctrine.query_collection_extension.accepted_product_reviews"
+                class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension"
+                public="true"
+        >
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service
             id="sylius.api.doctrine.query_collection_extension.products_by_channel_and_locale_code"
             class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension"
             public="true"

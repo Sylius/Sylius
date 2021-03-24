@@ -29,9 +29,6 @@
            <group>product_review:read</group>
            <group>product_review:update</group>
        </attribute>
-       <attribute name="product">
-           <group>product_review:read</group>
-       </attribute>
        <attribute name="rating">
            <group>product_review:read</group>
            <group>product_review:update</group>

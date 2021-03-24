@@ -56,7 +56,7 @@
 
         <service id="sylius.api.product_review_product_filter" parent="api_platform.doctrine.orm.search_filter">
             <argument type="collection">
-                <argument key="product">exact</argument>
+                <argument key="reviewSubject">exact</argument>
             </argument>
             <tag name="api_platform.filter" />
         </service>
