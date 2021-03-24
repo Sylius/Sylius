@@ -62,12 +62,13 @@ final class ProductReviewContext implements Context
 
     /**
      * @Then I should see :amount product reviews in the list
+     * @Then I should be notified that there are no reviews
      */
-    public function iShouldSeeProductReviewsInTheList(int $amount): void
+    public function iShouldSeeProductReviewsInTheList(int $amount = 0): void
     {
-        $result = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $productReviews = $this->responseChecker->getCollection($this->client->getLastResponse());
 
-        Assert::same(sizeof($result), $amount);
+        Assert::count($productReviews, $amount);
     }
 
     /**
@@ -75,30 +76,6 @@ final class ProductReviewContext implements Context
      */
     public function iShouldNotSeeReviewTitledInTheList(string $title): void
     {
-        $result = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::null($this->findReviewByTitle($title, $result));
-    }
-
-    /**
-     * @Then I should be notified that there are no reviews
-     */
-    public function iShouldBeNotifiedThatThereAreNoReviews(): void
-    {
-        $result = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::same(sizeof($result), 0);
-    }
-
-    private function findReviewByTitle(string $title, array $reviews): ?array
-    {
-        /** @var array $review */
-        foreach ($reviews as $review) {
-            if ($review['title'] === $title) {
-                return $review;
-            }
-        }
-
-        return null;
+        Assert::isEmpty($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'title', $title));
     }
 }
