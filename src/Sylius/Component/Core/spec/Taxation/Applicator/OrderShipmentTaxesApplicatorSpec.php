@@ -164,7 +164,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_applies_taxes_on_one_from_multiple_shipments_based_on_shipment_adjustments_promotions_and_rate(
+    function it_applies_taxes_on_multiple_shipments_when_there_is_no_tax_rate_for_one_of_them(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
@@ -204,6 +204,84 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $taxRate->isIncludedInPrice()->willReturn(false);
 
         $firstShipment->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $calculator->calculate(400, $taxRate)->willReturn(40);
+        $adjustmentsFactory
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                40,
+                false,
+                [
+                    'shippingMethodCode' => 'fedex',
+                    'shippingMethodName' => 'FedEx',
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1,
+                ])
+            ->willReturn($shippingTaxAdjustment)
+        ;
+        $secondShipment->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
+
+        $this->apply($order, $zone);
+    }
+
+    function it_applies_taxes_on_multiple_shipments_when_one_of_them_has_0_tax_amount(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
+        AdjustmentInterface $shippingTaxAdjustment,
+        OrderInterface $order,
+        ShipmentInterface $firstShipment,
+        ShipmentInterface $secondShipment,
+        ShippingMethodInterface $firstShippingMethod,
+        ShippingMethodInterface $secondShippingMethod,
+        TaxRateInterface $taxRate,
+        ZoneInterface $zone
+    ): void {
+        $order->getShippingTotal()->willReturn(1000);
+        $order->hasShipments()->willReturn(true);
+        $order->getShipments()->willReturn(new ArrayCollection([
+            $firstShipment->getWrappedObject(),
+            $secondShipment->getWrappedObject(),
+        ]));
+        $firstShipment->getAdjustmentsTotal()->willReturn(600);
+        $firstShipment->getMethod()->willReturn($firstShippingMethod);
+        $secondShipment->getAdjustmentsTotal()->willReturn(400);
+        $secondShipment->getMethod()->willReturn($secondShippingMethod);
+
+        $firstShippingMethod->getCode()->willReturn('dhl');
+        $firstShippingMethod->getName()->willReturn('DHL');
+
+        $secondShippingMethod->getCode()->willReturn('fedex');
+        $secondShippingMethod->getName()->willReturn('FedEx');
+
+        $taxRateResolver->resolve($firstShippingMethod, ['zone' => $zone])->willReturn($taxRate);
+        $taxRateResolver->resolve($secondShippingMethod, ['zone' => $zone])->willReturn($taxRate);
+        $taxRate->getLabel()->willReturn('Simple tax (10%)');
+        $taxRate->getCode()->willReturn('simple_tax');
+        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getAmount()->willReturn(0.1);
+        $taxRate->isIncludedInPrice()->willReturn(false);
+
+        $firstShipment->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $calculator->calculate(600, $taxRate)->willReturn(0);
+        $adjustmentsFactory
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                0,
+                false,
+                [
+                    'shippingMethodCode' => 'dhl',
+                    'shippingMethodName' => 'DHL',
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1,
+                ])
+            ->shouldNotBeCalled()
+        ;
 
         $calculator->calculate(400, $taxRate)->willReturn(40);
         $adjustmentsFactory
