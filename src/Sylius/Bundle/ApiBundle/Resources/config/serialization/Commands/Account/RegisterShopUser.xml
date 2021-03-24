@@ -28,5 +28,8 @@
         <attribute name="password">
             <group>shop:customer:create</group>
         </attribute>
+        <attribute name="subscribedToNewsletter">
+            <group>shop:customer:create</group>
+        </attribute>
     </class>
 </serializer>

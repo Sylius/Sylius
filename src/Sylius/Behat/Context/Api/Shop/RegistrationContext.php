@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Webmozart\Assert\Assert;
 
@@ -22,15 +26,32 @@ final class RegistrationContext implements Context
     /** @var AbstractBrowser */
     private $client;
 
+    /** @var ApiClientInterface */
+    private $customerClient;
+
     /** @var LoginContext */
     private $loginContext;
 
+    /** @var SharedStorageInterface */
+    private $sharedStorage;
+
+    /** @var ResponseCheckerInterface */
+    private $responseChecker;
+
     private $content = [];
 
-    public function __construct(AbstractBrowser $client, LoginContext $loginContext)
-    {
+    public function __construct(
+        AbstractBrowser $client,
+        ApiClientInterface $customerClient,
+        LoginContext $loginContext,
+        SharedStorageInterface $sharedStorage,
+        ResponseCheckerInterface $responseChecker
+    ) {
         $this->client = $client;
+        $this->customerClient = $customerClient;
         $this->loginContext = $loginContext;
+        $this->sharedStorage = $sharedStorage;
+        $this->responseChecker = $responseChecker;
     }
 
     /**
@@ -84,6 +105,33 @@ final class RegistrationContext implements Context
     public function iSpecifyThePhoneNumberAs(string $phoneNumber): void
     {
         $this->content['phoneNumber'] = $phoneNumber;
+    }
+
+    /**
+     * @When I subscribe to the newsletter
+     */
+    public function iSubscribeToTheNewsletter(): void
+    {
+        $this->content['subscribedToNewsletter'] = true;
+    }
+
+    /**
+     * @When I verify my account using link sent to :customer
+     */
+    public function iVerifyMyAccount(CustomerInterface $customer): void
+    {
+        $this->sharedStorage->set('customer', $customer);
+
+        $token = $customer->getUser()->getEmailVerificationToken();
+
+        $this->client->request(
+            'PATCH',
+            \sprintf('/api/v2/shop/account-verification-requests/%s', $token),
+            [],
+            [],
+            ['HTTP_ACCEPT' => 'application/ld+json', 'CONTENT_TYPE' => 'application/merge-patch+json'],
+            json_encode([], \JSON_THROW_ON_ERROR)
+        );
     }
 
     /**
@@ -199,6 +247,18 @@ final class RegistrationContext implements Context
     public function iShouldBeLoggedIn(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @Then I should be subscribed to the newsletter
+     */
+    public function iShouldBeSubscribedToTheNewsletter(): void
+    {
+        $customer = $this->sharedStorage->get('customer');
+
+        $response = $this->customerClient->show((string) $customer->getId());
+
+        Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }
 
     private function assertFieldValidationMessage(string $path, string $message): void
