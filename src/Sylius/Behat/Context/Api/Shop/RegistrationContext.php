@@ -118,7 +118,7 @@ final class RegistrationContext implements Context
     /**
      * @When I verify my account using link sent to :customer
      */
-    public function iVerifyMyAccount(CustomerInterface $customer): void
+    public function iVerifyMyAccountUsingLink(CustomerInterface $customer): void
     {
         $this->sharedStorage->set('customer', $customer);
 
