@@ -51,15 +51,26 @@ final class ApplyCouponToCartHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart doesn\'t exist');
 
-        /** @var PromotionCouponInterface $promotionCoupon */
-        $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $command->couponCode]);
-
-        Assert::notNull($promotionCoupon);
+        $promotionCoupon = $this->getPromotionCoupon($command->couponCode);
 
         $cart->setPromotionCoupon($promotionCoupon);
 
         $this->orderProcessor->process($cart);
 
         return $cart;
+    }
+
+    private function getPromotionCoupon(?string $code): ?PromotionCouponInterface
+    {
+        if ($code === null) {
+            return null;
+        }
+
+        /** @var PromotionCouponInterface $promotionCoupon */
+        $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $code]);
+
+        Assert::notNull($promotionCoupon);
+
+        return $promotionCoupon;
     }
 }

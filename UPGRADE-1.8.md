@@ -45,8 +45,28 @@ If you are using they on your custom entity `api_resource` configuration or seri
 - `product:update` changed to: `admin:product:update`
 - `province:read` changed to: `admin:province:read`
 - `province:update` changed to: `admin:province:update`
+- `shipment:read` changed to: `admin:shipment:read` and `shop:shipment:read`
+- `shipment:update` changed to: `admin:shipment:update`
+- `shipping_category:create` changed to: `admin:shipping_category:create`
+- `shipping_category:read` changed to: `admin:shipping_category:read`
+- `shipping_category:update` changed to: `admin:shipping_category:update`
+- `shipping_method:create` changed to: `admin:shipping_method:create`
+- `shipping_method:read` changed to: `admin:shipping_method:read`
+- `shipping_method:update` changed to: `admin:shipping_method:update`
 - `shop:currencies:read` changed to: `shop:currency:read`
 - `shop:customer:write` changed to: `shop:customer:create`
+- `shop_billing_data:read` changed to: `admin:shop_billing_data:read`
+- `tax_category:read` changed to: `admin:tax_category:read`
+- `tax_category:update` changed to: `admin:tax_category:update`
+- `tax_category:create` changed to: `admin:tax_category:create`
+- `taxon:read` changed to: `admin:taxon:read` and `shop:taxon:read` 
+- `taxon:update` changed to: `admin:taxon:update`
+- `taxon:create` changed to: `admin:taxon:create`
+- `zone:read` changed to: `admin:zone:read`
+- `zone:update` changed to: `admin:zone:update`
+- `zone:create` changed to: `admin:zone:create`
+- `zone_member:read` changed to: `admin:zone_member:read`
+- removed redundant `zone_member:write` 
 
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 

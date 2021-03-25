@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Descrição
+            enabled: Habilitado
             name: Nome
             parent: Pai
             slug: Slug

@@ -29,7 +29,8 @@ sylius:
             description: Descripción
             name: Nombre
         shipping_method:
-            calculator: Calculadora
+            add_rule: Añadir regla
+            calculator: Calcular
             category: Categoría
             category_requirement: Requisito de la categoría
             channels: Canales
@@ -41,5 +42,11 @@ sylius:
             match_none_category_requirement: Ninguna de las unidades debe coincidir con la categoría del método de envío
             name: Nombre
             position: Posición
-            tax_category: Categoría de impuestos
+            rules: Reglas
+            tax_category: Categoría del impuesto
             translations: Traducciones
+        shipping_method_rule:
+            type: Tipo
+            total: Total
+            weight: Peso
+            amount: Cantidad

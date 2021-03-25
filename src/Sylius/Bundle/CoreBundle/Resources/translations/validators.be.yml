@@ -15,10 +15,6 @@ sylius:
         email:
             invalid: Несапраўдны адрас.
             not_blank: Калі ласка, увядзіце свой адрас электроннай пошты.
-    locale:
-        code:
-            not_blank: Калі ласка, увядзіце код лакалі.
-            unique: Такая лакаль ўжо ёсць.
     product_variant:
         onHand:
             min: На руках павінна быць больш за {{ limit }}.

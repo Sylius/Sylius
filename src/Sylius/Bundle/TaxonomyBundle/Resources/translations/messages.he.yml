@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: תיאור
+            enabled: הופעל
             name: שם
             parent: הורה
             slug: שם מקוצר לשימוש בקישורים

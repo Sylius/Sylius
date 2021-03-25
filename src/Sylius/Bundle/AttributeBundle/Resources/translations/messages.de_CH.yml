@@ -9,6 +9,7 @@ sylius:
             choices: Auswahlmöglichkeiten
             code: Code
             name: Name
+            translatable: Übersetzbar
             translations: Übersetzungen
             type: Typ
         attribute_type:

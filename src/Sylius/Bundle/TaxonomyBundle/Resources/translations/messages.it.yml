@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Descrizione
+            enabled: Abilitato
             name: "Nome\n"
             parent: Genitore
             slug: Slug

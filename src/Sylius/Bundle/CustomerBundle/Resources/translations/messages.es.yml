@@ -7,17 +7,16 @@ sylius:
             first_name: Nombre
             group: Grupo
             last_name: Apellidos
-            email: Dirección de correo electrónico
+            email: Correo electrónico
             phone_number: Teléfono
             gender: Sexo
             birthday: Fecha de nacimiento
             billing_address: Dirección de facturación
-            different_billing_address: '¿Usar una dirección diferente para la facturación?'
             only_customer_registration: '¿Crear cuenta?'
             subscribed_to_newsletter: Suscribirse al boletín de noticias
         customer_group:
             name: Nombre
-            roles: Roles
+            roles: Perfiles
     gender:
         unknown: Desconocido
         male: Hombre

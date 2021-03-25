@@ -18,6 +18,12 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-translations</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:taxon:read</attribute>
+                        <attribute>taxon_translation:read</attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -25,11 +31,23 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-translations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:taxon:read</attribute>
+                        <attribute>taxon_translation:read</attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxon-translations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:taxon:read</attribute>
+                        <attribute>taxon_translation:read</attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

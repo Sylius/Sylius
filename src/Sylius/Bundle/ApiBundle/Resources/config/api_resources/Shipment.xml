@@ -59,6 +59,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:shipment:update</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 

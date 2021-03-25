@@ -1,5 +1,20 @@
 # CHANGELOG FOR `1.8.X`
 
+## v1.8.9 (2021-02-01)
+
+#### TL;DR
+
+- Fixes the application errors due to external dependencies changes
+
+#### Details
+
+- [#12234](https://github.com/Sylius/Sylius/issues/12234) Backport symfony/polyfill-mbstring:1.22.0 conflict to make the build passing on 1.8 ([@pamil](https://github.com/pamil))
+- [#12255](https://github.com/Sylius/Sylius/issues/12255) Auto-merge passing dependabot PRs ([@Zales0123](https://github.com/Zales0123))
+- [#12272](https://github.com/Sylius/Sylius/issues/12272) [Docs] fix for admin RBAC channels ([@AdamKasp](https://github.com/AdamKasp))
+- [#12274](https://github.com/Sylius/Sylius/issues/12274) Fix no identifier defined error in ApiPlatform 2.6 ([@kayue](https://github.com/kayue))
+- [#12281](https://github.com/Sylius/Sylius/issues/12281) Add conflict with api-platform/core:^2.6 ([@pamil](https://github.com/pamil))
+- [#12295](https://github.com/Sylius/Sylius/issues/12295) [Api] Fix CommandAwareInputDataTransformer ([@Tomanhez](https://github.com/Tomanhez))
+
 ## v1.8.8 (2021-01-11)
 
 #### Details

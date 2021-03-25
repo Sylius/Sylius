@@ -52,7 +52,7 @@ Feature: Receiving percentage discount on products from specific price range
         Then theirs price should be decreased by "$150.00"
         And my cart total should be "$150.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving percentage discount only on items that fit price range criteria
         Given this promotion gives "25%" off on every product priced between "$30.00" and "$150.00"
         When I add product "PHP T-Shirt" to the cart
@@ -61,7 +61,7 @@ Feature: Receiving percentage discount on products from specific price range
         And product "PHP Mug" price should not be decreased
         And my cart total should be "$95.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving different discounts on items from different price ranges
         Given this promotion gives "10%" off on every product with minimum price at "$80.00"
         And there is a promotion "Mugs promotion"

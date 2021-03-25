@@ -16,10 +16,6 @@ sylius:
             max_length: Promosyon ismi 1 karakterden uzun olmamalıdır.|Promosyon ismi {{ limit }} karakterden uzun olmamalıdır.
             min_length: Promosyon ismi en az 1 karakter uzunluğunda olmalıdır.|Promosyon ismi en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen promosyon ismini girin.
-    promotion_action:
-        percentage_discount_configuration:
-            min: Indirim değeri en az %0 olmalıdır.
-            max: En yüksek indirim yüzdesi %100'dür.
     promotion_coupon:
         code:
             max_length: Kupon kodu 1 karakterden uzun olmamalıdır. |Kupon kodunun {{ limit }} karakterden uzun olmaması gerekir.
@@ -38,6 +34,5 @@ sylius:
             min: Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.
             max: Kupon kodu {{ limit }} karakterden uzun olamaz.
             not_blank: Kupon kod uzunluğunu giriniz.
-        possible_generation_amount: Geçersiz kupon kodu uzunluğu veya kupon tutarı. %expectedAmount% eşsiz kuponları, kod uzunluğu %codeLength% emsali ile oluşturmak mümkün değildir. mümkün olan oluşturma miktarı %possibleAmount%'dır.
         usage_limit:
             min: Oluşturulan Kuponlar kullanım sınırı en az olması gerekir {{ limit }}.

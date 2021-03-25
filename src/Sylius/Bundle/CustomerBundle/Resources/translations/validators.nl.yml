@@ -24,6 +24,7 @@ sylius:
         code:
             regex: Klantgroep code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Klant groepcode moet uniek zijn.
+            not_blank: Voer a.u.b. een code voor de klantgroep in.
         name:
             max: De naam van de klantgroep mag niet langer zijn dan {{ limit }} tekens.
             min: De naam van de klantgroep moet minimaal {{ limit }} karakters lang zijn.

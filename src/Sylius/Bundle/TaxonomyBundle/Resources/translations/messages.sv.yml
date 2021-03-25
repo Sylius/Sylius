@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: Beskrivning
+            enabled: Aktiverad
             name: Namn
             parent: Förälder
             slug: Permalänk

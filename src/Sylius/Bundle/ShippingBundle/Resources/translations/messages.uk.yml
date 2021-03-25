@@ -16,7 +16,7 @@ sylius:
                 ready: Готове
                 shipped: Доставлене
                 returned: Повернене
-                cancelled: Скасовано
+                cancelled: Скасоване
             tracking_code: Код відстеження
         shipping_calculator:
             flat_rate_configuration:
@@ -27,16 +27,26 @@ sylius:
                 amount: Обсяг
         shipping_category:
             description: Опис
-            name: Назва
+            name: Назва регіону
         shipping_method:
+            add_rule: Додати правило
             calculator: Калькулятор
             category: Категорія
             category_requirement: Вимоги категорії
             channels: Канали
-            configuration: Конфігурація
+            configuration: Налаштування
             description: Опис
             enabled: Ввімкнено
-            name: Назва
+            match_all_category_requirement: Усі товари мають відповідати способу доставки
+            match_any_category_requirement: Щонайменше один товар має відповідати способу доставки
+            match_none_category_requirement: Ні один товар не має відповідати способу доставки
+            name: Назва регіону
             position: Позиція
+            rules: Правила
             tax_category: Категорія податку
             translations: Переклади
+        shipping_method_rule:
+            type: Тип
+            total: Усього
+            weight: Вага
+            amount: Обсяг

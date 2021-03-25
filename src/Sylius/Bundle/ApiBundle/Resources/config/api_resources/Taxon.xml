@@ -39,7 +39,11 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+<<<<<<< HEAD
                 <attribute name="path">/admin/taxons/{id}</attribute>
+=======
+                <attribute name="path">/admin/taxons/{code}</attribute>
+>>>>>>> parent of 74284df836 (Merge pull request #11 from bagrinsergiu/revert-10-dev-to-master)
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon:read</attribute>
                 </attribute>
@@ -50,9 +54,12 @@
                 <attribute name="path">/admin/taxons/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:update</attribute>
+<<<<<<< HEAD
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon:read</attribute>
+=======
+>>>>>>> parent of 74284df836 (Merge pull request #11 from bagrinsergiu/revert-10-dev-to-master)
                 </attribute>
             </itemOperation>
 

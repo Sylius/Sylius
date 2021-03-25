@@ -35,10 +35,9 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
-
         $output->writeln(sprintf(
             'Command will cancel orders that have been unpaid for <info>%s</info>.',
-            $expirationTime
+            (string) $expirationTime
         ));
 
         $unpaidCartsStateUpdater = $this->getContainer()->get('sylius.unpaid_orders_state_updater');

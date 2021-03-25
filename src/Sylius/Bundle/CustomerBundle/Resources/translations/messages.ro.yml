@@ -7,11 +7,11 @@ sylius:
             first_name: Prenume
             group: Grup
             last_name: Nume
-            email: Adresă e-mail
+            email: E-mail
             phone_number: Număr de telefon
             gender: Gen
             birthday: Data naşterii
-            billing_address: Adresa de facturare
+            billing_address: Adresă de facturare
             different_shipping_address: Folosiți o adresă diferită pentru livrare?
             only_customer_registration: Creez cont?
             subscribed_to_newsletter: Abonează-te la newsletter
@@ -19,6 +19,6 @@ sylius:
             name: Nume produs
             roles: Roluri
     gender:
-        unknown: Necunoscută
+        unknown: Necunoscut
         male: Masculin
         female: Feminin

@@ -47,26 +47,30 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
 
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
-        $shippingTotal = $order->getShippingTotal();
-        if (0 === $shippingTotal) {
+        if (0 === $order->getShippingTotal()) {
             return;
         }
 
-        $shipment = $this->getShipment($order);
-        $shippingMethod = $this->getShippingMethod($shipment);
-
-        /** @var TaxRateInterface|null $taxRate */
-        $taxRate = $this->taxRateResolver->resolve($shippingMethod, ['zone' => $zone]);
-        if (null === $taxRate) {
-            return;
+        if (!$order->hasShipments()) {
+            throw new \LogicException('Order should have at least one shipment.');
         }
 
-        $taxAmount = $this->calculator->calculate($shippingTotal, $taxRate);
-        if (0.00 === $taxAmount) {
-            return;
-        }
+        foreach ($order->getShipments() as $shipment) {
+            $shippingMethod = $this->getShippingMethod($shipment);
 
-        $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
+            /** @var TaxRateInterface|null $taxRate */
+            $taxRate = $this->taxRateResolver->resolve($shippingMethod, ['zone' => $zone]);
+            if (null === $taxRate) {
+                return;
+            }
+
+            $taxAmount = $this->calculator->calculate($shipment->getAdjustmentsTotal(), $taxRate);
+            if (0.00 === $taxAmount) {
+                return;
+            }
+
+            $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
+        }
     }
 
     private function addAdjustment(
@@ -88,20 +92,6 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
                 'taxRateAmount' => $taxRate->getAmount(),
             ]
         ));
-    }
-
-    /**
-     * @throws \LogicException
-     */
-    private function getShipment(OrderInterface $order): ShipmentInterface
-    {
-        /** @var ShipmentInterface|false $shipment */
-        $shipment = $order->getShipments()->first();
-        if (false === $shipment) {
-            throw new \LogicException('Order should have at least one shipment.');
-        }
-
-        return $shipment;
     }
 
     /**

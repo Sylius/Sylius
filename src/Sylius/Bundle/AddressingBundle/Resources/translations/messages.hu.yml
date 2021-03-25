@@ -23,7 +23,7 @@ sylius:
         province:
             name: Név
             abbreviation: Rövidítés
-            select: Válassza ki
+            select: Válasszon
         zone:
             add_member: Tag hozzáadása
             members: Tagok

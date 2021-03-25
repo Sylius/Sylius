@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface as OrderAdjustmentInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -45,26 +45,34 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             return false;
         }
 
-        $maxShippingDiscount = $subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) + $subject->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
-        if ($maxShippingDiscount < 0) {
+        if (!$subject->hasShipments()) {
             return false;
         }
 
-        $adjustment = $this->createAdjustment($promotion);
+        $result = false;
+        foreach ($subject->getShipments() as $shipment) {
+            $maxDiscount = $shipment->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) + $shipment->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+            if ($maxDiscount < 0) {
+                continue;
+            }
 
-        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        if (0 === $adjustmentAmount) {
-            return false;
+            $adjustmentAmount = (int) round($shipment->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
+            if (0 === $adjustmentAmount) {
+                continue;
+            }
+
+            if ($maxDiscount < $adjustmentAmount) {
+                $adjustmentAmount = $maxDiscount;
+            }
+
+            $adjustment = $this->createAdjustment($promotion);
+            $adjustment->setAmount(-$adjustmentAmount);
+            $shipment->addAdjustment($adjustment);
+            $result = true;
+
         }
 
-        if ($maxShippingDiscount < $adjustmentAmount) {
-            $adjustmentAmount = $maxShippingDiscount;
-        }
-
-        $adjustment->setAmount(-$adjustmentAmount);
-        $subject->addAdjustment($adjustment);
-
-        return true;
+        return $result;
     }
 
     /**
@@ -72,17 +80,22 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
-        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
-            );
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
+
+        if (!$subject->hasShipments()) {
+            return;
         }
 
         foreach ($subject->getAdjustments(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $subject->removeAdjustment($adjustment);
             }
+        }
+
+        foreach ($subject->getShipments() as $shipment) {
+            $this->removePromotionFromShipment($promotion, $shipment);
         }
     }
 
@@ -97,5 +110,14 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
         $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;
+    }
+
+    private function removePromotionFromShipment(PromotionInterface $promotion, ShipmentInterface $shipment): void
+    {
+        foreach ($shipment->getAdjustments(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT) as $adjustment) {
+            if ($promotion->getCode() === $adjustment->getOriginCode()) {
+                $shipment->removeAdjustment($adjustment);
+            }
+        }
     }
 }

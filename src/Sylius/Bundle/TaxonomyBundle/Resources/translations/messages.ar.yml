@@ -5,6 +5,7 @@ sylius:
     form:
         taxon:
             description: الوصف
+            enabled: تفعيل
             name: الاسم
             parent: الجذر
             slug: سبيكة

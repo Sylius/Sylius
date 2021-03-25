@@ -14,7 +14,7 @@ sylius:
             amount: Betaal hoeveelheid
             method: Betaalmethode
             state:
-                header: Betaalstatus
+                header: Betaal status
                 checkout: Afrekenen
                 completed: Voltooid
                 authorized: Gemachtigd

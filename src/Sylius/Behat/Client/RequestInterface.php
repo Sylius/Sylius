@@ -84,6 +84,8 @@ interface RequestInterface
 
     public function updateParameters(array $newParameters): void;
 
+    public function clearParameters(): void;
+
     public function files(): array;
 
     public function updateFiles(array $newFiles): void;

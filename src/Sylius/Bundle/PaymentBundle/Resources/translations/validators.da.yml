@@ -8,7 +8,7 @@ sylius:
             not_blank: Angiv navnet på kortindehaveren.
         expiry_month:
             max_range: Kreditkortets udløbsmåned skal være mellem {{ min }}} og {{ max }}.
-            min_range: Kreditkortets udløbsmåned skal være mellem {{ min }}} og {{ max }}.
+            min_range: Kreditkortets udløbsmåned skal være mellem {{ min }} og {{ max }}.
             not_blank: Vælg venligst udløbsmåneden.
         number:
             not_blank: Angiv kortnummer.

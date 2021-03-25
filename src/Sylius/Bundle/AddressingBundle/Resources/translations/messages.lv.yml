@@ -3,9 +3,34 @@
 
 sylius:
     form:
+        address:
+            city: Pilsēta
+            company: Kompānija
+            country: Valsts
+            first_name: Vārds
+            last_name: Uzvārds
+            phone_number: Telefona numurs
+            postcode: Pasta indekss
+            street: Adrese
+            province: Rajons
+            zone: Zona
         country:
+            add_province: Pievienot rajonu
             name: Nosaukums
+            provinces: Rajoni
+            enabled: Ieslēgts
         province:
             name: Nosaukums
+            abbreviation: Saīsinājums
         zone:
+            add_member: Pievienot dalībnieku
+            members: Dalībnieki
             name: Nosaukums
+            types:
+                country: Valsts
+                province: Rajons
+                zone: Zona
+            scope: Tvērums
+            scopes:
+                all: Visas
+            select_scope: Izvēlēties tvērumu

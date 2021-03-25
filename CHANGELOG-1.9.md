@@ -1,5 +1,50 @@
 # CHANGELOG FOR `1.9.X`
 
+## v1.9.0-BETA.3 (2021-02-15)
+
+#### Details
+
+- [#12313](https://github.com/Sylius/Sylius/issues/12313) Change package type from "project" to "library" ([@vvasiloi](https://github.com/vvasiloi))
+- [#12322](https://github.com/Sylius/Sylius/issues/12322) update documentation for creating custom model ([@arti0090](https://github.com/arti0090))
+- [#12328](https://github.com/Sylius/Sylius/issues/12328) update documentation for creating custom resource controller ([@arti0090](https://github.com/arti0090))
+- [#12331](https://github.com/Sylius/Sylius/issues/12331) Add note about removing Twig route config in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12332](https://github.com/Sylius/Sylius/issues/12332) Reorganize UPGRADE-1.9 file to extract steps for Symfony v5.2 ([@GSadee](https://github.com/GSadee))
+- [#12336](https://github.com/Sylius/Sylius/issues/12336) Fix timeout on 404 Not Found errors when using templating and Symfony 4.4 ([@pamil](https://github.com/pamil))
+- [#12338](https://github.com/Sylius/Sylius/issues/12338) [DOCS] Updating the controller customization ([@Roshyo](https://github.com/Roshyo))
+- [#12342](https://github.com/Sylius/Sylius/issues/12342) Fixes according to composer require commands in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+
+## v1.9.0-BETA.2 (2021-02-10)
+
+#### Details
+
+- [#12230](https://github.com/Sylius/Sylius/issues/12230) [BC BREAK] [Api] [ShippingMethod] [ShopBillingData] [TaxCategory] [Taxon][TaxonTranslation] [Zone] [ZoneMemberRefactor] serializations groups  ([@Tomanhez](https://github.com/Tomanhez))
+- [#12278](https://github.com/Sylius/Sylius/issues/12278) [API] move security parameters to bundles ([@SirDomin](https://github.com/SirDomin), [@lchrusciel](https://github.com/lchrusciel))
+- [#12289](https://github.com/Sylius/Sylius/issues/12289) [Docs] Add docs for LoyaltyRule ([@Tomanhez](https://github.com/Tomanhez))
+- [#12301](https://github.com/Sylius/Sylius/issues/12301) [API] Add missing api and no-api tags ([@lchrusciel](https://github.com/lchrusciel))
+- [#12312](https://github.com/Sylius/Sylius/issues/12312) [CI] Ignore changes in "adr" directory ([@pamil](https://github.com/pamil))
+- [#12319](https://github.com/Sylius/Sylius/issues/12319) Fix the appearance of the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12323](https://github.com/Sylius/Sylius/issues/12323) Change the order of sections in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+- [#12325](https://github.com/Sylius/Sylius/issues/12325) fix problem with registered service ([@AdamKasp](https://github.com/AdamKasp), [@pamil](https://github.com/pamil))
+- [#12326](https://github.com/Sylius/Sylius/issues/12326) Fixes in the UPGRADE-1.9 file ([@GSadee](https://github.com/GSadee))
+
+## v1.9.0-BETA.1 (2021-02-01)
+
+#### Details
+
+- [#12272](https://github.com/Sylius/Sylius/issues/12272) [Docs] fix for admin RBAC channels ([@AdamKasp](https://github.com/AdamKasp))
+- [#12274](https://github.com/Sylius/Sylius/issues/12274) Fix no identifier defined error in ApiPlatform 2.6 ([@kayue](https://github.com/kayue))
+- [#12279](https://github.com/Sylius/Sylius/issues/12279) [API] show product price ([@SirDomin](https://github.com/SirDomin))
+- [#12281](https://github.com/Sylius/Sylius/issues/12281) Add conflict with api-platform/core:^2.6 ([@pamil](https://github.com/pamil))
+- [#12282](https://github.com/Sylius/Sylius/issues/12282) [Shipment] Applying discounts and taxes for each shipment ([@GSadee](https://github.com/GSadee))
+- [#12283](https://github.com/Sylius/Sylius/issues/12283) Getting back to customer details in admin panel. ([@mamazu](https://github.com/mamazu))
+- [#12284](https://github.com/Sylius/Sylius/issues/12284) [Psalm] Fix build by casting to string in sprintf methods ([@GSadee](https://github.com/GSadee))
+- [#12287](https://github.com/Sylius/Sylius/issues/12287) [API] Search products by name within specific taxon ([@pamil](https://github.com/pamil))
+- [#12288](https://github.com/Sylius/Sylius/issues/12288) Add proper date in licenses ([@Tomanhez](https://github.com/Tomanhez))
+- [#12290](https://github.com/Sylius/Sylius/issues/12290) [Docs] Upgrade sphinx installation guide ([@Tomanhez](https://github.com/Tomanhez), [@pamil](https://github.com/pamil))
+- [#12291](https://github.com/Sylius/Sylius/issues/12291) Fix Taxon collection API name ([@kayue](https://github.com/kayue))
+- [#12295](https://github.com/Sylius/Sylius/issues/12295) [Api] Fix CommandAwareInputDataTransformer ([@Tomanhez](https://github.com/Tomanhez))
+- [#12296](https://github.com/Sylius/Sylius/issues/12296) Typo fix ([@Xeriaz](https://github.com/Xeriaz))
+
 ## v1.9.0-ALPHA.2 (2021-01-21)
 
 #### TL;DR
