@@ -43,16 +43,16 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
     public $password;
 
     /**
-     * @var bool
-     * @psalm-immutable
-     */
-    public $subscribedToNewsletter;
-
-    /**
      * @var string|null
      * @psalm-immutable
      */
     public $phoneNumber;
+
+    /**
+     * @var bool
+     * @psalm-immutable
+     */
+    public $subscribedToNewsletter;
 
     /** @var string */
     public $channelCode;
@@ -65,15 +65,15 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
         string $lastName,
         string $email,
         string $password,
-        bool $subscribedToNewsletter = false,
-        ?string $phoneNumber = null
+        ?string $phoneNumber = null,
+        bool $subscribedToNewsletter = false
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-        $this->subscribedToNewsletter = $subscribedToNewsletter;
         $this->phoneNumber = $phoneNumber;
+        $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
 
     public function getChannelCode(): string
