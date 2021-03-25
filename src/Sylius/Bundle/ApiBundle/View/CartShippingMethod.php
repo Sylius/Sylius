@@ -22,12 +22,12 @@ class CartShippingMethod implements CartShippingMethodInterface
     private $shippingMethod;
 
     /** @var int */
-    private $cost;
+    private $price;
 
-    public function __construct(ShippingMethodInterface $shippingMethod, int $cost)
+    public function __construct(ShippingMethodInterface $shippingMethod, int $price)
     {
         $this->shippingMethod = $shippingMethod;
-        $this->cost = $cost;
+        $this->price = $price;
     }
 
     public function getShippingMethod(): ShippingMethodInterface
@@ -35,8 +35,8 @@ class CartShippingMethod implements CartShippingMethodInterface
         return $this->shippingMethod;
     }
 
-    public function getCost(): int
+    public function getPrice(): int
     {
-        return $this->cost;
+        return $this->price;
     }
 }

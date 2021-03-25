@@ -88,6 +88,15 @@
                 <!-- <attribute name="controller">api_platform.doctrine.orm.data_persister</attribute> -->
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:create</attribute>
+                    </attribute>
+            </collectionOperation>
+            
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-variants</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_variant_product_filter</attribute>
+                    <attribute>sylius.api.product_variant_option_value_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

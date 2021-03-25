@@ -984,7 +984,7 @@ final class CheckoutContext implements Context
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
-                $cartShippingMethod['cost'] === $fee &&
+                $cartShippingMethod['price'] === $fee &&
                 $cartShippingMethod['shippingMethod']['code'] === $shippingMethod->getCode()
             ) {
                 return true;

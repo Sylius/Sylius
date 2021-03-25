@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Currency\Context;
 
-use Zend\Stdlib\PriorityQueue;
+use Laminas\Stdlib\PriorityQueue;
 
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {

@@ -1,0 +1,9 @@
+Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource:
+    fooSyliusResource:
+        name: FooSyliusResource
+
+Sylius\Bundle\ApiBundle\Application\Entity\Foo:
+    foo{1..2}:
+        name: Foo<current()>
+        owner: '@admin'
+        fooSyliusResource: '@fooSyliusResource'

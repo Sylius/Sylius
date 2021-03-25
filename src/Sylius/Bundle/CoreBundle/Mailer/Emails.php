@@ -24,4 +24,8 @@ interface Emails
     public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
 
     public const USER_REGISTRATION = 'user_registration';
+
+    public const PASSWORD_RESET = 'password_reset';
+
+    public const ACCOUNT_VERIFICATION_TOKEN = 'account_verification_token';
 }

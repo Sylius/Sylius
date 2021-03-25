@@ -119,7 +119,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When I specify the email as :email
+     * @When I specify customer email as :email
      * @When I do not specify the email
      */
     public function iSpecifyTheEmail(?string $email = null): void

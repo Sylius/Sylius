@@ -22,9 +22,9 @@
    
     Replace `Doctrine\Common\Persistence` namespace in your codebase to `Doctrine\Persistence`.
    
-1. We've removed DoctrineCacheBundle from our required packages while upgrading to the next major version of DoctrineBundle (v2).
+1. **We've removed DoctrineCacheBundle from our required packages while upgrading to the next major version of DoctrineBundle (v2).**
    
-1. We've upgraded SyliusThemeBundle to the next major version (v2.1).
+1. **We've upgraded SyliusThemeBundle to the next major version (v2.1).**
    
     Please follow [SyliusThemeBundle's upgrade instructions](https://github.com/Sylius/SyliusThemeBundle/blob/master/UPGRADE.md).
    
@@ -48,6 +48,15 @@
     +           permanent: false
     ```
 
+1. Add new bundles to your list of used bundles in `config/bundles.php` if they are not already there:
+
+    ```diff
+    +   BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    +   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+    ```
+
+1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
+
 #### Upgrades Symfony to v5.2
 
 1. Upgrade Symfony dependencies by:
@@ -60,15 +69,6 @@
     composer require --dev "symfony/web-profiler-bundle":"^5.2" --no-update --no-scripts
     composer update
     ```
-
-1. Add new bundles to your list of used bundles in `config/bundles.php` if they are not already there:
-
-    ```diff
-    +   BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
-    +   SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
-    ```
-
-1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
 
 1. We've removed the support for Symfony's Templating component (which is removed in Symfony 5). 
 

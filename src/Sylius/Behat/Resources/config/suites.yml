@@ -4,6 +4,7 @@
 imports:
     - suites/api/account/customer.yml
     - suites/api/account/customer_registration.yml
+    - suites/api/account/email_verification.yml
     - suites/api/account/login.yml
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
@@ -27,6 +28,7 @@ imports:
     - suites/api/product/managing_product_variants.yml
     - suites/api/product/managing_products.yml
     - suites/api/product/viewing_products.yml
+    - suites/api/product/viewing_product_reviews.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/receiving_discount.yml

@@ -7,7 +7,7 @@ Feature: Adding a product with selected option to the cart
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Adding a product with single option to the cart
         Given the store has a product "T-shirt banana"
         And this product has option "Size" with values "S" and "M"

@@ -12,6 +12,7 @@ parameters:
     excludes_analyse:
         # Test dependencies
         - '**/spec/**.php'
+        - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'

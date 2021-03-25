@@ -15,36 +15,84 @@ namespace Sylius\Bundle\ApiBundle\Command;
 
 /**
  * @experimental
- * @psalm-immutable
  */
-class RegisterShopUser
+class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $firstName;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $lastName;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $email;
 
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-immutable
+     */
     public $password;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     * @psalm-immutable
+     */
     public $phoneNumber;
+
+    /**
+     * @var bool
+     * @psalm-immutable
+     */
+    public $subscribedToNewsletter;
+
+    /** @var string */
+    public $channelCode;
+
+    /** @var string|null */
+    public $localeCode;
 
     public function __construct(
         string $firstName,
         string $lastName,
         string $email,
         string $password,
-        ?string $phoneNumber = null
+        ?string $phoneNumber = null,
+        bool $subscribedToNewsletter = false
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
         $this->phoneNumber = $phoneNumber;
+        $this->subscribedToNewsletter = $subscribedToNewsletter;
+    }
+
+    public function getChannelCode(): string
+    {
+        return $this->channelCode;
+    }
+
+    public function setChannelCode(?string $channelCode): void
+    {
+        $this->channelCode = $channelCode;
+    }
+
+    public function getLocaleCode(): ?string
+    {
+        return $this->localeCode;
+    }
+
+    public function setLocaleCode(?string $localeCode): void
+    {
+        $this->localeCode = $localeCode;
     }
 }

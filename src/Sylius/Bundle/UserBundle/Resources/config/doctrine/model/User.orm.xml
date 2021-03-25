@@ -21,7 +21,7 @@
         <field name="usernameCanonical" column="username_canonical" type="string" nullable="true" />
         <field name="enabled" column="enabled" type="boolean" nullable="false" />
         <field name="salt" column="salt" type="string" nullable="false" />
-        <field name="password" column="password" type="string" nullable="false" />
+        <field name="password" column="password" type="string" nullable="true" />
         <field name="encoderName" column="encoder_name" type="string" nullable="true" />
 
         <field name="lastLogin" column="last_login" type="datetime" nullable="true" />

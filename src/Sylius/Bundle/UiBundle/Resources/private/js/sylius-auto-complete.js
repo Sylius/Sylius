@@ -65,13 +65,12 @@ $.fn.extend({
                 $(`<div class="item" data-value="${item[choiceValue]}">${item[choiceName]}</div>`)
               ));
             });
+
+            element.dropdown('refresh');
+            element.dropdown('set selected', element.find('input.autocomplete').val().split(',').filter(String));
           },
         });
       }
-
-      window.setTimeout(() => {
-        element.dropdown('set selected', element.find('input.autocomplete').val().split(',').filter(String));
-      }, 5000);
     });
   },
 });
