@@ -19,12 +19,6 @@
         <attribute name="id">
             <group>product_option_value:read</group>
         </attribute>
-        <attribute name="value">
-            <group>product_option_value:read</group>
-        </attribute>
-        <attribute name="option">
-            <group>product_option_value:read</group>
-        </attribute>
         <attribute name="code">
             <group>product_option:create</group>
             <group>product_option:update</group>
