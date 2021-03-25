@@ -35,6 +35,14 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-reviews</attribute>
             </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-reviews</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_review_product_filter</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
