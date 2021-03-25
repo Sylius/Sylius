@@ -99,11 +99,10 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\AddProductReviewHandler">
-            <argument type="service" id="sylius.api.context.user" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
-            <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
             <tag name="messenger.message_handler" bus="sylius_default.bus"/>
         </service>
 

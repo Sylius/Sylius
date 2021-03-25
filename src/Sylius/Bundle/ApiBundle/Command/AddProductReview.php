@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-class AddProductReview
+class AddProductReview implements CommandAwareDataTransformerInterface
 {
     /**
      * @var string
@@ -51,7 +51,7 @@ class AddProductReview
         int $rating,
         string $comment,
         string $productCode,
-        string $email = null
+        ?string $email = null
     ) {
         $this->title = $title;
         $this->rating = $rating;

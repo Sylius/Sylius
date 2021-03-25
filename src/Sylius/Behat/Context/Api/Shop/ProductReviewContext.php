@@ -62,25 +62,6 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Then I should see :amount product reviews in the list
-     * @Then I should be notified that there are no reviews
-     */
-    public function iShouldSeeProductReviewsInTheList(int $amount = 0): void
-    {
-        $productReviews = $this->responseChecker->getCollection($this->client->getLastResponse());
-
-        Assert::count($productReviews, $amount);
-    }
-
-    /**
-     * @Then I should not see review titled :title in the list
-     */
-    public function iShouldNotSeeReviewTitledInTheList(string $title): void
-    {
-        Assert::isEmpty($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'title', $title));
-    }
-
-    /**
      * @When I add it
      */
     public function iAddIt(): void
@@ -125,5 +106,24 @@ final class ProductReviewContext implements Context
             $this->responseChecker->getValue($this->client->getLastResponse(), 'status'),
             ReviewInterface::STATUS_NEW
         );
+    }
+
+    /**
+     * @Then I should see :amount product reviews in the list
+     * @Then I should be notified that there are no reviews
+     */
+    public function iShouldSeeProductReviewsInTheList(int $amount = 0): void
+    {
+        $productReviews = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::count($productReviews, $amount);
+    }
+
+    /**
+     * @Then I should not see review titled :title in the list
+     */
+    public function iShouldNotSeeReviewTitledInTheList(string $title): void
+    {
+        Assert::isEmpty($this->responseChecker->getCollectionItemsWithValue($this->client->getLastResponse(), 'title', $title));
     }
 }

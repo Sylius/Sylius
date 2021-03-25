@@ -29,33 +29,28 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class AddProductReviewHandler implements MessageHandlerInterface
 {
-    /** @var UserContextInterface */
-    private $userContext;
-
-    /** @var CustomerProviderInterface */
-    private $customerProvider;
+    /** @var FactoryInterface */
+    private $productReviewFactory;
 
     /** @var RepositoryInterface */
     private $productReviewRepository;
 
-    /** @var FactoryInterface */
-    private $productReviewFactory;
-
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
+    /** @var CustomerProviderInterface */
+    private $customerProvider;
+
     public function __construct(
-        UserContextInterface $userContext,
-        CustomerProviderInterface $customerProvider,
-        RepositoryInterface $productReviewRepository,
         FactoryInterface $productReviewFactory,
-        ProductRepositoryInterface $productRepository
+        RepositoryInterface $productReviewRepository,
+        ProductRepositoryInterface $productRepository,
+        CustomerProviderInterface $customerProvider
     ) {
-        $this->userContext = $userContext;
-        $this->customerProvider = $customerProvider;
-        $this->productReviewRepository = $productReviewRepository;
         $this->productReviewFactory = $productReviewFactory;
+        $this->productReviewRepository = $productReviewRepository;
         $this->productRepository = $productRepository;
+        $this->customerProvider = $customerProvider;
     }
 
     public function __invoke(AddProductReview $addProductReview): ReviewInterface
@@ -63,20 +58,15 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         /** @var ProductInterface $product */
         $product = $this->productRepository->findOneByCode($addProductReview->productCode);
 
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->getCustomer();
-
         /** @var string|null $email */
         $email = $addProductReview->email;
 
-        if ($customer === null && $email === null) {
+        if ($email === null) {
             throw new \InvalidArgumentException('Visitor should provide an email');
         }
 
-        if ($customer === null && $email !== null) {
-            /** @var CustomerInterface $customer */
-            $customer = $this->customerProvider->provide($email);
-        }
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerProvider->provide($email);
 
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
@@ -86,21 +76,10 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         $review->setReviewSubject($product);
         $review->setAuthor($customer);
 
-        $this->productReviewRepository->add($review);
-
         $product->addReview($review);
 
+        $this->productReviewRepository->add($review);
+
         return $review;
-    }
-
-    private function getCustomer(): ?CustomerInterface
-    {
-        /** @var UserInterface|null $user */
-        $user = $this->userContext->getUser();
-        if ($user !== null && $user instanceof ShopUserInterface) {
-            return $user->getCustomer();
-        }
-
-        return null;
     }
 }

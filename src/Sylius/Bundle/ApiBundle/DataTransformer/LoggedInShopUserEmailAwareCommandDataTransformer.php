@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
 /** @experimental */
-final class AddProductReviewInputDataTransformer implements CommandDataTransformerInterface
+final class LoggedInShopUserEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     /** @var UserContextInterface */
     private $userContext;
@@ -35,7 +35,7 @@ final class AddProductReviewInputDataTransformer implements CommandDataTransform
         /** @var CustomerInterface|null $customer */
         $customer = $this->getCustomer();
 
-        if ($object->email === null && $customer !== null) {
+        if ($customer !== null) {
             $object->email = $customer->getEmail();
         }
 

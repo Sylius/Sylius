@@ -20,13 +20,13 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-final class AddProductReviewInputDataTransformerSpec extends ObjectBehavior
+final class LoggedInShopUserEmailAwareCommandDataTransformerSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext) {
         $this->beConstructedWith($userContext);
     }
 
-    function it_adds_email_to_add_product_review_for_login_customer(
+    function it_adds_email_to_add_product_review_for_logged_in_customer(
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         CustomerInterface $customer
@@ -37,10 +37,10 @@ final class AddProductReviewInputDataTransformerSpec extends ObjectBehavior
 
         $this->transform(
             new AddProductReview(
-            'Good stuff',
-            5,
-            'Really good stuff',
-            'winter_cap'
+                'Good stuff',
+                5,
+                'Really good stuff',
+                'winter_cap'
             ),
             'Sylius\Component\Core\Model\ProductReview',
             []
@@ -69,17 +69,19 @@ final class AddProductReviewInputDataTransformerSpec extends ObjectBehavior
         );
     }
 
-    function it_supports_add_product_review(): void
+    function it_supports_command_for_adding_product_review(): void
     {
-        $this->supportsTransformation(new AddProductReview(
-            'Good stuff',
-            5,
-            'Really good stuff',
-            'winter_cap'
-        ))->shouldReturn(true);
+        $this->supportsTransformation(
+            new AddProductReview(
+                'Good stuff',
+                5,
+                'Really good stuff',
+                'winter_cap'
+            )
+        )->shouldReturn(true);
     }
 
-    function it_does_not_support_not_add_product_review(): void
+    function it_supports_only_add_product_review_command(): void
     {
         $this->supportsTransformation(new PickupCart())->shouldReturn(false);
     }
