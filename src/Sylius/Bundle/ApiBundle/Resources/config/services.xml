@@ -21,6 +21,7 @@
 
     <parameters>
         <parameter key="sylius.model.address.interface">Sylius\Component\Addressing\Model\AddressInterface</parameter>
+        <parameter key="sylius.product.product_reviews.limit">3</parameter>
     </parameters>
 
     <services>
@@ -146,6 +147,12 @@
             <argument type="service" id="api_platform.serializer.normalizer.item" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.context.channel" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductSerializer">
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <argument>%sylius.product.product_reviews.limit%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
