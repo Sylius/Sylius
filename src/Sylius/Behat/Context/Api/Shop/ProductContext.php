@@ -84,6 +84,30 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :amount product reviews
+     */
+    public function iShouldSeeProductReviews(int $amount): void
+    {
+        Assert::count($this->responseChecker->getValue($this->client->getLastResponse(), 'reviews'), $amount);
+    }
+
+    /**
+     * @Then I should see reviews titled :titleOne, :titleTwo and :titleThree
+     */
+    public function iShouldSeeReviewsTitledAnd(...$titles): void
+    {
+        Assert::true($this->hasReviewsWithTitles($titles));
+    }
+
+    /**
+     * @Then I should not see review titled :title
+     */
+    public function iShouldNotSeeReviewTitled(string $title): void
+    {
+        Assert::false($this->hasReviewsWithTitles([$title]));
+    }
+
+    /**
      * @Then I should see the product :name
      */
     public function iShouldSeeTheProduct(string $name): void
@@ -199,6 +223,30 @@ final class ProductContext implements Context
                 if ($translation['name'] === $name) {
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasReviewsWithTitles($titles): bool
+    {
+        $productReviews = $this->responseChecker->getValue($this->client->getLastResponse(), 'reviews');
+
+        foreach ($titles as $title) {
+            if (!$this->hasKeyWithValue($productReviews, 'title', $title)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function hasKeyWithValue(array $array, string $key, string $value): bool
+    {
+        foreach ($array as $arrayValue) {
+            if ($arrayValue[$key] === $value) {
+                return true;
             }
         }
 
