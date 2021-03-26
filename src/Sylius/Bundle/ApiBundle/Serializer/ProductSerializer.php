@@ -1,10 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
@@ -25,7 +34,7 @@ final class ProductSerializer implements ContextAwareNormalizerInterface
         $this->reviewsLimit = $reviewsLimit;
     }
 
-    public function normalize($object, ?string $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = [])
     {
         Assert::isInstanceOf($object, ProductInterface::class);
 
@@ -41,7 +50,7 @@ final class ProductSerializer implements ContextAwareNormalizerInterface
         return $this->objectNormalizer->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, ?string $format = null, $context = []): bool
+    public function supportsNormalization($data, $format = null, $context = []): bool
     {
         return $data instanceof ProductInterface && $this->isShopGet($context);
     }
