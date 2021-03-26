@@ -94,7 +94,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see reviews titled :titleOne, :titleTwo and :titleThree
      */
-    public function iShouldSeeReviewsTitledAnd(...$titles): void
+    public function iShouldSeeReviewsTitledAnd(string ...$titles): void
     {
         Assert::true($this->hasReviewsWithTitles($titles));
     }
@@ -239,7 +239,7 @@ final class ProductContext implements Context
         return false;
     }
 
-    private function hasReviewsWithTitles($titles): bool
+    private function hasReviewsWithTitles(array $titles): bool
     {
         $productReviews = $this->responseChecker->getValue($this->client->getLastResponse(), 'reviews');
 

@@ -47,7 +47,10 @@ final class ProductSerializer implements ContextAwareNormalizerInterface
             }
         }
 
-        return $this->objectNormalizer->normalize($object, $format, $context);
+        $data = $this->objectNormalizer->normalize($object, $format, $context);
+        $data['@id'] = $object->getId();
+
+        return $data;
     }
 
     public function supportsNormalization($data, $format = null, $context = []): bool
