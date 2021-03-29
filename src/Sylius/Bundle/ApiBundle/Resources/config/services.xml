@@ -21,7 +21,6 @@
 
     <parameters>
         <parameter key="sylius.model.address.interface">Sylius\Component\Addressing\Model\AddressInterface</parameter>
-        <parameter key="sylius.product.product_reviews.limit">3</parameter>
     </parameters>
 
     <services>
