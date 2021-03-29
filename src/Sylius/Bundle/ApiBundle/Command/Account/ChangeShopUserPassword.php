@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Command\Account;
 
 /** @experimental */
 class ChangeShopUserPassword implements ShopUserIdAwareInterface

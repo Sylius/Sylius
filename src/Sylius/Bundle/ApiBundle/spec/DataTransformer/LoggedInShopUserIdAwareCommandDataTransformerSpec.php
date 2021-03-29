@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
-use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Account\ShopUserIdAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;

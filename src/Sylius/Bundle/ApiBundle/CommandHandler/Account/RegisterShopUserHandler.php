@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler;
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\ApiBundle\Command\RegisterShopUser;
+use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
