@@ -50,7 +50,7 @@ final class GenerateCouponsCommand extends Command
             ->setDescription('Generates coupons for a given promotion')
             ->addArgument('promotion-code', InputArgument::REQUIRED, 'Code of the promotion')
             ->addArgument('count', InputArgument::REQUIRED, 'Amount of coupons to generate')
-            ->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', 10)
+            ->addOption('length', 'len', InputOption::VALUE_OPTIONAL, 'Length of the coupon code (default 10)', '10')
         ;
     }
 
