@@ -22,6 +22,7 @@ imports:
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
     - suites/api/payment/managing_payments.yml
+    - suites/api/product/adding_product_review.yml
     - suites/api/product/managing_product_association_types.yml
     - suites/api/product/managing_product_options.yml
     - suites/api/product/managing_product_reviews.yml

@@ -120,6 +120,11 @@
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
+        <service id="sylius.api.data_transformer.add_product_review_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserEmailAwareCommandDataTransformer">
+            <argument type="service" id="sylius.api.context.user" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+
         <service id="sylius.api.data_transformer.locale_code_aware_input_data_transformer" class="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">
             <argument type="service" id="sylius.context.locale.composite" />
             <tag name="sylius.api.command_data_transformer" />

@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
@@ -58,6 +59,53 @@ final class ProductReviewContext implements Context
         $this->client->index();
         $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
         $this->client->filter();
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
+    }
+
+    /**
+     * @When I want to review product :product
+     */
+    public function iWantToReviewProduct(ProductInterface $product): void
+    {
+        $this->client->buildCreateRequest();
+        $this->client->addRequestData('productCode', $product->getCode());
+    }
+
+    /**
+     * @When I leave a comment :comment, titled :title as :email
+     * @When I leave a comment :comment, titled :title
+     */
+    public function iLeaveACommentTitled(string $comment, string $title, ?string $email = null): void
+    {
+        $this->client->addRequestData('title', $title);
+        $this->client->addRequestData('comment', $comment);
+        $this->client->addRequestData('email', $email);
+    }
+
+    /**
+     * @When I rate it with :rating point(s)
+     */
+    public function iRateItWithPoints(int $rating): void
+    {
+        $this->client->addRequestData('rating', $rating);
+    }
+
+    /**
+     * @Then I should be notified that my review is waiting for the acceptation
+     */
+    public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'status'),
+            ReviewInterface::STATUS_NEW
+        );
     }
 
     /**
