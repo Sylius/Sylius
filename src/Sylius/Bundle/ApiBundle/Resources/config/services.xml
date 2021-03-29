@@ -150,12 +150,6 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductSerializer">
-            <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument>%sylius.product.product_reviews.limit%</argument>
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
-
         <service id="sylius.api.factory.cart_shipping_method" class="Sylius\Bundle\ApiBundle\View\Factory\CartShippingMethodFactory" />
 
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -36,14 +37,24 @@ final class ProductContext implements Context
     /** @var SharedStorageInterface */
     private $sharedStorage;
 
+    /** @var ApiClientInterface */
+    private $productReviewClient;
+
+    /** @var IriConverterInterface */
+    private $iriConverter;
+
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
+        ApiClientInterface $productReviewClient,
+        IriConverterInterface $iriConverter
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
+        $this->productReviewClient = $productReviewClient;
+        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -88,7 +99,16 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductReviews(int $amount): void
     {
-        Assert::count($this->responseChecker->getValue($this->client->getLastResponse(), 'reviews'), $amount);
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $this->productReviewClient->index();
+        $this->productReviewClient->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
+        $this->productReviewClient->addFilter('itemsPerPage', 3);
+        $this->productReviewClient->addFilter('order[createdAt]', 'desc');
+        $this->productReviewClient->filter();
+
+        Assert::same($this->responseChecker->countCollectionItems($this->productReviewClient->getLastResponse()), $amount);
     }
 
     /**
@@ -231,25 +251,12 @@ final class ProductContext implements Context
 
     private function hasReviewsWithTitles(array $titles): bool
     {
-        $productReviews = $this->responseChecker->getValue($this->client->getLastResponse(), 'reviews');
-
         foreach ($titles as $title) {
-            if (!$this->hasKeyWithValue($productReviews, 'title', $title)) {
+            if (!$this->responseChecker->hasItemWithValue($this->productReviewClient->getLastResponse(), 'title', $title)) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    private function hasKeyWithValue(array $array, string $key, string $value): bool
-    {
-        foreach ($array as $arrayValue) {
-            if ($arrayValue[$key] === $value) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
