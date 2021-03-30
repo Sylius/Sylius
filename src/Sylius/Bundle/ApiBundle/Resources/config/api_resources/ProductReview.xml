@@ -43,6 +43,7 @@
                 <attribute name="path">/shop/product-reviews</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_review_product_filter</attribute>
+                    <attribute>sylius.api.product_review_date_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
