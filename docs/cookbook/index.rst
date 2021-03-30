@@ -52,6 +52,7 @@ Payments
     payments/encrypting-gateway-config
     payments/authorize
     payments/custom-payment-gateway
+    payments/customizing-credit-memo
 
 .. include:: /cookbook/payments/map.rst.inc
 
