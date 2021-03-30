@@ -84,6 +84,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then I should see :rating as its average rating
+     */
+    public function iShouldSeeAsItsAverageRating(float $rating): void
+    {
+        Assert::same(round($this->responseChecker->getValue($this->client->getLastResponse(), 'averageRating'), 2), $rating);
+    }
+
+    /**
      * @Then I should see the product :name
      */
     public function iShouldSeeTheProduct(string $name): void

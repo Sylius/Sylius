@@ -14,9 +14,12 @@ default:
                 - sylius.behat.context.transform.taxon
 
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.api.shop.product

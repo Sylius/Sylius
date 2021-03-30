@@ -120,5 +120,6 @@
         <property name="images" required="false" />
         <property name="mainTaxon" required="false" />
         <property name="variants" readable="true"/>
+        <property name="averageRating" readable="true" />
     </resource>
 </resources>
