@@ -31,7 +31,7 @@ default:
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.email
-                
+
                 - sylius.behat.context.api.admin.managing_shipments
             filters:
                 tags: "@managing_shipments && @api"

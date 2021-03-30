@@ -221,10 +221,10 @@ sylius_fixtures:
                                     - 'FASHION_WEB'
                                 coupon_based: true
                                 coupons:
-                                    - code: 'CHRISTMAS_SALE'
-                                      expires_at: 'December 24'
-                                      usage_limit: 10
-                                      per_customer_usage_limit: 1
+                                    -   code: 'CHRISTMAS_SALE'
+                                        expires_at: 'December 24'
+                                        usage_limit: 10
+                                        per_customer_usage_limit: 1
                             new_year:
                                 code: 'new_year'
                                 name: 'New Year'
